@@ -29,8 +29,8 @@ class vMSUserClass extends userClass{
 		}
 	    // echo $total_billabe."#".$total_charge;
 		foreach($returns as $return){
-			$return->bill = number_format(($return->billabehours/$total_billabe)*100,1);
-			$return->charg = number_format(($return->chargable_amount/$total_charge)*100,1);
+			$return->bill = number_format($total_billabe != 0 ? ($return->billabehours/$total_billabe)*100 : 0, 1);
+			$return->charg = number_format($total_charge != 0 ? ($return->chargable_amount/$total_charge)*100 : 0, 1);
 			$data[] =  $return;
 		}
 		return $data;
@@ -2541,9 +2541,9 @@ class vMSUserClass extends userClass{
     		if($uom == 'PH'){
     			$perhrsrate = $price;
     		}else if($uom == 'PD'){
-    			$perhrsrate = $price/$minimum_hours_required;
+    			$perhrsrate = $minimum_hours_required != 0 ? $price/$minimum_hours_required : 0;
     		}else if($uom == 'PW'){
-    			$perhrsrate = $price/($minimum_hours_required*$total_working_day);
+    			$perhrsrate = ($minimum_hours_required*$total_working_day) != 0 ? $price/($minimum_hours_required*$total_working_day) : 0;
     		}else{
     			$dateFrom = new DateTime($effective_date);
     			$dateTo = new DateTime($expire_date);
@@ -2732,22 +2732,22 @@ class vMSUserClass extends userClass{
     	if($purchase_uom =="PH"){
     		$rate_per_hrs = $item_amount;
     	}elseif($purchase_uom =="PD"){
-    		$rate_per_hrs = $item_amount/$minimum_hours_required;  
+    		$rate_per_hrs = $minimum_hours_required != 0 ? $item_amount/$minimum_hours_required : 0;
     	}elseif($purchase_uom =="PW"){
-    		$monthamount = $item_amount/$total_working_day;
-    		$rate_per_hrs = $monthamount/($minimum_hours_required*$totaldays);  
+    		$monthamount = $total_working_day != 0 ? $item_amount/$total_working_day : 0;
+    		$rate_per_hrs = ($minimum_hours_required*$totaldays) != 0 ? $monthamount/($minimum_hours_required*$totaldays) : 0;
     	}elseif($purchase_uom =="PM"){
-    		$monthamount = $item_amount/$totaldays;
-    		$rate_per_hrs = ($monthamount/$minimum_hours_required);  
+    		$monthamount = $totaldays != 0 ? $item_amount/$totaldays : 0;
+    		$rate_per_hrs = $minimum_hours_required != 0 ? ($monthamount/$minimum_hours_required) : 0;
     	}elseif($purchase_uom =="PT"){
     		$monthamount = ($item_amount/3);
-    		$rate_per_hrs = $monthamount/($minimum_hours_required*$totaldays);  
+    		$rate_per_hrs = ($minimum_hours_required*$totaldays) != 0 ? $monthamount/($minimum_hours_required*$totaldays) : 0;
     	}elseif($purchase_uom =="PS"){
     		$monthamount = ($item_amount/6);
-    		$rate_per_hrs = $monthamount/($minimum_hours_required*$totaldays);  
+    		$rate_per_hrs = ($minimum_hours_required*$totaldays) != 0 ? $monthamount/($minimum_hours_required*$totaldays) : 0;
     	}elseif($purchase_uom =="PY"){
     		$monthamount = ($item_amount/12);
-    		$rate_per_hrs = $monthamount/($minimum_hours_required*$totaldays);  
+    		$rate_per_hrs = ($minimum_hours_required*$totaldays) != 0 ? $monthamount/($minimum_hours_required*$totaldays) : 0;
     	}
     	return $rate_per_hrs;
     }

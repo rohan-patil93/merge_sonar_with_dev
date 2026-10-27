@@ -2364,7 +2364,7 @@ class userClass
 			$insert['out_value'] = $insert['out_value'] + $data->out_value;
 			$insert['closing_qty'] = $data->closing_qty+$post['in_qty']-$post['out_qty'];
 			$insert['day_value'] = $data->day_value+$post['in_value']-$post['out_value'];
-			$insert['day_rate'] = $insert['day_value']/$insert['closing_qty'];	
+			$insert['day_rate'] = $insert['closing_qty'] != 0 ? $insert['day_value']/$insert['closing_qty'] : 0;	
 			//echo "<pre>"; print_r($insert); //exit;
 			$res=$callConfig->updateRecord('loc_item_wa_balances',$insert,'id',$data->id); 
 		}else{
@@ -2373,7 +2373,7 @@ class userClass
 			$insert['opening_value'] = $data2->day_value;
 			$insert['day_value'] = $data2->day_value+$post['in_value']-$post['out_value'];
 			$insert['opening_rate'] = $data2->day_rate;
-			$insert['day_rate'] = $insert['day_value']/$insert['closing_qty'];
+			$insert['day_rate'] = $insert['closing_qty'] != 0 ? $insert['day_value']/$insert['closing_qty'] : 0;
 			//print_r($insert); //exit;
 			$res=$callConfig->insertRecord('loc_item_wa_balances',$insert);
 		}
@@ -2404,7 +2404,7 @@ class userClass
 			$insert['out_value'] = $insert['out_value'] + $data->out_value;
 			$insert['closing_qty'] = $data->closing_qty+$post['in_qty']-$post['out_qty'];
 			$insert['day_value'] = $data->day_value+$post['in_value']-$post['out_value'];
-			$insert['day_rate'] = $insert['day_value']/$insert['closing_qty'];	
+			$insert['day_rate'] = $insert['closing_qty'] != 0 ? $insert['day_value']/$insert['closing_qty'] : 0;	
 			//echo "<pre>"; print_r($insert); //exit;
 			$res=$callConfig->updateRecord('loc_item_st_balances',$insert,'id',$data->id); 
 		}else{
@@ -2413,7 +2413,7 @@ class userClass
 			$insert['opening_value'] = $data2->day_value;
 			$insert['day_value'] = $data2->day_value+$post['in_value']-$post['out_value'];
 			$insert['opening_rate'] = $data2->day_rate;
-			$insert['day_rate'] = $insert['day_value']/$insert['closing_qty'];
+			$insert['day_rate'] = $insert['closing_qty'] != 0 ? $insert['day_value']/$insert['closing_qty'] : 0;
 			//print_r($insert); //exit;
 			$res=$callConfig->insertRecord('loc_item_st_balances',$insert);
 		}
@@ -2442,7 +2442,7 @@ class userClass
 			$insert['out_value'] = $insert['out_value'] + $data->out_value;
 			$insert['closing_qty'] = $data->closing_qty+$post['in_qty']-$post['out_qty'];
 			$insert['day_value'] = $data->day_value+$post['in_value']-$post['out_value'];
-			$insert['day_rate'] = $insert['day_value']/$insert['closing_qty'];	
+			$insert['day_rate'] = $insert['closing_qty'] != 0 ? $insert['day_value']/$insert['closing_qty'] : 0;	
 			//echo "<pre>"; print_r($insert); //exit;
 			$res=$callConfig->updateRecord('item_wa_balances',$insert,'id',$data->id); 
 		}else{
@@ -2451,7 +2451,7 @@ class userClass
 			$insert['opening_value'] = $data2->day_value;
 			$insert['day_value'] = $data2->day_value+$post['in_value']-$post['out_value'];
 			$insert['opening_rate'] = $data2->day_rate;
-			$insert['day_rate'] = $insert['day_value']/$insert['closing_qty'];
+			$insert['day_rate'] = $insert['closing_qty'] != 0 ? $insert['day_value']/$insert['closing_qty'] : 0;
 			//print_r($insert); //exit;
 			$res=$callConfig->insertRecord('item_wa_balances',$insert);
 		}
@@ -2482,7 +2482,7 @@ class userClass
 			$insert['out_value'] = $insert['out_value'] + $data->out_value;
 			$insert['closing_qty'] = $data->closing_qty+$post['in_qty']-$post['out_qty'];
 			$insert['day_value'] = $data->day_value+$post['in_value']-$post['out_value'];
-			$insert['day_rate'] = $insert['day_value']/$insert['closing_qty'];	
+			$insert['day_rate'] = $insert['closing_qty'] != 0 ? $insert['day_value']/$insert['closing_qty'] : 0;	
 			//echo "<pre>"; print_r($insert); //exit;
 			$res=$callConfig->updateRecord('item_st_balances',$insert,'id',$data->id); 
 		}else{
@@ -2491,7 +2491,7 @@ class userClass
 			$insert['opening_value'] = $data2->day_value;
 			$insert['day_value'] = $data2->day_value+$post['in_value']-$post['out_value'];
 			$insert['opening_rate'] = $data2->day_rate;
-			$insert['day_rate'] = $insert['day_value']/$insert['closing_qty'];
+			$insert['day_rate'] = $insert['closing_qty'] != 0 ? $insert['day_value']/$insert['closing_qty'] : 0;
 			//print_r($insert); //exit;
 			$res=$callConfig->insertRecord('item_st_balances',$insert);
 		}
@@ -3416,7 +3416,7 @@ class userClass
     }
     function toGetFrequencyDate($fdate, $frequency){
     	global $callConfig; 
-    	$days = 30/$frequency;
+    	$days = $frequency != 0 ? 30/$frequency : 0;
     	//echo $days;
     	$dates = explode("-", $fdate);
     	//print_r($dates);

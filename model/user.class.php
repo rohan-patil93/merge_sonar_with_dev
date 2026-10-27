@@ -7342,7 +7342,7 @@ class userClass{
     }
     function toGetFrequencyDate($fdate, $frequency){
     	global $callConfig; 
-    	$days = 30/$frequency;
+    	$days = $frequency != 0 ? 30/$frequency : 0;
     	//echo $days;
     	$dates = explode("-", $fdate);
     	//print_r($dates);
@@ -15797,7 +15797,7 @@ function convertToYYYYMMDD($dateString) {
 	 	$letdata = $callConfig->getRow($letquery);	
 	 	$data['absent'] = $letdata->leaves;
 	 	$data['averge_employee'] = '77';
-	 	$data['averge_absent'] = number_format(100-($letdata->leaves/$days)*100,2);
+	 	$data['averge_absent'] = number_format(100-($days != 0 ? ($letdata->leaves/$days)*100 : 0),2);
 
 	 	for($i=1;$i<13;$i++){
 	 		$squery = "SELECT count(id) as acemp FROM `employees` WHERE `joining_date` < '".$ssdate."'";
