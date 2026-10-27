@@ -1,8 +1,30 @@
 <?php
 class phpMysqlClass{ 
+	/**
+	 * Server-side RBAC gate for the raw SQL endpoints. Must be called by every
+	 * controller/route BEFORE any method of this class is dispatched.
+	 * Allows only an authenticated session whose role list contains SUPERADMIN_ROLE;
+	 * anything else gets HTTP 403 and the request is terminated.
+	 */
+	static function requireSuperAdmin(){
+		if(session_status() !== PHP_SESSION_ACTIVE && !headers_sent()){
+			session_start();
+		}
+		$allowed = false;
+		if(isset($_SESSION) && !empty($_SESSION['userid'])){
+			$allowed = is_array($_SESSION['role_ids'] ?? null) && in_array(SUPERADMIN_ROLE, $_SESSION['role_ids'], true);
+		}
+		if(!$allowed){
+			http_response_code(403);
+			header('Content-Type: application/json');
+			echo json_encode(array('status'=>'Fail','code'=>'FORBIDDEN','msg'=>'Access denied'));
+			exit;
+		}
+	}
 	function getPHPMYSQLDetails($post){
 		global $callConfig;
 		$return = array();
+		$table_list = array();
     	$return['dbname'] = $callConfig->dbname;;
     	$row=$callConfig->getAllRows("SHOW TABLES");
 		$rowdb = 'Tables_in_'.$callConfig->dbname;
@@ -17,7 +39,9 @@ class phpMysqlClass{
 		$return['post'] = $post;
     	$sql_textarea = $post['sql_textarea'];
     	$return['requist_data_sql'] =$sql_textarea;
+    	$post['limit_select'] = max(0, (int)($post['limit_select'] ?? 0));
     	if($post['limit_select'] !=0){
+    		$removellimtsql = $sql_textarea;
 	    	if(strpos($sql_textarea,'LIMIT')){
 	    		$removellimt = explode("LIMIT",$sql_textarea);
 				$removellimtsql = $removellimt[0];
@@ -83,16 +107,16 @@ class phpMysqlClass{
 	}
 	function exicutePHPMYSQL(){
 		global $callConfig;
-		$exicute_sql_textarea = $_POST['exicute_sql_textarea'];
+		$return = array();
+		$exicute_sql_textarea = $_POST['exicute_sql_textarea'] ?? '';
 		if($exicute_sql_textarea !=""){
 			$sqlresult=$callConfig->executeQuery($exicute_sql_textarea);
 			$return['exicute_sql_res'] = $sqlresult;
 		}else{
-			return $return['error'] == 404; 	
+			return false; // previously `$return['error'] == 404` (always false, undefined-index warning)	
 		}
 		return $return; 	
 	}
 
 
 }
-?>  

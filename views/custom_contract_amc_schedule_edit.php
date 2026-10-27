@@ -12,7 +12,7 @@ $schedule_id = (int) ($_POST['schedule_id'] ?? 0);
 
 $url = API . "?mode=getcontractamcscheduledetails&method=get&schedule_id=" . $schedule_id;
 
-$res = json_decode(callAPI($url), true);
+$res = json_decode(callAPI($url), true)?? [];
 
 $schedule = $res['schedule'] ?? array();
 

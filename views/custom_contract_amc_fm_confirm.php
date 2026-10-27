@@ -8,7 +8,7 @@ include('../comm.php');
 
 $schedule_id = (int) ($_POST['schedule_id'] ?? 0);
 $url = API . "?mode=getcontractamcfmconfirmdetails&method=get&schedule_id=" . $schedule_id;
-$res = json_decode(callAPI($url), true);
+$res = json_decode(callAPI($url), true) ?? [];
 $schedule = $res['schedule'] ?? array();
 $canConfirm = !empty($res['can_confirm']);
 

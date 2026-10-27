@@ -41,7 +41,7 @@ if (isset($_GET['Rid']) && $_GET['Rid'] != '') {
     $rid = explode(':', $rid)[1];
 
     $url = API . "?mode=getamcregistrationdetails&method=get&id=" . $rid;
-    $res = json_decode(callAPI($url), true);
+    $res = json_decode(callAPI($url), true)?? [];
     // echo '<pre>';print_r($res);echo '</pre>';
     $editData = $res['amc_registration_details'] ?? [];
     $dynamic_fields = $res['dynamic_fields_details'] ?? [];

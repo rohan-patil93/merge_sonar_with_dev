@@ -9,9 +9,7 @@ $option = "COM_MAIN";
 $return=1;
 $dynmiclistpage = array('COM_LIST_PURCHASE_INVOICES','COM_LIST_SUPPLIER_BILLS','COM_LIST_SALES_INVOICES');
 $inn_check = array('COM_BULK_PROJECT_TIMESHEET','COM_LOGOUT','COM_LIST_NEW_EMPLOYEE','COM_MAIN','COM_INSERT_APPLICATION_USERS');
-if($_SESSION['userid'] == 726){
-echo "<pre>"; print_r($_SESSION); exit;
-}
+
 if(!in_array(ADMIN_ROLE,$_SESSION['role_ids']) && !in_array($option,(array)$inn_check) && $_SESSION['config']['role_permission']==0 && !isset($_SESSION['application_no_permission_pages']['option'][$_GET['option']])){
     $return = checkPremission($_GET['option'], $_GET['table'] ?? '');
 }

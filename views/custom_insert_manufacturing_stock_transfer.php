@@ -51,7 +51,7 @@ $url = API . "?mode=getstockrequests&method=get";
 if ($stock_request_id != '') {
   $url .= "&stock_request_id=" . $stock_request_id;
 }
-$result = json_decode(callAPI($url), true);
+$result = json_decode(callAPI($url), true)?? [];
 
 $stockRequests = $result['data'] ?? array();
 $stockRequestDetails = $result['stock_request'] ?? array();

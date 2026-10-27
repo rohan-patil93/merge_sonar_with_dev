@@ -47,7 +47,7 @@ if ($proposal_id > 0) {
     $url = API . "?mode=getCsrProposalProjectDates&method=get"
         . "&company_id=" . urlencode((string)$company_id)
         . "&proposal_id=" . urlencode((string)$proposal_id);
-    $response = json_decode(callAPI($url), true);
+    $response = json_decode(callAPI($url), true)?? [];;
     if (($response['status'] ?? '') == 'success') {
         $proposal = $response['proposal'] ?? array();
     } else {

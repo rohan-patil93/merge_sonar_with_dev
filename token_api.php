@@ -684,6 +684,7 @@ if ($method == 'post'){
 	$phpmysqlclass_array = array('postphpmysqldetails'=>'postPHPMYSQLDetails','exicutephpmysql'=>'exicutePHPMYSQL');
 	if(isset($phpmysqlclass_array[$mode])) {
 		include("model/phpmysql.class.php");
+		phpMysqlClass::requireSuperAdmin(); // RBAC: super-admin only, enforced server-side
 		$phpmysqlObj=new phpMysqlClass();
 		$fun = $phpmysqlclass_array[$mode];
 		$details = $phpmysqlObj->$fun($_GET, $_POST);
@@ -1793,6 +1794,7 @@ $mobilecheck_array = array('mobileaprovelistwithmodle'=>'mobileaprovelistwithmod
 	$phpmysqlclass_array = array('getphpmysqldetails' => 'getPHPMYSQLDetails','getfieldlist'=>'getfieldlist');
 	if (isset($phpmysqlclass_array[$mode])) {
 		include("model/phpmysql.class.php");
+		phpMysqlClass::requireSuperAdmin(); // RBAC: super-admin only, enforced server-side
 		$phpmysqlObj=new phpMysqlClass();
 		$fun = $phpmysqlclass_array[$mode];
 		$details = $phpmysqlObj->$fun($_GET);

@@ -1,10 +1,20 @@
 <?php 
 class configClass
 {
-		var $hostname="";
-		var  $username="";
-		var $password="";
-		var  $dbname="";
+		public $hostname = "";
+	    public $username = "";
+	    public $password = "";
+	    public $dbname = "";
+	    public $con = null;
+
+	    public $user_id = null;
+	    public $company_id = null;
+	    public $ip_address = null;
+	    public $option = null;
+	    public $extra_paramiter = null;
+	    public $extra_details = null;
+	    public $module_id = null;
+	    public $working_role_short_code = null;
 		function __construct($db,$extra) {
 			$this->hostname=HOSTNAME;
 			$this->username=USERNAME;

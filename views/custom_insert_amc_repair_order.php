@@ -19,7 +19,7 @@ $query = http_build_query(array_filter(array(
     'id' => $repair_order_id ?: null,
 )));
 $url = API . "?mode=getamcrepairorderformdata&method=get&admin_type=".$_SESSION['admin_type']."&". $query;
-$formData = json_decode(callAPI($url), true);
+$formData = json_decode(callAPI($url), true)?? [];
 $repairOrder = $formData['repair_order'] ?? array();
 $lines = $formData['lines'] ?? array();
 $contracts = $formData['contracts'] ?? array();

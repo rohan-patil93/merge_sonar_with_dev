@@ -1,6 +1,6 @@
 <?php
 $url = API . "?mode=getamcrepairorderslist&method=get&admin_type=".$_SESSION['admin_type'];
-$data = json_decode(callAPI($url), true);
+$data = json_decode(callAPI($url), true)?? [];
 $rows = $data['rows'] ?? array();
 ?>
 <div class="page-body">

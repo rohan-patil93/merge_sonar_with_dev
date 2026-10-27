@@ -63,7 +63,7 @@ if ($stock_request_id != '') {
 if ($stock_transfer_id != '') {
   $url .= "&stock_transfer_id=" . $stock_transfer_id;
 }
-$result = json_decode(callAPI($url), true);
+$result = json_decode(callAPI($url), true)?? [];
 
 $stockRequests = $result['stock_requests'] ?? array();
 $stockTransfers = $result['data'] ?? array();

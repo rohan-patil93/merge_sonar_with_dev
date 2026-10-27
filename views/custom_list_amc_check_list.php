@@ -2,7 +2,7 @@
 $_SESSION['apply_js']['multiselest'] = 1;
 
 $url = API . "?mode=getallproductdetails";
-$response = json_decode(callAPI($url), true);
+$response = json_decode(callAPI($url), true)?? [];
 $products = $response['pm_details'];
 $customers = $response['cust_details'];
 $ag_details = $response['ag_details'];

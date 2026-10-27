@@ -30,7 +30,7 @@ if($_GET['Rid']!=""){
  $rid =  encodeId($_GET['Rid']);
  $rid = urldecode($rid);
  $url = API."?mode=togetdatabasepaimairy&rid=$rid&table=".$table_name;
- $response = json_decode(callAPI($url),1);
+ $response = json_decode(callAPI($url),1)?? [];
  $selected_date = $response['timesheet_date'];
  $row_id = $response['id'];
  $projectdetails = $response;

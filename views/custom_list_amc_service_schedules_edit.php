@@ -26,7 +26,7 @@ if (isset($_GET['Rid']) && $_GET['Rid'] != '') {
     $rid = explode(':', $rid)[1];
 
     $url = API . "?mode=getamcservicedetails&method=get&id=" . $rid;
-    $res = json_decode(callAPI($url), true);
+    $res = json_decode(callAPI($url), true)?? [];
     $amc_service_schedules = $res['amc_service_schedules'];
     $gc_details = $res['gc_details'] ?? [];
     $ag_details = $res['ag_details'] ?? [];

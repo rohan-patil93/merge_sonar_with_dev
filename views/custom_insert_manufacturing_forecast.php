@@ -23,7 +23,7 @@ $remarks = '';
 // ===== FETCH LOGIC =====
 if ($year) {
     $url = API . "?mode=getmanufacturingforecastedata&method=get&year=" . $year;
-    $result = json_decode(callAPI($url), true);
+    $result = json_decode(callAPI($url), true)?? [];
     $data = $result['data'] ?? [];
     $forecastRows = $result['forecast_rows'] ?? [];
     $forecastStatus = $result['forecast_status'] ?? '';

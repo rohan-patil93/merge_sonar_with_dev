@@ -82,7 +82,7 @@ if ($_GET['work_order_id']) {
 
 // ===== FETCH LOGIC =====
 $url = API . "?mode=getmanufacturingworkorderslogs&method=get&work_order_id=" . $work_order_id;
-$result = json_decode(callAPI($url), true);
+$result = json_decode(callAPI($url), true)?? [];
 $workorders = $result['data'] ?? array();
 $data = $result ?? array();
 $plannedQty = floatval($data['work_order']['work_order_item_qty'] ?? 0);

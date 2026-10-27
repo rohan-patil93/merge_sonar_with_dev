@@ -25,7 +25,7 @@ $formdisable = '';
 // ===== FETCH LOGIC =====
 if ($year && $month) {
     $url = API . "?mode=getmanufacturingfirmordersdata&month=".$month."&year=" . $year;
-    $result = json_decode(callAPI($url), true);
+    $result = json_decode(callAPI($url), true)?? [];
     $data = $result['data'] ?? [];
     $firmOrderId = $result['firm_order_id'] ?? '';
     $firmOrderStatus = $result['firm_order_status'] ?? '';

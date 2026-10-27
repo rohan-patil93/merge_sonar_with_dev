@@ -5,7 +5,7 @@ include_once '../comm.php';
 
 $data = json_encode($_POST);
 $url = API . "?mode=getamcchecklistdetails&data=".urlencode($data);
-$result = json_decode(callAPI($url), true);
+$result = json_decode(callAPI($url), true)?? [];
 $response = $result['service'];
 $ag_details = $result['ag_details'];
 $gc_details = $result['gc_details'];
