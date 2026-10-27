@@ -22,10 +22,10 @@ $activeSurveys = (int)($summary['active'] ?? 0);
 $completedSurveys = (int)($summary['completed'] ?? 0);
 $draftSurveys = (int)($summary['draft'] ?? 0);
 
-$completionPercent = (int)($completionRate['percent'] ?? 0);
+$completionPercent = (int) round($completionRate['percent'] ?? 0);
 $completionCompletedCount = (int)($completionRate['completed_count'] ?? 0);
 $completionTotalCount = (int)($completionRate['total_count'] ?? 0);
-$trendPercent = (int)($completionRate['trend_percent'] ?? 0);
+$trendPercent = (int) round($completionRate['trend_percent'] ?? 0);
 $trendDirection = $completionRate['trend_direction'] != "" ? $completionRate['trend_direction'] : 'flat';
 
 if($completionPercent > 100){

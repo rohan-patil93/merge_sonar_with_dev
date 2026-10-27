@@ -315,82 +315,8 @@
 
 /************************************************/
 /* Duplicate info to a PDF file */
+/* Note: TCPDF removed as part of PHP 8.5 migration. Application uses Dompdf. */
 /************************************************/
-	if (isset($config["pdf"])){
-		if ($config["pdf"]["save"]) {
-
-			$path_pdf = directory_check($config["pdf"]["directory"]);
-
-			/* New file for every form submission */
-			if ( $config["pdf"]["new_file"] ) {
-				$single_name = date("Ymd_His")."_".mt_rand(1000,9999);
-				$file_pdf = $path_pdf.$single_name.".pdf";
-			}
-
-			/* General file */
-			if ( $config["pdf"]["general_file"] ){
-				$file_pdf = $path_pdf.$config["pdf"]["general_file_name"].".pdf";
-			}
-			
-			/* Debug */
-			if (!isset($file_pdf)){
-				if ($config["debug"]){
-					debugger( array(DEBUG_MESSAGE, PDF_ERROR_MESSAGE) );
-					exit;
-				}
-				debugger( array(DEBUG_GENERAL_MESSAGE) );
-				exit;
-			}
-
-			/* Create new record */
-			require_once dirname(__FILE__)."/tcpdf/tcpdf.php";
-			$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, "UTF-8", false);
-			$pdf->AddPage();
-			
-			/* Header */
-			$pdf->SetFont("freeserif", "", 20);
-			$pdf->Cell(190, 15, $config["your_subject"], 1, 1, "C");
-
-			/* Body */
-			foreach ($form_data as $field => $value) {
-				/* Skip service values */
-				if ($field === "_"){
-					continue;
-				}
-				// Fields
-				$pdf->SetFont("freeserif", "", 13);
-				$pdf->Cell(35, 10, row_name($field).":", 0, 0);
-				// Values
-				$pdf->SetFont("freeserif", "", 15);
-				// If value is longer than 74 chars
-				if (mb_strlen($value, "UTF-8") > 74) {
-					$pdf->MultiCell(155, 10, $value, 0, 1);
-					continue;
-				}
-				$pdf->Cell(155, 10, $value, 0, 1);
-			}
-			
-			/* If PDF file doesn't exist */
-			if (!file_exists($file_pdf)) {
-				$pdf->Output($file_pdf, "F");
-			} else {
-				require_once dirname(__FILE__)."/tcpdf/fpdf_merge.php";
-				// Temporary PDF file
-				$temp_pdf = dirname(__FILE__).$config["pdf"]["directory"]."temp.pdf";
-				// Create temporay PDF file
-				$pdf->Output($temp_pdf, "F");
-				// Merge main PDF file with temporary PDF file
-				$merge = new FPDF_Merge();
-				$merge->add($file_pdf);
-				$merge->add($temp_pdf);
-				$merge->output($file_pdf, "F");
-				unlink($temp_pdf);
-			}
-
-			/* Add to total array */
-			$form_data["_"]["pdf"] = $file_pdf;
-		}
-	}
 
 /************************************************/
 /* Duplicate info to a database */

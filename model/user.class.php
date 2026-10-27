@@ -6810,8 +6810,8 @@ class userClass{
 	}
 	function numberToWordFormateRupees($number){
 		global $callConfig;
-		$no = floor($number);
-		$point = round($number - $no, 2) * 100;
+		$no = floor($number ?? 0);
+		$point = (int) round((($number ?? 0) - $no) * 100);
 		$hundred = null;
 		$digits_1 = strlen($no);
 		$i = 0;
@@ -6846,8 +6846,7 @@ class userClass{
 		$str = array_reverse($str);
 		$result = implode('', $str);
 		$points = ($point) ?
-		". " . $words[$point / 10] . " " . 
-		$words[$point = $point % 10] : '';
+		". " . $words[(int)($point / 10)] . " " . $words[$point = $point % 10] : '';
 		if($result !=''){
 			$result = $result . "Rupees  ";
 		}

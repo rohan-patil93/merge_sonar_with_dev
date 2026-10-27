@@ -9,12 +9,12 @@ $spend_by_customers = $result['spend_by_customers'];
 $spend_by_vendor_category = $result['spend_by_vendor_category'];
 $spend_by_vendor_category_graph = array();
 foreach($spend_by_vendor_category as $sbvc){
-    $spend_by_vendor_category_graph[] = array($sbvc['category_description'],(int)$sbvc['total_amount']);
+    $spend_by_vendor_category_graph[] = array($sbvc['category_description'], round((float)$sbvc['total_amount'], 2));
 }
 $spend_by_customer_category = $result['spend_by_customer_category'];
 $spend_by_customer_category_graph = array();
 foreach($spend_by_customer_category as $sbvc){
-    $spend_by_customer_category_graph[] = array($sbvc['category_description'],(int)$sbvc['total_amount']);
+    $spend_by_customer_category_graph[] = array($sbvc['category_description'], round((float)$sbvc['total_amount'], 2));
 }
 $purchase_invoices_detail =$supplier_bills_detail =$requisitions_detail =$quotations_detail = array();
 if($invoice_detail['purchase_invoices'] !=""){

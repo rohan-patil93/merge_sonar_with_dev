@@ -639,7 +639,7 @@ class dashboardUserClass{
 	          AND component_code = 'GS'
 	          AND is_active = 0";
 	    $row = $callConfig->getRow($query);
-	    $gross_payroll = isset($row->gross_payroll) ? (int)$row->gross_payroll : 0;
+	    $gross_payroll = isset($row->gross_payroll) ? round((float)$row->gross_payroll, 2) : 0;
 	    $return['gross_payroll'] = $gross_payroll;
 
 	    // Total Deductions
@@ -653,7 +653,7 @@ class dashboardUserClass{
 	          AND is_active = 0
 	    ";
 	    $row = $callConfig->getRow($query);
-    	$total_deductions = isset($row->total_deductions) ? (int)$row->total_deductions : 0;
+    	$total_deductions = isset($row->total_deductions) ? round((float)$row->total_deductions, 2) : 0;
 	    $return['total_deductions'] = $total_deductions;
 
 	    // Net Payroll
@@ -666,7 +666,7 @@ class dashboardUserClass{
 	          AND component_code = 'NETPAYABLE'
 	          AND is_active = 0";
 	    $row = $callConfig->getRow($query);
-	    $net_payroll = isset($row->net_payroll) ? (int)$row->net_payroll : 0;
+	    $net_payroll = isset($row->net_payroll) ? round((float)$row->net_payroll, 2) : 0;
 	    $return['net_payroll'] = $net_payroll;
 
 		// Payroll Summary by Component

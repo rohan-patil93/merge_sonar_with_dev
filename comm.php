@@ -1033,8 +1033,8 @@ function notificationdatesdiff($date,$cond="",$ladate=""){
 }
 function numberToWordFormateRupees($number){
 
-	$no = floor($number);
-	$point = round($number - $no, 2) * 100;
+	$no = floor($number ?? 0);
+	$point = (int) round((($number ?? 0) - $no) * 100);
 	$hundred = null;
 	$digits_1 = strlen($no);
 	$i = 0;
@@ -1069,8 +1069,7 @@ function numberToWordFormateRupees($number){
 	$str = array_reverse((array)$str);
 	$result = implode('', (array)$str);
 	$points = ($point) ?
-	". " . $words[$point / 10] . " " . 
-	$words[$point = $point % 10] : '';
+	". " . $words[(int)($point / 10)] . " " . $words[$point = $point % 10] : '';
 	if($result !=''){
 		$result = $result . "Rupees  ";
 	}

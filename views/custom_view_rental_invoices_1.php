@@ -65,20 +65,8 @@ foreach ($itemcatres as $item) {
         if(document.readyState == "complete") {
             setTimeout(function(){
                  printDiv('invoice_wrapper');
-                // convertAndDownloadPdf();
             },500);
         } 
-    }
-    function convertAndDownloadPdf() {
-        var htmlContent = $('#invoice_wrapper').html();
-        $.ajax({
-            url: 'views/custom_view_download_pdf.php',
-            type: 'POST',
-            data: { html: htmlContent },
-            success: function() {
-                console.log('PDF downloaded successfully');
-            }
-        });
     }
 </script>
 

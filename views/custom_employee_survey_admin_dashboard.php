@@ -27,7 +27,7 @@ $inProgressCount = (int)($summary['in_progress'] ?? 0);
 $completedCount = (int)($summary['completed'] ?? 0);
 $pendingCount = (int)($summary['pending'] ?? 0);
 
-$completionPercent = (int)($completionRate['percent'] ?? 0);
+$completionPercent = (int) round($completionRate['percent'] ?? 0);
 $completionTitle = $completionRate['message_title'] != "" ? $completionRate['message_title'] : 'Great job!';
 $completionText = $completionRate['message_text'] != "" ? $completionRate['message_text'] : "You've completed 0 of 0 required " . $display_tag_lower . "s.";
 

@@ -1,8 +1,13 @@
 <?php 
-include_once('includes/session.php');
-include_once('dbconfig.php');
-include_once('comm.php');
-
+if($_POST['ajaxcall'] != 'Y'){
+    include_once('includes/session.php');
+    include_once('dbconfig.php');
+    include_once('comm.php');
+}else{
+    include_once('../includes/session.php');
+    include_once('../dbconfig.php');
+    include_once('../comm.php');
+}
 $optiondetails = getOptionPageTableName($_POST['option']);
 $url = API."?mode=getdynamicmoduledashboard&transaction_table=".$optiondetails['application_table_name']."&admin_type=".$_SESSION['admin_type']."&admin_access_employee=".$_SESSION['admin_access_employee'];
 $apires = callAPI($url);

@@ -369,8 +369,6 @@ echo "step 1";
 // 		$emailarray['total_amount'] = $rental_invoicesres->total_amount;
 // 		$emailarray['created_by'] = $get['user_id'];
 
-// 		require('htmltopdfconverterTCPDF/tcpdf.php');   
-// 	    $obj_pdf = new TCPDF('P', PDF_UNIT, 'A4', true, 'UTF-8', false);  
 // 	    $obj_pdf->SetCreator(PDF_CREATOR);  
 // 	    // $obj_pdf->SetHeaderData('', '', PDF_HEADER_TITLE, PDF_HEADER_STRING);  
 // 	    // $obj_pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));  
@@ -574,8 +572,6 @@ echo "step 1";
 // 		$emailarray['total_amount'] = $rental_invoicesres->total_amount;
 // 		$emailarray['created_by'] = $get['user_id'];
 
-// 		require('htmltopdfconverterTCPDF/tcpdf.php');   
-// 	    $obj_pdf = new TCPDF('P', PDF_UNIT, 'A4', true, 'UTF-8', false);  
 // 	    $obj_pdf->SetCreator(PDF_CREATOR);  
 // 	    // $obj_pdf->SetHeaderData('', '', PDF_HEADER_TITLE, PDF_HEADER_STRING);  
 // 	    // $obj_pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));  
