@@ -14,7 +14,6 @@ function syncCSRData($fromdb, $todb){
     ));
 
     $response = curl_exec($curl);
-    curl_close($curl);
 
     $datas = json_decode($response,1);
     $post['chcek']='chcek';
@@ -35,7 +34,6 @@ function syncCSRData($fromdb, $todb){
         ));
 
         $res = curl_exec($curl);
-        curl_close($curl);
         $decoded = json_decode($res, 1);
         print_r($decoded);
     }else{
@@ -65,7 +63,6 @@ function syncCSRData($fromdb, $todb){
     ));
 
 $response = curl_exec($curl);
-curl_close($curl);
 
 $decoded = json_decode($response, true);
 print_r($decoded);
@@ -86,7 +83,6 @@ function syncTableData($fromdb, $todb, $table_name){
     ));
 
     $response = curl_exec($curl);
-    curl_close($curl);
 
     $datas = json_decode($response,1);
     $post['chcek']='chcek';

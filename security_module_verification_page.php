@@ -16,7 +16,6 @@ curl_setopt_array($curl, array(
   CURLOPT_CUSTOMREQUEST => 'GET',
 ));
 $response = curl_exec($curl);
-curl_close($curl);
 $datas = json_decode($response,1);
 header("Content-Type: text/html");
 if ($datas['status'] === 'sucess') {

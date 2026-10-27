@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 class integartionClass{ 
 	function toinsertupdatethejobpostingpublish($post,$get){
 		global $callConfig;
@@ -59,7 +59,6 @@ class integartionClass{
 			// Perform a cURL session
 			curl_exec($ch);
 			// Closes a cURL session and frees all resources
-			curl_close($ch);
 			// Close file
 			fclose($fp);
 		}
@@ -2074,8 +2073,6 @@ function tosendwhatsappdatatodatain($data){
 
 		$response = curl_exec($curl);
 		$err = curl_error($curl);
-		curl_close($curl);
-
 		if ($err) {
 		    $return['status'] = 'Fail';
 			  $return['res'] = "cURL Error #:" . $err;
@@ -2288,7 +2285,6 @@ function sendWhatsappMessage($contact,$message,$option,$whatsup=""){
 		));
 		$response = curl_exec($curl);
 		$err = curl_error($curl);
-		curl_close($curl);
 	}
 }
 function emaildatareplace($data,$val){

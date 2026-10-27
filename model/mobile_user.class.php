@@ -1,4 +1,4 @@
-<?php 
+﻿<?php 
 class mobileUserClass extends userClass{
 
 	function togetconfigmobiledata($get){
@@ -812,7 +812,6 @@ class mobileUserClass extends userClass{
 			  ),
 			));	 
 			$response = curl_exec($curl);
-			curl_close($curl);
 			// echo $response; exit;
 			$res = json_decode($response,1);
 			if(isset($res['name']) && $res['name']!=""){
@@ -847,7 +846,6 @@ class mobileUserClass extends userClass{
 		} else {
 		    echo 'Response: ' . $response;
 		}*/
-		curl_close($ch);
 		return $response;
 
     	/*global $callConfig;
@@ -888,8 +886,6 @@ class mobileUserClass extends userClass{
 	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 	    $response = curl_exec($ch);
-	    curl_close($ch);
-
 	    $data = json_decode($response, true);
 
 	    if (isset($data['users'])) {
@@ -916,8 +912,6 @@ class mobileUserClass extends userClass{
 	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 	    $response = curl_exec($ch);
-	    curl_close($ch);
-
 	    $data = json_decode($response, true);
 
 	    if (isset($data['id_token'])) {
@@ -1394,7 +1388,7 @@ class mobileUserClass extends userClass{
 	        		
 	        	$workingDaysByMonth[$month]['present'] = intval($empattm[$month]);
 	       		$workingDaysByMonth[$month]['absent'] = $workingDays-$empattm[$month];
-	        	$workingDaysByMonth[$month]['precentage'] = round(($empattm[$month]/$workingDays)*100);
+	        	$workingDaysByMonth[$month]['precentage'] = $workingDays != 0 ? round(($empattm[$month]/$workingDays)*100) : 0;
 	        }
 	        $return['month_data'][] = $workingDaysByMonth[$month];
 	    }	    
@@ -1726,10 +1720,10 @@ class mobileUserClass extends userClass{
 			}
 			$data['first']['name'] = 'Present Days'; 
 			$data['first']['value'] = $att; 
-			$data['first']['percentage'] = round(($att/$total)*100); 
-			$data['second']['name'] = 'Absent  Days'; 
-			$data['second']['value'] = $abs; 
-			$data['second']['percentage'] = round(($abs/$total)*100);
+			$data['first']['percentage'] = $total != 0 ? round(($att/$total)*100) : 0;
+			$data['second']['name'] = 'Absent  Days';
+			$data['second']['value'] = $abs;
+			$data['second']['percentage'] = $total != 0 ? round(($abs/$total)*100) : 0;
  		}elseif($get['module_id']==38){
  			$query = "SELECT id,user_field_work_type  FROM application_users WHERE id =".$get['user_id'];
  			$user_data = $callConfig->getRow($query);
@@ -1779,7 +1773,7 @@ class mobileUserClass extends userClass{
 			$data['first']['percentage'] = $total >0 ? round(($abs/$total)*100):100; 
 			$data['second']['name'] = 'Pending'; 
 			$data['second']['value'] =  $att; 
-			$data['second']['percentage'] = round(($att/$total)*100);
+			$data['second']['percentage'] = $total != 0 ? round(($att/$total)*100) : 0;
 
  		}elseif($get['module_id']==12){ 	
  			$query = "SELECT   ta.user_id, COUNT(CASE WHEN ta.current_status = 4 THEN 1 END) AS complete, COUNT(CASE WHEN ta.current_status != 4 THEN 1 END) AS pending,COUNT(*) AS total_assignments FROM  emp_expenses ta WHERE ta.company_id =".$get['company_id']." AND ta.user_id =".$get['user_id']." AND ta.is_active = 0";

@@ -66,7 +66,6 @@ if($type!="CREATE"){
   ));    
 }*/
 $response = curl_exec($curl);
-curl_close($curl);
 
 //echo "Title:".$title;
 //echo "content:".$content;

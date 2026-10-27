@@ -16,7 +16,6 @@ if ($ticketId) {
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
     $response = curl_exec($ch);
-    curl_close($ch);
     $ticketData = json_decode($response, true)['project_tasks'] ?? [];
 }
 $user = $_SESSION['user'];

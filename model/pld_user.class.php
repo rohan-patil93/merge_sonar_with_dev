@@ -1,4 +1,4 @@
-
+﻿
 <?php
 require_once "dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
@@ -7298,7 +7298,7 @@ class userClass{
     }
     function toGetFrequencyDate($fdate, $frequency){
     	global $callConfig; 
-    	$days = 30/$frequency;
+    	$days = $frequency != 0 ? 30/$frequency : 0;
     	//echo $days;
     	$dates = explode("-", $fdate);
     	//print_r($dates);
@@ -16233,7 +16233,7 @@ function convertToYYYYMMDD($dateString) {
 	 	$letdata = $callConfig->getRow($letquery);	
 	 	$data['absent'] = $letdata->leaves;
 	 	$data['averge_employee'] = '77';
-	 	$data['averge_absent'] = number_format(100-($letdata->leaves/$days)*100,2);
+	 	$data['averge_absent'] = number_format(100-($days != 0 ? ($letdata->leaves/$days)*100 : 0),2);
 
 	 	for($i=1;$i<13;$i++){
 	 		$squery = "SELECT count(id) as acemp FROM `employees` WHERE `joining_date` < '".$ssdate."'";
@@ -38451,7 +38451,6 @@ function gerReferanceTableDetails($get){
 			  ),
 			));	 
 			$response = curl_exec($curl);
-			curl_close($curl);
 			//echo $response; exit;
 			$res = json_decode($response,1);
 			if(isset($res['name']) && $res['name']!=""){
@@ -38486,7 +38485,6 @@ function gerReferanceTableDetails($get){
 		} else {
 		    echo 'Response: ' . $response;
 		}*/
-		curl_close($ch);
 		return $response;
 
     	/*global $callConfig;
@@ -38605,9 +38603,6 @@ function gerReferanceTableDetails($get){
 
 			$response = curl_exec($curl);
 			$err = curl_error($curl);
-
-			curl_close($curl);
-
 			if ($err) {
 			  $return['status'] = 'Fail';
 			  $return['res'] = "cURL Error #:" . $err;
@@ -38691,8 +38686,6 @@ function gerReferanceTableDetails($get){
 
 		$response = curl_exec($curl);
 		$err = curl_error($curl);
-		curl_close($curl);
-
 		if ($err) {
 		    $return['status'] = 'Fail';
 			  $return['res'] = "cURL Error #:" . $err;

@@ -26,7 +26,6 @@ $url4 = "http://localhost/infisuite/ticketing_two/api.php?method=get&mode=getvie
 $ch2 = curl_init($url4);
 curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
 $tasklists = curl_exec($ch2);
-curl_close($ch2);
 $tasklist = json_decode($tasklists, true);
 $tasklogdetails = $tasklist['logs']['logsdetails'];
 $statusList = $tasklist['table_statusList'];

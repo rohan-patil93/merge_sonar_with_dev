@@ -35,8 +35,6 @@ curl_setopt_array($curl, array(
 
 $response = curl_exec($curl);
 
-curl_close($curl);
-
 $data = json_decode($response, true);
 if (!$data || !isset($data['project_tasks'])) {
     die("No ticket data found from API.<br>Raw response:<br><pre>" . htmlspecialchars($response) . "</pre>");
