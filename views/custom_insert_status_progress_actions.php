@@ -119,9 +119,9 @@ if($status_table != ""){
         type: "POST",
         success:function(data){
             console.log(data);
-            $("#sec").html("<select aria-label="Status Progress" class='form-control kt-select2 js-example-basic-single' onchange='checkreload(this.value)' name='status_progress'><option>Select Any One</option>"+data+"</select>");
+            $("#sec").html("<select aria-label='Status Progress' class='form-control kt-select2 js-example-basic-single' onchange='checkreload(this.value)' name='status_progress'><option>Select Any One</option>"+data+"</select>");
 
-            $("#multiplechecks").html("<select aria-label="Status Progress" class='form-control kt-select2 js-example-basic-multiple'  onchange='checkreload(this.value)' name='status_progress' multiple><option>Select Any One</option></select>");
+            $("#multiplechecks").html("<select aria-label='Status Progress' class='form-control kt-select2 js-example-basic-multiple'  onchange='checkreload(this.value)' name='status_progress' multiple><option>Select Any One</option></select>");
             $(".js-example-basic-single").select2();
             $(".js-example-basic-multiple").select2();
 

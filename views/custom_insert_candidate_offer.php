@@ -51,7 +51,7 @@ function gradechange(val){
         success:function(data){
         console.log(data);
 
-        $("#grade").html("<select aria-label="Pay Template" class='form-control' name='pay_template'>"+data+"</select>");
+        $("#grade").html("<select aria-label='Pay Template' class='form-control' name='pay_template'>"+data+"</select>");
         },
         error:function (){}
     });

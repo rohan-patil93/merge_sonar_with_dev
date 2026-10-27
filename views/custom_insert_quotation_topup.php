@@ -309,11 +309,11 @@ if($table_name =="sales_invoices" && $table1['ref_type'] != "" || ($table_name =
                             if(obj.payment_terms !=null){
                                 document.getElementById("party_payment_terms").value = obj.payment_terms;
                             }
-                                htmltemp +="<table style="width: 100%;">";
+                                htmltemp +="<table style='width: 100%;'>";
                                 htmltemp +="<tr>";
-                                htmltemp +="<th scope="col">Credit Limit</th>";
-                                htmltemp +="<th scope="col">Total Invoice</th>";
-                                htmltemp +="<th scope="col">Avl Limit</th>";
+                                htmltemp +="<th scope='col'>Credit Limit</th>";
+                                htmltemp +="<th scope='col'>Total Invoice</th>";
+                                htmltemp +="<th scope='col'>Avl Limit</th>";
                                 htmltemp +="</tr>";
                                 htmltemp +="<tr>";
                                 htmltemp +="<td>"+obj.credit_limit+"</td>";
@@ -341,7 +341,7 @@ if($table_name =="sales_invoices" && $table1['ref_type'] != "" || ($table_name =
                     type: "POST",
                     success:function(data){
                         console.log(data);
-                        $("#grade").html("<select aria-label="Pay Template" class='form-control' name='pay_template'>"+data+"</select>");
+                        $("#grade").html("<select aria-label='Pay Template' class='form-control' name='pay_template'>"+data+"</select>");
                     },
                     error:function (){}
                 });
@@ -438,7 +438,7 @@ if($table_name =="sales_invoices" && $table1['ref_type'] != "" || ($table_name =
                 type: "POST",
                 success:function(data){
                     var fun ="selectchange('ref_id',this.value,'"+key+"')";
-                    $(".refkey_ref_no").html("<select aria-label="Ref" class='form-control' name='ref_id' data-tablename='ref_id'  data-fieldsname='ref_id' data-pagename='comman_form' name='ref_id' id='ref_id' onchange="+fun+">"+data+"</select>");
+                    $(".refkey_ref_no").html("<select aria-label='Ref' class='form-control' name='ref_id' data-tablename='ref_id'  data-fieldsname='ref_id' data-pagename='comman_form' name='ref_id' id='ref_id' onchange="+fun+">"+data+"</select>");
                     window.location.href = 'index.php?option='+option+'&table='+key+'&TD='+trandate;
                 }
             });
@@ -681,12 +681,11 @@ if($fullvalue['type'] == 'serial_no'){
 
                                             ?>
                                             <input aria-label="Input field"  class="form-control"  type='text' <?php echo $read_only; ?> autocomplete="off" value='<?php  echo  $role[$key]; ?>' id="<?php  echo  $key; ?>" name="<?php echo $key?>" />
-                                        <?php }elseif($fullvalue['type']=='auto_select' && $key != 'place_of_supply'){ ?>
+                                        <?php }elseif($fullvalue['type']=='auto_select' && $key != 'place_of_supply'){
                  $selectdata =$field_result[$key];
 
-                 $select_table = $fieldtables[$key];
-
-                 <div class="w-full">
+                 $select_table = $fieldtables[$key]; ?>
+                  <div class="w-full">
                      <select aria-label="Select option"   class="form-select js-data-example-ajax-Comman-form col-lg-4" <?php echo $read_only; ?>  data-tablename="<?php echo $table_name; ?>"  data-fieldsname="<?php echo $key; ?>" data-value="" data-pagename="comman_form" name="<?php echo $key?>" id="<?php echo $key?>" onchange="selectchange(<?php echo "'".$key."'"; ?>,this.value,<?php echo "'".$select_table."'"; ?>)">
                          <option value=""> Select Any one</option>
                          <?php foreach ($selectdata as $selectkey => $selectvalue) {  if($selectkey == $role[$key] ){ ?>
@@ -696,7 +695,7 @@ if($fullvalue['type'] == 'serial_no'){
                      </select>
                  </div>
 
-             <?php }elseif($fullvalue['type']=='select' || $fullvalue['type']=='disable_select' || $key == 'place_of_supply') {  ?>
+             <?php }elseif($fullvalue['type']=='select' || $fullvalue['type']=='disable_select' || $key == 'place_of_supply') {
 
                  $selectdata = array();
                  if($table_name=="rental_invoices" AND ($key == 'parent_ref_id' || $key == 'ref_id')){
@@ -809,7 +808,7 @@ if($fullvalue['type'] == 'serial_no'){
                      <textarea aria-label="Text area" type="text" class="form-control" id="<?php echo $key; ?>" name="<?php echo $key; ?>" ><?php echo $role[$key];?></textarea>
                  <?php }elseif($fullvalue['type']=='touchspin') { ?>
                      <input aria-label="Kt Touchspin 1" id="kt_touchspin_1" type="text" class="form-control" value="1" id="<?php echo $key; ?>" name="<?php echo $key; ?>" placeholder="Select <?php echo $value; ?>">
-                 <?php }elseif($fullvalue['type']=='switch') { ?>
+                 <?php }elseif($fullvalue['type']=='switch') {
                 $selectdata =$field_result[$key];
                 $k=1;
                 foreach ($selectdata as $selectkey => $selectvalue) {
@@ -855,7 +854,7 @@ if($fullvalue['type'] == 'serial_no'){
                     }else{
                         $mulcheck = json_decode($role[$key],1);
                     } ?>
-                    <div class="w-full">
+                       <div class="w-full">
                         <select aria-label="Select option" class="form-control kt-select2" id="kt_select2_3<?php echo $mutiselet; ?>" name="<?php echo $key."[]"?>" multiple="multiple">
                             <option value=""> Select Any one <?php echo $value; ?></option>
                             <?php foreach ($selectdata as $selectkey => $selectvalue) {  ?>

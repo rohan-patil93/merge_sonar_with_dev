@@ -97,7 +97,9 @@
                 }
             };
             var uploader = document.querySelector('#kt_dropzone_2');
-            var newDropzone = new Dropzone(uploader, dropzoneOptions);
+            if (uploader) {
+                var newDropzone = new Dropzone(uploader, dropzoneOptions);
+            }
         };
 	function deleteTmageTemplates(lastid,names){
        return  $(".deletesrow").append('<div class="col-md-2 dz-preview dz-processing dz-image-preview dz-success text-center dz-complete divss del'+lastid+'"  style="width: fit-content;"><a class="dleteimages f-14 cursor-pointer" onclick="reused(\''+names+ '\','+lastid+')">Reused</a><div class="dz-image"><a href="uploads/attachments/'+names+'" target="_blank"><img class="brockenimage" src="uploads/attachments/'+names+'" style=" width: 100%;" ></a></div></div>');      

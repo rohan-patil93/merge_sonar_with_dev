@@ -43,22 +43,24 @@ if($("#mandatory_array").val()){
 
       // Hook up the form so we can prevent it from being posted
       var form = document.querySelector("form#form-validation");
-      form.addEventListener("submit", function(ev) {
+      if (form) {
+          form.addEventListener("submit", function(ev) {
 
-          ev.preventDefault();
-          handleFormSubmit(form);
-      });
-
-      // Hook up the inputs to validate on the fly
-      var inputs = document.querySelectorAll("input, textarea, select")
-      for (var i = 0; i < inputs.length; ++i) {
-
-          inputs.item(i).addEventListener("change", function(ev) {
-
-              var errors = validate(form, constraints) || {};
-              showErrorsForInput(this, errors[this.name]);
-
+              ev.preventDefault();
+              handleFormSubmit(form);
           });
+
+          // Hook up the inputs to validate on the fly
+          var inputs = document.querySelectorAll("input, textarea, select");
+          for (var i = 0; i < inputs.length; ++i) {
+
+              inputs.item(i).addEventListener("change", function(ev) {
+
+                  var errors = validate(form, constraints) || {};
+                  showErrorsForInput(this, errors[this.name]);
+
+              });
+          }
       }
 
 
@@ -255,20 +257,22 @@ if($("#mandatory_array").val()){
 
       // Hook up the form so we can prevent it from being posted
       var form1 = document.querySelector("form#second");
-      form1.addEventListener("submit", function(ev) {
+      if (form1) {
+          form1.addEventListener("submit", function(ev) {
 
-          ev.preventDefault();
-          handleFormSubmit1(form1);
-      });
-
-      // Hook up the inputs to validate on the fly
-      var inputs1 = document.querySelectorAll("input, textarea, select")
-      for (var i = 0; i < inputs.length; ++i) {
-          inputs.item(i).addEventListener("change", function(ev) {
-
-              var errors = validate(form1, constraints1) || {};
-              showErrorsForInput1(this, errors[this.name])
+              ev.preventDefault();
+              handleFormSubmit1(form1);
           });
+
+          // Hook up the inputs to validate on the fly
+          var inputs1 = document.querySelectorAll("input, textarea, select");
+          for (var i = 0; i < inputs.length; ++i) {
+              inputs.item(i).addEventListener("change", function(ev) {
+
+                  var errors = validate(form1, constraints1) || {};
+                  showErrorsForInput1(this, errors[this.name]);
+              });
+          }
       }
 
       function handleFormSubmit1(form, input) {
@@ -407,19 +411,21 @@ if($("#mandatory_array").val()){
 
       // Hook up the form so we can prevent it from being posted
       var form2 = document.querySelector("form#number_form");
-      form2.addEventListener("submit", function(ev) {
+      if (form2) {
+          form2.addEventListener("submit", function(ev) {
 
-          ev.preventDefault();
-          handleFormSubmit2(form2);
-      });
-
-      // Hook up the inputs to validate on the fly
-      var inputs2 = document.querySelectorAll("input, textarea, select")
-      for (var i = 0; i < inputs.length; ++i) {
-          inputs.item(i).addEventListener("change", function(ev) {
-              var errors = validate(form, constraints2) || {};
-              showErrorsForInput2(this, errors[this.name])
+              ev.preventDefault();
+              handleFormSubmit2(form2);
           });
+
+          // Hook up the inputs to validate on the fly
+          var inputs2 = document.querySelectorAll("input, textarea, select");
+          for (var i = 0; i < inputs.length; ++i) {
+              inputs.item(i).addEventListener("change", function(ev) {
+                  var errors = validate(form2, constraints2) || {};
+                  showErrorsForInput2(this, errors[this.name]);
+              });
+          }
       }
 
       function handleFormSubmit2(form, input) {
@@ -526,19 +532,21 @@ if($("#mandatory_array").val()){
       // Hook up the form so we can prevent it from being posted
 
       var form3 = document.querySelector("form#checkdrop");
-      form3.addEventListener("submit", function(ev) {
+      if (form3) {
+          form3.addEventListener("submit", function(ev) {
 
-          ev.preventDefault();
-          handleFormSubmit3(form3);
-      });
-
-      // Hook up the inputs to validate on the fly
-      var inputs3 = document.querySelectorAll("input, textarea, select")
-      for (var i = 0; i < inputs3.length; ++i) {
-          inputs.item(i).addEventListener("change", function(ev) {
-              var errors = validate(form3, constraints3) || {};
-              showErrorsForInput3(this, errors[this.name])
+              ev.preventDefault();
+              handleFormSubmit3(form3);
           });
+
+          // Hook up the inputs to validate on the fly
+          var inputs3 = document.querySelectorAll("input, textarea, select");
+          for (var i = 0; i < inputs3.length; ++i) {
+              inputs3.item(i).addEventListener("change", function(ev) {
+                  var errors = validate(form3, constraints3) || {};
+                  showErrorsForInput3(this, errors[this.name]);
+              });
+          }
       }
 
       function handleFormSubmit3(form, input) {

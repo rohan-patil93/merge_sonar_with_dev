@@ -222,11 +222,11 @@
 
 
 <!-- Stock Movement Analytics chart CSS -->
-<link rel="stylesheet" type="text/css" href="../assets/bower_components/morris.js/css/morris.css">
+<link rel="stylesheet" type="text/css" href="assets/bower_components/morris.js/css/morris.css">
 <!-- Stock Movement Analytics Chart JS -->
-<script src="../assets/bower_components/raphael/js/raphael.min.js"></script>
-<script src="../assets/bower_components/morris.js/js/morris.js"></script>
-<script src="../assets/pages/chart/morris/morris-custom-chart.js"></script>
+<script src="assets/bower_components/raphael/js/raphael.min.js"></script>
+<script src="assets/bower_components/morris.js/js/morris.js"></script>
+<script src="assets/pages/chart/morris/morris-custom-chart.js"></script>
 
 </body>
 

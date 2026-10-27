@@ -1050,8 +1050,8 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
 
 <?php  if($_SESSION['apply_js']['from-validation']==1){   ?>
 <!---Rohan Include validation testing---->
-<script src="/assets/js/moment/underscore-min.js"></script>
-<script src="/assets/js/moment/moment.min.js"></script>
+<script src="assets/bower_components/underscore/js/underscore-min.js"></script>
+<script src="assets/bower_components/moment/js/moment.min.js"></script>
 <script type="text/javascript" src="assets/pages/form-validation/validate.js"></script>
 <script type="text/javascript" src="assets/pages/form-validation/form-validation.js"></script>
 <!---Rohan Include validation testing---->

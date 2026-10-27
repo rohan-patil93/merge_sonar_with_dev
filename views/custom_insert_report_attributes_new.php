@@ -86,7 +86,7 @@ $showtables = json_decode($showtablesdata,1);
             }
             i++;
         });
-        $("#view_table").html("<select aria-label="Table" class='form-control form-select js-example-basic-single' id ='table' name='table' onchange='fieldchange(this.value)'><option value=''>Select any table </option>"+option+"</select>");
+        $("#view_table").html("<select aria-label='Table' class='form-control form-select js-example-basic-single' id ='table' name='table' onchange='fieldchange(this.value)'><option value=''>Select any table </option>"+option+"</select>");
         $(".js-example-basic-single").select2();
         $(".js-example-disabled-results").select2();
 
@@ -157,7 +157,7 @@ $showtables = json_decode($showtablesdata,1);
             data:'page=custom_right_join&table='+val,
             type: "POST",
             success:function(data){
-                $("#right_field_id").html("<select aria-label="Right Field" class='form-control form-select js-example-basic-single' onchange='bulidquery(this.value,this.id)' id ='right_field' name='right_field'>"+data+"</select>");
+                $("#right_field_id").html("<select aria-label='Right Field' class='form-control form-select js-example-basic-single' onchange='bulidquery(this.value,this.id)' id ='right_field' name='right_field'>"+data+"</select>");
                 $(".js-example-basic-single").select2();
                 $(".js-example-disabled-results").select2();
             },
@@ -170,7 +170,7 @@ $showtables = json_decode($showtablesdata,1);
             data:'page=dis_att_type&table='+val,
             type: "POST",
             success:function(data){
-                $("#left_field_id").html("<select aria-label="Left Field" class='form-control form-select js-example-basic-single' onchange='bulidquery(this.value,this.id)' id ='left_field' name='left_field'>"+data+"</select>");
+                $("#left_field_id").html("<select aria-label='Left Field' class='form-control form-select js-example-basic-single' onchange='bulidquery(this.value,this.id)' id ='left_field' name='left_field'>"+data+"</select>");
                 $(".js-example-basic-single").select2();
                 $(".js-example-disabled-results").select2();
             },

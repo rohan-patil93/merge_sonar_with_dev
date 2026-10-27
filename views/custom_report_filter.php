@@ -83,9 +83,9 @@ $comparator_array = array('=','!=','>','>=','<','<=');
             type: "POST",
             success:function(data){
                 console.log(data);
-                    $("#field_id").html("<select aria-label="Field Name" class='form-control form-select js-example-basic-single' id ='field_name' name='field_name'>"+data+"</select>");
-                    $("#label_id").html("<select aria-label="Value" class='form-control form-select js-example-basic-single' id='value' name='value'>"+data+"</select>");
-                    $("#order_by").html("<select aria-label="Order By" class='form-control form-select js-example-basic-single' id='order_by' name='order_by'>"+data+"</select>");
+                    $("#field_id").html("<select aria-label='Field Name' class='form-control form-select js-example-basic-single' id ='field_name' name='field_name'>"+data+"</select>");
+                    $("#label_id").html("<select aria-label='Value' class='form-control form-select js-example-basic-single' id='value' name='value'>"+data+"</select>");
+                    $("#order_by").html("<select aria-label='Order By' class='form-control form-select js-example-basic-single' id='order_by' name='order_by'>"+data+"</select>");
                     $("#drop").val(data);
                     $("#dis_custom_sql").val('');
 
