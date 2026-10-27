@@ -1,0 +1,57 @@
+/**
+ * Custom Insert ESI CSS
+ * Only custom classes for replacing inline styles
+ */
+
+/* Table column width classes - replaced from inline styles */
+.table-column-width-40 {
+    width: 40% !important;
+}
+
+.table-column-width-15-min {
+    min-width: 15% !important;
+}
+
+/* Text alignment - replaced from inline styles */
+.text-align-right {
+    text-align: right;
+}
+
+.text-align-left {
+    text-align: left;
+}
+
+/* Row backgrounds - replaced from inline styles */
+.row-bg-light-gray {
+    background-color: #eee;
+}
+
+/* Textarea styling - replaced from inline styles */
+.textarea-description {
+    overflow: hidden;
+    overflow-wrap: break-word;
+    resize: none;
+    height: 40px;
+}
+
+/* Select2 container width - replaced from inline styles */
+.select2-container {
+    width: 260px !important;
+}
+
+/* Background image URL classes - replaced from inline styles */
+.symbol-label-img-26 {
+    background-image: url('/metronic/theme/html/demo7/dist/assets/media/stock-600x400/img-26.jpg') !important;
+}
+
+.symbol-label-img-3 {
+    background-image: url('/metronic/theme/html/demo7/dist/assets/media/stock-600x400/img-3.jpg') !important;
+}
+
+.symbol-label-img-5 {
+    background-image: url('/metronic/theme/html/demo7/dist/assets/media/stock-600x400/img-5.jpg') !important;
+}
+
+.symbol-label-img-18 {
+    background-image: url('/metronic/theme/html/demo7/dist/assets/media/stock-600x400/img-18.jpg') !important;
+}

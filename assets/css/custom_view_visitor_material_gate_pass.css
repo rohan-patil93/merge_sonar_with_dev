@@ -1,0 +1,101 @@
+/*custom_view_visitor_material_gate_pass.css*/
+
+
+	@media (orientation: portrait) {
+		.container {
+			width: 100%;
+			border: none;
+			padding: 0;
+		}
+	}
+
+	@print {
+		.container {
+			100%;
+			padding: 0;
+			border: none;
+		}
+	}
+
+	td,
+	th {
+		font-size: 13px;
+		padding: 10px !important;
+		vertical-align: middle;
+		white-space: nowrap;
+	}
+
+	@media (max-width:772px) {
+		.scan {
+			width: 36%;
+		}
+	}
+
+	table {
+		border-collapse: collapse;
+	}
+.gatepass-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #cccccc;
+    font-family: Tahoma;
+}
+
+
+.gp-td {
+    font-size: 15px;
+    border: 1px solid #eeeeee;
+    text-align: left;
+    padding: 6px;
+}
+
+.gp-title {
+    font-size: 30px;
+    text-align: center;
+}
+
+.gp-header-logo {
+    text-align: center;
+}
+
+.gp-wrap {
+    white-space: normal;
+}
+
+.gp-separator {
+    background: #eeeeee;
+}
+.gp-block {
+    display: block;
+}
+
+
+
+
+.gp-icon {
+    margin-right: 5px;
+}
+.gp-no-padding {
+    padding: 0 !important;
+}
+
+.gatepass-inner-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.gp-th {
+    font-size: 15px;
+    border: 1px solid #eeeeee;
+    text-align: left;
+    padding: 6px;
+}
+
+.gp-sign {
+    height: 50px;
+}
+.gp-small {
+    font-size: 12px;
+}
+.gp-print-btn {
+    margin-top: 20px;
+}

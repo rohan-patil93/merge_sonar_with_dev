@@ -1,0 +1,13 @@
+    .distance-tooltip {
+        background: white;
+        color: black;
+        font-size: 12px;
+        border-radius: 4px;
+        padding: 2px 4px;
+        border: 1px solid #ccc;
+    }
+.d-none { display: none; }
+.text-danger { color: red; }
+.m-height-500{
+    height: 500px
+}

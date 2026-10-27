@@ -1,0 +1,125 @@
+ #	Name	Display postion , DIsplay list
+1	id	,1,1
+2	company_id ,3,1
+3	bill_id	 , 4,1
+4	status_code	, 5,1	
+5	notify	,7,1
+6	description	,4	,1	
+7	created_at,8,2			
+8	updated_at, 9,2			
+9	billed_at, 2,1		
+10	due_at	,10	,2	
+11	vendor_name ,6,1
+
+{"id":"take","notifiable_id":"3","notifiable_type":"matter","data":"one plus one","submit":"Add
+
+
+
+<td><span><?php echo $i; ?></spzn>	</td>
+							<td><?php echo $bill['bill_id']; ?></td>
+							<td><?php echo $bill['status_code']; ?></td>
+							<td> <span class="kt-badge kt-badge--brand kt-badge--inline kt-badge--pill"><?php echo isacStatusDescrption($bill['notify']); ?> </span></td>
+							<td><?php echo $bill['description']; ?>		</td>
+							 <td><?php echo $bill['description']; ?>		</td>
+							 <td><?php echo $bill['vendor_name']; ?>		</td>
+							 <td><?php echo $bill['billed_at']; ?>		</td>
+							<td><a href="index.php?option=com_roles&Rid="$rid></a><i  class='la la-edit'> </i></a></td>
+							
+							
+
+
+
+ALTER TABLE contacts ADD currentStatus int(1) NOT NULL;
+
+ALTER TABLE contacts ADD statusDate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
+ALTER TABLE vendors
+ADD COLUMN currentStatus int(1) NOT NULL,
+ADD COLUMN statusDate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ADD COLUMN FromDate date DEFAULT NULL,
+ADD COLUMN ToDate date DEFAULT NULL,
+ADD COLUMN CreatedBy int(11) DEFAULT NULL,
+ADD COLUMN UpdatedBy int(11) DEFAULT NULL,
+ADD COLUMN UpdatedDate timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+ADD COLUMN is_active int(1) NOT NULL;
+
+
+
+
+ALTER TABLE salary_template
+ADD COLUMN is_active int(11) DEFAULT NULL,
+ADD COLUMN current_status int(1) NOT NULL,
+ADD COLUMN status_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ADD COLUMN from_date date DEFAULT NULL,
+ADD COLUMN to_date date DEFAULT NULL,
+ADD COLUMN created_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ADD COLUMN created_by int(11) DEFAULT NULL,
+ADD COLUMN updated_by int(11) DEFAULT NULL,
+ADD COLUMN updated_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+
+
+
+
+ADD COLUMN is_active int(1) NOT NULL
+
+hr policies is good for introverts
+
+
+ALTER TABLE isac_bill_items
+ADD COLUMN CurrentStatus int(1) NOT NULL,
+ADD COLUMN StatusDate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ADD COLUMN FromDate date DEFAULT NULL,
+ADD COLUMN ToDate date DEFAULT NULL,
+ADD COLUMN CreatedBy int(11) DEFAULT NULL,
+ADD COLUMN UpdatedBy int(11) DEFAULT NULL,
+ADD COLUMN is_active int(1) NOT NULL
+
+
+<?php
+$bill_list = array();
+$bill_list ['id']['display_postion']=1;
+$bill_list ['company_id']['display_postion']=2;
+$bill_list ['payment_id']['display_postion']=3;
+$bill_list ['revenue_id']['display_postion']=4;
+$bill_list ['is_active']['display_postion']=5;
+$bill_list ['created_at']['display_postion']=6;
+$bill_list ['updated_at']['display_postion']=7;
+$bill_list ['id']['display_list']=1;
+$bill_list ['company_id']['display_list']=1;
+$bill_list ['payment_id']['display_list']=2;
+$bill_list ['revenue_id']['display_list']=2;
+$bill_list ['is_active']['display_list']=1;
+$bill_list ['created_at']['display_list']=1;
+$bill_list ['updated_at']['display_list']=2;
+$bill_list ['id']['display_list']='ID';
+$bill_list ['company_id']['lable']='Company';
+$bill_list ['payment_id']['lable']='Account';
+$bill_list ['revenue_id']['lable']= 'Paid Date';
+$bill_list ['is_active']['lable']= 'Status';
+$bill_list ['created_at']['lable']= 'Paid Date';
+$bill_list ['updated_at']['lable']= 'Updated';
+return $bill_list;	
+
+
+
+
+
+
+
+
+
+`currentStatus` int(1) NOT NULL DEFAULT '0',
+
+  `statusDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+  `FromDate` date DEFAULT NULL,
+
+  `ToDate` date DEFAULT NULL,
+
+  `CreatedBy` int(11) DEFAULT NULL,
+
+  `CreatedDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+  `UpdatedBy` int(11) DEFAULT NULL,
+
+  `UpdatedDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,

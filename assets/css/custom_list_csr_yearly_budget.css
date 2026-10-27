@@ -1,0 +1,10 @@
+.card-header-right-workflow:hover {
+    z-index: 100 !important;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Card fixed height (moved from inline style) */
+.ticket-card-fixed {
+    height: 12rem;
+}

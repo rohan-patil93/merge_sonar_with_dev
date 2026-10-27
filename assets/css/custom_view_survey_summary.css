@@ -1,0 +1,43 @@
+.survey-summary-container .symbollogo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.survey-summary-container .symbol-danger {
+    background-color: #f8d7da;
+    border-radius: 8px;
+}
+
+.survey-summary-container .progress-xs {
+    height: 8px;
+}
+
+.survey-summary-container .progress-bar-pink {
+    background-color: #e83e8c;
+}
+
+.survey-summary-container .infisuite_tab {
+    border-bottom: 1px solid #e4e6ef;
+}
+
+.survey-summary-container .nav-link {
+    padding: 1rem 1.5rem;
+    color: #7e8299;
+    font-weight: 500;
+}
+
+.survey-summary-container .nav-link.active {
+    color: #3699ff;
+    border-bottom: 2px solid #3699ff;
+}
+
+.survey-summary-container .symbol-group {
+    display: flex;
+    align-items: center;
+}
+
+.survey-summary-container .symbol-circle {
+    margin-right: -10px;
+    border: 2px solid #fff;
+}

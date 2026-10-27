@@ -1,0 +1,16 @@
+/* Month Input Styling */
+#att_month_year {
+    font-size: 14px;
+    height: 40px !important;
+    padding: 10px 15px;
+}
+
+/* Table Responsive Container */
+.table-responsive.custom-scroll {
+    height: 500px;
+}
+
+/* Image Styling */
+.mw-100.mh-300px {
+    max-height: 300px !important;
+}

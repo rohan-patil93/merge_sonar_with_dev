@@ -1,0 +1,187 @@
+.attendance-location-header {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.attendance-location-employee {
+    padding: 12px 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #f8fafc;
+}
+
+.attendance-location-employee .title {
+    font-size: 12px;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+}
+
+.attendance-location-employee .value {
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.attendance-summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.summary-card {
+    padding: 16px;
+    border-radius: 10px;
+    background: #111827;
+    color: #f9fafb;
+    text-align: center;
+}
+
+.summary-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #e5e7eb;
+}
+
+.summary-value {
+    font-size: 22px;
+    font-weight: 700;
+    margin-top: 8px;
+}
+
+.attendance-map-container {
+    position: relative;
+    margin-bottom: 24px;
+}
+
+.attendance-location-map {
+    width: 100%;
+    height: 520px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.attendance-location-empty {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 16px 24px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px dashed #cbd5f5;
+    border-radius: 10px;
+    color: #475569;
+    font-weight: 600;
+}
+
+.attendance-location-table {
+    margin-top: 8px;
+}
+
+.attendance-map-legend {
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 12px;
+    color: #111827;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.12);
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    z-index: 10;
+}
+
+.attendance-map-legend .legend-title {
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.attendance-map-legend .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.attendance-map-legend .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.attendance-map-legend .legend-dot-in {
+    background: #22c55e;
+}
+
+.attendance-map-legend .legend-dot-out {
+    background: #ef4444;
+}
+
+.attendance-map-tooltip {
+    background: rgba(17, 24, 39, 0.9);
+    color: #f9fafb;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    min-width: 140px;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.25);
+    pointer-events: none;
+}
+
+.attendance-map-tooltip .tooltip-title {
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.attendance-pin-wrapper {
+    background: transparent;
+    border: none;
+}
+
+.attendance-pin {
+    position: relative;
+    width: 30px;
+    height: 36px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.attendance-pin::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    width: 12px;
+    height: 6px;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.attendance-pin-in {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='96' height='120' viewBox='0 0 96 120'><path d='M48 2C27 2 10 19 10 40c0 27 38 74 38 74s38-47 38-74C86 19 69 2 48 2z' fill='%2322c55e'/><circle cx='48' cy='40' r='16' fill='%23ffffff'/><ellipse cx='48' cy='110' rx='26' ry='8' fill='%2322c55e'/></svg>");
+}
+
+.attendance-pin-out {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='96' height='120' viewBox='0 0 96 120'><path d='M48 2C27 2 10 19 10 40c0 27 38 74 38 74s38-47 38-74C86 19 69 2 48 2z' fill='%23ef4444'/><circle cx='48' cy='40' r='16' fill='%23ffffff'/><ellipse cx='48' cy='110' rx='26' ry='8' fill='%2306b6d4'/></svg>");
+}
+
+@media (max-width: 991px) {
+    .attendance-location-header,
+    .attendance-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .attendance-location-map {
+        height: 420px;
+    }
+}

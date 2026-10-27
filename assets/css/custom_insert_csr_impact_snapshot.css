@@ -1,0 +1,13 @@
+.js-project-empty {
+    display: block;
+}
+
+#csrImpactSnapshotForm .form-group {
+    margin-bottom: 18px;
+}
+
+#csrImpactSnapshotForm input[readonly],
+#csrImpactSnapshotForm select:disabled {
+    background-color: #f7f7f7;
+    cursor: not-allowed;
+}

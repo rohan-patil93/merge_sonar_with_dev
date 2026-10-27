@@ -1,0 +1,141 @@
+.csr-obl-dashboard {
+  padding-bottom: 24px;
+}
+
+.csr-obl-title {
+  color: #1a3a5c;
+  font-weight: 700;
+}
+
+.csr-obl-subtitle {
+  color: #6c757d;
+  font-size: 14px;
+}
+
+.csr-obl-csv-btn {
+  margin-top: 4px;
+}
+
+.csr-obl-filter-form .form-label {
+  font-size: 12px;
+}
+
+.csr-obl-filter-form .select2-container,
+.csr-obl-filter-form .csr-obl-fy-select {
+  width: 100% !important;
+}
+
+.csr-obl-kpi {
+  border: 1px solid #e3e8ef;
+  border-radius: 6px;
+  height: 100%;
+  margin-bottom: 16px;
+}
+
+.csr-obl-kpi .card-body {
+  padding: 16px 18px;
+}
+
+.csr-obl-kpi-label {
+  color: #1a3a5c;
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.csr-obl-kpi-value {
+  color: #1a3a5c;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+  word-break: break-word;
+}
+
+.csr-obl-table thead th {
+  background: #1a3a5c;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.csr-obl-table tbody td {
+  font-size: 12px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.csr-obl-group-header td {
+  background: #1a3a5c;
+  color: #fff;
+  font-size: 13px;
+}
+
+.csr-obl-summary-row td {
+  background: #f0f4f8;
+  font-weight: 600;
+}
+
+.csr-obl-category-row td {
+  background: #e8f1f8;
+  color: #c0392b;
+}
+
+.csr-obl-grand-total td {
+  background: #dce8f3;
+  color: #c0392b;
+  font-size: 13px;
+}
+
+.csr-obl-pct-good {
+  background: #d4edda !important;
+  color: #1e7e34;
+}
+
+.csr-obl-pct-warn {
+  background: #fff3cd !important;
+  color: #856404;
+}
+
+.csr-obl-status {
+  border-radius: 12px;
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+}
+
+.csr-obl-status-completed {
+  background: #d4edda;
+  color: #1e7e34;
+}
+
+.csr-obl-status-process {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.csr-obl-status-notstarted {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.csr-obl-mini-table thead th {
+  background: #f0f4f8;
+  color: #1a3a5c;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.csr-obl-mini-table td {
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+@media (max-width: 991px) {
+  .csr-obl-header .text-end {
+    text-align: left !important;
+    margin-top: 8px;
+  }
+}

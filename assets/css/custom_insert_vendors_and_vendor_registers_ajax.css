@@ -1,0 +1,38 @@
+
+
+@media (orientation: portrait) {
+    .container {width: 100%; border: none; padding: 0;}
+}
+@print{
+    .container{100%;padding:0;border:none;}
+}
+td, th{font-size: 13px; padding: 10px !important; vertical-align: middle;white-space: normal;}
+@media (max-width:772px){
+    .scan{width: 36%;}
+}
+table{
+    border-collapse : collapse;
+}
+
+td, th{font-size: 13px; padding: 10px !important; vertical-align: middle;white-space: normal;}
+			
+
+.m-0{
+    margin: 0;
+}
+.mt-3{
+    margin-top: 10px;
+}
+.mt-4{
+    margin-top: 15px;
+}
+.mt-5{
+    margin-top: 20px;
+}
+.w-100{
+    width: 100%;
+}
+.bg-gray{
+    background: #eeeeee;
+    margin: 0;
+}

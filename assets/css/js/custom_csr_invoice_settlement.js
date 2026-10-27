@@ -1,0 +1,217 @@
+$(document).ready(function () {
+    const csrDataEl = document.getElementById('csrData');
+
+    let invRowIndex = parseInt(
+        csrDataEl?.dataset?.inv_row_count || 1,
+        10
+    );
+    const csr_pos = csrDataEl?.dataset?.csr_pos
+        ? JSON.parse(csrDataEl.dataset.csr_pos)
+        : [];
+
+    const fyRows = csrDataEl?.dataset?.fy_rows
+        ? JSON.parse(csrDataEl.dataset.fy_rows)
+        : [];
+
+
+    /* Add row */
+    $('#addInvRowBtn').on('click', function () {
+        console.log('test');
+        invRowIndex++;
+        $('#invoiceRowsWrapper').append(getInvRowHtml(invRowIndex));
+        $('.js-example-basic-single').select2();
+    });
+
+    /* Remove row + soft delete */
+    $(document).on('click', '.removeInvRowBtn', function () {
+        const row = $(this).closest('.inv-row');
+        const invoice_id = row.find("input[name='id[]']").val();
+
+        row.remove();
+
+        if (invoice_id) {
+            $.ajax({
+                url: "ajax.php",
+                type: "POST",
+                data: {
+                    page: "softdeletedrecord",
+                    id: invoice_id,
+                    table: "csr_invoice_details"
+                }
+            });
+        }
+    });
+
+    /* Auto calculations */
+    $(document).on('input', '.taxable_value, .gst_amount', function () {
+        const row = $(this).closest('.inv-row');
+        const taxable = parseFloat(row.find('.taxable_value').val()) || 0;
+        const gst = parseFloat(row.find('.gst_amount').val()) || 0;
+        const tds = parseFloat(row.find('.tds_deducted').val()) || 0;
+
+        const total = taxable + gst;
+        row.find('.total_spent').val(total.toFixed(2));
+        row.find('.net_payable').val((total - tds).toFixed(2));
+    });
+
+    $(document).on('input', '.total_spent, .tds_deducted', function () {
+        const row = $(this).closest('.inv-row');
+        const total = parseFloat(row.find('.total_spent').val()) || 0;
+        const tds = parseFloat(row.find('.tds_deducted').val()) || 0;
+        row.find('.net_payable').val((total - tds).toFixed(2));
+    });
+
+    /* Submit */
+    $('#invoiceForm').on('submit', function (e) {
+        e.preventDefault();
+        let valid = true;
+
+        $('.inv-row').each(function (i, el) {
+            const row = $(el);
+            const required = [
+                ['.financial_year','Financial Year'],
+                ['.inv_no','Invoice No'],
+                ['.inv_date','Invoice Date'],
+                ['.paid_date','Paid Date'],
+                ['.paid_amount','Paid Amount'],
+                ['.paid_bank','Paid Bank'],
+                ['.taxable_value','Taxable Value'],
+                ['.gst_amount','GST Amount'],
+                ['.total_spent','Total Spent'],
+                ['.net_payable','Net Payable']
+            ];
+
+            required.forEach(r => {
+                if (row.find(r[0]).val().trim() === '') {
+                    notifyError(`${r[1]} missing (Row ${i+1})`);
+                    valid = false;
+                }
+            });
+        });
+
+        if (!valid) return;
+
+        const formData = new FormData(this);
+        formData.append('page', 'save_invoice_details');
+        formData.append('table_name', 'csr_invoice_details');
+
+        $.ajax({
+            url: 'ajax.php',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function () {
+                tostarnotify(
+                    'top','right','fa fa-thumbs-up',
+                    'form-label label label-success',
+                    'animated flipInX','animated flipOutX',
+                    'Invoice details saved successfully',''
+                );
+            },
+            error: function () {
+                notifyError('An error occurred. Please try again.');
+            }
+        });
+    });
+
+    function getInvRowHtml(index) {
+        console.log('testing***');
+        let poOptions = '<option value="">Select Any One</option>';
+        csr_pos.forEach(po => {
+            poOptions += `<option value="${po.id}">${po.po_no}</option>`;
+        });
+
+        let fyOptions = '<option value="">Select FY</option>';
+        fyRows.forEach(fy => {
+            fyOptions += `<option value="${fy.genc_detail_code}">${fy.genc_detail_code}</option>`;
+        });
+
+        return `
+        <div class="row inv-row border-bottom mb-3 pb-2" data-row="${index}">
+            <div class="col-lg-2 form-group">
+                <label>PO No</label>
+                <select class="form-control js-example-basic-single" name="csr_po_details_id[]">
+                    <option value="">Select Any One</option>
+                    ${poOptions}
+                </select>
+            </div>
+
+            <div class="col-lg-2 form-group">
+                <label>Financial Year <span class="text-danger">*</span></label>
+                <select name="financial_year[]" class="form-control form-select financial_year" required>
+                    ${fyOptions}
+                </select>
+            </div>
+
+            <div class="col-lg-2 form-group">
+                <label>Invoice No <span class="text-danger">*</span></label>
+                <input class="form-control inv_no" name="inv_no[]">
+            </div>
+
+            <div class="col-lg-2 form-group">
+                <label>Invoice Date <span class="text-danger">*</span></label>
+                <input class="form-control inv_date" type="date" name="inv_date[]">
+            </div>
+
+            <div class="col-lg-2 form-group">
+                <label>Taxable Value <span class="text-danger">*</span></label>
+                <input class="form-control taxable_value" type="number" name="taxable_value[]">
+            </div>
+
+            <div class="col-lg-2 form-group">
+                <label>GST Amount <span class="text-danger">*</span></label>
+                <input class="form-control gst_amount" type="number" name="gst_amount[]">
+            </div>
+
+            <div class="col-lg-2 form-group">
+                <label>Total Spent <span class="text-danger">*</span></label>
+                <input class="form-control total_spent" type="number" name="total_spent[]">
+            </div>
+
+            <div class="col-lg-2 form-group">
+                <label>TDS Deducted</label>
+                <input class="form-control tds_deducted" type="number" name="tds_deducted[]">
+            </div>
+
+            <div class="col-lg-2 form-group">
+                <label>Net Payable <span class="text-danger">*</span></label>
+                <input class="form-control net_payable" type="number" name="net_payable[]">
+            </div>
+
+            <div class="col-lg-2 form-group">
+                <label>Paid Date <span class="text-danger">*</span></label>
+                <input class="form-control paid_date" type="date" name="paid_date[]">
+            </div>
+
+            <div class="col-lg-2 form-group">
+                <label>Paid Amount <span class="text-danger">*</span></label>
+                <input class="form-control paid_amount" type="number" name="paid_amount[]">
+            </div>
+
+            <div class="col-lg-2 form-group">
+                <label>Paid Bank <span class="text-danger">*</span></label>
+                <input class="form-control paid_bank" name="paid_bank[]">
+            </div>
+
+            <div class="col-lg-1">
+                <button type="button" class="btn btn-danger btn-sm removeInvRowBtn">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </div>
+        </div>`;
+    }
+
+});
+
+/* Helpers */
+function notifyError(msg) {
+    tostarnotify(
+        'top','right','fa fa-thumbs-down',
+        'form-label label label-danger',
+        'animated flipInX','animated flipOutX',
+        msg,''
+    );
+}
+
+

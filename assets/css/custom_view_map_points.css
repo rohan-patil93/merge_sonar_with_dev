@@ -1,0 +1,52 @@
+.map-large {
+    height: 550px;
+}
+
+.info-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 23rem;
+    height: 35rem;
+    background: #fff;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+    padding: 20px;
+    z-index: 1000;
+}
+
+.info-close-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.d-none {
+    display: none;
+}
+
+.save-btn {
+    margin-top: 20px;
+    width: 100%;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+.d-flex {
+    display: flex;
+}
+.justify-between {
+    justify-content: space-between;
+}
+.align-center {
+    align-items: center;
+}
+.text-danger {
+    color: red;
+}
+.motorcycle-icon {
+    color: #3722a7;
+    font-size: 20px;
+}

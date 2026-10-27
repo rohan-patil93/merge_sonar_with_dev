@@ -1,0 +1,19 @@
+.transport-vehicle-master h6.text-primary { border-bottom: 2px solid #007bff; padding-bottom: 8px; }
+.transport-vehicle-master .form-label { font-weight: 500; }
+.vehicle-status-badge { padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 500; }
+.vehicle-status-available { background-color: #28a745; color: #fff; }
+.vehicle-status-in-use { background-color: #ffc107; color: #212529; }
+.vehicle-status-maintenance { background-color: #17a2b8; color: #fff; }
+.vehicle-status-out-of-service { background-color: #dc3545; color: #fff; }
+.vehicle-active-badge { background-color: #28a745; color: #fff; padding: 4px 10px; border-radius: 4px; font-size: 11px; }
+.vehicle-inactive-badge { background-color: #6c757d; color: #fff; padding: 4px 10px; border-radius: 4px; font-size: 11px; }
+.vehicle-action-btn { margin: 2px; }
+.insurance-expiring-soon { color: #ffc107; font-weight: 500; }
+.insurance-expired { color: #dc3545; font-weight: 500; }
+.insurance-valid { color: #28a745; }
+.loading-spinner-icon { font-size: 2rem; }
+.delete-confirm-vehicle-name { font-weight: bold; color: #dc3545; }
+.vehicle-detail-row { padding: 8px 0; border-bottom: 1px solid #eee; }
+.vehicle-detail-row:last-child { border-bottom: none; }
+.vehicle-detail-label { font-weight: 600; color: #555; }
+.vehicle-detail-value { color: #333; }

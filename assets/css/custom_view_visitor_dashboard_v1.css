@@ -1,0 +1,14 @@
+/* Dashboard main container */
+.DashboardMain {
+    min-height: 300px;
+}
+
+/* Loader center alignment */
+.dashboard-loader {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.dashboard-loader img {
+    width: 300px;
+}

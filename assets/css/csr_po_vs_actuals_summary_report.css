@@ -1,0 +1,44 @@
+.ws-normal {
+    white-space: normal;
+}
+
+.max-h-300 {
+    max-height: 300px !important;
+}
+
+.csr-sticky-col {
+    position: sticky;
+    z-index: 2;
+    background: #fff;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.08);
+}
+
+thead .csr-sticky-col {
+    z-index: 5;
+}
+
+.csr-sticky-project {
+    left: 0;
+    min-width: 220px;
+    width: 220px;
+    max-width: 220px;
+}
+
+.csr-sticky-nature {
+    left: 220px;
+    min-width: 280px;
+    width: 280px;
+    max-width: 280px;
+}
+
+.csr-sticky-partner {
+    left: 500px;
+    min-width: 220px;
+    width: 220px;
+    max-width: 220px;
+}
+
+tbody .csr-sticky-nature,
+tbody .csr-sticky-partner {
+    background: #fff;
+}

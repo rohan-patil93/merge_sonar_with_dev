@@ -1,0 +1,266 @@
+/* Manufacturing Work Orders Styling */
+
+/* Modal Styles */
+#productionModal .modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+#productionModal .modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #e9ecef;
+}
+
+#productionModal .modal-title {
+    font-weight: 600;
+    /*color: #212529;*/
+}
+
+/* Form Groups in Modal */
+#productionModal .form-group {
+    margin-bottom: 1rem;
+}
+
+#productionModal .form-label {
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+#productionModal .form-control {
+    border-radius: 0.25rem;
+    border: 1px solid #dee2e6;
+    font-size: 0.875rem;
+}
+
+#productionModal .form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+#productionModal .form-control[readonly] {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
+/* Table Styles in Modal */
+#productionModal .table {
+    margin-bottom: 0;
+    font-size: 0.875rem;
+}
+
+#productionModal .table thead {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+}
+
+#productionModal .table thead th {
+    font-weight: 600;
+    color: #495057;
+    padding: 0.75rem;
+    vertical-align: middle;
+    border-color: #dee2e6;
+}
+
+#productionModal .table tbody td {
+    padding: 0.75rem;
+    vertical-align: middle;
+    border-color: #dee2e6;
+}
+
+#productionModal .table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Input Fields in Table */
+#productionModal .consumed-qty-input,
+#productionModal .remarks-input {
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+}
+
+#productionModal .consumed-qty-input:focus,
+#productionModal .remarks-input:focus {
+    outline: none;
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+#productionModal .consumed-qty-input.is-invalid {
+    border-color: #dc3545;
+    background-image: none;
+}
+
+#productionModal .consumed-qty-input.is-invalid:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+/* Text alignment */
+#productionModal .text-end {
+    text-align: right;
+}
+
+/* Modal Footer */
+#productionModal .modal-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+    padding: 1rem;
+}
+
+#productionModal .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* Production Buttons */
+#production_start_btn,
+#production_hold_btn,
+#production_complete_btn {
+    margin-left: 0.5rem;
+}
+
+.manufacturing-uom-addon {
+    min-width: 64px;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.manufacturing-uom-badge {
+    color: #6c757d;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: 4px;
+    white-space: nowrap;
+}
+
+.manufacturing-method-cell {
+    min-width: 220px;
+}
+
+.manufacturing-method-cell .form-control,
+.manufacturing-method-cell .select2-container {
+    width: 100% !important;
+}
+
+.manufacturing-subcontract-fields {
+    margin-top: 6px;
+}
+
+.manufacturing-inhouse-note {
+    color: #6c757d;
+    font-size: 11px;
+    line-height: 1.3;
+    margin-top: 4px;
+}
+
+/* Alert for empty items */
+#productionModal .text-muted {
+    color: #6c757d;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #productionModal .modal-dialog {
+        margin: 0.5rem;
+    }
+
+    #productionModal .table {
+        font-size: 0.8rem;
+    }
+
+    #productionModal .table thead th,
+    #productionModal .table tbody td {
+        padding: 0.5rem;
+    }
+
+    #productionModal .consumed-qty-input,
+    #productionModal .remarks-input {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* Scrollbar styling for modal body */
+#productionModal .modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+#productionModal .modal-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+#productionModal .modal-body::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+#productionModal .modal-body::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Production Button Visibility State */
+.production-btn-hidden {
+    display: none !important;
+}
+
+/* Production Resume Button Styling */
+#production_resume_btn {
+    margin-left: 0.5rem;
+}
+
+#production_resume_btn:hover {
+    opacity: 0.9;
+}
+
+/* Completed Button (disabled state) */
+button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Table Header Column Widths */
+.th-sno {
+    width: 5%;
+}
+
+.th-item-name {
+    width: 25%;
+}
+
+.th-sku {
+    width: 10%;
+}
+
+.th-uom {
+    width: 10%;
+}
+
+.th-requested-qty {
+    width: 12%;
+}
+
+.th-current-consumed-qty {
+    width: 10%;
+}
+
+.th-available-qty {
+    width: 10%;
+}
+
+.th-session-consumed-qty {
+    width: 18%;
+}
+
+.th-consumed-qty {
+    width: 15%;
+}
+
+.th-remarks {
+    width: 23%;
+}

@@ -1,0 +1,219 @@
+    .verification-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .verification-step {
+        background: white;
+        border-radius: 8px;
+        padding: 30px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+    .step-header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+        color: #155724;
+        border-radius: 8px;
+        padding: 20px;
+    }
+
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    .btn {
+        min-width: 120px;
+    }
+
+    .field-info {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        border-left: 4px solid #007bff;
+        margin-bottom: 20px;
+    }
+
+    .verification-fields {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 5px;
+        border-left: 4px solid #007bff;
+        margin-top: 20px;
+    }
+
+    .confirmation-section {
+        background: #d4edda;
+        padding: 15px;
+        border-radius: 5px;
+        border-left: 4px solid #28a745;
+        margin-top: 20px;
+    }
+
+    .is-valid {
+        border-color: #28a745;
+    }
+
+    .is-invalid {
+        border-color: #dc3545;
+    }
+
+    .alert-warning {
+        background-color: #fff3cd;
+        border-color: #ffeaa7;
+        color: #856404;
+    }
+
+    .input-group {
+        position: relative;
+    }
+
+    .input-group .status-icon {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        background: transparent;
+        border: none;
+        padding: 0;
+    }
+
+    .input-group.has-success .form-control {
+        border-color: #28a745;
+    }
+
+    .input-group.has-error .form-control {
+        border-color: #dc3545;
+    }
+
+    .btn-group .btn {
+        margin-left: 5px;
+    }
+
+    .btn-group .btn:first-child {
+        margin-left: 0;
+    }
+
+    #bank_manual_confirmation_section {
+        border: 1px solid #ffc107;
+        border-radius: 8px;
+        animation: pulse-warning 2s infinite;
+    }
+
+    @keyframes pulse-warning {
+        0% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.4); }
+        70% { box-shadow: 0 0 0 10px rgba(255, 193, 7, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); }
+    }
+
+    #bank_manual_confirmation_section .btn {
+        min-width: 150px;
+    }
+
+    .gap-2 {
+        gap: 0.5rem;
+    }
+
+    /* Hidden elements */
+    .js-hidden {
+        display: none !important;
+    }
+
+    /* Data container for JavaScript */
+    .js-data-container {
+        display: none;
+    }
+
+    /* Current data section */
+    .current-data-section {
+        display: none;
+    }
+
+    .current-data-section.show {
+        display: block;
+    }
+
+    /* Verification fields sections */
+    .verification-fields-section {
+        display: none;
+    }
+
+    .verification-fields-section.show {
+        display: block;
+    }
+
+    /* Confirmation sections */
+    .confirmation-section-hidden {
+        display: none;
+    }
+
+    .confirmation-section-hidden.show {
+        display: block;
+    }
+
+    /* Manual confirmation sections */
+    .manual-confirmation-section {
+        display: none;
+        background: #fff3cd;
+        border-left: 4px solid #ffc107;
+    }
+
+    .manual-confirmation-section.show {
+        display: block;
+    }
+
+    /* Button visibility states */
+    .btn-hidden {
+        display: none !important;
+    }
+
+    .btn-visible {
+        display: inline-block !important;
+    }
+
+    /* Company name warning */
+    .company-name-warning {
+        display: none;
+    }
+
+    .company-name-warning.show {
+        display: block;
+    }
+
+    /* GST verification sections for add new */
+    .gst-verification-fields-new {
+        display: none;
+    }
+
+    .gst-verification-fields-new.show {
+        display: block;
+    }
+
+    .gst-comparison-section-new {
+        display: none;
+        background: #fff3cd;
+        border-left: 4px solid #ffc107;
+    }
+
+    .gst-comparison-section-new.show {
+        display: block;
+    }
+
+    .gst-confirmation-section-new {
+        display: none;
+    }
+
+    .gst-confirmation-section-new.show {
+        display: block;
+    }

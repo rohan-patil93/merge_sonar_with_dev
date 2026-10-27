@@ -1,0 +1,64 @@
+.issue-view-card {
+    border: 1px solid #e6ebf1;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+.issue-view-section {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.section-title {
+    margin-bottom: 0;
+    color: #1e293b;
+    font-weight: 700;
+}
+
+.detail-group {
+    margin-bottom: 18px;
+}
+
+.detail-group label {
+    display: block;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+.detail-group p {
+    margin-bottom: 0;
+    color: #0f172a;
+    font-weight: 500;
+}
+
+.issue-child-table thead th {
+    background: #f5f7fb;
+    color: #334155;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.issue-child-table tbody td {
+    vertical-align: middle;
+}
+
+.issue-child-table .text-right {
+    text-align: right;
+}
+
+@media (max-width: 768px) {
+    .issue-view-section {
+        padding: 14px;
+    }
+
+    .issue-child-table {
+        font-size: 12px;
+    }
+}

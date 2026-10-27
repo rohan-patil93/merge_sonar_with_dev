@@ -1,0 +1,573 @@
+/* INVOICE 1 CSS START HERE */
+.invoice-1 {
+    padding: 50px 0;
+    background: #fff6f6;
+}
+.invoice-content {
+    font-family: 'Poppins', sans-serif;
+    color: #535353;
+    font-size: 14px;
+}
+.invoice-1 .invoice-inner {
+    max-width: 1296px;
+    margin: 0 auto;
+}
+.invoice-1 .invoice-info {
+    background: #fff;
+    margin-bottom: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 5px rgb(0 0 0 / 10%);
+}
+.invoice-1 .invoice-top {
+    padding: 40px 150px 15px 150px;
+    font-size: 15px;
+}
+.invoice-1 .invoice-center {
+    padding: 0 150px 40px;
+}
+.invoice-1 .bg-active {
+    /*background: #f3f3f3;*/
+    /*color: #535353 !important;*/
+}
+.invoice-1 table tr {
+    border-bottom: 1px solid #e9ecef;
+    text-align: right;
+    background-color: #ffffff !important;
+    --bs-table-accent-bg: transparent !important;
+}
+thead.bg-active th {
+    border-right: 1px solid #eeeeee;
+}
+/*thead.bg-active th:last-child{
+    border: none;
+}*/
+.invoice-1 table tr th, .invoice-1 table tr td{
+    padding: 15px 20px;
+}
+.invoice-content .invoice-table th:first-child, .invoice-content .invoice-table td:first-child {
+    text-align: left;
+}
+.invoice-1 .table-responsive{
+    display: inline-block;
+    width: auto;
+    overflow-x: clip;
+}
+.invoice-1 .invoice-bottom {
+    padding: 0 150px 25px;
+}
+.invoice-content .important-notes-list-1 {
+    font-size: 13px !important;
+    padding-left: 15px;
+    margin-bottom: 15px;
+}
+.invoice-content .important-notes-list-1 li {
+    margin-bottom: 5px;
+    list-style: disc;
+}
+.invoice-1 .invoice-contact {
+    padding: 70px 150px 40px;
+    clip-path: polygon(0% 0, 50% 35%, 60% 100%, 0 100%);
+    background: rgba(0, 0, 0, 0.04) url(../images/invoice/img-1.png) top left repeat;
+    border-radius: 0 0 0 20px;
+}
+.invoice-1 .social-list {
+    float: left;
+}
+.invoice-1 .social-list span {
+    margin-right: 5px;
+    font-weight: 500;
+    font-size: 16px;
+    color: #fff;
+}
+.invoice-btn-section .btn{
+    padding: 10px 20px;
+    border-radius: 5px;
+} 
+
+
+.invoice-name .logo img{
+    width: 170px;
+}
+.invoice-headar{
+    padding: 90px 150px 130px;
+    clip-path: polygon(0 0, 100% 0, 100% 75%, 20% 100%, 0% 60%);
+    border-radius: 20px 20px 0 0;
+    background: rgba(0, 0, 0, 0.04) url('../images/invoice/img-1.png') top left repeat;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+
+/* INVOICE 1 CSS END HERE */
+
+/* INVOICE 2 CSS START HERE */
+.logo a img{
+    width: 170px;
+}
+.invoice-2 {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 47px 0 50px;
+    background: #fff6f6;
+}
+.invoice-2 .invoice-info {
+    background: #fff;
+    margin: 0 auto;
+    box-shadow: 0 0 5px rgb(0 0 0 / 10%);
+}
+.invoice-2 .invoice-top, .invoice-2 .invoice-center, .invoice-2 .order-summary, .invoice-2 .account-transfer {
+    border-bottom: solid 1px #d8d8d8;
+    padding: 40px 120px;
+}
+.invoice-2 .note {
+    padding: 40px 120px;
+}
+.invoice-content .invoice-btn-section {
+    text-align: center;
+    margin-top: 30px;
+}
+.invoice-2 table tr th, .invoice-2 table tr td {
+    padding: 15px 20px;
+}
+ul.bank-transfer-list-1 li{
+    list-style: disc;
+}
+.invoice-content .inv-title-1 {
+    font-weight: 500;
+    font-size: 16px;
+}
+.invoice-2 .total-amount h1 {
+    color: #25cc7e;
+    font-weight: 700;
+    margin-bottom: 5px;
+    font-size: 30px;
+}
+
+/* INVOICE 2 CSS END HERE */
+
+/* INVOICE 3 CSS START HERE */
+.invoice-3 {
+    padding: 50px 0;
+    background: #fff6f6;
+}
+.invoice-3 .invoice-top {
+    background: rgba(0, 0, 0, 0.04) url(../images/invoice/bg-img.jpg) top left repeat;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+    padding: 70px 150px 50px 150px;
+    border-radius: 10px 10px 0 0;
+}
+.invoice-3 .invoice-center, .invoice-3 .invoice-bottom {
+    padding: 70px 150px;
+    background: #fdfdfd;
+    border-left: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+}
+.invoice-3 table tr th, .invoice-3 table tr td {
+    padding: 15px 20px;
+}
+.invoice-3 .invoice-bottom h1 {
+    font-weight: 700;
+    font-size: 30px;
+    color: #8547e8;
+}
+
+
+/* INVOICE 3 CSS END HERE */
+
+
+/* INVOICE 4 CSS START HERE */
+.info a .logo{
+    width: 170px;
+} 
+.invoice-4 {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+    background: #fff6f6;
+}
+.invoice-4 .invoice-info {
+    background: #fff;
+    margin-bottom: 30px;
+    box-shadow: 0 0 5px rgb(0 0 0 / 10%);
+}
+.invoice-4 .logo-name {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    padding: 50px 70px;
+}
+.invoice-4 .invoice-top {
+    border-bottom: solid 1px #d8d8d8;
+}
+.invoice-4 .invoice-name {
+    text-align: right;
+    float: right;
+    clip-path: polygon(0 0, 100% 0, 100% 0%, 100% 100%, 20% 100%);
+    position: relative;
+    background: #25cc7e;
+    padding: 70px 70px 75px 120px;
+}
+.invoice-4 .invoice-center {
+    border-bottom: solid 1px #d8d8d8;
+    padding: 70px 70px 40px;
+}
+.invoice-4 .table-section {
+    padding: 70px 70px;
+    border-bottom: solid 1px #d8d8d8;
+}
+.invoice-4 table tr th, .invoice-4 table tr td {
+    padding: 15px 20px;
+}
+
+
+/* INVOICE 4 CSS END HERE */
+
+
+/* INVOICE 5 CSS START HERE */
+.invoice-5 {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 47px 0 50px;
+    background: #fff6f6;
+}
+.invoice-5 .invoice-info {
+    background: #fff;
+    margin-bottom: 30px;
+    box-shadow: 0 0 5px rgb(0 0 0 / 10%);
+}
+.invoice-5 .invoice-header {
+    background: rgba(0, 0, 0, 0.04) url(../images/invoice/bg5-img.jpg) top left repeat;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+    padding: 70px;
+    border-radius: 10px 10px 0 0;
+}
+.invoice-5 .invoice-header-inner {
+    margin: 0;
+    border: solid 1px #fbfbfb45;
+    border-radius: 5px;
+}
+.invoice-5 .border-r {
+    border-right: solid 1px #fbfbfb45;
+}
+.invoice-5 .address-info {
+    padding: 20px 30px 30px;
+}
+.invoice-5 .address-info .strong {
+    font-weight: 500;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: solid 1px #fbfbfb45;
+    color: #fff;
+    opacity: 1;
+    font-size: 16px;
+}
+.invoice-5 .table-section {
+    padding: 70px 70px 40px;
+}
+.invoice-5 .border-bottom {
+    border-bottom: solid 1px #dee2e6 !important;
+}
+.invoice-5 table tr th, .invoice-5 table tr td {
+    padding: 15px 20px;
+}
+
+
+/* INVOICE 5 CSS END HERE */
+
+
+/* INVOICE 6 CSS START HERE */
+.logo img{
+    width: 170px;
+}
+.invoice-6 {
+    background: #fff;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 47px 0 50px;
+}
+.invoice-6 .invoice-inner-6 {
+    background: #fff;
+    max-width: 1296px;
+    margin: 0 auto;
+    box-shadow: 0 0 5px rgb(0 0 0 / 10%);
+}
+.invoice-6 .invoice-top {
+    padding: 50px 150px;
+}
+.invoice-6 .invoice-top .invoice {
+    float: right;
+}
+.invoice-6 .invoice-top .invoice h1 {
+    font-weight: 500;
+    margin-bottom: 0;
+    font-size: 28px;
+}
+.invoice-6 .invoice-titel {
+    background: #25cc7e;
+}
+.invoice-6 .invoice2 {
+    background: #fbf8f8;
+    clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
+    padding: 20px 20px 20px 150px;
+}
+.invoice-6 .invoice-info {
+    padding: 50px 150px 20px;
+}
+.invoice-6.invoice-content .inv-title-1{
+    font-size: 20px;
+    font-weight: 600;
+}
+.invoice-6 .invoice-titel .row {
+    margin: 0;
+}
+.invoice-6 .invoice-titel h3 {
+    margin-bottom: 0;
+    font-weight: 500;
+    font-size: 18px;
+}
+.invoice-6 .date {
+    clip-path: polygon(5% 0, 100% 0, 100% 100%, 0% 100%);
+    background: #fbf8f8;
+    padding: 20px 150px 20px 20px;
+}
+.invoice-6 .order-summary {
+    padding: 50px 150px;
+}
+.invoice-6 table tr th, .invoice-6 table tr td {
+    padding: 15px 20px;
+}
+.invoice-6 .invoice-information {
+    padding: 50px 150px;
+    background: #fbf8f8;
+}
+
+
+/* INVOICE 6 CSS END HERE */
+
+
+/* INVOICE 7 CSS START HERE */
+.invoice-7 {
+    padding: 50px 0;
+    background: #fff6f6;
+}
+.invoice-7 .invoice-inner {
+    max-width: 1296px;
+    margin: 0 auto;
+}
+.invoice-7 .invoice-info {
+    background: #fff;
+    margin-bottom: 30px;
+    padding: 0;
+    background: rgba(0, 0, 0, 0.04) url(../images/invoice/img-6.jpg) top left repeat;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 100%;
+    box-shadow: 0 0 5px rgb(0 0 0 / 10%);
+}
+.invoice-7 .invoice-headar{
+    background: none;
+}
+.invoice-7 .invoice-headar {
+    padding: 45px 70px 35px;
+    border-bottom: solid 1px #e9e9e9;
+}
+.invoice-7 .invoice-top {
+    padding: 35px 70px 20px;
+    font-size: 15px;
+}
+.invoice-7.invoice-content .inv-title-1 {
+    font-weight: 600;
+    font-size: 18px;
+}
+.invoice-7 .invoice-center {
+    padding: 0 70px 35px;
+    border-bottom: solid 1px #e9e9e9;
+}
+.invoice-7 table tr th, .invoice-7 table tr td {
+    padding: 15px 20px;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: transparent;
+    --bs-table-accent-bg: #ffffff;
+}
+.invoice-7 .invoice-bottom {
+    padding: 35px 70px 20px;
+    border-bottom: solid 1px #e9e9e9;
+}
+.invoice-7 .invoice-contact {
+    padding: 35px 70px;
+}
+
+
+/* INVOICE 7 CSS END HERE */
+
+
+/* INVOICE 8 CSS START HERE */
+.invoice-8 {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 47px 0 50px;
+    background: #fff6f6;
+}
+.invoice-8 .invoice-inner {
+    max-width: 1296px;
+    margin: 0 auto;
+}
+.invoice-8 .invoice-info {
+    background: #fff;
+    margin-bottom: 30px;
+    box-shadow: 0 0 5px rgb(0 0 0 / 10%);
+}
+.invoice-8 .invoice-header {
+    padding: 70px 70px 0;
+}
+.invoice-8 .invoice-header-inner {
+    margin: 20px 0 0 0;
+    border: solid 1px #e9ecef;
+}
+.invoice-8 .address-info {
+    padding: 20px 30px 30px;
+}
+.invoice-8 .border-r {
+    border-right: solid 1px #e9ecef;
+}
+.invoice-8 .address-info .strong {
+    font-weight: 500;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    color: #535353;
+    border-bottom: solid 1px #e9ecef;
+}
+.invoice-8 .table-section {
+    padding: 70px 70px 40px;
+}
+.invoice-8 .border-bottom {
+    border-bottom: solid 1px #dee2e6 !important;
+}
+.invoice-8 table tr th, .invoice-8 table tr td {
+    padding: 15px 20px;
+}
+.invoice-8.invoice-content .inv-title-1 {
+    font-weight: 600;
+    font-size: 18px;
+}
+.invoice-8 .invoice-header h4{
+    font-weight: 600;
+    font-size: 21px;   
+}
+
+/* INVOICE 8 CSS END HERE */
+
+
+
+/* INVOICE 9 CSS START HERE */
+.invoice-9 {
+    background: #fff;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 47px 0 50px;
+}
+.invoice-9 .invoice-inner-9 {
+    background: #fff;
+    max-width: 1296px;
+    margin: 0 auto;
+    box-shadow: 0 0 5px rgb(0 0 0 / 10%);
+}
+.invoice-9 .invoice-top {
+    padding: 100px 150px 50px;
+}
+.invoice-9 .invoice-info {
+    padding: 0 150px 50px;
+}
+.invoice-9 .order-summary {
+    padding: 0 150px 100px;
+}
+.invoice-9 .invoice-information-footer {
+    position: relative;
+    padding: 50px 180px 40px;
+    border-top: 1px solid #ECEDF2;
+}
+.invoice-content .invoice-btn-section {
+    text-align: center;
+    margin-top: 30px;
+}
+.invoice-9 .invoice-top .invoice {
+    float: right;
+}
+.invoice-9 .invoice-top .invoice h1 {
+    font-weight: 600;
+    margin-bottom: 0;
+    color: #25cc7e;
+    font-size: 22px;
+}
+.invoice-9 .default-table {
+    position: relative;
+    background: #ffffff;
+    border: 0;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 100%;
+    min-width: 550px;
+}
+.invoice-9 table tr th, .invoice-9 table tr td {
+    padding: 15px 20px;
+}
+thead.bg-active th {
+    border-right: 1px solid #eeeeee;
+}
+table thead th {
+    border-bottom: 1px solid #d6dde1;
+}
+table tbody tr td {
+    border-bottom: 1px solid #d6dde1;
+}
+.invoice-9 .invoice-information-footer ul {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    marker: none;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.invoice-9 .invoice-information-footer ul li {
+    position: relative;
+    margin: 0 30px 10px;
+    font-size: 15px;
+    marker: none;
+    line-height: 20px;
+}
+.invoice-9 .invoice-information-footer li a {
+    color: #535353;
+}
+
+
+/* INVOICE 9 CSS END HERE */

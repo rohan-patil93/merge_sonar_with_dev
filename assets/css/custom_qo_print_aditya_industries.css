@@ -1,0 +1,100 @@
+body{
+    font-family: Tahoma;
+}
+table{
+    border-collapse: collapse;
+}
+td, th{
+    font-size: 13px;
+    padding: 10px;
+    border: 1px solid #eeeeee;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+.w-100{ 
+    width: 100%; 
+}
+.p-0{
+    padding: 0;
+}
+.m-b-20{
+    margin-bottom: 20px;
+}
+.m-t-20{
+    margin-top: 20px;
+}
+
+/* ======= Border CSS Start ======= */
+.border{ 
+    border: 1px solid #cccccc; 
+}
+.border-eeeeee{ 
+    border: 1px solid #eeeeee; 
+}
+/* ======= Border CSS End ======= */
+
+
+/* ======= Text Align CSS Start ======= */
+.text-center{ 
+    text-align: center; 
+}
+.text-start{ 
+    text-align: left; 
+}
+.text-end{ 
+    text-align: right; 
+}
+
+/* ======= Text Align CSS End ======= */
+
+
+/* ======= Text Align CSS End ======= */
+.d-block{ 
+    display:block; 
+}
+
+
+/* ======= Font CSS Start ======= */
+.f-14{ 
+    font-size:14px; 
+}
+.f-16{
+    font-size: 16px;
+}
+.f-24{
+    font-size: 24px;
+}
+.f-30{ 
+    font-size:30px; 
+}
+
+/* ======= Font CSS End ======= */
+
+/* 🔥 PRINT RULES */
+@media print {
+
+    body * {
+        visibility: hidden;
+    }
+
+    #printableArea,
+    #printableArea * {
+        visibility: visible;
+    }
+
+    #printableArea {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+
+    .print-btn {
+        display: none;
+    }
+
+    @page {
+        size: A4;
+        margin: 10mm;
+    }
+}

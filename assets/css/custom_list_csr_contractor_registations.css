@@ -1,0 +1,4 @@
+/* No-records image height (moved from inline style) */
+.no-record-img {
+    max-height: 300px !important;
+}

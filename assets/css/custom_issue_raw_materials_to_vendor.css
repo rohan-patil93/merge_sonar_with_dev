@@ -1,0 +1,348 @@
+/* Issue Raw Materials to Vendor - Styling */
+
+/* Section 1: Dropdown Form Styling */
+#issueRawMaterialsForm {
+    margin-bottom: 20px;
+}
+
+#issueRawMaterialsForm .form-group {
+    margin-bottom: 15px;
+}
+
+#issueRawMaterialsForm .form-label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+}
+
+#issueRawMaterialsForm .form-control,
+#issueRawMaterialsForm .form-select {
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+#issueRawMaterialsForm .form-control:focus,
+#issueRawMaterialsForm .form-select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+#issueRawMaterialsForm .btn {
+    padding: 8px 20px;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
+/* Section 2: Parent Record Display */
+.parent-record-section {
+    background: #f9f9f9;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.parent-record-section .card-title {
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.parent-record-section .card-title i {
+    margin-right: 8px;
+    color: #007bff;
+}
+
+.parent-record-section .form-group {
+    margin-bottom: 20px;
+}
+
+.parent-record-section .form-label {
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 6px;
+    display: block;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.parent-record-section .form-control[readonly] {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    color: #333;
+    cursor: default;
+    padding: 10px 12px;
+    border-radius: 4px;
+}
+
+.parent-record-section .form-control[readonly]:focus {
+    border-color: #dee2e6;
+    box-shadow: none;
+}
+
+/* Section 3: Child Items Table */
+.child-items-section {
+    background: #f9f9f9;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    padding: 20px;
+}
+
+.child-items-section .card-title {
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.child-items-section .card-title i {
+    margin-right: 8px;
+    color: #007bff;
+}
+
+.child-items-section .table {
+    margin-bottom: 0;
+    background: white;
+}
+
+.child-items-section .table thead {
+    background-color: #f0f2f5;
+    border-top: 1px solid #dee2e6;
+}
+
+.child-items-section .table thead th {
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+    color: #333;
+    padding: 12px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.child-items-section .table tbody td {
+    padding: 12px;
+    vertical-align: middle;
+    border-color: #e9ecef;
+}
+
+.child-items-section .table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.child-items-section .table tbody tr:last-child td {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.child-items-section .table .text-right {
+    text-align: right;
+}
+
+.child-items-section .table .badge {
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.child-items-section .table small {
+    color: #999;
+    font-size: 11px;
+}
+
+/* Alert Styling */
+.alert {
+    border-radius: 6px;
+    margin-bottom: 20px;
+    padding: 15px 20px;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+.alert-dismissible {
+    padding-right: 35px;
+}
+
+/* General Card Styling */
+.card {
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px;
+}
+
+.card-header {
+    background-color: #f0f2f5;
+    border-bottom: 1px solid #e9ecef;
+    padding: 15px 20px;
+    border-radius: 6px 6px 0 0;
+}
+
+.card-header h5 {
+    margin: 0;
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* Issue History Panel */
+.issue-history-panel {
+    background: #f9f9f9;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    padding: 15px;
+    max-height: 480px;
+    overflow-y: auto;
+}
+
+.issue-history-title {
+    color: #333;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.issue-history-title i {
+    margin-right: 6px;
+    color: #007bff;
+}
+
+.issue-history-item {
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.issue-history-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 9px 12px;
+    cursor: pointer;
+    user-select: none;
+    background: #f0f2f5;
+    transition: background 0.15s;
+}
+
+.issue-history-header:hover {
+    background: #e4e8ee;
+}
+
+.issue-history-arrow {
+    color: #555;
+    font-size: 12px;
+    flex-shrink: 0;
+}
+
+.issue-history-no {
+    font-weight: 600;
+    font-size: 13px;
+    color: #333;
+}
+
+.issue-history-summary {
+    flex: 1;
+    min-width: 0;
+}
+
+.issue-history-summary-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.issue-history-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    font-size: 11px;
+    color: #666;
+}
+
+.issue-history-meta span {
+    white-space: nowrap;
+}
+
+.issue-history-status {
+    flex-shrink: 0;
+}
+
+.issue-history-header .badge {
+    font-size: 11px;
+    padding: 3px 8px;
+}
+
+.issue-history-body {
+    padding: 12px;
+    border-top: 1px solid #dee2e6;
+}
+
+.issue-history-items-table {
+    background: #fff;
+}
+
+.issue-history-items-table thead th {
+    background: #f7f9fb;
+    font-size: 11px;
+    font-weight: 600;
+    color: #555;
+    text-transform: uppercase;
+}
+
+.issue-history-items-table td,
+.issue-history-items-table th {
+    padding: 6px 8px;
+    vertical-align: middle;
+}
+
+.issue-history-body .detail-group {
+    margin-bottom: 10px;
+}
+
+.issue-history-body .detail-group label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-bottom: 2px;
+}
+
+.issue-history-body .detail-group p {
+    margin: 0;
+    font-size: 13px;
+    color: #333;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .parent-record-section .form-group,
+    .child-items-section .table th,
+    .child-items-section .table td {
+        padding: 8px 10px;
+    }
+
+    .child-items-section .table {
+        font-size: 12px;
+    }
+
+    #issueRawMaterialsForm .col-lg-3,
+    #issueRawMaterialsForm .col-lg-4,
+    #issueRawMaterialsForm .col-lg-8 {
+        width: 100%;
+    }
+}

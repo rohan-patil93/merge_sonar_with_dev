@@ -1,0 +1,47 @@
+.cex-import-page .cex-upload-zone {
+	padding: 48px 16px;
+	border: 1px dashed #cbd5e1;
+	border-radius: 8px;
+	background: #f8fafc;
+	text-align: center;
+	cursor: pointer;
+}
+
+.cex-import-page .cex-upload-zone:hover {
+	border-color: #4680ff;
+	background: #f0f4ff;
+}
+
+.cex-import-page .cex-upload-zone i {
+	font-size: 36px;
+	color: #4680ff;
+	display: block;
+	margin-bottom: 8px;
+}
+
+.cex-import-page .cex-row-ok {
+	background: #ecfdf5;
+}
+
+.cex-import-page .cex-row-error {
+	background: #ffe4e6;
+	color: #b91c1c;
+}
+
+.cex-import-page .cex-stat-box {
+	border: 1px solid #e8ecf1;
+	border-radius: 8px;
+	padding: 12px 14px;
+	background: #fff;
+}
+
+.cex-import-page .cex-stat-box .cex-stat-value {
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: #333;
+}
+
+.cex-import-page .cex-stat-box .cex-stat-label {
+	font-size: 12px;
+	color: #8a94a6;
+}

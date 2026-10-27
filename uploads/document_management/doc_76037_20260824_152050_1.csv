@@ -1,0 +1,13 @@
+INFISUITE
+ID,TYPE NAME,IS ACTIVE
+1,Invoice,Active
+2,Purchase Order,Active
+3,Agreement / Contract,Active
+4,ID Proof,Active
+5,Bank Statement,Active
+6,Tax Document,Active
+7,Delivery Challan,Active
+8,Work Order,Active
+9,NOC,Active
+10,Other,Active
+11,Registration..,Active

@@ -1,0 +1,16 @@
+.nav-link.active {
+	background-color: #0d6efd !important;
+	color: #fff !important;
+}
+.profile-img {
+    margin: -40px 0 0 0;
+}
+.profile-pic-edit {
+    left: -3px;
+    top: -2px;
+}
+.csr-complete-img {
+    height: auto;
+    width: 4.5rem;
+}
+

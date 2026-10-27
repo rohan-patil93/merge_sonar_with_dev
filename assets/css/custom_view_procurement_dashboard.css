@@ -1,0 +1,493 @@
+.dashboard-container {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.04);
+    border: 1px solid #e2e8f0;
+}
+
+/* Tab Navigation Box Layout */
+.custom-tabs-container {
+    display: flex;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.custom-tab-link {
+    flex: 1;
+    background: none;
+    border: none;
+    border-right: 1px solid #e2e8f0;
+    padding: 16px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    text-align: left;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    color: #475569 !important;
+}
+
+.custom-tab-link:last-child {
+    border-right: none;
+}
+
+/* Bootstrap 5.0.1 Active State Overrides */
+.custom-tabs-container .custom-tab-link.active {
+    background-color: #0d6efd !important;
+    color: #ffffff !important;
+}
+
+.custom-tabs-container .custom-tab-link.active .tab-title,
+.custom-tabs-container .custom-tab-link.active .tab-main-count,
+.custom-tabs-container .custom-tab-link.active .tab-sub-text,
+.custom-tabs-container .custom-tab-link.active i {
+    color: #ffffff !important;
+}
+
+.tab-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tab-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: #64748b;
+    line-height: 1.2;
+}
+
+.tab-main-count {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1e293b;
+    display: block;
+    line-height: 1.2;
+    margin-top: 2px;
+}
+
+.tab-sub-text {
+    font-size: 11px;
+    color: #64748b;
+    display: block;
+    margin-top: 1px;
+}
+
+/* Cards Layout */
+.module-badge-box {
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-align: left;
+}
+
+/* AI Summary Gradient Box */
+.ai-summary-box {
+    background: linear-gradient(135deg, #f0f7ff 0%, #e1effe 100%);
+    border: 1px solid rgba(13, 110, 253, 0.1);
+    border-radius: 12px;
+    min-height: 87%;
+}
+
+.progress-sm {
+    height: 8px;
+    border-radius: 4px;
+}
+
+/* FIX: Set static height for charts to prevent spilling */
+.chart-box-wrapper {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.chart-container-doughnut {
+    position: relative;
+    height: 200px;
+    /* Fixed Height */
+    width: 100%;
+}
+
+.chart-container-doughnut canvas {
+    height: 200px !important;
+}
+
+.chart-container-line {
+    position: relative;
+    height: 200px;
+    /* Fixed Height */
+    width: 100%;
+}
+
+.chart-container-line canvas {
+    height: 200px !important;
+}
+
+.chart-container-bar {
+    position: relative;
+    height: 130px;
+    /* Smaller height for compact bar */
+    width: 100%;
+}
+
+.chart-container-bar canvas {
+    height: 130px !important;
+}
+
+@media (max-width: 768px) {
+    .custom-tabs-container {
+        flex-direction: column;
+    }
+
+    .custom-tab-link {
+        border-right: none;
+        border-bottom: 1px solid #e2e8f0;
+        justify-content: flex-start;
+        padding: 12px 20px;
+    }
+}
+
+
+.icon-wrapper {
+    background-color: #e0f2fe;
+    color: #0284c7;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+
+
+/* Container holding the map & dots */
+.map-container {
+    position: relative;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 260px;
+    margin: 0 auto;
+}
+
+/* Detailed India SVG Map */
+.india-map-svg {
+    width: 100%;
+    height: auto;
+    max-height: 280px;
+}
+
+/* Interactive risk dots */
+.map-dot {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    transform: translate(-50%, -50%);
+}
+
+/* Position Coordinate Coordinates on India Map */
+.dot-delhi {
+    top: 30%;
+    left: 37%;
+    background-color: #22c55e;
+    /* Green */
+}
+
+.dot-mumbai {
+    top: 61%;
+    left: 21%;
+    background-color: #22c55e;
+    /* Green */
+}
+
+.dot-bengaluru {
+    top: 81%;
+    left: 41%;
+    background-color: #eab308;
+    /* Yellow */
+}
+
+.dot-hyderabad {
+    top: 71%;
+    left: 46%;
+    background-color: #f97316;
+    /* Orange */
+}
+
+.dot-chennai {
+    top: 81%;
+    left: 52%;
+    background-color: #ef4444;
+    /* Red */
+}
+
+/* List styling on the right side */
+.risk-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.risk-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.risk-item:last-child {
+    border-bottom: none;
+}
+
+.city-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.city-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+}
+
+/* Status Label Colors */
+.risk-label {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.risk-v-high {
+    color: #ef4444;
+}
+
+.risk-high {
+    color: #f97316;
+}
+
+.risk-medium {
+    color: #eab308;
+}
+
+.risk-low {
+    color: #22c55e;
+}
+
+/* Footer Navigation link */
+.card-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.footer-link {
+    color: #2563eb;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.2s ease;
+}
+
+.footer-link:hover {
+    gap: 10px;
+}
+
+/* Responsiveness for small screens */
+@media (max-width: 560px) {
+    .card-body {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .map-container {
+        max-width: 220px;
+    }
+}
+
+.ai-card {
+    /*background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 680px;
+      padding: 24px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03);
+      position: relative;
+      overflow: hidden;*/
+}
+
+/* Header Styling */
+.ai-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    /*margin-bottom: 20px;*/
+}
+
+.ai-header-icon {
+    background-color: #eff6ff;
+    color: #2563eb;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    border: 1px solid #dbeafe;
+}
+
+.ai-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+/* Layout Split */
+.ai-content {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 20px;
+    align-items: center;
+}
+
+/* Left Side: Question Prompts */
+.prompt-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.prompt-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8faff;
+    border: 1px solid #e0ebff;
+    border-radius: 8px;
+    padding: 12px 16px;
+    text-align: left;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.prompt-button:hover {
+    background: #f0f5ff;
+    border-color: #bfdbfe;
+    transform: translateY(-1px);
+}
+
+.prompt-text {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #1e40af;
+    padding-right: 12px;
+}
+
+.prompt-arrow {
+    color: #3b82f6;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+/* Right Side: Graphic & Action Link */
+.ai-graphic-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Dynamic SVG Mascot Styling */
+.mascot-container {
+    width: 160px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.mascot-glow {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+    z-index: 1;
+}
+
+.mascot-svg {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+/* Open Assistant Footer Link */
+.open-assistant-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #2563eb;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 700;
+    transition: gap 0.2s ease, color 0.2s ease;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px 12px;
+}
+
+.open-assistant-btn:hover {
+    color: #1d4ed8;
+    gap: 12px;
+}
+
+/* Responsive styling for smaller devices */
+@media (max-width: 580px) {
+    .ai-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .ai-graphic-panel {
+        order: -1;
+        /* Graphic comes on top on mobile view */
+    }
+}

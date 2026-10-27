@@ -1,0 +1,326 @@
+/* Leave Balance Management Page CSS */
+
+/* Balance Section */
+.balance-section {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.balance-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 15px;
+    background-color: #fff;
+    margin-bottom: 15px;
+    transition: box-shadow 0.3s ease;
+}
+
+.balance-card:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.balance-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.leave-type-name {
+    font-weight: 600;
+    font-size: 16px;
+    color: #333;
+}
+
+.leave-type-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.balance-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.balance-item:last-child {
+    border-bottom: none;
+}
+
+.balance-label {
+    color: #666;
+    font-weight: 500;
+}
+
+.balance-value {
+    color: #333;
+    font-weight: 600;
+}
+
+.balance-value.positive {
+    color: #28a745;
+}
+
+.balance-value.warning {
+    color: #ffc107;
+}
+
+.balance-value.danger {
+    color: #dc3545;
+}
+
+/* Allocation Section */
+.allocation-section {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.allocation-section-spacer {
+    margin-top: 30px;
+}
+
+.is-hidden {
+    display: none;
+}
+
+.allocation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.add-allocation-btn {
+    margin-left: 8px;
+}
+
+#allocations-table {
+    background-color: #fff;
+    margin-bottom: 0;
+}
+
+#allocations-table thead th {
+    background-color: #f0f0f0;
+    color: #333;
+    font-weight: 600;
+    border-top: 1px solid #ddd;
+}
+
+#allocations-table tbody tr {
+    border-bottom: 1px solid #e9ecef;
+}
+
+#allocations-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+#allocations-table td {
+    vertical-align: middle;
+    padding: 12px;
+}
+
+.allocation-status {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-active {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+.status-pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-inactive {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Header and Buttons */
+.card-header {
+    border-bottom: 1px solid #ddd;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+#btn-add-allocation {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+#btn-add-allocation:hover {
+    background-color: #218838;
+    border-color: #218838;
+}
+
+/* Modal Custom Styling */
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+}
+
+.modal-title {
+    font-weight: 600;
+    /* color: #333; */
+}
+
+.modal-body {
+    padding: 25px;
+}
+
+.modal-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #ddd;
+}
+
+/* Form Controls */
+.form-label {
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.form-control,
+.form-select {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-control.is-invalid,
+.form-select.is-invalid {
+    border-color: #dc3545;
+}
+
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+/* Required Field Indicator */
+.text-danger {
+    color: #dc3545;
+}
+
+/* No Data Message */
+.alert-info {
+    background-color: #cfe2ff;
+    border: 1px solid #b6d4fe;
+    color: #084298;
+    border-radius: 4px;
+    padding: 12px 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .balance-card {
+        margin-bottom: 12px;
+    }
+
+    .balance-item {
+        flex-direction: column;
+        padding: 6px 0;
+    }
+
+    .card-header {
+        flex-direction: column;
+    }
+
+    #allocations-table {
+        font-size: 12px;
+    }
+
+    #allocations-table td {
+        padding: 8px;
+    }
+}
+
+/* Loading State */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Utility Classes */
+.mb-0 {
+    margin-bottom: 0;
+}
+
+.mb-3 {
+    margin-bottom: 1rem;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem;
+}
+
+.p-2 {
+    padding: 0.5rem;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.float-left {
+    float: left;
+}

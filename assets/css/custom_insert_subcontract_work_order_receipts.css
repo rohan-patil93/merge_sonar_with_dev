@@ -1,0 +1,191 @@
+.receipt-card .detail-box {
+    background: #f8fafc;
+    border: 1px solid #e5edf5;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    min-height: 88px;
+}
+
+.receipt-card .detail-label {
+    color: #6b7280;
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.receipt-card .detail-value {
+    color: #17212b;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.receipt-summary-grid {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-top: 8px;
+}
+
+.receipt-card .summary-tile {
+    background: linear-gradient(135deg, #f4f8fb 0%, #edf4ff 100%);
+    border: 1px solid #dde8f5;
+    border-radius: 10px;
+    padding: 16px;
+}
+
+.receipt-card .summary-tile-warning {
+    background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+    border-color: #fed7aa;
+}
+
+.receipt-card .tile-label {
+    color: #5f6b7a;
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+.receipt-card .summary-tile strong {
+    color: #0f172a;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.receipt-history-btn {
+    margin-right: 8px;
+}
+
+.receipt-tax-panel {
+    background: #ffffff;
+    border: 1px solid #e5edf5;
+    border-radius: 8px;
+    margin: 6px 0 18px;
+    padding: 16px;
+}
+
+.receipt-tax-panel .tax-panel-header {
+    align-items: center;
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.receipt-tax-panel .tax-panel-header h6 {
+    color: #17212b;
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.receipt-tax-panel .tax-panel-header span {
+    color: #6b7280;
+    font-size: 13px;
+    text-align: right;
+}
+
+.receipt-tax-summary {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.receipt-tax-summary .tax-summary-item {
+    background: #f8fafc;
+    border: 1px solid #edf2f7;
+    border-radius: 8px;
+    padding: 12px 14px;
+}
+
+.receipt-tax-summary .tax-summary-item span {
+    color: #6b7280;
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+.receipt-tax-summary .tax-summary-item strong {
+    color: #0f172a;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.receipt-card .tax-breakdown-table th,
+.receipt-card .tax-breakdown-table td {
+    vertical-align: middle;
+}
+
+.receipt-history-summary {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.receipt-history-summary .history-summary-item {
+    background: #f8fafc;
+    border: 1px solid #e5edf5;
+    border-radius: 8px;
+    padding: 12px 14px;
+}
+
+.receipt-history-summary .history-summary-item span {
+    color: #6b7280;
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+.receipt-history-summary .history-summary-item strong {
+    color: #0f172a;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.receipt-history-table th,
+.receipt-history-table td {
+    vertical-align: middle;
+}
+
+@media (max-width: 991px) {
+    .receipt-summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .receipt-tax-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .receipt-history-summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 575px) {
+    .receipt-summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .receipt-tax-panel .tax-panel-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .receipt-tax-panel .tax-panel-header span {
+        text-align: left;
+    }
+
+    .receipt-history-summary {
+        grid-template-columns: 1fr;
+    }
+}

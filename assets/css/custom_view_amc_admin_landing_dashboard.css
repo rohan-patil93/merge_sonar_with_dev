@@ -1,0 +1,336 @@
+.amc-admin-landing-dashboard {
+    padding-bottom: 10px;
+}
+
+.amc-admin-landing-dashboard .amc-landing-kpi-click,
+.amc-admin-landing-dashboard .amc-kpi-card--link {
+    cursor: pointer;
+}
+
+.amc-admin-landing-dashboard .amc-landing-qa-contract-popup,
+.amc-admin-landing-dashboard .amc-landing-qa-reports-popup {
+    cursor: pointer;
+}
+
+.amc-admin-landing-dashboard .amc-kpi-card {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    min-height: 118px;
+    padding: 18px 18px 16px;
+    border: 1px solid #e8edf3;
+    border-radius: 14px;
+    background: #fff;
+    color: #1f2937;
+    text-decoration: none;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.amc-admin-landing-dashboard .amc-kpi-card:hover {
+    transform: translateY(-3px);
+    border-color: #d7e0ea;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.1);
+    color: #111827;
+    text-decoration: none;
+}
+
+.amc-admin-landing-dashboard .amc-kpi-card__accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    border-radius: 14px 14px 0 0;
+}
+
+.amc-admin-landing-dashboard .amc-kpi-card__body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 78px;
+}
+
+.amc-admin-landing-dashboard .amc-kpi-card__content {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.amc-admin-landing-dashboard .amc-kpi-card__label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #64748b;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.amc-admin-landing-dashboard .amc-kpi-card__value {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+    color: #0f172a;
+    letter-spacing: -0.02em;
+}
+
+.amc-admin-landing-dashboard .amc-kpi-card__icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.amc-admin-landing-dashboard .amc-kpi-card--rose .amc-kpi-card__accent {
+    background: linear-gradient(90deg, #fb7185, #f43f5e);
+}
+
+.amc-admin-landing-dashboard .amc-kpi-card--rose .amc-kpi-card__icon {
+    background: #fff1f2;
+    color: #e11d48;
+}
+
+.amc-admin-landing-dashboard .amc-kpi-card--blue .amc-kpi-card__accent {
+    background: linear-gradient(90deg, #60a5fa, #3b82f6);
+}
+
+.amc-admin-landing-dashboard .amc-kpi-card--blue .amc-kpi-card__icon {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.amc-admin-landing-dashboard .amc-kpi-card--amber .amc-kpi-card__accent {
+    background: linear-gradient(90deg, #fbbf24, #f59e0b);
+}
+
+.amc-admin-landing-dashboard .amc-kpi-card--amber .amc-kpi-card__icon {
+    background: #fffbeb;
+    color: #d97706;
+}
+
+.amc-admin-landing-dashboard .amc-kpi-card--teal .amc-kpi-card__accent {
+    background: linear-gradient(90deg, #2dd4bf, #14b8a6);
+}
+
+.amc-admin-landing-dashboard .amc-kpi-card--teal .amc-kpi-card__icon {
+    background: #ecfdf5;
+    color: #0d9488;
+}
+
+.amc-admin-landing-dashboard .amc-kpi-card--indigo .amc-kpi-card__accent {
+    background: linear-gradient(90deg, #818cf8, #6366f1);
+}
+
+.amc-admin-landing-dashboard .amc-kpi-card--indigo .amc-kpi-card__icon {
+    background: #eef2ff;
+    color: #4f46e5;
+}
+
+.amc-admin-landing-dashboard .amc-landing-quick-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.amc-admin-landing-dashboard .amc-qa-tile {
+    flex: 1 1 0;
+    min-width: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 92px;
+    padding: 14px 12px;
+    border: 1px solid #e8edf2;
+    border-radius: 8px;
+    background: #fff;
+    color: #37474f;
+    text-align: center;
+    text-decoration: none;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.amc-admin-landing-dashboard .amc-qa-tile:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
+    color: #263238;
+}
+
+.amc-admin-landing-dashboard .amc-qa-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.amc-admin-landing-dashboard .amc-qa-label {
+    font-size: 12px;
+    line-height: 1.35;
+    font-weight: 600;
+}
+
+.amc-admin-landing-dashboard .amc-qa-primary .amc-qa-icon {
+    background: #e8f8f0;
+    color: #2ed8b6;
+}
+
+.amc-admin-landing-dashboard .amc-qa-info .amc-qa-icon {
+    background: #e8f1ff;
+    color: #4099ff;
+}
+
+.amc-admin-landing-dashboard .amc-qa-warning .amc-qa-icon {
+    background: #f3e8ff;
+    color: #6f42c1;
+}
+
+.amc-admin-landing-dashboard .amc-qa-success .amc-qa-icon {
+    background: #fff3e6;
+    color: #ff9800;
+}
+
+.amc-admin-landing-dashboard .amc-qa-reports .amc-qa-icon {
+    background: #e6fbf7;
+    color: #1abc9c;
+}
+
+.amc-admin-landing-dashboard .amc-visit-overdue .card-header {
+    border-left: 4px solid #ff5252;
+}
+
+.amc-admin-landing-dashboard .amc-visit-today .card-header {
+    border-left: 4px solid #4099ff;
+}
+
+.amc-admin-landing-dashboard .amc-visit-yesterday .card-header {
+    border-left: 4px solid #6f42c1;
+}
+
+.amc-admin-landing-dashboard .amc-visit-next7 .card-header {
+    border-left: 4px solid #2ed8b6;
+}
+
+.amc-admin-landing-dashboard .amc-landing-complaints-card .card-header {
+    border-left: 4px solid #64b5f6;
+}
+
+.amc-admin-landing-dashboard .amc-landing-repairs-card .card-header {
+    border-left: 4px solid #90a4ae;
+}
+
+.amc-admin-landing-dashboard .card-header h5 {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.amc-admin-landing-dashboard .table th,
+.amc-admin-landing-dashboard .table td {
+    vertical-align: middle;
+}
+
+.amc-admin-landing-dashboard .badge.bg-c-green {
+    background-color: #2ed8b6 !important;
+    color: #fff;
+}
+
+.amc-admin-landing-dashboard .yearly-overview-subtitle {
+    display: block;
+    margin-top: 2px;
+}
+
+.amc-admin-landing-dashboard .amc-landing-expiry-card .card-header {
+    border-left: 4px solid #ffb64d;
+}
+
+.amc-admin-landing-dashboard .amc-landing-expired-title {
+    margin-top: 18px;
+    margin-bottom: 0;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.amc-admin-landing-dashboard .amc-landing-expiry-accordion .accordion-panel {
+    margin-top: 10px;
+}
+
+.amc-admin-landing-dashboard .amc-landing-expiry-accordion .accordion-panel:first-child {
+    margin-top: 0;
+}
+
+.amc-admin-landing-dashboard .amc-landing-expiry-accordion .bg-gray {
+    background: #f4f4f4;
+    margin-bottom: 0;
+    padding: 10px 12px;
+    border-radius: 5px;
+}
+
+.amc-admin-landing-dashboard .amc-landing-expiry-accordion .accordion-msg {
+    display: block;
+    position: relative;
+    padding: 0 28px 0 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: #37474f;
+    text-decoration: none;
+}
+
+.amc-admin-landing-dashboard .amc-landing-expiry-accordion .accordion-msg::after {
+    content: "+";
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1;
+    color: #4099ff;
+}
+
+.amc-admin-landing-dashboard .amc-landing-expiry-accordion .accordion-msg:not(.collapsed)::after {
+    content: "−";
+}
+
+.amc-admin-landing-dashboard .amc-landing-expiry-accordion .accordion-content {
+    max-height: 260px;
+    overflow-y: auto;
+    margin-top: 8px;
+}
+
+@media (max-width: 991px) {
+    .amc-admin-landing-dashboard .amc-qa-tile {
+        flex: 1 1 calc(50% - 12px);
+        min-width: calc(50% - 12px);
+    }
+}
+
+@media (max-width: 575px) {
+    .amc-admin-landing-dashboard .amc-qa-tile {
+        flex: 1 1 100%;
+        min-width: 100%;
+    }
+
+    .amc-admin-landing-dashboard .amc-kpi-card__value {
+        font-size: 28px;
+    }
+
+    .amc-admin-landing-dashboard .amc-kpi-card__icon {
+        width: 42px;
+        height: 42px;
+        font-size: 18px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .amc-admin-landing-dashboard .amc-landing-quick-actions {
+        flex-wrap: nowrap;
+    }
+}

@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Infistaq | Home</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="description" content="Unlock your business's full potential with affordable ERP software Infistaq. ERP that supports manufacturing, distribution, retail, trading, services, education, non profits and healthcare. Try our customizable ERP solutions today." />
+<meta name="keywords" content="ERP software, Enterprise Resource Planning, ERP system, Cloud ERP, On-premise ERP, ERP solutions, ERP implementation, ERP integration, Business process automation, Supply chain management, Inventory management, Financial management, Manufacturing ERP, Human resources management, Customer relationship management (CRM), Sales and marketing automation, ERP consulting, ERP customization, Enterprise software, ERP for small businesses, ERP for medium-sized businesses, ERP for large enterprises, Industry-specific ERP (e.g., ERP for manufacturing, retail, healthcare, etc.), ERP benefits, ERP features, ERP comparison, ERP reporting and analytics, ERP training, ERP support and maintenance, ERP scalability, ERP ROI (Return on Investment), Cloud-based ERP solutions, ERP for business growth, ERP best practices, ERP compliance, ERP case studies/testimonials" />
+<meta name="author" content="infisuite" />
+<!-- Favicon icon -->
+<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+
+<!-- Google font-->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Quicksand:500,700" rel="stylesheet">
+
+<!-- Required Fremwork -->
+<link rel="stylesheet" type="text/css" href="assets/bower_components/bootstrap/css/bootstrap.min.css">
+
+
+<link rel="stylesheet" type="text/css" href="assets/icon/themify-icons/themify-icons.css">
+<link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
+<link rel="stylesheet" type="text/css" href="assets/css/font-awesome-n.min.css">
+ 
+
+
+<!-- Data Table Css -->
+<link rel="stylesheet" type="text/css" href="assets/bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="assets/pages/data-table/css/buttons.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="assets/bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="assets/pages/data-table/extensions/buttons/css/buttons.dataTables.min.css">
+
+<!-- Chartlist chart css -->
+<link rel="stylesheet" href="assets/bower_components/chartist/css/chartist.css" type="text/css" media="all">
+<!-- Bootstrap date-time-picker js -->	
+<link rel="stylesheet" type="text/css" href="assets/pages/advance-elements/css/bootstrap-datetimepicker.css">
+<link rel="stylesheet" type="text/css" href="assets/css/date-jquery-ui.css">
+<!-- Date-range picker css  -->
+<link rel="stylesheet" type="text/css" href="assets/bower_components/bootstrap-daterangepicker/css/daterangepicker.css" />
+<!-- Date-Dropper css -->
+<link rel="stylesheet" type="text/css" href="assets/bower_components/datedropper/css/datedropper.min.css" />
+<link rel="stylesheet" href="assets/bower_components/select2/css/select2.min.css" />
+<!-- Multi Select css -->
+<link rel="stylesheet" type="text/css" href="assets/bower_components/bootstrap-multiselect/css/bootstrap-multiselect.css" />
+<link rel="stylesheet" type="text/css" href="assets/bower_components/multiselect/css/multi-select.css" />
+<!-- Color Picker css -->
+<link rel="stylesheet" type="text/css" href="assets/bower_components/spectrum/css/spectrum.css" />
+<!-- Mini-color css -->
+<link rel="stylesheet" type="text/css" href="assets/bower_components/jquery-minicolors/css/jquery.minicolors.css" />
+<link rel="stylesheet" type="text/css" href="assets/pages/data-table/extensions/responsive/css/responsive.dataTables.css">
+<!-- Switch component css -->
+<link rel="stylesheet" type="text/css" href="assets/bower_components/switchery/css/switchery.min.css">
+<!-- Tags js -->
+<link rel="stylesheet" type="text/css" href="assets/bower_components/bootstrap-tagsinput/css/bootstrap-tagsinput.css" />
+<!-- Style.css -->	
+<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+<link rel="stylesheet" type="text/css" href="assets/css/component.css">
+<link rel="stylesheet" type="text/css" href="assets/css/pages.css">	
+<link rel="stylesheet" type="text/css" href="assets/css/custom.css">
+<link rel="stylesheet" type="text/css" href="assets/css/custom_mobile.css">
+<link rel="stylesheet" href="assets/bower_components/chartist/css/chartist.css" type="text/css" media="all">
+<!----notification---->
+<link rel="stylesheet" type="text/css" href="assets/pages/notification/notification.css">
+<!-- Calender css -->
+<link rel="stylesheet" type="text/css" href="assets/bower_components/fullcalendar/css/fullcalendar.css">
+<link rel="stylesheet" type="text/css" href="assets/bower_components/fullcalendar/css/fullcalendar.print.css" media='print'>
+<link rel="stylesheet" type="text/css" href="assets/bower_components/owl.carousel/css/owl.carousel.css">
+<!-- Redial css -->
+<link rel="stylesheet" href="assets/pages/chart/radial/css/radial.css" type="text/css" media="all">
+<!--forms-widget css-->
+<link rel="stylesheet" type="text/css" href="assets/css/widget.css">
+<!--- <link rel="stylesheet" type="text/css" href="assets/css/widget.css">  -->
+<!-- <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>    
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>-->
+
+
+<!---<link rel="stylesheet" type="text/css" href="assets/js/sweetalert.js">  -->
+
+
+  <!-- sweet alert framework -->
+    <link rel="stylesheet" type="text/css" href="assets/bower_components/sweetalert/css/sweetalert.css">
+  <!-- sweet alert framework -->
+
+<!--  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+ -->
+ </head><body>
+    <!-- [ Pre-loader ] start -->
+    <div class="loader-bg">
+        <div class="loader-bar"></div>
+    </div>
+    <!-- [ Pre-loader ] end -->
+    <div id="pcoded" class="pcoded">
+        <div class="pcoded-overlay-box"></div>
+        <div class="pcoded-container navbar-wrapper">
+	  <script type="text/javascript">
+  function clicktransport(){
+	//alert("hai");
+	jQuery.ajax({
+            url: "views/customtransportrequestpopup.php",
+            data:'option=1&emp_id='+$('#emp_id').val(),
+            type: "POST",
+            success:function(data){
+                $('#popup2').html(data);
+                $('#kt_modal_KTDatatable_remote1').modal("show");
+            },
+            error:function (){}
+        });
+    }
+    function checkinattendence(msg){
+        //alert(dat+'/'+tim);
+        //str = 'date='+dat+'&time='+tim;
+        $.ajax({
+            url: "ajax.php",
+            type: "POST",
+            data: 'page=employeeclocks',
+            success: function(response) {
+                console.log(response);
+                //alert(response);
+                //$('.success').html(response);
+                //document.getElementById("myForm").submit();
+                swal.fire({              
+                    title: msg,              
+                            //text: "Do you want to close ? ",              
+                            type: "success",           
+                            buttonsStyling: false,
+                            confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",    
+                            confirmButtonClass: "btn btn-danger", 
+                            showCancelButton: false,     
+                            cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",      
+                            cancelButtonClass: "btn btn-default"        
+                        }).then(function(result) {
+                            if (result.value){
+                                $('#kt_modal_KTDatatable_remote').modal('hide');
+                                window.location.reload();
+                            }
+                        }); 
+                    }
+                });
+    }
+    function checkemptransportrequest(emp_id,val){
+        if(val !=""){
+            $.ajax({
+                url: "ajax.php",
+                data:'page=updatedynamicfied&table=employee_transport_requests&hid='+val+'&fid=is_active&rid=1',
+                type: "POST",
+                success:function(data){
+                    console.log(data);
+                },
+                error:function (){}
+            });
+        }else{
+            jQuery.ajax({
+                url: "views/new_from.php",
+                data:'option=COM_INSERT_EMPLOYEE_TRANSPORT_REQUESTS&emp_id='+emp_id+'&location_id='+$('#location_id').val(),
+                type: "POST",
+                success:function(data){
+                    $('#popup2').html(data);
+                    $('#kt_modal_KTDatatable_remote1').modal("show");
+                },
+                error:function (){}
+            });
+        }
+    }
+    function checkempfoodoption(val,emp_id){
+        $.ajax({
+            url: "ajax.php",
+            data:'page=insertanupdateempfoodoption&food_option='+val+'&emp_id='+emp_id+'&location_id='+$('#location_id').val()+'&start_date='+$('#start_date').val(),
+            type: "POST",
+            success:function(data){
+                console.log(data);
+            },
+            error:function (){}
+        });
+
+    }
+    function dynamicinsertpopup(option){
+        jQuery.ajax({
+            url: "views/new_from.php",
+            data:'option='+option+'&emp_id=1',
+            type: "POST",
+            success:function(data){
+                $('#popup2').html(data);
+                $('#kt_modal_KTDatatable_remote1').modal("show");
+            },
+            error:function (){}
+        });
+    }
+
+    function divFunction(){
+        $('.profile-close').toggle("slide", { direction: "right" }, 1000);
+        $('.basic_info_other').hide('slow');
+    }
+
+    function div2Function(){
+        $('.basic_info_other').toggle("slide", { direction: "left" }, 1000);
+        $('.profile-close').hide('slow');
+    }
+	function closenotificationinfo(id){
+     $.ajax({
+            url: "ajax.php",
+            data:'page=closenotificationinfo&id='+id,
+            type: "POST",
+            success:function(data){
+                console.log(data);
+                $("#infoclose"+id).remove();
+            },
+            error:function (){}
+        });
+}
+ function closeallnotifications(type,user_id){
+	    $.ajax({
+            url: "ajax.php",
+            data:'page=closeallnotifications&type='+type+'&user_id='+user_id,
+            type: "POST",
+            success:function(data){
+                console.log(data);
+                //$("#infoclose"+id).remove();
+            },
+            error:function (){}
+        });
+    }
+
+
+function getNotificationList(){
+	//$(".popnotifictionspeen").show();
+	//$(".popnotifiction").hide();
+	//$(".iconshownotifiction").html("");
+	//$("#iconshownotifiction_"+grp_mid).html('<i class="fa fa-check-circle text-warning f-16"></i>');
+	jQuery.ajax({
+            url: "views/custom_list_notification_popup.php",
+            data:'page=page',
+            type: "POST",
+            success:function(data){
+				console.log(data);
+                $('#popnotifiction').html(data);
+				//$(".popnotifictionspeen").hide();
+				//$(".popnotifiction").show();
+            },
+            error:function (){}
+        });
+}
+
+function changeAdminToEmployee(){
+	var admin_access_employee = "";
+	var msg="";
+	if($("#admin_access_employee").is(':checked')){
+		admin_access_employee = "Y";
+		msg="Successfully switched to employee mode";
+	}else{
+		admin_access_employee = "N";
+		msg="successfully switched to Admin mode";
+	}
+	jQuery.ajax({
+            url: "views/custom_change_admin_to_employees.php",
+            data:'admin_access_employee='+admin_access_employee,
+            type: "POST",
+            success:function(data){
+				tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',msg,'');
+				window.location.reload();
+            },
+            error:function (){}
+        });
+}
+
+</script>
+<script>
+    let startTimedash, timerIntervaldash, pausedTimedash;
+
+    function startTimerdash() {
+        const timerDisplaydash = document.getElementById('timerdash');
+        const startButtondash = document.getElementById('startButtondash');
+        const pauseButtondash = document.getElementById('pauseButtondash');
+        var oldtimedash = $("#oldtimedash").val();
+        var currenttimelogdash = $("#currenttimelogdash").val();
+        console.log('nowqq'+Date.now());
+        if(oldtimedash !=0 && !startTimedash){
+            if(currenttimelogdash!="" ){
+            var noldtimedash = Date.now() - currenttimelogdash;
+            oldtimedash = parseInt(oldtimedash) + parseInt(noldtimedash);
+            console.log('currenttimelog'+oldtimedash);
+            }
+            startTimedash =  Date.now() - oldtimedash;
+            console.log('restart'+startTimedash);
+            pausedTimedash = Date.now();
+            console.log('now pase'+pausedTimedash);
+        }
+        if (!startTimedash) {
+            // Start the timer
+            console.log('startTime');
+            startTimedash = Date.now();
+            $('#btntimedash').hide();
+            $('#btnpasdash').show();
+            sessionstartandinsertimelog('start',startTimedash,'');
+            //  document.getElementById('btntime').innerHTML  = '<button id="pauseButton" class="btn-danger"> <i class="ti-control-record" > </i> </button>';
+            timerIntervaldash = setInterval(updateTimerdash, 1000);
+        } else if (pausedTimedash) {
+          console.log('pay Time:'+Date.now());
+          console.log('pausedTime:'+pausedTimedash);
+            // Resume the timer after pause
+            startTimedash += Date.now() - pausedTimedash;
+            pausedTimedash = null;
+           // pauseButton.textContent = 'Pause';
+           timerIntervaldash = setInterval(updateTimerdash, 1000);
+           $('#btntimedash').hide();
+           $('#btnpasdash').show();
+        }
+        function updateTimerdash() {
+             //console.log('updateTimer');
+            const currentTimedash = Date.now();
+            const elapsedMilliseconds = currentTimedash - startTimedash;
+
+            const hours = Math.floor(elapsedMilliseconds / 3600000);
+            const minutes = Math.floor((elapsedMilliseconds % 3600000) / 60000);
+            const seconds = Math.floor((elapsedMilliseconds % 60000) / 1000);
+
+            const formattedTime = `${padZero(hours)}:${padZero(minutes)}:${padZero(seconds)}`;
+            //console.log('updatetime:'+formattedTime);
+            timerDisplaydash.textContent = formattedTime;
+        }
+        function padZero(number) {
+            //console.log('padZero');
+            return number.toString().padStart(2, '0');
+        }
+    }
+    function pauseTimerdash() {
+        console.log('padZero paused');
+        if (startTimedash && !pausedTimedash) {
+            clearInterval(timerIntervaldash);
+            pausedTimedash = Date.now();
+            console.log(pausedTimedash);
+            //document.getElementById('pauseButton').textContent = 'Resume';
+            
+            $('#dislogclose').hide();
+            sessionstartandinsertimelog('pause',startTimedash,pausedTimedash);
+        }
+    }
+    document.getElementById('startButtondash').addEventListener('click', startTimerdash);
+    document.getElementById('pauseButtondash').addEventListener('click', pauseTimerdash);
+   
+
+    function sessionstartandinsertimelog(type,starttime,endtime){
+        var task_id = $('#task_id_dash').val();
+        jQuery.ajax({
+            url: "ajax.php",
+            data:'page=toinsertupdateprojecttasktimlog&task_id='+task_id+'&type='+type+'&starttime='+starttime+'&endtime='+endtime,
+            type: "POST",
+            success:function(data){
+                console.log(data);
+                //$("#rem_"+val).hide();
+            },
+        error:function (){}
+        });
+    }
+</script>
+
+<!-- [ Header ] start -->
+<nav class="navbar header-navbar pcoded-header">
+    <div class="navbar-wrapper">
+        <div class="navbar-logo">
+            <a href="index">
+                                    <img class="img-fluid" src="uploads/all/file_1689142287_64ae440fe26df.png" alt="Theme-Logo" />
+                            </a>
+            <a class="mobile-menu" id="mobile-collapse" href="#!">
+                <i class="ti-flickr"></i>
+            </a>
+            <a class="mobile-options waves-effect waves-light">
+                <i class="feather icon-more-horizontal"></i>
+            </a>
+        </div>
+	         <div class="navbar-container container-fluid">
+            <ul class="nav-right">
+                                
+	                     <li class="header-notification m-r-20">
+                                 </li>
+			 			
+		 
+				<li class="header-notification m-r-10" data-bs-toggle="tooltip" data-placement="bottom" title="Display Attributes">
+            <div class="dropdown-primary" onclick="location.href='index?option=COM_LIST_DISPLAY_ATTRIBUTES';">
+                <div class="" data-bs-toggle="dropdown">
+                    <i class="ti-tablet"></i>
+                </div>
+            </div>
+        </li>
+        <li class="header-notification m-r-10" data-bs-toggle="tooltip" data-placement="bottom" title="Report Builder">
+            <div class="dropdown-primary" onclick="location.href='index?option=COM_VIEW_REPORT';">
+                <div class="" data-bs-toggle="dropdown">
+                    <i class="ti-panel"></i>
+                </div>
+            </div>
+        </li>
+	   <!--<li class="header-notification m-r-10" data-bs-toggle="tooltip" data-placement="bottom" title="My Reports">
+                 <div class="dropdown-primary" onclick="location.href='index.php?option=COM_VIEW_REPORT';">
+                    <div class="" data-bs-toggle="dropdown">
+                        <i class="ti-pie-chart"></i>
+                 </div>
+             </div>
+         </li> -->
+        <li class="header-notification m-r-10" data-bs-toggle="tooltip" data-placement="bottom" title="Project Dashboard">
+            <div class="dropdown-primary" onclick="location.href='index?option=COM_VIEW_PROJECT_DASH_BOARD';">
+                <div class="" data-bs-toggle="dropdown">
+                    <i class="fa fa-cube" ></i>
+                </div>
+            </div>
+        </li> 
+		<li class="header-notification m-r-10" data-bs-toggle="tooltip" data-placement="bottom" title="Reports">
+            <div class="dropdown-primary" onclick="location.href='index?option=COM_LIST_MY_REPORTS';">
+                <div class="" data-bs-toggle="dropdown">
+                    <!-- <i class="ti-stats-up" ></i> -->
+                    <i class="ti-pie-chart" ></i> 
+                </div>
+            </div>
+        </li>
+        <li class="header-notification m-r-10" data-bs-toggle="tooltip" data-placement="bottom" title="Settings">
+            <div class="dropdown-primary" onclick="location.href='index?option=COM_LIST_APPLICATION_MENU_SETTINGS';">
+                <div class="" data-bs-toggle="dropdown">
+                    <i class="ti-settings" ></i>
+                </div>
+             </div>
+        </li>
+	
+        <li class="header-notification  m-r-10"  data-bs-toggle="tooltip" data-placement="bottom" title="Inbox">
+            <div class="dropdown-primary" onclick="location.href='index?option=COM_LIST_INBOX';">
+                <div class="" data-bs-toggle="dropdown" >
+                    <i class="ti-email"></i>
+                    <span class="badge bg-c-green customcount">4</span>
+                </div>
+            </div>
+        </li>
+        <li class="header-notification  m-r-10"  data-bs-toggle="tooltip" data-placement="bottom" title="Announcements">
+            <div class="dropdown-primary" onclick="location.href='index?option=COM_VIEW_ANNOUNCEMENTS';">
+                <div class="" data-bs-toggle="dropdown" >
+                    <i class="ti-announcement"></i>
+                </div>
+            </div>
+        </li>
+
+
+    <li class="header-notification  m-r-10"  data-bs-toggle="tooltip" data-placement="bottom" title="Notifications" onclick="getNotificationList()">
+        <div class="dropdown-primary dropdown">
+            <div class="displayChatbox dropdown-toggle" data-bs-toggle="dropdown">
+                <i class="ti-bell"></i>
+                <span class="badge bg-c-red">312</span>
+            </div>
+        </div>
+    </li>
+
+ <!--   <li class="header-notification">
+            <div class="dropdown-primary dropdown">
+                <div class="displayChatbox dropdown-toggle" data-bs-toggle="dropdown">
+                   <i class="feather icon-bell"></i>
+                    <span class="badge bg-c-green customcount"></span>
+                </div>
+            </div>
+        </li> -->
+
+
+
+ <!--  END ACtiv Check--->
+
+                <li class="user-profile header-notification">
+
+                    <div class="dropdown-primary dropdown">
+                        <div class="dropdown-toggle" data-bs-toggle="dropdown">
+
+                                                     <img src="uploads/all/file_1689092069_64ad7fe56a8f4.jpg" class="img-radius img-50 align-top m-r-15  mt-3" alt="User-Profile-Image">
+                       
+                      <span>Anthony Johnston
+                  </span>
+                  <i class="ti-angle-down"></i>
+              </div>
+              <ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+             <!--   <li>
+                    <a href="#!">
+                        <i class="ti-settings"></i> Settings
+                    </a>
+                </li>  --->
+                <li>
+                                        <a href="index?option=COM_LIST_NOT_EMPLOYEE">
+                        <i class="ti-user"></i> Profile
+
+                    </a>
+                </li>
+		<li>	
+                    <a href="?option=COM_LIST_NOT_EMPLOYEE&tab=cp">	
+                        <i class="ti-key"></i> Change Password	
+                    </a>	
+                </li>
+                <li>
+                    <a href="index?option=COM_LIST_INBOX">
+                        <i class="ti-email"></i> My Messages
+
+                    </a>
+                </li> 
+                <li onclick="location.href='index?option=com_logout';">
+                    <a href="#!" class="text-danger">
+                        <i class="ti-power-off"></i> Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </li>
+        <li class="header-notification">
+        <div class="dropdown-primary dropdown">
+            <div class="dropdown-toggle" data-bs-toggle="dropdown">
+                <!-- <i class="ti-view-grid"></i> -->
+                <img src="assets/images/favicon.ico" class="img-30">
+            </div>
+            <div class="show-notification notification-view dropdown-menu pt-0 pb-0" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="width: 450px;">
+                <div class="row m-0" style="background: url('assets/images/bg-6.jpg');">
+                    <div class="col-lg-6 text-left" >
+                        <h4 class="mb-0 text-white p-3">Modules</h4>
+                    </div>
+                                        <div class="col-lg-3 text-white">Employee</div>
+                    <div class="col-lg-3"><input type="checkbox" class="js-switch" id="admin_access_employee" onchange="changeAdminToEmployee()" ></div>
+                                </div>
+                <div class="row text-center custom-notification m-0 custom-scroll" style="height: 560px;">
+                                            <div class="col-lg-3 p-1 border" style=""   onclick="location='index?option=COM_CHANGE_MODULE_GROUPS&Rid=MQ=='">
+                                                        <img src="uploads/all/purchasing.webp" class="img-50" style="height: auto;"> 
+                            <h5 class=" f-14">Purchasing</h5>
+                        </div>
+                                            <div class="col-lg-3 p-1 border" style=""   onclick="location='index?option=COM_CHANGE_MODULE_GROUPS&Rid=Mg=='">
+                                                        <img src="uploads/all/file_1695811399_65140747ab8de.webp" class="img-50" style="height: auto;"> 
+                            <h5 class=" f-14">Stores</h5>
+                        </div>
+                                            <div class="col-lg-3 p-1 border" style=""   onclick="location='index?option=COM_CHANGE_MODULE_GROUPS&Rid=Mw=='">
+                                                        <img src="uploads/all/sales.webp" class="img-50" style="height: auto;"> 
+                            <h5 class=" f-14">Sales</h5>
+                        </div>
+                                            <div class="col-lg-3 p-1 border" style=""   onclick="location='index?option=COM_CHANGE_MODULE_GROUPS&Rid=NA=='">
+                                                        <img src="uploads/all/file_1695811362_6514072236ce2.webp" class="img-50" style="height: auto;"> 
+                            <h5 class=" f-14">Accounts</h5>
+                        </div>
+                                            <div class="col-lg-3 p-1 border" style=""   onclick="location='index?option=COM_CHANGE_MODULE_GROUPS&Rid=NQ=='">
+                                                        <img src="uploads/all/budget.webp" class="img-50" style="height: auto;"> 
+                            <h5 class=" f-14">Budget</h5>
+                        </div>
+                                            <div class="col-lg-3 p-1 border" style=""   onclick="location='index?option=COM_CHANGE_MODULE_GROUPS&Rid=Ng=='">
+                                                        <img src="uploads/all/assets_management.webp" class="img-50" style="height: auto;"> 
+                            <h5 class=" f-14">Assets</h5>
+                        </div>
+                                            <div class="col-lg-3 p-1 border" style=""   onclick="location='index?option=COM_CHANGE_MODULE_GROUPS&Rid=Nw=='">
+                                                        <img src="uploads/all/hr.webp" class="img-50" style="height: auto;"> 
+                            <h5 class=" f-14">HR</h5>
+                        </div>
+                                            <div class="col-lg-3 p-1 border" style=""   onclick="location='index?option=COM_CHANGE_MODULE_GROUPS&Rid=OA=='">
+                                                        <img src="uploads/all/Payroll.webp" class="img-50" style="height: auto;"> 
+                            <h5 class=" f-14">Payroll</h5>
+                        </div>
+                                            <div class="col-lg-3 p-1 border" style=""   onclick="location='index?option=COM_CHANGE_MODULE_GROUPS&Rid=MTI='">
+                                                        <img src="uploads/all/claims.webp" class="img-50" style="height: auto;"> 
+                            <h5 class=" f-14">Reimbursments</h5>
+                        </div>
+                                            <div class="col-lg-3 p-1 border" style=""   onclick="location='index?option=COM_CHANGE_MODULE_GROUPS&Rid=MTU='">
+                                                        <img src="uploads/all/survey.webp" class="img-50" style="height: auto;"> 
+                            <h5 class=" f-14">Survey </h5>
+                        </div>
+                                            <div class="col-lg-3 p-1 border" style=""   onclick="location='index?option=COM_CHANGE_MODULE_GROUPS&Rid=MTY='">
+                                                        <img src="uploads/all/polls.webp" class="img-50" style="height: auto;"> 
+                            <h5 class=" f-14">Polls</h5>
+                        </div>
+                                            <div class="col-lg-3 p-1 border" style=""   onclick="location='index?option=COM_CHANGE_MODULE_GROUPS&Rid=MTc='">
+                                                        <img src="uploads/all/assessment.webp" class="img-50" style="height: auto;"> 
+                            <h5 class=" f-14">Assessment</h5>
+                        </div>
+                                            <div class="col-lg-3 p-1 border" style=""   onclick="location='index?option=COM_CHANGE_MODULE_GROUPS&Rid=MTg='">
+                                                        <img src="uploads/all/pms.webp" class="img-50" style="height: auto;"> 
+                            <h5 class=" f-14">PMS</h5>
+                        </div>
+                                            <div class="col-lg-3 p-1 border" style=""   onclick="location='index?option=COM_CHANGE_MODULE_GROUPS&Rid=MTk='">
+                                                        <img src="uploads/all/vms.webp" class="img-50" style="height: auto;"> 
+                            <h5 class=" f-14">VMS</h5>
+                        </div>
+                                            <div class="col-lg-3 p-1 border" style=""   onclick="location='index?option=COM_CHANGE_MODULE_GROUPS&Rid=MjA='">
+                                                        <img src="uploads/all/petty_cash.webp" class="img-50" style="height: auto;"> 
+                            <h5 class=" f-14">Petty Cash</h5>
+                        </div>
+                                            <div class="col-lg-3 p-1 border" style=""   onclick="location='index?option=COM_CHANGE_MODULE_GROUPS&Rid=MjM='">
+                                                        <img src="uploads/all/recruitStaq.png" class="img-50" style="height: auto;"> 
+                            <h5 class=" f-14">Recruitment</h5>
+                        </div>
+                                            <div class="col-lg-3 p-1 border" style=""   onclick="location='index?option=COM_CHANGE_MODULE_GROUPS&Rid=MjU='">
+                                                        <img src="uploads/all/taskda.webp" class="img-50" style="height: auto;"> 
+                            <h5 class=" f-14">Taskda</h5>
+                        </div>
+                                            <div class="col-lg-3 p-1 border" style=""   onclick="location='index?option=COM_CHANGE_MODULE_GROUPS&Rid=MjY='">
+                                                        <img src="uploads/all/requisitions.webp" class="img-50" style="height: auto;"> 
+                            <h5 class=" f-14">Indenting</h5>
+                        </div>
+                                            <div class="col-lg-3 p-1 border" style=""   onclick="location='index?option=COM_CHANGE_MODULE_GROUPS&Rid=Mjc='">
+                                                        <img src="uploads/all/quality_check.webp" class="img-50" style="height: auto;"> 
+                            <h5 class=" f-14">QC</h5>
+                        </div>
+                                            <div class="col-lg-3 p-1 border" style=""   onclick="location='index?option=COM_CHANGE_MODULE_GROUPS&Rid=Mjg='">
+                                                        <img src="uploads/all/on_boardning.webp" class="img-50" style="height: auto;"> 
+                            <h5 class=" f-14">On Boarding </h5>
+                        </div>
+                                            <div class="col-lg-3 p-1 border" style=""   onclick="location='index?option=COM_CHANGE_MODULE_GROUPS&Rid=Mjk='">
+                                                        <img src="uploads/all/crm.webp" class="img-50" style="height: auto;"> 
+                            <h5 class=" f-14">CRM</h5>
+                        </div>
+                                            <div class="col-lg-3 p-1 border" style=""   onclick="location='index?option=COM_CHANGE_MODULE_GROUPS&Rid=MzA='">
+                                                        <img src="uploads/all/stock_take.webp" class="img-50" style="height: auto;"> 
+                            <h5 class=" f-14">Stock Take</h5>
+                        </div>
+                                            <div class="col-lg-3 p-1 border" style=""   onclick="location='index?option=COM_CHANGE_MODULE_GROUPS&Rid=MzE='">
+                                                        <img src="uploads/all/bills.webp" class="img-50" style="height: auto;"> 
+                            <h5 class=" f-14">Bills</h5>
+                        </div>
+                                            <div class="col-lg-3 p-1 border" style=""   onclick="location='index?option=COM_CHANGE_MODULE_GROUPS&Rid=MzI='">
+                                                        <img src="uploads/all/esop.webp" class="img-50" style="height: auto;"> 
+                            <h5 class=" f-14">ESOP</h5>
+                        </div>
+                                            <div class="col-lg-3 p-1 border" style="box-shadow: 0px 0px 10px grey;"   onclick="location='index?option=COM_CHANGE_MODULE_GROUPS&Rid=MzM='">
+                            <i class="fa fa-check-circle text-warning f-22"></i>                            <img src="uploads/all/file_1698381444_653b3e84f2389.webp" class="img-50" style="height: auto;"> 
+                            <h5 class=" f-14">Rental</h5>
+                        </div>
+                                    </div>
+            </div>
+        </div>
+    </li>
+    </ul>
+<!-- 
+<div class="sidebar-icon-sec custom-scroll">
+    <ul>
+        </ul>
+</div> -->
+<!------ Add allin one menu  start--->
+<!------ <ul class=" nav-left">                
+                <li class="nav-item dropdown has-megamenu">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"> 
+                        Menu
+                    </a>
+                    <div class="dropdown-menu megamenu" role="menu" style="width:200px !important;">
+                        <div class="row g-3">                            
+                            <div class="col-lg-2">
+                                <div class="col-megamenu">
+                                    <h6 class="title"></h6>
+                                    <ul class="list-unstyled">
+                                                                            </ul>
+                                </div> 
+                            </div>
+                        </div>
+                    </div> 
+                </li>                
+            </ul>--->
+  
+     
+<!------ Add allin one menu  End--->
+<ul class="<!--nav-left--> nav-left">
+           <li class="nav-item has-megamenu">
+    <a class="nav-link  text-primary f-w-600" href="index" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Rental Home"> 
+       <!-- <i class="ti-home btn waves-effect waves-light btn-success btn-icon"></i>  -->
+       <img src="uploads/all/file_1698381444_653b3e84f2389.webp" class="img-40">
+
+    </a>
+    </li>
+
+            <li class="nav-item dropdown has-megamenu">
+            <a class="nav-link dropdown-toggle text-primary" href="#" data-bs-toggle="dropdown"> 
+                 
+                                                 
+                    <i class=" btn waves-effect waves-light btn-success btn-icon f-12"></i> 
+                    <span style="font-size:14px;letter-spacing: 1px;"> New </span>
+                            </a>
+                        <div class="dropdown-menu megamenu" role="menu" style="left: auto; width: 350px !important;">
+                <div class="row g-3" style = "margin-bottom: calc(var(--bs-gutter-y) * -1);">
+                                            <div class="col-lg-12">
+                            <div class="col-megamenu">
+                                <ul class="list-unstyled">
+                                                                            <li style="padding: 0px !important;"><a href="index?option=COM_LIST_BANKS">
+                                          Banks                                      </a></li>
+                                                                          <li style="padding: 0px !important;"><a href="index?option=COM_LIST_PROPERTY_OWNERS">
+                                          Property Owner                                      </a></li>
+                                                                          <li style="padding: 0px !important;"><a href="index?option=COM_LIST_PROPERTY_TENANT_DETAILS">
+                                          Tenant Details                                      </a></li>
+                                                                          <li style="padding: 0px !important;"><a href="index?option=COM_LIST_RENTAL_INVOICES">
+                                          Rental Invoices                                      </a></li>
+                                                                          <li style="padding: 0px !important;"><a href="index?option=COM_LIST_RENTAL_INVOICES">
+                                          Rental Bill Types                                      </a></li>
+                                                                </ul>
+                          </div> <!-- col-megamenu.// -->
+                      </div><!-- end col-3 -->
+                                           
+              </div><!-- end row -->
+          </div> <!-- dropdown-mega-menu.// -->
+      </li>
+  
+
+
+   <!---  <li class="nav-item has-megamenu">
+    <a href="" class="nav-link  text-white f-w-600   btn btn-primary btn-shadow-hover font-weight-bold  " style="border-radius: 25px;margin-top:12px;padding: 5px 10px;"> 
+        Bulk Timesheet Approval 
+    </a>
+    </li>
+   <li class="header-search p-custom-search">
+    <div class="main-search morphsearch-search">
+        <div class="input-group">
+            <span class="input-group-text search-close">
+                <i class="ti-close input-group-text text-dark"></i>
+            </span>
+            <input type="text" class="form-control" placeholder="Enter Keyword">
+            <span class="input-group-text search-btn">
+                <i class="ti-search input-group-text"></i>
+            </span>
+        </div>
+    </div>
+</li>
+<li>
+    <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
+        <i class="full-screen feather icon-maximize"></i>
+    </a>
+</li> -->
+</ul>
+ <!--  END ACtiv Check--->
+</div>
+</div>
+</nav>
+<!-- [ chat user list ] start -->
+
+
+
+
+
+<div id="sidebar" class="users p-chat-user showChat width25">
+    <div class="had-container">
+        <div class="p-fixed users-main width25">
+            <div class="user-box">
+                <div class="chat-search-box">
+                    <a class="back_friendlist">
+                        <i class="ti-close"></i>
+                    </a>
+                    <div class="right-icon-control">
+                        <div class="input-group input-group-button">
+                            <input type="text" id="search-friends" name="footer-email" class="form-control" placeholder="Search a notiffication">
+                         <!--   <button class="btn btn-primary waves-effect waves-light" type="button">
+                                <i class="ti-search"></i>
+                            </button>  -->
+                        </div>
+                    </div>
+                </div>
+                <div class="main-friend-list p-2" id="popnotifiction"> 
+                   
+				  
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- [ chat user list ] end -->
+
+
+<!-- 
+<div id="sidebar" class="users p-chat-user showChat">
+    <div class="had-container">
+        <div class="p-fixed users-main">
+            <div class="user-box">
+                <div class="chat-search-box">
+                    <a class="back_friendlist">
+                        <i class="feather icon-x"></i>
+                    </a>
+                    <div class="right-icon-control">
+                        <div class="input-group input-group-button">
+                            <input type="text" id="search-friends" name="footer-email" class="form-control" placeholder="Search Friend">
+                            <button class="btn btn-primary waves-effect waves-light" type="button">
+                                <i class="feather icon-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="main-friend-list">
+                    <div class="media userlist-box waves-effect waves-light" data-id="1" data-status="online" data-username="Josephin Doe">
+                        <a class="media-left" href="#!">
+                            <img class="media-object img-radius img-radius" src="../files/assets/images/avatar-3.jpg" alt="Generic placeholder image ">
+                            <div class="live-status bg-success"></div>
+                        </a>
+                        <div class="media-body">
+                            <div class="chat-header">Josephin Doe</div>
+                        </div>
+                    </div>
+                    <div class="media userlist-box waves-effect waves-light" data-id="2" data-status="online" data-username="Lary Doe">
+                        <a class="media-left" href="#!">
+                            <img class="media-object img-radius" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder image">
+                            <div class="live-status bg-success"></div>
+                        </a>
+                        <div class="media-body">
+                            <div class="f-13 chat-header">Lary Doe</div>
+                        </div>
+                    </div>
+                    <div class="media userlist-box waves-effect waves-light" data-id="3" data-status="online" data-username="Alice">
+                        <a class="media-left" href="#!">
+                            <img class="media-object img-radius" src="../files/assets/images/avatar-4.jpg" alt="Generic placeholder image">
+                            <div class="live-status bg-success"></div>
+                        </a>
+                        <div class="media-body">
+                            <div class="f-13 chat-header">Alice</div>
+                        </div>
+                    </div>
+                    <div class="media userlist-box waves-effect waves-light" data-id="4" data-status="offline" data-username="Alia">
+                        <a class="media-left" href="#!">
+                            <img class="media-object img-radius" src="../files/assets/images/avatar-3.jpg" alt="Generic placeholder image">
+                            <div class="live-status bg-default"></div>
+                        </a>
+                        <div class="media-body">
+                            <div class="f-13 chat-header">Alia<small class="d-block text-muted">10 min ago</small></div>
+                        </div>
+                    </div>
+                    <div class="media userlist-box waves-effect waves-light" data-id="5" data-status="offline" data-username="Suzen">
+                        <a class="media-left" href="#!">
+                            <img class="media-object img-radius" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder image">
+                            <div class="live-status bg-default"></div>
+                        </a>
+                        <div class="media-body">
+                            <div class="f-13 chat-header">Suzen<small class="d-block text-muted">15 min ago</small></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+<!-- [ chat user list ] end -->
+
+<!-- [ chat message ] start 
+<div class="showChat_inner">
+    <div class="d-flex chat-inner-header">
+        <a class="back_chatBox">
+            <i class="feather icon-x"></i> Josephin Doe
+        </a>
+    </div>
+    <div class="main-friend-chat">
+        <div class="d-flex chat-messages">
+            <a class="media-left photo-table" href="#!">
+                <div class="flex-shrink-0">
+                    <img class="media-object img-radius img-radius m-t-5" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder image">
+                </div>
+            </a>
+            <div class="flex-grow-1 chat-menu-content">
+                <div class="">
+                    <p class="chat-cont">I'm just looking around. Will you tell me something about yourself?</p>
+                </div>
+                <p class="chat-time">8:20 a.m.</p>
+            </div>
+        </div>
+        <div class="d-flex chat-messages">
+            <div class="flex-grow-1 chat-menu-reply">
+                <div class="">
+                    <p class="chat-cont">Ohh! very nice</p>
+                </div>
+                <p class="chat-time">8:22 a.m.</p>
+            </div>
+        </div>
+        <div class="d-flex chat-messages">
+            <a class="media-left photo-table" href="#!">
+                <div class="flex-shrink-0">
+                    <img class="media-object img-radius img-radius m-t-5" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder image">
+                </div>
+            </a>
+            <div class="media-body chat-menu-content">
+                <div class="">
+                    <p class="chat-cont">can you come with me?</p>
+                </div>
+                <p class="chat-time">8:20 a.m.</p>
+            </div>
+        </div>
+    </div>
+    <div class="chat-reply-box">
+        <div class="right-icon-control">
+            <div class="input-group input-group-button">
+                <input type="text" class="form-control" placeholder="Write hear . . ">
+                <button class="btn btn-primary waves-effect waves-light" type="button">
+                    <i class="feather icon-message-circle"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+         [ chat message ] end -->
+
+         	<script>
+             var HOST_URL = "https://demo.hrstaq.com/";
+          	  var DateFormate = 'dd-mm-yy';
+         	  // console.log("DateFormate"); console.log(DateFormate);
+           	//alert(HOST_URL);
+        	</script>
+	<div class="pcoded-main-container">
+                <div class="pcoded-wrapper">
+			                    <div class="pcoded-content ">
+					
+		
+                        <!-- [ breadcrumb ] start -->
+                                                <!-- [ breadcrumb ] end -->
+
+
+						 <div class="page-header card" style="margin: 15px !important;">
+                           
+                        						</div>                       
+                    </div>
+                    <!-- [ style Customizer ] start -->
+                    <div id="styleSelector">
+                    </div>
+                    <!-- [ style Customizer ] end -->
+                </div>
+            </div>
+        </div>
+	<!--begin::Footer-->
+<div class="footer bg-white py-2 d-flex flex-lg-column" style="position:unset;" id="kt_footer">
+
+	<!--begin::Container-->
+	<div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
+
+		<!--begin::Copyright-->
+		<div class="text-dark order-2 order-md-1">
+			<span class="text-muted font-weight-bold mr-2">2021©</span>
+			<a href="https://infistaq.com/" target="_blank" class="text-dark-75 text-hover-primary">Infistaq</a>
+		</div>
+
+		<!--end::Copyright-->
+
+		<!--begin::Nav-->
+		<div class="nav nav-dark">
+			<a href="https://infisuite.com/about-us/" target="_blank" class="nav-link pl-0 pr-5">Abouts</a>
+			<a href="https://infisuite.com/contact/" target="_blank" class="nav-link pl-0 pr-0">Contact</a>
+		</div>
+
+		<!--end::Nav-->
+	</div>
+
+	<!--end::Container-->
+</div>
+
+
+
+<!--end::Footer-->
+
+    </div>
+        <!-- Warning Section Ends -->
+<div id="kt_modal_dynamic_popup" class="modal fade" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl"  >
+        <div class="modal-content"  id="dynamic_popup1" style="border:none;">
+            
+        </div>
+    </div>
+</div>
+ <div id="kt_modal_KTDatatable_remote" class="modal fade" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg " >
+        <div class="modal-content"  id="popup1" style="border:none;">
+            
+        </div>
+    </div>
+</div>
+<div id="kt_modal_KTDatatable_remotem" class="modal fade" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg " >
+        <div class="modal-content"  id="popupm" style="border:none;">
+            
+        </div>
+    </div>
+</div>
+<div id="kt_modal_dynamic_popup2" class="modal fade" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl" style="max-width: 1200px !important;">
+        <div class="modal-content"  id="dynamic_popup11" style="border:none;">
+            
+        </div>
+    </div>
+</div>
+<div id="kt_modal_dynamic_popupxxl" class="modal fade" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl"  style="max-width: 98% !important;" >
+        <div class="modal-content"  id="dynamic_popupxxl" style="border-radius: 20px;" style="border:none;">
+            
+        </div>
+    </div>
+</div>
+
+ <script type="text/javascript" src="assets/bower_components/jquery/js/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/bower_components/jquery-ui/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="assets/bower_components/popper.js/js/popper.min.js"></script>
+    <script type="text/javascript" src="assets/bower_components/bootstrap/js/bootstrap.min.js"></script> 
+    <script src="assets/pages/waves/js/waves.min.js"></script>
+    <!-- jquery slimscroll js -->
+    <script type="text/javascript" src="assets/bower_components/jquery-slimscroll/js/jquery.slimscroll.js"></script>
+                 <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- Custom js menu js -->
+    <script src="assets/js/pcoded.min.js"></script>
+
+     
+    <script src="assets/js/vertical/horizontal-layout.min.js"></script>
+        <script type="text/javascript" src="assets/js/script.min.js"></script>
+                <!--------- Start wizard js -------------------->
+	  
+    <!--------- End wizard js -------------------->
+	<!-- Select 2 js -->
+	<script type="text/javascript" src="assets/bower_components/select2/js/select2.full.min.js"></script>
+	  
+	<!-- Date picker js -->
+    <script type="text/javascript" src="assets/bower_components/moment/js/moment.min.js"></script>
+	<script type="text/javascript" src="assets/pages/advance-elements/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript" src="assets/js/custom_datepicker.js"></script>
+		
+     	<!-- Date-dropper js -->
+	<script type="text/javascript" src="assets/bower_components/datedropper/js/datedropper.min.js"></script>
+
+		
+	    	<!-- Switch component js -->
+	<script type="text/javascript" src="assets/bower_components/switchery/js/switchery.min.js"></script>
+	<script type="text/javascript" src="assets/bower_components/bootstrap-maxlength/js/bootstrap-maxlength.js"></script>
+	<script type="text/javascript" src="assets/pages/advance-elements/swithces.js"></script>
+    
+		
+	 
+			
+        
+
+ 	<!------- Genral item work ------------------------------>
+	 <script> var table_name ='';  </script>
+	  <script type="text/javascript" src="assets/js/custom.js"></script>
+	
+<!-- scrollbars modernizr js -->
+	<script type="text/javascript" src="assets/bower_components/modernizr/js/modernizr.js"></script>
+	<script type="text/javascript" src="assets/bower_components/modernizr/js/css-scrollbars.js"></script>
+
+	<!-- modal window POPUP  modalEffects js nifty modal window effects -->
+	<script src="assets/js/classie.js"></script>
+	<script type="text/javascript" src="assets/js/modalEffects.js"></script>
+	<script type="text/javascript" src="assets/pages/accordion/accordion.js"></script>
+
+	 
+	<!-- calender js -->
+	<script type="text/javascript" src="assets/bower_components/moment/js/moment.min.js"></script>
+	<script type="text/javascript" src="assets/bower_components/fullcalendar/js/fullcalendar.min.js"></script>
+	<script type="text/javascript" src="assets/pages/full-calender/calendar.js"></script>
+					
+	<script type="text/javascript" src="assets/js/bootstrap-growl.min.js"></script>
+	<script type="text/javascript" src="assets/pages/notification/notification.js"></script>
+
+				<!-- 	<script type="text/javascript" src="assets/pages/widget/widget-chart.js"></script> -->
+  <!---------------- Main Chart ---------------------------> 
+		 
+	 
+				    		             
+                                 	
+    <!-- sweet alert js Rohan Added-->
+<script type="text/javascript" src="assets/bower_components/sweetalert/js/sweetalert.min.js"></script>
+<!-- <script type="text/javascript" src="assets/js/modal.js"></script> -->
+<!-- sweet alert  js Rohan Added-->
+
+<!---Rohan Include Chart Not Ajx Show PaySlip---->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<!---Rohan Include Chart Not Show PaySlip---->
+
+
+ 
+
+	<script>
+    	$(document).ready(function() {
+       		 $('[data-bs-toggle="tooltip"]').tooltip();
+            /*  var currenttimelogdash = $("#currenttimelogdash").val();
+        if(currenttimelogdash!=""){
+            startTimerdash();
+        }*/
+   	 });
+
+      $(document).ready(function() {
+        $('[data-bs-toggle="popover"]').popover({
+            html: true,
+            content: function() {
+                return $('#primary-popover-content').html();
+            }
+        });
+     });
+     $(document).ready(function() {
+	var alertcheck = 0;
+	var error =null;
+	var title = ' Infistaq Glow';
+	if(error != '' && error != null && alertcheck != 0){
+	if(alertcheck!='3004'){
+		tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',error,'');
+	}else{
+	tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger','animated flipInX','animated flipOutX',error,'');
+	}
+	}
+     });
+ 
+</script>
+
+						
+
+</body>
+
+</html>

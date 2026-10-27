@@ -1,0 +1,22 @@
+/*visitors_bucket_modal.css*/
+/* avatar / image sizes */
+.avatar-40 {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
+
+/* table empty image */
+.empty-img-300 {
+    max-height: 300px;
+}
+
+/* table header width helpers */
+.th-w-56 {
+    width: 56px;
+}
+
+/* common text-wrap helper */
+.text-wrap-auto {
+    text-wrap: auto;
+}

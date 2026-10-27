@@ -1,0 +1,391 @@
+/**
+ * Custom View Buddy Reassignment History CSS
+ * Styles for buddy reassignment history page
+ */
+
+/* Page Container */
+body {
+    background-color: #f4f6f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Card Styling */
+.card {
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.card-header {
+    border-radius: 8px 8px 0 0 !important;
+    padding: 15px 20px;
+}
+
+.card-header h4 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.card-body {
+    padding: 25px;
+}
+
+/* Table Styling */
+.table-responsive {
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+#history_table {
+    margin-bottom: 0;
+}
+
+#history_table thead th {
+    background-color: #343a40;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    padding: 12px;
+    border: none;
+}
+
+#history_table tbody td {
+    padding: 12px;
+    vertical-align: middle;
+    color: #495057;
+}
+
+#history_table tbody tr:hover {
+    background-color: #e9ecef;
+    cursor: pointer;
+}
+
+/* Badges */
+.badge {
+    padding: 6px 12px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
+.badge.bg-info {
+    background-color: #17a2b8 !important;
+}
+
+.badge.bg-success {
+    background-color: #28a745 !important;
+}
+
+.badge.bg-warning {
+    background-color: #ffc107 !important;
+    color: #212529;
+}
+
+.badge.bg-danger {
+    background-color: #dc3545 !important;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-sm {
+    padding: 5px 12px;
+    font-size: 0.875rem;
+}
+
+.btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #5c636a;
+    border-color: #565e64;
+}
+
+/* Modal Styling */
+.modal-content {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+    border-bottom: 1px solid #dee2e6;
+    border-radius: 8px 8px 0 0;
+}
+
+.modal-header.bg-primary {
+    background-color: #0d6efd !important;
+}
+
+.modal-title {
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.modal-body {
+    padding: 20px 25px;
+}
+
+.modal-body p {
+    margin-bottom: 5px;
+    color: #495057;
+}
+
+.modal-body strong {
+    color: #212529;
+}
+
+.modal-footer {
+    border-top: 1px solid #dee2e6;
+    padding: 15px 25px;
+}
+
+/* Modal Employee Table */
+.modal-body .table {
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+.modal-body .table thead {
+    background-color: #6c757d;
+    color: white;
+}
+
+.modal-body .table thead th {
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 10px;
+    border: none;
+}
+
+.modal-body .table tbody td {
+    padding: 10px;
+    font-size: 0.9rem;
+}
+
+.modal-body .table-sm tbody td {
+    padding: 8px;
+}
+
+.modal-body .table-bordered {
+    border: 1px solid #dee2e6;
+}
+
+/* DataTables Customization */
+.dataTables_wrapper {
+    padding: 20px 0;
+}
+
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter {
+    margin-bottom: 15px;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    padding: 6px 12px;
+    margin-left: 10px;
+}
+
+.dataTables_wrapper .dataTables_length select {
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    padding: 5px 10px;
+    margin: 0 5px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    border-radius: 4px;
+    padding: 5px 12px;
+    margin: 0 2px;
+    border: 1px solid transparent;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: #0d6efd;
+    border-color: #0d6efd;
+    color: white !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: #e9ecef;
+    border-color: #dee2e6;
+    color: #212529 !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    background: #0b5ed7;
+    border-color: #0a58ca;
+    color: white !important;
+}
+
+.dataTables_wrapper .dataTables_info {
+    padding-top: 15px;
+    color: #6c757d;
+}
+
+/* Navigation Buttons */
+.mb-3 {
+    margin-bottom: 1rem;
+}
+
+.mb-3 .btn {
+    margin-right: 10px;
+}
+
+/* Icons */
+.fas,
+.fa {
+    margin-right: 5px;
+}
+
+/* Shadow Effects */
+.shadow-sm {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+/* Text Center for Empty State */
+.text-center {
+    text-align: center;
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 15px;
+    }
+    
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+    
+    #history_table {
+        font-size: 0.85rem;
+    }
+    
+    #history_table thead th,
+    #history_table tbody td {
+        padding: 8px;
+    }
+    
+    .modal-body {
+        padding: 15px;
+    }
+    
+    .badge {
+        font-size: 0.75rem;
+        padding: 4px 8px;
+    }
+}
+
+/* Animation for Modal */
+.modal.fade .modal-dialog {
+    transition: transform 0.3s ease-out;
+}
+
+/* Button Close for Modal */
+.btn-close-white {
+    filter: brightness(0) invert(1);
+}
+
+/* Table Striped */
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Table Bordered */
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid #dee2e6;
+}
+
+/* Action Column */
+#history_table tbody td:last-child {
+    text-align: center;
+}
+
+/* View Details Button Specific */
+.view-details-btn {
+    white-space: nowrap;
+}
+
+/* Hover Effects */
+tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+/* Empty State Styling */
+tbody tr td[colspan] {
+    padding: 40px 20px;
+    font-size: 1rem;
+}
+
+/* Scrollbar Customization (for modal if needed) */
+.modal-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Loading State (if needed) */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+}

@@ -1,0 +1,465 @@
+<?php
+if(isset($_POST['submit'])){
+        $_POST['company_id'] = $_SESSION['company_id'];
+        $_POST['created_by'] = $_SESSION['userid'];
+        $_POST['created_date'] = nowDate();
+        $url = API."?mode=addsalary&method=post";
+        $response = file_post_contents($url, $_POST, 'insert');
+         if ($response) {
+            if ($_POST['submit_value'] == 'continue'){
+                    $LASTID = json_decode($response,1);
+                    $nrid = "id:".$LASTID['LASTID'];
+                    header("location:index.php?option=".$option."&Rid=".deocdeId($nrid));
+                }else{
+                    header("location:index.php?option=".$list);
+                }
+        }
+}
+
+$pageurl = API."?mode=togetsalarycatdetaillist";
+$data =  callAPI($pageurl);
+$data = json_decode($data,1);
+
+?>
+<script type="text/javascript">
+    function calucationstocat(){
+        var count = $(".itemRow").length;
+        var month =0;  var year =0;
+        for(var i=1 ; i<count+1;i++ ){
+            var cat_type = $("#cat_type_"+i).val();
+            if( cat_type =='P'){
+                var cat_cat = $("#cat_cat_"+i).val();
+                var cat_num = $("#cat_num_"+i).val();
+                var basic = $("#"+cat_cat).val();
+                if(!basic){ basic = 0; }
+                month_amount = (parseFloat(cat_num)/100)* parseFloat(basic);
+                month_amount = parseFloat(month_amount).toFixed(2);
+                $('#m_amount_'+i).val(month_amount);
+                $('#y_amount_'+i).val(month_amount*12);
+
+            }
+        }
+    }
+    function spicalallowances(id){
+        alert("rav");
+        var basic = $("#total_month").val();
+        var ctc = $("#ctc").val();
+        sp_amount = ctc-basic;
+        sp_amount = parseFloat(sp_amount).toFixed(2);
+        $('#m_amount_'+id).val(sp_amount);
+        $('#y_amount_'+id).val(sp_amount*12);
+        var month_amount = parseFloat(basic)+parseFloat(sp_amount);
+        $('#total_month').val(month_amount);
+        $('#total_year').val(month_amount*12);
+
+    }
+    function monthlytoyearlycat(val,id){
+        var cat_cat = $("#cat_cat_"+id).val();
+        var cat_type = $("#cat_type_"+id).val();
+        var cat_code =  $("#cat_code_"+id).val();
+         $('#cat_num_'+id).val(val);
+
+        if(cat_cat !="" &&  cat_type != ''){
+            if(cat_type == 'P'){
+                var basic = $("#"+cat_cat).val();
+                if(!basic){ basic = 0; }
+                month_amount = (parseFloat(val)/100)* parseFloat(basic);
+                month_amount = parseFloat(month_amount).toFixed(2);
+                $('#m_amount_'+id).val(month_amount);
+                $('#'+cat_code).val(month_amount);
+                $('#y_amount_'+id).val(month_amount*12);
+
+
+            }else{
+
+                $('#m_amount_'+id).val(val);
+                $('#y_amount_'+id).val(val*12);
+            }
+        }
+        calucationstocat();
+        calucations();
+    }
+    function ctcmonthlychange(val){
+        var mvar = val/12;
+        $('#ctc').val(parseFloat(mvar).toFixed(2));
+    }
+    function monthlytoyearly(val,id){
+         $('#y_amount_'+id).val(val*12);
+    }
+     function dynamicinformationopup(option){
+        $('#popup1').html(decodeURI(option));
+        $('#kt_modal_KTDatatable_remote').modal({ show: true});
+    }
+     function addsaldata(val){
+        var check = $('#'+val+"check").val();
+
+        if(check == 0){
+            $('#'+val+"check").val(1);
+            var data = $('#'+val+"_detail").val();
+            var obj = JSON.parse(data);
+            addrows(obj,val);
+        }else{
+            $('#'+val+"check").val(0);
+            removerows(val);
+        }
+    }
+    function addrows(data,id){
+        var count = $(".itemRow").length;
+         count++;
+        var month_amount = 0;
+        alert(data.calculation_type);
+        if(data.calculation_type !="" &&  data.calculation_category != ''){
+            if(data.calculation_type == 'P'){
+                var codedetail1 = data.calculation_category.toUpperCase();
+                var codedetail = "% of "+codedetail1.replace("_","  ");
+                var basic = $("#"+data.calculation_category).val();
+                if(!basic){ basic = 0; }
+                month_amount = (parseFloat(data.calculation_number)/100)* parseFloat(basic);
+            }else if(data.calculation_type == 'SP'){
+                alert("Good");
+                $('#SPS').val(count);
+                var codedetail = "Fixed Amount";
+                var basic = $("#total_month").val();
+                var ctc = $("#ctc").val();
+               month_amount = ctc-basic;
+
+            }else{
+                month_amount = data.calculation_number;
+                var codedetail = "Fixed Amount";
+            }
+            month_amount = parseFloat(month_amount).toFixed(2);
+        }
+
+
+        var htmlRows = '';
+        var note = "'"+data.note+"'";
+        htmlRows += '<tr id="'+id+'">';
+        htmlRows += '<td><div class="form-group col-lg-12" ><input aria-label="Name[]" type="text" class="form-control itemRow" readonly value="'+data.name+'" name="name[]"><input type="hidden" class="form-control itemRow" readonly value="'+data.id+'" name="id[]"></div></td>';
+        htmlRows += '<td><div class="form-group col-lg-12">  <div class="input-group"> <input aria-label="Calucation[]" type="text" onblur="monthlytoyearlycat(this.value,'+count+')" class="form-control text-right" value="'+data.calculation_number+'" name="calucation[]" aria-describedby="basic-addon2"/>   <div class="input-group-append"><span class="input-group-text">'+codedetail+'</span></div> </div></div> </td>';
+      htmlRows += '<td><div class="form-group col-lg-12"><input aria-label="0.00" type="text" class="form-control text-right" readonly placeholder="0.00" name="monthly_amount[]" value ="'+month_amount+'"  id="m_amount_'+count+'"></div> <input type="hidden" name="cat_type[]" value="'+data.calculation_type+'" id="cat_type_'+count+'">  <input type="hidden" name="cat_code[]" value="'+data.code+'" id="cat_code_'+count+'">     <input type="hidden" name="cat_cat[]" value="'+data.calculation_category+'" id="cat_cat_'+count+'"> <input type="hidden" name="cat_num[]" value="'+data.calculation_number+'" id="cat_num_'+count+'"></td>';
+        htmlRows += '<td><div class="form-group col-lg-12"><div class="input-group"> <input type="hidden" name="'+data.code+'" value="'+month_amount+'" id="'+data.code+'"><input aria-label="0.00" type="text" readonly id="y_amount_'+count+'" name="yearly_amount[]"  value ="'+month_amount*12+'" class="form-control text-right" placeholder="0.00"><button type="button" class="mt-6" onclick="dynamicinformationopup('+encodeURI(note)+')">&nbsp;<i class="icon-2x text-dark-50 flaticon-information "> </i> </button></div> </div></td>';
+        htmlRows += '</tr>';
+        $("#invoiceItem"+data.category_id).css("display", "block");
+        $('#invoiceItem'+data.category_id).append(htmlRows);
+        calucations();
+    }
+     function removerows(val){
+            $('#'+val).remove();
+             calucations();
+    }
+    function calucations(){
+        var count = $(".itemRow").length;
+        var month =0;  var year =0;
+       $("[id^='cat_type_']").each(function() {
+            var i = $(this).attr('id');
+            i = i.replace("cat_type_",'');
+            var ccheck = $('#cat_type_'+i).val();
+            if( ccheck!='SP'){
+                var cal = $('#m_amount_'+i).val();
+                var cal2 = $('#y_amount_'+i).val();
+                month = parseFloat(month)+ parseFloat(cal);
+                year = parseFloat(year)+ parseFloat(cal2);
+            }
+        });
+         $('#total_month').val(month);
+         $('#total_year').val(year);
+        var sps = $('#SPS').val();
+        if(sps !=0){
+            spicalallowances(sps);
+        }
+    }
+</script>
+<div class="d-flex flex-column-fluid">
+
+    <div class="container-fluid">
+            <div class="card card-custom">
+        <div class="card-body">
+<?php if($_GET['Rid']==""){ ?>
+    <div class="d-flex flex-row">
+
+        <!--begin::Content-->
+        <div class="flex-row-fluid ml-lg-8">
+            <!--begin::Row-->
+
+                <div class="row salary-template">
+                    <div class="col-md-3">
+                        <p class="text-dark-75 font-weight-bolder font-size-h5 m-0">Build Your Template</p>
+                        <div class="font-size-sm text-muted font-weight-bold mt-1 mb-8">Include active salary components</div>
+                        <div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample3">
+
+                            <?php $j=1; foreach ($data as  $dat) { ?>
+                            <div class="card">
+                                <div class="card-header" id="headingTwo3">
+                                    <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseTwo<?php echo $j; ?>">
+                                        <?php echo $dat['name'];?>
+                                    </div>
+                                </div>
+                                <div id="collapseTwo<?php echo $j; ?>" class="collapse" data-parent="#accordionExample3">
+                                    <div class="card-body">
+                                         <?php foreach ($dat['data'] as  $value) { ?>
+                                        <div class="mt-3">
+                                           <?php $addsaldata = $value['id'];
+                                            echo $value['name']; ?>
+                                            <label class="checkbox float-right">
+                                            <input type="hidden" name="addsaldata" id="<?php echo $addsaldata."_detail"; ?>" value='<?php echo json_encode($value); ?>' >
+                                            <input type="hidden" id="<?php echo $addsaldata."check"; ?>" value="0">
+                                                <input aria-label="Checkboxes1" type="checkbox" name="Checkboxes1" onclick="addsaldata(<?php echo "'".$addsaldata."'"; ?>)" onkeydown=""><span></span>
+                                            </label>
+                                        </div>
+                                    <?php } ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php $j++;
+} ?>
+
+                        </div>
+                    </div>
+                    <?php $inn = "Basic salary Amount";?>
+                    <div class="col-md-9">
+                        <form class="form" method="post" action="">
+                            <div class="card card-custom gutter-b">
+                                <!--begin::Header-->
+                                <div class="card-header border-0 py-0 pl-5">
+                                    <h3 class="card-title align-items-start flex-column">
+                                        <span class="card-label font-weight-bolder text-dark">Salary</span>
+                                        <span class="text-muted mt-3 font-weight-bold font-size-sm">Experience in different organizations</span>
+                                    </h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group row">
+                                        <div class="col-lg-4">
+                                            <span>Employee </span>
+                                            <select aria-label="Select option">
+                                                <option> Select Any One</option>
+                                            </select>
+
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <span>Description:</span>
+                                            <textarea aria-label="Kt Autosize 2" class="form-control" id="kt_autosize_2" rows="3" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 40px;">Max 5000 characters</textarea>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <span>Notes:</span>
+                                            <textarea aria-label="Max 5000 characters" class="form-control" id="kt_autosize_2_2" name="note" placeholder="Max 5000 characters" ></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Header-->
+                                <div class="card-body row pl-5 py-0">
+                                    <div class="col-md-2 mt-3">
+                                        <span>Annual CTC</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+
+                                                <input aria-label="0.00" type="text" class="form-control text-right" placeholder="0.00" value="0.00" name="ctc_y" id="ctc_y" onblur="ctcmonthlychange(this.value)">
+                                                <input type="hidden" class="form-control" placeholder="0.00" value="0.00" name="ctc" id="ctc">
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 mt-3">
+
+                                    </div>
+                                </div>
+                                <!--begin::Body-->
+                                <div class="card-body pt-0 pb-3">
+                                    <!--begin::Table-->
+                                    <div class="table-responsive">
+                                        <table class="table table-head-custom table-head-bg table-borderless table-vertical-center"  >
+                                            <thead>
+                                                <tr class="text-uppercase">
+                                                    <th scope="col" style="width: 30%" class="pl-7">
+                                                        <span class="text-dark-75">Salary Component</span>
+                                                    </th>
+                                                    <th scope="col" style="width: 20%">Calculation Type</th>
+                                                    <th scope="col" style="width: 20%;text-align: center;">Amount Monthly</th>
+                                                    <th scope="col" style="width: 20%">Amount Annually</th>
+
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                          <?php $j=1; foreach ($data as  $dat) { ?>
+                                        <table id="invoiceItem<?php echo $j; ?>" style="display: none;">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="col" class="pl-0 py-4" style="width: 30%" >
+                                                        <b><?php echo $dat['name'];?></b>
+                                                    </th>
+                                                    <th scope="col" style="width: 20%" ></th>
+                                                    <th scope="col" style="width: 20%"></th>
+                                                    <th scope="col" style="width: 20%"></th>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    <?php $j++;
+} ?>
+                                    <input type="hidden" name="sp" id="SPS" value="0">
+
+
+                                        <table role="presentation" class="table table-head-custom table-head-bg table-borderless table-vertical-center">
+                                            <tbody>
+
+                                                <tr style="background-color: #eee;">
+                                                    <td class="pl-2 py-4">
+                                                        <span class="text-dark-75">Cost to Company</span>
+                                                    </td>
+                                                    <td></td>
+                                                    <td>
+                                                        <span class="text-dark-75 font-weight-bolder font-size-lg">
+                                                             <input aria-label="Total Month" type="text" name="total_month" class="form-control text-right" id="total_month"  value="0.00">
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="text-dark-75 font-weight-bolder font-size-lg">
+                                                            <input aria-label="Total Year" type="text" name="total_year" class="form-control text-right " id="total_year"  value="0.00">
+                                                        </span>
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!--end::Table-->
+                                </div>
+                                <!--end::Body-->
+                            </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-lg-4"></div>
+                                    <div class="col-lg-8">
+                                        <input type="hidden" name="submit" value="submit">
+                                        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                                        <button type="reset" class="btn btn-secondary">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ <div id="kt_modal_KTDatatable_remote" class="modal fade" role="dialog" aria-hidden="true">
+    <div class="modal-dialog " >
+        <div class="modal-content" >
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Information</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i aria-hidden="true" class="ki ki-close"></i>
+                </button>
+            </div>
+            <div class="modal-body"  id="popup1">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<?php }else{
+
+$datawr["where"] = array('is_active'=> '0','id'=>1);
+  $costdata = urlencode(json_encode($datawr));
+  $url = API."?mode=gettabledetailswithconditions&table=salary_template&data=".$costdata;
+  $salarydata = callAPI($url);
+  $salarydata = json_decode($salarydata,1);
+ $salarydata = $salarydata[0];
+   $stpdata["where"] = array('is_active'=> '0','salary_template_id'=>$salarydata['id']);
+   $stpdata["order"] = "component_cat_id ASC";
+
+  $stpmdata = urlencode(json_encode($stpdata));
+  $stpurl = API."?mode=gettabledetailswithconditions&table=salary_template_components&data=".$stpmdata;
+  $salarytmpdata = callAPI($stpurl);
+  $salarytmpdata = json_decode($salarytmpdata,1);
+
+$datacat["where"] = array('is_active'=> '0');
+  $catdata = urlencode(json_encode($datacat));
+  $caturl = API."?mode=gettabledetailswithconditions&table=salary_categories&data=".$catdata;
+  $salarycatdata = callAPI($caturl);
+  $salarycatdata = json_decode($salarycatdata,1);
+  foreach ($salarycatdata as $cate) {
+      $cat[$cate['id']] = $cate['name'];
+  }
+
+
+?>
+
+<div class="card card-custom " id="kt_page_sticky_card">
+            <div class="card-header">
+                <div class="card-title">
+                    <h3 class="card-label">&nbsp;<?php echo " Salaray Template";  ?> </h3>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="row align-items-center" style="margin-top: 10px;padding: 0px 10%;" id="printarea">
+
+                                <div  class="col-lg-12" style="page-break-before: always;">
+        <table style="border: 1px solid #000;width: 100%;padding: 5px; margin: 20px 0px; margin-left: auto; margin-right: auto;" role="presentation">
+            <tr style="height: 50px;border: 1px solid #000;">
+                <td style="border:1px solid #000;padding: 5px;"><b>Name</b></td>
+                <td  style="border:1px solid #000;padding: 5px;"colspan="2">&nbsp;<?php echo  $send_data['display_name']; ?></td>
+            </tr>
+            <tr style="height: 50px;border: 1px solid #000;">
+                <td style="border:1px solid #000;padding: 5px;"><b>Designation</b></td>
+                <td style="border:1px solid #000;padding: 5px;" colspan="2">&nbsp;<?php echo $send_data['job_title']; ?></td>
+            </tr>
+            <tr style="border: 1px solid #000;">
+                <td style="border:1px solid #000;padding: 5px;"><b>COMPENSATION DETAILS</b>                </td>
+                <td style="text-align: center;border:1px solid #000;padding: 5px;"><b>MONTHLY</b>        </td>
+                <td style="text-align: center;border:1px solid #000;padding: 5px;"><b>YEARLY</b>    </td>
+            </tr>
+            <?php $nm=0; foreach ($salarytmpdata as  $stvalue) { ?>
+                <?php if($stvalue['component_cat_id'] !=$nm ){ $nm =$stvalue['component_cat_id'];  ?>
+                <tr style="border: 1px solid #000;" >
+                    <td style="font-size: 14px;border:1px solid #000;padding: 5px;">&nbsp;  <?php echo $cat[$nm];?></td>
+                    <td style="border:1px solid #000;padding: 5px;"> </td>
+                    <td style="border:1px solid #000;padding: 5px;">  </td>
+                </tr>
+                <?php } ?>
+                <tr style="border: 1px solid #000;" >
+                    <td style="border:1px solid #000;padding: 5px;" > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $stvalue['component_name'];?></td>
+                    <td style="text-align: center;border:1px solid #000;padding: 5px;"> <?php echo customeummarmonyformate($stvalue['monthly_amount']);?></td>
+                    <td style="text-align: center;border:1px solid #000;padding: 5px;"><?php echo customeummarmonyformate($stvalue['yearly_amount']);?></td>
+                </tr>
+            <?php } ?>
+                <tr style="border: 1px solid #000;" >
+                    <td style="border:1px solid #000;padding: 5px;" ><?php echo "Total";?></td>
+                    <td style="text-align: center;border:1px solid #000;padding: 5px;"> <?php echo customeummarmonyformate($salarydata['company_cost_monthly']);?></td>
+                    <td style="text-align: center;border:1px solid #000;padding: 5px;"><?php echo customeummarmonyformate($salarydata['company_cost_yearly']);?></td>
+                </tr>
+                <tr style="border: 1px solid #000;" >
+                    <td colspan="3" style="border:1px solid #000;padding: 5px;">&nbsp;  Notes: </br>
+                        <p style="padding: 0px 5%;"><?php echo  $salarydata['note']; ?></p>
+                    </td>
+
+                </tr>
+        </table>
+    </div>
+    <div style="width: 50%; display: inline-block; margin: 30px 0 0 0;">
+        <b style="font-size: 14px; color: #000; font-family: 'Noto Sans'; margin:0; display: block;">With best wishes.<br />For <?php echo  $send_data['company_name']; ?></b>
+    </div>
+    <div style="width: 48%; display: inline-block; margin: 30px 0 0 0; text-align: right;">
+        <b style="font-size: 14px; color: #000; font-family: 'Noto Sans'; margin:0; display: block;">ANJANA AUDUKOORI<br />DIRECTOR HR</b>
+    </div>
+    <div style="width: 50%; display: inline-block; margin: 40px 0 0 0;">
+        <b style="font-size: 14px; color: #888; font-family: 'Noto Sans'; margin:0; display: block;">-----------------------------------------------</b>
+        <b style="font-size: 14px; color: #666; font-family: 'Noto Sans'; margin:0; display: block;">Candidate Signature</b>
+    </div>
+    <div style="width: 48%; display: inline-block; margin: 40px 0 0 0; text-align: right;">
+        <b style="font-size: 14px; color: #888; font-family: 'Noto Sans'; margin:0; display: block;">-----------------------------------------------</b>
+        <b style="font-size: 14px; color: #666; font-family: 'Noto Sans'; margin:0; display: block;">Date</b>
+    </div>
+
+                                </div>
+
+            </div>
+        </div>
+                </div>
+        </div>
+
+<?php } ?>

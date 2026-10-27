@@ -1,0 +1,36 @@
+/* Clock Time Cell Styling */
+.clock-in-cell,
+.clock-out-cell {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    user-select: none;
+}
+
+.clock-in-cell:hover,
+.clock-out-cell:hover {
+    background-color: #e7f3ff;
+    border: 1px solid #b3d9ff;
+    border-radius: 3px;
+}
+
+/* Clock Time Input */
+.clock-time-input {
+    min-width: 150px;
+    padding: 6px 8px;
+    border: 2px solid #007bff;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.clock-time-input:focus {
+    outline: none;
+    border-color: #0056b3;
+    box-shadow: 0 0 0 3px rgba(0, 91, 179, 0.25);
+}
+
+/* Readonly state after save */
+.clock-in-cell.saved-state,
+.clock-out-cell.saved-state {
+    background-color: #d4edda;
+}

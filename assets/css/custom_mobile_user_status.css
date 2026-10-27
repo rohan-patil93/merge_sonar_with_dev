@@ -1,0 +1,285 @@
+/* Mobile User Status Dashboard Styles */
+
+.stats-card {
+    border: 1px solid #e3e6f0;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.stats-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+    border-color: #d0d3db;
+}
+
+.stats-card.active {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+}
+
+.stats-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-body p {
+    font-size: 14px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .stats-card {
+        margin-bottom: 15px;
+    }
+    
+    .stats-card .card-body {
+        padding: 1.5rem !important;
+    }
+
+    .stats-card h3 {
+        font-size: 1.8rem;
+    }
+}
+
+/* Table styling */
+#userDetailsTable {
+    overflow-x: auto;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.user-table thead {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.user-table thead th {
+    padding: 12px 15px;
+    font-weight: 600;
+    color: #333;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.user-table tbody tr {
+    border-bottom: 1px solid #dee2e6;
+    transition: background-color 0.2s ease;
+}
+
+.user-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.user-table tbody td {
+    padding: 12px 15px;
+    vertical-align: middle;
+}
+
+.user-table tbody td:first-child {
+    font-weight: 600;
+    color: #0d6efd;
+}
+
+.badge-status {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.badge-active {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.badge-inactive {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.badge-contacted {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+/* Empty state */
+.empty-state {
+    text-align: center;
+    padding: 30px;
+    color: #6c757d;
+}
+
+.empty-state i {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    opacity: 0.5;
+}
+
+.empty-state p {
+    margin: 0;
+    font-size: 16px;
+}
+
+/* Loading state */
+.loading-skeleton {
+    background: linear-gradient(
+        90deg,
+        #f0f0f0 25%,
+        #e0e0e0 50%,
+        #f0f0f0 75%
+    );
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Pagination styling (if needed) */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 15px;
+    margin-top: 10px;
+}
+
+.pagination-btn {
+    padding: 6px 10px;
+    border: 1px solid #dee2e6;
+    background-color: #fff;
+    color: #0d6efd;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background-color: #0d6efd;
+    color: #fff;
+}
+
+.pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pagination-info {
+    font-size: 12px;
+    color: #6c757d;
+    padding: 0 10px;
+}
+
+/* Card title styling */
+.card-header {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.card-header h5 {
+    color: #333;
+    font-weight: 600;
+}
+
+/* Responsive table */
+@media (max-width: 768px) {
+    .user-table {
+        font-size: 12px;
+    }
+
+    .user-table thead th,
+    .user-table tbody td {
+        padding: 8px 10px;
+    }
+
+    .user-table .col-hide-mobile {
+        display: none;
+    }
+}
+
+/* List view alternative (if needed) */
+.user-list-item {
+    padding: 12px;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.2s ease;
+}
+
+.user-list-item:hover {
+    background-color: #f8f9fa;
+}
+
+.user-list-item-content {
+    flex: 1;
+}
+
+.user-list-item-name {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.user-list-item-meta {
+    font-size: 12px;
+    color: #6c757d;
+}
+
+/* Typography */
+.fw-500 {
+    font-weight: 500;
+}
+
+.opacity-25 {
+    opacity: 0.25;
+}
+
+/* Animation for card title */
+#tableTitle {
+    transition: color 0.3s ease;
+    color: #333;
+}
+
+/* Custom scroll styling */
+.custom-scroll {
+    overflow-y: auto;
+    border-top: 1px solid #dee2e6;
+}
+
+/* Custom scrollbar styling */
+.custom-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

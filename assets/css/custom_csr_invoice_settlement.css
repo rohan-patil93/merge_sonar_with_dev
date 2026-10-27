@@ -1,0 +1,12 @@
+.csr-invoice-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+@media (max-width: 767px) {
+    .csr-invoice-header-actions {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+}

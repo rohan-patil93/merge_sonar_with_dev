@@ -1,0 +1,258 @@
+
+
+.legend {
+    display: flex;
+    gap: 25px; /* space between each item */
+    align-items: center;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot-one {
+    background-color: #b4c1d7; /* Light red */
+}
+
+.dot-two {
+    background-color: #ff9f55; /* Orange */
+}
+
+.text {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.height-380{
+	height: 380px;
+}
+
+.width-850{
+	width: 850px;
+}
+
+.width-1000{
+	width: 1000px;
+}
+
+.th-gray{
+	background:#f8f9fa;
+}
+
+@keyframes highlightFade {
+  	0% { background-color: #fff3cd; }   /* light yellow */
+  	100% { background-color: transparent; }
+}
+.highlight {
+  	animation: highlightFade 1.2s ease;
+}
+
+
+
+
+/* ===== Responsive Forecast Table ===== */
+
+/* Enable smooth horizontal scrolling */
+.forecast-table-wrapper {
+  	overflow-x: auto;
+  	-webkit-overflow-scrolling: touch;
+  	border-radius: 8px;
+}
+
+/* Make table cells wider and evenly spaced */
+.forecast-table th, 
+.forecast-table td {
+  	min-width: 85px;
+  	white-space: nowrap;
+  	text-align: center;
+  	vertical-align: middle;
+  	padding: 6px 8px;
+}
+
+/* Prevent number inputs from shrinking */
+.forecast-table input[type="number"] {
+  	width: 80px;
+  	min-width: 70px;
+  	text-align: right;
+  	margin: auto;
+}
+/* Make “Item” column wider */
+.forecast-table td:first-child,
+.forecast-table th:first-child {
+  	/*min-width: 200px;*/
+  	text-align: left;
+  	/*position: sticky;*/
+  	left: 0;
+  	/*background: #fff;*/
+  	z-index: 5;
+  	box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+}
+
+/* Freeze top header */
+.forecast-table thead th {
+  	/*position: sticky;*/
+  	top: 0;
+  	background: #f8f9fa;
+  	z-index: 10;
+}
+
+/* Totals highlight */
+.forecast-table tfoot {
+  	background: #f3f4f6;
+  	font-weight: 600;
+  	position: sticky;
+  	bottom: 0;
+  	z-index: 5;
+}
+
+/* Better look on small devices */
+@media (max-width: 768px) {
+  	.forecast-table input[type="number"] {
+   	 	width: 60px;
+  	}
+  	.forecast-table td:first-child {
+    	min-width: 150px;
+    	font-size: 13px;
+  	}
+}
+
+/* Highlight animation (keep your earlier one) */
+@keyframes highlightFade {
+  	0% { background-color: #fff3cd; }
+  	100% { background-color: transparent; }
+}
+.highlight {
+  	animation: highlightFade 1.2s ease;
+}
+
+
+.width-50{
+	width: 50px;
+}
+.mfg-dashboard .card-header h5 {
+  margin-bottom: 0;
+}
+
+.mfg-dashboard .mfg-chart {
+  height: 300px;
+}
+
+.mfg-dashboard .mfg-chart-small {
+  height: 230px;
+}
+
+.mfg-dashboard .mfg-role-note {
+  color: rgba(255, 255, 255, .85);
+}
+
+.mfg-dashboard .mfg-kpi-label {
+  color: #667085;
+  font-size: 13px;
+}
+
+.mfg-dashboard .mfg-chart-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  padding: 0 20px 16px;
+  font-size: 12px;
+}
+
+.mfg-dashboard .mfg-chart-summary span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #475467;
+  font-weight: 600;
+}
+
+.mfg-dashboard .mfg-chart-summary i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.mfg-dashboard .mfg-chart-color-1 {
+  background: #4099ff;
+}
+
+.mfg-dashboard .mfg-chart-color-2 {
+  background: #2ed8b6;
+}
+
+.mfg-dashboard .mfg-chart-color-3 {
+  background: #ffb64d;
+}
+
+.mfg-dashboard .mfg-chart-color-4 {
+  background: #ff5370;
+}
+
+.mfg-dashboard .mfg-action-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.mfg-dashboard .mfg-action-tile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid #e4e7ec;
+  border-radius: 6px;
+  color: #344054;
+  font-weight: 700;
+  background: #fff;
+}
+
+.mfg-dashboard .mfg-action-tile:hover {
+  color: #0969da;
+  border-color: #4099ff;
+  box-shadow: 0 6px 16px rgba(64, 153, 255, .16);
+}
+
+.mfg-dashboard .mfg-action-tile i {
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #eef6ff;
+  color: #4099ff;
+  font-size: 16px;
+}
+
+.mfg-dashboard .mfg-action-list a {
+  display: block;
+  padding: 8px 0;
+  font-weight: 600;
+}
+
+.mfg-dashboard .mfg-progress-wrap {
+  padding: 20px 25px 28px;
+}
+
+.mfg-dashboard .mfg-progress-track {
+  height: 16px;
+  background: #eef2f7;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.mfg-dashboard .mfg-progress-fill {
+  height: 16px;
+  background: #2ed8b6;
+  border-radius: 20px;
+}

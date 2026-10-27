@@ -1,0 +1,12 @@
+.csr-po-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+@media (max-width: 767px) {
+    .csr-po-header-actions {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+}

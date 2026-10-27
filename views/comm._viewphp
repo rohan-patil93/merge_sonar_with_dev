@@ -1,0 +1,1231 @@
+<?php 
+/*$url = API."?method=post";
+$data = file_post_contents($url,timezoan());*/
+function isacStatusDescrption($value){
+	$statusurl = API."?mode=singlerowtabledata&fid=name_value&rid=".$value."&table=".TBL_STATUS;
+	$statusres = file_get_contents($statusurl, false, $context);
+	$stausresult = json_decode($statusres,1);
+	//echo "-----".$value."hahha"; //print_r($stausresult);
+	$dgc = "#".strval($stausresult["background_color"]);
+	$string = '<span style = "color: #'.$stausresult["color"].';    background: '.$dgc.';" class="kt-badge  kt-badge--inline kt-badge--pill">'.$stausresult["name"].'</span>';
+	return $string;
+}
+function errorMessageUseErrorCode($code) {
+	$resurl = API."?mode=singlerowtabledata&table=".TBL_ERRORMESSAGE."&fid=error_number&rid=". $code;
+	//echo $resurl; exit;
+	$resresponse = file_get_contents($resurl, false, $context);
+	$resresponsedata = json_decode($resresponse,1);
+	return $resresponsedata['error_description']; 
+}
+function deocdeId($id){
+		return base64_encode(base64_encode($id));
+}
+function encodeId($id){
+		return base64_decode(base64_decode($id));
+}
+function initials($str) {
+    $ret = '';
+    foreach (explode(' ', $str) as $word)
+        $ret .= strtoupper($word[0]);
+    return $ret;
+}
+function toGetUserDetais(){
+	$url = API."?mode=userdetails&userid=".$_SESSION['userid'];
+	$res = callAPI($url);
+	return json_decode($res,1);;
+}
+function candidatedetais($email){
+	$statusurl = API."?mode=singlerowtabledata&fid=email_id&rid=".$email."&table=candidates";
+	//echo $statusurl; exit;
+	$statusres = callAPI($statusurl);
+	//echo $statusres; exit;
+	$stausresult = json_decode($statusres,1);
+	return $stausresult;
+}
+function vendordetails($email){
+	$statusurl = API."?mode=singlerowtabledata&fid=email&rid=".$email."&table=vendors";
+	//echo $statusurl; exit;
+	$statusres = callAPI($statusurl);
+	//echo $statusres; exit;
+	$stausresult = json_decode($statusres,1);
+	return $stausresult;
+}
+function dyanamicselectdata($table_name, $filed_name){
+	$dsurl = API."?mode=dyanamicselectdata&table_name=".$table_name."&filed_namee=". $filed_name;
+	//echo $dsurl;
+	//$resresponse = file_get_contents($dsurl, false, $context);
+	$resresponse = callAPI($dsurl);
+	//echo $dsurl; exit;
+	$res = json_decode($resresponse,1);
+	if($res['type'] != 'function'){
+		$return = $res['res'];
+	}
+	return $return;
+}
+function dyanamicselectdatatablename($table_name, $filed_name){
+	$data1["where"] = array('application_table_name'=> $table_name,'field_name'=> $filed_name,'company_id'=>$_SESSION['company_id']);
+	$data = urlencode(json_encode($data1));
+	$curl = API."?mode=gettabledetailswithconditions&table=display_attribute_types&data=".$data; 
+	//echo $curl;
+	$cudata = callAPI($curl);
+	$cudata = json_decode($cudata,1);
+	$json_data = json_decode(urldecode($cudata[0]['content_details']),1);
+	return $json_data['table_name'];
+}
+function dyanamicselectreportdata($report_id, $filed_name){
+	$dsurl = API."?mode=dyanamicselectreportdata&report_id=".$report_id."&filed_name=". $filed_name;
+	//echo $dsurl; exit;
+	//$resresponse = file_get_contents($dsurl, false, $context);
+	$resresponse = callAPI($dsurl);
+	//echo $resresponse;exit;
+	$res = json_decode($resresponse,1);
+	$return = $res['res'];
+	return $return;
+}
+function dyanamicafterdata($table_name, $filed_name){
+	$dsurl = API."?mode=dyanamicafterdata&&table_name=".$table_name."&filed_namee=". $filed_name;
+	//echo $dsurl; exit;
+	$resresponse = file_get_contents($dsurl, false, $context);
+	$res = json_decode($resresponse,1);
+	/*if($res['type'] != 'function'){
+		$return = $res['res'];
+	}*/
+	return $res;
+}
+function imageupload($jnt,$imagename,$hidimage,$exname=""){
+	$name = $hidimage;
+	echo "Ravi".$imagename.$array_number; print_r($_FILES); exit;
+	$exname = ($exname =="") ? "file" : $exname;
+	if($_FILES[$imagename]['name']!=""){
+		$ext=explode(".",$_FILES[$imagename]['name']);
+		$name= $exname.'_'.time()."_".uniqid().'.'.$ext[1];
+		$path = 'hrstaq/demo/uploads/'.$jnt.'/';
+		echo $path.$name; //exit;
+		if(!is_dir($path)) { 	
+			echo "dir";	
+			$dual_path = trim($path,'/');
+			$dual_path = explode('/', $dual_path);
+			$epath ="";
+			foreach ($dual_path as $dpath) {
+				$epath = $epath.$dpath."/";
+				if(!is_dir($epath)){
+					//echo "<br>no dir".$epath;
+					$ss = mkdir($epath); 
+					echo $ss;
+				}else{
+					//echo "<br>yes dir".$epath;
+				}
+			}
+			
+		}
+		$res = move_uploaded_file($_FILES[$imagename]['tmp_name'],$path.$name);
+		//echo $res; exit;
+	} 
+	return $name;
+}
+function imageuploadwitharray($jnt,$imagename,$hidimage,$exname="",$array_number=''){	
+	
+	$name = $hidimage;	
+	$exname = ($exname =="") ? "file" : $exname;
+	
+	if($_FILES[$imagename]['name'][$array_number]!=""){	
+	    //echo "man";
+		$ext=explode(".",$_FILES[$imagename]['name'][$array_number]);	
+		$name= $exname.'_'.time()."_".uniqid().'.'.$ext[1];	
+		$path = 'hrstaq/demo/uploads/'.$jnt.'/';	
+		echo $path.$name; exit;
+		if(!is_dir($path)) { 			
+			$dual_path = trim($path,'/');	
+			$dual_path = explode('/', $dual_path);	
+			$epath ="";	
+			foreach ($dual_path as $dpath) {	
+				$epath = $epath.$dpath."/";	
+				if(!is_dir($epath)){	
+					mkdir($epath); 	
+				}	
+			}	
+				
+		}	
+		move_uploaded_file($_FILES[$imagename]['tmp_name'][$array_number],$path.$name);	
+	} 	
+	return $name;	
+}
+function toGETUsersList(){
+	$userurl = API."?mode=gettabledetails&table=".TBL_USERS;
+	$usres = callAPI($userurl);
+	$userresult = json_decode($usres,1);
+	foreach ($userresult as  $value) {
+	    $name = $value['display_name']!="" ?$value['display_name']:$value['first_name']." ".$value['middle_name']." ".$value['last_name'];
+		$status[$value['id']]= $name;
+	}
+	//print_r($status); exit;
+	return $status;
+}
+
+function toGETStatuList(){
+	$userurl = API."?mode=gettabledetails&table=".TBL_STATUS;
+	$usres = callAPI($userurl);
+	$userresult = json_decode($usres,1);
+	foreach ($userresult as  $value) {
+		$status[$value['name_value']]= $value;
+	}
+	return $status;
+}
+function dateformates($pdate,$formate,$sparater){
+			//echo $formate;
+		$array = array('DD'=>'d','MM'=>'m','YYYY'=>'Y');
+		$formates = explode('-', $formate);
+		$return = "";
+		foreach ($formates as  $value) {
+			$return.= $array[$value].$sparater;
+		}
+		$return = trim($return,$sparater);
+
+		return date($return, strtotime($pdate) );
+}
+function fromDate($from='') {
+    $from = $from!='0000-00-00' ? $from :'';
+    $_SESSION['date_formate'] = $_SESSION['date_formate']!="0"  ? $_SESSION['date_formate'] : 'Y-m-d';
+    //$_SESSION['date_formate'] = $_SESSION['date_formate']!="" ? $_SESSION['date_formate'] : 'Y-m-d';
+	if($from != ""){
+		$from =  date($_SESSION['date_formate'],strtotime($from));
+	}else{
+		$from = date($_SESSION['date_formate']);
+	}
+	//echo $from; exit;
+ return $from; 
+}
+function reqDate($to=''){
+	if($to != ""){
+		$to =  date($_SESSION['date_formate'],strtotime($to));
+	}else{
+		$to = date($_SESSION['date_formate'],strtotime(date("Y-m-d", mktime()) . " + 15 days"));
+	}
+	return $to;
+}
+function toDate($to=''){
+    $from = $to!='0000-00-00' ? $to :'';
+	if($to != ""){
+		$to =  date($_SESSION['date_formate'],strtotime($to));
+	}else{
+		$to = date($_SESSION['date_formate'],strtotime(date("Y-m-d", mktime()) . " + 5 year"));
+	}
+	return $to;
+}
+function exportname($name) {
+			$title = viewTitle($name);
+		return "export_".$title."_".time();
+}
+function statusData($table){
+	$statusurl = API."?mode=statusdata&fid=table_name&rid=".$table."&table=".TBL_STATUSPROGRES;
+	//echo $statusurl; 
+	$statusres = callAPI($statusurl);
+	//$statusres = file_get_contents($statusurl, false, $context);
+	$stausresult = json_decode($statusres,1);
+	return $stausresult;
+}
+function nowDate(){
+	return date("Y-m-d H:i:s");
+}
+function ViewStatusData(){
+	$statusurl = API."?mode=gettabledetails&fid=table_name&rid=".$table."&table=".TBL_STATUS;
+	/*$statusres = file_get_contents($statusurl, false, $context);*/
+	$statusres = callAPI($statusurl);
+	$stausresult = json_decode($statusres,1);
+	foreach ($stausresult as  $value) {
+		$status[$value['name_value']]['name']= $value['name'];
+		$status[$value['name_value']]['background_color']= $value['background_color'];
+		$status[$value['name_value']]['color']= $value['color'];
+	}
+	//print_r($status); exit;
+	return $status;
+}
+function ViewStatusValue($value,$table_name=''){
+	$statusurl = API."?mode=singlestatusdata&status=".$value."&table=".$table_name;
+	//echo $statusurl; exit;
+	$statusres = callAPI($statusurl);
+	$stausresult = json_decode($statusres,1);
+	//print_r($stausresult); exit;
+	return $stausresult;
+}
+function toGetStatusProgressAction($table_name, $status){
+	$statusurl = API."?mode=toGetStatusProgressActionList&table=".$table_name."&status=".$status;
+	//echo $statusurl; exit;
+	$statusres = callAPI($statusurl);
+	$stausresult = json_decode($statusres,1);
+	//print_r($stausresult); exit;
+	return $stausresult;
+
+}
+
+function dateFormate($daate){
+	return  date($_SESSION['date_formate'], strtotime($daate));
+}
+function viewTitle ($title){
+	$array = array('COM_','LIST_','INSERT_','EDIT_','VIEW_','_');
+	foreach ($array as  $value) {
+		$title = str_replace($value, ' ', $title);
+	}
+	//echo "ravi";
+	//return strtoupper(str_replace('_',' ',str_replace('INSERT_','',str_replace('COM_', '', $title))));
+	//strtolower(str)
+	return ucwords(strtolower(str_replace('_', ' ', $title)));
+}
+function customeummarmonyformate($number){
+	$num = $_SESSION['configdata']['number_format'] !='' ? $_SESSION['configdata']['number_format'] :2;
+	return number_format($number, $num, '.', ',');
+}
+function invoicePrefix(){
+	if($_SESSION['configdata']['invoice_perfix']=='YYYY'){
+		$return = date("Y");
+	}elseif($_SESSION['configdata']['invoice_perfix']=='MM-YYYY'){
+		$return = date("m-Y");
+	}elseif($_SESSION['configdata']['invoice_perfix']=='FAYEAR'){
+		$year = date("Y");	
+		if(date("m")>3){
+			$return = $year."-".substr( $year+1, -2);
+		}else{
+			$return = ($year-1)."-".substr( $year, -2);
+		}
+	}else{
+		$return = "";
+	}
+	return $return;
+}
+function itemAttributesDisplayType(){
+	$array = array();
+	$array["text"]="Text";
+	$array["dop_down"]="Drop Down";
+	//$array["checkbox"]="Check Box";
+	$array["radio"]="Radio";
+	return $array;
+}
+function  dates(){
+	$from = fromDate();
+	 $to= toDate(); 
+		echo '<div class="form-group  row">
+			<label class="col-form-label col-lg-3 col-sm-12">From Date </label>
+			<div class="col-lg-9 col-xl-6">
+				<div class="input-group date">
+					<div class="input-group-append">
+						<span class="input-group-text">
+							<i class="la la-calendar-check-o"></i>
+						</span>
+					</div>
+					<input type="text" class="form-control" name="From_Date" value="'. $from.'"  id="kt_datepicker_4_3" />
+				</div>
+			</div>
+		</div>
+		<div class="form-group  row">
+			<label class="col-form-label col-lg-3 col-sm-12">To Date </label>
+			<div class="col-lg-9 col-xl-6">
+				<div class="input-group date">
+					<div class="input-group-append">
+						<span class="input-group-text">
+							<i class="la la-calendar-check-o"></i>
+						</span>
+					</div>
+					<input type="text" class="form-control"  name="To_Date" value="'. $to.'"  id="kt_datepicker_4_3_1" />
+				</div>
+			</div>
+		</div>';
+}
+function file_post_contents($url, $data, $type = '',$username = null, $password = null){
+	//echo $url; exit;
+	$url = $url."&data_name=".$_SESSION['DB_NAME']."&user_id=".$_SESSION['userid']."&company_id=".$_SESSION['company_id']."&ipaddress=".$_SERVER['REMOTE_ADDR']."&page_option=".$_GET['option'];
+	//echo $url;  //print_r($data); exit;
+	//echo $type; exit;
+	$postdata = http_build_query($data);
+		$opts = array('http' =>array(
+        'method'  => 'POST',
+        'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+        'content' => $postdata
+    	)
+	);
+	$context = stream_context_create($opts);
+	$return = file_get_contents($url, false, $context);
+	//print_r($return); exit;
+	$cahek_dd = json_decode($return,1);
+	if($cahek_dd['status'] == 'sucess'){
+		if($type == 'insert'){	$_SESSION['check'] = '3000'; }
+		if($type == 'update'){	$_SESSION['check'] = '3001'; }
+	}
+	//print_r($return); exit;
+	return $return;
+}
+function toGetErrorMessages(){
+	$errorurl = API."?mode=gettabledetails&table=".TBL_ERRORMESSAGE;
+	$erroresponse = callAPI($errorurl);
+	$erroresponse = json_decode($erroresponse,1);
+	//print_r($erroresponse)
+	foreach ($erroresponse as  $errordata) {
+		$error_data[$errordata['message_number']] =$errordata['message_description'];
+	}
+	return $error_data;
+}
+function toGetRolePermisssionsByUserId($user_id){
+	$rolesurl = API."?mode=getrolepermission&user_id=".$user_id;
+	//echo $rolesurl; exit;
+	$roledata = callAPI($rolesurl);
+	//exit;
+	//echo $roledata; exit;
+	$roledata = json_decode($roledata,1);
+	return $roledata;
+}
+function timezoan() {
+$array = array();
+$array["Pacific/Midway"]="(GMT-11:00) Midway Island, Samoa";
+$array["America/Adak"]="(GMT-10:00) Hawaii-Aleutian";
+$array["Etc/GMT+10"]="(GMT-10:00) Hawaii";
+$array["Pacific/Marquesas"]="(GMT-09:30) Marquesas Islands";
+$array["Pacific/Gambier"]="(GMT-09:00) Gambier Islands";
+$array["America/Anchorage"]="(GMT-09:00) Alaska";
+$array["America/Ensenada"]="(GMT-08:00) Tijuana, Baja California";
+$array["Etc/GMT+8"]="(GMT-08:00) Pitcairn Islands";
+$array["America/Los_Angeles"]="(GMT-08:00) Pacific Time (US & Canada)";
+$array["America/Denver"]="(GMT-07:00) Mountain Time (US & Canada)";
+$array["America/Chihuahua"]="(GMT-07:00) Chihuahua, La Paz, Mazatlan";
+$array["America/Dawson_Creek"]="(GMT-07:00) Arizona";
+$array["America/Belize"]="(GMT-06:00) Saskatchewan, Central America";
+$array["America/Cancun"]="(GMT-06:00) Guadalajara, Mexico City, Monterrey";
+$array["Chile/EasterIsland"]="(GMT-06:00) Easter Island";
+$array["America/Chicago"]="(GMT-06:00) Central Time (US & Canada)";
+$array["America/New_York"]="(GMT-05:00) Eastern Time (US & Canada)";
+$array["America/Havana"]="(GMT-05:00) Cuba";
+$array["America/Bogota"]="(GMT-05:00) Bogota, Lima, Quito, Rio Branco";
+$array["America/Caracas"]="(GMT-04:30) Caracas";
+$array["America/Santiago"]="(GMT-04:00) Santiago";
+$array["America/La_Paz"]="(GMT-04:00) La Paz";
+$array["Atlantic/Stanley"]="(GMT-04:00) Faukland Islands";
+$array["America/Campo_Grande"]="(GMT-04:00) Brazil";
+$array["America/Goose_Bay"]="(GMT-04:00) Atlantic Time (Goose Bay)";
+$array["America/Glace_Bay"]="(GMT-04:00) Atlantic Time (Canada)";
+$array["America/St_Johns"]="(GMT-03:30) Newfoundland";
+$array["America/Araguaina"]="(GMT-03:00) UTC-3";
+$array["America/Montevideo"]="(GMT-03:00) Montevideo";
+$array["America/Miquelon"]="(GMT-03:00) Miquelon, St. Pierre";
+$array["America/Godthab"]="(GMT-03:00) Greenland";
+$array["America/Argentina/Buenos_Aires"]="(GMT-03:00) Buenos Aires";
+$array["America/Sao_Paulo"]="(GMT-03:00) Brasilia";
+$array["America/Noronha"]="(GMT-02:00) Mid-Atlantic";
+$array["Atlantic/Cape_Verde"]="(GMT-01:00) Cape Verde Is.";
+$array["Atlantic/Azores"]="(GMT-01:00) Azores";
+$array["Europe/Belfast"]="(GMT) Greenwich Mean Time : Belfast";
+$array["Europe/Dublin"]="(GMT) Greenwich Mean Time : Dublin";
+$array["Europe/Lisbon"]="(GMT) Greenwich Mean Time : Lisbon";
+$array["Europe/London"]="(GMT) Greenwich Mean Time : London";
+$array["Africa/Abidjan"]="(GMT) Monrovia, Reykjavik";
+$array["Europe/Amsterdam"]="(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna";
+$array["Europe/Belgrade"]="(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague";
+$array["Europe/Brussels"]="(GMT+01:00) Brussels, Copenhagen, Madrid, Paris";
+$array["Africa/Algiers"]="(GMT+01:00) West Central Africa";
+$array["Africa/Windhoek"]="(GMT+01:00) Windhoek";
+$array["Asia/Beirut"]="(GMT+02:00) Beirut";
+$array["Africa/Cairo"]="(GMT+02:00) Cairo";
+$array["Asia/Gaza"]="(GMT+02:00) Gaza";
+$array["Africa/Blantyre"]="(GMT+02:00) Harare, Pretoria";
+$array["Asia/Jerusalem"]="(GMT+02:00) Jerusalem";
+$array["Europe/Minsk"]="(GMT+02:00) Minsk";
+$array["Asia/Damascus"]="(GMT+02:00) Syria";
+$array["Europe/Moscow"]="(GMT+03:00) Moscow, St. Petersburg, Volgograd";
+$array["Africa/Addis_Ababa"]="(GMT+03:00) Nairobi";
+$array["Asia/Tehran"]="(GMT+03:30) Tehran";
+$array["Asia/Dubai"]="(GMT+04:00) Abu Dhabi, Muscat";
+$array["Asia/Yerevan"]="(GMT+04:00) Yerevan";
+$array["Asia/Kabul"]="(GMT+04:30) Kabul";
+$array["Asia/Yekaterinburg"]="(GMT+05:00) Ekaterinburg";
+$array["Asia/Tashkent"]="(GMT+05:00) Tashkent";
+$array["Asia/Kolkata"]="(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi";
+$array["Asia/Katmandu"]="(GMT+05:45) Kathmandu";
+$array["Asia/Dhaka"]="(GMT+06:00) Astana, Dhaka";
+$array["Asia/Novosibirsk"]="(GMT+06:00) Novosibirsk";
+$array["Asia/Rangoon"]="(GMT+06:30) Yangon (Rangoon)";
+$array["Asia/Bangkok"]="(GMT+07:00) Bangkok, Hanoi, Jakarta";
+$array["Asia/Krasnoyarsk"]="(GMT+07:00) Krasnoyarsk";
+$array["Asia/Hong_Kong"]="(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi";
+$array["Asia/Irkutsk"]="(GMT+08:00) Irkutsk, Ulaan Bataar";
+$array["Australia/Perth"]="(GMT+08:00) Perth";
+$array["Australia/Eucla"]="(GMT+08:45) Eucla";
+$array["Asia/Tokyo"]="(GMT+09:00) Osaka, Sapporo, Tokyo";
+$array["Asia/Seoul"]="(GMT+09:00) Seoul";
+$array["Asia/Yakutsk"]="(GMT+09:00) Yakutsk";
+$array["Australia/Adelaide"]="(GMT+09:30) Adelaide";
+$array["Australia/Darwin"]="(GMT+09:30) Darwin";
+$array["Australia/Brisbane"]="(GMT+10:00) Brisbane";
+$array["Australia/Hobart"]="(GMT+10:00) Hobart";
+$array["Asia/Vladivostok"]="(GMT+10:00) Vladivostok";
+$array["Australia/Lord_Howe"]="(GMT+10:30) Lord Howe Island";
+$array["Etc/GMT-11"]="(GMT+11:00) Solomon Is., New Caledonia";
+$array["Asia/Magadan"]="(GMT+11:00) Magadan";
+$array["Pacific/Norfolk"]="(GMT+11:30) Norfolk Island";
+$array["Asia/Anadyr"]="(GMT+12:00) Anadyr, Kamchatka";
+$array["Pacific/Auckland"]="(GMT+12:00) Auckland, Wellington";
+$array["Etc/GMT-12"]="(GMT+12:00) Fiji, Kamchatka, Marshall Is.";
+$array["Pacific/Chatham"]="(GMT+12:45) Chatham Islands";
+$array["Pacific/Tongatapu"]="(GMT+13:00) Nuku'alofa";
+$array["Pacific/Kiritimati"]="(GMT+14:00) Kiritimati";
+return $array;
+}
+function callAPI($page){
+		$url = $page."&data_name=".$_SESSION['DB_NAME']."&user_id=".$_SESSION['userid']."&company_id=".$_SESSION['company_id']."&ipaddress=".$_SERVER['REMOTE_ADDR']."&page_option=".$_GET['option'];
+		//echo $url; //exit;
+		$res = file_get_contents($url, false, $context);
+		//echo $res; //exit;
+		//echo "man";
+		return $res;
+}
+function toGetApplicationPagesList(){
+	$pages = API."?mode=gettabledetails&table=".TBL_APPLICATION_PAGES;
+	$page_list = callAPI($pages);
+	$res = json_decode($page_list,1);
+	return $res;
+}
+function logout(){
+	$pages = API."?mode=logout&user_id=".$_SESSION['userid'];
+	//echo $pages;exit;
+	$page_list = callAPI($pages);
+
+	$res = json_decode($page_list,1);
+	return $res;
+}
+function toGetTableNameBaseApplicationPagesList($type, $type_name, $case=''){
+	//echo "asdlaslda";
+	if($case == ''){
+	$type_name = strtoupper($type_name);
+	}
+	foreach ($_SESSION['application_pages'] as $page){
+		if($page[$type] == $type_name){
+			$data = $page; 
+			break;
+		}	
+	}
+	//print_r($data);
+	return $data;
+}
+function toGetMenuDetailsBaseMenuPageName($page){
+	//echo $page;
+	//echo "<pre>";print_r($_SESSION['application_menu']);
+	foreach ($_SESSION['application_menu'] as $pages){
+		//print_r($page); //exit;
+		//echo $pages['Page_Name']."==". $page."</br>";
+		if($pages['page_name'] == $page){
+			//echo "ravi"; 
+			$data = $pages;
+			break;
+		}	
+	}
+	return $data;
+}
+function toGetIdformateApplicationPagesList(){
+	foreach ($_SESSION['application_pages'] as $page){
+		$data[$page['id']] = $page;
+	}
+	return $data;
+}
+function toGetApplicationMenuList(){
+	//echo "hhi"; exit;
+	$order = urlencode('display_priority ASC');
+	$menu = API."?mode=gettabledetails&fid=is_active&rid=0&orderby=".$order."&table=".TBL_APPLICATION_MENU;
+	//echo $menu; exit;
+	$page_list = callAPI($menu);
+	//echo  $page_list; exit;
+	$res = json_decode($page_list,1);
+	return $res;
+}
+function toGETNavDetails($type){
+	
+
+	$menu  = $_SESSION['application_menu'];
+	//echo $type."<pre>";print_r($menu); exit;
+	foreach ($menu as $key => $value) {
+		//$res = checkPremission($value['Page_Name']);
+		$res = 1;
+		$child = getParentidmenus($value['id'],1);
+		if(count((array)$child)>0){
+				$res = 1;
+		}
+		//echo $value['menu_location']."||".$type ."||". $value['parent_menu']."||".$res."</br>"; 
+		if($value['menu_location'] == $type && $value['parent_menu'] == 0 && $res == 1){
+			$array[ $value['id']]['id'] =  $value['id'];
+			$array[ $value['id']]['Label'] =  $value['menu_label'];
+			$array[ $value['id']]['Menu_Icon'] =  $value['menu_icon'];
+			$array[ $value['id']]['Page_Name'] =  $value['page_name'];
+			$array[ $value['id']]['child'] = $child;
+		}
+	}
+	//echo $type."<pre>";print_r($array);exit;
+	return $array;
+}
+function checkPremission($name){
+	$return = 0;
+	//echo  $name; exit;
+	//echo "<pre>"; print_r($_SESSION['role_permission']);
+	foreach ($_SESSION['application_pages'] as  $value) {
+		if($value['list_page_name']==$name || $value['insert_page_name']==$name || $value['edit_page_name']==$name || $value['view_page_name']==$name){
+			$table = $value['application_table_name'];
+			if($value['list_page_name']==$name){	$type = 'permission_list';	}
+			if($value['insert_page_name']==$name){	$type = 'permission_insert';	}
+			if($value['edit_page_name']==$name){	$type = 'permission_update';	}
+			if($value['view_page_name']==$name){	$type = 'permission_list';	}
+		}
+	}
+	//echo $type;echo $table; exit;
+	if($_SESSION['role_permission'][$table][$type] == 1){
+		$return =1;
+	}
+	//echo $return; exit;
+	return $return; //exit;
+}
+function toGetTableNameUsingPageName($name){
+	$return = "";
+	foreach ($_SESSION['application_pages'] as  $value) {
+		if($value['list_page_name']==$name || $value['insert_page_name']==$name || $value['edit_page_name']==$name || $value['view_page_name']==$name){
+			$return = $value['application_table_name'];
+		}	
+	}
+	return $return; //exit;
+}
+function getParentidmenus($pid,$len){
+	$menu  = $_SESSION['application_menu'];
+	/*if($len > 5){
+		echo $len."&&".$pid; exit;
+		return array('bad maping'); 
+	}
+*/	foreach ($menu as $key => $value) {
+		//$res = checkPremission($value['Page_Name']);
+		$res = 1;
+		if($value['parent_menu'] == $pid && $res == 1){
+			
+			$array1[ $value[id]]['id'] =  $value['id'];
+			$array1[ $value[id]]['Label'] =  $value['menu_label'];
+			$array1[ $value[id]]['Menu_Icon'] =  $value['menu_icon'];
+			$array1[ $value[id]]['Page_Name'] =  $value['page_name'];
+			$array1[ $value[id]]['child'] = getParentidmenus($value['id'],$len+1);
+		}
+	}
+	return $array1;
+}
+function togetnotificationuserslist(){
+	return "3";
+}
+function toGetNotigficationListByUsingUserId($user_id,$type=""){
+	//echo "hai||".$user_id; 
+	$url_noti = API."?mode=toGetNotigficationListByUsingUserId&user_id=$user_id&type=$type";
+	//echo $url_noti; exit; 
+	$res = callAPI($url_noti);
+	//echo $res;
+	$res = json_decode($res,1);
+	//print_r($res); exit;
+	return $res;
+}
+function toGetInboxCountUsingUserId(){
+	$url_noti = API."?mode=toGetInboxCountUsingUserId"; 
+	$res = callAPI($url_noti);
+	$res = json_decode($res,1);
+	return $res['indox_count'];
+}
+function notificationdatesdiff($date){
+$date1 = strtotime(date("Y-m-d h:i:sa")); 
+$date2 = strtotime($date); 
+// Formulate the Difference between two dates 
+$diff = abs($date2 - $date1); 
+// To get the year divide the resultant date into // total seconds in a year (365*60*60*24) 
+$years = floor($diff / (365*60*60*24));
+// To get the month, subtract it with years and 
+// divide the resultant date into 
+// total seconds in a month (30*60*60*24) 
+$months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24)); 
+// To get the day, subtract it with years and 
+// months and divide the resultant date into 
+// total seconds in a days (60*60*24) 
+$days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24)); 
+// To get the hour, subtract it with years, 
+// months & seconds and divide the resultant 
+// date into total seconds in a hours (60*60) 
+$hours = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24) / (60*60)); 
+// To get the minutes, subtract it with years, 
+// months, seconds and hours and divide the 
+// resultant date into total seconds i.e. 60 
+$minutes = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24 - $hours*60*60)/ 60); 
+// To get the minutes, subtract it with years, 
+// months, seconds, hours and minutes 
+$seconds = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24 - $hours*60*60 - $minutes*60)); 
+// Print the result 
+//printf("%d years, %d months, %d days, %d hours, "	. "%d minutes, %d seconds",$years, $months, $days, $hours, $minutes, $seconds);
+$str='';
+if($years >0){
+	$str .= $years." years, ";
+}
+if($years >0){
+	$str .= $months." months,";
+}
+if($days >0){
+	$str .= $days." days, ";
+}
+if($hours >0){
+	$str .= $hours." hours,";
+}
+if($minutes >0){
+	$str .= $minutes." minutes";
+}else{
+	$str .="1 minutes";
+}
+
+return $str;
+}
+function numberToWordFormateRupees($number){
+
+   $no = floor($number);
+   $point = round($number - $no, 2) * 100;
+   $hundred = null;
+   $digits_1 = strlen($no);
+   $i = 0;
+   $str = array();
+   $words = array('0' => '', '1' => 'one', '2' => 'two',
+    '3' => 'three', '4' => 'four', '5' => 'five', '6' => 'six',
+    '7' => 'seven', '8' => 'eight', '9' => 'nine',
+    '10' => 'ten', '11' => 'eleven', '12' => 'twelve',
+    '13' => 'thirteen', '14' => 'fourteen',
+    '15' => 'fifteen', '16' => 'sixteen', '17' => 'seventeen',
+    '18' => 'eighteen', '19' =>'nineteen', '20' => 'twenty',
+    '30' => 'thirty', '40' => 'forty', '50' => 'fifty',
+    '60' => 'sixty', '70' => 'seventy',
+    '80' => 'eighty', '90' => 'ninety');
+   $digits = array('', 'hundred', 'thousand', 'lakh', 'crore');
+   while ($i < $digits_1) {
+     $divider = ($i == 2) ? 10 : 100;
+     $number = floor($no % $divider);
+     $no = floor($no / $divider);
+     $i += ($divider == 10) ? 1 : 2;
+     if ($number) {
+        $plural = (($counter = count((array)$str)) && $number > 9) ? 's' : null;
+        $hundred = ($counter == 1 && $str[0]) ? ' and ' : null;
+        $str [] = ($number < 21) ? $words[$number] .
+            " " . $digits[$counter] . $plural . " " . $hundred
+            :
+            $words[floor($number / 10) * 10]
+            . " " . $words[$number % 10] . " "
+            . $digits[$counter] . $plural . " " . $hundred;
+     } else $str[] = null;
+  }
+  $str = array_reverse($str);
+  $result = implode('', (array)$str);
+  $points = ($point) ?
+    ". " . $words[$point / 10] . " " . 
+          $words[$point = $point % 10] : '';
+    if($result !=''){
+    	$result = $result . "Rupees  ";
+    }
+    if($points !=''){
+    	$result.= $points . " Paise  ";
+    }
+  echo ucwords($result." only");
+}
+function toGetCountryNameBaseCountryID($id){
+	//echo "hai||".$id; 
+	$cu = API."?mode=singlerowtabledata&rid=$id&table=".TBL_COUNREIES;
+	//echo $cu;
+	$res = callAPI($cu);
+	//echo $res;
+	$res = json_decode($res,1);
+	//print_r($res);
+	return $res['country_name'];
+}
+function toGETConfigartion(){
+	$configurl = API."?mode=singlerowtabledata&rid=1&table=".TBL_CONFIG;
+	//echo $configurl; 
+	$configesponse = callAPI($configurl);
+	$configdata = json_decode($configesponse,1);
+	//print_r($configdata); exit;
+	return $configdata;
+}
+function toGetTaxrates(){
+	/*$configurl = API."?mode=toGetTaxrates";
+	$configesponse = callAPI($configurl);
+	$configdata = json_decode($configesponse,1);
+	foreach($configdata as $data){
+		$array[$data['id']] = $data['tax_rate']*100 . "Percentage";
+	}
+	$configurl = API."?mode=gettabledetails&table=".TBL_TAX_AUTHORITIES_RATES;
+	$configesponse = callAPI($configurl);
+	$configdata = json_decode($configesponse,1);
+	foreach($configdata as $data){
+		$array[$data['id']] = $data['tax_rate']*100 . " %";
+	}
+	return $array;*/
+	return array('2.5'=>"2.5% Percentage",'5'=>"5% Percentage",'10'=>"10% Percentage", '18'=>"18% Percentage",'20'=>"20% Percentage",'28'=>"28% Percentage");
+ }
+ function toCreateInvoicePages(){
+ 	$configurl = API."?mode=gettabledetails&table=".TBL_DYNAMIC_MAPPING_TABLES;
+ 	//echo $configurl;
+	$configesponse = callAPI($configurl);
+	$configesponse = json_decode($configesponse,1);
+	foreach($configesponse AS $con){
+		$table_list[$con['option_url']] ['table']= $con['application_table_name'];
+		$table_list[$con['option_url']] ['title']= $con['page_title'];
+		$table_list[$con['option_url']] ['display_table']= $con['display_table'];
+	}
+    //print_r($table_list); exit;
+ 	return $table_list;
+ }
+ function toGetpageOptionName($table){
+ 	$vdata1["where"] = array('application_table_name'=> $table);
+    $vdata = urlencode(json_encode($vdata1));
+    $vurl = API."?mode=gettabledetailswithconditions&table=".TBL_DYNAMIC_MAPPING_TABLES."&data=".$vdata; 
+    $configesponse = callAPI($vurl);
+	$return = json_decode($configesponse,1);
+	//print_r($return);exit;
+	return $return[0];
+ 
+ }
+ function toGETactionloglastetrecards(){
+ 	$vdata1['order'] = "id DESC";
+ 	$vdata1['limit'] = "0,5";
+ 	$vdata1["where"] = array('company_id'=> $_SESSION['company_id'],'user_id'=>$_SESSION['userid']);
+    $vdata = urlencode(json_encode($vdata1));
+    $vurl = API."?mode=gettabledetailswithconditions&table=".TBL_ACTION_LOG."&data=".$vdata; 
+   // echo $vurl;
+	$configesponse = callAPI($vurl);
+	return json_decode($configesponse,1);
+	
+}
+function togetaprovaluserlist($table_name, $rid){
+	$vdata1["where"] = array('transaction_table'=> $table_name,'transaction_id'=>$rid);
+    $vdata = urlencode(json_encode($vdata1));
+   // print_r($vdata1);
+    $vurl = API."?mode=gettabledetailswithconditions&table=".TBL_TRANSACTION_APPROVAL_LOGS."&data=".$vdata; 
+    $res = callAPI($vurl);
+	//echo $table_name."|||||".$rid; exit;
+	$res = json_decode($res,1);
+	//echo $res;
+	foreach($res as $data){
+		//print_r($data);
+		$user[]= $data['user_id'];
+		$approvaldata[$data['user_id']] = $data;
+	}
+	$return['user']= $user;
+	$return['details']= $approvaldata;
+	return $return;
+}
+function toGetPendingRequisitionQty($table){
+	//echo "hai adasd asd ad asd as d asd asd asdas d asd asdasd as d asd as d as d asdasdasd asd"; exit;
+	$vurl = API."?mode=toGetPendingRequisitionQty&table=".$table; 
+	//echo $vurl; //exit;
+    $res = callAPI($vurl);
+   	return json_decode($res,1); 
+}
+function toGetApplicationSerialNumber($table_name){
+	//echo $table_name;
+	$vdata1["where"] = array('application_table_name'=> $table_name,'is_active'=> 0);
+    $vdata = urlencode(json_encode($vdata1));
+    $vurl = API."?mode=gettabledetailswithconditions&table=".TBL_APPLICATION_SERIAL_NUMBERS."&data=".$vdata;
+   // echo $vurl; 
+    $res = callAPI($vurl);
+	$res = json_decode($res,1);
+	$res = $res[0] ;
+	$le = $res['doc_no_length'] ;
+	$var = "%0".$le."d";
+	$data = $res['pre_fix'].sprintf($var,$res['serial_number']+1).$res['post_fix'];
+	return trim($data);
+}
+function toGetCompanyList(){
+	$vurl = API."?mode=gettabledetailswithconditions&table=".TBL_COMPANIES; 
+    $res = callAPI($vurl);
+	$res = json_decode($res,1);
+	foreach($res as $data){
+		//print_r($data);
+		$datas[$data['id']]= $data['name'];
+	}
+	return $datas;
+}
+function NotificationRead($id){
+	$data = array('read_status' => 1);
+	$data = urlencode(json_encode($data));
+	$vurl = API."?mode=notification_read&id=".encodeId($id); 
+	//echo $vurl; exit;
+    $res = callAPI($vurl);
+}
+function fiscalmonth($month){
+	$array = array('01'=> '10','02'=> '11','03'=> '12','04'=> '1','05'=> '2','06'=> '3','07'=> '4','08'=> '5','09'=> '6','10'=> '7','11'=> '8','12'=> '9');
+	return $array[$month];
+}
+function dateDiffInDays($date1, $date2 = '')  
+{ 
+    if($date2 ==''){ $date2 = date("Y-m-d h:i:sa"); }
+    $diff = strtotime($date2) - strtotime($date1); 
+    return abs(round($diff / 86400)); 
+}
+function Insertqueries($post){
+    //print_r($post);//exit;
+	//$dats = $post;
+	$dats['query_type'] = $post['query_type'];
+	$dats['query_text'] = $post['query_text'];
+	$dats['table_name'] = $post['table_name'];
+	$dats['transaction_id'] = $post['transaction_id'];
+    $dats['parent_query'] = $post['parent_query'];
+	$dats['created_by'] = $post['created_by'];
+	$dats['new_reply'] = $post['new_reply'];
+	$dats['company_id'] = $_SESSION['company_id'];
+	$dats['is_active'] = 0;
+    $dats['current_status'] = 0;
+    //$dats['created_date'] = nowDate();
+    $post['option'] =  $_GET['option'];
+    $dats['originator'] = $post['send_id'];
+    $post['company_id'] =  $_SESSION['company_id']; 
+    unset($dats['submit']);
+    unset($dats['trno']);
+    unset($dats['send_id']);
+    //print_r($dats);exit;
+    $url = API."?mode=adddata&table=".TBL_TRANSACTION_QUERIES."&method=post";
+    $response = file_post_contents($url, $dats, 'insert');
+   /* echo $response;
+    print_r($post); exit;*/
+    $notiurrl = API."?mode=querynotificationandemail&method=post";
+    $res = file_post_contents($notiurrl, $post, 'insert');
+    return $res;
+}
+function updatequeries($da){
+	$data['new_reply'] = $da['query_reply'];
+	$data['updated_by'] = $da['user_id'];
+	$data['updated_date'] = nowDate();
+
+	//print_r($data); exit;
+	$url = API."?mode=updaterowtabledata&rid=".$da['reply_id']."&table=".TBL_TRANSACTION_QUERIES."&method=post";
+	//echo $url; exit;
+	$response = file_post_contents($url, $data, 'update');
+    return $response;
+}
+function insertatchments($data){
+	/*$url = API."?mode=adddata&table=".TBL_APPLICATION_ATTACHMENTS."&method=post";
+
+	//echo $url; exit;
+	$response = file_post_contents($url, $data, 'update');
+	//echo $data; exit;*/
+	$vdata = urlencode(json_encode($data));
+    $vurl = API."?mode=adddata&table=".TBL_APPLICATION_ATTACHMENTS."&data=".$vdata;
+    //echo $vurl;  exit;
+    $res = callAPI($vurl);
+	return $response;
+}
+
+function validategstin($gstNumber){
+	$GSTINFORMAT_REGEX = "/[0-9]{2}[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9A-Za-z]{1}[Z]{1}[0-9a-zA-Z]{1}/";
+	if(preg_match($GSTINFORMAT_REGEX, $gstNumber)){
+		if(gst_error_check($gstNumber) == $gstNumber){
+			return(1);
+ 		}else{
+			return(0);
+		}
+
+	}else{
+		return(0);
+	}	
+}
+function gst_error_check($gst_number){
+	$GSTN_CODEPOINT_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	$input =  str_split($gst_number);
+	$inputChars = $input;
+	unset($inputChars[14]); 
+	$factor = 2;
+	$sum = 0;
+	$checkCodePoint = 0;
+	$cpChars = str_split($GSTN_CODEPOINT_CHARS);
+	$mod = count((array)$cpChars);
+	for ($i = count((array)$inputChars) - 1; $i >= 0; $i--) {
+			$codePoint = -1;
+			for ($j = 0; $j < count((array)$cpChars); $j++) {
+				if ($cpChars[$j] == $inputChars[$i]) {
+					$codePoint = $j;
+				}
+			}
+			$digit = $factor * $codePoint;
+			$factor = ($factor == 2) ? 1 : 2;
+			$x =  ($digit % $mod);
+			#echo $x;
+			$digit = (int) ($digit / $mod) + (int) ($digit % $mod);
+			$sum += $digit;
+	}
+		$checkCodePoint = ($mod - ($sum % $mod)) % $mod;
+		$inputChars = implode('', (array)$inputChars);
+	return($inputChars.$cpChars[$checkCodePoint]);
+}
+function emaildatareplacedd($data, $mesg){
+		print_r($data);
+		$mes1= strpos($mesg,'{[')+2;
+		$mes2= strpos($mesg,']}');
+		if($mes2 == ''){ $mes2=0; }
+		//$mesg= "11qww".$mes1."ppp".$mes2; //exit;
+		echo $mes1."###".$mes2; 
+		if($mes1>0 && $mes2>0){
+		    echo "Ravi";//exit;
+			$str =''; $sstr ='';
+			$str = strtolower(substr($mesg,$mes1,$mes2-$mes1));
+			$sstr = "{[".$str."]}";
+			$mesg = str_replace($sstr, $data[$str], $mesg);
+			$mesg = emaildatareplace($data, $mesg);
+		
+		} 
+		//echo $mesg; exit;
+		return $mesg;
+}
+function emaildatareplace($data, $mesg){
+		//print_r($data);
+		$mes1= strpos($mesg,'{[')+2;
+		$mes2= strpos($mesg,']}');
+		if($mes2 == ''){ $mes2=0; }
+		//$mesg= "11qww".$mes1."ppp".$mes2; //exit;
+		//echo $mes1."###".$mes2;
+		$count = substr_count((array)$mesg, "{[")+2;
+		for($i=0;$i<$count;$i++){
+		if($mes1>0 && $mes2>0){
+		 //   echo "Ravi";//exit;
+			$str =''; $sstr ='';
+			$str = strtolower(substr($mesg,$mes1,$mes2-$mes1));
+			$sstr = "{[".$str."]}";
+			$mesg = str_replace($sstr, $data[$str], $mesg);
+			//$mesg = emaildatareplace($data, $mesg);
+			$mes1= strpos($mesg,'{[')+2;
+	    	$mes2= strpos($mesg,']}');
+		} else{
+		    break;
+		}
+		}
+		//echo $mesg; exit;
+		return $mesg;
+}
+function emailnumberschange($mesg){
+	
+	$mes1= strpos($mesg,'[')+1;
+	$mes2= strpos($mesg,']');
+	if($mes2 == ''){ $mes2=0; }
+	//echo "11qww".$mes1."ppp".$mes2;
+	if($mes1>0 && $mes2>0){
+		$str =''; $sstr ='';
+		$str = substr($mesg,$mes1,$mes2-$mes1);
+		$sstr = "[".$str."]";
+		$mesg = str_replace($sstr, $this->numberToWordFormateRupees($str), $mesg);
+		$mesg = $this->emaildatareplace($data, $mesg);	
+	} 
+	return $mesg;
+}
+function dyanamicserialnumber($table){
+	$vurl = API."?mode=dyanamicserialnumber&table=".$table;
+    //echo $vurl;  exit;
+    $res = callAPI($vurl);
+    return json_decode($res);
+}
+ function toGetclockdata(){
+ 	$vdata1["where"] = array('is_active'=> '0', 'employee_id'=> $_SESSION['emp_id'], 'attendace_date'=>date('Y-m-d'));
+ 	//print_r($vdata1); exit;
+    $vdata = urlencode(json_encode($vdata1));
+    $vurl = API."?mode=gettabledetailswithconditions&table=employee_daily_attendances&data=".$vdata; 
+    $configesponse = callAPI($vurl);
+	$return = json_decode($configesponse,1);
+	//print_r($return);exit;
+	return $return[0];
+ }
+  function toGetEmployeeData(){
+ 	$vdata1["where"] = array('is_active'=> '0', 'user_id'=>$_SESSION['userid']);
+ 	//print_r($vdata1); exit;
+    $vdata = urlencode(json_encode($vdata1));
+    $vurl = API."?mode=gettabledetailswithconditions&table=employees&data=".$vdata; 
+    $configesponse = callAPI($vurl);
+	$return = json_decode($configesponse,1);
+	//print_r($return);exit;
+	return $return[0];
+ }
+ function phonenumberdisplay($result){
+
+	return preg_replace('~.*(\d{3})[^\d]{0,7}(\d{3})[^\d]{0,7}(\d{4}).*~', '($1) $2-$3', $result);
+	//return $result;
+ }
+ function toupdateuserconfirmedbasicinfo(){
+ 	$updata['confirmed_basic_ino'] = '0';
+	$url = API."?mode=updaterowtabledata&rid=".$_SESSION['userid']."&table=".TBL_USERS."&method=post";
+	$response = file_post_contents($url, $updata, 'update');
+ }
+ function toupdateemployee($name){
+
+ 	$updata['image'] = $name;
+	//print_r($data); exit;
+	$url = API."?mode=updaterowtabledata&rid=".$_SESSION['emp_id']."&table=employees&method=post";
+	///echo $url; exit;
+	$response = file_post_contents($url, $updata, 'update');
+	return $response; 
+ }
+ function todisplaystatuslist($data){
+    //print_r($data); exit;
+ 	$wlist =array();
+	if($_GET['Rid']!="" && $_GET['table']==""){
+	    $wlist_url =  API."?mode=wrokflowlist&table=".$data['table']."&amount=".$data['grand_total'];
+	   // echo $wlist_url; exit;
+	    $wlist = callAPI($wlist_url);
+	    $wlist = json_decode($wlist,1);
+	}
+	$dis_str='';
+	if(count((array)$wlist)>0){
+	 	$dis_str.='<div class="breadcrumb">';
+        $checkcurrent_status = $data['current_status'];
+        if($checkcurrent_status == ST_INACTIVE || $checkcurrent_status== ST_DRAFT ){
+            $checkcurrent_status =-1;
+        }
+        $wlcount = count((array)$wlist);$cw=1;$ork=0;
+        foreach ($wlist as $pwlist) {
+	        $orcolor =""; $oricon="";
+	        if($checkcurrent_status >=$pwlist['status']){    
+	          $orcolor = "text-success";
+	          $oricon = '<i class="far fa-check-circle text-success"></i> &nbsp;';
+	        }else{
+	            if($ork==0){
+	                $orcolor = "text-primary";
+	                $oricon = '<i class="far fa-hourglass text-primary"></i> &nbsp;';
+	                $ork =1;
+	            }
+	        }
+		    $dis_str.='<a href="#"><span class="breadcrumb__inner"><span class="breadcrumb__title '.$orcolor.'">';         
+			$dis_str.=$oricon.$pwlist['action_label'];
+		    $dis_str.='</span> </span></a>';
+		    $cw+1;
+		} 
+		$dis_str.='</div>';
+  	} 
+  	return $dis_str;
+ }
+ function todisplaythree($data){
+     $diss="";
+    if($data['id']!=""){
+        if($data['encode']=='no'){
+            $data['value_id'] = $data['id'];
+        	$data['transaction_number'] = $data['id'];
+        	$data['transaction_id'] = $data['id'];
+        }else{
+        $rid =  encodeId($data['id']);
+    	$rid = urldecode($rid);
+     	$erid = explode(':', $rid);
+     	$data['value_id'] = $erid[1];
+     	$data['transaction_number'] = $erid[1];
+     	$data['transaction_id'] = $erid[1];
+        }
+     	echo '<div class="col-lg-12 mt-2"><div class="card card-custom"> <div class="card-body"><div class="col-lg-12">';
+     	if($data['dis_query']=='yes'){	$diss.= todisplayquerylist($data); }
+     	if($data['dis_timeline']=='yes'){ $diss.= todisplaytimeline($data); }
+        if($data['dis_comments']=='yes'){	$diss.= todiplaycomments($data); }
+     	$diss.='</div></div></div></div>';
+    }
+ 	return $diss;
+ }
+ function todisplayquerylist($data){
+    //print_r($data); exit;
+ 	$question_display ='Y';
+    $replay_display = 'N';
+    $trnsation_no = $data['transaction_number'];
+    if($_SESSION['userid'] == $data['originator']){
+        $question_display ='N';
+        $replay_display = 'Y';
+    }
+    $dis_str ='';
+   include_once("views/custom_query.php");  
+  
+    
+ }
+ function todisplaytimeline($data){
+   // print_r($data);
+   
+ 	$vdata1["where"] = array('transaction_primary_1'=> $data['value_id'],'transaction_table'=>$data['table']);
+    $vdata1["field"] = "id,transaction_type,user_id,action_log,action_date,status_value";
+    $vdata1['order'] = "id DESC";
+    $vdata = urlencode(json_encode($vdata1));
+    $vurl = API."?mode=gettabledetailswithconditions&table=".TBL_ACTION_LOG."&data=".$vdata; 
+    $vdata_details = callAPI($vurl);
+    $vdata_details = json_decode($vdata_details,1);
+    //print_r($vdata1);
+    $dis_str ='';
+    //$dis_str.='<div class="col-lg-12">';
+    $dis_str.='<div class="accordion accordion-solid mt-2 accordion-toggle-arrow" id="accordionExample2">                    
+                    <div class="card">
+                        <div class="card-header" id="headingTwo2">
+                            <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2">
+                                Transaction Timeline
+                            </div>
+                        </div>
+                        <div id="collapseTwo2" class="collapse" aria-labelledby="headingTwo2" data-parent="#accordionExample2">
+                            <div class="card-body">
+                                    <div class="kt-timeline-v2 ml-10">
+                                        <div class="kt-timeline-v2__items  kt-padding-top-25 kt-padding-bottom-30">';
+                                            foreach ($vdata_details as  $vdvalue) { 
+                                $dis_str.=' <div class="kt-timeline-v2__item mt-5">
+                                                <div class="kt-timeline-v2__item-cricle ml-2 float-left">';
+                                                    if($vdvalue['transaction_type'] == 'INSERT'){ 
+                                                 $dis_str.='<i class="fa fa-genderless text-success icon-xl"></i>';
+                                                    } 
+                                                    if($vdvalue['transaction_type'] == 'UPDATE'){ 
+                                                  	 $dis_str.='<i class="fa fa-genderless text-warning icon-xl"></i>';
+                                                    } 
+                                                $dis_str.='</div>
+                                                <div class="kt-timeline-v2__item-text  kt-padding-top-5">
+                                                    <b>&nbsp;'.date("M d, Y g:i A", strtotime($vdvalue['action_date'])).'</b>'.
+                                                    $vdvalue['action_log'].'&nbsp;'.$_SESSION['users'][$vdvalue['user_id']].' with Status '.$_SESSION['status'][$vdvalue['status_value']]['name']; 
+                                                    
+                                                $dis_str.='</div>
+                                            </div>';
+                                              } 
+                                       $dis_str.=' </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> ';
+    return $dis_str;
+ }
+ function todiplaycomments($data){
+ 
+	$appruser_list_data = togetaprovaluserlist($data['table'], $data['value_id']);
+	$appruser_list = $appruser_list_data['user'];
+	$appruser_data =  $appruser_list_data['details'];
+    	$dis_str ='';
+    //	print_r($appruser_data);
+	if(count((array)$appruser_data) > 0){
+	$stausresult = ViewStatusData();
+
+	$dis_str.='<div>  
+	    <div class="accordion accordion-solid mt-2 accordion-toggle-arrow" id="accordionExample2">
+	        <div class="card">
+	            <div class="card-header" id="headingTwo21">
+	                <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseTwo21" aria-expanded="false" aria-controls="collapseTwo21">
+	                    Comments
+	                </div>
+	            </div>
+	            <div id="collapseTwo21" class="collapse" aria-labelledby="headingTwo21" data-parent="#accordionExample2">
+	                <div class="card-body">
+	                    <div class="kt-timeline-v2">
+	                        <div class="timeline timeline-6 mt-3">';
+	                            foreach ($appruser_data as  $lists) { 
+	            $dis_str.=' 	 <div class="timeline-item align-items-start">
+	                                  <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"></div>
+	                                <div class="timeline-badge">';
+	                                    if($lists['response_type'] == '3'){ 
+	                      $dis_str.='   <i class="fa fa-genderless text-success icon-xl"></i>';
+	                                   } else{ 
+	                      $dis_str.='  <i class="fa fa-genderless text-warning icon-xl"></i>';
+	                                    } 
+	                     $dis_str.='</div>
+	                                <div class="timeline-content d-flex">';
+	                                  	if($lists['response_type'] == 0){ $list_date = $lists['request_date']; }else{  $list_date = $lists['response_date']; }
+	                  $dis_str.='      <b> '. date("M d, Y g:i A", strtotime($list_date)).'</b> &nbsp;'.
+	                                    $_SESSION['users'][$lists['user_id']].'&nbsp; with Status &nbsp;<span style="color:#'.$stausresult[$lists['response_type']]['color'].' background:#'.strval($stausresult[$lists['response_type']]['background_color']).'class="label label-lg label-light-primary label-inline font-weight-bold py-4">';
+	                                    if($lists['response_type'] == 0){ $dis_str.='Yet to respond'; }else{ $dis_str.=$stausresult[$lists['response_type']]['name']; }
+	                                    $dis_str.='</span> &nbsp;'.$lists['comments'].'
+	                                </div>
+	                            </div>';
+	                            } 
+	                       $dis_str.='</div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>';
+	} 
+ 	return $dis_str;
+ }
+?>

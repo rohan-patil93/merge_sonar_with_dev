@@ -1,0 +1,133 @@
+.manager-leaves-page {
+    --ml-border: #e8ecf3;
+    --ml-muted: #6b7280;
+    --ml-bg: #f7f9fc;
+    --ml-text: #1f2937;
+    --ml-accent: #0d6efd;
+}
+
+.manager-leaves-shell {
+    border: 1px solid var(--ml-border);
+    box-shadow: 0 10px 24px rgba(28, 39, 60, 0.06);
+}
+
+.manager-leaves-header {
+    background: linear-gradient(120deg, #fbfdff 0%, #f3f8ff 100%);
+    border-bottom: 1px solid var(--ml-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.manager-leaves-header h4 {
+    color: var(--ml-text);
+    font-weight: 700;
+}
+
+.manager-leaves-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.stat-tile {
+    background: var(--ml-bg);
+    border: 1px solid var(--ml-border);
+    border-radius: 10px;
+    padding: 12px;
+}
+
+.stat-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--ml-muted);
+}
+
+.stat-value {
+    font-size: 28px;
+    line-height: 1.1;
+    color: var(--ml-accent);
+    font-weight: 700;
+}
+
+.stat-note {
+    color: var(--ml-text);
+    font-size: 13px;
+}
+
+.manager-leaves-filters {
+    margin-bottom: 12px;
+}
+
+.manager-leaves-table-wrap {
+    border: 1px solid var(--ml-border);
+    border-radius: 10px;
+    overflow: auto;
+    max-height: 65vh;
+}
+
+.manager-leaves-table {
+    margin-bottom: 0;
+    min-width: 980px;
+}
+
+.manager-leaves-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: #f8fafc;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #4b5563;
+    letter-spacing: 0.35px;
+    border-bottom: 1px solid var(--ml-border);
+}
+
+.manager-leaves-table tbody td {
+    vertical-align: middle;
+    color: #1f2937;
+    font-size: 13px;
+}
+
+.leave-type-chip {
+    display: inline-block;
+    background: #eef2f7;
+    color: #111827;
+    border-radius: 999px;
+    padding: 2px 10px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.manager-leaves-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.manager-leaves-actions .btn {
+    min-width: 74px;
+}
+
+.manager-leaves-empty {
+    text-align: center;
+    margin-top: 12px;
+    color: var(--ml-muted);
+    border: 1px dashed var(--ml-border);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+@media (max-width: 991.98px) {
+    .manager-leaves-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .manager-leaves-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

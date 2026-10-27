@@ -1,0 +1,267 @@
+/*custom_insert_visitor_logs.css*/
+
+.luggage-scroller {
+    display: flex;
+    gap: 34px;
+    overflow-x: auto;
+    padding: 16px 6px;
+    align-items: flex-start;
+}
+
+.lug-pill {
+    text-align: center;
+    cursor: pointer;
+    min-width: 86px;
+}
+
+.lug-img {
+    width: 86px;
+    height: 86px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin: 0 auto 8px;
+    font-size: 32px;
+}
+
+.lug-pill:hover .lug-img {
+    box-shadow: 0 4px 14px rgba(23, 11, 184, 0.12);
+    transform: translateY(-1px);
+}
+
+.lug-label {
+    font-size: 14px;
+    color: #666;
+}
+
+
+.luggage-list .lug-item {
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: #fafafa;
+}
+
+.lug-meta {
+    font-size: 13px;
+    color: #333;
+}
+
+.lug-actions button {
+    border: none;
+    background: transparent;
+    color: #d33;
+}
+
+
+/* keep your existing hover styles */
+.lug-pill:hover .lug-img {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+    background-color: #4099ff;
+    color: #fff;
+}
+
+.lug-pill:hover .lug-label {
+    color: #4099ff;
+    font-weight: 600;
+}
+
+/* NEW: persistent active style */
+.lug-pill.active .lug-img {
+    background-color: #4099ff;
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+.lug-pill.active .lug-label {
+    color: #4099ff;
+    font-weight: 600;
+}
+
+.visit-card-image {
+    position: relative;
+    display: inline-block;
+    max-width: 200px;
+    width: 100%;
+}
+
+.visit-card-image img {
+    width: 100%;
+    display: block;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.visit-card-code {
+    position: absolute;
+    left: 50%;
+    bottom: 25%;
+    /* adjust to match your art */
+    transform: translateX(-50%);
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: .06em;
+    color: #111;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+}
+/* visibility helpers */
+.d-none {
+    display: none !important;
+}
+
+.d-view-block {
+    display: " ";
+}
+/* for inline elements like span, badge */
+.d-inline-show {
+    display: inline-block !important;
+}
+.mt-8 { margin-top: 8px; }
+
+.minw-220 { min-width: 220px; }
+.minw-180 { min-width: 180px; }
+
+.photo-frame-inline {
+    width: 250px;
+    height: 200px;
+    background: #f8f9fb;
+    border: 1px solid #e9edf3;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.photo-frame-inline img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+}
+
+.photo-placeholder-inline {
+    color: #999;
+    font-size: 14px;
+}
+
+.minw-160 { min-width: 160px; }
+.minw-130 { min-width: 130px; }
+
+
+
+/* allow the preview to escape the table cell */
+#visitorHistoryWrap .table-responsive {
+    overflow: visible;
+}
+
+.visitor-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar-hover {
+    position: relative;
+    display: inline-block;
+}
+
+.avatar-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #eef2f7;
+    color: #334155;
+    font-weight: 700;
+    font-size: 14px;
+    border: 1px solid #e5e7eb;
+}
+
+.avatar-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.avatar-circle.in {
+    border: 2px solid #dc2626;
+    /* red for inside */
+}
+
+.avatar-circle.out {
+    border: 2px solid #16a34a;
+    /* green for checked out */
+}
+
+/* Hover popover with bigger image */
+.avatar-pop {
+    position: absolute;
+    top: -6px;
+    left: 48px;
+    width: 180px;
+    height: 180px;
+    border-radius: 12px;
+    display: none;
+    z-index: 1000;
+    background: #fff;
+    padding: 6px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .18), 0 2px 8px rgba(0, 0, 0, .08);
+    border: 1px solid #e5e7eb;
+}
+
+.avatar-pop img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+}
+
+/* Show the big preview on hover */
+.avatar-hover:hover .avatar-pop {
+    display: block;
+}
+
+.visitor-name {
+    font-weight: 600;
+    line-height: 1.1;
+}
+
+.visitor-name.out {
+    color: #16a34a;
+}
+
+/* checked out → green */
+.visitor-name.in {
+    color: #dc2626;
+}
+
+/* still inside → red */
+.visitor-meta {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.avatar-pop .idcard-caption {
+    margin-top: 5px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #374151;
+    text-align: center;
+    background-color: white;
+}
+
+.mh-300 { max-height: 300px !important; }

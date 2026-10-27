@@ -1,0 +1,42 @@
+.custom-popup-open {
+  display: none;
+}
+
+.popup-width-850 {
+  width: 850px;
+  max-width: 100%;
+}
+
+.popup-width-1000 {
+  width: 1000px;
+  max-width: 100%;
+}
+
+#invoiceItem {
+  vertical-align: top;
+}
+
+#bom-product .card-body {
+  overflow-x: auto;
+}
+
+#bom-product table {
+  min-width: 1180px;
+}
+
+#invoiceItem td {
+  vertical-align: top;
+}
+
+#invoiceItem .js-remove-row,
+#invoiceItem .js-open-alternate-items {
+  font-size: 17px;
+  line-height: 1;
+  padding: 6px;
+}
+
+#invoiceItem p.f-12 {
+  color: #4b5563;
+  line-height: 1.25;
+  margin-bottom: 0;
+}

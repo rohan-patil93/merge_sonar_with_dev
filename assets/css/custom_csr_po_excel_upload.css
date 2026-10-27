@@ -1,0 +1,36 @@
+.csr-po-upload-card .card-header,
+.csr-po-upload-card .card-body {
+    background: #fff;
+}
+
+.csr-po-upload-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.csr-po-upload-empty {
+    padding: 48px 16px;
+    border: 1px dashed #cbd5e1;
+    border-radius: 8px;
+    background: #f8fafc;
+}
+
+.po-upload-preview-table th {
+    white-space: nowrap;
+    background: #f5f7fa;
+}
+
+.po-upload-invalid-cell {
+    background: #ffe4e6 !important;
+    color: #b91c1c;
+    font-weight: 600;
+}
+
+@media (max-width: 767px) {
+    .csr-po-upload-actions,
+    .csr-po-header-actions {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+}

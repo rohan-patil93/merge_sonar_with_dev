@@ -1,0 +1,13 @@
+
+
+.text-danger { color: #dc3545; }
+
+/* Base year validation */
+.base-year-error {
+    display: none !important; 
+}
+
+/* No records image */
+.no-record-img {
+    max-height: 300px !important;
+}

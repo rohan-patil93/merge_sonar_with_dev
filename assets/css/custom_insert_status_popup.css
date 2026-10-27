@@ -1,0 +1,18 @@
+.status-popup-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.status-popup-modal-title {
+    font-size: 1.25rem;
+}
+
+.status-popup-info {
+    font-weight: 600;
+}
+
+.status-popup-comment-textarea {
+    width: 100%;
+    min-height: 100px;
+}

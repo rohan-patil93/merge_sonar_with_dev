@@ -1,0 +1,24 @@
+.biometric-machine-last-used-report .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.biometric-machine-last-used-report .card-header-right {
+    float: none;
+}
+
+.biometric-machine-last-used-report .form-label {
+    font-weight: 600;
+}
+
+.biometric-machine-last-used-table th,
+.biometric-machine-last-used-table td {
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.biometric-machine-last-used-table .latest-used-value {
+    font-weight: 600;
+    color: #0b5ed7;
+}

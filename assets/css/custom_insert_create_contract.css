@@ -1,0 +1,712 @@
+/* Create Contract Wizard */
+.cc-wizard-page {
+    background: #f4f6f9;
+    margin: -15px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.cc-wizard-layout {
+    display: flex;
+    gap: 0;
+    min-height: calc(100vh - 180px);
+}
+
+/* Sidebar */
+.cc-wizard-sidebar {
+    width: 280px;
+    flex-shrink: 0;
+    background: #fff;
+    border-right: 1px solid #e8ecf1;
+    padding: 24px 20px;
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+}
+
+.cc-wizard-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 12px 10px;
+    margin-bottom: 4px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none;
+    color: inherit;
+}
+
+.cc-wizard-step:hover {
+    background: #f0f4ff;
+}
+
+.cc-wizard-step.active .cc-step-number {
+    background: #4680ff;
+    color: #fff;
+    border-color: #4680ff;
+}
+
+.cc-wizard-step.active .cc-step-title {
+    color: #4680ff;
+    font-weight: 600;
+}
+
+.cc-wizard-step.completed:not(.active) .cc-step-number {
+    background: #2ed8b6;
+    color: #fff;
+    border-color: #2ed8b6;
+}
+
+.cc-wizard-step.completed:not(.active) .cc-step-title {
+    color: #1a9e84;
+    font-weight: 600;
+}
+
+.cc-step-number {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #d0d5dd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    flex-shrink: 0;
+    color: #6c757d;
+}
+
+.cc-step-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.cc-step-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 2px;
+}
+
+.cc-step-desc {
+    font-size: 12px;
+    color: #8a94a6;
+    line-height: 1.3;
+}
+
+.cc-sidebar-box {
+    margin-top: 20px;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.cc-sidebar-box.help-box {
+    background: #eef4ff;
+    border: 1px solid #c5d9ff;
+}
+
+.cc-sidebar-box.amc-box {
+    background: #f0faf5;
+    border: 1px solid #b8e6d0;
+}
+
+.cc-sidebar-box h6 {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+/* Main content */
+.cc-wizard-main {
+    flex: 1;
+    padding: 0 24px 24px;
+    overflow-y: auto;
+}
+
+.cc-wizard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background: #fff;
+    border-bottom: 1px solid #e8ecf1;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.cc-wizard-header h5 {
+    margin: 0;
+    font-weight: 600;
+}
+
+.cc-wizard-header-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+/* Section cards */
+.cc-section {
+    background: #fff;
+    border: 1px solid #e8ecf1;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.cc-section-pair-row {
+    margin-bottom: 20px;
+}
+
+.cc-section-pair-row > [class*="col-"] {
+    display: flex;
+}
+
+.cc-section-pair-row .cc-section {
+    flex: 1;
+}
+
+.cc-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.cc-section-header h6 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 15px;
+    color: #333;
+}
+
+.cc-section-header h6 i {
+    color: #4680ff;
+    margin-right: 8px;
+}
+
+.cc-section-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: #4680ff;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* AMC enabled banner */
+.cc-amc-banner {
+    background: #e8f8f0;
+    border: 1px solid #b8e6d0;
+    border-radius: 8px;
+    padding: 10px 16px;
+    color: #1a7a4c;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Upload zone */
+.cc-upload-zone {
+    border: 2px dashed #c5d0e0;
+    border-radius: 8px;
+    padding: 30px 20px;
+    text-align: center;
+    background: #fafbfc;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.cc-upload-zone:hover {
+    border-color: #4680ff;
+    background: #f5f8ff;
+}
+
+.cc-upload-zone i {
+    font-size: 32px;
+    color: #4680ff;
+    margin-bottom: 8px;
+}
+
+.cc-upload-zone p {
+    margin: 0;
+    color: #6c757d;
+    font-size: 13px;
+}
+
+.cc-uploaded-files .cc-uploaded-file-item {
+    padding: 8px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    background: #f8fafc;
+    font-size: 13px;
+}
+
+.cc-uploaded-files .cc-uploaded-file-item .text-truncate {
+    max-width: 60%;
+}
+
+/* Tables */
+.cc-wizard-main .table th {
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+    background: #f8f9fb;
+    white-space: nowrap;
+}
+
+.cc-wizard-main .table td {
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+.cc-action-btn {
+    padding: 2px 6px;
+    font-size: 14px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.cc-action-btn.edit {
+    color: #4680ff;
+}
+
+.cc-action-btn.delete {
+    color: #ff5370;
+}
+
+/* Escalation levels */
+.cc-escalation-level {
+    background: #f8f9fb;
+    border: 1px solid #e8ecf1;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 12px;
+}
+
+.cc-escalation-level .level-badge {
+    display: inline-block;
+    background: #4680ff;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+/* Summary — same card style as other sections */
+.cc-summary-section .cc-summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    font-size: 13px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.cc-summary-section .cc-summary-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.cc-summary-item .cc-summary-label {
+    color: #6c757d;
+    flex-shrink: 0;
+}
+
+.cc-summary-item .cc-summary-value {
+    font-weight: 600;
+    color: #333;
+    text-align: right;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+.cc-payment-total td {
+    background: #e8f8f0 !important;
+    color: #1a7a4c;
+    font-weight: 600;
+}
+
+.cc-wizard-page .select2-container {
+    width: 100% !important;
+}
+
+#amc_customer_connect_box {
+    overflow: visible;
+}
+
+#amc_customer_connect_box .amc-field-help-text {
+    display: block;
+    margin-top: 0.5rem;
+    line-height: 1.45;
+    font-size: 12px;
+    color: #6c757d;
+    clear: both;
+}
+
+/* Footer — scoped to create contract page only */
+.cc-wizard-page .cc-wizard-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0 0;
+    margin-top: 4px;
+    background: transparent;
+    border-top: 1px solid #e8ecf1;
+}
+
+/* Radio / checkbox inline */
+.cc-inline-radios label,
+.cc-inline-checks label {
+    margin-right: 20px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+/* Review section */
+.cc-review-block {
+    background: #f8f9fb;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 14px;
+}
+
+.cc-review-block h6 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #4680ff;
+    margin-bottom: 10px;
+}
+
+.cc-review-row {
+    display: flex;
+    padding: 4px 0;
+    font-size: 13px;
+}
+
+.cc-review-row .lbl {
+    width: 160px;
+    color: #6c757d;
+    flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .cc-wizard-layout {
+        flex-direction: column;
+    }
+
+    .cc-wizard-sidebar {
+        width: 100%;
+        position: relative;
+        max-height: none;
+        border-right: none;
+        border-bottom: 1px solid #e8ecf1;
+    }
+
+    .cc-wizard-steps-list {
+        display: flex;
+        overflow-x: auto;
+        gap: 4px;
+    }
+
+    .cc-wizard-step {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        min-width: 100px;
+    }
+
+    .cc-step-desc {
+        display: none;
+    }
+
+}
+
+/* Contract type — icon cards with labels */
+.unified-contract-create-card > .card-header {
+    padding: 10px 15px;
+    min-height: 0;
+}
+
+.unified-contract-create-card > .card-header .btn {
+    margin-bottom: 0 !important;
+}
+
+.unified-contract-create-card > .card-header .card-header-right {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.unified-contract-create-card > .card-block {
+    padding-top: 8px;
+    padding-bottom: 0;
+}
+
+.unified-contract-create-card .cc-wizard-header {
+    display: none;
+}
+
+.unified-contract-create-card #unified-contract-page > .cc-wizard-page {
+    margin-top: 0;
+}
+
+.contract-type-toggle-row {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.contract-type-toggle-row .contract-type-icon-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.contract-type-toggle-row .contract-type-icon-card {
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.contract-type-toggle-row .contract-type-icon-input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    pointer-events: none;
+}
+
+.contract-type-toggle-row label.contract-type-icon-label {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 110px;
+    min-height: 100px;
+    height: auto;
+    margin: 0;
+    padding: 10px 8px;
+    border: 2px solid #dfe5ef;
+    border-radius: 16px;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.contract-type-toggle-row label.contract-type-icon-label:hover {
+    border-color: #b8c9f5;
+    background: #f8faff;
+    transform: translateY(-2px);
+}
+
+.contract-type-toggle-row .contract-type-icon-input:focus-visible + label.contract-type-icon-label {
+    outline: 2px solid #4680ff;
+    outline-offset: 3px;
+}
+
+.contract-type-toggle-row .contract-type-icon-input:checked + label.contract-type-icon-label {
+    border-color: #4680ff;
+    background: linear-gradient(180deg, #f5f8ff 0%, #eef3ff 100%);
+    box-shadow: 0 8px 24px rgba(70, 128, 255, 0.18);
+}
+
+.contract-type-toggle-row .contract-type-icon-name {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #6c7a8d;
+    text-align: center;
+    transition: color 0.2s ease;
+}
+
+.contract-type-toggle-row .contract-type-icon-input:checked + label.contract-type-icon-label .contract-type-icon-name {
+    color: #4680ff;
+}
+
+.contract-type-toggle-row .contract-type-icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #f0f4f9;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.contract-type-toggle-row .contract-type-icon-wrap i {
+    font-size: 32px;
+    line-height: 1;
+    color: #6c7a8d;
+    transition: color 0.2s ease, transform 0.15s ease;
+}
+
+.contract-type-toggle-row .contract-type-icon-standard {
+    background: #eef6ff;
+}
+
+.contract-type-toggle-row .contract-type-icon-standard i {
+    color: #4680ff;
+}
+
+.contract-type-toggle-row .contract-type-icon-amc {
+    background: #eefaf3;
+}
+
+.contract-type-toggle-row .contract-type-icon-amc i {
+    color: #2ecc71;
+}
+
+.contract-type-toggle-row .contract-type-icon-input:checked + label.contract-type-icon-label .contract-type-icon-wrap {
+    background: #fff;
+}
+
+.contract-type-toggle-row .contract-type-icon-input:checked + label.contract-type-icon-label .contract-type-icon-standard i {
+    color: #2f6bff;
+    transform: scale(1.06);
+}
+
+.contract-type-toggle-row .contract-type-icon-input:checked + label.contract-type-icon-label .contract-type-icon-amc i {
+    color: #1fa85a;
+    transform: scale(1.06);
+}
+
+@media (max-width: 575px) {
+    .contract-type-toggle-row .contract-type-icon-grid {
+        justify-content: center;
+    }
+
+    .contract-type-toggle-row label.contract-type-icon-label {
+        width: 100px;
+        min-height: 96px;
+    }
+
+    .contract-type-toggle-row .contract-type-icon-wrap {
+        width: 52px;
+        height: 52px;
+    }
+
+    .contract-type-toggle-row .contract-type-icon-wrap i {
+        font-size: 28px;
+    }
+
+    .contract-type-toggle-row .contract-type-icon-name {
+        font-size: 11px;
+    }
+}
+
+/* Renewal Amount History (renew mode only) */
+.cc-renewal-history-panel {
+    background: #fff;
+    border: 1px solid #e8ecf1;
+    border-left: 4px solid #4e73df;
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin-top: 4px;
+}
+
+.cc-renewal-history-header {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 2px;
+}
+
+.cc-renewal-history-subtitle {
+    margin-bottom: 12px;
+}
+
+.cc-renewal-history-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    border: 1px solid #eef1f5;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    background: #fafbfc;
+}
+
+.cc-renewal-history-row-current {
+    background: #fffbea;
+    border-color: #f5e6a8;
+}
+
+.cc-renewal-history-row-main {
+    flex: 1;
+    min-width: 0;
+}
+
+.cc-renewal-history-label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #2c3e50;
+}
+
+.cc-renewal-history-effective {
+    font-size: 0.78rem;
+    color: #6c757d;
+    margin-top: 2px;
+}
+
+.cc-renewal-history-amount-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+.cc-renewal-history-amount {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #2c3e50;
+}
+
+.cc-trend-up {
+    color: #dc3545;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.cc-trend-down {
+    color: #198754;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+@media (max-width: 575px) {
+    .cc-renewal-history-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .cc-renewal-history-amount-wrap {
+        width: 100%;
+        justify-content: space-between;
+    }
+}

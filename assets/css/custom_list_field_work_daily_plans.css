@@ -1,0 +1,10 @@
+.d-none { display: none; }
+.text-danger { color: red; }
+
+.work-img {
+    max-height: 300px !important;
+}
+.disabled-link {
+    pointer-events: none;
+    opacity: 0.5;
+}

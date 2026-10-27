@@ -1,0 +1,10 @@
+.d-none { display: none; }
+.text-danger { color: red; }
+
+.map-container {
+    height: 450px;
+}
+
+.work-img {
+    max-height: 300px !important;
+}

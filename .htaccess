@@ -1,0 +1,15 @@
+RewriteEngine On
+# Redirect ZIP file requests to homepage
+RewriteRule ^.*\.zip$ / [R=302,L,NC]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !^/mobile/
+# Only exclude this specific folder from the redirect
+RewriteCond %{REQUEST_URI} !^/uploads/candidate_resume_with_rm/
+RewriteCond %{REQUEST_URI} !^/uploads/sonar_security/
+RewriteRule . / [L,R=301]
+ 
+ErrorDocument 404 /error.php
+ErrorDocument 500 /error.php

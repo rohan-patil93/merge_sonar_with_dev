@@ -1,0 +1,19 @@
+/* Disable form interaction (moved from inline style) */
+.form-disabled {
+    pointer-events: none;
+    opacity: 0.7;
+}
+/* Force-enable interaction for sections that must remain clickable */
+.form-enabled {
+    pointer-events: auto;
+    opacity: 1;
+}
+/* Loader image size */
+.workflow-loader {
+    width: 300px;
+}
+/* Download icon styling (moved from inline style) */
+.csr-download-icon {
+    font-size: 1.5rem;
+    font-weight: bold;
+}

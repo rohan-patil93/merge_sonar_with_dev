@@ -1,0 +1,17 @@
+.employee-missing-btn {
+    min-width: 88px;
+}
+
+#employeeMissingDetailsTable thead th {
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+#employeeMissingDetailsTbody td {
+    vertical-align: middle;
+}
+
+.employee-missing-empty {
+    color: #6c757d;
+    font-style: italic;
+}
