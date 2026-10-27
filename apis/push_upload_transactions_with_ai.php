@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include_once'../dbconfig.php';
 include_once'../comm.php';
 $transaction_table = $_POST['transaction_table'];
@@ -84,7 +84,6 @@ if (curl_errno($ch)) {
                     curl_setopt($upch, CURLOPT_POSTFIELDS, $data21);
                     curl_setopt($upch, CURLOPT_RETURNTRANSFER, true);
                     curl_exec($upch);
-                    curl_close($upch); 
                     echo transactionDetailsUI($retres,$fullPathfilename);
                }else{
                     $data21['api_response_details'] =  json_encode((array)$retres);
@@ -98,7 +97,6 @@ if (curl_errno($ch)) {
                     curl_setopt($upch, CURLOPT_POSTFIELDS, $data21);
                     curl_setopt($upch, CURLOPT_RETURNTRANSFER, true);
                     curl_exec($upch);
-                    curl_close($upch); 
                     echo '<div class="card-px text-center ">
                         <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> Oops.. Processing is taking longer than expected. Please re-upload the file. -  '.$retres['errorMessage'].'</p>   
                         <div class="text-center px-4">

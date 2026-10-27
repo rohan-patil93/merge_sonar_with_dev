@@ -30,4 +30,3 @@ if ($response === false) {
 } else {
     echo $response . PHP_EOL;
 }
-curl_close($curl);

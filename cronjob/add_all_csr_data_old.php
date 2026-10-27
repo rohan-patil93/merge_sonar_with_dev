@@ -13,7 +13,6 @@ curl_setopt_array($curl, array(
 ));
 
 $response = curl_exec($curl);
-curl_close($curl);
 //echo $response;
 
 $datas = json_decode($response,1);
@@ -40,7 +39,6 @@ if(count((array)$datas)>0){
 
   $res = curl_exec($curl);
 
-  curl_close($curl);
   //echo $res;
   $lodids = json_decode($res,1);
   print_r($lodids); exit;
@@ -65,7 +63,6 @@ curl_setopt_array($curl, array(
 ));
 
 $response = curl_exec($curl);
-curl_close($curl);
 //echo $response;
 
 $datas = json_decode($response,1);

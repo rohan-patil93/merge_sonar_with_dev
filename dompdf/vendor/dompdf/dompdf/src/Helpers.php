@@ -988,7 +988,6 @@ class Helpers
                             break;
                     }
                 }
-                curl_close($curl);
             }
         } finally {
             restore_error_handler();

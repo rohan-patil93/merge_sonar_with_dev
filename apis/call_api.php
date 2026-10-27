@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 if(!isset($_POST['API_TYPE']) && $_POST['API_TYPE'] !="D"){
   include('../includes/session.php');
 }else{
@@ -143,7 +143,6 @@ $api_code = $_REQUEST['api_code'];
  
   $result = json_encode($returnresult);
   echo $result;
-  curl_close($curl);
   $data['response_status'] = $httpCode;
   $data['api_response_details'] = $result;
   $data['response_date_time'] = nowDate();

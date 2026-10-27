@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include('../dbconfig.php');
 include('../comm.php');
 $transaction_table = $_POST['transaction_table'];
@@ -70,7 +70,6 @@ if (curl_errno($ch)) {
                 curl_setopt($upch, CURLOPT_POSTFIELDS, $data21);
                 curl_setopt($upch, CURLOPT_RETURNTRANSFER, true);
                 curl_exec($upch);
-                curl_close($upch); 
             } 
            
         }

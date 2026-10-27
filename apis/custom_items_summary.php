@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 if($_GET['refresh'] == "Y"){
 	include_once('../includes/session.php');
 	include_once('../dbconfig.php');
@@ -31,7 +31,6 @@ if($_GET['refresh'] =="Y"){
 	  ),
 	));
 	$response23 = curl_exec($curl);
-	curl_close($curl);
 	$decores = json_decode($response23,1);
 	$returnresult = array('company_id'=>$itsum_company_id,'application_table'=>$transaction_table,'transaction_id'=>$transaction_id,'api_master_id'=>47,'api_url'=>'','api_request_parameters'=>$sendpostreq,'request_date_time'=>date("Y-m-d H:i:s"),'api_response_details'=>urlencode(json_encode($decores)),'response_date_time'=>date("Y-m-d H:i:s"),'is_active'=>'0','current_status'=>'0','created_date'=>date("Y-m-d H:i:s"),'created_by'=>$itsum_user_id,'response_status'=>200);
  	$inserturl = API."?mode=adddata&table=api_hits&method=post&company_id=".$itsum_company_id."&data_name=".$itsum_data_name."&userid=".$itsum_user_id; 

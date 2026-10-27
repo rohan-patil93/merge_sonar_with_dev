@@ -19,7 +19,6 @@ curl_setopt_array($curl, array(
 
 $response = curl_exec($curl);
 
-curl_close($curl);
 $response = json_decode($response, true);
 
 $ticketHistories = $response['tickets'];

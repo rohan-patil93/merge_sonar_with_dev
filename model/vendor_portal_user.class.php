@@ -1,4 +1,4 @@
-<?php 
+﻿<?php 
 require_once "dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
 use Dompdf\Options;	
@@ -671,10 +671,8 @@ class vendorPortelUserClass extends userClass{
 	    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // disable SSL verify for dev
 	    $response = curl_exec($ch);
 	    if (curl_errno($ch)) {
-	        curl_close($ch);
 	        return [ 'success' => false,'error' => curl_error($ch)];
 	    }
-	    curl_close($ch);
 	    $return = json_decode($response, true);
 	    if (!is_array($return)) {
 	        return ['success' => false,'raw_response' => $response];

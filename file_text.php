@@ -18,8 +18,6 @@
   curl_setopt($ch, CURLOPT_HEADER, 0);
   // Perform a cURL session
   curl_exec($ch);
-  // Closes a cURL session and frees all resources
-  curl_close($ch);
   // Close file
   fclose($fp);
 ?>

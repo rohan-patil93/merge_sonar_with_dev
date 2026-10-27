@@ -1,4 +1,4 @@
-
+﻿
 <?php
 require_once "dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
@@ -37716,7 +37716,6 @@ function gerReferanceTableDetails($get){
 			  ),
 			));	 
 			$response = curl_exec($curl);
-			curl_close($curl);
 			//echo $response; exit;
 			$res = json_decode($response,1);
 			if(isset($res['name']) && $res['name']!=""){
@@ -37751,7 +37750,6 @@ function gerReferanceTableDetails($get){
 		} else {
 		    echo 'Response: ' . $response;
 		}*/
-		curl_close($ch);
 		return $response;
 
     	/*global $callConfig;
@@ -37870,9 +37868,6 @@ function gerReferanceTableDetails($get){
 
 			$response = curl_exec($curl);
 			$err = curl_error($curl);
-
-			curl_close($curl);
-
 			if ($err) {
 			  $return['status'] = 'Fail';
 			  $return['res'] = "cURL Error #:" . $err;
@@ -37956,8 +37951,6 @@ function gerReferanceTableDetails($get){
 
 		$response = curl_exec($curl);
 		$err = curl_error($curl);
-		curl_close($curl);
-
 		if ($err) {
 		    $return['status'] = 'Fail';
 			  $return['res'] = "cURL Error #:" . $err;

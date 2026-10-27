@@ -1,4 +1,4 @@
-<?php 
+﻿<?php 
 class mobileUserClass extends userClass{
 
 	function togetconfigmobiledata($get){
@@ -812,7 +812,6 @@ class mobileUserClass extends userClass{
 			  ),
 			));	 
 			$response = curl_exec($curl);
-			curl_close($curl);
 			// echo $response; exit;
 			$res = json_decode($response,1);
 			if(isset($res['name']) && $res['name']!=""){
@@ -847,7 +846,6 @@ class mobileUserClass extends userClass{
 		} else {
 		    echo 'Response: ' . $response;
 		}*/
-		curl_close($ch);
 		return $response;
 
     	/*global $callConfig;
@@ -888,8 +886,6 @@ class mobileUserClass extends userClass{
 	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 	    $response = curl_exec($ch);
-	    curl_close($ch);
-
 	    $data = json_decode($response, true);
 
 	    if (isset($data['users'])) {
@@ -916,8 +912,6 @@ class mobileUserClass extends userClass{
 	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 	    $response = curl_exec($ch);
-	    curl_close($ch);
-
 	    $data = json_decode($response, true);
 
 	    if (isset($data['id_token'])) {
