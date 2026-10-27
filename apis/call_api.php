@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 if(!isset($_POST['API_TYPE']) && $_POST['API_TYPE'] !="D"){
   include('../includes/session.php');
 }else{

@@ -1,4 +1,5 @@
 <?php
+ob_start();
 header("Access-Control-Allow-Origin: http://contracts.wftracker.com"); 
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Accept");
@@ -621,6 +622,9 @@ if ($method == 'post'){
 		}else{
 
 		}
+		if (ob_get_length()) {
+			ob_clean();
+		}
 		echo json_encode($res);
 	}
 	//$check_postget_array = array('togetemployeeageprofile'=>'togetemployeeageprofile','togetemployeeageprofile'=>'togetemployeeageprofile','addfloderupdatereportid'=>'addfloderupdatereportid','addfloderupdatereportid'=>'addfloderupdatereportid','addremovetransport'=>'addremovetransport','insertupdateesgcpopup'=>'insertupdateesgcpopup',,'insertletters'=>'insertLetters',);
@@ -912,6 +916,9 @@ if ($method == 'post'){
 			}/*else{
 				echo "<br> Nooo";
 			}*/
+		}
+		if (ob_get_length()) {
+			ob_clean();
 		}
 		echo json_encode($res);exit; 
 	}

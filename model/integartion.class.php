@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 class integartionClass{ 
 	function toinsertupdatethejobpostingpublish($post,$get){
 		global $callConfig;

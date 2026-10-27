@@ -71,10 +71,11 @@ session_destroy ();
 
 $_SESSION = array();*/
 function getBrowser() { 
-  $u_agent = $_SERVER['HTTP_USER_AGENT'];
+  $u_agent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
   $bname = 'Unknown';
   $platform = 'Unknown';
   $version= "";
+  $ub = "Unknown";
 
   //First get the platform?
   if (preg_match('/linux/i', $u_agent)) {
@@ -139,7 +140,7 @@ function getBrowser() {
   $data = array(  'userAgent' => $u_agent,'name'      => $bname, 'version'   => $version,'platform'  => $platform, 'pattern'    => $pattern);
   return $data['name'].",".$data['version'];
 } 
-if($_SESSION['userid']!=''){
+if(!empty($_SESSION['userid'])){
     header("location:index.php");
 }
 if(isset($_GET['confirm']) && $_GET['confirm'] != ''){
@@ -182,9 +183,12 @@ if (isset($_POST['submit'])){
         //echo $url; exit;
         //$response = file_get_contents($url, false, $context);
         //echo $response;
+        if (is_string($response)) {
+            $response = preg_replace('/^[\xEF\xBB\xBF\r\n\s]+/', '', $response);
+        }
         $row = json_decode($response,1);  
         //print_r($row); //exit;
-        if ($row['id'] !=''){
+        if (isset($row['id']) && $row['id'] !=''){
             //echo "data"; exit;
             $_SESSION['userid'] = $row['id'];
             $_SESSION['us_name']=$row['user_name'];
@@ -205,7 +209,7 @@ if (isset($_POST['submit'])){
            header("location:index");
         }else {
             //echo $row['error']; exit;
-            $error = $row['error'];
+            $error = !empty($row['error']) ? $row['error'] : '6002';
             header("location:login?error=$error");
            exit;
         }
@@ -246,7 +250,7 @@ if(isset($datadetail['image'])){
 
 }
 //$image = 'uploads/all/file_1704095913_659270a975d4a.png';
-$error = $_GET['error'];
+$error = isset($_GET['error']) && $_GET['error'] !== '' ? $_GET['error'] : '';
 $dis_error['6001'] = "Thank you very much for confirming your registration, </br> please login using email ID.";
 $dis_error['6002'] = "Incorrect username or password.  Please try again.";
 $dis_error['6003'] = "We have sent a verification email, </br> please login into your email and verify.";

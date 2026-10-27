@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 if($_GET['refresh'] == "Y"){
 	include_once('../includes/session.php');
 	include_once('../dbconfig.php');

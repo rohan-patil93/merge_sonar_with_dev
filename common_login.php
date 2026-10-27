@@ -19,28 +19,23 @@
 
                         <div class="auth-box custom-auth-box custom-login-on animated animate__animated animate__backInUp">
                                         <?php 
-                            $error = $_GET['error'];
+                            $error = isset($_GET['error']) && $_GET['error'] !== '' ? $_GET['error'] : '';
                             $dis_error['6001'] = "Thank you very much for confirming your registration, </br> please login using email ID.";
                             $dis_error['6002'] = "Incorrect username or password.  Please try again.";
                             $dis_error['6003'] = "We have sent a verification email, </br> please login into your email and verify.";
                             $dis_error['6004']  = "Your email verification is pending,</br>  kindly verify your email to access the system.";
                             $dis_error['6005']  = "The email is not registered with us,</br>  please register to access the system";
                             $dis_error['6006']  = "Details are sent to your registered email,</br>  please check";
+                            $dis_error['6007']  = "The Captcha code does not match!";
 
-                            if($error !='') { 
-                            if($error == '6002' || $error == '6004' || $error == '6005' ){ ?>
-                          
-                            <div class="alert alert-warning alert-dismissible">
-<strong class="f-14"><?php echo $dis_error[$error]; ?></strong>
-<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-                            <?php }else{ ?>
-                                               <div class="alert alert-warning alert-dismissible">
-<strong class="f-14"><?php echo $dis_error[$error]; ?></strong>
-<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-                          
-                        <?php } }?>
+                            if($error != '') { 
+                                $errorMessage = isset($dis_error[$error]) ? $dis_error[$error] : $dis_error['6002'];
+                            ?>
+                                <div class="alert alert-warning alert-dismissible">
+                                    <strong class="f-14"><?php echo $errorMessage; ?></strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            <?php } ?>
 
                            <form class="md-float-material form-material" action="" method="post">
                             <div class="card-block">

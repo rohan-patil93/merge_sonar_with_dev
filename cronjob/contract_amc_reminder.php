@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Daily AMC visit reminders — contract_amc_details.reminder_days
  * Dev server cron: php cron_job/contract_amc_reminder.php [company_id] [database_name]

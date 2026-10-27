@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 $curl = curl_init();
 curl_setopt_array($curl, array(

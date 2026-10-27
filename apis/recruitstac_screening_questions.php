@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include_once'../dbconfig.php';
 include_once'../comm.php';
 $transaction_table = $_POST['transaction_table'];

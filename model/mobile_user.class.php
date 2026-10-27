@@ -1,4 +1,4 @@
-﻿<?php 
+<?php 
 class mobileUserClass extends userClass{
 
 	function togetconfigmobiledata($get){
