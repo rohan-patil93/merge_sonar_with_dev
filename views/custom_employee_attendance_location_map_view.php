@@ -42,7 +42,7 @@ $page_data = json_encode(
 ?>
 
 <link rel="stylesheet" href="assets/css/custom_employee_attendance_location_map_view.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@9.0.0/ol.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@9.0.0/ol.css" integrity="sha384-PpyAaiUdY+s8ycCAmYsYkyq9cQgPWrtjtiv4/NzjY5FHo+7R5wdgdpqPAOl+No0J" crossorigin="anonymous">
 
 <div class="page-body" id="attendanceLocationMapPage" data-attendance='<?= $page_data ?>'>
     <div class="card">
@@ -138,5 +138,5 @@ $page_data = json_encode(
 </div>
 
 <script src="assets/bower_components/jquery/js/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/ol@9.0.0/dist/ol.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ol@9.0.0/dist/ol.js" integrity="sha384-7xARM9Z19UF2taX5HKueVI7bdsKQSTMj1a1qp4VOxFfEgW5ws28LUB/wPJLZixlV" crossorigin="anonymous"></script>
 <script src="assets/js/custom_employee_attendance_location_map_view.js"></script>
