@@ -256,7 +256,7 @@ var PARENT_NODE = 'parentNode',
         _parsers: [
             {
                 name: ATTRIBUTES,
-                re: /^\uE003(-?[a-z]+[\w\-]*)+([~\|\^\$\*!=]=?)?['"]?([^\uE004'"]*)['"]?\uE004/i,
+                re: /^\uE003(-?[a-z][\w\-]*)(?:([~\|\^\$\*!=]=?)['"]?([^\uE004'"]*)['"]?)?\uE004/i,
                 fn: function(match, token) {
                     var operator = match[2] || '',
                         operators = Selector.operators,

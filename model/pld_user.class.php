@@ -5836,7 +5836,7 @@ class userClass{
 			$email_data['email'] = $email;
 			$email_res=$callConfig->insertRecord($databasename.TBL_EMAIL_LOGS,$email_data);
 			$emailmsg= $data['mesg'];
-			$boundary = md5(uniqid(time()));
+			$boundary = bin2hex(random_bytes(16));
 			$headers = "MIME-Version: 1.0\r\n";
 			$sender = $data['sender']!="" ? $data['sender']:SUPERADMIN_EMAIL_ID;
 			$headers .= 'From:'.$sender . "\r\n";

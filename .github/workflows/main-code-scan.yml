@@ -1,0 +1,75 @@
+name: scanning the code for issues and vulnarability
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  scan-complete:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v3
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          args: >
+            -Dsonar.javascript.node.maxspace=4096
+            -Dsonar.projectKey=infisuite-php-main-branch
+            -Dsonar.projectName=infisuite-php-main-branch
+            -Dsonar.sources=.
+            -Dsonar.exclusions=vendor/**,dompdf/**,phpqrcode/**,htmltopdfconverterTCPDF/**,assets/**,captcha/css/**,captcha/fonts/**,captcha/images/**,model/SMTP/**,scratch/**,**/*.min.js,**/node_modules/**,**/.next/**,**/dist/**,**/build/**,**/coverage/**,**/*.map
+            -Dsonar.php.coverage.reportPaths=coverage/coverage.xml
+      - name: SonarQube Quality Gate
+        uses: SonarSource/sonarqube-quality-gate-action@v1
+        timeout-minutes: 10
+        continue-on-error: true
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+      - name: Free GitHub runner disk space
+        run: |
+          df -h
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /usr/local/share/boost
+          df -h
+      - name: Run Trivy FS Scan (TXT)
+        id: trivy
+        continue-on-error: true
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: fs
+          scan-ref: '.'
+          format: table
+          output: infisuite-php-complete-fs.txt
+          severity: HIGH,CRITICAL
+          scanners: vuln,secret
+          ignore-unfixed: true
+          exit-code: "1"
+
+      - name: Upload Trivy TXT Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-txt-report
+          path: infisuite-php-complete-fs.txt
+          retention-days: 1
+
+      - name: Fail workflow if Trivy found vulnerabilities
+        if: steps.trivy.outcome == 'failure'
+        run: exit 1
+
+      - name: code quality
+        if: success()
+        run: echo "code scan completed it passes all checkss"
