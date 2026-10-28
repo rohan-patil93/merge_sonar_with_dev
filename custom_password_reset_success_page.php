@@ -82,8 +82,8 @@ session_destroy ();
   <link rel="stylesheet" type="text/css" href="assets/css/widget.css">
   <link rel="stylesheet" type="text/css" href="assets/css/pages.css">
   <link rel="stylesheet" type="text/css" href="assets/css/custom.css">
-  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>    
-  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js" integrity="sha384-qFIkRsVO/J5orlMvxK1sgAt2FXT67og+NyFTITYzvbIP1IJavVEKZM7YWczXkwpB" crossorigin="anonymous"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js" integrity="sha384-Db7hblRnqdGlji33B0iZCtQhHVBG3a8ZSlU+ia7qFTufJCg9Nh6zO6FBmrQAbmZY" crossorigin="anonymous"></script>
   <script src="assets/js/sweetalert.js"></script>
 </head>
 
