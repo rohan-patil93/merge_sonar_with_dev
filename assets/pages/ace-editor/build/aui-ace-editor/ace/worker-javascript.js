@@ -1,38 +1,38 @@
-"no use strict";
+﻿"no use strict";
 
-var console = {
+let console = {
     log: function(msg) {
         postMessage({type: "log", data: msg});
     }
 };
-var window = {
+let window = {
     console: console
 };
 
-var normalizeModule = function(parentId, moduleName) {
+let normalizeModule = function(parentId, moduleName) {
     // normalize plugin requires
-    if (moduleName.indexOf("!") !== -1) {
-        var chunks = moduleName.split("!");
+    if (moduleName.includes("!")) {
+        let chunks = moduleName.split("!");
         return normalizeModule(parentId, chunks[0]) + "!" + normalizeModule(parentId, chunks[1]);
     }
     // normalize relative requires
     if (moduleName.charAt(0) == ".") {
-        var base = parentId.split("/").slice(0, -1).join("/");
-        var moduleName = base + "/" + moduleName;
-        
-        while(moduleName.indexOf(".") !== -1 && previous != moduleName) {
-            var previous = moduleName;
-            var moduleName = moduleName.replace(/\/\.\//, "/").replace(/[^\/]+\/\.\.\//, "");
+        let base = parentId.split("/").slice(0, -1).join("/");
+        moduleName = base + "/" + moduleName;
+        let previous;
+        while(moduleName.includes(".") && previous != moduleName) {
+            previous = moduleName;
+            moduleName = moduleName.replace(/\/\.\//, "/").replace(/[^\/]+\/\.\.\//, "");
         }
     }
     
     return moduleName;
 };
 
-var require = function(parentId, id) {
-    var id = normalizeModule(parentId, id);
+let require = function(parentId, id) {
+    id = normalizeModule(parentId, id);
     
-    var module = require.modules[id];
+    let module = require.modules[id];
     if (module) {
         if (!module.initialized) {
             module.exports = module.factory().exports;
@@ -41,9 +41,9 @@ var require = function(parentId, id) {
         return module.exports;
     }
     
-    var chunks = id.split("/");
+    let chunks = id.split("/");
     chunks[0] = require.tlns[chunks[0]] || chunks[0];
-    var path = chunks.join("/") + ".js";
+    let path = chunks.join("/") + ".js";
     
     require.id = id;
     importScripts(path);
@@ -53,7 +53,7 @@ var require = function(parentId, id) {
 require.modules = {};
 require.tlns = {};
 
-var define = function(id, deps, factory) {
+let define = function(id, deps, factory) {
     if (arguments.length == 2) {
         factory = deps;
     } else if (arguments.length == 1) {
@@ -64,16 +64,16 @@ var define = function(id, deps, factory) {
     if (id.indexOf("text!") === 0) 
         return;
     
-    var req = function(deps, factory) {
+    let req = function(deps, factory) {
         return require(id, deps, factory);
     };
 
     require.modules[id] = {
         factory: function() {
-            var module = {
+            let module = {
                 exports: {}
             };
-            var returnExports = factory(req, module.exports, module);
+            let returnExports = factory(req, module.exports, module);
             if (returnExports)
                 module.exports = returnExports;
             return module;
@@ -87,10 +87,10 @@ function initBaseUrls(topLevelNamespaces) {
 
 function initSender() {
 
-    var EventEmitter = require(null, "ace/lib/event_emitter").EventEmitter;
-    var oop = require(null, "ace/lib/oop");
+    let EventEmitter = require(null, "ace/lib/event_emitter").EventEmitter;
+    let oop = require(null, "ace/lib/oop");
     
-    var Sender = function() {};
+    let Sender = function() {};
     
     (function() {
         
@@ -117,11 +117,11 @@ function initSender() {
     return new Sender();
 }
 
-var main;
-var sender;
+let main;
+let sender;
 
 onmessage = function(e) {
-    var msg = e.data;
+    let msg = e.data;
     if (msg.command) {
         main[msg.command].apply(main, msg.args);
     }
@@ -129,7 +129,7 @@ onmessage = function(e) {
         initBaseUrls(msg.tlns);
         require(null, "ace/lib/fixoldbrowsers");
         sender = initSender();
-        var clazz = require(null, msg.module)[msg.classname];
+        let clazz = require(null, msg.module)[msg.classname];
         main = new clazz(sender);
     } 
     else if (msg.event && sender) {
@@ -163,7 +163,7 @@ define('ace/lib/regexp', ['require', 'exports', 'module' ], function(require, ex
     //  Private variables
     //---------------------------------
 
-    var real = {
+    let real = {
             exec: RegExp.prototype.exec,
             test: RegExp.prototype.test,
             match: String.prototype.match,
@@ -172,7 +172,7 @@ define('ace/lib/regexp', ['require', 'exports', 'module' ], function(require, ex
         },
         compliantExecNpcg = real.exec.call(/()??/, "")[1] === undefined, // check `exec` handling of nonparticipating capturing groups
         compliantLastIndexIncrement = function () {
-            var x = /^/g;
+            let x = /^/g;
             real.test.call(x, "");
             return !x.lastIndex;
         }();
@@ -190,17 +190,17 @@ define('ace/lib/regexp', ['require', 'exports', 'module' ], function(require, ex
     //   rather than the empty string.
     // - `lastIndex` should not be incremented after zero-length matches.
     RegExp.prototype.exec = function (str) {
-        var match = real.exec.apply(this, arguments),
+        let match = real.exec.apply(this, arguments),
             name, r2;
         if ( typeof(str) == 'string' && match) {
             // Fix browsers whose `exec` methods don't consistently return `undefined` for
             // nonparticipating capturing groups
             if (!compliantExecNpcg && match.length > 1 && indexOf(match, "") > -1) {
-                r2 = RegExp(this.source, real.replace.call(getNativeFlags(this), "g", ""));
+                r2 = new RegExp(this.source, real.replace.call(getNativeFlags(this), "g", ""));
                 // Using `str.slice(match.index)` rather than `match[0]` in case lookahead allowed
                 // matching due to characters outside the match
                 real.replace.call(str.slice(match.index), r2, function () {
-                    for (var i = 1; i < arguments.length - 2; i++) {
+                    for (let i = 1; i < arguments.length - 2; i++) {
                         if (arguments[i] === undefined)
                             match[i] = undefined;
                     }
@@ -208,7 +208,7 @@ define('ace/lib/regexp', ['require', 'exports', 'module' ], function(require, ex
             }
             // Attach named capture properties
             if (this._xregexp && this._xregexp.captureNames) {
-                for (var i = 1; i < match.length; i++) {
+                for (let i = 1; i < match.length; i++) {
                     name = this._xregexp.captureNames[i - 1];
                     if (name)
                        match[name] = match[i];
@@ -227,7 +227,7 @@ define('ace/lib/regexp', ['require', 'exports', 'module' ], function(require, ex
         RegExp.prototype.test = function (str) {
             // Use the native `exec` to skip some processing overhead, even though the overriden
             // `exec` would take care of the `lastIndex` fix
-            var match = real.exec.call(this, str);
+            let match = real.exec.call(this, str);
             // Fix browsers that increment `lastIndex` after zero-length matches
             if (match && this.global && !match[0].length && (this.lastIndex > match.index))
                 this.lastIndex--;
@@ -250,7 +250,7 @@ define('ace/lib/regexp', ['require', 'exports', 'module' ], function(require, ex
     function indexOf (array, item, from) {
         if (Array.prototype.indexOf) // Use the native array method if available
             return array.indexOf(item, from);
-        for (var i = from || 0; i < array.length; i++) {
+        for (let i = from || 0; i < array.length; i++) {
             if (array[i] === item)
                 return i;
         }
@@ -309,14 +309,14 @@ define('ace/lib/es5-shim', ['require', 'exports', 'module' ], function(require, 
 if (!Function.prototype.bind) {
     Function.prototype.bind = function bind(that) { // .length is 1
         // 1. Let Target be the this value.
-        var target = this;
+        let target = this;
         // 2. If IsCallable(Target) is false, throw a TypeError exception.
         if (typeof target != "function")
-            throw new TypeError(); // TODO message
+            throw new TypeError("Invalid argument"); // TODO message resolved
         // 3. Let A be a new (possibly empty) internal list of all of the
         //   argument values provided after thisArg (arg1, arg2 etc), in order.
         // XXX slicedArgs will stand in for "A" if used
-        var args = slice.call(arguments, 1); // for normal call
+        let args = slice.call(arguments, 1); // for normal call
         // 4. Let F be a new native ECMAScript object.
         // 11. Set the [[Prototype]] internal property of F to the standard
         //   built-in Function prototype object as specified in 15.3.3.1.
@@ -326,7 +326,7 @@ if (!Function.prototype.bind) {
         //   15.3.4.5.2.
         // 14. Set the [[HasInstance]] internal property of F as described in
         //   15.3.4.5.3.
-        var bound = function () {
+        let bound = function () {
 
             if (this instanceof bound) {
                 // 15.3.4.5.2 [[Construct]]
@@ -345,11 +345,11 @@ if (!Function.prototype.bind) {
                 // 5. Return the result of calling the [[Construct]] internal 
                 //   method of target providing args as the arguments.
 
-                var F = function(){};
+                let F = function(){};
                 F.prototype = target.prototype;
-                var self = new F;
+                let self = new F;
 
-                var result = target.apply(
+                let result = target.apply(
                     self,
                     args.concat(slice.call(arguments))
                 );
@@ -424,20 +424,20 @@ if (!Function.prototype.bind) {
 // dereference that costs universally.
 // _Please note: Shortcuts are defined after `Function.prototype.bind` as we
 // us it in defining shortcuts.
-var call = Function.prototype.call;
-var prototypeOfArray = Array.prototype;
-var prototypeOfObject = Object.prototype;
-var slice = prototypeOfArray.slice;
-var toString = call.bind(prototypeOfObject.toString);
-var owns = call.bind(prototypeOfObject.hasOwnProperty);
+let call = Function.prototype.call;
+let prototypeOfArray = Array.prototype;
+let prototypeOfObject = Object.prototype;
+let slice = prototypeOfArray.slice;
+let toString = call.bind(prototypeOfObject.toString);
+let owns = call.bind(prototypeOfObject.hasOwnProperty);
 
 // If JS engine supports accessors creating shortcuts.
-var defineGetter;
-var defineSetter;
-var lookupGetter;
-var lookupSetter;
-var supportsAccessors;
-if ((supportsAccessors = owns(prototypeOfObject, "__defineGetter__"))) {
+let defineGetter;
+let defineSetter;
+let lookupGetter;
+let lookupSetter;
+const supportsAccessors = owns(prototypeOfObject, "__defineGetter__");
+if (supportsAccessors) {
     defineGetter = call.bind(prototypeOfObject.__defineGetter__);
     defineSetter = call.bind(prototypeOfObject.__defineSetter__);
     lookupGetter = call.bind(prototypeOfObject.__lookupGetter__);
@@ -475,14 +475,14 @@ if (!Array.isArray) {
 // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/array/forEach
 if (!Array.prototype.forEach) {
     Array.prototype.forEach = function forEach(fun /*, thisp*/) {
-        var self = toObject(this),
+        let self = toObject(this),
             thisp = arguments[1],
             i = 0,
             length = self.length >>> 0;
 
         // If no callback function or if callback is not a callable function
         if (toString(fun) != "[object Function]") {
-            throw new TypeError(); // TODO message
+            throw new TypeError("Callback must be a function"); // TODO message resolved
         }
 
         while (i < length) {
@@ -501,17 +501,17 @@ if (!Array.prototype.forEach) {
 // https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Objects/Array/map
 if (!Array.prototype.map) {
     Array.prototype.map = function map(fun /*, thisp*/) {
-        var self = toObject(this),
+        let self = toObject(this),
             length = self.length >>> 0,
-            result = Array(length),
+            result = new Array(length),
             thisp = arguments[1];
 
         // If no callback function or if callback is not a callable function
         if (toString(fun) != "[object Function]") {
-            throw new TypeError(); // TODO message
+            throw new TypeError("Callback must be a function"); // TODO message resolved
         }
 
-        for (var i = 0; i < length; i++) {
+        for (let i = 0; i < length; i++) {
             if (i in self)
                 result[i] = fun.call(thisp, self[i], i, self);
         }
@@ -524,17 +524,17 @@ if (!Array.prototype.map) {
 // https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Objects/Array/filter
 if (!Array.prototype.filter) {
     Array.prototype.filter = function filter(fun /*, thisp */) {
-        var self = toObject(this),
+        let self = toObject(this),
             length = self.length >>> 0,
             result = [],
             thisp = arguments[1];
 
         // If no callback function or if callback is not a callable function
         if (toString(fun) != "[object Function]") {
-            throw new TypeError(); // TODO message
+            throw new TypeError("Callback must be a function"); // TODO message resolved
         }
 
-        for (var i = 0; i < length; i++) {
+        for (let i = 0; i < length; i++) {
             if (i in self && fun.call(thisp, self[i], i, self))
                 result.push(self[i]);
         }
@@ -547,16 +547,16 @@ if (!Array.prototype.filter) {
 // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/every
 if (!Array.prototype.every) {
     Array.prototype.every = function every(fun /*, thisp */) {
-        var self = toObject(this),
+        let self = toObject(this),
             length = self.length >>> 0,
             thisp = arguments[1];
 
         // If no callback function or if callback is not a callable function
         if (toString(fun) != "[object Function]") {
-            throw new TypeError(); // TODO message
+            throw new TypeError("Callback must be a function"); // TODO message resolved
         }
 
-        for (var i = 0; i < length; i++) {
+        for (let i = 0; i < length; i++) {
             if (i in self && !fun.call(thisp, self[i], i, self))
                 return false;
         }
@@ -569,16 +569,16 @@ if (!Array.prototype.every) {
 // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/some
 if (!Array.prototype.some) {
     Array.prototype.some = function some(fun /*, thisp */) {
-        var self = toObject(this),
+        let self = toObject(this),
             length = self.length >>> 0,
             thisp = arguments[1];
 
         // If no callback function or if callback is not a callable function
         if (toString(fun) != "[object Function]") {
-            throw new TypeError(); // TODO message
+            throw new TypeError("Callback must be a function"); // TODO message resolved
         }
 
-        for (var i = 0; i < length; i++) {
+        for (let i = 0; i < length; i++) {
             if (i in self && fun.call(thisp, self[i], i, self))
                 return true;
         }
@@ -591,20 +591,20 @@ if (!Array.prototype.some) {
 // https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Objects/Array/reduce
 if (!Array.prototype.reduce) {
     Array.prototype.reduce = function reduce(fun /*, initial*/) {
-        var self = toObject(this),
+        let self = toObject(this),
             length = self.length >>> 0;
 
         // If no callback function or if callback is not a callable function
         if (toString(fun) != "[object Function]") {
-            throw new TypeError(); // TODO message
+            throw new TypeError("Callback must be a function"); // TODO message resolved
         }
 
         // no value to return if no initial value and an empty array
         if (!length && arguments.length == 1)
-            throw new TypeError(); // TODO message
+            throw new TypeError("Invalid argument"); // TODO message resolved
 
-        var i = 0;
-        var result;
+        let i = 0;
+        let result;
         if (arguments.length >= 2) {
             result = arguments[1];
         } else {
@@ -616,7 +616,7 @@ if (!Array.prototype.reduce) {
 
                 // if array contains no values, no initial value to return
                 if (++i >= length)
-                    throw new TypeError(); // TODO message
+                    throw new TypeError("Invalid argument"); // TODO message resolved
             } while (true);
         }
 
@@ -634,19 +634,19 @@ if (!Array.prototype.reduce) {
 // https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Objects/Array/reduceRight
 if (!Array.prototype.reduceRight) {
     Array.prototype.reduceRight = function reduceRight(fun /*, initial*/) {
-        var self = toObject(this),
+        let self = toObject(this),
             length = self.length >>> 0;
 
         // If no callback function or if callback is not a callable function
         if (toString(fun) != "[object Function]") {
-            throw new TypeError(); // TODO message
+            throw new TypeError("Callback must be a function"); // TODO message resolved
         }
 
         // no value to return if no initial value, empty array
         if (!length && arguments.length == 1)
-            throw new TypeError(); // TODO message
+            throw new TypeError("Invalid argument"); // TODO message resolved
 
-        var result, i = length - 1;
+        let result, i = length - 1;
         if (arguments.length >= 2) {
             result = arguments[1];
         } else {
@@ -658,7 +658,7 @@ if (!Array.prototype.reduceRight) {
 
                 // if array contains no values, no initial value to return
                 if (--i < 0)
-                    throw new TypeError(); // TODO message
+                    throw new TypeError("Invalid argument"); // TODO message resolved
             } while (true);
         }
 
@@ -676,13 +676,13 @@ if (!Array.prototype.reduceRight) {
 // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/indexOf
 if (!Array.prototype.indexOf) {
     Array.prototype.indexOf = function indexOf(sought /*, fromIndex */ ) {
-        var self = toObject(this),
+        let self = toObject(this),
             length = self.length >>> 0;
 
         if (!length)
             return -1;
 
-        var i = 0;
+        let i = 0;
         if (arguments.length > 1)
             i = toInteger(arguments[1]);
 
@@ -702,12 +702,12 @@ if (!Array.prototype.indexOf) {
 // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/lastIndexOf
 if (!Array.prototype.lastIndexOf) {
     Array.prototype.lastIndexOf = function lastIndexOf(sought /*, fromIndex */) {
-        var self = toObject(this),
+        let self = toObject(this),
             length = self.length >>> 0;
 
         if (!length)
             return -1;
-        var i = length - 1;
+        let i = length - 1;
         if (arguments.length > 1)
             i = Math.min(i, toInteger(arguments[1]));
         // handle negative indices
@@ -743,7 +743,7 @@ if (!Object.getPrototypeOf) {
 // ES5 15.2.3.3
 // http://es5.github.com/#x15.2.3.3
 if (!Object.getOwnPropertyDescriptor) {
-    var ERR_NON_OBJECT = "Object.getOwnPropertyDescriptor called on a " +
+    let ERR_NON_OBJECT = "Object.getOwnPropertyDescriptor called on a " +
                          "non-object: ";
     Object.getOwnPropertyDescriptor = function getOwnPropertyDescriptor(object, property) {
         if ((typeof object != "object" && typeof object != "function") || object === null)
@@ -752,7 +752,7 @@ if (!Object.getOwnPropertyDescriptor) {
         if (!owns(object, property))
             return;
 
-        var descriptor, getter, setter;
+        let descriptor, getter, setter;
 
         // If object has a property then it's for sure both `enumerable` and
         // `configurable`.
@@ -766,11 +766,11 @@ if (!Object.getOwnPropertyDescriptor) {
             // inherited getter. To avoid misbehavior we temporary remove
             // `__proto__` so that `__lookupGetter__` will return getter only
             // if it's owned by an object.
-            var prototype = object.__proto__;
+            let prototype = object.__proto__;
             object.__proto__ = prototypeOfObject;
 
-            var getter = lookupGetter(object, property);
-            var setter = lookupSetter(object, property);
+            let getter = lookupGetter(object, property);
+            let setter = lookupSetter(object, property);
 
             // Once we have getter and setter we can put values back.
             object.__proto__ = prototype;
@@ -804,13 +804,13 @@ if (!Object.getOwnPropertyNames) {
 // http://es5.github.com/#x15.2.3.5
 if (!Object.create) {
     Object.create = function create(prototype, properties) {
-        var object;
+        let object;
         if (prototype === null) {
             object = { "__proto__": null };
         } else {
             if (typeof prototype != "object")
                 throw new TypeError("typeof prototype["+(typeof prototype)+"] != 'object'");
-            var Type = function () {};
+            let Type = function () {};
             Type.prototype = prototype;
             object = new Type();
             // IE has no built-in implementation of `Object.getPrototypeOf`
@@ -849,18 +849,18 @@ function doesDefinePropertyWork(object) {
 // check whether defineProperty works if it's given. Otherwise,
 // shim partially.
 if (Object.defineProperty) {
-    var definePropertyWorksOnObject = doesDefinePropertyWork({});
-    var definePropertyWorksOnDom = typeof document == "undefined" ||
+    let definePropertyWorksOnObject = doesDefinePropertyWork({});
+    let definePropertyWorksOnDom = typeof document == "undefined" ||
         doesDefinePropertyWork(document.createElement("div"));
     if (!definePropertyWorksOnObject || !definePropertyWorksOnDom) {
-        var definePropertyFallback = Object.defineProperty;
+        let definePropertyFallback = Object.defineProperty;
     }
 }
 
 if (!Object.defineProperty || definePropertyFallback) {
-    var ERR_NON_OBJECT_DESCRIPTOR = "Property description must be an object: ";
-    var ERR_NON_OBJECT_TARGET = "Object.defineProperty called on non-object: "
-    var ERR_ACCESSORS_NOT_SUPPORTED = "getters & setters can not be defined " +
+    let ERR_NON_OBJECT_DESCRIPTOR = "Property description must be an object: ";
+    let ERR_NON_OBJECT_TARGET = "Object.defineProperty called on non-object: "
+    let ERR_ACCESSORS_NOT_SUPPORTED = "getters & setters can not be defined " +
                                       "on this javascript engine";
 
     Object.defineProperty = function defineProperty(object, property, descriptor) {
@@ -903,7 +903,7 @@ if (!Object.defineProperty || definePropertyFallback) {
                 // `__proto__` we can safely override `__proto__` while defining
                 // a property to make sure that we don't hit an inherited
                 // accessor.
-                var prototype = object.__proto__;
+                let prototype = object.__proto__;
                 object.__proto__ = prototypeOfObject;
                 // Deleting a property anyway since getter / setter may be
                 // defined on object itself.
@@ -932,7 +932,7 @@ if (!Object.defineProperty || definePropertyFallback) {
 // http://es5.github.com/#x15.2.3.7
 if (!Object.defineProperties) {
     Object.defineProperties = function defineProperties(object, properties) {
-        for (var property in properties) {
+        for (let property in properties) {
             if (owns(properties, property))
                 Object.defineProperty(object, property, properties[property]);
         }
@@ -1010,15 +1010,15 @@ if (!Object.isExtensible) {
     Object.isExtensible = function isExtensible(object) {
         // 1. If Type(O) is not Object throw a TypeError exception.
         if (Object(object) === object) {
-            throw new TypeError(); // TODO message
+            throw new TypeError("Object must be extensible"); // TODO message resolved
         }
         // 2. Return the Boolean value of the [[Extensible]] internal property of O.
-        var name = '';
+        let name = '';
         while (owns(object, name)) {
             name += '?';
         }
         object[name] = true;
-        var returnValue = owns(object, name);
+        let returnValue = owns(object, name);
         delete object[name];
         return returnValue;
     };
@@ -1028,7 +1028,7 @@ if (!Object.isExtensible) {
 // http://es5.github.com/#x15.2.3.14
 if (!Object.keys) {
     // http://whattheheadsaid.com/2010/10/a-safer-object-keys-compatibility-implementation
-    var hasDontEnumBug = true,
+    let hasDontEnumBug = true,
         dontEnums = [
             "toString",
             "toLocaleString",
@@ -1040,7 +1040,7 @@ if (!Object.keys) {
         ],
         dontEnumsLength = dontEnums.length;
 
-    for (var key in {"toString": null})
+    for (let key in {"toString": null})
         hasDontEnumBug = false;
 
     Object.keys = function keys(object) {
@@ -1048,16 +1048,16 @@ if (!Object.keys) {
         if ((typeof object != "object" && typeof object != "function") || object === null)
             throw new TypeError("Object.keys called on a non-object");
 
-        var keys = [];
-        for (var name in object) {
+        let keys = [];
+        for (let name in object) {
             if (owns(object, name)) {
                 keys.push(name);
             }
         }
 
         if (hasDontEnumBug) {
-            for (var i = 0, ii = dontEnumsLength; i < ii; i++) {
-                var dontEnum = dontEnums[i];
+            for (let i = 0, ii = dontEnumsLength; i < ii; i++) {
+                let dontEnum = dontEnums[i];
                 if (owns(object, dontEnum)) {
                     keys.push(dontEnum);
                 }
@@ -1083,7 +1083,7 @@ if (!Object.keys) {
 // this object is not a finite Number a RangeError exception is thrown.
 if (!Date.prototype.toISOString || (new Date(-62198755200000).toISOString().indexOf('-000001') === -1)) {
     Date.prototype.toISOString = function toISOString() {
-        var result, length, value, year;
+        let result, length, value, year;
         if (!isFinite(this))
             throw new RangeError;
 
@@ -1132,7 +1132,7 @@ if (!Date.prototype.toJSON) {
         // O with argument "toISOString".
         // 5. If IsCallable(toISO) is false, throw a TypeError exception.
         if (typeof this.toISOString != "function")
-            throw new TypeError(); // TODO message
+            throw new TypeError("Invalid argument"); // TODO message resolved
         // 6. Return the result of calling the [[Call]] internal method of
         //  toISO with O as the this value and an empty argument list.
         return this.toISOString();
@@ -1158,10 +1158,10 @@ if (Date.parse("+275760-09-13T00:00:00.000Z") !== 8.64e15) {
     Date = (function(NativeDate) {
 
         // Date.length === 7
-        var Date = function Date(Y, M, D, h, m, s, ms) {
-            var length = arguments.length;
+        let Date = function Date(Y, M, D, h, m, s, ms) {
+            let length = arguments.length;
             if (this instanceof NativeDate) {
-                var date = length == 1 && String(Y) === Y ? // isString(Y)
+                let date = length == 1 && String(Y) === Y ? // isString(Y)
                     // We explicitly pass it through parse:
                     new NativeDate(Date.parse(Y)) :
                     // We have to manually make calls depending on argument
@@ -1182,7 +1182,7 @@ if (Date.parse("+275760-09-13T00:00:00.000Z") !== 8.64e15) {
         };
 
         // 15.9.1.15 Date Time String Format.
-        var isoDateExpression = new RegExp("^" +
+        let isoDateExpression = new RegExp("^" +
             "(\\d{4}|[\+\-]\\d{6})" + // four-digit year capture or sign + 6-digit extended year
             "(?:-(\\d{2})" + // optional month capture
             "(?:-(\\d{2})" + // optional day capture
@@ -1204,7 +1204,7 @@ if (Date.parse("+275760-09-13T00:00:00.000Z") !== 8.64e15) {
         "$");
 
         // Copy any custom methods a 3rd party library may have added
-        for (var key in NativeDate)
+        for (let key in NativeDate)
             Date[key] = NativeDate[key];
 
         // Copy "native" methods explicitly; they may be non-enumerable
@@ -1215,11 +1215,11 @@ if (Date.parse("+275760-09-13T00:00:00.000Z") !== 8.64e15) {
 
         // Upgrade Date.parse to handle simplified ISO 8601 strings
         Date.parse = function parse(string) {
-            var match = isoDateExpression.exec(string);
+            let match = isoDateExpression.exec(string);
             if (match) {
                 match.shift(); // kill match[0], the full match
                 // parse months, days, hours, minutes, seconds, and milliseconds
-                for (var i = 1; i < 7; i++) {
+                for (let i = 1; i < 7; i++) {
                     // provide default values if necessary
                     match[i] = +(match[i] || (i < 3 ? 1 : 0));
                     // match[1] is the month. Months are 0-11 in JavaScript
@@ -1230,10 +1230,10 @@ if (Date.parse("+275760-09-13T00:00:00.000Z") !== 8.64e15) {
                 }
 
                 // parse the UTC offset component
-                var minuteOffset = +match.pop(), hourOffset = +match.pop(), sign = match.pop();
+                let minuteOffset = +match.pop(), hourOffset = +match.pop(), sign = match.pop();
 
                 // compute the explicit time zone offset if specified
-                var offset = 0;
+                let offset = 0;
                 if (sign) {
                     // detect invalid offsets and return early
                     if (hourOffset > 23 || minuteOffset > 59)
@@ -1248,7 +1248,7 @@ if (Date.parse("+275760-09-13T00:00:00.000Z") !== 8.64e15) {
                 // The Gregorian calendar has a 400-year cycle, so 
                 // to Date.UTC(year + 400, .... ) - 12622780800000 == Date.UTC(year, ...),
                 // where 12622780800000 - number of milliseconds in Gregorian calendar 400 years
-                var year = +match[0];
+                let year = +match[0];
                 if (0 <= year && year <= 99) {
                     match[0] = year + 400;
                     return NativeDate.UTC.apply(this, match) + offset - 12622780800000;
@@ -1271,14 +1271,14 @@ if (Date.parse("+275760-09-13T00:00:00.000Z") !== 8.64e15) {
 
 // ES5 15.5.4.20
 // http://es5.github.com/#x15.5.4.20
-var ws = "\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u2003" +
+let ws = "\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u2003" +
     "\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000\u2028" +
     "\u2029\uFEFF";
 if (!String.prototype.trim || ws.trim()) {
     // http://blog.stevenlevithan.com/archives/faster-trim-javascript
     // http://perfectionkills.com/whitespace-deviations/
     ws = "[" + ws + "]";
-    var trimBeginRegexp = new RegExp("^" + ws + ws + "*"),
+    let trimBeginRegexp = new RegExp("^" + ws + ws + "*"),
         trimEndRegexp = new RegExp(ws + ws + "*$");
     String.prototype.trim = function trim() {
         return String(this).replace(trimBeginRegexp, "").replace(trimEndRegexp, "");
@@ -1293,7 +1293,7 @@ if (!String.prototype.trim || ws.trim()) {
 // ES5 9.4
 // http://es5.github.com/#x9.4
 // http://jsperf.com/to-integer
-var toInteger = function (n) {
+let toInteger = function (n) {
     n = +n;
     if (n !== n) // isNaN
         n = 0;
@@ -1302,12 +1302,12 @@ var toInteger = function (n) {
     return n;
 };
 
-var prepareString = "a"[0] != "a",
+let prepareString = "a"[0] != "a",
     // ES5 9.9
     // http://es5.github.com/#x9.9
     toObject = function (o) {
         if (o == null) { // this matches both null and undefined
-            throw new TypeError(); // TODO message
+            throw new TypeError("Invalid argument"); // TODO message resolved
         }
         // If the implementation doesn't support by-index access of
         // string characters (ex. IE < 7), split the string
@@ -1321,15 +1321,15 @@ var prepareString = "a"[0] != "a",
 define('ace/lib/event_emitter', ['require', 'exports', 'module' ], function(require, exports, module) {
 
 
-var EventEmitter = {};
+let EventEmitter = {};
 
 EventEmitter._emit =
 EventEmitter._dispatchEvent = function(eventName, e) {
     this._eventRegistry = this._eventRegistry || {};
     this._defaultHandlers = this._defaultHandlers || {};
 
-    var listeners = this._eventRegistry[eventName] || [];
-    var defaultHandler = this._defaultHandlers[eventName];
+    let listeners = this._eventRegistry[eventName] || [];
+    let defaultHandler = this._defaultHandlers[eventName];
     if (!listeners.length && !defaultHandler)
         return;
 
@@ -1348,7 +1348,7 @@ EventEmitter._dispatchEvent = function(eventName, e) {
         };
     }
 
-    for (var i=0; i<listeners.length; i++) {
+    for (let i=0; i<listeners.length; i++) {
         listeners[i](e);
         if (e.propagationStopped)
             break;
@@ -1371,9 +1371,9 @@ EventEmitter.on =
 EventEmitter.addEventListener = function(eventName, callback) {
     this._eventRegistry = this._eventRegistry || {};
 
-    var listeners = this._eventRegistry[eventName];
+    let listeners = this._eventRegistry[eventName];
     if (!listeners)
-        var listeners = this._eventRegistry[eventName] = [];
+        let listeners = this._eventRegistry[eventName] = [];
 
     if (listeners.indexOf(callback) == -1)
         listeners.push(callback);
@@ -1383,11 +1383,11 @@ EventEmitter.removeListener =
 EventEmitter.removeEventListener = function(eventName, callback) {
     this._eventRegistry = this._eventRegistry || {};
 
-    var listeners = this._eventRegistry[eventName];
+    let listeners = this._eventRegistry[eventName];
     if (!listeners)
         return;
 
-    var index = listeners.indexOf(callback);
+    let index = listeners.indexOf(callback);
     if (index !== -1)
         listeners.splice(index, 1);
 };
@@ -1404,7 +1404,7 @@ define('ace/lib/oop', ['require', 'exports', 'module' ], function(require, expor
 
 
 exports.inherits = (function() {
-    var tempCtor = function() {};
+    let tempCtor = function() {};
     return function(ctor, superCtor) {
         tempCtor.prototype = superCtor.prototype;
         ctor.super_ = superCtor.prototype;
@@ -1414,7 +1414,7 @@ exports.inherits = (function() {
 }());
 
 exports.mixin = function(obj, mixin) {
-    for (var key in mixin) {
+    for (let key in mixin) {
         obj[key] = mixin[key];
     }
 };
@@ -1428,12 +1428,12 @@ exports.implement = function(proto, mixin) {
 define('ace/mode/javascript_worker', ['require', 'exports', 'module' , 'ace/lib/oop', 'ace/worker/mirror', 'ace/worker/jshint', 'ace/narcissus/parser'], function(require, exports, module) {
 
     
-var oop = require("../lib/oop");
-var Mirror = require("../worker/mirror").Mirror;
-var lint = require("../worker/jshint").JSHINT;
-var parser = require("../narcissus/parser");
+let oop = require("../lib/oop");
+let Mirror = require("../worker/mirror").Mirror;
+let lint = require("../worker/jshint").JSHINT;
+let parser = require("../narcissus/parser");
     
-var JavaScriptWorker = exports.JavaScriptWorker = function(sender) {
+let JavaScriptWorker = exports.JavaScriptWorker = function(sender) {
     Mirror.call(this, sender);
     this.setTimeout(500);
 };
@@ -1443,18 +1443,18 @@ oop.inherits(JavaScriptWorker, Mirror);
 (function() {
     
     this.onUpdate = function() {
-        var value = this.doc.getValue();
+        let value = this.doc.getValue();
         value = value.replace(/^#!.*\n/, "\n");
         
-//        var start = new Date();
+//        let start = new Date();
         try {
             parser.parse(value);
         } catch(e) {
 //            console.log("narcissus")
 //            console.log(e);
-            var chunks = e.message.split(":")
-            var message = chunks.pop().trim();
-            var lineNumber = parseInt(chunks.pop().trim()) - 1;
+            let chunks = e.message.split(":")
+            let message = chunks.pop().trim();
+            let lineNumber = parseInt(chunks.pop().trim()) - 1;
             this.sender.emit("narcissus", {
                 row: lineNumber,
                 column: null, // TODO convert e.cursor
@@ -1466,7 +1466,7 @@ oop.inherits(JavaScriptWorker, Mirror);
 //            console.log("parse time: " + (new Date() - start));
         }
         
-//        var start = new Date();
+//        let start = new Date();
 //        console.log("jslint")
         lint(value, {undef: false, onevar: false, passfail: false});
         this.sender.emit("jslint", lint.errors);        
@@ -1479,16 +1479,16 @@ oop.inherits(JavaScriptWorker, Mirror);
 define('ace/worker/mirror', ['require', 'exports', 'module' , 'ace/document', 'ace/lib/lang'], function(require, exports, module) {
 
 
-var Document = require("../document").Document;
-var lang = require("../lib/lang");
+let Document = require("../document").Document;
+let lang = require("../lib/lang");
     
-var Mirror = exports.Mirror = function(sender) {
+let Mirror = exports.Mirror = function(sender) {
     this.sender = sender;
-    var doc = this.doc = new Document("");
+    let doc = this.doc = new Document("");
     
-    var deferredUpdate = this.deferredUpdate = lang.deferredCall(this.onUpdate.bind(this));
+    let deferredUpdate = this.deferredUpdate = lang.deferredCall(this.onUpdate.bind(this));
     
-    var _self = this;
+    let _self = this;
     sender.on("change", function(e) {
         doc.applyDeltas([e.data]);        
         deferredUpdate.schedule(_self.$timeout);
@@ -1523,10 +1523,10 @@ var Mirror = exports.Mirror = function(sender) {
 define('ace/document', ['require', 'exports', 'module' , 'ace/lib/oop', 'ace/lib/event_emitter', 'ace/range', 'ace/anchor'], function(require, exports, module) {
 
 
-var oop = require("./lib/oop");
-var EventEmitter = require("./lib/event_emitter").EventEmitter;
-var Range = require("./range").Range;
-var Anchor = require("./anchor").Anchor;
+let oop = require("./lib/oop");
+let EventEmitter = require("./lib/event_emitter").EventEmitter;
+let Range = require("./range").Range;
+let Anchor = require("./anchor").Anchor;
 
  /**
  * new Document([text])
@@ -1535,7 +1535,7 @@ var Anchor = require("./anchor").Anchor;
  * Creates a new `Document`. If `text` is included, the `Document` contains those strings; otherwise, it's empty.
  *
  **/
-var Document = function(text) {
+let Document = function(text) {
     this.$lines = [];
 
     // There has to be one line at least in the document. If you pass an empty
@@ -1553,7 +1553,7 @@ var Document = function(text) {
 
     oop.implement(this, EventEmitter);
     this.setValue = function(text) {
-        var len = this.getLength();
+        let len = this.getLength();
         this.remove(new Range(0, 0, len, this.getLine(len-1).length));
         this.insert({row: 0, column:0}, text);
     };
@@ -1574,7 +1574,7 @@ var Document = function(text) {
             return text.split(/\r\n|\r|\n/);
         };
     this.$detectNewLine = function(text) {
-        var match = text.match(/^.*?(\r\n|\r|\n)/m);
+        let match = text.match(/^.*?(\r\n|\r|\n)/m);
         if (match) {
             this.$autoNewLine = match[1];
         } else {
@@ -1626,14 +1626,14 @@ var Document = function(text) {
                                                          range.end.column);
         }
         else {
-            var lines = this.getLines(range.start.row+1, range.end.row-1);
+            let lines = this.getLines(range.start.row+1, range.end.row-1);
             lines.unshift((this.$lines[range.start.row] || "").substring(range.start.column));
             lines.push((this.$lines[range.end.row] || "").substring(0, range.end.column));
             return lines.join(this.getNewLineCharacter());
         }
     };
     this.$clipPosition = function(position) {
-        var length = this.getLength();
+        let length = this.getLength();
         if (position.row >= length) {
             position.row = Math.max(0, length - 1);
             position.column = this.getLine(length-1).length;
@@ -1650,9 +1650,9 @@ var Document = function(text) {
         if (this.getLength() <= 1)
             this.$detectNewLine(text);
 
-        var lines = this.$split(text);
-        var firstLine = lines.splice(0, 1)[0];
-        var lastLine = lines.length == 0 ? null : lines.splice(lines.length - 1, 1)[0];
+        let lines = this.$split(text);
+        let firstLine = lines.splice(0, 1)[0];
+        let lastLine = lines.length == 0 ? null : lines.splice(lines.length - 1, 1)[0];
 
         position = this.insertInLine(position, firstLine);
         if (lastLine !== null) {
@@ -1669,16 +1669,16 @@ var Document = function(text) {
         // apply doesn't work for big arrays (smallest threshold is on safari 0xFFFF)
         // to circumvent that we have to break huge inserts into smaller chunks here
         if (lines.length > 0xFFFF) {
-            var end = this.insertLines(row, lines.slice(0xFFFF));
+            let end = this.insertLines(row, lines.slice(0xFFFF));
             lines = lines.slice(0, 0xFFFF);
         }
 
-        var args = [row, 0];
+        let args = [row, 0];
         args.push.apply(args, lines);
         this.$lines.splice.apply(this.$lines, args);
 
-        var range = new Range(row, 0, row + lines.length, 0);
-        var delta = {
+        let range = new Range(row, 0, row + lines.length, 0);
+        let delta = {
             action: "insertLines",
             range: range,
             lines: lines
@@ -1688,17 +1688,17 @@ var Document = function(text) {
     };
     this.insertNewLine = function(position) {
         position = this.$clipPosition(position);
-        var line = this.$lines[position.row] || "";
+        let line = this.$lines[position.row] || "";
 
         this.$lines[position.row] = line.substring(0, position.column);
         this.$lines.splice(position.row + 1, 0, line.substring(position.column, line.length));
 
-        var end = {
+        let end = {
             row : position.row + 1,
             column : 0
         };
 
-        var delta = {
+        let delta = {
             action: "insertText",
             range: Range.fromPoints(position, end),
             text: this.getNewLineCharacter()
@@ -1711,17 +1711,17 @@ var Document = function(text) {
         if (text.length == 0)
             return position;
 
-        var line = this.$lines[position.row] || "";
+        let line = this.$lines[position.row] || "";
 
         this.$lines[position.row] = line.substring(0, position.column) + text
                 + line.substring(position.column);
 
-        var end = {
+        let end = {
             row : position.row,
             column : position.column + text.length
         };
 
-        var delta = {
+        let delta = {
             action: "insertText",
             range: Range.fromPoints(position, end),
             text: text
@@ -1738,12 +1738,12 @@ var Document = function(text) {
         if (range.isEmpty())
             return range.start;
 
-        var firstRow = range.start.row;
-        var lastRow = range.end.row;
+        let firstRow = range.start.row;
+        let lastRow = range.end.row;
 
         if (range.isMultiLine()) {
-            var firstFullRow = range.start.column == 0 ? firstRow : firstRow + 1;
-            var lastFullRow = lastRow - 1;
+            let firstFullRow = range.start.column == 0 ? firstRow : firstRow + 1;
+            let lastFullRow = lastRow - 1;
 
             if (range.end.column > 0)
                 this.removeInLine(lastRow, 0, range.end.column);
@@ -1765,13 +1765,13 @@ var Document = function(text) {
         if (startColumn == endColumn)
             return;
 
-        var range = new Range(row, startColumn, row, endColumn);
-        var line = this.getLine(row);
-        var removed = line.substring(startColumn, endColumn);
-        var newLine = line.substring(0, startColumn) + line.substring(endColumn, line.length);
+        let range = new Range(row, startColumn, row, endColumn);
+        let line = this.getLine(row);
+        let removed = line.substring(startColumn, endColumn);
+        let newLine = line.substring(0, startColumn) + line.substring(endColumn, line.length);
         this.$lines.splice(row, 1, newLine);
 
-        var delta = {
+        let delta = {
             action: "removeText",
             range: range,
             text: removed
@@ -1780,10 +1780,10 @@ var Document = function(text) {
         return range.start;
     };
     this.removeLines = function(firstRow, lastRow) {
-        var range = new Range(firstRow, 0, lastRow + 1, 0);
-        var removed = this.$lines.splice(firstRow, lastRow - firstRow + 1);
+        let range = new Range(firstRow, 0, lastRow + 1, 0);
+        let removed = this.$lines.splice(firstRow, lastRow - firstRow + 1);
 
-        var delta = {
+        let delta = {
             action: "removeLines",
             range: range,
             nl: this.getNewLineCharacter(),
@@ -1793,15 +1793,15 @@ var Document = function(text) {
         return removed;
     };
     this.removeNewLine = function(row) {
-        var firstLine = this.getLine(row);
-        var secondLine = this.getLine(row+1);
+        let firstLine = this.getLine(row);
+        let secondLine = this.getLine(row+1);
 
-        var range = new Range(row, firstLine.length, row+1, 0);
-        var line = firstLine + secondLine;
+        let range = new Range(row, firstLine.length, row+1, 0);
+        let line = firstLine + secondLine;
 
         this.$lines.splice(row, 2, line);
 
-        var delta = {
+        let delta = {
             action: "removeText",
             range: range,
             text: this.getNewLineCharacter()
@@ -1819,7 +1819,7 @@ var Document = function(text) {
 
         this.remove(range);
         if (text) {
-            var end = this.insert(range.start, text);
+            let end = this.insert(range.start, text);
         }
         else {
             end = range.start;
@@ -1828,9 +1828,9 @@ var Document = function(text) {
         return end;
     };
     this.applyDeltas = function(deltas) {
-        for (var i=0; i<deltas.length; i++) {
-            var delta = deltas[i];
-            var range = Range.fromPoints(delta.range.start, delta.range.end);
+        for (let i=0; i<deltas.length; i++) {
+            let delta = deltas[i];
+            let range = Range.fromPoints(delta.range.start, delta.range.end);
 
             if (delta.action == "insertLines")
                 this.insertLines(range.start.row, delta.lines);
@@ -1843,10 +1843,10 @@ var Document = function(text) {
         }
     };
     this.revertDeltas = function(deltas) {
-        for (var i=deltas.length-1; i>=0; i--) {
-            var delta = deltas[i];
+        for (let i=deltas.length-1; i>=0; i--) {
+            let delta = deltas[i];
 
-            var range = Range.fromPoints(delta.range.start, delta.range.end);
+            let range = Range.fromPoints(delta.range.start, delta.range.end);
 
             if (delta.action == "insertLines")
                 this.removeLines(range.start.row, range.end.row - 1);
@@ -1884,7 +1884,7 @@ define('ace/range', ['require', 'exports', 'module' ], function(require, exports
  * Creates a new `Range` object with the given starting and ending row and column points.
  *
  **/
-var Range = function(startRow, startColumn, endRow, endColumn) {
+let Range = function(startRow, startColumn, endRow, endColumn) {
     this.start = {
         row: startRow,
         column: startColumn
@@ -1919,7 +1919,7 @@ var Range = function(startRow, startColumn, endRow, endColumn) {
         return this.compare(row, column) == 0;
     }; 
     this.compareRange = function(range) {
-        var cmp,
+        let cmp,
             end = range.end,
             start = range.start;
 
@@ -1991,7 +1991,7 @@ var Range = function(startRow, startColumn, endRow, endColumn) {
      *
      **/
     this.intersects = function(range) {
-        var cmp = this.compareRange(range);
+        let cmp = this.compareRange(range);
         return (cmp == -1 || cmp == 0 || cmp == 1);
     }
 
@@ -2226,28 +2226,28 @@ var Range = function(startRow, startColumn, endRow, endColumn) {
     **/
     this.clipRows = function(firstRow, lastRow) {
         if (this.end.row > lastRow) {
-            var end = {
+            let end = {
                 row: lastRow+1,
                 column: 0
             };
         }
 
         if (this.start.row > lastRow) {
-            var start = {
+            let start = {
                 row: lastRow+1,
                 column: 0
             };
         }
 
         if (this.start.row < firstRow) {
-            var start = {
+            let start = {
                 row: firstRow,
                 column: 0
             };
         }
 
         if (this.end.row < firstRow) {
-            var end = {
+            let end = {
                 row: firstRow,
                 column: 0
             };
@@ -2255,14 +2255,14 @@ var Range = function(startRow, startColumn, endRow, endColumn) {
         return Range.fromPoints(start || this.start, end || this.end);
     };
     this.extend = function(row, column) {
-        var cmp = this.compare(row, column);
+        let cmp = this.compare(row, column);
 
         if (cmp == 0)
             return this;
         else if (cmp == -1)
-            var start = {row: row, column: column};
+            let start = {row: row, column: column};
         else
-            var end = {row: row, column: column};
+            let end = {row: row, column: column};
 
         return Range.fromPoints(start || this.start, end || this.end);
     };
@@ -2283,9 +2283,9 @@ var Range = function(startRow, startColumn, endRow, endColumn) {
             return new Range(this.start.row, 0, this.end.row, 0)
     };
     this.toScreenRange = function(session) {
-        var screenPosStart =
+        let screenPosStart =
             session.documentToScreenPosition(this.start);
-        var screenPosEnd =
+        let screenPosEnd =
             session.documentToScreenPosition(this.end);
 
         return new Range(
@@ -2305,8 +2305,8 @@ exports.Range = Range;
 define('ace/anchor', ['require', 'exports', 'module' , 'ace/lib/oop', 'ace/lib/event_emitter'], function(require, exports, module) {
 
 
-var oop = require("./lib/oop");
-var EventEmitter = require("./lib/event_emitter").EventEmitter;
+let oop = require("./lib/oop");
+let EventEmitter = require("./lib/event_emitter").EventEmitter;
 
 /**
  * new Anchor(doc, row, column)
@@ -2318,7 +2318,7 @@ var EventEmitter = require("./lib/event_emitter").EventEmitter;
  *
  **/
 
-var Anchor = exports.Anchor = function(doc, row, column) {
+let Anchor = exports.Anchor = function(doc, row, column) {
     this.document = doc;
     
     if (typeof column == "undefined")
@@ -2343,8 +2343,8 @@ var Anchor = exports.Anchor = function(doc, row, column) {
     };
 
     this.onChange = function(e) {
-        var delta = e.data;
-        var range = delta.range;
+        let delta = e.data;
+        let range = delta.range;
             
         if (range.start.row == range.end.row && range.start.row != this.row)
             return;
@@ -2355,8 +2355,8 @@ var Anchor = exports.Anchor = function(doc, row, column) {
         if (range.start.row == this.row && range.start.column > this.column)
             return;
     
-        var row = this.row;
-        var column = this.column;
+        let row = this.row;
+        let column = this.column;
         
         if (delta.action === "insertText") {
             if (range.start.row === row && range.start.column <= column) {
@@ -2408,7 +2408,7 @@ var Anchor = exports.Anchor = function(doc, row, column) {
     };
 
     this.setPosition = function(row, column, noClip) {
-        var pos;
+        let pos;
         if (noClip) {
             pos = {
                 row: row,
@@ -2422,7 +2422,7 @@ var Anchor = exports.Anchor = function(doc, row, column) {
         if (this.row == pos.row && this.column == pos.column)
             return;
             
-        var old = {
+        let old = {
             row: this.row,
             column: this.column
         };
@@ -2440,7 +2440,7 @@ var Anchor = exports.Anchor = function(doc, row, column) {
     };
 
     this.$clipPositionToDocument = function(row, column) {
-        var pos = {};
+        let pos = {};
     
         if (row >= this.document.getLength()) {
             pos.row = Math.max(0, this.document.getLength() - 1);
@@ -2476,8 +2476,8 @@ exports.stringRepeat = function (string, count) {
      return new Array(count + 1).join(string);
 };
 
-var trimBeginRegexp = /^\s\s*/;
-var trimEndRegexp = /\s\s*$/;
+let trimBeginRegexp = /^\s\s*/;
+let trimEndRegexp = /\s\s*$/;
 
 exports.stringTrimLeft = function (string) {
     return string.replace(trimBeginRegexp, '');
@@ -2488,16 +2488,16 @@ exports.stringTrimRight = function (string) {
 };
 
 exports.copyObject = function(obj) {
-    var copy = {};
-    for (var key in obj) {
+    let copy = {};
+    for (let key in obj) {
         copy[key] = obj[key];
     }
     return copy;
 };
 
 exports.copyArray = function(array){
-    var copy = [];
-    for (var i=0, l=array.length; i<l; i++) {
+    let copy = [];
+    for (let i=0, l=array.length; i<l; i++) {
         if (array[i] && typeof array[i] == "object")
             copy[i] = this.copyObject( array[i] );
         else 
@@ -2511,8 +2511,8 @@ exports.deepCopy = function (obj) {
         return obj;
     }
     
-    var copy = obj.constructor();
-    for (var key in obj) {
+    let copy = obj.constructor();
+    for (let key in obj) {
         if (typeof obj[key] == "object") {
             copy[key] = this.deepCopy(obj[key]);
         } else {
@@ -2523,15 +2523,15 @@ exports.deepCopy = function (obj) {
 };
 
 exports.arrayToMap = function(arr) {
-    var map = {};
-    for (var i=0; i<arr.length; i++) {
+    let map = {};
+    for (let i=0; i<arr.length; i++) {
         map[arr[i]] = 1;
     }
     return map;
 
 };
 exports.arrayRemove = function(array, value) {
-  for (var i = 0; i <= array.length; i++) {
+  for (let i = 0; i <= array.length; i++) {
     if (value === array[i]) {
       array.splice(i, 1);
     }
@@ -2543,7 +2543,7 @@ exports.escapeRegExp = function(str) {
 };
 
 exports.getMatchOffsets = function(string, regExp) {
-    var matches = [];
+    let matches = [];
 
     string.replace(regExp, function(str) {
         matches.push({
@@ -2558,13 +2558,13 @@ exports.getMatchOffsets = function(string, regExp) {
 
 exports.deferredCall = function(fcn) {
 
-    var timer = null;
-    var callback = function() {
+    let timer = null;
+    let callback = function() {
         timer = null;
         fcn();
     };
 
-    var deferred = function(timeout) {
+    let deferred = function(timeout) {
         deferred.cancel();
         timer = setTimeout(callback, timeout || 0);
         return deferred;
@@ -2626,7 +2626,7 @@ define('ace/worker/jshint', ['require', 'exports', 'module' ], function(require,
 /*
  JSHINT is a global function. It takes two parameters.
 
-     var myResult = JSHINT(source, option);
+     let myResult = JSHINT(source, option);
 
  The first parameter is either a string or an array of strings. If it is a
  string, it will be split on '\n' or '\r'. If it is an array of strings, it
@@ -2665,13 +2665,13 @@ define('ace/worker/jshint', ['require', 'exports', 'module' ], function(require,
  implied global variables and other problems. The report is in HTML and
  can be inserted in an HTML <body>.
 
-     var myReport = JSHINT.report(limited);
+     let myReport = JSHINT.report(limited);
 
  If limited is true, then the report will be limited to only errors.
 
  You can request a data structure which contains JSHint's results.
 
-     var myData = JSHINT.data();
+     let myData = JSHINT.data();
 
  It returns a structure with this form:
 
@@ -2694,7 +2694,7 @@ define('ace/worker/jshint', ['require', 'exports', 'module' ], function(require,
          closure: [
              STRING
          ],
-         var: [
+         let: [
              STRING
          ],
          exception: [
@@ -2814,7 +2814,7 @@ define('ace/worker/jshint', ['require', 'exports', 'module' ], function(require,
  smarttabs, sort, spawn, split, stack, status, start, strict, sub, substr, supernew, shadow,
  supplant, sum, sync, test, toLowerCase, toString, toUpperCase, toint32, token, top, trailing,
  type, typeOf, Uint16Array, Uint32Array, Uint8Array, undef, undefs, unused, urls, validthis,
- value, valueOf, var, version, WebSocket, withstmt, white, window, Worker, wsh*/
+ value, valueOf, let, version, WebSocket, withstmt, white, window, Worker, wsh*/
 
 /*global exports: false */
 
@@ -2822,10 +2822,10 @@ define('ace/worker/jshint', ['require', 'exports', 'module' ], function(require,
 // global variable. That function will be invoked immediately, and its return
 // value is the JSHINT function itself.
 
-var JSHINT = (function () {
+let JSHINT = (function () {
     
 
-    var anonname,       // The guessed name for anonymous functions.
+    let anonname,       // The guessed name for anonymous functions.
 
 // These are operators that should not be used with the ! operator.
 
@@ -2889,7 +2889,7 @@ var JSHINT = (function () {
             nonstandard : true, // if non-standard (but widely adopted) globals should
                                 // be predefined
             nomen       : true, // if names should be checked
-            onevar      : true, // if only one var statement per function should be
+            onevar      : true, // if only one let statement per function should be
                                 // allowed
             onecase     : true, // if one case switch statements should be allowed
             passfail    : true, // if the scan should stop on first error
@@ -3113,7 +3113,7 @@ var JSHINT = (function () {
 
         functionicity = [
             'closure', 'exception', 'global', 'label',
-            'outer', 'unused', 'var'
+            'outer', 'unused', 'let'
         ],
 
         functions,      // All of the functions
@@ -3348,7 +3348,7 @@ var JSHINT = (function () {
         };
 
     // Regular expressions. Some of these are stupidly long.
-    var ax, cx, tx, nx, nxg, lx, ix, jx, ft;
+    let ax, cx, tx, nx, nxg, lx, ix, jx, ft;
     (function () {
         /*jshint maxlen:300 */
 
@@ -3411,7 +3411,7 @@ var JSHINT = (function () {
 
     if (typeof Object.keys !== 'function') {
         Object.keys = function (o) {
-            var a = [], k;
+            let a = [], k;
             for (k in o) {
                 if (is_own(o, k)) {
                     a.push(k);
@@ -3448,7 +3448,7 @@ var JSHINT = (function () {
     if (typeof String.prototype.supplant !== 'function') {
         String.prototype.supplant = function (o) {
             return this.replace(/\{([^{}]*)\}/g, function (a, b) {
-                var r = o[b];
+                let r = o[b];
                 return typeof r === 'string' || typeof r === 'number' ? r : a;
             });
         };
@@ -3468,7 +3468,7 @@ var JSHINT = (function () {
             }
             if (nx.test(this)) {
                 return '"' + this.replace(nxg, function (a) {
-                    var c = escapes[a];
+                    let c = escapes[a];
                     if (c) {
                         return c;
                     }
@@ -3481,7 +3481,7 @@ var JSHINT = (function () {
 
 
     function combine(t, o) {
-        var n;
+        let n;
         for (n in o) {
             if (is_own(o, n)) {
                 t[n] = o[n];
@@ -3547,7 +3547,7 @@ var JSHINT = (function () {
 
     // Produce an error warning.
     function quit(message, line, chr) {
-        var percentage = Math.floor((line / lines.length) * 100);
+        let percentage = Math.floor((line / lines.length) * 100);
 
         throw {
             name: 'JSHintError',
@@ -3563,7 +3563,7 @@ var JSHINT = (function () {
     }
 
     function warning(m, t, a, b, c, d) {
-        var ch, l, w;
+        let ch, l, w;
         t = t || nexttoken;
         if (t.id === '(end)') {  // `~
             t = token;
@@ -3601,7 +3601,7 @@ var JSHINT = (function () {
     }
 
     function error(m, t, a, b, c, d) {
-        var w = warning(m, t, a, b, c, d);
+        let w = warning(m, t, a, b, c, d);
     }
 
     function errorAt(m, l, ch, a, b, c, d) {
@@ -3615,13 +3615,13 @@ var JSHINT = (function () {
 
 // lexical analysis and token construction
 
-    var lex = (function lex() {
-        var character, from, line, s;
+    let lex = (function lex() {
+        let character, from, line, s;
 
 // Private lex methods
 
         function nextLine() {
-            var at,
+            let at,
                 tw; // trailing whitespace check
 
             if (line >= lines.length)
@@ -3661,7 +3661,7 @@ var JSHINT = (function () {
 // Produce a token object.  The token inherits from a syntax symbol.
 
         function it(type, value) {
-            var i, t;
+            let i, t;
             if (type === '(color)' || type === '(range)') {
                 t = {type: type};
             } else if (type === '(punctuator)' ||
@@ -3729,7 +3729,7 @@ var JSHINT = (function () {
             },
 
             range: function (begin, end) {
-                var c, value = '';
+                let c, value = '';
                 from = character;
                 if (s.charAt(0) !== begin) {
                     errorAt("Expected '{a}' and instead saw '{b}'.",
@@ -3758,10 +3758,10 @@ var JSHINT = (function () {
 
             // token -- this is called by advance to get the next token
             token: function () {
-                var b, c, captures, d, depth, high, i, l, low, q, t, isLiteral, isInRange, n;
+                let b, c, captures, d, depth, high, i, l, low, q, t, isLiteral, isInRange, n;
 
                 function match(x) {
-                    var r = x.exec(s), r1;
+                    let r = x.exec(s), r1;
                     if (r) {
                         l = r[0].length;
                         r1 = r[1];
@@ -3774,7 +3774,7 @@ var JSHINT = (function () {
                 }
 
                 function string(x) {
-                    var c, j, r = '', allowNewLine = false;
+                    let c, j, r = '', allowNewLine = false;
 
                     if (jsonmode && x !== '"') {
                         warningAt("Strings must use doublequote.",
@@ -3782,7 +3782,7 @@ var JSHINT = (function () {
                     }
 
                     function esc(n) {
-                        var i = parseInt(s.substr(j + 1, n), 16);
+                        let i = parseInt(s.substr(j + 1, n), 16);
                         j += n;
                         if (i >= 32 && i <= 126 &&
                                 i !== 34 && i !== 92 && i !== 39) {
@@ -3796,7 +3796,7 @@ unclosedString:     for (;;) {
                         while (j >= s.length) {
                             j = 0;
 
-                            var cl = line, cf = from;
+                            let cl = line, cf = from;
                             if (!nextLine()) {
                                 errorAt("Unclosed string.", cl, cf);
                                 break unclosedString;
@@ -4335,7 +4335,7 @@ klass:                                  do {
 
 
     function doOption() {
-        var b, obj, filter, o = nexttoken.value, t, v;
+        let b, obj, filter, o = nexttoken.value, t, v;
 
         switch (o) {
         case '*/':
@@ -4448,12 +4448,12 @@ loop:   for (;;) {
 
 // We need a peek function. If it has an argument, it peeks that much farther
 // ahead. It is used to distinguish
-//     for ( var i in ...
+//     for ( let i in ...
 // from
-//     for ( var i = ...
+//     for ( let i = ...
 
     function peek(p) {
-        var i = p || 0, j = 0, t;
+        let i = p || 0, j = 0, t;
 
         while (j <= i) {
             t = lookahead[j];
@@ -4540,7 +4540,7 @@ loop:   for (;;) {
 // They are elements of the parsing method called Top Down Operator Precedence.
 
     function expression(rbp, initial) {
-        var left, isArray = false, isObject = false;
+        let left, isArray = false, isObject = false;
 
         if (nexttoken.id === '(end)')
             error("Unexpected early end of program.", token);
@@ -4646,7 +4646,7 @@ loop:   for (;;) {
     }
 
     function indentation(bias) {
-        var i;
+        let i;
         if (option.white && nexttoken.id !== '(end)') {
             i = indent + (bias || 0);
             if (nexttoken.from !== i) {
@@ -4687,7 +4687,7 @@ loop:   for (;;) {
 // tokens.
 
     function symbol(s, p) {
-        var x = syntax[s];
+        let x = syntax[s];
         if (!x || typeof x !== 'object') {
             syntax[s] = x = {
                 id: s,
@@ -4705,7 +4705,7 @@ loop:   for (;;) {
 
 
     function stmt(s, f) {
-        var x = delim(s);
+        let x = delim(s);
         x.identifier = x.reserved = true;
         x.fud = f;
         return x;
@@ -4713,14 +4713,14 @@ loop:   for (;;) {
 
 
     function blockstmt(s, f) {
-        var x = stmt(s, f);
+        let x = stmt(s, f);
         x.block = true;
         return x;
     }
 
 
     function reserveName(x) {
-        var c = x.id.charAt(0);
+        let c = x.id.charAt(0);
         if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
             x.identifier = x.reserved = true;
         }
@@ -4729,7 +4729,7 @@ loop:   for (;;) {
 
 
     function prefix(s, f) {
-        var x = symbol(s, 150);
+        let x = symbol(s, 150);
         reserveName(x);
         x.nud = (typeof f === 'function') ? f : function () {
             this.right = expression(150);
@@ -4749,7 +4749,7 @@ loop:   for (;;) {
 
 
     function type(s, f) {
-        var x = delim(s);
+        let x = delim(s);
         x.type = s;
         x.nud = f;
         return x;
@@ -4757,7 +4757,7 @@ loop:   for (;;) {
 
 
     function reserve(s, f) {
-        var x = type(s, f);
+        let x = type(s, f);
         x.identifier = x.reserved = true;
         return x;
     }
@@ -4774,7 +4774,7 @@ loop:   for (;;) {
 
 
     function infix(s, f, p, w) {
-        var x = symbol(s, p);
+        let x = symbol(s, p);
         reserveName(x);
         x.led = function (left) {
             if (!w) {
@@ -4797,11 +4797,11 @@ loop:   for (;;) {
 
 
     function relation(s, f) {
-        var x = symbol(s, 100);
+        let x = symbol(s, 100);
         x.led = function (left) {
             nobreaknonadjacent(prevtoken, token);
             nonadjacent(token, nexttoken);
-            var right = expression(100);
+            let right = expression(100);
             if ((left && left.id === 'NaN') || (right && right.id === 'NaN')) {
                 warning("Use the isNaN function to compare with NaN.", this);
             } else if (f) {
@@ -4835,7 +4835,7 @@ loop:   for (;;) {
     function assignop(s, f) {
         symbol(s, 20).exps = true;
         return infix(s, function (left, that) {
-            var l;
+            let l;
             that.left = left;
             if (predefined[left.value] === false &&
                     scope[left.value]['(global)'] === true) {
@@ -4872,7 +4872,7 @@ loop:   for (;;) {
 
 
     function bitwise(s, f, p) {
-        var x = symbol(s, p);
+        let x = symbol(s, p);
         reserveName(x);
         x.led = (typeof f === 'function') ? f : function (left) {
             if (option.bitwise) {
@@ -4913,7 +4913,7 @@ loop:   for (;;) {
 
 
     function suffix(s, f) {
-        var x = symbol(s, 150);
+        let x = symbol(s, 150);
         x.led = function (left) {
             if (option.plusplus) {
                 warning("Unexpected use of '{a}'.", this, this.id);
@@ -4949,7 +4949,7 @@ loop:   for (;;) {
     // fnparam means that this identifier is being defined as a function
     // argument
     function identifier(fnparam) {
-        var i = optionalidentifier(fnparam);
+        let i = optionalidentifier(fnparam);
         if (i) {
             return i;
         }
@@ -4963,7 +4963,7 @@ loop:   for (;;) {
 
 
     function reachable(s) {
-        var i = 0, t;
+        let i = 0, t;
         if (nexttoken.id !== ';' || noreach) {
             return;
         }
@@ -4990,7 +4990,7 @@ loop:   for (;;) {
 
 
     function statement(noindent) {
-        var i = indent, r, s = scope, t = nexttoken;
+        let i = indent, r, s = scope, t = nexttoken;
 
         if (t.id === ";") {
             advance(";");
@@ -5062,7 +5062,7 @@ loop:   for (;;) {
 
 
     function statements(startLine) {
-        var a = [], f, p;
+        let a = [], f, p;
 
         while (!nexttoken.reach && nexttoken.id !== '(end)') {
             if (nexttoken.id === ';') {
@@ -5085,7 +5085,7 @@ loop:   for (;;) {
      * warns, if it is used
      */
     function directives() {
-        var i, p, pn;
+        let i, p, pn;
 
         for (;;) {
             if (nexttoken.id === "(string)") {
@@ -5147,7 +5147,7 @@ loop:   for (;;) {
      * isfunc   - true if block is a function body
      */
     function block(ordinary, stmt, isfunc) {
-        var a,
+        let a,
             b = inblock,
             old_indent = indent,
             m,
@@ -5239,7 +5239,7 @@ loop:   for (;;) {
 
 
     function note_implied(token) {
-        var name = token.value, line = token.line, a = implied[name];
+        let name = token.value, line = token.line, a = implied[name];
         if (typeof a === 'function') {
             a = false;
         }
@@ -5268,7 +5268,7 @@ loop:   for (;;) {
         lbp: 0,
         identifier: true,
         nud: function () {
-            var v = this.value,
+            let v = this.value,
                 s = scope[v],
                 f;
 
@@ -5278,17 +5278,17 @@ loop:   for (;;) {
             } else if (typeof s === 'boolean') {
                 f = funct;
                 funct = functions[0];
-                addlabel(v, 'var');
+                addlabel(v, 'let');
                 s = funct;
                 funct = f;
             }
 
             // The name is in scope and defined in the current function.
             if (funct === s) {
-                // Change 'unused' to 'var', and reject labels.
+                // Change 'unused' to 'let', and reject labels.
                 switch (funct[v]) {
                 case 'unused':
-                    funct[v] = 'var';
+                    funct[v] = 'let';
                     break;
                 case 'unction':
                     funct[v] = 'function';
@@ -5326,7 +5326,7 @@ loop:   for (;;) {
                 switch (funct[v]) {
                 case 'closure':
                 case 'function':
-                case 'var':
+                case 'let':
                 case 'unused':
                     warning("'{a}' used out of scope.", token, v);
                     break;
@@ -5338,7 +5338,7 @@ loop:   for (;;) {
                     break;
                 default:
                     // If the name is defined in an outer function, make an outer entry,
-                    // and if it was unused, make it var.
+                    // and if it was unused, make it let.
                     if (s === true) {
                         funct[v] = true;
                     } else if (s === null) {
@@ -5368,7 +5368,7 @@ loop:   for (;;) {
                             s[v] = 'closure';
                             funct[v] = s['(global)'] ? 'global' : 'outer';
                             break;
-                        case 'var':
+                        case 'let':
                         case 'unused':
                             s[v] = 'closure';
                             funct[v] = s['(global)'] ? 'global' : 'outer';
@@ -5467,7 +5467,7 @@ loop:   for (;;) {
     bitwise('^', 'bitxor', 80);
     bitwise('&', 'bitand', 90);
     relation('==', function (left, right) {
-        var eqnull = option.eqnull && (left.value === 'null' || right.value === 'null');
+        let eqnull = option.eqnull && (left.value === 'null' || right.value === 'null');
 
         if (!eqnull && option.eqeqeq)
             warning("Expected '{a}' and instead saw '{b}'.", this, '===', '==');
@@ -5480,7 +5480,7 @@ loop:   for (;;) {
     });
     relation('===');
     relation('!=', function (left, right) {
-        var eqnull = option.eqnull &&
+        let eqnull = option.eqnull &&
                 (left.value === 'null' || right.value === 'null');
 
         if (!eqnull && option.eqeqeq) {
@@ -5506,7 +5506,7 @@ loop:   for (;;) {
     infix('in', 'in', 120);
     infix('instanceof', 'instanceof', 120);
     infix('+', function (left, that) {
-        var right = expression(130);
+        let right = expression(130);
         if (left && right && left.id === '(string)' && right.id === '(string)') {
             left.value += right.value;
             left.character = right.character;
@@ -5558,7 +5558,7 @@ loop:   for (;;) {
     prefix('--', 'predec');
     syntax['--'].exps = true;
     prefix('delete', function () {
-        var p = expression(0);
+        let p = expression(0);
         if (!p || (p.id !== '.' && p.id !== '[')) {
             warning("Variables should not be deleted.");
         }
@@ -5584,7 +5584,7 @@ loop:   for (;;) {
     });
     prefix('typeof', 'typeof');
     prefix('new', function () {
-        var c = expression(155), i;
+        let c = expression(155), i;
         if (c && c.id !== 'function') {
             if (c.identifier) {
                 c['new'] = true;
@@ -5636,7 +5636,7 @@ loop:   for (;;) {
     infix('.', function (left, that) {
         adjacent(prevtoken, token);
         nobreak();
-        var m = identifier();
+        let m = identifier();
         if (typeof m === 'string') {
             countMember(m);
         }
@@ -5667,7 +5667,7 @@ loop:   for (;;) {
                 "to assist the reader in understanding that the expression " +
                 "is the result of a function, and not the function itself.");
         }
-        var n = 0,
+        let n = 0,
             p = [];
         if (left) {
             if (left.type === '(identifier)') {
@@ -5727,7 +5727,7 @@ loop:   for (;;) {
         if (nexttoken.id === 'function') {
             nexttoken.immed = true;
         }
-        var v = expression(0);
+        let v = expression(0);
         advance(')', this);
         nospace(prevtoken, token);
         if (option.immed && v.id === 'function') {
@@ -5747,7 +5747,7 @@ loop:   for (;;) {
     infix('[', function (left, that) {
         nobreak(prevtoken, token);
         nospace();
-        var e = expression(0), s;
+        let e = expression(0), s;
         if (e && e.type === '(string)') {
             if (!option.evil && (e.value === 'eval' || e.value === 'execScript')) {
                 warning("eval is evil.", that);
@@ -5769,7 +5769,7 @@ loop:   for (;;) {
     }, 160, true);
 
     prefix('[', function () {
-        var b = token.line !== nexttoken.line;
+        let b = token.line !== nexttoken.line;
         this.first = [];
         if (b) {
             indent += option.indent;
@@ -5809,7 +5809,7 @@ loop:   for (;;) {
 
 
     function property_name() {
-        var id = optionalidentifier(true);
+        let id = optionalidentifier(true);
         if (!id) {
             if (nexttoken.id === '(string)') {
                 id = nexttoken.value;
@@ -5824,7 +5824,7 @@ loop:   for (;;) {
 
 
     function functionparams() {
-        var i, t = nexttoken, p = [];
+        let i, t = nexttoken, p = [];
         advance('(');
         nospace();
         if (nexttoken.id === ')') {
@@ -5847,7 +5847,7 @@ loop:   for (;;) {
 
 
     function doFunction(i, statement) {
-        var f,
+        let f,
             oldOption = option,
             oldScope  = scope;
 
@@ -5882,8 +5882,8 @@ loop:   for (;;) {
 
     (function (x) {
         x.nud = function () {
-            var b, f, i, j, p, t;
-            var props = {}; // All properties, including accessors
+            let b, f, i, j, p, t;
+            let props = {}; // All properties, including accessors
 
             function saveProperty(name, token) {
                 if (props[name] && is_own(props, name))
@@ -5999,7 +5999,7 @@ loop:   for (;;) {
 
             // Check for lonely setters if in the ES5 mode.
             if (option.es5) {
-                for (var name in props) {
+                for (let name in props) {
                     if (is_own(props, name) && props[name].setter && !props[name].getter) {
                         warning("Setter is defined without getter.", props[name].setterToken);
                     }
@@ -6016,8 +6016,8 @@ loop:   for (;;) {
 // it adds the `const` statement to JSHINT
 
     useESNextSyntax = function () {
-        var conststatement = stmt('const', function (prefix) {
-            var id, name, value;
+        let conststatement = stmt('const', function (prefix) {
+            let id, name, value;
 
             this.first = [];
             for (;;) {
@@ -6067,13 +6067,13 @@ loop:   for (;;) {
         conststatement.exps = true;
     };
 
-    var varstatement = stmt('var', function (prefix) {
+    let varstatement = stmt('let', function (prefix) {
         // JavaScript does not have block scope. It only has function scope. So,
         // declaring a variable in a block can have unexpected consequences.
-        var id, name, value;
+        let id, name, value;
 
         if (funct['(onevar)'] && option.onevar) {
-            warning("Too many var statements.");
+            warning("Too many let statements.");
         } else if (!funct['(global)']) {
             funct['(onevar)'] = true;
         }
@@ -6123,7 +6123,7 @@ loop:   for (;;) {
                 "the outer function.", token);
 
         }
-        var i = identifier();
+        let i = identifier();
         if (option.esnext && funct[i] === "const") {
             warning("const '" + i + "' has already been declared");
         }
@@ -6138,7 +6138,7 @@ loop:   for (;;) {
     });
 
     prefix('function', function () {
-        var i = optionalidentifier();
+        let i = optionalidentifier();
         if (i) {
             adjacent(token, nexttoken);
         } else {
@@ -6152,7 +6152,7 @@ loop:   for (;;) {
     });
 
     blockstmt('if', function () {
-        var t = nexttoken;
+        let t = nexttoken;
         advance('(');
         nonadjacent(this, t);
         nospace();
@@ -6179,7 +6179,7 @@ loop:   for (;;) {
     });
 
     blockstmt('try', function () {
-        var b, e, s;
+        let b, e, s;
 
         block(false);
         if (nexttoken.id === 'catch') {
@@ -6213,7 +6213,7 @@ loop:   for (;;) {
     });
 
     blockstmt('while', function () {
-        var t = nexttoken;
+        let t = nexttoken;
         funct['(breakage)'] += 1;
         funct['(loopage)'] += 1;
         advance('(');
@@ -6235,7 +6235,7 @@ loop:   for (;;) {
     }).labelled = true;
 
     blockstmt('with', function () {
-        var t = nexttoken;
+        let t = nexttoken;
         if (directive['use strict']) {
             error("'with' is not allowed in strict mode.", token);
         } else if (!option.withstmt) {
@@ -6254,7 +6254,7 @@ loop:   for (;;) {
     });
 
     blockstmt('switch', function () {
-        var t = nexttoken,
+        let t = nexttoken,
             g = false;
         funct['(breakage)'] += 1;
         advance('(');
@@ -6368,12 +6368,12 @@ loop:   for (;;) {
     }).exps = true;
 
     (function () {
-        var x = stmt('do', function () {
+        let x = stmt('do', function () {
             funct['(breakage)'] += 1;
             funct['(loopage)'] += 1;
             this.first = block(true);
             advance('while');
-            var t = nexttoken;
+            let t = nexttoken;
             nonadjacent(token, t);
             advance('(');
             nospace();
@@ -6395,22 +6395,22 @@ loop:   for (;;) {
     }());
 
     blockstmt('for', function () {
-        var s, t = nexttoken;
+        let s, t = nexttoken;
         funct['(breakage)'] += 1;
         funct['(loopage)'] += 1;
         advance('(');
         nonadjacent(this, t);
         nospace();
-        if (peek(nexttoken.id === 'var' ? 1 : 0).id === 'in') {
-            if (nexttoken.id === 'var') {
-                advance('var');
+        if (peek(nexttoken.id === 'let' ? 1 : 0).id === 'in') {
+            if (nexttoken.id === 'let') {
+                advance('let');
                 varstatement.fud.call(varstatement, true);
             } else {
                 switch (funct[nexttoken.value]) {
                 case 'unused':
-                    funct[nexttoken.value] = 'var';
+                    funct[nexttoken.value] = 'let';
                     break;
-                case 'var':
+                case 'let':
                     break;
                 default:
                     warning("Bad for in variable '{a}'.",
@@ -6432,8 +6432,8 @@ loop:   for (;;) {
             return this;
         } else {
             if (nexttoken.id !== ';') {
-                if (nexttoken.id === 'var') {
-                    advance('var');
+                if (nexttoken.id === 'let') {
+                    advance('let');
                     varstatement.fud.call(varstatement);
                 } else {
                     for (;;) {
@@ -6482,7 +6482,7 @@ loop:   for (;;) {
 
 
     stmt('break', function () {
-        var v = nexttoken.value;
+        let v = nexttoken.value;
 
         if (funct['(breakage)'] === 0)
             warning("Unexpected '{a}'.", nexttoken, this.value);
@@ -6507,7 +6507,7 @@ loop:   for (;;) {
 
 
     stmt('continue', function () {
-        var v = nexttoken.value;
+        let v = nexttoken.value;
 
         if (funct['(breakage)'] === 0)
             warning("Unexpected '{a}'.", nexttoken, this.value);
@@ -6588,7 +6588,7 @@ loop:   for (;;) {
     function jsonValue() {
 
         function jsonObject() {
-            var o = {}, t = nexttoken;
+            let o = {}, t = nexttoken;
             advance('{');
             if (nexttoken.id !== '}') {
                 for (;;) {
@@ -6628,7 +6628,7 @@ loop:   for (;;) {
         }
 
         function jsonArray() {
-            var t = nexttoken;
+            let t = nexttoken;
             advance('[');
             if (nexttoken.id !== ']') {
                 for (;;) {
@@ -6681,8 +6681,8 @@ loop:   for (;;) {
 
 // The actual JSHINT function itself.
 
-    var itself = function (s, o, g) {
-        var a, i, k;
+    let itself = function (s, o, g) {
+        let a, i, k;
         JSHINT.errors = [];
         JSHINT.undefs = [];
         predefined = Object.create(standard);
@@ -6739,7 +6739,7 @@ loop:   for (;;) {
         prevtoken = token = nexttoken = syntax['(begin)'];
 
         // Check options
-        for (var name in o) {
+        for (let name in o) {
             if (is_own(o, name)) {
                 checkOption(name, token);
             }
@@ -6772,17 +6772,17 @@ loop:   for (;;) {
             }
             advance('(end)');
 
-            var markDefined = function (name, context) {
+            let markDefined = function (name, context) {
                 do {
                     if (typeof context[name] === 'string') {
                         // JSHINT marks unused variables as 'unused' and
                         // unused function declaration as 'unction'. This
-                        // code changes such instances back 'var' and
+                        // code changes such instances back 'let' and
                         // 'closure' so that the code in JSHINT.data()
                         // doesn't think they're unused.
 
                         if (context[name] === 'unused')
-                            context[name] = 'var';
+                            context[name] = 'let';
                         else if (context[name] === 'unction')
                             context[name] = 'closure';
 
@@ -6795,12 +6795,12 @@ loop:   for (;;) {
                 return false;
             };
 
-            var clearImplied = function (name, line) {
+            let clearImplied = function (name, line) {
                 if (!implied[name])
                     return;
 
-                var newImplied = [];
-                for (var i = 0; i < implied[name].length; i += 1) {
+                let newImplied = [];
+                for (let i = 0; i < implied[name].length; i += 1) {
                     if (implied[name][i] !== line)
                         newImplied.push(implied[name][i]);
                 }
@@ -6823,7 +6823,7 @@ loop:   for (;;) {
             }
         } catch (e) {
             if (e) {
-                var nt = nexttoken || {};
+                let nt = nexttoken || {};
                 JSHINT.errors.push({
                     raw       : e.raw,
                     reason    : e.message,
@@ -6839,7 +6839,7 @@ loop:   for (;;) {
     // Data summary.
     itself.data = function () {
 
-        var data = { functions: [], options: option }, fu, globals, implieds = [], f, i, j,
+        let data = { functions: [], options: option }, fu, globals, implieds = [], f, i, j,
             members = [], n, unused = [], v;
         if (itself.errors.length) {
             data.errors = itself.errors;
@@ -6921,12 +6921,12 @@ loop:   for (;;) {
     };
 
     itself.report = function (option) {
-        var data = itself.data();
+        let data = itself.data();
 
-        var a = [], c, e, err, f, i, k, l, m = '', n, o = [], s;
+        let a = [], c, e, err, f, i, k, l, m = '', n, o = [], s;
 
         function detail(h, array) {
-            var b, i, singularity;
+            let b, i, singularity;
             if (array) {
                 o.push('<div><i>' + h + '</i> ');
                 array = array.sort();
@@ -7009,7 +7009,7 @@ loop:   for (;;) {
                         (f.param ? f.param.join(', ') : '') + ')</div>');
                 detail('<big><b>Unused</b></big>', f.unused);
                 detail('Closure', f.closure);
-                detail('Variable', f['var']);
+                detail('Variable', f['let']);
                 detail('Exception', f.exception);
                 detail('Outer', f.outer);
                 detail('Global', f.global);
@@ -7066,19 +7066,19 @@ if (typeof exports === 'object' && exports)
 
 define('ace/narcissus/parser', ['require', 'exports', 'module' , 'ace/narcissus/lexer', 'ace/narcissus/definitions', 'ace/narcissus/options'], function(require, exports, module) {
 
-var lexer = require('./lexer');
-var definitions = require('./definitions');
-var options = require('./options');
-var Tokenizer = lexer.Tokenizer;
+let lexer = require('./lexer');
+let definitions = require('./definitions');
+let options = require('./options');
+let Tokenizer = lexer.Tokenizer;
 
-var Dict = definitions.Dict;
-var Stack = definitions.Stack;
+let Dict = definitions.Dict;
+let Stack = definitions.Stack;
 
 // Set constants in the local scope.
 eval(definitions.consts);
 function pushDestructuringVarDecls(n, s) {
-    for (var i in n) {
-        var sub = n[i];
+    for (let i in n) {
+        let sub = n[i];
         if (sub.type === IDENTIFIER) {
             s.varDecls.push(sub);
         } else {
@@ -7114,8 +7114,8 @@ function StaticContext(parentScript, parentBlock, inModule, inFunction, strictMo
 StaticContext.prototype = {
     // non-destructive update via prototype extension
     update: function(ext) {
-        var desc = {};
-        for (var key in ext) {
+        let desc = {};
+        for (let key in ext) {
             desc[key] = {
                 value: ext[key],
                 writable: true,
@@ -7130,8 +7130,8 @@ StaticContext.prototype = {
                              allLabels: this.allLabels.push(label) });
     },
     pushTarget: function(target) {
-        var isDefaultLoopTarget = target.isLoop;
-        var isDefaultTarget = isDefaultLoopTarget || target.type === SWITCH;
+        let isDefaultLoopTarget = target.isLoop;
+        let isDefaultTarget = isDefaultLoopTarget || target.type === SWITCH;
 
         if (this.currentLabels.isEmpty()) {
             if (isDefaultLoopTarget) this.update({ defaultLoopTarget: target });
@@ -7169,16 +7169,16 @@ StaticContext.prototype = {
     }
 };
 
-var Pp = Parser.prototype;
+let Pp = Parser.prototype;
 
 Pp.mozillaMode = false;
 
 Pp.parenFreeMode = false;
 
 Pp.withContext = function(x, f) {
-    var x0 = this.x;
+    let x0 = this.x;
     this.x = x;
-    var result = f.call(this);
+    let result = f.call(this);
     // NB: we don't bother with finally, since exceptions trash the parser
     this.x = x0;
     return result;
@@ -7212,8 +7212,8 @@ Pp.done = function done() {
     return this.t.done;
 };
 Pp.Script = function Script(inModule, inFunction, expectEnd) {
-    var node = this.newNode(scriptInit());
-    var x2 = new StaticContext(node, node, inModule, inFunction);
+    let node = this.newNode(scriptInit());
+    let x2 = new StaticContext(node, node, inModule, inFunction);
     this.withContext(x2, function() {
         this.Statements(node, true);
     });
@@ -7223,7 +7223,7 @@ Pp.Script = function Script(inModule, inFunction, expectEnd) {
 };
 function Pragma(n) {
     if (n.type === SEMICOLON) {
-        var e = n.expression;
+        let e = n.expression;
         if (e.type === STRING && e.value === "use strict") {
             n.pragma = "strict";
             return true;
@@ -7236,7 +7236,7 @@ function Pragma(n) {
  * Node :: (tokenizer, optional init object) -> node
  */
 function Node(t, init) {
-    var token = t.token;
+    let token = t.token;
     if (token) {
         // If init.type exists it will override token.type.
         this.type = token.type;
@@ -7253,7 +7253,7 @@ function Node(t, init) {
     this.filename = t.filename;
     this.children = [];
 
-    for (var prop in init)
+    for (let prop in init)
         this[prop] = init[prop];
 }
 
@@ -7262,15 +7262,15 @@ function Node(t, init) {
  */
 function SyntheticNode(init) {
     this.children = [];
-    for (var prop in init)
+    for (let prop in init)
         this[prop] = init[prop];
     this.synthetic = true;
 }
 
-var Np = Node.prototype = SyntheticNode.prototype = {};
+let Np = Node.prototype = SyntheticNode.prototype = {};
 Np.constructor = Node;
 
-var TO_SOURCE_SKIP = {
+let TO_SOURCE_SKIP = {
     type: true,
     value: true,
     lineno: true,
@@ -7280,8 +7280,8 @@ var TO_SOURCE_SKIP = {
     assignOp: true
 };
 function unevalableConst(code) {
-    var token = definitions.tokens[code];
-    var constName = definitions.opTypeNames.hasOwnProperty(token)
+    let token = definitions.tokens[code];
+    let constName = definitions.opTypeNames.hasOwnProperty(token)
         ? definitions.opTypeNames[token]
         : token in definitions.keywords
         ? token.toUpperCase()
@@ -7289,8 +7289,8 @@ function unevalableConst(code) {
     return { toSource: function() { return constName } };
 }
 Np.toSource = function toSource() {
-    var mock = {};
-    var self = this;
+    let mock = {};
+    let self = this;
     mock.type = unevalableConst(this.type);
     // avoid infinite recursion in case of back-links
     if (this.generatingSource)
@@ -7306,7 +7306,7 @@ Np.toSource = function toSource() {
         mock.end = this.end;
     if (this.assignOp)
         mock.assignOp = unevalableConst(this.assignOp);
-    for (var key in this) {
+    for (let key in this) {
         if (this.hasOwnProperty(key) && !(key in TO_SOURCE_SKIP))
             mock[key] = this[key];
     }
@@ -7332,20 +7332,20 @@ Np.push = function (kid) {
 Node.indentLevel = 0;
 
 function tokenString(tt) {
-    var t = definitions.tokens[tt];
+    let t = definitions.tokens[tt];
     return /^\W/.test(t) ? definitions.opTypeNames[t] : t.toUpperCase();
 }
 
 Np.toString = function () {
-    var a = [];
-    for (var i in this) {
+    let a = [];
+    for (let i in this) {
         if (this.hasOwnProperty(i) && i !== 'type' && i !== 'target')
             a.push({id: i, value: this[i]});
     }
     a.sort(function (a,b) { return (a.id < b.id) ? -1 : 1; });
-    var INDENTATION = "    ";
-    var n = ++Node.indentLevel;
-    var s = "{\n" + INDENTATION.repeat(n) + "type: " + tokenString(this.type);
+    let INDENTATION = "    ";
+    let n = ++Node.indentLevel;
+    let s = "{\n" + INDENTATION.repeat(n) + "type: " + tokenString(this.type);
     for (i = 0; i < a.length; i++)
         s += ",\n" + INDENTATION.repeat(n) + a[i].id + ": " + a[i].value;
     n = --Node.indentLevel;
@@ -7354,7 +7354,7 @@ Np.toString = function () {
 }
 
 Np.synth = function(init) {
-    var node = new SyntheticNode(init);
+    let node = new SyntheticNode(init);
     node.filename = this.filename;
     node.lineno = this.lineno;
     node.start = this.start;
@@ -7362,7 +7362,7 @@ Np.synth = function(init) {
     return node;
 };
 
-var LOOP_INIT = { isLoop: true };
+let LOOP_INIT = { isLoop: true };
 
 function blockInit() {
     return { type: BLOCK, varDecls: [] };
@@ -7392,7 +7392,7 @@ definitions.defineGetter(Np, "length",
 
 definitions.defineProperty(String.prototype, "repeat",
                            function(n) {
-                               var s = "", t = this + s;
+                               let s = "", t = this + s;
                                while (--n >= 0)
                                    s += t;
                                return s;
@@ -7415,10 +7415,10 @@ Pp.MaybeRightParen = function MaybeRightParen(p) {
  * Parses a sequence of Statements.
  */
 Pp.Statements = function Statements(n, topLevel) {
-    var prologue = !!topLevel;
+    let prologue = !!topLevel;
     try {
         while (!this.done() && this.peek(true) !== RIGHT_CURLY) {
-            var n2 = this.Statement();
+            let n2 = this.Statement();
             n.push(n2);
             if (prologue && Pragma(n2)) {
                 this.x.strictMode = true;
@@ -7438,8 +7438,8 @@ Pp.Statements = function Statements(n, topLevel) {
 
 Pp.Block = function Block() {
     this.mustMatch(LEFT_CURLY);
-    var n = this.newNode(blockInit());
-    var x2 = this.x.update({ parentBlock: n }).pushTarget(n);
+    let n = this.newNode(blockInit());
+    let x2 = this.x.update({ parentBlock: n }).pushTarget(n);
     this.withContext(x2, function() {
         this.Statements(n);
     });
@@ -7447,7 +7447,7 @@ Pp.Block = function Block() {
     return n;
 }
 
-var DECLARED_FORM = 0, EXPRESSED_FORM = 1, STATEMENT_FORM = 2;
+let DECLARED_FORM = 0, EXPRESSED_FORM = 1, STATEMENT_FORM = 2;
 function Export(node, isDefinition) {
     this.node = node;                 // the AST node declaring this individual export
     this.isDefinition = isDefinition; // is the node an 'export'-annotated definition?
@@ -7470,8 +7470,8 @@ function registerExport(exports, decl) {
         register(decl.name, new Export(decl, true));
         break;
 
-      case VAR:
-        for (var i = 0; i < decl.children.length; i++)
+      case let:
+        for (let i = 0; i < decl.children.length; i++)
             register(decl.children[i].name, new Export(decl.children[i], true));
         break;
 
@@ -7480,13 +7480,13 @@ function registerExport(exports, decl) {
         throw new Error("NYI: " + definitions.tokens[decl.type]);
 
       case EXPORT:
-        for (var i = 0; i < decl.pathList.length; i++) {
-            var path = decl.pathList[i];
+        for (let i = 0; i < decl.pathList.length; i++) {
+            let path = decl.pathList[i];
             switch (path.type) {
               case OBJECT_INIT:
-                for (var j = 0; j < path.children.length; j++) {
+                for (let j = 0; j < path.children.length; j++) {
                     // init :: IDENTIFIER | PROPERTY_INIT
-                    var init = path.children[j];
+                    let init = path.children[j];
                     if (init.type === IDENTIFIER)
                         register(init.value, new Export(init, false));
                     else
@@ -7519,17 +7519,17 @@ function registerExport(exports, decl) {
  * Static semantic representation of a module.
  */
 function Module(node) {
-    var exports = node.body.exports;
-    var modDefns = node.body.modDefns;
+    let exports = node.body.exports;
+    let modDefns = node.body.modDefns;
 
-    var exportedModules = new Dict();
+    let exportedModules = new Dict();
 
     exports.forEach(function(name, exp) {
-        var node = exp.node;
+        let node = exp.node;
         if (node.type === MODULE) {
             exportedModules.set(name, node);
         } else if (!exp.isDefinition && node.type === IDENTIFIER && modDefns.has(node.value)) {
-            var mod = modDefns.get(node.value);
+            let mod = modDefns.get(node.value);
             exportedModules.set(name, mod);
         }
     });
@@ -7545,9 +7545,9 @@ function Module(node) {
  * Parses a Statement.
  */
 Pp.Statement = function Statement() {
-    var i, label, n, n2, p, c, ss, tt = this.t.get(true), tt2, x0, x2, x3;
+    let i, label, n, n2, p, c, ss, tt = this.t.get(true), tt2, x0, x2, x3;
 
-    var comments = this.t.blockComments;
+    let comments = this.t.blockComments;
 
     // Cases for statements ending in a right curly return early, avoiding the
     // common semicolon insertion magic after this switch.
@@ -7567,7 +7567,7 @@ Pp.Statement = function Statement() {
           case MODULE:
           case FUNCTION:
           case LET:
-          case VAR:
+          case let:
           case CONST:
             n = this.Statement();
             n.blockComments = comments;
@@ -7655,7 +7655,7 @@ Pp.Statement = function Statement() {
         n2 = null;
         if ((tt = this.peek(true)) !== SEMICOLON) {
             this.withContext(x3, function() {
-                if (tt === VAR || tt === CONST) {
+                if (tt === let || tt === CONST) {
                     this.t.get();
                     n2 = this.Variables();
                 } else if (tt === LET) {
@@ -7678,7 +7678,7 @@ Pp.Statement = function Statement() {
             n.type = FOR_IN;
             this.withContext(x3, function() {
                 n.object = this.Expression();
-                if (n2.type === VAR || n2.type === LET) {
+                if (n2.type === let || n2.type === LET) {
                     c = n2.children;
 
                     // Destructuring turns one decl into multiples, so either
@@ -7846,7 +7846,7 @@ Pp.Statement = function Statement() {
         });
         return n;
 
-      case VAR:
+      case let:
       case CONST:
         n = this.Variables();
         break;
@@ -7965,7 +7965,7 @@ function isPragmaToken(tt) {
  * Pragmas :: () -> Array[Array[token]]
  */
 Pp.Pragmas = function Pragmas() {
-    var pragmas = [];
+    let pragmas = [];
     do {
         pragmas.push(this.Pragma());
     } while (this.match(COMMA));
@@ -7977,8 +7977,8 @@ Pp.Pragmas = function Pragmas() {
  * Pragmas :: () -> Array[token]
  */
 Pp.Pragma = function Pragma() {
-    var items = [];
-    var tt;
+    let items = [];
+    let tt;
     do {
         tt = this.t.get(true);
         items.push(this.t.token);
@@ -7990,7 +7990,7 @@ Pp.Pragma = function Pragma() {
  * MagicalSemicolon :: () -> void
  */
 Pp.MagicalSemicolon = function MagicalSemicolon() {
-    var tt;
+    let tt;
     if (this.t.lineno === this.t.token.lineno) {
         tt = this.peekOnSameLine();
         if (tt !== END && tt !== NEWLINE && tt !== SEMICOLON && tt !== RIGHT_CURLY)
@@ -8003,9 +8003,9 @@ Pp.MagicalSemicolon = function MagicalSemicolon() {
  * ReturnOrYield :: () -> (RETURN | YIELD) node
  */
 Pp.ReturnOrYield = function ReturnOrYield() {
-    var n, b, tt = this.t.token.type, tt2;
+    let n, b, tt = this.t.token.type, tt2;
 
-    var parentScript = this.x.parentScript;
+    let parentScript = this.x.parentScript;
 
     if (tt === RETURN) {
         if (!this.x.inFunction)
@@ -8047,7 +8047,7 @@ Pp.ModuleExpression = function ModuleExpression() {
  * ImportPathList :: () -> Array[DOT node]
  */
 Pp.ImportPathList = function ImportPathList() {
-    var a = [];
+    let a = [];
     do {
         a.push(this.ImportPath());
     } while (this.match(COMMA));
@@ -8058,14 +8058,14 @@ Pp.ImportPathList = function ImportPathList() {
  * ImportPath :: () -> DOT node
  */
 Pp.ImportPath = function ImportPath() {
-    var n = this.QualifiedPath();
+    let n = this.QualifiedPath();
     if (!this.match(DOT)) {
         if (n.type === IDENTIFIER)
             this.fail("cannot import local variable");
         return n;
     }
 
-    var n2 = this.newNode();
+    let n2 = this.newNode();
     n2.push(n);
     n2.push(this.ImportSpecifierSet());
     return n2;
@@ -8075,7 +8075,7 @@ Pp.ImportPath = function ImportPath() {
  * ExplicitSpecifierSet :: (() -> node) -> OBJECT_INIT node
  */
 Pp.ExplicitSpecifierSet = function ExplicitSpecifierSet(SpecifierRHS) {
-    var n, n2, id, tt;
+    let n, n2, id, tt;
 
     n = this.newNode({ type: OBJECT_INIT });
     this.mustMatch(LEFT_CURLY);
@@ -8101,7 +8101,7 @@ Pp.ExplicitSpecifierSet = function ExplicitSpecifierSet(SpecifierRHS) {
  * ImportSpecifierSet :: () -> (IDENTIFIER | OBJECT_INIT) node
  */
 Pp.ImportSpecifierSet = function ImportSpecifierSet() {
-    var self = this;
+    let self = this;
     return this.match(MUL)
         ? this.newNode({ type: IDENTIFIER, name: "*" })
     : ExplicitSpecifierSet(function() { return self.Identifier() });
@@ -8127,7 +8127,7 @@ Pp.IdentifierName = function IdentifierName() {
  * QualifiedPath :: () -> (IDENTIFIER | DOT) node
  */
 Pp.QualifiedPath = function QualifiedPath() {
-    var n, n2;
+    let n, n2;
 
     n = this.Identifier();
 
@@ -8150,7 +8150,7 @@ Pp.QualifiedPath = function QualifiedPath() {
  * ExportPath :: () -> (IDENTIFIER | DOT | OBJECT_INIT) node
  */
 Pp.ExportPath = function ExportPath() {
-    var self = this;
+    let self = this;
     if (this.peek() === LEFT_CURLY)
         return this.ExplicitSpecifierSet(function() { return self.QualifiedPath() });
     return this.QualifiedPath();
@@ -8160,7 +8160,7 @@ Pp.ExportPath = function ExportPath() {
  * ExportPathList :: () -> Array[(IDENTIFIER | DOT | OBJECT_INIT) node]
  */
 Pp.ExportPathList = function ExportPathList() {
-    var a = [];
+    let a = [];
     do {
         a.push(this.ExportPath());
     } while (this.match(COMMA));
@@ -8174,8 +8174,8 @@ Pp.ExportPathList = function ExportPathList() {
  *                    -> node
  */
 Pp.FunctionDefinition = function FunctionDefinition(requireName, functionForm, comments) {
-    var tt;
-    var f = this.newNode({ params: [], paramComments: [] });
+    let tt;
+    let f = this.newNode({ params: [], paramComments: [] });
     if (typeof comments === "undefined")
         comments = null;
     f.blockComments = comments;
@@ -8188,7 +8188,7 @@ Pp.FunctionDefinition = function FunctionDefinition(requireName, functionForm, c
     else if (requireName)
         this.fail("missing function identifier");
 
-    var inModule = this.x.inModule;
+    let inModule = this.x.inModule;
     x2 = new StaticContext(null, null, inModule, true, this.x.strictMode);
     this.withContext(x2, function() {
         this.mustMatch(LEFT_PAREN);
@@ -8249,7 +8249,7 @@ Pp.FunctionDefinition = function FunctionDefinition(requireName, functionForm, c
  * initializations).
  */
 Pp.ModuleVariables = function ModuleVariables(n) {
-    var n1, n2;
+    let n1, n2;
     do {
         n1 = this.Identifier();
         if (this.match(ASSIGN)) {
@@ -8267,15 +8267,15 @@ Pp.ModuleVariables = function ModuleVariables(n) {
 /*
  * Variables :: () -> node
  *
- * Parses a comma-separated list of var declarations (and maybe
+ * Parses a comma-separated list of let declarations (and maybe
  * initializations).
  */
 Pp.Variables = function Variables(letBlock) {
-    var n, n2, ss, i, s, tt;
+    let n, n2, ss, i, s, tt;
 
     tt = this.t.token.type;
     switch (tt) {
-      case VAR:
+      case let:
       case CONST:
         s = this.x.parentScript;
         break;
@@ -8296,7 +8296,7 @@ Pp.Variables = function Variables(letBlock) {
             // Need to unget to parse the full destructured expression.
             this.t.unget();
 
-            var dexp = this.DestructuringExpression(true);
+            let dexp = this.DestructuringExpression(true);
 
             n2 = this.newNode({ type: IDENTIFIER,
                                 name: dexp,
@@ -8329,13 +8329,13 @@ Pp.Variables = function Variables(letBlock) {
         s.varDecls.push(n2);
 
         if (this.match(ASSIGN)) {
-            var comment = this.t.lastBlockComment();
+            let comment = this.t.lastBlockComment();
             if (this.t.token.assignOp)
                 this.fail("Invalid variable initialization");
 
             n2.initializer = this.AssignExpression();
         } else {
-            var comment = this.t.lastBlockComment();
+            let comment = this.t.lastBlockComment();
         }
         n2.blockComment = comment;
     } while (this.match(COMMA));
@@ -8349,7 +8349,7 @@ Pp.Variables = function Variables(letBlock) {
  * Does not handle let inside of for loop init.
  */
 Pp.LetBlock = function LetBlock(isStatement) {
-    var n, n2;
+    let n, n2;
 
     // t.token.type must be LET
     n = this.newNode({ type: LET_BLOCK, varDecls: [] });
@@ -8381,9 +8381,9 @@ Pp.checkDestructuring = function checkDestructuring(n, simpleNamesOnly) {
     if (n.type !== ARRAY_INIT && n.type !== OBJECT_INIT)
         return;
 
-    var lhss = {};
-    var nn, n2, idx, sub, cc, c = n.children;
-    for (var i = 0, j = c.length; i < j; i++) {
+    let lhss = {};
+    let nn, n2, idx, sub, cc, c = n.children;
+    for (let i = 0, j = c.length; i < j; i++) {
         if (!(nn = c[i]))
             continue;
         if (nn.type === PROPERTY_INIT) {
@@ -8415,7 +8415,7 @@ Pp.checkDestructuring = function checkDestructuring(n, simpleNamesOnly) {
 }
 
 Pp.DestructuringExpression = function DestructuringExpression(simpleNamesOnly) {
-    var n = this.PrimaryExpression();
+    let n = this.PrimaryExpression();
     // Keep the list of lefthand sides for varDecls
     n.destructuredNames = this.checkDestructuring(n, simpleNamesOnly);
     return n;
@@ -8428,7 +8428,7 @@ Pp.GeneratorExpression = function GeneratorExpression(e) {
 }
 
 Pp.ComprehensionTail = function ComprehensionTail() {
-    var body, n, n2, n3, p;
+    let body, n, n2, n3, p;
 
     // t.token.type must be FOR
     body = this.newNode({ type: COMP_TAIL });
@@ -8455,7 +8455,7 @@ Pp.ComprehensionTail = function ComprehensionTail() {
           case IDENTIFIER:
             n.iterator = n3 = this.newNode({ type: IDENTIFIER });
             n3.name = n3.value;
-            n.varDecl = n2 = this.newNode({ type: VAR });
+            n.varDecl = n2 = this.newNode({ type: let });
             n2.push(n3);
             this.x.parentScript.varDecls.push(n3);
             // Don't add to varDecls since the semantics of comprehensions is
@@ -8480,11 +8480,11 @@ Pp.ComprehensionTail = function ComprehensionTail() {
 }
 
 Pp.HeadExpression = function HeadExpression() {
-    var p = this.MaybeLeftParen();
-    var n = this.ParenExpression();
+    let p = this.MaybeLeftParen();
+    let n = this.ParenExpression();
     this.MaybeRightParen(p);
     if (p === END && !n.parenthesized) {
-        var tt = this.peek();
+        let tt = this.peek();
         if (tt !== LEFT_CURLY && !definitions.isStatementStartCode[tt])
             this.fail("Unparenthesized head followed by unbraced body");
     }
@@ -8495,10 +8495,10 @@ Pp.ParenExpression = function ParenExpression() {
     // Always accept the 'in' operator in a parenthesized expression,
     // where it's unambiguous, even if we might be parsing the init of a
     // for statement.
-    var x2 = this.x.update({
+    let x2 = this.x.update({
         inForLoopInit: this.x.inForLoopInit && (this.t.token.type === LEFT_PAREN)
     });
-    var n = this.withContext(x2, function() {
+    let n = this.withContext(x2, function() {
         return this.Expression();
     });
     if (this.match(FOR)) {
@@ -8518,7 +8518,7 @@ Pp.ParenExpression = function ParenExpression() {
  * Top-down expression parser matched against SpiderMonkey.
  */
 Pp.Expression = function Expression() {
-    var n, n2;
+    let n, n2;
 
     n = this.AssignExpression();
     if (this.match(COMMA)) {
@@ -8537,7 +8537,7 @@ Pp.Expression = function Expression() {
 }
 
 Pp.AssignExpression = function AssignExpression() {
-    var n, lhs;
+    let n, lhs;
 
     // Have to treat yield like an operand because it could be the leftmost
     // operand of the expression.
@@ -8573,14 +8573,14 @@ Pp.AssignExpression = function AssignExpression() {
 }
 
 Pp.ConditionalExpression = function ConditionalExpression() {
-    var n, n2;
+    let n, n2;
 
     n = this.OrExpression();
     if (this.match(HOOK)) {
         n2 = n;
         n = this.newNode({ type: HOOK });
         n.push(n2);
-        var x2 = this.x.update({ inForLoopInit: false });
+        let x2 = this.x.update({ inForLoopInit: false });
         this.withContext(x2, function() {
             n.push(this.AssignExpression());
         });
@@ -8593,7 +8593,7 @@ Pp.ConditionalExpression = function ConditionalExpression() {
 }
 
 Pp.OrExpression = function OrExpression() {
-    var n, n2;
+    let n, n2;
 
     n = this.AndExpression();
     while (this.match(OR)) {
@@ -8607,7 +8607,7 @@ Pp.OrExpression = function OrExpression() {
 }
 
 Pp.AndExpression = function AndExpression() {
-    var n, n2;
+    let n, n2;
 
     n = this.BitwiseOrExpression();
     while (this.match(AND)) {
@@ -8621,7 +8621,7 @@ Pp.AndExpression = function AndExpression() {
 }
 
 Pp.BitwiseOrExpression = function BitwiseOrExpression() {
-    var n, n2;
+    let n, n2;
 
     n = this.BitwiseXorExpression();
     while (this.match(BITWISE_OR)) {
@@ -8635,7 +8635,7 @@ Pp.BitwiseOrExpression = function BitwiseOrExpression() {
 }
 
 Pp.BitwiseXorExpression = function BitwiseXorExpression() {
-    var n, n2;
+    let n, n2;
 
     n = this.BitwiseAndExpression();
     while (this.match(BITWISE_XOR)) {
@@ -8649,7 +8649,7 @@ Pp.BitwiseXorExpression = function BitwiseXorExpression() {
 }
 
 Pp.BitwiseAndExpression = function BitwiseAndExpression() {
-    var n, n2;
+    let n, n2;
 
     n = this.EqualityExpression();
     while (this.match(BITWISE_AND)) {
@@ -8663,7 +8663,7 @@ Pp.BitwiseAndExpression = function BitwiseAndExpression() {
 }
 
 Pp.EqualityExpression = function EqualityExpression() {
-    var n, n2;
+    let n, n2;
 
     n = this.RelationalExpression();
     while (this.match(EQ) || this.match(NE) ||
@@ -8678,8 +8678,8 @@ Pp.EqualityExpression = function EqualityExpression() {
 }
 
 Pp.RelationalExpression = function RelationalExpression() {
-    var n, n2;
-    var x2 = this.x.update({ inForLoopInit: false });
+    let n, n2;
+    let x2 = this.x.update({ inForLoopInit: false });
     this.withContext(x2, function() {
         n = this.ShiftExpression();
         while ((this.match(LT) || this.match(LE) || this.match(GE) || this.match(GT) ||
@@ -8696,7 +8696,7 @@ Pp.RelationalExpression = function RelationalExpression() {
 }
 
 Pp.ShiftExpression = function ShiftExpression() {
-    var n, n2;
+    let n, n2;
 
     n = this.AddExpression();
     while (this.match(LSH) || this.match(RSH) || this.match(URSH)) {
@@ -8710,7 +8710,7 @@ Pp.ShiftExpression = function ShiftExpression() {
 }
 
 Pp.AddExpression = function AddExpression() {
-    var n, n2;
+    let n, n2;
 
     n = this.MultiplyExpression();
     while (this.match(PLUS) || this.match(MINUS)) {
@@ -8724,7 +8724,7 @@ Pp.AddExpression = function AddExpression() {
 }
 
 Pp.MultiplyExpression = function MultiplyExpression() {
-    var n, n2;
+    let n, n2;
 
     n = this.UnaryExpression();
     while (this.match(MUL) || this.match(DIV) || this.match(MOD)) {
@@ -8738,7 +8738,7 @@ Pp.MultiplyExpression = function MultiplyExpression() {
 }
 
 Pp.UnaryExpression = function UnaryExpression() {
-    var n, n2, tt;
+    let n, n2, tt;
 
     switch (tt = this.t.get(true)) {
       case DELETE: case VOID: case TYPEOF:
@@ -8779,7 +8779,7 @@ Pp.UnaryExpression = function UnaryExpression() {
 }
 
 Pp.MemberExpression = function MemberExpression(allowCallSyntax) {
-    var n, n2, name, tt;
+    let n, n2, name, tt;
 
     if (this.match(NEW)) {
         n = this.newNode();
@@ -8828,7 +8828,7 @@ Pp.MemberExpression = function MemberExpression(allowCallSyntax) {
 }
 
 Pp.ArgumentList = function ArgumentList() {
-    var n, n2;
+    let n, n2;
 
     n = this.newNode({ type: LIST });
     if (this.match(RIGHT_PAREN, true))
@@ -8850,7 +8850,7 @@ Pp.ArgumentList = function ArgumentList() {
 }
 
 Pp.PrimaryExpression = function PrimaryExpression() {
-    var n, n2, tt = this.t.get(true);
+    let n, n2, tt = this.t.get(true);
 
     switch (tt) {
       case FUNCTION:
@@ -8882,7 +8882,7 @@ Pp.PrimaryExpression = function PrimaryExpression() {
         break;
 
       case LEFT_CURLY:
-        var id, fd;
+        let id, fd;
         n = this.newNode({ type: OBJECT_INIT });
 
         object_init:
@@ -8893,7 +8893,7 @@ Pp.PrimaryExpression = function PrimaryExpression() {
                     this.peek() === IDENTIFIER) {
                     n.push(this.FunctionDefinition(true, EXPRESSED_FORM));
                 } else {
-                    var comments = this.t.blockComments;
+                    let comments = this.t.blockComments;
                     switch (tt) {
                       case IDENTIFIER: case NUMBER: case STRING:
                         id = this.newNode({ type: IDENTIFIER });
@@ -8914,8 +8914,8 @@ Pp.PrimaryExpression = function PrimaryExpression() {
                         n2.blockComments = comments;
                         n.push(n2);
                     } else {
-                        // Support, e.g., |var {x, y} = o| as destructuring shorthand
-                        // for |var {x: x, y: y} = o|, per proposed JS2/ES4 for JS1.8.
+                        // Support, e.g., |let {x, y} = o| as destructuring shorthand
+                        // for |let {x: x, y: y} = o|, per proposed JS2/ES4 for JS1.8.
                         if (this.peek() !== COMMA && this.peek() !== RIGHT_CURLY)
                             this.fail("missing : after property");
                         n.push(id);
@@ -8953,8 +8953,8 @@ Pp.PrimaryExpression = function PrimaryExpression() {
  * parse :: (source, filename, line number) -> node
  */
 function parse(s, f, l) {
-    var t = new Tokenizer(s, f, l, options.allowHTMLComments);
-    var p = new Parser(t);
+    let t = new Tokenizer(s, f, l, options.allowHTMLComments);
+    let p = new Parser(t);
     return p.Script(false, false, true);
 }
 
@@ -8965,8 +8965,8 @@ function parse(s, f, l) {
  *               -> node
  */
 function parseFunction(s, requireName, form, f, l) {
-    var t = new Tokenizer(s, f, l);
-    var p = new Parser(t);
+    let t = new Tokenizer(s, f, l);
+    let p = new Parser(t);
     p.x = new StaticContext(null, null, false, false, false);
     return p.FunctionDefinition(requireName, form);
 }
@@ -8987,9 +8987,9 @@ function parseStdin(s, ln, prefix, isCommand) {
 
     for (;;) {
         try {
-            var t = new Tokenizer(s, "stdin", ln.value, false);
-            var p = new Parser(t);
-            var n = p.Script(false, false);
+            let t = new Tokenizer(s, "stdin", ln.value, false);
+            let p = new Parser(t);
+            let n = p.Script(false, false);
             ln.value = t.lineno;
             return n;
         } catch (e) {
@@ -8997,7 +8997,7 @@ function parseStdin(s, ln, prefix, isCommand) {
                 throw e;
 
             // commands in the middle are not treated as part of the input
-            var more;
+            let more;
             do {
                 if (prefix)
                     putstr(prefix);
@@ -9015,11 +9015,11 @@ function parseStdin(s, ln, prefix, isCommand) {
  * parseMultiline :: ({line number}, string | null) -> program node
  */
 function parseMultiline(ln, prefix) {
-    var s = "";
+    let s = "";
     for (;;) {
         if (prefix)
             putstr(prefix);
-        var more = readline();
+        let more = readline();
         if (more === null)
             return null;
         // the only command recognized in multiline mode is .end
@@ -9027,9 +9027,9 @@ function parseMultiline(ln, prefix) {
             break;
         s += "\n" + more;
     }
-    var t = new Tokenizer(s, "stdin", ln.value, false);
-    var p = new Parser(t);
-    var n = p.Script(false, false);
+    let t = new Tokenizer(s, "stdin", ln.value, false);
+    let p = new Parser(t);
+    let n = p.Script(false, false);
     ln.value = t.lineno;
     return n;
 }
@@ -9098,20 +9098,20 @@ exports.Export = Export;
 
  define('ace/narcissus/lexer', ['require', 'exports', 'module' , 'ace/narcissus/definitions'], function(require, exports, module) {
 
-var definitions = require('./definitions');
+let definitions = require('./definitions');
 
 // Set constants in the local scope.
 eval(definitions.consts);
 
 // Build up a trie of operator tokens.
-var opTokens = {};
-for (var op in definitions.opTypeNames) {
+let opTokens = {};
+for (let op in definitions.opTypeNames) {
     if (op === '\n' || op === '.')
         continue;
 
-    var node = opTokens;
-    for (var i = 0; i < op.length; i++) {
-        var ch = op[i];
+    let node = opTokens;
+    for (let i = 0; i < op.length; i++) {
+        let ch = op[i];
         if (!(ch in node))
             node[ch] = {};
         node = node[ch];
@@ -9135,12 +9135,12 @@ function isValidIdentifierChar(ch, first) {
     }
 
     // create an object to test this in
-    var x = {};
+    let x = {};
     x["x"+ch] = true;
     x[ch] = true;
 
     // then use eval to determine if it's a valid character
-    var valid = false;
+    let valid = false;
     try {
         valid = (Function("x", "return (x." + (first?"":"x") + ch + ");")(x) === true);
     } catch (ex) {}
@@ -9158,7 +9158,7 @@ function isIdentifier(str) {
     if (!isValidIdentifierChar(str[0], true))
         return false;
 
-    for (var i = 1; i < str.length; i++) {
+    for (let i = 1; i < str.length; i++) {
         if (!isValidIdentifierChar(str[i], false))
             return false;
     }
@@ -9206,7 +9206,7 @@ Tokenizer.prototype = {
     },
 
     peek: function (scanOperand) {
-        var tt, next;
+        let tt, next;
         if (this.lookahead) {
             next = this.tokens[(this.tokenIndex + this.lookahead) & 3];
             tt = (this.scanNewlines && next.lineno !== this.lineno)
@@ -9221,23 +9221,23 @@ Tokenizer.prototype = {
 
     peekOnSameLine: function (scanOperand) {
         this.scanNewlines = true;
-        var tt = this.peek(scanOperand);
+        let tt = this.peek(scanOperand);
         this.scanNewlines = false;
         return tt;
     },
 
     lastBlockComment: function() {
-        var length = this.blockComments.length;
+        let length = this.blockComments.length;
         return length ? this.blockComments[length - 1] : null;
     },
 
     // Eat comments and whitespace.
     skip: function () {
-        var input = this.source;
+        let input = this.source;
         this.blockComments = [];
         for (;;) {
-            var ch = input[this.cursor++];
-            var next = input[this.cursor];
+            let ch = input[this.cursor++];
+            let next = input[this.cursor];
             // handle \r, \r\n and (always preferable) \n
             if (ch === '\r') {
                 // if the next character is \n, we don't care about this at all
@@ -9250,7 +9250,7 @@ Tokenizer.prototype = {
             if (ch === '\n' && !this.scanNewlines) {
                 this.lineno++;
             } else if (ch === '/' && next === '*') {
-                var commentStart = ++this.cursor;
+                let commentStart = ++this.cursor;
                 for (;;) {
                     ch = input[this.cursor++];
                     if (ch === undefined)
@@ -9259,7 +9259,7 @@ Tokenizer.prototype = {
                     if (ch === '*') {
                         next = input[this.cursor];
                         if (next === '/') {
-                            var commentEnd = this.cursor - 1;
+                            let commentEnd = this.cursor - 1;
                             this.cursor++;
                             break;
                         }
@@ -9303,8 +9303,8 @@ Tokenizer.prototype = {
     // Lex the exponential part of a number, if present. Return true iff an
     // exponential part was found.
     lexExponent: function() {
-        var input = this.source;
-        var next = input[this.cursor];
+        let input = this.source;
+        let next = input[this.cursor];
         if (next === 'e' || next === 'E') {
             this.cursor++;
             ch = input[this.cursor++];
@@ -9326,7 +9326,7 @@ Tokenizer.prototype = {
     },
 
     lexZeroNumber: function (ch) {
-        var token = this.token, input = this.source;
+        let token = this.token, input = this.source;
         token.type = NUMBER;
 
         ch = input[this.cursor++];
@@ -9362,10 +9362,10 @@ Tokenizer.prototype = {
     },
 
     lexNumber: function (ch) {
-        var token = this.token, input = this.source;
+        let token = this.token, input = this.source;
         token.type = NUMBER;
 
-        var floating = false;
+        let floating = false;
         do {
             ch = input[this.cursor++];
             if (ch === '.' && !floating) {
@@ -9376,16 +9376,16 @@ Tokenizer.prototype = {
 
         this.cursor--;
 
-        var exponent = this.lexExponent();
+        let exponent = this.lexExponent();
         floating = floating || exponent;
 
-        var str = input.substring(token.start, this.cursor);
+        let str = input.substring(token.start, this.cursor);
         token.value = floating ? parseFloat(str) : parseInt(str);
     },
 
     lexDot: function (ch) {
-        var token = this.token, input = this.source;
-        var next = input[this.cursor];
+        let token = this.token, input = this.source;
+        let next = input[this.cursor];
         if (next >= '0' && next <= '9') {
             do {
                 ch = input[this.cursor++];
@@ -9405,11 +9405,11 @@ Tokenizer.prototype = {
     },
 
     lexString: function (ch) {
-        var token = this.token, input = this.source;
+        let token = this.token, input = this.source;
         token.type = STRING;
 
-        var hasEscapes = false;
-        var delim = ch;
+        let hasEscapes = false;
+        let delim = ch;
         if (input.length <= this.cursor)
             throw this.newSyntaxError("Unterminated string literal");
         while ((ch = input[this.cursor++]) !== delim) {
@@ -9430,7 +9430,7 @@ Tokenizer.prototype = {
     },
 
     lexRegExp: function (ch) {
-        var token = this.token, input = this.source;
+        let token = this.token, input = this.source;
         token.type = REGEXP;
 
         do {
@@ -9462,12 +9462,12 @@ Tokenizer.prototype = {
     },
 
     lexOp: function (ch) {
-        var token = this.token, input = this.source;
+        let token = this.token, input = this.source;
 
         // A bit ugly, but it seems wasteful to write a trie lookup routine
         // for only 3 characters...
-        var node = opTokens[ch];
-        var next = input[this.cursor];
+        let node = opTokens[ch];
+        let next = input[this.cursor];
         if (next in node) {
             node = node[next];
             this.cursor++;
@@ -9479,7 +9479,7 @@ Tokenizer.prototype = {
             }
         }
 
-        var op = node.op;
+        let op = node.op;
         if (definitions.assignOps[op] && input[this.cursor] === '=') {
             this.cursor++;
             token.type = ASSIGN;
@@ -9495,8 +9495,8 @@ Tokenizer.prototype = {
 
     // FIXME: Unicode escape sequences
     lexIdent: function (ch, keywordIsName) {
-        var token = this.token;
-        var id = ch;
+        let token = this.token;
+        let id = ch;
 
         while ((ch = this.getValidIdentifierChar(false)) !== null) {
             id += ch;
@@ -9508,7 +9508,7 @@ Tokenizer.prototype = {
         if (keywordIsName)
             return;
 
-        var kw;
+        let kw;
 
         if (this.parser.mozillaMode) {
             kw = definitions.mozillaKeywords[id];
@@ -9538,7 +9538,7 @@ Tokenizer.prototype = {
      * Dispatch to the appropriate lexing function depending on the input.
      */
     get: function (scanOperand, keywordIsName) {
-        var token;
+        let token;
         while (this.lookahead) {
             --this.lookahead;
             this.tokenIndex = (this.tokenIndex + 1) & 3;
@@ -9554,15 +9554,15 @@ Tokenizer.prototype = {
         if (!token)
             this.tokens[this.tokenIndex] = token = {};
 
-        var input = this.source;
+        let input = this.source;
         if (this.cursor >= input.length)
             return token.type = END;
 
         token.start = this.cursor;
         token.lineno = this.lineno;
 
-        var ich = this.getValidIdentifierChar(true);
-        var ch = (ich === null) ? input[this.cursor++] : null;
+        let ich = this.getValidIdentifierChar(true);
+        let ch = (ich === null) ? input[this.cursor++] : null;
         if (ich !== null) {
             this.lexIdent(ich, keywordIsName);
         } else if (scanOperand && ch === '/') {
@@ -9603,7 +9603,7 @@ Tokenizer.prototype = {
 
     newSyntaxError: function (m) {
         m = (this.filename ? this.filename + ":" : "") + this.lineno + ": " + m;
-        var e = new SyntaxError(m, this.filename, this.lineno);
+        let e = new SyntaxError(m, this.filename, this.lineno);
         e.source = this.source;
         e.cursor = this.lookahead
             ? this.tokens[(this.tokenIndex + this.lookahead) & 3].start
@@ -9616,9 +9616,9 @@ Tokenizer.prototype = {
      * if there is none.
      */
     getValidIdentifierChar: function(first) {
-        var input = this.source;
+        let input = this.source;
         if (this.cursor >= input.length) return null;
-        var ch = input[this.cursor];
+        let ch = input[this.cursor];
 
         // first check for \u escapes
         if (ch === '\\' && input[this.cursor+1] === 'u') {
@@ -9633,7 +9633,7 @@ Tokenizer.prototype = {
             this.cursor += 5;
         }
 
-        var valid = isValidIdentifierChar(ch, first);
+        let valid = isValidIdentifierChar(ch, first);
         if (valid) this.cursor++;
         return (valid ? ch : null);
     },
@@ -9697,7 +9697,7 @@ exports.Tokenizer = Tokenizer;
 
 define('ace/narcissus/definitions', ['require', 'exports', 'module' ], function(require, exports, module) {
 
-var tokens = [
+let tokens = [
     // End of source.
     "END",
 
@@ -9747,11 +9747,11 @@ var tokens = [
     "return",
     "switch",
     "this", "throw", "true", "try", "typeof",
-    "var", "void",
+    "let", "void",
     "while", "with",
 ];
 
-var strictKeywords = {
+let strictKeywords = {
     __proto__: null,
     "implements": true,
     "interface": true,
@@ -9766,7 +9766,7 @@ var strictKeywords = {
     "yield": true
 };
 
-var statementStartTokens = [
+let statementStartTokens = [
     "break",
     "const", "continue",
     "debugger", "do",
@@ -9776,13 +9776,13 @@ var statementStartTokens = [
     "return",
     "switch",
     "throw", "try",
-    "var",
+    "let",
     "yield",
     "while", "with",
 ];
 
 // Whitespace characters (see ECMA-262 7.2)
-var whitespaceChars = [
+let whitespaceChars = [
     // normal whitespace:
     "\u0009", "\u000B", "\u000C", "\u0020", "\u00A0", "\uFEFF",
 
@@ -9793,8 +9793,8 @@ var whitespaceChars = [
     "\u202F", "\u205F", "\u3000"
 ];
 
-var whitespace = {};
-for (var i = 0; i < whitespaceChars.length; i++) {
+let whitespace = {};
+for (let i = 0; i < whitespaceChars.length; i++) {
     whitespace[whitespaceChars[i]] = true;
 }
 
@@ -9802,7 +9802,7 @@ for (var i = 0; i < whitespaceChars.length; i++) {
 // NB: because the lexer doesn't backtrack, all token prefixes must themselves
 // be valid tokens (e.g. !== is acceptable because its prefixes are the valid
 // tokens != and !).
-var opTypeNames = {
+let opTypeNames = {
     '\n':   "NEWLINE",
     ';':    "SEMICOLON",
     ',':    "COMMA",
@@ -9845,13 +9845,13 @@ var opTypeNames = {
 
 // Hash of keyword identifier to tokens index.  NB: we must null __proto__ to
 // avoid toString, etc. namespace pollution.
-var keywords = {__proto__: null};
-var mozillaKeywords = {__proto__: null};
+let keywords = {__proto__: null};
+let mozillaKeywords = {__proto__: null};
 
 // Define const END, etc., based on the token names.  Also map name to index.
-var tokenIds = {};
+let tokenIds = {};
 
-var hostSupportsEvalConst = (function() {
+let hostSupportsEvalConst = (function() {
     try {
         return eval("(function(s) { eval(s); return x })('const x = true;')");
     } catch (e) {
@@ -9860,12 +9860,12 @@ var hostSupportsEvalConst = (function() {
 })();
 
 // Building up a string to be eval'd in different contexts.
-var consts = hostSupportsEvalConst ? "const " : "var ";
-for (var i = 0, j = tokens.length; i < j; i++) {
+let consts = hostSupportsEvalConst ? "const " : "let ";
+for (let i = 0, j = tokens.length; i < j; i++) {
     if (i > 0)
         consts += ", ";
-    var t = tokens[i];
-    var name;
+    let t = tokens[i];
+    let name;
     if (/^[a-z]/.test(t)) {
         name = t.toUpperCase();
         if (name === "LET" || name === "YIELD")
@@ -9882,12 +9882,12 @@ for (var i = 0, j = tokens.length; i < j; i++) {
 }
 consts += ";";
 
-var isStatementStartCode = {__proto__: null};
+let isStatementStartCode = {__proto__: null};
 for (i = 0, j = statementStartTokens.length; i < j; i++)
     isStatementStartCode[keywords[statementStartTokens[i]]] = true;
 
 // Map assignment operators to their indexes in the tokens array.
-var assignOps = ['|', '^', '&', '<<', '>>', '>>>', '+', '-', '*', '/', '%'];
+let assignOps = ['|', '^', '&', '<<', '>>', '>>>', '+', '-', '*', '/', '%'];
 
 for (i = 0, j = assignOps.length; i < j; i++) {
     t = assignOps[i];
@@ -9911,7 +9911,7 @@ function defineGetterSetter(obj, prop, getter, setter, dontDelete, dontEnum) {
 function defineMemoGetter(obj, prop, fn, dontDelete, dontEnum) {
     Object.defineProperty(obj, prop, {
         get: function() {
-            var val = fn();
+            let val = fn();
             defineProperty(obj, prop, val, dontDelete, true, dontEnum);
             return val;
         },
@@ -9932,13 +9932,13 @@ function isNativeCode(fn) {
     return ((typeof fn) === "function") && fn.toString().match(/\[native code\]/);
 }
 
-var Fpapply = Function.prototype.apply;
+let Fpapply = Function.prototype.apply;
 
 function apply(f, o, a) {
     return Fpapply.call(f, [o].concat(a));
 }
 
-var applyNew;
+let applyNew;
 
 // ES5's bind is a simpler way to implement applyNew
 if (Function.prototype.bind) {
@@ -9957,8 +9957,8 @@ if (Function.prototype.bind) {
           case 3:
             return new f(a[0], a[1], a[2]);
           default:
-            var argStr = "a[0]";
-            for (var i = 1, n = a.length; i < n; i++)
+            let argStr = "a[0]";
+            for (let i = 1, n = a.length; i < n; i++)
                 argStr += ",a[" + i + "]";
             return eval("new f(" + argStr + ")");
         }
@@ -9974,10 +9974,10 @@ function getPropertyDescriptor(obj, name) {
 }
 
 function getPropertyNames(obj) {
-    var table = Object.create(null, {});
+    let table = Object.create(null, {});
     while (obj) {
-        var names = Object.getOwnPropertyNames(obj);
-        for (var i = 0, n = names.length; i < n; i++)
+        let names = Object.getOwnPropertyNames(obj);
+        for (let i = 0, n = names.length; i < n; i++)
             table[names[i]] = true;
         obj = Object.getPrototypeOf(obj);
     }
@@ -9985,21 +9985,21 @@ function getPropertyNames(obj) {
 }
 
 function getOwnProperties(obj) {
-    var map = {};
-    for (var name in Object.getOwnPropertyNames(obj))
+    let map = {};
+    for (let name in Object.getOwnPropertyNames(obj))
         map[name] = Object.getOwnPropertyDescriptor(obj, name);
     return map;
 }
 
 function blacklistHandler(target, blacklist) {
-    var mask = Object.create(null, {});
-    var redirect = Dict.create(blacklist).mapObject(function(name) { return mask; });
+    let mask = Object.create(null, {});
+    let redirect = Dict.create(blacklist).mapObject(function(name) { return mask; });
     return mixinHandler(redirect, target);
 }
 
 function whitelistHandler(target, whitelist) {
-    var catchall = Object.create(null, {});
-    var redirect = Dict.create(whitelist).mapObject(function(name) { return target; });
+    let catchall = Object.create(null, {});
+    let redirect = Dict.create(whitelist).mapObject(function(name) { return target; });
     return mixinHandler(redirect, catchall);
 }
 
@@ -10027,24 +10027,24 @@ function mixinHandler(redirect, catchall) {
     }
 
     function getMuxPropertyDescriptor(name) {
-        var desc = getPropertyDescriptor(targetFor(name), name);
+        let desc = getPropertyDescriptor(targetFor(name), name);
         if (desc)
             desc.configurable = true;
         return desc;
     }
 
     function getMuxPropertyNames() {
-        var names1 = Object.getOwnPropertyNames(redirect).filter(function(name) {
+        let names1 = Object.getOwnPropertyNames(redirect).filter(function(name) {
             return name in redirect[name];
         });
-        var names2 = getPropertyNames(catchall).filter(function(name) {
+        let names2 = getPropertyNames(catchall).filter(function(name) {
             return !hasOwn(redirect, name);
         });
         return names1.concat(names2);
     }
 
     function enumerateMux() {
-        var result = Object.getOwnPropertyNames(redirect).filter(function(name) {
+        let result = Object.getOwnPropertyNames(redirect).filter(function(name) {
             return name in redirect[name];
         });
         for (name in catchall) {
@@ -10066,7 +10066,7 @@ function mixinHandler(redirect, catchall) {
             Object.defineProperty(targetFor(name), name, desc);
         },
         "delete": function(name) {
-            var target = targetFor(name);
+            let target = targetFor(name);
             return delete target[name];
         },
         // FIXME: ha ha ha
@@ -10074,11 +10074,11 @@ function mixinHandler(redirect, catchall) {
         has: hasMux,
         hasOwn: hasMux,
         get: function(receiver, name) {
-            var target = targetFor(name);
+            let target = targetFor(name);
             return target[name];
         },
         set: function(receiver, name, val) {
-            var target = targetFor(name);
+            let target = targetFor(name);
             target[name] = val;
             return true;
         },
@@ -10092,14 +10092,14 @@ function makePassthruHandler(obj) {
     // http://wiki.ecmascript.org/doku.php?id=harmony:proxies&s=proxy%20object#examplea_no-op_forwarding_proxy
     return {
         getOwnPropertyDescriptor: function(name) {
-            var desc = Object.getOwnPropertyDescriptor(obj, name);
+            let desc = Object.getOwnPropertyDescriptor(obj, name);
 
             // a trapping proxy's properties must always be configurable
             desc.configurable = true;
             return desc;
         },
         getPropertyDescriptor: function(name) {
-            var desc = getPropertyDescriptor(obj, name);
+            let desc = getPropertyDescriptor(obj, name);
 
             // a trapping proxy's properties must always be configurable
             desc.configurable = true;
@@ -10128,7 +10128,7 @@ function makePassthruHandler(obj) {
         // bad behavior when set fails in non-strict mode
         set: function(receiver, name, val) { obj[name] = val; return true; },
         enumerate: function() {
-            var result = [];
+            let result = [];
             for (name in obj) { result.push(name); };
             return result;
         },
@@ -10136,7 +10136,7 @@ function makePassthruHandler(obj) {
     };
 }
 
-var hasOwnProperty = ({}).hasOwnProperty;
+let hasOwnProperty = ({}).hasOwnProperty;
 
 function hasOwn(obj, name) {
     return hasOwnProperty.call(obj, name);
@@ -10148,11 +10148,11 @@ function Dict(table, size) {
 }
 
 Dict.create = function(table) {
-    var init = Object.create(null, {});
-    var size = 0;
-    var names = Object.getOwnPropertyNames(table);
-    for (var i = 0, n = names.length; i < n; i++) {
-        var name = names[i];
+    let init = Object.create(null, {});
+    let size = 0;
+    let names = Object.getOwnPropertyNames(table);
+    for (let i = 0, n = names.length; i < n; i++) {
+        let name = names[i];
         init[name] = table[name];
         size++;
     }
@@ -10175,21 +10175,21 @@ Dict.prototype = {
         return this.table[x];
     },
     forEach: function(f) {
-        var table = this.table;
-        for (var key in table)
+        let table = this.table;
+        for (let key in table)
             f.call(this, key, table[key]);
     },
     map: function(f) {
-        var table1 = this.table;
-        var table2 = Object.create(null, {});
+        let table1 = this.table;
+        let table2 = Object.create(null, {});
         this.forEach(function(key, val) {
             table2[key] = f.call(this, val, key);
         });
         return new Dict(table2, this.size);
     },
     mapObject: function(f) {
-        var table1 = this.table;
-        var table2 = Object.create(null, {});
+        let table1 = this.table;
+        let table2 = Object.create(null, {});
         this.forEach(function(key, val) {
             table2[key] = f.call(this, val, key);
         });
@@ -10208,8 +10208,8 @@ Dict.prototype = {
         }
     },
     copy: function() {
-        var table = Object.create(null, {});
-        for (var key in this.table)
+        let table = Object.create(null, {});
+        for (let key in this.table)
             table[key] = this.table[key];
         return new Dict(table, this.size);
     },
@@ -10219,16 +10219,16 @@ Dict.prototype = {
     toString: function() { return "[object Dict]" }
 };
 
-var _WeakMap = typeof WeakMap === "function" ? WeakMap : (function() {
+let _WeakMap = typeof WeakMap === "function" ? WeakMap : (function() {
     // shim for ES6 WeakMap with poor asymptotics
     function WeakMap(array) {
         this.array = array || [];
     }
 
     function searchMap(map, key, found, notFound) {
-        var a = map.array;
-        for (var i = 0, n = a.length; i < n; i++) {
-            var pair = a[i];
+        let a = map.array;
+        for (let i = 0, n = a.length; i < n; i++) {
+            let pair = a[i];
             if (pair.key === key)
                 return found(pair, i);
         }
@@ -10240,7 +10240,7 @@ var _WeakMap = typeof WeakMap === "function" ? WeakMap : (function() {
             return searchMap(this, x, function() { return true }, function() { return false });
         },
         set: function(x, v) {
-            var a = this.array;
+            let a = this.array;
             searchMap(this, x,
                       function(pair) { pair.value = v },
                       function() { a.push({ key: x, value: v }) });
@@ -10251,7 +10251,7 @@ var _WeakMap = typeof WeakMap === "function" ? WeakMap : (function() {
                              function() { return null });
         },
         "delete": function(x) {
-            var a = this.array;
+            let a = this.array;
             searchMap(this, x,
                       function(pair, i) { a.splice(i, 1) },
                       function() { });
@@ -10280,7 +10280,7 @@ Stack.prototype = {
         return this.top === null;
     },
     find: function(test) {
-        for (var elts = this.elts; elts; elts = elts.rest) {
+        for (let elts = this.elts; elts; elts = elts.rest) {
             if (test(elts.top))
                 return elts.top;
         }
@@ -10290,7 +10290,7 @@ Stack.prototype = {
         return Boolean(this.find(function(elt) { return elt === x }));
     },
     forEach: function(f) {
-        for (var elts = this.elts; elts; elts = elts.rest) {
+        for (let elts = this.elts; elts; elts = elts.rest) {
             f(elts.top);
         }
     }
@@ -10299,8 +10299,8 @@ Stack.prototype = {
 if (!Array.prototype.copy) {
     defineProperty(Array.prototype, "copy",
                    function() {
-                       var result = [];
-                       for (var i = 0, n = this.length; i < n; i++)
+                       let result = [];
+                       for (let i = 0, n = this.length; i < n; i++)
                            result[i] = this[i];
                        return result;
                    }, false, false, true);
