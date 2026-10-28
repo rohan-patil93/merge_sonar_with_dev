@@ -3140,10 +3140,10 @@ $html .= "</div>";
 
 			
 		}
-		$main_transaction_number = rand();
-		$monthly_transaction_number = $monthly_transaction_number !=""?$monthly_transaction_number:rand();
-		$yearly_transaction_number = $yearly_transaction_number !=""?$yearly_transaction_number:rand();
-		$lifetime_transaction_number = $lifetime_transaction_number !=""?$lifetime_transaction_number:rand();
+		$main_transaction_number = random_int(1, PHP_INT_MAX);
+		$monthly_transaction_number = $monthly_transaction_number !=""?$monthly_transaction_number:random_int(1, PHP_INT_MAX);
+		$yearly_transaction_number = $yearly_transaction_number !=""?$yearly_transaction_number:random_int(1, PHP_INT_MAX);
+		$lifetime_transaction_number = $lifetime_transaction_number !=""?$lifetime_transaction_number:random_int(1, PHP_INT_MAX);
 		if($main_transaction_no_type=="MT"){
 			$main_transaction_number = $monthly_transaction_number;
 		}elseif($main_transaction_no_type=="YR"){
