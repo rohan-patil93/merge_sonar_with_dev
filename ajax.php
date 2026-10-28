@@ -9875,8 +9875,8 @@ if ($page == 'get_contracts_excel_batch') {
 if ($page == 'createrecruitingmanagerdashboardcandidatesfolder') {
 	$folder = "uploads/candidate_resume_with_rm/resume_rm_".$_SESSION['userid'];
 	if (!file_exists($folder)) {
-	    if (mkdir($folder, 0777, true)) {
-	        chmod($folder, 0777); // Set permissions (may be affected by umask)
+	    if (mkdir($folder, 0755, true)) {
+	        chmod($folder, 0755);
 	         $result = array('status' => 'Success', 'message' => 'Folder created successfully.'); 
 	    } else {
 	        $result = array('status' => 'Fail', 'message' => 'Failed to create folder.'); 
