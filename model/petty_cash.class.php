@@ -351,8 +351,9 @@ class pettyCashUserClass extends userClass{
 							if($seq ==1){ 
 								if($bres->balance_date != $pcbrres->transaction_date){
 						
-									$closing_balanceee = $bres->opening_balance.$balancetype.$pcbrres->total_amount;
-									$closing_balance = eval('return '.$closing_balanceee.';');
+									$closing_balance = ($balancetype === '-')
+										? (float)$bres->opening_balance - (float)$pcbrres->total_amount
+										: (float)$bres->opening_balance + (float)$pcbrres->total_amount;
 									$insertcust = array('company_id'=>$post['company_id'],'pt_owner_id'=>$pcbrres->party_id,'pc_box_id'=>$pcbrres->ref_id,'balance_date'=>$pcbrres->transaction_date,'debit_amount'=>$pcbrres->total_amount,'credit_amount'=>0,'opening_balance'=>$bres->opening_balance,'closing_balance'=>$closing_balance,'is_active'=>0,'current_status'=>0,'created_by'=>$post['user_id'],'created_date'=>date("Y-m-d H:i:s"));
 									$pc_balance = $callConfig->insertRecord('petty_cash_balances',$insertcust);
 									$return['beforsamedate'][] = $samedate;	
@@ -369,9 +370,10 @@ class pettyCashUserClass extends userClass{
 
 					}else{
 						
-						$balancetype = htmlspecialchars((string)filter_input(INPUT_POST, 'balancetype', FILTER_UNSAFE_RAW),ENT_QUOTES,'UTF-8');
-						$closing_balanceee = (float)$pcbres->closing_balance . $balancetype . (float)$pcbrres->total_amount;
-						$closing_balance = eval('return '.$closing_balanceee.';');
+						$balancetype = (filter_input(INPUT_POST, 'balancetype') === '-') ? '-' : '+';
+						$closing_balance = ($balancetype === '-')
+							? (float)$pcbres->closing_balance - (float)$pcbrres->total_amount
+							: (float)$pcbres->closing_balance + (float)$pcbrres->total_amount;
 						$insertcust = array('company_id'=>$post['company_id'],'pt_owner_id'=>$pcbrres->party_id,'pc_box_id'=>$pcbrres->ref_id,'balance_date'=>$pcbrres->transaction_date,'debit_amount'=>$pcbrres->total_amount,'credit_amount'=>0,'opening_balance'=>$pcbres->closing_balance,'closing_balance'=>$closing_balance,'is_active'=>0,'current_status'=>0,'created_by'=>$post['user_id'],'created_date'=>date("Y-m-d H:i:s"));
 						$pc_balance = $callConfig->insertRecord('petty_cash_balances',$insertcust);
 						$return['pc_balance_already_after_date'] = $pc_balance;
