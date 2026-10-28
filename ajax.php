@@ -7217,7 +7217,7 @@ if($page == 'uploadFeasibilityFiles'){
                 $actualFileName = $fileName;
                 $temp = explode(".", $actualFileName);
                 // $uniqueFilename = "file_" . time() . "_" . uniqid() . "." . end($temp);
-                $randomNumber = mt_rand(10000, 99999);
+                $randomNumber = random_int(10000, 99999);
                 $microtime = microtime(true);
                 $dateTime = date('Ymd_His', (int)$microtime) . sprintf('%03d', ($microtime - floor($microtime)) * 1000);
                 $uniqueFilename = "file_{$randomNumber}_{$dateTime}." . end($temp);
