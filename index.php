@@ -1041,8 +1041,8 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
 <?php } ?>
 <?php /** ?>
 <!---Rohan Include validation testing---->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js" integrity="sha384-FZY+KSLVXVyc1qAlqH9oCx1JEOlQh6iXfw3o2n3Iy32qGjXmUPWT9I0Z9e9wxYe3" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js" integrity="sha384-v7eExOYhwaHa3+GhP+lHytJsMcidazNdjiaggRhdbvVTVTCjweLpa23t37ZKxaCf" crossorigin="anonymous"></script>
 <script type="text/javascript" src="assets/pages/form-validation/validate.js"></script>
 <script type="text/javascript" src="assets/pages/form-validation/form-validation.js"></script>
 <!---Rohan Include validation testing---->
