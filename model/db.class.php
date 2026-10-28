@@ -714,7 +714,7 @@ function generateRandomString($length)
     }
     $i = 0; 
     while ($i < $length) { 
-      $char = substr($possible, mt_rand(0, $maxlength-1), 1);
+      $char = substr($possible, random_int(0, $maxlength-1), 1);
       if (!strstr($password, $char)) { 
         $password .= $char;
         $i++;
@@ -730,11 +730,11 @@ function random_code()
 	$rand = '';
 	
 	for($i = 0;$i <= 10;$i++) {
-		$num = rand() % 61;
+		$num = random_int(0, 60);
 		$tmp = substr($string, $num, 1);
 		$rand = $rand.$tmp;
 	}
-	return time().rand(1,time()).$rand.$salt;
+	return time().random_int(1, time()).$rand.$salt;
 }
 
 		
