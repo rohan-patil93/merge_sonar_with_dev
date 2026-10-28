@@ -426,7 +426,7 @@ class userClass{
 		$randomString = ''; 
 		//echo "random :".$n;
 		for ($i = 0; $i < $n; $i++) { 
-			$index = rand(0, strlen($characters) - 1); 
+			$index = random_int(0, strlen($characters) - 1); 
 			$randomString .= $characters[$index]; 
 		} 
 		//echo "randomout :".$randomString;
@@ -496,8 +496,7 @@ class userClass{
 		$query=$callConfig->selectQuery(MAINDB.'.'.TBL_DATABASE_ALLOCATIONS,'*',$whr,'','','');
 		$row=$callConfig->getRow($query);
 		//print_r($row); exit;
-		//$gen_password = $this->genrateRandomString(7);
-		$gen_password = "PensAndPencils123";
+		$gen_password = $this->genrateRandomString(7);
 		$password = $callConfig->passwordEncrypt($gen_password);
 		$db_id = $row->id;
 		$whrs="zqr_connect= '".$db_id."'";
@@ -551,8 +550,7 @@ class userClass{
 		//echo $query;
 		$row=$callConfig->getRow($query);
 		$ap_email = $row->user_email;
-		//$gen_password = $this->genrateRandomString(7);
-		$gen_password = "PensAndPencils123";
+		$gen_password = $this->genrateRandomString(7);
 		$password = $callConfig->passwordEncrypt($gen_password);
 
 		$whr = "user_email = '".$ap_email."'";
@@ -8363,7 +8361,7 @@ function togetgenralledgerlistdata($post){
 			$marray['credit_amount'] = $value->credit_amount;
 			$marray['blance'] = '1000'; 
 			$marray['type'] = $value->account_type;
-			$marray['Actions'] = 'http://dev.mylejar.com/login.php';
+			$marray['Actions'] = 'https://dev.mylejar.com/login.php';
 			$larray[$value->account_code] = $marray;
 			$larray[$value->account_code]['Orders'] =  array();
 		}
@@ -36647,7 +36645,7 @@ function gerReferanceTableDetails($get){
 	function generateOTP($length = 4) {
 	    $otp = '';
 	    for ($i = 0; $i < $length; $i++) {
-	        $otp .= mt_rand(1, 9); // Generate a random number between 0 and 9 and append it to the OTP string
+	        $otp .= random_int(1, 9); // Generate a random number between 1 and 9 and append it to the OTP string
 	    }
 	    if(strlen($otp)!=$length){
 	    	$otp = $this->generateOTP($length);
@@ -39005,10 +39003,10 @@ function gerReferanceTableDetails($get){
 			}
 			$lifetime_transaction_number = trim(implode($asnres->separator_symbols, (array)$parts));
 		}
-		$main_transaction_number = rand();
-		$monthly_transaction_number = $monthly_transaction_number !=""?$monthly_transaction_number:rand();
-		$yearly_transaction_number = $yearly_transaction_number !=""?$yearly_transaction_number:rand();
-		$lifetime_transaction_number = $lifetime_transaction_number !=""?$lifetime_transaction_number:rand();
+		$main_transaction_number = random_int(1, PHP_INT_MAX);
+		$monthly_transaction_number = $monthly_transaction_number !=""?$monthly_transaction_number:random_int(1, PHP_INT_MAX);
+		$yearly_transaction_number = $yearly_transaction_number !=""?$yearly_transaction_number:random_int(1, PHP_INT_MAX);
+		$lifetime_transaction_number = $lifetime_transaction_number !=""?$lifetime_transaction_number:random_int(1, PHP_INT_MAX);
 		if($main_transaction_no_type=="MT"){
 			$main_transaction_number = $monthly_transaction_number;
 		}elseif($main_transaction_no_type=="YR"){
