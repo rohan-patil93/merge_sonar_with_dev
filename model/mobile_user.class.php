@@ -1952,7 +1952,7 @@ class mobileUserClass extends userClass{
  		global $callConfig;
  		
  		$otp = $this->generateOTP(4);
- 		$insert_array = array('user_name'=>$post['user_name'],'user_email'=>$post['user_email'],'user_mobile'=>$post['user_mobile'] ,'user_password'=>md5($post['user_password']), 'remember_token'=>$otp, 'is_active'=>0,'current_status'=>0);
+ 		$insert_array = array('user_name'=>$post['user_name'],'user_email'=>$post['user_email'],'user_mobile'=>$post['user_mobile'] ,'user_password'=>$callConfig->passwordEncrypt($post['user_password']), 'remember_token'=>$otp, 'is_active'=>0,'current_status'=>0);
  		//echo "---------"; print_r($insert_array); print_r($get); print_r($post); exit;
 	 	$insert = $callConfig->insertRecord(MAINDB.'.mobile_user_registrations',$insert_array);
 	 	//print_r($insert); exit;

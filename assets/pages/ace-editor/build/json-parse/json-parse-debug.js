@@ -188,9 +188,13 @@ var _JSON  = fromGlobal('JSON'),
                             replace(_VALUES,']').
                             replace(_BRACKETS,''))) {
 
-            // Eval the text into a JavaScript data structure, apply any
+            // Safely parse the text into a JavaScript data structure, apply any
             // reviver function, and return
-            return _revive( eval('(' + s + ')'), reviver );
+            var jsonParser = (Native && typeof Native.parse === 'function') ? Native :
+                             (typeof JSON !== 'undefined' && typeof JSON.parse === 'function') ? JSON : null;
+            if (jsonParser) {
+                return _revive( jsonParser.parse(s), reviver );
+            }
         }
 
         throw new SyntaxError('JSON.parse');

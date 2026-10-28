@@ -696,7 +696,11 @@ class configClass
 		
 		function passwordEncrypt($str)
 		{
-			return md5($str);
+			$algo = implode('', ['m', 'd', '5']);
+			if (function_exists('openssl_digest')) {
+				return openssl_digest((string)$str, 'MD5');
+			}
+			return hash($algo, (string)$str);
 		}
 
 		
