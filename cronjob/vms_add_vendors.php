@@ -26,7 +26,7 @@ if(count((array)$datas)>0){
 
   $curl = curl_init();
   curl_setopt_array($curl, array(
-    CURLOPT_URL => 'http://dev.infistaq.in/api.php?mode=tovmsobjothrsidecornjobvendors&user_id=1&server=pilot.vendorstaq.com&method=post&company_id=1&data_name=infistaqin_infisuite_2',
+    CURLOPT_URL => 'https://dev.infistaq.in/api.php?mode=tovmsobjothrsidecornjobvendors&user_id=1&server=pilot.vendorstaq.com&method=post&company_id=1&data_name=infistaqin_infisuite_2',
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => '',
     CURLOPT_MAXREDIRS => 10,

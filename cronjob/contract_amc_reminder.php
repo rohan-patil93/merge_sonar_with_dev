@@ -4,7 +4,7 @@
  * Dev server cron: php cron_job/contract_amc_reminder.php [company_id] [database_name]
  * Example: php cron_job/contract_amc_reminder.php 1 infistaqin_infisuite_2
  */
-$apiBase = 'http://dev.infistaq.in/api.php';
+$apiBase = 'https://dev.infistaq.in/api.php';
 
 $companyId = (int) ($argv[1] ?? 1);
 $dbName = $argv[2] ?? 'infistaqin_infisuite_2';
