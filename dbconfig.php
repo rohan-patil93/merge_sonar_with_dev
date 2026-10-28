@@ -783,10 +783,10 @@ define("USER_IMAGE_ROOT",	        SITEROOT."/images/");
 //define(SITEURL, 				"http://".$_SERVER['HTTP_HOST']);
 
 /*------------- DEFULT PROJECT FLODER ------------------ */
-define("DYNAMIC_SITEURL", 		"http://www.{domain_name}.");
+define("DYNAMIC_SITEURL", 		"https://www.{domain_name}.");
 
 
-define("SITEURL", 				"http://".$_SERVER['HTTP_HOST']."/merge_sonar_with_dev/");
+define("SITEURL", 				"https://".$_SERVER['HTTP_HOST']."/merge_sonar_with_dev/");
 
 /*define("TEST", 				SITEURL."/api.php");*/
 
@@ -802,7 +802,7 @@ if($_SESSION['userid'] == 726){
 
 define("CRMAPI", 			SITEURL."/crm_api.php/");
 
-define("GOOGLE_MAPS_API_KEY", "AIzaSyB45MxMrICyOGQPR_4cmuB69EmynFPISog"); // paste your Google Maps JavaScript API key here
+define("GOOGLE_MAPS_API_KEY", getenv('GOOGLE_MAPS_API_KEY') ?: ''); // set GOOGLE_MAPS_API_KEY environment variable on server
 
 
 define("IMGURL", 				SITEURL."/images");
