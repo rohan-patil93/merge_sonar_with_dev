@@ -167,7 +167,7 @@ session_start();
 
 
                                         <div class="form-group mb-1">
-                                            <img src="captcha.php?rand=<?php echo rand();?>" id='captchaimg'><br>
+                                            <img src="captcha.php?rand=<?php echo random_int(0, PHP_INT_MAX);?>" id='captchaimg'><br>
                                             <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray"  id="captcha_code11" name="captcha_code" type="text" placeholder="Enter Captcha">
                                            
                                             <br>

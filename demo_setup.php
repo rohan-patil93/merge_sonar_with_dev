@@ -618,7 +618,7 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
 <script type="text/javascript" src="assets/js/common-pages.js"></script>
 
 <script type="text/javascript" src="assets/bower_components/bootstrap-tagsinput/js/bootstrap-tagsinput.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js" integrity="sha384-L+5n452EWFXO4Wnt9PcDq8OdxBC6vu1YnigaNE43IWRV3vpu1nY1H+iflfUs7N6N" crossorigin="anonymous"></script>
 
 <!-- Select 2 js -->
 <script type="text/javascript" src="assets/bower_components/select2/js/select2.full.min.js"></script>
