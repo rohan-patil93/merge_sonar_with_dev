@@ -16,7 +16,7 @@ class phptextClass
 		
 		if($backgroundColor==''){/*select random color*/
 			$colorCode=array('#FFFFFF', '#FFFFFF', '#FFFFFF');
-			$backgroundColor = $this->hexToRGB($colorCode[rand(0, count($colorCode)-1)]);
+			$backgroundColor = $this->hexToRGB($colorCode[random_int(0, count($colorCode)-1)]);
 			$backgroundColor = imagecolorallocate($im, $backgroundColor['r'],$backgroundColor['g'],$backgroundColor['b']);
 		}else{/*select background color as provided*/
 			$backgroundColor = $this->hexToRGB($backgroundColor);
@@ -52,14 +52,14 @@ class phptextClass
 		$noiceColor=$this->hexToRGB($noiceColor);	
 		$noiceColor = imagecolorallocate($im, $noiceColor['r'],$noiceColor['g'],$noiceColor['b']);
 		for( $i=0; $i<$noiceLines; $i++ ) {				
-			imageline($im, mt_rand(0,$imgWidth), mt_rand(0,$imgHeight),
-			mt_rand(0,$imgWidth), mt_rand(0,$imgHeight), $noiceColor);
+			imageline($im, random_int(0,$imgWidth), random_int(0,$imgHeight),
+			random_int(0,$imgWidth), random_int(0,$imgHeight), $noiceColor);
 		}}				
 				
 		if($noiceDots>0){/* generating the dots randomly in background */
 		for( $i=0; $i<$noiceDots; $i++ ) {
-			imagefilledellipse($im, mt_rand(0,$imgWidth),
-			mt_rand(0,$imgHeight), 3, 3, $textColor);
+			imagefilledellipse($im, random_int(0,$imgWidth),
+			random_int(0,$imgHeight), 3, 3, $textColor);
 		}}		
 		
 		imagefill($im,0,0,$backgroundColor);	
@@ -78,7 +78,7 @@ class phptextClass
 	protected function random($characters=6,$letters = '23456789bcdfghjkmnpqrstvwxyz'){
 		$str='';
 		for ($i=0; $i<$characters; $i++) { 
-			$str .= substr($letters, mt_rand(0, strlen($letters)-1), 1);
+			$str .= substr($letters, random_int(0, strlen($letters)-1), 1);
 		}
 		return $str;
 	}	
