@@ -1,8 +1,8 @@
 
 <?php
-include('../includes/session.php');
-include('../dbconfig.php');
-include('../comm.php');
+include_once('../includes/session.php');
+include_once('../dbconfig.php');
+include_once('../comm.php');
 $filter_id = $_GET['filter_id'];
 //print_r($_GET);
 $filter_table = 'employees';

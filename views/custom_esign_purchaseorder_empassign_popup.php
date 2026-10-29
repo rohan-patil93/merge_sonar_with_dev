@@ -1,7 +1,7 @@
 <?php 
-include('../includes/session.php');
-include('../dbconfig.php');
-include('../comm.php');
+include_once('../includes/session.php');
+include_once('../dbconfig.php');
+include_once('../comm.php');
 $dataurl = API."?mode=togetesignpolistpopup&type=".$_POST['type']."&rid=".$_POST['rid']."&item=".$_POST['item']."&emp_id=".$_POST['emp_id'];
 $view = callAPI($dataurl);
 $data = json_decode($view,1);

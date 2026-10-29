@@ -1,7 +1,7 @@
 <?php
-include('../includes/session.php');
-include('../dbconfig.php');
-include('../comm.php');
+include_once('../includes/session.php');
+include_once('../dbconfig.php');
+include_once('../comm.php');
 $table_name = "email_content";
 $wh1["where"] = array('apply_table_name'=>$table_name,'is_active'=>0,'company_id'=>$_SESSION['company_id']);
 $wh1["field"] = "id,fields,label,application_table_name,preview_value";

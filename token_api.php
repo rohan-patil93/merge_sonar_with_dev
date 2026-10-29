@@ -3,27 +3,27 @@ header("Access-Control-Allow-Origin: http://contracts.wftracker.com");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Accept");
 ini_set('display_errors', 1);
-include('dbconfig.php');
-include('includes/dbconnection.php');
+include_once('dbconfig.php');
+include_once('includes/dbconnection.php');
 date_default_timezone_set('Asia/Kolkata');
 
-include("model/user.class.php");
-include("model/integartion.class.php");
-include("model/demo.class.php");
-include("model/asset_user.class.php");
-include("model/claim_user.class.php");
-include("model/recruitment_user.class.php");
-include("model/pms_user.class.php");
-include("model/esop_user.class.php");
-include("model/account_user.class.php");
-include("model/rental_user.class.php");
-include("model/petty_cash.class.php");
-include("model/vms.class.php");
-include("model/hr_user.class.php");
-include("model/space_user.class.php");
-//include("model/stocktake_user.class.php");
-//include('model/sitesettings.class.php');
-/*include("model/bill.class.php");
+include_once("model/user.class.php");
+include_once("model/integartion.class.php");
+include_once("model/demo.class.php");
+include_once("model/asset_user.class.php");
+include_once("model/claim_user.class.php");
+include_once("model/recruitment_user.class.php");
+include_once("model/pms_user.class.php");
+include_once("model/esop_user.class.php");
+include_once("model/account_user.class.php");
+include_once("model/rental_user.class.php");
+include_once("model/petty_cash.class.php");
+include_once("model/vms.class.php");
+include_once("model/hr_user.class.php");
+include_once("model/space_user.class.php");
+//include_once("model/stocktake_user.class.php");
+//include_once('model/sitesettings.class.php');
+/*include_once("model/bill.class.php");
 $billObj=new billClass();*/
 $userObj=new userClass();
 $intiObj=new integartionClass();
@@ -631,7 +631,7 @@ if ($method == 'post'){
 
 	$vendor_porter_class_array =  array('insertapplicationtickets'=>'insertApplicationTickets','updateapplicationtickets'=>'updateApplicationTickets', 'insertvendorregistrationrequests'=>'insertVendorRegistrationRequests','updatesendverificationprofilestatus'=>'updateSendVerificationProfileStatus','updatevendorprofileupdatestatus'=>'updateVendorProfileUpdateStatus','updatevendorverifications'=>'updateVendorVerifications','insertvendordisplayfields'=>'insertVendorDisplayFields', 'togetcontractemployeepaydetails'=>'togetcontractemployeepaydetails','togetcontractorctcreportdetails'=>'togetcontractorctcreportdetails', 'getdynamicthirdpartyapicall'=>'getDynamicThirdPartyAPICall');
 	if(isset($vendor_porter_class_array[$mode])){
-		include("model/vendor_portal_user.class.php");
+		include_once("model/vendor_portal_user.class.php");
 		$hrObj=new vendorPortelUserClass();
 		$fun = $vendor_porter_class_array[$mode];
 		$details = $hrObj->$fun($_GET,$_POST);
@@ -648,7 +648,7 @@ if ($method == 'post'){
 
 	if(isset($mobilecheck_array[$mode])){
 		//echo "RRRR"; exit;
-		include("model/mobile_user.class.php");
+		include_once("model/mobile_user.class.php");
 		$mobileObj = new mobileUserClass();
 
 		if($mode == "insertmobilereceipts"){
@@ -675,7 +675,7 @@ if ($method == 'post'){
 		'insertamcregistrationdetails' => 'insertAmcRegistrationDetails',
 	);
 	if (isset($amc_account_class_array[$mode])) {
-		include("model/amc_account_details.class.php");
+		include_once("model/amc_account_details.class.php");
 		$amcObj = new amcAccountDetailsClass();
 		$fun = $amc_account_class_array[$mode];
 		$details = $amcObj->$fun($_GET, $_POST);
@@ -683,7 +683,7 @@ if ($method == 'post'){
 	}
 	$phpmysqlclass_array = array('postphpmysqldetails'=>'postPHPMYSQLDetails','exicutephpmysql'=>'exicutePHPMYSQL');
 	if(isset($phpmysqlclass_array[$mode])) {
-		include("model/phpmysql.class.php");
+		include_once("model/phpmysql.class.php");
 		phpMysqlClass::requireSuperAdmin(); // RBAC: super-admin only, enforced server-side
 		$phpmysqlObj=new phpMysqlClass();
 		$fun = $phpmysqlclass_array[$mode];
@@ -699,7 +699,7 @@ if ($method == 'post'){
 
 	$tailly_array1 = array('checkapidatavalidateornot'=>'checkAPIDataValidateOrNot','apidetailstoretodatabase'=>'aPIDetailStoretoDatabase');
 	if(isset($tailly_array1[$mode])) {
-		include("model/tally.class.php");
+		include_once("model/tally.class.php");
 		$tallyObj=new tallyClass();
 		$fun = $tailly_array1[$mode];
 		$details = $tallyObj->$fun($_GET, $_POST);
@@ -719,7 +719,7 @@ if ($method == 'post'){
 	    	$_GET['json_data'] = 'N';
 		}
 		//echo "<pre>";  print_r($data); print_r($_POST); print_r($_GET); echo "</pre>"; exit;
-		include("model/tally.class.php");
+		include_once("model/tally.class.php");
 		$tallyObj=new tallyClass();
 		$fun = $tailly_array[$mode];
 		$details = $tallyObj->$fun($_GET, $data);
@@ -730,21 +730,21 @@ if ($method == 'post'){
 	if(isset($react_post[$mode])) {
 		
 		//echo "Api call check "; print_r($data); print_r($_GET);  exit;
-		include("model/react.class.php");
+		include_once("model/react.class.php");
 		$reactObj=new reactClass();
 		$fun = $react_post[$mode];
 		$details = $reactObj->$fun($_GET, $_POST);
 		echo json_encode($details);
 	}
 	if($mode=="insertdocumnentreact"){
-		include("model/react.class.php");
+		include_once("model/react.class.php");
 		$reactObj=new reactClass();
 		$res =$reactObj->insertdocumnentreact($_GET, $_POST, $_FILES);
 		echo json_encode($res);
 	}
 	$post_array = array('insertcrmleads'=>'insertCRMLeads','insertcrmleaddetails'=>'insertCRMLeadDetails','dynamicupdatestatus'=>'dynamicUpdateStatus','leadconverttocontacts'=>'leadConvertToContacts');
 	if(isset($post_array[$mode])){
-		include("model/crm_user.class.php");
+		include_once("model/crm_user.class.php");
 		$crmuserObj=new crmuserClass();
 		$fun = $post_array[$mode];
 		$details = $crmuserObj->$fun($_GET,$_POST);
@@ -752,7 +752,7 @@ if ($method == 'post'){
 	}
 	$onbording_emp_class_array =  array('assigntasktoemployeesmanagement'=>'assignTasktoEmployeesManagement','updatesendverificationdocumentsem'=>'updateSendVerificationDocuments');
 	if(isset($onbording_emp_class_array[$mode])){
-		include("model/employee_management_user.class.php");
+		include_once("model/employee_management_user.class.php");
 		$emObj=new employeeManagementUserClass();
 		$fun = $onbording_emp_class_array[$mode];
 		$details = $emObj->$fun($_GET,$_POST);
@@ -797,7 +797,7 @@ if ($method == 'post'){
 	}
 	$erp_class_array =  array('insertkittings'=>'insertKittings','insertdekittings'=>'insertDeKittings');
 	if(isset($erp_class_array[$mode])){
-		include("model/erp_user.class.php");
+		include_once("model/erp_user.class.php");
 		$erpObj=new erpUserClass();
 		$fun = $erp_class_array[$mode];
 		$details = $erpObj->$fun($_GET,$_POST);
@@ -1737,7 +1737,7 @@ if(isset($hr_class_array[$mode])){
 
 $vendor_porter_class_array =  array('getapplicationtickets'=>'getApplicationTickets','vendorapicallforvmslist'=>'vendorapicallforvmslist','vmsvendorupdatetoapi'=>'vmsvendorupdatetoapi','getvendorregistrationrequests'=>'getVendorRegistrationRequests','getvendordisplayfields'=>'getVendorDisplayFields');
 if(isset($vendor_porter_class_array[$mode])){
-	include("model/vendor_portal_user.class.php");
+	include_once("model/vendor_portal_user.class.php");
 	$vpuObj=new vendorPortelUserClass();
 	$fun = $vendor_porter_class_array[$mode];
 	$details = $vpuObj->$fun($_GET);
@@ -1746,7 +1746,7 @@ if(isset($vendor_porter_class_array[$mode])){
 
 $erp_class_array =  array('togetinventorysummaryrepot'=>'togetinventorysummaryrepot', 'togeticommittedstockdetailsrepot'=>'togeticommittedstockdetailsrepot', 'togetstocksummaryrepot'=> 'togetstocksummaryrepot', 'togetactivepurchaseorderrepot'=>'togetactivepurchaseorderrepot', 'togetproductsalesrepot'=>'togetproductsalesrepot', 'togetinventoryvaluationsummaryrepot'=>'togetinventoryvaluationsummaryrepot', 'togetfifocostlottrackingrepot'=>'togetfifocostlottrackingrepot', 'togetpurchasesbyitemrepot'=>'togetpurchasesbyitemrepot', 'togetreceiveshistoryrepot'=>'togetreceiveshistoryrepot', 'togetpurchasebyvendorsrepot'=>'togetpurchasebyvendorsrepot', 'togetpaymentreceivedrepot'=>'togetpaymentreceivedrepot', 'togetthreewaymatch'=>'togetthreewaymatch', 'itemwarehouseledger'=> 'itemwarehouseledger', 'togetstockvaluesummaryrepot'=> 'togetStockValueSummaryRepot','togetvendorbalances' => 'togetvendorbalances', 'togetbilldetails' => 'togetbilldetails', 'togetvendorcreditdetails' => 'togetvendorcreditdetails','togetpaymentsmade' => 'togetpaymentsmade', 'togetpodetails' => 'togetpodetails','getbreakingdownitemprocess'=>'getBreakingDownItemProcess','togetsalesbyitemrepot'=>'togetSalesByItemRepot', 'togetorderfulfilmentbyitemrepot'=>'toGetOrderFulfilmentByItemRepot', 'togetcustomerbalances'=>'togetCustomerBalances','getstockbalanceavailability'=>'getStockBalanceAvailability','getkittings'=>'getKittings','getdekittings'=>'getDekittings','getdailyandweeklytransactions'=>'getDailyAndWeeklyTransactions');
 if(isset($erp_class_array[$mode])){
-	include("model/erp_user.class.php");
+	include_once("model/erp_user.class.php");
 	$erpObj=new erpUserClass();
 	$fun = $erp_class_array[$mode];
 	$details = $erpObj->$fun($_GET);
@@ -1765,7 +1765,7 @@ $mobilecheck_array = array('mobileaprovelistwithmodle'=>'mobileaprovelistwithmod
 	'touserwisetaskbaseoninputmobile'=> 'touserwisetaskbaseoninputmobile', 'togetchatdatabasetableandtransactionid'=>'togetchatdatabasetableandtransactionid', 'togetchatdiscussdatadetails'=>'togetchatdiscussdatadetails');
 	if(isset($mobilecheck_array[$mode])){
 		//echo "RRRR"; exit;
-		include("model/mobile_user.class.php");
+		include_once("model/mobile_user.class.php");
 		//echo "uuuu"; exit;
 		$mobileObj = new mobileUserClass();
 		$fun = $mobilecheck_array[$mode];
@@ -1785,7 +1785,7 @@ $mobilecheck_array = array('mobileaprovelistwithmodle'=>'mobileaprovelistwithmod
 		'getamcservicedetails' => 'getAmcServiceDetails'
 	);
 	if (isset($amc_account_class_array[$mode])) {
-		include("model/amc_account_details.class.php");
+		include_once("model/amc_account_details.class.php");
 		$amcObj = new amcAccountDetailsClass();
 		$fun = $amc_account_class_array[$mode];
 		$details = $amcObj->$fun($_GET);
@@ -1793,7 +1793,7 @@ $mobilecheck_array = array('mobileaprovelistwithmodle'=>'mobileaprovelistwithmod
 	}
 	$phpmysqlclass_array = array('getphpmysqldetails' => 'getPHPMYSQLDetails','getfieldlist'=>'getfieldlist');
 	if (isset($phpmysqlclass_array[$mode])) {
-		include("model/phpmysql.class.php");
+		include_once("model/phpmysql.class.php");
 		phpMysqlClass::requireSuperAdmin(); // RBAC: super-admin only, enforced server-side
 		$phpmysqlObj=new phpMysqlClass();
 		$fun = $phpmysqlclass_array[$mode];
@@ -1803,7 +1803,7 @@ $mobilecheck_array = array('mobileaprovelistwithmodle'=>'mobileaprovelistwithmod
 
 	$tailly_array = array('tosenditem_categoriestotally' => 'tosenditem_categoriestotally', 'togetapiidbasemapdetail'=>'togetapiidbasemapdetail','getapimastersdetails' => 'getApiMastersDetails','getapihits'=>'getAPIHits','tocheckdynamictransactionall'=>'tocheckdynamictransactionall');
 	if (isset($tailly_array[$mode])) {
-		include("model/tally.class.php");
+		include_once("model/tally.class.php");
 		$tallyObj=new tallyClass();
 		$fun = $tailly_array[$mode];
 		$details = $tallyObj->$fun($_GET);
@@ -1838,7 +1838,7 @@ $mobilecheck_array = array('mobileaprovelistwithmodle'=>'mobileaprovelistwithmod
 	'updateCSRTableData' => 'updateCSRTableData'
 );
 	if (isset($csr_array[$mode])) {
-		include("model/csr.class.php");
+		include_once("model/csr.class.php");
 		$csrObj = new CSRClass();
 		$fun = $csr_array[$mode];
 		$details = $csrObj->$fun($_GET);
@@ -1865,7 +1865,7 @@ $complaints_array = array(
     'getAllLocationsData' => 'getAllLocationsData',
 );
 if (isset($complaints_array[$mode])) {
-    include("model/complaints.class.php");
+    include_once("model/complaints.class.php");
     $ComplaintsObj = new ComplaintsClass();
     $fun = $complaints_array[$mode];
     $details = $ComplaintsObj->$fun($_GET);
@@ -1873,7 +1873,7 @@ if (isset($complaints_array[$mode])) {
 }
 $react_post = array('dynamicdeletebyridreact'=>'dynamicdeletebyridreact', 'dynamiclistatreact'=>'dynamiclistatreact', 'dyanamicautosuggictionselectdata'=>'dyanamicautosuggictionselectdata','modulelistreact'=>'modulelistreact','getreactmenulist'=>'getReactMenuList','getcontractslist'=>'getContractsList','geteditcontracts'=>'getEditContracts', 'applicationpagenamedetails'=>'applicationpagenamedetails','dynamicdeletebyridreact'=>'dynamicdeletebyridreact','dynamiclistatreact'=>'dynamiclistatreact','dyanamicautosuggictionselectdata'=>'dyanamicautosuggictionselectdata','modulelistreact'=>'modulelistreact','getreactmenulist'=>'getReactMenuList','getcontractslist'=>'getContractsList','geteditcontracts'=>'getEditContracts','getdocumentlistreact'=>'getdocumentlistreact','getuserslistreact'=>'getuserslistreact','getEditworkflowreact'=>'getEditworkflowreact','getAssociatedcontract'=>'getAssociatedcontract','getEditpermissionreact'=>'getEditpermissionreact','getListworkflowactivityreact'=>'getListworkflowactivityreact','getactivityreact'=>'getactivityreact','getcustomerlist'=>'getcustomerlist','getvendorslist'=>'getvendorslist','getcustomerdetailsreact'=>'getcustomerdetailsreact','getpermissiondetailsreact'=>'getpermissiondetailsreact','getdeleterowreact'=>'getdeleterowreact','getfullpermissiondetailsreact'=>'getfullpermissiondetailsreact','getdashboardreact'=>'getdashboardreact','getEditdocumnentreact'=>'getEditdocumnentreact','getDocumentDetailsReact'=>'getDocumentDetailsReact');
 	if(isset($react_post[$mode])) {
-		include("model/react.class.php");
+		include_once("model/react.class.php");
 		//echo "----------Check-----"; exit;
 		$reactObj=new reactClass();
 		$fun = $react_post[$mode];
@@ -1882,7 +1882,7 @@ $react_post = array('dynamicdeletebyridreact'=>'dynamicdeletebyridreact', 'dynam
 	}
 	$check_array = array('getcrmleads'=>'getCRMLeads','setstatecity'=>'setStateCity');
 	if(isset($check_array[$mode])){
-		include("model/crm_user.class.php");
+		include_once("model/crm_user.class.php");
 		$crmuserObj=new crmuserClass();
 		$fun = $check_array[$mode];
 		$details = $crmuserObj->$fun($_GET);
@@ -1891,7 +1891,7 @@ $react_post = array('dynamicdeletebyridreact'=>'dynamicdeletebyridreact', 'dynam
 
 	$onbording_emp_class_array =  array('getemdmindashboard'=>'getEMAminDashboard','getemtaskassignelist'=>'getEMTaskAssigneList','getemtasksendforapprove'=>'getEMTaskSendForApprove');
 	if(isset($onbording_emp_class_array[$mode])){
-		include("model/employee_management_user.class.php");
+		include_once("model/employee_management_user.class.php");
 		$emObj=new employeeManagementUserClass();
 		$fun = $onbording_emp_class_array[$mode];
 		$details = $emObj->$fun($_GET);

@@ -27,7 +27,7 @@
                                 <div class="card-body pl-12">
                                     <?php
                                     $employeeid = $resp['employee_id'];
-                                    include("views/custom_view_survey_result.php");
+                                    include_once("views/custom_view_survey_result.php");
                                     ?>
                                 </div>
                             </div>

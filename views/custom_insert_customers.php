@@ -1892,7 +1892,7 @@ function toggleRowLock(button) {
 						</div>
 					</div>
 					<div id="showdivpagehtml">
-						<?php //include('custom_insert_property_tenant_details.php'); ?>
+						<?php //include_once('custom_insert_property_tenant_details.php'); ?>
 					</div>
 				</div>
 				</div>

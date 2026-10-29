@@ -72,7 +72,7 @@ $assessment_years = $result['assessment_years'] ?? array();
     <div class="mt-4" id="TableContent">
         <?php
     if(isset($_GET['employee_id']) && isset($_GET['assessment_year']) ){
-        include('custom_employee_assign_release_documents_table.php'); 
+        include_once('custom_employee_assign_release_documents_table.php'); 
     }
     ?>
     </div>

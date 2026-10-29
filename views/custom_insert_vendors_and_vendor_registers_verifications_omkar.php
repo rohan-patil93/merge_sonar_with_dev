@@ -1,8 +1,8 @@
 <?php
 if ($_POST['ajaxcall'] == "Y") {
-    include('../includes/session.php');
-    include('../dbconfig.php');
-    include('../comm.php');
+    include_once('../includes/session.php');
+    include_once('../dbconfig.php');
+    include_once('../comm.php');
 }
 
 function showNotificationIcon($status)

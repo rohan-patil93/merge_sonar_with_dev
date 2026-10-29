@@ -31,7 +31,7 @@
 				<div class="form-group">
 					<input type="text" class="form-control" name="captcha" required="required"/>
 				</div>
-				<?php include 'login.php'?>
+				<?php include_once 'login.php'?>
 				<center><button name="login" class="btn btn-primary"><span class="glyphicon glyphicon-log-in"></span> login</button></center>
 			</form>
 		</div>	

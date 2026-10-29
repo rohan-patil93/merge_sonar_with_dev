@@ -4,7 +4,7 @@
 print_r($_POST); exit;
 } */
 //echo "Good Boy"; exit;
-include('dbconfig.php');
+include_once('dbconfig.php');
 session_start();
 $session_id = session_id();
 //echo "check"; exit;
@@ -320,9 +320,9 @@ $dis_error['6007']  = "The Captcha code does not match!";
   } 
     //echo LOGIN_ARRAY[$pageid];
     if(isset(LOGIN_ARRAY[$pageid]) AND LOGIN_ARRAY[$pageid] !=""){
-        include(LOGIN_ARRAY[$pageid]);
+        include_once(LOGIN_ARRAY[$pageid]);
     }else{
-        include("common_login.php"); 
+        include_once("common_login.php"); 
     }
 
     ?>

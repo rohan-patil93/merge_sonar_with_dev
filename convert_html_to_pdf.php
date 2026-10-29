@@ -1,5 +1,5 @@
 <?php 
-include('dbconfig.php');
+include_once('dbconfig.php');
 require_once "dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
 use Dompdf\Options;

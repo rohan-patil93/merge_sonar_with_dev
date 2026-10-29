@@ -1,5 +1,5 @@
-<?php 
-/*include('dbconfig.php');
+﻿<?php 
+/*include_once('dbconfig.php');
 session_start();
 $row = $_GET;
 $_SESSION['userid'] = $row['id'];
@@ -13,7 +13,7 @@ $domainresult = json_decode($domainres,1);
 $_SESSION['us_name']=$row['user_name'];
 $_SESSION['email']=$row['user_email'];
 $_SESSION['role_id']=$row['role_id'];*/
-//include('comm.php');
+//include_once('comm.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">

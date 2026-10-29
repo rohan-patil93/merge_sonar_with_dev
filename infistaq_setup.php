@@ -1,9 +1,9 @@
 <?php
 ini_set('display_errors' ,0);
-include('includes/session.php');
+include_once('includes/session.php');
 //$_SESSION['DB_NAME']="infistaq_infisuite_1";
-include('dbconfig.php');
-include('comm.php');
+include_once('dbconfig.php');
+include_once('comm.php');
 
 if(isset($_SESSION['sbt_message']) AND $_SESSION['sbt_message'] == 1){ ?>
     <script type="text/javascript">

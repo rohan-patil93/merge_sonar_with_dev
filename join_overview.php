@@ -1,9 +1,9 @@
 <?php 
 ini_set('display_errors' ,0);
-include('includes/session.php');
-include('dbconfig.php');
-include('comm.php');
-include('join_header.php');
+include_once('includes/session.php');
+include_once('dbconfig.php');
+include_once('comm.php');
+include_once('join_header.php');
 
 $div_count_array = array('0'=>'0','1'=>'12','2'=>'6','3'=>'4','4'=>'3','5'=>'4', '6'=>'4','7'=>'3','8'=>'3','9'=>'4');
 $div_count = array('0','1','2','3','4','5', '6','7','8','9');

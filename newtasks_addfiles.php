@@ -1,7 +1,7 @@
 <?php
-include('../includes/session.php');
-include('../dbconfig.php');
-include('../comm.php');
+include_once('../includes/session.php');
+include_once('../dbconfig.php');
+include_once('../comm.php');
 $data1q["where"] = array('company_id'=>$_SESSION['company_id'],'is_active'=>0);
                            //print_r($data1q); //exit;
 $ssdata = urlencode(json_encode($data1q));

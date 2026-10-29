@@ -145,11 +145,11 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 ?>
 <div class="row p-5">
 	<!--<div class="col-lg-6 col-xxl-6">
-	<?php //include('custom_view_vms_jobs.php'); ?>
+	<?php //include_once('custom_view_vms_jobs.php'); ?>
 </div>-->
 
 <div class="col-lg-8  draggable-zone">
-	<?php include('custom_view_vms_budget.php'); ?>
+	<?php include_once('custom_view_vms_budget.php'); ?>
 </div>	  
 <div class="col-lg-4">
 	<!--begin::Card-->
@@ -614,7 +614,7 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 	</div>	 -->
 </div>
 	<!-- <div class="col-lg-8 draggable-zone">
-         <?php //include('custom_view_admin_dashboard_report.php'); ?>
+         <?php //include_once('custom_view_admin_dashboard_report.php'); ?>
       </div> -->	
 					
 

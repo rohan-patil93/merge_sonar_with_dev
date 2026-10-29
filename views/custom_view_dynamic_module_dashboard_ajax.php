@@ -429,14 +429,14 @@ if($totaldoc != 0 AND $totaldoc !=""){
                             $_GET['company_id'] = 1;
                             $_GET['data_name'] = "infistaqin_infisuite_2";
                             $_GET['user_id'] = 459;
-                            include("../apis/custom_vendor_customer_finance_summary.php"); ?>
+                            include_once("../apis/custom_vendor_customer_finance_summary.php"); ?>
                         </div>
                         <div class="tab-pane card-body p-0" id="itemssummary" role="tabpanel">  
                             <?php 
                             $_GET['company_id'] = 1;
                             $_GET['data_name'] = "infistaqin_infisuite_2";
                             $_GET['user_id'] = 459;
-                            include("../apis/custom_items_summary.php"); ?>
+                            include_once("../apis/custom_items_summary.php"); ?>
                         </div>
                         <?php } **/ ?>
                         <div class="tab-pane card-body p-0" id="schedules_tab" role="tabpanel"> 

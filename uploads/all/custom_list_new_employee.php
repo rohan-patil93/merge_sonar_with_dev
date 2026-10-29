@@ -47,7 +47,7 @@ $pp = round(($k/$i)*(100));
     $res_team = callAPI($vurl);
   	$res_team = json_decode($res_team,1);
 //	print_r($shift);// exit;
-include("new_from_submit.php");
+include_once("new_from_submit.php");
 	//echo "<pre>"; print_r($skills); exit;
 	$vdata1["where"] = array('emp_id'=> $_SESSION['emp_id'],'is_active'=>'0'); 
     $vdata = urlencode(json_encode($vdata1));
@@ -340,14 +340,14 @@ include("new_from_submit.php");
 								<div class="card  ">
 									<?php $_GET['option'] = $option_name;
 					if($_GET['option']!=""){
-						include("includes/controller.php");
+						include_once("includes/controller.php");
 						$dispage = str_replace("views/", '', $disptemp);
-						include($dispage);
+						include_once($dispage);
 					}else{
-						include("custom_list_dash_board.php");
+						include_once("custom_list_dash_board.php");
 						
 					} 
-					//include("custom_admin_dash_board.php");
+					//include_once("custom_admin_dash_board.php");
 									?>							
 								</div>
 								<!--end::Sign-in Method-->

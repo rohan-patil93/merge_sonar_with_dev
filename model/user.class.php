@@ -30019,7 +30019,7 @@ function submitStatusDynamicWorkFlow($get){
 					$rentalObj->insertRentalInvoices($get);
 				}
 				if($get['transaction_table']=="kittings" || $get['transaction_table']=="dekittings"){
-					include("erp_user.class.php");
+					include_once("erp_user.class.php");
 					$erpObj=new erpUserClass();
 					$erpObj->insertKittingAndDekkitingStockUpdate($get);
 				}

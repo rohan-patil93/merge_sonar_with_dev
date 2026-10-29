@@ -1,6 +1,6 @@
 
 
- <?php include 'header.php';?>
+ <?php include_once 'header.php';?>
 
     <div class="row preview">
         <div class="col-md-12">
@@ -123,4 +123,4 @@ var x = setInterval(function() {
 </script>
 
 <!--begin::Footer-->
-<?php include 'footer.php';?>
+<?php include_once 'footer.php';?>

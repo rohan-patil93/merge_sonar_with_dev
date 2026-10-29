@@ -1,6 +1,6 @@
 <?php
 if(!isset($_POST['API_TYPE']) && $_POST['API_TYPE'] !="D"){
-  include('../includes/session.php');
+  include_once('../includes/session.php');
 }else{
   session_start();
   $_SESSION['company_id'] = 1;

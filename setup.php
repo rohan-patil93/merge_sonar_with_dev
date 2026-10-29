@@ -1,9 +1,9 @@
 <?php 
 $_SESSION['apply_js']['multiselest'] = "1";
 ini_set('display_errors' ,0);
-include('includes/session.php');
-include('dbconfig.php');
-include('comm.php');
+include_once('includes/session.php');
+include_once('dbconfig.php');
+include_once('comm.php');
 if($_GET['setup'] == 'F'){
    unset($_SESSION['login_details']);         
         ?>
@@ -957,7 +957,7 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 				//echo "setups/".$spage['page_name'].".php"; 
 				$nextpagesqeq++;
 				$nextseqstartnumber = $setuppage[$nextpagesqeq]['seq'][0];
-				include("setups/".$spage['page_name'].".php");
+				include_once("setups/".$spage['page_name'].".php");
 				$previousseqnumber = end($spage['seq']);
 			}  **/
 			/**/
@@ -971,13 +971,13 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 				}else{
 					$nextseqstartnumber = '';
 				}
-				include("setups/".$pagedetail[0]['page_name'].".php");
+				include_once("setups/".$pagedetail[0]['page_name'].".php");
 				$previousarray = end($pagedetail);
 				$previousseqnumber = $previousarray['sequence'];
 			}  /**/ 
 		?>
 		</div>
-		<?php ///include("setups/product_and_service_setup.php"); ?>
+		<?php ///include_once("setups/product_and_service_setup.php"); ?>
 
 
 

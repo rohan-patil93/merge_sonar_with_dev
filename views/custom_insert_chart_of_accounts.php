@@ -264,7 +264,7 @@ function clickChartOfAccountLockAndUnlock(ca_status, ca_id){
                          }else{
                             //echo $pageurl;
                              include_once $pageurl;
-                            //include('custom_insert_chart_of_accounts_ajax.php');
+                            //include_once('custom_insert_chart_of_accounts_ajax.php');
                          }
                         ?>  
                     </div>

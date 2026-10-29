@@ -893,6 +893,6 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 			</div>
 		</div>
 		<div class="tab-pane card-body <?php echo ($_GET['TAB'] =="Cand")?"active":"";?>" id="Candidates-tab" role="tabpanel">
-			<?php include('custom_view_recruitingmanager_dashboard_candidates.php'); ?>
+			<?php include_once('custom_view_recruitingmanager_dashboard_candidates.php'); ?>
 		</div>
 	</div>

@@ -1,7 +1,7 @@
 <?php
-include('../includes/session.php');
-include('../dbconfig.php');
-include('../comm.php');
+include_once('../includes/session.php');
+include_once('../dbconfig.php');
+include_once('../comm.php');
 
 //print_r($_POST);
 $table_list = array("job_feedback_setup","job_feedback_questions","job_feedback_question_options");

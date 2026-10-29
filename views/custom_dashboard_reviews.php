@@ -1,7 +1,7 @@
 <?php
-include('../includes/session.php');
-include('../dbconfig.php');
-include('../comm.php');
+include_once('../includes/session.php');
+include_once('../dbconfig.php');
+include_once('../comm.php');
 $reviewurl = API."?mode=getriviewsdata&response_type=0";
 $reviewdata = callAPI($reviewurl);
 $reviewdata = json_decode($reviewdata, 1);

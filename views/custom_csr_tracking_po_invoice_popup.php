@@ -15,9 +15,9 @@ if (!$project_id || !$tracking_id || !$doc_type) {
 
 <?php
 	if ($doc_type === 'PO') {
-	    include 'custom_csr_po_details.php';
+	    include_once 'custom_csr_po_details.php';
 	} elseif ($doc_type === 'INVOICE') {
-	    include 'custom_csr_invoice_settlement.php';
+	    include_once 'custom_csr_invoice_settlement.php';
 	} else {
 	    echo '<div class="alert alert-warning">Invalid document type</div>';
 	}

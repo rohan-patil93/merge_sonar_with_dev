@@ -1,6 +1,6 @@
 <?php
-include('../dbconfig.php');
-include('../comm.php');
+include_once('../dbconfig.php');
+include_once('../comm.php');
 $transaction_table = $_POST['transaction_table'];
 $transaction_id = '';
 $screening_id = $_POST['screening_id'];

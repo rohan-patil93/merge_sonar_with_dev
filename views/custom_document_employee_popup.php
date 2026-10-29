@@ -1,7 +1,7 @@
 <?php 
-include('../includes/session.php');
-include('../dbconfig.php');
-include('../comm.php');
+include_once('../includes/session.php');
+include_once('../dbconfig.php');
+include_once('../comm.php');
 $vdata1["where"] = array('is_active'=> '0', 'assessment_year'=>$_REQUEST['assement_year'], 'document_list_id'=> $_REQUEST['list_id']);
 $vdata1["field"] = "id, emp_id";
 $vdata = urlencode(json_encode($vdata1));

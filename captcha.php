@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	include("./phptextClass.php");	
+	include_once("./phptextClass.php");	
 	
 	/*create class object*/
 	$phptextObj = new phptextClass();	

@@ -2439,7 +2439,7 @@ if($checktimeprint > 0){
 </div>
 <div class="tab-content tabs">
     <div class="tab-pane card-body p-0" id="searchitem" role="tabpanel"> 
-        <?php include("views/custom_list_item_search.php"); ?>
+        <?php include_once("views/custom_list_item_search.php"); ?>
     </div>
     <div class="tab-pane card-body p-0" id="samerefdocuments" role="tabpanel"> 
     </div>

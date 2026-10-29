@@ -1,8 +1,8 @@
 <?php 
 if($_GET['print'] =="Y"){
-    include('../includes/session.php');
-    include('../dbconfig.php');
-    include('../comm.php');
+    include_once('../includes/session.php');
+    include_once('../dbconfig.php');
+    include_once('../comm.php');
     $callapi = "Y";
 }else{
     include_once('dbconfig.php');

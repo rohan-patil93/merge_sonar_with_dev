@@ -1,8 +1,8 @@
 <?php
 ini_set("display_errors",0);
-include('includes/session.php');
-include('dbconfig.php');
-include('comm.php');
+include_once('includes/session.php');
+include_once('dbconfig.php');
+include_once('comm.php');
 $transaction_table = $_GET['table']; 
 $array = array();
 if($transaction_table!=""){

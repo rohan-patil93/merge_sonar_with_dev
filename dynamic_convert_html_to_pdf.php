@@ -1,6 +1,6 @@
 <?php 
-include('dbconfig.php');
-include('includes/session.php');
+include_once('dbconfig.php');
+include_once('includes/session.php');
 require_once "dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
 use Dompdf\Options;

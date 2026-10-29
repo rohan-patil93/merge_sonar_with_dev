@@ -1,8 +1,8 @@
 <?php
 ini_set('display_errors' ,0);
-include('includes/session.php');
-include('dbconfig.php');
-include('comm.php');
+include_once('includes/session.php');
+include_once('dbconfig.php');
+include_once('comm.php');
 $helptext = array('location'=>'Please Enter Your Location',
   'org_name'=>'Please Enter Organization Name',
   'phone'=>'Please Enter Phone Number',

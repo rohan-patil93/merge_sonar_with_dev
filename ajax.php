@@ -1,7 +1,7 @@
 <?php 
-include('includes/session.php');
-include('dbconfig.php');
-include('comm.php');
+include_once('includes/session.php');
+include_once('dbconfig.php');
+include_once('comm.php');
  $page = $_POST['page'];
  $response = 'Empty';
  if ($page == 'login') { 
@@ -3200,7 +3200,7 @@ if($page =="getkpalist"){
 		$organization_goalsidd[$kralist0['ogid']] = $kralist0['ogid'];
 		$kpiderails[$kralist0['key_performance_id']] = $kralist0;
 	}
-	include("views/custom_insert_organization_goal_ajax.php");
+	include_once("views/custom_insert_organization_goal_ajax.php");
 }
 if($page == "checkassemntyearcopetency"){
 	$url = API."?mode=getjobtitlecompetencies&checkassetyear=Y&assessment_year=".$_POST['assemntyearcopetency']; 
@@ -3226,7 +3226,7 @@ if($page == "inserperformanaceappraiserheader"){
 	$response1 = json_decode($response0,1);
 	$lastid = $response1['exicute']['LASTID'];
 	$_POST['rid'] = $lastid;
-	include("views/custom_insert_performance_appraisal_headers_ajax.php");
+	include_once("views/custom_insert_performance_appraisal_headers_ajax.php");
 //	$returnarray = array("LATSID"=>$lastid,'INSERT_PAGE'=>$html_page);
 	//echo $returnarray;
 }
@@ -3237,7 +3237,7 @@ if($page == "updateperformanaceappraiserheader"){
 	$response0 = file_post_contents($url, $_POST, 'insert');
 	$response1 = json_decode($response0,1);
 	$lastid = $response1['exicute']['LASTID'];
-	include("views/custom_insert_performance_appraisal_headers_ajax.php");
+	include_once("views/custom_insert_performance_appraisal_headers_ajax.php");
 }
 if($page == "publichappraisal"){
 	$url1 = API."?mode=publichappraisal&id=".$_POST['id']."&assessment_year=".$_POST['assessment_year'];  
@@ -5253,10 +5253,10 @@ if($page == "updatemodulestatus"){
 			$nextseqstartnumber = '';
 		}
 
-		//include("setups/".$pagedetail[0]['page_name'].".php");
-		//$includedData .= include "setups/".$pagedetail[0]['page_name'].".php";
+		//include_once("setups/".$pagedetail[0]['page_name'].".php");
+		//$includedData .= include_once "setups/".$pagedetail[0]['page_name'].".php";
 		ob_start();
-		include "setups/".$pagedetail[0]['page_name'].".php";
+		include_once "setups/".$pagedetail[0]['page_name'].".php";
 		$includedData .= ob_get_clean();
 		$previousarray = end($pagedetail);
 		$previousseqnumber = $previousarray['sequence'];
@@ -7424,6 +7424,7 @@ if ($page == 'load_recharge_history') {
                 }
             }
         }
+        unset($row);
     }
     echo json_encode($data);
     exit;
@@ -9741,7 +9742,7 @@ if ($page == 'get_production_details') {
     $result = json_decode($response, 1);
 
     if ($result['status'] === 'success') {
-        include('views/custom_insert_manufacturing_product_modal.php');
+        include_once('views/custom_insert_manufacturing_product_modal.php');
     } else {
         echo json_encode($result);
     }

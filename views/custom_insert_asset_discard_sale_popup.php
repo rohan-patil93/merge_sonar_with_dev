@@ -1,7 +1,7 @@
 <?php //print_r($_POST); 
-include('../includes/session.php');
-include('../dbconfig.php');
-include('../comm.php');
+include_once('../includes/session.php');
+include_once('../dbconfig.php');
+include_once('../comm.php');
 //$url = API."?mode=getassetallocation&list=Y&assetid=".$_POST['assetid']; 
 $url = API."?mode=getassetallocation&admin_type=".$_SESSION['admin_type']."&resultgettype=DISCARDASSET&assetid=".$_POST['assetid'];
 $data_details = callAPI($url);

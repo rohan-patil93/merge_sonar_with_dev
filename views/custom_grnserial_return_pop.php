@@ -1,7 +1,7 @@
 <?php
-include('../includes/session.php');
-include('../dbconfig.php');
-include('../comm.php');
+include_once('../includes/session.php');
+include_once('../dbconfig.php');
+include_once('../comm.php');
 //echo "<pre>"; print_r($_POST); echo "</pre>";
 $table = "goods_receipt_notes";
 $qty= $_POST['qty'];

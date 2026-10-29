@@ -1,8 +1,8 @@
 <?php 
-include('dbconfig.php');
-include('comm.php');
+include_once('dbconfig.php');
+include_once('comm.php');
 //print_r($_POST);
-//include('views/custom_logout.php');
+//include_once('views/custom_logout.php');
 session_start();
 if (isset($_POST['submit'])){
    // print_r($_POST); //exit;

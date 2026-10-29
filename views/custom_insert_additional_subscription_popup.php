@@ -1,7 +1,7 @@
 <?php
-include('../includes/session.php');
-include('../dbconfig.php');
-include('../comm.php');
+include_once('../includes/session.php');
+include_once('../dbconfig.php');
+include_once('../comm.php');
 
  	 $url = API."?mode=getsubscriptionusers&additionalsubscription=Y&company_subscr_id=".$_POST['company_subscr_id'];
     $subscripusers = callAPI($url);

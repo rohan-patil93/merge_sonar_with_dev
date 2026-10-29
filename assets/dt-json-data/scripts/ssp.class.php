@@ -19,7 +19,7 @@
 // REMOVE THIS BLOCK - used for DataTables test environment only!
 $file = $_SERVER['DOCUMENT_ROOT'].'/datatables/mysql.php';
 if ( is_file( $file ) ) {
-	include( $file );
+	include_once( $file );
 }
 
 

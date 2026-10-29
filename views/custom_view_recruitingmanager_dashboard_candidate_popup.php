@@ -1,7 +1,7 @@
 <?php 
-include('../includes/session.php');
-include('../dbconfig.php');
-include('../comm.php');
+include_once('../includes/session.php');
+include_once('../dbconfig.php');
+include_once('../comm.php');
 $url = API."?mode=getrecruitmentintegdashboard&apitype=candidatelistpopup&candidate_ids=".$_POST['candidate_ids'];
 $apires = callAPI($url);
 $result = json_decode($apires,1);

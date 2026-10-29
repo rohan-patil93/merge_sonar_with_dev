@@ -249,7 +249,7 @@ function refrashpage(){
                                     </div>
                                     <div class="card-body">
                                         <div class="table-responsive" id="productajax">
-                                            <?php include("views/custom_insert_subscription_product_table.php"); ?>
+                                            <?php include_once("views/custom_insert_subscription_product_table.php"); ?>
 
                                         </div>
                                     </div>

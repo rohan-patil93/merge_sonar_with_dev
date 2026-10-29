@@ -1,7 +1,7 @@
 <?php
-include('../includes/session.php');
-include('../dbconfig.php');
-include('../comm.php');
+include_once('../includes/session.php');
+include_once('../dbconfig.php');
+include_once('../comm.php');
 $url = API."?mode=togetcourier&id=".$_POST['id'];
 $data_details = callAPI($url);
 $data = json_decode($data_details,1);

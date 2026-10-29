@@ -1,8 +1,8 @@
 <?php
-include('../includes/session.php');
+include_once('../includes/session.php');
 //print_r($_SESSION); exit;	
-include('../dbconfig.php');
-include('../comm.php');
+include_once('../dbconfig.php');
+include_once('../comm.php');
 ?>
 <script type="text/javascript">
 	function addmoreRows() {

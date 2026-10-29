@@ -1142,7 +1142,7 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 				</div>				
 			</div> -->
 			<div class="col-lg-8">
-				<?php include('custom_bulk_timesheet_chart.php'); ?>
+				<?php include_once('custom_bulk_timesheet_chart.php'); ?>
 			</div>
 			<div class="col-lg-4 col-md-12">
 				<div class="row col-lg-12">

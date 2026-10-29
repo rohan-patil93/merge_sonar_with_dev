@@ -1,7 +1,7 @@
 <?php
-  include('../includes/session.php');
-  include('../dbconfig.php');
-  include('../comm.php');
+  include_once('../includes/session.php');
+  include_once('../dbconfig.php');
+  include_once('../comm.php');
 if($_POST['action']=="pagelist"){ 
    $id = json_encode($_POST['permision']);
    $url = API."?mode=applicationprocesspages&id=".$id; 

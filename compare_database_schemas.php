@@ -1,5 +1,5 @@
 <?php
-//include('dbconfig.php');
+//include_once('dbconfig.php');
     compareDatabaseSchemas($_GET);
     function compareDatabaseSchemas($get){
         $dbName1 = $get['db1']; // e.g., 'my_database_1'

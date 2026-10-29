@@ -1,10 +1,10 @@
 <?php
 
-include('../includes/session.php');
+include_once('../includes/session.php');
 
-include('../dbconfig.php');
+include_once('../dbconfig.php');
 
-include('../comm.php');
+include_once('../comm.php');
 
 $schedule_id = (int) ($_POST['schedule_id'] ?? 0);
 $url = API . "?mode=getcontractamcfmconfirmdetails&method=get&schedule_id=" . $schedule_id;

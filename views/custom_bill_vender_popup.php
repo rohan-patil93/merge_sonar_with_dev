@@ -1,7 +1,7 @@
 <?php //print_r($_POST); 
-include('../includes/session.php');
-include('../dbconfig.php');
-include('../comm.php');
+include_once('../includes/session.php');
+include_once('../dbconfig.php');
+include_once('../comm.php');
 //print_r($_POST);
 $url = API."?mode=togetreportvillbaseidvendors&val=".$_POST['val'];
 $apires = callAPI($url); 
