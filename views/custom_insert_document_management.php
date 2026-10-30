@@ -82,7 +82,7 @@ if (isset($_POST['submit']) && $_POST['submit'] != '') {
 
                 if ($fileError == UPLOAD_ERR_OK && $tmpName != '') {
                     $ext = pathinfo($uploadName, PATHINFO_EXTENSION);
-                    $uniqueFileName = 'doc_' . mt_rand(10000, 99999) . '_' . date('Ymd_His') . '_' . $index;
+                    $uniqueFileName = 'doc_' . random_int(10000, 99999) . '_' . date('Ymd_His') . '_' . $index;
                     if ($ext != '') {
                         $uniqueFileName .= '.' . $ext;
                     }
