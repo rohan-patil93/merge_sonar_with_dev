@@ -6,12 +6,14 @@ $curl = curl_init();
 $postData = array('data_name' => 'infistaqin_infisuite_2_ticketing', 'email' => $_SESSION['email'], 'module_id' => '1', 'module_group_id' => '', 'ipaddress' => '::1', 'page_option' => '', 'role_ids' => '1,2,3', 'notdisplaycurrent_status' => '2,0,40', 'admin_type' => '1', 'client_id' => '', 'priority' => '', 'current_status' => '', 'filterfromdate' => '', 'filtertodate' => '');
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => 'http://dev.infistaq.in/ticketing/api.php?method=post&mode=getemployeetickets&data_name=infistaqin_infisuite_2_ticketing&email=anthony_johnston@live.infistaq.com',
+  CURLOPT_URL => 'https://dev.infistaq.in/ticketing/api.php?method=post&mode=getemployeetickets&data_name=infistaqin_infisuite_2_ticketing&email=anthony_johnston@live.infistaq.com',
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,
   CURLOPT_TIMEOUT => 0,
   CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_SSL_VERIFYPEER => true,
+  CURLOPT_SSL_VERIFYHOST => 2,
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => 'POST',
   CURLOPT_POSTFIELDS => $postData,

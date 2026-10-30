@@ -21,7 +21,7 @@ $result = json_decode($result, true);
 $employees = $result['table'] ?? array();
 
 ?>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" integrity="sha384-nLoOnA/BDh8A/jxqtckg4DumuCGOBYUnNJLZdQz/zfYNp3wcjGSoWTAzgko06G/2" crossorigin="anonymous"></script>
 <div class="page-body">
     <div class="card">
         <div class="card-header">

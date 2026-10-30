@@ -286,7 +286,7 @@ $contracts = $result['contracts'] ?? array();
 	</div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha384-UG8ao2jwOWB7/oDdObZc6ItJmwUkR/PfMyt9Qs5AwX7PsnYn1CRKCTWyncPTWvaS" crossorigin="anonymous"></script>
 <script>
 		const preselectedLocationId = <?php echo json_encode($return['location_id']); ?>;
 		const preselectedBuildingId = <?php echo json_encode($return['building_id']); ?>;
