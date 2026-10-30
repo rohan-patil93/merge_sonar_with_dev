@@ -4,7 +4,7 @@
  * Dev server cron: php cron_job/contract_amc_escalation.php [company_id] [database_name]
  * Example: php cron_job/contract_amc_escalation.php 1 infistaqin_infisuite_2
  */
-$apiBase = 'http://dev.infistaq.in/api.php';
+$apiBase = 'https://dev.infistaq.in/api.php';
 
 $companyId = (int) ($argv[1] ?? 1);
 $dbName = $argv[2] ?? 'infistaqin_infisuite_2';
@@ -21,8 +21,8 @@ curl_setopt_array($curl, array(
     CURLOPT_URL => $url,
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_TIMEOUT => 0,
-    CURLOPT_SSL_VERIFYPEER => false,
-    CURLOPT_SSL_VERIFYHOST => false,
+    CURLOPT_SSL_VERIFYPEER => true,
+    CURLOPT_SSL_VERIFYHOST => 2,
 ));
 $response = curl_exec($curl);
 if ($response === false) {

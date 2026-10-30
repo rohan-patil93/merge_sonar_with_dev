@@ -1,0 +1,10 @@
+# Environment & secrets — never commit
+.env
+*.env
+.env.*
+
+# Firebase service account keys
+*-adminsdk-*.json
+
+# Vendor dependencies
+/vendor/

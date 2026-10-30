@@ -1686,7 +1686,7 @@ class manfacturingForecastUserClass extends userClass{
         $tracking_type = intval($post['tracking_type'] ?? 0);
         $random_no = trim($random_no);
         if ($random_no == '') {
-            $random_no = date('YmdHis') . $note_id . mt_rand(1000, 9999);
+            $random_no = date('YmdHis') . $note_id . random_int(1000, 9999);
         }
         $return = array();
 

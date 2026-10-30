@@ -294,7 +294,7 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 	}  
 	body{background-color: transparent; background-image: none;}
 </style>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js" integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs" crossorigin="anonymous"></script>
 <script type="text/javascript">
 	function nextsetupview(page,submit_field=""){
 		/**if(submit_field !=""){
@@ -1001,7 +1001,7 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 	<script type="text/javascript" src="assets/pages/notification/notification.js"></script>
 
 		<script type="text/javascript" src="assets/bower_components/bootstrap-tagsinput/js/bootstrap-tagsinput.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js" integrity="sha384-L+5n452EWFXO4Wnt9PcDq8OdxBC6vu1YnigaNE43IWRV3vpu1nY1H+iflfUs7N6N" crossorigin="anonymous"></script>
 
 		<!-- Select 2 js -->
 		<script type="text/javascript" src="assets/bower_components/select2/js/select2.full.min.js"></script>

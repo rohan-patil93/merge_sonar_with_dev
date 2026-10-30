@@ -1897,7 +1897,7 @@ function addslabrows(){
 <script type="text/javascript" src="assets/bower_components/switchery/js/switchery.min.js"></script>
 <!-- Tags js -->
 <script type="text/javascript" src="assets/bower_components/bootstrap-tagsinput/js/bootstrap-tagsinput.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js" integrity="sha384-L+5n452EWFXO4Wnt9PcDq8OdxBC6vu1YnigaNE43IWRV3vpu1nY1H+iflfUs7N6N" crossorigin="anonymous"></script>
 <!-- Max-length js -->
 <script type="text/javascript" src="assets/bower_components/bootstrap-maxlength/js/bootstrap-maxlength.js"></script>
 <!-- Custom js -->
