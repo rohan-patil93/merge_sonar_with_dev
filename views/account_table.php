@@ -247,7 +247,7 @@
 <div class="table-responsive mb-3">
 <table class="table table-hover"  id="invoiceItem"> 
         <tr>
-            <th class="thheader" width="2%"> 
+            <th scope="col" class="thheader" width="2%"> 
                    <div class="checkbox-fade fade-in-primary">
                     <label class="kt-checkbox">
                         <input id="checkAll"  type="checkbox">
@@ -257,13 +257,13 @@
                     </label>
                 </div>
             </th>
-            <th class="" width="15%">Account <span class="requried"></span></th>
-            <th class="" width="15%">Description</th>
-            <th class="thheader text-start" width="15%">Name <!-- <span class="requried">*</span> --></th>
-           <!-- <th class="thheader" width="10%">Tax  <span class="requried">*</span> </th> -->
-            <th class="thheader text-start" width="15%">Location <!-- <span class="requried">*</span> --></th>
-            <th class="thheader text-start" width="15%">Debits<!--  <span class="requried">*</span> --></th>
-            <th class="thheader text-start" width="15%">Credits<!--  <span class="requried">*</span> --></th>
+            <th scope="col" class="" width="15%">Account <span class="requried"></span></th>
+            <th scope="col" class="" width="15%">Description</th>
+            <th scope="col" class="thheader text-start" width="15%">Name <!-- <span class="requried">*</span> --></th>
+           <!-- <th scope="col" class="thheader" width="10%">Tax  <span class="requried">*</span> </th> -->
+            <th scope="col" class="thheader text-start" width="15%">Location <!-- <span class="requried">*</span> --></th>
+            <th scope="col" class="thheader text-start" width="15%">Debits<!--  <span class="requried">*</span> --></th>
+            <th scope="col" class="thheader text-start" width="15%">Credits<!--  <span class="requried">*</span> --></th>
         </tr>    
         <?php if(count((array)$table2)>0){ $i=1; 
         foreach ($table2 as $tab2) { //print_r($tab2); ?>

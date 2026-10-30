@@ -97,10 +97,10 @@
                     <p class="text-muted f-14 f-w-600">Get unlimited access & earn money</p>
                     <div class="text-left mt-4">
                         <div class="form-group">
-                            <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="text" name="name" id="chrUserName" required="" placeholder="User Name">
+                            <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="text" name="name" id="regUserName" required="" placeholder="User Name">
                         </div>
                         <div class="form-group mb-3">
-                            <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="text" name="email" id="chrUserName" required="" placeholder="Email Id">
+                            <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="text" name="email" id="regEmail" required="" placeholder="Email Id">
                            <!-- <span class="text-muted f-12 text-left">Use 8 or more characters with a mix of letters, numbers &amp; symbols.</span>  -->
                         </div>
                         <div class="form-group mb-1">

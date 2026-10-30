@@ -60,10 +60,10 @@ $title = 'User Assigned Contract Types';
                         <table id="basic-btn" class="table table-striped table-bordered nowrap">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>User</th>
-                                    <th>Assigned Types</th>
-                                    <th>Action</th>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">User</th>
+                                    <th scope="col">Assigned Types</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>

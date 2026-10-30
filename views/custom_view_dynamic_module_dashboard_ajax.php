@@ -521,12 +521,12 @@ if($totaldoc != 0 AND $totaldoc !=""){
                                             </div>
                                                     <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
                                                         <thead>
-                                                            <th>Transaction No.</th>
-                                                            <th>Originator</th>
-                                                            <th>Date</th>
-                                                            <th>Party Name</th>
-                                                            <th class="text-right">Amount</th>
-                                                            <th>Satus</th>
+                                                            <th scope="col">Transaction No.</th>
+                                                            <th scope="col">Originator</th>
+                                                            <th scope="col">Date</th>
+                                                            <th scope="col">Party Name</th>
+                                                            <th scope="col" class="text-right">Amount</th>
+                                                            <th scope="col">Satus</th>
                                                         </thead>
                                                         <tbody>
                                                             <?php foreach($list as $list){ ?>
@@ -630,12 +630,12 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                             </div>
                                                     <table class="table table-hover m-b-0" style="font-size:13px;" id="locationfilter">
                                                         <thead>
-                                                            <th>Transaction No.</th>
-                                                            <th>Originator</th>
-                                                            <th>Date</th>
-                                                            <th>Party Name</th>
-                                                            <th class="text-right">Amount</th>
-                                                            <th>Satus</th>
+                                                            <th scope="col">Transaction No.</th>
+                                                            <th scope="col">Originator</th>
+                                                            <th scope="col">Date</th>
+                                                            <th scope="col">Party Name</th>
+                                                            <th scope="col" class="text-right">Amount</th>
+                                                            <th scope="col">Satus</th>
                                                         </thead>
                                                         <tbody>
                                                             <?php foreach($list as $list){?>
@@ -728,12 +728,12 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                             </div>
                                                     <table class="table table-hover m-b-0" style="font-size:13px;" id="costcenterfilter">
                                                         <thead>
-                                                            <th>Transaction No.</th>
-                                                            <th>Originator</th>
-                                                            <th>Date</th>
-                                                            <th>Party Name</th>
-                                                            <th class="text-right">Amount</th>
-                                                            <th>Satus</th>
+                                                            <th scope="col">Transaction No.</th>
+                                                            <th scope="col">Originator</th>
+                                                            <th scope="col">Date</th>
+                                                            <th scope="col">Party Name</th>
+                                                            <th scope="col" class="text-right">Amount</th>
+                                                            <th scope="col">Satus</th>
                                                         </thead>
                                                         <tbody>
                                                             <?php foreach($list as $list){?>
@@ -799,12 +799,12 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                 <?php if(count((array)$gdocs) !=0){ ?>
                 <table class="table table-hover m-b-0" style="font-size:13px;" id="costcenterfilter">
                     <thead>
-                        <th>Transaction No.</th>
-                        <th>Originator</th>
-                        <th>Date</th>
-                        <th>Party Name</th>
-                        <th class="text-right">Amount</th>
-                        <th>Generate</th>
+                        <th scope="col">Transaction No.</th>
+                        <th scope="col">Originator</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Party Name</th>
+                        <th scope="col" class="text-right">Amount</th>
+                        <th scope="col">Generate</th>
                     </thead>
                     <tbody>
                         <?php foreach($gdocs as $list){?>
@@ -860,12 +860,12 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
         <?php if(count((array)$result['latest_table_list']) != 0){ ?>
         <table class="table table-hover m-b-0" style="font-size:13px;" id="costcenterfilter">
                                                         <thead>
-                                                            <th>Transaction No.</th>
-                                                            <th>Originator</th>
-                                                            <th>Date</th>
-                                                            <th>Party Name</th>
-                                                            <th class="text-right">Amount</th>
-                                                            <th>Satus</th>
+                                                            <th scope="col">Transaction No.</th>
+                                                            <th scope="col">Originator</th>
+                                                            <th scope="col">Date</th>
+                                                            <th scope="col">Party Name</th>
+                                                            <th scope="col" class="text-right">Amount</th>
+                                                            <th scope="col">Satus</th>
                                                         </thead>
                                                         <tbody>
                                                             <?php foreach($result['latest_table_list'] as $list){?>

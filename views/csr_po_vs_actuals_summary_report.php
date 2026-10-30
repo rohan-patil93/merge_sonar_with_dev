@@ -83,31 +83,31 @@ $_SESSION['download_data'] = [];
                     <table class="table table-bordered table-sm align-middle f-12">
                         <thead>
                             <tr>
-                                <th class="csr-sticky-col csr-sticky-project bg-primary"></th>
-                                <th class="csr-sticky-col csr-sticky-nature bg-primary"></th>
-                                <th class="csr-sticky-col csr-sticky-partner text-center bg-primary">PO Details</th>
+                                <th scope="col" class="csr-sticky-col csr-sticky-project bg-primary"></th>
+                                <th scope="col" class="csr-sticky-col csr-sticky-nature bg-primary"></th>
+                                <th scope="col" class="csr-sticky-col csr-sticky-partner text-center bg-primary">PO Details</th>
                                 <?php foreach ($normalizedFyList as $fyRow) { ?>
-                                    <th colspan="3" class="bg-primary text-white text-center">
+                                    <th scope="col" colspan="3" class="bg-primary text-white text-center">
                                         FY <?= $fyRow['text']; ?>
                                     </th>
                                 <?php } ?>
-                                <th colspan="5" class="bg-primary text-white text-center">Total Spent & Unspent Amt. (incl GST)</th>
+                                <th scope="col" colspan="5" class="bg-primary text-white text-center">Total Spent & Unspent Amt. (incl GST)</th>
                             </tr>
                             <tr>
-                                <th rowspan="1" class="csr-sticky-col csr-sticky-project bg-dark text-white text-center">Name of the CSR Project</th>
-                                <th rowspan="1" class="csr-sticky-col csr-sticky-nature bg-dark text-white text-center">Nature of Work Done</th>
-                                <th rowspan="1" class="csr-sticky-col csr-sticky-partner bg-dark text-white text-center">Business Partner Name</th>
+                                <th scope="col" rowspan="1" class="csr-sticky-col csr-sticky-project bg-dark text-white text-center">Name of the CSR Project</th>
+                                <th scope="col" rowspan="1" class="csr-sticky-col csr-sticky-nature bg-dark text-white text-center">Nature of Work Done</th>
+                                <th scope="col" rowspan="1" class="csr-sticky-col csr-sticky-partner bg-dark text-white text-center">Business Partner Name</th>
 
                                 <?php foreach ($normalizedFyList as $fy) { ?>
-                                    <th class="bg-dark text-white text-center">PO No</th>
-                                    <th class="bg-dark text-white text-center">PO Issued<br>(Incl. GST)</th>
-                                    <th class="bg-dark text-white text-center">Amt. Spent<br>(Incl. GST)</th>
+                                    <th scope="col" class="bg-dark text-white text-center">PO No</th>
+                                    <th scope="col" class="bg-dark text-white text-center">PO Issued<br>(Incl. GST)</th>
+                                    <th scope="col" class="bg-dark text-white text-center">Amt. Spent<br>(Incl. GST)</th>
                                 <?php } ?>
-                                <th class="bg-dark text-white text-center">Total PO Issued</th>
-                                <th class="bg-dark text-white text-center">Total Spent Amt.</th>
-                                <th class="bg-dark text-white text-center">Spent %</th>
-                                <th class="bg-dark text-white text-center">Total Unspent Amt.</th>
-                                <th class="bg-dark text-white text-center">Unspent %</th>
+                                <th scope="col" class="bg-dark text-white text-center">Total PO Issued</th>
+                                <th scope="col" class="bg-dark text-white text-center">Total Spent Amt.</th>
+                                <th scope="col" class="bg-dark text-white text-center">Spent %</th>
+                                <th scope="col" class="bg-dark text-white text-center">Total Unspent Amt.</th>
+                                <th scope="col" class="bg-dark text-white text-center">Unspent %</th>
                             </tr>
                         </thead>
                         <tbody>

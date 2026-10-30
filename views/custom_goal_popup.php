@@ -91,12 +91,12 @@ include_once('../comm.php');
 								<div class="col-lg-12">
 									<table class="table table-striped- table-bordered table-hover table-checkable  no-footer" style="color: #646c9a;" id="invoiceItem123">	
 											<tr>
-												<th class="" width="25%">Indicator Name</th>
-												<th class="thheader" width="30%">Weightage</th>
-												<th class="thheader" width="15%">model</th>
-												<th class="thheader" width="15%">Frequency</th>
-												<th class="thheader" width="15%">traget</th>
-												<th class="thheader" width="5%"></th>
+												<th scope="col" class="" width="25%">Indicator Name</th>
+												<th scope="col" class="thheader" width="30%">Weightage</th>
+												<th scope="col" class="thheader" width="15%">model</th>
+												<th scope="col" class="thheader" width="15%">Frequency</th>
+												<th scope="col" class="thheader" width="15%">traget</th>
+												<th scope="col" class="thheader" width="5%"></th>
 											</tr>
 											<?php /*if(count((array)$tr)>0){
 												$count = 1;

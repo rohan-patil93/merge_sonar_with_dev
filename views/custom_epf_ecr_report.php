@@ -93,37 +93,37 @@ $ecr_list = json_decode($configesponse,1);
 						<table class="table table-bordered table-hover table-checkable mt-10 dataTable no-footer dtr-inline" id="kt_datatable" role="grid" aria-describedby="kt_datatable_info" style="width: 1236px;">
 							<thead>
 								<tr role="row" bgcolor="#f7f7f7">
-									<th>Employee ID</th>
-									<th>Uan</th>
-									<th>Member Name</th>
-									<th>Gross Wages</th>
-									<th>EPF Wages</th>
-									<th>EPS Wages</th>
-									<th>EDLI Wages</th>
-									<th style="text-align:right">EPF Contribution Remitted</th>
-									<th style="text-align:right">EPS Contribution Remitted</th>
-									<th style="text-align:right">EPF & EPS Diff Remitted</th>
-									<th>NCP Days</th>
-									<th>Refund Of Advances</th>
+									<th scope="col">Employee ID</th>
+									<th scope="col">Uan</th>
+									<th scope="col">Member Name</th>
+									<th scope="col">Gross Wages</th>
+									<th scope="col">EPF Wages</th>
+									<th scope="col">EPS Wages</th>
+									<th scope="col">EDLI Wages</th>
+									<th scope="col" style="text-align:right">EPF Contribution Remitted</th>
+									<th scope="col" style="text-align:right">EPS Contribution Remitted</th>
+									<th scope="col" style="text-align:right">EPF & EPS Diff Remitted</th>
+									<th scope="col">NCP Days</th>
+									<th scope="col">Refund Of Advances</th>
 								</tr>
 							</thead>
 							<tbody>
 								<?php if(!empty($ecr_list)) {
 										foreach ($ecr_list as $ecr_data) { ?>
 								<tr role="row" class="odd">
-									<th><?php echo $ecr_data['employee_id']; ?></th>
-									<th>---TBD---</th>
-									<th><?php echo $ecr_data['employee_name']; ?></th>
-									<th><?php echo $ecr_data['emp_gross']; ?></th>
-									<th><?php echo $ecr_data['epf_wages']; ?></th>
-									<th><?php echo $ecr_data['eps_wages']; ?></th>
-									<th><?php echo $ecr_data['edli_wages']; ?></th>
+									<th scope="col"><?php echo $ecr_data['employee_id']; ?></th>
+									<th scope="col">---TBD---</th>
+									<th scope="col"><?php echo $ecr_data['employee_name']; ?></th>
+									<th scope="col"><?php echo $ecr_data['emp_gross']; ?></th>
+									<th scope="col"><?php echo $ecr_data['epf_wages']; ?></th>
+									<th scope="col"><?php echo $ecr_data['eps_wages']; ?></th>
+									<th scope="col"><?php echo $ecr_data['edli_wages']; ?></th>
 
-									<th><?php echo $ecr_data['epf_remitted']; ?></th>
-									<th><?php echo $ecr_data['eps_remitted']; ?></th>
-									<th><?php echo $ecr_data['epf_eps_diff']; ?></th>
-									<th>---TBD---</th>
-									<th>---TBD---</th>
+									<th scope="col"><?php echo $ecr_data['epf_remitted']; ?></th>
+									<th scope="col"><?php echo $ecr_data['eps_remitted']; ?></th>
+									<th scope="col"><?php echo $ecr_data['epf_eps_diff']; ?></th>
+									<th scope="col">---TBD---</th>
+									<th scope="col">---TBD---</th>
 								</tr>
 
 								<?php

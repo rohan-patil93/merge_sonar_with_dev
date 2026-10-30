@@ -988,10 +988,10 @@ function toggleRowLock(button) {
 												<table class="table table-hover m-b-0">
 													<thead>
 														<tr>
-															<th>Property Name</th>
-															<th class="w-b-w-s">Address</th>
-															<th>Start Date</th>
-															<th>End Date</th>
+															<th scope="col">Property Name</th>
+															<th scope="col" class="w-b-w-s">Address</th>
+															<th scope="col">Start Date</th>
+															<th scope="col">End Date</th>
 														</tr>
 													</thead>
 													<tbody>
@@ -1028,10 +1028,10 @@ function toggleRowLock(button) {
 												<table class="table table-hover m-b-0">
 													<thead>
 														<tr>
-															<th>Type</th>
-															<th>Number</th>
-															<th>Sign Date</th>
-															<th>Expiry Date</th>
+															<th scope="col">Type</th>
+															<th scope="col">Number</th>
+															<th scope="col">Sign Date</th>
+															<th scope="col">Expiry Date</th>
 														</tr>
 													</thead>
 													<tbody>
@@ -1777,12 +1777,12 @@ function toggleRowLock(button) {
 								<div class="form-group col-lg-12">
 									<table class="table table-bordered " id="edutable">
 										<tr>
-											<th class="" width="2%">Sl NO</th>
-											<th class="" width="25%">Type</th>
-											<th class="thheader" width="20%">Number</th>
-											<th class="" width="20%"> Sign Date</th>
-											<th class="thheader" width="20%">Expiry Date </th>
-											<th class="thheader" width="15%">Files</th>
+											<th scope="col" class="" width="2%">Sl NO</th>
+											<th scope="col" class="" width="25%">Type</th>
+											<th scope="col" class="thheader" width="20%">Number</th>
+											<th scope="col" class="" width="20%"> Sign Date</th>
+											<th scope="col" class="thheader" width="20%">Expiry Date </th>
+											<th scope="col" class="thheader" width="15%">Files</th>
 										</tr>
 									<?php $k=0;  if(count((array)$aggrements) != '0'){ $aggrements[] = array('agreement_name'=>''); }
 									foreach ($aggrements as $inst) { $k++;?>
@@ -1844,15 +1844,15 @@ function toggleRowLock(button) {
 								<table class="table table-hover m-b-0">
 									<thead>
 										<tr>
-											<th>Owner Name</th>
-											<th>Property Name</th>
-											<th>Address</th>
-											<th>Start Date</th>
-											<th>End Date</th>
-											<th>Rented Area</th>
-											<th>Rent</th>
-											<th>Invoice</th>
-											<th>Last Paid</th>
+											<th scope="col">Owner Name</th>
+											<th scope="col">Property Name</th>
+											<th scope="col">Address</th>
+											<th scope="col">Start Date</th>
+											<th scope="col">End Date</th>
+											<th scope="col">Rented Area</th>
+											<th scope="col">Rent</th>
+											<th scope="col">Invoice</th>
+											<th scope="col">Last Paid</th>
 										</tr>
 									</thead>
 									<tbody>

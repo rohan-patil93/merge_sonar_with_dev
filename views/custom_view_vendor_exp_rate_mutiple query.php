@@ -22,20 +22,20 @@ $_SESSION['download_data'] = array();
         <!-- table table-hover -->
         <table class=" table table-bordered">
           <tr bgcolor="#eeeeee">
-            <th colspan="3"></th>
+            <th scope="col" colspan="3"></th>
             <?php foreach ($result['vendor_data'] as $kyloc=>$locdata) { ?>
-            <th colspan="<?php echo count((array)$locdata); ?>"><?php echo $result['location'][$kyloc]; ?></th>
+            <th scope="col" colspan="<?php echo count((array)$locdata); ?>"><?php echo $result['location'][$kyloc]; ?></th>
             <?php } ?>
           </tr>
           <tr bgcolor="#eeeeee">
-            <th>#</th>
-            <th>Job Title</th>
-            <th>Exp</th>
+            <th scope="col">#</th>
+            <th scope="col">Job Title</th>
+            <th scope="col">Exp</th>
             <?php foreach ($result['vendor_data'] as $locdata) { 
               foreach ($locdata as $vendata) { 
                 $listvendors[] = $vendata['id'];
             ?>
-             <th><?php echo $vendata['display_name']; ?></th>
+             <th scope="col"><?php echo $vendata['display_name']; ?></th>
             <?php 
               }
             } ?>

@@ -35,12 +35,12 @@ $data = $response['data'] ?? array();
 				<table class="table table-bordered table-hover">
 					<thead>
 						<tr>
-							<th width="5%">S.No</th>
-							<th>Employee</th>
-							<th>assessment_year</th>
-							<th>document_name</th>
-                            <th>Pan Number</th>
-                            <th>View</th>
+							<th scope="col" width="5%">S.No</th>
+							<th scope="col">Employee</th>
+							<th scope="col">assessment_year</th>
+							<th scope="col">document_name</th>
+                            <th scope="col">Pan Number</th>
+                            <th scope="col">View</th>
 						</tr>
 					</thead>
 					 <tbody>

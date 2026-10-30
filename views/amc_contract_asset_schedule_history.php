@@ -7,12 +7,12 @@ $assetName = htmlspecialchars($asset['asset_name'] ?? '—', ENT_QUOTES, 'UTF-8'
 <table class="table table-bordered table-sm f-12 mb-0">
     <thead class="table-light">
         <tr>
-            <th>Asset Code</th>
-            <th>Asset Name</th>
-            <th>Planned Date</th>
-            <th>Actual Start</th>
-            <th>Actual End</th>
-            <th>Status</th>
+            <th scope="col">Asset Code</th>
+            <th scope="col">Asset Name</th>
+            <th scope="col">Planned Date</th>
+            <th scope="col">Actual Start</th>
+            <th scope="col">Actual End</th>
+            <th scope="col">Status</th>
         </tr>
     </thead>
     <tbody>

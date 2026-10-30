@@ -470,12 +470,12 @@
 									<table class="table table-borderless table-vertical-center">
 										<thead>
 											<tr>
-												<th class="p-0 w-40px"> </th>
-												<th class="p-0 min-w-200px">Employee Details</th>
-												<th class="p-0 min-w-100px text-right">Billable Amount</th>
-												<th class="p-0 min-w-125px text-right">Billable Hours</th>
-												<th class="p-0 min-w-110px text-center">Status</th>
-												<th class="py-0 min-w-50px text-center">
+												<th scope="col" class="p-0 w-40px"> </th>
+												<th scope="col" class="p-0 min-w-200px">Employee Details</th>
+												<th scope="col" class="p-0 min-w-100px text-right">Billable Amount</th>
+												<th scope="col" class="p-0 min-w-125px text-right">Billable Hours</th>
+												<th scope="col" class="p-0 min-w-110px text-center">Status</th>
+												<th scope="col" class="py-0 min-w-50px text-center">
 													<div class="checkbox-inline">
 														<label class="checkbox checkbox-success">
 														<input type="checkbox" checked id="" disabled class="">
@@ -556,12 +556,12 @@
 									<table class="table table-borderless table-vertical-center">
 										<thead>
 											<tr>
-												<th class="p-0 w-40px"> </th>
-												<th class="p-0 min-w-200px">Employee Details</th>
-												<th class="p-0 min-w-100px text-right">Billable Amount</th>
-												<th class="p-0 min-w-125px text-right">Billable Hours</th>
-												<th class="p-0 min-w-110px text-center">Status</th>
-												<th class="py-0 min-w-50px text-center">
+												<th scope="col" class="p-0 w-40px"> </th>
+												<th scope="col" class="p-0 min-w-200px">Employee Details</th>
+												<th scope="col" class="p-0 min-w-100px text-right">Billable Amount</th>
+												<th scope="col" class="p-0 min-w-125px text-right">Billable Hours</th>
+												<th scope="col" class="p-0 min-w-110px text-center">Status</th>
+												<th scope="col" class="py-0 min-w-50px text-center">
 													<div class="checkbox-inline">
 														<label class="checkbox checkbox-success">
 														<input type="checkbox" id="select_all" class="itemRow" onclick="tocheckallboxes()">

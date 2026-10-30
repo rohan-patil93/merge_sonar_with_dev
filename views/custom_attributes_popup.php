@@ -561,11 +561,11 @@ elem.forEach(function(html) {
 									<div class="col-lg-7">
 										<table class="table table-striped- table-bordered table-hover table-checkable  no-footer" style="color: #646c9a;" id="invoiceItem">	
 											<tr>
-												<th class="" width="15%">Field</th>
-												<th class="thheader" width="5%">Operator</th>
-												<th class="thheader" width="15%">Value</th>
-												<th class="thheader" width="5%">Condition</th>
-												<th class="thheader" width="5%">Action</th>
+												<th scope="col" class="" width="15%">Field</th>
+												<th scope="col" class="thheader" width="5%">Operator</th>
+												<th scope="col" class="thheader" width="15%">Value</th>
+												<th scope="col" class="thheader" width="5%">Condition</th>
+												<th scope="col" class="thheader" width="5%">Action</th>
 											</tr>
 											<?php if(count((array)$tr)>0){
 												$count = 1;

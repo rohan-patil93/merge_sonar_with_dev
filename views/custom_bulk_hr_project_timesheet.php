@@ -206,7 +206,7 @@ $lmonth['budgeted_amount'] = $la_budgeted_amount;
 $lmonth['vendor_ids'] = $la_vendor ;
 $lmonth['employee_ids'] = $la_employee;
 $lmonth['period']=$key;
-$last_pre_list = $last_pre_list;
+
 /*foreach($last_data as $key=>$last){
 	$dismonth[] = date('M-Y',strtotime($key));
 	$la_billable_amount = 0;
@@ -666,17 +666,17 @@ $total_vs_p = (($lmonth['billable_amount'] ?? 0) + ($lmonth['nonbillable_amount'
 									<table class="table table-borderless table-vertical-center">
 										<thead>
 											<tr>
-												<th class="p-0 w-40px"> </th>
-												<th class="p-0 min-w-200px">Employee Details</th>
-												<th class="p-0 min-w-200px">Hiring Manger</th>
-												<th class="p-0 min-w-200px text-center">Vendor</th>
-												<th class=" min-w-100px text-center"><?php echo headerlables(array('name'=>'Rate Card Value')); ?> </th>
-												<th class=" min-w-100px text-center"><?php echo headerlables(array('name'=>'PO Value')); ?></th>
-												<!-- <th class="p-0 min-w-100px text-right">Billable Amount</th>-->
-												<th class="p-0 min-w-125px text-center">Billable Hours</th>
-											<!-- 	<th class="p-0 min-w-125px text-right">Nonbillable Hours</th> -->
-												<th class="p-0 min-w-110px text-center">Status</th>
-												<th class=" min-w-50px text-center">
+												<th scope="col" class="p-0 w-40px"> </th>
+												<th scope="col" class="p-0 min-w-200px">Employee Details</th>
+												<th scope="col" class="p-0 min-w-200px">Hiring Manger</th>
+												<th scope="col" class="p-0 min-w-200px text-center">Vendor</th>
+												<th scope="col" class=" min-w-100px text-center"><?php echo headerlables(array('name'=>'Rate Card Value')); ?> </th>
+												<th scope="col" class=" min-w-100px text-center"><?php echo headerlables(array('name'=>'PO Value')); ?></th>
+												<!-- <th scope="col" class="p-0 min-w-100px text-right">Billable Amount</th>-->
+												<th scope="col" class="p-0 min-w-125px text-center">Billable Hours</th>
+											<!-- 	<th scope="col" class="p-0 min-w-125px text-right">Nonbillable Hours</th> -->
+												<th scope="col" class="p-0 min-w-110px text-center">Status</th>
+												<th scope="col" class=" min-w-50px text-center">
 																		<div class="checkbox-fade fade-in-primary">
 																			<label class="checkbox checkbox-success">
 																				<input type="checkbox" checked id="" disabled class="">
@@ -865,17 +865,17 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 										<table class="table table-borderless table-vertical-center">
 											<thead>
 												<tr>
-													<th class="p-0 w-40px"> </th>
-													<th class="p-0 min-w-200px">Employee Details</th>
-													<th class="p-0 min-w-200px">Hiring Manger</th>
-													<th class="p-0 min-w-200px text-center">Vendor</th>
-													<th class=" min-w-100px text-center"><?php echo headerlables(array('name'=>'Rate Card Value')); ?></th>
-													<th class=" min-w-100px text-center"><?php echo headerlables(array('name'=>'PO Value')); ?></th>
-													<!--  <th class="p-0 min-w-100px text-right">Billable Amount</th> -->
-													<th class="p-0 min-w-125px text-center"> Hours</th>
-													<!-- <th class="p-0 min-w-125px text-right">Nonbillable Hours</th> -->
-													<th class="p-0 min-w-110px text-center">Status</th>
-													<th class=" min-w-50px text-center">
+													<th scope="col" class="p-0 w-40px"> </th>
+													<th scope="col" class="p-0 min-w-200px">Employee Details</th>
+													<th scope="col" class="p-0 min-w-200px">Hiring Manger</th>
+													<th scope="col" class="p-0 min-w-200px text-center">Vendor</th>
+													<th scope="col" class=" min-w-100px text-center"><?php echo headerlables(array('name'=>'Rate Card Value')); ?></th>
+													<th scope="col" class=" min-w-100px text-center"><?php echo headerlables(array('name'=>'PO Value')); ?></th>
+													<!--  <th scope="col" class="p-0 min-w-100px text-right">Billable Amount</th> -->
+													<th scope="col" class="p-0 min-w-125px text-center"> Hours</th>
+													<!-- <th scope="col" class="p-0 min-w-125px text-right">Nonbillable Hours</th> -->
+													<th scope="col" class="p-0 min-w-110px text-center">Status</th>
+													<th scope="col" class=" min-w-50px text-center">
 														<div class="checkbox-fade fade-in-primary" name="approval_check_box">
 															<label class="checkbox checkbox-success">
 																<input type="checkbox" id="select_all" class="itemRow" onclick="tocheckallboxeshrwork()">

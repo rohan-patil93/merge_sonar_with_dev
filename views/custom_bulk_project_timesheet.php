@@ -88,7 +88,7 @@ $lmonth['budgeted_amount'] = $la_budgeted_amount;
 $lmonth['vendor_ids'] = $la_vendor ;
 $lmonth['employee_ids'] = $la_employee;
 $lmonth['period']=$key;
-$last_pre_list = $last_pre_list;
+
 $apv_billable_amount = 0;
 $sba_billable_amount =0;
 $total_budget_amount =0;
@@ -787,15 +787,15 @@ if ($total_budget_hrs > 0) {
 														<table class="table table-borderless table-vertical-center">
 															<thead>
 																<tr>
-																	<th class=" w-40px">1 </th>
-																	<th class=" min-w-200px">Employee Details</th>
-																	<th class=" min-w-100px text-center">
+																	<th scope="col" class=" w-40px">1 </th>
+																	<th scope="col" class=" min-w-200px">Employee Details</th>
+																	<th scope="col" class=" min-w-100px text-center">
 <?php echo headerlables(array('name'=>'Rate Card Value')); ?>
 </th>
-																	<th class=" min-w-100px text-center"><?php echo headerlables(array('name'=>'PO Value')); ?></th>
-																	<th class=" min-w-125px text-center">Billable Hours</th>
-																	<th class=" min-w-110px text-center">Status</th>
-																	<th class=" min-w-50px text-center">
+																	<th scope="col" class=" min-w-100px text-center"><?php echo headerlables(array('name'=>'PO Value')); ?></th>
+																	<th scope="col" class=" min-w-125px text-center">Billable Hours</th>
+																	<th scope="col" class=" min-w-110px text-center">Status</th>
+																	<th scope="col" class=" min-w-50px text-center">
 																		<div class="checkbox-fade fade-in-primary">
 																			<label class="checkbox checkbox-success">
 																				<input type="checkbox" checked id="" disabled class="">
@@ -971,13 +971,13 @@ if($sb['vrc_purchase_uom']=='PD'){
 										<table class="table table-borderless table-vertical-center">
 											<thead>
 												<tr>
-													<th class=" w-40px"> 2</th>
-													<th class=" min-w-200px">Employee Details</th>
-													<th class=" min-w-100px text-center"><?php echo headerlables(array('name'=>'Rate Card Value')); ?></th>
-													<th class=" min-w-100px text-center"><?php echo headerlables(array('name'=>'PO Value')); ?></th>
-													<th class=" min-w-125px text-center">Billable Hours</th>
-													<th class=" min-w-110px text-center">Status</th>
-													<th class=" min-w-50px text-center">
+													<th scope="col" class=" w-40px"> 2</th>
+													<th scope="col" class=" min-w-200px">Employee Details</th>
+													<th scope="col" class=" min-w-100px text-center"><?php echo headerlables(array('name'=>'Rate Card Value')); ?></th>
+													<th scope="col" class=" min-w-100px text-center"><?php echo headerlables(array('name'=>'PO Value')); ?></th>
+													<th scope="col" class=" min-w-125px text-center">Billable Hours</th>
+													<th scope="col" class=" min-w-110px text-center">Status</th>
+													<th scope="col" class=" min-w-50px text-center">
 														<div class="checkbox-fade fade-in-primary">
 															<label class="checkbox checkbox-success">
 																<input type="checkbox" id="select_all" class="itemRow" onclick="tocheckallboxes()">
@@ -1155,13 +1155,13 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 										<table class="table table-borderless table-vertical-center">
 											<thead>
 												<tr>
-													<th class=" w-40px"> 3</th>
-													<th class=" min-w-200px">Employee Details</th>
-													<th class=" min-w-100px text-center"><?php echo headerlables(array('name'=>'Rate Card Value')); ?>	</th>
-													<th class=" min-w-100px text-center"><?php echo headerlables(array('name'=>'PO Value')); ?></th>
-													<th class=" min-w-125px text-center">Billable Hours</th>
-													<th class=" min-w-110px text-center">Status</th>
-													<th class=" min-w-50px text-center">
+													<th scope="col" class=" w-40px"> 3</th>
+													<th scope="col" class=" min-w-200px">Employee Details</th>
+													<th scope="col" class=" min-w-100px text-center"><?php echo headerlables(array('name'=>'Rate Card Value')); ?>	</th>
+													<th scope="col" class=" min-w-100px text-center"><?php echo headerlables(array('name'=>'PO Value')); ?></th>
+													<th scope="col" class=" min-w-125px text-center">Billable Hours</th>
+													<th scope="col" class=" min-w-110px text-center">Status</th>
+													<th scope="col" class=" min-w-50px text-center">
 
 													</th>
 												</tr>

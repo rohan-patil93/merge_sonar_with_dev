@@ -59,16 +59,16 @@
 							<table id="basic-btn" class="table table-striped table-bordered nowrap"> 
 								<thead>
 									<tr>
-										<th>User</th>
-										<th>Asset Category</th>
-										<th>Request Date</th>
-										<th>Description</th>
-										<th>Location</th>
-										<th>Required From</th>
-										<th>Required To</th>
-										<th>Request qty</th>
-										<th>Transfers qty</th>
-										<th>Action</th>
+										<th scope="col">User</th>
+										<th scope="col">Asset Category</th>
+										<th scope="col">Request Date</th>
+										<th scope="col">Description</th>
+										<th scope="col">Location</th>
+										<th scope="col">Required From</th>
+										<th scope="col">Required To</th>
+										<th scope="col">Request qty</th>
+										<th scope="col">Transfers qty</th>
+										<th scope="col">Action</th>
 									</tr>
 								</thead>
 								<tbody>

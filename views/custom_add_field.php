@@ -324,12 +324,12 @@
 						<div class="col-lg-7">
 							<table class="table table-striped- table-bordered table-hover table-checkable  no-footer" style="color: #646c9a;" id="invoiceItem">	
 									<tr>
-										<th class="" width="15%">Frist Field </th>
-										<th class="thheader" width="5%">operater</th>
-										<th class="thheader" width="15%">Second Field </th>
-										<th class="thheader" width="5%">Value</th>
-										<th class="thheader" width="5%">operater</th>
-										<th class="thheader" width="5%">Delete</th>
+										<th scope="col" class="" width="15%">Frist Field </th>
+										<th scope="col" class="thheader" width="5%">operater</th>
+										<th scope="col" class="thheader" width="15%">Second Field </th>
+										<th scope="col" class="thheader" width="5%">Value</th>
+										<th scope="col" class="thheader" width="5%">operater</th>
+										<th scope="col" class="thheader" width="5%">Delete</th>
 										
 									</tr>	
 									<tr>
@@ -397,12 +397,12 @@
 						<div class="col-lg-12">
 							<table class="table table-striped- table-bordered table-hover table-checkable  no-footer" style="color: #646c9a;" id="invoiceItem1">	
 									<tr>
-										<th class="" width="40%">Frist Table/Static Field  </th>
-										<th class="thheader" width="5%">operater</th>
-										<th class="thheader" width="40%">Second Table/Static Field </th>
+										<th scope="col" class="" width="40%">Frist Table/Static Field  </th>
+										<th scope="col" class="thheader" width="5%">operater</th>
+										<th scope="col" class="thheader" width="40%">Second Table/Static Field </th>
 										
-										<th class="thheader" width="5%">operater</th>
-										<th class="thheader" width="5%">Delete</th>
+										<th scope="col" class="thheader" width="5%">operater</th>
+										<th scope="col" class="thheader" width="5%">Delete</th>
 									</tr>	
 									<tr>
 										<td>

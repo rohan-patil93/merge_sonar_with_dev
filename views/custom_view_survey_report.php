@@ -12,17 +12,17 @@ $maxoptions = isset($surveyData['maxoptions']) ? (int)$surveyData['maxoptions'] 
 		<!-- <table class="table table-separate table-head-custom table-checkable" id="kt_datatable1"> -->
 			<thead>
 				<tr>
-					<th></th>
-					<th> </th>
+					<th scope="col"></th>
+					<th scope="col"> </th>
 					<td class="text-primary text-center font-size-h5" colspan="<?php echo $maxoptions; ?>">Option  </td>
 				</tr>
 			</thead>
 			<thead>
 				<tr>
-					<th class="font-size-h5">#</th>
-					<th width="30%" class="font-size-h5">Questions </th>
+					<th scope="col" class="font-size-h5">#</th>
+					<th scope="col" width="30%" class="font-size-h5">Questions </th>
 					<?php for($op_count=1; $op_count<=$maxoptions; $op_count++) { ?>
-					<th class="font-size-h5"><?php echo $op_count; ?> </th>
+					<th scope="col" class="font-size-h5"><?php echo $op_count; ?> </th>
 					<?php } ?>
 				</tr>
 			</thead>

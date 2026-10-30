@@ -2897,9 +2897,9 @@ if (count((array) $milestones) > 0) {
                                                         id="unified-billing-schedule-table">
                                                         <thead class="table-light">
                                                             <tr>
-                                                                <th>Period</th>
-                                                                <th class="text-end">Amount</th>
-                                                                <th>Date</th>
+                                                                <th scope="col">Period</th>
+                                                                <th scope="col" class="text-end">Amount</th>
+                                                                <th scope="col">Date</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody id="unified-billing-schedule-body"
@@ -3147,9 +3147,9 @@ if (count((array) $milestones) > 0) {
                                 <table class="table table-sm table-bordered mb-0">
                                     <thead class="table-light">
                                         <tr>
-                                            <th>Location</th>
-                                            <th>Service Start Date</th>
-                                            <th>Service End Date</th>
+                                            <th scope="col">Location</th>
+                                            <th scope="col">Service Start Date</th>
+                                            <th scope="col">Service End Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -3207,14 +3207,14 @@ if (count((array) $milestones) > 0) {
                                     <table class="table table-bordered table-sm f-12 amc-assets-table mb-0">
                                         <thead class="table-light">
                                             <tr>
-                                                <th>Asset No.</th>
-                                                <th>Asset Name</th>
-                                                <th>Category</th>
-                                                <th>Service Frequency</th>
-                                                <th>Visits / Interval</th>
-                                                <th>Service Start</th>
-                                                <th>Service End</th>
-                                                <th class="text-center">Action</th>
+                                                <th scope="col">Asset No.</th>
+                                                <th scope="col">Asset Name</th>
+                                                <th scope="col">Category</th>
+                                                <th scope="col">Service Frequency</th>
+                                                <th scope="col">Visits / Interval</th>
+                                                <th scope="col">Service Start</th>
+                                                <th scope="col">Service End</th>
+                                                <th scope="col" class="text-center">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody class="amc-assets-tbody"></tbody>
@@ -3443,16 +3443,16 @@ if (count((array) $milestones) > 0) {
                                             <tbody>
                                                 <?php foreach ($associatedContracts as $contract): ?>
                                                     <tr class="bg-gray">
-                                                        <th colspan="4"
+                                                        <th scope="col" colspan="4"
                                                             class="py-2 px-4 text-left text-lg font-semibold text-gray-800">
                                                             <?= htmlspecialchars($contract['contract_name']) ?>
                                                         </th>
                                                     </tr>
                                                     <tr>
-                                                        <th class="py-3 px-5 text-center">Contract ID</th>
-                                                        <th class="py-3 px-5 text-center">Contract Name</th>
-                                                        <th class="py-3 px-5 text-center">Effective Date</th>
-                                                        <th class="py-3 px-5 text-center">Expiration Date</th>
+                                                        <th scope="col" class="py-3 px-5 text-center">Contract ID</th>
+                                                        <th scope="col" class="py-3 px-5 text-center">Contract Name</th>
+                                                        <th scope="col" class="py-3 px-5 text-center">Effective Date</th>
+                                                        <th scope="col" class="py-3 px-5 text-center">Expiration Date</th>
                                                     </tr>
                                                     <tr>
                                                         <td class="py-3 px-5 text-gray-700">
@@ -3617,10 +3617,10 @@ if (count((array) $milestones) > 0) {
                                         <table class="table table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th>User</th>
-                                                    <th>Permissions</th>
-                                                    <th>Document Permissions</th>
-                                                    <th>Actions</th>
+                                                    <th scope="col">User</th>
+                                                    <th scope="col">Permissions</th>
+                                                    <th scope="col">Document Permissions</th>
+                                                    <th scope="col">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -3881,13 +3881,13 @@ if (count((array) $milestones) > 0) {
                                 <table class="table table-bordered align-middle">
                                     <thead class="table-light">
                                         <tr>
-                                            <th>S.N</th>
-                                            <th>Recharge Date</th>
-                                            <th>Activation Date</th>
-                                            <th>Expiry Date</th>
-                                            <th>Plan Type</th>
-                                            <th>Remaining Days</th>
-                                            <th>Status</th>
+                                            <th scope="col">S.N</th>
+                                            <th scope="col">Recharge Date</th>
+                                            <th scope="col">Activation Date</th>
+                                            <th scope="col">Expiry Date</th>
+                                            <th scope="col">Plan Type</th>
+                                            <th scope="col">Remaining Days</th>
+                                            <th scope="col">Status</th>
                                         </tr>
                                     </thead>
                                     <tbody id="rechargeHistoryBody">

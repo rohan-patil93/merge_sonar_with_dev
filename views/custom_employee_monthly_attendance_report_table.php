@@ -161,15 +161,15 @@ for ($day = 1; $day <= $daysInMonth; $day++) {
 				<table class="table table-bordered table-hover">
 					<thead>
 						<tr>
-							<th width="5%">S.No</th>
-							<th>Attendance Date</th>
-							<th>Clock In</th>
-							<th>Clock Out</th>
-                            <th>Over Time</th>
-                            <th>Absenteeism</th>
-							<th>Status</th>
-                            <th></th>
-                             <th></th>
+							<th scope="col" width="5%">S.No</th>
+							<th scope="col">Attendance Date</th>
+							<th scope="col">Clock In</th>
+							<th scope="col">Clock Out</th>
+                            <th scope="col">Over Time</th>
+                            <th scope="col">Absenteeism</th>
+							<th scope="col">Status</th>
+                            <th scope="col"></th>
+                             <th scope="col"></th>
 						</tr>
 					</thead>
 					 <tbody>

@@ -732,13 +732,13 @@ if(catlink=='PTX'){
                                     <table class="table table-head-custom table-head-bg table-borderless table-vertical-center"  >
                                         <thead>
                                             <tr class="text-uppercase">
-                                                <th style="width: 30%" class="pl-7">
+                                                <th scope="col" style="width: 30%" class="pl-7">
                                                     <label class="f-14">Salary Component</label>
                                                 </th>
-                                                <th style="width: 20%"><label class="f-14">Calculation Type</label></th>
-                                                <th style="width: 20%;text-align: center;"><label class="f-14">Amount Monthly</label></th>
-                                                <th style="width: 20%"><label class="f-14">Amount Annually</label></th>
-                                                <!-- <th style="width: 15%">Remarks</th> -->
+                                                <th scope="col" style="width: 20%"><label class="f-14">Calculation Type</label></th>
+                                                <th scope="col" style="width: 20%;text-align: center;"><label class="f-14">Amount Monthly</label></th>
+                                                <th scope="col" style="width: 20%"><label class="f-14">Amount Annually</label></th>
+                                                <!-- <th scope="col" style="width: 15%">Remarks</th> -->
                                             </tr>
                                         </thead>
                                     </table>

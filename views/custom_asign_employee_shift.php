@@ -156,14 +156,14 @@ $designations = json_decode($designations,1);
 				<table class="table table-separate table-head-custom table-checkable" id="kt_datatable_2">
 					<thead>
 						<tr>
-							<th></th>
-							<!-- <th>Company Name</th> -->
-							<th>Employee Code</th>
-							<th>Employee Name</th>
-							<th>Employee Email</th>
-							<th>Phone</th>
-							<th>Date of birth</th>
-							<th>Actions</th>
+							<th scope="col"></th>
+							<!-- <th scope="col">Company Name</th> -->
+							<th scope="col">Employee Code</th>
+							<th scope="col">Employee Name</th>
+							<th scope="col">Employee Email</th>
+							<th scope="col">Phone</th>
+							<th scope="col">Date of birth</th>
+							<th scope="col">Actions</th>
 						</tr>
 					</thead>	
 					<?php foreach ($response as $empp) { ?>		

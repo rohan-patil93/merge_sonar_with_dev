@@ -94,24 +94,24 @@ $grand_total_unspent  = 0;
                     <table class="table table-bordered table-sm align-middle ">
                         <thead>
                             <tr>
-                                <th colspan="3" class="bg-primary text-white text-center">CSR Actual Spent Details</th>
-                                <th colspan="3">-</th>
-                                <th colspan="5" class="bg-primary text-white text-center">Amount Summary</th>
-                                <th></th>
+                                <th scope="col" colspan="3" class="bg-primary text-white text-center">CSR Actual Spent Details</th>
+                                <th scope="col" colspan="3">-</th>
+                                <th scope="col" colspan="5" class="bg-primary text-white text-center">Amount Summary</th>
+                                <th scope="col"></th>
                             </tr>
                             <tr class="bg-light">
-                                <th class="text-center">Location</th>
-                                <th class="text-center">Name of the CSR Project</th>
-                                <th class="text-center">Nature of work done</th>
-                                <th class="text-center">Type of work</th>
-                                <th class="text-center">Type of Project</th>
-                                <th class="text-center">Area</th>
-                                <th class="text-center">PO Issued<br><span class="f-12">(Incl. GST)</span></th>
-                                <th class="text-center">Amount Spent<br><span class="f-12">(Incl. GST)</span></th>
-                                <th class="text-center">Unspent Amount</th>
-                                <th class="text-center">Spent %</th>
-                                <th class="text-center">Unspent %</th>
-                                <th class="text-center">Status of Project</th>
+                                <th scope="col" class="text-center">Location</th>
+                                <th scope="col" class="text-center">Name of the CSR Project</th>
+                                <th scope="col" class="text-center">Nature of work done</th>
+                                <th scope="col" class="text-center">Type of work</th>
+                                <th scope="col" class="text-center">Type of Project</th>
+                                <th scope="col" class="text-center">Area</th>
+                                <th scope="col" class="text-center">PO Issued<br><span class="f-12">(Incl. GST)</span></th>
+                                <th scope="col" class="text-center">Amount Spent<br><span class="f-12">(Incl. GST)</span></th>
+                                <th scope="col" class="text-center">Unspent Amount</th>
+                                <th scope="col" class="text-center">Spent %</th>
+                                <th scope="col" class="text-center">Unspent %</th>
+                                <th scope="col" class="text-center">Status of Project</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -124,7 +124,7 @@ $grand_total_unspent  = 0;
                             ?>
                                 <tr>
                                     <td class=""><?php echo $row['location'] ?? '-'; ?></td>
-                                    <th class=""><?php echo $row['project_name'] ?? '-'; ?></th>
+                                    <th scope="col" class=""><?php echo $row['project_name'] ?? '-'; ?></th>
                                     <td class=""><?php echo $row['nature_of_work_done'] ?? '-'; ?></td>
                                     <td class=""><?php echo $row['type_of_work'] ?? '-'; ?></td>
                                     <td class=""><?php echo $row['type_of_project'] ?? '-'; ?></td>

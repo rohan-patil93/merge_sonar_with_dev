@@ -2496,11 +2496,11 @@ payment tersm**/
 				$html .= "<div class='table-responsive mb-3'>
         <table class='table table-striped' id='feasibilityFieldsTable'>
         <thead><tr>
-            <th width='20%'>Label</th>
-            <th width='20%'>Type</th>
-            <th width='20%'>Values (JSON)</th>
-            <th width='20%'>Length (col)</th>
-            <th width='10%'>Mandatory</th>
+            <th scope="col" width='20%'>Label</th>
+            <th scope="col" width='20%'>Type</th>
+            <th scope="col" width='20%'>Values (JSON)</th>
+            <th scope="col" width='20%'>Length (col)</th>
+            <th scope="col" width='10%'>Mandatory</th>
             <thwidth='0%'>Action</th>
         </tr></thead><tbody>";
 

@@ -194,19 +194,19 @@ if ($scheduleVendorLabel == '') {
                     <table class="table table-bordered table-sm">
                         <thead class="table-light">
                             <tr>
-                                <th>Item</th>
-                                <th>Part / Description</th>
-                                <th>Qty</th>
-                                <th>PO No.</th>
-                                <th>Amount</th>
-                                <?php if ($isRepairEditable) { ?><th></th><?php } ?>
+                                <th scope="col">Item</th>
+                                <th scope="col">Part / Description</th>
+                                <th scope="col">Qty</th>
+                                <th scope="col">PO No.</th>
+                                <th scope="col">Amount</th>
+                                <?php if ($isRepairEditable) { ?><th scope="col"></th><?php } ?>
                             </tr>
                         </thead>
                         <tbody id="amcRepairLinesBody">
                             <?php
                             $lineIdx = 0;
                             $repairContractAssets = $contractAssets;
-                            $repairItems = $repairItems;
+
                             $repairLocationId = (int) ($repairOrder['location_id'] ?? 0);
                             if (count((array)$lines) > 0) {
                                 foreach ($lines as $line) {
@@ -216,7 +216,7 @@ if ($scheduleVendorLabel == '') {
                                 }
                             } elseif ($isRepairEditable) {
                                 $line = array();
-                                include __DIR__ . '/contract_amc_schedule_repair_line_row.php';
+                                include_once __DIR__ . '/contract_amc_schedule_repair_line_row.php';
                             }
                             ?>
                         </tbody>

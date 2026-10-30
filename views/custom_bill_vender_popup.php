@@ -21,13 +21,13 @@ $datas = json_decode($apires,1);
 					<table  class="table table-striped table-bordered nowrap"> 
 						<thead>
 							<tr>
-								<th>Sl No</th>
-								<th>Vendor</th>
-								<th>Invoice Number</th>
-								<th>Invoice Date</th>
-								<th>Due Date</th>
-								<th>Amount</th>
-								<th>Due Amount</th>
+								<th scope="col">Sl No</th>
+								<th scope="col">Vendor</th>
+								<th scope="col">Invoice Number</th>
+								<th scope="col">Invoice Date</th>
+								<th scope="col">Due Date</th>
+								<th scope="col">Amount</th>
+								<th scope="col">Due Amount</th>
 							</tr>
 						</thead>
 						<tbody>

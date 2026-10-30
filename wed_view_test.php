@@ -56,9 +56,9 @@ $_SESSION['role_id']=$row['role_id'];*/
         <h2>Data Display Table</h2>
         <table>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Value</th>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Value</th>
             </tr>
             <tr>
                 <td>1</td>

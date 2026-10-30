@@ -125,24 +125,24 @@ $vurl = API."?mode=togetsumofempsalaryoncomponentid&company_id=".$company_id."&e
 						<table class="table table-bordered table-hover table-checkable mt-10 dataTable no-footer dtr-inline" id="kt_datatable" role="grid" aria-describedby="kt_datatable_info" style="width: 1236px;">
 							<thead>
 								<tr role="row" bgcolor="#f7f7f7">
-									<th>Employee ID</th>
-									<th>Insurance Person Name</th>
-									<th>Paid Days</th>
-									<th>Total Monthly Wages</th>
-									<th>Reason Code For Zero Working Days</th>
-									<th>Last Working Days</th>
+									<th scope="col">Employee ID</th>
+									<th scope="col">Insurance Person Name</th>
+									<th scope="col">Paid Days</th>
+									<th scope="col">Total Monthly Wages</th>
+									<th scope="col">Reason Code For Zero Working Days</th>
+									<th scope="col">Last Working Days</th>
 								</tr>
 							</thead>
 							<tbody>
 								<?php if(!empty($esi_return_list)) {
 										foreach ($esi_return_list as $esi_data) { ?>
 								<tr role="row" class="odd">
-									<th><?php echo $esi_data['employee_id']; ?></th>
-									<th><?php echo $esi_data['employee_name']; ?></th>
-									<th><?php echo $esi_data['total_no_of_working_days']; ?></th>
-									<th><?php echo $esi_data['emp_basic']; ?></th>
-									<th>---TBD---</th>
-									<th><?php echo $esi_data['date_of_leaving']; ?></th>
+									<th scope="col"><?php echo $esi_data['employee_id']; ?></th>
+									<th scope="col"><?php echo $esi_data['employee_name']; ?></th>
+									<th scope="col"><?php echo $esi_data['total_no_of_working_days']; ?></th>
+									<th scope="col"><?php echo $esi_data['emp_basic']; ?></th>
+									<th scope="col">---TBD---</th>
+									<th scope="col"><?php echo $esi_data['date_of_leaving']; ?></th>
 								</tr>
 
 								<?php

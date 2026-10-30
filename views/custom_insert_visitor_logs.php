@@ -1155,8 +1155,8 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                                 id="serviceTagTableModal">
                                                                 <thead class="table-light">
                                                                     <tr>
-                                                                        <th class="minw-220">Visitor Name</th>
-                                                                        <th class="minw-180">Card ID Assigned</th>
+                                                                        <th scope="col" class="minw-220">Visitor Name</th>
+                                                                        <th scope="col" class="minw-180">Card ID Assigned</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody></tbody>
@@ -1521,14 +1521,14 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                     <table class="table table-hover" id="invoiceItem">
                                                         <tbody>
                                                             <tr>
-                                                                <th width="35%" class="p-1">Items/Service</th>
-                                                                <th class="thheader p-1" width="30%">Description</th>
+                                                                <th scope="col" width="35%" class="p-1">Items/Service</th>
+                                                                <th scope="col" class="thheader p-1" width="30%">Description</th>
                                                                 <?php if (($return['vendor_supplier_document_type'] ?? '') !== 'NOREF'): ?>
-                                                                    <th class="thheader p-1 text-right" width="10%">QTY</th>
+                                                                    <th scope="col" class="thheader p-1 text-right" width="10%">QTY</th>
                                                                 <?php endif; ?>
-                                                                <th class="thheader p-1 text-right" width="15%">Received Qty
+                                                                <th scope="col" class="thheader p-1 text-right" width="15%">Received Qty
                                                                     <span class="requried">*</span></th>
-                                                                <th class="thheader p-1" width="5%">UOM <span
+                                                                <th scope="col" class="thheader p-1" width="5%">UOM <span
                                                                         class="requried">*</span></th>
                                                             </tr>
                                                             <?php foreach ($visitor_luggages_res as $item): ?>
@@ -2022,10 +2022,10 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                         id="visitorHistoryTable">
                                         <thead class="table-light">
                                             <tr>
-                                                <th>Visitor Details</th>
-                                                <th>Phone</th>
-                                                <th>Check-in DateTime</th>
-                                                <th>Check-out DateTime</th>
+                                                <th scope="col">Visitor Details</th>
+                                                <th scope="col">Phone</th>
+                                                <th scope="col">Check-in DateTime</th>
+                                                <th scope="col">Check-out DateTime</th>
                                             </tr>
                                         </thead>
                                         <tbody></tbody>
@@ -2187,13 +2187,13 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                 <table class="table table-hover align-middle mb-0" id="checkoutHistoryTable">
                                     <thead>
                                         <tr>
-                                            <th class="th-visitor">Visitor Details</th>
-                                            <th class="th-idcard">Pass ID / Code</th>
-                                            <th class="th-phone">Contact Phone</th>
-                                            <th class="th-visittype">Visit Type</th>
-                                            <th class="th-checkin">Check-in Stamp</th>
-                                            <th class="th-checkout">Check-out Stamp</th>
-                                            <th class="th-action text-center">Checkout Action</th>
+                                            <th scope="col" class="th-visitor">Visitor Details</th>
+                                            <th scope="col" class="th-idcard">Pass ID / Code</th>
+                                            <th scope="col" class="th-phone">Contact Phone</th>
+                                            <th scope="col" class="th-visittype">Visit Type</th>
+                                            <th scope="col" class="th-checkin">Check-in Stamp</th>
+                                            <th scope="col" class="th-checkout">Check-out Stamp</th>
+                                            <th scope="col" class="th-action text-center">Checkout Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>

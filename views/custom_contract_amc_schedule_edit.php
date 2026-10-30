@@ -656,11 +656,11 @@ if ($checklistTotal > 0) {
 
                         <tr>
 
-                            <th style="width:45%;">Item</th>
+                            <th scope="col" style="width:45%;">Item</th>
 
-                            <th style="width:18%;">Done</th>
+                            <th scope="col" style="width:18%;">Done</th>
 
-                            <th style="width:37%;">Remarks</th>
+                            <th scope="col" style="width:37%;">Remarks</th>
 
                         </tr>
 

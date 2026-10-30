@@ -84,14 +84,14 @@ $application_users = $result['application_users'];
                     <table class="table fwdp-table" id="fiedWorkTable">
                         <thead>
                             <tr>
-                                <th>S No.</th>
-                                <th>User</th>
-                                <th>Email</th>
-                                <th>Date</th>
-                                <th>Visited</th>
-                                <th>Extra</th>
-                                <th>Pending</th>
-                                <th>Action</th>
+                                <th scope="col">S No.</th>
+                                <th scope="col">User</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Visited</th>
+                                <th scope="col">Extra</th>
+                                <th scope="col">Pending</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>

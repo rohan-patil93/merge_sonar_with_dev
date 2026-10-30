@@ -279,8 +279,8 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                             <table id="request_parameters">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Value</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Value</th>
                                     </tr>
                                 </thead>
                                 <?php $mk=1;  foreach (json_decode($details['api_request_parameters'], true) as $name => $value): ?>
@@ -310,8 +310,8 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                             <table id="headers" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Value</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Value</th>
                                     </tr>
                                 </thead>
                                 <?php foreach (json_decode($details['request_header'], true) as $name => $value): ?>
@@ -335,8 +335,8 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                             <table id="postField" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Value</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Value</th>
                                     </tr>
                                 </thead>
                                 <?php foreach (json_decode($details['api_request_post_parameters'], true) as $name => $value): ?>
@@ -381,10 +381,10 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                                 <table id="responseDetails" width="100%" class="mt-0">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <!-- <th>Value</th> -->
-                                            <th>Mapping Field</th>
-                                            <th>Uniqueness</th>
+                                            <th scope="col">Name</th>
+                                            <!-- <th scope="col">Value</th> -->
+                                            <th scope="col">Mapping Field</th>
+                                            <th scope="col">Uniqueness</th>
                                         </tr>
                                     </thead>
                                     <?php $sqo = 1; foreach(json_decode($details['api_response_details'], true) as $name => $value): ?>

@@ -1469,10 +1469,10 @@ function viewApprovalAllUsers(id){
                         <div class="col-lg-3 p-r-0">
                         <div style="position: sticky;top: 20px;">
                         <table class=" table table-bordered custom_dynamic_transaction_table" >
-                            <tr class="bg-primary" ><th colspan="2" class="p-2 text-center">Order Summary</th></tr>
+                            <tr class="bg-primary" ><th scope="col" colspan="2" class="p-2 text-center">Order Summary</th></tr>
                             <tr>
-                                <th class="amount text-start p-2" width="40%" style="width:40%"><span>Sub Total</span></th>
-                                <th class="p-2 text-right" width="60%" style="width:40%">
+                                <th scope="col" class="amount text-start p-2" width="40%" style="width:40%"><span>Sub Total</span></th>
+                                <th scope="col" class="p-2 text-right" width="60%" style="width:40%">
                                     <span id="dis_subTotalid">
                                         <?php echo customeummarmonyformateifine($table1['sub_total']); ?>
                                     </span>
@@ -1481,7 +1481,7 @@ function viewApprovalAllUsers(id){
                                 </th>
                             </tr>
                             <tr>
-                                <th class="amount text-start p-2 ">
+                                <th scope="col" class="amount text-start p-2 ">
                                     <div class="form-radio">
                                     <span>Discount </span>
                                     <div class="radio radio-inline m-0">
@@ -1515,7 +1515,7 @@ function viewApprovalAllUsers(id){
                             </tr>
                             <?php if($table_name != 'bills'){ ?>
                             <tr>
-                                <th class="amount text-start p-2">
+                                <th scope="col" class="amount text-start p-2">
                                     <span >Shipping</span>
                                     <div class="">  
                                         <select class="form-select js-example-basic-single"  name="shipping_tax" id="shipping_tax" onchange="calculateTotal()" >
@@ -1578,7 +1578,7 @@ function viewApprovalAllUsers(id){
                         </tr>
                             <?php if($table_name == 'bills'){ ?>
                             <tr>
-                                <th class="amount p-2">
+                                <th scope="col" class="amount p-2">
                                     <div> 
                                         <div style="float: left;width: 50%;padding: 10px;">
                                             <span >TDS</span>
@@ -1601,19 +1601,19 @@ function viewApprovalAllUsers(id){
                             </tr>
                         <?php } ?>
                             <tr>
-                                <th class="amount p-2 text-start " >
+                                <th scope="col" class="amount p-2 text-start " >
                                     <span>Grand Total</span>
                                     <input  type="hidden" class="form-control amount" placeholder="value" name="gdam" id="gdam">
                                     <input  type="hidden" class="form-control amount" placeholder="value" name="div_amount_total" id="div_amount_total">
                                     <input  value="<?php echo $table1['tax_amount']; ?>" type="hidden" class="form-control amount" name="taxRate" id="taxAmount" readonly placeholder="Tax Amount">
                                 </th>
-                                <th class="p-2 text-right">
+                                <th scope="col" class="p-2 text-right">
                                     <span id="grndtotalid"><?php echo customeummarmonyformateifine($table1['grand_total']); ?> </span>
                                     <input  value="<?php echo customeummarmonyformate($table1['grand_total']); ?>" type="hidden" class="form-control amount" name="dis_grandtotal" id="dis_grandtotal" readonly placeholder="Grand Total"><input  value="<?php echo $table1['grand_total']; ?>" type="hidden" class="form-control amount" name="grandtotal" id="grandtotal" readonly placeholder="Grand Total">
                                 </th>
                             </tr>
                             <tr style="display: none;">
-                                <th class="amount" ><span >Amount Paid</span></th>
+                                <th scope="col" class="amount" ><span >Amount Paid</span></th>
                                 <td><input value="" type="text" class="form-control amount" name="amountPaid" id="amountPaid" placeholder="Amount Paid"></td>
                             </tr>
                             <tr style="display: none;">
@@ -1625,11 +1625,11 @@ function viewApprovalAllUsers(id){
                                 <td colspan="2" >
                                     <table  id='exchange'  class=" table table-bordered " style="float: right;">
                                         <tr>
-                                            <!-- <th class="amount">Exchange Rate</th> -->  
-                                            <th class="amount">Sub total</th>
-                                            <th class="amount">Tax</th>
-                                            <th class="amount">Discount</th>
-                                            <th class="amount">Grand Total </th>
+                                            <!-- <th scope="col" class="amount">Exchange Rate</th> -->  
+                                            <th scope="col" class="amount">Sub total</th>
+                                            <th scope="col" class="amount">Tax</th>
+                                            <th scope="col" class="amount">Discount</th>
+                                            <th scope="col" class="amount">Grand Total </th>
                                         </tr>
                                         <tr>
                                             <!-- <td><input value="<?php echo $table1['currency_rate']; ?>" type="text" readonly  class="form-control amount" name="" id="ex_rate" ></td> -->

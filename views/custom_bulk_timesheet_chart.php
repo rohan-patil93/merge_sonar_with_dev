@@ -48,10 +48,10 @@ foreach($vendor_charts as $vendor_chart){
 			<table class="table table-hover m-b-0">
 				<thead>
 					<tr class="">
-						<th class=""></th>
-						<th class="" name="vendors_count"> Vendor Name</th>
-						<th class="text-right" name="resources_count"> Budget Amount</th>
-						<th class="text-right" name="leaves_count"> Available</th>
+						<th scope="col" class=""></th>
+						<th scope="col" class="" name="vendors_count"> Vendor Name</th>
+						<th scope="col" class="text-right" name="resources_count"> Budget Amount</th>
+						<th scope="col" class="text-right" name="leaves_count"> Available</th>
 						
 					</tr>
 				</thead>

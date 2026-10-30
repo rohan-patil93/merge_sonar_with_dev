@@ -3711,7 +3711,7 @@ function reportofyearmonthalldetails($get){
 		$new_min[$min_month_res->month] = $min_month_res->mc;
 	}
 	/*if($month>3){
-		$year = $year;
+
 	    $sdate = $year."-03-01";
 	}else{
 	    $year = $year-1;

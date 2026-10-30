@@ -49,14 +49,14 @@ function emdEsc($value)
                 <table class="table table-bordered table-striped" id="employeeMissingDetailsTable">
                     <thead>
                         <tr>
-                            <th>Sr.No</th>
-                            <th>emp_code</th>
-                            <th>Employee Name</th>
-                            <th>Email Missing <span class="label label-primary"><?php echo (int)$missingCounts['email']; ?></span></th>
-                            <th>B-Machine ID Missing <span class="label label-primary"><?php echo (int)$missingCounts['b_machine_id']; ?></span></th>
-                            <th>User Missing <span class="label label-primary"><?php echo (int)$missingCounts['user']; ?></span></th>
-                            <th>Salary Missing <span class="label label-primary"><?php echo (int)$missingCounts['salary']; ?></span></th>
-                            <th>Pay Area Missing <span id="missingCountPayArea" class="label label-primary"><?php echo (int)$missingCounts['pay_area']; ?></span></th>
+                            <th scope="col">Sr.No</th>
+                            <th scope="col">emp_code</th>
+                            <th scope="col">Employee Name</th>
+                            <th scope="col">Email Missing <span class="label label-primary"><?php echo (int)$missingCounts['email']; ?></span></th>
+                            <th scope="col">B-Machine ID Missing <span class="label label-primary"><?php echo (int)$missingCounts['b_machine_id']; ?></span></th>
+                            <th scope="col">User Missing <span class="label label-primary"><?php echo (int)$missingCounts['user']; ?></span></th>
+                            <th scope="col">Salary Missing <span class="label label-primary"><?php echo (int)$missingCounts['salary']; ?></span></th>
+                            <th scope="col">Pay Area Missing <span id="missingCountPayArea" class="label label-primary"><?php echo (int)$missingCounts['pay_area']; ?></span></th>
                         </tr>
                     </thead>
                     <tbody id="employeeMissingDetailsTbody">

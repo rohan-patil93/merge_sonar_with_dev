@@ -274,15 +274,15 @@ $_SESSION['download_data'] = array();
             <table class="table table-bordered table-sm csr-obl-table mb-0" id="csrOblProjectTable">
               <thead>
                 <tr>
-                  <th>Project Name</th>
-                  <th>Type</th>
-                  <th>Entity</th>
-                  <th>Location</th>
-                  <th>Status</th>
-                  <th>Total Amount</th>
+                  <th scope="col">Project Name</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Entity</th>
+                  <th scope="col">Location</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Total Amount</th>
                   <?php if (count((array)$fyRange) > 0) { ?>
                     <?php foreach ($fyRange as $fyCode) { ?>
-                      <th>FY <?php echo csrOblDashText($fyCode); ?></th>
+                      <th scope="col">FY <?php echo csrOblDashText($fyCode); ?></th>
                     <?php } ?>
                   <?php } ?>
                 </tr>
@@ -504,9 +504,9 @@ $_SESSION['download_data'] = array();
             <table class="table table-sm table-bordered mb-0 csr-obl-mini-table">
               <thead>
                 <tr>
-                  <th>Location</th>
-                  <th>Amount</th>
-                  <th>Status</th>
+                  <th scope="col">Location</th>
+                  <th scope="col">Amount</th>
+                  <th scope="col">Status</th>
                 </tr>
               </thead>
               <tbody>

@@ -5162,7 +5162,7 @@ class userClass{
     	for($i =0; $i<$frequency; $i++){
 
     		if($f_date >31){
-    			$f_date =  $f_date;
+
     			$new_month = $new_month+1;
     			if($new_month > 12){
     				$new_month =1;
@@ -5173,7 +5173,7 @@ class userClass{
     		$params = [$date, $i, $new_year, $new_month, $f_date];
     		$f_date = $f_date+$days;
     		if($f_date >31){
-    			$f_date =  $f_date;
+
     			$new_month = $new_month+1;
     			if($new_month > 12){
     				$new_month =1;
@@ -5779,7 +5779,7 @@ class userClass{
 			//echo $query3; exit;
 			$data3 = $callConfig->getRowNew($query3);
 			if($data3->tatal == ""){
-				$return = $return;
+
 			}else{
 				$return = $data3->tatal;
 			}

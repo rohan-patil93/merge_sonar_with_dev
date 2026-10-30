@@ -82,12 +82,12 @@ $rowCounter = 0;
                 <table class="table table-bordered" id="csr_tracking_manage_table">
                     <thead>
                         <tr>
-                            <th>Sr. No.</th>
-                            <th>Tracking Name</th>
-                            <th>Description</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                            <th>Budget</th>
+                            <th scope="col">Sr. No.</th>
+                            <th scope="col">Tracking Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">End Date</th>
+                            <th scope="col">Budget</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -216,12 +216,12 @@ function emptyCheck($valu){
                     <td colspan="6">&nbsp</td>
                 </tr>
                 <tr bgcolor="#eeeeee">
-                    <th class="p-1 f-12">ITEM</th>
-                    <th class="p-1 f-12"></th>
-                    <th class="p-1 f-12" width="20%">PRODUCTION DESCRIPTION</th>
-                    <th class="p-1 text-end f-12" width="5%">QTY</th>
-                    <th class="text-end p-1 f-12" width="12%">UNIT PRICE <span class="d-block">(INR)</span></th>
-                    <th class="text-end p-1 f-12" width="13%">AMOUNT <span class="d-block">(INR)</span></th>
+                    <th scope="col" class="p-1 f-12">ITEM</th>
+                    <th scope="col" class="p-1 f-12"></th>
+                    <th scope="col" class="p-1 f-12" width="20%">PRODUCTION DESCRIPTION</th>
+                    <th scope="col" class="p-1 text-end f-12" width="5%">QTY</th>
+                    <th scope="col" class="text-end p-1 f-12" width="12%">UNIT PRICE <span class="d-block">(INR)</span></th>
+                    <th scope="col" class="text-end p-1 f-12" width="13%">AMOUNT <span class="d-block">(INR)</span></th>
                 </tr>
                 <tr>
                     <td class="p-1" style="vertical-align:top;">
@@ -291,38 +291,38 @@ function emptyCheck($valu){
                     <td colspan="4" class="border-0 p-1">
                             <table class="table">
                                 <tr>
-                                    <th class="f-12 p-0 pt-1 pb-1" width="50%">TOTAL</th>
-                                    <th width="50%" class="text-right f-12 p-0 pt-1 pb-1">
+                                    <th scope="col" class="f-12 p-0 pt-1 pb-1" width="50%">TOTAL</th>
+                                    <th scope="col" width="50%" class="text-right f-12 p-0 pt-1 pb-1">
                                         INR 1,20,000/-
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th class="f-12 p-0 pt-1 pb-1">10% DISCOUNT</th>
-                                    <th class="text-right f-12 p-0 pt-1 pb-1">
+                                    <th scope="col" class="f-12 p-0 pt-1 pb-1">10% DISCOUNT</th>
+                                    <th scope="col" class="text-right f-12 p-0 pt-1 pb-1">
                                         INR 12,000/-
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th class="f-12 p-0 pt-1 pb-1">TAXABLE AMOUNT</th>
-                                    <th class="text-right f-12 p-0 pt-1 pb-1">
+                                    <th scope="col" class="f-12 p-0 pt-1 pb-1">TAXABLE AMOUNT</th>
+                                    <th scope="col" class="text-right f-12 p-0 pt-1 pb-1">
                                         INR 1,08,000/-
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th class="f-12 p-0 pt-1 pb-1">CGST 9% (HSN CODE)</th>
-                                    <th class="text-right f-12 p-0 pt-1 pb-1">
+                                    <th scope="col" class="f-12 p-0 pt-1 pb-1">CGST 9% (HSN CODE)</th>
+                                    <th scope="col" class="text-right f-12 p-0 pt-1 pb-1">
                                         INR 10,000/-
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th class="f-12 p-0 pt-1 pb-1">SGST 9% (HSN CODE)</th>
-                                    <th class="text-right f-12 p-0 pt-1 pb-1">
+                                    <th scope="col" class="f-12 p-0 pt-1 pb-1">SGST 9% (HSN CODE)</th>
+                                    <th scope="col" class="text-right f-12 p-0 pt-1 pb-1">
                                         INR 10,000/-
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th class="f-12 p-0 pt-1 pb-1">GRAND TOTAL</th>
-                                    <th class="text-right f-12 p-0 pt-1 pb-1">
+                                    <th scope="col" class="f-12 p-0 pt-1 pb-1">GRAND TOTAL</th>
+                                    <th scope="col" class="text-right f-12 p-0 pt-1 pb-1">
                                         INR 1,35,000/-
                                     </th>
                                 </tr>

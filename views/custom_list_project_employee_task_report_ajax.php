@@ -23,13 +23,13 @@ $today = date('Y-m-d');
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th>Sl.No</th>
-				<th>Employee name</th>
-				<th>Project name</th>
-				<th>Task name</th>
-				<th>Planned start</th>
-				<th>Plan finish date</th>
-				<th>Status</th>
+				<th scope="col">Sl.No</th>
+				<th scope="col">Employee name</th>
+				<th scope="col">Project name</th>
+				<th scope="col">Task name</th>
+				<th scope="col">Planned start</th>
+				<th scope="col">Plan finish date</th>
+				<th scope="col">Status</th>
 			</tr>
 		</thead>
 		<tbody>

@@ -63,11 +63,11 @@ function valueemtpydash($val){
 							<table id="basic-btn" class="table  table-bordered nowrap">
 							<thead>
 								<tr> 
-									<th>Cost Center Name</th>
+									<th scope="col">Cost Center Name</th>
 									<?php foreach((array)$roles['months'] as $mkey => $monthlist){ ?>
-										<th class="text-right"><?php echo $monthlist; ?></th>
+										<th scope="col" class="text-right"><?php echo $monthlist; ?></th>
 									<?php } ?>
-									<th class="text-right">Total</th>
+									<th scope="col" class="text-right">Total</th>
 								</tr>
 							</thead>
 							<tbody>

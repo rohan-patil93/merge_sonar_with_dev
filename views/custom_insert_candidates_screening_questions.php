@@ -157,10 +157,10 @@ var max = 500;
           		<div class="card-block">
                     <table class="table table-bordered table-md">
                         <tr>
-                            <th>Job Postings</th>
-                            <th>Screening</th>
-                            <th>AI Shortlisted</th>
-                            <th>Status</th>
+                            <th scope="col">Job Postings</th>
+                            <th scope="col">Screening</th>
+                            <th scope="col">AI Shortlisted</th>
+                            <th scope="col">Status</th>
                         </tr>
                     <?php foreach($job_posting_candidates as $jpc){ ?>
                         <tr>

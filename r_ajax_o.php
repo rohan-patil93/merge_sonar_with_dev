@@ -58,10 +58,10 @@ if($page=="gettenantproperty"){
 		$html .='<table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
 					<thead>
 						<tr>
-							<th width="5%">#</th>
-							<th width="37%">Utility</th>
-							<th width="18%" class="text-right">Amount</th>
-							<th width="30%">Remark</th>
+							<th scope="col" width="5%">#</th>
+							<th scope="col" width="37%">Utility</th>
+							<th scope="col" width="18%" class="text-right">Amount</th>
+							<th scope="col" width="30%">Remark</th>
 						</tr>
 					</thead>
 					<tbody>';
@@ -123,11 +123,11 @@ if($page=="getassetcategorydetails"){
 	$seq = 1;
 	$html = '<table class="table table-hover m-b-0" style="font-size:13px;"><thead>
 					<tr>
-						<th>#</th>
-						<th>Depreciation Date</th>
-						<th class="text-right">Depreciation</th>
-						<th class="text-right">Accumulated Depreciation</th>
-						<th class="text-right">Book Value</th>
+						<th scope="col">#</th>
+						<th scope="col">Depreciation Date</th>
+						<th scope="col" class="text-right">Depreciation</th>
+						<th scope="col" class="text-right">Accumulated Depreciation</th>
+						<th scope="col" class="text-right">Book Value</th>
 					</tr>
 			</thead><tbody>';
 			$html .= '<tr><td class="p-2">'.$seq.'</td>

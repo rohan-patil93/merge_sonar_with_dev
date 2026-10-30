@@ -92,12 +92,12 @@ $successMessage = isset($_GET['msg']) ? trim((string)$_GET['msg']) : '';
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th>Sr. No.</th>
-                            <th>Document Type</th>
-                            <th>Document Name</th>
-                            <th>Files</th>
-                            <th>Created Date</th>
-                            <th>Action</th>
+                            <th scope="col">Sr. No.</th>
+                            <th scope="col">Document Type</th>
+                            <th scope="col">Document Name</th>
+                            <th scope="col">Files</th>
+                            <th scope="col">Created Date</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>

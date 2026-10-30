@@ -61,10 +61,10 @@ foreach ($field_tabs['all_user_map_detail'] as $key => $value) {
             <table class="table table-hover m-b-0">
                 <thead>
                     <tr>
-                        <th>Company </th>
-                        <th>Start Date</th>
-                        <th>Time</th>
-                        <th>Status</th>
+                        <th scope="col">Company </th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -105,10 +105,10 @@ foreach ($field_tabs['all_user_map_detail'] as $key => $value) {
             <table class="table table-hover m-b-0">
                 <thead>
                     <tr>
-                        <th>Company </th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Status</th>
+                        <th scope="col">Company </th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">End Date</th>
+                        <th scope="col">Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -143,10 +143,10 @@ foreach ($field_tabs['all_user_map_detail'] as $key => $value) {
             <table class="table table-hover m-b-0">
                 <thead>
                     <tr>
-                        <th>Company </th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Status</th>
+                        <th scope="col">Company </th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">End Date</th>
+                        <th scope="col">Status</th>
                     </tr>
                 </thead>
                <tbody>

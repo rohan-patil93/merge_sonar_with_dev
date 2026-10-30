@@ -7349,7 +7349,7 @@ class userClass{
     	for($i =0; $i<$frequency; $i++){
 
     		if($f_date >31){
-    			$f_date =  $f_date;
+
     			$new_month = $new_month+1;
     			if($new_month > 12){
     				$new_month =1;
@@ -7359,7 +7359,7 @@ class userClass{
     		$date[$i]['from'] =$new_year."-".$new_month."-".$f_date;
     		$f_date = $f_date+$days;
     		if($f_date >31){
-    			$f_date =  $f_date;
+
     			$new_month = $new_month+1;
     			if($new_month > 12){
     				$new_month =1;
@@ -7973,7 +7973,7 @@ class userClass{
 			//echo $query3; exit;
 			$data3 = $callConfig->getRow($query3);
 			if($data3->tatal == ""){
-				$return = $return;
+
 			}else{
 				$return = $data3->tatal;
 			}
@@ -20409,7 +20409,7 @@ function toinsertpayrnsummarynew($post, $get){
 						$act = $stc->monthly_amount;
 					}
 					if($earns[$stc->component_id]['calculation_type']=='A'){
-						$act = $act;
+
 					}
 					if($earns[$stc->component_id]['calculation_type']=='P'){
 						$cc_code =$earns[$stc->component_id]['calculation_category'];
@@ -22401,7 +22401,7 @@ function getLeaveWithStatus($data){
 							
 						}
 						if($earns[$stc->component_id]['calculation_type']=='A'){
-							$act = $act;
+
 						}
 						if($earns[$stc->component_id]['calculation_type']=='P'){
 							$cc_code =$earns[$stc->component_id]['calculation_category'];
@@ -35418,7 +35418,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 				foreach($followup_with_userid as $userid=>$esaldata){
 					if($application_users[$userid]){ // check user available or not
 						$userdetail = $application_users[$userid];
-						$transactionlisttable = "<table width ='100%'><tr><th style='text-align: center'>#</th><th style='text-align: center'>Submitted Date</th><th style='text-align: center'>Current Status</th><th style='text-align: center'>Action</th></tr>";
+						$transactionlisttable = "<table width ='100%'><tr><th scope="col" style='text-align: center'>#</th><th scope="col" style='text-align: center'>Submitted Date</th><th scope="col" style='text-align: center'>Current Status</th><th scope="col" style='text-align: center'>Action</th></tr>";
 						$mk = 1;
 						foreach($esaldata as $datas){
 							$request_dates = date("d M Y",strtotime($datas->request_date));
@@ -35479,7 +35479,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 				foreach($escalation_with_userid as $userid=>$esaldata){
 					if($application_users[$userid]){ // check user available or not
 						$reportdetail = $application_users[$userid];
-						$transactionlisttable = "<table width ='100%'><tr><th style='text-align: center'>#</th><th style='text-align: center'>Submitted Date</th><th style='text-align: center'>Submitted To</th><th style='text-align: center'>Current Status</th><th style='text-align: center'>Action</th></tr>";
+						$transactionlisttable = "<table width ='100%'><tr><th scope="col" style='text-align: center'>#</th><th scope="col" style='text-align: center'>Submitted Date</th><th scope="col" style='text-align: center'>Submitted To</th><th scope="col" style='text-align: center'>Current Status</th><th scope="col" style='text-align: center'>Action</th></tr>";
 						$mk = 1;
 						foreach($esaldata as $datas){
 							$request_dates = date("d M Y",strtotime($datas->request_date));

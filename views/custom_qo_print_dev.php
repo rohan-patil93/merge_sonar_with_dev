@@ -219,27 +219,27 @@ function emptyCheck($valu){
             <div class="" style="width:49%;display: inline-block;vertical-align: middle;">
                 <table style="width: 100%;">
                     <tr>
-                        <th style="padding-top: 5px;text-align: left;font-size: 12px;">Invoice Number:</th>
+                        <th scope="col" style="padding-top: 5px;text-align: left;font-size: 12px;">Invoice Number:</th>
                         <td style="padding-top: 5px;text-align: left;font-size: 12px;"><?php echo $transaction['transaction_number']; ?></td>
                     </tr>
                     <tr>
-                        <th style="padding-top: 5px;text-align: left;font-size: 12px;">Invoice Date:</th>
+                        <th scope="col" style="padding-top: 5px;text-align: left;font-size: 12px;">Invoice Date:</th>
                         <td style="padding-top: 5px;text-align: left;font-size: 12px;"><?php echo date("d M Y",strtotime($transaction['transaction_date'])); ?></td>
                     </tr>
                     <tr>
-                        <th style="padding-top: 5px;text-align: left;font-size: 12px;">Due Date:</th>
+                        <th scope="col" style="padding-top: 5px;text-align: left;font-size: 12px;">Due Date:</th>
                         <td style="padding-top: 5px;text-align: left;font-size: 12px;"><?php echo date("d M Y",strtotime($transaction['due_date'])); ?></td>
                     </tr>
                     <tr>
-                        <th style="padding-top: 5px;text-align: left;font-size: 12px;">Contact Person:</th>
+                        <th scope="col" style="padding-top: 5px;text-align: left;font-size: 12px;">Contact Person:</th>
                         <td style="padding-top: 5px;text-align: left;font-size: 12px;"><?php echo $bill_by['display_name']; ?></td>
                     </tr>
                     <tr>
-                        <th style="padding-top: 5px;text-align: left;font-size: 12px;">Email ID:</th>
+                        <th scope="col" style="padding-top: 5px;text-align: left;font-size: 12px;">Email ID:</th>
                         <td style="padding-top: 5px;text-align: left;font-size: 12px;"><?php echo emptyCheck($bill_by['user_email']); ?></td>
                     </tr>
                     <tr>
-                        <th style="padding-top: 5px;text-align: left;font-size: 12px;">Phone Number:</th>
+                        <th scope="col" style="padding-top: 5px;text-align: left;font-size: 12px;">Phone Number:</th>
                         <td style="padding-top: 5px;text-align: left;font-size: 12px;"><?php echo emptyCheck($bill_by['user_mobile']); ?></td>
                     </tr>
                 </table>
@@ -251,11 +251,11 @@ function emptyCheck($valu){
                     <p style="font-size: 12px;color:#333333;margin:5px 0 0 0;white-space:initial;min-height: 30px;"><?php echo emptyCheck($transaction['party_address']); ?></p>
                     <table style="width: 100%;">
                         <tr>
-                            <th style="padding-top: 5px;font-size: 12px;text-align: left;">GSTIN:</th>
+                            <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;">GSTIN:</th>
                             <td style="padding-top: 5px;text-align: right;font-size: 12px;"><?php echo emptyCheck($config['gst_number']); ?></td>
                         </tr>
                         <tr>
-                            <th style="font-size: 12px;text-align: left;">PAN:</th>
+                            <th scope="col" style="font-size: 12px;text-align: left;">PAN:</th>
                             <td style="text-align: right;font-size: 12px;"><?php echo emptyCheck($config['pan_number']); ?></td>
                         </tr>
                     </table>
@@ -271,11 +271,11 @@ function emptyCheck($valu){
                             <p style="font-size: 12px;color:#333333;margin:5px 0 0 0;white-space:initial;min-height: 30px;"><?php echo $transaction['party_address']; ?></p>
                             <table style="width: 100%;">
                                 <tr>
-                                    <th style="padding-top: 5px;font-size: 12px;text-align: left;">GSTIN:</th>
+                                    <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;">GSTIN:</th>
                                     <td style="padding-top: 5px;text-align: right;font-size: 12px;"><?php echo emptyCheck($party_additional_details['gstin']); ?></td>
                                 </tr>
                                 <tr>
-                                    <th style="font-size: 12px;text-align: left;">PAN:</th>
+                                    <th scope="col" style="font-size: 12px;text-align: left;">PAN:</th>
                                     <td style="text-align: right;font-size: 12px;"><?php echo emptyCheck($party_additional_details['pan_no']); ?></td>
                                 </tr>
                             </table>
@@ -288,11 +288,11 @@ function emptyCheck($valu){
                             <p style="font-size: 12px;color:#333333;margin:5px 0 0 0;white-space:initial;min-height: 30px;"><?php echo emptyCheck($transaction['party_ship_adderss']); ?></p> 
                             <table style="width: 100%;">
                                 <tr>
-                                    <th style="padding-top: 5px;font-size: 12px;text-align: left;">GSTIN:</th>
+                                    <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;">GSTIN:</th>
                                     <td style="padding-top: 5px;text-align: right;font-size: 12px;"><?php echo emptyCheck($party_additional_details['gstin']); ?></td>
                                 </tr>
                                 <tr>
-                                    <th style="font-size: 12px;text-align: left;">PAN:</th>
+                                    <th scope="col" style="font-size: 12px;text-align: left;">PAN:</th>
                                     <td style="text-align: right;font-size: 12px;"><?php echo emptyCheck($party_additional_details['pan_no']); ?></td>
                                 </tr>
                             </table>
@@ -302,15 +302,15 @@ function emptyCheck($valu){
             </table>
             <table style="width:99%;margin:10px 0 0 0;">
                 <tr style="background: #eeeeee;">
-                    <th style="padding:5px;text-align: left;font-size: 12px;">Item Name</th>
-                    <th style="padding:5px;text-align: left;font-size: 12px;">Note</th>
-                    <!--<th style="padding:10px;text-align: right;">HSN/SAC</th>
-                    <th style="padding:10px;text-align: right;">GST Rate</th>
-                    <th style="padding:10px;text-align: right;">QTY.</th> -->
-                    <th style="padding:5px;text-align: right;font-size: 12px;">Rate</th>
-                    <th style="padding:5px;text-align: right;font-size: 12px;">Tax</th>
-                    <!--<th style="padding:10px;text-align: right;">IGST</th> -->
-                    <th style="padding:5px;text-align: right;font-size: 12px;">Total</th>
+                    <th scope="col" style="padding:5px;text-align: left;font-size: 12px;">Item Name</th>
+                    <th scope="col" style="padding:5px;text-align: left;font-size: 12px;">Note</th>
+                    <!--<th scope="col" style="padding:10px;text-align: right;">HSN/SAC</th>
+                    <th scope="col" style="padding:10px;text-align: right;">GST Rate</th>
+                    <th scope="col" style="padding:10px;text-align: right;">QTY.</th> -->
+                    <th scope="col" style="padding:5px;text-align: right;font-size: 12px;">Rate</th>
+                    <th scope="col" style="padding:5px;text-align: right;font-size: 12px;">Tax</th>
+                    <!--<th scope="col" style="padding:10px;text-align: right;">IGST</th> -->
+                    <th scope="col" style="padding:5px;text-align: right;font-size: 12px;">Total</th>
                 </tr>
                 <?php foreach($transaction_items as $ta){ ?>
                 <tr style="border: 1px solid #cccccc;">
@@ -330,7 +330,7 @@ function emptyCheck($valu){
                             <h3 style="font-size: 12px;color:#333333;margin: 0;">Bank & UPI Detail</h3>
                             <table style="width: 100%; margin:10px 0 0 0;">
                                 <tr>
-                                    <th style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;">Bank Name:</th>
+                                    <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;">Bank Name:</th>
                                     <td style="padding-top: 5px;text-align: left;font-size: 12px;width: 50%;"><?php echo emptyCheck($bank_accounts['bank_name']); ?></td>
                                     <td rowspan="6" align="center" style="width: 20%;">
                                         <h3 style="font-size: 12px;color:#333333;margin: 0;font-weight: 500;">Scan to pay via UPI</h3>
@@ -340,19 +340,19 @@ function emptyCheck($valu){
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;">Account Holder:</th>
+                                    <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;">Account Holder:</th>
                                     <td style="padding-top: 5px;text-align: left;font-size: 12px;width: 50%;"><?php echo emptyCheck($bank_accounts['bank_contact_person']); ?></td>
                                 </tr>
                                 <tr>
-                                    <th style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;">Account Number:</th>
+                                    <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;">Account Number:</th>
                                     <td style="padding-top: 5px;text-align: left;font-size: 12px;width: 50%;"><?php echo emptyCheck($bank_accounts['bank_account_number']); ?></td>
                                 </tr>
                                 <tr>
-                                    <th style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;">IFSC Number:</th>
+                                    <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;">IFSC Number:</th>
                                     <td style="padding-top: 5px;text-align: left;font-size: 12px;width: 50%;"><?php echo emptyCheck($bank_accounts['ifsc_code']); ?></td>
                                 </tr>
                                 <tr>
-                                    <th style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;">Account Type:</th>
+                                    <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;">Account Type:</th>
                                     <td style="padding-top: 5px;text-align: left;font-size: 12px;width: 50%;"><?php if($bank_accounts['account_type'] =="C"){
                                         echo "Current Account";
                                     }if($bank_accounts['account_type'] =="S"){
@@ -362,7 +362,7 @@ function emptyCheck($valu){
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;">UPI:</th>
+                                    <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;">UPI:</th>
                                     <td style="padding-top: 5px;text-align: left;font-size: 12px;width: 50%;"><?php echo emptyCheck($bank_accounts['upi_id']); ?></td>
                                 </tr>
                             </table>
@@ -371,15 +371,15 @@ function emptyCheck($valu){
                     <td style="width:40%;vertical-align: top;">
                         <table style="width: 100%; margin:10px 0 0 0;">
                             <tr>
-                                <th style="padding-top: 5px;font-size: 12px;text-align: left;">Sub Total</th>
+                                <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;">Sub Total</th>
                                 <td style="padding-top: 5px;padding-bottom: 5px;text-align:right;font-size: 12px;"><?php echo currencyFormat($transaction['amount'],$config); ?></td>
                             </tr>
                             <tr>
-                                <th style="padding-top: 5px;font-size: 12px;text-align: left;">Discount</th>
+                                <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;">Discount</th>
                                 <td style="padding-top: 5px;text-align: right;font-size: 12px;"><?php echo currencyFormat($transaction['discount_amount'],$config); ?></td>
                             </tr>
                             <tr>
-                                <th style="padding-top: 5px;font-size: 12px;text-align: left;">Shipping Charges</th>
+                                <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;">Shipping Charges</th>
                                 <td style="padding-top: 5px;text-align: right;font-size: 12px;"><?php echo currencyFormat($transaction['shipping_amount'],$config); ?></td>
                             </tr>
 
@@ -417,22 +417,22 @@ function emptyCheck($valu){
 
                             <?php /** if($transaction['originator_state_id'] == $transaction['supplier_state_id']){ ?>
                              <tr>
-                                <th style="padding-top: 5px;font-size: 12px;text-align: left;">IGST</th>
+                                <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;">IGST</th>
                                 <td style="padding-top: 5px;text-align: right;font-size: 12px;"><?php echo currencyFormat($transaction['tax_amount'],$config); ?></td>
                             </tr>
                             <?php }else{ ?>
                             <tr>
-                                <th style="padding-top: 5px;font-size: 12px;text-align: left;">CGST</th>
+                                <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;">CGST</th>
                                 <td style="padding-top: 5px;text-align: right;font-size: 12px;"><?php echo currencyFormat($transaction['tax_amount']/2,$config); ?></td>
                             </tr>
                             <tr>
-                                <th style="padding-top: 5px;font-size: 12px;text-align: left;">SGST</th>
+                                <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;">SGST</th>
                                 <td style="padding-top: 5px;text-align: right;font-size: 12px;"><?php echo currencyFormat($transaction['tax_amount']/2,$config); ?></td>
                             </tr>
                             <?php } **/ ?>
                             <tr style="border-top:1px solid #444444;border-bottom: 1px solid #444444;">
-                                <th style="padding-top: 5px;text-align: left;border-top:1px solid #cccccc;font-weight: 500;"><span style="font-size: 21px;">Total</span> </th>
-                                <th style="padding-top: 5px;text-align: right;border-top:1px solid #cccccc;font-weight: 500"><span style="font-size:21px;"><?php echo currencyFormat($transaction['total_amount'],$config); ?></span> </th>
+                                <th scope="col" style="padding-top: 5px;text-align: left;border-top:1px solid #cccccc;font-weight: 500;"><span style="font-size: 21px;">Total</span> </th>
+                                <th scope="col" style="padding-top: 5px;text-align: right;border-top:1px solid #cccccc;font-weight: 500"><span style="font-size:21px;"><?php echo currencyFormat($transaction['total_amount'],$config); ?></span> </th>
                             </tr>
                         </table>
                         <div style="margin-top: 10px;vertical-align: top;">

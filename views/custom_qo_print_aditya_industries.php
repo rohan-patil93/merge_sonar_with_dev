@@ -269,23 +269,23 @@ function emptyCheck($valu){
                     <td colspan="3" class="p-0">
                         <table class="w-100 border-collapse">
                             <tr>
-                                <th class="f-14 text-end">Invoice No.</th>
-                                <th class="f-14 text-start"><?php echo $transaction['transaction_number']; ?></th>
+                                <th scope="col" class="f-14 text-end">Invoice No.</th>
+                                <th scope="col" class="f-14 text-start"><?php echo $transaction['transaction_number']; ?></th>
                             </tr>
                             <tr>
-                                <th class="f-14 text-end">Invoice Date</th>
-                                <th class="f-14 text-start"><?php echo date("d M Y",strtotime($transaction['transaction_date'])); ?></th>
+                                <th scope="col" class="f-14 text-end">Invoice Date</th>
+                                <th scope="col" class="f-14 text-start"><?php echo date("d M Y",strtotime($transaction['transaction_date'])); ?></th>
                             </tr>
                             <tr>
                                 <?php 
                                 $transaction['doc_ref_date'] = ($transaction['doc_ref_date']!='0000-00-00' AND $transaction['doc_ref_date']!='1970-01-01')?date("d M Y",strtotime($transaction['doc_ref_date'])):"";
                                 ?>
-                                <th class="f-14 text-end">Buyer's Order No.</th>
-                                <th class="f-14 text-start"><?php echo emptyCheck($transaction['doc_ref_no']); ?></th>
+                                <th scope="col" class="f-14 text-end">Buyer's Order No.</th>
+                                <th scope="col" class="f-14 text-start"><?php echo emptyCheck($transaction['doc_ref_no']); ?></th>
                             </tr>
                             <tr>
-                                <th class="f-14 text-end">Order Date</th>
-                                <th class="f-14 text-start"><?php echo emptyCheck($transaction['doc_ref_date']); ?></th>
+                                <th scope="col" class="f-14 text-end">Order Date</th>
+                                <th scope="col" class="f-14 text-start"><?php echo emptyCheck($transaction['doc_ref_date']); ?></th>
                             </tr>
                         </table>
                     </td>
@@ -299,28 +299,28 @@ function emptyCheck($valu){
                     <td colspan="3" class="p-0">
                         <table class="w-100 border-collapse">
                             <tr>
-                                <th class="f-14 text-end"> Despatched Through</th>
-                                <th class="f-14 text-start"> - </th>
+                                <th scope="col" class="f-14 text-end"> Despatched Through</th>
+                                <th scope="col" class="f-14 text-start"> - </th>
                             </tr>
                             <tr>
-                                <th class="f-14 text-end">Place of Supply</th>
-                                <th class="f-14 text-start"> - </th>
+                                <th scope="col" class="f-14 text-end">Place of Supply</th>
+                                <th scope="col" class="f-14 text-start"> - </th>
                             </tr>
                             <tr>
-                                <th class="f-14 text-end">STATE : -</th>
-                                <th class="f-14 text-start">STATE CODE : - </th>
+                                <th scope="col" class="f-14 text-end">STATE : -</th>
+                                <th scope="col" class="f-14 text-start">STATE CODE : - </th>
                             </tr>
                         </table>
                     </td>
                 </tr>
                 <tr>
-                    <th class="f-14">SL.No.</th>
-                    <th class="f-14">Item Name</th>
-                    <th class="f-14">Description of Goods</th>
-                    <th class="f-14">HSN/SAC Code</th>
-                    <th class="f-14">Rate</th>
-                    <th class="f-14">Qty</th>
-                    <th class="f-14">Amount</th>
+                    <th scope="col" class="f-14">SL.No.</th>
+                    <th scope="col" class="f-14">Item Name</th>
+                    <th scope="col" class="f-14">Description of Goods</th>
+                    <th scope="col" class="f-14">HSN/SAC Code</th>
+                    <th scope="col" class="f-14">Rate</th>
+                    <th scope="col" class="f-14">Qty</th>
+                    <th scope="col" class="f-14">Amount</th>
                 </tr>
 
                  <?php $seq =1 ; foreach($transaction_items as $ta){ ?>
@@ -335,14 +335,14 @@ function emptyCheck($valu){
                 </tr>
                 <?php $seq++; } ?>
                 <tr>
-                    <th colspan="4" class="text-start">
+                    <th scope="col" colspan="4" class="text-start">
                         Amount In words(Rupees):- <?php echo numberToWordFormate($transaction['total_amount']);?> 
                     </th>
                     <td class="p-0" colspan="3">
                         <table class="w-100 border-collapse">
                             <tr>
-                                <th class="f-14">Total</th>
-                                <th class="f-14 text-end" colspan="2"><?php echo currencyFormat($transaction['amount'],$config); ?></th>
+                                <th scope="col" class="f-14">Total</th>
+                                <th scope="col" class="f-14 text-end" colspan="2"><?php echo currencyFormat($transaction['amount'],$config); ?></th>
                             </tr>
                             <tr>
                                 <td class="f-14">Less</td>
@@ -360,12 +360,12 @@ function emptyCheck($valu){
                     <td colspan="3" class="f-14 p-0">
                         <table class="w-100 border-collapse">
                             <tr>
-                                <th class="text-start">Other Charges</th>
-                                <th><?php echo currencyFormat($transaction['shipping_amount'],$config); ?></th>
+                                <th scope="col" class="text-start">Other Charges</th>
+                                <th scope="col"><?php echo currencyFormat($transaction['shipping_amount'],$config); ?></th>
                             </tr>
                             <tr>
-                                <th class="text-start">Total Taxable Value</th>
-                                <th><?php echo currencyFormat($transaction['amount'],$config); ?></th>
+                                <th scope="col" class="text-start">Total Taxable Value</th>
+                                <th scope="col"><?php echo currencyFormat($transaction['amount'],$config); ?></th>
                             </tr>
                         </table>
                     </td>
@@ -374,19 +374,19 @@ function emptyCheck($valu){
                     <td class="p-0" colspan="4">
                         <table class="w-100 border-collapse">
                             <tr>
-                                <th class="f-14">L.R.No.</th>
-                                <th class="f-14">-</th>
-                                <th class="f-14">L.R.Date</th>
-                                <th class="f-14">-</th>
-                                <th class="f-14">Transport</th>
-                                <th class="f-14">-</th>
+                                <th scope="col" class="f-14">L.R.No.</th>
+                                <th scope="col" class="f-14">-</th>
+                                <th scope="col" class="f-14">L.R.Date</th>
+                                <th scope="col" class="f-14">-</th>
+                                <th scope="col" class="f-14">Transport</th>
+                                <th scope="col" class="f-14">-</th>
                             </tr>
                             <tr>
-                                <th colspan="6">
+                                <th scope="col" colspan="6">
                                     <span class="f-14 d-block"><?php echo emptyCheck($bank_accounts['bank_name']); ?>, <?php echo emptyCheck($bank_accounts['bank_address']); ?>, CODE No. : -</span> 
                                     <span class="f-14 d-block m-b-20">A/C. No. :<?php echo emptyCheck($bank_accounts['bank_account_number']); ?> IFSC CODE: <?php echo emptyCheck($bank_accounts['ifsc_code']); ?></span>
                                 </th>
-                                <th colspan="2">
+                                <th scope="col" colspan="2">
                                     <?php if($bank_accounts['upi_qr_code_image'] != ''){ ?>
                                     
                                         <h3 style="font-size: 12px;color:#333333;margin: 0;font-weight: 500;">Scan to pay via UPI</h3>
@@ -409,19 +409,19 @@ function emptyCheck($valu){
                                     <?php //if($table1['tax_state'] == 'S'){ 
                                         if($transaction['originator_state_id'] == $transaction['supplier_state_id']){ ?>
                                     <tr>
-                                        <th class="f-14 text-start"><?php echo $split_1_name; ?>  @ <?php echo $ktax['percentage']*$split_1; ?>%</th>
-                                        <th class="f-14 text-end"><?php echo currencyFormat($ktax['tax_amount']*$split_1,$config); ?></th>
+                                        <th scope="col" class="f-14 text-start"><?php echo $split_1_name; ?>  @ <?php echo $ktax['percentage']*$split_1; ?>%</th>
+                                        <th scope="col" class="f-14 text-end"><?php echo currencyFormat($ktax['tax_amount']*$split_1,$config); ?></th>
                                     </tr>
                                     <tr>
-                                        <th class="f-14 text-start"><?php echo $split_2_name; ?> @ <?php echo currencyFormat($ktax['percentage']*$split_2,$config); ?>%</th>
-                                        <th class="f-14 text-end"><?php echo currencyFormat($ktax['tax_amount']*$split_2,$config); ?></th>
+                                        <th scope="col" class="f-14 text-start"><?php echo $split_2_name; ?> @ <?php echo currencyFormat($ktax['percentage']*$split_2,$config); ?>%</th>
+                                        <th scope="col" class="f-14 text-end"><?php echo currencyFormat($ktax['tax_amount']*$split_2,$config); ?></th>
                                     </tr>
                             
                                 <?php } else{  ?> 
 
                                     <tr>
-                                        <th class="f-14 text-start"><?php echo $split_1_name; ?> @ <?php echo currencyFormat($ktax['percentage'],$config); ?></th>
-                                        <th class="f-14 text-end"><?php echo currencyFormat($ktax['tax_amount'],$config); ?></th>
+                                        <th scope="col" class="f-14 text-start"><?php echo $split_1_name; ?> @ <?php echo currencyFormat($ktax['percentage'],$config); ?></th>
+                                        <th scope="col" class="f-14 text-end"><?php echo currencyFormat($ktax['tax_amount'],$config); ?></th>
                                     </tr>
                                 <?php }?>
                             <?php } }  ?>
@@ -437,8 +437,8 @@ function emptyCheck($valu){
                     <td class="p-0" colspan="3">
                         <table class="w-100 border-collapse">
                             <tr>
-                                <th class="f-14 text-start">TOTAL INVOICE VALUE:-</th>
-                                <th class="f-14 text-end">Rs. <?php echo currencyFormat($transaction['total_amount'],$config); ?></th>
+                                <th scope="col" class="f-14 text-start">TOTAL INVOICE VALUE:-</th>
+                                <th scope="col" class="f-14 text-end">Rs. <?php echo currencyFormat($transaction['total_amount'],$config); ?></th>
                             </tr>
                             <tr>
                                 <td class="f-14" colspan="2">

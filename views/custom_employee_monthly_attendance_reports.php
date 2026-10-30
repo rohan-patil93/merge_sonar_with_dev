@@ -75,7 +75,7 @@ if (isset($_GET['employee_id']) || isset($_GET['month'])) {
     </div>
     <div class="mt-4" id="TableContent">
         <?php if (!empty($employee_id) && !empty($report_month)): ?>
-            <?php include __DIR__ . '/custom_employee_monthly_attendance_report_table.php'; ?>
+            <?php include_once __DIR__ . '/custom_employee_monthly_attendance_report_table.php'; ?>
         <?php endif; ?>
     </div>
 </div>

@@ -95,11 +95,11 @@ if(isset($_REQUEST['month'])){
 	<table class="table table-hover custom_asign_emp_mpc" id="kt_datatable1" >
 		<thead >
 			<tr>
-				<th width="2%">#</th>
-				<th width="15%">Name </th>
-				<th width="10%">Email</th>
-				<th width="10%"></th>
-				<th width="2%"></th>
+				<th scope="col" width="2%">#</th>
+				<th scope="col" width="15%">Name </th>
+				<th scope="col" width="10%">Email</th>
+				<th scope="col" width="10%"></th>
+				<th scope="col" width="2%"></th>
 			</tr>
 		</thead>
 		<tbody >

@@ -145,8 +145,8 @@ function transactionDetailsUI($retres, $fullPathfilename){
    <table class="table table-hover m-b-0" style="font-size:13px;">
         <thead>
             <tr>
-                <th>#</th>
-                    <th>Error</th>
+                <th scope="col">#</th>
+                    <th scope="col">Error</th>
                 </tr>
             </thead>
             <tbody>';
@@ -165,8 +165,8 @@ function transactionDetailsUI($retres, $fullPathfilename){
         <table class="table table-hover m-b-0" style="font-size:13px;">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Warning</th>
+                    <th scope="col">#</th>
+                    <th scope="col">Warning</th>
                     </tr>
                 </thead>
                 <tbody>';
@@ -261,15 +261,15 @@ function transactionDetailsUI($retres, $fullPathfilename){
             <table class="table table-hover m-b-0" style="font-size:13px;">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Product Name</th>
-                        <th>HSN</th>
-                        <th>UOM</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Total Price</th>
-                        <th>Tax</th>
-                        <th>Discount</th>
+                        <th scope="col">#</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">HSN</th>
+                        <th scope="col">UOM</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Total Price</th>
+                        <th scope="col">Tax</th>
+                        <th scope="col">Discount</th>
                     </tr>
                 </thead>
             <tbody>';

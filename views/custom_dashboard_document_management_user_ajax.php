@@ -33,13 +33,13 @@ if (count((array)$rows) > 0) {
     <table class="table table-hover table-bordered mb-0">
         <thead>
             <tr>
-                <th>#</th>
-                <th>Document Name</th>
-                <th>Document Type</th>
-                <th>Files</th>
-                <th>Status</th>
-                <th>Created Date</th>
-                <th>View</th>
+                <th scope="col">#</th>
+                <th scope="col">Document Name</th>
+                <th scope="col">Document Type</th>
+                <th scope="col">Files</th>
+                <th scope="col">Status</th>
+                <th scope="col">Created Date</th>
+                <th scope="col">View</th>
             </tr>
         </thead>
         <tbody>

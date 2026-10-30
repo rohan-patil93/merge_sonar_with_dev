@@ -1015,10 +1015,10 @@ class vendorPortelUserClass extends userClass{
 		$emailarray['created_by'] = $post['user_id'];
 		$extramsg .= "<table width='100%'><tbody>";
 		if (empty($api_result['result']) || count((array)$api_result['result']) == 0) {
-			$extramsg .= "<tr><th style='text-align: left; width:50%'> Response:</th><td style='text-align: left; width:50%'>".$api_result['response_message']."</td></tr>";
+			$extramsg .= "<tr><th scope="col" style='text-align: left; width:50%'> Response:</th><td style='text-align: left; width:50%'>".$api_result['response_message']."</td></tr>";
 		}else{
 			foreach($api_result['result'] as $resukey=>$resu){
-				$extramsg .= "<tr><th style='text-align: left; width:50%'>".ucwords(str_replace('_',' ',$resukey)).":</th><td style='text-align: left; width:50%'>".$resu."</td></tr>";
+				$extramsg .= "<tr><th scope="col" style='text-align: left; width:50%'>".ucwords(str_replace('_',' ',$resukey)).":</th><td style='text-align: left; width:50%'>".$resu."</td></tr>";
 			}
 		}
 		$extramsg .= "<tbody>"; 

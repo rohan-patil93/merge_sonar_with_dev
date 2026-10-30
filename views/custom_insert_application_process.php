@@ -110,9 +110,9 @@ $application_pages = $return['application_pages'];
                     <table class="table table-bordered" id="process-table">
                         <thead class="bg-light">
                             <tr>
-                                <th width="25%">Process Name</th>
-                                <th width="65%">Pages</th>
-                                <th width="10%">Action</th>
+                                <th scope="col" width="25%">Process Name</th>
+                                <th scope="col" width="65%">Pages</th>
+                                <th scope="col" width="10%">Action</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -25,20 +25,20 @@ if(count((array)$rows) > 0){
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th>Sl.No</th>
-				<th>Date</th>
-				<th>To Address</th>
-				<th>From Address</th>
-				<th>Tracking No</th>
-				<th>Vehicle No</th>
-				<th>Description of Materials</th>
-				<th>Qty.</th>
-				<th>Taken By Name</th>
-				<th>Taken By Date</th>
-				<th>Taken By Time</th>
-				<th>Taken By Contact No</th>
-				<th>Security Sign</th>
-				<th>Remarks</th>
+				<th scope="col">Sl.No</th>
+				<th scope="col">Date</th>
+				<th scope="col">To Address</th>
+				<th scope="col">From Address</th>
+				<th scope="col">Tracking No</th>
+				<th scope="col">Vehicle No</th>
+				<th scope="col">Description of Materials</th>
+				<th scope="col">Qty.</th>
+				<th scope="col">Taken By Name</th>
+				<th scope="col">Taken By Date</th>
+				<th scope="col">Taken By Time</th>
+				<th scope="col">Taken By Contact No</th>
+				<th scope="col">Security Sign</th>
+				<th scope="col">Remarks</th>
 			</tr>
 		</thead>
 		<tbody>

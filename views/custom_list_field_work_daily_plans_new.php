@@ -106,14 +106,14 @@ $to_date = date('Y-m-d');
                     <table class="table fwdp-table" id="fiedWorkTable">
                         <thead>
                             <tr>
-                                <th>Sl No.</th>
-                                <th>User</th>
-                                <th>Location Name</th>
-                                <th>Latitude</th>
-                                <th>Longitude</th>
-                                <th>From Date</th>
-                                <th>To Date</th>
-                                <th>Action</th>
+                                <th scope="col">Sl No.</th>
+                                <th scope="col">User</th>
+                                <th scope="col">Location Name</th>
+                                <th scope="col">Latitude</th>
+                                <th scope="col">Longitude</th>
+                                <th scope="col">From Date</th>
+                                <th scope="col">To Date</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>

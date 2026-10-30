@@ -17,9 +17,9 @@ if($gettype =="QuestionsAnswers"){
     ?>
     <table class="table table-bordered table-md">
         <tr>
-            <th>#</th>
-            <th>Questions</th>
-            <th>Answers</th>
+            <th scope="col">#</th>
+            <th scope="col">Questions</th>
+            <th scope="col">Answers</th>
         </tr>
     <?php $seq=1; foreach($candidate_screening_questions_and_answers as $qa){ ?>
         <tr>

@@ -3425,7 +3425,7 @@ class userClass
     	for($i =0; $i<$frequency; $i++){
     		
     		if($f_date >31){
-    			$f_date =  $f_date;
+
     			$new_month = $new_month+1;
     			if($new_month > 12){
     				$new_month =1;
@@ -3435,7 +3435,7 @@ class userClass
     		$date[$i]['from'] =$new_year."-".$new_month."-".$f_date;
     		$f_date = $f_date+$days;
     		if($f_date >31){
-    			$f_date =  $f_date;
+
     			$new_month = $new_month+1;
     			if($new_month > 12){
     				$new_month =1;
@@ -4045,7 +4045,7 @@ WHERE po.`company_id` =  pc.company_id and po.`authorized_expenses` = pc.id  and
 			//echo $query3; exit;
 			$data3 = $callConfig->getRow($query3);
 			if($data3->tatal == ""){
-				$return = $return;
+
 			}else{
 				$return = $data3->tatal;
 			}

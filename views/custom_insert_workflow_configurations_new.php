@@ -798,7 +798,7 @@ $stausresult = ViewStatusData();
 				<div class="col-lg-3">
 					<div class="table-responsive">
 						<table class="table table-bordered table-sm border-none" style="border: 1px solid #dee2e6;">
-							<tr align="center" style="border: 1px solid #dee2e6;"><th>Approval Levels</th></tr>
+							<tr align="center" style="border: 1px solid #dee2e6;"><th scope="col">Approval Levels</th></tr>
 							<tr><td>&nbsp</td></tr>
 							<tr><td>&nbsp</td></tr>
 							<?php for($i=1; $i <= $workflowconfiguration['workflow_level']; $i++){  
@@ -824,13 +824,13 @@ $stausresult = ViewStatusData();
 					<div class="table-responsive">
 						<table class="table table-hover table-bordered table-sm">
 							<tr align="center">
-								<th colspan="8"><?php echo ucwords(str_replace("_"," ",($workflowconfiguration['process_name']))); ?></th>
+								<th scope="col" colspan="8"><?php echo ucwords(str_replace("_"," ",($workflowconfiguration['process_name']))); ?></th>
 							</tr>
 							<tr align="center">
 							<?php $incnumber = 1; 
 								foreach($dynamicdoacriteria as $unifieldkey =>$dynamicdoacriterias){ 
 								$wfdetail = $wfdetails[$unifieldkey]; ?>
-							<th>
+							<th scope="col">
 								<input type="hidden" name="wfd_id[<?php echo $incnumber; ?>]" value="<?php echo $wfdetail['id']; ?>">
 								<label class="form-label label label-inverse-primary">
 									<?php $mk=1; foreach($dynamicdoacriterias as $fieldkey => $dynamicselection){
@@ -853,7 +853,7 @@ $stausresult = ViewStatusData();
 								$wfdetail = $wfdetails[$unifieldkey];
 								$doa_amount = json_decode($wfdetail['doa_amount'],1);
 								?>
-								<th align="center" >
+								<th scope="col" align="center" >
 									<div class="input-group input-group-button"> 
 										<input class="form-control autonumber width1"  name="doa_amount[<?php echo $incnumber; ?>][<?php echo $i; ?>]"  type="text" value="<?php echo $doa_amount[$i]['end_doa']; ?>" placeholder="Eg. 0" data-a-sign="<?php echo $_SESSION['config']['currency_symbol']; ?>" id="pendingcriteria_<?php echo $incnumber.$i; ?>" <?php echo ($wfdetail['final_approval'] < $i && $wfdetail['final_approval'] !="")?"disabled":""; ?>>
 										<span class="input-group-text form-radio p-0">

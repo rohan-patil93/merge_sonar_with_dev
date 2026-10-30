@@ -43,7 +43,7 @@ $account_groups = $result['account_groups'];
                         $Alevel3 = $financereportgroupsreport[$level2['account_code']];
                         ?>
                             <tr>
-                                <th> <i class="ti-pencil-alt cursor-pointer" onclick="editFinanaceGrp('<?php echo $level2['id']; ?>')"></i></th>
+                                <th scope="col"> <i class="ti-pencil-alt cursor-pointer" onclick="editFinanaceGrp('<?php echo $level2['id']; ?>')"></i></th>
                                 <td  colspan="2" class="<?php echo count((array)$Alevel3) !='0'?"f-w-700":""; ?> w-b-w-s"><span class="m-l-10"><?php echo $i.".".$mk." - ".$level2['account_name']." - ".$level2['account_short_name']." (".$level2['account_code'].")".(($level2['lock_and_unlock_status'] =="Y")?'<span class="pcoded-badge label label-danger m-l-10">Locked</span>':''); ?></span></td>
                                 <td><button class="btn bg-primary p-0 pt-1" onclick="editFinanaceGrp(0,'<?php echo $level2['account_code']; ?>','<?php echo $level2['account_type']; ?>','<?php echo $level2['accgro_group_id']; ?>')"><i class="ti-plus text-white m-l-5"></i></button></td>
                             </tr>

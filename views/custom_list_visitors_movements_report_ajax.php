@@ -24,18 +24,18 @@ if(count((array)$rows) > 0){
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th>Sl.No</th>
-				<th>Name</th>
-				<th>Contact No.</th>
-				<th>Government ID</th>
-				<th>Coming From</th>
-				<th>Purpose</th>
-				<th>Whom to Meet</th>
-				<th>Card No.</th>
-				<th>In Time</th>
-				<th>Out Time</th>
-				<th>Security Sign</th>
-				<th>Remarks</th>
+				<th scope="col">Sl.No</th>
+				<th scope="col">Name</th>
+				<th scope="col">Contact No.</th>
+				<th scope="col">Government ID</th>
+				<th scope="col">Coming From</th>
+				<th scope="col">Purpose</th>
+				<th scope="col">Whom to Meet</th>
+				<th scope="col">Card No.</th>
+				<th scope="col">In Time</th>
+				<th scope="col">Out Time</th>
+				<th scope="col">Security Sign</th>
+				<th scope="col">Remarks</th>
 			</tr>
 		</thead>
 		<tbody>

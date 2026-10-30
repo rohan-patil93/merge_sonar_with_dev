@@ -264,12 +264,12 @@ function refrashpage(){
                                             <table class="table table-hover m-b-0">
                                                 <thead>
                                                     <tr>
-                                                        <th><span class="d-block">#</span></th>
-                                                        <th><span class="d-block">Request Date</span></th>
-                                                        <th><span class="d-block">User</span></th>
-                                                        <th><span class="d-block">Amount</span></th>
-                                                        <th><span class="d-block">Payment</span></th>
-                                                        <th><span class="d-block">Status</span></th>
+                                                        <th scope="col"><span class="d-block">#</span></th>
+                                                        <th scope="col"><span class="d-block">Request Date</span></th>
+                                                        <th scope="col"><span class="d-block">User</span></th>
+                                                        <th scope="col"><span class="d-block">Amount</span></th>
+                                                        <th scope="col"><span class="d-block">Payment</span></th>
+                                                        <th scope="col"><span class="d-block">Status</span></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -317,9 +317,9 @@ function refrashpage(){
                                             <table class="table table-hover m-b-0" id="appendfield">
                                                 <thead>
                                                     <tr>
-                                                        <th>Field Name</th>
-                                                        <th>Field Value</th>
-                                                        <th>Action</th>
+                                                        <th scope="col">Field Name</th>
+                                                        <th scope="col">Field Value</th>
+                                                        <th scope="col">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>

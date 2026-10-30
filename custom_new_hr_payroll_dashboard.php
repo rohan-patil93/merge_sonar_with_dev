@@ -203,8 +203,8 @@
            <table class="table table-borderless table-sm align-middle pedding-approvals f-12 mb-0">
              <?php foreach ($componentSummary as $row) { ?>
                <tr>
-                 <th><?php echo ucwords(strtolower($row['component_code'])); ?></th>
-                 <th class="text-end">₹ <?php echo number_format($row['amount'] ?? 0, 2); ?></th>
+                 <th scope="col"><?php echo ucwords(strtolower($row['component_code'])); ?></th>
+                 <th scope="col" class="text-end">₹ <?php echo number_format($row['amount'] ?? 0, 2); ?></th>
                </tr>
              <?php } ?>
            </table>
@@ -304,15 +304,15 @@
 
            <table class="table table-sm align-middle pedding-approvals f-12">
              <tr>
-               <th>Component</th>
-               <th>Amount (₹)</th>
-               <th>Status</th>
-               <th>Due Date</th>
-               <th>Paid On</th>
+               <th scope="col">Component</th>
+               <th scope="col">Amount (₹)</th>
+               <th scope="col">Status</th>
+               <th scope="col">Due Date</th>
+               <th scope="col">Paid On</th>
              </tr>
 
              <tr>
-               <th>Provident Fund (PF)</th>
+               <th scope="col">Provident Fund (PF)</th>
                <td>₹ <?php echo number_format($components['PF'] ?? 0, 2); ?></td>
                <td><label class="form-label label label-success">Paid</label></td>
                <td>-</td>
@@ -320,7 +320,7 @@
              </tr>
 
              <tr>
-               <th>ESI</th>
+               <th scope="col">ESI</th>
                <td>₹ <?php echo number_format($components['ESI'] ?? 0, 2); ?></td>
                <td><label class="form-label label label-success">Paid</label></td>
                <td>-</td>
@@ -328,7 +328,7 @@
              </tr>
 
              <tr>
-               <th>Professional Tax (PT)</th>
+               <th scope="col">Professional Tax (PT)</th>
                <td>₹ <?php echo number_format($components['PT'] ?? 0, 2); ?></td>
                <td><label class="form-label label label-success">Paid</label></td>
                <td>-</td>
@@ -336,7 +336,7 @@
              </tr>
 
              <tr>
-               <th>TDS</th>
+               <th scope="col">TDS</th>
                <td>₹ <?php echo number_format($components['TDS'] ?? 0, 2); ?></td>
                <td><label class="form-label label label-success">Paid</label></td>
                <td>-</td>
@@ -344,7 +344,7 @@
              </tr>
 
              <tr>
-               <th>Gratuity</th>
+               <th scope="col">Gratuity</th>
                <td>₹ <?php echo number_format($components['GRATUITY'] ?? 0, 2); ?></td>
                <td><label class="form-label label label-success">Paid</label></td>
                <td>-</td>
@@ -568,11 +568,11 @@ $(document).ready(function() {
 
            <table class="table table-sm align-middle pedding-approvals f-12">
              <tr>
-               <th>Payroll Month</th>
-               <th>Employees</th>
-               <th>Gross Payroll (₹)</th>
-               <th>Net Payroll (₹)</th>
-               <th>Status</th>
+               <th scope="col">Payroll Month</th>
+               <th scope="col">Employees</th>
+               <th scope="col">Gross Payroll (₹)</th>
+               <th scope="col">Net Payroll (₹)</th>
+               <th scope="col">Status</th>
              </tr>
 
              <?php foreach ($allSummary as $row) { ?>

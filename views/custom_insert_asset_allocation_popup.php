@@ -117,14 +117,14 @@ function submitdetails(){
 	<table  class="table table-striped table-bordered nowrap"> 
 		<thead>
 			<tr>
-				<th>Asset Code</th>
-				<th>Asset Name</th>
-				<th>Brand</th>
-				<th>Model</th>
-				<th>Serial Number</th>
-				<!-- <th>Location </th>
-				<th>Satus</th>
-				<th>Condition</th>  -->
+				<th scope="col">Asset Code</th>
+				<th scope="col">Asset Name</th>
+				<th scope="col">Brand</th>
+				<th scope="col">Model</th>
+				<th scope="col">Serial Number</th>
+				<!-- <th scope="col">Location </th>
+				<th scope="col">Satus</th>
+				<th scope="col">Condition</th>  -->
 			</tr>
 		</thead>
 		<tbody>

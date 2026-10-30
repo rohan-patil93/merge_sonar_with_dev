@@ -85,11 +85,11 @@ class demoClass extends userClass{
                                 <table class="table caption-top invoice-table" style="width:100%;margin:0;">
                                     <thead class="bg-active">
 	                                    <tr>
-						                    <th style="padding:5pt;text-align:left;">Name</th>
-						                    <th style="padding:5pt;text-align:left;">Descrpition</th>
-						                    <th style="text-align:right;padding:5pt;" class="">Price</th>
-						                    <th style="text-align:right;padding:5pt;" class="">Amount</th>
-						                    <th style="text-align:right;padding:5pt;" class="">Total</th>
+						                    <th scope="col" style="padding:5pt;text-align:left;">Name</th>
+						                    <th scope="col" style="padding:5pt;text-align:left;">Descrpition</th>
+						                    <th scope="col" style="text-align:right;padding:5pt;" class="">Price</th>
+						                    <th scope="col" style="text-align:right;padding:5pt;" class="">Amount</th>
+						                    <th scope="col" style="text-align:right;padding:5pt;" class="">Total</th>
 						                </tr>
                                     </thead>
                                     <tbody>';
@@ -450,11 +450,11 @@ echo "step 1";
 //                                 <table class="table caption-top invoice-table" style="width:100%;margin:0;">
 //                                     <thead class="bg-active">
 // 	                                    <tr>
-// 						                    <th style="padding:5pt;text-align:left;">Name</th>
-// 						                    <th style="padding:5pt;text-align:left;">Descrpition</th>
-// 						                    <th style="text-align:right;padding:5pt;" class="">Price</th>
-// 						                    <th style="text-align:right;padding:5pt;" class="">Amount</th>
-// 						                    <th style="text-align:right;padding:5pt;" class="">Total</th>
+// 						                    <th scope="col" style="padding:5pt;text-align:left;">Name</th>
+// 						                    <th scope="col" style="padding:5pt;text-align:left;">Descrpition</th>
+// 						                    <th scope="col" style="text-align:right;padding:5pt;" class="">Price</th>
+// 						                    <th scope="col" style="text-align:right;padding:5pt;" class="">Amount</th>
+// 						                    <th scope="col" style="text-align:right;padding:5pt;" class="">Total</th>
 // 						                </tr>
 //                                     </thead>
 //                                     <tbody>';
@@ -647,11 +647,11 @@ echo "step 1";
 //                                 <table class="table caption-top invoice-table" style="width:100%;margin:0;">
 //                                     <thead class="bg-active">
 // 	                                    <tr>
-// 						                    <th style="padding:5pt;text-align:left;">Name</th>
-// 						                    <th style="padding:5pt;text-align:left;">Descrpition</th>
-// 						                    <th style="text-align:right;padding:5pt;" class="">Price</th>
-// 						                    <th style="text-align:right;padding:5pt;" class="">Amount</th>
-// 						                    <th style="text-align:right;padding:5pt;" class="">Total</th>
+// 						                    <th scope="col" style="padding:5pt;text-align:left;">Name</th>
+// 						                    <th scope="col" style="padding:5pt;text-align:left;">Descrpition</th>
+// 						                    <th scope="col" style="text-align:right;padding:5pt;" class="">Price</th>
+// 						                    <th scope="col" style="text-align:right;padding:5pt;" class="">Amount</th>
+// 						                    <th scope="col" style="text-align:right;padding:5pt;" class="">Total</th>
 // 						                </tr>
 //                                     </thead>
 //                                     <tbody>';

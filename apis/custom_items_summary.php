@@ -104,10 +104,10 @@ $loopstatus = array('WARNING','CRITICAL','INFO');
 	<table class="mb-4" id="stockTable">
 		<thead>
 			<tr>
-				<th>ITEM</th>
-				<th>STOCK NUMBERS</th>
-				<th>ISSUE</th>
-				<th>ACTION</th>
+				<th scope="col">ITEM</th>
+				<th scope="col">STOCK NUMBERS</th>
+				<th scope="col">ISSUE</th>
+				<th scope="col">ACTION</th>
 			</tr>
 		</thead>
 		<tbody id="tableBody">

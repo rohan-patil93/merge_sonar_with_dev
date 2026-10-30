@@ -317,11 +317,11 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 							<table class="table table-borderless table-vertical-center">
 								<thead>
 									<tr>
-										<th class="p-0 w-40px"></th>
-										<th class="p-0 min-w-200px"> Vendor Name</th>
-										<th class="p-0 min-w-100px text-center"> Agreement Name</th>
-										<th class="p-0 min-w-125px text-center"> Sign Date</th>
-										<th class="p-0 min-w-110px text-center">Expiry Date	</th>
+										<th scope="col" class="p-0 w-40px"></th>
+										<th scope="col" class="p-0 min-w-200px"> Vendor Name</th>
+										<th scope="col" class="p-0 min-w-100px text-center"> Agreement Name</th>
+										<th scope="col" class="p-0 min-w-125px text-center"> Sign Date</th>
+										<th scope="col" class="p-0 min-w-110px text-center">Expiry Date	</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -363,11 +363,11 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 							<table class="table table-borderless table-vertical-center">
 								<thead>
 									<tr>
-										<th class="p-0 w-40px"></th>
-										<th class="p-0 min-w-200px"> Vendor Name</th>
-										<th class="p-0 min-w-100px text-center"> Agreement Name</th>
-										<th class="p-0 min-w-125px text-center"> Sign Date</th>
-										<th class="p-0 min-w-110px text-center">Expiry Date	</th>
+										<th scope="col" class="p-0 w-40px"></th>
+										<th scope="col" class="p-0 min-w-200px"> Vendor Name</th>
+										<th scope="col" class="p-0 min-w-100px text-center"> Agreement Name</th>
+										<th scope="col" class="p-0 min-w-125px text-center"> Sign Date</th>
+										<th scope="col" class="p-0 min-w-110px text-center">Expiry Date	</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -409,11 +409,11 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 							<table class="table table-borderless table-vertical-center">
 								<thead>
 									<tr>
-										<th class="p-0 w-40px"></th>
-										<th class="p-0 min-w-200px"> Vendor Name</th>
-										<th class="p-0 min-w-100px text-center"> Agreement Name</th>
-										<th class="p-0 min-w-125px text-center"> Sign Date</th>
-										<th class="p-0 min-w-110px text-center">Expiry Date	</th>
+										<th scope="col" class="p-0 w-40px"></th>
+										<th scope="col" class="p-0 min-w-200px"> Vendor Name</th>
+										<th scope="col" class="p-0 min-w-100px text-center"> Agreement Name</th>
+										<th scope="col" class="p-0 min-w-125px text-center"> Sign Date</th>
+										<th scope="col" class="p-0 min-w-110px text-center">Expiry Date	</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -487,11 +487,11 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 							<table class="table table-borderless table-vertical-center">
 								<thead>
 									<tr>
-										<th class="p-0 w-40px"></th>
-										<th class="p-0 min-w-200px"> Vendor Name</th>
-										<th class="p-0 min-w-100px text-center"> All Jobs</th>
-										<th class="p-0 min-w-125px text-center"> Apply Candidates</th>
-										<th class="p-0 min-w-110px text-center">Approved Candidates</th>
+										<th scope="col" class="p-0 w-40px"></th>
+										<th scope="col" class="p-0 min-w-200px"> Vendor Name</th>
+										<th scope="col" class="p-0 min-w-100px text-center"> All Jobs</th>
+										<th scope="col" class="p-0 min-w-125px text-center"> Apply Candidates</th>
+										<th scope="col" class="p-0 min-w-110px text-center">Approved Candidates</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -565,11 +565,11 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 							<table class="table table-borderless table-vertical-center">
 								<thead>
 									<tr>
-										<th class="p-0 w-40px"></th>
-										<th class="p-0 min-w-200px">Job Title</th>
-										<th class="p-0 min-w-100px"> All Vendors</th>
-										<th class="p-0 min-w-125px"> Apply Candidates</th>
-										<th class="p-0 min-w-110px">Approved Candidates</th>
+										<th scope="col" class="p-0 w-40px"></th>
+										<th scope="col" class="p-0 min-w-200px">Job Title</th>
+										<th scope="col" class="p-0 min-w-100px"> All Vendors</th>
+										<th scope="col" class="p-0 min-w-125px"> Apply Candidates</th>
+										<th scope="col" class="p-0 min-w-110px">Approved Candidates</th>
 										
 									</tr>
 								</thead>

@@ -138,17 +138,17 @@ $isRepairEditable = ($repairEligibility == 'editable');
 
                     <tr>
 
-                        <th>Item</th>
+                        <th scope="col">Item</th>
 
-                        <th>Part / Description</th>
+                        <th scope="col">Part / Description</th>
 
-                        <th style="width:70px;">Qty</th>
+                        <th scope="col" style="width:70px;">Qty</th>
 
-                        <th>PO No.</th>
+                        <th scope="col">PO No.</th>
 
-                        <th style="width:90px;">Amount</th>
+                        <th scope="col" style="width:90px;">Amount</th>
 
-                        <?php if ($isRepairEditable) { ?><th style="width:40px;"></th><?php } ?>
+                        <?php if ($isRepairEditable) { ?><th scope="col" style="width:40px;"></th><?php } ?>
 
                     </tr>
 
@@ -182,7 +182,7 @@ $isRepairEditable = ($repairEligibility == 'editable');
 
                         $line = array();
 
-                        include __DIR__ . '/contract_amc_schedule_repair_line_row.php';
+                        include_once __DIR__ . '/contract_amc_schedule_repair_line_row.php';
 
                         $lineIdx = 1;
 

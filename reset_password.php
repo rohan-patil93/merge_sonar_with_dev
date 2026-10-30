@@ -88,10 +88,10 @@ function getIPAddress(){
                 <form class="md-float-material form-material" action="" method="post">
                     <div class="width-60 text-left mt-5"> 
                         <div class="form-group">
-                            <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="password" placeholder="Old Password" id="chrUserName" name="old_password" autocomplete="off" required="">
+                            <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="password" placeholder="Old Password" id="oldPassword" name="old_password" autocomplete="off" required="">
                         </div>
                         <div class="form-group">
-                            <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="password" placeholder="New Password" id="chrUserName" name="new_password" autocomplete="off" required="">
+                            <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="password" placeholder="New Password" id="newPassword" name="new_password" autocomplete="off" required="">
                         </div>
                         <div class="form-group mb-1">
                             <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="password" placeholder="Confirm Password" name="conpassword" autocomplete="off" required="">

@@ -94,17 +94,17 @@ function fworStatusClass($status) {
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th>Sl.No</th>
-				<th>Date</th>
-				<th>Time</th>
-				<th>User</th>
-				<th>Customer</th>
-				<th>Contact</th>
-				<th>Location</th>
-				<th>Coordinates</th>
-				<th>Geo Location</th>
-				<th>Status</th>
-				<th>Map</th>
+				<th scope="col">Sl.No</th>
+				<th scope="col">Date</th>
+				<th scope="col">Time</th>
+				<th scope="col">User</th>
+				<th scope="col">Customer</th>
+				<th scope="col">Contact</th>
+				<th scope="col">Location</th>
+				<th scope="col">Coordinates</th>
+				<th scope="col">Geo Location</th>
+				<th scope="col">Status</th>
+				<th scope="col">Map</th>
 			</tr>
 		</thead>
 		<tbody>

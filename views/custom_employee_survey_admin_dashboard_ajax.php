@@ -31,12 +31,12 @@ if(count((array)$rows) > 0) {
 <div class="table-responsive survey_dashboard">
 	<table class="table table-bordered table-sm">
 		<tr bgcolor="#eeeeee">
-			<th><?php echo $display_tag; ?> Name</th>
-			<th>Category</th>
-			<th>Start Date</th>
-			<th>End Date</th>
-			<th>Status</th>
-			<th>Action</th>
+			<th scope="col"><?php echo $display_tag; ?> Name</th>
+			<th scope="col">Category</th>
+			<th scope="col">Start Date</th>
+			<th scope="col">End Date</th>
+			<th scope="col">Status</th>
+			<th scope="col">Action</th>
 		</tr>
 		<?php foreach($rows as $surveyRow) {
 			$surveyRow = is_array($surveyRow) ? $surveyRow : (array)$surveyRow;

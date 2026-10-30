@@ -1189,10 +1189,10 @@ function addslabrows(){
 
                      <table class="table table-striped- table-bordered table-hover1 table-checkable dataTable no-footer text-center" id="slabtable">
                       <tr>
-                       <th  width="2%"></th>
-                       <th class="" width="33%"> Start Range</th>
-                       <th class="thheader" width="32%">End Range</th>
-                       <th class="thheader" width="33%">Tax Amount</th>
+                       <th scope="col"  width="2%"></th>
+                       <th scope="col" class="" width="33%"> Start Range</th>
+                       <th scope="col" class="thheader" width="32%">End Range</th>
+                       <th scope="col" class="thheader" width="33%">Tax Amount</th>
                      </tr>
                      <tr>
                        <td>
@@ -1427,10 +1427,10 @@ function addslabrows(){
                       
                          <table class="table table-striped- table-bordered table-hover1 table-checkable dataTable no-footer text-center" id="slabtable">
                             <tr>
-                               <th  width="2%"></th>
-                               <th class="" width="33%"> Start Range</th>
-                               <th class="thheader" width="32%">End Range</th>
-                               <th class="thheader" width="33%">Tax Amount</th>
+                               <th scope="col"  width="2%"></th>
+                               <th scope="col" class="" width="33%"> Start Range</th>
+                               <th scope="col" class="thheader" width="32%">End Range</th>
+                               <th scope="col" class="thheader" width="33%">Tax Amount</th>
                             </tr>
                             <tr>
                                <td>

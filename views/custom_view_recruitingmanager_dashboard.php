@@ -395,25 +395,25 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 												<table class="table table-hover m-b-0" style="font-size:13px;">
 													<thead>
 														<tr style="border-bottom-style: hidden;">
-															<th></th>
-															<th class="text-center" ></th>
+															<th scope="col"></th>
+															<th scope="col" class="text-center" ></th>
 
-															<th class="text-center" ></th>
+															<th scope="col" class="text-center" ></th>
 
-															<th class="text-center p-0"  colspan="2" >ShortListed</th>
-															<th class="text-center p-0" colspan="4" >LoI</th>
+															<th scope="col" class="text-center p-0"  colspan="2" >ShortListed</th>
+															<th scope="col" class="text-center p-0" colspan="4" >LoI</th>
 														</tr>
 														<tr >
-															<th>Job Name</th>
-															<th class="text-center" >No. Res.</th>
+															<th scope="col">Job Name</th>
+															<th scope="col" class="text-center" >No. Res.</th>
 
-															<th class="text-center" >Applied</th>
-															<th class="text-center"><label class="form-label label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_HMSHORTLISTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="RM ShotListed">RM</label></th>
-															<th class="text-center"><label class="form-label label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_RMSHORTLISTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="HM ShortListed">HM</label></th>
-															<th class="text-center"><label class="form-label label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_LOIREQUESTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Requested">Req</label></th>
-															<th class="text-center"><label class="form-label label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_LOIGENERATED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Generated">Gen</label></th>
-															<th class="text-center"><label class="form-label label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_LOIACCEPTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Accepted">Acc</label></th>
-															<th class="text-center"><label class="form-label label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_LOIREJECTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Rejected">Rej</label></th>
+															<th scope="col" class="text-center" >Applied</th>
+															<th scope="col" class="text-center"><label class="form-label label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_HMSHORTLISTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="RM ShotListed">RM</label></th>
+															<th scope="col" class="text-center"><label class="form-label label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_RMSHORTLISTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="HM ShortListed">HM</label></th>
+															<th scope="col" class="text-center"><label class="form-label label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_LOIREQUESTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Requested">Req</label></th>
+															<th scope="col" class="text-center"><label class="form-label label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_LOIGENERATED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Generated">Gen</label></th>
+															<th scope="col" class="text-center"><label class="form-label label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_LOIACCEPTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Accepted">Acc</label></th>
+															<th scope="col" class="text-center"><label class="form-label label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_LOIREJECTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Rejected">Rej</label></th>
 														</tr>
 											
 										</thead>

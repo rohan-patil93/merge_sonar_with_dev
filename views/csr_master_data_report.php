@@ -47,39 +47,39 @@ $_SESSION['download_data'] = [];
                     <table class="table table-bordered table-sm  align-middle">
                         <thead>
                             <tr class="bg-light">
-                                <th class="text-right">SL No</th>
-                                <th>Entity</th>
-                                <th>Project Name</th>
-                                <th>Type of Project</th>
-                                <th>Nature of Work Done</th>
-                                <th>Type of Work</th>
-                                <th>Project Related to FY</th>
-                                <th>PO Issued Year</th>
-                                <th>PO No</th>
-                                <th>PO Date</th>
-                                <th class="text-right">PO Value (Excl. Tax)</th>
-                                <th class="text-right">GST @ 18%</th>
-                                <th class="text-right">PO Value (Incl. Tax)</th>
-                                <th>Business Partner Code</th>
-                                <th>Business Partner Name</th>
-                                <th>Invoice Accounting Year</th>
-                                <th>Invoice Number</th>
-                                <th>Invoice Date</th>
-                                <th class="text-right">Taxable Value</th>
-                                <th class="text-right">GST Amt</th>
-                                <th class="text-right">Other Cost</th>
-                                <th class="text-right">Total Spent (Incl. GST)</th>
-                                <th class="text-right">TDS Deducted</th>
-                                <th class="text-right">Any Other Deduction</th>
-                                <th class="text-right fw-bold">Net Payable</th>
-                                <th class="text-right">Spent %</th>
-                                <th class="text-right">Unspent %</th>
-                                <th class="text-right">Paid Amount</th>
-                                <th class="text-right">Delta</th>
-                                <th>Paid Date</th>
-                                <th>Paid From Which Bank</th>
-                                <th>Project Completion Date</th>
-                                <th>Project Status</th>
+                                <th scope="col" class="text-right">SL No</th>
+                                <th scope="col">Entity</th>
+                                <th scope="col">Project Name</th>
+                                <th scope="col">Type of Project</th>
+                                <th scope="col">Nature of Work Done</th>
+                                <th scope="col">Type of Work</th>
+                                <th scope="col">Project Related to FY</th>
+                                <th scope="col">PO Issued Year</th>
+                                <th scope="col">PO No</th>
+                                <th scope="col">PO Date</th>
+                                <th scope="col" class="text-right">PO Value (Excl. Tax)</th>
+                                <th scope="col" class="text-right">GST @ 18%</th>
+                                <th scope="col" class="text-right">PO Value (Incl. Tax)</th>
+                                <th scope="col">Business Partner Code</th>
+                                <th scope="col">Business Partner Name</th>
+                                <th scope="col">Invoice Accounting Year</th>
+                                <th scope="col">Invoice Number</th>
+                                <th scope="col">Invoice Date</th>
+                                <th scope="col" class="text-right">Taxable Value</th>
+                                <th scope="col" class="text-right">GST Amt</th>
+                                <th scope="col" class="text-right">Other Cost</th>
+                                <th scope="col" class="text-right">Total Spent (Incl. GST)</th>
+                                <th scope="col" class="text-right">TDS Deducted</th>
+                                <th scope="col" class="text-right">Any Other Deduction</th>
+                                <th scope="col" class="text-right fw-bold">Net Payable</th>
+                                <th scope="col" class="text-right">Spent %</th>
+                                <th scope="col" class="text-right">Unspent %</th>
+                                <th scope="col" class="text-right">Paid Amount</th>
+                                <th scope="col" class="text-right">Delta</th>
+                                <th scope="col">Paid Date</th>
+                                <th scope="col">Paid From Which Bank</th>
+                                <th scope="col">Project Completion Date</th>
+                                <th scope="col">Project Status</th>
                             </tr>
                         </thead>
                         <tbody>

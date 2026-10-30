@@ -2411,11 +2411,11 @@ class reactClass extends userClass{
 		    }
 		    $html .= '<table border="1" cellpadding="5" cellspacing="0" width="100%">
 		                <tr>
-		                	<th>Contract No</th>
-		                    <th>Contract Name</th>
-		                    <th>Location</th>
-		                    <th>Start Date</th>
-		                    <th>End Date</th>
+		                	<th scope="col">Contract No</th>
+		                    <th scope="col">Contract Name</th>
+		                    <th scope="col">Location</th>
+		                    <th scope="col">Start Date</th>
+		                    <th scope="col">End Date</th>
 		                </tr>';
 		    foreach ($contracts as $contract) {
 		        $html .= '<tr>

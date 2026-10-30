@@ -100,24 +100,24 @@ $payslip_data = $payslip_list['payslip_data'];
 							<table class="table table-bordered table-hover table-checkable mt-10 dataTable no-footer dtr-inline" id="kt_datatable" role="grid" aria-describedby="kt_datatable_info" style="width: 1236px;">
 								<thead>
 									<tr role="row" bgcolor="#f7f7f7">
-										<th>Employee ID</th>
-									<th>Employee Name</th>
+										<th scope="col">Employee ID</th>
+									<th scope="col">Employee Name</th>
 									<?php 
 									foreach ($category_list as $cat_value) {
 										?>
-										<th colspan="<?php echo $cat_value['total_components'];?>" rowspan="1"><?php echo $cat_value['category_name']; ?> </th>
+										<th scope="col" colspan="<?php echo $cat_value['total_components'];?>" rowspan="1"><?php echo $cat_value['category_name']; ?> </th>
 										<?php
 									} ?>
 									
 								</tr>
 
 								<tr role="row">
-									<th></th>
-									<th></th>
+									<th scope="col"></th>
+									<th scope="col"></th>
 
 									<?php 
 									foreach ($component_list as $component_value) { ?>
-										<th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 47px;" aria-label="Record ID: activate to sort column ascending"><?php echo $component_value['component_name']; ?></th>
+										<th scope="col" class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 47px;" aria-label="Record ID: activate to sort column ascending"><?php echo $component_value['component_name']; ?></th>
 										<?php
 									} ?>
 
@@ -128,8 +128,8 @@ $payslip_data = $payslip_list['payslip_data'];
 									<?php 
 									foreach ($payslip_data as $values) { ?>
 
-										<th><?php echo $values['employee_id']; ?></th>
-										<th><?php echo $values['employee_name']; ?></th>
+										<th scope="col"><?php echo $values['employee_id']; ?></th>
+										<th scope="col"><?php echo $values['employee_name']; ?></th>
 										<?php foreach ($component_list as $component_value) {
 											$amount = $values[$component_value['component_id']];
 											if($amount==''){
@@ -137,7 +137,7 @@ $payslip_data = $payslip_list['payslip_data'];
 											}
 										 ?>
 									
-										<th><?php echo $amount; ?></th>
+										<th scope="col"><?php echo $amount; ?></th>
 										<?php 
 									} ?>
 										

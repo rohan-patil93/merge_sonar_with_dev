@@ -84,56 +84,56 @@ $_SESSION['download_data'] = array();
         	<table class="table table-hover">
           		<thead>
 	          		<tr bgcolor="#eeeeee">
-			            <th># </th>
-			            <th>First Name</th>
-						<th>Middle Name</th>
-						<th>Last Name</th>
-						<th>Email</th>
-						<th>Phone</th>
-						<th>Mobile</th>
-						<th>Company</th>
-						<th>Location</th>
-						<th>Business Size</th>
-						<th>TIN Number</th>
-						<th>VAR Number</th>
-						<th>Display Name</th>
-						<th>Billing Address</th>
-						<th>Billing City</th>
-						<th>Billing State</th>
-						<th>Billing Post code</th>
-						<th>Billing Country</th>
-						<th>Shipping Address</th>
-						<th>Shipping City</th>
-						<th>Shipping State</th>
-						<th>Shipping Post code</th>
-						<th>Shipping Country</th>
-						<th>Bank Account Name</th>
-						<th>Bank Name</th>
-						<th>Bank Account No</th>
-						<th>IFSC Code</th>
-						<th>Bank Address</th>
-						<th>Website URL</th>
-						<th>Vendor PO Notes</th>
-						<th>Vendor Other Notes</th>
-						<th>Pan No</th>
-						<th>GST No</th>
-						<th>HR Connect</th>
-						<th>Finance Connect</th>
-						<th>Purchase Connect</th>
-						<th>Admin Connect</th>
-						<th>Project Connect</th>
-						<th>Location Connect</th>
-						<th>Legal Connect</th>
-						<th>Bank Country</th>
-						<th>Bank State</th>
-						<th>Bank City</th>
-						<th>Bank Post Code</th>
-						<th>Bank Beneficiary Name</th>
-						<th>TAN Number</th>
-						<th>MSME Number</th>
-						<th>Reference Vendor Code</th>
-						<th>Short Name</th>
-						<th>BP Code</th>
+			            <th scope="col"># </th>
+			            <th scope="col">First Name</th>
+						<th scope="col">Middle Name</th>
+						<th scope="col">Last Name</th>
+						<th scope="col">Email</th>
+						<th scope="col">Phone</th>
+						<th scope="col">Mobile</th>
+						<th scope="col">Company</th>
+						<th scope="col">Location</th>
+						<th scope="col">Business Size</th>
+						<th scope="col">TIN Number</th>
+						<th scope="col">VAR Number</th>
+						<th scope="col">Display Name</th>
+						<th scope="col">Billing Address</th>
+						<th scope="col">Billing City</th>
+						<th scope="col">Billing State</th>
+						<th scope="col">Billing Post code</th>
+						<th scope="col">Billing Country</th>
+						<th scope="col">Shipping Address</th>
+						<th scope="col">Shipping City</th>
+						<th scope="col">Shipping State</th>
+						<th scope="col">Shipping Post code</th>
+						<th scope="col">Shipping Country</th>
+						<th scope="col">Bank Account Name</th>
+						<th scope="col">Bank Name</th>
+						<th scope="col">Bank Account No</th>
+						<th scope="col">IFSC Code</th>
+						<th scope="col">Bank Address</th>
+						<th scope="col">Website URL</th>
+						<th scope="col">Vendor PO Notes</th>
+						<th scope="col">Vendor Other Notes</th>
+						<th scope="col">Pan No</th>
+						<th scope="col">GST No</th>
+						<th scope="col">HR Connect</th>
+						<th scope="col">Finance Connect</th>
+						<th scope="col">Purchase Connect</th>
+						<th scope="col">Admin Connect</th>
+						<th scope="col">Project Connect</th>
+						<th scope="col">Location Connect</th>
+						<th scope="col">Legal Connect</th>
+						<th scope="col">Bank Country</th>
+						<th scope="col">Bank State</th>
+						<th scope="col">Bank City</th>
+						<th scope="col">Bank Post Code</th>
+						<th scope="col">Bank Beneficiary Name</th>
+						<th scope="col">TAN Number</th>
+						<th scope="col">MSME Number</th>
+						<th scope="col">Reference Vendor Code</th>
+						<th scope="col">Short Name</th>
+						<th scope="col">BP Code</th>
 	          		</tr>
 	          	</thead>
 	          	<tbody>

@@ -655,13 +655,13 @@ if($page=='selectedattendancelist'){
 	$empattendance_data = json_decode($empattendance,1);
 	$employee = $empattendance_data['emp_names'];
 	$empattendance=$empattendance_data['emp_attendance'];
-	$return ='<table class="work-entry text-center" width="100%"><thead><tr><th rowspan="0">Work Entries</th>	<th colspan="31" align="center">'.$mon. " ".$attendance_year.'</th>	</tr><tr>';
+	$return ='<table class="work-entry text-center" width="100%"><thead><tr><th scope="col" rowspan="0">Work Entries</th>	<th scope="col" colspan="31" align="center">'.$mon. " ".$attendance_year.'</th>	</tr><tr>';
 	for($i=1;$i<=$maxdays;$i++) { 
-		$return .= '<th>'.$i.'</th>';
+		$return .= '<th scope="col">'.$i.'</th>';
 	}
 	$return .= '</tr>	</thead>';
 	foreach ($empattendance as $key => $empvalue) {
-		$return .= '<tr><th rowspan="2">'.$employee[$key].'</th>';
+		$return .= '<tr><th scope="col" rowspan="2">'.$employee[$key].'</th>';
 		foreach ($empvalue as $key => $sessiontime) {
 			$showflag = $sessiontime['first_reg']==1? 'flag-icon':'';
 			$return .= '<td class="bg-'.strtolower($sessiontime['S1displaybgcolor']).' text-'.strtolower($sessiontime['S1displaytextcolor']).' '.$showflag.'">'.$sessiontime['S1displayvalue'].'</td>';
@@ -1292,13 +1292,13 @@ if($page=='selectetimesheetlist'){
 	$employee = $empattendance_data['emp_names'];
 	$empattendance=$empattendance_data['emp_attendance'];
 	//print_r($empattendance); exit;
-	$return ='<table class="work-entry text-center" width="100%"><thead><tr><th rowspan="0">Work Entries</th>	<th colspan="31" align="center">'.$mon. " ".$attendance_year.'</th>	</tr><tr>';
+	$return ='<table class="work-entry text-center" width="100%"><thead><tr><th scope="col" rowspan="0">Work Entries</th>	<th scope="col" colspan="31" align="center">'.$mon. " ".$attendance_year.'</th>	</tr><tr>';
 	for($i=1;$i<=$maxdays;$i++) { 
-		$return .= '<th>'.$i.'</th>';
+		$return .= '<th scope="col">'.$i.'</th>';
 	}
 	$return .= '</tr>	</thead>';
 	foreach ($empattendance as $key => $empvalue) {
-		$return .= '<tr><th rowspan="2">'.$employee[$key].'</th>';
+		$return .= '<tr><th scope="col" rowspan="2">'.$employee[$key].'</th>';
 		foreach ($empvalue as $key => $sessiontime) {
 			$return .= '<td class="bg-'.strtolower($sessiontime['S1displaybgcolor']).' text-'.strtolower($sessiontime['S1displaytextcolor']).' '.$showflag.'">'.$sessiontime['S1displayvalue'].'</td>';
 		}
@@ -1888,7 +1888,6 @@ if($page=="insertcommentjobposting"){
 
 	$_POST['company_id']=$_SESSION['company_id'];
 	$_POST['user_id']=$_SESSION['userid'];
-	$_POST['job_selection_step_id']=$_POST['job_selection_step_id'];
 	$_POST['job_posting_candedate_id']=$_POST['job_post_can_id'];
 	$url = API."?mode=insertcommentjobposting&method=post";
 	echo $response = file_post_contents($url, $_POST, 'insert');
@@ -1901,7 +1900,6 @@ if($page=="inserttagjobposting"){
 	$_POST['company_id']=$_SESSION['company_id'];
 	$_POST['user_id']=$_SESSION['userid'];
 	$_POST['value']=$value;
-	$_POST['job_selection_step_id']=$_POST['job_selection_step_id'];
 	$_POST['job_posting_candedate_id']=$_POST['job_post_can_id'];
 	$url = API."?mode=inserttagjobposting&method=post";
 	echo $response = file_post_contents($url, $_POST, 'insert');	
@@ -2046,7 +2044,6 @@ if($page=="resetnewpassword"){
 
 		$_POST['company_id'] = $_SESSION['company_id'];
 		$_POST['userid'] = $_SESSION['userid'];
-	$_POST['Rid'] = $_POST['Rid'];
 		$url = API."?mode=resetnewpassword&method=post";
 		$response = file_post_contents($url, $_POST);
 		echo $response;
@@ -3578,9 +3575,7 @@ if($page == "submitstatusdynamicworkflow"){
 
 
 	$_POST['transaction_table'] = $_POST['table_name'];
-	$_POST['current_status'] = $_POST['current_status'];
 	$_POST['transaction_no'] = $_POST['transaction_id'];
-	$_POST['next_status'] = $_POST['next_status'];
 	$_POST['user_id'] = $_SESSION['userid'];
 	$_POST['company_id'] = $_SESSION['company_id'];
 	$url = API."?mode=submitstatusdynamicworkflow&method=post";
@@ -4174,11 +4169,11 @@ if($page == "getdepreciationtable"){
 	$seq = 1;
 	$html = '<table class="table table-hover m-b-0" style="font-size:13px;"><thead>
 					<tr>
-						<th>#</th>
-						<th>Depreciation Date</th>
-						<th class="text-right">Depreciation</th>
-						<th class="text-right">Accumulated Depreciation</th>
-						<th class="text-right">Book Value</th>
+						<th scope="col">#</th>
+						<th scope="col">Depreciation Date</th>
+						<th scope="col" class="text-right">Depreciation</th>
+						<th scope="col" class="text-right">Accumulated Depreciation</th>
+						<th scope="col" class="text-right">Book Value</th>
 					</tr>
 			</thead><tbody>';
 			$html .= '<tr><td class="p-2">'.$seq.'</td>
@@ -4540,10 +4535,10 @@ if($page=="gettenantproperty"){
 		$html .='<table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
 					<thead>
 						<tr>
-							<th width="5%">#</th>
-							<th width="25%">Utility</th>
-							<th width="30%" class="text-right" colspan="4">Amount</th>
-							<th width="30%">Remark</th>
+							<th scope="col" width="5%">#</th>
+							<th scope="col" width="25%">Utility</th>
+							<th scope="col" width="30%" class="text-right" colspan="4">Amount</th>
+							<th scope="col" width="30%">Remark</th>
 						</tr>
 					</thead>
 					<tbody>';
@@ -4631,11 +4626,11 @@ if($page=="getassetcategorydetails"){
 	$seq = 1;
 	$html = '<table class="table table-hover m-b-0" style="font-size:13px;"><thead>
 					<tr>
-						<th>#</th>
-						<th>Depreciation Date</th>
-						<th class="text-right">Depreciation</th>
-						<th class="text-right">Accumulated Depreciation</th>
-						<th class="text-right">Book Value</th>
+						<th scope="col">#</th>
+						<th scope="col">Depreciation Date</th>
+						<th scope="col" class="text-right">Depreciation</th>
+						<th scope="col" class="text-right">Accumulated Depreciation</th>
+						<th scope="col" class="text-right">Book Value</th>
 					</tr>
 			</thead><tbody>';
 			$html .= '<tr><td class="p-2">'.$seq.'</td>
@@ -4795,9 +4790,9 @@ if($page=="searchcourierdata"){
 	$html .='<table class="table table-framed">
 	 <thead>.';
 	 foreach($tb_in_courier as $th){ 
-        $html .='<th>'.$th.'</th>';
+        $html .='<th scope="col">'.$th.'</th>';
       }
-      $html .='  <th></th> </thead><tbody>';
+      $html .='  <th scope="col"></th> </thead><tbody>';
 	if(count((array)$data['courier'])>0){
 	$csvData = array();
 	$sl=0; 
@@ -4968,12 +4963,12 @@ if($page =="searchstationeryreport"){
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Type</th>
-                        <th>Date</th>
-                        <th class="text-end">In Qty</th>
-                        <th class="text-end">Out Qty</th>
-                        <th class="text-end">Run Qty</th>
+                        <th scope="col">#</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Date</th>
+                        <th scope="col" class="text-end">In Qty</th>
+                        <th scope="col" class="text-end">Out Qty</th>
+                        <th scope="col" class="text-end">Run Qty</th>
                     </tr>
                 </thead>
                 <tbody>';
@@ -6089,7 +6084,7 @@ if($page == "getitemsorders"){
     $str .= '<div class="modal-body">';
     if(count((array)$transactions) != 0){
 	    $str .='<table class=" table table-hover ">';
-	    $str .= '<tr><th>Trans. No.</th><th>Party</th><th>Date</th><th>Qty</th><th>Price</th><th>Amount</th></tr>';  
+	    $str .= '<tr><th scope="col">Trans. No.</th><th scope="col">Party</th><th scope="col">Date</th><th scope="col">Qty</th><th scope="col">Price</th><th scope="col">Amount</th></tr>';  
 		foreach ($transactions as  $trns){
 	       $str .= '<tr>
 	            <td class="p-2"><a href="index?option='.$_POST['option'].'&Rid='.deocdeId("id:".$trns['id']).'" target="_blank" class="text-primary">'.$trns['transaction_number'].'</a></td>
@@ -6579,7 +6574,7 @@ if($page == "checkapidatavalidateornot"){
 
 
 
-			$html_res .= '<table class="table table-separate table-head-custom table-checkable data-table custom_asign_emp_mpc" id="htmlajaxapihits"><tr><th></th><th>Transaction No.</th><th>Transaction Date</th><th class="text-right">Total</th><th >Required*</th><th>Status</th></tr>'; 
+			$html_res .= '<table class="table table-separate table-head-custom table-checkable data-table custom_asign_emp_mpc" id="htmlajaxapihits"><tr><th scope="col"></th><th scope="col">Transaction No.</th><th scope="col">Transaction Date</th><th scope="col" class="text-right">Total</th><th scope="col" >Required*</th><th scope="col">Status</th></tr>'; 
 			foreach($result['result'] as $trans_id=>$tableslist){ 
 					$arychunks = array_chunk($tableslist['Ledger_Entries'], 2);
 					$recepttotalamt = 0;
@@ -6624,7 +6619,7 @@ if($page == "checkapidatavalidateornot"){
 				$html_res .= '<td colspan="20">';
 				$html_res .= '<div class="row">';
 				$html_res .= '<div class="col-lg-12">';
-				$html_res .= '<table class="table table-td-6"><thead><tr><th>Transaction No.</th><th>Party_Name</th><th class="text-right">Total</th></tr></thead><tbody>';
+				$html_res .= '<table class="table table-td-6"><thead><tr><th scope="col">Transaction No.</th><th scope="col">Party_Name</th><th scope="col" class="text-right">Total</th></tr></thead><tbody>';
 				foreach($arychunks as $tableslist1){
 					$html_res .= '<tr>';
 					$html_res .= '<td class="w-b-w-s">'.$tableslist1[0]['Bill_Details']['Bill_NO'].'</td>';
@@ -6647,7 +6642,7 @@ if($page == "checkapidatavalidateornot"){
 
 		}elseif($api_code == "RECEIVEPURCHASEORDERS" || $api_code == "RECEIVEPURCHASEINVOICES" || $api_code == "RECEIVEGOODSRECEIPTNOTES" || $api_code == "RECEIVESALESORDERS" || $api_code == "RECEIVESALESINVOICES" || $api_code == "RECEIVEDELIVERYORDERS" || $api_code == "RECEIVEDEBITNOTES" || $api_code == "RECEIVECREDITNOTES"){
 			
-			$html_res .= '<table class="table table-separate table-head-custom table-checkable data-table custom_asign_emp_mpc"><tr><th></th><th>Transaction No.</th><th>Transaction Date</th><th>Party Name</th><th class="text-right">Amount</th><th class="text-right">Tax</th><th class="text-right">Total</th><th >Required*</th><th>Status</th></tr>';
+			$html_res .= '<table class="table table-separate table-head-custom table-checkable data-table custom_asign_emp_mpc"><tr><th scope="col"></th><th scope="col">Transaction No.</th><th scope="col">Transaction Date</th><th scope="col">Party Name</th><th scope="col" class="text-right">Amount</th><th scope="col" class="text-right">Tax</th><th scope="col" class="text-right">Total</th><th scope="col" >Required*</th><th scope="col">Status</th></tr>';
 
 				foreach($result['result'] as $trans_id=>$tableslist){ 
 					if($tableslist['Voucher_Amount']!=""){
@@ -6703,7 +6698,7 @@ if($page == "checkapidatavalidateornot"){
 					$html_res .= '<td class="text-right">'.$status_transaction_res.'</td>';
 					$html_res .= '</tr>';
 					
-					$html_res .= '<tr class="data showclass'.$trans_id.' showclassdiv"><td colspan="20"><div class="row"><div class="col-lg-12"><table class="table table-td-6"><thead><tr><th>Item</th><th>SKU</th><th>Account No</th><th class="text-right">Quantity</th><th class="text-right">Price</th><th class="text-right">Amount</th><th class="text-right">Total</th></tr></thead><tbody>';
+					$html_res .= '<tr class="data showclass'.$trans_id.' showclassdiv"><td colspan="20"><div class="row"><div class="col-lg-12"><table class="table table-td-6"><thead><tr><th scope="col">Item</th><th scope="col">SKU</th><th scope="col">Account No</th><th scope="col" class="text-right">Quantity</th><th scope="col" class="text-right">Price</th><th scope="col" class="text-right">Amount</th><th scope="col" class="text-right">Total</th></tr></thead><tbody>';
 					foreach($tableslist['Item_Entries'] as $seqkey=>$tableslist1){
 						$transactionitem = $tableslist['response']['transaction_item'][$seqkey]; 
 						$html_res .= '<tr>';
@@ -6719,9 +6714,9 @@ if($page == "checkapidatavalidateornot"){
 					$html_res .= '</tbody></table></div>';
 					
 					//$html_res .= '<div class="col-lg-3 col-md-3 col-sm-6 col-6"><div class="card" style="background: #f5f6f7;"><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-6"><div class="card-header"><h5>Order Summary</h5></div></div></div><div class="card-body"><table class="table table-sm mb-0">';
-					//$html_res .= '<tr><th>Sub Total </th><td align="right">'.($invtotalamt-$totaltax).'</td></tr>';
-					//$html_res .= '<tr><th>Tax</th><td align="right">'.$totaltax.'</td></tr>';
-					//$html_res .= '<tr class="bg-primary"><th>Total</th><td align="right"><span class="f-18">'.$invtotalamt.'</span></td></tr>';
+					//$html_res .= '<tr><th scope="col">Sub Total </th><td align="right">'.($invtotalamt-$totaltax).'</td></tr>';
+					//$html_res .= '<tr><th scope="col">Tax</th><td align="right">'.$totaltax.'</td></tr>';
+					//$html_res .= '<tr class="bg-primary"><th scope="col">Total</th><td align="right"><span class="f-18">'.$invtotalamt.'</span></td></tr>';
 					//$html_res .= '</table></div></div></div></div></td></tr>';
 					$html_res .= '</div></td></tr>';
 				} 	
@@ -6731,13 +6726,13 @@ if($page == "checkapidatavalidateornot"){
 			$html_res .= '<table class="table table-hover m-b-0" style="font-size:13px;" id="costcenterfilter">';
 			$html_res .= '<thead>';
 			$html_res .= '<tr>';
-			$html_res .= '<th>#</th>';
+			$html_res .= '<th scope="col">#</th>';
 			foreach($api_masters_response_details as $keyfield=>$mappingfield){
-				$html_res .= '<th>'.$keyfield.'</th>';
+				$html_res .= '<th scope="col">'.$keyfield.'</th>';
 			} 
-			$html_res .= '<th>Status</th>';
-			$html_res .= '<th>Error</th>';
-			$html_res .= '<th>Query</th>';
+			$html_res .= '<th scope="col">Status</th>';
+			$html_res .= '<th scope="col">Error</th>';
+			$html_res .= '<th scope="col">Query</th>';
 			$html_res .= '</tr>';
 			$html_res .= '</thead>';
 			$html_res .= '<tbody>';
@@ -7623,7 +7618,7 @@ if($page == "getmultireferencepagedetails"){
 	}elseif($_POST['gettype'] == 'transaction_list'){
 		
 		$iseq = 1;
-		$tables = '<table class="table table-hover m-b-0"><thead><tr><th>#</th><th>Transaction No.</th><th>Amount</th></tr></thead><tbody>';
+		$tables = '<table class="table table-hover m-b-0"><thead><tr><th scope="col">#</th><th scope="col">Transaction No.</th><th scope="col">Amount</th></tr></thead><tbody>';
 		if(count((array)$result['transaction_list']) != 0){
 			foreach($result['transaction_list'] as $drtres){
 				$checkeddlist = "";
@@ -7653,9 +7648,9 @@ if($page == "getmultireferencepagedetails"){
 
 
 		$iseq = 1;
-		//$tables = '<table class="table table-hover m-b-0"><thead><tr><th>#</th><th>Trans. No.</th><th>Item Name</th><th>Order (Pend) Qty</th><th>Price</th><th>Tax</th><th>Total</th><th>Invoice Qty</th><th>Tax</th><th>Total</th></tr></thead><tbody>';
+		//$tables = '<table class="table table-hover m-b-0"><thead><tr><th scope="col">#</th><th scope="col">Trans. No.</th><th scope="col">Item Name</th><th scope="col">Order (Pend) Qty</th><th scope="col">Price</th><th scope="col">Tax</th><th scope="col">Total</th><th scope="col">Invoice Qty</th><th scope="col">Tax</th><th scope="col">Total</th></tr></thead><tbody>';
 		$tables = '<table class="table table-hover m-b-0"><thead><tr>';
-		$tables .= "<th><div class='checkbox-fade fade-in-primary'>
+		$tables .= "<th scope="col"><div class='checkbox-fade fade-in-primary'>
                       <label class='form-label'>
                         <input type='checkbox' class='check_all_check_box' onchange='selectAllTransactionsItems()'>
                         <span class='cr'>
@@ -7664,7 +7659,7 @@ if($page == "getmultireferencepagedetails"){
                         <span>All</span>
                       </label>
                     </div></th>";
-		$tables .= '<th>Trans. No.</th><th>Item Name</th><th>Order (Pend) Qty</th><th>Price</th><th>Tax</th><th>Total</th></tr></thead><tbody>';
+		$tables .= '<th scope="col">Trans. No.</th><th scope="col">Item Name</th><th scope="col">Order (Pend) Qty</th><th scope="col">Price</th><th scope="col">Tax</th><th scope="col">Total</th></tr></thead><tbody>';
 		foreach($result['transaction_item_list'] as $drtres){
 			$checkeddlist = "";
 			if(isset($alreday_selected_transaction_item_id[$drtres['id']])){
@@ -9325,7 +9320,7 @@ if ($page == 'getamcrepairordercontractassets') {
 			$scheduleData = array('schedules' => array(), 'asset' => array());
 		}
 		ob_start();
-		include __DIR__ . '/views/amc_contract_asset_schedule_history.php';
+		include_once __DIR__ . '/views/amc_contract_asset_schedule_history.php';
 		echo ob_get_clean();
 		exit;
 	}

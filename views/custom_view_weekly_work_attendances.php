@@ -394,7 +394,7 @@ $sprogress = $statusprogress['full'] ?? array();
                                     $col_date = date('Y-m-d', strtotime("+$i days", strtotime($start_date)));
                                     $col_day_name = date('l', strtotime($col_date));
                                 ?> 
-                                    <th width="14.28%" class="p-2">
+                                    <th scope="col" width="14.28%" class="p-2">
                                         <div><?php echo $col_day_name; ?></div>
                                         <small class="text-white-50"><?php echo date('d M', strtotime($col_date)); ?></small>
                                     </th>

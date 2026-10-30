@@ -164,18 +164,18 @@ function emptyCheck($valu){
                         <b class="f-40">Invoice</b>
                         <table>
                             <tr>
-                                <th class="f-12 p-0">
+                                <th scope="col" class="f-12 p-0">
                                     Invoice#:      
                                 </th>
-                                <th class="f-12 p-0">
+                                <th scope="col" class="f-12 p-0">
                                     &nbsp 57989            
                                 </th>
                             </tr>
                             <tr>
-                                <th class="f-12 p-0">
+                                <th scope="col" class="f-12 p-0">
                                     Date:            
                                 </th>
-                                <th class="f-12 p-0">
+                                <th scope="col" class="f-12 p-0">
                                     &nbsp 04 June 2024            
                                 </th>
                             </tr>
@@ -195,23 +195,23 @@ function emptyCheck($valu){
                 </tr>
           
                 <tr style="border-bottom: 1px solid #000000;">
-                    <th class="f-12">ITEM DESCRIPTION</th>
-                    <th class="f-12 text-center">PRICE</th>
-                    <th class="f-12 text-cneter">QTY</th>
-                    <th class="f-12 text-end">TOTAL</th>
+                    <th scope="col" class="f-12">ITEM DESCRIPTION</th>
+                    <th scope="col" class="f-12 text-center">PRICE</th>
+                    <th scope="col" class="f-12 text-cneter">QTY</th>
+                    <th scope="col" class="f-12 text-end">TOTAL</th>
                 </tr>
                 <tr>
                     <td class="f-12" style="border-right: 1px solid #000000;">
                         <b class="f-w-600 m-0">Web Design</b>
                         <p class="m-0 f-12">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                     </td>
-                    <th class="f-12 text-center" align="center" style="border-right: 1px solid #000000;">
+                    <th scope="col" class="f-12 text-center" align="center" style="border-right: 1px solid #000000;">
                         $150.00
                     </th>
-                    <th class="f-12 text-center" align="center" style="border-right: 1px solid #000000;">
+                    <th scope="col" class="f-12 text-center" align="center" style="border-right: 1px solid #000000;">
                         2
                     </th>
-                    <th class="f-12 text-end" align="right">
+                    <th scope="col" class="f-12 text-end" align="right">
                         $150.00
                     </th>
                 </tr>
@@ -220,13 +220,13 @@ function emptyCheck($valu){
                         <b class="f-w-600 m-0">Wedding Photography</b>
                         <p class="m-0 f-12">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                     </td>
-                    <th class="f-12 text-center" align="right" style="border-right: 1px solid #000000;">
+                    <th scope="col" class="f-12 text-center" align="right" style="border-right: 1px solid #000000;">
                         $150.00
                     </th>
-                    <th class="f-12 text-center" align="right" style="border-right: 1px solid #000000;">
+                    <th scope="col" class="f-12 text-center" align="right" style="border-right: 1px solid #000000;">
                         2
                     </th>
-                    <th class="f-12 text-end" align="right">
+                    <th scope="col" class="f-12 text-end" align="right">
                         $150.00
                     </th>
                 </tr>
@@ -235,13 +235,13 @@ function emptyCheck($valu){
                         <b class="f-w-600 m-0">Web Development</b>
                         <p class="m-0 f-12">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                     </td>
-                    <th class="f-12 text-center" align="right" style="border-right: 1px solid #000000;">
+                    <th scope="col" class="f-12 text-center" align="right" style="border-right: 1px solid #000000;">
                         $150.00
                     </th>
-                    <th class="f-12 text-center" align="right" style="border-right: 1px solid #000000;">
+                    <th scope="col" class="f-12 text-center" align="right" style="border-right: 1px solid #000000;">
                         2
                     </th>
-                    <th class="f-12 text-end" align="right">
+                    <th scope="col" class="f-12 text-end" align="right">
                         $150.00
                     </th>
                 </tr>

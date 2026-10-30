@@ -1680,7 +1680,7 @@ $dis_str.='<div class="col-lg-6 ">
 					<h5>'.ucwords(str_replace("_"," ",($trantable))).'</h5>
 				</div>';
 		$dis_str.='<div class="card-body"><table width="100%">';
-		$dis_str.='<tr><th>Number</th><th>Date</th><th>Originator</th></tr>';
+		$dis_str.='<tr><th scope="col">Number</th><th scope="col">Date</th><th scope="col">Originator</th></tr>';
 		 foreach($vdata_detail as $vdatd){
 		 	$redirecturl = getPagenametotable($trantable,'insert_page_name');
 			$rid = deocdeId("id:".$vdatd['id']);

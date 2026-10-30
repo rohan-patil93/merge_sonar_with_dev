@@ -73,11 +73,11 @@ $companyName = isset($_SESSION['config']['name'])   ? htmlspecialchars($_SESSION
                         <table class="table table-hover table-bordered mb-0 custom-scroll" style="max-height: 400px;">
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Document Name</th>
-                                    <th>Type</th>
-                                    <th>Created Date</th>
-                                    <th>View</th>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Document Name</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Created Date</th>
+                                    <th scope="col">View</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -118,11 +118,11 @@ $companyName = isset($_SESSION['config']['name'])   ? htmlspecialchars($_SESSION
                         <table class="table table-hover table-bordered mb-0 custom-scroll" style="max-height: 400px;">
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Document Name</th>
-                                    <th>Type</th>
-                                    <th>Created Date</th>
-                                    <th>View</th>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Document Name</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Created Date</th>
+                                    <th scope="col">View</th>
                                 </tr>
                             </thead>
                             <tbody>

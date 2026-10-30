@@ -199,13 +199,13 @@ $overviewTitle = $display_tag . ' Overview';
 								<div class="table-responsive survey_dashboard">
 									<table class="table table-bordered table-sm f-12">
 										<tr bgcolor="#eeeeee">
-											<th><?php echo $display_tag; ?> Name</th>
-											<th>Category</th>
-											<th>Assigned To</th>
-											<th>Start Date</th>
-											<th>End Date</th>
-											<th>Status</th>
-											<th>Action</th>
+											<th scope="col"><?php echo $display_tag; ?> Name</th>
+											<th scope="col">Category</th>
+											<th scope="col">Assigned To</th>
+											<th scope="col">Start Date</th>
+											<th scope="col">End Date</th>
+											<th scope="col">Status</th>
+											<th scope="col">Action</th>
 										</tr>
 										<?php if(count((array)$recentSurveys) > 0) {
 											foreach($recentSurveys as $surveyRow) {

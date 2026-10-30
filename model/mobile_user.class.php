@@ -2650,7 +2650,7 @@ class mobileUserClass extends userClass{
 					$tax_amount = $item_total_amount*($tax_percentage/100);
 					$total_amount = $total_amount+$tax_amount;
 					$tax_id = $pur->hsn_and_sac_code_id;
-					$tax_percentage =$tax_percentage;
+
 					$tax_name = $pur->code;
 					$amount =$total_amount;  
 					$tax_total_amount =$total_amount; 

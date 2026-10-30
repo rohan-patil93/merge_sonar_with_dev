@@ -164,18 +164,18 @@ function emptyCheck($valu){
                         <b class="f-40">Invoice</b>
                         <table>
                             <tr>
-                                <th class="f-12 p-0">
+                                <th scope="col" class="f-12 p-0">
                                     Invoice#:      
                                 </th>
-                                <th class="f-12 p-0">
+                                <th scope="col" class="f-12 p-0">
                                    &nbsp <?php echo $transaction['transaction_number']; ?>           
                                 </th>
                             </tr>
                             <tr>
-                                <th class="f-12 p-0">
+                                <th scope="col" class="f-12 p-0">
                                     Date:            
                                 </th>
-                                <th class="f-12 p-0">
+                                <th scope="col" class="f-12 p-0">
                                     &nbsp <?php echo date("d M Y",strtotime($transaction['transaction_date'])); ?>           
                                 </th>
                             </tr>
@@ -195,10 +195,10 @@ function emptyCheck($valu){
                 </tr>
           
                 <tr style="border-bottom: 1px solid #000000;">
-                    <th class="f-12">ITEM DESCRIPTION</th>
-                    <th class="f-12 text-center">PRICE</th>
-                    <th class="f-12 text-cneter">QTY</th>
-                    <th class="f-12 text-end">TOTAL</th>
+                    <th scope="col" class="f-12">ITEM DESCRIPTION</th>
+                    <th scope="col" class="f-12 text-center">PRICE</th>
+                    <th scope="col" class="f-12 text-cneter">QTY</th>
+                    <th scope="col" class="f-12 text-end">TOTAL</th>
                 </tr>
                 <?php foreach($transaction_items as $ta){ ?>
                 <tr>
@@ -206,13 +206,13 @@ function emptyCheck($valu){
                         <b class="f-w-600 m-0"><?php echo $ta['item_name']; ?></b>
                         <p class="m-0 f-12"><?php echo emptyCheck($ta['description']); ?></p>
                     </td>
-                    <th class="f-12 text-center" align="center" style="border-right: 1px solid #000000;">
+                    <th scope="col" class="f-12 text-center" align="center" style="border-right: 1px solid #000000;">
                         <?php echo currencyFormat($ta['item_amount'],$config); ?>
                     </th>
-                    <th class="f-12 text-center" align="center" style="border-right: 1px solid #000000;">
+                    <th scope="col" class="f-12 text-center" align="center" style="border-right: 1px solid #000000;">
                         <?php echo $ta['item_quantity']; ?>
                     </th>
-                    <th class="f-12 text-end" align="right">
+                    <th scope="col" class="f-12 text-end" align="right">
                        <?php echo currencyFormat($ta['total_amount'],$config); ?>
                     </th>
                 </tr>

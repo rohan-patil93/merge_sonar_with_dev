@@ -1312,12 +1312,12 @@ if($register_data['current_status'] !=""){
 							  <?php /** ?>
 							  <table class="table table-striped- table-bordered table-hover1 table-checkable dataTable no-footer text-center ">
                                 <tr>
-                                  <th  class="thheader" width="2%">#</th>
-                                  <th  class="thheader" width="30%">Document</th>
-                                  <th  class="thheader" width="25%">Category</th>
-                                  <th  class="thheader" width="36%">Attach Files</th>
+                                  <th scope="col"  class="thheader" width="2%">#</th>
+                                  <th scope="col"  class="thheader" width="30%">Document</th>
+                                  <th scope="col"  class="thheader" width="25%">Category</th>
+                                  <th scope="col"  class="thheader" width="36%">Attach Files</th>
                                   <?php if($rowid!='') { ?>
-                                    <th  class="thheader" width="7%">View</th>
+                                    <th scope="col"  class="thheader" width="7%">View</th>
                                   <?php } ?>
 
                                 </tr>

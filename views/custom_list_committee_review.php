@@ -273,13 +273,13 @@ foreach ($tracking_inprogress_arr as $row) {
 
 									<thead>
 										<tr>
-											<th>Creator</th>
-											<th>Project Name</th>
+											<th scope="col">Creator</th>
+											<th scope="col">Project Name</th>
 
-											<th>Start Date</th>
-											<th>End Date</th>
-											<th class='text-center'>Cost</th>
-											<th>Status</th>
+											<th scope="col">Start Date</th>
+											<th scope="col">End Date</th>
+											<th scope="col" class='text-center'>Cost</th>
+											<th scope="col">Status</th>
 										</tr>
 									</thead>
 
@@ -336,13 +336,13 @@ foreach ($tracking_inprogress_arr as $row) {
 								<table class="table table-hover m-b-0">
 									<thead>
 										<tr>
-											<th>Creator</th>
-											<th>Project Name</th>
+											<th scope="col">Creator</th>
+											<th scope="col">Project Name</th>
 
-											<th>Start Date</th>
-											<th>End Date</th>
-											<th class='text-center'>Cost</th>
-											<th>Status</th>
+											<th scope="col">Start Date</th>
+											<th scope="col">End Date</th>
+											<th scope="col" class='text-center'>Cost</th>
+											<th scope="col">Status</th>
 
 										</tr>
 									</thead>
@@ -398,13 +398,13 @@ foreach ($tracking_inprogress_arr as $row) {
 								<table class="table table-hover m-b-0">
 									<thead>
 										<tr>
-											<th>Creator</th>
-											<th>Project Name</th>
+											<th scope="col">Creator</th>
+											<th scope="col">Project Name</th>
 
-											<th>Start Date</th>
-											<th>End Date</th>
-											<th class='text-center'>Cost</th>
-											<th>Status</th>
+											<th scope="col">Start Date</th>
+											<th scope="col">End Date</th>
+											<th scope="col" class='text-center'>Cost</th>
+											<th scope="col">Status</th>
 
 										</tr>
 									</thead>
@@ -460,14 +460,14 @@ foreach ($tracking_inprogress_arr as $row) {
 								<table class="table table-hover m-b-0">
 									<thead>
 										<tr>
-											<th>Creator</th>
-											<th>Project Name</th>
+											<th scope="col">Creator</th>
+											<th scope="col">Project Name</th>
 
-											<th>Start Date</th>
-											<th>End Date</th>
-											<th class='text-center'>Cost</th>
-											<th>Status</th>
-											<th></th>
+											<th scope="col">Start Date</th>
+											<th scope="col">End Date</th>
+											<th scope="col" class='text-center'>Cost</th>
+											<th scope="col">Status</th>
+											<th scope="col"></th>
 
 										</tr>
 									</thead>
@@ -557,12 +557,12 @@ foreach ($tracking_inprogress_arr as $row) {
 								<table class="table table-hover m-b-0">
 									<thead>
 										<tr>
-											<th>Creator</th>
-											<th>Project Name</th>
-											<th>Start Date</th>
-											<th>End Date</th>
-											<th class='text-center'>Cost</th>
-											<th></th>
+											<th scope="col">Creator</th>
+											<th scope="col">Project Name</th>
+											<th scope="col">Start Date</th>
+											<th scope="col">End Date</th>
+											<th scope="col" class='text-center'>Cost</th>
+											<th scope="col"></th>
 										</tr>
 									</thead>
 
@@ -630,12 +630,12 @@ foreach ($tracking_inprogress_arr as $row) {
 								<table class="table table-hover m-b-0">
 									<thead>
 										<tr>
-											<th>Creator</th>
-											<th>Project Name</th>
-											<th>Start Date</th>
-											<th>End Date</th>
-											<th class='text-center'>Cost</th>
-											<th></th>
+											<th scope="col">Creator</th>
+											<th scope="col">Project Name</th>
+											<th scope="col">Start Date</th>
+											<th scope="col">End Date</th>
+											<th scope="col" class='text-center'>Cost</th>
+											<th scope="col"></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -705,12 +705,12 @@ foreach ($tracking_inprogress_arr as $row) {
 								<table class="table table-hover m-b-0">
 									<thead>
 										<tr>
-											<th>Creator</th>
-											<th>Project Name</th>
-											<th>Start Date</th>
-											<th>End Date</th>
-											<th class='text-center'>Cost</th>
-											<th></th>
+											<th scope="col">Creator</th>
+											<th scope="col">Project Name</th>
+											<th scope="col">Start Date</th>
+											<th scope="col">End Date</th>
+											<th scope="col" class='text-center'>Cost</th>
+											<th scope="col"></th>
 										</tr>
 									</thead>
 									<tbody>

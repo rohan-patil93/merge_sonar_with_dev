@@ -1192,7 +1192,7 @@ function calculateTotal(){
                  //$commentss[] = $appruser_data[$_SESSION['userid']];
                 $commentss = $appruser_data;
                 if($table1['current_status'] == ST_ACTIVE || $table1['current_status'] == ST_DRAFT || $table1['current_status'] == ST_SEND_BACK || $table1['current_status'] == ST_QUOTATION_GENERATED || $table1['current_status'] == ST_PURCHASE_ORDER_GENRATED || $table1['current_status'] == ST_APPROVED){
-                   $lists = $lists;
+
                 }else{
                      $lists = array();
                 }
@@ -1640,7 +1640,7 @@ function calculateTotal(){
     <div style="float: left;width: 50%">
     <table class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer" style="float: right;">
         <tr>
-            <th class="amount"><span>Sub Total</span></th>
+            <th scope="col" class="amount"><span>Sub Total</span></th>
             <td  width="18%">
                 <span>
                     <input  type="text" class="form-control amount" readonly value="<?php echo customeummarmonyformate($table1['sub_total']); ?>" name="dis_subtotal_debit" id="dis_subtotal_debit">
@@ -1687,7 +1687,7 @@ function calculateTotal(){
             </td>
         </tr>
         <tr>
-            <th class="amount" ><span>Grand Total</span></th>
+            <th scope="col" class="amount" ><span>Grand Total</span></th>
              <input  type="hidden" class="form-control amount" name="credit_tax" value="0" id="credit_tax">
              <input  type="hidden" class="form-control amount" name="debit_tax" value="0" id="debit_tax">
              <input  value="<?php echo $table1['tax_amount']; ?>" type="hidden" class="form-control amount" name="taxRate" id="taxAmount" readonly placeholder="Tax Amount">

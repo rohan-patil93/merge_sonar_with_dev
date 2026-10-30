@@ -32,11 +32,11 @@ if (!is_array($rows)) {
 				<table class="table table-bordered table-hover">
 					<thead>
 						<tr>
-							<th>S.No</th>
-							<th>Table Name</th>
-							<th>Description</th>
-							<th>Workflow Level</th>
-							<th>Edit</th>
+							<th scope="col">S.No</th>
+							<th scope="col">Table Name</th>
+							<th scope="col">Description</th>
+							<th scope="col">Workflow Level</th>
+							<th scope="col">Edit</th>
 						</tr>
 					</thead>
 					<tbody>

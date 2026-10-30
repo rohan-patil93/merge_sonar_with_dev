@@ -63,15 +63,15 @@ function updateApplicationTickets(rid,status){
 	<table class="table table-striped table-bordered nowrap" style="font-size:13px;" id="basic-btn-non">
 		<thead>
 			<tr>
-				<th>User</th>
-				<th>Ticket No.</th>
-				<th>Issue</th>
-				<th>Request</th>
-				<th>File</th>
-				<!-- <th>Response</th> -->
-				<!-- <th>Completion</th> -->
-				<th>Status</th>
-				<!-- <th></th> -->
+				<th scope="col">User</th>
+				<th scope="col">Ticket No.</th>
+				<th scope="col">Issue</th>
+				<th scope="col">Request</th>
+				<th scope="col">File</th>
+				<!-- <th scope="col">Response</th> -->
+				<!-- <th scope="col">Completion</th> -->
+				<th scope="col">Status</th>
+				<!-- <th scope="col"></th> -->
 			</tr>
 		</thead>
 		<tbody>
@@ -130,13 +130,13 @@ function updateApplicationTickets(rid,status){
 	<table class="table table-striped table-bordered nowrap" style="font-size:13px;" id="basic-btn-non">
 		<thead>
 			<tr>
-				<th>Ticket No.</th>
-				<th>Issue</th>
-				<th>Request</th>
-				<th>File</th>
-				<!-- <th>Response</th> -->
-				<!-- <th>Completion</th> -->
-				<th>Status</th>
+				<th scope="col">Ticket No.</th>
+				<th scope="col">Issue</th>
+				<th scope="col">Request</th>
+				<th scope="col">File</th>
+				<!-- <th scope="col">Response</th> -->
+				<!-- <th scope="col">Completion</th> -->
+				<th scope="col">Status</th>
 			</tr>
 		</thead>
 		<tbody>

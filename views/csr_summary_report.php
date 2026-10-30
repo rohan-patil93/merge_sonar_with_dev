@@ -23,22 +23,22 @@ $summary = $result['summary'] ?? [];
         <table class="table table-bordered table-sm f-14 align-middle">
 
           <tr>
-            <th>Particulars</th>
-            <th class="text-center">Amount</th>
+            <th scope="col">Particulars</th>
+            <th scope="col" class="text-center">Amount</th>
           </tr>
 
           <?php foreach ($summary as $fy) { ?>
             <!-- Block Header -->
             <tr>
-              <th colspan="2" class="bg-light text-center">
+              <th scope="col" colspan="2" class="bg-light text-center">
                 CSR Summary for FY <?= htmlspecialchars($fy['label']) ?>
               </th>
             </tr>
 
             <!-- Gross Required -->
             <tr>
-              <th>a) Gross amount required to be spent by the Company as per the Companies Act, 2013 during the year FY <?= $fy['label'] ?></th>
-              <th class="text-end"><?= number_format($fy['gross_required'], 2) ?></th>
+              <th scope="col">a) Gross amount required to be spent by the Company as per the Companies Act, 2013 during the year FY <?= $fy['label'] ?></th>
+              <th scope="col" class="text-end"><?= number_format($fy['gross_required'], 2) ?></th>
             </tr>
             <tr>
               <td>i) Construction/acquisition of any asset</td>
@@ -51,34 +51,34 @@ $summary = $result['summary'] ?? [];
 
             <!-- Total Spent -->
             <tr>
-              <th class="text-danger">(b) Total Spent</th>
-              <th class="text-danger text-end"><?= number_format($fy['total_spent'], 2) ?></th>
+              <th scope="col" class="text-danger">(b) Total Spent</th>
+              <th scope="col" class="text-danger text-end"><?= number_format($fy['total_spent'], 2) ?></th>
             </tr>
 
             <!-- Unspent Current Year -->
             <tr>
-              <th>Balance amount unspent for FY <?= $fy['label'] ?></th>
+              <th scope="col">Balance amount unspent for FY <?= $fy['label'] ?></th>
               <td align="right"><?= number_format($fy['current_unspent'], 2) ?></td>
             </tr>
 
             <!-- Previous Year CF -->
             <tr>
-              <th>C/F Balance amount unspent for FY <?= ($fy['year'] - 1) ?>-<?= substr(($fy['year'] - 1), -2) ?></th>
-              <th class="text-end"><?= number_format($fy['carry_forward_previous'], 2) ?></th>
+              <th scope="col">C/F Balance amount unspent for FY <?= ($fy['year'] - 1) ?>-<?= substr(($fy['year'] - 1), -2) ?></th>
+              <th scope="col" class="text-end"><?= number_format($fy['carry_forward_previous'], 2) ?></th>
             </tr>
             <tr>
               <td>Less :- Amount spent in FY <?= $fy['label'] ?></td>
-              <th class="text-end"><?= number_format($fy['spent_from_py'], 2) ?></th>
+              <th scope="col" class="text-end"><?= number_format($fy['spent_from_py'], 2) ?></th>
             </tr>
             <tr>
-              <th>Balance amount unspent for FY <?= ($fy['year'] - 1) ?>-<?= substr(($fy['year'] - 1), -2) ?></th>
-              <th class="text-end"><?= number_format($fy['cf_balance_py'], 2) ?></th>
+              <th scope="col">Balance amount unspent for FY <?= ($fy['year'] - 1) ?>-<?= substr(($fy['year'] - 1), -2) ?></th>
+              <th scope="col" class="text-end"><?= number_format($fy['cf_balance_py'], 2) ?></th>
             </tr>
 
             <!-- Net Unspent -->
             <tr>
-              <th>Amount remaining unspent during FY <?= $fy['label'] ?> after adjsting PY O/s</th>
-              <th class="text-end"><?= number_format($fy['remaining_unspent'], 2) ?></th>
+              <th scope="col">Amount remaining unspent during FY <?= $fy['label'] ?> after adjsting PY O/s</th>
+              <th scope="col" class="text-end"><?= number_format($fy['remaining_unspent'], 2) ?></th>
             </tr>
           <?php } ?>
 

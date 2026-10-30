@@ -120,14 +120,14 @@
                     <td colspan="3" style="padding: 0 !important; vertical-align: top;">
                         <table style="width: 100%">
                             <tr>
-                                <th style="font-size: 11px; border: 1px solid #cccccc; padding: 5px;">S.N.</th>
-                                <th style="font-size: 11px; border: 1px solid #cccccc; padding: 5px;">Goods / Service Description</th>
-                                <th style="font-size: 11px; border: 1px solid #cccccc; padding: 5px;">Qty(UOM)</th>
-                                <th style="font-size: 11px; border: 1px solid #cccccc; text-align: center; padding: 5px;">Unit Rate</th>
-                                <th style="font-size: 11px; border: 1px solid #cccccc; text-align: center; padding: 5px;">Discount % per Qty</th>
-                                <th style="font-size: 11px; border: 1px solid #cccccc; text-align: center; padding: 5px;">CGST/SGST(50:50)(%)</th>
-                                <th style="font-size: 11px; border: 1px solid #cccccc; text-align: center; padding: 5px;">CGST/SGST Amount</th>
-                                <th style="font-size: 11px; border: 1px solid #cccccc; text-align: center; padding: 5px;">Value</th>
+                                <th scope="col" style="font-size: 11px; border: 1px solid #cccccc; padding: 5px;">S.N.</th>
+                                <th scope="col" style="font-size: 11px; border: 1px solid #cccccc; padding: 5px;">Goods / Service Description</th>
+                                <th scope="col" style="font-size: 11px; border: 1px solid #cccccc; padding: 5px;">Qty(UOM)</th>
+                                <th scope="col" style="font-size: 11px; border: 1px solid #cccccc; text-align: center; padding: 5px;">Unit Rate</th>
+                                <th scope="col" style="font-size: 11px; border: 1px solid #cccccc; text-align: center; padding: 5px;">Discount % per Qty</th>
+                                <th scope="col" style="font-size: 11px; border: 1px solid #cccccc; text-align: center; padding: 5px;">CGST/SGST(50:50)(%)</th>
+                                <th scope="col" style="font-size: 11px; border: 1px solid #cccccc; text-align: center; padding: 5px;">CGST/SGST Amount</th>
+                                <th scope="col" style="font-size: 11px; border: 1px solid #cccccc; text-align: center; padding: 5px;">Value</th>
                             </tr>
                             <?php $seq=1; foreach($transaction_items as $ta){ ?>
                             <tr style="vertical-align: top;">
@@ -165,15 +165,15 @@
                                 <td colspan="3" style="padding: 0 !important;">
                                     <table style="width: 100%;">
                                         <tr>
-                                            <th style="font-size:11px;border: 1px solid #cccccc; padding: 5px;">Terms</th>
-                                            <th style="font-size:11px;border: 1px solid #cccccc; text-align: right; padding: 5px;">Amount</th>
+                                            <th scope="col" style="font-size:11px;border: 1px solid #cccccc; padding: 5px;">Terms</th>
+                                            <th scope="col" style="font-size:11px;border: 1px solid #cccccc; text-align: right; padding: 5px;">Amount</th>
                                         </tr>
                                         <tr>
-                                            <th align="left" style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;">Sub Total</th>
+                                            <th scope="col" align="left" style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;">Sub Total</th>
                                             <td align="right" style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;"><?php echo currencyFormat($transaction['amount'],$config); ?></td>
                                         </tr>
                                         <tr>
-                                            <th align="left" style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;">Discount</th>
+                                            <th scope="col" align="left" style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;">Discount</th>
                                             <td align="right" style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;"><?php echo currencyFormat($transaction['discount_amount'],$config); ?></td>
                                         </tr>
                                         
@@ -181,17 +181,17 @@
                                          if(count((array)$additional_charges) !="0"){ 
                                             foreach($additional_charges as $adcharge){ ?>
                                         <tr>
-                                            <th align="left" style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;"><?php echo $adcharge['charge_name']; ?></th>
+                                            <th scope="col" align="left" style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;"><?php echo $adcharge['charge_name']; ?></th>
                                             <td align="right" style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;"><?php echo currencyFormat(($adcharge['shipping_amount']+$adcharge['shipping_tax_amount']),$config); ?></td>
                                         </tr>
                                         <?php } } ?>
 
                                         <tr>
-                                            <th align="left" style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;">CGST & SGST / IGST</th>
+                                            <th scope="col" align="left" style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;">CGST & SGST / IGST</th>
                                             <td align="right" style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;"><?php echo currencyFormat($transaction['tax_amount'],$config); ?></td>
                                         </tr>
                                         <tr>
-                                            <th align="left" style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;">Total PO Value (INR)</th>
+                                            <th scope="col" align="left" style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;">Total PO Value (INR)</th>
                                             <td align="right" style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;"><?php echo currencyFormat($transaction['total_amount'],$config); ?></td>
                                         </tr>
                                     </table>

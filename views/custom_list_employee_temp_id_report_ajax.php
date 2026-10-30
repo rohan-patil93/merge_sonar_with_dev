@@ -24,19 +24,19 @@ if(count((array)$rows) > 0){
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th>Sl. No.</th>
-				<th>Date</th>
-				<!-- <th>ID No.</th> -->
-				<th>Name</th>
-				<th>Card NO</th>
-				<th>Access NO</th>
-				<th>In TIME</th>
-				<th>Access Enable Date</th>
-				<th>Out TIME</th>
-				<th>Access Disable Date</th>
-				<th>Card Submitted DATE</th>
-				<th>SECURITY SIGN</th>
-				<th>Remarks</th>
+				<th scope="col">Sl. No.</th>
+				<th scope="col">Date</th>
+				<!-- <th scope="col">ID No.</th> -->
+				<th scope="col">Name</th>
+				<th scope="col">Card NO</th>
+				<th scope="col">Access NO</th>
+				<th scope="col">In TIME</th>
+				<th scope="col">Access Enable Date</th>
+				<th scope="col">Out TIME</th>
+				<th scope="col">Access Disable Date</th>
+				<th scope="col">Card Submitted DATE</th>
+				<th scope="col">SECURITY SIGN</th>
+				<th scope="col">Remarks</th>
 			</tr>
 		</thead>
 		<tbody>

@@ -522,11 +522,11 @@ function getDepreciationMethod(){
 									<table class="table table-hover m-b-0" style="font-size:13px;">
 										<thead>
 											<tr>
-												<th>#</th>
-												<th>Depreciation Date</th>
-												<th class="text-right">Depreciation</th>
-												<th class="text-right">Accumulated Depreciation</th>
-												<th class="text-right">Book Value</th>
+												<th scope="col">#</th>
+												<th scope="col">Depreciation Date</th>
+												<th scope="col" class="text-right">Depreciation</th>
+												<th scope="col" class="text-right">Accumulated Depreciation</th>
+												<th scope="col" class="text-right">Book Value</th>
 											</tr>
 										</thead>
 										<tbody>

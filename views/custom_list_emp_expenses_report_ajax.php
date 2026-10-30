@@ -103,19 +103,19 @@ function eerStatusClass($status_code) {
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th>Sl.No</th>
-				<th>Date</th>
-				<th>Code</th>
-				<th>Employee</th>
-				<th>Type</th>
-				<th>Merchant</th>
-				<th>Bill No</th>
-				<th>Payment</th>
-				<th>Location</th>
-				<th>Tax</th>
-				<th>Amount</th>
-				<th>Status</th>
-				<th>Bill</th>
+				<th scope="col">Sl.No</th>
+				<th scope="col">Date</th>
+				<th scope="col">Code</th>
+				<th scope="col">Employee</th>
+				<th scope="col">Type</th>
+				<th scope="col">Merchant</th>
+				<th scope="col">Bill No</th>
+				<th scope="col">Payment</th>
+				<th scope="col">Location</th>
+				<th scope="col">Tax</th>
+				<th scope="col">Amount</th>
+				<th scope="col">Status</th>
+				<th scope="col">Bill</th>
 			</tr>
 		</thead>
 		<tbody>

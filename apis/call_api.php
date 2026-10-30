@@ -131,12 +131,6 @@ $api_code = $_REQUEST['api_code'];
   $returnresult = json_decode($response,1);
   $returnresult['response_code'] = $httpCode;
   $returnresult['api_hit_id'] = $last_id;
-  if($api_code == "FACELIVENESS" AND $httpCode == "200"){
-    $returnresult['result']['request_id'] = $returnresult['result']['request_id'];
-    $returnresult['result']['webhook_security_key'] = $returnresult['result']['webhook_security_key']; //webhookid
-    $returnresult['result']['expires_at'] = $returnresult['result']['expires_at'];
-    $returnresult['result']['sdk_url'] = $returnresult['result']['sdk_url']; //faceliveness url
-  }
   if($httpCode == "503" || $httpCode == "504"){
     $returnresult['response_message'] = "The server is currently unavailable. Please try again after sometime. If the issue persists, contact your administrator for assistance";
   }

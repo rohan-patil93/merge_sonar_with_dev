@@ -97,11 +97,11 @@ $page_data = json_encode(
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th width="5%">#</th>
-                                <th>Clock In</th>
-                                <th>Clock In Location</th>
-                                <th>Clock Out</th>
-                                <th>Clock Out Location</th>
+                                <th scope="col" width="5%">#</th>
+                                <th scope="col">Clock In</th>
+                                <th scope="col">Clock In Location</th>
+                                <th scope="col">Clock Out</th>
+                                <th scope="col">Clock Out Location</th>
                             </tr>
                         </thead>
                         <tbody>

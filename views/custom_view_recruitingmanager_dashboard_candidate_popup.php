@@ -26,11 +26,11 @@ $candidates = $result['candidates'];
 			<table  class="table table-hover m-b-0 " style="font-size:13px;" >
 				<thead>
 					<tr>
-						<th>#.</th>
-						<th>Candidate </th>
-						<th>Candidate Email</th>
-						<th>Phone No.</th>
-						<th>Skills</th>
+						<th scope="col">#.</th>
+						<th scope="col">Candidate </th>
+						<th scope="col">Candidate Email</th>
+						<th scope="col">Phone No.</th>
+						<th scope="col">Skills</th>
 					</tr>
 				</thead>
 				<tbody id="categoryfilter">

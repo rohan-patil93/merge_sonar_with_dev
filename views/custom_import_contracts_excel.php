@@ -123,7 +123,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
 									<div class="table-responsive"><table class="table table-sm table-bordered" id="cex-table-milestones"><thead></thead><tbody></tbody></table></div>
 								</div>
 								<div class="tab-pane fade" id="cex-tab-errors">
-									<div class="table-responsive"><table class="table table-sm table-bordered" id="cex-table-errors"><thead><tr><th>Message</th></tr></thead><tbody></tbody></table></div>
+									<div class="table-responsive"><table class="table table-sm table-bordered" id="cex-table-errors"><thead><tr><th scope="col">Message</th></tr></thead><tbody></tbody></table></div>
 								</div>
 							</div>
 							<div class="cc-wizard-footer d-flex gap-2 mt-3">
@@ -143,10 +143,10 @@ $_SESSION['apply_js']['multiselest'] = 1;
 								<table class="table table-sm table-bordered" id="cex-table-result">
 									<thead>
 										<tr>
-											<th>import_ref</th>
-											<th>Status</th>
-											<th>Contract ID</th>
-											<th>Message</th>
+											<th scope="col">import_ref</th>
+											<th scope="col">Status</th>
+											<th scope="col">Contract ID</th>
+											<th scope="col">Message</th>
 										</tr>
 									</thead>
 									<tbody></tbody>

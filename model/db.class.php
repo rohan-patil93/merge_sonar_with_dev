@@ -52,11 +52,11 @@ class configClass
 		if(count($fields1)>1)
 		$fields1=implode(",",$fields1);
 		else
-		$fields1=$fields1;
+
 		if(count($fields2)>1)
 		$fields2=implode(",",$fields2);
 		else
-		$fields2=$fields2;
+
 		$query=DBSELECT.$fields1.','.$fields2.DBFROM.$tablename1.','.$tablename2;
 		if($where!="")
 		$query.=DBWHR.$where;
@@ -235,7 +235,7 @@ class configClass
 			{  
 				$values = mysqli_real_escape_string($this->con,$values);
 				if(is_numeric($values) && preg_match('/^[1-9][0-9]*$/', $values)){
-					$values=$values;
+
 				}elseif(is_null($values)){
 					$values="";
 				}elseif($values == ""){
@@ -281,7 +281,7 @@ class configClass
 				$fields=implode(",",$fields);
 			}
 			else{
-				$fields=$fields;
+
 			}
 
 			$query=DBSELECT.$fields.DBFROM.$tablename;
@@ -306,7 +306,7 @@ class configClass
 		{  	
 			$values = mysqli_real_escape_string($this->con,$values);
 			if(is_numeric($values)){
-				$values=$values;
+
 				if($values['0']==0){
 					$values="'".$values."'";
 				}

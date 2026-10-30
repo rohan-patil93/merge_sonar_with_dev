@@ -66,8 +66,8 @@ if (curl_errno($ch)) {
                 $buttonhtml = '<button type="button" class="btn btn-primary float-right mb-1" id="ai_spproved_and_start" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Click here to Start Screening" onclick="approvedstartScreening(\''.$screeningwhatsid.'\')"><i class="ti-light-bulb"></i> Scre. Start</button>';
                 $question = '<div class="row " ><table class="table table-bordered table-md">
                         <tr>
-                            <th>#</th>
-                            <th>Question</th>
+                            <th scope="col">#</th>
+                            <th scope="col">Question</th>
                         </tr>';    
                 $sq = 1;
                 foreach($questions as $qou){

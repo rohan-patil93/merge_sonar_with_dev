@@ -184,17 +184,17 @@ function addMoreAdditionalSettings(){
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th>Finance Year</th>
-						<th>Format</th>
+						<th scope="col">Finance Year</th>
+						<th scope="col">Format</th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php foreach($application_serial_numbers_list as $lst){ ?>
 					<tr class="">
-						<th class="p-2 w-b-w-s">
+						<th scope="col" class="p-2 w-b-w-s">
 						<a href="#!" class="text-primary" data-bs-toggle="tooltip" data-placement="bottom" title="" d;ata-bs-original-title="Please Click To Open Owner Details" onclick="selectProcessName('<?php echo $process_name; ?>','<?php echo $lst['id']; ?>')"><?php echo date("M-Y", strtotime($lst['from_date']))."-".date("M-Y", strtotime($lst['to_date'])); ?></a> 
 						</th>
-						<th class="p-2 w-b-w-s"></th>
+						<th scope="col" class="p-2 w-b-w-s"></th>
 					</tr>
 					<?php } ?>
 				</tbody>	

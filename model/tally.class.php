@@ -1379,7 +1379,7 @@ class tallyClass extends userClass{
 							$tax_amount = $itementry['AMOUNT']*($tax_percentage/100);
 							$total_amount = $total_amount+$tax_amount;
 							$tax_id =$items[$itementry['part_no']]->hsn_and_sac_code_id;
-							$tax_percentage =$tax_percentage;
+
 							$tax_name =$items[$itementry['part_no']]->code;
 							$amount =$total_amount;  
 							$tax_total_amount =$total_amount; 

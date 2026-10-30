@@ -95,12 +95,12 @@ if($current_status != ''){
                 <table class="table table-hover m-b-0">
                     <thead>
                         <tr>
-                            <th>Sr. No</th>
-                            <th>Creator</th>
-                            <th>Project Name</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                            <th class='text-center'>Cost</th>
+                            <th scope="col">Sr. No</th>
+                            <th scope="col">Creator</th>
+                            <th scope="col">Project Name</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">End Date</th>
+                            <th scope="col" class='text-center'>Cost</th>
                         </tr>
                     </thead>
                     <tbody>

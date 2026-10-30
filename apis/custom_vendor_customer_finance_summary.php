@@ -199,8 +199,8 @@ $financeshowtabmodule = array(4);
           <div class="table-responsive">
             <table class="table table-bordered table-sm">
               <tr bgcolor="#eeeeee">
-                <th>ERP Module</th>
-                <th>ACTION Count</th>
+                <th scope="col">ERP Module</th>
+                <th scope="col">ACTION Count</th>
               </tr>
               <?php foreach($notifications['action_by_module'] as $keylable=>$keyval){ ?>
               <tr>
@@ -220,9 +220,9 @@ $financeshowtabmodule = array(4);
           <div class="table-responsive">
             <table class="table table-bordered table-sm">
               <tr bgcolor="#eeeeee">
-                <th>ERP Repeated Alerts</th>
-                <th>Times Seen</th>
-                <th>Sample Message</th>
+                <th scope="col">ERP Repeated Alerts</th>
+                <th scope="col">Times Seen</th>
+                <th scope="col">Sample Message</th>
               </tr>
               <?php foreach($notifications['repeated_alerts'] as $repeated_alerts){ ?>
               <tr>
@@ -236,8 +236,8 @@ $financeshowtabmodule = array(4);
           <div class="table-responsive">
             <table class="table table-bordered table-sm">
               <tr bgcolor="#eeeeee">
-                <th>ERP Breakdown</th>
-                <th>Unread Count</th>
+                <th scope="col">ERP Breakdown</th>
+                <th scope="col">Unread Count</th>
               </tr>
               <?php foreach($notifications['breakdown'] as $breakdownkey=> $breakdownbal){ ?>
               
@@ -260,12 +260,12 @@ $financeshowtabmodule = array(4);
             <div class="table-responsive mt-4">
               <table class="table table-bordered table-sm">
                 <tr bgcolor="#eeeeee">
-                  <th>Transaction Table</th>
-                  <th>Requested On</th>
-                  <th>Days Pending</th>
-                  <th>Severity</th>
-                  <th>Issue</th>
-                  <th>Review</th>
+                  <th scope="col">Transaction Table</th>
+                  <th scope="col">Requested On</th>
+                  <th scope="col">Days Pending</th>
+                  <th scope="col">Severity</th>
+                  <th scope="col">Issue</th>
+                  <th scope="col">Review</th>
                 </tr>
                 <?php foreach($approvals['items'] as $itemsval){ ?>
                 <tr>
@@ -293,9 +293,9 @@ $financeshowtabmodule = array(4);
         <div class="table-responsive mt-4">
           <table class="table table-bordered table-sm">
             <tbody><tr bgcolor="#eeeeee">
-              <th>task_name</th>
-              <th>Overdue Day</th>
-              <th>Severity</th>
+              <th scope="col">task_name</th>
+              <th scope="col">Overdue Day</th>
+              <th scope="col">Severity</th>
             </tr>
             <?php if(count((array)$tasks['items']) != 0){ foreach($tasks['items'] as $unredtask){ ?>
             <tr>
@@ -367,10 +367,10 @@ $financeshowtabmodule = array(4);
                 <div class="table-responsive mt-4">
                   <table class="table table-bordered table-sm">
                       <tr bgcolor="#eeeeee">
-                        <th>Customer</th>
-                        <th>Missing Fields</th>
-                        <th>Credit Limit Breach</th>
-                        <th>Severity</th>
+                        <th scope="col">Customer</th>
+                        <th scope="col">Missing Fields</th>
+                        <th scope="col">Credit Limit Breach</th>
+                        <th scope="col">Severity</th>
                       </tr>
                       <?php foreach($customer_data_check['issues'] as $issuesval){ ?>
                       <tr>
@@ -449,10 +449,10 @@ $financeshowtabmodule = array(4);
               <div class="table-responsive mt-4">
                 <table class="table table-bordered table-sm">
                   <tr bgcolor="#eeeeee">
-                    <th>Vendor</th>
-                    <th>Missing Fields</th>
-                    <th>Credit / Overpaid</th>
-                    <th>Severity</th>
+                    <th scope="col">Vendor</th>
+                    <th scope="col">Missing Fields</th>
+                    <th scope="col">Credit / Overpaid</th>
+                    <th scope="col">Severity</th>
                   </tr>
                    <?php foreach($vendor_data_check['issues'] as $issuesval){ ?>
                   <tr>
@@ -536,15 +536,15 @@ $financeshowtabmodule = array(4);
               <div class="table-responsive">
                 <table class="table table-bordered table-sm">
                   <tr class="text-white" bgcolor="#333333">
-                    <th class="text-white">#</th>
-                    <th class="text-white">Vendor</th>
-                    <th class="text-white">AI Status</th>
-                    <th class="text-white">Rating</th>
-                    <th class="text-white">Payment Progress</th>
-                    <th class="text-white">Invoices</th>
-                    <th class="text-white">Overdue ₹</th>
-                    <th class="text-white">% of Total</th>
-                    <th class="text-white">Recommended Action</th>
+                    <th scope="col" class="text-white">#</th>
+                    <th scope="col" class="text-white">Vendor</th>
+                    <th scope="col" class="text-white">AI Status</th>
+                    <th scope="col" class="text-white">Rating</th>
+                    <th scope="col" class="text-white">Payment Progress</th>
+                    <th scope="col" class="text-white">Invoices</th>
+                    <th scope="col" class="text-white">Overdue ₹</th>
+                    <th scope="col" class="text-white">% of Total</th>
+                    <th scope="col" class="text-white">Recommended Action</th>
                   </tr>
                   <?php $mkseq= 1; foreach($vendor_payment_ratings['ratings'] as $ratingsred){ ?>
                   <tr>
@@ -583,25 +583,25 @@ $financeshowtabmodule = array(4);
                   </tr>
 
                   <tr bgcolor="#eeeeee">
-                    <th colspan="9">
+                    <th scope="col" colspan="9">
                       <table class="table table-bordered table-sm f-13">
                         <tr>
-                          <th colspan="5" class="f-14">
+                          <th scope="col" colspan="5" class="f-14">
                             <i class="fa fa-file-text-o m-r-5"></i> Invoice Payment Breakdown — Aperture Science
                           </th>
                         </tr>
                         <?php foreach($ratingsred['invoices_detail'] as $invoices_detail){ ?>
                         <tr>
-                          <th colspan="5" class="f-12 bg-info">
+                          <th scope="col" colspan="5" class="f-12 bg-info">
                             <i class="fa fa-file-text-o m-r-5"></i><?php echo $invoices_detail['invoice_number']."  ".$invoices_detail['invoice_date']; ?>
                           </th>
                         </tr>
                         <tr>
-                          <th>DUE DATE</th>
-                          <th>DUE AMOUNT</th>
-                          <th>PENDING</th>
-                          <th>STATUS</th>
-                        <!--   <th>PAYMENTS MADE</th>-->
+                          <th scope="col">DUE DATE</th>
+                          <th scope="col">DUE AMOUNT</th>
+                          <th scope="col">PENDING</th>
+                          <th scope="col">STATUS</th>
+                        <!--   <th scope="col">PAYMENTS MADE</th>-->
                       </tr>
                         <?php foreach($invoices_detail['terms'] as $termsval){ ?>
                         <tr>
@@ -616,10 +616,10 @@ $financeshowtabmodule = array(4);
                   </tr>
 
                   <tr bgcolor="#eeeeee"> 
-                    <th colspan="9"> 
+                    <th scope="col" colspan="9"> 
                       <table class="table table-bordered table-sm f-13 text-white"> 
                         <tr class="header-row" onclick="toggleTable(this)">
-                          <th colspan="5" class="f-14 text-dark cursor-pointer">
+                          <th scope="col" colspan="5" class="f-14 text-dark cursor-pointer">
                             <i class="ti-angle-right m-r-10 arrow"></i>
                             <i class="fa fa-book m-r-5"></i> Ledger Statement — Aperture Science
                           </th>
@@ -712,15 +712,15 @@ $financeshowtabmodule = array(4);
               <div class="table-responsive mt-4">
                 <table class="table table-bordered table-sm">
                   <tbody><tr class="text-white" bgcolor="#333333">
-                    <th class="text-white">#</th>
-                    <th class="text-white">Customer</th>
-                    <th class="text-white">AR Status</th>
-                    <th class="text-white">Rating</th>
-                    <th class="text-white">Collection Progress</th>
-                    <th class="text-white">Invoices</th>
-                    <th class="text-white">Overdue ₹</th>
-                    <th class="text-white">% of Total</th>
-                    <th class="text-white">Recommended Action</th>
+                    <th scope="col" class="text-white">#</th>
+                    <th scope="col" class="text-white">Customer</th>
+                    <th scope="col" class="text-white">AR Status</th>
+                    <th scope="col" class="text-white">Rating</th>
+                    <th scope="col" class="text-white">Collection Progress</th>
+                    <th scope="col" class="text-white">Invoices</th>
+                    <th scope="col" class="text-white">Overdue ₹</th>
+                    <th scope="col" class="text-white">% of Total</th>
+                    <th scope="col" class="text-white">Recommended Action</th>
                   </tr>
                   <?php $mkseq=1; foreach($customer_payment_ratings['ratings'] as $ratingsres){ ?>
                   <tr>
@@ -757,25 +757,25 @@ $financeshowtabmodule = array(4);
                     <td class="f-10"><?php $ratingsres['recommended_action']; ?></td>
                   </tr>
                   <tr bgcolor="#eeeeee">
-                    <th colspan="9">
+                    <th scope="col" colspan="9">
                       <table class="table table-bordered table-sm f-13">
                         <tr>
-                          <th colspan="5" class="f-14">
+                          <th scope="col" colspan="5" class="f-14">
                             <i class="fa fa-file-text-o m-r-5"></i> Sales Invoice Receivable Breakdown — <?php echo $ratingsres['company'];?>
                           </th>
                         </tr>
                         <?php foreach($ratingsres['invoices_detail'] as $invoicesdetail){ ?>
                         <tr bgcolor="#f6f7f8">
-                          <th colspan="5" class="f-12 bg-info">
+                          <th scope="col" colspan="5" class="f-12 bg-info">
                             <i class="fa fa-file-text-o m-r-5"></i> <?php echo $invoices_detail['invoice_number']."  ".$invoices_detail['invoice_date']; ?>
                           </th>
                         </tr>
                         <tr>
-                          <th>DUE DATE</th>
-                          <th>DUE AMOUNT</th>
-                          <th>PENDING</th>
-                          <th>STATUS</th>
-                          <!-- <th>PAYMENTS RECEIVED</th> -->
+                          <th scope="col">DUE DATE</th>
+                          <th scope="col">DUE AMOUNT</th>
+                          <th scope="col">PENDING</th>
+                          <th scope="col">STATUS</th>
+                          <!-- <th scope="col">PAYMENTS RECEIVED</th> -->
                         </tr>
                         <?php foreach($invoicesdetail['terms'] as $terms){ ?>
                         <tr>
@@ -824,11 +824,11 @@ $financeshowtabmodule = array(4);
           <div class="table-responsive">
             <table class="table table-bordered table-sm">
               <tr bgcolor="#333333" class="text-white">
-                <th class="text-white">Category</th>
-                <th class="text-white">Metric</th>
-                <th class="text-white">Value</th>
-                <!-- <th class="text-white">Trend</th> -->
-                <th class="text-white">Status</th>
+                <th scope="col" class="text-white">Category</th>
+                <th scope="col" class="text-white">Metric</th>
+                <th scope="col" class="text-white">Value</th>
+                <!-- <th scope="col" class="text-white">Trend</th> -->
+                <th scope="col" class="text-white">Status</th>
               </tr>
               <?php foreach($finance['metrics_snapshot'] as $metrics_snapshot){ ?>
               <tr>
@@ -912,7 +912,7 @@ $financeshowtabmodule = array(4);
           <div class="table-responsive mt-4">
             <table class="table table-bordered table-sm">
               <tr bgcolor="#333333" class="text-white">
-                <th colspan="3" class="text-white">Key P&L Figures</th>
+                <th scope="col" colspan="3" class="text-white">Key P&L Figures</th>
               </tr>
               <tr>
                 <td>Metric</td>
@@ -920,7 +920,7 @@ $financeshowtabmodule = array(4);
               </tr>
               <tr>
                 <td>Revenue</td>
-                <th class="text-success"><?php echo $finance['profit_and_loss']['revenue']; ?></th>
+                <th scope="col" class="text-success"><?php echo $finance['profit_and_loss']['revenue']; ?></th>
               </tr>
               <tr>
                 <td>Gross Profit</td>
@@ -1003,7 +1003,7 @@ $financeshowtabmodule = array(4);
           <div class="table-responsive mt-4">
             <table class="table table-bordered table-sm">
               <tr bgcolor="#333333" class="text-white">
-                <th colspan="3" class="text-white">Operating Activities Detail</th>
+                <th scope="col" colspan="3" class="text-white">Operating Activities Detail</th>
               </tr>
               <tr>
                 <td>Item</td>
@@ -1013,7 +1013,7 @@ $financeshowtabmodule = array(4);
               <?php foreach($finance['cash_flow']['operating_activities'] as $operating_activities){ ?>
               <tr>
                 <td><?php echo $operating_activities['label']; ?></td>
-                <th class="text-dark"><?php echo $operating_activities['current']; ?></th>
+                <th scope="col" class="text-dark"><?php echo $operating_activities['current']; ?></th>
                 <td class="text-muted"><?php echo $operating_activities['previous']; ?></td>
               </tr>
               <?php } ?>
@@ -1022,7 +1022,7 @@ $financeshowtabmodule = array(4);
           <div class="table-responsive mt-4">
             <table class="table table-bordered table-sm">
               <tr bgcolor="#333333" class="text-white">
-                <th colspan="3" class="text-white">Investing Activities Detail</th>
+                <th scope="col" colspan="3" class="text-white">Investing Activities Detail</th>
               </tr>
               <tr>
                 <td>Item</td>
@@ -1032,7 +1032,7 @@ $financeshowtabmodule = array(4);
               <?php foreach($finance['cash_flow']['investing_activities'] as $investing_activities){ ?>
               <tr>
                 <td><?php echo $investing_activities['label']; ?></td>
-                <th class="text-dark"><?php echo $investing_activities['current']; ?></th>
+                <th scope="col" class="text-dark"><?php echo $investing_activities['current']; ?></th>
                 <td class="text-muted"><?php echo $investing_activities['previous']; ?></td>
               </tr>
               <?php } ?>
@@ -1041,7 +1041,7 @@ $financeshowtabmodule = array(4);
           <div class="table-responsive mt-4">
             <table class="table table-bordered table-sm">
               <tr bgcolor="#333333" class="text-white">
-                <th colspan="3" class="text-white"> Financing Activities Detail</th>
+                <th scope="col" colspan="3" class="text-white"> Financing Activities Detail</th>
               </tr>
               <tr>
                 <td>Item</td>
@@ -1051,7 +1051,7 @@ $financeshowtabmodule = array(4);
               <?php foreach($finance['cash_flow']['financing_activities'] as $financing_activities){ ?>
               <tr>
                 <td><?php echo $financing_activities['label']; ?></td>
-                <th class="text-dark"><?php echo $financing_activities['current']; ?></th>
+                <th scope="col" class="text-dark"><?php echo $financing_activities['current']; ?></th>
                 <td class="text-muted"><?php echo $financing_activities['previous']; ?></td>
               </tr>
               <?php } ?>

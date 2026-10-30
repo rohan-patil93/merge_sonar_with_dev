@@ -102,12 +102,12 @@ $schedulesUrl = 'index.php?option=COM_VIEW_CONTRACT_AMC_SCHEDULES&contract_id=' 
                                             <table class="table table-bordered table-sm f-12 mb-0">
                                                 <thead class="table-light">
                                                     <tr>
-                                                        <th>Category</th>
-                                                        <th>Asset</th>
-                                                        <th>Frequency</th>
-                                                        <th>Pending Visits</th>
-                                                        <th>Default <?php echo $assigneeLabel; ?></th>
-                                                        <th>Status</th>
+                                                        <th scope="col">Category</th>
+                                                        <th scope="col">Asset</th>
+                                                        <th scope="col">Frequency</th>
+                                                        <th scope="col">Pending Visits</th>
+                                                        <th scope="col">Default <?php echo $assigneeLabel; ?></th>
+                                                        <th scope="col">Status</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>

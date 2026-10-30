@@ -147,13 +147,13 @@ function deleteitem(cardid){
 <table class="table table-hover table-custom-responsive"  id="toureaddmore"> 
     <thead>
 	  <tr>	
-		  <th width="15%">Field Name</th>
-		  <th width="15%">Menu Path</th>
-		  <th width="15%">Ref Field Name</th>
-		  <th width="30%">Help Text</th>
-		  <th width="15%">Field  Type</th>
-		  <th width="5%">Sequence</th>
-		  <th width="5%">Display</th> 
+		  <th scope="col" width="15%">Field Name</th>
+		  <th scope="col" width="15%">Menu Path</th>
+		  <th scope="col" width="15%">Ref Field Name</th>
+		  <th scope="col" width="30%">Help Text</th>
+		  <th scope="col" width="15%">Field  Type</th>
+		  <th scope="col" width="5%">Sequence</th>
+		  <th scope="col" width="5%">Display</th> 
 	  </tr>
 	 </thead>
 	 <tbody>

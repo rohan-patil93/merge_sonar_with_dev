@@ -24,10 +24,10 @@ $reviewdata = json_decode($reviewdata, 1);
 			<table class="table table-hover m-b-0">
 				<thead>
 					<tr>
-						<th></th>
-						<th>Description</th>
-						<th>Status</th>
-						<!-- 	<th>Actions</th> -->
+						<th scope="col"></th>
+						<th scope="col">Description</th>
+						<th scope="col">Status</th>
+						<!-- 	<th scope="col">Actions</th> -->
 					</tr>
 				</thead>
 				<tbody>
@@ -86,10 +86,10 @@ $reviewdata = json_decode($reviewdata, 1);
 				<table class="table table-hover m-b-0">
 					<thead>
 						<tr>
-							<th></th>
-							<th>Description</th>
-							<th>Status</th>
-							<!-- 	<th>Actions</th> -->
+							<th scope="col"></th>
+							<th scope="col">Description</th>
+							<th scope="col">Status</th>
+							<!-- 	<th scope="col">Actions</th> -->
 						</tr>
 					</thead>
 					<tbody>

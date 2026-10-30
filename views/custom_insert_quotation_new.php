@@ -2773,14 +2773,14 @@ if($checktimeprint > 0){
                                  <?php if(count((array)$jv_items) !=0 AND $table_name == "purchase_invoices" AND 1 != 1){  ?>
                                     <table   class="table table-bordered">
                                         <tr class="bg-primary" >
-                                            <th align="center" colspan="5" class="p-2 text-center">Journal Vouchers</th>
+                                            <th scope="col" align="center" colspan="5" class="p-2 text-center">Journal Vouchers</th>
                                         </tr>
                                         <tr> 
-                                            <th class="p-2 text-left"><span>Account</span></th>
-                                            <th class="p-2 text-left"><span>Account Name</span></th>
-                                            <th class="p-2 text-left"><span>Particulars</span></th>
-                                            <th class="p-2 text-right">Debit</th>
-                                            <th class="p-2 text-right">Credit</th>
+                                            <th scope="col" class="p-2 text-left"><span>Account</span></th>
+                                            <th scope="col" class="p-2 text-left"><span>Account Name</span></th>
+                                            <th scope="col" class="p-2 text-left"><span>Particulars</span></th>
+                                            <th scope="col" class="p-2 text-right">Debit</th>
+                                            <th scope="col" class="p-2 text-right">Credit</th>
                                         </tr>
                                         <?php $debitsum = $creditsum = 0; foreach((array)$jv_items as $jvitems){ 
                                             $debitsum = $debitsum +$jvitems['debit_amount'];
@@ -2795,9 +2795,9 @@ if($checktimeprint > 0){
                                         </tr>
                                     <?php } ?>
                                         <tr> 
-                                            <th class="p-2 text-left" colspan="3"><span>Total</span></th>
-                                            <th class="p-2 text-right"><?php echo customeummarmonyformate($debitsum); ?> </th>
-                                            <th class="p-2 text-right"><?php echo customeummarmonyformate($creditsum); ?> </th>
+                                            <th scope="col" class="p-2 text-left" colspan="3"><span>Total</span></th>
+                                            <th scope="col" class="p-2 text-right"><?php echo customeummarmonyformate($debitsum); ?> </th>
+                                            <th scope="col" class="p-2 text-right"><?php echo customeummarmonyformate($creditsum); ?> </th>
                                         </tr>
                                     </table>
                                 <?php } ?>
@@ -2806,14 +2806,14 @@ if($checktimeprint > 0){
                                     <div class="mt-3">
                                     <table   class=" table table-bordered">
                                         <tr class="bg-primary" >
-                                            <th colspan="6" class="p-2 text-center">Follow Ups</th>
+                                            <th scope="col" colspan="6" class="p-2 text-center">Follow Ups</th>
                                         </tr>
                                         <tr> 
-                                            <th class="p-2"><span>#</span></th>
-                                            <th class="p-2"><span>Task Name</span></th>
-                                            <th class="p-2"><span>Task Date</span></th>
-                                            <th class="p-2 text-center">Status</th>
-                                            <th class="p-2 text-center">Action</th>
+                                            <th scope="col" class="p-2"><span>#</span></th>
+                                            <th scope="col" class="p-2"><span>Task Name</span></th>
+                                            <th scope="col" class="p-2"><span>Task Date</span></th>
+                                            <th scope="col" class="p-2 text-center">Status</th>
+                                            <th scope="col" class="p-2 text-center">Action</th>
                                         </tr>
                                         <?php $i=1; foreach((array)$project_task_details as $atl){
                                             ?>
@@ -2859,10 +2859,10 @@ if($checktimeprint > 0){
                             <div class="tab-pane card-body active p-0 originatercurrencycalc_tab" id="originatercurrencycalc" role="tabpanel"> 
                         <div style="position: sticky;top: 20px;">
                         <table class=" table table-bordered custom_dynamic_transaction_table" >
-                            <tr class="bg-primary" ><th colspan="2" class="p-2 text-center">Order Summary</th></tr>
+                            <tr class="bg-primary" ><th scope="col" colspan="2" class="p-2 text-center">Order Summary</th></tr>
                             <tr>
-                                <th class="amount text-start p-2" width="40%" style="width:40%"><span>Sub Total</span></th>
-                                <th class="p-2 text-right" width="60%" style="width:40%">
+                                <th scope="col" class="amount text-start p-2" width="40%" style="width:40%"><span>Sub Total</span></th>
+                                <th scope="col" class="p-2 text-right" width="60%" style="width:40%">
                                     <span id="dis_subTotalid">
                                         <?php echo customeummarmonyformateifine($table1['sub_total']); ?>
                                     </span>
@@ -2871,7 +2871,7 @@ if($checktimeprint > 0){
                                 </th>
                             </tr>
                             <tr>
-                                <th class="amount text-start p-2 <?php if($table1['discount_mode'] == 'DI'){ echo "event_disabled"; } ?>" id="overall_discount_div">
+                                <th scope="col" class="amount text-start p-2 <?php if($table1['discount_mode'] == 'DI'){ echo "event_disabled"; } ?>" id="overall_discount_div">
                                     <div class="form-radio">
                                     <span>Discount </span>
                                     <div class="radio radio-inline m-0">
@@ -2956,7 +2956,7 @@ if($checktimeprint > 0){
                             </tr>
                             <?php  /**  ?>
                             <tr>
-                                <th class="amount text-start p-2">
+                                <th scope="col" class="amount text-start p-2">
                                     <div class="">  
                                         <select class="form-select js-example-basic-single"  name="shipping_tax" id="shipping_tax"  >
                                             <option value="0">Additional Charges</option>
@@ -2975,7 +2975,7 @@ if($checktimeprint > 0){
                             </tr>
                             
                             <tr>
-                                <th class="amount text-start p-2">
+                                <th scope="col" class="amount text-start p-2">
                                     <span >Shipping</span>
                                     <div class="">  
                                         <select class="form-select js-example-basic-single"  name="shipping_tax" id="shipping_tax" onchange="calculateTotal()" >
@@ -3040,7 +3040,7 @@ if($checktimeprint > 0){
                         </tr>
                             <?php if($table_name == 'bills'){ ?>
                             <tr>
-                                <th class="amount p-2">
+                                <th scope="col" class="amount p-2">
                                     <div> 
                                         <div style="float: left;width: 50%;padding: 10px;">
                                             <span >TDS</span>
@@ -3114,7 +3114,7 @@ if($checktimeprint > 0){
                         <?php } //} ?>
                         <?php if($table_name == "sales_invoices"){ ?>
                             <tr >
-                                <th class="p-2  text-left">TCS</th>
+                                <th scope="col" class="p-2  text-left">TCS</th>
                                 <td class="p-2 text-right f-w-600" ><?php echo $table1['total_tds_amount'] !=""?$table1['total_tds_amount']:0; ?></td>
                             </tr>
 
@@ -3122,30 +3122,30 @@ if($checktimeprint > 0){
                         <?php } ?>
                         <?php if($table1['security_deposit'] !="" AND $table1['security_deposit'] !="0"){ ?>
                             <tr >
-                                <th class="p-2  text-left">Security Deposit</th>
+                                <th scope="col" class="p-2  text-left">Security Deposit</th>
                                 <td class="p-2 text-right f-w-600" ><?php echo $table1['security_deposit'] !=""?$table1['security_deposit']:0; ?></td>
                             </tr>
 
 
                         <?php } ?>
                             <tr>
-                                <th class="amount p-2 text-start " >
+                                <th scope="col" class="amount p-2 text-start " >
                                     <span>Grand Total</span>
                                     <input  type="hidden" class="form-control amount" placeholder="value" name="gdam" id="gdam">
                                     <input  type="hidden" class="form-control amount" placeholder="value" name="div_amount_total" id="div_amount_total">
                                     <input  value="<?php echo $table1['tax_amount']; ?>" type="hidden" class="form-control amount" name="taxRate" id="taxAmount" readonly placeholder="Tax Amount">
                                 </th>
-                                <th class="p-2 text-right">
+                                <th scope="col" class="p-2 text-right">
                                     <span id="grndtotalid"><?php echo customeummarmonyformateifine($table1['grand_total']+$table1['total_tds_amount']); ?> </span>
                                     <input  value="<?php echo customeummarmonyformate($table1['grand_total']); ?>" type="hidden" class="form-control amount" name="dis_grandtotal" id="dis_grandtotal" readonly placeholder="Grand Total"><input  value="<?php echo $table1['grand_total']; ?>" type="hidden" class="form-control amount" name="grandtotal" id="grandtotal" readonly placeholder="Grand Total">
                                 </th>
                             </tr>
                             <tr>
-                                <th class="amount p-2 text-start "><span >Rounding Off</span></th>
+                                <th scope="col" class="amount p-2 text-start "><span >Rounding Off</span></th>
                                 <td class="p-2 text-right"><span id="rounding_off"><?php echo $table1['rounding_off']!=""?customeummarmonyformateifine($table1['rounding_off']):0; ?> </span></td>
                             </tr>
                             <tr style="display: none;">
-                                <th class="amount" ><span >Amount Paid</span></th>
+                                <th scope="col" class="amount" ><span >Amount Paid</span></th>
                                 <td><input value="" type="text" class="form-control amount" name="amountPaid" id="amountPaid" placeholder="Amount Paid"></td>
                             </tr>
                             <tr style="display: none;">
@@ -3184,28 +3184,28 @@ if($checktimeprint > 0){
      ?>
                         <table   class=" table table-bordered exchange" <?php echo $currency_conversion_style; ?>>
                                     <tr class="bg-primary" >
-                                        <th colspan="2" class="p-2 text-center">Order Summary</th>
+                                        <th scope="col" colspan="2" class="p-2 text-center">Order Summary</th>
                                     </tr>
                                     <tr>
-                                        <th class="p-2 text-left"><span >Sub total</span ></th>
+                                        <th scope="col" class="p-2 text-left"><span >Sub total</span ></th>
                                         <td class="p-2 text-right f-w-600">
                                              <span id="ex_sub_total"><?php echo customeummarmonyformate($table1['sub_total']*$table1['currency_rate']); ?></span> 
                                         </td>
                                      </tr> 
                                      <tr> 
-                                        <th class=" p-2 text-left"><span>Tax</span></th>
+                                        <th scope="col" class=" p-2 text-left"><span>Tax</span></th>
                                         <td class="p-2 text-right">
                                              <span id="ex_tax"><?php echo customeummarmonyformate($table1['tax_amount']*$table1['currency_rate']); ?></span> 
                                         </td>
                                     </tr>
                                     <tr>    
-                                        <th class="p-2  text-left">Discount</th>
+                                        <th scope="col" class="p-2  text-left">Discount</th>
                                         <td class="p-2 text-right ">
                                              <span id="ex_discount"><?php echo customeummarmonyformate($table1['discount_amount']*$table1['currency_rate']); ?></span> 
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th class="p-2  text-left">Grand Total </th>
+                                        <th scope="col" class="p-2  text-left">Grand Total </th>
                                         <td class="p-2 text-right f-w-600">
                                              <span id="ex_grand_total"><?php echo customeummarmonyformate(($table1['grand_total']+$table1['total_tds_amount'])*$table1['currency_rate']); ?></span> 
                                         </td>

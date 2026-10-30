@@ -119,12 +119,12 @@ if(isset($_POST['datefilter'])){
 									<!-- <table class="table table-separate table-head-custom table-checkable" id="kt_datatable1"> -->
 										<thead>  
 											<tr>
-												<th>#</th>
-												<th>Location </th>
+												<th scope="col">#</th>
+												<th scope="col">Location </th>
 												<?php foreach($foodoptions as $food_op){ ?>
-													<th> <?php echo $food_op['food_option']; ?></th>
+													<th scope="col"> <?php echo $food_op['food_option']; ?></th>
 												<?php } ?>
-												<th>Transport </th>
+												<th scope="col">Transport </th>
 											</tr>
 										</thead>
 										<tbody> 
