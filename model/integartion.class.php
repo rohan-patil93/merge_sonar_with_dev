@@ -1,6 +1,6 @@
 <?php
 class integartionClass{ 
-	function toinsertupdatethejobpostingpublish($post,$get){
+	public function toinsertupdatethejobpostingpublish($post,$get){
 		global $callConfig;
 		//5,52,53	
 		$returrara['post'] = $post;
@@ -36,7 +36,7 @@ class integartionClass{
 		$insert = $callConfig->insertRecord('job_posting_publish_detail_histories',$insert_array);
 		return $returrara;
 	}
-	function infisuitejobcandedatesave($post,$get){
+	public function infisuitejobcandedatesave($post,$get){
 		global $callConfig;		
 		if($post['resume']!=""){
 			// Initialize a file URL to the variable
@@ -85,7 +85,7 @@ class integartionClass{
 		$insert = $callConfig->insertRecord('job_posting_candidates',$insert_array);	*/
 		
 	}
-	function toGetApplicationSerialNumber($table_name){
+	public function toGetApplicationSerialNumber($table_name){
 		global $callConfig;
 		$whr="application_table_name = '".$table_name."'";
 
@@ -97,7 +97,7 @@ class integartionClass{
 		$update = $callConfig->updateRecord(TBL_APPLICATION_SERIAL_NUMBERS,array('serial_number' =>$res->serial_number+1),'id',$res->id);
 		return trim($data);
 	}
-	function getviewalldetilarecruitmentdashboardineg($get){
+	public function getviewalldetilarecruitmentdashboardineg($get){
 		global $callConfig;
 		//echo "<pre>";
 		$reportstartdate = $get['reportstartdate'];
@@ -145,7 +145,7 @@ class integartionClass{
 		}
 		return $return;
 	}
-	function togetmyreportswithdetails($get){
+	public function togetmyreportswithdetails($get){
 		global $callConfig;
 		$whr = " AND module_id IN (".$get['module_list'].") ";
 		
@@ -160,7 +160,7 @@ class integartionClass{
 		$return['view'] = $view;
 		return $return;
 	}
-	function togetcandidatefunnel($get){
+	public function togetcandidatefunnel($get){
 		
 		global $callConfig;
 		$return['get']  = $get;
@@ -224,7 +224,7 @@ class integartionClass{
 		}
 		return $return;
 	}
-	function togetcandidatebydisabilitygender($get){
+	public function togetcandidatebydisabilitygender($get){
 		global $callConfig;
 		$query = "SELECT jp.id, jp.job_code, jp.job_name, jp.job_number, jp.requested_date, jp.job_status, jt.job_title , jt.id job_title_id FROM job_postings jp , job_titles jt WHERE jp.company_id = jt.company_id AND jp.company_id=".$get['company_id']." AND jp.job_code = jt.id AND jp.job_status = 0 AND jp.is_active =0";
 		$job_postings = $callConfig->getAllRows($query);
@@ -243,12 +243,12 @@ class integartionClass{
 		$return['data'] = $callConfig->getAllRows($query);
 		return $return;
 	}
-	function toinsertreportviewdata($get){
+	public function toinsertreportviewdata($get){
 		global $callConfig;
 		$insert_array = array('company_id'=>$get['company_id'],'report_id'=>$get['myreport_id'],'report_date'=>date("Y-m-d"),'activity'=>'Viewed','user_id'=>$get['user_id'],'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id']);
 		$insert = $callConfig->insertRecord('report_histories',$insert_array);
 	}
-	function togetcandidatebyracegender($get){
+	public function togetcandidatebyracegender($get){
 		global $callConfig;
 		$query = "SELECT jp.id, jp.job_code, jp.job_name, jp.job_number, jp.requested_date, jp.job_status, jt.job_title , jt.id job_title_id FROM job_postings jp , job_titles jt WHERE jp.company_id = jt.company_id AND jp.company_id=".$get['company_id']." AND jp.job_code = jt.id AND jp.job_status = 0 AND jp.is_active =0";
 		$job_postings = $callConfig->getAllRows($query);
@@ -269,7 +269,7 @@ class integartionClass{
 		$return['data'] = $callConfig->getAllRows($query);
 		return $return;
 	}
-	function togetcandidatebyveterangender($get){
+	public function togetcandidatebyveterangender($get){
 		global $callConfig;
 		$query = "SELECT jp.id, jp.job_code, jp.job_name, jp.job_number, jp.requested_date, jp.job_status, jt.job_title , jt.id job_title_id FROM job_postings jp , job_titles jt WHERE jp.company_id = jt.company_id AND jp.company_id=".$get['company_id']." AND jp.job_code = jt.id AND jp.job_status = 0 AND jp.is_active =0";
 		$job_postings = $callConfig->getAllRows($query);
@@ -290,7 +290,7 @@ class integartionClass{
 		$return['data'] = $callConfig->getAllRows($query);
 		return $return;
 	}
-	function togetcandidatesources($get){
+	public function togetcandidatesources($get){
 		global $callConfig;
 		$query = "SELECT id, job_name, job_number, requested_date,job_status FROM job_postings WHERE company_id=".$get['company_id']." AND job_status = 0 AND is_active =0";
 		$query = "SELECT jp.id, jp.job_code, jp.job_name, jp.job_number, jp.requested_date, jp.job_status, jt.job_title , jt.id job_title_id FROM job_postings jp , job_titles jt WHERE jp.company_id = jt.company_id AND jp.company_id=".$get['company_id']." AND jp.job_code = jt.id AND jp.job_status = 0 AND jp.is_active =0";
@@ -332,7 +332,7 @@ class integartionClass{
 			$return['candidates'] = $callConfig->getAllRows($query);
 			return $return;
 	}
-	function togetemployeeageprofile($post, $get){
+	public function togetemployeeageprofile($post, $get){
 		global $callConfig;
 		//echo "Ravi----------------------"; exit;
 		$return['menu_data'] = $this->toreportempdropdown($get);
@@ -434,7 +434,7 @@ class integartionClass{
 		$return['age_range'] = $callConfig->getAllRows($query);
 		return $return;
 	}
-	function toreportempdropdown($get){
+	public function toreportempdropdown($get){
 		global $callConfig;
 		$menudata['divisions']=array('table_name'=>'divisions','name'=>'Divisions','field'=>'division_name','data'=>'');
 		$menudata['departments']=array('table_name'=>'departments','name'=>'Departments','field'=>'department_name','data'=>'');
@@ -458,7 +458,7 @@ class integartionClass{
 		}
 		return $menudata;
 	} 
-	function togetemployeebirthdays($post,$get){
+	public function togetemployeebirthdays($post,$get){
 		global $callConfig;
 		$return['menu_data'] = $this->toreportempdropdown($get);
 		$whr = "";
@@ -478,7 +478,7 @@ class integartionClass{
 		*/
   		return  $return;
  	}
- 	function togetemployeeeodetails($post, $get){
+ 	public function togetemployeeeodetails($post, $get){
  		global $callConfig;
  		$return['menu_data'] = $this->toreportempdropdown($get);
  		$whr = "";
@@ -507,7 +507,7 @@ class integartionClass{
  		$return['eeo_categories'] = $callConfig->getAllRows($query);
  		return $return;
  	}
- 	function toinsertapplication_table_histories_over($get){
+ 	public function toinsertapplication_table_histories_over($get){
  		global $callConfig;
  		$insert ="data";
  		for($i=1; $i<111; $i=$i+50){
@@ -524,7 +524,7 @@ class integartionClass{
  		}
  		return $insert_res;
  	}
-  	function togetreportemploymentstatushistory($post, $get){
+  	public function togetreportemploymentstatushistory($post, $get){
 	  	global $callConfig;
 	  	$return['menu_data'] = $this->toreportempdropdown($get);
 	  	$whr = "";
@@ -540,7 +540,7 @@ class integartionClass{
 	  	
 	  	return $return;
   	}
-  	function togetemployeegenderprofile($post, $get){
+  	public function togetemployeegenderprofile($post, $get){
 	  	global $callConfig;
 	  	$return['menu_data'] = $this->toreportempdropdown($get);
 	  	$whr = "";
@@ -637,7 +637,7 @@ class integartionClass{
 	  	$return['emp_data'] = $callConfig->getAllRows($query);
 	  	return $return;
   	}
-  	function togetreportsalaryhistory($post, $get){
+  	public function togetreportsalaryhistory($post, $get){
   		global $callConfig;
   		$return['menu_data'] = $this->toreportempdropdown($get);
   		$whr = "";
@@ -660,7 +660,7 @@ class integartionClass{
 	  	$return['emp_data'] = $callConfig->getAllRows($query);
   		return $return;
   	}	
-  	function togetemployeaddtionterminations($post,$get){
+  	public function togetemployeaddtionterminations($post,$get){
 	  	global $callConfig;
 	  	$return['menu_data'] = $this->toreportempdropdown($get);
 	  	$whr = "";
@@ -753,7 +753,7 @@ class integartionClass{
 	  	$return['emp_data'] = $callConfig->getAllRows($query);
 	  	return $return;
   	}
-  function togetemployeemployeeheadcount($post, $get){
+  public function togetemployeemployeeheadcount($post, $get){
   	global $callConfig;
   	$return['menu_data'] = $this->toreportempdropdown($get);
   	$whr = "";
@@ -846,7 +846,7 @@ class integartionClass{
   	return $return;
 
   }
-  function togetemployeemployeeturnover($post, $get){
+  public function togetemployeemployeeturnover($post, $get){
   	global $callConfig;
   	$return['menu_data'] = $this->toreportempdropdown($get);
   	$whr = "";
@@ -948,7 +948,7 @@ class integartionClass{
   	return $return;
 
   }
-  function togetreportlastpaychange($post, $get){
+  public function togetreportlastpaychange($post, $get){
   	global $callConfig;
   	$return['menu_data'] = $this->toreportempdropdown($get);
   	$whr = "";
@@ -2786,7 +2786,7 @@ function togetprojectdnewashboarddetails($get){
 	 //print_r($project); exit;
 	
 	foreach($ptime as $atimr){
-		if($atimr->planned_finish !="" && $atimr->planned_finish!=""){
+		if($atimr->planned_finish !=""){
 			//echo "<pre>"; print_r($atimr);
 			$plandaystr = strtotime($atimr->planned_finish) - strtotime($atimr->planned_start);
 			$planday = floor($plandaystr / (60 * 60 * 24));
@@ -3221,7 +3221,7 @@ function togetallslectedtrasportdetails($get){
 	return $return;
 }
   
-  function toinserttranspordatarequest($post, $get){
+  public function toinserttranspordatarequest($post, $get){
 	global $callConfig;
 	$post['current_status'] = 10;
 	$res=$callConfig->insertRecord('employee_transport_requests',$post);
@@ -3591,7 +3591,7 @@ function searchtransportbus($get){
 	if($get['droping'] != "" && $get['droping'] == ""){
 		$whr.= " AND route_ends = '".$get['droping']."'";
 	}
-	if($get['pickup'] != "" && $get['pickup'] != ""){
+	if($get['pickup'] != ""){
 		$whr.= " AND ( route_starts LIKE '%".$get['pickup']."%' OR route_ends LIKE '%".$get['pickup']."%')";
 	}
 	$query = "SELECT * FROM company_transports WHERE company_id =".$get['company_id']." AND is_active = 0";
@@ -3640,7 +3640,6 @@ function reportofyearmonthalldetails($get){
 	$head_in_count = $headdata->cc;
 
 	$head_mnth_query = "SELECT COUNT(id) mc, month(joining_date) month, MONTHNAME(joining_date) AS month_name, sum(if(rejoin_ref_id!='',1,0)) rejoin FROM  employees WHERE YEAR(joining_date) = '".$gyear."' AND is_active = 0 GROUP BY  YEAR(joining_date), MONTH(joining_date)"; 
-	$res['head_mnth_query'] = $head_mnth_query;
 	$head_month_res = $callConfig->getAllRows($head_mnth_query);
 	$res['head_month_res'] = $head_month_res;
 
@@ -4054,7 +4053,7 @@ function toimportthedataintotablesemployeessalary($get){
 	}
 	return $salayid;
 }
-	function savegenralcodedetails($post, $get){
+	public function savegenralcodedetails($post, $get){
 		global $callConfig;
 		//$post = json_decode($post['data'],1);
 		$return['post'] = $post;
@@ -4081,7 +4080,7 @@ function toimportthedataintotablesemployeessalary($get){
 		//print_r($return);  exit;
 		return $return;
 	}
-	function gnrolepermision($get){
+	public function gnrolepermision($get){
 		global $callConfig;
 		$query = "SELECT id FROM general_code_role_permissions WHERE company_id =".$get['company_id']." AND genc_code='".$get['code']."' AND role_short_code='".$get['role']."' AND is_active =0";
 		$data = $callConfig->getRow($query);
@@ -4098,7 +4097,7 @@ function toimportthedataintotablesemployeessalary($get){
 		}
 		return $res;
 	}
-	function toinsertapplication_table_histories($get){
+	public function toinsertapplication_table_histories($get){
  		global $callConfig;
  		$return['get'] = $get;
  		$table_name = $get['table_name']; 	
@@ -4151,7 +4150,7 @@ function toimportthedataintotablesemployeessalary($get){
 	  	//print_r($insert); echo "<br>"; exit;
  		return $return;
  	}
- 	function togetjobtitleexploc($get){
+ 	public function togetjobtitleexploc($get){
  		global $callConfig;
  		$return['get'] = $get;
  		$jobtitle_query = "SELECT id,job_title FROM job_titles WHERE company_id = ".$get['company_id']." AND id IN (SELECT DISTINCT item_id FROM `vrc_items` WHERE company_id = ".$get['company_id']." AND is_active = 0) AND is_active = 0 ORDER BY id";
@@ -4199,7 +4198,7 @@ function toimportthedataintotablesemployeessalary($get){
 	 	$return['data'] = $data;
  		return $return;
  	}
- 	function togetjobtitleexp($get){
+ 	public function togetjobtitleexp($get){
  		global $callConfig;
  		$return['get'] = $get;
  		$whr=  "";
@@ -4312,7 +4311,7 @@ function toimportthedataintotablesemployeessalary($get){
 	 	$return['vendor'] = $ven;
  		return $return;
  	}
- 	function togetcarddetailsemp($get){
+ 	public function togetcarddetailsemp($get){
  		global $callConfig;
  		$return['get'] = $get;
  		$query ="SELECT vrc.transaction_number,
@@ -4401,7 +4400,7 @@ function toimportthedataintotablesemployeessalary($get){
 	 	}
 	 	return $return;
  	}
- 	function leaveapplycreateemployee($post,$get){
+ 	public function leaveapplycreateemployee($post,$get){
  		global $callConfig;
  		foreach($post['leave'] as $leaveid=>$leave){
     		$inarray = array('company_id'=>$get['company_id'],'blance_year'=>date('Y'),'employee_id'=>$post['emp_id'],'leave_type'=>$leaveid,'applicable_leaves'=>$leave,'consumed_leaves'=>'0','unapproved_leaves'=>'0','weekend_leave_consume'=>'0','holiday_leave_consume'=>'0','leave_year'=>date('Y'),'is_active'=>'0','current_status'=>'0','created_date'=>date('Y-m-d h:i:s'),'created_by'=>$get['user_id']);
@@ -4409,7 +4408,7 @@ function toimportthedataintotablesemployeessalary($get){
 		}
 		return $return;
  	}
- 	function toinsertapplicationpageprocessold($get){
+ 	public function toinsertapplicationpageprocessold($get){
  		global $callConfig;
  		$res = array('get'=>$get);
  		$table_array = array('Projects'=>'COM_VIEW_PROJECT_TOP_DASH_BOARD_DETAILS','Projects Tasks'=>'COM_VIEW_PROJECT_KANBAN','Project View'=>'COM_VIEW_PROJECT');
@@ -4431,7 +4430,7 @@ function toimportthedataintotablesemployeessalary($get){
  		return $res;
  	}
 
- 	function toinsertapplicationpageprocess($get){
+ 	public function toinsertapplicationpageprocess($get){
  		global $callConfig;
  		$res = array('get'=>$get);
  		$query = "SELECT * FROM application_process WHERE  process_name='Reports' AND is_active = 0";
@@ -4462,7 +4461,7 @@ function toimportthedataintotablesemployeessalary($get){
 	 	}
  		return $res;
  	}
- 	function togetanddifflisttablefields($get){
+ 	public function togetanddifflisttablefields($get){
  		global $callConfig;
  		$db1 = 'infistaq_infisuite_2';
  		$db2 = 'infistaq_infisuite_live_vms';
@@ -4542,7 +4541,7 @@ function toimportthedataintotablesemployeessalary($get){
  		echo "</table>"; exit;
  		return array('dbone'=>$tabone,'dbtwo'=>$tabtwo, 'listone'=>$listone, 'listtwo'=>$listtwo, 'checktables'=>$checktables, 'tablefiled'=> $tablefiled);
  	}
- 	function togetemployeeprofessionaltaxexemptions($post,$get){
+ 	public function togetemployeeprofessionaltaxexemptions($post,$get){
 		global $callConfig;
 		$return['menu_data'] = $this->toreportempdropdown($get);
 		$whr = "";
@@ -4605,7 +4604,7 @@ function toimportthedataintotablesemployeessalary($get){
   		return  $return;
  	}
  	//Omkar Code added - 18-06-2025
- 	function getmoduleprocesslist($get){
+ 	public function getmoduleprocesslist($get){
 		global $callConfig;
 		$return['get'] = $get;
 		$query = "SELECT id, module_id, module_name FROM module_setup WHERE company_id = '" . $get['company_id'] . "' AND linking = 1 AND is_active = 0";
@@ -4626,7 +4625,7 @@ function toimportthedataintotablesemployeessalary($get){
 
 		return $return;
 	}
-	function insertmoduleprocess($post ,$get){
+	public function insertmoduleprocess($post ,$get){
 		global $callConfig;
 		$return = array();
 		$return['post'] = $post;
@@ -4805,7 +4804,7 @@ function toimportthedataintotablesemployeessalary($get){
 
 		return $return;
 	}
-	function dateconvertdbformat($date){
+	public function dateconvertdbformat($date){
 		$dateformat = "";
 		if($date !=""){
 			$datesplit = str_replace('/"', '-',$date);
@@ -4814,7 +4813,7 @@ function toimportthedataintotablesemployeessalary($get){
 		return $dateformat;   
 	}
 
-	function generatingApplicationSerialNumberMasters($transaction_table,$get){
+	public function generatingApplicationSerialNumberMasters($transaction_table,$get){
 		global $callConfig;
 		$return = array();
 		$transaction_date = $get['transaction_date'];
@@ -5028,7 +5027,7 @@ function toimportthedataintotablesemployeessalary($get){
 		return 	$returnres;		
 	}
 
-	function getApplicationSerialNumbers($get){
+	public function getApplicationSerialNumbers($get){
 		global $callConfig;
 		$return = array();
 		//echo "sdvdvdfv";
@@ -5096,7 +5095,7 @@ function toimportthedataintotablesemployeessalary($get){
 		return $return;
 
 	}**/
-	function insertApplicationSerialNumbers($post, $get){
+	public function insertApplicationSerialNumbers($post, $get){
 		global $callConfig;
 		$return = array();
 		$return['post'] = $post;
@@ -5143,7 +5142,7 @@ function toimportthedataintotablesemployeessalary($get){
 		return $return;
 
 	}
-	function tobeforeaddmeetingrommbook($get){
+	public function tobeforeaddmeetingrommbook($get){
 		global $callConfig;
         $return = array();
         $query ="SELECT id,cabin_name FROM building_floor_spaces WHERE company_id = {$get['company_id']} AND space_type_id IN (SELECT id FROM space_types WHERE company_id =  {$get['company_id']} AND short_code = 'METTING_ROOM' AND is_active =0)";
@@ -5163,7 +5162,7 @@ function toimportthedataintotablesemployeessalary($get){
         return $return;
 	}
 
-	function getTrevllingPlanData_old($get){
+	public function getTrevllingPlanData_old($get){
         global $callConfig;
         $return = array();
         $cities_arr = array();
@@ -5236,7 +5235,7 @@ function toimportthedataintotablesemployeessalary($get){
 
     }
 
-    function getDynamicCities($get){
+    public function getDynamicCities($get){
         global $callConfig;
         $return = array();
         if(isset($get['q']) && $get['q'] != ''){
@@ -5248,7 +5247,7 @@ function toimportthedataintotablesemployeessalary($get){
         return $return;
     }
 
-    function insertAndUpdateTrevllingPlans_old($post, $get){
+    public function insertAndUpdateTrevllingPlans_old($post, $get){
         global $callConfig;
         $return = array();
         $now        = date('Y-m-d H:i:s');
@@ -5260,7 +5259,7 @@ function toimportthedataintotablesemployeessalary($get){
             return true;
         };
 
-        function non_empty_rows(array $rows, array $required, callable $rowEmpty): array
+        public function non_empty_rows(array $rows, array $required, callable $rowEmpty): array
         {
             return array_values(array_filter($rows, fn($r) => !$rowEmpty($r, $required)));
         }
@@ -5465,7 +5464,7 @@ function toimportthedataintotablesemployeessalary($get){
         }
         return $return;
     }
-    function getCompanyAnnouncements($get){
+    public function getCompanyAnnouncements($get){
         global $callConfig;
         $return = array();
         $query = "SELECT id, announcement_category_name FROM announcement_categories WHERE company_id = {$get['company_id']} AND is_active = 0 ORDER BY id DESC";
@@ -5478,7 +5477,7 @@ function toimportthedataintotablesemployeessalary($get){
         }
         return $return;
     }
-	function tocreateuserstationeryrequestnewhr($get){
+	public function tocreateuserstationeryrequestnewhr($get){
 		global $callConfig;
 		$get['transaction_date'] = date('Y-m-d');
 		$rnd = $this->toGetApplicationSerialNumber('stationery_requests',$get);
@@ -5506,7 +5505,7 @@ function toimportthedataintotablesemployeessalary($get){
 		// }
 		return $edata;
 	}
-    function getStationeryAvailableItemsData($get){
+    public function getStationeryAvailableItemsData($get){
         global $callConfig;
         $return = array();
         $query = "SELECT id, name 
@@ -5560,7 +5559,7 @@ function toimportthedataintotablesemployeessalary($get){
         }
         return $return;
     }
-    function getMonthlyStationeryReport($get){
+    public function getMonthlyStationeryReport($get){
         global $callConfig;
 
         $return = array();
@@ -5641,7 +5640,7 @@ function toimportthedataintotablesemployeessalary($get){
 
         return $return;
     }
-    function getStationeryStockBalance($get){
+    public function getStationeryStockBalance($get){
         global $callConfig;
 
         $return = array();
@@ -5702,7 +5701,7 @@ function toimportthedataintotablesemployeessalary($get){
 
         return $return;
     }
-    function getTotalItemsIssuedCategoryWise($get){
+    public function getTotalItemsIssuedCategoryWise($get){
         global $callConfig;
 
         $return = array();
@@ -5787,7 +5786,7 @@ function toimportthedataintotablesemployeessalary($get){
 
         return $return;
     }
-    function getStationeryStockInOutDatewise($get){
+    public function getStationeryStockInOutDatewise($get){
         global $callConfig;
 
         $return = array();
@@ -5851,7 +5850,7 @@ function toimportthedataintotablesemployeessalary($get){
         return $return;
     }
 	// model/integartion.class.php
-	function updatestationeryitem($post, $get){
+	public function updatestationeryitem($post, $get){
 		global $callConfig;
 		$update = array();
 
@@ -5890,7 +5889,7 @@ function toimportthedataintotablesemployeessalary($get){
 
 	//manufacturing related start
 
-	function getProcessQcAllowedProcesses($company_id){
+	public function getProcessQcAllowedProcesses($company_id){
 		global $callConfig;
 		$processes = array(
 			'goods_receipt_notes' => 'Goods Receipt Notes',
@@ -5911,7 +5910,7 @@ function toimportthedataintotablesemployeessalary($get){
 		return $processes;
 	}
 
-	function getProcessQcMappingByPriority($company_id, $process, $item_cat_id, $item_id){
+	public function getProcessQcMappingByPriority($company_id, $process, $item_cat_id, $item_id){
 		global $callConfig;
 		$company_id = intval($company_id);
 		$item_cat_id = intval($item_cat_id);
@@ -5935,11 +5934,11 @@ function toimportthedataintotablesemployeessalary($get){
 		return (object)array();
 	}
 
-	function getprocessqcprocesses($get){
+	public function getprocessqcprocesses($get){
 		return array('processes'=>$this->getProcessQcAllowedProcesses($get['company_id']));
 	}
 
-	function getprocessqctransactions($get){
+	public function getprocessqctransactions($get){
 		global $callConfig;
 		$company_id = intval($get['company_id']);
 		$process = $get['process'] ?? '';
@@ -5990,7 +5989,7 @@ function toimportthedataintotablesemployeessalary($get){
 		return array('status'=>'success','data'=>$rows,'query'=>$query);
 	}
 
-	function getprocessqcmapping($get){
+	public function getprocessqcmapping($get){
 		global $callConfig;
 		$company_id = intval($get['company_id']);
 		$process = $get['process'] ?? $get['table'] ?? '';
@@ -6009,12 +6008,12 @@ function toimportthedataintotablesemployeessalary($get){
 		return $return;
 	}
 
-	function saveprocessqc($post, $get){
+	public function saveprocessqc($post, $get){
 		$post['table'] = $post['process'] ?? ($post['table'] ?? '');
 		return $this->toinsertthedataonitemquality($post, $get);
 	}
 
-	function getProcessQcHeader($company_id, $process, $tranid, $user_id){
+	public function getProcessQcHeader($company_id, $process, $tranid, $user_id){
 		global $callConfig;
 		$company_id = intval($company_id);
 		$tranid = intval($tranid);
@@ -6036,7 +6035,7 @@ function toimportthedataintotablesemployeessalary($get){
 		return $header;
 	}
 
-	function getProcessQcParameterCount($mapping){
+	public function getProcessQcParameterCount($mapping){
 		$spec = json_decode($mapping->specifications ?? '', true);
 		if(!is_array($spec) || !isset($spec['parameters']) || !is_array($spec['parameters'])){
 			return 0;
@@ -6050,7 +6049,7 @@ function toimportthedataintotablesemployeessalary($get){
 		return $mandatory > 0 ? $mandatory : count($spec['parameters']);
 	}
 
-	function getProcessQcSourceRows($company_id, $process, $tranid, $item_id, $item){
+	public function getProcessQcSourceRows($company_id, $process, $tranid, $item_id, $item){
 		global $callConfig;
 		$company_id = intval($company_id);
 		$tranid = intval($tranid);
@@ -6073,7 +6072,7 @@ function toimportthedataintotablesemployeessalary($get){
 		return $rows;
 	}
 
-	function syncProcessQcItems($company_id, $process, $tranid, $item_id, $header, $mapping, $item){
+	public function syncProcessQcItems($company_id, $process, $tranid, $item_id, $header, $mapping, $item){
 		global $callConfig;
 		$company_id = intval($company_id);
 		$tranid = intval($tranid);
@@ -6122,7 +6121,7 @@ function toimportthedataintotablesemployeessalary($get){
 		}
 	}
 
-	function getProcessQcContext($get){
+	public function getProcessQcContext($get){
 		global $callConfig;
 		$company_id = intval($get['company_id']);
 		$process = $get['process'] ?? $get['table'] ?? '';
@@ -6147,7 +6146,7 @@ function toimportthedataintotablesemployeessalary($get){
 		return array('status'=>'success','process'=>$process,'tranid'=>$tranid,'item_id'=>$item_id,'item'=>$item,'mapping'=>$mapping,'header'=>$header);
 	}
 
-	function getProcessQcSummaryData($company_id, $process, $tranid, $item_id){
+	public function getProcessQcSummaryData($company_id, $process, $tranid, $item_id){
 		global $callConfig;
 		$company_id = intval($company_id);
 		$tranid = intval($tranid);
@@ -6170,7 +6169,7 @@ function toimportthedataintotablesemployeessalary($get){
 		);
 	}
 
-	function getprocessqcsummary($get){
+	public function getprocessqcsummary($get){
 		$context = $this->getProcessQcContext($get);
 		if(($context['status'] ?? '') != 'success'){
 			return $context;
@@ -6178,7 +6177,7 @@ function toimportthedataintotablesemployeessalary($get){
 		return array('status'=>'success','summary'=>$this->getProcessQcSummaryData($get['company_id'], $context['process'], $context['tranid'], $context['item_id']));
 	}
 
-	function getprocessqcworkspace($get){
+	public function getprocessqcworkspace($get){
 		global $callConfig;
 		$context = $this->getProcessQcContext($get);
 		if(($context['status'] ?? '') != 'success'){
@@ -6219,7 +6218,7 @@ function toimportthedataintotablesemployeessalary($get){
 		);
 	}
 
-	function getProcessQcGroupedParameters($company_id, $mapping){
+	public function getProcessQcGroupedParameters($company_id, $mapping){
 		global $callConfig;
 		$spec = json_decode($mapping->specifications ?? '', true);
 		if(!is_array($spec)){ return array(); }
@@ -6258,7 +6257,7 @@ function toimportthedataintotablesemployeessalary($get){
 		return array_values($return);
 	}
 
-	function getprocessqcitemform($get){
+	public function getprocessqcitemform($get){
 		global $callConfig;
 		$context = $this->getProcessQcContext($get);
 		if(($context['status'] ?? '') != 'success'){
@@ -6287,7 +6286,7 @@ function toimportthedataintotablesemployeessalary($get){
 		);
 	}
 
-	function getProcessQcOptionLabel($raw_options, $key){
+	public function getProcessQcOptionLabel($raw_options, $key){
 		$options = json_decode($raw_options ?? '', true);
 		if(is_array($options) && isset($options[$key])){
 			return $options[$key];
@@ -6295,7 +6294,7 @@ function toimportthedataintotablesemployeessalary($get){
 		return null;
 	}
 
-	function evaluateProcessQcParameter($param, $value){
+	public function evaluateProcessQcParameter($param, $value){
 		$value = trim((string)$value);
 		if($value === ''){
 			return array('failed'=>0,'message'=>'');
@@ -6334,7 +6333,7 @@ function toimportthedataintotablesemployeessalary($get){
 		return array('failed'=>$failed,'message'=>'');
 	}
 
-	function saveProcessQcItem($post, $get, $complete){
+	public function saveProcessQcItem($post, $get, $complete){
 		global $callConfig;
 		$get['process'] = $post['process'] ?? '';
 		$get['tranid'] = $post['tranid'] ?? 0;
@@ -6474,16 +6473,16 @@ function toimportthedataintotablesemployeessalary($get){
 		);
 	}
 
-	function saveprocessqcitemdraft($post, $get){
+	public function saveprocessqcitemdraft($post, $get){
 		return $this->saveProcessQcItem($post, $get, false);
 	}
 
-	function completeprocessqcitem($post, $get){
+	public function completeprocessqcitem($post, $get){
 		return $this->saveProcessQcItem($post, $get, true);
 	}
 
 	//manufacturing related end
-	function getProjectEmployeeTaskReport($get){
+	public function getProjectEmployeeTaskReport($get){
 		
 		global $callConfig;
 		$return = array();
@@ -6555,7 +6554,7 @@ function toimportthedataintotablesemployeessalary($get){
 
 		return $return;
 	}
-	function togenratesalarytemplatesoot($get){
+	public function togenratesalarytemplatesoot($get){
 		global $callConfig;
 		print_r($get); exit;
 		/*$empqual = "SELECT * FROM edi_data_new WHERE id>=1 AND id<66 AND field16 !='' AND field17=''";

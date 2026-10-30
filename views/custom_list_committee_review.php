@@ -290,7 +290,7 @@ foreach ($tracking_inprogress_arr as $row) {
 												<tr>
 													<td>
 														<?php if ($_SESSION['user_image'][$row['created_by']] != "") { ?>
-															<img src="uploads/all/<?php echo $_SESSION['user_image'][$row['created_by']]; ?>" class="img-radius img-40 align-top" >
+															<img src="uploads/all/<?php echo $_SESSION['user_image'][$row['created_by']]; ?>" class="img-radius img-40 align-top" alt="" >
 														<?php } else { ?>
 															<span alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
 														<?php } ?>
@@ -354,7 +354,7 @@ foreach ($tracking_inprogress_arr as $row) {
 												<tr>
 													<td>
 														<?php if ($_SESSION['user_image'][$row['created_by']] != "") { ?>
-															<img src="uploads/all/<?php echo $_SESSION['user_image'][$row['created_by']]; ?>" class="img-radius img-40 align-top" >
+															<img src="uploads/all/<?php echo $_SESSION['user_image'][$row['created_by']]; ?>" class="img-radius img-40 align-top" alt="" >
 														<?php } else { ?>
 															<span alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
 														<?php } ?>
@@ -416,7 +416,7 @@ foreach ($tracking_inprogress_arr as $row) {
 												<tr>
 													<td>
 														<?php if ($_SESSION['user_image'][$row['created_by']] != "") { ?>
-															<img src="uploads/all/<?php echo $_SESSION['user_image'][$row['created_by']]; ?>" class="img-radius img-40 align-top" >
+															<img src="uploads/all/<?php echo $_SESSION['user_image'][$row['created_by']]; ?>" class="img-radius img-40 align-top" alt="" >
 														<?php } else { ?>
 															<span alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
 														<?php } ?>
@@ -479,7 +479,7 @@ foreach ($tracking_inprogress_arr as $row) {
 												<tr>
 													<td>
 														<?php if ($_SESSION['user_image'][$row['created_by']] != "") { ?>
-															<img src="uploads/all/<?php echo $_SESSION['user_image'][$row['created_by']]; ?>" class="img-radius img-40 align-top" >
+															<img src="uploads/all/<?php echo $_SESSION['user_image'][$row['created_by']]; ?>" class="img-radius img-40 align-top" alt="" >
 														<?php } else { ?>
 															<span alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
 														<?php } ?>
@@ -582,7 +582,7 @@ foreach ($tracking_inprogress_arr as $row) {
 												<tr>
 													<td>
 														<?php if ($_SESSION['user_image'][$row['created_by']] != "") { ?>
-															<img src="uploads/all/<?php echo $_SESSION['user_image'][$row['created_by']]; ?>" class="img-radius img-40 align-top" >
+															<img src="uploads/all/<?php echo $_SESSION['user_image'][$row['created_by']]; ?>" class="img-radius img-40 align-top" alt="" >
 														<?php } else { ?>
 															<span alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
 														<?php } ?>
@@ -657,7 +657,7 @@ foreach ($tracking_inprogress_arr as $row) {
 												<tr>
 													<td>
 														<?php if ($_SESSION['user_image'][$row['created_by']] != "") { ?>
-															<img src="uploads/all/<?php echo $_SESSION['user_image'][$row['created_by']]; ?>" class="img-radius img-40 align-top" >
+															<img src="uploads/all/<?php echo $_SESSION['user_image'][$row['created_by']]; ?>" class="img-radius img-40 align-top" alt="" >
 														<?php } else { ?>
 															<span alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
 														<?php } ?>
@@ -730,7 +730,7 @@ foreach ($tracking_inprogress_arr as $row) {
 												<tr>
 													<td>
 														<?php if ($_SESSION['user_image'][$row['created_by']] != "") { ?>
-															<img src="uploads/all/<?php echo $_SESSION['user_image'][$row['created_by']]; ?>" class="img-radius img-40 align-top" >
+															<img src="uploads/all/<?php echo $_SESSION['user_image'][$row['created_by']]; ?>" class="img-radius img-40 align-top" alt="" >
 														<?php } else { ?>
 															<span alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
 														<?php } ?>

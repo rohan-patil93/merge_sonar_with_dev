@@ -225,8 +225,7 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
         $table1['qo_number'] = "";
         $table1['qo_date'] = "";
         $table1['ref_id'] =  $_GET['Rid']!="" ? $_GET['Rid'] : $rid;
-        $table1['ref_no'] = $rpdata['transaction_number'];
-        $table1['ref_date'] = $rpdata['transaction_date']; 
+        $table1['ref_date'] = $rpdata['transaction_date'];
         $table1['due_date'] = $rpdata['due_date'];
         $table1['ref_type'] = $_GET['table']!="" ? $_GET['table'] : $rtable_name;
         $table1['ref_no'] =  $_GET['linkRid']!="" ? $_GET['linkRid'] : "";
@@ -288,7 +287,6 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
     $table1['opex_cpex'] = $rpdata['opex_cpex'];
     $table1['type'] = $rpdata['type'];
     $table1['originator_currency_id'] = $rpdata['originator_currency_id'];
-    $table1['supplier_state_id'] = $rpdata['supplier_state_id'];
     $table1['doc_ref_no'] = $rpdata['doc_ref_no'];
     $table1['doc_ref_date'] = $rpdata['doc_ref_date'];
     $table1['cancel_invoice'] = $rpdata['cancel_invoice'];
@@ -500,8 +498,6 @@ if($table_name == 'petty_cash' || $table_name == 'bills') {
 $small_sub = 111;
 //////////////////////currency_id//////////////////////////////////
 if($table1['currency_id']!="" AND $table1['currency_id']!="0"){
-    $table1['currency_id'] = $table1['currency_id'];
-    $table1['originator_currency_id'] = $table1['originator_currency_id'];
 }elseif($_SESSION['user']['default_currency_id'] !="" AND $_SESSION['user']['default_currency_id'] !="0"){
     $table1['currency_id'] = $_SESSION['user']['default_currency_id'];
     $table1['originator_currency_id'] = $_SESSION['user']['default_currency_id'];
@@ -512,15 +508,11 @@ if($table1['currency_id']!="" AND $table1['currency_id']!="0"){
 //////////////////////currency_id//////////////////////////////////
 //////////////////////state//////////////////////////////////
 if($table1['originator_state_id']!="" AND $table1['originator_state_id']!="0"){
-    $table1['originator_state_id'] = $table1['originator_state_id'];
-    $table1['supplier_state_id'] = $table1['supplier_state_id'];
     //echo "wroking --- 1";
 }elseif($_SESSION['user']['default_state_id'] !="" AND $_SESSION['user']['default_state_id']!="0"){
     $table1['originator_state_id'] = $_SESSION['user']['default_state_id'];
     
-    if($table1['supplier_state_id']!="" AND $table1['supplier_state_id']!="0"){
-        $table1['supplier_state_id'] = $table1['supplier_state_id'];
-    }else{
+    if($table1['supplier_state_id']=="" OR $table1['supplier_state_id']=="0"){
         $table1['supplier_state_id'] = $_SESSION['user']['default_state_id'];
     }
    // echo "wroking --- 2";

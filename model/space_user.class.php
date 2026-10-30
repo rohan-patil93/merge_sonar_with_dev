@@ -1,6 +1,6 @@
 <?php 
 class spaceUserClass extends userClass{
-	function insertBuildings($get,$post){
+	public function insertBuildings($get,$post){
 		global $callConfig;
 		$building_floors = $post['building_floors'];
 		$insertary=array('building_name'=>$post['building_name'],'building_address'=>$post['building_address'],'building_image'=>$post['building_image'],'location_id'=>$post['location_id'],'originator'=>json_encode($post['originator']));
@@ -47,7 +47,7 @@ class spaceUserClass extends userClass{
 		return $return;
 	}
 	
-	function getBuildings($get){
+	public function getBuildings($get){
 		global $callConfig;	
 		$buildingssql = "SELECT * FROM buildings WHERE company_id = '".$get['company_id']."'  AND  id = '".$get['rid']."' AND is_active = 0";
 		$buildingsres = $callConfig->getRow($buildingssql);
@@ -67,7 +67,7 @@ class spaceUserClass extends userClass{
 
 		return $return;
 	}
-	function getBuildingFloors($get){
+	public function getBuildingFloors($get){
 		global $callConfig;	
 		//echo "------------------------";
 		//print_r($get); exit;		
@@ -133,7 +133,7 @@ class spaceUserClass extends userClass{
 		
 		return $return;
 	}
-	function insertBuildingFloorCabins($get,$post){
+	public function insertBuildingFloorCabins($get,$post){
 		global $callConfig;
 		$return['post'] =$post;	
 		$insertary=array('building_floor_id'=>$post['building_floor_id'],'cabin_name'=>$post['cabin_name'],'space_type_id'=>$post['space_type_id'],'x_size'=>$post['x_size'],'y_size'=>$post['y_size'],'width'=>$post['width'],'height'=>$post['height']);
@@ -154,7 +154,7 @@ class spaceUserClass extends userClass{
 		return $return;
 
 	}
-	function getEquipmentAllocations($get){
+	public function getEquipmentAllocations($get){
 		global $callConfig;
 		$return['get'] = $get;
 		// if($get['gettype']=="buildings_list"){
@@ -903,7 +903,7 @@ class spaceUserClass extends userClass{
 		//}
 		return $return;
 	}
-	function insertEquipmentAllocations($get,$post){
+	public function insertEquipmentAllocations($get,$post){
 		global $callConfig;
 		$return['post'] =$post;
 		if($post['building_floor_space_id'] !=""){
@@ -1026,14 +1026,14 @@ class spaceUserClass extends userClass{
 		}
 		return $return;
 	}
-	function getequipmentIncidents($get){
+	public function getequipmentIncidents($get){
 		global $callConfig;
 		$equipmentssql = "SELECT id, equipment_type_id, equipment_name, employee_seating FROM equipments WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 		$equipmentsres = $callConfig->getAllRows($equipmentssql);
 		$return['equipments'] =$equipmentsres;
 		return $return;
 	}
-	function getEquipments($get){
+	public function getEquipments($get){
 		global $callConfig;
 		$return['get'] =$get;
 		$equipment_typessql = "SELECT id, equipment_types_name, seating_equipment FROM equipment_types WHERE company_id = '".$get['company_id']."' AND is_active = 0";
@@ -1049,7 +1049,7 @@ class spaceUserClass extends userClass{
 		$return['display_attributes'] =$display_attributesres;
 		return $return;
 	}
-	function intertEquipments($get,$post){
+	public function intertEquipments($get,$post){
 		global $callConfig;
 		$qruploadDir =  SITEROOT.'/uploads/equipments/qr_code/';
 		$employee_seating = $post['employee_seating'] =='Y'?"Y":"N";
@@ -1096,7 +1096,7 @@ class spaceUserClass extends userClass{
 		}
 		return $return;
 	}
-	function allocateEmployeeSeat($get){
+	public function allocateEmployeeSeat($get){
 		global $callConfig;
 		$return['get'] =$get;
 		$updatedary['emp_id']=$get['emp_id'];
@@ -1110,7 +1110,7 @@ class spaceUserClass extends userClass{
 		$return['building_id']  = $building_res->building_id;
 		return $return;
 	}
-	function insertBuildingFloorSpaceAllocations($get,$post){
+	public function insertBuildingFloorSpaceAllocations($get,$post){
 		global $callConfig;
 		$return['post'] =$post;
 		$informationlist = array();
@@ -1264,7 +1264,7 @@ class spaceUserClass extends userClass{
 		}
 		return $return;
 	}
-	function approvedApaceAllocationsStatus($get){
+	public function approvedApaceAllocationsStatus($get){
 		global $callConfig;
 		$return['get'] =$get;
 		$building_floor_space_allocation_id = $get['building_floor_space_allocation_id'];
@@ -1330,7 +1330,7 @@ class spaceUserClass extends userClass{
 		//notification
 		return $return;
 	}
-	function apiaccountbalancesupdate($get){
+	public function apiaccountbalancesupdate($get){
 		global $callConfig;
 		$return['get'] =$get;
 

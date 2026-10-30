@@ -1,6 +1,6 @@
 <?php
 class aicallUserClass extends userClass{
-	function getUserConfiguration($get){
+	public function getUserConfiguration($get){
 		global $callConfig;
 		$emailmobile = $get['emailmobile'];
 		$query = "SELECT * FROM ".MAINDB.".ai_configurations WHERE email_id = '".$emailmobile."' OR  mobile LIKE '%".$emailmobile."%'";
@@ -19,7 +19,7 @@ class aicallUserClass extends userClass{
    		}
 
 	}
-	function aijobtitlecandidates($get){
+	public function aijobtitlecandidates($get){
 		global $callConfig;
 		$return = array();
 		$post_id = $get['job_post_id'];
@@ -33,7 +33,7 @@ class aicallUserClass extends userClass{
 
 		return $return;
 	}
-	function aiToGetRecruitmentData($get){
+	public function aiToGetRecruitmentData($get){
 		global $callConfig;
 		$return = array();
 		$post_id = $get['job_post_id'];
@@ -65,7 +65,7 @@ class aicallUserClass extends userClass{
 		}
 		return $return;
 	}
-	function aitoaddcandidatedetails($get, $data){
+	public function aitoaddcandidatedetails($get, $data){
 		global $callConfig;
 		$return = array();
 		$insert_array = array(
@@ -140,7 +140,7 @@ class aicallUserClass extends userClass{
 
 
 
-	function startCandidateScreeningQuestionsAndAnswers($get, $post){
+	public function startCandidateScreeningQuestionsAndAnswers($get, $post){
 		global $callConfig;
 		$return = array();
 /**
@@ -168,7 +168,7 @@ class aicallUserClass extends userClass{
 
 		return $return;
 	}
-	function endCandidateScreeningQuestionsAndAnswers($get, $post){
+	public function endCandidateScreeningQuestionsAndAnswers($get, $post){
 		global $callConfig;
 		$return = array();
 		//$return['post'] = $post;

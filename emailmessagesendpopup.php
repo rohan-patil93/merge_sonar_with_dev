@@ -6,7 +6,7 @@ session_start();
 <html lang="en">
 
 <head>
- 
+<title>InfiSuite</title>
       <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
       <!-- Google font-->     
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Quicksand:500,700" rel="stylesheet">
@@ -141,7 +141,7 @@ session_start();
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
                                   </div>
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-12 get-in-touch">
-                                        <img src="assets/images/msg.png" class="" style="width: 100%;">
+                                        <img src="assets/images/msg.png" class="" style="width: 100%;" alt="" >
                                     </div>
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-12 p-r-40 padd-mob">
                                         <h3 class="txt-primary f-w-600">Get in Touch</h3>
@@ -167,7 +167,7 @@ session_start();
 
 
                                         <div class="form-group mb-1">
-                                            <img src="captcha.php?rand=<?php echo random_int(0, PHP_INT_MAX);?>" id='captchaimg'><br>
+                                            <img src="captcha.php?rand=<?php echo random_int(0, PHP_INT_MAX);?>" id='captchaimg' alt="" ><br>
                                             <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray"  id="captcha_code11" name="captcha_code" type="text" placeholder="Enter Captcha">
                                            
                                             <br>

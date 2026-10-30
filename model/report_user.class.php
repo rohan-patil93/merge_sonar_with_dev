@@ -1,7 +1,7 @@
 <?php
 
 class reportUserClass extends userClass{
-	function getDynamicDownloadPDFInvoices($get){
+	public function getDynamicDownloadPDFInvoices($get){
 		 global $callConfig;
         $return = array();
         $transaction_table = $get['transaction_table'];
@@ -30,7 +30,7 @@ class reportUserClass extends userClass{
 		$return['party'] = $partyres;
         return $return;
 	}
-	function togetlistamendedorders($get)
+	public function togetlistamendedorders($get)
 {
 	global $callConfig;
 	$return = array();
@@ -141,7 +141,7 @@ function getSalesRegisterReport($get)
 
 	}
 
-    function getsalesregisterreport($get)
+    public function getsalesregisterreport($get)
 	{
 		global $callConfig;
 		$return = array();
@@ -229,7 +229,7 @@ function getSalesRegisterReport($get)
 
 	}
 
-    function getordersalesreport($get)
+    public function getordersalesreport($get)
 	{
 		global $callConfig;
 		$return = array();
@@ -271,7 +271,7 @@ function getSalesRegisterReport($get)
 	} **/
 
 
-	   	function getSalesSummaryReport($get)
+	   	public function getSalesSummaryReport($get)
 	{
 		global $callConfig;
 		$return = array();
@@ -385,7 +385,7 @@ function getSalesRegisterReport($get)
 	}
 
 
-    	function getordersalesreport($get)
+    	public function getordersalesreport($get)
 	{
 		global $callConfig;
 		$return = array();
@@ -500,7 +500,7 @@ function getSalesRegisterReport($get)
 	}
 
 
-	function getSalesRegisterReport($get)
+	public function getSalesRegisterReport($get)
 	{
 		global $callConfig;
 		$return = array();
@@ -621,7 +621,7 @@ function getSalesRegisterReport($get)
 
 	}
 
-	function toGetStandardTransactionDetailsReports($get){
+	public function toGetStandardTransactionDetailsReports($get){
 		global $callConfig;
 		$return = array();
 		$transaction_table = $get['transaction_table'];
@@ -677,7 +677,7 @@ function getSalesRegisterReport($get)
 		return $return;
 	}
 
-	function toGetStandardDayStockBalanceReport($get){
+	public function toGetStandardDayStockBalanceReport($get){
 		global $callConfig;
 		$return = array();
 		$balance_date = $this->dateconvertdbformat($get['balance_date']);
@@ -686,7 +686,7 @@ function getSalesRegisterReport($get)
 		$return['stock_list'] = $dmtres;
 		return $return;
 	}
-	function getProjectTaskTimeLogReport($get){
+	public function getProjectTaskTimeLogReport($get){
 		global $callConfig;
 		$return = array();
 
@@ -739,7 +739,7 @@ function getSalesRegisterReport($get)
 	}
 // added by koti 24-07-2026
 
-    function getCourierReportFilterLookups($get){
+    public function getCourierReportFilterLookups($get){
         global $callConfig;
         $return = array();
         $return['locations'] = array();
@@ -777,7 +777,7 @@ function getSalesRegisterReport($get)
         return $return;
     }
 
-    function buildCouriersReportWhere($get, $courier_type){
+    public function buildCouriersReportWhere($get, $courier_type){
         $company_id = isset($get['company_id']) ? $get['company_id'] : '';
         $from_date = isset($get['from_date']) ? $get['from_date'] : '';
         $to_date = isset($get['to_date']) ? $get['to_date'] : '';
@@ -816,7 +816,7 @@ function getSalesRegisterReport($get)
         return $where;
     }
 
-    function getCouriersEmployeeNameMap($company_id, $ids){
+    public function getCouriersEmployeeNameMap($company_id, $ids){
         global $callConfig;
         $map = array();
         if(count((array)$ids) == 0){
@@ -845,7 +845,7 @@ function getSalesRegisterReport($get)
         return $map;
     }
 
-    function getInwardCouriersReport($get){
+    public function getInwardCouriersReport($get){
         global $callConfig;
         $return = $this->getCourierReportFilterLookups($get);
         $return['rows'] = array();
@@ -902,7 +902,7 @@ function getSalesRegisterReport($get)
         return $return;
     }
 
-    function getOutwardCouriersReport($get){
+    public function getOutwardCouriersReport($get){
         global $callConfig;
         $return = $this->getCourierReportFilterLookups($get);
         $return['rows'] = array();
@@ -947,7 +947,7 @@ function getSalesRegisterReport($get)
         return $return;
     }
 
-    function getGateReportFilterLookups($get){
+    public function getGateReportFilterLookups($get){
         global $callConfig;
         $return = array();
         $return['locations'] = array();
@@ -985,7 +985,7 @@ function getSalesRegisterReport($get)
         return $return;
     }
 
-    function getGateReportEmployeeMap($company_id){
+    public function getGateReportEmployeeMap($company_id){
         global $callConfig;
         $map = array();
         // Include inactive employees for name resolution on historical whom_to_meet IDs
@@ -1005,7 +1005,7 @@ function getSalesRegisterReport($get)
         return $map;
     }
 
-    function getGateReportUserMap($company_id){
+    public function getGateReportUserMap($company_id){
         global $callConfig;
         $map = array();
         $users_sql = "SELECT id, display_name FROM application_users WHERE company_id = '".$company_id."'";
@@ -1020,7 +1020,7 @@ function getSalesRegisterReport($get)
         return $map;
     }
 
-    function resolveGateReportPersonName($id, $emp_map, $user_map){
+    public function resolveGateReportPersonName($id, $emp_map, $user_map){
         if($id == '' || $id == 0 || $id == '0'){
             return '';
         }
@@ -1033,7 +1033,7 @@ function getSalesRegisterReport($get)
         return '';
     }
 
-    function buildVisitorMovementsWhere($get, $visit_type){
+    public function buildVisitorMovementsWhere($get, $visit_type){
         $company_id = isset($get['company_id']) ? $get['company_id'] : '';
         $from_date = isset($get['from_date']) ? $get['from_date'] : '';
         $to_date = isset($get['to_date']) ? $get['to_date'] : '';
@@ -1093,7 +1093,7 @@ function getSalesRegisterReport($get)
         return $where;
     }
 
-    function getVisitorsMovementsReport($get){
+    public function getVisitorsMovementsReport($get){
         global $callConfig;
         $return = $this->getGateReportFilterLookups($get);
         $return['rows'] = array();
@@ -1163,7 +1163,7 @@ function getSalesRegisterReport($get)
         return $return;
     }
 
-    function getVendorsMovementsReport($get){
+    public function getVendorsMovementsReport($get){
         global $callConfig;
         $return = $this->getGateReportFilterLookups($get);
         $return['rows'] = array();
@@ -1254,7 +1254,7 @@ function getSalesRegisterReport($get)
         return $return;
     }
 
-    function getEmployeeTempIdReport($get){
+    public function getEmployeeTempIdReport($get){
         global $callConfig;
         $return = $this->getGateReportFilterLookups($get);
         $return['rows'] = array();

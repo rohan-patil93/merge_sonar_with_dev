@@ -1076,7 +1076,7 @@ function numberToWordFormateRupees($number){
 	if($points !=''){
 		$result.= $points . " Paise  ";
 	}
-	echo ucwords($result." only");
+	return ucwords($result." only");
 }
 function toGetCountryNameBaseCountryID($id){
 	//echo "hai||".$id; 
@@ -1513,9 +1513,11 @@ function emaildatareplacedd($data, $mesg){
 			$question_display ='N';
 			$replay_display = 'Y';
 		}
+		ob_start();
 		echo '<div class="col-lg-6">';
-		include_once("views/custom_query.php"); 
-		echo '</div>'; 
+		include_once("views/custom_query.php");
+		echo '</div>';
+		return ob_get_clean();
 	}
 	function todisplaytimeline($data){
   		// print_r($data);
@@ -2054,27 +2056,13 @@ $deleteimages .= '<div class="col-md-2 dz-preview dz-processing dz-image-preview
 //     }else{ echo $amount; }
 // }
 function convert_Rupee_Number($amount){
-
-
-    //99,99,99,99,999.99
-	if("99,99,99,99,999.99" == "99,99,99,99,999.99"){
-	    if(($amount/10000000) >= 1){
-	    	
-	        echo round($amount/10000000,2).' Cr.';
-	    }elseif(($amount/100000) >= 1){
-	        echo round($amount/100000,2).' Lc';  //millian 
-	    }elseif(($amount/1000) >= 1){
-	        echo round($amount/1000,2).' K';
-	    }else{ echo round($amount); }
-	}else{
-		if(($amount/1000000000) >= 1){
-	        echo round($amount/1000000000,2).' B.';
-	    }elseif(($amount/1000000) >= 1){
-	        echo round($amount/1000000,2).' M';  //millian 
-	    }elseif(($amount/1000) >= 1){
-	        echo round($amount/1000,2).' K';
-	    }else{ echo round($amount); }
-	}  
+    if(($amount/10000000) >= 1){
+        return round($amount/10000000,2).' Cr.';
+    }elseif(($amount/100000) >= 1){
+        return round($amount/100000,2).' Lc';  //millian
+    }elseif(($amount/1000) >= 1){
+        return round($amount/1000,2).' K';
+    }else{ return round($amount); }
 }
 function dyanamicselectAutoSelect($table_name, $filed_name,$word){
 	$dsurl = API."?mode=dyanamicautoselectdata&table_name=".$table_name."&filed_namee=".$filed_name."&words=".$word;

@@ -163,7 +163,7 @@ $_SESSION['date_formate'] = str_replace('yyyy', 'Y', str_replace('mm', 'm', str_
 $date_format = str_replace('yyyy', 'yy',$date_format);
 $_SESSION['system_date_formate'] = $date_format;
 if(isset($_GET['noti_id'])){
-    $not = NotificationRead($_GET['noti_id']);
+    NotificationRead($_GET['noti_id']);
 }
 if($timeprint == '1' AND $maxtimeshow >= '5'){
 echo "Notifition - ".date('m/d/Y h:i:s a')."</br>";
@@ -450,7 +450,9 @@ if(isset($_SESSION['work_module_setup_id']) && $_SESSION['work_module_setup_id']
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<?php  include_once("partials/_head.php"); 
+<head>
+<title>InfiSuite | Home</title>
+<?php  include_once("partials/_head.php");
 if($timeprint == '1' AND $maxtimeshow >= '17'){
 	echo "CSS Ending - ".date('m/d/Y h:i:s a')."</br>";
 }

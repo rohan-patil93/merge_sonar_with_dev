@@ -1,7 +1,7 @@
 <?php
 
 class amcAccountDetailsClass extends userClass{
-  function insertAmcAccountDetails($get, $post){
+  public function insertAmcAccountDetails($get, $post){
     global $callConfig;
     $return['post'] = $post;
     $dob = str_replace('/"', '-', $post['dob']);
@@ -67,7 +67,7 @@ class amcAccountDetailsClass extends userClass{
     }
     return $return;
   }
-  function toafterapprovaltoupdatemanufirmorder($transaction_no, $get){
+  public function toafterapprovaltoupdatemanufirmorder($transaction_no, $get){
     global $callConfig;
     print_r($get); echo "transaction_no".$transaction_no; exit;
     /*$query = "SELECT * FROM manufacturing_forecast WHERE company_id=".$get['company_id']." AND id=".$transaction_no;
@@ -76,7 +76,7 @@ class amcAccountDetailsClass extends userClass{
     $exquery = $callConfig->executeQuery($upquery);*/
     return $exquery;
   }
-  function getAmcAccountDetails($get){
+  public function getAmcAccountDetails($get){
     global $callConfig;
      //$res = $this->toafterapprovaltoupdatemanufirmorder($get['transaction_no'],$get);
     //print_r($get); print_r($res); exit;
@@ -98,7 +98,7 @@ class amcAccountDetailsClass extends userClass{
     }
     return $return;
   }
-  function getAllDetails($get){
+  public function getAllDetails($get){
     global $callConfig;
     $return = array();
     $return['get'] = $get;
@@ -128,7 +128,7 @@ class amcAccountDetailsClass extends userClass{
     $return['account_groups'] = $account_groups;
     return $return;
   }
-  function getProductDetails($get){
+  public function getProductDetails($get){
     global $callConfig;
     $return = array();
     $return['get'] = $get;
@@ -164,7 +164,7 @@ class amcAccountDetailsClass extends userClass{
     }
     return $return;
   }
-  function getAllProductDetails($get){
+  public function getAllProductDetails($get){
     
     global $callConfig;
     $return = array();
@@ -260,7 +260,7 @@ class amcAccountDetailsClass extends userClass{
 
     return $return;
   }
-  function insertAmcRegistrationDetails($get, $post){
+  public function insertAmcRegistrationDetails($get, $post){
     global $callConfig;
     // $return['post'] = $post;
     // $return['get'] = $get;
@@ -409,7 +409,7 @@ class amcAccountDetailsClass extends userClass{
     }
     return $return;
   }
-  function getAmcRegistrationDetails($get){
+  public function getAmcRegistrationDetails($get){
     // print_r($get);    exit;
     global $callConfig;
     $return = array();
@@ -446,7 +446,7 @@ class amcAccountDetailsClass extends userClass{
     }
     return $return;
   }
-  function getCustomerDetails($get){
+  public function getCustomerDetails($get){
     global $callConfig;
     $return = array();
     $return['get'] = $get;
@@ -458,7 +458,7 @@ class amcAccountDetailsClass extends userClass{
     return $return;
   } 
 
-  function createSchedule($get){
+  public function createSchedule($get){
     // print_r($get);    exit;
     global $callConfig;
     $return = array();
@@ -623,7 +623,7 @@ class amcAccountDetailsClass extends userClass{
     return $return;
   }
 
-  function getServiceScheduleDetails($get){
+  public function getServiceScheduleDetails($get){
     global $callConfig;
     $return = array();
     if ($get['id'] != "") {
@@ -664,7 +664,7 @@ class amcAccountDetailsClass extends userClass{
     $return['tech_details'] = $tech_details;
     return $return;
   }
-  function getAmcServiceDetails($get){
+  public function getAmcServiceDetails($get){
     // print_r($get);    exit;
     global $callConfig;
     $return = array();
@@ -712,7 +712,7 @@ class amcAccountDetailsClass extends userClass{
     return $return;
   }
 
-  function togetuserfielddashboard($get){
+  public function togetuserfielddashboard($get){
     global $callConfig;
    // echo "<pre>"; print_r($get); exit;
     $whr = "";
@@ -736,7 +736,7 @@ class amcAccountDetailsClass extends userClass{
     //print_r($return); exit;
     return $return;
   }
-  function togetoprationlistbasedonmonthly($get){
+  public function togetoprationlistbasedonmonthly($get){
     global $callConfig;
     $year_month = $get['year_month']!="" ? $get['year_month'] : date('Y-m');
     $from_date =  date('Y-m-d', strtotime($year_month."-01"));
@@ -758,7 +758,7 @@ class amcAccountDetailsClass extends userClass{
     $return['all_user_map_detail'] = $aumapudpdata;
     return $return;
   }
-  function updateAmcServiceDetailsAndCheckList($get, $post){
+  public function updateAmcServiceDetailsAndCheckList($get, $post){
     global $callConfig;
     // $return['post'] = $post;
     // $return['get'] = $get;
@@ -816,7 +816,7 @@ class amcAccountDetailsClass extends userClass{
     }
     return $return;
   }
-  function getAmcCheckListDetails($get){
+  public function getAmcCheckListDetails($get){
     global $callConfig;
     $data = json_decode(urldecode($get['data']),1);
     $whr = "";
@@ -873,7 +873,7 @@ class amcAccountDetailsClass extends userClass{
     return $return;
     
   } 
-  function getqrgenerationdetails($get) {
+  public function getqrgenerationdetails($get) {
     global $callConfig;
 
     if($get['id'] != ''){
@@ -908,7 +908,7 @@ class amcAccountDetailsClass extends userClass{
 
     return $return;
   } 
-  function getamccomplaintsdetails($get){
+  public function getamccomplaintsdetails($get){
     global $callConfig;
     $return = array();
 
@@ -948,7 +948,7 @@ class amcAccountDetailsClass extends userClass{
 
     return $return;
   }
-  function getamccomplaintslistdetails($get){
+  public function getamccomplaintslistdetails($get){
     global $callConfig;
     $return = array();
     if($get['rid'] && $get['rid'] != ''){
@@ -999,7 +999,7 @@ class amcAccountDetailsClass extends userClass{
     return $return;
   }  
 
-  function getstationeryrelateddata($get){
+  public function getstationeryrelateddata($get){
     global $callConfig;
     $sql = "SELECT id,item_name FROM stationery_items WHERE company_id = '{$get['company_id']}' AND is_active = 0";
     $res = $callConfig->getAllRows($sql);
@@ -1027,7 +1027,7 @@ class amcAccountDetailsClass extends userClass{
     return $return;
   }
 
-  function insertstationerydata($get, $post){
+  public function insertstationerydata($get, $post){
     global $callConfig;
     $return = array();
     $company_id = $get['company_id'];
@@ -1136,7 +1136,7 @@ class amcAccountDetailsClass extends userClass{
     return $return;
   }
 
-  function getstationeryitemsreportdata($get) {
+  public function getstationeryitemsreportdata($get) {
     global $callConfig;
     $return = array();
 
@@ -1233,7 +1233,7 @@ class amcAccountDetailsClass extends userClass{
 
       return $return;
   }
-  function getamccomplaintsreportdata($get){
+  public function getamccomplaintsreportdata($get){
       global $callConfig;
       $return = array();
       $company_id = $get['company_id'];
@@ -1291,7 +1291,7 @@ class amcAccountDetailsClass extends userClass{
 
       return $return;
   }
-  function getcomplaintqrcodesreportdata($get){
+  public function getcomplaintqrcodesreportdata($get){
       global $callConfig;
       $company_id = $get['company_id'];
       $return = [];
@@ -1367,7 +1367,7 @@ class amcAccountDetailsClass extends userClass{
   } 
 
   // here function for dahsboard data.
-  function getamcdashboarddata($get) {
+  public function getamcdashboarddata($get) {
       global $callConfig;
 
       $company_id = (int)($get['company_id'] ?? 0);
@@ -1506,7 +1506,7 @@ class amcAccountDetailsClass extends userClass{
     return $return;
   }
 
-  function getamcschedulesbydate($get){
+  public function getamcschedulesbydate($get){
     global $callConfig;
     $company_id=$get['company_id'];
     $date=$get['date'];

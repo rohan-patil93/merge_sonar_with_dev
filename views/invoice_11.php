@@ -89,7 +89,7 @@ function numberToWordFormate($number){
     if($points !=''){
         $result.= $points . " Paise  ";
     }
-    echo ucwords($result." only");
+    return ucwords($result." only");
 }
 function emptyCheck($valu){
     $value = "";
@@ -158,7 +158,7 @@ function emptyCheck($valu){
             <table class="table table-card">
                 <tr>
                     <td width="20%" class="p-1 border-0" style="vertical-align:top;">
-                        <img src="uploads/all/file_1704095913_659270a975d4a.png" style="width:100px; height: 34px;">
+                        <img src="uploads/all/file_1704095913_659270a975d4a.png" style="width:100px; height: 34px;" alt="" >
                     </td>
                     <td width="25%" align="center" class="p-1 border-0 f-12" style="vertical-align:top; padding-right: 40px !important;">
                         <span>THANK YOU FOR YOUR ORDER. THIS DOCUMENT IS A RECEIPT OF YOUR PURCHASE.</span>
@@ -203,7 +203,7 @@ function emptyCheck($valu){
                 </tr>
                 <tr>
                     <td class="p-1 border-0" style="vertical-align:bottom;">
-                        <img src="uploads/all/file_1704095913_659270a975d4a.png" style="width:100px; height: 34px;">
+                        <img src="uploads/all/file_1704095913_659270a975d4a.png" style="width:100px; height: 34px;" alt="" >
                     </td>
                     <td align="center" class="p-1 pt-5 border-0 f-12" style="vertical-align:bottom; padding-right: 40px !important;">
                         <span>SAR STUDIO WWW.SAR STUDIO.COM +91 000 000 0000</span>
@@ -225,7 +225,7 @@ function emptyCheck($valu){
                 </tr>
                 <tr>
                     <td class="p-1" style="vertical-align:top;">
-                        <img style="width: 100px; height:85px;" class="img-fluid" src="uploads/all/file_1688986265_64abe2999f741.jpg" alt="item">
+                        <img style="width: 100px; height:85px;" class="img-fluid" src="uploads/all/file_1688986265_64abe2999f741.jpg" alt="item" >
                     </td>
                     <td align="" class="p-1" style="vertical-align:top;">
                         <!-- <div class="swatches f-12"></div>
@@ -247,7 +247,7 @@ function emptyCheck($valu){
                 </tr>
                 <tr>
                     <td class="p-1" style="vertical-align:top;">
-                        <img style="width: 100px;height: 85px;" class="img-fluid" src="uploads/all/file_1688986555_64abe3bb28d5f.jpg" alt="item">
+                        <img style="width: 100px;height: 85px;" class="img-fluid" src="uploads/all/file_1688986555_64abe3bb28d5f.jpg" alt="item" >
                     </td>
                     <td align="" class="p-1" style="vertical-align:top;">
                         <!-- <div class="swatches f-12"></div>
@@ -264,7 +264,7 @@ function emptyCheck($valu){
                 </tr>
                 <tr>
                     <td class="p-1" style="vertical-align:top;">
-                        <img style="width: 100px;" class="img-fluid" src="uploads/all/file_1688973992_64abb2a8a5325.jpg" alt="item">
+                        <img style="width: 100px;" class="img-fluid" src="uploads/all/file_1688973992_64abb2a8a5325.jpg" alt="item" >
                     </td>
                     <td align="" class="p-1" style="vertical-align:top;">
                         <!-- <div class="swatches f-12"></div>

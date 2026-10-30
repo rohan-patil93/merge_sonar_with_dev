@@ -213,12 +213,12 @@ function getIPAddress(){
     <div class="loader-bar"></div>
   </div>
   <div class="mobile-view-logo bg-primary text-center">
-    <img class="img-100 m-3" src="assets/images/sign-in/HRstaq-1.png">   
+    <img class="img-100 m-3" src="assets/images/sign-in/HRstaq-1.png" alt="" >   
   </div>
   <div class="row align-items-center fancy-sign-in">
     <div class="col-lg-6 bg-white">
       <div class="m-l-50 p-l-50 margin-0 mob-pd">
-        <div class="text-center1" style="padding-left: 2rem!important;"> <img src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" >  </div>
+        <div class="text-center1" style="padding-left: 2rem!important;"> <img src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >  </div>
         <div class="p-5 regsterform" >
          <form class="md-float-material form-material" action="" method="post" novalidate>
 
@@ -261,7 +261,7 @@ function getIPAddress(){
     </div>
   </div>
   <div class="col-lg-6 text-center desktop-view-bg" style="">
-    <img class="w-100 fancy-bg" src="assets/images/sign-in/recruitstaq_side_image.png" style="">
+    <img class="w-100 fancy-bg" src="assets/images/sign-in/recruitstaq_side_image.png" style="" alt="" >
   </div>
 </div>
 

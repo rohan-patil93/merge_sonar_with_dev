@@ -88,7 +88,7 @@ $companyName = isset($_SESSION['config']['name'])   ? htmlspecialchars($_SESSION
             <!-- Table content loaded by ajax -->
             <div id="dmTableContent" class="custom-scroll" style="max-height: 500px;">
                 <div class="text-center py-5">
-                    <img src="assets/images/spiner/spiner3.gif" style="width:200px;">
+                    <img src="assets/images/spiner/spiner3.gif" style="width:200px;" alt="" >
                 </div>
             </div>
 
@@ -98,7 +98,7 @@ $companyName = isset($_SESSION['config']['name'])   ? htmlspecialchars($_SESSION
 
 <script type="text/javascript">
     function loadDmTable(status, el) {
-        var loader = '<div class="text-center py-5"><img src="assets/images/spiner/spiner3.gif" style="width:200px;"></div>';
+        var loader = '<div class="text-center py-5"><img src="assets/images/spiner/spiner3.gif" style="width:200px;" alt="" ></div>';
         $('#dmTableContent').html(loader);
         $.ajax({
             url: 'views/custom_dashboard_document_management_ajax.php',

@@ -1,6 +1,6 @@
 <?php 
 class manufacturingUserClass extends userClass{
-	function getManufacturingBOMS($get)
+	public function getManufacturingBOMS($get)
 	{
 		global $callConfig;
 		$return = array();
@@ -99,7 +99,7 @@ class manufacturingUserClass extends userClass{
 		return $return;
 	}
 
-	function insertManufacturingBOMS($get,$post){
+	public function insertManufacturingBOMS($get,$post){
 		global $callConfig;
 		$return = array();
 		$return['post'] = $post;
@@ -250,7 +250,7 @@ class manufacturingUserClass extends userClass{
 		return $return;
 	}
 
-	function getmanufacturingworkorders($get){
+	public function getmanufacturingworkorders($get){
 		global $callConfig;
 		$return = array();
 		
@@ -360,7 +360,7 @@ class manufacturingUserClass extends userClass{
 	
 		return $return;
 	}
-	function insertManufacturingWorkOrders($get, $post){
+	public function insertManufacturingWorkOrders($get, $post){
 		global $callConfig;
 		$return = array();
 		$companyId = intval($post['company_id'] ?? 0);
@@ -550,7 +550,7 @@ class manufacturingUserClass extends userClass{
 		return $return;
 	}
 
-	function createSubcontractWorkOrderFromManufacturingWip($parentWorkOrder, $workOrderItem, $bomId, $bom, $get, $workorderitemqty){
+	public function createSubcontractWorkOrderFromManufacturingWip($parentWorkOrder, $workOrderItem, $bomId, $bom, $get, $workorderitemqty){
 		global $callConfig;
 		$return = array();
 		$companyId = intval($get['company_id']);
@@ -663,7 +663,7 @@ class manufacturingUserClass extends userClass{
 		return $return;
 	}
 
-	function toGetSubcontractWorkOrderNumber($get){
+	public function toGetSubcontractWorkOrderNumber($get){
 		global $callConfig;
 		$companyId = intval($get['company_id']);
 		$transactionDate = $get['transaction_date'] != "" ? $this->dateconvertdbformat($get['transaction_date']) : date('Y-m-d');
@@ -682,7 +682,7 @@ class manufacturingUserClass extends userClass{
 		return 'SWO'.str_pad($nextNo, 5, '0', STR_PAD_LEFT);
 	}
 
-	function autoInsertManufacturingWorkOrders($transaction_id,$get){
+	public function autoInsertManufacturingWorkOrders($transaction_id,$get){
 		global $callConfig;
 		$return = array();
 		$mwosql = "SELECT * FROM manufacturing_work_orders WHERE company_id =".$get['company_id']."  AND id = ".$transaction_id." AND is_active = 0";
@@ -756,7 +756,7 @@ class manufacturingUserClass extends userClass{
 			}
 		}
 	}
-	function toafterapprovaltoupdatemanuforecast($transaction_no, $get){
+	public function toafterapprovaltoupdatemanuforecast($transaction_no, $get){
 	    global $callConfig;
 	    $query = "SELECT * FROM manufacturing_forecast WHERE company_id=".$get['company_id']." AND id=".$transaction_no." AND is_active=0";
 	    $data = $callConfig->getRow($query);
@@ -770,7 +770,7 @@ class manufacturingUserClass extends userClass{
 	    $exquery = $callConfig->executeQuery($upquery);
 	    return $exquery;
 	}
-	function toafterapprovaltoupdatemanufirmorder($transaction_no, $get){
+	public function toafterapprovaltoupdatemanufirmorder($transaction_no, $get){
 	    global $callConfig;
 	    $upquery = "UPDATE manufacturing_firm_order_items SET current_status =".ST_APPROVED." WHERE company_id=".$get['company_id']." AND manufacturing_firm_order_id='".$transaction_no."' AND is_active=0";
 	    $exquery = $callConfig->executeQuery($upquery);

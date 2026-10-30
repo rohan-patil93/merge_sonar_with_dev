@@ -161,7 +161,7 @@ foreach($modulelinklists as $linking){
 									<label for="optionget<?php echo $modul['module_id']; ?>" class="text-center fixheght">
 										<span class="text-facebook">
 											<?php if($modul['module_logo'] !=""){ ?>
-												<img src='uploads/module/<?php echo $modul['module_logo']; ?>' class="img-60" style="height: auto;">
+												<img src='uploads/module/<?php echo $modul['module_logo']; ?>' class="img-60" style="height: auto;" alt="" >
 											<?php }else{ ?>
 												
 											<?php  } ?>

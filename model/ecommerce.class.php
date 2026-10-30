@@ -2,7 +2,7 @@
 class userClass
 { 
 	/* start */
-	function toGetBannerDetails() {
+	public function toGetBannerDetails() {
 		global $callConfig;
 		$whr = "is_active = '0'";
 		$query=$callConfig->selectQuery('banner','*',$whr,'','','');
@@ -10,7 +10,7 @@ class userClass
 		$data = $callConfig->getAllRows($query);
 		return $data;
 	}
-	function toGetMenuDetails() {
+	public function toGetMenuDetails() {
 		global $callConfig;
 		$whr = "is_active = '0'";
 		$query=$callConfig->selectQuery('category','*',$whr,'','','');
@@ -21,14 +21,14 @@ class userClass
 		$retun['subcategory'] = $data1;
 		return $retun;
 	}
-	function toGetSubCategoryProductDetails($post) {
+	public function toGetSubCategoryProductDetails($post) {
 		global $callConfig;
 		$whr = "is_active = '0' And sub_category_id ='".$post['sub_id']."'";
 		$query=$callConfig->selectQuery('product','*',$whr,'','','');
 		$data = $callConfig->getAllRows($query);
 		return $data;
 	}
-	function toGetProductDetails($post) {
+	public function toGetProductDetails($post) {
 		global $callConfig;
 		$whr = "is_active = '0' And id ='".$post['id']."'";
 		$query=$callConfig->selectQuery('product','*',$whr,'','','');

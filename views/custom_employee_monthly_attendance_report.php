@@ -8,7 +8,7 @@ if((isset($_POST['search'])) ){
     $month       = $_REQUEST['month'] ?? '';
     header("location:index?option=COM_EMPLOYEE_MONTHLY_ATTENDANCE_REPORT&employee_id=".$employee_id."&month=".$month ); exit;
 }
-if(isset($_GET['employee_id']) && isset($_GET['employee_id']) ){
+if(isset($_GET['employee_id'])){
     $employee_id = $_REQUEST['employee_id'] ?? 0;
     $month       = $_REQUEST['month'] ?? '';
 }

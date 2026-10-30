@@ -777,10 +777,10 @@
 															AEOL Meeting With
 														</div>
 														<div class="kt-list-pics kt-list-pics--sm kt-padding-l-20">
-															<a href="#"><img src="assets/media/users/100_4.jpg" title=""></a>
-															<a href="#"><img src="assets/media/users/100_13.jpg" title=""></a>
-															<a href="#"><img src="assets/media/users/100_11.jpg" title=""></a>
-															<a href="#"><img src="assets/media/users/100_14.jpg" title=""></a>
+															<a href="#"><img src="assets/media/users/100_4.jpg" title="" alt="" ></a>
+															<a href="#"><img src="assets/media/users/100_13.jpg" title="" alt="" ></a>
+															<a href="#"><img src="assets/media/users/100_11.jpg" title="" alt="" ></a>
+															<a href="#"><img src="assets/media/users/100_14.jpg" title="" alt="" ></a>
 														</div>
 													</div>
 													<div class="kt-timeline-v2__item">

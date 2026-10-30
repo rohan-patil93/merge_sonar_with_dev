@@ -1535,8 +1535,8 @@ if($mode == 'gettabledetails'){
 	if($_GET['orderby'] !=''){
 		$orderby = urldecode($_GET['orderby']);
 	}
-	if($_GET['field'] !='' && $_GET['field'] !=''){
-		
+	if($_GET['field'] !=''){
+
 		$field = $_GET['field'] !='' ? $_GET['field'] : '*';
 		
 	}

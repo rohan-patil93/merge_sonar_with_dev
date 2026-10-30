@@ -150,7 +150,7 @@ function changestatus(val,tranid,allowitemid,table_name){
             });
         }
         function openApprovedPage(table,clone){
-            var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;"></div>';
+            var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="" ></div>';
             $("#tabsopen").html(loader);
             jQuery.ajax({
                 url: "views/custom_list_approved_table.php",
@@ -206,7 +206,7 @@ function changestatus(val,tranid,allowitemid,table_name){
     });
 }
 function getSchedulesOrders(){
-    var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;"></div>';
+    var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="" ></div>';
     $("#schedules_tab").html(loader);
     jQuery.ajax({
         url: "views/custom_view_schedules_orders.php",
@@ -222,7 +222,7 @@ function getSchedulesOrders(){
 function getEnquiryVendororCustomer(valu){
     if(valu.length >= 3){
         var searchvendorcustomertype = $('.searchvendorcustomertype:checked').val();
-        var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;"></div>';
+        var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="" ></div>';
         $('#search_result_employee').html(htmloader);
         $("#search_result_employee").show('slow');
         jQuery.ajax({
@@ -283,9 +283,9 @@ if($totaldoc != 0 AND $totaldoc !=""){
                                 <?php 
                         $disname = $_SESSION['user']['display_name']!=""?$_SESSION['user']['display_name']:$_SESSION['display_name'];
                         if($_SESSION['user']['user_photo']!=""){ ?>
-                          <img src="<?php echo "uploads/all/".$_SESSION['user']['user_photo']; ?>" class="percentag-img-radius img-90" alt="image" style="border-radius: 50%;border: 8px solid #ffffff;">
+                          <img src="<?php echo "uploads/all/".$_SESSION['user']['user_photo']; ?>" class="percentag-img-radius img-90" alt="image" style="border-radius: 50%;border: 8px solid #ffffff;" >
                        <?php }elseif($_SESSION['employee']['gender'] !=""){ ?>
-                                <img src="uploads/all/<?php echo $_SESSION['employee']['gender'].".png"; ?>" class="percentag-img-radius img-90" alt="image" style="border-radius: 50%;border: 8px solid #ffffff;">
+                                <img src="uploads/all/<?php echo $_SESSION['employee']['gender'].".png"; ?>" class="percentag-img-radius img-90" alt="image" style="border-radius: 50%;border: 8px solid #ffffff;" >
                         <?php }else{ ?>
                           <span class="text-dark f-16 f-w-600 d-block" style="    background-color: white !important;"><?php echo initials($disname); ?></span>
                       <?php } ?>
@@ -567,7 +567,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                                     <div class="card-px text-center ">
                                                         <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No <?php echo $_POST['menu_label']; ?></p>   
                                                         <div class="text-center px-4">
-                                                            <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+                                                            <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                                                         </div>   
                                                     </div>
                                                 <?php   } ?>
@@ -578,7 +578,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                             <div class="card-px text-center ">
                                                         <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No <?php echo $itemcatname; ?></p>   
                                                         <div class="text-center px-4">
-                                                            <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+                                                            <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                                                         </div>   
                                                     </div>
                                             <?php } ?>
@@ -673,7 +673,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                                     <div class="card-px text-center ">
                                                         <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No <?php echo $_POST['menu_label']; ?></p>   
                                                         <div class="text-center px-4">
-                                                            <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+                                                            <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                                                         </div>   
                                                     </div>
                                                 <?php   } ?>
@@ -770,7 +770,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                                     <div class="card-px text-center ">
                                                         <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No <?php echo $_POST['menu_label']; ?></p>   
                                                         <div class="text-center px-4">
-                                                            <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+                                                            <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                                                         </div>   
                                                     </div>
                                                 <?php   } ?>
@@ -828,7 +828,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                 <div class="card-px text-center ">
                     <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No <?php echo $trnstabkey; ?></p>   
                     <div class="text-center px-4">
-                        <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+                        <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                     </div>   
                 </div>
             <?php   } ?>
@@ -902,7 +902,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                         <div class="card-px text-center ">
                                     <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Update</p>   
                                     <div class="text-center px-4">
-                                        <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+                                        <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                                     </div>   
                                 </div>
                         <?php } ?>
@@ -945,7 +945,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                 
                 <div class="align-middle">
                   <?php if($_SESSION['user_image'][$activeres1['originator']]!=""){?>
-                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$activeres1['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';">
+                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$activeres1['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';" alt="" >
                   <?php }else{ ?>
                     <span  alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$activeres1['originator']]); ?></span>
                   <?php } ?>
@@ -978,7 +978,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                         <div class="card-px text-center ">
                                     <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Draft Records</p>   
                                     <div class="text-center px-4">
-                                        <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+                                        <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                                     </div>   
                                 </div>
                         <?php } ?>  
@@ -1000,7 +1000,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                                     </div> -->
                                     <div class="align-middle">
                   <?php if($_SESSION['user_image'][$activeres1['originator']]!=""){?>
-                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$activeres1['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';">
+                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$activeres1['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';" alt="" >
                   <?php }else{ ?>
                     <span  alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$activeres1['originator']]); ?></span>
                   <?php } ?>
@@ -1032,7 +1032,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                         <div class="card-px text-center ">
                                     <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Active Records</p>   
                                     <div class="text-center px-4">
-                                        <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+                                        <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                                     </div>   
                                 </div>
                         <?php } ?>  
@@ -1054,7 +1054,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                                     </div> -->
                                     <div class="align-middle">
                   <?php if($_SESSION['user_image'][$activeres1['originator']]!=""){?>
-                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$activeres1['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';">
+                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$activeres1['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';" alt="" >
                   <?php }else{ ?>
                     <span  alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$activeres1['originator']]); ?></span>
                   <?php } ?>
@@ -1088,7 +1088,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                         <div class="card-px text-center ">
                                     <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No In-Process Records</p>   
                                     <div class="text-center px-4">
-                                        <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+                                        <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                                     </div>   
                                 </div>
                         <?php } ?>
@@ -1110,7 +1110,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                                     </div> -->
                                     <div class="align-middle">
                   <?php if($_SESSION['user_image'][$activeres1['originator']]!=""){?>
-                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$activeres1['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';">
+                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$activeres1['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';" alt="" >
                   <?php }else{ ?>
                     <span  alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$activeres1['originator']]); ?></span>
                   <?php } ?>
@@ -1144,7 +1144,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                         <div class="card-px text-center ">
                                     <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Approved Records</p>   
                                     <div class="text-center px-4">
-                                        <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+                                        <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                                     </div>   
                                 </div>
                         <?php } ?>
@@ -1170,7 +1170,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                                     </div> -->
                                     <div class="align-middle">
                   <?php if($_SESSION['user_image'][$logdetails['originator']]!=""){?>
-                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$logdetails['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';">
+                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$logdetails['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';" alt="" >
                   <?php }else{ ?>
                     <span  alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$logdetails['originator']]); ?></span>
                   <?php } ?>
@@ -1187,7 +1187,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                         <div class="card-px text-center ">
                                     <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Approval Pending</p>   
                                     <div class="text-center px-4">
-                                        <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+                                        <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                                     </div>   
                                 </div>
                         <?php } ?>  
@@ -1212,7 +1212,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                                     </div> -->
                                     <div class="align-middle">
                   <?php if($_SESSION['user_image'][$logdetails['originator']]!=""){?>
-                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$logdetails['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';">
+                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$logdetails['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';" alt="" >
                   <?php }else{ ?>
                     <span  alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$logdetails['originator']]); ?></span>
                   <?php } ?>
@@ -1229,7 +1229,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                         <div class="card-px text-center ">
                                     <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Approved</p>   
                                     <div class="text-center px-4">
-                                        <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+                                        <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                                     </div>   
                                 </div>
                         <?php } ?>  
@@ -1253,7 +1253,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                                     </div> -->
                                     <div class="align-middle">
                   <?php if($_SESSION['user_image'][$logdetails['originator']]!=""){?>
-                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$logdetails['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';">
+                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$logdetails['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';" alt="" >
                   <?php }else{ ?>
                     <span  alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$logdetails['originator']]); ?></span>
                   <?php } ?>
@@ -1270,7 +1270,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                         <div class="card-px text-center ">
                                     <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Send back</p>   
                                     <div class="text-center px-4">
-                                        <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+                                        <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                                     </div>   
                                 </div>
                         <?php } ?>  
@@ -1294,7 +1294,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                                     </div> -->
                                     <div class="align-middle">
                   <?php if($_SESSION['user_image'][$logdetails['originator']]!=""){?>
-                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$logdetails['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';">
+                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$logdetails['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';" alt="" >
                   <?php }else{ ?>
                     <span  alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$logdetails['originator']]); ?></span>
                   <?php } ?>
@@ -1311,7 +1311,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                         <div class="card-px text-center ">
                                     <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Rejected</p>   
                                     <div class="text-center px-4">
-                                        <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+                                        <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                                     </div>   
                                 </div>
                         <?php } ?>  

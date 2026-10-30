@@ -3,7 +3,7 @@ require_once "dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
 use Dompdf\Options;
 class recruitmentUserClass extends userClass{
-	function candidatesofferhistories($data){
+	public function candidatesofferhistories($data){
 		global $callConfig;
 		$sql = "SELECT id,annual_ctc from salary_template where candidate_id='".$data['candidate_id']."' AND company_id = '".$data['company_id']."' and is_active = 0";	
 		$val=$callConfig->getRow($sql);
@@ -11,7 +11,7 @@ class recruitmentUserClass extends userClass{
 		$res=$callConfig->insertRecord('candidate_offer_histories',$fieldnames);
 		return $res;
 	}
-	function candidateofferAccept($get,$post){
+	public function candidateofferAccept($get,$post){
 		global $callConfig; 
 		$return = array();
 		$return['get'] = $get;
@@ -35,7 +35,7 @@ class recruitmentUserClass extends userClass{
 		return $return;
 	}
 
-	function candidateOfferGenerateToPDFAndSend($get){
+	public function candidateOfferGenerateToPDFAndSend($get){
 		global $callConfig; 
 		$candidate_id = $get['candidate_id'];
 		$candidatessql = "SELECT can.*, (SELECT jt.job_title FROM job_titles jt WHERE jt.company_id = can.company_id AND jt.id = can.job_tittle_id AND  jt.is_active =can.is_active) as job_title FROM candidates can WHERE can.company_id = '".$get['company_id']."' AND can.id = '".$candidate_id."'  AND can.is_active =0";
@@ -83,7 +83,7 @@ class recruitmentUserClass extends userClass{
 		$notres1 = $this->tosendnotifiations($crfeatebynotdataa);
         return $return;
 	}
-	function generateOfferLatterPDF($get){
+	public function generateOfferLatterPDF($get){
         global $callConfig;
         $return = array();
         $candidate_id = $get['candidate_id'];
@@ -125,7 +125,7 @@ class recruitmentUserClass extends userClass{
     }
 
 	/**
-	function candidateofferAccept($get){
+	public function candidateofferAccept($get){
 		global $callConfig; 
 		$returnary = array();
 		$candiquery = $callConfig->selectQuery('candidates','*','id='.$get['candidate_id'],'','','');
@@ -211,7 +211,7 @@ class recruitmentUserClass extends userClass{
 		}
 		return $returnary;
 	} **/
-	function getCandidateOfferDetails($get){
+	public function getCandidateOfferDetails($get){
 		global $callConfig;
 
 		$application_userssql = "SELECT id,display_name, user_email, user_mobile FROM application_users WHERE company_id = '".$get['company_id']."' AND JSON_SEARCH(role_id, 'one', '".ADMIN_ROLE."') IS NOT NULL AND is_active =0";
@@ -274,7 +274,7 @@ class recruitmentUserClass extends userClass{
 		$returnresult['config'] = $configres;
 		return $returnresult;
 	} 
-	function getCandidateInterviewPopUp($get){
+	public function getCandidateInterviewPopUp($get){
 		global $callConfig;
 		$job_post_can_id =  $get['job_post_can_id'];
 		$job_posting_candidatessql = "SELECT * FROM job_posting_candidates WHERE company_id = '".$get['company_id']."' AND id = '".$job_post_can_id."' AND is_active =0";
@@ -310,7 +310,7 @@ class recruitmentUserClass extends userClass{
 		$returnresult['job_candidate_interview_schedules'] = $job_candidate_interview_schedulessres;
 		return $returnresult;
 	}
-	function getCandidateMaster($get){
+	public function getCandidateMaster($get){
 		global $callConfig;
 		$application_querysql = "SELECT id, field_group FROM application_query WHERE company_id = '".$get['company_id']."' AND is_active =0";
 		$application_queryres=$callConfig->getAllRows($application_querysql);
@@ -353,7 +353,7 @@ class recruitmentUserClass extends userClass{
 
 		return $return;
 	}
-	function getJobPostingList($get){
+	public function getJobPostingList($get){
 		global $callConfig;
 		$roleshortcodes = json_decode($get['roleshortcode'],1);
 		$whr = ""; $whrjp="";
@@ -378,7 +378,7 @@ class recruitmentUserClass extends userClass{
 		
 		return $return;
 	}
-	function getrecruitmentintegdashboard($get){
+	public function getrecruitmentintegdashboard($get){
 		global $callConfig; 
 		//echo "<pre>";
 		//print_r($get); exit;
@@ -570,7 +570,7 @@ class recruitmentUserClass extends userClass{
 
 		return $return; 
 	}
-	function getCandidateScreeningQuestions($get){
+	public function getCandidateScreeningQuestions($get){
 		global $callConfig; 
 		if($get['gettype'] =="QuestionsAnswers"){
 

@@ -1,6 +1,6 @@
 <?php 
 class webViewClass extends userClass{
-	function dynamicdatashowbasedontable($get){
+	public function dynamicdatashowbasedontable($get){
 		global $callConfig;
 		$table_name = $get['table_name'];
 		$company_id = $get['company_id'];
@@ -27,7 +27,7 @@ class webViewClass extends userClass{
 
 	}
 
-	function getdynamicinfodata($get){
+	public function getdynamicinfodata($get){
 		global $callConfig;
 		$return = array();
 		$table_name = $get['table'];
@@ -69,7 +69,7 @@ class webViewClass extends userClass{
 
 	}
 
-	function getRegularizationRequestList($get){
+	public function getRegularizationRequestList($get){
 		global $callConfig;
 		$return = array();
 		$company_id = $get['company_id'];
@@ -103,7 +103,7 @@ class webViewClass extends userClass{
 		return $return;
 	}
 
-	function togetRegularizationRequestById($get){
+	public function togetRegularizationRequestById($get){
 		global $callConfig;
 		$return = array();
 		$rid = $get['id'];
@@ -123,7 +123,7 @@ class webViewClass extends userClass{
 		return $return;
 	}
 
-	function toSaveDataEmployeeDailyAttendanceByRequestById($get){
+	public function toSaveDataEmployeeDailyAttendanceByRequestById($get){
 		global $callConfig;
 		$return = array();
 		$rid = $get['transaction_id'];
@@ -176,7 +176,7 @@ class webViewClass extends userClass{
 	    }
 		return $return;
 	}
-	function togetTransportPersonalGatewayData($get){
+	public function togetTransportPersonalGatewayData($get){
 		global $callConfig;
 		$return = array();
 		$company_id = $get['company_id'];
@@ -214,7 +214,7 @@ class webViewClass extends userClass{
 		return $return;
 	}
 
-	function togetTransportVehicleGatePassData($get){
+	public function togetTransportVehicleGatePassData($get){
 		global $callConfig;
 		$return = array();
 		$company_id = $get['company_id'];
@@ -264,7 +264,7 @@ class webViewClass extends userClass{
 	    }
 		return $return;
 	}
-	function togetEmployeeLeaveData($get){
+	public function togetEmployeeLeaveData($get){
 		global $callConfig;
 		$return = array();
 		$company_id = $get['company_id'];
@@ -305,7 +305,7 @@ class webViewClass extends userClass{
 	    }
 		return $return;
 	}
-	function togetStationeryRequestWebview($get){
+	public function togetStationeryRequestWebview($get){
 		global $callConfig;
 		$return = array();
 		$company_id = $get['company_id'];
@@ -371,7 +371,7 @@ class webViewClass extends userClass{
 
 		return $return;
 	}
-	function togetAssetRequestWebview($get){
+	public function togetAssetRequestWebview($get){
 		global $callConfig;
 		
 		$return = array();
@@ -447,7 +447,7 @@ class webViewClass extends userClass{
 
 		return $return;
 	}
-	function togetWorkFromHomeRequestWebview($get){
+	public function togetWorkFromHomeRequestWebview($get){
 		global $callConfig;
 		$return = array();
 		$company_id = $get['company_id'];
@@ -504,7 +504,7 @@ class webViewClass extends userClass{
 
 		return $return;
 	}
-	function canAccessApprovalDiscussion($get){
+	public function canAccessApprovalDiscussion($get){
 		global $callConfig;
 		$return = array('can_view' => false, 'can_post' => false);
 		$company_id = $get['company_id'];
@@ -588,7 +588,7 @@ class webViewClass extends userClass{
 		return $return;
 	}
 
-	function getApprovalDiscussionMessages($get){
+	public function getApprovalDiscussionMessages($get){
 		global $callConfig;
 		$return = array('status' => 'success', 'can_view' => false, 'can_post' => false, 'messages' => array());
 
@@ -636,7 +636,7 @@ class webViewClass extends userClass{
 		return $return;
 	}
 
-	function postApprovalDiscussionMessage($post){
+	public function postApprovalDiscussionMessage($post){
 		global $callConfig;
 		$return = array('status' => 'error', 'message' => 'Unable to send message.');
 
@@ -697,7 +697,7 @@ class webViewClass extends userClass{
 		);
 		return $return;
 	}
-	function getApprovalDiscussionNotifyUsers($get){
+	public function getApprovalDiscussionNotifyUsers($get){
 		global $callConfig;
 		$notify_users = array();
 		$company_id = $get['company_id'];
@@ -769,7 +769,7 @@ class webViewClass extends userClass{
 
 		return $notify_users;
 	}
-	function sendApprovalDiscussionMobilePush($post, $sender_name, $message_text){
+	public function sendApprovalDiscussionMobilePush($post, $sender_name, $message_text){
 		$push_sent = 0;
 		$push_messages = array();
 		$return = array();

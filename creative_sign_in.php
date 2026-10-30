@@ -9,7 +9,7 @@
             <div class="col-lg-6">
                 <div class="p-5 mob-pd">
                     <div class="text-left m-l-50 p-l-50 margin-0 mob-pd">
-                        <img class="img-200 mt-3" src="<?php echo $image; ?>">
+                        <img class="img-200 mt-3" src="<?php echo $image; ?>" alt="" >
                         <h3 class="text-white mt-3 f-24"><?php echo LOGIN_INFO['heding']; ?></h3>
 						<p class="f-14 text-white"><?php echo LOGIN_INFO['text']; ?></p>
                     </div>
@@ -21,7 +21,7 @@
                             <div class="card-body">
                                 <div class="p-5 custom-login-on">
                                     <div class="text-center mb-5">
-                                        <img class="img-200" src="assets/images/sign-in/HRstaq.png">   
+                                        <img class="img-200" src="assets/images/sign-in/HRstaq.png" alt="" >   
                                     </div>
                                     <h2 class="f-26 f-w-600 mt-4">Sign In</h2>
 									  <?php 
@@ -49,8 +49,8 @@
                         <?php } }?>
                                    <!--- <p class="text-muted f-14 f-w-600">Your Social Campaigns</p>
                                       <div class="d-block mt-5 text-center">
-                                        <button class="btn border f-w-600 text-muted f-14 b-radius-5 p-2"><img class="img-20 m-r-10" src="assets/images/sign-in/google-icon.svg"> Sign in with Google</button>
-                                        <button class="btn border f-w-600 text-muted f-14 b-radius-5 p-2"><img class="img-20 m-r-10" src="assets/images/sign-in/apple-black.svg"> Sign in with Apple</button>
+                                        <button class="btn border f-w-600 text-muted f-14 b-radius-5 p-2"><img class="img-20 m-r-10" src="assets/images/sign-in/google-icon.svg" alt="" > Sign in with Google</button>
+                                        <button class="btn border f-w-600 text-muted f-14 b-radius-5 p-2"><img class="img-20 m-r-10" src="assets/images/sign-in/apple-black.svg" alt="" > Sign in with Apple</button>
                                     </div>
                                     <div class="d-block mt-5">
                                         <h3 class="text-muted f-14">Or with email</h3>
@@ -81,8 +81,8 @@
                                     <h2 class="f-26 f-w-600 mt-2 text-center">Sign Up</h2>
                                   <!---  <p class="text-muted f-14 f-w-600 text-center">Your Social Campaigns</p>
                                      <div class="d-block mt-5 text-center">
-                                        <button class="btn border f-w-600 text-muted f-14 b-radius-5 p-2"><img class="img-20 m-r-10" src="assets/images/sign-in/google-icon.svg"> Sign in with Google</button>
-                                        <button class="btn border f-w-600 text-muted f-14 b-radius-5 p-2"><img class="img-20 m-r-10" src="assets/images/sign-in/apple-black.svg"> Sign in with Apple</button>
+                                        <button class="btn border f-w-600 text-muted f-14 b-radius-5 p-2"><img class="img-20 m-r-10" src="assets/images/sign-in/google-icon.svg" alt="" > Sign in with Google</button>
+                                        <button class="btn border f-w-600 text-muted f-14 b-radius-5 p-2"><img class="img-20 m-r-10" src="assets/images/sign-in/apple-black.svg" alt="" > Sign in with Apple</button>
                                     </div>
                                     <div class="d-block mt-4 text-center">
                                         <h3 class="text-muted f-14">Or with email</h3>

@@ -3,7 +3,7 @@ require_once "dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
 use Dompdf\Options; 
 class accountUserClass extends userClass{
-	function getFinanaceReportGroups($get){
+	public function getFinanaceReportGroups($get){
     	global $callConfig;
     	$return = array();
     	$chartofaccountssql = "SELECT id,account_name,account_code FROM `chart_of_accounts` WHERE company_id = ".$get['company_id']." AND parent_account_code = 0 AND is_active =0";
@@ -30,7 +30,7 @@ class accountUserClass extends userClass{
     	}
 		return $return; 
     }
-    function selectChartOfAccont($get){
+    public function selectChartOfAccont($get){
     	global $callConfig;
     	$chartofaccountssql = "SELECT id,account_name,parent_account_code,account_code FROM `chart_of_accounts` WHERE company_id = ".$get['company_id']." AND (parent_account_code IN('".$get['chart_of_account_codes']."') OR account_code IN('".$get['chart_of_account_codes']."')) AND is_active =0";
     	$chartofaccountsres = $callConfig->getAllRows($chartofaccountssql);
@@ -63,7 +63,7 @@ class accountUserClass extends userClass{
     	$return['chart_of_accounts_child']= $chartofaccounts;
     	return $return;
     }
-    function insertFinanaceReportGroups($get,$post){
+    public function insertFinanaceReportGroups($get,$post){
     	global $callConfig;
     	$return =array();
     	$return['post'] = $post;
@@ -110,7 +110,7 @@ class accountUserClass extends userClass{
     	} 
 		return $return;  
     }
-    function getChartOfAccounts($get){
+    public function getChartOfAccounts($get){
     	global $callConfig;
     	$return = array();
     	$chartofaccountssql = "SELECT * FROM `chart_of_accounts` WHERE company_id = ".$get['company_id']." AND is_active =0 ORDER BY parent_account_code ASC";
@@ -159,7 +159,7 @@ class accountUserClass extends userClass{
 
 		return $return;
     }
-    function insertChartOfAccounts($get,$post){
+    public function insertChartOfAccounts($get,$post){
     	global $callConfig;
     	$return =array();
     	$return['post'] = $post;
@@ -209,7 +209,7 @@ class accountUserClass extends userClass{
 
 		return $return;  
     }
-    function insertTOCHeaders($get,$post){
+    public function insertTOCHeaders($get,$post){
     	global $callConfig;
     	$return =array();
     	$return['post'] = $post;
@@ -225,7 +225,7 @@ class accountUserClass extends userClass{
     	}
 		return $return;  
     }
- 	function getTOCHeader($get){
+ 	public function getTOCHeader($get){
     	global $callConfig;
     	$returnarray = array();
     	if($get['id'] != ""){
@@ -251,7 +251,7 @@ class accountUserClass extends userClass{
 		return $returnarray;
 
     }
-    function getTextOfContentReports($get){
+    public function getTextOfContentReports($get){
     	global $callConfig;
     	//echo "<pre>";
     	if($get['inputformreport'] =="Y"){
@@ -310,7 +310,7 @@ class accountUserClass extends userClass{
 		$returnarray['stringfields']  = $stringfields;
 		return $returnarray;
     }
-    function getFinanaceReports($get){
+    public function getFinanaceReports($get){
         global $callConfig;
         $financereportgroupssql = "SELECT * FROM `finance_report_groups` WHERE company_id = ".$get['company_id']." AND finance_report_id = '".$get['fr_id']."' AND is_active =0 ORDER BY display_priority ASC";
         $financereportgroupsres = $callConfig->getAllRows($financereportgroupssql);
@@ -339,7 +339,7 @@ class accountUserClass extends userClass{
         $return['trial_balance']= $trialbalanceres;
         return $return;
     }
-    function insertNotes($get,$post){
+    public function insertNotes($get,$post){
         global $callConfig;
         $return =array();
         $return['post'] = $post;
@@ -354,14 +354,14 @@ class accountUserClass extends userClass{
         }
         return $return;  
     }
-    function getNotes($get){
+    public function getNotes($get){
         global $callConfig;
         $notessql = "SELECT id, note_number, parent_id, note_name, description FROM notes WHERE company_id = '".$get['company_id']."' AND is_active = 0 ORDER BY created_date ASC";
         $notesres = $callConfig->getAllRows($notessql);
         $return['notes'] = $notesres;
         return $return; 
     }
-    function getJournals($get){
+    public function getJournals($get){
         global $callConfig;
         $currenciessql = "SELECT * FROM `journal_settings` WHERE company_id = ".$get['company_id']." AND (id = '".$get['rid']."' OR transaction_table = '".$get['tt']."') AND is_active =0";
         $currenciesres = $callConfig->getRow($currenciessql);
@@ -386,7 +386,7 @@ class accountUserClass extends userClass{
 
         return $return; 
     }
-    function insertJournals($get,$post){
+    public function insertJournals($get,$post){
         global $callConfig;
         $return =array();
         $return['post'] = $post;
@@ -414,7 +414,7 @@ class accountUserClass extends userClass{
         }
         return $return;  
     }
-    function getTaxAuthorities($get){
+    public function getTaxAuthorities($get){
         global $callConfig;
         $all_tax_authoritiessql = "SELECT id, tax_name, tax_type, tax_scope, tax_rate, tax_computation_id FROM `tax_authorities` WHERE company_id = ".$get['company_id']." AND tax_computation_id != '1' AND id != '".$get['rid']."'  AND is_active =0";
         $all_tax_authoritiesres = $callConfig->getAllRows($all_tax_authoritiessql);
@@ -474,7 +474,7 @@ class accountUserClass extends userClass{
         return $return;  
 
     }
-    function insertTaxAuthorities($get,$post){
+    public function insertTaxAuthorities($get,$post){
         global $callConfig;
         $return =array();
         $return['post'] = $post;
@@ -543,7 +543,7 @@ class accountUserClass extends userClass{
 
         return $return;  
     }
-    function getFiscalPositions($get){
+    public function getFiscalPositions($get){
         global $callConfig;
         $return = array();
         $countriessql = "SELECT id, country_name FROM `countries` WHERE company_id = ".$get['company_id']." AND is_active =0 ORDER BY country_name ASC";
@@ -571,7 +571,7 @@ class accountUserClass extends userClass{
         return $return;  
 
     }
-    function insertFiscalPositions($get,$post){
+    public function insertFiscalPositions($get,$post){
         global $callConfig;
         $return =array();
         $return['post'] = $post;
@@ -612,7 +612,7 @@ class accountUserClass extends userClass{
         }
         return $return;
     }
-    function getDeferredRevenues($get){
+    public function getDeferredRevenues($get){
         global $callConfig;
         $return =array();
         $return['get'] = $get;
@@ -633,7 +633,7 @@ class accountUserClass extends userClass{
 
         return $return;
     }
-    function insertDeferredRevenues($get,$post){
+    public function insertDeferredRevenues($get,$post){
         global $callConfig;
         $return =array();
         $return['post'] = $post;
@@ -659,7 +659,7 @@ class accountUserClass extends userClass{
         }
         return $return;
     }
-    function getFollowUpLevels($get){
+    public function getFollowUpLevels($get){
          global $callConfig;
         $return =array();
         $return['get'] = $get;
@@ -693,7 +693,7 @@ class accountUserClass extends userClass{
         }
         return $return;
     }
-    function insertFollowUpLevels($get,$post){
+    public function insertFollowUpLevels($get,$post){
          global $callConfig;
         $return =array();
         $return['post'] = $post;
@@ -715,7 +715,7 @@ class accountUserClass extends userClass{
         }
         return $return;
     }
-    function getReconciliations($get){
+    public function getReconciliations($get){
         global $callConfig;
         $return =array();
         $reconciliationtypesql = "SELECT genc_detail_code, genc_detail_name FROM `general_code_details` WHERE company_id = ".$get['company_id']." AND genc_code = 'RECONCILIATIONTYPE' AND is_active =0";
@@ -757,7 +757,7 @@ class accountUserClass extends userClass{
         }
         return $return;
     }
-    function insertReconciliations($get,$post){
+    public function insertReconciliations($get,$post){
          global $callConfig;
         $return =array();
         $return['post'] = $post;
@@ -787,7 +787,7 @@ class accountUserClass extends userClass{
         }
         return $return;
     }
-    function togetbudgetuserdeailsaccount($post){
+    public function togetbudgetuserdeailsaccount($post){
 		global $callConfig;
 		$query = "SELECT * FROM chart_of_accounts WHERE account_code IN (SELECT account_code FROM gl_account_users WHERE user_id = ".$post['user_id'].")";
 		$data = $callConfig->getAllRows($query);
@@ -824,7 +824,7 @@ class accountUserClass extends userClass{
 		}
 		return array('main'=>$main, 'cost_centers'=>$cost_centers, 'account_budgets'=>$account_budgets, 'budget'=>$budget, 'account_budget_query'=>$query, 'budget_query'=>$querys);
 	}
-	function budgetinsertaccount($get,$post){
+	public function budgetinsertaccount($get,$post){
 		global $callConfig;		
 		//print_r($post); exit;
 		$whrqu= "UPDATE account_budgets SET is_active = NULL , updated_by = ".$get['user_id']." WHERE company_id= '".$get['company_id']."' AND  cost_center_id='".$post['cost_center_id']."' AND fiscal_year='".$post['fiscal_year']."' AND is_active = 0";
@@ -855,7 +855,7 @@ class accountUserClass extends userClass{
 		}
 		return $res;
 	}
-	function insertorupdatebudgetaccount($post){
+	public function insertorupdatebudgetaccount($post){
 		global $callConfig;
 		$whr1="company_id= '".$post['company_id']."' and budget_version='".$post['budget_version']."' and cost_center_id='".$post['cost_center_id']."' and account_code='".$post['account_code']."' and fiscal_year='".$post['fiscal_year']."'";
 		$query2 = $callConfig->selectQuery('budget','*',$whr1,'','','');
@@ -868,7 +868,7 @@ class accountUserClass extends userClass{
 		}
 		return $res;
 	}
-    function getJournalVouchers($get){
+    public function getJournalVouchers($get){
         global $callConfig;
         $return= $partylist = array();
         if(isset($get['rid']) AND $get['rid'] !=""){
@@ -956,7 +956,7 @@ class accountUserClass extends userClass{
         return $return;
 
     }
-    function insertJournalVouchers($get,$post){
+    public function insertJournalVouchers($get,$post){
          global $callConfig;
         $return =array();
         $return['post'] = $post; 
@@ -1053,7 +1053,7 @@ class accountUserClass extends userClass{
         
         return $return;
     }
-     function insertReverseAccountBalances($journalEntry) {
+     public function insertReverseAccountBalances($journalEntry) {
         global $callConfig;
         $return['journalEntry'] = $journalEntry;
         $company_id = $journalEntry['company_id'];
@@ -1116,7 +1116,7 @@ class accountUserClass extends userClass{
 
         return $return;    
     }
-    function insertAccountBalances($journalEntry){
+    public function insertAccountBalances($journalEntry){
         global $callConfig;
         $return['journalEntry'] = $journalEntry;
         $company_id = $journalEntry['company_id'];
@@ -1244,7 +1244,7 @@ class accountUserClass extends userClass{
 
         return $return;    
     }
-    function getBankVouchers($get){
+    public function getBankVouchers($get){
         global $callConfig;
         $return= $partylist = array();
         if(isset($get['rid']) AND $get['rid'] !=""){
@@ -1309,7 +1309,7 @@ class accountUserClass extends userClass{
         $return['vouchar_type']= $vouchar_type;
         return $return;
     }
-    function insertBankVouchers($get,$post){
+    public function insertBankVouchers($get,$post){
          global $callConfig;
         $return =array();
         $return['post'] = $post; 
@@ -1460,7 +1460,7 @@ class accountUserClass extends userClass{
         //child level entry
         return $return;
     }
-    function getCashVouchers($get){
+    public function getCashVouchers($get){
         global $callConfig;
         $return= $partylist = array();
         if(isset($get['rid']) AND $get['rid'] !=""){
@@ -1525,7 +1525,7 @@ class accountUserClass extends userClass{
         $return['vouchar_type']= $vouchar_type;
         return $return;
     }
-     function insertCashVouchers($get,$post){
+     public function insertCashVouchers($get,$post){
         global $callConfig;
         $return =array();
         $return['post'] = $post; 
@@ -1676,13 +1676,10 @@ class accountUserClass extends userClass{
 
         return $return;
     }
-    function getGeneralLedger($get){
+    public function getGeneralLedger($get){
         global $callConfig;
         $getFinanceialYear = $this->getFinanceialYear($get['from_date']);
         $financeyear = $getFinanceialYear['fullstartyear'].$getFinanceialYear['fullendyear'];
-        $journalssql = "SELECT id,gl_account_pc_cash,pc_box_description FROM `petty_cash_boxes` WHERE company_id = ".$get['company_id']." AND is_active =0";
-        $journalsres = $callConfig->getAllRows($journalssql);
-        $return['petty_cash_boxes']= $journalsres;
 
         $chartofaccountssql = "SELECT id,account_name,account_code,parent_account_code FROM `chart_of_accounts` WHERE company_id = ".$get['company_id']." AND allow_posting = 0 AND is_active =0 ORDER BY account_name ASC";
         $chartofaccountsres = $callConfig->getAllRows($chartofaccountssql);
@@ -1740,7 +1737,7 @@ class accountUserClass extends userClass{
 
         return $return;
     }
-    function toGetApplicationVoucherSerialNumbers($get,$table_name,$trans_date,$serial_number_type,$voucher_type=""){
+    public function toGetApplicationVoucherSerialNumbers($get,$table_name,$trans_date,$serial_number_type,$voucher_type=""){
         global $callConfig;
         $return = array();
         if($voucher_type !=""){
@@ -1757,10 +1754,9 @@ class accountUserClass extends userClass{
             $update = $callConfig->updateRecord('application_voucher_serial_numbers',array('serial_number' =>$res->serial_number+1),'id',$res->id); 
             $return['query_1_update'] = $update; 
        }else{
-            $query = "SELECT * FROM `application_voucher_serial_numbers` WHERE company_id = ".$get['company_id']." AND application_table_name = '".$table_name."' AND serial_number_type = '".$serial_number_type."' AND is_active =0";  
-            $return['query_2_res'] = $query;   
+            $query = "SELECT * FROM `application_voucher_serial_numbers` WHERE company_id = ".$get['company_id']." AND application_table_name = '".$table_name."' AND serial_number_type = '".$serial_number_type."' AND is_active =0";
             $res = $callConfig->getRow($query);
-            $return['query_2_res'] = $res;  
+            $return['query_2_res'] = $res;
             if(isset($res->doc_no_length)){
                 $le = $res->doc_no_length;
                 $var = "%0".$le."d";
@@ -1796,7 +1792,7 @@ class accountUserClass extends userClass{
         return trim($data);
     }
 
-    function getAccountClosingBalance($get,$acount_code){
+    public function getAccountClosingBalance($get,$acount_code){
         global $callConfig;
         $closingbalance = 0;
         $query = "SELECT id, balance_amount FROM `general_ledger` WHERE company_id = ".$get['company_id']." AND account_code = '".$acount_code."' AND is_active =0 ORDER BY voucher_date DESC limit 1";    
@@ -1808,7 +1804,7 @@ class accountUserClass extends userClass{
         }
         return trim($closingbalance);
     } 
-    function getTrialBalancesReport($get){
+    public function getTrialBalancesReport($get){
         global $callConfig;
         $company_id = $get['company_id'];
         $balance_date = $get['balance_date'];
@@ -1849,7 +1845,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         $return['balances'] =$res; 
         return $return;
     } 
-    function getFinanceialYear($trans_date){
+    public function getFinanceialYear($trans_date){
         $returnary = array();
         if(date("m",strtotime($trans_date)) >= 4){
             $shortstartyear = date("y",strtotime($trans_date));
@@ -1869,7 +1865,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         $returnary = array('startdate'=>$startdate,'enddate'=>$startdate,'fullstartyear'=>$startyear,'fullendyear'=>$endyear,'shortstartyear'=>$shortstartyear,'shortendyear'=>$shortendyear);
         return $returnary;
     } 
-    function getPurchaseLedger($get){
+    public function getPurchaseLedger($get){
         global $callConfig;
         if($get['from_date'] !="" AND $get['to_date'] !=""){
             $condition .= " AND '".$this->dateconvertdbformat($get['from_date'])."' <= transaction_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= transaction_date";
@@ -1888,7 +1884,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         $return['purchase_invoices'] =$purchase_invoicesres; 
         return $return;
     }
-     function getSalesLedger($get){
+     public function getSalesLedger($get){
         global $callConfig;
         if($get['from_date'] !="" AND $get['to_date'] !=""){
             $condition .= " AND '".$this->dateconvertdbformat($get['from_date'])."' <= transaction_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= transaction_date";
@@ -1907,7 +1903,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         $return['sales_invoices'] =$sales_invoicesres; 
         return $return;
     }
-    function getProfitAndLossReports($get){
+    public function getProfitAndLossReports($get){
         global $callConfig;
         $company_id = $get['company_id'];
         $start_date = $get['start_date'];
@@ -1938,7 +1934,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
 
 
     }
-    function getBalanceSheetReport($get){
+    public function getBalanceSheetReport($get){
         global $callConfig;
         $company_id = $get['company_id'];
         $balance_date = $get['balance_date'];
@@ -1955,7 +1951,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         
         return $return;
     }
-    function getcashflowreports($get){
+    public function getcashflowreports($get){
         global $callConfig;
         $company_id = $get['company_id'];
         $start_date = $get['start_date'];
@@ -1984,7 +1980,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         //previous year data
         return $return;
     }
-    function getdebitandcreditnotes($get){
+    public function getdebitandcreditnotes($get){
         global $callConfig;
         $return = array();
         $return['get']= $get;
@@ -2048,7 +2044,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
          }
         return $return;
     }
-    function insertdebitandcreditnotes($get,$post){
+    public function insertdebitandcreditnotes($get,$post){
         global $callConfig;
         $return = array();
         $return['post'] = $post;
@@ -2118,7 +2114,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         }
         return $return;
     }
-    function getdynamicmappingtableinvoices($get){
+    public function getdynamicmappingtableinvoices($get){
         global $callConfig;
         $return = array();
         $transaction_table = $get['transaction_table'];
@@ -2157,7 +2153,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         return $return;
 
     }
-    function getCustomerLedger($get){
+    public function getCustomerLedger($get){
         global $callConfig;
         $transactionwithdates = array();
         $getFinanceialYear = $this->getFinanceialYear($get['from_date']);
@@ -2218,7 +2214,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         $return['transactionwithdates'] =$transactionwithdates; 
         return $return;
     }
-    function getCustomerStatements($get){
+    public function getCustomerStatements($get){
         global $callConfig;
         $transactionwithdates = array();
         $getFinanceialYear = $this->getFinanceialYear($get['from_date']);
@@ -2287,7 +2283,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
 
 
 
-    function getVendorledger($get){
+    public function getVendorledger($get){
         global $callConfig;
         $transactionwithdates = array();
         $getFinanceialYear = $this->getFinanceialYear($get['from_date']);
@@ -2348,7 +2344,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         $return['transactionwithdates'] =$transactionwithdates; 
         return $return;
     }
-    function getVendorstatements($get){
+    public function getVendorstatements($get){
         global $callConfig;
         $transactionwithdates = array();
         $getFinanceialYear = $this->getFinanceialYear($get['from_date']);
@@ -2416,7 +2412,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
     }
 
 
-    function getEnquiryVendorOrCustomer($get){
+    public function getEnquiryVendorOrCustomer($get){
         global $callConfig;
         $return = array();
         $return['get'] =$get;
@@ -2426,7 +2422,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         $return['search_result'] =$vencustres; 
         return $return;
     }
-    function setAccountCode($get, $post){
+    public function setAccountCode($get, $post){
         global $callConfig;
         $sep = "-";
         $serialLen = 2;
@@ -2464,7 +2460,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         $callConfig->insertRecord("account_code_list", $insertArray); 
         return ["account_code" => $finalCode];
     }
-    function chartOfAccountLockAndUnlock($get){
+    public function chartOfAccountLockAndUnlock($get){
         global $callConfig;
         $return['get'] = $get;
         $ca_status = $get['ca_status']!=""?$get['ca_status']:'N';

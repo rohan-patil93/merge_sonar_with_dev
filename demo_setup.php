@@ -212,7 +212,7 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
       <div class="container-fluid text-right">
         <div class="top-logo p-2">
           <a href="">
-            <img class="img-100" src="assets/images/sign-in/<?php //echo LOGIN_INFO['logo']; ?>">  
+            <img class="img-100" src="assets/images/sign-in/<?php //echo LOGIN_INFO['logo']; ?>" alt="" >  
           </a>
         </div>
       </div>
@@ -241,7 +241,7 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
   			<div class="col-lg-6 text-center position-relative">
   				<div class="top-logo p-2">
   					<a href="">
-  						<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>">  
+  						<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >  
   					</a>
   				</div>
   				<div class="text-position text-start">
@@ -250,7 +250,7 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
   						<p class="f-14 f-w-600">Enter your company's details here. This information will be used across various modules and documents within the system, ensuring accurate branding and identification.</p>
   						<button class="btn btn-primary">infistaq.com</button>
   				</div>
-  				<img class="" src="assets/images/setup_welcome_compliance.png">
+  				<img class="" src="assets/images/setup_welcome_compliance.png" alt="" >
   			</div>
   		</div>
   	</div>
@@ -294,7 +294,7 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
   											<span> <i class="fa fa-camera"></i> &nbsp; Upload Logo</span>
   										</label>
   										<input type="file" name="image" id="display_logo" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
-  										<img src="<?php echo "uploads/all/".$role['image'] ; ?>" id="outputdisplay_logo" width="200" onerror="this.src='uploads/all/no-image.jpg';"/>
+  										<img src="<?php echo "uploads/all/".$role['image'] ; ?>" id="outputdisplay_logo" width="200" onerror="this.src='uploads/all/no-image.jpg';" alt="" />
   										<input type="hidden" name="hid_image" value="<?php echo $role['image'] ;  ?>">
   									</div>
   								</div>
@@ -335,7 +335,7 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
       <div class="col-lg-6 text-center position-relative">
       	<div class="top-logo p-2">
       		<a href="">
-      			<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>">  
+      			<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >  
       		</a>
       	</div>
       	<div class="text-position text-start">
@@ -344,7 +344,7 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
   						<p class="f-14 f-w-600">Choose your preferred currency and locale settings. This ensures that all financial transactions and system displays are aligned with your regional preferences.</p>
   						<button class="btn btn-primary">infistaq.com</button>
   				</div>
-      	<img class="" src="assets/images/setup_welcome_compliance.png">
+      	<img class="" src="assets/images/setup_welcome_compliance.png" alt="" >
       </div>
   </div>
 </div>
@@ -423,7 +423,7 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
          <div class="col-lg-6 text-center position-relative"> 
          	<div class="top-logo p-2">
          		<a href="">
-         			<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>">  
+         			<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >  
          		</a>
          	</div>
          	<div class="text-position text-start">
@@ -432,7 +432,7 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
   						<p class="f-14 f-w-600">Choose your preferred currency and locale settings. This ensures that all financial transactions and system displays are aligned with your regional preferences.</p>
   						<button class="btn btn-primary">infistaq.com</button>
   				</div>
-         	<img class="" src="assets/images/setup_welcome_compliance.png">
+         	<img class="" src="assets/images/setup_welcome_compliance.png" alt="" >
          </div>
      </div>
  </div>
@@ -476,7 +476,7 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
 			<div class="col-lg-6 text-center position-relative"> 
 				<div class="top-logo p-2">
 					<a href="">
-						<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>">  
+						<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >  
 					</a>
 				</div>
 				<div class="text-position text-start">
@@ -485,7 +485,7 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
   						<p class="f-14 f-w-600">Choose your preferred currency and locale settings. This ensures that all financial transactions and system displays are aligned with your regional preferences.</p>
   						<button class="btn btn-primary">infistaq.com</button>
   				</div>
-				<img class="" src="assets/images/setup_welcome_compliance.png">
+				<img class="" src="assets/images/setup_welcome_compliance.png" alt="" >
 			</div>
 		</div>
 	</div>
@@ -540,7 +540,7 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
 			<div class="col-lg-6 text-center position-relative"> 
 				<div class="top-logo p-2">
 					<a href="">
-						<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>">  
+						<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >  
 					</a>
 				</div>
 				<div class="text-position text-start">
@@ -549,7 +549,7 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
   						<p class="f-14 f-w-600">Choose your preferred currency and locale settings. This ensures that all financial transactions and system displays are aligned with your regional preferences.</p>
   						<button class="btn btn-primary">infistaq.com</button>
   				</div>
-				<img class="" src="assets/images/setup_welcome_compliance.png">
+				<img class="" src="assets/images/setup_welcome_compliance.png" alt="" >
 			</div>
 		</div>
 	</div>
@@ -584,7 +584,7 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
 			<div class="col-lg-6 text-center position-relative"> 
 				<div class="top-logo p-2">
 					<a href="">
-						<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>">  
+						<img class="img-100" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >  
 					</a>
 				</div>
 				<div class="text-position text-start">
@@ -593,7 +593,7 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
   						<p class="f-14 f-w-600">Choose your preferred currency and locale settings. This ensures that all financial transactions and system displays are aligned with your regional preferences.</p>
   						<button class="btn btn-primary">infistaq.com</button>
   				</div>
-				<img class="" src="assets/images/setup_welcome_compliance.png">
+				<img class="" src="assets/images/setup_welcome_compliance.png" alt="" >
 			</div>
 		</div>
 	</div>

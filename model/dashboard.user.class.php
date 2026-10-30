@@ -2,7 +2,7 @@
 
 class dashboardUserClass{
 	
-	function togetHRAdminDashboardData($get){	
+	public function togetHRAdminDashboardData($get){	
 		global $callConfig;
 
 		$company_id = $get['company_id'];
@@ -282,7 +282,7 @@ class dashboardUserClass{
 		$return['attendance_last_6_months'] = $attendance_last_6_months;
 		return $return;
 	}
-	function getEmployeeSelfDashboard($get){
+	public function getEmployeeSelfDashboard($get){
 		global $callConfig;
 		
 		$company_id = $get['company_id'];
@@ -592,7 +592,7 @@ class dashboardUserClass{
 	   return $return;
 	}
 	
-	function getPayrollDashboardSummary($get){
+	public function getPayrollDashboardSummary($get){
     	global $callConfig;
 
 		$company_id = $get['company_id'];

@@ -115,7 +115,7 @@
                     <div class="card mb-0" style="min-height: auto;">
                         <div class="card-body pw-5">
                             <div class="p-3 custom-login-on mob-pd">
-                                <img class="mt-2 mb-3" src="<?php echo $image; ?>">
+                                <img class="mt-2 mb-3" src="<?php echo $image; ?>" alt="" >
                                 <h2 class="f-26 f-w-600">Welcome Back</h2>
 								<?php 
                                 if($error !='') { 
@@ -149,7 +149,7 @@
                                             </span>
                                         </div>
                                         <?php if(CAPTCHA_YES_NO == 'YES' && $subdomain !='uat' ){ ?> 
-                                        <center><img style="height: 50px;" src="captcha/captcha.php" /></center>
+                                        <center><img style="height: 50px;" src="captcha/captcha.php" alt="" /></center>
                                         <div class="form-group form-primary login-mean-class" >
                                             <input type="text" class="form-control" name="captcha" placeholder="Enter Captcha" required="required"/>
                                         </div>
@@ -168,7 +168,7 @@
                             </div>
 							<div class="p-5 regsterform" style="display:none">
 							    <form class="md-float-material form-material" action="" method="post" >
-                                    <img class="img-100 mt-0 rentalji" src="<?php echo $image; ?>">
+                                    <img class="img-100 mt-0 rentalji" src="<?php echo $image; ?>" alt="" >
 								    <h2 class="f-26 f-w-600 mt-4">Sign Up</h2>
                               
                                     <div class="text-left mt-4">
@@ -195,7 +195,7 @@
                             </div>
                             <div class="p-5 forgotpasswordon mt-5" style="display:none">
 							    <form class="md-float-material form-material" action="" method="post" >
-                                    <img class="mt-3 mb-3" src="<?php echo $image; ?>">
+                                    <img class="mt-3 mb-3" src="<?php echo $image; ?>" alt="" >
                                     <div class="">
                                         <h2 class="f-26 f-w-600 mt-2">Forgot Password</h2>
                                         <p class="text-muted f-14 f-w-600">Enter your email to reset your password.</p>

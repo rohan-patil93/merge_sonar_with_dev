@@ -1,6 +1,6 @@
 <?php
 class purchasingUserClass extends userClass{
-    function getSubcontractWorkOrders($get){
+    public function getSubcontractWorkOrders($get){
         global $callConfig;
         $return = array();
         
@@ -45,7 +45,7 @@ class purchasingUserClass extends userClass{
 
         return $return;
     }
-    function insertSubcontractWorkOrders($get, $post){
+    public function insertSubcontractWorkOrders($get, $post){
         global $callConfig;
         $return = array();
         
@@ -184,7 +184,7 @@ class purchasingUserClass extends userClass{
         return $return;
     }
 
-    function getIssueRawMaterialsToVendor($get){
+    public function getIssueRawMaterialsToVendor($get){
         global $callConfig;
         $return = array();
         // Case A: Dropdown list - no rid provided
@@ -300,7 +300,7 @@ class purchasingUserClass extends userClass{
         return $return;
     }
 
-    function saveIssueRawMaterialsToVendor($get, $post){
+    public function saveIssueRawMaterialsToVendor($get, $post){
         global $callConfig;
         $return = array();
 
@@ -452,7 +452,7 @@ class purchasingUserClass extends userClass{
 
         return $return;
     }
-    function getSubContractWorkOrderIssues($get){
+    public function getSubContractWorkOrderIssues($get){
         global $callConfig;
         $return = array();
 
@@ -528,7 +528,7 @@ class purchasingUserClass extends userClass{
         return $return;
     }
     
-    function updateSubcontractWorkOrderPendingQty($get){
+    public function updateSubcontractWorkOrderPendingQty($get){
         global $callConfig;
         $return = array();
 
@@ -616,7 +616,7 @@ class purchasingUserClass extends userClass{
         return $return;
     }
 
-    function getSubcontractWorkOrderReceiptMetrics($company_id, $work_order_id, $exclude_receipt_id = ''){
+    public function getSubcontractWorkOrderReceiptMetrics($company_id, $work_order_id, $exclude_receipt_id = ''){
         global $callConfig;
 
         $receipt_where = "company_id = '".$company_id."' AND ref_id = '".$work_order_id."' AND is_active = 0 AND (current_status IS NULL OR current_status NOT IN ('".ST_REJECTED."', '".ST_CANCEL."', '".ST_INACTIVE."'))";
@@ -633,7 +633,7 @@ class purchasingUserClass extends userClass{
         );
     }
 
-    function getSubcontractReceiptWorkOrderDetails($company_id, $work_order_id, $exclude_receipt_id = ''){
+    public function getSubcontractReceiptWorkOrderDetails($company_id, $work_order_id, $exclude_receipt_id = ''){
         global $callConfig;
         
         $work_order_sql = "SELECT swo.id, swo.transaction_number, swo.transaction_date, swo.product_id, swo.party_id, swo.party_name, swo.request_warehouse_id, swo.party_warehouse_id, swo.work_order_item_qty, swo.work_order_item_price, swo.work_order_total_amount  as item_total_amount, ven.company as vendor_company, ven.display_name as vendor_display_name, ven.email as vendor_email, ven.phone as vendor_phone, ven.billing_address, ven.shipping_address, ven.billing_state, ven.shipping_state, ven.gstin, ven.pan_no, ownw.warehouse_name as requested_warehouse_name, venw.warehouse_name as vendor_warehouse_name, itm.item_name as product_name, itm.sku as product_sku, itm.purchase_uom as product_uom, uom.uom_name as product_uom_name
@@ -662,13 +662,11 @@ class purchasingUserClass extends userClass{
         return $work_order_res;
     }
 
-    function getSubcontractWorkOrderReceipts($get){
+    public function getSubcontractWorkOrderReceipts($get){
         global $callConfig;
 
         $return = array();
         $return['status'] = 'success';
-        $return['subcontract_work_orders_list'] = array();
-        
 
         $dropdown_sql = "SELECT swo.id, swo.transaction_number
                          FROM subcontract_work_orders swo
@@ -693,7 +691,7 @@ class purchasingUserClass extends userClass{
 
         return $return;
     }
-    function calculateSubcontractWorkOrderReceiptTaxDetails($get, $work_order_id, $received_qty){
+    public function calculateSubcontractWorkOrderReceiptTaxDetails($get, $work_order_id, $received_qty){
         global $callConfig;
 
         $return = array(
@@ -764,7 +762,7 @@ class purchasingUserClass extends userClass{
         return $return;
     }
 
-    function getSubcontractWorkOrderReceiptTaxPreview($get, $post){
+    public function getSubcontractWorkOrderReceiptTaxPreview($get, $post){
         $return = array();
         $work_order_id = isset($post['subcontract_work_order_id']) ? $post['subcontract_work_order_id'] : '';
         $received_qty = isset($post['received_qty']) ? (float)$post['received_qty'] : 0;
@@ -783,7 +781,7 @@ class purchasingUserClass extends userClass{
 
         return $this->calculateSubcontractWorkOrderReceiptTaxDetails($get, $work_order_id, $received_qty);
     }
-    function saveSubcontractWorkOrderReceipt($get, $post){
+    public function saveSubcontractWorkOrderReceipt($get, $post){
         global $callConfig;
 
         $return = array();
@@ -988,7 +986,7 @@ class purchasingUserClass extends userClass{
         return $return;
     }
 
-    function getSubcontractWorkOrderReceiptHistory($get){
+    public function getSubcontractWorkOrderReceiptHistory($get){
         global $callConfig;
 
         $return = array();

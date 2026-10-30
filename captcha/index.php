@@ -2,6 +2,7 @@
 <?php session_start()?>
 <html lang="en">
 	<head>
+		<title>InfiSuite</title>
 		<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css"/>
 	</head>
@@ -25,7 +26,7 @@
 					<label>Password</label>
 					<input type="password" name="password" class="form-control" required="required"/>
 				</div>
-				<center><img src="captcha.php" /></center>
+				<center><img src="captcha.php" alt="" /></center>
 				<br />
 				<br />
 				<div class="form-group">

@@ -230,7 +230,7 @@ $_SESSION['download_data'] = [];
                 <div class="text-center py-4">
                     <p class="text-muted f-16 fw-bold"><i class="ti-alert text-warning"></i> No Data Available</p>
                     <div class="text-center px-4">
-                        <img class="mw-100 mh-300px max-h-300" src="assets/images/work.png" >
+                        <img class="mw-100 mh-300px max-h-300" src="assets/images/work.png" alt="" >
                     </div>
                 </div>
             <?php } ?>

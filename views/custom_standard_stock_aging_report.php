@@ -89,7 +89,7 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
           </tr>
           <?php
           $sl = 1;
-          if (!empty($return['stock_aging_report']) && !empty($return['stock_aging_report'])) {
+          if (!empty($return['stock_aging_report'])) {
             foreach ($return['stock_aging_report'] as $data) {
 
               $cssdata[] = array(

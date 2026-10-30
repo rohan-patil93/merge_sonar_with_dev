@@ -1,7 +1,7 @@
 <?php
 class VmsDocumentClass extends userClass
 {
-    function getDocumentManagementData($get)
+    public function getDocumentManagementData($get)
     {
         global $callConfig;
 
@@ -65,7 +65,7 @@ class VmsDocumentClass extends userClass
         return $return;
     }
 
-    function getDocumentManagementList($get)
+    public function getDocumentManagementList($get)
     {
         global $callConfig;
 
@@ -159,7 +159,7 @@ class VmsDocumentClass extends userClass
         return $return;
     }
 
-    function saveDocumentManagement($get, $post)
+    public function saveDocumentManagement($get, $post)
     {
         global $callConfig;
 
@@ -300,7 +300,7 @@ class VmsDocumentClass extends userClass
         );
     }
 
-    function getDocumentManagementDashboard($get)
+    public function getDocumentManagementDashboard($get)
     {
         global $callConfig;
 
@@ -364,7 +364,7 @@ class VmsDocumentClass extends userClass
         return $return;
     }
 
-    function getDocumentManagementUserDashboard($get)
+    public function getDocumentManagementUserDashboard($get)
     {
         global $callConfig;
 

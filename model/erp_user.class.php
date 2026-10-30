@@ -4,7 +4,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;		
 */
 class erpUserClass extends userClass{
-	function togetinventorysummaryrepot($get){
+	public function togetinventorysummaryrepot($get){
 		global $callConfig;
 		$return['get']= $get;
 		$whr = "";
@@ -55,7 +55,7 @@ GROUP BY tl.item_id";
 		$return['data']= $data;
 		return $return;
 	}
-	function togeticommittedstockdetailsrepot($get){
+	public function togeticommittedstockdetailsrepot($get){
 		global $callConfig;
 		$return['get']= $get;
 		$whr = "";
@@ -68,7 +68,7 @@ GROUP BY tl.item_id";
 		$return['data']= $data;
 		return $return;
 	}
-	function togetstocksummaryrepot($get){
+	public function togetstocksummaryrepot($get){
 		global $callConfig;
 		$return['get']= $get;
 		//print_r($return); exit;
@@ -113,7 +113,7 @@ GROUP BY tl.item_id";
 		return $return;
 	}
 
-	function togetStockValueSummaryRepot($get){
+	public function togetStockValueSummaryRepot($get){
 		global $callConfig;
 		$return['get']= $get;
 		$query = "SELECT it.id item_id,
@@ -151,7 +151,7 @@ GROUP BY tl.item_id";
 		return $return;
 	}
 
-	function togetactivepurchaseorderrepot($get){
+	public function togetactivepurchaseorderrepot($get){
 		global $callConfig;
 		$return['get']= $get;
 		$whr = "";
@@ -164,7 +164,7 @@ GROUP BY tl.item_id";
 		$return['data']= $data;
 		return $return;
 	}
-	function togetproductsalesrepot($get){
+	public function togetproductsalesrepot($get){
 		global $callConfig;
 		$return['get']= $get;
 		$whr = "";
@@ -177,7 +177,7 @@ GROUP BY tl.item_id";
 		$return['data']= $data;
 		return $return;
 	}
-	function togetinventoryvaluationsummaryrepot($get){
+	public function togetinventoryvaluationsummaryrepot($get){
 		global $callConfig;
 		$return['get']= $get;
 		$whr = "";
@@ -190,7 +190,7 @@ GROUP BY tl.item_id";
 		$return['data']= $data;
 		return $return;
 	}
-	function togetfifocostlottrackingrepot($get){
+	public function togetfifocostlottrackingrepot($get){
 		global $callConfig;
 		$return['get']= $get;
 		$whr = "";
@@ -204,7 +204,7 @@ GROUP BY tl.item_id";
 		return $return;
 	}
 	
-	function togetpurchasesbyitemrepot($get){
+	public function togetpurchasesbyitemrepot($get){
 		global $callConfig;
 		$return['get']= $get;
 		$whr = "";
@@ -217,7 +217,7 @@ GROUP BY tl.item_id";
 		$return['data']= $data;
 		return $return;
 	}
-	function togetreceiveshistoryrepot($get){
+	public function togetreceiveshistoryrepot($get){
 		global $callConfig;
 		$return['get']= $get;
 		$whr = "";
@@ -230,7 +230,7 @@ GROUP BY tl.item_id";
 		$return['data']= $data;
 		return $return;
 	}
-	function togetpurchasebyvendorsrepot($get){
+	public function togetpurchasebyvendorsrepot($get){
 		global $callConfig;
 		$return['get']= $get;
 		$whr = "";
@@ -243,7 +243,7 @@ GROUP BY tl.item_id";
 		$return['data']= $data;
 		return $return;
 	}	
-	function togetpaymentreceivedrepot($get){
+	public function togetpaymentreceivedrepot($get){
 		global $callConfig;
 		$return['get']= $get;
 		$whr = "";
@@ -257,7 +257,7 @@ GROUP BY tl.item_id";
 		$return['data']= $data;
 		return $return;
 	}
-	function itemwarehouseledger($get){
+	public function itemwarehouseledger($get){
 		global $callConfig;
 		$return['get']= $get;
 		$item_con = "";
@@ -328,7 +328,7 @@ GROUP BY tl.item_id";
 
 		return $return;
 	}
-	function togetthreewaymatch($get){
+	public function togetthreewaymatch($get){
 		global $callConfig;
 		$return['get']= $get;
 		$return['data']= array();
@@ -420,7 +420,7 @@ GROUP BY tl.item_id";
 		return $return;
 	}
 	//Koteswar code added start
-	function togetvendorbalances($get){
+	public function togetvendorbalances($get){
 		// return $get;
 		global $callConfig;
 		$return['get']= $get;
@@ -463,7 +463,7 @@ GROUP BY tl.item_id";
 		$return['data']= $data;
 		return $return;
 	}
-	function togetbilldetails($get){
+	public function togetbilldetails($get){
 		// return $get;
 		global $callConfig;
 		$return['get']= $get;
@@ -510,7 +510,7 @@ GROUP BY tl.item_id";
 		$return['data']= $data;
 		return $return;
 	}
-	function togetvendorcreditdetails($get){
+	public function togetvendorcreditdetails($get){
 		// return $get;
 		global $callConfig;
 		$return['get']= $get;
@@ -554,7 +554,7 @@ GROUP BY tl.item_id";
 		$return['data']= $data;
 		return $return;
 	}
-	function togetpaymentsmade($get){
+	public function togetpaymentsmade($get){
 		// return $get;
 		global $callConfig;
 		$return['get']= $get;
@@ -597,7 +597,7 @@ GROUP BY tl.item_id";
 		$return['data']= $data;
 		return $return;
 	}
-	function togetpodetails($get){
+	public function togetpodetails($get){
 		// return $get;
 		global $callConfig;
 		$return['get']= $get;
@@ -638,7 +638,7 @@ GROUP BY tl.item_id";
 	}
 	//koteswar code added end
 
-	function getBreakingDownItemProcess($get){
+	public function getBreakingDownItemProcess($get){
 		global $callConfig;
 		$return['get']= $get;
 		$itemsql = "SELECT id, sku, item_name FROM items WHERE company_id =".$get['company_id']." AND is_active = 0";
@@ -654,7 +654,7 @@ GROUP BY tl.item_id";
 
 		return $return;
 	}
-	function togetSalesByItemRepot($get){
+	public function togetSalesByItemRepot($get){
 		global $callConfig;
 		$return['get']= $get;
 		$whr = "";
@@ -668,7 +668,7 @@ GROUP BY tl.item_id";
 		return $return;
 
 	}
-	function toGetOrderFulfilmentByItemRepot($get){
+	public function toGetOrderFulfilmentByItemRepot($get){
 		global $callConfig;
 		$return['get']= $get;
 		$whr = "";
@@ -700,7 +700,7 @@ GROUP BY tl.item_id";
 
 		return $return;
 	}
-		function togetCustomerBalances($get){
+		public function togetCustomerBalances($get){
 		// return $get;
 		global $callConfig;
 		$return['get']= $get;
@@ -743,7 +743,7 @@ GROUP BY tl.item_id";
 		$return['data']= $data;
 		return $return;
 	}
-	function getStockBalanceAvailability($get){
+	public function getStockBalanceAvailability($get){
 		global $callConfig;
 		//echo "<pre>";
 		$return['get']= $get;
@@ -824,7 +824,7 @@ GROUP BY tl.item_id";
 	
 	}
 
-	function getKittings($get){
+	public function getKittings($get){
 	    global $callConfig;
 	    $queryitm = "SELECT itm.id, itm.sku, itm.item_name, itm.purchase_uom, itm.sold_individually, itm.sold_in_groups, iwb.balance_date, iwb.day_rate FROM items itm LEFT JOIN item_wa_balances iwb ON itm.company_id = '".$get['company_id']."' AND itm.id = iwb.item_id AND iwb.company_id = itm.company_id AND itm.is_active = 0 AND iwb.balance_date = (SELECT MAX(iwb1.balance_date) FROM item_wa_balances iwb1 WHERE iwb1.item_id = itm.id AND iwb1.company_id = itm.company_id) GROUP BY itm.id, itm.sku, itm.item_name, itm.purchase_uom";
 	    $item = $callConfig->getAllRows($queryitm);
@@ -841,7 +841,7 @@ GROUP BY tl.item_id";
 	 	}
         return ['kittings' => $kittingData,'items' => $itemsData,'item' => $item,'uom' => $uom];
     }
-    function getDekittings($get){
+    public function getDekittings($get){
         global $callConfig;
         $queryitm = "SELECT itm.id, itm.sku, itm.item_name, itm.purchase_uom, itm.sold_individually, itm.sold_in_groups, iwb.balance_date, iwb.day_rate FROM items itm LEFT JOIN item_wa_balances iwb ON itm.company_id = '".$get['company_id']."' AND itm.id = iwb.item_id AND iwb.company_id = itm.company_id AND itm.is_active = 0 AND iwb.balance_date = (SELECT MAX(iwb1.balance_date) FROM item_wa_balances iwb1 WHERE iwb1.item_id = itm.id AND iwb1.company_id = itm.company_id) GROUP BY itm.id,itm.sku, itm.item_name, itm.purchase_uom";
 	    $item = $callConfig->getAllRows($queryitm);
@@ -858,7 +858,7 @@ GROUP BY tl.item_id";
 	 	}
         return ['dekittings' => $dekittingData,'items' => $itemsData,'item' => $item,'uom' => $uom];
     }
-    function getDailyAndWeeklyTransactions($get){
+    public function getDailyAndWeeklyTransactions($get){
     	global $callConfig;
     	$returntrans = array();
     	$return['get'] = $get; 
@@ -876,7 +876,7 @@ GROUP BY tl.item_id";
 	    $return['transaction'] = $returntrans;
         return $return;
     }
-    function insertDeKittings($get, $post)
+    public function insertDeKittings($get, $post)
 	{
 		global $callConfig;
 		$return = array();
@@ -991,7 +991,7 @@ GROUP BY tl.item_id";
 		return $return;
 	}
 
-	function insertKittings($get, $post){
+	public function insertKittings($get, $post){
 		global $callConfig;
 		$return = array();
 		$return['post'] = $post;
@@ -1097,7 +1097,7 @@ GROUP BY tl.item_id";
 		return $return;
 	}
 
-	function insertKittingAndDekkitingStockUpdate($get){
+	public function insertKittingAndDekkitingStockUpdate($get){
 		global $callConfig;
 		$return = array();
 		$transaction_id = $get['transaction_no'];
@@ -1437,7 +1437,7 @@ GROUP BY tl.item_id";
 
 		return $return;
 	}
-	function getkittingdekittinglist($get){
+	public function getkittingdekittinglist($get){
 		global $callConfig;
 		$itemquery = "SELECT `id`, `company_id`, `sku`, `item_name`, `item_type`, `item_description`, `purchase_uom` FROM items WHERE company_id = '" . $get['company_id'] . "' AND is_active=0";
 		$item = $callConfig->getAllRows($itemquery);
@@ -1456,7 +1456,7 @@ GROUP BY tl.item_id";
 		$dekittingitemsData = $callConfig->getAllRows($dekittingitemsQuery);
 		return ['dekitting' => $dekittingData,'dekittingitems' => $dekittingitemsData,'kitting' => $kittingData,'kittingitems' => $itemsData,'item' => $item,'uom' => $uom];
 	}
-	function checkitemcategoryaccountdata($get, $post){
+	public function checkitemcategoryaccountdata($get, $post){
 	    global $callConfig;
 	    $category_sql = "SELECT  ic.id,  ic.category_description,  ic.hsn_and_sac_code_id, hsc.code AS hsn_code, hsc.code_description AS hsn_description, ic.inventory_asset_account, ic.inventory_adjustment_account, ic.inventory_cost_variance_account, ic.cogs_account, ic.purchase_expense_account, ic.sales_revenue_account, ic.sales_discount_account, ic.sales_return_account, ic.purchase_price_variance_account, ic.freight_expense_account, ic.packaging_expense_account, ic.sales_tax_payable_account, ic.purchase_tax_payable_account, ic.promotions_and_discounts_account, ic.sales_allowances_account, ic.deferred_revenue_account, ic.ap_account, ic.ar_account, ic.accrued_expenses_account, ic.prepaid_expenses_account, ic.wip_asset_account, ic.goods_received_not_invoiced_account, ic.invoiced_not_received_account, ic.goods_sold_not_invoiced_account FROM item_categories ic LEFT JOIN hsn_and_sac_codes hsc ON hsc.id = ic.hsn_and_sac_code_id WHERE ic.company_id = '" . $get['company_id'] . "' AND ic.id = '" . $post['categoryId'] . "' AND ic.is_active = '0' ";
 	    $category_res = $callConfig->getRow($category_sql);
@@ -1496,7 +1496,7 @@ GROUP BY tl.item_id";
 	}
 
 	// added by koti start
-	function togetpurchaserequisition($get){
+	public function togetpurchaserequisition($get){
 		global $callConfig;
 		$return = array();
 		$return['get'] = $get;
@@ -1525,7 +1525,7 @@ GROUP BY tl.item_id";
 		
 	}
 
-	function  getStatusProgressList($data){
+	public function  getStatusProgressList($data){
 		global $callConfig;
 		$statussql = "SELECT id,name,status,action_label FROM status_progress WHERE table_name = '".$data['table']."' ORDER BY `id` ASC";
 		$statusress = $callConfig->getAllRows($statussql);
@@ -1537,7 +1537,7 @@ GROUP BY tl.item_id";
 		return $statusres;
 	}
 
-	function togetpovsgrndata($get){
+	public function togetpovsgrndata($get){
 		global $callConfig;
 		$return = array();
 		$return['get'] = $get;
@@ -1597,7 +1597,7 @@ GROUP BY tl.item_id";
 		return $return;
 	}
 
-	function togetpendinggrn($get){
+	public function togetpendinggrn($get){
 		global $callConfig;
 		$return = array();
 		$whr = '';
@@ -1630,7 +1630,7 @@ GROUP BY tl.item_id";
 		return $return;
 	}
 
-	function togetmaterialshortagebasedonpurchaseorder($get){
+	public function togetmaterialshortagebasedonpurchaseorder($get){
 		global $callConfig;
 		$return = array();
 		$from_date = $get['from_date'] ?? "";
@@ -1655,7 +1655,7 @@ GROUP BY tl.item_id";
 		return $return;
 	}
 
-	function togetmaterialshortagebasedonsalesorder($get){
+	public function togetmaterialshortagebasedonsalesorder($get){
 		global $callConfig;
 		$return = array();
 		$from_date = $get['from_date'] ?? "";
@@ -1679,7 +1679,7 @@ GROUP BY tl.item_id";
 		$return['sql'] = $listsql;
 		return $return;
 	}
-	function togetduplicateinvoicedata($get){
+	public function togetduplicateinvoicedata($get){
 		global $callConfig;
 		$return = array();
 		$whr = '';
@@ -1695,7 +1695,7 @@ GROUP BY tl.item_id";
 		$return['sql'] = $listsql;
 		return $return;
 	}
-	function togetwithholdingtax($get){
+	public function togetwithholdingtax($get){
 		global $callConfig;
 		$return = array();
 		$return['get'] = $get;
@@ -1722,7 +1722,7 @@ GROUP BY tl.item_id";
 		$return['sql'] = $listsql;
 		return $return;
 	}
-	function togetopensalesorders($get) {
+	public function togetopensalesorders($get) {
 		global $callConfig;
 		$return = array();
 		$return['get'] = $get;
@@ -1750,7 +1750,7 @@ GROUP BY tl.item_id";
 		return $return;
 	}
 
-	function togetordervsshipmentdata($get) {
+	public function togetordervsshipmentdata($get) {
 		global $callConfig;
 		$return = array();
 		$return['get'] = $get;
@@ -1860,7 +1860,7 @@ GROUP BY tl.item_id";
 		return $return;
 	}
 
-	function togetspendanalysisbyvendor($get){
+	public function togetspendanalysisbyvendor($get){
 		global $callConfig;
 		$return = array();
 		// $return['get'] = $get;
@@ -1904,7 +1904,7 @@ GROUP BY tl.item_id";
 		return $return;
 	}
 
-	function togetspendanalysisbycategory($get){
+	public function togetspendanalysisbycategory($get){
 		global $callConfig;
 		$return = array();
 		$return['get'] = $get;
@@ -1977,7 +1977,7 @@ GROUP BY tl.item_id";
 		return $return;
 	}
 
-	function togetcancelledoramendedorders($get){
+	public function togetcancelledoramendedorders($get){
 		global $callConfig;
 		$return = array();
 		$return['get'] = $get;
@@ -2028,7 +2028,7 @@ GROUP BY tl.item_id";
 		return $return;
 	}
 
-	function togetsalesbyproduct($get){
+	public function togetsalesbyproduct($get){
 		global $callConfig;
 		$return = array();
 		$return['get'] = $get;
@@ -2063,7 +2063,7 @@ GROUP BY tl.item_id";
 		$return['sql'] = $listsql;
 		return $return;
 	}
-	function togetsalesbycustomer($get){
+	public function togetsalesbycustomer($get){
 		global $callConfig;
 		$return = array();
 		$return['get'] = $get;
@@ -2105,7 +2105,7 @@ GROUP BY tl.item_id";
 		$return['sql'] = $listsql;
 		return $return;
 	}
-	function togetsalesbyregion($get){
+	public function togetsalesbyregion($get){
 		global $callConfig;
 		$return = array();
 		$return['get'] = $get;
@@ -2148,7 +2148,7 @@ GROUP BY tl.item_id";
 		$return['sql'] = $listsql;
 		return $return;
 	}
-	function togetdeliverypendingreport($get){
+	public function togetdeliverypendingreport($get){
 		global $callConfig;
 		$return = array();
 		$return['get'] = $get;
@@ -2215,7 +2215,7 @@ GROUP BY tl.item_id";
 
 		return $return;
 	}
-	function togetcustomerbalancereport($get){
+	public function togetcustomerbalancereport($get){
 		global $callConfig;
 		$return = array();
 		$return['get'] = $get;
@@ -2271,7 +2271,7 @@ GROUP BY tl.item_id";
 		$return['sql'] = $listsql;
 		return $return;
 	}
-	function togetcollectionsreport($get){
+	public function togetcollectionsreport($get){
 		global $callConfig;
 		$return = array();
 		$return['get'] = $get;
@@ -2323,7 +2323,7 @@ GROUP BY tl.item_id";
 
 		return $return;
 	}
-	function togetcustomercreditutilizationreport($get){
+	public function togetcustomercreditutilizationreport($get){
 		global $callConfig;
 		$return = array();
 		$return['get'] = $get;
@@ -2378,7 +2378,7 @@ GROUP BY tl.item_id";
 		$return['sql'] = $listsql;
 		return $return;
 	}
-	function togetblockedorderscreditreport($get){
+	public function togetblockedorderscreditreport($get){
 		global $callConfig;
 		$return = array();
 		$return['get'] = $get;
@@ -2455,7 +2455,7 @@ GROUP BY tl.item_id";
 		return $return;
 	}
 
-	function togetcustomerpaymenthistoryreport($get){
+	public function togetcustomerpaymenthistoryreport($get){
 		global $callConfig;
 		$return = array();
 		$company_id = $get['company_id'];
@@ -2476,7 +2476,7 @@ GROUP BY tl.item_id";
 		$return['payment_history_list'] = $callConfig->getAllRows($listsql);
 		return $return;
 	}
-	function togettaxreportbyregion($get) {
+	public function togettaxreportbyregion($get) {
 		global $callConfig;
 		$return = array();
 		$return['get'] = $get;
@@ -2508,7 +2508,7 @@ GROUP BY tl.item_id";
 
 		return $return;
 	}
-	function togettopcustomercontributionreport($get) {
+	public function togettopcustomercontributionreport($get) {
 		global $callConfig;
 		$return = array();
 		$return['get'] = $get;
@@ -2542,7 +2542,7 @@ GROUP BY tl.item_id";
 		$return['report_data'] = $res;
 		return $return;
 	}
-	function togetprofitabilityreport($get) {
+	public function togetprofitabilityreport($get) {
 		global $callConfig;
 		$return = array();
 		$return['get'] = $get;
@@ -2583,7 +2583,7 @@ GROUP BY tl.item_id";
 		$return['report_data'] = $res;
 		return $return;
 	}
-	function togetfreightcostreport($get) {
+	public function togetfreightcostreport($get) {
 		global $callConfig;
 		$return = array();
 		$return['get'] = $get;
@@ -2639,14 +2639,14 @@ GROUP BY tl.item_id";
 	// added by koti end
 	
 	// added by omkar start
-	function getOpenPOReport($get){
+	public function getOpenPOReport($get){
         global $callConfig;
         $sql = "SELECT po.id AS po_id, po.transaction_number AS po_no, po.transaction_date AS po_date, po.party_name AS vendor_name, poi.item_id, poi.item_name, poi.description, poi.item_quantity AS ordered_qty, IFNULL(SUM(gri.item_quantity), 0) AS received_qty, (poi.item_quantity - IFNULL(SUM(gri.item_quantity), 0)) AS pending_qty, po.due_date AS due_date, po.total_amount AS po_value FROM purchase_orders po INNER JOIN po_items poi ON po.id = poi.transaction_id AND po.company_id = '" . $get['company_id'] . "' AND po.is_active = '0' LEFT JOIN goods_receipt_notes grn ON grn.ref_id = po.id AND grn.company_id = po.company_id LEFT JOIN grn_items gri ON gri.transaction_id = grn.id AND gri.item_id = poi.item_id GROUP BY po.id, poi.item_id ORDER BY po.transaction_date DESC, po.transaction_number ASC ";
         $rows = $callConfig->getAllRows($sql);
         $result['open_po_report'] = $rows;
         return $result;
     }
-	function getUrgentEmergencyPurchaseDetails($get){
+	public function getUrgentEmergencyPurchaseDetails($get){
 		global $callConfig;
 		$whereDate = "";
 		if (!empty($get['from_date']) && !empty($get['to_date'])) {
@@ -2667,7 +2667,7 @@ GROUP BY tl.item_id";
 		return $result;
 	}
 
-	function getStockAgingReportDetails($get){
+	public function getStockAgingReportDetails($get){
 		global $callConfig;
 		$selectedDate = !empty($get['date'])
 			? date('Y-m-d', strtotime($get['date']))
@@ -2700,7 +2700,7 @@ GROUP BY tl.item_id";
 		return $result;
 	}
 
-	function getDebitOrCreditNoteRegisterDetails($get){
+	public function getDebitOrCreditNoteRegisterDetails($get){
 		global $callConfig;
 		$from = '';
 		$to = '';
@@ -2733,7 +2733,7 @@ GROUP BY tl.item_id";
 		return $result;
 	}
 
-	function getAPReconciliationReport($get){
+	public function getAPReconciliationReport($get){
 		global $callConfig;
 		$whereDatePO = $whereDateGRN = $whereDateINV = '';
 		if (!empty($get['from_date']) && !empty($get['to_date'])) {
@@ -2762,7 +2762,7 @@ GROUP BY tl.item_id";
 		return $result;
 	}
 
-	function getAccruedLiabilitiesReport($get){
+	public function getAccruedLiabilitiesReport($get){
 		global $callConfig;
  
 		$whereDatePO = $whereDateGRN = $whereDateINV = '';
@@ -2796,7 +2796,7 @@ GROUP BY tl.item_id";
 		return $result;
 	}
 
-	function getPaymentProposalReport($get)	{
+	public function getPaymentProposalReport($get)	{
 		global $callConfig; 
 		$whereDate = '';
 		if (!empty($get['from_date']) && !empty($get['to_date'])) {
@@ -2821,7 +2821,7 @@ GROUP BY tl.item_id";
 		return $result;
 	}
 
-	function getAdvancePaymentReport($get){
+	public function getAdvancePaymentReport($get){
 		global $callConfig;
  
 		$whereDate = '';
@@ -2848,7 +2848,7 @@ GROUP BY tl.item_id";
 		return $result;
 	}
 
-	function getVendorPaymentAgingReport($get) {
+	public function getVendorPaymentAgingReport($get) {
 	    global $callConfig;
 
 	    $selectedDate = !empty($get['date'])
@@ -2880,7 +2880,7 @@ GROUP BY tl.item_id";
 	}
 
 
-	function getVendorReconciliationStatement($get)	{
+	public function getVendorReconciliationStatement($get)	{
 		global $callConfig;
  
 		$whereDatePO = $whereDateGRN = $whereDateINV = '';
@@ -2920,7 +2920,7 @@ GROUP BY tl.item_id";
 		return $result;
 	}
 
-	function getPendingInvoiceReport($get){
+	public function getPendingInvoiceReport($get){
 		global $callConfig;
 
 		$whereDate = '';
@@ -2954,7 +2954,7 @@ GROUP BY tl.item_id";
 		return $result;
 	}
 
-	function getSalesTrendReport($get){
+	public function getSalesTrendReport($get){
 	    global $callConfig;
 
 	    $category = $get['category'] ?? 'monthly';  
@@ -3002,7 +3002,7 @@ GROUP BY tl.item_id";
 	}
 
 
-	function getDaysSalesOutstandingReport($get){
+	public function getDaysSalesOutstandingReport($get){
 	    global $callConfig;
 
 	    $whereDate = '';
@@ -3029,7 +3029,7 @@ GROUP BY tl.item_id";
 	}
 
 
-	function getARAgingReport($get) {
+	public function getARAgingReport($get) {
 	    global $callConfig;
 	 
 	    $selectedDate = !empty($get['date'])
@@ -3058,7 +3058,7 @@ GROUP BY tl.item_id";
 	    return $result;
 	}
 
-	function getPriceVarianceReport($get){
+	public function getPriceVarianceReport($get){
 	    global $callConfig;
 	 
 	    $fromDate = !empty($get['from_date']) ? date('Y-m-d', strtotime($get['from_date'])) : '1970-01-01';
@@ -3082,7 +3082,7 @@ GROUP BY tl.item_id";
 	    return $result;
 	}
 
-	function getDebitOrCreditMemoRegisterDetails($get){
+	public function getDebitOrCreditMemoRegisterDetails($get){
 		global $callConfig;
 		$from = '';
 		$to = '';
@@ -3115,7 +3115,7 @@ GROUP BY tl.item_id";
 		return $result;
 	}
 	
-	function getCashApplicationReport($get){
+	public function getCashApplicationReport($get){
 	    global $callConfig;
 
 	    $from = '';
@@ -3157,7 +3157,7 @@ GROUP BY tl.item_id";
 	}
 
 
-	function getTopVendorSpendReport($get){
+	public function getTopVendorSpendReport($get){
 	    global $callConfig;
 	 
 	    $fromDate = !empty($get['from_date']) ? date('Y-m-d', strtotime($get['from_date'])) : '1970-01-01';
@@ -3190,7 +3190,7 @@ GROUP BY tl.item_id";
 	}
 
 
-	function getDiscountAndRebateUtilizationReport($get){
+	public function getDiscountAndRebateUtilizationReport($get){
 	    global $callConfig;
 	 
 	    $fromDate = !empty($get['from_date']) ? date('Y-m-d', strtotime($get['from_date'])) : '1970-01-01';
@@ -3219,7 +3219,7 @@ GROUP BY tl.item_id";
 	    return $result;
 	}
 	// added by omkar end
-	function getBankReconciliations($get){
+	public function getBankReconciliations($get){
 		global $callConfig;
 		$return = array();
 		$query = "SELECT id, account_code, bank_account_name, bank_account_number, bank_contact_person, ifsc_code FROM bank_accounts WHERE company_id =".$get['company_id']." AND is_active = 0";

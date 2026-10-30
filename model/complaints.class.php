@@ -1,6 +1,6 @@
 <?php
 class ComplaintsClass{
-	function getAllComplaintsData($get){
+	public function getAllComplaintsData($get){
 		global $callConfig;
 		$return = array();
 
@@ -36,7 +36,7 @@ class ComplaintsClass{
 
 		return $return;
 	}
-	function getTableData($get){
+	public function getTableData($get){
 		global $callConfig;
 		$return = array();
 		$table_name = $get['table'] ?? '';
@@ -58,7 +58,7 @@ class ComplaintsClass{
 		$return['table'] = $table;
 		return $return;
 	}
-	function getComplaintsData($get){
+	public function getComplaintsData($get){
 		global $callConfig;
 		$return = array();
 		if($get['rid'] && $get['rid'] != ''){
@@ -110,7 +110,7 @@ class ComplaintsClass{
 		$return['table'] = $table;
 		return $return;
 	}
-	function getImagesData($get){
+	public function getImagesData($get){
 		global $callConfig;
 		$return = array();
 		$table_name = $get['table'] ?? '';
@@ -140,7 +140,7 @@ class ComplaintsClass{
 		$return['table'] = $table;
 		return $return;
 	}
-	function getMobileUsersData($get){
+	public function getMobileUsersData($get){
 		global $callConfig;
 		$return = array();
 		$data = json_decode($get['data']);
@@ -168,7 +168,7 @@ class ComplaintsClass{
 		$return['table'] = $table;
 		return $return;
 	}
-	function getMobileRegistredUsersData($get){
+	public function getMobileRegistredUsersData($get){
 		global $callConfig;
 		$return = array();
 		$data = json_decode($get['data']);
@@ -197,7 +197,7 @@ class ComplaintsClass{
 		return $return;
 	}
 
-		function getComplaintsResponseData($get){
+		public function getComplaintsResponseData($get){
 		global $callConfig;
 		$return = array();
 		$table_name = $get['table'] ?? '';
@@ -223,7 +223,7 @@ class ComplaintsClass{
 		return $return;
 	}
 
-	function getAllLocationsData($get){
+	public function getAllLocationsData($get){
 		global $callConfig;
 		$return = array();
 

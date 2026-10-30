@@ -1,6 +1,6 @@
 <?php 
 class manfacturingForecastUserClass extends userClass{
-    function getmanufacturingforecastedata($get){
+    public function getmanufacturingforecastedata($get){
 		global $callConfig;
         $return = array();
         $company_id = intval($get['company_id']);
@@ -61,7 +61,7 @@ class manfacturingForecastUserClass extends userClass{
 		return $return;
 	}
 
-    function insertandupdatemanufacturingforecaste($get, $post){
+    public function insertandupdatemanufacturingforecaste($get, $post){
         global $callConfig;
         $return = array();
         $return['post']=$post;
@@ -188,7 +188,7 @@ class manfacturingForecastUserClass extends userClass{
 
     }
 
-    function getmanufacturingfirmordersdata($get){
+    public function getmanufacturingfirmordersdata($get){
         global $callConfig;
         $return = array();
         $company_id = intval($get['company_id']);
@@ -274,7 +274,7 @@ class manfacturingForecastUserClass extends userClass{
 
         return $return;
     }
-    function insertandupdatemanufacturingfirmorder($get, $post){
+    public function insertandupdatemanufacturingfirmorder($get, $post){
         global $callConfig;
         $return = array();
         $company_id = intval($get['company_id']);
@@ -403,7 +403,7 @@ class manfacturingForecastUserClass extends userClass{
         $return['data'][] = array('status' => 'sucess', 'LASTID' => $firmOrderId, 'message' => 'Firm order saved successfully.');
         return $return;
     }
-    function getmfgdashboarddetails($get){
+    public function getmfgdashboarddetails($get){
         global $callConfig;
         $return = [];
         $company_id = $get['company_id'];
@@ -475,7 +475,7 @@ class manfacturingForecastUserClass extends userClass{
         return $return;
     }
 
-    function getmfgadmindashboarddetails($get){
+    public function getmfgadmindashboarddetails($get){
         $company_id = intval($get['company_id']);
         $workOrders = $this->getManufacturingDashboardWorkOrders($company_id, '', "ORDER BY exception_rank ASC, w.planned_end_date ASC, w.transaction_date DESC, w.id DESC", "LIMIT 8");
         $allWorkOrders = $this->getManufacturingDashboardWorkOrders($company_id, '', '', '');
@@ -514,7 +514,7 @@ class manfacturingForecastUserClass extends userClass{
         );
     }
 
-    function getmfgplannerdashboarddetails($get){
+    public function getmfgplannerdashboarddetails($get){
         $company_id = intval($get['company_id']);
         $planningWhere = " AND IFNULL(w.work_log_status, -1) != 199 ";
         $workOrders = $this->getManufacturingDashboardWorkOrders($company_id, $planningWhere, "ORDER BY planning_risk_rank ASC, w.planned_start_date ASC, w.planned_end_date ASC, w.id DESC", "LIMIT 8");
@@ -554,7 +554,7 @@ class manfacturingForecastUserClass extends userClass{
         );
     }
 
-    function getmfgsupervisordashboarddetails($get){
+    public function getmfgsupervisordashboarddetails($get){
         $company_id = intval($get['company_id']);
         $supervisorWhere = " AND (w.work_log_status IN (0,1) OR w.planned_start_date <= CURDATE() OR DATE(w.actual_start_date) = CURDATE()) AND IFNULL(w.work_log_status, -1) != 199 ";
         $workOrders = $this->getManufacturingDashboardWorkOrders($company_id, $supervisorWhere, "ORDER BY supervisor_rank ASC, w.planned_start_date ASC, w.id DESC", "LIMIT 8");
@@ -592,7 +592,7 @@ class manfacturingForecastUserClass extends userClass{
         );
     }
 
-    function getManufacturingDashboardWorkOrders($company_id, $extraWhere = '', $orderBy = '', $limit = ''){
+    public function getManufacturingDashboardWorkOrders($company_id, $extraWhere = '', $orderBy = '', $limit = ''){
         global $callConfig;
         $company_id = intval($company_id);
         $query = "SELECT w.id AS work_order_id, w.transaction_no, w.transaction_date, w.work_order_item_id AS product_id,
@@ -680,7 +680,7 @@ class manfacturingForecastUserClass extends userClass{
         return $callConfig->getAllRows($query);
     }
 
-    function getManufacturingApprovalStatusSummary($company_id){
+    public function getManufacturingApprovalStatusSummary($company_id){
         global $callConfig;
         $company_id = intval($company_id);
         $query = "SELECT IFNULL(s.name, CONCAT('Status ', w.current_status)) AS status_name, COUNT(*) AS total
@@ -699,7 +699,7 @@ class manfacturingForecastUserClass extends userClass{
         return array('rows' => $rows, 'labels' => $labels, 'series' => $series);
     }
 
-    function getManufacturingMaterialDashboardSummary($company_id, $workOrderWhere = ''){
+    public function getManufacturingMaterialDashboardSummary($company_id, $workOrderWhere = ''){
         global $callConfig;
         $company_id = intval($company_id);
         $query = "SELECT SUM(IFNULL(wi.request_qty,0)) AS required_qty, SUM(IFNULL(wi.stock_receipts_qty,0)) AS received_qty,
@@ -717,7 +717,7 @@ class manfacturingForecastUserClass extends userClass{
         );
     }
 
-    function getManufacturingResourceDashboardSummary($company_id, $workOrderWhere = ''){
+    public function getManufacturingResourceDashboardSummary($company_id, $workOrderWhere = ''){
         global $callConfig;
         $company_id = intval($company_id);
         $query = "SELECT SUM(IFNULL(o.operation_manpower,0)) AS manpower_required,
@@ -736,7 +736,7 @@ class manfacturingForecastUserClass extends userClass{
         );
     }
 
-    function getManufacturingQcDashboardSummary($company_id, $workOrderWhere = ''){
+    public function getManufacturingQcDashboardSummary($company_id, $workOrderWhere = ''){
         global $callConfig;
         $company_id = intval($company_id);
         $query = "SELECT
@@ -755,7 +755,7 @@ class manfacturingForecastUserClass extends userClass{
         );
     }
 
-    function getManufacturingProductionTrendSummary($company_id){
+    public function getManufacturingProductionTrendSummary($company_id){
         global $callConfig;
         $company_id = intval($company_id);
         $query = "SELECT DATE_FORMAT(transaction_date, '%Y-%m') AS period_label,
@@ -781,7 +781,7 @@ class manfacturingForecastUserClass extends userClass{
         return array('labels' => $labels, 'request' => $request, 'produced' => $produced);
     }
 
-    function getManufacturingPlanningConversionSummary($company_id){
+    public function getManufacturingPlanningConversionSummary($company_id){
         global $callConfig;
         $company_id = intval($company_id);
         $forecast = $callConfig->getRow("SELECT SUM(IFNULL(fi.total_forecast,0)) AS qty
@@ -801,7 +801,7 @@ class manfacturingForecastUserClass extends userClass{
         );
     }
 
-    function getManufacturingTopPlannedProducts($company_id){
+    public function getManufacturingTopPlannedProducts($company_id){
         global $callConfig;
         $company_id = intval($company_id);
         $query = "SELECT IFNULL(i.item_name, 'Product') AS product_name, SUM(IFNULL(w.work_order_item_qty,0)) AS planned_qty
@@ -821,7 +821,7 @@ class manfacturingForecastUserClass extends userClass{
         return array('rows' => $rows, 'labels' => $labels, 'series' => $series);
     }
 
-    function buildManufacturingProductionStatusSummary($rows){
+    public function buildManufacturingProductionStatusSummary($rows){
         $summary = array('not_started' => 0, 'active' => 0, 'hold' => 0, 'completed' => 0);
         foreach ((array)$rows as $row) {
             if ((string)($row->work_log_status ?? '') === '0') {
@@ -837,7 +837,7 @@ class manfacturingForecastUserClass extends userClass{
         return $summary;
     }
 
-    function sumManufacturingDashboardRows($rows, $field){
+    public function sumManufacturingDashboardRows($rows, $field){
         $total = 0;
         foreach ((array)$rows as $row) {
             $total += (float)($row->$field ?? 0);
@@ -845,7 +845,7 @@ class manfacturingForecastUserClass extends userClass{
         return $total;
     }
 
-    function countManufacturingDashboardRows($rows, $field){
+    public function countManufacturingDashboardRows($rows, $field){
         $total = 0;
         foreach ((array)$rows as $row) {
             if (!empty($row->$field)) {
@@ -855,7 +855,7 @@ class manfacturingForecastUserClass extends userClass{
         return $total;
     }
 
-    function pluckManufacturingDashboardRows($rows, $field){
+    public function pluckManufacturingDashboardRows($rows, $field){
         $values = array();
         foreach ((array)$rows as $row) {
             $values[] = $row->$field ?? '';
@@ -863,7 +863,7 @@ class manfacturingForecastUserClass extends userClass{
         return $values;
     }
 
-    function getManufacturingProductionSummaryReport($get){
+    public function getManufacturingProductionSummaryReport($get){
         global $callConfig;
         $company_id = intval($get['company_id']);
         $dateWhere = $this->getManufacturingReportDateWhere($get, 'pn.transaction_date');
@@ -884,7 +884,7 @@ class manfacturingForecastUserClass extends userClass{
         return array('data' => $rows, 'summary' => $this->buildManufacturingProductionNoteSummary($rows));
     }
 
-    function getManufacturingWorkOrderStatusReport($get){
+    public function getManufacturingWorkOrderStatusReport($get){
         global $callConfig;
         $company_id = intval($get['company_id']);
         $dateWhere = $this->getManufacturingReportDateWhere($get, 'w.transaction_date');
@@ -902,7 +902,7 @@ class manfacturingForecastUserClass extends userClass{
         return array('data' => $rows, 'summary' => $this->buildManufacturingWorkOrderSummary($rows));
     }
 
-    function getManufacturingMaterialRequirementConsumptionReport($get){
+    public function getManufacturingMaterialRequirementConsumptionReport($get){
         global $callConfig;
         $company_id = intval($get['company_id']);
         $dateWhere = $this->getManufacturingReportDateWhere($get, 'wo.transaction_date');
@@ -937,7 +937,7 @@ class manfacturingForecastUserClass extends userClass{
         return array('data' => $rows);
     }
 
-    function getManufacturingStockRequestTransferReceiptReport($get){
+    public function getManufacturingStockRequestTransferReceiptReport($get){
         global $callConfig;
         $company_id = intval($get['company_id']);
         $dateWhere = $this->getManufacturingReportDateWhere($get, 'sr.transaction_date');
@@ -983,7 +983,7 @@ class manfacturingForecastUserClass extends userClass{
         return array('data' => $rows);
     }
 
-    function getManufacturingProductionPerformanceReport($get){
+    public function getManufacturingProductionPerformanceReport($get){
         global $callConfig;
         $company_id = intval($get['company_id']);
         $dateWhere = $this->getManufacturingReportDateWhere($get, 'pn.transaction_date');
@@ -1003,7 +1003,7 @@ class manfacturingForecastUserClass extends userClass{
         return array('data' => $rows, 'summary' => $this->buildManufacturingProductionNoteSummary($rows));
     }
 
-    function getManufacturingBomReport($get){
+    public function getManufacturingBomReport($get){
         global $callConfig;
         $company_id = intval($get['company_id']);
         $dateWhere = $this->getManufacturingReportDateWhere($get, 'b.transaction_date');
@@ -1024,7 +1024,7 @@ class manfacturingForecastUserClass extends userClass{
         return array('data' => $rows);
     }
 
-    function getManufacturingQcSummaryRejectionReport($get){
+    public function getManufacturingQcSummaryRejectionReport($get){
         global $callConfig;
         $company_id = intval($get['company_id']);
         $dateWhere = $this->getManufacturingReportDateWhere($get, 'pn.transaction_date');
@@ -1046,7 +1046,7 @@ class manfacturingForecastUserClass extends userClass{
         return array('data' => $rows);
     }
 
-    function getManufacturingWorkOrderTimelineDelayReport($get){
+    public function getManufacturingWorkOrderTimelineDelayReport($get){
         global $callConfig;
         $company_id = intval($get['company_id']);
         $dateWhere = $this->getManufacturingReportDateWhere($get, 'w.transaction_date');
@@ -1107,7 +1107,7 @@ class manfacturingForecastUserClass extends userClass{
         return array('data' => $rows);
     }
 
-    function getManufacturingReportDateWhere($get, $fieldName){
+    public function getManufacturingReportDateWhere($get, $fieldName){
         $where = '';
         if (!empty($get['from_date']) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $get['from_date'])) {
             $where .= " AND {$fieldName} >= '".$get['from_date']."'";
@@ -1118,7 +1118,7 @@ class manfacturingForecastUserClass extends userClass{
         return $where;
     }
 
-    function buildManufacturingWorkOrderSummary($rows){
+    public function buildManufacturingWorkOrderSummary($rows){
         $summary = array('total_work_orders' => 0, 'planned_qty' => 0, 'produced_qty' => 0, 'pending_qty' => 0);
         foreach ((array)$rows as $row) {
             $row = (array)$row;
@@ -1133,7 +1133,7 @@ class manfacturingForecastUserClass extends userClass{
         return $summary;
     }
 
-    function buildManufacturingProductionNoteSummary($rows){
+    public function buildManufacturingProductionNoteSummary($rows){
         $summary = array('total_work_orders' => 0, 'planned_qty' => 0, 'produced_qty' => 0, 'pending_qty' => 0, 'wastage_qty' => 0);
         foreach ((array)$rows as $row) {
             $row = (array)$row;
@@ -1151,7 +1151,7 @@ class manfacturingForecastUserClass extends userClass{
     }
 
     // added by koti start
-    function getmanufacturingworkordersdetails($get){
+    public function getmanufacturingworkordersdetails($get){
         global $callConfig;
         $return = array();
         $company_id = $get['company_id'];
@@ -1219,7 +1219,7 @@ class manfacturingForecastUserClass extends userClass{
         }
         return $return;
     }
-    function insertmanufacturingproductnote($get, $post){
+    public function insertmanufacturingproductnote($get, $post){
         global $callConfig;
         $return = array();
         $company_id = $get['company_id'] ?? $post['company_id'] ?? 0;
@@ -1340,7 +1340,7 @@ class manfacturingForecastUserClass extends userClass{
         return $return;
     }
 
-    function postManufacturingProductNoteInventory($company_id, $user_id, $note_id, $post){
+    public function postManufacturingProductNoteInventory($company_id, $user_id, $note_id, $post){
         global $callConfig;
         $return = array('status' => 'skipped', 'message' => 'Inventory posting not required');
         $work_order_id = intval($post['work_order_id'] ?? 0);
@@ -1439,7 +1439,7 @@ class manfacturingForecastUserClass extends userClass{
         return array('status' => 'success', 'message' => 'Inventory posted for product note', 'posted_rows' => $posted);
     }
 
-    function postManufacturingProductNoteInventoryById($company_id, $user_id, $note_id){
+    public function postManufacturingProductNoteInventoryById($company_id, $user_id, $note_id){
         global $callConfig;
         $note_id = intval($note_id);
         $company_id = intval($company_id);
@@ -1470,7 +1470,7 @@ class manfacturingForecastUserClass extends userClass{
         return $this->postManufacturingProductNoteInventory($company_id, $user_id, $note_id, $post);
     }
 
-    function buildManufacturingInventoryPostingRow($company_id, $location_id, $warehouse_id, $transaction_date, $item, $document_no, $document_type, $document_ref_no, $in_qty, $out_qty, $in_value, $out_value, $rate){
+    public function buildManufacturingInventoryPostingRow($company_id, $location_id, $warehouse_id, $transaction_date, $item, $document_no, $document_type, $document_ref_no, $in_qty, $out_qty, $in_value, $out_value, $rate){
         $qty = ($in_qty > 0) ? $in_qty : $out_qty;
         $base_uom = $item->base_uom ?? '';
         $purchase_uom = $item->purchase_uom ?? $base_uom;
@@ -1506,7 +1506,7 @@ class manfacturingForecastUserClass extends userClass{
         );
     }
 
-    function validateManufacturingProductNote($company_id, $post, $note_id = 0){
+    public function validateManufacturingProductNote($company_id, $post, $note_id = 0){
         global $callConfig;
         $work_order_id = intval($post['work_order_id'] ?? 0);
         $product_id = intval($post['item_id'] ?? 0);
@@ -1617,7 +1617,7 @@ class manfacturingForecastUserClass extends userClass{
         return array('status' => 'success');
     }
 
-    function applyManufacturingProductNoteWorkOrderProgress($company_id, $user_id, $post){
+    public function applyManufacturingProductNoteWorkOrderProgress($company_id, $user_id, $post){
         global $callConfig;
         $work_order_id = intval($post['work_order_id'] ?? 0);
         $produced_qty = floatval($post['produced_qty'] ?? 0);
@@ -1655,7 +1655,7 @@ class manfacturingForecastUserClass extends userClass{
         }
     }
 
-    function saveManufacturingProductNoteQcHeader($company_id, $user_id, $note_id, $remarks = ''){
+    public function saveManufacturingProductNoteQcHeader($company_id, $user_id, $note_id, $remarks = ''){
         global $callConfig;
         $existing = $callConfig->getRow("SELECT id FROM application_table_quality_check WHERE company_id = '{$company_id}' AND application_table_name = 'manufacturing_product_notes' AND transaction_id = '{$note_id}' AND is_active = 0");
         if (!empty($existing->id)) {
@@ -1677,7 +1677,7 @@ class manfacturingForecastUserClass extends userClass{
         return $result['LASTID'] ?? 0;
     }
 
-    function saveManufacturingProductNoteSerialLot($company_id, $user_id, $note_id, $item_id, $post, $random_no = ''){
+    public function saveManufacturingProductNoteSerialLot($company_id, $user_id, $note_id, $item_id, $post, $random_no = ''){
         global $callConfig;
         if ($note_id <= 0 || $item_id <= 0) {
             return array();
@@ -1741,7 +1741,7 @@ class manfacturingForecastUserClass extends userClass{
         return $return;
     }
 
-    function getmanufacturingworkorderslogs($get){
+    public function getmanufacturingworkorderslogs($get){
         global $callConfig;
         $return = array();
         $company_id = $get['company_id'];
@@ -1793,7 +1793,7 @@ class manfacturingForecastUserClass extends userClass{
         return $return;
     }
     // added by koti end
-    function getstockrequests($get){
+    public function getstockrequests($get){
         global $callConfig;
         $return = array();
         $company_id = $get['company_id'];
@@ -1915,7 +1915,7 @@ class manfacturingForecastUserClass extends userClass{
         
         return $return;
     }
-    function insertstocktransfer($get, $post){
+    public function insertstocktransfer($get, $post){
         global $callConfig;
         $return = array();
         $company_id = $get['company_id'];
@@ -2092,7 +2092,7 @@ class manfacturingForecastUserClass extends userClass{
 
         return $return;
     }
-    function getstocktransfers($get){
+    public function getstocktransfers($get){
         global $callConfig;
         $return = array();
         $company_id = $get['company_id'];
@@ -2164,7 +2164,7 @@ class manfacturingForecastUserClass extends userClass{
 
         return $return;
     }
-    function insertstocktransferreceipt($get, $post){
+    public function insertstocktransferreceipt($get, $post){
         global $callConfig;
         $return = array();
         $company_id = $get['company_id'];
@@ -2394,7 +2394,7 @@ class manfacturingForecastUserClass extends userClass{
         return $return;
     }
     
-    function insertManufacturingProductionStart($get, $post) {
+    public function insertManufacturingProductionStart($get, $post) {
         global $callConfig;
         
         $work_order_id = $get['work_order_id'] ?? $post['work_order_id'] ?? 0;
@@ -2457,7 +2457,7 @@ class manfacturingForecastUserClass extends userClass{
             );
         }
     }
-    function getManufacturingProductionDetails($get) {
+    public function getManufacturingProductionDetails($get) {
         global $callConfig;
         $return = array();
         
@@ -2509,7 +2509,7 @@ class manfacturingForecastUserClass extends userClass{
         return $return;
     }
 
-    function updateManufacturingProductionData($get, $post) {
+    public function updateManufacturingProductionData($get, $post) {
         global $callConfig;
         $return = array();
         
@@ -2784,7 +2784,7 @@ class manfacturingForecastUserClass extends userClass{
         }
     }
 
-    function resumeManufacturingProduction($get, $post) {
+    public function resumeManufacturingProduction($get, $post) {
         global $callConfig;
         
         $work_order_id = $get['work_order_id'] ?? $post['work_order_id'] ?? 0;
@@ -2847,7 +2847,7 @@ class manfacturingForecastUserClass extends userClass{
             );
         }
     }
-    function getManufacturingWorkOrderQcData($get){
+    public function getManufacturingWorkOrderQcData($get){
         global $callConfig;
         $company_id = intval($get['company_id'] ?? $callConfig->company_id ?? 0);
         $query = "SELECT mpn.id, mpn.transaction_no, mpn.transaction_date, mpn.work_order_id, mpn.item_id, mpn.produced_qty,

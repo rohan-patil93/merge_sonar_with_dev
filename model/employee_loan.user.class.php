@@ -3,7 +3,7 @@
 class employeeLoanClass extends userClass
 {
 
-	function getLoanEmployeesdata($get)	{
+	public function getLoanEmployeesdata($get)	{
 		global $callConfig;
 		$return  = array();
 		$company_id = $get['company_id'];
@@ -50,7 +50,7 @@ class employeeLoanClass extends userClass
 
 		return $return;
 	}
-	function saveEmployeeLoan($get, $post)	{
+	public function saveEmployeeLoan($get, $post)	{
 		global $callConfig;
 
 		$company_id = $get['company_id'];
@@ -132,7 +132,7 @@ class employeeLoanClass extends userClass
 		}
 		return array("status" => "success", "loan_id" => $loan_id);
 	}
-	function employeeDeductions($get)	{
+	public function employeeDeductions($get)	{
 		global $callConfig;
 		$return  = array();
 		$company_id = $get['company_id'];
@@ -190,7 +190,7 @@ class employeeLoanClass extends userClass
 	}
 
 	// omkar related code start
-	function getpersonalgatewaydetails($get){
+	public function getpersonalgatewaydetails($get){
 	    global $callConfig;
 	    $result = [];
 	    $company_id  = (int) $get['company_id'];
@@ -219,7 +219,7 @@ class employeeLoanClass extends userClass
 	    return $result;
 	}
 
-	function gettransportgatewaydetails($get)
+	public function gettransportgatewaydetails($get)
 	{
 		global $callConfig;
 		$return = [];
@@ -242,7 +242,7 @@ class employeeLoanClass extends userClass
 	} 
 
 
-	function gettransportvehiclemasterlist($get)
+	public function gettransportvehiclemasterlist($get)
     {
         global $callConfig;
         $return = array();
@@ -277,7 +277,7 @@ class employeeLoanClass extends userClass
         return $return;
     }
 
-	function getpersonalgatewaylist($get)	
+	public function getpersonalgatewaylist($get)	
     {
         global $callConfig;
         $return['get'] = $get;
@@ -418,7 +418,7 @@ class employeeLoanClass extends userClass
     //     return $return;
     // }
 
-	function getpersonalgatewayold($get)
+	public function getpersonalgatewayold($get)
     {
         global $callConfig;
         $return = [];
@@ -541,7 +541,7 @@ class employeeLoanClass extends userClass
         }
     }
  	
-	function getrecentpersonalactivity($get){
+	public function getrecentpersonalactivity($get){
 	    global $callConfig;
 
 	    $company_id  = $get['company_id'];
@@ -613,7 +613,7 @@ class employeeLoanClass extends userClass
 	}
 
 
-	function insertpersonalgateway($get, $post)
+	public function insertpersonalgateway($get, $post)
 	{
 		global $callConfig;
  
@@ -683,7 +683,7 @@ class employeeLoanClass extends userClass
 		return $res;
 	}
 
-	function updatepersonalexit($get, $post)
+	public function updatepersonalexit($get, $post)
 	{
 		global $callConfig;
 
@@ -733,7 +733,7 @@ class employeeLoanClass extends userClass
 		return $res;
 	}
 
-	function getvehiclegateway($get)
+	public function getvehiclegateway($get)
 	{
 		global $callConfig;
 		$return = [];
@@ -815,7 +815,7 @@ class employeeLoanClass extends userClass
 	}
 
 
-	function getrecentvehicleactivity($get)
+	public function getrecentvehicleactivity($get)
 	{
 		global $callConfig;
 		$company_id = $get['company_id'] ?? $_SESSION['company_id'];
@@ -868,7 +868,7 @@ class employeeLoanClass extends userClass
 	}
 
 
-	function lookupVehicleDetails($get)
+	public function lookupVehicleDetails($get)
 	{
 		global $callConfig;
 		try {
@@ -899,7 +899,7 @@ class employeeLoanClass extends userClass
 	}
 
 
-	function insertvehiclegateway($get, $post)
+	public function insertvehiclegateway($get, $post)
 	{
 		global $callConfig;
  
@@ -960,7 +960,7 @@ class employeeLoanClass extends userClass
 		return $res;
 	}
 
-	function updatevehicleexit($get, $post)
+	public function updatevehicleexit($get, $post)
 	{
 		global $callConfig;
 		 
@@ -1007,7 +1007,7 @@ class employeeLoanClass extends userClass
 	}
 
 
-	function updatetransportvehiclemaster($get, $post)
+	public function updatetransportvehiclemaster($get, $post)
     {
         global $callConfig;
 
@@ -1045,7 +1045,7 @@ class employeeLoanClass extends userClass
         return $res;
     }
 
-	function inserttransportvehiclemaster($get, $post)
+	public function inserttransportvehiclemaster($get, $post)
     {
         global $callConfig;
 
@@ -1086,7 +1086,7 @@ class employeeLoanClass extends userClass
     }
 
 
-	function getVehicleGatewayList($get)
+	public function getVehicleGatewayList($get)
 	{
 		global $callConfig;
 		$return['get'] = $get;
@@ -1133,7 +1133,7 @@ class employeeLoanClass extends userClass
 		return $return;
 	}
 
-	function deletetransportvehiclemaster($get)
+	public function deletetransportvehiclemaster($get)
     {
         global $callConfig;
         $company_id = $get['company_id'];
@@ -1145,7 +1145,7 @@ class employeeLoanClass extends userClass
         return $res;
     }
 
-	function getfuelentrydata($get)
+	public function getfuelentrydata($get)
 	{
 		global $callConfig;
 		$company_id = $get['company_id'];
@@ -1155,7 +1155,7 @@ class employeeLoanClass extends userClass
 		return $res;
 	}
 
-	function getdepartmentdetails($get)
+	public function getdepartmentdetails($get)
 	{
 		global $callConfig;
 		$return = [];
@@ -1166,7 +1166,7 @@ class employeeLoanClass extends userClass
 		return $result;
 	}
 
-	function getdepartmentemployeesdetails($get)
+	public function getdepartmentemployeesdetails($get)
 	{
 		global $callConfig;
 		$return = [];
@@ -1179,7 +1179,7 @@ class employeeLoanClass extends userClass
 	}
 
 
-	function getfuelstatistics($get)
+	public function getfuelstatistics($get)
 	{
 		global $callConfig;
 
@@ -1205,7 +1205,7 @@ class employeeLoanClass extends userClass
 
 
 
-	function gettodayfuelsummary($get)
+	public function gettodayfuelsummary($get)
 	{
 		global $callConfig;
 
@@ -1224,7 +1224,7 @@ class employeeLoanClass extends userClass
 		);
 	}
 
-	function getfueldetails($get)
+	public function getfueldetails($get)
 	{
 		global $callConfig;
 		$fuel_id = $get['fuel_id'];
@@ -1244,7 +1244,7 @@ class employeeLoanClass extends userClass
 		}
 	}
 
-	function insertfuelentry($get, $post)
+	public function insertfuelentry($get, $post)
 	{
 		global $callConfig;
 
@@ -1294,7 +1294,7 @@ class employeeLoanClass extends userClass
 	}
 
 
-	function updatefuelentry($get, $post)
+	public function updatefuelentry($get, $post)
 	{
 		global $callConfig;
 
@@ -1344,7 +1344,7 @@ class employeeLoanClass extends userClass
 	}
 
 
-	function getfuelentrylist($get)
+	public function getfuelentrylist($get)
 	{
 		global $callConfig;
 		$company_id = $get['company_id'] ?? $_SESSION['company_id'];
@@ -1369,7 +1369,7 @@ class employeeLoanClass extends userClass
 	}
 
 
-	function deletefuelentry($get, $post)
+	public function deletefuelentry($get, $post)
 	{
 		global $callConfig;
 
@@ -1387,7 +1387,7 @@ class employeeLoanClass extends userClass
 	}
 	// omkar related code end
 	// 
-	function getEmployeesAttendanceData($get){
+	public function getEmployeesAttendanceData($get){
 	    global $callConfig;
 	    $query = "SELECT id, display_name, emp_code FROM employees
 	        WHERE company_id = {$get['company_id']} AND is_active = 0 ORDER BY display_name ASC";
@@ -1509,7 +1509,7 @@ class employeeLoanClass extends userClass
 	    $app_leave_day = $callConfig->getAllRows($adqry);
 	    return array('table'=>$data, 'attendance_data'=>$attendance_data, 'holidays' => $holidays, 'leaves' => $leaves, 'weak_off_arr' => $weak_off_arr,'employee_name' => $emp, 'shift_info' => $shift_info, 'attendance_key_types' => $shiftKeys, 'app_leave_day'=>$app_leave_day);
 	}
-	function togetalldetailsforemployeevalattendance_old($get){
+	public function togetalldetailsforemployeevalattendance_old($get){
 	    global $callConfig;
 	    $return = array();
 	    /* -------------------------------------------------
@@ -1592,7 +1592,7 @@ class employeeLoanClass extends userClass
 	    $return['leave_types'] = $leave_types;
 	    return $return;
 	}
-	function saveEmployeeAttendance_old($get, $post){
+	public function saveEmployeeAttendance_old($get, $post){
 	    global $callConfig;
 
 	    $company_id = $get['company_id'];
@@ -1699,7 +1699,7 @@ class employeeLoanClass extends userClass
 	        'res1' => $res1
 	    );
 	}
-	function getAutoAttendanceTime_old($get){
+	public function getAutoAttendanceTime_old($get){
 	    global $callConfig;
 
 	    $company_id = $get['company_id'];
@@ -1798,7 +1798,7 @@ class employeeLoanClass extends userClass
 	    return ['status' => 'error'];
 	}
 
-	function getEmployeesAttendanceDataNew_1($get){
+	public function getEmployeesAttendanceDataNew_1($get){
 	    global $callConfig;
 	    $query = "SELECT id, display_name,emp_code FROM employees
 	        WHERE company_id = {$get['company_id']} AND is_active = 0 ORDER BY display_name ASC";
@@ -1924,7 +1924,7 @@ class employeeLoanClass extends userClass
 	    return array('table'=>$data, 'attendance_data'=>$attendance_data, 'calculated_hours'=> $calculated_hours, 'holidays' => $holidays, 'leaves' => $leaves, 'weak_off_arr' => $weak_off_arr,'employee_name' => $emp, 'attendance_key_types' => $shiftKeys);
 	}
 
-	function togetalldetailsforemployeevalattendance($get){
+	public function togetalldetailsforemployeevalattendance($get){
 	    global $callConfig;
 	    $return = array();
 	    /* -------------------------------------------------
@@ -2007,7 +2007,7 @@ class employeeLoanClass extends userClass
 	    $return['leave_types'] = $leave_types;
 	    return $return;
 	}
-	function saveEmployeeAttendanceold08042026($get, $post){
+	public function saveEmployeeAttendanceold08042026($get, $post){
 	    global $callConfig;
 
 	    $company_id = $get['company_id'];
@@ -2119,7 +2119,7 @@ class employeeLoanClass extends userClass
 	        'res1' => $res1
 	    );
 	}
-	function saveEmployeeAttendance($get, $post){
+	public function saveEmployeeAttendance($get, $post){
 	    global $callConfig;
 
 	    $company_id = $get['company_id'];
@@ -2256,7 +2256,7 @@ class employeeLoanClass extends userClass
 	        'post'=>$post
 	    );
 	}
-	function getAutoAttendanceTime($get){
+	public function getAutoAttendanceTime($get){
 	    global $callConfig;
 
 	    $company_id = $get['company_id'];
@@ -2358,7 +2358,7 @@ class employeeLoanClass extends userClass
 	 * Get all employees assigned with a specific buddy type
 	 * Extracts UNIQUE buddy IDs from the specified column and returns employee data
 	 */
-	function getBuddyTypeEmployees($get, $post){
+	public function getBuddyTypeEmployees($get, $post){
 		global $callConfig;
 
 		$buddy_type = isset($post['buddy_type']) ? $post['buddy_type'] : '';
@@ -2434,7 +2434,7 @@ class employeeLoanClass extends userClass
 	/**
 	 * Get employees affected by buddy reassignment (for preview)
 	 */
-	function getBuddyEmployees($get, $post){
+	public function getBuddyEmployees($get, $post){
 		global $callConfig;
 
 		$buddy_type = isset($post['buddy_type']) ? $post['buddy_type'] : '';
@@ -2508,7 +2508,7 @@ class employeeLoanClass extends userClass
 	/**
 	 * Confirm and execute buddy reassignment
 	 */
-	function confirmBuddyReassignment($get, $post){
+	public function confirmBuddyReassignment($get, $post){
 		global $callConfig;
         
 		$buddy_type = isset($post['buddy_type']) ? $post['buddy_type'] : '';
@@ -2584,7 +2584,7 @@ class employeeLoanClass extends userClass
 		}
 	}
 
-	function getEmployeeAttendanceLocationDetails($get){
+	public function getEmployeeAttendanceLocationDetails($get){
 	    global $callConfig;
 	    $return = array(
 	        'details' => array(),
@@ -2658,7 +2658,7 @@ class employeeLoanClass extends userClass
 	/**
 	 * Get all employees and leave types for the dropdown
 	 */
-	function getLeaveEmployees($get){
+	public function getLeaveEmployees($get){
 	    global $callConfig;
 	    $return = array();
 	    $company_id = $get['company_id'];
@@ -2694,7 +2694,7 @@ class employeeLoanClass extends userClass
 	/**
 	 * Get leave balance and allocation data for selected employee
 	 */
-	function getLeaveBalanceAndAllocations($get){
+	public function getLeaveBalanceAndAllocations($get){
 	    global $callConfig;
 	    $return = array();
 	    $company_id = $get['company_id'];
@@ -2775,7 +2775,7 @@ class employeeLoanClass extends userClass
 	/**
 	 * Save leave allocation and update leave balance
 	 */
-	function saveLeaveAllocation($get, $post){
+	public function saveLeaveAllocation($get, $post){
 	    global $callConfig;
 	    $return = array();
 	    
@@ -2912,7 +2912,7 @@ class employeeLoanClass extends userClass
 	 * @param array $post - Contains rid, employee_id, attendace_date, check_type, clock_value, user_id
 	 * @return array - Response with status, clock times, attendance code, and error messages if any
 	 */
-    function saveClockTime($get, $post) {
+    public function saveClockTime($get, $post) {
         global $callConfig;
  
         $company_id = $get['company_id'] ?? 0;
@@ -3007,7 +3007,7 @@ class employeeLoanClass extends userClass
         );
     }
 
-    function employeeattendancechangebaseonshift($get,$post){
+    public function employeeattendancechangebaseonshift($get,$post){
 
 	    global $callConfig;
 	    
@@ -3243,7 +3243,7 @@ class employeeLoanClass extends userClass
 		// Default: Absent
 		return $attendance_key_short_code ?: 'A';
 	}
-	function getvehiclegatewaypending($get){
+	public function getvehiclegatewaypending($get){
 		global $callConfig;
 		try {
 			$company_id = $get['company_id'];
@@ -3266,7 +3266,7 @@ class employeeLoanClass extends userClass
 		}
 	}
 
-	function getvehiclegatewaymissing($get){
+	public function getvehiclegatewaymissing($get){
 		global $callConfig;
 		try {
 			$company_id = $get['company_id'];
@@ -3293,7 +3293,7 @@ class employeeLoanClass extends userClass
 	 * @param mixed $post POST data containing vehicle_id, exit_date, exit_time, method_type, etc.
 	 * @return array Response with status
 	 */
-	function updatevehiclegatewayexit($get,$post)
+	public function updatevehiclegatewayexit($get,$post)
 	{
 		global $callConfig;
 		date_default_timezone_set('Asia/Kolkata');
@@ -3392,7 +3392,7 @@ class employeeLoanClass extends userClass
 		}
 	}
 
-	function toupdatetransportgatewayprocess_val($get){
+	public function toupdatetransportgatewayprocess_val($get){
 	    global $callConfig;
 	    try {
 	        $id = $get['id'] ?? null;
@@ -3440,7 +3440,7 @@ class employeeLoanClass extends userClass
 	    }
 	}
 
-	function getpersonalgateway($get){
+	public function getpersonalgateway($get){
         global $callConfig;
         $return = [];
  
@@ -3517,7 +3517,7 @@ class employeeLoanClass extends userClass
         }
     }
 
-	function updatepersonalgatewayexit($get,$post){
+	public function updatepersonalgatewayexit($get,$post){
 		global $callConfig;
 		date_default_timezone_set('Asia/Kolkata');
 		try {
@@ -3628,7 +3628,7 @@ class employeeLoanClass extends userClass
 			return ['status' => 'error', 'message' => 'Error: ' . $e->getMessage()];
 		}
 	}
-	function toupdatetransportpersonalgatewayprocess_val($get){
+	public function toupdatetransportpersonalgatewayprocess_val($get){
 	    global $callConfig;
 	    try {
 	        $id = $get['id'] ?? null;
@@ -3677,7 +3677,7 @@ class employeeLoanClass extends userClass
 	        return ['status'=>'error','message'=>$e->getMessage()];
 	    }
 	}
-	function updateAttendanceKey($get){
+	public function updateAttendanceKey($get){
 		global $callConfig;
 
 		$company_id = intval($get['company_id'] ?? 0);
@@ -3889,7 +3889,7 @@ class employeeLoanClass extends userClass
 			'message' => 'Attendance status updated successfully'
 		);
 	}
-	function gettransportgatewayreport($get){
+	public function gettransportgatewayreport($get){
 		global $callConfig;
 
 		$company_id = $get['company_id'] ?? '';
@@ -4026,7 +4026,7 @@ class employeeLoanClass extends userClass
 			'query' => $query
 		);
 	}
-	function getEmployeeBuddyAuthorizers($get){
+	public function getEmployeeBuddyAuthorizers($get){
 	    global $callConfig;
 
 	    $company_id = isset($get['company_id']) ? (int) $get['company_id'] : 0;

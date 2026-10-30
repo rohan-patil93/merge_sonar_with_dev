@@ -1,6 +1,6 @@
 <?php 
 class reactClass extends userClass{
-	function dynamicadddatareact($get, $data){
+	public function dynamicadddatareact($get, $data){
 		global $callConfig;
 		
 		$data['company_id'] = $get['company_id'];
@@ -12,7 +12,7 @@ class reactClass extends userClass{
 		$res=$callConfig->insertRecord($get['table'],$data);
 		return $res;
 	}
-	function dynamicupdateatareact($get, $data){
+	public function dynamicupdateatareact($get, $data){
 		global $callConfig;
 		//echo "___________________"; 		echo "array"; print_r($data); exit;
 		$rid = $get['rid'];
@@ -21,7 +21,7 @@ class reactClass extends userClass{
 		$res=$callConfig->updateRecord($get['table'],$data,$fid,$rid);
 		return $res;
 	}
-	function dynamicdeletebyridreact($get){
+	public function dynamicdeletebyridreact($get){
 		global $callConfig;
 		//echo "___________________";echo "array"; print_r($get); exit;
 		$rid = $get['rid'];
@@ -29,7 +29,7 @@ class reactClass extends userClass{
 		$res=$callConfig->updateRecord($get['table'],array('is_active'=>NULL),$fid,$rid);
 		return $res;
 	}
-	function dynamiclistatreact($get){
+	public function dynamiclistatreact($get){
 		global $callConfig;
 		$whr ='is_active=0';
 		$field = '*';
@@ -42,8 +42,8 @@ class reactClass extends userClass{
 		if($_GET['orderby'] !=''){
 			$orderby = urldecode($_GET['orderby']);
 		}
-		if($_GET['field'] !='' && $_GET['field'] !=''){
-			
+		if($_GET['field'] !=''){
+
 			$field = $_GET['field'] !='' ? $_GET['field'] : '*';
 			
 		}
@@ -51,7 +51,7 @@ class reactClass extends userClass{
 		$res = $this->getAllTablesData($_GET['table'],'*',$whr,$orderby);
 		return $res;
 	}
-	function dyanamicautosuggictionselectdata($get){
+	public function dyanamicautosuggictionselectdata($get){
 		global $callConfig;
 		$query = "SELECT *  FROM `display_attribute_types` WHERE `application_table_name` = '".$get['table']."' AND `field_name` = '".$get['view']."'";
 		$dis_data = $callConfig->getRow($query);
@@ -69,7 +69,7 @@ class reactClass extends userClass{
 		//print_r($get); exit;*/
 
 	}
-	function modulelistreact($get){
+	public function modulelistreact($get){
 		global $callConfig;
 		$whr = "";
 		/*if($all == 'Y'){
@@ -81,14 +81,13 @@ class reactClass extends userClass{
 		$module_data = $callConfig->getAllRows($module_query);
 		return $module_data;
 	}
-	function getReactMenuList($get){
+	public function getReactMenuList($get){
 		global $callConfig;
 		$return = array();
 		//echo  "<pre>";
 		$defaultmoduleid = $get['module_id'];
 		$admin_type = $get['admin_type'];
 		$get['defaultmoduleid'] = $defaultmoduleid;
-		$get['working_role_short_code'] = $get['working_role_short_code'];
 		$rolepermission = $this->toGetRoledata($get['user_id'],$get);
 		$rolepermission['role_permission'] = $rolepermission['permission'];
 		$rolepermission['role_page_permission'] = $rolepermission['page_permission'];
@@ -112,7 +111,7 @@ class reactClass extends userClass{
 		//echo "<pre>"; print_r($return);
 		return $return;
 	}
-	function toGETNavDetails($type,$admin_type,$rolepermission){
+	public function toGETNavDetails($type,$admin_type,$rolepermission){
 		$menu  = $rolepermission['application_menu'];
 	//echo $type."<pre>";print_r($menu); //exit;
 
@@ -154,7 +153,7 @@ class reactClass extends userClass{
 
 		return $array;
 	}
-	function menurecheck($data){
+	public function menurecheck($data){
 		$array= array();
 		foreach($data as $key=>$dat){
 			if(count((array)$dat['child'])>0){
@@ -188,7 +187,7 @@ class reactClass extends userClass{
 		return $array;
 	}
 
-	function checkPremission($name,$admin_type,$rolepermission){
+	public function checkPremission($name,$admin_type,$rolepermission){
 		$return = 0;
 	//echo  $name; //exit;
 	//echo "<pre>"; print_r($_SESSION['role_permission']);print_r($_SESSION['role_permission']);
@@ -232,7 +231,7 @@ class reactClass extends userClass{
 
 
 
-	function getParentidmenus($pid,$len,$admin_type,$rolepermission){
+	public function getParentidmenus($pid,$len,$admin_type,$rolepermission){
 		$menu  = $rolepermission['application_menu'];
 		$array1 = array();
 		foreach ($menu as $key => $value) {
@@ -265,7 +264,7 @@ class reactClass extends userClass{
 		}
 		return $array1; 
 	} 
-	function getParentidmenuscheck($pid,$len,$admin_type,$rolepermission){
+	public function getParentidmenuscheck($pid,$len,$admin_type,$rolepermission){
 		$menu  = $rolepermission['application_menu'];
 		foreach ($menu as $key => $value) {
 			if($value->parent_menu == $pid){
@@ -279,7 +278,7 @@ class reactClass extends userClass{
 		}
 		return $array1;
 	}
-	function applicationpagenamedetails($get){
+	public function applicationpagenamedetails($get){
 		global $callConfig;
 		$name = $get['page_name'];
 		$query = "SELECT id, application_table_name, list_page_name, list_page_type, insert_page_name, insert_page_type, edit_page_name, edit_page_type, view_page_name, view_page_type FROM application_pages WHERE company_id =".$get['company_id']." AND  ( list_page_name = '".$get['page_name']."' OR insert_page_name = '".$get['page_name']."' OR edit_page_name = '".$get['page_name']."' OR view_page_name = '".$get['page_name']."') AND is_active =0";
@@ -318,7 +317,7 @@ class reactClass extends userClass{
 				return $return;
 			}
 			
-			function insertcontractsreact($get, $post){
+			public function insertcontractsreact($get, $post){
 				global $callConfig;
 				$return = [];
 				$return['post'] = $post;
@@ -643,10 +642,10 @@ class reactClass extends userClass{
 				$return['commercial_details_result'] = $this->saveContractCommercialDetails($contract_id, $get, $post);
 				return $return;
 			}
-			function getcontractslistpost($get, $post){
+			public function getcontractslistpost($get, $post){
 				return $this->getcontractslist($post);
 			}
-			function adminOrUserOrFM($get){
+			public function adminOrUserOrFM($get){
 				global $callConfig;
 				$whr = '';
 				if($get['admin_type'] != 1){
@@ -672,7 +671,7 @@ class reactClass extends userClass{
 				return $whr;
 			}
 
-			function getcontractslist($get){
+			public function getcontractslist($get){
 				global $callConfig;
 				$return = array();
 				$return['get'] = $get;
@@ -790,7 +789,7 @@ class reactClass extends userClass{
 				}
 				return $return;
 			}
-			function getEditContracts($get)
+			public function getEditContracts($get)
 			{
 				global $callConfig;
 				$return = array();
@@ -800,7 +799,7 @@ class reactClass extends userClass{
 				$return['result'] = $contractsres;
 				return $return;
 			}
-			function getuserslistreact($get)
+			public function getuserslistreact($get)
 			{
 				global $callConfig;
 				$return = array();
@@ -809,7 +808,7 @@ class reactClass extends userClass{
 				$return['result'] = $useres;
 				return $return;
 			}
-			function getdocumentlistreact($get)
+			public function getdocumentlistreact($get)
 			{
 				global $callConfig;
 				$return = array();
@@ -818,7 +817,7 @@ class reactClass extends userClass{
 				$return['result'] = $contractsres;
 				return $return;
 			}
-			function insertdocumnentreact($get, $post, $files)
+			public function insertdocumnentreact($get, $post, $files)
 			{
 				global $callConfig;
 				$return = [];
@@ -888,7 +887,7 @@ class reactClass extends userClass{
 			}
 
 /**
-	function insertdocumnentreact($get, $post, $files)
+	public function insertdocumnentreact($get, $post, $files)
 	{
 		global $callConfig;
 		$return = array();
@@ -990,7 +989,7 @@ class reactClass extends userClass{
 
 		return $return;
 	}**/
-	function insertworkflowreact($get, $post)
+	public function insertworkflowreact($get, $post)
 	{
 		global $callConfig;
 		$return = array();
@@ -1045,7 +1044,7 @@ class reactClass extends userClass{
 
 		return $return;
 	}
-	function getEditdocumnentreact($get)
+	public function getEditdocumnentreact($get)
 	{
 		global $callConfig;
 		$return = array();
@@ -1055,7 +1054,7 @@ class reactClass extends userClass{
 		$return['result'] = $documnentres;
 		return $return;
 	}
-	function getEditworkflowreact($get){
+	public function getEditworkflowreact($get){
 		global $callConfig;
 		$return = array();
 		$rid = $get['rid'];
@@ -1064,7 +1063,7 @@ class reactClass extends userClass{
 		$return['result'] = $documnentres;
 		return $return;
 	}
-	function insertpermissionreact($get, $post)
+	public function insertpermissionreact($get, $post)
 	{
 		global $callConfig;
 		$return = [];
@@ -1100,7 +1099,7 @@ class reactClass extends userClass{
 	}
 
 
-	function getEditpermissionreact($get)
+	public function getEditpermissionreact($get)
 	{
 		global $callConfig;
 		$return = array();
@@ -1110,7 +1109,7 @@ class reactClass extends userClass{
 		$return['result'] = $permissionres;
 		return $return;
 	}
-	function insertworkflowactivityreact($get, $post)
+	public function insertworkflowactivityreact($get, $post)
 	{
 		global $callConfig;
 		$return = array();
@@ -1139,7 +1138,7 @@ class reactClass extends userClass{
 
 		return $return;
 	}
-	function getListworkflowactivityreact($get)
+	public function getListworkflowactivityreact($get)
 	{
 		global $callConfig;
 		$return = array();
@@ -1149,7 +1148,7 @@ class reactClass extends userClass{
 		$return['result'] = $workflowactivityres;
 		return $return;
 	}
-	function getAssociatedcontract($get)
+	public function getAssociatedcontract($get)
 	{
 		global $callConfig;
 		$return = array();
@@ -1160,7 +1159,7 @@ class reactClass extends userClass{
 
 		return $return;
 	}
-	function insertcontrolversionreact($get, $post)
+	public function insertcontrolversionreact($get, $post)
 	{
 		global $callConfig;
 		$return = array();
@@ -1194,7 +1193,7 @@ class reactClass extends userClass{
 		}
 		return $return;
 	}
-	function insertactivityreact($get, $post){
+	public function insertactivityreact($get, $post){
 		global $callConfig;
 		$return = array();
 		$inputJSON = file_get_contents('php://input');
@@ -1222,7 +1221,7 @@ class reactClass extends userClass{
 		}
 		return $return;
 	}
-	function getactivityreact($get)
+	public function getactivityreact($get)
 	{
 		global $callConfig;
 		$return = array();
@@ -1233,7 +1232,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 	
-	function insertCustomersreact($get, $post)
+	public function insertCustomersreact($get, $post)
 	{
 		global $callConfig;
 		$return = array();
@@ -1293,7 +1292,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-	function insertVendorsreact($get, $post)
+	public function insertVendorsreact($get, $post)
 	{
 		global $callConfig;
 		$return = array();
@@ -1355,7 +1354,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-	function getcustomerlist($get){
+	public function getcustomerlist($get){
 		global $callConfig;
 		$return = array();
 		$activitysql = "SELECT * FROM customers WHERE company_id =" . $get['company_id'] . " AND is_active = 0";
@@ -1363,7 +1362,7 @@ class reactClass extends userClass{
 		$return['result'] = $activityres;
 		return $return;
 	}
-	function getvendorslist($get){
+	public function getvendorslist($get){
 		global $callConfig;
 		$return = array();
 		$activitysql = "SELECT * FROM vendors WHERE company_id =" . $get['company_id'] . " AND is_active = 0";
@@ -1372,7 +1371,7 @@ class reactClass extends userClass{
 
 		return $return;
 	}
-	function getcustomerdetailsreact($get){
+	public function getcustomerdetailsreact($get){
 		global $callConfig;
 		$return = array();
 		$rid = $get['rid'];
@@ -1382,7 +1381,7 @@ class reactClass extends userClass{
 
 		return $return;
 	}
-	function getpermissiondetailsreact($get){
+	public function getpermissiondetailsreact($get){
 		global $callConfig;
 		$return = array();
 		$user_id = $get['user_id'];
@@ -1393,7 +1392,7 @@ class reactClass extends userClass{
 
 		return $return;
 	}
-	function getfullpermissiondetailsreact($get){
+	public function getfullpermissiondetailsreact($get){
 		global $callConfig;
 		$return = array();
 		$user_id = $get['user_id'];
@@ -1402,7 +1401,7 @@ class reactClass extends userClass{
 		$return['result'] = $customerres;
 		return $return;
 	}
-	function getdeleterowreact($get){
+	public function getdeleterowreact($get){
 		global $callConfig;
 		$return = array();
 		$rid = $get['rid'];
@@ -1413,7 +1412,7 @@ class reactClass extends userClass{
 		$return['res'] = $res;
 		return $return;
 	}
-	function getdashboardreact($get)
+	public function getdashboardreact($get)
 	{
 		global $callConfig;
 		$return = array();
@@ -1483,7 +1482,7 @@ class reactClass extends userClass{
 
 		return $return;
 	}
-	function getDocumentDetailsReact($get){
+	public function getDocumentDetailsReact($get){
 		global $callConfig;
 		$return = array();
 		$contract_id = $get['contract_id'];
@@ -1492,7 +1491,7 @@ class reactClass extends userClass{
 		$return['result'] = $customerres;
 		return $return;
 	}
-	function insertContractRechargeDetails($get,$post){
+	public function insertContractRechargeDetails($get,$post){
 		global $callConfig;
 		$return =array();
 		$return['post'] = $post;
@@ -1513,7 +1512,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-	function getcontractdetailsreactamc($get){
+	public function getcontractdetailsreactamc($get){
 		global $callConfig;
 		$return = array();
 		$rid = $get['rid'] ?? 0;
@@ -1663,7 +1662,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 	/**/
-		function getAmcContractEditData($company_id, $contract_id)
+		public function getAmcContractEditData($company_id, $contract_id)
 	{
 		global $callConfig;
 		$return = array('details' => array(), 'locations' => array());
@@ -1725,7 +1724,7 @@ class reactClass extends userClass{
 /***/
 
 
-	function getcontractdetailsreact($get){
+	public function getcontractdetailsreact($get){
 		global $callConfig;
 		$return = array();
 		$rid = $get['rid'] ?? 0;
@@ -1875,7 +1874,7 @@ class reactClass extends userClass{
 		  return $return;
 		}
 
-		function renewcontractreact($get, $post)
+		public function renewcontractreact($get, $post)
 		{
 			global $callConfig;
 
@@ -2276,7 +2275,7 @@ class reactClass extends userClass{
 // }
 
 
-		function cancelcontractreact($get, $post)
+		public function cancelcontractreact($get, $post)
 		{
 			global $callConfig;
 
@@ -2325,7 +2324,7 @@ class reactClass extends userClass{
 		}
 
 		
-		function sendCronJobContractExpiryNotifications($get){
+		public function sendCronJobContractExpiryNotifications($get){
 			global $callConfig;
 			$startdate =  date('Y-m-d');
 			$enddate =  date('Y-m-d', strtotime('+3 months'));
@@ -2404,7 +2403,7 @@ class reactClass extends userClass{
 			return $get;
 		}	
 
-		function sendCronJobContractExpiryNotificationsExtrafuncall($title, $contracts){
+		public function sendCronJobContractExpiryNotificationsExtrafuncall($title, $contracts){
 		    $html = "<h3>{$title}</h3>";
 		    if (empty($contracts)) {
 		        return $html . "<p>No contracts found.</p>";
@@ -2443,7 +2442,7 @@ class reactClass extends userClass{
 
 		////////////// kotesss
 
-	function AMCInsertContractsReact($get, $post){
+	public function AMCInsertContractsReact($get, $post){
 		global $callConfig;
 
 		$return = [];
@@ -2797,7 +2796,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-		function saveAmcContractData($contract_id, $get, $post)
+		public function saveAmcContractData($contract_id, $get, $post)
 	{
 		global $callConfig;
 		$return = array();
@@ -3024,7 +3023,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-	function saveContractCommercialDetails($contract_id, $get, $post)
+	public function saveContractCommercialDetails($contract_id, $get, $post)
 	{
 		global $callConfig;
 		$return = array();
@@ -3059,7 +3058,7 @@ class reactClass extends userClass{
 		$return['details'] = $callConfig->insertRecord('contract_amc_details', $detailsRow);
 		return $return;
 	}
-	function generateContractAmcSchedulesForAsset($contract_id, $companyId, $userId, $assetRow, $now)
+	public function generateContractAmcSchedulesForAsset($contract_id, $companyId, $userId, $assetRow, $now)
 	{
 		global $callConfig;
 		$inserted = array();
@@ -3384,7 +3383,7 @@ class reactClass extends userClass{
 		}
 		return $this->amcFormatDateYmd($d);
 	}
-	function getAmcContractAssetSchedules($get)
+	public function getAmcContractAssetSchedules($get)
 	{
 		global $callConfig;
 		$return = array('schedules' => array(), 'asset' => array());
@@ -3443,7 +3442,7 @@ class reactClass extends userClass{
 		}
 		return $datePart;
 	}
-	function getAmcContractAssetCalendarEvents($get)
+	public function getAmcContractAssetCalendarEvents($get)
 	{
 		global $callConfig;
 		$return = array('events' => array());
@@ -3475,7 +3474,7 @@ class reactClass extends userClass{
 	{
 		return preg_match('/\s00:00:00$/', (string) $datetime) == 1;
 	}
-	function getContractAmcDashboardData($get)
+	public function getContractAmcDashboardData($get)
 	{
 		global $callConfig;
 		$return = array();
@@ -3532,7 +3531,7 @@ class reactClass extends userClass{
 
 		return $return;
 	}
-	function buildContractAmcFmDashboardJoin()
+	public function buildContractAmcFmDashboardJoin()
 	{
 		return "INNER JOIN contracts c ON c.id = s.contract_id AND c.company_id = s.company_id AND c.is_active = 0
 			AND c.is_amc_contract = 'Y' AND c.party_type = 'vendor' AND c.current_status = '" . ST_APPROVED . "'
@@ -3542,7 +3541,7 @@ class reactClass extends userClass{
 			LEFT JOIN assets a ON a.id = s.asset_id AND a.company_id = s.company_id AND a.is_active = 0";
 	}
 
-	function buildContractAmcFmDashboardWhere($get)
+	public function buildContractAmcFmDashboardWhere($get)
 	{
 		$companyId = (int) ($get['company_id'] ?? 0);
 		$where = "s.company_id = {$companyId} AND s.is_active = 0 AND cad.customer_connect_id IS NOT NULL AND cad.customer_connect_id > 0";
@@ -3556,7 +3555,7 @@ class reactClass extends userClass{
 		$where .= " AND cad.customer_connect_id IN ({$idList})";
 		return $where;
 	}
-		function getPartyContractsList($get, $party_type, $party_id)
+		public function getPartyContractsList($get, $party_type, $party_id)
 	{
 		global $callConfig;
 		$return = array();
@@ -3616,11 +3615,11 @@ class reactClass extends userClass{
 
 		return $return;
 	}
-	function getVendorContracts($get)
+	public function getVendorContracts($get)
 	{
 		return $this->getPartyContractsList($get, 'vendor', $get['vendor_id'] ?? '');
 	}
-	function getContractAmcScheduleRollups($company_id, $contract_ids)
+	public function getContractAmcScheduleRollups($company_id, $contract_ids)
 	{
 		global $callConfig;
 		$rollups = array();
@@ -3658,7 +3657,7 @@ class reactClass extends userClass{
 		}
 		return $rollups;
 	}
-	function mergeContractRollupsIntoRows($rows, $rollups)
+	public function mergeContractRollupsIntoRows($rows, $rollups)
 	{
 		if (count((array)$rows) == 0) {
 			return $rows;
@@ -3684,7 +3683,7 @@ class reactClass extends userClass{
 		return $merged;
 	}
 
-	function insertContracts($get,$post){
+	public function insertContracts($get,$post){
 		global $callConfig;
     	$return =array();
     	$return['post'] = $post;
@@ -3776,7 +3775,7 @@ class reactClass extends userClass{
 		return 'April - ' . $fiscalStartYear . ' To March - ' . ($fiscalStartYear + 1);
 	}
 
-	function getCustomerContracts($get)
+	public function getCustomerContracts($get)
 	{
 		return $this->getPartyContractsList($get, 'customer', $get['customer_id'] ?? '');
 	}
@@ -3798,7 +3797,7 @@ class reactClass extends userClass{
 		return $clean;
 	}
 
-	function getAmcScheduleStatusLabel($status)
+	public function getAmcScheduleStatusLabel($status)
 	{
 		$status = (int) $status;
 		if ($status > 0 && $status < 199) {
@@ -3810,7 +3809,7 @@ class reactClass extends userClass{
 		return array('label' => 'Pending', 'class' => 'bg-primary');
 	}
 
-	function getContractAmcScheduleDrilldown($get)
+	public function getContractAmcScheduleDrilldown($get)
 	{
 		global $callConfig;
 		$return = array('contract' => array(), 'locations' => array());
@@ -3970,7 +3969,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-	function resolveContractAmcCurrentStatus($get, $contract)
+	public function resolveContractAmcCurrentStatus($get, $contract)
 	{
 		$contract = (array) $contract;
 		$currentStatus = $contract['current_status'] ?? null;
@@ -3995,12 +3994,12 @@ class reactClass extends userClass{
 		return is_array($row) ? ($row['current_status'] ?? '') : ($row->current_status ?? '');
 	}
 
-	function isContractAmcApprovedForExecution($get, $contract)
+	public function isContractAmcApprovedForExecution($get, $contract)
 	{
 		return $this->resolveContractAmcCurrentStatus($get, $contract) == ST_APPROVED;
 	}
 
-	function canExecuteContractAmcService($get, $contract)
+	public function canExecuteContractAmcService($get, $contract)
 	{
 		if (!$this->isContractAmcApprovedForExecution($get, $contract)) {
 			return false;
@@ -4035,7 +4034,7 @@ class reactClass extends userClass{
 		return false;
 	}
 
-	function resolveContractAmcServiceMode($contractRow)
+	public function resolveContractAmcServiceMode($contractRow)
 	{
 		$row = is_object($contractRow) ? (array) $contractRow : (array) $contractRow;
 		if (($row['service_mode'] ?? '') == 'inhouse') {
@@ -4047,7 +4046,7 @@ class reactClass extends userClass{
 		return 'vendor';
 	}
 
-	function getContractAmcServiceMode($companyId, $contractId)
+	public function getContractAmcServiceMode($companyId, $contractId)
 	{
 		global $callConfig;
 		$companyId = (int) $companyId;
@@ -4068,7 +4067,7 @@ class reactClass extends userClass{
 		return $this->resolveContractAmcServiceMode($r);
 	}
 
-	function getContractAmcEmployees($companyId, $departmentId = 0)
+	public function getContractAmcEmployees($companyId, $departmentId = 0)
 	{
 		global $callConfig;
 		$list = array();
@@ -4094,7 +4093,7 @@ class reactClass extends userClass{
 		return $list;
 	}
 
-	function getAmcAssetsByLocationCategory($get)
+	public function getAmcAssetsByLocationCategory($get)
 	{
 		global $callConfig;
 		$return = array('assets' => array());
@@ -4121,7 +4120,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-	function getContractAmcTechnicians($company_id)
+	public function getContractAmcTechnicians($company_id)
 	{
 		global $callConfig;
 		$list = array();
@@ -4136,7 +4135,7 @@ class reactClass extends userClass{
 		return $list;
 	}
 
-	function getContractAmcAssetDefaultTechnicianId($companyId, $contractAmcAssetId)
+	public function getContractAmcAssetDefaultTechnicianId($companyId, $contractAmcAssetId)
 	{
 		global $callConfig;
 		$contractAmcAssetId = (int) $contractAmcAssetId;
@@ -4154,7 +4153,7 @@ class reactClass extends userClass{
 		return (int) ($r['default_technician_id'] ?? 0);
 	}
 
-	function resolveEffectiveAmcTechnician($scheduleRow, $assetDefaultId, $techNameMap = array())
+	public function resolveEffectiveAmcTechnician($scheduleRow, $assetDefaultId, $techNameMap = array())
 	{
 		$schedule = (array) $scheduleRow;
 		$isOverride = (int) ($schedule['technician_is_override'] ?? 0) == 1;
@@ -4188,7 +4187,7 @@ class reactClass extends userClass{
 		);
 	}
 
-	function resolveAmcScheduleTechnicianOverrideFields($technicianId, $assetDefaultId, $resetToDefault = false)
+	public function resolveAmcScheduleTechnicianOverrideFields($technicianId, $assetDefaultId, $resetToDefault = false)
 	{
 		$technicianId = (int) $technicianId;
 		$assetDefaultId = (int) $assetDefaultId;
@@ -4210,7 +4209,7 @@ class reactClass extends userClass{
 		);
 	}
 
-	function getContractAmcAssetDefaultEmployeeId($companyId, $contractAmcAssetId)
+	public function getContractAmcAssetDefaultEmployeeId($companyId, $contractAmcAssetId)
 	{
 		global $callConfig;
 		$contractAmcAssetId = (int) $contractAmcAssetId;
@@ -4228,7 +4227,7 @@ class reactClass extends userClass{
 		return (int) ($r['default_employee_id'] ?? 0);
 	}
 
-	function resolveEffectiveAmcEmployee($scheduleRow, $assetDefaultId, $empNameMap = array())
+	public function resolveEffectiveAmcEmployee($scheduleRow, $assetDefaultId, $empNameMap = array())
 	{
 		$schedule = (array) $scheduleRow;
 		$isOverride = (int) ($schedule['employee_is_override'] ?? 0) == 1;
@@ -4262,7 +4261,7 @@ class reactClass extends userClass{
 		);
 	}
 
-	function resolveAmcScheduleEmployeeOverrideFields($employeeId, $assetDefaultId, $resetToDefault = false)
+	public function resolveAmcScheduleEmployeeOverrideFields($employeeId, $assetDefaultId, $resetToDefault = false)
 	{
 		$employeeId = (int) $employeeId;
 		$assetDefaultId = (int) $assetDefaultId;
@@ -4284,7 +4283,7 @@ class reactClass extends userClass{
 		);
 	}
 
-	function propagateAssetDefaultEmployeeToPendingSchedules($companyId, $contractAmcAssetId, $employeeId, $userId = 0)
+	public function propagateAssetDefaultEmployeeToPendingSchedules($companyId, $contractAmcAssetId, $employeeId, $userId = 0)
 	{
 		global $callConfig;
 		$companyId = (int) $companyId;
@@ -4309,7 +4308,7 @@ class reactClass extends userClass{
 		return 1;
 	}
 
-	function propagateAssetDefaultToPendingSchedules($companyId, $contractAmcAssetId, $technicianId, $userId = 0)
+	public function propagateAssetDefaultToPendingSchedules($companyId, $contractAmcAssetId, $technicianId, $userId = 0)
 	{
 		global $callConfig;
 		$companyId = (int) $companyId;
@@ -4334,7 +4333,7 @@ class reactClass extends userClass{
 		return 1;
 	}
 
-	function getContractAmcTechnicianAssignments($get)
+	public function getContractAmcTechnicianAssignments($get)
 	{
 		global $callConfig;
 		$return = array('contract' => array(), 'locations' => array(), 'technicians' => array(), 'employees' => array(), 'service_mode' => 'vendor');
@@ -4440,7 +4439,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-	function getContractAmcChecklist($get)
+	public function getContractAmcChecklist($get)
 	{
 		global $callConfig;
 		$return = array(
@@ -4486,7 +4485,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-	function saveContractAmcChecklist($get, $post)
+	public function saveContractAmcChecklist($get, $post)
 	{
 		global $callConfig;
 		$return = array('status' => 'error', 'message' => 'Unable to save checklist');
@@ -4587,7 +4586,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-	function saveContractAmcAssetTechnicians($get, $post)
+	public function saveContractAmcAssetTechnicians($get, $post)
 	{
 		global $callConfig;
 		$return = array('status' => 'error', 'message' => 'Unable to save assignments');
@@ -4679,7 +4678,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-	function assignContractAmcTechnician($get, $post)
+	public function assignContractAmcTechnician($get, $post)
 	{
 		global $callConfig;
 		$return = array('status' => 'error', 'message' => 'Unable to assign');
@@ -4750,7 +4749,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-	function getDefaultContractAmcChecklistItems($company_id, $contract_id)
+	public function getDefaultContractAmcChecklistItems($company_id, $contract_id)
 	{
 		global $callConfig;
 		$items = array();
@@ -4775,7 +4774,7 @@ class reactClass extends userClass{
 		return $items;
 	}
 
-	function getContractAmcScheduleDetails($get)
+	public function getContractAmcScheduleDetails($get)
 	{
 		global $callConfig;
 		$return = array();
@@ -4870,7 +4869,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-	function isContractAmcChecklistComplete($company_id, $schedule_id, $contract_id)
+	public function isContractAmcChecklistComplete($company_id, $schedule_id, $contract_id)
 	{
 		global $callConfig;
 		$items = $this->getDefaultContractAmcChecklistItems($company_id, $contract_id);
@@ -4898,7 +4897,7 @@ class reactClass extends userClass{
 		return true;
 	}
 
-	function updateContractAmcScheduleDetails($get, $post)
+	public function updateContractAmcScheduleDetails($get, $post)
 	{
 		global $callConfig;
 		$return = array('status' => 'error', 'message' => 'Update failed');
@@ -5002,7 +5001,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-	function buildContractAmcDashboardWhere($get)
+	public function buildContractAmcDashboardWhere($get)
 	{
 		global $callConfig;
 		$companyId = (int) ($get['company_id'] ?? 0);
@@ -5019,13 +5018,13 @@ class reactClass extends userClass{
 		return $where;
 	}
 
-	function buildContractAmcDashboardJoin($get)
+	public function buildContractAmcDashboardJoin($get)
 	{
 		return "INNER JOIN contracts c ON c.id = s.contract_id AND c.company_id = s.company_id AND c.is_active = 0 AND c.is_amc_contract = 'Y' AND c.current_status = '" . ST_APPROVED . "'
 			LEFT JOIN contract_amc_assets ca ON ca.id = s.contract_amc_asset_id AND ca.company_id = s.company_id AND ca.is_active = 0";
 	}
 
-	function resolveContractAmcFmVisitStatus($row)
+	public function resolveContractAmcFmVisitStatus($row)
 	{
 		$row = is_object($row) ? (array) $row : (array) $row;
 		$fmConfirmed = trim((string) ($row['fm_confirmed_datetime'] ?? ''));
@@ -5046,7 +5045,7 @@ class reactClass extends userClass{
 		return array('code' => 'due', 'label' => 'Due', 'class' => 'bg-primary');
 	}
 
-	function enrichContractAmcFmVisitRow($row)
+	public function enrichContractAmcFmVisitRow($row)
 	{
 		global $callConfig;
 		$r = is_object($row) ? (array) $row : (array) $row;
@@ -5074,7 +5073,7 @@ class reactClass extends userClass{
 		return $r;
 	}
 
-	function hasContractAmcFmDashboardAccess($get)
+	public function hasContractAmcFmDashboardAccess($get)
 	{
 		global $callConfig;
 		$parties = $this->resolvePortalPartyIds($get);
@@ -5092,7 +5091,7 @@ class reactClass extends userClass{
 		return $row && (int) ($row->c ?? 0) > 0;
 	}
 
-	function getContractAmcFmDashboardSectionFilters()
+	public function getContractAmcFmDashboardSectionFilters()
 	{
 		$monthStart = date('Y-m-01');
 		$monthEnd = date('Y-m-t');
@@ -5103,7 +5102,7 @@ class reactClass extends userClass{
 		);
 	}
 
-	function buildContractAmcFmDashboardSearchWhere($search)
+	public function buildContractAmcFmDashboardSearchWhere($search)
 	{
 		global $callConfig;
 		$search = trim((string) $search);
@@ -5119,7 +5118,7 @@ class reactClass extends userClass{
 			. " OR DATE_FORMAT(s.planned_service_datetime, '%d/%m/%Y') LIKE {$like})";
 	}
 
-	function getContractAmcFmDashboardSection($get, $sectionKey, $page = 1, $search = '')
+	public function getContractAmcFmDashboardSection($get, $sectionKey, $page = 1, $search = '')
 	{
 		global $callConfig;
 		$empty = array(
@@ -5174,7 +5173,7 @@ class reactClass extends userClass{
 		);
 	}
 
-	function getContractAmcFmDashboardData($get)
+	public function getContractAmcFmDashboardData($get)
 	{
 		$return = array(
 			'has_access' => false,
@@ -5212,7 +5211,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-	function getContractAmcFmScheduleRow($get, $scheduleId)
+	public function getContractAmcFmScheduleRow($get, $scheduleId)
 	{
 		global $callConfig;
 		$scheduleId = (int) $scheduleId;
@@ -5233,7 +5232,7 @@ class reactClass extends userClass{
 		return $this->enrichContractAmcFmVisitRow($row);
 	}
 
-	function getContractAmcFmConfirmDetails($get)
+	public function getContractAmcFmConfirmDetails($get)
 	{
 		$scheduleId = (int) ($get['schedule_id'] ?? $get['id'] ?? 0);
 		$schedule = $this->getContractAmcFmScheduleRow($get, $scheduleId);
@@ -5246,7 +5245,7 @@ class reactClass extends userClass{
 		);
 	}
 
-	function canConfirmContractAmcFmVisit($get, $schedule)
+	public function canConfirmContractAmcFmVisit($get, $schedule)
 	{
 		if (($get['admin_type'] ?? '') == '1' || strtoupper($get['working_role_short_code'] ?? '') == 'CONTRACT_ADMIN') {
 			return true;
@@ -5259,7 +5258,7 @@ class reactClass extends userClass{
 		return in_array($connectId, (array) ($parties['customer_ids'] ?? array()));
 	}
 
-	function confirmContractAmcFmVisit($get, $post)
+	public function confirmContractAmcFmVisit($get, $post)
 	{
 		global $callConfig;
 		$return = array('status' => 'error', 'message' => 'Confirmation failed');
@@ -5328,7 +5327,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-	function resolvePortalPartyIds($get)
+	public function resolvePortalPartyIds($get)
 	{
 		global $callConfig;
 		$userId = (int) ($get['user_id'] ?? 0);
@@ -5356,7 +5355,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-	function getAmcPortalHomeData($get)
+	public function getAmcPortalHomeData($get)
 	{
 		$parties = $this->resolvePortalPartyIds($get);
 		$return = array(
@@ -5399,7 +5398,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-	function sendContractAmcNotification($get, $schedule, $type, $message, $reminderDay = null)
+	public function sendContractAmcNotification($get, $schedule, $type, $message, $reminderDay = null)
 	{
 		$schedule = (array) $schedule;
 		$contractId = (int) ($schedule['contract_id'] ?? 0);
@@ -5438,7 +5437,7 @@ class reactClass extends userClass{
 		$callConfig->insertRecord('contract_amc_notification_log', $log);
 	}
 
-	function runContractAmcReminderCron($get)
+	public function runContractAmcReminderCron($get)
 	{
 		global $callConfig;
 		$return = array('sent' => 0, 'skipped' => 0);
@@ -5484,7 +5483,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-	function runContractAmcEscalationCron($get)
+	public function runContractAmcEscalationCron($get)
 	{
 		global $callConfig;
 		$return = array('sent' => 0, 'skipped' => 0);
@@ -5528,7 +5527,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-	function getPpmInhouseReportData($get)
+	public function getPpmInhouseReportData($get)
 	{
 		global $callConfig;
 		$return = array(
@@ -5690,7 +5689,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-	function getVendorAmcTrackerReportData($get)
+	public function getVendorAmcTrackerReportData($get)
 	{
 		global $callConfig;
 		$return = array(
@@ -5935,7 +5934,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-	function buildVendorAmcFrequencyLabelMap($companyId)
+	public function buildVendorAmcFrequencyLabelMap($companyId)
 	{
 		global $callConfig;
 		$map = array();
@@ -5960,7 +5959,7 @@ class reactClass extends userClass{
 		return $map;
 	}
 
-	function vendorAmcFrequencyLabel($frequency, $labelMap = array())
+	public function vendorAmcFrequencyLabel($frequency, $labelMap = array())
 	{
 		$freq = $this->normalizeAmcServiceOn($frequency);
 		if (count((array)$labelMap) > 0 && isset($labelMap[$freq]) && $labelMap[$freq] != '') {
@@ -5979,7 +5978,7 @@ class reactClass extends userClass{
 		return $raw != '' ? $raw : '—';
 	}
 
-	function vendorAmcFiscalMonthKey($plannedDatetime, $fiscalStartYear)
+	public function vendorAmcFiscalMonthKey($plannedDatetime, $fiscalStartYear)
 	{
 		$plannedDatetime = trim((string) $plannedDatetime);
 		if ($plannedDatetime == '') {
@@ -6004,7 +6003,7 @@ class reactClass extends userClass{
 		return $month;
 	}
 
-	function vendorAmcFiscalStartYearFromDate($plannedDatetime)
+	public function vendorAmcFiscalStartYearFromDate($plannedDatetime)
 	{
 		$plannedDatetime = trim((string) $plannedDatetime);
 		if ($plannedDatetime == '') {
@@ -6022,7 +6021,7 @@ class reactClass extends userClass{
 		return $calYear - 1;
 	}
 
-	function vendorAmcScheduleFormatAssetLocation($assetName, $locationName, $assetCode = '', $assetDescription = '', $equipmentAssetNo = '', $categoryName = '')
+	public function vendorAmcScheduleFormatAssetLocation($assetName, $locationName, $assetCode = '', $assetDescription = '', $equipmentAssetNo = '', $categoryName = '')
 	{
 		$assetName = trim((string) $assetName);
 		$locationName = trim((string) $locationName);
@@ -6055,7 +6054,7 @@ class reactClass extends userClass{
 		return $displayName;
 	}
 
-	function vendorAmcScheduleReportTitle($categoryName, $fiscalStartYear)
+	public function vendorAmcScheduleReportTitle($categoryName, $fiscalStartYear)
 	{
 		$categoryName = trim((string) $categoryName);
 		$fiscalStartYear = (int) $fiscalStartYear;
@@ -6065,7 +6064,7 @@ class reactClass extends userClass{
 		return $categoryName . ' AMC Schedule-' . $fiscalStartYear . '-' . ($fiscalStartYear + 1);
 	}
 
-	function vendorAmcScheduleMonthLabel($monthKey)
+	public function vendorAmcScheduleMonthLabel($monthKey)
 	{
 		$monthKey = trim((string) $monthKey);
 		if ($monthKey == '') {
@@ -6078,7 +6077,7 @@ class reactClass extends userClass{
 		return date('F', $ts);
 	}
 
-	function vendorAmcScheduleBuildVisitColumnLayout($dateKeys)
+	public function vendorAmcScheduleBuildVisitColumnLayout($dateKeys)
 	{
 		$monthToDates = array();
 		if (count((array)$dateKeys) > 0) {
@@ -6135,7 +6134,7 @@ class reactClass extends userClass{
 		);
 	}
 
-	function vendorAmcScheduleMergeVisitCell($existing, $planned, $actualStart)
+	public function vendorAmcScheduleMergeVisitCell($existing, $planned, $actualStart)
 	{
 		$existing = is_array($existing) ? $existing : array('planned' => '', 'actual_start' => '');
 		$planned = trim((string) $planned);
@@ -6172,7 +6171,7 @@ class reactClass extends userClass{
 		);
 	}
 
-	function getVendorAmcScheduleReportData($get)
+	public function getVendorAmcScheduleReportData($get)
 	{
 		global $callConfig;
 		$return = array(
@@ -6344,7 +6343,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-	function getScheduleVisitPhase($scheduleRow)
+	public function getScheduleVisitPhase($scheduleRow)
 	{
 		$row = is_array($scheduleRow) ? $scheduleRow : (array) $scheduleRow;
 		$status = (int) ($row['visit_status'] ?? $row['current_status'] ?? 0);
@@ -6357,7 +6356,7 @@ class reactClass extends userClass{
 		return 'pending';
 	}
 
-	function getScheduleRepairEligibility($scheduleRow, $repairOrderRow)
+	public function getScheduleRepairEligibility($scheduleRow, $repairOrderRow)
 	{
 		$phase = $this->getScheduleVisitPhase($scheduleRow);
 		$hasRepair = count((array)$repairOrderRow) > 0 && !empty($repairOrderRow['id']);
@@ -6373,7 +6372,7 @@ class reactClass extends userClass{
 		return 'hidden';
 	}
 
-	function canSaveRepairOrderForSchedule($companyId, $scheduleId, $repairOrderId)
+	public function canSaveRepairOrderForSchedule($companyId, $scheduleId, $repairOrderId)
 	{
 		global $callConfig;
 		$companyId = (int) $companyId;
@@ -6399,7 +6398,7 @@ class reactClass extends userClass{
 		return array('ok' => true, 'message' => '', 'schedule' => $schedule);
 	}
 
-	function resolveContractFromAssetLocation($companyId, $assetId, $locationId)
+	public function resolveContractFromAssetLocation($companyId, $assetId, $locationId)
 	{
 		global $callConfig;
 		$companyId = (int) $companyId;
@@ -6428,7 +6427,7 @@ class reactClass extends userClass{
 		return is_array($row) ? $row : (array) $row;
 	}
 
-	function resolveContractFromAssetLocationApi($get)
+	public function resolveContractFromAssetLocationApi($get)
 	{
 		$assetId = (int) ($get['asset_id'] ?? 0);
 		$locationId = (int) ($get['location_id'] ?? 0);
@@ -6436,7 +6435,7 @@ class reactClass extends userClass{
 		return array('contract' => $row, 'found' => count((array)$row) > 0);
 	}
 
-	function getAmcContractSchedulesForAsset($get)
+	public function getAmcContractSchedulesForAsset($get)
 	{
 		global $callConfig;
 		$companyId = (int) ($get['company_id'] ?? 0);
@@ -6467,7 +6466,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-	function getRepairOrderByScheduleId($companyId, $scheduleId)
+	public function getRepairOrderByScheduleId($companyId, $scheduleId)
 	{
 		global $callConfig;
 		$companyId = (int) $companyId;
@@ -6484,7 +6483,7 @@ class reactClass extends userClass{
 		return is_array($row) ? $row : (array) $row;
 	}
 
-	function getRepairOrderLines($companyId, $repairOrderId)
+	public function getRepairOrderLines($companyId, $repairOrderId)
 	{
 		global $callConfig;
 		$companyId = (int) $companyId;
@@ -6511,7 +6510,7 @@ class reactClass extends userClass{
 		return $out;
 	}
 
-	function getRepairOrderBundleForSchedule($companyId, $scheduleId, $scheduleRow)
+	public function getRepairOrderBundleForSchedule($companyId, $scheduleId, $scheduleRow)
 	{
 		$repairOrder = $this->getRepairOrderByScheduleId($companyId, $scheduleId);
 		$lines = array();
@@ -6526,7 +6525,7 @@ class reactClass extends userClass{
 		);
 	}
 
-	function generateRepairOrderTransactionNo($companyId)
+	public function generateRepairOrderTransactionNo($companyId)
 	{
 		global $callConfig;
 		$companyId = (int) $companyId;
@@ -6536,7 +6535,7 @@ class reactClass extends userClass{
 		return 'RO-' . $year . '-' . sprintf('%05d', $seq);
 	}
 
-	function createRepairOrderApprovalLog($get, $repairOrderId, $repairDate)
+	public function createRepairOrderApprovalLog($get, $repairOrderId, $repairDate)
 	{
 		global $callConfig;
 		$moduleId = (int) ($get['module_id'] ?? $_SESSION['module'] ?? 0);
@@ -6553,7 +6552,7 @@ class reactClass extends userClass{
 		return $callConfig->insertRecord('transaction_approval_logs', $insert_array);
 	}
 
-	function validateRepairOrderLineAssets($companyId, $contractId, $lines)
+	public function validateRepairOrderLineAssets($companyId, $contractId, $lines)
 	{
 		$assets = $this->getAmcRepairOrderContractAssetsData($companyId, $contractId);
 		$allowedAssetIds = array();
@@ -6573,7 +6572,7 @@ class reactClass extends userClass{
 		}
 		return array('ok' => true, 'message' => '');
 	}
-	function validateRepairOrderLineItems($companyId, $lines)
+	public function validateRepairOrderLineItems($companyId, $lines)
 	{
 		global $callConfig;
 		$companyId = (int) $companyId;
@@ -6598,7 +6597,7 @@ class reactClass extends userClass{
 		}
 		return array('ok' => true, 'message' => '');
 	}
-	function getAmcRepairOrderItemsData($companyId)
+	public function getAmcRepairOrderItemsData($companyId)
 	{
 		global $callConfig;
 		$companyId = (int) $companyId;
@@ -6619,7 +6618,7 @@ class reactClass extends userClass{
 		return $items;
 	}
 
-	function getAmcRepairOrderContractAssetsData($companyId, $contractId)
+	public function getAmcRepairOrderContractAssetsData($companyId, $contractId)
 	{
 		global $callConfig;
 		$companyId = (int) $companyId;
@@ -6659,13 +6658,13 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-	function getAmcRepairOrderContractAssets($get)
+	public function getAmcRepairOrderContractAssets($get)
 	{
 		$contractId = (int) ($get['contract_id'] ?? 0);
 		return $this->getAmcRepairOrderContractAssetsData($get['company_id'], $contractId);
 	}
 
-	function buildAmcRepairOrderScheduleSummary($get, $scheduleId, $schedule = array(), $detail = array())
+	public function buildAmcRepairOrderScheduleSummary($get, $scheduleId, $schedule = array(), $detail = array())
 	{
 		global $callConfig;
 		$scheduleId = (int) $scheduleId;
@@ -6710,14 +6709,14 @@ class reactClass extends userClass{
 		);
 	}
 
-	function getAmcRepairOrderScheduleDetailsGet($get, $scheduleId)
+	public function getAmcRepairOrderScheduleDetailsGet($get, $scheduleId)
 	{
 		$scheduleGet = array_merge((array) $get, array('schedule_id' => (int) $scheduleId));
 		unset($scheduleGet['id'], $scheduleGet['repair_order_id']);
 		return $this->getContractAmcScheduleDetails($scheduleGet);
 	}
 
-	function getAmcRepairOrderFormData($get)
+	public function getAmcRepairOrderFormData($get)
 	{
 		global $callConfig;
 		$companyId = (int) ($get['company_id'] ?? 0);
@@ -6834,7 +6833,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-	function getAmcRepairOrdersList($get)
+	public function getAmcRepairOrdersList($get)
 	{
 		global $callConfig;
 		$companyId = (int) ($get['company_id'] ?? 0);
@@ -6854,7 +6853,7 @@ class reactClass extends userClass{
 		return array('rows' => $callConfig->getAllRows($sql));
 	}
 
-	function saveAmcRepairOrder($get, $post)
+	public function saveAmcRepairOrder($get, $post)
 	{
 		global $callConfig;
 		$return = array('status' => 'error', 'message' => 'Save failed');
@@ -7037,7 +7036,7 @@ class reactClass extends userClass{
 		$return['lines'] = $this->getRepairOrderLines($companyId, $repairOrderId);
 		return $return;
 	}
-	function getAmcComplaintsDetails($get)
+	public function getAmcComplaintsDetails($get)
 	{
 		global $callConfig;
 		$return = array();
@@ -7112,7 +7111,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-	function getAmcComplaintsListDetails($get)
+	public function getAmcComplaintsListDetails($get)
 	{
 		global $callConfig;
 		$return = array();
@@ -7185,7 +7184,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-	function getAmcComplaintsReportData($get)
+	public function getAmcComplaintsReportData($get)
 	{
 		global $callConfig;
 		$return = array();
@@ -7247,7 +7246,7 @@ class reactClass extends userClass{
 
 	// koti start
 
-	function getAmcAdminLandingDashboardData($get)
+	public function getAmcAdminLandingDashboardData($get)
 	{
 		
 		
@@ -7475,7 +7474,7 @@ class reactClass extends userClass{
 		);
 	}
 
-	function getAmcAdminLandingContractsPopupList($get)
+	public function getAmcAdminLandingContractsPopupList($get)
 	{
 		global $callConfig;	
 		$return = array('contracts' => array(), 'total' => 0);
@@ -8168,7 +8167,7 @@ class reactClass extends userClass{
 		return array_values(array_filter(array_unique($allowedContractIds)));
 	}
 
-	function getAmcAdminLandingVisitsList($get)
+	public function getAmcAdminLandingVisitsList($get)
 	{
 		global $callConfig;
 		$section = strtolower(trim((string) ($get['section'] ?? 'overdue')));
@@ -8254,7 +8253,7 @@ class reactClass extends userClass{
 	}
 
 
-	function buildAmcAdminLandingComplaints($get)
+	public function buildAmcAdminLandingComplaints($get)
 	{
 		global $callConfig;
 		//return $get;
@@ -8395,7 +8394,7 @@ class reactClass extends userClass{
 
 
 
-	function generateContractsExcelTemplate($get, $post = array())
+	public function generateContractsExcelTemplate($get, $post = array())
 	{
 		global $callConfig;
 		require_once dirname(__DIR__) . '/includes/contracts_excel_helper.php';
@@ -8591,7 +8590,7 @@ class reactClass extends userClass{
 		);
 	}
 
-	function validateContractsExcel($get, $post)
+	public function validateContractsExcel($get, $post)
 	{
 		global $callConfig;
 		//return $get;
@@ -8667,7 +8666,7 @@ class reactClass extends userClass{
 			'valid_import_refs' => $validation['valid_import_refs'],
 		);
 	}
-	function importInsertContractReact($get, $post)
+	public function importInsertContractReact($get, $post)
     {
         global $callConfig;
         $return = array();
@@ -8804,7 +8803,7 @@ class reactClass extends userClass{
  
         return $return;
     }
-	function importContractsExcel($get, $post)
+	public function importContractsExcel($get, $post)
 	{
 		global $callConfig;
 		//print_r($get); exit;
@@ -8911,7 +8910,7 @@ class reactClass extends userClass{
 
 	}
 
-	function getContractsExcelBatch($get, $post = array())
+	public function getContractsExcelBatch($get, $post = array())
 	{
 		global $callConfig;
 		$companyId = (int) ($get['company_id'] ?? 0);
@@ -9838,7 +9837,7 @@ class reactClass extends userClass{
 
 		return $payload;
 	}
-	function getusercontracttypelist($get)
+	public function getusercontracttypelist($get)
 	{
 		global $callConfig;
 		$return = array('types' => array());

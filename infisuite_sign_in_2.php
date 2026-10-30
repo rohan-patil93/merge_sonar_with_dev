@@ -48,9 +48,9 @@
             <div class="login_left text-center" style="">
                 <div class="ps-5 mob-pd">
 				    <!--  <div class="text-center d-block">
-					   <img class="img-100 mt-3" src="<?php echo $image; ?>">
+					   <img class="img-100 mt-3" src="<?php echo $image; ?>" alt="" >
 				    </div> -->
-                    <!-- <img class=" img-vector"  src="assets/images/sign-in/seating_image.png" style="width: 460px;"> -->
+                    <!-- <img class=" img-vector"  src="assets/images/sign-in/seating_image.png" style="width: 460px;" alt="" > -->
                     <!-- <div class="mt-2 text-center">
                         <p class="f-14 text-muted p-2 m-l-30 m-r-30 margin-0">1. Cubicle management system streamlines workspace allocation by enabling administrators to assign cubicles to employees efficiently. It also allows for the assignment of necessary equipment, ensuring each workspace is fully equipped and ready for use. This system enhances organization and maximizes resource utilization.</p>
                     </div> -->
@@ -61,7 +61,7 @@
                     <div class="card mb-0" style="min-height: auto;">
                         <div class="card-body pw-5">
                             <div class="p-3 custom-login-on mob-pd">
-                                <img class="mt-3 mb-3" src="<?php echo $image; ?>">
+                                <img class="mt-3 mb-3" src="<?php echo $image; ?>" alt="" >
                                 <h2 class="f-26 f-w-600 mt-2">Welcome Back</h2>
 								<?php 
                                 if($error !='') { 
@@ -89,7 +89,7 @@
                                             <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="password" name="chrPassword" required="" placeholder="Password">
                                         </div>
                                         <?php if(CAPTCHA_YES_NO == 'YES'){ ?> 
-                                        <center><img style="height: 50px;" src="captcha/captcha.php" /></center>
+                                        <center><img style="height: 50px;" src="captcha/captcha.php" alt="" /></center>
                                         <div class="form-group form-primary login-mean-class" >
                                             <input type="text" class="form-control" name="captcha" placeholder="Enter Captcha" required="required"/>
                                         </div>
@@ -108,7 +108,7 @@
                             </div>
 							<div class="p-5 regsterform" style="display:none">
 							    <form class="md-float-material form-material" action="" method="post" >
-                                    <img class="img-100 mt-0 rentalji" src="<?php echo $image; ?>">
+                                    <img class="img-100 mt-0 rentalji" src="<?php echo $image; ?>" alt="" >
 								    <h2 class="f-26 f-w-600 mt-4">Sign Up</h2>
                               
                                     <div class="text-left mt-4">
@@ -135,7 +135,7 @@
                             </div>
                             <div class="p-5 forgotpasswordon mt-5" style="display:none">
 							    <form class="md-float-material form-material" action="" method="post" >
-                                    <img class="mt-3 mb-3" src="<?php echo $image; ?>">
+                                    <img class="mt-3 mb-3" src="<?php echo $image; ?>" alt="" >
                                     <div class="">
                                         <h2 class="f-26 f-w-600 mt-2">Forgot Password</h2>
                                         <p class="text-muted f-14 f-w-600">Enter your email to reset your password.</p>

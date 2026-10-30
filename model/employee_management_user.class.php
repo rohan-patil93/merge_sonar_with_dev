@@ -3,7 +3,7 @@ require_once "dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
 use Dompdf\Options; 
 class employeeManagementUserClass extends userClass{
-	function getEMAminDashboard($get){
+	public function getEMAminDashboard($get){
         global $callConfig;
         $return = array();
         $return['get'] = $get;
@@ -45,7 +45,7 @@ class employeeManagementUserClass extends userClass{
 
         return $return;
     }   
-    function getEMTaskAssigneList($get){
+    public function getEMTaskAssigneList($get){
         global $callConfig;
         $return = array();
         $return['get'] = $get;
@@ -191,7 +191,7 @@ class employeeManagementUserClass extends userClass{
         //print_r($return);
         return $return;  
     }
-    function assigntasktoemployeesmanagement($get, $post){
+    public function assigntasktoemployeesmanagement($get, $post){
         global $callConfig;
         $return = array();
         $return['get'] = $get;
@@ -208,7 +208,7 @@ class employeeManagementUserClass extends userClass{
         }
         return $return;  
     }
-    function getEMTaskSendForApprove($get){
+    public function getEMTaskSendForApprove($get){
         global $callConfig;
         $return = array();
         $return['get'] = $get;
@@ -224,7 +224,7 @@ class employeeManagementUserClass extends userClass{
         $return['transaction_activity_schedule'] = $taskactivityres;
         return $return;   
     }
-    function updateSendVerificationDocuments($get,$post){
+    public function updateSendVerificationDocuments($get,$post){
         global $callConfig;
         $return = array();
         $transaction_table = $post['transaction_table'];
@@ -249,7 +249,7 @@ class employeeManagementUserClass extends userClass{
         return $post;
     }
     /**
-    function updateOnBoardingTaskStatus($post){
+    public function updateOnBoardingTaskStatus($post){
         global $callConfig;
         $return = array();
         $return['get'] = $post;
@@ -280,7 +280,7 @@ class employeeManagementUserClass extends userClass{
         return $return;
     }       
 //End marge user class -- 2023-08-25
-    function getVendorsDetails($get){
+    public function getVendorsDetails($get){
         global $callConfig;
         $return = array();
         $return['get']= $get;
@@ -423,7 +423,7 @@ class employeeManagementUserClass extends userClass{
         return $return;
     }
 
-    function getVendorsDetails($get){
+    public function getVendorsDetails($get){
         global $callConfig;
         $return = array();
         $return['get']= $get;

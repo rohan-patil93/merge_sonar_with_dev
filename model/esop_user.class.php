@@ -1,6 +1,6 @@
 <?php 
 class esopUserClass extends userClass{
-	function insertCompanyValuations($post){
+	public function insertCompanyValuations($post){
 		global $callConfig;
 		//$return['post'] = $post;
 		$insertary=array('company_id'=>$post['company_id'],'valuation_name'=>$post['valuation_name'],'valuation_date'=>$this->dateconvertdbformat($post['valuation_date']),'company_value'=>$post['company_value'],'old_share_qty'=>$post['old_share_qty'],'valuation_shareholding'=>$post['valuation_shareholding'],'new_share_qty'=>$post['new_share_qty'],'total_share_qty'=>$post['total_share_qty'],'per_share_value'=>$post['per_share_value'],'notes'=>$post['notes']);
@@ -59,7 +59,7 @@ class esopUserClass extends userClass{
 		}
 		return $return;
 	}
-	function getCompanyValuations($get){
+	public function getCompanyValuations($get){
 		global $callConfig;
 		$return = array();
 
@@ -105,7 +105,7 @@ class esopUserClass extends userClass{
     	$return['last_valuation_total_share'] = $lastvaluationtotalshare;
     	return $return;
 	}
-	function insertESOPPlans($post){
+	public function insertESOPPlans($post){
 		global $callConfig;
 		$select_company_valuation = $post['select_company_valuation'];
 		$explodevaluation = explode("||",$select_company_valuation);
@@ -161,7 +161,7 @@ class esopUserClass extends userClass{
 		}
 		return $return;
 	}
-	function geteSopPlans($get){
+	public function geteSopPlans($get){
 		global $callConfig;
 		$return = array();
 
@@ -178,7 +178,7 @@ class esopUserClass extends userClass{
     	$return['esop_plan_buckets'] = $esopplansres;
     	return $return;
 	}
-	function getESOPAllocations($get){
+	public function getESOPAllocations($get){
 		global $callConfig;
 		$return = array();
 
@@ -239,7 +239,7 @@ class esopUserClass extends userClass{
 		}
     	return $return;
 	}
-	function insertESOPAllocations($post){
+	public function insertESOPAllocations($post){
 		global $callConfig;
 		$explname = explode(" ",$post['emp_name']);
 		$auquery = "SELECT id FROM application_users where company_id = '".$post['company_id']."' AND user_email ='".trim($post['user_email'])."' AND is_active = 0 ";
@@ -339,7 +339,7 @@ class esopUserClass extends userClass{
 	}
 
 
-	function getESOPReports($get){
+	public function getESOPReports($get){
 		global $callConfig;
 		if($get['type']=="ALL"){
 
@@ -414,7 +414,7 @@ class esopUserClass extends userClass{
 
     	return $return;
 	}
-	function getESOPAdminDashboard($get){
+	public function getESOPAdminDashboard($get){
 		global $callConfig;
 
 		if($get['result_type']== "USER"){
@@ -514,7 +514,7 @@ class esopUserClass extends userClass{
 	    }	
     	return $return;
 	}
-	function getValuationReport($get){
+	public function getValuationReport($get){
 		global $callConfig;
 		
 		$company_contribution_userssql = "SELECT id, display_name FROM company_contribution_users WHERE company_id = '".$get['company_id']."' AND is_active=0";
@@ -536,7 +536,7 @@ class esopUserClass extends userClass{
     	return $return;
 
 	}
-	function getESOPDetails($get){
+	public function getESOPDetails($get){
 		global $callConfig;
 		
 		// $esop_planscntsql = "SELECT count(*) as esop_cnt, SUM(share) as total_share_cnt, (SELECT SUM(epb.allocated_shares) FROM esop_plan_buckets epb WHERE ep.company_id = epb.company_id AND ep.is_active = epb.is_active) as allocated_shares_cnt FROM esop_plans ep WHERE ep.company_id = '".$get['company_id']."' AND ep.is_active=0";

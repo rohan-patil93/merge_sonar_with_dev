@@ -4,7 +4,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;		
 */
 class attendanceUserClass extends userClass{
-	function attendaceswdatainsert_new($get, $post){
+	public function attendaceswdatainsert_new($get, $post){
 
 		global $callConfig;
 		$insert = array();
@@ -89,7 +89,7 @@ class attendanceUserClass extends userClass{
 			// print_r($get); print_r($insert_array); print_r($data); exit;
 		return $insert;
 	}
-	function attendaceswdatainsert($get, $post){
+	public function attendaceswdatainsert($get, $post){
 		global $callConfig;
 		//$insert = $callConfig->insertRecord('sw_attendance_data',$post);		
 		$data = json_decode($post['data'],1);
@@ -111,7 +111,7 @@ class attendanceUserClass extends userClass{
 	}
 
 	/* Dum table view */
-    function getEmployeeDailyAttendanceSummary($get){
+    public function getEmployeeDailyAttendanceSummary($get){
         global $callConfig;
 
         $company_id = isset($get['company_id']) ? (int)$get['company_id'] : 0;
@@ -447,7 +447,7 @@ class attendanceUserClass extends userClass{
             'attendance_data' => $grid_rows
         );
     }
-    function saveEmployeeBiometricRawData($get, $post){
+    public function saveEmployeeBiometricRawData($get, $post){
         global $callConfig;
         $payload = isset($post['data']) ? trim((string)$post['data']) : '';
         if ($payload === '') {
@@ -485,7 +485,7 @@ class attendanceUserClass extends userClass{
         );
     }
 
-    function getPullEmployeeAttendanceKey($company_id, $emp_id, $clock_in, $clock_out, $clock_in_date, $clock_out_date) {
+    public function getPullEmployeeAttendanceKey($company_id, $emp_id, $clock_in, $clock_out, $clock_in_date, $clock_out_date) {
         global $callConfig;
 
         if (($clock_in == null || $clock_in == '') && ($clock_out == null || $clock_out == '')) {
@@ -564,7 +564,7 @@ class attendanceUserClass extends userClass{
         return $key;
     }
 
-    function savePullEmployeeAttendance($get, $post) {
+    public function savePullEmployeeAttendance($get, $post) {
         global $callConfig;
 
         $company_id = isset($get['company_id']) ? (int)$get['company_id'] : 0;
@@ -834,7 +834,7 @@ class attendanceUserClass extends userClass{
         );
     }
 
-    function toCallPullEmployeeAttendance($get) {
+    public function toCallPullEmployeeAttendance($get) {
         global $callConfig;
 
         $completed_ids = array();
@@ -873,7 +873,7 @@ class attendanceUserClass extends userClass{
             'result' => $result
         );
     }
-    function getBiometricMachineLastUsedReport($get){
+    public function getBiometricMachineLastUsedReport($get){
         global $callConfig;
         $company_id = isset($get['company_id']) ? (int)$get['company_id'] : 0;
         $machine_number = isset($get['machine_number']) ? trim((string)$get['machine_number']) : '';
@@ -959,7 +959,7 @@ class attendanceUserClass extends userClass{
         );
     }
 
-    function fixWrongInPullEmployeeAttendance($get){
+    public function fixWrongInPullEmployeeAttendance($get){
         global $callConfig; 
         $company_id = isset($get['company_id']) ? (int)$get['company_id'] : 0;
         $user_id    = isset($get['user_id']) ? (int)$get['user_id'] : 0; 
@@ -1259,7 +1259,7 @@ class attendanceUserClass extends userClass{
 
     }
 
-    function updateAttendanceDataoOfThreeBiometricMachines($get){
+    public function updateAttendanceDataoOfThreeBiometricMachines($get){
         global $callConfig;
         $company_id = isset($get['company_id']) ? (int)$get['company_id'] : 0;
         $clock_in_start = '2026-06-30';
@@ -1421,7 +1421,7 @@ class attendanceUserClass extends userClass{
             'result' => $insert
         );
     }
-    function torunnewattendancecodes($get){
+    public function torunnewattendancecodes($get){
  
         global $callConfig;
         //echo "<pre>"; print_r($get); exit;

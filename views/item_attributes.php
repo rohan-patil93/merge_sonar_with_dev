@@ -150,7 +150,7 @@ $itemAttributesDisplayType = itemAttributesDisplayType();
                                                 </div>
                                             </div>
 
-                                            <?php echo dates(); ?>
+                                            <?php dates(); ?>
                                             <div class="form-group  row">
                                                 <span class="col-xl-3 col-lg-3 col-sm-12">Status</span>
                                                 <div class="col-lg-9 col-xl-6">

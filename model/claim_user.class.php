@@ -1,6 +1,6 @@
 <?php 
 class claimUserClass extends userClass{
-		function getReimbursementDashboard($get){
+		public function getReimbursementDashboard($get){
 			global $callConfig;
 			$returnarray = array();
 			$employee_id = $get['emp_id'];
@@ -105,7 +105,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 			 //print_r($returnarray);
 			return $returnarray;
 		}
-		function getReimbursementDashboardChart($get){
+		public function getReimbursementDashboardChart($get){
 			global $callConfig;
 			$exploderole = explode(',', $get['roleshortcode']);
 			//if(!in_array(CLAIM_EXECUTIVE_ROLE, $exploderole)){
@@ -148,7 +148,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 
 
 
-		function getReimbursementPaymentDashboard($get){
+		public function getReimbursementPaymentDashboard($get){
 			global $callConfig;
 			$returnarray = array();
 			$employee_id = $get['emp_id'];
@@ -235,7 +235,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 			 //print_r($returnarray);
 			return $returnarray;
 		}
-	function getEmpExpenses($get){
+	public function getEmpExpenses($get){
 		global $callConfig;
 		$return = array();
 		$return['get'] = $get;
@@ -345,7 +345,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 		return $return;
 	}
 
-	function togetemployeetripsbyuser($get){
+	public function togetemployeetripsbyuser($get){
         global $callConfig;
         $query = "SELECT  `id`, `user_id`, `transaction_no`, `transaction_date`, `trip_name`, `trip_type`, `trip_purpose`, `project_id`, `customer_id`, `budget_amount`, `final_amount`, `is_active`, `current_status`, ( SELECT exp.id FROM emp_expenses exp WHERE exp.trip_id=tp.id AND exp.is_active=0 LIMIT 1) as exp_id FROM trips tp WHERE company_id = ".$get['company_id']." AND user_id =".$get['user_id']." AND is_active =0 ORDER BY id DESC";
         //echo $query;
@@ -364,7 +364,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
         return $return;
     }	
 
-    function togetinprocesstripdetails($get){
+    public function togetinprocesstripdetails($get){
         global $callConfig;
         $return = array();
         $cities_arr = array();
@@ -461,7 +461,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
         $return['trip_types'] = $res;
         return $return;
     }  
-    function insertEMPExpenses($get,$post){
+    public function insertEMPExpenses($get,$post){
     	global $callConfig;
     	$return = array();
     	$fieldnames=array('company_id'=>$post['company_id'],'user_id'=>$post['user_id'],'emp_id'=>$post['emp_id'],'trip_id'=>$post['trip_id'],'expense_code'=>$post['expense_code'],'amount'=>$post['parent_amount'],'tax_amount'=>$post['parent_tax_amount'],'total_amount'=>$post['parent_total_amount'],'pending_amount'=>$post['parent_total_amount'],'cost_center_id'=>$post['cost_center_id']);
@@ -535,7 +535,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 		}		
 	 	return $return;
     }
-    function getReimbursementPolicies($get){
+    public function getReimbursementPolicies($get){
     	global $callConfig;
     	$return = array();
 
@@ -576,7 +576,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 
     	return $return;
     }
-    function getUserReimbursementPolicies($get,$data){
+    public function getUserReimbursementPolicies($get,$data){
 		global $callConfig;
 		$data = $data['where'];
 		$condition = "";
@@ -605,7 +605,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 
 		return $return;
 	}
-	function getTrevllingPlanData($get){
+	public function getTrevllingPlanData($get){
         global $callConfig;
         $return = array();
         $cities_arr = array();
@@ -694,7 +694,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
         return $return;
 
     }
-    function insertAndUpdateTrevllingPlans($get, $post){
+    public function insertAndUpdateTrevllingPlans($get, $post){
         global $callConfig;
         $return = array();
         $now        = date('Y-m-d H:i:s');
@@ -706,7 +706,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
             return true;
         };
 
-        function non_empty_rows(array $rows, array $required, callable $rowEmpty): array
+        public function non_empty_rows(array $rows, array $required, callable $rowEmpty): array
         {
             return array_values(array_filter($rows, fn($r) => !$rowEmpty($r, $required)));
         }

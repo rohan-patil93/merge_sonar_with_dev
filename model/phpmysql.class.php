@@ -6,7 +6,7 @@ class phpMysqlClass{
 	 * Allows only an authenticated session whose role list contains SUPERADMIN_ROLE;
 	 * anything else gets HTTP 403 and the request is terminated.
 	 */
-	static function requireSuperAdmin(){
+	static public function requireSuperAdmin(){
 		if(session_status() !== PHP_SESSION_ACTIVE && !headers_sent()){
 			session_start();
 		}
@@ -21,7 +21,7 @@ class phpMysqlClass{
 			exit;
 		}
 	}
-	function getPHPMYSQLDetails($post){
+	public function getPHPMYSQLDetails($post){
 		global $callConfig;
 		$return = array();
 		$table_list = array();
@@ -34,7 +34,7 @@ class phpMysqlClass{
 		$return['table_list'] = $table_list;
 		return $return; 
 	}
-	function postPHPMYSQLDetails($get,$post){
+	public function postPHPMYSQLDetails($get,$post){
 		global $callConfig;
 		$return['post'] = $post;
     	$sql_textarea = $post['sql_textarea'];
@@ -95,7 +95,7 @@ class phpMysqlClass{
     	
 		return $return; 
 	}
-	function getfieldlist($get){
+	public function getfieldlist($get){
 		global $callConfig;
 		$return = array();
 		if($get['table_name'] !=""){
@@ -105,7 +105,7 @@ class phpMysqlClass{
 		}
 		return $return; 
 	}
-	function exicutePHPMYSQL(){
+	public function exicutePHPMYSQL(){
 		global $callConfig;
 		$return = array();
 		$exicute_sql_textarea = $_POST['exicute_sql_textarea'] ?? '';

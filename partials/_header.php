@@ -531,7 +531,7 @@
                           <?php 
                           $dis_name = $_SESSION['user']['display_name']!=""?$_SESSION['user']['display_name']:$_SESSION['display_name'];
                         if($_SESSION['user']['user_photo']!=""){ ?>
-                           <img src="<?php echo "uploads/all/".$_SESSION['user']['user_photo']; ?>" class="img-radius img-50 align-top m-r-15  mt-3" alt="User-Profile-Image">
+                           <img src="<?php echo "uploads/all/".$_SESSION['user']['user_photo']; ?>" class="img-radius img-50 align-top m-r-15  mt-3" alt="User-Profile-Image" >
                        <?php }elseif($_SESSION['employee']['gender'] !=""){ ?>
                                 <img src="uploads/all/<?php echo $_SESSION['employee']['gender'].".png"; ?>" class="img-radius img-50 align-top m-r-15  mt-3" alt="image" />
                         <?php }else{ ?>
@@ -597,7 +597,7 @@
         <div class="dropdown-primary dropdown">
             <div class="dropdown-toggle" data-bs-toggle="dropdown">
                 <!-- <i class="ti-view-grid"></i> -->
-                <img src="assets/images/favicon.ico" class="img-30">
+                <img src="assets/images/favicon.ico" class="img-30" alt="" >
             </div>
             <div class="show-notification notification-view dropdown-menu pt-0 pb-0" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" 
                 style="">
@@ -685,7 +685,7 @@
                             ?>
                         <div class="col-lg-3 p-1 border" style="<?php echo $style;?> " <?php echo $modultitle; ?>  onclick="<?php echo $modulfunction;?>">
                             <?php echo $icon; ?>
-                            <img src="uploads/all/<?php echo $module_list['module_logo']; ?>" class="img-40" > 
+                            <img src="uploads/all/<?php echo $module_list['module_logo']; ?>" class="img-40" alt="" > 
                             <h5 class=" f-12"><?php echo $module_list['module_name']; ?></h5>
                         </div>
                     <?php } } ?>
@@ -711,7 +711,7 @@ if($_SESSION['user_activated'] == 'Y'){ ?>
     <li class="nav-item has-megamenu">
     <a class="nav-link  text-primary f-w-600" href="index.php" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $_SESSION['module_setp'][$_SESSION['work_module_setup_id']]['module_name'];?> Home"> 
        <!-- <i class="ti-home btn waves-effect waves-light btn-success btn-icon"></i>  -->
-       <img src="uploads/all/<?php echo $_SESSION['module_setp'][$_SESSION['work_module_setup_id']]['module_logo'];?>" class="img-40">
+       <img src="uploads/all/<?php echo $_SESSION['module_setp'][$_SESSION['work_module_setup_id']]['module_logo'];?>" class="img-40" alt="" >
 
     </a>
     </li>
@@ -969,7 +969,7 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
                 <div class="main-friend-list">
                     <div class="media userlist-box waves-effect waves-light" data-id="1" data-status="online" data-username="Josephin Doe">
                         <a class="media-left" href="#!">
-                            <img class="media-object img-radius img-radius" src="../files/assets/images/avatar-3.jpg" alt="Generic placeholder image ">
+                            <img class="media-object img-radius img-radius" src="../files/assets/images/avatar-3.jpg" alt="Generic placeholder image " >
                             <div class="live-status bg-success"></div>
                         </a>
                         <div class="media-body">
@@ -978,7 +978,7 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
                     </div>
                     <div class="media userlist-box waves-effect waves-light" data-id="2" data-status="online" data-username="Lary Doe">
                         <a class="media-left" href="#!">
-                            <img class="media-object img-radius" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder image">
+                            <img class="media-object img-radius" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder image" >
                             <div class="live-status bg-success"></div>
                         </a>
                         <div class="media-body">
@@ -987,7 +987,7 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
                     </div>
                     <div class="media userlist-box waves-effect waves-light" data-id="3" data-status="online" data-username="Alice">
                         <a class="media-left" href="#!">
-                            <img class="media-object img-radius" src="../files/assets/images/avatar-4.jpg" alt="Generic placeholder image">
+                            <img class="media-object img-radius" src="../files/assets/images/avatar-4.jpg" alt="Generic placeholder image" >
                             <div class="live-status bg-success"></div>
                         </a>
                         <div class="media-body">
@@ -996,7 +996,7 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
                     </div>
                     <div class="media userlist-box waves-effect waves-light" data-id="4" data-status="offline" data-username="Alia">
                         <a class="media-left" href="#!">
-                            <img class="media-object img-radius" src="../files/assets/images/avatar-3.jpg" alt="Generic placeholder image">
+                            <img class="media-object img-radius" src="../files/assets/images/avatar-3.jpg" alt="Generic placeholder image" >
                             <div class="live-status bg-default"></div>
                         </a>
                         <div class="media-body">
@@ -1005,7 +1005,7 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
                     </div>
                     <div class="media userlist-box waves-effect waves-light" data-id="5" data-status="offline" data-username="Suzen">
                         <a class="media-left" href="#!">
-                            <img class="media-object img-radius" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder image">
+                            <img class="media-object img-radius" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder image" >
                             <div class="live-status bg-default"></div>
                         </a>
                         <div class="media-body">
@@ -1030,7 +1030,7 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
         <div class="d-flex chat-messages">
             <a class="media-left photo-table" href="#!">
                 <div class="flex-shrink-0">
-                    <img class="media-object img-radius img-radius m-t-5" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder image">
+                    <img class="media-object img-radius img-radius m-t-5" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder image" >
                 </div>
             </a>
             <div class="flex-grow-1 chat-menu-content">
@@ -1051,7 +1051,7 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
         <div class="d-flex chat-messages">
             <a class="media-left photo-table" href="#!">
                 <div class="flex-shrink-0">
-                    <img class="media-object img-radius img-radius m-t-5" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder image">
+                    <img class="media-object img-radius img-radius m-t-5" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder image" >
                 </div>
             </a>
             <div class="media-body chat-menu-content">

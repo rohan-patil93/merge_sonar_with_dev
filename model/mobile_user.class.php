@@ -1,7 +1,7 @@
 <?php 
 class mobileUserClass extends userClass{
 
-	function togetconfigmobiledata($get){
+	public function togetconfigmobiledata($get){
 		global $callConfig;
 
 		$configsql = "SELECT name, display_logo, default_bank_account_id,number_format, date_separator, date_format,pan_number,phone_number, gst_number, billing_address, contact_address, attendance_enable_clock, shift_mode  FROM config WHERE company_id = '".$get['company_id']."' AND is_active =0";
@@ -188,14 +188,14 @@ class mobileUserClass extends userClass{
 	    $return['config'] = $configres;
 		return $return;
 	}
-	function togetmoduleuserroleslist($get){
+	public function togetmoduleuserroleslist($get){
 		global $callConfig;
 		$query = "SELECT aur.user_id, aur.role_short_code, ar.display_name AS role_display_name FROM application_user_module_roles aur INNER JOIN application_roles ar ON aur.company_id = ar.company_id AND aur.role_short_code = ar.role_short_code WHERE aur.company_id = ".$get['company_id']." AND aur.user_id = ".$get['user_id']." AND aur.application_module_id = ".$get['module_id']." AND aur.is_active = 0 AND ar.is_active = 0";
 		//$return['data_query'] =$query;
 		$return['data'] =$callConfig->getAllRows($query);
 		return $return;
 	}
-	function togetconfigmobiledataold($get){
+	public function togetconfigmobiledataold($get){
 		global $callConfig;
 		$configsql = "SELECT name, display_logo, default_bank_account_id,number_format, date_separator, date_format,pan_number,phone_number, gst_number, billing_address, contact_address, attendance_enable_clock  FROM config WHERE company_id = '".$get['company_id']."' AND is_active =0";
         $configres=$callConfig->getRow($configsql);
@@ -284,7 +284,7 @@ class mobileUserClass extends userClass{
 		return $return;
 	}
 
-	function mobileaprovelistwithmodle($get){
+	public function mobileaprovelistwithmodle($get){
 		global $callConfig;
 		$query = "SELECT id,application_module_id,role_id, role_short_code FROM application_user_module_roles WHERE company_id = ".$get['company_id']." AND user_id = ".$get['user_id']." AND is_active =0";
 		$datas = $callConfig->getAllRows($query);
@@ -314,7 +314,7 @@ class mobileUserClass extends userClass{
 	    $return['config'] = $configres;
 		return $return;
 	}
-	function togetbaseonmoduluelistandapprovals($get){
+	public function togetbaseonmoduluelistandapprovals($get){
 		global $callConfig;
 		//echo "RRRR"; exit;
 
@@ -388,7 +388,6 @@ class mobileUserClass extends userClass{
 				$get['transaction_no'] = $app->id;
 				$get['transaction_table'] = $transtab;
 				$get['current_status'] = $app->current_status;
-				$get['company_id'] = $get['company_id'];
 				$getDynamicWorkFlowSteps = $this->getDynamicWorkFlowSteps($get);
 				$status_progress = $getDynamicWorkFlowSteps['status_progress'];
 				$nextstepkeyvalue = $getDynamicWorkFlowSteps['nextstepkeyvalue'];
@@ -416,7 +415,7 @@ class mobileUserClass extends userClass{
 		//echo "<pre>"; print_r($res);
 		return array('approvals'=>$res);
 	} 
-	function togetuserdetailsbaseonuserid($get){
+	public function togetuserdetailsbaseonuserid($get){
 		global $callConfig;
 		$query = "SELECT * FROM application_users WHERE id=".$get['user_id'];
 		$row_data = $callConfig->getRow($query);
@@ -426,7 +425,7 @@ class mobileUserClass extends userClass{
 		$row_data->emp_id = $employee->id;
 		return $row_data;
 	}
-	function togetdynamicinvoicedetails($get){
+	public function togetdynamicinvoicedetails($get){
         global $callConfig;
         $return = array();
         $transaction_id = $get['transaction_id'];
@@ -470,7 +469,7 @@ class mobileUserClass extends userClass{
 
         return $return;
     }
-    function togetrecallstatusdata($get){
+    public function togetrecallstatusdata($get){
     	global $callConfig;
     	$query = "UPDATE `transaction_approval_logs` SET `response_type` = '0' WHERE user_id = 377";
     	$res = $callConfig->executeQuery($query);
@@ -480,7 +479,7 @@ class mobileUserClass extends userClass{
     	//echo $query;
  		return $res;
     }
-    function togetcreatedapproverejectinvoicedetails($get){
+    public function togetcreatedapproverejectinvoicedetails($get){
     	global $callConfig;
     	$query = "SELECT page_name,menu_label FROM `application_menu` WHERE `company_id` = ".$get['company_id']." AND `aplication_module` = ".$get['module_id']." AND `dashboard` = 0 AND `is_active` = 0";
 		$datas = $callConfig->getAllRows($query);
@@ -548,7 +547,7 @@ class mobileUserClass extends userClass{
 		}
 		return array('after_approval'=>$res);
     }
-    function togetcreatedinvoicedetails($get){
+    public function togetcreatedinvoicedetails($get){
     	global $callConfig;
     	$query = "SELECT page_name,menu_label FROM `application_menu` WHERE `company_id` = ".$get['company_id']." AND `aplication_module` = ".$get['module_id']." AND `dashboard` = 0 AND `is_active` = 0";
 		$datas = $callConfig->getAllRows($query);
@@ -590,13 +589,12 @@ class mobileUserClass extends userClass{
 		foreach($all_data as $table=>$data){
 			$retd['name'] = ucwords(str_replace('_',' ',$table));
 			$retd['table'] = $table;
-			$retd['data'] = array();
 			$retd['data'] = $data;
 			$res[] = $retd;
 		}
 		return array('data_created'=>$res);
     }
-    function togetapproveinvoicedetails($get){
+    public function togetapproveinvoicedetails($get){
     	global $callConfig;
 
     	$auquery = "SELECT id, display_name, user_photo FROM application_users WHERE company_id ='".$get['company_id']."' AND is_active =0";
@@ -690,14 +688,13 @@ class mobileUserClass extends userClass{
 		foreach($all_data as $table=>$data){
 			$retd['name'] = ucwords(str_replace('_',' ',$table));
 			$retd['table'] = $table;
-			$retd['data'] = array();
 			$retd['data'] = $data;
 			$res[] = $retd;
 		}
 		//echo "<pre>"; print_r($res);
 		return array('data_approved'=>$res);
     }
-    function togetrecjectinvoicedetails($get){
+    public function togetrecjectinvoicedetails($get){
     	global $callConfig;
     	$auquery = "SELECT id, display_name, user_photo FROM application_users WHERE company_id ='".$get['company_id']."' AND is_active =0";
     	$aures = $callConfig->getAllRows($auquery);
@@ -754,7 +751,6 @@ class mobileUserClass extends userClass{
 		foreach($all_data as $table=>$data){
 			$retd['name'] = ucwords(str_replace('_',' ',$table));
 			$retd['table'] = $table;
-			$retd['data'] = array();
 			$retd['data'] = $data;
 			$res[] = $retd;
 		}
@@ -762,7 +758,7 @@ class mobileUserClass extends userClass{
 		//echo "<pre>"; print_r($res);  exit;
 		//return array('data_rejected'=>$all_data);
     }
-    function toaddupdateusermobiledetails($get, $post){
+    public function toaddupdateusermobiledetails($get, $post){
     	global $callConfig;
     	$update = "update user_mobile_details set is_active = NULL, updated_by = ".$get['user_id']." where user_id ='".$get['user_id']."' AND is_active = 0";
 		$update_data=$callConfig->executeQuery($update);
@@ -833,7 +829,7 @@ class mobileUserClass extends userClass{
  		}
  		return $return;
     }*/
-    function togenratefirebaseheaderauthentication($get){  
+    public function togenratefirebaseheaderauthentication($get){  
     	//echo "No"; exit;
 		$url = SITEURL."/cfa_token.php";
 		$ch = curl_init();
@@ -872,7 +868,7 @@ class mobileUserClass extends userClass{
 		    echo 'Error: ' . $e->getMessage() . PHP_EOL;
 		}*/
     }
-    function verifyFirebaseToken($idToken) {
+    public function verifyFirebaseToken($idToken) {
 	    $apiKey = "YOUR_FIREBASE_WEB_API_KEY"; // Replace with your Firebase API Key
 	    $url = "https://identitytoolkit.googleapis.com/v1/accounts:lookup?key={$apiKey}";
 
@@ -895,7 +891,7 @@ class mobileUserClass extends userClass{
 
 	    }
 	}
-	function generateNewToken($refreshToken) {
+	public function generateNewToken($refreshToken) {
 	    $apiKey = "YOUR_FIREBASE_WEB_API_KEY"; // Replace with your Firebase API Key
 	    $url = "https://securetoken.googleapis.com/v1/token?key={$apiKey}";
 
@@ -920,7 +916,7 @@ class mobileUserClass extends userClass{
 	    	return ['error' => $data['error']['message'] ?? 'Token generation failed'];
 	    }
 	}
-    function initials($str) {
+    public function initials($str) {
 		$ret = '';
 		foreach (explode(' ', $str) as $word)
 			$ret .= strtoupper($word[0]);
@@ -929,7 +925,7 @@ class mobileUserClass extends userClass{
 		}
 		return strtoupper($ret);
 	}
-	function notificationsforuserid($get){
+	public function notificationsforuserid($get){
 		global $callConfig;
 		$whr = "";
 		if($get['module_id']!=""){
@@ -951,7 +947,7 @@ class mobileUserClass extends userClass{
 
 		return $data;
 	}
-	function countLines() {
+	public function countLines() {
 		$array = array('views', 'model', 'apis', 'cronjob', 'setups', 'phpqrcode', 'partials', 'includes','outsidefile');
 		foreach($array as $arr){
 		    $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($arr));
@@ -969,7 +965,7 @@ class mobileUserClass extends userClass{
 	    $lines_array['Total'] = $valtotalLines;
 	    return $lines_array;
 	}
-	function togetemployeeattendatailsbasedondate($get){
+	public function togetemployeeattendatailsbasedondate($get){
 		global $callConfig;
 		$return = array('attendace_date'=>$get['date'], 'clock_in_date'=>'', 'clock_in'=>'', 'clock_out_date'=>'', 'clock_out'=>'', 'clock_type'=>'OUT');
 		$query ="SELECT attendace_date, clock_in_date, clock_in, clock_out_date, clock_out FROM employee_daily_attendances WHERE company_id =".$get['company_id']." AND employee_id =".$get['emp_id']." AND attendace_date ='".$get['date']."' AND is_active = 0";
@@ -985,7 +981,7 @@ class mobileUserClass extends userClass{
 		}
 		return $return;
 	}
-	function mobileemployeeclocks_old($get){
+	public function mobileemployeeclocks_old($get){
     	global $callConfig;
     	$query = $callConfig->selectQuery('employee_daily_attendances','*',"is_active=0 AND employee_id='".$get['emp_id']."' AND attendace_date='".$get['date']."'",'','','');
 		//echo $query ; exit;
@@ -1017,7 +1013,7 @@ class mobileUserClass extends userClass{
 	    $return = $this->togetemployeeattendatailsbasedondate($get);
 	    return $return;
 	}
-	function mobileemployeeclocks($get){
+	public function mobileemployeeclocks($get){
     	global $callConfig;
     	$query = $callConfig->selectQuery('employee_daily_attendances','*',"is_active=0 AND employee_id='".$get['emp_id']."' AND attendace_date='".$get['date']."'",'','','');
 		//echo $query ; exit;
@@ -1050,7 +1046,7 @@ class mobileUserClass extends userClass{
 	    $return = $this->togetemployeeattendatailsbasedondate($get);
 	    return $return;
 	}
-	function listgetmonthattendancedetails($get){
+	public function listgetmonthattendancedetails($get){
 		global $callConfig;
 		//print_r($get);
 		$fromdate = $get['date']!=""? $get['date'] : date('y-m-01');
@@ -1193,7 +1189,7 @@ class mobileUserClass extends userClass{
 		//return array('data'=>$work_days, 'type'=>$type, 'attendance'=>$data);
 		return $return;
  	}
-	function listgetmonthattendancedetails_old($get){
+	public function listgetmonthattendancedetails_old($get){
 		global $callConfig;
 		//print_r($get);
 		$fromdate = $get['date']!=""? $get['date'] : date('y-m-01');
@@ -1324,7 +1320,7 @@ class mobileUserClass extends userClass{
 		//return array('data'=>$work_days, 'type'=>$type, 'attendance'=>$data);
 		return $return;
  	}
- 	function togetyearlymonthwisedataperce($get){
+ 	public function togetyearlymonthwisedataperce($get){
  		global $callConfig;
  		$year = $get['year']!="" ? $get['year'] : date('Y');
  		$query = "SELECT id, working_days FROM attendance_settings WHERE company_id =".$get['company_id']." AND is_active =0";
@@ -1395,7 +1391,7 @@ class mobileUserClass extends userClass{
 	    //return $workingDaysByMonth;
 	    return $return;
  	}
- 	function togetmobileleavedetails($get){
+ 	public function togetmobileleavedetails($get){
  		global $callConfig;
  		//echo "---"; print_r($get); exit;
  		$query = "SELECT id, leave_type_name FROM leave_types WHERE company_id =".$get['company_id']."  AND is_active = 0";
@@ -1416,8 +1412,6 @@ class mobileUserClass extends userClass{
  		$leave_left = 0; $leave_used=0;
  		foreach($leave_balance as $balance){
 
- 			$leavetypedate['applicable_leaves'] =$balance->leave_type;
- 			//print_r($balance); exit;
  			$leavetypedate['name'] = $leave[$balance->leave_type];
  			//print_r($balance); exit;
  			$leavetypedate['applicable_leaves'] = $balance->applicable_leaves-$balance->consumed_leaves;
@@ -1453,7 +1447,7 @@ class mobileUserClass extends userClass{
  		$return['applied_leave'] = $all_app_leave;
  		return $return;
  	}
- 	function toaddmobileempleave_old($get, $post){
+ 	public function toaddmobileempleave_old($get, $post){
  		global $callConfig;
  		//print_r($post); exit;
  		$leave_from_at = str_replace('/"', '-', $post['leave_from']);
@@ -1472,7 +1466,7 @@ class mobileUserClass extends userClass{
 		}
 		return $ret;
  	}
- 	function toaddmobileempleave($get, $post){
+ 	public function toaddmobileempleave($get, $post){
  		global $callConfig;
  		//print_r($post); exit;
  		$leave_from_at = str_replace('/"', '-', $post['leave_from']);
@@ -1491,7 +1485,7 @@ class mobileUserClass extends userClass{
 		}
 		return $ret;
  	}
- 	function toupdatemobileempleave($get, $post){
+ 	public function toupdatemobileempleave($get, $post){
  		global $callConfig; 	
  		$leave_from_at = str_replace('/"', '-', $post['leave_from']);
     	$leave_from_at =  date('Y-m-d', strtotime($leave_from_at));
@@ -1502,14 +1496,14 @@ class mobileUserClass extends userClass{
 		$ret['update'] =$res;
 		return $ret;
  	}
- 	function todeletemobileempleave($get){
+ 	public function todeletemobileempleave($get){
  		global $callConfig; 
  		$update_query = "UPDATE employee_leaves SET is_active = NULL WHERE id =".$get['ref_id'];
  		//echo $update_query;
  		$res = $callConfig->executeQuery($update_query);
  		return $res;
  	}
- 	function toinsertfieldmapuser($get,$post){
+ 	public function toinsertfieldmapuser($get,$post){
  		global $callConfig;
  		//echo "------ Test ----";  print_r($get);  print_r($file); exit;
  		$current_status = $post['current_status']!='' ? $post['current_status'] :'0';
@@ -1518,7 +1512,7 @@ class mobileUserClass extends userClass{
 		$ret['insert'] =$insert;
 		return $ret;
  	}
- 	function togetfieldworkusermappoints($get){
+ 	public function togetfieldworkusermappoints($get){
  		global $callConfig;
 
  		$query = "SELECT id,map_title, map_latitude, map_longitude, map_date, map_time,'file_1689092069_64ad7fe56a8f4.jpg' as image, map_distance, comments,status_radius, field_work_daily_plan_id, status_radius , remarks  FROM field_work_user_map_points WHERE company_id = ".$get['company_id']." AND user_id = ".$get['user_id']." AND map_date = '".$get['date']."' AND is_active =0";
@@ -1531,7 +1525,7 @@ class mobileUserClass extends userClass{
 		
 		return $return;
  	}
- 	function tocreatecomplanatedetails($get, $post){
+ 	public function tocreatecomplanatedetails($get, $post){
  		global $callConfig;
  		$insert_array = array('company_id'=>$get['company_id'],'user_id'=>$get['user_id'],'complaint_name'=>$post['complaint_name'],'complaint_type'=>$post['complaint_type'], 'transaction_date'=>$post['transaction_date'] ,'complaint_priority'=>$post['complaint_priority'],'building_id'=>$post['building_id'],'building_floor_id'=>$post['building_floor_id'],'building_floor_space_id'=>$post['building_floor_space_id'],'item_id'=>$post['item_id'],'asset_id'=>$post['asset_id'],'complaint_image'=>$complaint_image, 'remarks'=>$post['remarks'], 'table_name'=>$post['table_name'],'party_id'=>$post['party_id'], 'ref_id'=>$post['ref_id'], 'is_active'=>0,'current_status'=>0,'created_by'=>$get['user_id']);
  		$insert = $callConfig->insertRecord('complaints',$insert_array);
@@ -1553,7 +1547,7 @@ class mobileUserClass extends userClass{
 		return $ret;
  		//complainant_name, complainant_type, complaint_description, building_id, building_floor_id, building_floor_space_id, item_id, asset_id, complaint_image, remarks
  	}
- 	function multipleimagesapplicationattachments($get,$post){
+ 	public function multipleimagesapplicationattachments($get,$post){
 		global $callConfig;
 		foreach($post['images'] as $key=>$img){
 			$insert_array = array('company_id'=>$get['company_id'],'file_name'=>$img,'actual_file_name'=>$img,'file_size_mb'=>0,'application_table_name'=>$post['application_table_name'],'transaction_id'=>$post['transaction_id'],'is_active' =>'0');
@@ -1561,7 +1555,7 @@ class mobileUserClass extends userClass{
 		}
 		return $res;
 	}
- 	function togetapproalcomplientdetails($get){
+ 	public function togetapproalcomplientdetails($get){
  		global $callConfig;
  		//print_r($get); exit;
  		$query = "SELECT name_value, name, background_color, color FROM `status` WHERE `company_id` = ".$get['company_id']." AND `is_active` = 0";
@@ -1594,7 +1588,7 @@ class mobileUserClass extends userClass{
 		return $all_data; 		
  	}
  	
- 	function togetcreatecomplientdetails($get){
+ 	public function togetcreatecomplientdetails($get){
  		global $callConfig;
  		$query = "SELECT name_value, name, background_color, color FROM `status` WHERE `company_id` = ".$get['company_id']." AND `is_active` = 0";
 		$data_status = $callConfig->getAllRows($query);
@@ -1621,7 +1615,7 @@ class mobileUserClass extends userClass{
 			}
 		return $all_data;
  	}
- 	function togenrateqrcodebasetype($get){
+ 	public function togenrateqrcodebasetype($get){
  		
  		$array = array('item'=>'Item', 'building'=> 'Building Location', 'asset'=> 'Asset');
  		$i=10;
@@ -1634,7 +1628,7 @@ class mobileUserClass extends userClass{
  		}
  		return $return;
  	}
- 	function togenrateqrcodebaseontypelist($get){
+ 	public function togenrateqrcodebaseontypelist($get){
  		global $callConfig;
  		$array = array('item'=>'Item', 'building_floor'=> 'Building Location', 'asset'=> 'Asset');
  		if($get['type']=='item'){
@@ -1655,7 +1649,7 @@ class mobileUserClass extends userClass{
  		}
  		return $return;
  	}
- 	function togetbulidingfloors($get){
+ 	public function togetbulidingfloors($get){
  		global $callConfig;
  		$query = "SELECT id,  floor_name FROM building_floors WHERE `company_id` = ".$get['company_id']." AND building_id =".$get['building_id']." AND is_active = 0";
 		$data = $callConfig->getAllRows($query);
@@ -1665,7 +1659,7 @@ class mobileUserClass extends userClass{
  		}
  		return $return;
  	}
- 	function togetemloyeemodeleraiodcricle($get){
+ 	public function togetemloyeemodeleraiodcricle($get){
  		global $callConfig;
  		//echo "TEstt"; exit;
  		$chek = array('1'=>'quotations','2'=>'goods_receipt_notes','3'=>'sales_orders','26'=>'requisitions');
@@ -1801,7 +1795,7 @@ class mobileUserClass extends userClass{
  		//print_r($data); exit;
  		return $data; 
  	}
- 	function tocheckpermissiontoqrcodeapproval($get){
+ 	public function tocheckpermissiontoqrcodeapproval($get){
  		global $callConfig;
  		$list_status['genrate_qr_code'] = 'NO';
  		$list_status['approval'] = 'NO';
@@ -1821,7 +1815,7 @@ class mobileUserClass extends userClass{
  		$return['data']=$list_status;
  		return $return;
  	}
- 	function togetcomplientsbyiddetails($get){
+ 	public function togetcomplientsbyiddetails($get){
  		global $callConfig;
  		$query = "SELECT * FROM complaints WHERE company_id =".$get['company_id']." AND user_id = ".$get['user_id']." AND id=".$get['complaint_id']."  AND is_active=0";
  		$data = $callConfig->getRow($query);
@@ -1839,14 +1833,14 @@ class mobileUserClass extends userClass{
  		
  		return $return;
  	}
-	function todeletecomplaintbasedonid($get){
+	public function todeletecomplaintbasedonid($get){
  		global $callConfig;
  		$upquery = "UPDATE complaints SET is_active = NULL, updated_by = ".$get['user_id']."  WHERE company_id =".$get['company_id']." AND id=".$get['complaint_id']."  AND is_active=0";
  		$data = $callConfig->executeQuery($upquery);
  		//$return['data']=$data;
  		return $data;
  	}
- 	function toupdatecomplanatedetails($get, $post){
+ 	public function toupdatecomplanatedetails($get, $post){
  		global $callConfig;
  		$insert_array = array('complaint_name'=>$post['complaint_name'],'complaint_type'=>$post['complaint_type'], 'complaint_priority'=>$post['complaint_priority'],'building_id'=>$post['building_id'],'building_floor_id'=>$post['building_floor_id'],'building_floor_space_id'=>$post['building_floor_space_id'],'item_id'=>$post['item_id'],'asset_id'=>$post['asset_id'],'complaint_image'=>$complaint_image, 'remarks'=>$post['remarks'],'is_active'=>0,'current_status'=>0,'updated_by'=>$get['user_id']);
  		$res=$callConfig->updateRecord('complaints', $insert_array,'id',$get['complaint_id']);
@@ -1854,7 +1848,7 @@ class mobileUserClass extends userClass{
 		return $ret;
  		//complaint_name, complaint_type, complaint_description, building_id, building_floor_id, building_floor_space_id, item_id, asset_id, complaint_image, remarks
  	}
- 	function toaddcomplaintshisorydetails($get, $post){
+ 	public function toaddcomplaintshisorydetails($get, $post){
  		global $callConfig;
  		if($post['remarks']!=""){
 	 		$insert_array = array('company_id'=>$get['company_id'],'complaint_id'=>$post['complaint_id'],'user_id'=>$get['user_id'],'transaction_date'=>$post['transaction_date'] ,'complaint_image'=>$complaint_image, 'remarks'=>$post['remarks'],'is_active'=>0,'current_status'=>0,'created_by'=>$get['user_id']);
@@ -1867,7 +1861,7 @@ class mobileUserClass extends userClass{
 		return $ret;
 		//complaint_id,company_id, user_id, transaction_date, complaint_image, remarks, current_status,change_status 
  	}
- 	function togetsalaryyearmonthlist($get){
+ 	public function togetsalaryyearmonthlist($get){
  		global $callConfig;
  		$query = "SELECT pay_year, pay_month FROM pay_run_summary WHERE company_id=".$get['company_id']." AND employee_id = ".$get['emp_id']." AND is_active = 0";
  		$datas = $callConfig->getAllRows($query);
@@ -1882,7 +1876,7 @@ class mobileUserClass extends userClass{
  		//print_r($return); exit;
  		return $return;
  	}
- 	function togetsalarydetailsyearbasemonthlist($get){
+ 	public function togetsalarydetailsyearbasemonthlist($get){
  		global $callConfig;
 
  		$query ="SELECT id, emp_code, display_name, designation_id, (SELECT designation_name FROM designations WHERE id = designation_id) designation_name FROM employees WHERE company_id=".$get['company_id']." AND id =".$get['emp_id'];
@@ -1948,7 +1942,7 @@ class mobileUserClass extends userClass{
  		//print_r($data); exit;
  		return $data;
  	}
- 	function mobileuserregistation($get, $post){
+ 	public function mobileuserregistation($get, $post){
  		global $callConfig;
  		
  		$otp = $this->generateOTP(4);
@@ -1963,7 +1957,7 @@ class mobileUserClass extends userClass{
 	 	// user_name, user_email, user_mobile, user_password
 	 	return $insert;
  	}
- 	function mobileregistationcheckotp($get){
+ 	public function mobileregistationcheckotp($get){
  		global $callConfig;
  		//print_r($get);
  		$query = "SELECT id FROM ".MAINDB.".mobile_user_registrations WHERE id=".$get['user_id']." AND remember_token='".$get['otp']."' AND is_active =0";
@@ -1975,7 +1969,7 @@ class mobileUserClass extends userClass{
  		}
  		return $return;
  	}
- 	function toaddmobfielddailyplans($get, $post){
+ 	public function toaddmobfielddailyplans($get, $post){
  		global $callConfig; 
  		$msg = "The selected time slot is already occupied by another scheduled task. Please choose a different time or reschedule the existing task to avoid conflicts";
  		$plan_date = str_replace('/"', '-', $post['plan_date']);
@@ -2005,7 +1999,7 @@ class mobileUserClass extends userClass{
 		}
 	 	return $insert;
  	}
- 	function togetmobfielddailyplans($get){
+ 	public function togetmobfielddailyplans($get){
  		global $callConfig; 
  		//echo "----"; exit;
  		$query = "SELECT id, user_id, contact_person,  mobile, plan_date, plan_time, plan_longitude, plan_latitude, plan_distance, plan_location, plan_address, plan_type, current_status    FROM field_work_daily_plans WHERE company_id =".$get['company_id']." AND user_id =".$get['user_id']." AND plan_date='".$get['plan_date']."' AND is_active = 0";
@@ -2052,7 +2046,7 @@ class mobileUserClass extends userClass{
  		
 	 	return $return;	
  	}
- 	function toaddmobfieldwork($get, $post){
+ 	public function toaddmobfieldwork($get, $post){
  		global $callConfig; 
  		$plan_date = str_replace('/"', '-', $post['work_date']);
 		$work_date =  date('Y-m-d', strtotime($work_date));
@@ -2064,7 +2058,7 @@ class mobileUserClass extends userClass{
 	 	}
 	 	return $insert;
  	}
- 	function togetmobfieldworkdetails($get){
+ 	public function togetmobfieldworkdetails($get){
  		global $callConfig; 
  		$query = "SELECT `company_id`, `user_id`, `client_name`, `work_date`, `work_time`, `work_longitude`, `work_latitude`, `work_distance`, `work_location`, `work_address`, `comments`, `field_work_daily_plan_id`   FROM field_work_details WHERE company_id =".$get['company_id']." AND user_id =".$get['user_id']." AND work_date=".$get['work_date']." AND is_active = 0";
  		$datas = $callConfig->getAllRows($query);
@@ -2074,7 +2068,7 @@ class mobileUserClass extends userClass{
  		}
 	 	return $return;	
  	}
- 	function togetmobmanagerfieldworkdetails($get){
+ 	public function togetmobmanagerfieldworkdetails($get){
  		global $callConfig; 
  		$query = "SELECT id, display_name, user_email, user_mobile, user_photo FROM application_users WHERE company_id = 1 AND reports_to = ".$get['user_id']." AND is_active =0";
  		$user_datas = $callConfig->getAllRows($query);
@@ -2097,7 +2091,7 @@ class mobileUserClass extends userClass{
 	 	return $return;	
  	}
 
- 	function toinactiveasedontableid($get){
+ 	public function toinactiveasedontableid($get){
  		global $callConfig;
  		//print_r($get); exit;
  		$upquery = "UPDATE ".$get['table']." SET is_active = 1 WHERE company_id=".$get['company_id']." AND id=".$get['ref_id'];
@@ -2108,7 +2102,7 @@ class mobileUserClass extends userClass{
  		return $res;
  	}
 
- 	function toupdatedynamicfielddata($get,$post){
+ 	public function toupdatedynamicfielddata($get,$post){
  		global $callConfig;
  		$table = $get['table'];
  		$value = $post['ref_id'];
@@ -2138,7 +2132,7 @@ class mobileUserClass extends userClass{
  		} 		
  		return $res;
  	}
- 	function tocheckuserfieldwortype($get){
+ 	public function tocheckuserfieldwortype($get){
  		global $callConfig;
  		//user_field_work_details
  		// 1: Daily Plan 2 : Daily Work 3: security
@@ -2169,7 +2163,7 @@ class mobileUserClass extends userClass{
  		$return['data'] = $data;
  		return $return;
  	}	
- 	function togetworkfielddataperdate($get){
+ 	public function togetworkfielddataperdate($get){
  		global $callConfig;
  		$query = "SELECT count(id) count_dp FROM `field_work_daily_plans` WHERE company_id=".$get['company_id']." AND plan_date = '".$get['plan_date']."' AND is_active=0";
  		$dp_res = $callConfig->getRow($query);
@@ -2182,7 +2176,7 @@ class mobileUserClass extends userClass{
  		$return['distance']=$dw_res->work_distance;
  		return $return;
  	}
- 	function togetworkfielddatapermonth($get){
+ 	public function togetworkfielddatapermonth($get){
  		global $callConfig;
  		$formdate = date('Y-m-01',strtotime($get['plan_date']));
  		$todate = date('Y-m-t',strtotime($get['plan_date']));
@@ -2210,14 +2204,14 @@ class mobileUserClass extends userClass{
  		}
  		return $data;
  	}
- 	function toaddmobilehelpdetails($get, $post){
+ 	public function toaddmobilehelpdetails($get, $post){
     	global $callConfig;
     	$insert_array = array('company_id'=>$get['company_id'],'user_id'=>$get['user_id'],'name'=>$post['name'], 'email'=>$post['email'], 'phone'=>$post['phone'], 'message'=>$post['message'],'is_active'=>0,'current_status'=>0,'created_by'=>$get['user_id']);
     	// post : name, email, phone, message : get : company_id , user_id
 		$res=$callConfig->insertRecord('mobile_help',$insert_array);
 		return $res;
     }
-    function tomapouttimeallcase($get){
+    public function tomapouttimeallcase($get){
  		global $callConfig;
  		//print_r($get); exit;
  		$upquery = "UPDATE field_work_user_map_points SET map_out_time = '".$get['map_out_time']."' WHERE company_id=".$get['company_id']." AND id=".$get['ref_id'];
@@ -2227,7 +2221,7 @@ class mobileUserClass extends userClass{
  		//$res=$callConfig->updateRecord($get['table'],array('is_active'=>1),'id',$get['ref_id']);
  		return $res;
  	}
- 	function togetsecurtydetails($get){
+ 	public function togetsecurtydetails($get){
         global $callConfig;
         $return = array();
         $userid = $get['user_id'];
@@ -2238,7 +2232,7 @@ class mobileUserClass extends userClass{
         $return['data'] = $data;
         return $return;
     }
-    function togetuserfieldworkdata($get){
+    public function togetuserfieldworkdata($get){
         global $callConfig;
         $return = array();
         $userid = $get['user_id'];
@@ -2252,7 +2246,7 @@ class mobileUserClass extends userClass{
         
         return $return;
     }
-    function togetlistfiledworkdatabasedate($get){
+    public function togetlistfiledworkdatabasedate($get){
     	global $callConfig;
     	//echo "----"; exit;
         $return = array();
@@ -2292,7 +2286,7 @@ class mobileUserClass extends userClass{
         $return['status'] = $status;
         return $return;
     }
-    function togetholidayslistbaseyear($get){
+    public function togetholidayslistbaseyear($get){
     	global $callConfig;
     	$year = $get['year']!="" ? $get['year'] : date('Y');
 
@@ -2301,7 +2295,7 @@ class mobileUserClass extends userClass{
         $return['data'] = $data;
         return $return;
     }
-    function togetweekdayslist($get){
+    public function togetweekdayslist($get){
     	global $callConfig;
     	$attquery = "SELECT id, working_days FROM attendance_settings WHERE company_id = '".$get['company_id']."' AND is_active =0";
     	//echo $attquery;
@@ -2309,7 +2303,7 @@ class mobileUserClass extends userClass{
 	    $return['data'] = json_decode($att_data->working_days,1);
 	    return $return;
     }
-    function togetfieldworkdailyplansfrmobile($get){
+    public function togetfieldworkdailyplansfrmobile($get){
     	global $callConfig;
     	$query = "SELECT 
 				  au.id, 
@@ -2400,7 +2394,7 @@ class mobileUserClass extends userClass{
         
         return $return;
     }
-    function togetgeolocationresaonlist($get){
+    public function togetgeolocationresaonlist($get){
     	//echo "--------------"; exit;
     	global $callConfig;
     	$query = "SELECT id, genc_detail_code, genc_detail_name FROM general_code_details where is_active='0' and company_id='".$get['company_id']."' and genc_code='GEOLOCATIONREASON' order by id ASC"; 
@@ -2408,14 +2402,14 @@ class mobileUserClass extends userClass{
 		$data['data'] = $display_details;
 		return $data;
     }
-    function togetuserslistformobile($get){
+    public function togetuserslistformobile($get){
     	global $callConfig;
     	$query = "SELECT id, display_name FROM application_users WHERE company_id=".$get['company_id']." AND is_active=0";
     	$data = $callConfig->getAllRows($query);
     	$return['data'] = $data; 
     	return $return;
     }
-    function togetuserssecurtydaydetailswithhistory($get){
+    public function togetuserssecurtydaydetailswithhistory($get){
     	global $callConfig;
     	
     	$userid = $get['user_id'];
@@ -2446,7 +2440,7 @@ class mobileUserClass extends userClass{
 		return $return;
     	//echo "<pre>"; print_r($data); 
     }
-    function dynamicinsertformobile($get, $post){
+    public function dynamicinsertformobile($get, $post){
     	global $callConfig;
     	$post['company_id'] = $get['company_id'];
     	$post['is_active'] = '0';
@@ -2457,7 +2451,7 @@ class mobileUserClass extends userClass{
 		$res=$callConfig->insertRecord($get['table'],$post);
 		return $res;
     }
-    function togetpostvaldynmicdetials($get, $post){
+    public function togetpostvaldynmicdetials($get, $post){
     	global $callConfig;
     	$where = " company_id =".$get['company_id'];
     	if(count((array)$post)>0){
@@ -2473,13 +2467,13 @@ class mobileUserClass extends userClass{
 		$res = $callConfig->getAllRows($query);
 		return $res;
     }
-    function togetrelatedworkusermapointmob($get){
+    public function togetrelatedworkusermapointmob($get){
     	global $callConfig;
     	$query="SELECT map_title, phone, address, map_latitude, map_longitude, map_date FROM `field_work_user_map_points` WHERE company_id =".$get['company_id']." AND user_id = ".$get['user_id']." AND is_active =0 GROUP BY phone";
     	$res = $callConfig->getAllRows($query);
     	return $res;
     }
-    function dyanamicgenccodedetailformobile($get){
+    public function dyanamicgenccodedetailformobile($get){
     	global $callConfig;
     	$res = array();
     	if($get['genc_code']!=""){
@@ -2489,19 +2483,19 @@ class mobileUserClass extends userClass{
     	return array('data' => $res);
     }
 
-    function togetproductformitemonmobile($get){
+    public function togetproductformitemonmobile($get){
     	global $callConfig;
     	$query="SELECT id, item_name, item_description, sale_price, item_image FROM `items` WHERE company_id =".$get['company_id']." AND is_active =0";
     	$res = $callConfig->getAllRows($query);
     	return array('data' => $res);
     }
-    function togetproductcustomeronmobile($get){
+    public function togetproductcustomeronmobile($get){
     	global $callConfig;
     	$query="SELECT id, display_name, phone, email, billing_address, map_latitude, map_longitude  FROM customers WHERE company_id =".$get['company_id']." AND is_active =0";
     	$res = $callConfig->getAllRows($query);
     	return array('data' => $res);
     }
-    function toinsertpurchaseorderonmobile($get,$post){
+    public function toinsertpurchaseorderonmobile($get,$post){
     	global $callConfig;
     	//print_r($get); print_r($post); exit;
     	$insert_array = array('company_id'=>$get['company_id'], 'data'=> json_encode($post), 'get_data'=>json_encode($get),'created_by'=>$get['user_id']);
@@ -2509,7 +2503,7 @@ class mobileUserClass extends userClass{
     	$res=$this->toinsertpurchaseordermobile($get,$post);
 		return $res;
     }
-    function toinsertpurchaseordermobile($get,$post){
+    public function toinsertpurchaseordermobile($get,$post){
 		global $callConfig;
 		/*//echo "----------------------"; exit;
 		$dataw = $callConfig->getRow("SELECT * FROM purchase_order_dump WHERE id=23");
@@ -2693,7 +2687,7 @@ class mobileUserClass extends userClass{
 		$responsary[] = $apihitre;*/
  		return $maintransactionaryres; 
 	}
-	function getMobileReceipts($get){
+	public function getMobileReceipts($get){
 		global $callConfig;
 		$return = array();
 		$resciptlist = $this->getReceipts($get);
@@ -2701,7 +2695,7 @@ class mobileUserClass extends userClass{
 		//echo "<pre>"; print_r($resciptlist);
 		return $return;
 	}
-	function getMobileTransactionReceipts($get){
+	public function getMobileTransactionReceipts($get){
 		global $callConfig;
 		$return = $transactionary = array();
 		$get['party_id'] = urlencode(json_encode($get['party_id']));
@@ -2715,7 +2709,7 @@ class mobileUserClass extends userClass{
 		}
 		return $transactionary;	
 	}
-	function insertMobileReceipts($get,$post){
+	public function insertMobileReceipts($get,$post){
 		global $callConfig;
 		
 		$return = array();
@@ -2739,7 +2733,7 @@ class mobileUserClass extends userClass{
 		$resut = $this->insertReceipts($newary);
 		return $newary;
 	}
-	function getMoblieUserRelatedDetails($get){
+	public function getMoblieUserRelatedDetails($get){
 		global $callConfig;
 		$return = array();
 		$userid = $get['user_id'];
@@ -2751,7 +2745,7 @@ class mobileUserClass extends userClass{
 		$return['result'] = $resdata;
 		return $return;
 	}
-	function tokengenrateformobile($get){
+	public function tokengenrateformobile($get){
 		global $callConfig;
 		//print_r($get); //exit;
 		$token = hash('sha256', uniqid(random_bytes(8), true) . time());
@@ -2767,13 +2761,13 @@ class mobileUserClass extends userClass{
 		$return['web_url'] = $web_url;
 		return $return;
 	} 
-	function toretrivewebviewlogin($get){
+	public function toretrivewebviewlogin($get){
 		global $callConfig;
 		$query = "SELECT * FROM application_users WHERE id =".$get['user_id']." AND is_active=0";
 		$res = $callConfig->getRow($query);
 		return $res;
 	}
-	function getMobileExpenseDetails($get){
+	public function getMobileExpenseDetails($get){
 		global $callConfig;
 		$return = array();
 		$res = $this->getEmployeeExpencesDetails($get);
@@ -2791,7 +2785,7 @@ class mobileUserClass extends userClass{
 		}
 		return $return;
 	}
-	function getMobileOrders($get){
+	public function getMobileOrders($get){
         global $callConfig;
         $table_name = "sales_orders";
         $sub_table = "so_items";
@@ -2810,7 +2804,7 @@ class mobileUserClass extends userClass{
         $return['mobile_orders'] = $mobile_orders;
         return $return;
     }
-    function getMobileOrderInfo($get){
+    public function getMobileOrderInfo($get){
         global $callConfig;
         $table_name = "sales_orders";
         $sub_table = "so_items";
@@ -2835,7 +2829,7 @@ class mobileUserClass extends userClass{
         $return['mobile_orders'] = $mobile_orders;
         return $return;
     }
-    function getMobileCRMDetails($get){
+    public function getMobileCRMDetails($get){
 		global $callConfig;
 		$return = array();
 		if($get['gettype']== 'countries'){
@@ -2853,13 +2847,13 @@ class mobileUserClass extends userClass{
 		}
 		return $return;
 	}
-	function togetdeliveryschedulesdetails($get){
+	public function togetdeliveryschedulesdetails($get){
 		global $callConfig;
 		$query = "SELECT application_table_name as transaction_table, ref_transaction_number as transaction_number, transaction_id, planned_qty, planned_delivery_date, planned_delivery_time FROM delivery_schedules WHERE id=".$get['ref_id'];
 		$return=$callConfig->getRow($query);
 		return $return;
 	}
-	function getFaceLivenessResponse($get){
+	public function getFaceLivenessResponse($get){
 		global $callConfig;
 		$api_hit_id = $get['api_hit_id'];
 		$query = "SELECT webhook_response FROM api_hits WHERE id=".$get['api_hit_id'];
@@ -2882,27 +2876,27 @@ class mobileUserClass extends userClass{
 		$return['api_hit_id'] = $api_hit_id;
 		return $return;
 	}
-	function deliverdorderlistbasepartyid($get){
+	public function deliverdorderlistbasepartyid($get){
 		global $callConfig;
 		$query = "SELECT id, transaction_id, ref_transaction_number as transaction_number, application_table_name  FROM delivery_schedules WHERE company_id= ".$get['company_id']." AND party_id = ".$get['party_id']." AND is_active =0";
 
 		$return['data']=$callConfig->getAllRows($query);
 		return $return;
 	}
-	function getMobileAllEmployeeLeaves($get){
+	public function getMobileAllEmployeeLeaves($get){
 		global $callConfig;
 		$query = "SELECT emp_code, display_name, leaves FROM `ai_employees` WHERE id < 5 AND company_id= ".$get['company_id']." AND is_active =0";
 		$return=$callConfig->getAllRows($query);
 		return $return;
 	}
-	function getMobileSingleEmployeeLeaves($get){
+	public function getMobileSingleEmployeeLeaves($get){
 		global $callConfig;
 		$empname = $get['empname'];
 		$query = "SELECT emp_code, display_name, leaves FROM `ai_employees` WHERE company_id= ".$get['company_id']."  AND display_name LIKE '%".$empname."%'  AND is_active =0";
 		$return=$callConfig->getRow($query);
 		return $return;
 	}
-	function insertMobileEmployeeLeaves($get,$post){
+	public function insertMobileEmployeeLeaves($get,$post){
 		global $callConfig;
 		//$return['get'] = $get;
 		//$return['post'] = $post;
@@ -2946,7 +2940,7 @@ class mobileUserClass extends userClass{
 		}
 		return $return;
 	}
-	function getMobileReportingManagerEmployeeLeave($get){
+	public function getMobileReportingManagerEmployeeLeave($get){
 		global $callConfig;
 		$useriid = $get['user_id'];
 		$leave_from = $get['leave_from'] !=""?$get['leave_from']:'2024-07-11';
@@ -2977,7 +2971,7 @@ class mobileUserClass extends userClass{
 		$returnres['data'] = $return;
 		return $returnres;
 	}
-	function getInsertEmployeeLeaves($get){
+	public function getInsertEmployeeLeaves($get){
 		global $callConfig;
 		$useriid = $get['user_id'];
 		$emp_id = $get['emp_id'];
@@ -3047,7 +3041,7 @@ class mobileUserClass extends userClass{
 		}
 		return $returnres;
 	}
-	function checkWorkFlowStatusWithApprove($get){
+	public function checkWorkFlowStatusWithApprove($get){
 		global $callConfig;
 		//$return['get'] = $get;
 		$transaction_no = $get['transaction_no'];
@@ -3150,7 +3144,7 @@ class mobileUserClass extends userClass{
 		//echo "<pre>"; print_r($returnarray);
 		return $returnarray;
 	}
-	function transportrequestcreate($get){
+	public function transportrequestcreate($get){
 		global $callConfig;
 		//echo "<pre>"; print_r($get); exit;
 		$query = "SELECT id, driver_name FROM drivers WHERE company_id = ".$get['company_id']." AND is_active =0";
@@ -3161,7 +3155,7 @@ class mobileUserClass extends userClass{
 		$return['transports'] = $rows;
 		return $return;
 	}
-	function togetdrivelistalldata($get){
+	public function togetdrivelistalldata($get){
 		global $callConfig;
 		$str="ta.user_id = ".$get['user_id']." AND ";
 		if($get['driver_id']!=""){
@@ -3195,7 +3189,7 @@ class mobileUserClass extends userClass{
 		$return['status'] = $rows;
 		return $return;
 	}
-	function togetinprocesstripdetailswithexpencess($get){
+	public function togetinprocesstripdetailswithexpencess($get){
 		global $callConfig;
 		$query = "SELECT id, expense_code, user_id, emp_id, expense_date, tax_amount, total_amount, transport_assign_id, client_reimbursement, description, pending_amount, current_status FROM emp_expenses WHERE company_id = ".$get['company_id']." AND id =".$get['exp_id']." AND is_active =0";
     	//echo $query;
@@ -3247,7 +3241,7 @@ class mobileUserClass extends userClass{
 		}
 		return $return;
 	}
-	function togetdynamicresaonlist($get){
+	public function togetdynamicresaonlist($get){
     	//echo "--------------"; exit;
     	global $callConfig;
     	$query = "SELECT id, genc_detail_code, genc_detail_name FROM general_code_details where is_active='0' and company_id='".$get['company_id']."' and genc_code='".$get['code']."' order by id ASC"; 
@@ -3255,7 +3249,7 @@ class mobileUserClass extends userClass{
 		$data['data'] = $display_details;
 		return $data;
     }
-    function togetemployeeexpensesbyuser($get){
+    public function togetemployeeexpensesbyuser($get){
     	global $callConfig;
     	
 		$billssql = "SELECT  id, expense_code, expense_date, amount, reference_no, current_status, reference_date FROM emp_expenses WHERE company_id = '".$get['company_id']."' AND is_active = 0 AND (emp_id='".$get['emp_id']."' OR user_id = '".$get['user_id']."') ORDER BY id DESC";
@@ -3273,7 +3267,7 @@ class mobileUserClass extends userClass{
 
     	return $return;
     }
-    function togetemployeeexpensesbyuser_old($get){
+    public function togetemployeeexpensesbyuser_old($get){
     	global $callConfig;
     	// $query = "SELECT ee.id, ta.driver_id, ta.transport_id, ta.source_place, ta.source_latitude, ta.source_longitude, ta.destination_place, ta.destination_latitude, ta.destination_longitude, ta.start_reading, ta.stop_reading, ta.start_reading_image,ta.stop_reading_image, ta.contact_phone, ta.start_date, ta.start_time, ta.actual_start_date, ta.actual_start_time, ta.departure_date, ta.departure_time, ta.remarks, ee.expense_code, ee.transport_assign_id, ee.expense_date, ee.total_amount, ts.vehicle_name, ts.registration_number, ts.vehicle_capacity, ts.vehicle_type FROM emp_expenses ee, transport_assign ta, transports ts  WHERE ee.company_id = ta.company_id AND ee.company_id = ts.company_id AND ee.company_id = ".$get['company_id']." AND user_id = ".$get['user_id']." AND ee.transport_assign_id = ta.id  AND ta.transport_id = ts.id  AND  transport_assign_id IN (SELECT id FROM transport_assign WHERE company_id =".$get['company_id']."  AND is_active=0)";
     	$query = "SELECT id, expense_code, user_id, emp_id, expense_date, tax_amount, total_amount, transport_assign_id, client_reimbursement, description, pending_amount, current_status FROM emp_expenses WHERE company_id = ".$get['company_id']." AND user_id =".$get['user_id']." AND is_active =0 ORDER BY id DESC";
@@ -3300,7 +3294,7 @@ class mobileUserClass extends userClass{
     		
     	return $alldata;
     }
-    function togettaskdaworkspacenoprojectandtask($get){
+    public function togettaskdaworkspacenoprojectandtask($get){
     	global $callConfig;
     	$uwhr = ""; $cwhr ="";
     	if( $get['role_short_code']!='TASKDA_ADMIN'){
@@ -3344,7 +3338,7 @@ class mobileUserClass extends userClass{
 		$return = $callConfig->getAllRows($query);
 		return $return;
     }
-    function togetprojecteditdetailsval($get){
+    public function togetprojecteditdetailsval($get){
     	global $callConfig;
     	$query = "SELECT id, type_name FROM project_type WHERE company_id =".$get['company_id']." AND is_active=0";
     	$type = $callConfig->getAllRows($query);
@@ -3356,7 +3350,7 @@ class mobileUserClass extends userClass{
     	}
     	return $return;
     }
-    function togetmobileprojectsview($get){
+    public function togetmobileprojectsview($get){
     	global $callConfig;
     	$query = "SELECT p.id, p.project_logo, p.project_name, p.description, p.planned_start, p.planned_finish, p.created_by as project_creater, COUNT(DISTINCT pt.id) AS number_of_project_teams, COUNT(DISTINCT t.id) AS number_of_project_tasks, CASE WHEN COUNT(t.id) = 0 THEN 0 ELSE ROUND( (SUM(CASE WHEN t.current_status = 199 THEN 1 ELSE 0 END) / COUNT(t.id)) * 100, 2 ) END AS percentage_of_tasks_completed FROM projects p LEFT JOIN project_teams pt ON p.id = pt.project_id AND pt.is_active = 0 LEFT JOIN project_task_details t ON p.id = t.project_id AND t.is_active = 0 WHERE p.company_id =".$get['company_id']." AND p.project_work_space_id=".$get['work_space_id']." AND p.is_active =0 GROUP BY p.id";
     	//echo $query; 
@@ -3406,7 +3400,7 @@ class mobileUserClass extends userClass{
     	$return['data'] = $pass;
     	return $return;
     }
-    function todisplaytasklistview($get){
+    public function todisplaytasklistview($get){
     	global $callConfig;
     	$uwhr = "";
     	if($get['role_short_code']!='TASKDA_ADMIN'){
@@ -3417,7 +3411,7 @@ class mobileUserClass extends userClass{
     	$return['data'] = $callConfig->getAllRows($query);
     	return $return;
     }
-    function projecttaskstatuscreation($get){
+    public function projecttaskstatuscreation($get){
     	global $callConfig;
     	$status = array('0'=>'To DO','101'=>'Doing','5'=>'On Hold','199'=>'Completed');
 		$k=10;
@@ -3429,7 +3423,7 @@ class mobileUserClass extends userClass{
 		}
 		return $kresult;
     }
-    function togettaskcreatelistdata($get){
+    public function togettaskcreatelistdata($get){
     	global $callConfig;
     	//echo "----------------------"; exit;
     	$tt = array('1'=> 'Story', '2'=> 'Task', '3'=> 'Sub Task', '4'=>'Bug');
@@ -3479,7 +3473,7 @@ class mobileUserClass extends userClass{
     	}
     	return $return;
     }
-    function togetmobiletaskdetailsall($get){
+    public function togetmobiletaskdetailsall($get){
     	global $callConfig;
     	$query ="SELECT pt.*, (SELECT project_phase_name  FROM project_phases WHERE id=pt.project_phase_id AND is_active=0 ) as project_phase_name, (SELECT name  FROM project_task_status WHERE  table_name='project_task_details' AND project_id = pt.project_id AND status=pt.current_status AND is_active =0 ) as status_name  FROM project_task_details pt WHERE pt.company_id=".$get['company_id']." AND pt.id=".$get['task_id']." AND pt.is_active=0";
     	//$return['taskdetils_query'] =$query;
@@ -3555,7 +3549,7 @@ class mobileUserClass extends userClass{
 		$return['all_project_task_time_status'] = $xcrow;
     	return $return;
     }
-    function addupdaterolememberdetailformobile($get,$post){
+    public function addupdaterolememberdetailformobile($get,$post){
     	global $callConfig;
 
 		$query = "SELECT id FROM project_task_teams WHERE company_id = ".$get['company_id']." AND project_id = ".$post['project_id']."  AND project_task_id =".$post['task_id']." AND user_id = ".$post['member_ids']." AND is_active = 0";
@@ -3605,7 +3599,7 @@ class mobileUserClass extends userClass{
 		$return = $insert;
 		return $return;
     }
-    function togetmobileprojectdetails($get){
+    public function togetmobileprojectdetails($get){
     	
     	global $callConfig;
     	$project_id = $get['project_id'];
@@ -3644,7 +3638,7 @@ class mobileUserClass extends userClass{
     	$return['users'] = $users; 
 		return $return;
     }
-    function touserwisetaskbaseoninputmobile($get){
+    public function touserwisetaskbaseoninputmobile($get){
     	global $callConfig;
     	$whr = "AND pt.planned_start <= CURDATE()";
     	if($get['type']=='W'){
@@ -3668,13 +3662,13 @@ class mobileUserClass extends userClass{
     	$return['create_data'] = $asign_data; 
 		return $return;
     }
-    function togetchatdatabasetableandtransactionid($get){
+    public function togetchatdatabasetableandtransactionid($get){
     	global $callConfig;
     	$query = "SELECT table_name, transaction_id, query_text, originator, created_date, (SELECT au.display_name FROM application_users au WHERE au.id =originator ) as display_name  FROM `transaction_queries` WHERE company_id =".$get['company_id']." AND  table_name = '".$get['table_name']."' AND transaction_id =".$get['transaction_id']." AND is_active =0";
     	$data = $callConfig->getAllRows($query);
     	return $data;
     }
-    function togetchatdiscussdatadetails($get){
+    public function togetchatdiscussdatadetails($get){
     	global $callConfig;
     	
     	$whr = " AND ( user_id =".$get['user_id']." or created_by = ".$get['user_id']." ) ";
@@ -3724,7 +3718,7 @@ class mobileUserClass extends userClass{
     	}
     	return $res_pass;
     }
-    function mobileInitials($str) {
+    public function mobileInitials($str) {
 		$ret = '';
 		foreach (explode(' ', $str) as $word)
 			$ret .= strtoupper($word[0]);
@@ -3733,7 +3727,7 @@ class mobileUserClass extends userClass{
 		}
 		return strtoupper($ret);
 	}
-	function mobileuserlogout($get){
+	public function mobileuserlogout($get){
 		global $callConfig;
 		$update = "update user_mobile_details set is_active = NULL, updated_by = ".$get['user_id']." where user_id ='".$get['user_id']."' AND is_active = 0";
 		$update_data=$callConfig->executeQuery($update);
@@ -3743,7 +3737,7 @@ class mobileUserClass extends userClass{
 		$res = $callConfig->executeQuery($upquery);
 		return $update_data;
 	}
-	function togetpersonalgatewaydetails($get){
+	public function togetpersonalgatewaydetails($get){
 		global $callConfig;
 		$return['get'] = $get;
 		//$method_type = array('entry_first'=>'Entry First', 'exit_first'=> 'Exit First');
@@ -3777,7 +3771,7 @@ class mobileUserClass extends userClass{
 		//print_r($get); exit;
 		return $return;
 	}
-	function toaddpersonaldataonmobile($get, $post){
+	public function toaddpersonaldataonmobile($get, $post){
 		global $callConfig;
 
 		$person_detai = array('employee_id'=>$post['emp_id'] ?? null,'employee_name'=>$post['employee_name'] ?? null,'employee_contact'=>$post['employee_contact'] ?? null);
@@ -3798,7 +3792,7 @@ class mobileUserClass extends userClass{
 		// emp_id, employee_name, employee_contact, vehicle_number, visit_purpose, location, entry_date, entry_time, method_type, 
 		return $res;
 	}	
-	function toupdatepersonaldataonmobile($get, $post){
+	public function toupdatepersonaldataonmobile($get, $post){
 		global $callConfig;
 		$person_detai = array('employee_id'=>$post['emp_id'],'employee_name'=>$post['employee_name'],'employee_contact'=>$post['employee_contact']);
 		$person_details = json_encode($person_detai,1);
@@ -3809,7 +3803,7 @@ class mobileUserClass extends userClass{
 		// emp_id, employee_name, employee_contact, vehicle_number, visit_purpose, location, entry_date, entry_time, method_type, 
 		return $res;
 	}
-	function getAttendanceRegularizationRequestData($get){
+	public function getAttendanceRegularizationRequestData($get){
 	    global $callConfig;
 	    $return  = array();
 	    $company_id = $get['company_id'];
@@ -3826,7 +3820,7 @@ class mobileUserClass extends userClass{
 	    return $return;
 	}
 
-	function saveAttendanceRegularizationRequestData($get, $post){
+	public function saveAttendanceRegularizationRequestData($get, $post){
 		global $callConfig;
 	    $return  = array();
 	    $insertary = array(
@@ -3860,7 +3854,7 @@ class mobileUserClass extends userClass{
 
 	}
 
-	function getTransportVehicleGatePassDeatails($get){
+	public function getTransportVehicleGatePassDeatails($get){
         global $callConfig;
         $return = array();
         $company_id = $get['company_id'];
@@ -3938,7 +3932,7 @@ class mobileUserClass extends userClass{
         return $return;
     }
 
-    function savevehiclegatepass($get, $post){
+    public function savevehiclegatepass($get, $post){
 		global $callConfig;
  		
 		$method_type = 'exit_first';
@@ -3983,7 +3977,7 @@ class mobileUserClass extends userClass{
 		return $res;
 	}
 
-	function insertMobiDynamicMappingTransactions($get, $post){
+	public function insertMobiDynamicMappingTransactions($get, $post){
 		global $callConfig;
 		$return = array();
 		$return['get'] = $get;
@@ -4173,7 +4167,7 @@ class mobileUserClass extends userClass{
 	
 
 	/**
-	function insertMobiDynamicMappingTransactions($get, $post){
+	public function insertMobiDynamicMappingTransactions($get, $post){
 		global $callConfig;
 		$return = array();
 		$return['get'] = $get;
@@ -4349,7 +4343,7 @@ class mobileUserClass extends userClass{
 		return $return;
 	}
 **/
-	function getEmailWithDBAndCompanyID($get){
+	public function getEmailWithDBAndCompanyID($get){
 		global $callConfig;
 		$user_email = $get['user_email'];
 		$aiemailquery = "SELECT id,zqr_connect, email_id, is_active FROM ".MAINDB.".ai_email_configurations WHERE email_id= '".$user_email."' AND is_active =0";
@@ -4389,7 +4383,7 @@ class mobileUserClass extends userClass{
 	        );
 		}
 	}
-	function GETProcurementModulesDashboardSummaryStock($get){
+	public function GETProcurementModulesDashboardSummaryStock($get){
 		global $callConfig;
 		$return = array();
 
@@ -4445,7 +4439,7 @@ class mobileUserClass extends userClass{
 
 
 
-	function GETProcurementModulesDashboardSummaryTest($get){
+	public function GETProcurementModulesDashboardSummaryTest($get){
 		global $callConfig;
 		$return = array();
 		$user_id= $get['user_id'];
@@ -4598,8 +4592,7 @@ class mobileUserClass extends userClass{
 		//purchase_invoices list
 
 
-	echo "<pre>"; print_r($return);
-	//return $return;
+	return $return;
 
 	}
 
@@ -5757,7 +5750,6 @@ function GETProcurementCustomerLedger($get){
 
     $get['from_date'] = $get['start_date'] !=""?$get['start_date']:date('Y-m-01');
     $get['to_date']   = $get['end_date'] !=""?$get['end_date']:date('Y-m-t');
-    $get['customer_id']= $get['customer_id'];
  	$result1 = $obj->getVendorledger($get);
     $result = json_decode(json_encode($result1), true);
     $last_account_balances = $result['last_account_balances'];
@@ -5948,7 +5940,7 @@ $creditside = array('credit_notes','payments');
 }
 
 //Edn customer ledger
-	function getMobileProcurementModulesData($get){
+	public function getMobileProcurementModulesData($get){
 		global $callConfig;
 		$return = array();
 		//echo "<pre>";
@@ -6159,7 +6151,7 @@ $creditside = array('credit_notes','payments');
 		//echo "<pre>"; print_r($return);
 		return $return;
 	}
-	function togetmobileadminhrdashboard($get){
+	public function togetmobileadminhrdashboard($get){
 	 	global $callConfig;
 	 	//echo "<pre>";
 	 	$thisyearfirstmonthlastdate = date('Y')."-01-01";
@@ -6703,7 +6695,7 @@ $creditside = array('credit_notes','payments');
 		$data['department_arr'] = $department_arr;
 	 	return $data;
 	}
-	function backviewtogetmobileadminhrdashboard($get){
+	public function backviewtogetmobileadminhrdashboard($get){
 	 	global $callConfig;
 	 	//echo "<pre>";
 	 	$thisyearfirstmonthlastdate = date('Y')."-01-01";
@@ -6886,7 +6878,7 @@ $creditside = array('credit_notes','payments');
 		$data['department_arr'] = $department_arr;
 	 	return $data;
 	}
-	function togetmobileadminhrviewtopemplist($get){
+	public function togetmobileadminhrviewtopemplist($get){
 		global $callConfig;
 		//print_r($get); exit;
 		$res = $this->backviewtogetmobileadminhrdashboard($get);
@@ -6906,7 +6898,7 @@ $creditside = array('credit_notes','payments');
 	 * @param array $get - Must contain: company_id, user_id (for cart join), optional: category_id
 	 * @return array - Returns categories array, and items array if category_id provided
 	 */
-	function getStationeryCategoriesWithItems($get) {
+	public function getStationeryCategoriesWithItems($get) {
 	    global $callConfig;
 	    
 	    $company_id = $get['company_id'];
@@ -6966,7 +6958,7 @@ $creditside = array('credit_notes','payments');
 	 * @param array $get - Must contain: company_id, user_id, category_id, item_name
 	 * @return array - Returns matching items with cart status
 	 */
-	function searchStationeryItemsByCategory($get) {
+	public function searchStationeryItemsByCategory($get) {
 	    global $callConfig;
 	    
 	    $company_id = $get['company_id'];
@@ -7015,7 +7007,7 @@ $creditside = array('credit_notes','payments');
 	 * @param array $post - Must contain: item_id, qty, cart_type (1=ADD, 0=REMOVE), optional: cart_id
 	 * @return array - Returns updated cart status
 	 */
-	function manageStationeryCart($get, $post) {
+	public function manageStationeryCart($get, $post) {
 	    global $callConfig;
 
 	    $company_id = $get['company_id'];
@@ -7194,7 +7186,7 @@ $creditside = array('credit_notes','payments');
 	 * @param array $get - Must contain: company_id, user_id
 	 * @return array - Returns all cart items with item details
 	 */
-	function getUserStationeryCart($get) {
+	public function getUserStationeryCart($get) {
 	    global $callConfig;
 	    
 	    $company_id = $get['company_id'];
@@ -7259,7 +7251,7 @@ $creditside = array('credit_notes','payments');
 	 *                      building_id, building_floor_id, building_floor_space_id, other_name
 	 * @return array - Returns request details and status
 	 */
-	function createStationeryRequest($get, $post) {
+	public function createStationeryRequest($get, $post) {
 	    global $callConfig;
 	    $return = array();
 
@@ -7365,7 +7357,7 @@ $creditside = array('credit_notes','payments');
 	}
 
 	// inventory added by koti end
-	function togetemployeeidentitycarddetails($get){
+	public function togetemployeeidentitycarddetails($get){
 		global $callConfig;
 		$query = "SELECT id, emp_code, display_name,`pf_no`, `pf_uan`, `esi_no`, `driving_licence`, `driving_licence_expiry_date`, `passport`, `passport_expiry_date`, `adhar_no`, `pan_number`, attached_files FROM employees WHERE id=".$get['emp_id'];
 		$data = $callConfig->getRow($query);
@@ -7373,7 +7365,7 @@ $creditside = array('credit_notes','payments');
 		return $return;
 	}
 
-	function togetassetsdetails($get){
+	public function togetassetsdetails($get){
 		global $callConfig;
 		$return = array();
 		$query = "SELECT id,category_id,name FROM asset_attributes WHERE company_id={$get['company_id']} AND is_active=0";
@@ -7415,7 +7407,7 @@ $creditside = array('credit_notes','payments');
 	 * Insert or Edit asset_requests
 	 * If $get['rid'] exists, performs UPDATE; otherwise performs INSERT
 	 */
-	function insertAssetRequests($get, $post){
+	public function insertAssetRequests($get, $post){
 		global $callConfig;
 		$return = array();
 
@@ -7473,7 +7465,7 @@ $creditside = array('credit_notes','payments');
 		return $return;
 	}
 
-	function togetAssetRequestDetails($get){
+	public function togetAssetRequestDetails($get){
 
 		global $callConfig;
 		$return = array();
@@ -7531,7 +7523,7 @@ $creditside = array('credit_notes','payments');
 
 		return $return;
 	}
-	function insertWorkFromHomeRequests($get, $post){
+	public function insertWorkFromHomeRequests($get, $post){
 		global $callConfig;
 		$return = array();
 
@@ -7594,7 +7586,7 @@ $creditside = array('credit_notes','payments');
 		return $return;
 	}
 
-	function togetWorkFromHomeRequestDetails($get){
+	public function togetWorkFromHomeRequestDetails($get){
 		global $callConfig;
 		$return = array();
 		$rid = $get['rid'] ?? '';
@@ -7627,7 +7619,7 @@ $creditside = array('credit_notes','payments');
 		return $return;
 	}
 
-    function getUserMobileStatusDashboard($get) {
+    public function getUserMobileStatusDashboard($get) {
         global $callConfig;
         
         try {
@@ -7721,7 +7713,7 @@ $creditside = array('credit_notes','payments');
         }
     }
 
-	function togetmobilemanagerdashboard($get){
+	public function togetmobilemanagerdashboard($get){
 	 	global $callConfig;
 	 	//echo "<pre>";
 	 	$thisyearfirstmonthlastdate = date('Y')."-01-01";
@@ -8019,7 +8011,7 @@ $creditside = array('credit_notes','payments');
 	 	$data['salarygraphres'] = $passsalarygraphres;
 	 	return $data;
 	}
-	function backviewtogetmobilemanagerdashboard($get){
+	public function backviewtogetmobilemanagerdashboard($get){
 	 	global $callConfig;
 	 	//echo "<pre>";
 	 	$thisyearfirstmonthlastdate = date('Y')."-01-01";
@@ -8427,7 +8419,7 @@ $creditside = array('credit_notes','payments');
 		$data['department_arr'] = $department_arr;
 	 	return $data;
 	}
-	function togetmobilemanagerviewtopemplist($get){
+	public function togetmobilemanagerviewtopemplist($get){
 		global $callConfig;
 		//print_r($get); exit;
 		$res = $this->backviewtogetmobilemanagerdashboard($get);
@@ -8439,7 +8431,7 @@ $creditside = array('credit_notes','payments');
 		$return['data'] = array_slice($resdata, $get['limit'], $get['lenght']);
 		return $return;
 	}
-	function getPendingLeaveDetailsByEmpId($get){
+	public function getPendingLeaveDetailsByEmpId($get){
 	    global $callConfig;
 	    $return = array();
 	    $rid = $get['rid'] ?? '';
@@ -8495,7 +8487,7 @@ $creditside = array('credit_notes','payments');
 	    return $return;
 	}
 
-	function getResignedEmployeeAssetDetailsByEmpId($get){
+	public function getResignedEmployeeAssetDetailsByEmpId($get){
 	    global $callConfig;
 	    $return = array();
 	    $emp_id = $get['emp_id'] ?? '';
@@ -8523,14 +8515,14 @@ $creditside = array('credit_notes','payments');
 	    $return['assets'] = $assets_result;
 	    return $return;
 	}
-	function togetjobpostingdetails($get){
+	public function togetjobpostingdetails($get){
 		global $callConfig;
 		$query = "SELECT jp.id, jp.job_code, jp.job_number, jp.job_name, CASE jp.job_status WHEN 0 THEN 'Open' WHEN 1 THEN 'Close' WHEN 2 THEN 'Hold' ELSE 'Unknown' END AS job_status, CASE jp.employment_mode WHEN 1 THEN 'Full Time' WHEN 2 THEN 'Part Time' WHEN 3 THEN 'Distance Learning Program' WHEN 4 THEN 'Executive Program' WHEN 5 THEN 'Certification' ELSE 'Unknown' END AS employment_mode, jp.location_id, (SELECT loc.location_name FROM locations loc WHERE loc.id = jp.location_id ) AS location_name, requested_date, (SELECT COUNT(jps.id) FROM job_posting_candidates jps WHERE jps.job_posting_id = jp.id AND jps.is_active = 0 ) AS applicant FROM job_postings jp WHERE jp.company_id =".$get['company_id']." AND jp.is_active = 0";
 		$rows = $callConfig->getAllRows($query);
 		$return['data'] = $rows;
 		return $return;
 	}
-	function togetjobpostingdetailsbyid($get){
+	public function togetjobpostingdetailsbyid($get){
 		global $callConfig;
 		//CAST(FROM_BASE64(jp.job_desc) AS CHAR) AS`job_desc`,
 		$query = "SELECT 
@@ -8600,7 +8592,7 @@ $creditside = array('credit_notes','payments');
 		$return['candidates'] = $rows;
 		return $return; 
 	}
-	function tocandidatedetailsbyid($get){
+	public function tocandidatedetailsbyid($get){
 		global $callConfig;
 
 		$query = "SELECT 
@@ -8632,7 +8624,7 @@ $creditside = array('credit_notes','payments');
 		$return['candidates'] = $rows;
 		return $return; 
 	}
-	function togettaskgrpsdetails($get){
+	public function togettaskgrpsdetails($get){
 		global $callConfig;
 			$uewhr = "";
 			if($get['role_short_code']!='TASKDA_ADMIN'){
@@ -8665,14 +8657,14 @@ $creditside = array('credit_notes','payments');
 		//$row['data_query'] = $query; 
 		return $row;
 	}
-	function tgetcurrenttasklogdata($get){
+	public function tgetcurrenttasklogdata($get){
 		global $callConfig;
 		$query = "SELECT ptd.task_name, ptd.planned_finish, CASE WHEN CURDATE() > ptd.planned_finish THEN 'Y' ELSE 'N' END AS overdue FROM project_task_details ptd WHERE company_id =1 AND id IN ( SELECT DISTINCT task_id FROM project_task_time_log WHERE company_id =1 AND user_id = 620 AND is_active = 0 ) AND current_status <199 AND is_active = 0 ORDER BY id";
 		$row['data'] = $callConfig->getAllRows($query);
 		//$row['data_query'] = $query; 
 		return $row;
 	}
-	function toupdateprojecttaskteamremove($get, $post){
+	public function toupdateprojecttaskteamremove($get, $post){
 		
 		global $callConfig;
 		$res=$callConfig->updateRecord($get['table'],$post,'id',$get['rid']);
@@ -8701,7 +8693,7 @@ $creditside = array('credit_notes','payments');
 
 	//trippppppppppppppppppppppppppppppp
 
-	function togetmobiletripdetails($get){
+	public function togetmobiletripdetails($get){
 		//print_r($get); exit;
 		global $callConfig;
         $return = array();
@@ -8764,7 +8756,7 @@ $creditside = array('credit_notes','payments');
  		//echo "<pre>"; print_r($return);
         return $return;
 	}
-	function toinserttripexpencesdetails($get, $post){
+	public function toinserttripexpencesdetails($get, $post){
 		global $callConfig;
 
 		$claimObj=new claimUserClass();
@@ -8833,13 +8825,13 @@ $creditside = array('credit_notes','payments');
 		//return $res;
 		return $return;
 	}
-	function togettripsdetails($get){
+	public function togettripsdetails($get){
 		global $callConfig;
 		$query = "SELECT tp.*, ( SELECT pt.project_name FROM projects pt WHERE pt.id = tp.project_id) as project_name, ( SELECT cs.display_name FROM customers cs WHERE cs.id = tp.customer_id) as client_name FROM trips tp WHERE tp.company_id =".$get['company_id']." AND user_id = ".$get['user_id']." AND tp.is_active =0";
 		$return['data'] = $callConfig->getAllRows($query);
 		return $return;
 	}
-	function togettripdetailsbasedid($get){
+	public function togettripdetailsbasedid($get){
 		global $callConfig;
 		$return['get'] = $get;
 
@@ -8871,7 +8863,7 @@ $creditside = array('credit_notes','payments');
         **/
         return $return;
 	}
-	function toupdatetripexpencesdetails($get, $post){
+	public function toupdatetripexpencesdetails($get, $post){
 		global $callConfig;
 
 		//echo "<pre>"; print_r($get); print_r($post); exit;
@@ -8925,7 +8917,7 @@ $creditside = array('credit_notes','payments');
 		return $return;
 	}
 	
-	function toaddprojecttaskdetails($get,$post){
+	public function toaddprojecttaskdetails($get,$post){
 		global $callConfig;		
 		//echo "<pre>"; print_r($get); print_r($post); exit;
 		$notification_message = '';
@@ -9000,7 +8992,7 @@ $creditside = array('credit_notes','payments');
 			return $senddata;
 		
 	}
-	function toinsertupdateprojecttasktimlog($get,$post){
+	public function toinsertupdateprojecttasktimlog($get,$post){
 		global $callConfig;
 		$crow=$callConfig->getRow("SELECT id,task_start,task_id FROM project_task_time_log WHERE  company_id = ".$get['company_id']." AND task_end is NULL AND is_active = 0 ORDER BY id DESC LIMIT 0,1"); 
 		$upquery = $callConfig->executeQuery("UPDATE `project_task_details` SET  to_date= ".date('Y-m-d')." WHERE id=".$post['task_id']);
@@ -9046,12 +9038,11 @@ $creditside = array('credit_notes','payments');
 		}
 		return $res;		
 	}
-	 function adddataprojecttask($get,$post){
+	 public function adddataprojecttask($get,$post){
     	global $callConfig;
     	//print_r($post); exit;
 
     	$res = $this->insertTablesdata($post, $get['table']);
-    	$post['task_id'] = $res['LASTID'];
     	$post['task_id'] = 100;
     	
     		$insert_array = array('company_id'=>$get['company_id'],'project_id'=>$post['project_id'], 'project_task_id'=>$post['task_id'], 'project_role_id'=>1,'user_id'=>$post['assigen_id'],'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'));
@@ -9107,7 +9098,7 @@ $creditside = array('credit_notes','payments');
 			//echo "---qqq";print_r($emill); exit;
 		return $res;
     }
-    function updatedynamicfiedrojecttaskdetail( $get, $post){
+    public function updatedynamicfiedrojecttaskdetail( $get, $post){
 		global $callConfig;
 		if($post['field'] == "planned_start" || $post['field']=="planned_finish"){
 			$post['fielddata'] = date('Y-m-d', strtotime(str_replace('/"', '-', $post['fielddata'])));
@@ -9137,7 +9128,7 @@ $creditside = array('credit_notes','payments');
 		//$work = $this->toinsertactivitydata($post,$get);
 		return $res;
 	}
-	function toinsertactivitydata($post,$get){
+	public function toinsertactivitydata($post,$get){
 		global $callConfig;
 		$application_table_name = 'project_task_details';
 		if($post['table_name']=='projects'){
@@ -9187,7 +9178,7 @@ $creditside = array('credit_notes','payments');
 		//rohan added
 		return $res;
 	}
-	function passprojectTaskid($post,$get,$task_id){
+	public function passprojectTaskid($post,$get,$task_id){
 		global $callConfig;
 		$taskid = $post['update_id'];
 		$projectteams = array();

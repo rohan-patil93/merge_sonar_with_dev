@@ -5,12 +5,12 @@
         <div class="loader-bar"></div>
     </div>
     <!-- <div class="mobile-view-logo bg-primary text-center">
-        <img class="img-100 m-3" src="assets/images/sign-in/HRstaq-1.png">   
+        <img class="img-100 m-3" src="assets/images/sign-in/HRstaq-1.png" alt="" >   
     </div> -->
     <div class="row fancy-sign-in">
         <div class="col-lg-5 bg-white">
             <div class="m-l-20 p-l-20 margin-0 mob-pd">
-		        <div class="logo m-l-30"> <img src="<?php echo $image; ?>" style="width: :150px !important;" >  
+		        <div class="logo m-l-30"> <img src="<?php echo $image; ?>" style="width: :150px !important;" alt="" >  
                 </div>
                 <div class="p-5 custom-login-on pt-0 pb-0">
 					<!-- <p class="text-muted f-w-600 text-center f-18 text-muted">Not a Member yet? <a class="text-primary" href="#" onclick="registerform()">Sign up</a></p> -->
@@ -43,13 +43,13 @@
                                 <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="password"  name="chrPassword" required="" placeholder="Password">
                             </div>
                             <?php if(CAPTCHA_YES_NO == 'YES'){ ?> 
-                                  <center><img style="height: 50px;" src="captcha/captcha.php" /></center>
+                                  <center><img style="height: 50px;" src="captcha/captcha.php" alt="" /></center>
                                             </br>
                                 <div class="form-group form-primary login-mean-class" >
                                     <input type="text" class="form-control" name="captcha" placeholder="Enter Captcha" required="required"/>
                                 </div>
                             <!-- <div class="form-group mb-1">
-                                <img src="captcha.php?rand=<?php echo random_int(0, PHP_INT_MAX);?>" id='captchaimg'><br>
+                                <img src="captcha.php?rand=<?php echo random_int(0, PHP_INT_MAX);?>" id='captchaimg' alt="" ><br>
                                 <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray"  id="captcha_code" name="captcha_code" type="text" placeholder="Enter Captcha">
                                 <br>
                                 Can't read the image? click <a href='javascript: refreshCaptcha();' class="text-primary">here</a> to refresh.
@@ -69,9 +69,9 @@
                                 </div>
                              <!--   <div class="col-lg-6 text-right mt-4">
                                     <b class="m-r-15">Or</b>
-                                    <a class="m-r-10" href=""><img class="img-20" src="assets/images/sign-in/google-icon.svg"></a>
+                                    <a class="m-r-10" href=""><img class="img-20" src="assets/images/sign-in/google-icon.svg" alt="" ></a>
                                     <a class="m-r-10" href=""><i class="fa fa-facebook-official f-20 mt-2"></i></a>
-                                    <a class="" href=""><img class="img-20" src="assets/images/sign-in/apple-black.svg"></a>
+                                    <a class="" href=""><img class="img-20" src="assets/images/sign-in/apple-black.svg" alt="" ></a>
                                 </div> -->
                             </div>
                            <!--  <div class="row mt-5">
@@ -123,9 +123,9 @@
                             </div>
                           <!--   <div class="col-lg-6 text-right mt-4">
                                 <b class="m-r-15">Or</b>
-                                <a class="m-r-10" href=""><img class="img-20" src="assets/images/sign-in/google-icon.svg"></a>
+                                <a class="m-r-10" href=""><img class="img-20" src="assets/images/sign-in/google-icon.svg" alt="" ></a>
                                 <a class="m-r-10" href=""><i class="fa fa-facebook-official f-20 mt-2"></i></a>
-                                <a class="" href=""><img class="img-20" src="assets/images/sign-in/apple-black.svg"></a>
+                                <a class="" href=""><img class="img-20" src="assets/images/sign-in/apple-black.svg" alt="" ></a>
                             </div> -->
                         </div>
                     </div>
@@ -153,7 +153,7 @@
             </div>
         </div>
         <div class="col-lg-7 desktop-view-bg why-choose" style="">
-            <!-- <img class="w-100 fancy-bg" src="assets/images/sign-in/recruitstaq_side_image.png" style=""> -->
+            <!-- <img class="w-100 fancy-bg" src="assets/images/sign-in/recruitstaq_side_image.png" style="" alt="" > -->
             <div class="row align-items-center">
                 <div class="col-lg-4">
                     <div class="why-box hrstaq-box float-end wow fadeInLeft">
@@ -178,7 +178,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 why-choose-img text-center">
-                    <img src="assets/images/why.jpg">
+                    <img src="assets/images/why.jpg" alt="" >
                 </div>
                 <div class="col-lg-4">
                     <div class="why-box AppreXA-box why-box-2 float-start text-end wow fadeInRight">

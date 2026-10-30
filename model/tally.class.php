@@ -1,20 +1,20 @@
 <?php 
 class tallyClass extends userClass{
-	function topostmasterdetails($get, $post){
+	public function topostmasterdetails($get, $post){
 	 	global $callConfig;
 	 	//echo "<pre>";  print_r($post); print_r($get); echo "</pre>";  exit;
 	 	$api_hits = array('company_id'=>$get['company_id'],'api_url'=>$get['mode'],'api_request_parameters'=>json_encode($get),'api_response_details'=>json_encode($post), 'application_table'=> $get['table'], 'status_json'=>$get['json_data'], 'is_active'=>0,'current_status'=>0,'created_by'=>$get['user_id']);
 		$res=$callConfig->insertRecord('api_hits',$api_hits);	
 	 	return $res;
 	}
-	function tosenditem_categoriestotally($get){
+	public function tosenditem_categoriestotally($get){
 	 	global $callConfig;
 	 	$query = "SELECT id,category_description FROM item_categories WHERE company_id =".$get['company_id']." AND is_active=0";
  		$data = $callConfig->getAllRows($query);
  		$return['result'] = $data;
 	 	return $return;
 	}
-	function togetapiidbasemapdetail($get){
+	public function togetapiidbasemapdetail($get){
 		global $callConfig;
 
 		$query = "SELECT * FROM api_masters WHERE company_id =".$get['company_id']." AND is_active=0";
@@ -37,7 +37,7 @@ class tallyClass extends userClass{
  		//print_r($dataa); exit;
  		return $return;
 	}
-	function getApiMastersDetails($get){
+	public function getApiMastersDetails($get){
 	    global $callConfig;
 	    $return = array();
 	    $return['get'] = $get;
@@ -58,7 +58,7 @@ class tallyClass extends userClass{
 
 	    return $return;
 	  }
-	function getAPIHits($get){
+	public function getAPIHits($get){
 		global $callConfig;
 	    $return = array();
 	    $return['get'] = $get;
@@ -90,13 +90,13 @@ class tallyClass extends userClass{
 	    return $return;
 	}
 
-	function insertAPIHits($get){
+	public function insertAPIHits($get){
 	 	global $callConfig;
 	 	$res=$callConfig->insertRecord('api_hits',$get);	
 	 	return $res;
 	}
 
-	function getLedgerMaster($get,$post){
+	public function getLedgerMaster($get,$post){
 		global $callConfig;
 		$return = array();
 		$uniquecode = $get['uniquecode'];
@@ -182,7 +182,7 @@ class tallyClass extends userClass{
 
 	}
 
-	function getTransactionInvoices($get,$post,$transaction_table=""){
+	public function getTransactionInvoices($get,$post,$transaction_table=""){
 	 	global $callConfig;
 	 	$return = $transaction_entry =$item_trans =  array();
 	 	$uniquecode = $get['uniquecode'];
@@ -371,7 +371,7 @@ class tallyClass extends userClass{
 	 	return $return;
 
 	}
-	function getAPIPayments($get,$post){
+	public function getAPIPayments($get,$post){
 		global $callConfig;
 	 	$return = array();
 	 	$uniquecode = $get['uniquecode'];
@@ -478,7 +478,7 @@ class tallyClass extends userClass{
 		//echo "<pre>"; print_r($return);
 		return $return;
 	}
-	function getAPIReceipts($get,$post){
+	public function getAPIReceipts($get,$post){
 		global $callConfig;
 	 	$return = array();
 	 	$uniquecode = $get['uniquecode'];
@@ -584,7 +584,7 @@ class tallyClass extends userClass{
 		//echo "<pre>"; print_r($return);
 		return $return;
 	}
-	function getAPIJournalVouchers($get,$post){
+	public function getAPIJournalVouchers($get,$post){
 		global $callConfig;
 	 	$return = array();
 	 	$uniquecode = $get['uniquecode'];
@@ -622,7 +622,7 @@ class tallyClass extends userClass{
 		//echo "<pre>"; print_r($return);
 		return $return;
 	}
-	function getAPIItems($get,$post){
+	public function getAPIItems($get,$post){
 		global $callConfig;
 	 	$return = array();
 	 	$uniquecode = $get['uniquecode'];
@@ -655,7 +655,7 @@ class tallyClass extends userClass{
 		//echo "<pre>"; print_r($return);
 		return $return;
 	}
-	function getAPImastersAPICode($get,$post){
+	public function getAPImastersAPICode($get,$post){
 	 	global $callConfig;
 	 	$return = array();
 	 	$uniquecode = $get['uniquecode'];
@@ -754,7 +754,7 @@ class tallyClass extends userClass{
     	//echo "<pre>"; print_r($return);
 	 	return $return;
 	}
-	function tallyAPIReceiveReceipts($get,$post,$api_hitsres,$apimastersres){
+	public function tallyAPIReceiveReceipts($get,$post,$api_hitsres,$apimastersres){
 		global $callConfig;
 		$api_hit_id = $post['api_hit_id'] !=""?$post['api_hit_id']:$get['api_hit_id'];
 	 	$checkstatus = $post['checkstatus'] !=""?$post['checkstatus']:$get['checkstatus'];
@@ -913,7 +913,7 @@ class tallyClass extends userClass{
  		return $responsary;
 	}
 
-	function tallyAPIReceivePayments($get,$post,$api_hitsres,$apimastersres){
+	public function tallyAPIReceivePayments($get,$post,$api_hitsres,$apimastersres){
 		global $callConfig;
 		$api_hit_id = $post['api_hit_id'] !=""?$post['api_hit_id']:$get['api_hit_id'];
 	 	$checkstatus = $post['checkstatus'] !=""?$post['checkstatus']:$get['checkstatus'];
@@ -1066,7 +1066,7 @@ class tallyClass extends userClass{
 		$return['responsary'] = $responsary;
  		return $return;
 	}
-	function tallyAPIDebitANDCreditNoteTransactions($get,$post,$api_hitsres,$apimastersres){
+	public function tallyAPIDebitANDCreditNoteTransactions($get,$post,$api_hitsres,$apimastersres){
 		global $callConfig;
 		$api_hit_id = $post['api_hit_id'] !=""?$post['api_hit_id']:$get['api_hit_id'];
 	 	$checkstatus = $post['checkstatus'] !=""?$post['checkstatus']:$get['checkstatus'];
@@ -1236,7 +1236,7 @@ class tallyClass extends userClass{
 
 
 	}
-	function tallyAPIReceiveTransactions($get,$post,$api_hitsres,$apimastersres){
+	public function tallyAPIReceiveTransactions($get,$post,$api_hitsres,$apimastersres){
 		global $callConfig;
 		
 		$api_hit_id = $post['api_hit_id'] !=""?$post['api_hit_id']:$get['api_hit_id'];
@@ -1443,7 +1443,6 @@ class tallyClass extends userClass{
 	        	$stringary['transaction'] = $maintransactionary;
 	        	$stringary['transaction_res'] = $maintransactionaryres;
 	        	$stringary['error'] = 'success';
-	        	$stringary['error'] = 'success';
 						
 			}	  				
 			//stringary
@@ -1456,7 +1455,7 @@ class tallyClass extends userClass{
  		return $responsary;
 	}
 
-	function checkAPIDataValidateOrNot($get,$post){
+	public function checkAPIDataValidateOrNot($get,$post){
 		global $callConfig;
  		$return['post'] = $post;
  		$api_hit_id = $post['api_hit_id'] !=""?$post['api_hit_id']:$get['api_hit_id'];
@@ -1610,28 +1609,28 @@ class tallyClass extends userClass{
 	}
 
 
-	function toSendItemsToTally($get){
+	public function toSendItemsToTally($get){
 	 	global $callConfig;
 	 	$query = "SELECT company_id, sku, item_name FROM items WHERE company_id =".$get['company_id']." AND is_active=0";
  		$data = $callConfig->getAllRows($query);
  		$return['result'] = $data;
 	 	return $return;
 	}
-	function tosendCostCentersToTally($get){
+	public function tosendCostCentersToTally($get){
 	 	global $callConfig;
 	 	$query = "SELECT company_id, cost_center_name FROM cost_centers WHERE company_id =".$get['company_id']." AND is_active=0";
  		$data = $callConfig->getAllRows($query);
  		$return['result'] = $data;
 	 	return $return;
 	}
-	function toSendUnitOfMeasurementsToTally($get){
+	public function toSendUnitOfMeasurementsToTally($get){
 	 	global $callConfig;
 	 	$query = "SELECT company_id, uom_short_code, uom_name FROM unit_of_measurements WHERE company_id =".$get['company_id']." AND is_active=0";
  		$data = $callConfig->getAllRows($query);
  		$return['result'] = $data;
 	 	return $return;
 	}
-	function toSendWarehousesToTally($get){
+	public function toSendWarehousesToTally($get){
 	 	global $callConfig;
 	 	$query = "SELECT company_id, warehouse_short_name, warehouse_name FROM warehouses WHERE company_id =".$get['company_id']." AND is_active=0";
  		$data = $callConfig->getAllRows($query);
@@ -1641,7 +1640,7 @@ class tallyClass extends userClass{
 
 	
 	/**
-	function tocheckdynamictransactionall($get){
+	public function tocheckdynamictransactionall($get){
 		global $callConfig;
 		echo "<pre>";
 		$api_hit_id = $get['api_hit_id'];
@@ -1806,7 +1805,7 @@ class tallyClass extends userClass{
 	}
 	**/
 	/**
-	function tocheckdynamictransactionall($get){
+	public function tocheckdynamictransactionall($get){
 		global $callConfig;
 		$api_hit_id = $get['api_hit_id'];
 	 	$checkstatus = $get['checkstatus'];
@@ -1951,7 +1950,7 @@ class tallyClass extends userClass{
   		return $return;
 
 	}  
-	function toadditemleveltallydata($apihitre, $table, $id){
+	public function toadditemleveltallydata($apihitre, $table, $id){
 		global $callConfig;
 		$item_array = array('Stock_Item'=>'item_name', 'RATE'=>'item_price', 'QUANTITY'=>'item_quantity', 'AMOUNT'=>'item_amount');
 		
@@ -1985,7 +1984,7 @@ class tallyClass extends userClass{
 	} **/
 
 
-	function aPIDetailStoretoDatabase($get,$post){
+	public function aPIDetailStoretoDatabase($get,$post){
 		global $callConfig;
  		$return['post'] = $post;
  		$api_hit_id = $post['api_hit_id'] !=""?$post['api_hit_id']:$get['api_hit_id'];

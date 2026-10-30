@@ -157,7 +157,7 @@ function numberToWordFormate($number){
     if($points !=''){
         $result.= $points . " Paise  ";
     }
-    echo ucwords($result." only");
+    return ucwords($result." only");
 }
 function emptyCheck($valu){
     $value = "";
@@ -185,6 +185,7 @@ function emptyCheck($valu){
 <!DOCTYPE html>
 <html>
 <head>
+    <title>InfiSuite</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     

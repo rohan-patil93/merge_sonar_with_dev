@@ -130,7 +130,7 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
           </tr>
           <?php
           $sl = 1;
-          if (!empty($return['open_po_report']) && !empty($return['open_po_report'])) {
+          if (!empty($return['open_po_report'])) {
             foreach ($return['open_po_report'] as $data) {
               $cssdata[] = array( 'Sl No' => $sl, 'PO Number' => $data['po_no'], 'PO Date' => $data['po_date'], 'Vendor Name' => $data['vendor_name'], 'Item Code' => $data['item_id'], 'Item Name' => $data['item_name'], 'Ordered Qty' => $data['ordered_qty'], 'Received Qty' => $data['received_qty'], 'Pending Qty' => $data['pending_qty'], 'Due Date' => $data['due_date'], 'PO Value' => $data['po_value'], 'Status' => $data['status_name'] );
               ?>

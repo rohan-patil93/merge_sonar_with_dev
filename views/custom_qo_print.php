@@ -185,7 +185,7 @@ function numberToWordFormate($number){
     if($points !=''){
         $result.= $points . " Paise  ";
     }
-    echo ucwords($result." only");
+    return ucwords($result." only");
 }
 function emptyCheck($valu){
     $value = "";

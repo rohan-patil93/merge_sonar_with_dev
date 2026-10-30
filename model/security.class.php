@@ -2,7 +2,7 @@
 date_default_timezone_set('Asia/Kolkata');
 class SecurityClass
 {
-    function getVisitorsReportData($get){
+    public function getVisitorsReportData($get){
         global $callConfig;
         $return = array();
         $date = $get['date'] ?? '';
@@ -33,7 +33,7 @@ class SecurityClass
     }
 
 
-   function getVisitorsDashboardData($get)
+   public function getVisitorsDashboardData($get)
 {
     global $callConfig;
     // ---------- Existing totals (unchanged) ----------
@@ -276,7 +276,7 @@ function getVisitorsDataBasedOnDate($get)
 
     return $return;
 }
-   function getVisitorPassDetails($get)
+   public function getVisitorPassDetails($get)
 {
     global $callConfig;
     $return = array();
@@ -385,7 +385,7 @@ function getVisitorsDataBasedOnDate($get)
     return $return;
 }
 
-    function getVisitorInsertRelatedData($get){
+    public function getVisitorInsertRelatedData($get){
         global $callConfig;
         $return = array();
         $company_id = (int)($get['company_id'] ?? 0);
@@ -508,7 +508,7 @@ function getVisitorsDataBasedOnDate($get)
         $return['items'] = $data;
         return $return;
     }
-    function getNextBadgeForGate($get) {
+    public function getNextBadgeForGate($get) {
 
         global $callConfig;
         if ($get['gate_id'] <= 0) {
@@ -564,7 +564,7 @@ function getVisitorsDataBasedOnDate($get)
         );
     }
 
-    function getEmployeePassDetails($get){
+    public function getEmployeePassDetails($get){
         global $callConfig;
         $return = array();
         $whr = '';
@@ -586,7 +586,7 @@ function getVisitorsDataBasedOnDate($get)
         return $return;
     }
 
-    function getVisitorsByPhoneAndEmpCode($get){
+    public function getVisitorsByPhoneAndEmpCode($get){
         global $callConfig;
         $return = array();
         $phone = urldecode($get['phone']) ?? '';
@@ -613,7 +613,7 @@ function getVisitorsDataBasedOnDate($get)
         return $return;
     }
 
-    function getVendorSupplierTransactionItems($get) {
+    public function getVendorSupplierTransactionItems($get) {
         global $callConfig;
         $company_id = (int)($get['company_id'] ?? 1);
         $transaction_id = (int)($get['transaction_id'] ?? 0);
@@ -673,13 +673,13 @@ function getVisitorsDataBasedOnDate($get)
     }
 
 
-    function makeCode($name,$company_id){
+    public function makeCode($name,$company_id){
         global $callConfig;
         $row = $callConfig->getRow("SELECT genc_detail_code FROM general_code_details WHERE company_id={$company_id} AND genc_code='{$name}' AND is_active=0 ORDER BY genc_detail_code DESC LIMIT 1");
         $code = $row->genc_detail_code ? (int)$row->genc_detail_code + 1 : 1;
         return $code;
     }
-    function insertVisitorBundle($get, $post) {
+    public function insertVisitorBundle($get, $post) {
         global $callConfig;
         $company_id = (int)($get['company_id'] ?? 0);
         $user_id    = (int)($get['user_id'] ?? 0);
@@ -1477,7 +1477,7 @@ function getVisitorsDataBasedOnDate($get)
         ];
     }
 
-    function saveVisitorOut($get, $post){
+    public function saveVisitorOut($get, $post){
         global $callConfig;
         $company_id = (int)($get['company_id'] ?? 0);
         $user_id    = (int)($get['user_id'] ?? 0);
@@ -1633,7 +1633,7 @@ function getVisitorsDataBasedOnDate($get)
         );
     }
 
-    function getVisitorsSearch($get){
+    public function getVisitorsSearch($get){
         global $callConfig;
         $out = ['visitor_logs_res' => []];
 
@@ -1708,7 +1708,7 @@ function getVisitorsDataBasedOnDate($get)
         return $out;
     }
 
-    function getVisitorsList($get)
+    public function getVisitorsList($get)
 {
     global $callConfig;
     $return = array();
@@ -1827,7 +1827,7 @@ function getVisitorsDataBasedOnDate($get)
 }
 
 
-    function getvisitormaterialgatepassdata($get){
+    public function getvisitormaterialgatepassdata($get){
         global $callConfig;
         $return = array();
         if($get['rid'] != ''){
@@ -1850,7 +1850,7 @@ function getVisitorsDataBasedOnDate($get)
         return $return;
     }
 
-    function getvisitorworkpermitdata($get){
+    public function getvisitorworkpermitdata($get){
         global $callConfig;
         $return = array();
         if($get['rid'] != ''){
@@ -1888,7 +1888,7 @@ function getVisitorsDataBasedOnDate($get)
         return $return;
     }
 
-    function approveVisitorByHost($rid, $status) {
+    public function approveVisitorByHost($rid, $status) {
         global $callConfig;
         $rid = (int)$rid;
         if ($rid <= 0) {
@@ -1912,7 +1912,7 @@ function getVisitorsDataBasedOnDate($get)
         return $res;
     }
 
-    function getVisitorStatus($rid) {
+    public function getVisitorStatus($rid) {
         global $callConfig;
         $rid = (int)$rid;
         $row = $callConfig->getRow("SELECT current_Status, whom_to_meet, emp_temp_whom_to_meet, deliver_to, authorized_employee FROM visitor_logs WHERE id = {$rid} AND is_active = 0");
@@ -1939,7 +1939,7 @@ function getVisitorsDataBasedOnDate($get)
         ];
     }
 
-    function resendApprovalEmail($rid) {
+    public function resendApprovalEmail($rid) {
         global $callConfig;
         $rid = (int)$rid;
         $row = $callConfig->getRow("SELECT * FROM visitor_logs WHERE id = {$rid} AND is_active = 0");
@@ -2033,7 +2033,7 @@ function getVisitorsDataBasedOnDate($get)
         return ['status' => 'success', 'message' => 'Reminder email sent to ' . $hostEmail,'sent_log'=>$sent];
     }
 
-    function manualConfirm($rid) {
+    public function manualConfirm($rid) {
         global $callConfig;
         $rid = (int)$rid;
         $row = $callConfig->getRow("SELECT current_Status FROM visitor_logs WHERE id = {$rid} AND is_active = 0");
@@ -2049,7 +2049,7 @@ function getVisitorsDataBasedOnDate($get)
         return ['status' => 'success'];
     }
 
-    function finalizeCheckin($rid, $gate_id, $company_id, $user_id, $location_id) {
+    public function finalizeCheckin($rid, $gate_id, $company_id, $user_id, $location_id) {
         global $callConfig;
         $rid = (int)$rid;
         $row = $callConfig->getRow("SELECT * FROM visitor_logs WHERE id = {$rid} AND is_active = 0");
@@ -2106,7 +2106,7 @@ function getVisitorsDataBasedOnDate($get)
         return ['status' => 'success', 'rid' => $rid, 'badge' => $generatedCode];
     }
     /**
-        function getVisitorDetails($get)
+        public function getVisitorDetails($get)
     {
         global $callConfig;
         $return = array();
@@ -2206,7 +2206,7 @@ function getVisitorsDataBasedOnDate($get)
         return $return;
     }
 **/
-    function getReferenceTransactions($get)
+    public function getReferenceTransactions($get)
     {
         global $callConfig;
         $doc_type = $get['doc_type'] ?? '';
@@ -2228,7 +2228,7 @@ function getVisitorsDataBasedOnDate($get)
         return $results;
     }
 
-    function getHistoricalVisitorProfileSearch($get)
+    public function getHistoricalVisitorProfileSearch($get)
     {
         global $callConfig;
         $query = isset($get['query']) ? trim($get['query']) : '';
@@ -2282,7 +2282,7 @@ function getVisitorsDataBasedOnDate($get)
         }
         return $results;
     }
-    function getVisitorDetails($get)
+    public function getVisitorDetails($get)
 {
     global $callConfig;
     $return = array();
@@ -2508,7 +2508,7 @@ function getVisitorProfilesReportData($get)
         return $return;
     }
 
-    function getVisitorProfileDetails($get)
+    public function getVisitorProfileDetails($get)
     {
         global $callConfig;
         $return = array();

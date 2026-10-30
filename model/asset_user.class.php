@@ -1,6 +1,6 @@
 <?php 
 class assetUserClass extends userClass{
-	function getAssetAllocation($get){
+	public function getAssetAllocation($get){
 		global $callConfig;
 		$return = array();
 		//print_r($get); exit;
@@ -445,7 +445,7 @@ class assetUserClass extends userClass{
 
 		return $return;
 	}
-	function insertAssetRequest($get, $post){
+	public function insertAssetRequest($get, $post){
 		global $callConfig;
 		$return['post'] = $post;
 		$attributes =implode(",",(array)$post['attribute']);
@@ -464,7 +464,7 @@ class assetUserClass extends userClass{
 		}
 		return $return;
 	}
-	function getassetTransferRequests($get){
+	public function getassetTransferRequests($get){
 		global $callConfig;
 		$return = array();
 		if($get['rid'] !=""){
@@ -539,7 +539,7 @@ class assetUserClass extends userClass{
 		
 		return $return;	
 	}
-	function insertAssetRequestTransfers($get, $post){
+	public function insertAssetRequestTransfers($get, $post){
 		global $callConfig;
 		$return = array();
 		$return['get'] = $get;
@@ -568,7 +568,7 @@ class assetUserClass extends userClass{
 		return $return;	
 	}
 
-	function getactiveassetanystage($get){
+	public function getactiveassetanystage($get){
 		global $callConfig;
 		$sql1 = "SELECT asset_id FROM `asset_request_transfers` WHERE company_id = '".$get['company_id']."' AND current_status = '0' AND is_active = 0";
 		$res1=$callConfig->getAllRows($sql1);
@@ -586,7 +586,7 @@ class assetUserClass extends userClass{
 		$asset_id = implode(",",(array)$asset_ids);
 		return $asset_id;
 	}
-	function insertAssetVerification($get,$post){
+	public function insertAssetVerification($get,$post){
 		global $callConfig;
 		$assetary = explode(',', $post['asset_id']);
 		foreach($assetary as $asset_id){
@@ -602,7 +602,7 @@ class assetUserClass extends userClass{
 	}
 
 	
-	function getAssetVerifications($get){
+	public function getAssetVerifications($get){
 		global $callConfig;
 		$return = array();
 		$todaytedate = date('Y-m-d');
@@ -657,7 +657,7 @@ class assetUserClass extends userClass{
 		}
 		return $return;
 	}	
-	function updateAssetVerificationStatus($get, $post){
+	public function updateAssetVerificationStatus($get, $post){
 		global $callConfig;
 		$return = array();
 		$insert_array = array('verification_date_time'=>date('Y-m-d H:i:s'),'user_note'=>$post['user_note'],'current_status'=>ST_APPROVED,'updated_date'=>date('Y-m-d H:i:s'),'updated_by'=>$post['user_id']);
@@ -672,7 +672,7 @@ class assetUserClass extends userClass{
 //'".$from." 00:00:00' and '".$to." 23:59:59'
 		return $return;
 	}
-	function assetAccepts($get,$post){
+	public function assetAccepts($get,$post){
 		global $callConfig;
 		$asset_request_transfer_id = $post['asset_request_transfer_id'];
 		$asset_request_transferssql = "SELECT id, asset_id,  originator, start_date, end_date FROM asset_request_transfers WHERE company_id = '".$get['company_id']."' AND id = '".$asset_request_transfer_id."' AND is_active =0";
@@ -809,7 +809,7 @@ function insertAsset($post){
 	}
 
 
-	function insertAssetReturn($get, $post){
+	public function insertAssetReturn($get, $post){
 		global $callConfig;
 		$return['get'] = $get; 
 		$return['post'] = $post;
@@ -880,7 +880,7 @@ function insertAsset($post){
 
 
 
-	function getAssetAllocation_old($get){
+	public function getAssetAllocation_old($get){
 		global $callConfig;
 		$conditionassetlist = "";
 		$empassetcoditon = "";
@@ -1055,7 +1055,7 @@ function insertAsset($post){
 	return $returnresult;
 } 
 
-	function insertAssetAllocation($get,$post){
+	public function insertAssetAllocation($get,$post){
 		global $callConfig;
 		$table = "user_assets";
 		if($post['singleasset']=="Y"){ //single asset alocation request page
@@ -1142,7 +1142,7 @@ function insertAsset($post){
 		}	
 		return $returnresult;
 	}
-	function insertAssetTransaction($post,$table,$res,$assetupdatearray=""){
+	public function insertAssetTransaction($post,$table,$res,$assetupdatearray=""){
 		global $callConfig;
 		//print_r($res);
 		$returnresult['resdd'][] =$res;
@@ -1164,7 +1164,7 @@ function insertAsset($post){
 		$returnresult['insert_history_res'][]  =$insert_history;
 		return $returnresult;
 	}
-	function insertAssetExtension($get,$post){
+	public function insertAssetExtension($get,$post){
 		global $callConfig;
 		$get['employee_id'] = $post['emp_id'];
 		$get['company_id'] = $post['company_id'];
@@ -1191,7 +1191,7 @@ function insertAsset($post){
 		return $returnresult;
 	}
 
-	function insertAssetRequestold($get, $post){
+	public function insertAssetRequestold($get, $post){
 		global $callConfig;
 		$returnresult['post'] = $post;
 		$get['employee_id'] = $post['emp_id'];
@@ -1215,7 +1215,7 @@ function insertAsset($post){
 		return $returnresult;
 	}
 
-	function getAssetAndAttributes($get){ 
+	public function getAssetAndAttributes($get){ 
 		global $callConfig;
 		$assetsql = "SELECT id,asset_description FROM assets WHERE is_active =0 AND company_id = '".$get['company_id']."' AND category_id ='".$get['cat_id']."'";
 		$assetdertails=$callConfig->getAllRows($assetsql);
@@ -1225,7 +1225,7 @@ function insertAsset($post){
 		$returnarray['asset_attributes']= $assetdertails; 
 		return $returnarray;
 	}
-	function getassetTransferRequestsold($get){
+	public function getassetTransferRequestsold($get){
 		global $callConfig;
 		$assettrareqsql = "SELECT id,request_date,required_by,admin_buddy,request_status,description FROM asset_transfer_requests WHERE is_active =0 AND company_id = '".$get['company_id']."' AND (required_by = '".$get['required_by']."' OR admin_buddy = '".$get['admin_buddy']."')";
 		$assettrareqres=$callConfig->getAllRows($assettrareqsql);
@@ -1233,7 +1233,7 @@ function insertAsset($post){
 	}
 	
 	/*End asset allocation */ 
-	function getemployeeassetandassetsdata($get, $post){
+	public function getemployeeassetandassetsdata($get, $post){
 		global $callConfig;
 		//$whr = "emp_id=".$get['empid']." AND is_active=0";
 		$equery = "SELECT eas.id id, eas.asset_id,  eas.start_date, eas.end_date, eas.remarks, eas.current_status, ast.asset_code, ast.serial_no, ast.asset_description FROM user_assets eas, assets ast WHERE eas.company_id = ast.company_id AND eas.asset_id = ast.id AND eas.user_id = ".$get['empid']."  AND eas.is_active = 0"; 
@@ -1250,7 +1250,7 @@ function insertAsset($post){
 		$return['employee'] = $callConfig->getRow($equery);		 
 		return 	$return;
 	}
-	function addupdateassetsallocation($post, $get){
+	public function addupdateassetsallocation($post, $get){
 		global $callConfig;
 		foreach($post['asset_id'] as $key=>$asset){
 			if($asset!=""){
@@ -1306,7 +1306,7 @@ function insertAsset($post){
 		}
 		return array('post'=>$post,'query'=>$resquery);
 	}
-	function  vmssingleemployeedashoard($get){
+	public function  vmssingleemployeedashoard($get){
 		global $callConfig;
 		$fristdate = date("Y-m-01", strtotime( date( 'Y-m-01' )." -6 months")); 
 		$lastdate = date("Y-m-t"); 
@@ -1356,14 +1356,14 @@ function insertAsset($post){
 		$assmentholidays = $callConfig->getAllRows($query);
 		return array('timesheet'=>$timesheet, 'submited'=>$sumit, 'approved'=>$approve, 'create'=>$create,'employee'=>$employee, 'holidays'=>$holidays,'holileave'=>$holileave, 'workdays'=>$workdays, 'nonetworkindays'=>$nonetworkindays, 'assmentholidays'=>$assmentholidays, 'weekdates'=>$weekdates,'queries'=>$queries);
 	}
-	function togetassetsempassetdetails($get,$post){
+	public function togetassetsempassetdetails($get,$post){
 		global $callConfig;
 			//print_r($get);
 		$emp_assetssql = " SELECT emp_a.id, emp_a.start_date, emp_a.end_date, emp_a.current_status, asset.asset_code , asset.asset_description FROM `user_assets` emp_a, assets asset WHERE emp_a.company_id = '".$get['company_id']."' AND emp_a.is_active = 0 AND emp_a.asset_id = asset.id AND emp_a.user_id =  '".$get['empid']."'";
 		$emp_assetres = $callConfig->getAllRows($emp_assetssql);
 		return $emp_assetres;
 	}
-	function togetassestdashboarddetails($get,$post){
+	public function togetassestdashboarddetails($get,$post){
 		global $callConfig;
 		$query = "SELECT sum(if(current_status=31,1,0)) allocated, sum(if(current_status=32,1,0)) returned FROM `user_assets` WHERE is_active =0";
 		$data1 = $callConfig->getRow($query);

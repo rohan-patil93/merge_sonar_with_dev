@@ -1,6 +1,6 @@
 <?php 
 class pmsUserClass extends userClass{
-	function publichAppraisal($get){
+	public function publichAppraisal($get){
 		global $callConfig;
 		$returnarray = array();
 		$pssal ="SELECT * FROM performance_appraisal_setups WHERE company_id =".$get['company_id']." AND id = '".$get['id']."' AND is_active = 0";
@@ -86,7 +86,7 @@ class pmsUserClass extends userClass{
 		}  **/
 	return $returnarray;
 	}
-	function inserPerformanaceAppraiser($post){
+	public function inserPerformanaceAppraiser($post){
 	global $callConfig;
 	$returnaray = array();
 	$insertfields = "";
@@ -273,7 +273,7 @@ class pmsUserClass extends userClass{
 	}	
 	return $retuenres;
 }**/
-	function getPerFormanceAppraisalReport($get){
+	public function getPerFormanceAppraisalReport($get){
 		global $callConfig;
 		$returnaray = $employees = array();
 		$sql = "SELECT emp.id, emp.display_name, emp.emp_code, emp.image FROM employees emp, application_users au WHERE emp.company_id = '".$get['company_id']."' AND emp.company_id = au.company_id AND emp.user_id = au.id AND emp.is_active = 0 AND emp.is_active = au.is_active AND (('1' = '".$get['admin_type']."') OR au.reports_to = '".$get['user_id']."' OR au.id = '".$get['user_id']."' OR hr_buddy = '".$get['emp_id']."') AND emp.is_active = 0";
@@ -467,7 +467,7 @@ function getPerFormanceAppraisal($get){ //please removed not working code
 
 
 /*New Data*/
-	function insertPerforManceAppraisalSetups($get,$post){
+	public function insertPerforManceAppraisalSetups($get,$post){
 		global $callConfig;
 		$returnarray = array();
 		$insert_array = array('performance_appraisal_name'=>$post['performance_appraisal_name'],'assessment_year'=>$post['assessment_year'],'url'=>$post['url'],'file_name'=>$post['file_name'],'assessment_start_date'=>$this->dateconvertdbformat($post['assessment_start_date']),'assessment_end_date'=>$this->dateconvertdbformat($post['assessment_end_date']),'self_assessment_start_date'=>$this->dateconvertdbformat($post['self_assessment_start_date']),'self_assessment_end_date'=>$this->dateconvertdbformat($post['self_assessment_end_date']),'manager_assessment_start_date'=>$this->dateconvertdbformat($post['manager_assessment_start_date']),'manager_assessment_end_date'=>$this->dateconvertdbformat($post['manager_assessment_end_date']),'reviewing_start_date'=>$this->dateconvertdbformat($post['reviewing_start_date']),'reviewing_end_date'=>$this->dateconvertdbformat($post['reviewing_end_date']),'action_frequency'=>$post['action_frequency'],'appraisal_setup_type'=>$post['appraisal_setup_type'],'appraisal_bell_curve_id'=>$post['appraisal_bell_curve_id']);
@@ -493,7 +493,7 @@ function getPerFormanceAppraisal($get){ //please removed not working code
 		}
 		return $returnarray;
 	}
-	function getPerforManceAppraisalSetups($get){
+	public function getPerforManceAppraisalSetups($get){
 		global $callConfig;
 		$return = array();
 		$passql ="SELECT * FROM performance_appraisal_setups WHERE company_id =".$get['company_id']." AND id = '".$get['rid']."' AND is_active = 0";
@@ -539,7 +539,7 @@ function getPerFormanceAppraisal($get){ //please removed not working code
 		return $return;
 
 	}
-	function insertPerformanceAppraisalQuestions($get,$post){
+	public function insertPerformanceAppraisalQuestions($get,$post){
 		global $callConfig;
 		$returnarray = array();
 		$updateset = array("is_active"=>null);
@@ -567,7 +567,7 @@ function getPerFormanceAppraisal($get){ //please removed not working code
 		//$returnarray['insert'] = $insert;
 		return $return;
 	}
-	function getKipAndKraDetails($get){// getOrganizationGoalsSetails
+	public function getKipAndKraDetails($get){// getOrganizationGoalsSetails
 		global $callConfig;
 		$retuenres = array();
 		$kratable  = $get['kratable'];
@@ -613,7 +613,7 @@ function getPerFormanceAppraisal($get){ //please removed not working code
 		}
 		return $retuenres;
 	}
-	function addkra($get,$post){
+	public function addkra($get,$post){
 		global $callConfig;
 		$kratable  = $post['kratable'];
 		if($post['kra_id'] !=""){
@@ -631,7 +631,7 @@ function getPerFormanceAppraisal($get){ //please removed not working code
 		}
 		return $insert;
 	}
-	function addorupdatekpi($get,$post){
+	public function addorupdatekpi($get,$post){
 		global $callConfig; 
 		$returnres = array();
 		$kratable  = $post['kratable'];
@@ -673,7 +673,7 @@ function getPerFormanceAppraisal($get){ //please removed not working code
 		$returnre['upsql'] = $upsql;;
 		return $returnre;
 	}
-	function insertAppraisalKRA($get){
+	public function insertAppraisalKRA($get){
 		global $callConfig;
 		$returnaray = array();
 		$insertkra = "INSERT INTO `appraisal_key_result_areas`(`company_id`, `appraisal_id`,`kra_id`,`area_name`, `description`, `weightage`, `kra_type`, `is_active`, `current_status`, `created_date`, `created_by`)SELECT '".$get['company_id']."','".$get['appraisal_id']."',`id`, `area_name`, `description`, `weightage`, `kra_type`, '0','0','".date('Y-m-d h:i:s')."','".$get['user_id']."' FROM `key_result_areas` WHERE company_id = '".$get['company_id']."' AND is_active = 0";
@@ -692,7 +692,7 @@ function getPerFormanceAppraisal($get){ //please removed not working code
 		// $returnara['insertressql'] =$inserttask;
 		return $returnara;
 	}
-	function getorganizationgoalcheck($get){
+	public function getorganizationgoalcheck($get){
 	global $callConfig;
 	$where="";
 	$returnaray = array();
@@ -943,13 +943,13 @@ function pmsDashboard1($get){
 // 	return $return;
 // }
 
-	function pmsDashboard2($get){
+	public function pmsDashboard2($get){
 		global $callConfig;
 		$return = array();
 		$return['menu_data'] = $this->toreportempdropdown($get);
 		return $return;
 	}
-	function getEmployeeGoalsDetails($get){
+	public function getEmployeeGoalsDetails($get){
 	global $callConfig;
 	$retuenres = array();
 		//$retuenres['scsdc'] = $get;
@@ -1044,7 +1044,7 @@ function getOrganizationGoals($get){
 /*New Data*/
 
 
-	function insertGoals($get,$post){
+	public function insertGoals($get,$post){
 		global $callConfig;
 		$returnarray = array();
 		if($post['start_goal'] == "Y"){
@@ -1080,7 +1080,7 @@ function getOrganizationGoals($get){
 		}
 		return $returnarray;
 	}
-	function getGoals($get){
+	public function getGoals($get){
 		global $callConfig;
 		$return = array();
 		$employee_goalssql = "SELECT * FROM goals WHERE company_id='".$get['company_id']."' AND id='".$get['rid']."' AND is_active=0"; 
@@ -1105,7 +1105,7 @@ function getOrganizationGoals($get){
 
 		return $return;
 	}
-	function getFeedBacks($get){
+	public function getFeedBacks($get){
 		global $callConfig;
 		$return = array();
 
@@ -1129,7 +1129,7 @@ function getOrganizationGoals($get){
 		return $return;
 	}
 	
-	function insertFeedBacks($get,$post){
+	public function insertFeedBacks($get,$post){
 		global $callConfig;
 		$returnarray = array();
 		if($post['start_feedback'] == "Y"){
@@ -1170,7 +1170,7 @@ function getOrganizationGoals($get){
 		return $returnarray;
 
 	}
-	function getEmployeePerformanceAppraisals($get){
+	public function getEmployeePerformanceAppraisals($get){
 	global $callConfig;
 	$return = array();
 	if($get['ajax']=="Y"){  // Ajax Not Call
@@ -1247,7 +1247,7 @@ function getOrganizationGoals($get){
 	}
 	return $return;
 }
-	function insertEmployeePerformanceAppraisals($get,$post){
+	public function insertEmployeePerformanceAppraisals($get,$post){
 		global $callConfig;
 		$return = array();
 		$epasql = "SELECT id, appraisal_id,employee_id FROM employee_performance_appraisals WHERE company_id = '".$get['company_id']."' AND id = '".$post['rid']."' AND is_active = 0"; 
@@ -1307,7 +1307,7 @@ function getOrganizationGoals($get){
 		}
 		return $return;
 	}
-	function getEmployeeGoals($get){
+	public function getEmployeeGoals($get){
 		global $callConfig;
 		$return = array();
 		$employee_goalssql = "SELECT eg.id, eg.employee_id, eg.percentage_of_completion, go.goal_name, go.descriptions, go.goal_start_date, go.goal_end_date FROM employee_goals eg, goals go WHERE eg.company_id = '".$get['company_id']."' AND eg.id = '".$get['rid']."' AND eg.is_active = 0 "; 
@@ -1316,7 +1316,7 @@ function getOrganizationGoals($get){
 		$return['employee_goals'] = $employee_goalsres;
 		return $return;
 	}
-	function getPMSAdminDashboard($get){
+	public function getPMSAdminDashboard($get){
 		global $callConfig;
 		$return = array();
 		$employee_goalssql = "SELECT eg.id, eg.employee_id, eg.percentage_of_completion, go.goal_name, go.descriptions, go.goal_start_date, go.goal_end_date FROM employee_goals eg, goals go WHERE eg.company_id = '".$get['company_id']."' AND eg.is_active = 0 "; 
@@ -1406,7 +1406,7 @@ function getOrganizationGoals($get){
 
 		return $return;
 	}
-	function getPMSEmployeeDashboard($get){
+	public function getPMSEmployeeDashboard($get){
 		global $callConfig;
 		$return = array();
 		//AND JSON_SEARCH(employee_ids, 'one', '".$get['employee_id']."') IS NOT NULL
@@ -1434,7 +1434,7 @@ function getOrganizationGoals($get){
 
 		return $return;
 	}
-	function getEmployeeFeedBacks($get){
+	public function getEmployeeFeedBacks($get){
 		global $callConfig;
 		$return = array();
 		$employee_feedbackssql = "SELECT fe.question, fe.description, fe.answer_type, fe.feedback_type, fe.action_frequency, fe.question_options, fe.max_ratting, ef.id, ef.response, ef.response_datetime FROM employee_feedbacks ef, feedbacks fe WHERE ef.company_id = '".$get['company_id']."' AND ef.company_id = fe.company_id AND ef.feedback_id = fe.id AND ef.id = '".$get['rid']."'  AND ef.is_active = 0 AND ef.is_active = fe.is_active"; 
@@ -1443,7 +1443,7 @@ function getOrganizationGoals($get){
 		$return['employee_feedbacks'] = $employee_feedbacksres;
 		return $return;
 	}
-	function getEmployeePerformanceAppraisalsNormalisations($get,$post){
+	public function getEmployeePerformanceAppraisalsNormalisations($get,$post){
 		global $callConfig;
 		$return = array();
 		$condition = "";
@@ -1542,7 +1542,7 @@ function getOrganizationGoals($get){
 
 		return $return;
 	}
-	function getAppraisalBellCurves($get){
+	public function getAppraisalBellCurves($get){
 		global $callConfig;
 		$return = array();
 		$condition = "";
@@ -1557,7 +1557,7 @@ function getOrganizationGoals($get){
 		
 		return $return;
 	}
-	function insertAppraisalBellCurves($get,$post){
+	public function insertAppraisalBellCurves($get,$post){
 		global $callConfig;
 		$returnarray = array();
 		$returnarray['post'] = $post;
@@ -1580,7 +1580,7 @@ function getOrganizationGoals($get){
 		$returnarray['insert'] = $insert;
 		return $returnarray;
 	}
-	function publishCommentAndRank($get,$post){
+	public function publishCommentAndRank($get,$post){
 		global $callConfig;
 		$returnarray = array();
 		$insert_array['updated_by'] = $post['userid'];

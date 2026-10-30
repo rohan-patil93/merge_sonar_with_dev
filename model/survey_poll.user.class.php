@@ -2,7 +2,7 @@
 class surveyPollUserClass extends userClass
 {
 	/*------- SURVEY SURVEY Start ---*/
-	function getsurveydetails($get){
+	public function getsurveydetails($get){
 
 		global $callConfig;
 		$whr="company_id=".$get['company_id']." and is_active='0'";
@@ -39,7 +39,7 @@ class surveyPollUserClass extends userClass
 	}
 
 
-	function createsurveys($post,$get){
+	public function createsurveys($post,$get){
 
 		global $callConfig;
 		$rowid=$get['rowid'];
@@ -129,7 +129,7 @@ class surveyPollUserClass extends userClass
     		return $retunn_survey_id;
 
     	}
-    	function getsharedsurveydetails($get){
+    	public function getsharedsurveydetails($get){
     		global $callConfig;
     		$whr="company_id=".$get['company_id']." and is_active='0' and id=".$get['survey_id'];
     		$query=$callConfig->selectQuery(TBL_SURVEY_SETUP,'*',$whr,'','','');
@@ -167,7 +167,7 @@ class surveyPollUserClass extends userClass
 
     		return $details;
     	}
-    	function savesurveyreponses($post, $get) {
+    	public function savesurveyreponses($post, $get) {
     		global $callConfig;
     	// set is_active 1 bsed on survey id and empid
     		$updatearray = array('is_active'=>'1');
@@ -182,7 +182,7 @@ class surveyPollUserClass extends userClass
     		}
     		return $qresponse;
     	}
-    	function getsurveysummary($get){
+    	public function getsurveysummary($get){
     		global $callConfig;
 			
     		if($get['survey_type']==EXITE_INTERVIEW_TYPE){
@@ -276,7 +276,7 @@ class surveyPollUserClass extends userClass
 
     	}
 
-    	function getsurveylist($get){
+    	public function getsurveylist($get){
     		global $callConfig;
     		$queryresponse = "SELECT * FROM ".TBL_SURVEY_SETUP." WHERE is_active=0 and company_id=".$get['company_id']." and id=".$get['survey_id']." and category=".$get['category'] ; 
     		$response = $callConfig->getRow($queryresponse);
@@ -310,7 +310,7 @@ class surveyPollUserClass extends userClass
     	}
 
 
-    	function getsurveyresult($get){
+    	public function getsurveyresult($get){
     		global $callConfig;
     		$queryresponse = "SELECT * FROM ".TBL_SURVEY_RESPONSE_DETAILS." WHERE is_active=0 and company_id=".$get['company_id']." and survey_id=".$get['survey_id']." and employee_id=".$get['survey_emp_id'] ; 
     		$response = $callConfig->getAllRows($queryresponse);
@@ -349,7 +349,7 @@ class surveyPollUserClass extends userClass
     	}	
 
 
-    	function getsurveyreport($get){
+    	public function getsurveyreport($get){
     		global $callConfig;
     		$Qtypes = array('MultilpleChoice'=>'1','Rating'=>'2','Ranking'=>'3','FreeText'=>'4');
 
@@ -414,7 +414,7 @@ class surveyPollUserClass extends userClass
     		return $details;
     	}
 
-    	function getempsurvey($get){
+    	public function getempsurvey($get){
     		global $callConfig;
     		$tag1 = $get['category'] ==1 ?'Surveys' : 'Polls';
 
@@ -490,7 +490,7 @@ class surveyPollUserClass extends userClass
 
                 return $details;
             }
-	function resolveSurveyAdminDashboardStatus($survey, $questionCount){
+	public function resolveSurveyAdminDashboardStatus($survey, $questionCount){
 		$endTime = $survey->survey_end_time != "" ? $survey->survey_end_time : "12:00:00";
 		$startTime = $survey->survey_start_time != "" ? $survey->survey_start_time : "12:00:00";
 		$endTs = strtotime($survey->survey_end_date." ".$endTime);
@@ -510,7 +510,7 @@ class surveyPollUserClass extends userClass
 		return array('code'=>'other','label'=>'','color'=>'secondary');
 	}
 
-	function mapSurveyAdminDashboardRow($survey, $questionCount, $typeMap, &$filterLabelCache, $totalEmployeeCount){
+	public function mapSurveyAdminDashboardRow($survey, $questionCount, $typeMap, &$filterLabelCache, $totalEmployeeCount){
 		global $callConfig;
 
 		$statusInfo = $this->resolveSurveyAdminDashboardStatus($survey, $questionCount);
@@ -552,7 +552,7 @@ class surveyPollUserClass extends userClass
 		);
 	}
 
-	function getsurveyadmindashboard($get){
+	public function getsurveyadmindashboard($get){
 		global $callConfig;
 
 		$category = $get['category'] != "" ? $get['category'] : '1';
@@ -726,7 +726,7 @@ class surveyPollUserClass extends userClass
 		return $details;
 	}
 
-	function loadSurveyEmployeeDashboardProgressMaps($companyId, $empId, $surveyIds){
+	public function loadSurveyEmployeeDashboardProgressMaps($companyId, $empId, $surveyIds){
 		global $callConfig;
 
 		$questionCounts = array();
@@ -757,7 +757,7 @@ class surveyPollUserClass extends userClass
 		return array('question_counts'=>$questionCounts, 'answered_counts'=>$answeredCounts);
 	}
 
-	function resolveSurveyEmployeeDashboardStatus($responseRow, $surveyRow, $progressPercent){
+	public function resolveSurveyEmployeeDashboardStatus($responseRow, $surveyRow, $progressPercent){
 		$endTime = $surveyRow->survey_end_time != "" ? $surveyRow->survey_end_time : "12:00:00";
 		$endTs = strtotime($surveyRow->survey_end_date." ".$endTime);
 		$nowTs = time();
@@ -817,7 +817,7 @@ class surveyPollUserClass extends userClass
 		);
 	}
 
-	function matchesEmployeeSurveyDashboardFilter($responseRow, $isExpired, $statusFilter){
+	public function matchesEmployeeSurveyDashboardFilter($responseRow, $isExpired, $statusFilter){
 		if($statusFilter == '' || $statusFilter == 'assigned'){
 			return true;
 		}
@@ -833,7 +833,7 @@ class surveyPollUserClass extends userClass
 		return true;
 	}
 
-	function mapSurveyEmployeeDashboardTableRow($responseRow, $surveyRow, $progressPercent, $typeMap, $category){
+	public function mapSurveyEmployeeDashboardTableRow($responseRow, $surveyRow, $progressPercent, $typeMap, $category){
 		$statusInfo = $this->resolveSurveyEmployeeDashboardStatus($responseRow, $surveyRow, $progressPercent);
 		$categoryLabel = 'General';
 		if($surveyRow->survey_type != "" && isset($typeMap[$surveyRow->survey_type])){
@@ -866,7 +866,7 @@ class surveyPollUserClass extends userClass
 		);
 	}
 
-	function resolveSurveyEmployeeId($get){
+	public function resolveSurveyEmployeeId($get){
 		global $callConfig;
 
 		$empId = isset($get['emp_id']) ? trim($get['emp_id']) : '';
@@ -889,7 +889,7 @@ class surveyPollUserClass extends userClass
 		return '';
 	}
 
-	function getemployeesurveydashboard($get){
+	public function getemployeesurveydashboard($get){
 		global $callConfig;
 
 		$category = $get['category'] != "" ? $get['category'] : '1';
@@ -1112,7 +1112,7 @@ class surveyPollUserClass extends userClass
 
 		return $details;
 	} 
-	function totestcodems($get){
+	public function totestcodems($get){
 		global $callConfig;
 		$start = date("Y-m-d", strtotime($get['fromdate']."-01"));
 		$end = date("Y-m-t", strtotime($start));
@@ -1233,7 +1233,7 @@ class surveyPollUserClass extends userClass
     	return $return;
     	//echo "<pre>tuiop";  print_r($loc_holiday);print_r($emp_data); exit;
 	}
-	function toretriveminhorsandweksanddayebasedondateswork($get){
+	public function toretriveminhorsandweksanddayebasedondateswork($get){
 		global $callConfig;
 		$from = $get['from_date'];
 		$to = $get['to_date'];

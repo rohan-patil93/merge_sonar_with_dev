@@ -3,7 +3,7 @@ require_once "dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
 use Dompdf\Options;
 class userClass{ 
-	function checkAdmin($post) {
+	public function checkAdmin($post) {
 		global $callConfig;
 		$login_type = 'N';
 	   //print_r($post); echo "kkkkk"; exit;
@@ -111,7 +111,7 @@ class userClass{
 	   return $return;		
 
 	}
-	function togetbaseurlcreate($get){
+	public function togetbaseurlcreate($get){
 
     	global $callConfig;
     	$user_email = $get['chrUserName'];
@@ -135,7 +135,7 @@ class userClass{
 	    $params = [$baseurl, $httpshttp, $subdomain, $data->domain_name, $host];
 	    return $baseurl;
     }
-	function loginafterdetails($get){
+	public function loginafterdetails($get){
 		global $callConfig;
 		//print_r($get); exit;
 		//To Get login user Deatails 
@@ -353,7 +353,7 @@ class userClass{
 		return $return;
 	}
 	/*
-	function getMainDomainName(){
+	public function getMainDomainName(){
 		$url = SITEURL;
 		$host = parse_url($url, PHP_URL_HOST);
 		$parts = explode('.', $host);
@@ -362,7 +362,7 @@ class userClass{
 		$params = [$mainDomain, $parts, $parts, $parts, $parts];
 		return $mainDomain;
 	}
-	function confrimbutton($id){
+	public function confrimbutton($id){
 		global $callConfig;
 
 		$emailcheckalreadyactivesql = "SELECT urg.id, urg.user_email, da.db_name FROM ".MAINDB.".".TBL_USER_REGISTIRED_GROUPS." urg, ".MAINDB.".database_allocations da WHERE urg.id ='?' AND urg.zqr_connect = da.id  AND urg.email_active = 0";
@@ -409,7 +409,7 @@ class userClass{
 		}
 		return $returnarray;
 	}
-	function logout($data){
+	public function logout($data){
 		global $callConfig;
 		$timm =date("Y-m-d H:i:s");
 		$fieldnames=array('login_to'=>$timm);
@@ -417,7 +417,7 @@ class userClass{
 		$res=$callConfig->updateRecord('application_user_logins',$fieldnames,'user_id',$data);
 		return $res;
 	}
-	function genrateRandomString($n) { 
+	public function genrateRandomString($n) { 
 		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; 
 		$randomString = ''; 
 		//echo "random :".$n;
@@ -428,7 +428,7 @@ class userClass{
 		//echo "randomout :".$randomString;
 		return $randomString; 
 	} 
-	function forgotpassword($email){
+	public function forgotpassword($email){
 		global $callConfig;
 		$whrs="user_email= '?'";
 		$params = [$whrs, $email];
@@ -492,7 +492,7 @@ class userClass{
 		}
 		return $lenn;
 	}
-	function NewUserformate($post,$db_name){
+	public function NewUserformate($post,$db_name){
 		global $callConfig;
 	 	//echo "ravi"; exit;
 	 	$db_name = $db_name !=""?$db_name:$callConfig->dbname;
@@ -556,7 +556,7 @@ class userClass{
 		//$emill = $this->sendNotificationAndEmails($notarry,$post,$post['template_reference_id']);		
 		return $emill;
 	}
-	function NewUserEmailresent($get){
+	public function NewUserEmailresent($get){
 		global $callConfig;
 	 	//echo "ravi"; exit;
 		$whr = "id = '?'";
@@ -625,7 +625,7 @@ class userClass{
 		//print_r($lenn); exit;
 		return $email;
 	}
-	function insertAdminUser($post){
+	public function insertAdminUser($post){
 		global $callConfig;
 		$returnarray['callConfig'] = $callConfig;
 
@@ -786,7 +786,7 @@ class userClass{
 		}
         return $returnarray;
     }
-    function replicateListofCommonTables($post){
+    public function replicateListofCommonTables($post){
    		global $callConfig;
    		//echo "<pre>"; print_r($post); echo "</pre>"; exit;
    		$maxtablecnt = 0; 
@@ -831,21 +831,21 @@ class userClass{
    		//echo "Done"; exit;
    		return $res;
    	}	
-	function getCountAllTablesDataCount($tablename,$fieldname,$where){
+	public function getCountAllTablesDataCount($tablename,$fieldname,$where){
 		global $callConfig;
 		if($where!="")
 			$whr=$where;
 		$query=$callConfig->selectQuery($tablename,$fieldname,$whr,'','','');
 		return $callConfig->getCount($query);
 	}  
-	function getAllTablesData($tablename,$fieldnames='',$where='',$order='',$limit1='',$limit2=''){
+	public function getAllTablesData($tablename,$fieldnames='',$where='',$order='',$limit1='',$limit2=''){
 		global $callConfig;
 		$fieldname = ($fieldnames == '') ? '*' : $fieldnames;
 		$whr = ($where == '') ? '' : $where;
 		$query=$callConfig->selectQuery($tablename,$fieldname,$whr,$order,$limit1,$limit2);
 		return $callConfig->getAllRowsNew($query);
 	}
-	function getrowTablesData($tablename,$fieldnames='',$where='',$order='',$limit1='',$limit2=''){
+	public function getrowTablesData($tablename,$fieldnames='',$where='',$order='',$limit1='',$limit2=''){
 		global $callConfig;
 		$fieldname = ($fieldnames == '') ? '*' : $fieldnames;
 		$whr = ($where == '') ? '' : $where;
@@ -855,34 +855,34 @@ class userClass{
 		//print_r($data);
 		return $callConfig->getRowNew($query);
 	}
-	function insertTablesdata($fieldnames, $table)	{
+	public function insertTablesdata($fieldnames, $table)	{
 		global $callConfig;
 		$res=$callConfig->insertRecord($table,$fieldnames);
 		return $res;
 	}
-	function updateTablesdata($fieldnames, $table, $whr, $value){	
+	public function updateTablesdata($fieldnames, $table, $whr, $value){	
 		global $callConfig;
 		$res=$callConfig->updateRecord($table,$fieldnames,$whr,$value);
 		return $res;
 	}
-	function getAdminUserData($id){
+	public function getAdminUserData($id){
 		global $callConfig;
 		$query=$callConfig->selectQuery(TBL_USERS,'*','id='.$id,'','','');
 		$data = $callConfig->getRowNew($query);
 		return $data;
 	}	
-	function userAuthentication(){
+	public function userAuthentication(){
 		if($_SESSION['userid']!="")	{
 			header("location:index.php?option=com_dashboard");
 		}
 	}
-	function updateAdminUser($post){
+	public function updateAdminUser($post){
 		global $callConfig;
 		$fieldnames=array('name'=>$post['name'],'email'=>$post['email'],'phone'=>$post['phone'],'user_photo'=>$post['image_name']);
 		$res=$callConfig->updateRecord(TPREFIX.TBL_USERS,$fieldnames,'id',$post['hdn_user_id']);
 		return $res;
 	}
-	function addrole($post) {
+	public function addrole($post) {
 		global $callConfig;
 		$option = array();
 		$option ['add'] = isset($post['add']) ? $post['add'] : "off";
@@ -894,7 +894,7 @@ class userClass{
 		$res=$callConfig->insertRecord(TPREFIX.TBL_ROLE,$fieldnames);
 		return $res;
 	}
-	function updateRole($post){
+	public function updateRole($post){
 		//echo "asdasd"; exit;
 		global $callConfig;
 		$option = array();
@@ -907,13 +907,13 @@ class userClass{
 		return $res;
 	}
 
-	function getRoleData(){
+	public function getRoleData(){
 		global $callConfig;
 		$query=$callConfig->selectQuery(TPREFIX.TBL_ROLE,'*','','','','');
 		return $callConfig->getAllRowsNew($query);
 
 	}
-	function getoneRoleData($rid){
+	public function getoneRoleData($rid){
 		global $callConfig;
 		$whr="role_id = ".$rid;
 		$query=$callConfig->selectQuery(TPREFIX.TBL_ROLE,'*',$whr,'','','');
@@ -921,118 +921,118 @@ class userClass{
 		return $callConfig->getRowNew($query);
 
 	}
-	function getSessions() {
+	public function getSessions() {
 		global $callConfig;
 		$query=$callConfig->selectQuery(TPREFIX.TBL_SESSIONS,'*','','','','');
 		return $callConfig->getAllRowsNew($query);
 	}
-	function getBillHistoryData(){
+	public function getBillHistoryData(){
 		global $callConfig;
 		$query=$callConfig->selectQuery(TPREFIX.TBL_BILLHISTORIES_VW,'*','','','','');
 		return $callConfig->getAllRowsNew($query);
 	}
-	function getModuleHistories(){
+	public function getModuleHistories(){
 		global $callConfig;
 		$query=$callConfig->selectQuery(TPREFIX.TBL_MODULEHISTORIES_VW,'*','','','','');
 		return $callConfig->getAllRowsNew($query);
 	}
-	function getRevenuesDetaills(){
+	public function getRevenuesDetaills(){
 		global $callConfig;
 		$query=$callConfig->selectQuery(TPREFIX.TBL_REVENUES,'*','','','','');
 		return $callConfig->getAllRowsNew($query);
 	}
-	function insertCategories($post){
+	public function insertCategories($post){
 		global $callConfig;
 		$fieldnames=array('company_id'=>$post['company_id'],'name'=>$post['name'],'type'=>$post['type'],'color'=>$post['color'],'enabled'=>$post['enable']);
 		$res=$callConfig->insertRecord(TPREFIX.TBL_CATEGORIES,$fieldnames);
 		return $res;
 	}
-	function updatecategories($post){
+	public function updatecategories($post){
 		global $callConfig;
 		$fieldnames=array('company_id'=>$post['company_id'],'name'=>$post['name'],'type'=>$post['type'],'color'=>$post['color'],'enabled'=>$post['enable']);
 		$res=$callConfig->updateRecord(TPREFIX.TBL_CATEGORIES,$fieldnames,'id',$post['id']);
 		return $res;
 	}
-	function insertCompanies($post){
+	public function insertCompanies($post){
 		global $callConfig;
 		$fieldnames=array('domain'=>$post['domain'],'enabled'=>$post['enabled']);
 		$res=$callConfig->insertRecord(TPREFIX.TBL_COMPANIES,$fieldnames);
 		return $res;
 	}
-	function updateCompanies($post){
+	public function updateCompanies($post){
 		global $callConfig;
 		$fieldnames=array('domain'=>$post['domain'],'enabled'=>$post['enabled']);
 		$res=$callConfig->updateRecord(TPREFIX.TBL_COMPANIES,$fieldnames,'id',$post['id']);
 		return $res;
 	}
-	function insertConfig($post){
+	public function insertConfig($post){
 		global $callConfig;
 		$fieldnames=array('name'=>$post['name'],'liscense_number'=>$post['liscense_number'],'admin_email'=>$post['admin_email'],'tax_number'=>$post['tax_number'],'phone_number'=>$post['phone_number'],'billing_address'=>$post['billing_address'],'contact_address'=>$post['contact_address'],'enabled'=>$post['enabled'],'display_logo'=>$post['display_logo'],'financial_start'=>$post['financial_start'],'time_zone'=>$post['time_zone'],'date_format'=>$post['date_format'],'percentage_position'=>$post['percentage_position'],'number_format'=>$post['number_format'],'default_currency_id'=>$post['default_currency_id'],'default_language_id'=>$post['default_language_id'],'default_payment_mode'=>$post['default_payment_mode'],'default_pettycash_acct'=>$post['default_pettycash_acct'],'default_cash_acct'=>$post['default_cash_acct']);
 		$res=$callConfig->insertRecord(TPREFIX.TBL_CONFIG,$fieldnames);
 		return $res;
 	}
-	function updateConfig($post){
+	public function updateConfig($post){
 		global $callConfig;
 		$fieldnames=array('name'=>$post['name'],'liscense_number'=>$post['liscense_number'],'admin_email'=>$post['admin_email'],'tax_number'=>$post['tax_number'],'phone_number'=>$post['phone_number'],'billing_address'=>$post['billing_address'],'contact_address'=>$post['contact_address'],'enabled'=>$post['enabled'],'display_logo'=>$post['display_logo'],'financial_start'=>$post['financial_start'],'time_zone'=>$post['time_zone'],'date_format'=>$post['date_format'],'percentage_position'=>$post['percentage_position'],'number_format'=>$post['number_format'],'default_currency_id'=>$post['default_currency_id'],'default_language_id'=>$post['default_language_id'],'default_payment_mode'=>$post['default_payment_mode'],'default_pettycash_acct'=>$post['default_pettycash_acct'],'default_cash_acct'=>$post['default_cash_acct']);
 		$res=$callConfig->updateRecord(TPREFIX.TBL_CONFIG,$fieldnames,'id',$post['id']);
 		return $res;
 	}
-	function insertCurrencies($post){
+	public function insertCurrencies($post){
 		global $callConfig;
 		$fieldnames=array('name'=>$post['name'],'code'=>$post['code'],'rate'=>$post['rate'],'enabled'=>$post['enabled'],'precisions'=>$post['precision'],'symbol'=>$post['symbol'],'symbol_first'=>$post['symbol_first'],'decimal_mark'=>$post['decimal_mark'],'thousands_separator'=>$post['thousands_separator']);
 		$res=$callConfig->insertRecord(TPREFIX.TBL_CURRENCIES,$fieldnames);
 		return $res;
 	}
-	function updateCurrencies($post){
+	public function updateCurrencies($post){
 		global $callConfig;
 		$fieldnames=array('name'=>$post['name'],'code'=>$post['code'],'rate'=>$post['rate'],'enabled'=>$post['enabled'],'precisions'=>$post['precision'],'symbol'=>$post['symbol'],'symbol_first'=>$post['symbol_first'],'decimal_mark'=>$post['decimal_mark'],'thousands_separator'=>$post['thousands_separator']);
 		$res=$callConfig->updateRecord(TPREFIX.TBL_CURRENCIES,$fieldnames,'id',$post['id']);
 		return $res;
 	}
 	
-	function insertCustomer($post){
+	public function insertCustomer($post){
 		global $callConfig;
 		$fieldnames=array('company_id'=>$post['company_id'],'name'=>$post['name'],'email'=>$post['email'],'tax_number'=>$post['tax_number'],'phone'=>$post['phone'],'address'=>$post['address'],'website'=>$post['website'],'currency_code'=>$post['currency_code'],'enabled'=>$post['enabled']);
 		$res=$callConfig->insertRecord(TPREFIX.TBL_CUSTOMERS,$fieldnames);
 		return $res;
 	}
-	function updateCustomer($post){
+	public function updateCustomer($post){
 		global $callConfig;
 		$fieldnames=array('company_id'=>$post['company_id'],'name'=>$post['name'],'email'=>$post['email'],'tax_number'=>$post['tax_number'],'phone'=>$post['phone'],'address'=>$post['address'],'website'=>$post['website'],'currency_code'=>$post['currency_code'],'enabled'=>$post['enabled']);
 		$res=$callConfig->updateRecord(TPREFIX.TBL_CUSTOMERS,$fieldnames,'id',$post['id']);
 		return $res;
 	}
-	function insertMediables($post){
+	public function insertMediables($post){
 		global $callConfig;
 		$fieldnames=array('media_id'=>$post['media_id'],'mediable_type'=>$post['mediable_type'],'mediable_id'=>$post['mediable_id'],'tag'=>$post['tag'],'order'=>$post['order']);
 		$res=$callConfig->insertRecord(TPREFIX.TBL_MEDIABLES,$fieldnames);
 		return $res;
 	}
-	function updateMediables($post){
+	public function updateMediables($post){
 		global $callConfig;
 		$fieldnames=array('company_id'=>$post['company_id'],'name'=>$post['name'],'email'=>$post['email'],'tax_number'=>$post['tax_number'],'phone'=>$post['phone'],'address'=>$post['address'],'website'=>$post['website'],'currency_code'=>$post['currency_code'],'enabled'=>$post['enabled']);
 		$res=$callConfig->updateRecord(TPREFIX.TBL_MEDIABLES,$fieldnames,'id',$post['id']);
 		return $res;
 	}
-	function insertNotifications($post){
+	public function insertNotifications($post){
 		global $callConfig;
 		$fieldnames=array('type'=>$post['type'],'notifiable_id'=>$post['notifiable_id'],'notifiable_type'=>$post['notifiable_type'],'data'=>$post['data']);
 		$res=$callConfig->insertRecord(TPREFIX.TBL_NOTIFICATIONS,$fieldnames);
 		return $res;
 	}
-	function updateNotifications($post){
+	public function updateNotifications($post){
 		global $callConfig;
 		$fieldnames=array('type'=>$post['type'],'notifiable_id'=>$post['notifiable_id'],'notifiable_type'=>$post['notifiable_type'],'data'=>$post['data']);
 		$res=$callConfig->updateRecord(TPREFIX.TBL_NOTIFICATIONS,$fieldnames,'id',$post['id']);
 		return $res;
 	}
-	function updateItems($post){
+	public function updateItems($post){
 		global $callConfig;
 		$fieldnames=array('company_id'=>$post['company_id'],'name'=>$post['name'],'sku'=>$post['sku'],'description'=>$post['description'],'sale_price'=>$post['sale_price'],'purchase_price'=>$post['purchase_price'],'quantity'=>$post['quantity'],'category_id'=>$post['category_id'],'tax_id'=>$post['tax_id'],'item_image'=>$post['company_id'],'name'=>$post['name'],'sku'=>$post['sku'],'description'=>$post['description'],'sale_price'=>$post['sale_price'],'purchase_price'=>$post['item_image'],'item_image2'=>$post['item_image2'],'item_image3'=>$post['item_image3'],'enabled'=>$post['enabled']);
 		$res=$callConfig->updateRecord(TPREFIX.TBL_ITEMS,$fieldnames,'id',$post['id']);
 		return $res;
 	}
-	function insertBillTables($post){
+	public function insertBillTables($post){
 		global $callConfig;
 		$fieldnames=array('company_id'=>$post['company_id'],'bill_number'=>$post['invoice_no'],'order_number'=>$post['invoice_no'],'bill_status_code'=>'SSS','billed_at'=>$post['invoice_date'],'due_at'=>$post['invoice_date'],'amount'=>$post['total'],'currency_code'=>'INR','vendor_name'=>$post['vendor_name'],'vendor_email'=>$post['vendor_email'],'vendor_tax_number'=>$post['vendor_tax_number'],'vendor_phone'=>$post['vendor_phone'],'paid_amount'=>$post['paid']);
 		$bill_id=$callConfig->insertRecord(TPREFIX.TBL_BILLS,$fieldnames);
@@ -1044,7 +1044,7 @@ class userClass{
 		}
 		return $bill_id;
 	}
-	function insertBillTables11($post){
+	public function insertBillTables11($post){
 		global $callConfig;
 		print_r($post); exit;
 		$fieldnames=array('company_id'=>$post['company_id'],'invoice_number'=>$post['invoice_number'],'invoice_serial_number'=>$post['invoice_serial_number'],'order_at'=>$post['order_at'],'order_number'=>$post['order_number'],'invoiced_at'=>$post['invoiced_at'],'party_id'=>$post['party_id'],'amount'=>$post['grandtotaol'],'currency_code'=>'INR','party_name'=>$post['party_name'],'party_email'=>$post['party_email'],'party_tax_number'=>$post['party_tax_number'],'party_phone'=>$post['party_phone'],'party_address'=>$post['party_address'],'party_ship_adderss'=>$post['party_ship_adderss'],'place_of_supply'=>$post['place_of_supply'],'payment_terms'=>$post['payment_terms'],'notes'=>$post['notes']);
@@ -1056,7 +1056,7 @@ class userClass{
 		}
 		return $bill_id;
 	}
-	function listofTables($db){
+	public function listofTables($db){
 		global $callConfig;
 		//$query="show TABLES";
 		$query="SELECT table_name FROM information_schema.tables WHERE table_schema ='?'";
@@ -1074,7 +1074,7 @@ class userClass{
 		}
 		return $tables;
 	}
-	function listofTableFields($table, $content=''){
+	public function listofTableFields($table, $content=''){
 		global $callConfig;
 		$additional_attributes = 0;
 		$query="show COLUMNS from ".$table;
@@ -1135,7 +1135,7 @@ class userClass{
 		}
 		return json_encode($fields);	
 	}
-	function testTableInsert($data, $filename,$get){
+	public function testTableInsert($data, $filename,$get){
 		global $callConfig;
 		$edrdquery=$callConfig->selectQuery('edi_read','*','file_name="?"','','','');
 		$params = [$edrdquery, $callConfig->selectQuery, $filename];
@@ -1203,7 +1203,7 @@ class userClass{
 		$es_id=$callConfig->insertRecord('edi_dump',$demo);
 		return $es_id;
 	}
-	function dateformate($str,$value){
+	public function dateformate($str,$value){
 		$sty= strpos($str,'yyyy');
 		$std= strpos($str,'dd');
 		$stm= strpos($str,'mm');
@@ -1211,7 +1211,7 @@ class userClass{
 		$params = [$value, $value, $sty, $value, $stm, $value, $std];
 		return $value;
 	}
-	function getINqueryData ($tablename,$fields,$where,$ids) {
+	public function getINqueryData ($tablename,$fields,$where,$ids) {
 		global $callConfig;
 		//echo $tablename; exit;
 		$fields = ($fields == '') ? '*' : $fields;
@@ -1221,19 +1221,19 @@ class userClass{
 		return $callConfig->getAllRowsNew($query);
 
 	}
-	function getStatusSeq($ids){
+	public function getStatusSeq($ids){
 		global $callConfig;
 		$order = "sequence ASC";
 		$query=$callConfig->selectIN(TBL_STATUS,'*','name_value',$ids,$order);
 		return $callConfig->getAllRowsNew($query);
 	}
-	function maacInvoicenumber($company_id){
+	public function maacInvoicenumber($company_id){
 		global $callConfig;
 		$query=	"SELECT max(`invoice_serial_number`) as number FROM isac_invoices where `company_id` =".$company_id;
 		//echo $query; //exit;
 		return $callConfig->getRowNew($query);
 	}
-	function reSetPassword($data){
+	public function reSetPassword($data){
 		global $callConfig;
 		//echo "raviw"; exit;
 		$dbquery = "select db_name FROM ".MAINDB.".database_allocations where id IN (SELECT zqr_connect FROM ".MAINDB.".user_registered_groups  WHERE user_email ='?')";
@@ -1263,7 +1263,7 @@ class userClass{
 		}
 		return $res;
 	}
-	function changepassword($post){
+	public function changepassword($post){
 		global $callConfig;
 		//print_r($post);
 		$fieldnames=array('user_password'=>$callConfig->passwordEncrypt($post['new_password']));
@@ -1272,7 +1272,7 @@ class userClass{
 		$params = [$res, $callConfig->updateRecord, $post, $fieldnames, $post];
 		return $res;
 	}
-	function getDyanamicafterData($table_name, $filed_name){
+	public function getDyanamicafterData($table_name, $filed_name){
 		global $callConfig;
 		//echo "data"; exit;
 		$filed_name = $filed_name."_after";
@@ -1291,7 +1291,7 @@ class userClass{
 		//echo $query; exit;
 		return $array;
 	}
-	function getDyanamicReportSelectData($report_id, $filed_name){
+	public function getDyanamicReportSelectData($report_id, $filed_name){
 		global $callConfig;
 		//echo "data"; exit;
 		$whr = "report_id= '?' AND field_name = '?'";
@@ -1322,7 +1322,7 @@ class userClass{
 		//print_r($array); exit;
 		return $array;
 	}
-	function getDyanamicSelectData($table_name, $filed_name,$val=""){
+	public function getDyanamicSelectData($table_name, $filed_name,$val=""){
 		global $callConfig;
 		//echo "data"; exit;
 		$whr = "application_table_name= '?' AND field_name = '?'";
@@ -1364,7 +1364,7 @@ class userClass{
 		return $array;
 
 	}
-	function listofTableFieldsByUsedTable($table,$db){
+	public function listofTableFieldsByUsedTable($table,$db){
 		global $callConfig;
 		$query="SELECT COLUMN_NAME  FROM INFORMATION_SCHEMA.COLUMNS   WHERE TABLE_SCHEMA = '?' AND TABLE_NAME = '?'";
 		$params = [$query, $db, $table];
@@ -1376,13 +1376,13 @@ class userClass{
 		}
 		return $data;	
 	}
-	function deleterows($table_name,$whr){
+	public function deleterows($table_name,$whr){
 		global $callConfig;
 		//echo "delete";
 		$data = $callConfig->deleteRecord($table_name,$whr);
 		return $data;
 	}
-	function toGetNotigficationList($user_id,$type="",$get){
+	public function toGetNotigficationList($user_id,$type="",$get){
 		global $callConfig;
         $sql = "SELECT notiusr.notification_id, notiusr.notification_type, notiusr.read_status, noti.notification_message, noti.notification_datetime, noti.application_table_name, noti.transaction_number, noti.notification_details FROM notification_user notiusr, notifications noti WHERE noti.company_id = notiusr.company_id AND noti.id = notiusr.notification_id AND noti.company_id = '?' AND notiusr.user_id = '?'";
 		$params = [$sql, $get, $user_id];
@@ -1403,7 +1403,7 @@ class userClass{
 		}
 		return  $res;
 	}
-	function displayrolepermission($post){
+	public function displayrolepermission($post){
 		global $callConfig;
 		$role_id = $_GET['rid'];
 		$db = $_GET['data_name'];
@@ -1431,7 +1431,7 @@ class userClass{
 		//print_r($data1);
 		return $data1;
 	}
-	function toGetRolePermissions($table){
+	public function toGetRolePermissions($table){
 		global $callConfig;
 		$whr = "table_name = '?'";
 		$params = [$whr, $table];
@@ -1460,7 +1460,7 @@ class userClass{
 		//echo "<pre>"; print_r($data1);
 		return $data1;
 	}
-	function toGetRoledata($user_id,$get){
+	public function toGetRoledata($user_id,$get){
 		global $callConfig;
 		//echo "data"; exit;
 		//echo "<pre>";
@@ -1574,13 +1574,13 @@ class userClass{
 		//echo "<pre>"; print_r($return);
 		return $return;
 	}
-	function toGetblanceInvoices($customer_id){
+	public function toGetblanceInvoices($customer_id){
 		global $callConfig;
 		$query = "SELECT * FROM invoices WHERE due_amount != 0 AND party_id = ".$customer_id;
 		$data = $callConfig->getAllRowsNew($query);
 		return $data;
 	}
-	function toGetblancebill($get){
+	public function toGetblancebill($get){
 		global $callConfig;
 		$return =$returnpaymets = $pttrans = $pttransdue =  array();
 		//$returnres['get'] = $get;
@@ -1691,7 +1691,7 @@ class userClass{
 		return $returnres;
 	}
 
-	function toInsertandupateinvoice($post){
+	public function toInsertandupateinvoice($post){
 		global $callConfig;
 		//echo "hai";
 		//print_r($post); //exit;
@@ -1711,7 +1711,7 @@ class userClass{
 		}	
 
 	}
-	function insertEstimatesTables($post){
+	public function insertEstimatesTables($post){
 		global $callConfig;
 			//echo "<pre>";print_r($post); exit;
 		$fieldnames=array('company_id'=>$post['company_id'],'estimate_number'=>$post['invoice_number'],'estimated_at'=>$post['invoiced_at'],'amount'=>$post['invoiced_at'],'amount'=>$post['grandtotaol'],'currency_code'=>'INR','party_id'=>$post['party_id'],'party_name'=>$post['party_name'],'party_email'=>$post['party_email'],'party_tax_number'=>$post['party_tax_number'],'party_phone'=>$post['party_phone'],'party_address'=>$post['party_address'],'party_ship_adderss'=>$post['party_ship_adderss'],'place_of_supply'=>$post['place_of_supply'],'payment_terms'=>$post['payment_terms'],'sub_total'=>$post['subTotal'],'tax_amount'=>$post['taxRate']);
@@ -1730,7 +1730,7 @@ class userClass{
 		}
 		return $es_id;
 	}
-	function insertdebitnoteTables($post){
+	public function insertdebitnoteTables($post){
 		global $callConfig;
 			//echo "<pre>";print_r($post); exit;
 		$fieldnames=array('company_id'=>$post['company_id'],'estimate_number'=>$post['invoice_number'],'estimated_at'=>$post['invoiced_at'],'amount'=>$post['invoiced_at'],'amount'=>$post['grandtotaol'],'currency_code'=>'INR','party_id'=>$post['party_id'],'party_name'=>$post['party_name'],'party_email'=>$post['party_email'],'party_tax_number'=>$post['party_tax_number'],'party_phone'=>$post['party_phone'],'party_address'=>$post['party_address'],'party_ship_adderss'=>$post['party_ship_adderss'],'place_of_supply'=>$post['place_of_supply'],'payment_terms'=>$post['payment_terms'],'sub_total'=>$post['subTotal'],'tax_amount'=>$post['taxRate']);
@@ -1749,7 +1749,7 @@ class userClass{
 		}
 		return $es_id;
 	}
-	function insertcreaditnoteTables($post){
+	public function insertcreaditnoteTables($post){
 		global $callConfig;
 			//echo "<pre>";print_r($post); exit;
 		$fieldnames=array('company_id'=>$post['company_id'],'estimate_number'=>$post['invoice_number'],'estimated_at'=>$post['invoiced_at'],'amount'=>$post['invoiced_at'],'amount'=>$post['grandtotaol'],'currency_code'=>'INR','party_id'=>$post['party_id'],'party_name'=>$post['party_name'],'party_email'=>$post['party_email'],'party_tax_number'=>$post['party_tax_number'],'party_phone'=>$post['party_phone'],'party_address'=>$post['party_address'],'party_ship_adderss'=>$post['party_ship_adderss'],'place_of_supply'=>$post['place_of_supply'],'payment_terms'=>$post['payment_terms'],'sub_total'=>$post['subTotal'],'tax_amount'=>$post['taxRate']);
@@ -1768,7 +1768,7 @@ class userClass{
 		}
 		return $es_id;
 	}
-	function insertquotationTables($post){
+	public function insertquotationTables($post){
 		global $callConfig;
 			//echo "<pre>";print_r($post); exit;
 		$fieldnames=array('company_id'=>$post['company_id'],'estimate_number'=>$post['invoice_number'],'estimated_at'=>$post['invoiced_at'],'amount'=>$post['invoiced_at'],'amount'=>$post['grandtotaol'],'currency_code'=>'INR','party_id'=>$post['party_id'],'party_name'=>$post['party_name'],'party_email'=>$post['party_email'],'party_tax_number'=>$post['party_tax_number'],'party_phone'=>$post['party_phone'],'party_address'=>$post['party_address'],'party_ship_adderss'=>$post['party_ship_adderss'],'place_of_supply'=>$post['place_of_supply'],'payment_terms'=>$post['payment_terms'],'sub_total'=>$post['subTotal'],'tax_amount'=>$post['taxRate']);
@@ -1787,7 +1787,7 @@ class userClass{
 		}
 		return $es_id;
 	}
-	function insertpurchaseTables($post){
+	public function insertpurchaseTables($post){
 		global $callConfig;
 			//echo "<pre>";print_r($post); exit;
 		$fieldnames=array('company_id'=>$post['company_id'],'estimate_number'=>$post['invoice_number'],'estimated_at'=>$post['invoiced_at'],'amount'=>$post['invoiced_at'],'amount'=>$post['grandtotaol'],'currency_code'=>'INR','party_id'=>$post['party_id'],'party_name'=>$post['party_name'],'party_email'=>$post['party_email'],'party_tax_number'=>$post['party_tax_number'],'party_phone'=>$post['party_phone'],'party_address'=>$post['party_address'],'party_ship_adderss'=>$post['party_ship_adderss'],'place_of_supply'=>$post['place_of_supply'],'payment_terms'=>$post['payment_terms'],'sub_total'=>$post['subTotal'],'tax_amount'=>$post['taxRate']);
@@ -1806,7 +1806,7 @@ class userClass{
 		}
 		return $es_id;
 	}
-	function togetnameandphotoonuseridbaseonemailids($post){
+	public function togetnameandphotoonuseridbaseonemailids($post){
 		global $callConfig;
 		//echo "<pre>";print_r($post);
 		$user = array();
@@ -1831,7 +1831,7 @@ class userClass{
 		return $user;
 	}
 	# To Get Email group Details with number emails  with user pics
-	function getemailgroupdetails(){
+	public function getemailgroupdetails(){
 		global $callConfig;
 		$query=$callConfig->selectQuery(TBL_EMAILGROUPS,'*','','','','');
 		$emailgroup = $callConfig->getAllRowsNew($query);
@@ -1872,7 +1872,7 @@ class userClass{
 		//echo "<pre>"; print_r($groups);
 		return $groups;
 	}
-	function insertorupdatepermissions($post){
+	public function insertorupdatepermissions($post){
 		global $callConfig;
 		//echo "hai";
 		//echo "<pre>";print_r($post);
@@ -1903,7 +1903,7 @@ class userClass{
 		return $res;
 	}
 	#To Get  group  Email Details with number groups  
-	function getgroupemaildetails($group_id){
+	public function getgroupemaildetails($group_id){
 			global $callConfig;
 			//$group_id = 1;
 			$query=$callConfig->selectQuery(TBL_EMAILGROUPS,'id,name','','','','');
@@ -1944,7 +1944,7 @@ class userClass{
 		//echo "<pre>"; print_r($return); exit;
 			return $return;
 		}
-	function checkAndInsertapplicationpage($table, $company_id){
+	public function checkAndInsertapplicationpage($table, $company_id){
 			global $callConfig;
 			$whr="application_table_name='?' AND company_id= '?'" ;
 			$params = [$whr, $table, $company_id];
@@ -1961,7 +1961,7 @@ class userClass{
 			//print_r($data);
 			return $res;
 		} 
-	function viewdattributetype($table, $field, $db){
+	public function viewdattributetype($table, $field, $db){
 			global $callConfig;
 			$whr="application_table_name='?' AND field_name='?'";
 			$params = [$whr, $table, $field];
@@ -1982,7 +1982,7 @@ class userClass{
 			//echo "<pre>"; print_r($data); exit;
 			return $data;
 		}
-	function togetprimarykey($table,$db){
+	public function togetprimarykey($table,$db){
 			global $callConfig;
 			//$query = "SELECT k.column_name, k.table_schema, k.table_name, k.constraint_name FROM information_schema.table_constraints t JOIN information_schema.key_column_usage k where k.constraint_schema = t.constraint_schema and k.table_schema = t.table_schema and k.table_name = t.table_name and t.constraint_type='PRIMARY KEY' AND k.constraint_name = 'PRIMARY' AND t.table_schema='".$db."' AND t.table_name='".$table."'";
 			$query = "SELECT COLUMN_NAME as column_name
@@ -2003,7 +2003,7 @@ class userClass{
 			}
 			return $return;
 		}
-	function togetdatabasepaimairy($tablename, $db, $data){
+	public function togetdatabasepaimairy($tablename, $db, $data){
 			global $callConfig;
 			$data =  explode(",", urldecode($data));
 			$whr = "";
@@ -2018,7 +2018,7 @@ class userClass{
 			return $callConfig->getRowNew($query);
 			//return $query;
 		}
-	function updaterowbasepimarydata($fieldnames,$table,$rid){
+	public function updaterowbasepimarydata($fieldnames,$table,$rid){
 			global $callConfig;
 			//echo "<br>".$rid;
 			$data =  explode(",", urldecode($rid));
@@ -2032,7 +2032,7 @@ class userClass{
 			$res=$callConfig->updateRecord($table,$fieldnames,'','',$whr);
 			return $res;
 		}
-	function morefilednames($tables,$db){
+	public function morefilednames($tables,$db){
 			global $callConfig;
 			$array = array();
 			//print_r($tables);
@@ -2042,7 +2042,7 @@ class userClass{
 			}
 			return $array;
 		}
-	function togetmastertablesdetais(){
+	public function togetmastertablesdetais(){
 			global $callConfig;
 			$query=$callConfig->selectQuery(TBL_DISPLAYATTRIBUTES,'*','','application_table_name ASC','','');
 			$lists = $callConfig->getAllRowsNew($query);
@@ -2093,7 +2093,7 @@ class userClass{
 		//echo "<pre>";print_r($data);
 		return $data;
 	}
-	function togetreportdata($data){
+	public function togetreportdata($data){
 		global $callConfig;
 		//print_r($data);
 		$whr =  "id = '?'";
@@ -2155,7 +2155,7 @@ class userClass{
 		return $lists;
 
 	}
-	function insertorupdatereportfilter($data){ 
+	public function insertorupdatereportfilter($data){ 
 		global $callConfig;
 		//print_r($data); exit;
 
@@ -2167,7 +2167,7 @@ class userClass{
 		$res = $this->insertTablesdata($data, TBL_REPORT_FILTERS);
 
 	}
-	function getPurchaseRequisitionsData($id){
+	public function getPurchaseRequisitionsData($id){
 		global $callConfig;
 		$where = "id = '?'";	
 		$params = [$where, $id];
@@ -2182,7 +2182,7 @@ class userClass{
 		$pr['taxes'] = $this->getAllTablesData(TBL_PURCHASE_REQUISITIONS_ITEMS_TAXES,'*',$whr,'');
 		return $pr;
 	}
-	function toGetDynamicInvoicetables(){ 
+	public function toGetDynamicInvoicetables(){ 
 		global $callConfig;
 		$where = " item_table != '' AND tax_table != '' AND is_active = 0";
 		$configesponse = $this->getAllTablesData(TBL_DYNAMIC_MAPPING_TABLES,'*',$where);
@@ -2195,7 +2195,7 @@ class userClass{
 	    //print_r($table_list); exit;
 		return $table_list;
 	}
-	function toGetInvoicetables(){ 
+	public function toGetInvoicetables(){ 
 		global $callConfig;
 		$configesponse = $this->getAllTablesData(TBL_DYNAMIC_MAPPING_TABLES,'*','','');
 		foreach($configesponse AS $con){
@@ -2208,7 +2208,7 @@ class userClass{
 	    //print_r($table_list); exit;
 		return $table_list;
 	}
-	function toGetDynamicTables($table,$option=''){ 
+	public function toGetDynamicTables($table,$option=''){ 
 		global $callConfig;
 		$where = " application_table_name = '?' AND is_active = 0";
 		$params = [$where, $table];
@@ -2230,7 +2230,7 @@ class userClass{
 	    //print_r($table_list); exit;
 		return $table_list;
 	}
-	function togetitemvalues($item_d){
+	public function togetitemvalues($item_d){
 		global $callConfig;
 		if($item_d !=""){
 			$whr="id='?'" ;
@@ -2296,7 +2296,7 @@ class userClass{
 		}
 		return $data;
 	}
-	function togetitemwadayrate($item_d, $company_id){
+	public function togetitemwadayrate($item_d, $company_id){
 		global $callConfig;
 		$day_rate = 0;
 		if($company_id !="" AND $item_d !=""){
@@ -2309,7 +2309,7 @@ class userClass{
 		}
 		return $day_rate;
 	}
-	function toGetInvoicetabledata($table){ 
+	public function toGetInvoicetabledata($table){ 
 		global $callConfig;
 
 		$where = "application_table_name = '?'";
@@ -2326,7 +2326,7 @@ class userClass{
 	    //print_r($table_list); exit;
 		return $table_list;
 	}
-	function toGetApplicationSerialNumber($table_name){
+	public function toGetApplicationSerialNumber($table_name){
 		global $callConfig;
 		$whr="application_table_name = '?'";
 		$params = [$whr, $table_name];
@@ -2341,7 +2341,7 @@ class userClass{
 		}
 		return trim($data);
 	}
-	function updaterandomvalueforlotandseries($post, $trnid){
+	public function updaterandomvalueforlotandseries($post, $trnid){
 		global $callConfig;
 		$query = "UPDATE item_lot_nos SET transaction_id =? WHERE random_no = '?'";
 		$params = [$query, $trnid, $post];
@@ -2350,7 +2350,7 @@ class userClass{
 		$params = [$query, $trnid, $post];
 		$res = $callConfig->executeQuery($query);
 	}
-	function insertInvoiceType($post, $table, $get){
+	public function insertInvoiceType($post, $table, $get){
 		global $callConfig;
 		$return = array();
 		$sales_tables = array('enquiries','estimates','delivery_orders','sales_orders','sales_returns');
@@ -2692,7 +2692,7 @@ class userClass{
 		return $insert_data;
 	}
 	
-	function invoiceUpdates($table,$len){
+	public function invoiceUpdates($table,$len){
 		global $callConfig;
 		
 		if(count((array)$len)>1){
@@ -2718,7 +2718,7 @@ class userClass{
 			//$createudate = tocreatejounalvoucherbaseallcases()
 		}
 	}
-	function tocreatejounalvoucherbaseallcases($table_name,$ref_id,$type=''){
+	public function tocreatejounalvoucherbaseallcases($table_name,$ref_id,$type=''){
 		global $callConfig;	
 
 		$defaultaccount = array('inventory_asset_account' => '1003809', 'inventory_adjustment_account'=>'50000106', 'cogs_account' => '50000151', 'purchase_expense_account'=>'20003507', 'sales_revenue_account'=>'40001101', 'sales_return_account'=>'10003700', 'ap_account'=>'20003501', 'ar_account'=>'1004001', 'goods_received_not_invoiced_account'=>'20003506', 'goods_sold_not_invoiced_account'=>'1004003','default_cash_acct'=>'10005101', 'default_purchase_discount_account'=>'40001109', 'jv_suspense_acc'=>'200037018', 'tds_clearing_account'=>'20003701', 'tds_payables'=>'20003702', 'tcs_clearing_account'=>'20003701', 'tcs_payables'=>'20003716', 'default_sales_discount_account'=>'50002714', 'default_round_off_account'=>'5002557', 'config_inventory_asset_account'=>'1003809'); 
@@ -3357,7 +3357,7 @@ class userClass{
 		//echo "working 132 ";
 		return $addjournalvouchers; 
 	} 
-	function addjournalvouchers($post, $table, $type='',$mtable = ''){
+	public function addjournalvouchers($post, $table, $type='',$mtable = ''){
 		global $callConfig;
 		$return = array();
 		if($mtable ==""){
@@ -3456,7 +3456,7 @@ class userClass{
 		return $return;		
 	} 
 	
-	function addjournalvouchersold($post, $table, $type=''){
+	public function addjournalvouchersold($post, $table, $type=''){
 		global $callConfig;
 		//echo "hah";
 		echo "<pre>"; print_r($post); exit;
@@ -3610,7 +3610,7 @@ class userClass{
 		//$ledger = $this->toinsertgenralledger();
 		 return $insert_data;
 	}
-	function insertorupdateitem_ledgerst($post){
+	public function insertorupdateitem_ledgerst($post){
 			global $callConfig;
 		//echo "<pre>"; print_r($post);
 			$whr="location_id='?' AND item_id = '?' AND document_type='?' AND document_no='?'";
@@ -3632,7 +3632,7 @@ class userClass{
 		}
 		return $res;
 	}
-	function insertorupdateitem_ledgerwa($post){
+	public function insertorupdateitem_ledgerwa($post){
 		global $callConfig;
 		if($post['location_id'] !="" AND  $post['item_id'] !="" AND $post['document_type']!="" AND $post['document_no'] !=""){
 			$whr="location_id='?' AND item_id = '?' AND document_type='?' AND document_no='?' AND is_active=0";
@@ -3655,7 +3655,7 @@ class userClass{
 		}
 		return $res;
 	}
-	function itemledgerlifochange($post){
+	public function itemledgerlifochange($post){
 		global $callConfig;
 		$whr= "item_id = '?' AND document_type='?' AND document_no='?'";
 		$params = [$whr, $post, $post, $post];
@@ -3687,7 +3687,7 @@ class userClass{
 		}
 		
 	}
-	function insertorupdateitem_ledgerlifo($post){
+	public function insertorupdateitem_ledgerlifo($post){
 		global $callConfig;
 		if($post['location_id'] !="" AND $post['item_id'] !="" AND $post['document_type'] !="" AND $post['document_no']!=""){
 			$whr="location_id='?' AND item_id = '?' AND document_type='?' AND document_no='?'";
@@ -3729,7 +3729,7 @@ class userClass{
 		}
 		return $res;
 	}
-	function  itemlifoupdateledge($post){
+	public function  itemlifoupdateledge($post){
 		global $callConfig;
 		$count = $post['out_qty'];
 		$itemcount = $post['out_qty'];
@@ -3811,7 +3811,7 @@ class userClass{
 	    }//exit;
 	    return $res;
 	}
-	function insertorupdateitem_ledgerfifo($post){
+	public function insertorupdateitem_ledgerfifo($post){
 		global $callConfig;
 		//echo "<pre>"; print_r($post);
 		$whr="location_id='?' AND item_id = '?' AND document_type='?' AND document_no='?'";
@@ -3852,7 +3852,7 @@ class userClass{
 		}
 		return $res;
 	}
-	function  itemfifoupdateledge($post){
+	public function  itemfifoupdateledge($post){
 		global $callConfig;
 		$count = $post['out_qty'];
 		$itemcount = $post['out_qty'];
@@ -3935,14 +3935,14 @@ class userClass{
 	}
 
 	
-	function insertorupdateitemfifo($post){
+	public function insertorupdateitemfifo($post){
 		global $callConfig;
 		$bdate = date('Y-m-d');
 		$insert = array('company_id' =>$post['company_id'] , 'location_id' =>$post['location_id'] ,'item_id' =>$post['item_id'] ,'balance_date' =>$bdate ,'in_qty' =>$post['in_qty'] ,'in_value' =>$post['in_value'],'day_value' => $post['day_value'],'day_rate' => $post['day_rate']);
 		$res=$callConfig->insertRecord('loc_item_fifo_lifo_balances',$insert);
 		return $res;
 	}	
-	function averagebalance($post){
+	public function averagebalance($post){
 		//print_r($post);
 		global $callConfig;
 		$bdate = date('Y-m-d');
@@ -3971,7 +3971,7 @@ class userClass{
 
 		return $return;
 	}
-	function insertoupdatelocitemwabalances($post){
+	public function insertoupdatelocitemwabalances($post){
 		global $callConfig;
 		$bdate = $post['transaction_date'];
 		$insert = array('company_id' =>$post['company_id'] , 'location_id' =>$post['location_id'], 'ware_house_id'=>$post['transaction_warehouse_id'],'item_id' =>$post['item_id'] ,'balance_date' =>$bdate ,'in_qty' =>$post['in_qty'] ,'in_value' =>$post['in_value'],'out_qty' =>$post['out_qty'] ,'out_value' =>$post['out_value'],'day_value' => $post['day_value'],'day_rate' => $post['day_rate']);
@@ -4033,7 +4033,7 @@ class userClass{
 		//print_r($res); exit;
 		return $res;
 	}
-	function insertoupdatelocitemstbalances($post){
+	public function insertoupdatelocitemstbalances($post){
 		global $callConfig;
 		$post['in_value'] = $post['in_qty']*$post['item_st_cost'];
 		$post['out_value'] = $post['out_qty']*$post['item_st_cost'];
@@ -4095,7 +4095,7 @@ class userClass{
 		//print_r($res); exit;
 		return $res;
 	}
-	function insertoupdateitemwabalances($post){
+	public function insertoupdateitemwabalances($post){
 		global $callConfig;
 		$bdate = $post['transaction_date'];
 		$insert = array('company_id' =>$post['company_id'] , 'item_id' =>$post['item_id'] ,'balance_date' =>$bdate ,'in_qty' =>$post['in_qty'] ,'in_value' =>$post['in_value'],'out_qty' =>$post['out_qty'] ,'out_value' =>$post['out_value'],'day_value' => $post['day_value'],'day_rate' => $post['day_rate']);
@@ -4154,7 +4154,7 @@ class userClass{
 		//print_r($res); exit;
 		return $res;
 	}
-	function insertoupdateitemstbalances($post){
+	public function insertoupdateitemstbalances($post){
 		global $callConfig;
 		$post['in_value'] = $post['in_qty']*$post['item_st_cost'];
 		$post['out_value'] = $post['out_qty']*$post['item_st_cost'];
@@ -4215,7 +4215,7 @@ class userClass{
 		//print_r($res); exit;
 		return $res;
 	}
-	function UpdateBudgetBlance($data){
+	public function UpdateBudgetBlance($data){
 		global $callConfig;
 		$tr_date = explode('-', $data['transaction_date']);
 		$month = $this->fiscalmonth($tr_date[1]);
@@ -4233,12 +4233,12 @@ class userClass{
 		}
 		return $updatequery;
 	}
-	function fiscalmonth($month){
+	public function fiscalmonth($month){
 		global $callConfig;
 		$array = array('01'=> '10','02'=> '11','03'=> '12','04'=> '1','05'=> '2','06'=> '3','07'=> '4','08'=> '5','09'=> '6','10'=> '7','11'=> '8','12'=> '9');
 		return $array[$month];
 	}
-	function insertandupdatedataapplicationtag($data, $id, $option){
+	public function insertandupdatedataapplicationtag($data, $id, $option){
 		global $callConfig;
 
 		$appv_fieldnames=array('transaction_id'=>$id,'transaction_number'=>$data['transaction_number'],'transaction_date'=>$data['transaction_date'],'transaction_amount'=>$data['total_amount'],'transaction_status'=>$data['current_status'],'option_url'=>$option);
@@ -4258,7 +4258,7 @@ class userClass{
 		return $res; 
 
 	}
-	function tocheckDAOValues($data){
+	public function tocheckDAOValues($data){
 		global $callConfig;
 		$whr="process_type='?'";
 		$params = [$whr, $data];
@@ -4289,7 +4289,7 @@ class userClass{
 		return $data1;
 	}
 	
-	function togetemailslist($data){
+	public function togetemailslist($data){
 		global $callConfig;
 		$emailstr = "";
 		$email_id = array(); $email_group_id = array();
@@ -4339,7 +4339,7 @@ class userClass{
 		$return ['doa_id'] = $data1->id;
 		return $return;
 	}
-	function tosendmailtest($get){
+	public function tosendmailtest($get){
 
 		$data =$get;
 		$data['content']= "Test  API call done workingg";
@@ -4357,7 +4357,7 @@ class userClass{
 		$return = $this->sendEmailslist($data);
 		return $return;
 	}
-	function sendEmailslist($data){
+	public function sendEmailslist($data){
 		//echo "<pre>"; print_r($data); exit;
 		global $callConfig;
 		if($data['databasename'] !=""){
@@ -4401,7 +4401,7 @@ class userClass{
 		//echo "email send sucess";
 		return $email_data;
 	}
-	function sendmailwithsmtp($email, $subject, $mesg, $smtp,$data){
+	public function sendmailwithsmtp($email, $subject, $mesg, $smtp,$data){
 		global $callConfig;
 		//print_r($smtp); exit;
 		//echo $email."+----------------------------"; exit;
@@ -4447,7 +4447,7 @@ class userClass{
 		}
 		return $res;
 	}
-	function checkhierarchicallevel($data){
+	public function checkhierarchicallevel($data){
 		global $callConfig;
 		$whrstp="company_id = '?' AND process_type='?'";
 		$params = [$whrstp, $data, $data];
@@ -4520,7 +4520,7 @@ class userClass{
 		return $return;
 	} 
 
-	function toSendEmailNotificationsBaseDAO($data){
+	public function toSendEmailNotificationsBaseDAO($data){
 		//echo "<pre>"; print_r($data); exit;
 		global $callConfig;
 		$email_data = $this->checkhierarchicallevel($data);
@@ -4599,7 +4599,7 @@ class userClass{
 		//echo "ravi"; exit;
 		return $noti_res;
 	}
-	function getInvoicesData($id,$table){
+	public function getInvoicesData($id,$table){
 		global $callConfig;	
 		if($table !=""){
 			$fieldarray  = $this->toGetInvoicetabledata($table);
@@ -4745,7 +4745,7 @@ class userClass{
 		}
 		return $pr;
 	}
-	function toGetStatusProgressActionList($table, $status){
+	public function toGetStatusProgressActionList($table, $status){
 		global $callConfig;
 		//echo $table."|||".$status;
 		$whr = "table_name = '?' AND status = '?'";
@@ -4771,7 +4771,7 @@ class userClass{
 	}
 
 
-	function updateapprovallog($post){
+	public function updateapprovallog($post){
 		global $callConfig;
 		$whr = "";
 		$fieldnames = array('comments'=>$post['comments'],'response_date'=>$post['response_date'],'response_type'=>$post['response_type']);
@@ -4796,7 +4796,7 @@ class userClass{
 		} //exit;
 		return $return;
 	}
-	function toGetPendingRequisitionQty($post){
+	public function toGetPendingRequisitionQty($post){
 		global $callConfig;
 		$fieldarray  = $this->toGetInvoicetabledata($post['table']);
 		$query = "SELECT rq.id ,sum(reqi.pending_qty)as pending_qty,rq.transaction_number FROM ? rq, ? reqi WHERE rq.id = reqi.transaction_id AND rq.current_status = '".ST_APPROVED."' GROUP BY rq.id,rq.transaction_number having sum(reqi.pending_qty) > 0";
@@ -4805,7 +4805,7 @@ class userClass{
 		$data = $callConfig->getAllRowsNew($query);
 		return $data;
 	}
-	function emailnumberschange($mesg){
+	public function emailnumberschange($mesg){
 		global $callConfig;
 		$mes1= strpos($mesg,'[')+1;
 		$mes2= strpos($mesg,']');
@@ -4821,7 +4821,7 @@ class userClass{
 		} 
 		return $mesg;
 	}
-	function numberToWordFormateRupees($number){
+	public function numberToWordFormateRupees($number){
 		global $callConfig;
 		$no = floor($number ?? 0);
 		$point = (int) round((($number ?? 0) - $no) * 100);
@@ -4868,14 +4868,14 @@ class userClass{
 		}
 		return ucwords($result." only");
 	}
-	function getplaceofsupply($company_id){
+	public function getplaceofsupply($company_id){
 		global $callConfig;
 		$query = "select  * from states where country_id in ( select base_country from companies where company_id =?)";
 		$params = [$query, $company_id];
 		$data = $callConfig->getAllRowsNew($query);
 		return $data;
 	}
-	function notificationRead($id, $user_id){
+	public function notificationRead($id, $user_id){
 		global $callConfig;
 		$query = "select  * from ".TBL_NOTIFICATIONS." where id in ( select notification_id from ".TBL_NOTIFICATON_USER." where id =?)";
 		$params = [$query, $id];
@@ -4897,7 +4897,7 @@ class userClass{
 		return $res;
 
 	}
-	function ToCheckStatusApprovalLog($post){
+	public function ToCheckStatusApprovalLog($post){
 		global $callConfig;
 		//print_r($post); exit;
 		$data['transaction_type'] = $post['table'];
@@ -4958,7 +4958,7 @@ class userClass{
 		}
 		return $return;
 	}
-	function ToInserttransactions($data){
+	public function ToInserttransactions($data){
 		global $callConfig;
 		//print_r($data); exit;
 		$fieldarray  = $this->toGetDynamicInvoicetables();
@@ -5111,7 +5111,7 @@ class userClass{
 		}
 		return $res;
 	}
-	function togetpcdata($companyid,$ownerid){
+	public function togetpcdata($companyid,$ownerid){
         global $callConfig; //echo "<pre>";
         $whr1 = "company_id = '?' AND owner_id='?' AND is_active = 0";	
         $params = [$whr1, $companyid, $ownerid];
@@ -5149,7 +5149,7 @@ class userClass{
         }  
         return $returns;
     }
-    function toGetFrequencyDate($fdate, $frequency){
+    public function toGetFrequencyDate($fdate, $frequency){
     	global $callConfig; 
     	$days = 30/$frequency;
     	//echo $days;
@@ -5192,7 +5192,7 @@ class userClass{
     	//echo "F date:".$fdate."###".$frequency; exit;
     	return $return;
     }
-    function insertBills($post,$type){
+    public function insertBills($post,$type){
     	global $callConfig; 
     	//echo "<pre>"; print_r($post); exit;
     	//echo $post['invoiced_at'];
@@ -5303,7 +5303,7 @@ class userClass{
 		return $insert_data;
     }
 
-    function insertPC($post,$type){
+    public function insertPC($post,$type){
     	global $callConfig; 
     	//echo "<pre>"; print_r($post); exit;
     	//echo $post['invoiced_at'];
@@ -5423,7 +5423,7 @@ class userClass{
 
 
 
-    function getApprovalLogData($data){
+    public function getApprovalLogData($data){
     	global $callConfig;
     	//echo "<pre>"; print_r($data); exit;
     	$table = $_GET['table'];
@@ -5465,21 +5465,21 @@ class userClass{
     	$return['data'] = $data3;
     	return $return;
     }
-    function getchartofaccountdetailsuseglaccountuser($data){
+    public function getchartofaccountdetailsuseglaccountuser($data){
     	global $callConfig;
     	$query = "select coa.* from chart_of_accounts coa, gl_account_users gau where coa.company_id = gau.company_id and coa.account_code = gau.account_code and  gau.company_id =?  and gau.user_id = ".$data['user_id'];
     	$params = [$query, $data, $data];
     	$data = $callConfig->getAllRowsNew($query);
     	return $data;
     }
-    function pettycashdetails($data){
+    public function pettycashdetails($data){
     	global $callConfig;
     	$query = "select * From petty_cash_expenses where id in ( select authorized_expenses from petty_cash_box_owner where owner_id =?)";
     	$params = [$query, $data];
     	$data = $callConfig->getAllRowsNew($query);
     	return $data;
     }
-    function budgetcheckreftadledata($data){
+    public function budgetcheckreftadledata($data){
     	global $callConfig;
     	//echo"<pre>"; print_r($data); exit;
     	$str = '';
@@ -5518,7 +5518,7 @@ class userClass{
     	//echo"<pre>"; print_r($return); exit; 
     	return $return;
     }
-    function toGetBluckApprovaldata($post){
+    public function toGetBluckApprovaldata($post){
     	global $callConfig;
     	//echo "<pre>"; print_r($data);exit;
     	$whr1 = "company_id = ? AND is_active = 0";	
@@ -5581,7 +5581,7 @@ class userClass{
 		//echo "<pre>"; print_r($approval_count_data); exit;
     	return $return;
     }
-    function toGetBluckStatusData($data){
+    public function toGetBluckStatusData($data){
     	global $callConfig;
     	//echo "<pre>"; print_r($data);
     	$query2="SELECT bat.id, bat.company_id, bat.transaction_type, bat.transaction_id, bat.cost_center_id, bat.transaction_number, bat.transaction_date, bat.currency_id, bat.currency_rate, bat.originator, bat.party_id, bat.party_name, bat.party_email, bat.party_tax_number, bat.party_phone, bat.party_address, bat.party_ship_adderss, bat.place_of_supply, bat.payment_terms, bat.notes, bat.printing_notes, bat.parent_id, bat.amount, bat.tax_amount, bat.type, bat.tax_type, bat.discount_type, bat.discount_value, bat.discount_amount, bat.total_amount, bat.shipping_tax, bat.shipping_amount, bat.shipping_tax_amount, bat.tax_state, bat.opex_cpex, bat.ref_type, bat.ref_id, bat.ref_no, bat.ref_date, bat.old_ref_no, bat.old_ref_date, bat.current_status, tal.id, tal.`response_type`, tal.`user_id`, tal.`request_date`, tal.`send_back_flag`, tal.`response_date`, tal.`comments`, tal.`doa_id` FROM bulk_approval_transactions bat, transaction_approval_logs tal where bat.company_id = tal.company_id and    bat.transaction_type = tal.transaction_table and bat.transaction_id = tal.transaction_id and bat.current_status='?' and bat.transaction_type ='?' and  tal.user_id=? AND tal.response_type = 0" ;
@@ -5590,7 +5590,7 @@ class userClass{
     	$data = $callConfig->getAllRowsNew($query2);
     	return $data;
     }
-    function upadateblukapproval($data){
+    public function upadateblukapproval($data){
     	global $callConfig;
     	$ids = trim($data['rid'],',');
     	$table = $data['table'];
@@ -5609,7 +5609,7 @@ class userClass{
     	}
     	return $res;
     }
-    function upadteablukprrovals($post){
+    public function upadteablukprrovals($post){
     	global $callConfig;
     	$where = "id = '?'";
     	$params = [$where, $post];
@@ -5631,7 +5631,7 @@ class userClass{
 		}//print_r($itemids); exit;]
 		return $res;
 	}
-	function addAndUpdateBulkApprovalTransaction($data , $type){
+	public function addAndUpdateBulkApprovalTransaction($data , $type){
 		global $callConfig;
 		
 		if($type == 'insert'){
@@ -5643,7 +5643,7 @@ class userClass{
 		}
 		return $return;
 	}
-	function toGetPettyCashSummary($post){
+	public function toGetPettyCashSummary($post){
 		global $callConfig;
 		//echo "ravi"; exit;
 		$query = "SELECT po.`company_id`, po.`pc_box_id`, po.`owner_id`, po.`pc_type_id`, po.`currency_id`, po.`pc_limit`, po.`assigner_id`, po.`authorizer_id`, po.`authorized_expenses`, po.`gl_account_assignment`, po.`gl_account_pc_cash`, po.`tax_group_id`, po.`is_active`, pc.expense_name FROM petty_cash_box_owner po , petty_cash_expenses pc
@@ -5698,7 +5698,7 @@ class userClass{
 		$return['sum'] = $sum_arry;
 		return $return;
 	}
-	function querynotificationandemail($data){
+	public function querynotificationandemail($data){
 		global $callConfig;
 		//print_r($data); exit;
 		if($data['new_reply'] == 'N'){
@@ -5740,14 +5740,14 @@ class userClass{
 		return $res;
 	}
 	
-	function multiplefileupload($post){
+	public function multiplefileupload($post){
 		global $callConfig;
 		foreach ($post as $value) {
 			$res=$callConfig->insertRecord(TBL_APPLICATION_ATTACHMENTS,$value);
 		}
 		return $res;
 	}
-	function togetuserpettycashboxdetails($post){
+	public function togetuserpettycashboxdetails($post){
 		global $callConfig;
 		$query = "SELECT * FROM petty_cash_boxes WHERE id IN(SELECT DISTINCT(`pc_box_id`) FROM `petty_cash_box_owner` WHERE `owner_id` = ?)";
 		$params = [$query, $post];
@@ -5755,7 +5755,7 @@ class userClass{
         //print_r($data); exit;
 		return $data;
 	}
-	function pettycashbranchamount($post){
+	public function pettycashbranchamount($post){
 		global $callConfig;
 		$whrs="pc_box_id= '?' AND owner_id = '?' AND pc_type_id='?'";
 		$params = [$whrs, $post, $post, $post];
@@ -5786,7 +5786,7 @@ class userClass{
 		}
 		return $return;
 	}
-	function getpettycashbuget($post){
+	public function getpettycashbuget($post){
 		global $callConfig;
 		//print_r($post);
 		$whr1="id= '?'";
@@ -5801,7 +5801,7 @@ class userClass{
 		$data3 = $callConfig->getRowNew($query);
 		return $data3;
 	}
-	function dailypettycashformonth($post){
+	public function dailypettycashformonth($post){
 		global $callConfig;
 		$from = date('Y-m-d',strtotime(date("Y-m-d", mktime()) . " - 180 day"));
 		$day = 180;
@@ -5823,7 +5823,7 @@ class userClass{
 		//echo "<pre>"; print_r($return);
 		return $return; 
 	}
-	function dailypettycashmonth($post){
+	public function dailypettycashmonth($post){
 		global $callConfig;
 		$from = date('Y-m-d',strtotime(date("Y-m-d", mktime()) . " - 30 day"));
 		//print_r($dates); exit;
@@ -5838,7 +5838,7 @@ class userClass{
 		//echo "<pre>"; print_r($return);
 		return $return; 
 	}
-	function dailypettycashdaydetails(){
+	public function dailypettycashdaydetails(){
 		global $callConfig;
 		$from = date('Y-m-d',strtotime(date("Y-m-d", mktime()) . " - 30 day"));
 		//print_r($dates); exit;
@@ -5851,7 +5851,7 @@ class userClass{
 		//echo "<pre>"; print_r($return);
 		return $data3; 
 	}
-	function montlypettycashdetails($post){
+	public function montlypettycashdetails($post){
 		global $callConfig;
 		//print_r($post);
 		$query1="SELECT  id as pc_box_id, pc_box_code, pc_box_description FROM petty_cash_boxes WHERE id IN (SELECT `pc_box_id`  FROM  petty_cash_box_owner where `owner_id` =? AND `company_id` =? ORDER BY pc_box_id)";
@@ -5889,7 +5889,7 @@ class userClass{
 		//echo "<pre>"; print_r($return);
 		return $return_main; 
 	}
-	function dailypettycashdetails($post){
+	public function dailypettycashdetails($post){
 		global $callConfig;
 		//print_r($post);
 		$whr1="id= '?'";
@@ -5913,7 +5913,7 @@ class userClass{
 		//echo "<pre>"; print_r($return);
 		return $return; 
 	}
-	function dasboaradrequisition1details($post){
+	public function dasboaradrequisition1details($post){
 		global $callConfig;
 		$to = date('Y-m-d');
 		$month = date('m');
@@ -5955,7 +5955,7 @@ class userClass{
 		//print_r($return); exit;
 		return $return;
 	}
-	function dasboaradrequisition1coscenterdetails($post){
+	public function dasboaradrequisition1coscenterdetails($post){
 		global $callConfig;
 		$query12 = "SELECT id,cost_center_name from cost_centers where id in (SELECT `cost_center_id` FROM `user_cost_centers` where user_id = ? AND company_id = ? )";
 		$params = [$query12, $post, $post];
@@ -5988,7 +5988,7 @@ class userClass{
 		}
 		return $return;
 	}
-	function togetstatusprogresstables($post){
+	public function togetstatusprogresstables($post){
 		global $callConfig;
 		$query = "SELECT DISTINCT(table_name) as table_name FROM status_progress WHERE company_id = '?'";
 		$params = [$query, $post];
@@ -5996,7 +5996,7 @@ class userClass{
 		//echo "<pre>"; print_r($data);
 		return $data;
 	}
-	function togetbudgetuserdeails($post){
+	public function togetbudgetuserdeails($post){
 		global $callConfig;
 		$query = "SELECT * FROM chart_of_accounts WHERE account_code IN (SELECT account_code FROM gl_account_users WHERE user_id = ?)";
 		$params = [$query, $post];
@@ -6027,7 +6027,7 @@ class userClass{
 		//echo "<pre>".$account_section; print_r($main);
 		return $main;
 	}
-	function budgetinsert($post){
+	public function budgetinsert($post){
 		global $callConfig;		
 		//print_r($post); exit;
 		foreach ($post['data'] as $value) {
@@ -6047,7 +6047,7 @@ class userClass{
 			$data = $this->insertorupdatebudget($value);
 		}
 	}
-	function insertorupdatebudget($post){
+	public function insertorupdatebudget($post){
 		global $callConfig;
 		$whr1="company_id= '?' and budget_version='?' and cost_center_id='?' and account_code='?' and fiscal_year='?'";
 		$params = [$whr1, $post, $post, $post, $post, $post];
@@ -6061,7 +6061,7 @@ class userClass{
 		}
 		return $res;
 	}
-	function pendingQuerieslist($post){
+	public function pendingQuerieslist($post){
 		global $callConfig;
 		$query="select id, table_name, transaction_id, parent_count, query_type from ( SELECT tq1.id, tq1.table_name, tq1.query_type, tq1.transaction_id, ( select count(*) from transaction_queries tq2 WHERE tq2.company_id = tq1.company_id AND tq2.parent_query = tq1.id AND tq2.company_id = ? ) parent_count FROM transaction_queries tq1 WHERE originator = ? AND tq1.new_reply = 'N' ) a where parent_count =0";
 		$params = [$query, $post, $post];
@@ -6075,7 +6075,7 @@ class userClass{
 		$return['approval']= $data2;
 		return $return;
 	}
-	function addletters($post,$type=''){
+	public function addletters($post,$type=''){
 		global $callConfig;
 		//echo "ravi";
 		//echo "<pre>"; print_r($post); exit;
@@ -6137,7 +6137,7 @@ class userClass{
 		}
 		return $insert_data;
 	}
-	function dumpaddletters($post){
+	public function dumpaddletters($post){
 		global $callConfig;
 		$query= " INSERT INTO letter_dumps (`transaction_id`, `company_id`, `transaction_number`, `transaction_date`, `version_number`, `originator`, `customer_id`, `ref_id`, `ref_no`, `ref_date`, `subject`, `address_to`, `content`, `is_active`, `current_status`, `status_date`, `from_date`, `to_date`, `created_date`, `created_by`, `updated_by`, `updated_date`) SELECT  `id`, `company_id`, `transaction_number`, `transaction_date`, `version_number`, `originator`, `customer_id`, `ref_id`, `ref_no`, `ref_date`, `subject`, `address_to`, `content`, `is_active`, `current_status`, `status_date`, `from_date`, `to_date`, `created_date`, `created_by`, `updated_by`, `updated_date` FROM  letters Where id = '?'";
 		$params = [$query, $post];
@@ -6145,7 +6145,7 @@ class userClass{
 		//echo $query; //exit;
 		return $insert_data;
 	}
-	function productupload($data){
+	public function productupload($data){
 		global $callConfig;
 		//echo "<pre>"; print_r($data); exit;
 		foreach ($data['data'] as  $value) {
@@ -6163,7 +6163,7 @@ class userClass{
 			$insert_data=$callConfig->insertRecord('product_upload',$fieldnames);
 		}
 	}
-	function togetgenralledgerlistdata($post){
+	public function togetgenralledgerlistdata($post){
 		global $callConfig;
 		if($post['from']!='' && $post['to'] !=''){
 			$from = $post['from'];
@@ -6222,7 +6222,7 @@ class userClass{
 			//echo "<pre>"; print_r($maindata); print_r($data);
 		return $maindata;
 	}
-	function insertORUpadateStatusprogressaction($post){
+	public function insertORUpadateStatusprogressaction($post){
 		global $callConfig;
 		$modulelist = $post['module_setup_id'];		
 		$whr1="company_id= '?' and status_progress_id='?'";
@@ -6255,7 +6255,7 @@ class userClass{
 			//exit;
 		return $update_data;
 	}
-	function togetstatusprogressactiondetails(){
+	public function togetstatusprogressactiondetails(){
 		global $callConfig;
 		$query11 = "SELECT * FROM status_progress WHERE `id` IN  (SELECT status_progress_id FROM status_progress_actions GROUP BY status_progress_id)";
 		$data11 = $callConfig->getAllRowsNew($query11);
@@ -6278,7 +6278,7 @@ class userClass{
 		return $mainarray;
 			//echo "<pre>"."ravi"; print_r($mainarray);
 	}
-	function toGetItemcostingtyewithdata($post){
+	public function toGetItemcostingtyewithdata($post){
 		global $callConfig;
 			//$whr1="company_id= '".$post['company_id']."' and id='".$post['status_progress']."'";
 		
@@ -6320,7 +6320,7 @@ class userClass{
 			
 		return $return;
 	}
-	function employeeDetails($data){
+	public function employeeDetails($data){
 		global $callConfig;
 		$query1 = "SELECT *,(SELECT ms.marital_status_name FROM marital_statuses ms WHERE employees.marital_status = ms.id AND employees.company_id = ms.company_id) as marital_status_name, (SELECT bg.blood_group FROM blood_groups bg WHERE employees.blood_group = bg.id AND employees.company_id = bg.company_id) as blood_group_name FROM employees WHERE id = ? AND is_active=0 AND company_id=".$data['company_id'];
 		$params = [$query1, $data, $data];
@@ -6349,7 +6349,7 @@ class userClass{
 
 		return $return;
 	}
-	function togettablebasedata($table,$data ){
+	public function togettablebasedata($table,$data ){
 		global $callConfig;
 		$whr = "is_active = 0 AND company_id = ".$data['company_id'];
 			//echo $where;
@@ -6357,7 +6357,7 @@ class userClass{
 			//echo $tablename."//".$query;exit;
 		return $callConfig->getAllRowsNew($query);
 	}
-	function togettablebasedataPro($table,$data,$fieldval){
+	public function togettablebasedataPro($table,$data,$fieldval){
 		global $callConfig;
 		$whr = "is_active = 0 AND company_id = ".$data['company_id'];
 			//echo $where;
@@ -6365,7 +6365,7 @@ class userClass{
 			//echo $tablename."//".$query;exit;
 		return $callConfig->getAllRowsNew($query);
 	}
-	function togetemployeeteamdata($data){
+	public function togetemployeeteamdata($data){
 		global $callConfig;
 		$report_id =$data['report_id'];
 		$by_emp_ids = array();
@@ -6396,7 +6396,7 @@ class userClass{
 			$teams ['teams'] = $array23;
 			return $teams;
 	}
-	function togetemployeeassertdata($data){
+	public function togetemployeeassertdata($data){
 		global $callConfig;
 		$query24 = "SELECT id, asset_id, start_date, end_date, remarks, current_status FROM emp_assets WHERE emp_id = ? AND is_active=0 AND company_id=".$data['company_id'];
 		$params = [$query24, $data, $data];
@@ -6420,7 +6420,7 @@ class userClass{
 		}
 		return $assets_data;
 	}
-	function updatedynamicapprovallog($post){
+	public function updatedynamicapprovallog($post){
 		global $callConfig;
 		$statusarray = array(ST_ACTIVE, ST_DRAFT, ST_INACTIVE);
 		//print_r($statusarray); print_r($post); //exit;		
@@ -6499,7 +6499,7 @@ class userClass{
 		}
 		return $res;
 	}
-	function taskassignttoadmin($post){
+	public function taskassignttoadmin($post){
 		global $callConfig; 
 		$usql = "SELECT emp.user_id FROM project_tasks pt,project_users pu, employees emp  WHERE pu.company_id = '?' AND pt.id = '?' and pu.is_active = 0 AND pu.company_id = emp.company_id AND pu.is_active = emp.is_active AND pu.company_id = pt.company_id AND pu.is_active = pt.is_active AND pu.emp_id = emp.id AND pt.project_id = pu.id";
 		$params = [$usql, $post, $post];
@@ -6516,7 +6516,7 @@ class userClass{
 		return $post;
 	}
 	
-	function updateprojecttimesheetsbluk($get){
+	public function updateprojecttimesheetsbluk($get){
 		global $callConfig; 
 		$quer = "SELECT hr_buddy FROM `employee_buddies` WHERE `employee_id`=".$get['emp_id'];
 		$hrb = $callConfig->getRowNew($quer);
@@ -6545,7 +6545,7 @@ class userClass{
 		$ss = $this->tosendnotifiations($notdataa);
 		exit;
 	}
-	function ToCheckStatusApprovalLogdynamic($post){
+	public function ToCheckStatusApprovalLogdynamic($post){
 		global $callConfig;
 		$workflow = $this->checkhierarchicallevel($post);
 		//print_r($workflow); exit;
@@ -6593,7 +6593,7 @@ class userClass{
 		}
 		return $return;
 	}
-	function toSendEmailNotificationsBaseDAOdynamic($data){
+	public function toSendEmailNotificationsBaseDAOdynamic($data){
 		//echo "<pre>"; print_r($data);// exit;
 		global $callConfig;
 		$email_data = $this->checkhierarchicallevel($data);
@@ -6679,7 +6679,7 @@ class userClass{
 		//echo "ravi"; exit;
 		return $noti_res;
 	}
-	function addorupdatewizardsettings($post,$urldata){
+	public function addorupdatewizardsettings($post,$urldata){
 		global $callConfig; 
 		$update = "update application_user_widgets set is_active = 1 where  user_id='?'";
 		$params = [$update, $urldata];
@@ -6707,7 +6707,7 @@ class userClass{
 		//$data = $callConfig->executeQuery($update);
 		return $data;
 	}
-	function addorupdatekpi_comment($post,$get){
+	public function addorupdatekpi_comment($post,$get){
 		global $callConfig; 
 		foreach ($post['name'] as  $key=>$name) {
 			$insert_array = array('company_id'=>$get['company_id'],'indicator_name'=>$name,'key_reslut_id'=>$post['result'][$key],'weightage'=>$post['weightage'][$key],'model'=>$post['model'][$key],'uom'=>$post['uom'][$key],'role_id'=>$post['role_id'],'version_no'=>$post['version_no']);
@@ -6722,7 +6722,7 @@ class userClass{
 		}
 		return $insert;
 	} 
-	function togetcandidatedocumentlist($data){
+	public function togetcandidatedocumentlist($data){
 		global $callConfig; 
 		$query="SELECT * FROM document_lists WHERE id in (SELECT document_list_id FROM `candidate_documents` WHERE `candidate_id` = ? AND company_id = ? AND is_active = 0)";
 		$params = [$query, $data, $data];
@@ -6730,7 +6730,7 @@ class userClass{
 		return $data;
 	}
 	
-	function togetsalarycatdetaillist($post){
+	public function togetsalarycatdetaillist($post){
 		global $callConfig;
 		$type = $post['type']!="" ? $post['type'] : "M";
 		$whr1="company_id= '?' AND is_active=0 AND part_of_ctc=0 AND salary_type ='?'";
@@ -6753,7 +6753,7 @@ class userClass{
 		}
 		return $return;
 	}
-	function inserttasks_comments($post, $get){
+	public function inserttasks_comments($post, $get){
 			global $callConfig;
 			//echo "ravi"; print_r($post); //exit; 
 			$array_id = array('kpi_tasks'=>'kpi_id','organization_tasks'=>'goal_id','employee_kpi_tasks'=>'emp_goal_id');
@@ -6777,7 +6777,7 @@ class userClass{
 		}
 		return $insert;
 	}
-	function goalscheckandadd($data){
+	public function goalscheckandadd($data){
 		global $callConfig;
 			//echo "<pre>"; print_r($data);
 		$whr1="company_id= '?' and role_id='?' and version_no='?' and is_active=0";
@@ -6805,7 +6805,7 @@ class userClass{
 		return $returnary;
 
 	}
-	function employeegoalscheckandadd($data){
+	public function employeegoalscheckandadd($data){
 		global $callConfig;
 			//echo "<pre>"; print_r($data);
 		$cfquery = $callConfig->selectQuery('config','default_kpi_weekly_task_day,default_kpi_monthly_task_day','id=1','','','');
@@ -6848,7 +6848,7 @@ class userClass{
 		}
 		return  $returnary;
 	}
-	function toinsertemployeehistory($data){
+	public function toinsertemployeehistory($data){
 		global $callConfig; 
 		
 		$whre="company_id= '?' and  emp_goal_id='?' and is_active=0";
@@ -6895,7 +6895,7 @@ class userClass{
 		return $returnarr;
 	}
 
-	function addorupdategoals($post,$get){
+	public function addorupdategoals($post,$get){
 		global $callConfig; 
 		foreach ($post['id'] as  $key=>$id) {
 			$insert_array = array('indicator_name'=>$post['name'][$key],'key_reslut_id'=>$post['result'][$key],'weightage'=>$post['weightage'][$key],'model'=>$post['model'][$key],'uom'=>$post['uom'][$key],'assessment_frequency'=>$post['assessment_frequency'][$key],'traget'=>$post['traget'][$key]);
@@ -6905,7 +6905,7 @@ class userClass{
 		return $insert_data;
 	}	
 
-	function addorupdatesalary($post, $urldata){
+	public function addorupdatesalary($post, $urldata){
 		global $callConfig; 
 			//echo "<pre>";print_r($post); exit;
 		$whre="company_id= '?' and is_active=0";
@@ -7028,7 +7028,7 @@ class userClass{
 		//return $return;
 		return $insert;
 	}
-	function addorupdategradesalary($post, $urldata){
+	public function addorupdategradesalary($post, $urldata){
 		global $callConfig; 
 		$whre="company_id= '?' and  level_id='?' and is_active=0";
 		$params = [$whre, $urldata, $post];
@@ -7052,7 +7052,7 @@ class userClass{
 		}
 		return $insert;
 	}
-	function addjobpostingapplicatantdata($post,$get){
+	public function addjobpostingapplicatantdata($post,$get){
 		global $callConfig; 
 		$res=$callConfig->updateRecord('job_posting_candidates',array('is_active'=>'1'),'job_posting_id',$post['job_posting']);
 		foreach ($post['name'] as  $key=>$name) {
@@ -7069,7 +7069,7 @@ class userClass{
 		}
 		return $insert;
 	}	
-	function candidateautoregistation($post,$get){
+	public function candidateautoregistation($post,$get){
 		global $callConfig; 
 		$allreadycreatesql = "SELECT id FROM ".MAINDB.".user_registered_groups WHERE user_email ='?'";
 		$params = [$allreadycreatesql, $post];
@@ -7136,7 +7136,7 @@ class userClass{
 	// 	}
 	// 	return $daas;
 	// }
-	function addorupdatecandaitedocument($post,$get){
+	public function addorupdatecandaitedocument($post,$get){
 		global $callConfig;
 		//print_r($post); exit;
 		//$category_id = isset($post['category_id']) ? $post['category_id'] :1;
@@ -7159,7 +7159,7 @@ class userClass{
 		}
 		return $daas;
 	}
-	function updatecandaitedocument($post,$get){
+	public function updatecandaitedocument($post,$get){
 			global $callConfig;
 			$return = array();
 			//echo "<pre>";
@@ -7183,7 +7183,7 @@ class userClass{
 		$this->tosendnotifiations($notarry);
 		return $return;
 	}
-	function tosendnotifiations($notarry){
+	public function tosendnotifiations($notarry){
 		global $callConfig;		
 		$notarry['notification_datetime']= 	$notarry['notification_datetime'] !=""?$notarry['notification_datetime'] : date("Y-m-d H:i:s");
 	  	//$notarry['notification_datetime']=date("Y-m-d H:i:s");
@@ -7213,7 +7213,7 @@ class userClass{
 		//$lenn = $this->sendEmailslist($email_array);
 		return $res;
 	}
-	function updateonlystatus($get){
+	public function updateonlystatus($get){
 		global $callConfig;
 		$whr = "";
 		$fieldnames = array('current_status'=>$get['status']);
@@ -7235,7 +7235,7 @@ class userClass{
 		return $res;
 	}
 
-	function toinsertpayrnsummary($post, $get){
+	public function toinsertpayrnsummary($post, $get){
 		global $callConfig;
 		//echo "<pre>";print_r($post); exit;
 		$whr1="company_id= '?' and is_active=0 and user_type!=4";
@@ -7397,7 +7397,7 @@ class userClass{
 	}
 
 
-	function togetpayrolledetails($post){
+	public function togetpayrolledetails($post){
 		global $callConfig;
 		$post['month'] = '12';
 		$post['year'] = '2020';
@@ -7405,7 +7405,7 @@ class userClass{
 		$return['dash1'] = $this->togetpayrollgrosspayanddeductions($post);
 		return $return;
 	}
-	function togetpayrollgrosspayanddeductions($post){
+	public function togetpayrollgrosspayanddeductions($post){
 		global $callConfig;
 		$query = "SELECT SUM(if(compnent_type!=4,`salary_component_actual`,0)) as actual ,SUM(if(compnent_type =4,`salary_component_actual`,0)) as deductions, sum(salary_component_actual) as total FROM pay_run_summary_components where  `pay_month`='?' and `pay_year`='?' and `revision_no`='?'";
 		$params = [$query, $post, $post, $post];
@@ -7413,7 +7413,7 @@ class userClass{
 		return $data;
 		//echo $query;
 	}
-	function togetpayslipdetails($post){
+	public function togetpayslipdetails($post){
 		global $callConfig;
 		//		echo "<pre>";
 		//print_r($post);
@@ -7522,7 +7522,7 @@ class userClass{
 		// exit;
 		return $data;
 	}
-	function genratecandidatetoemployee($post,$get){
+	public function genratecandidatetoemployee($post,$get){
 		global $callConfig;
 		$returnarray = array();
 		$returnarray['post'] = $post; 
@@ -7642,7 +7642,7 @@ class userClass{
 		}
 		return $returnarray;
 	}
-	function movefileonedirtoanotherdir($source, $destination,$file,$other=''){
+	public function movefileonedirtoanotherdir($source, $destination,$file,$other=''){
 		$path = $destination;
 		//echo $source."######".$destination."######".$file; exit;
 		if(!is_dir($path)) { 		
@@ -7661,7 +7661,7 @@ class userClass{
 		$params = [$returns, $source, $file, $destination, $file];
 		return $returns;
 	}
-	function genratecandidatesalarytemplate_comment($post,$get){
+	public function genratecandidatesalarytemplate_comment($post,$get){
 		global $callConfig;
 		$offer_post['job_grade']=$post['job_grade'];
 		$offer_post['pay_template']=$post['pay_template'];
@@ -7699,7 +7699,7 @@ class userClass{
 		$insert_task1 = $callConfig->executeQuery($quer_com);
 		return $insert_task;
 	}
-	function genratecandidatesalarytemplate($post,$get){
+	public function genratecandidatesalarytemplate($post,$get){
 		global $callConfig;
 		$return = array();
 		$return['post'] = $post;
@@ -7866,7 +7866,7 @@ class userClass{
 		return $return;
 	}
 
-	function usernotify($post,$get){
+	public function usernotify($post,$get){
 		global $callConfig;
 		$notarry['notification_message'] = $post['comment'];
 		$notarry['notification_users'] = array('0'=>$post['send_id']);
@@ -7876,7 +7876,7 @@ class userClass{
 		$notarry['type'] = "INFORMATION";
 		$this->tosendnotifiations($notarry);
 	}
-	function payrollfromtodates($get){
+	public function payrollfromtodates($get){
 		global $callConfig;
 		if($get['pay_area_id']!=""){
 			$cfquery = "SELECT pay_run_period FROM pay_areas WHERE company_id =? AND id=? AND is_active = 0";
@@ -7914,7 +7914,7 @@ class userClass{
 		return  $return;
 	}
 	
-	function togetcurrentmonthexitemployes($get){
+	public function togetcurrentmonthexitemployes($get){
 		global $callConfig;
 		$cfquery = $callConfig->selectQuery('config','default_payroll_day','id=1','','','');
 		$cfdata = $callConfig->getRowNew($cfquery);
@@ -7963,7 +7963,7 @@ class userClass{
 		return $returns;
 		
 	}
-	function togetcurrentmonthsalaryrevisions($get){
+	public function togetcurrentmonthsalaryrevisions($get){
 		global $callConfig;
 		//echo "ravi"; exit;
 		$cfquery = $callConfig->selectQuery('config','default_payroll_day','id=1','','','');
@@ -8014,7 +8014,7 @@ class userClass{
 		}
 		return $returns;
 	}
-	function togetcurrentmonthsalaryrevisions1($get){
+	public function togetcurrentmonthsalaryrevisions1($get){
 		global $callConfig;
 		//echo "ravi 123"; exit;
 		$cfquery = $callConfig->selectQuery('config','default_payroll_day','id=1','','','');
@@ -8046,7 +8046,7 @@ class userClass{
 		}
 		return $returns;
 	}
-	function togetemployeeattendanacecalucater($post){
+	public function togetemployeeattendanacecalucater($post){
 		global $callConfig;
 		//echo "<pre>";
 		$emp_id = $post['emp_id'];
@@ -8096,7 +8096,7 @@ class userClass{
 		print_r($empattdata); exit;
 
 	}
-	function togetpresentationdetails($get){
+	public function togetpresentationdetails($get){
 		global $callConfig;
 		//echo "<pre>";
 		//print_r($get);
@@ -8120,7 +8120,7 @@ class userClass{
 		//print_r($returns);
 		return $return1;
 	}
-	function togetemployrrearndetails($post){
+	public function togetemployrrearndetails($post){
 		global $callConfig;
 		$queryearnings ="SELECT * from  employee_other_earnings where is_active=0 AND employee_id = ? AND  `earning_date` <= '?' AND `earning_date` > '?'";
 		$params = [$queryearnings, $post, $get, $get];
@@ -8148,7 +8148,7 @@ class userClass{
 		
 		return $earns_data;
 	}
-	function togetpresentationpagedetails($get){
+	public function togetpresentationpagedetails($get){
 		global $callConfig;
 
 		$cfquery = $callConfig->selectQuery('presentation','*','is_active=0 AND id=? AND parent_id='.$get['presentation_id'],'display_sequence ASC','','');
@@ -8166,7 +8166,7 @@ class userClass{
        // print_r($returns); exit;
 		return $returns;
 	}
-	function addorupdateitdeclaration80c($post,$get){
+	public function addorupdateitdeclaration80c($post,$get){
 		global $callConfig;
         //echo "ravi<pre>"; print_r($post); exit;
 		$query = "SELECT id FROM emp_it_declaration WHERE company_id= '?' and emp_id='?' and assessment_year='?' AND version=?' AND is_active = 0";
@@ -8191,7 +8191,7 @@ class userClass{
         }
         return $daas;
     }
-    function addorupdateitdeclarationotherincome($post){
+    public function addorupdateitdeclarationotherincome($post){
 		global $callConfig;
         //echo "ravi<pre>"; print_r($post); exit;
 
@@ -8207,7 +8207,7 @@ class userClass{
         }
         return $daas;
     }
-    function togetsalarytotaldetails($get){
+    public function togetsalarytotaldetails($get){
     	global $callConfig;
     	$ctquery = $callConfig->selectQuery('salary_categories','*','is_active=0','','','');
 		//echo $pcquery; exit;
@@ -8267,7 +8267,7 @@ class userClass{
 		//print_r($data); exit;
     	return $maindata;
     }	
-    function togetemployeeincometax($post){
+    public function togetemployeeincometax($post){
     	global $callConfig;
 	    //echo "<pre>";	print_r($post); exit;
 	    // $array('emp_id'=>$emp->id,'gross_aount'=>$code_data['GS'],'date1'=>$date1,'date2'=>$date2,'valdata'=>$codeactual,'actualval'=>$code_data, 'joining_date'=>$emp->joining_date,'joining_bonus_applicable'=>$datast->joining_bonus_applicable, 'joining_bonus_tax_type'=>$datast->joining_bonus_tax_type, 'joining_bonus_amount'=>$datast->joining_bonus_amount, 'code_data'=>$code_data);
@@ -8419,7 +8419,7 @@ class userClass{
     	return $tax_val;
     }
 	
-    function employeeclocks($post,$get){
+    public function employeeclocks($post,$get){
     	global $callConfig;
     	$query = $callConfig->selectQuery('employee_daily_attendances','*',"is_active=0 AND employee_id='?' AND attendace_date='?'",'','','');
     	$params = [$query, $callConfig->selectQuery, $post, $post];
@@ -8452,7 +8452,7 @@ class userClass{
 		return $res;
 			//echo $res; exit;
 	}
-	function togetempleavebalances($get)
+	public function togetempleavebalances($get)
 	{
 		global $callConfig;
 		$itemsquery  = "SELECT sum(consumed_leaves) as consumed FROM emp_leave_balances where DATE_FORMAT(status_date,'%Y%M')='?' AND employee_id =? AND is_active = 0 ";
@@ -8462,7 +8462,7 @@ class userClass{
 		return $data;
 	}
 
-	function payrollupdateonetime($post,$get){
+	public function payrollupdateonetime($post,$get){
 		global $callConfig;
 			//echo "<pre>";
 		$erquery = $callConfig->selectQuery($post['type'],'*',"is_active=0",'','','');
@@ -8500,7 +8500,7 @@ class userClass{
 		}
 		return $res;
 	}
-	function payrolldetails($get){
+	public function payrolldetails($get){
 		global $callConfig;
 			//echo "<pre>"; print_r($get);
 		//$datess = $this->payrollfromtodates($get);
@@ -8548,7 +8548,7 @@ class userClass{
 			//print_r($return); exit;
 		return $return;
 	}
-	function regenratepayrolldetails($get){
+	public function regenratepayrolldetails($get){
 		global $callConfig;
 		$query = "UPDATE `pay_run_summary` SET is_active=1 WHERE  `company_id`=? AND `pay_year`=? AND `pay_month`=? AND is_active=0";
 		$params = [$query, $get, $get, $get];
@@ -8567,7 +8567,7 @@ class userClass{
 		$data = $callConfig->executeQuery($query5);
 		return $data;
 	}
-	function payrolldisplaydata($get){
+	public function payrolldisplaydata($get){
 		global $callConfig;
 			//echo "<pre>"; print_r($get);
 		$whr = "pay_year=? AND pay_month = ? AND company_id = ? AND is_active=0";

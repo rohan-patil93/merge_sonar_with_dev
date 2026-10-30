@@ -68,7 +68,7 @@ function getIPAddress(){
         <div class="loader-bar"></div>
     </div>
     <div class="mobile-view-logo bg-primary text-center">
-        <img class="img-100 m-3" src="assets/images/sign-in/compliance_logo.png">   
+        <img class="img-100 m-3" src="assets/images/sign-in/compliance_logo.png" alt="" >   
     </div>
     <div class="row align-items-center">
         <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 bg-white text-center">
@@ -107,9 +107,9 @@ function getIPAddress(){
         <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 text-center desktop-view-bg">
             <div class="p-3">
                 <div class="text-center d-block">
-                    <img class="img-100 mt-3" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>">
+                    <img class="img-100 mt-3" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >
                 </div>
-                <!-- <img class="mt-5 mb-4" src="assets/images/sign-in/bg11.png"> -->
+                <!-- <img class="mt-5 mb-4" src="assets/images/sign-in/bg11.png" alt="" > -->
                 <div class="mt-2 mb-5 text-center">
                     <h2 class="text-white f-30 f-w-600"><!-- Never miss any compliance deadline --></h2>
                     <p class="f-14 text-white p-2 m-l-30 m-r-30"><!-- Timely Comply facilitates compliance management teams to keep themselves updated with the status of all compliance submissions. An innovative solution that has been developed by experts and experienced product developers to smoothen the coordination between internal stakeholders and external advisors. --></p>

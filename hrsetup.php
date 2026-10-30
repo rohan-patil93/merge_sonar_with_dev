@@ -589,7 +589,7 @@ function addslabrows(){
             <!--begin::Header Mobile-->
             <div id="kt_header_mobile" class="header-mobile align-items-center  header-mobile-fixed " style="background-color: white;">
 
-             <a href="index.php"> <img alt="Logo" src="assets/images/logo.png"  class="img-100"/> </a>
+             <a href="index.php"> <img alt="Logo" src="assets/images/logo.png"  class="img-100" /> </a>
            </div>
 
            <div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
@@ -642,7 +642,7 @@ function addslabrows(){
       <input  type="file" name="display_logo" id="display_logo" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
       <input type="hidden" name="logo_remove" >
 
-      <img src="<?php echo $bimage ; ?>" id="outputdisplay_logo" width="200"  onerror="this.src='uploads/all/no-image.jpg';"/>
+      <img src="<?php echo $bimage ; ?>" id="outputdisplay_logo" width="200"  onerror="this.src='uploads/all/no-image.jpg';" alt="" />
     </div>
 
 

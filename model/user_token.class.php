@@ -1,7 +1,7 @@
 <?php 
 class UserTokenClass {
 
-	function tocheckusertoken($get){
+	public function tocheckusertoken($get){
 		global $callConfig;
 		/*$company_id =$get['company_id'];
 		$user_token =$get['token'];

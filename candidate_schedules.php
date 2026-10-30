@@ -117,7 +117,7 @@ $countries = $getreturnresponse['countries'];
           <div class="card">
             <div class="card-body p-l-50 p-r-50 p-b-50">
                 <div class="text-center">
-                   <img class="img-200" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>">  
+                   <img class="img-200" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >  
                 </div>
                 <?php if($getresponse['current_status'] == ST_ACTIVE){ ?>
                 <form class="md-float-material form-material m-t-50" action="" method="post"> 
@@ -180,7 +180,7 @@ $countries = $getreturnresponse['countries'];
             	<div class="card-px text-center py-20 m-t-30">
 					<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> Already Scheduled Time</p>	 
 					<div class="text-center px-4">
-						<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+						<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
 					</div>	 
 				</div>
             <?php } ?>

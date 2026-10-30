@@ -102,7 +102,7 @@ $companyName = isset($_SESSION['config']['name'])   ? htmlspecialchars($_SESSION
                     <?php } else { ?>
                     <div class="text-center py-3">
                         <p class="text-muted f-14 fw-bold"><i class="ti-alert text-warning"></i> No Records</p>
-                        <img class="mw-100" style="max-height:200px;" src="assets/images/work.png" alt="">
+                        <img class="mw-100" style="max-height:200px;" src="assets/images/work.png" alt="" >
                     </div>
                     <?php } ?>
                 </div>
@@ -147,7 +147,7 @@ $companyName = isset($_SESSION['config']['name'])   ? htmlspecialchars($_SESSION
                     <?php } else { ?>
                     <div class="text-center py-3">
                         <p class="text-muted f-14 fw-bold"><i class="ti-alert text-warning"></i> No Records</p>
-                        <img class="mw-100" style="max-height:200px;" src="assets/images/work.png" alt="">
+                        <img class="mw-100" style="max-height:200px;" src="assets/images/work.png" alt="" >
                     </div>
                     <?php } ?>
                 </div>
@@ -188,7 +188,7 @@ $companyName = isset($_SESSION['config']['name'])   ? htmlspecialchars($_SESSION
             <!-- Table content loaded by ajax -->
             <div id="dmTableContent" class="custom-scroll" style="max-height: 500px;">
                 <div class="text-center py-5">
-                    <img src="assets/images/spiner/spiner3.gif" style="width:200px;">
+                    <img src="assets/images/spiner/spiner3.gif" style="width:200px;" alt="" >
                 </div>
             </div>
 
@@ -198,7 +198,7 @@ $companyName = isset($_SESSION['config']['name'])   ? htmlspecialchars($_SESSION
 
 <script type="text/javascript">
     function loadDmTable(status, el) {
-        var loader = '<div class="text-center py-5"><img src="assets/images/spiner/spiner3.gif" style="width:200px;"></div>';
+        var loader = '<div class="text-center py-5"><img src="assets/images/spiner/spiner3.gif" style="width:200px;" alt="" ></div>';
         $('#dmTableContent').html(loader);
         $.ajax({
             url: 'views/custom_dashboard_document_management_user_ajax.php',

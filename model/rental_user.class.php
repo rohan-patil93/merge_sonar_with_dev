@@ -3,7 +3,7 @@ require_once "dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
 use Dompdf\Options;
 class rentalUserClass extends userClass{
-	function getPropertyOwners($get){
+	public function getPropertyOwners($get){
 		global $callConfig;
 		$property_typessql = "SELECT id, property_type_name, parent_id, icon FROM property_types WHERE is_active =0 AND company_id = '".$get['company_id']."'";
 		$property_typesres=$callConfig->getAllRows($property_typessql);
@@ -53,7 +53,7 @@ class rentalUserClass extends userClass{
 
 		return $return;
 	}
-	function insertPropertyOwners($get,$post){
+	public function insertPropertyOwners($get,$post){
 		global $callConfig;
 		$return['post']= $post;
 		$insertary=array('company_id'=>$post['company_id'],'owner_name'=>$post['owner_name'],'address'=>$post['address'],'gst_no'=>$post['gst_no'],'bank_id'=>$post['bank_id'],'bank_account_no'=>$post['bank_account_no'],'owner_company_name'=>$post['owner_company_name'],'pan_no'=>$post['pan_no'],'ifsc_code'=>$post['ifsc_code'],'account_type'=>$post['account_type'],'contact_no'=>$post['contact_no'],'email_id'=>$post['email_id']); 
@@ -133,7 +133,7 @@ class rentalUserClass extends userClass{
 		}
 		return $return;
 	}
-	function getPropertyTenantDetails($get){
+	public function getPropertyTenantDetails($get){
 		global $callConfig;
 		if($get['un_lock_date'] != ''){
 			$un_lock_date = $this->dateconvertdbformat($get['un_lock_date']);
@@ -236,7 +236,7 @@ class rentalUserClass extends userClass{
 	}
 		return $return;
 	}
-	function getAjaxPropertyOwnerDetails($get){
+	public function getAjaxPropertyOwnerDetails($get){
 		global $callConfig;
 		if($get['ownerid'] !=""){
 			$property_owner_detailssql = "SELECT id, property_name, property_type, property_sub_type FROM property_owner_details WHERE company_id = '".$get['company_id']."' AND property_owner_id = '".$get['ownerid']."'  AND is_active =0";
@@ -264,7 +264,7 @@ class rentalUserClass extends userClass{
 		}
 		return $return;
 	}
-	function insertPropertyTenantDetails($get,$post){
+	public function insertPropertyTenantDetails($get,$post){
 		global $callConfig;
 		$return['post']= $post;
 		if($post['customer_id'] =="" OR $post['customer_id'] =="0"){
@@ -336,7 +336,7 @@ class rentalUserClass extends userClass{
 
 		return $return;
 	}
-	function insertRentalInvoices($get){
+	public function insertRentalInvoices($get){
 		global $callConfig;
 		$return['get']= $get;
 		//echo "<pre>";
@@ -355,7 +355,7 @@ class rentalUserClass extends userClass{
 
 			$rent_escalation_after_month = $property_tenant_detailsres->rent_escalation_after_month;
 			$rent_escalation_percentage = $property_tenant_detailsres->rent_escalation_percentage;
-			if($rent_escalation_after_month !="" AND $rent_escalation_after_month !=""){
+			if($rent_escalation_after_month !=""){
 				$rent_escalation_after_every_month = range($rent_escalation_after_month, 5000, $rent_escalation_after_month);
 			}
 			$return['property_tenant_details'] = $property_tenant_detailsres;
@@ -513,7 +513,7 @@ class rentalUserClass extends userClass{
 					}
 					$perdayrante = $monthlyrant[$keyyy]/$totaldays;
 					$rent_tax = 0;
-					if($property_tenant_detailsres->tax_percentage !="" AND $property_tenant_detailsres->tax_percentage !=""){
+					if($property_tenant_detailsres->tax_percentage !=""){
 						$rent_tax = $monthlyrant[$keyyy]*($property_tenant_detailsres->tax_percentage/100);
 					}
 					$totalmonthly_tax += $rent_tax;
@@ -642,7 +642,7 @@ class rentalUserClass extends userClass{
 		return $return;
 	}
 	/**
-	function insertRentalInvoices($get){
+	public function insertRentalInvoices($get){
 		global $callConfig;
 		$return['get']= $get;
 		$property_tenant_detailssql = "SELECT * FROM property_tenant_details WHERE company_id = '".$get['company_id']."' AND id = '".$get['rid']."'  AND is_active =0";
@@ -731,7 +731,7 @@ class rentalUserClass extends userClass{
 					}
 					$perdayrante = $monthlyrant/$totaldays;
 					$rent_tax = 0;
-					if($property_tenant_detailsres->tax_percentage !="" AND $property_tenant_detailsres->tax_percentage !=""){
+					if($property_tenant_detailsres->tax_percentage !=""){
 						$rent_tax = $monthlyrant*($property_tenant_detailsres->tax_percentage/100);
 					}
 					$totalmonthly_tax += $rent_tax;
@@ -842,7 +842,7 @@ class rentalUserClass extends userClass{
 		$return['sendMailWithPDF'] = $this->sendMailWithPDF($get,$rental_invoice_id);  **//**
 		return $return;
 	} **/
-	function getRentalAdminDashboard($get){
+	public function getRentalAdminDashboard($get){
 		global $callConfig;
 		$returnarray = array();
 		$vendor_id = array();
@@ -957,7 +957,7 @@ class rentalUserClass extends userClass{
 
 		return $returnarray;
 	}
-	function getRentalDashboardChart($get){
+	public function getRentalDashboardChart($get){
 		global $callConfig;
 		// $exploderole = explode(',', $get['roleshortcode']);
 		// if($get['admin_type'] != 1){
@@ -991,7 +991,7 @@ class rentalUserClass extends userClass{
 		}
 		return $expensemontharray;
 	}
-	function getPropertyTenantBillings($get){
+	public function getPropertyTenantBillings($get){
 		global $callConfig;
 		$return = array();
 		$month = $get['month'];
@@ -1025,7 +1025,7 @@ class rentalUserClass extends userClass{
 		$return['rental_bill_types'] = $rental_utilitiesres;
 		return $return;
 	}
-	function updatePropertyTenantBillings($get,$post){
+	public function updatePropertyTenantBillings($get,$post){
 		global $callConfig;
 		$return = array();
 		$return['post'] = $post;
@@ -1088,7 +1088,7 @@ class rentalUserClass extends userClass{
 		}
 		return $return;
 	}
-	function renatalInvoiceSend($get,$property_tenant_billings_id=""){
+	public function renatalInvoiceSend($get,$property_tenant_billings_id=""){
 		global $callConfig;
 		$return = array();
 		if($property_tenant_billings_id ==""){
@@ -1153,7 +1153,7 @@ class rentalUserClass extends userClass{
 		$return['res'] = $res; 
 		return $return;
 	}
-	function insertRentalInvoicesNew($get,$property_tenant_billings_id,$status=''){
+	public function insertRentalInvoicesNew($get,$property_tenant_billings_id,$status=''){
 		global $callConfig;
 		$return = array();
 		$ptbsql = "SELECT id,property_tenant_detail_id,bill_detail,utility_details,month_start_date, rent_amount, rent_tax, rent_total_amount, utility_amount, total_amount, rent_due_date, rent_additional_notes, utility_transaction_date,utility_due_date,utility_additional_notes,rent_transaction_date FROM property_tenant_billings WHERE company_id = '".$get['company_id']."' AND id = '".$property_tenant_billings_id."' AND is_active = 0";      
@@ -1333,7 +1333,7 @@ class rentalUserClass extends userClass{
 		$callConfig->updateRecord('property_tenant_billings',$updateary,'rental_invoice_id',$rid);
 		return $filename;
 	}
-	function getTenantCustomers($get){
+	public function getTenantCustomers($get){
 		global $callConfig;
 		$return = array();
 		$return['get'] = $get;
@@ -1394,7 +1394,7 @@ class rentalUserClass extends userClass{
 
 		return $return;
 	}
-	function getCustomersDetails($get){
+	public function getCustomersDetails($get){
 		global $callConfig;
 		$return = array();
 		$return['get']= $get;
@@ -1504,7 +1504,7 @@ class rentalUserClass extends userClass{
 
 		return $return;
 	}
-	function insertCustomers($get,$post){
+	public function insertCustomers($get,$post){
 		global $callConfig;
 		$return['post']= $post;
 		$insertary=array('company_id'=>$post['company_id'],'title'=>$post['title'],'first_name'=>$post['first_name'],'middle_name'=>$post['middle_name'],'last_name'=>$post['last_name'],'suffix'=>$post['suffix'],'email'=>$post['email'],'phone'=>$post['phone'],'company'=>$post['company'],'display_name'=>$post['display_name'],'image'=>$post['image'],'curreny_id'=>$post['curreny_id'],'website_url'=>$post['website_url'],'parent_customer'=>$post['parent_customer'],'bill_with_parent'=>$post['bill_with_parent'],'customer_inv_notes'=>$post['customer_inv_notes'],'customer_stmnt_notes'=>$post['customer_stmnt_notes'],'customer_tax_reg_no'=>$post['customer_tax_reg_no'],'cst_reg_no'=>$post['cst_reg_no'],'pan_no'=>$post['pan_no'],'tds_apply'=>$post['tds_apply'],'sales_type'=>$post['sales_type'],'hold_reason'=>$post['hold_reason'],'payment_terms'=>$post['payment_terms'],'default_discount_perc'=>$post['default_discount_perc'],'payment_discount_perc'=>$post['payment_discount_perc'],'pref_payment_method'=>$post['pref_payment_method'],'opening_balance'=>$post['opening_balance'],'last_paid'=>$post['last_paid'],'last_paid_date'=>$post['last_paid_date'],'credit_limit'=>$post['credit_limit'],'edi_invoices'=>$post['edi_invoices'],'edi_orders'=>$post['edi_orders'],'edi_reference'=>$post['edi_reference'],'edi_transport'=>$post['edi_transport'],'edi_address'=>$post['edi_address'],'edi_server_user'=>$post['edi_server_user'],'edi_server_pwd'=>$post['edi_server_pwd'],'language_id'=>$post['language_id'],'other'=>$post['other'],'asof'=>$this->dateconvertdbformat($post['asof']),'preferred_deliver_method'=>$post['preferred_deliver_method'],'pay_with_me'=>$post['pay_with_me'],'contact_person'=>$post['contact_person'],'account_code'=>$post['account_code']);
@@ -1599,7 +1599,7 @@ class rentalUserClass extends userClass{
         // End Insert LUT/Bond details if provided
 		return $return;
 	}
-	function getOwnerReports($get){
+	public function getOwnerReports($get){
 		global $callConfig;
 		$return['post']= $post;
 		$condition = "";
@@ -1616,7 +1616,6 @@ class rentalUserClass extends userClass{
 
 		$property_owner_detailssql = "SELECT id, property_owner_id, property_name, property_type, property_sub_type, property_address FROM property_owner_details WHERE company_id = '".$get['company_id']."' AND is_active =0";
 		$property_owner_detailsres=$callConfig->getAllRows($property_owner_detailssql);
-		$return['property_owner_details'] = $property_owner_detailsres;
 		$property_owner_details =  array();
 		foreach($property_owner_detailsres as $pwd){
 			$property_owner_details[$pwd->property_owner_id][]= $pwd;
@@ -1648,7 +1647,7 @@ class rentalUserClass extends userClass{
 		$return['property_owner_detail_areas'] = $property_owner_detail_areas;
 		return $return;
 	}
-	function getTenantReports($get){
+	public function getTenantReports($get){
 		global $callConfig;
 		$return['get']= $get;
 		$condition = "";
@@ -1666,7 +1665,6 @@ class rentalUserClass extends userClass{
 
 		$property_owner_detailssql = "SELECT id, property_name FROM property_owner_details WHERE company_id = '".$get['company_id']."' AND is_active =0";
 		$property_owner_detailsres=$callConfig->getAllRows($property_owner_detailssql);
-		$return['property_owner_details'] = $property_owner_detailsres;
 		$property_owner_details =  array();
 		foreach($property_owner_detailsres as $pwd){
 			$property_owner_details[$pwd->id]= $pwd->property_name;
@@ -1691,7 +1689,7 @@ class rentalUserClass extends userClass{
 		$return['property_tenant_details'] = $property_tenant_details;
 		return $return;
 	}
-	function gettenantBillingReports($get){
+	public function gettenantBillingReports($get){
 		global $callConfig;
 		$return['get']= $get;
 		$sdate = date("Y-m-01",strtotime($get['start_month']));
@@ -1734,7 +1732,6 @@ class rentalUserClass extends userClass{
 
 		$property_owner_detailssql = "SELECT id, property_name FROM property_owner_details WHERE company_id = '".$get['company_id']."' AND is_active =0";
 		$property_owner_detailsres=$callConfig->getAllRows($property_owner_detailssql);
-		$return['property_owner_details'] = $property_owner_detailsres;
 		$property_owner_details =  array();
 		foreach($property_owner_detailsres as $pwd){
 			$property_owner_details[$pwd->id]= $pwd;
@@ -1743,7 +1740,6 @@ class rentalUserClass extends userClass{
 		$invoices = $opening_balance_inv =  array();
 		//Start opening balance
 		$ob_rental_invoicessql = "SELECT parent_ref_id, SUM(amount) as amount, SUM(tax_amount) as tax_amount, SUM(total_amount) as total_amount, SUM(pending_amount) as pending_amount FROM rental_invoices WHERE company_id = '".$get['company_id']."' AND is_active =0 AND current_status = '".ST_APPROVED."' AND transaction_date <= '".$previouslastdate."' GROUP BY parent_ref_id";
-		$return['ob_rental_invoicessql'] = $ob_rental_invoicessql;
 		$ob_rental_invoicesres=$callConfig->getAllRows($ob_rental_invoicessql);
 		foreach($ob_rental_invoicesres as $ri){
 			$opening_balance_inv[$ri->parent_ref_id]['ob_rent']= $ri;
@@ -1811,7 +1807,6 @@ class rentalUserClass extends userClass{
 
 		$property_owner_detailssql = "SELECT id, property_name FROM property_owner_details WHERE company_id = '".$get['company_id']."' AND is_active =0";
 		$property_owner_detailsres=$callConfig->getAllRows($property_owner_detailssql);
-		$return['property_owner_details'] = $property_owner_detailsres;
 		$property_owner_details =  array();
 		foreach($property_owner_detailsres as $pwd){
 			$property_owner_details[$pwd->id]= $pwd->property_name;
@@ -1857,7 +1852,7 @@ class rentalUserClass extends userClass{
 		**/
 		return $return;
 	}
-	function getTenantProperty($get){
+	public function getTenantProperty($get){
 		global $callConfig;
 		if($get['type'] == 'getcustid' || $get['type'] =='parent_ref_id'){
 			$sql = "SELECT  ptd.id, ptd.monthly_total,pod.property_name as value, ptd.rent_commencement_date, ptd.company_name FROM property_tenant_details ptd, property_owner_details pod WHERE  ptd.company_id = '".$get['company_id']."' AND pod.company_id = ptd.company_id AND pod.id = ptd.property_owner_detail_id AND ptd.customer_id = '".$get['valu']."' AND ptd.current_status = '".ST_APPROVED."' AND pod.is_active = ptd.is_active AND ptd.is_active ='0' ORDER BY pod.property_name ASC";	
@@ -1906,7 +1901,7 @@ class rentalUserClass extends userClass{
 		}
 		return $return;
 	}
-	function getRentalInvoices($get){
+	public function getRentalInvoices($get){
 		global $callConfig;
 		$return['get']= $get;
 	if($get['bill_type'] == 'U'){ // utility invoice used only
@@ -1974,7 +1969,7 @@ class rentalUserClass extends userClass{
 
 		return $return;
 	}
-	function insertDebitNote($get,$post){
+	public function insertDebitNote($get,$post){
 		global $callConfig;
 		$return = array();
 		$transaction_table = $post['popup_transaction_table'];
@@ -1998,7 +1993,7 @@ class rentalUserClass extends userClass{
 		$return['debit_note_items'] = $rental_invoicesins;
 		return $return;
 	}
-	function insertCreditNote($get,$post){
+	public function insertCreditNote($get,$post){
 		global $callConfig;
 		$return = array();
 		$transaction_table = $post['popup_transaction_table'];
@@ -2022,7 +2017,7 @@ class rentalUserClass extends userClass{
 		$return['credit_note_items'] = $rental_invoicesins;
 		return $return;
 	}
-	function getRentalInvoicePrint($get){
+	public function getRentalInvoicePrint($get){
 		global $callConfig;
 		$return = array();
 		$rid = $get['rid'];
@@ -2078,7 +2073,7 @@ class rentalUserClass extends userClass{
 
 		return $return;
 	}
-	function insertTenantOpeningBalance($get,$post){
+	public function insertTenantOpeningBalance($get,$post){
 		global $callConfig;
 		$return = array();
 		$return['post'] =$post; 
@@ -2110,7 +2105,7 @@ class rentalUserClass extends userClass{
 		}		
 		return $return;
 	}
-	function updatePropertyTenantDetails($get,$post){
+	public function updatePropertyTenantDetails($get,$post){
 		global $callConfig;
 		$return = array();
 		$return['post'] =$post;
@@ -2240,7 +2235,7 @@ class rentalUserClass extends userClass{
 		}
 		return $return;
 	}
-	function getOwnerInvoiceReports($get){
+	public function getOwnerInvoiceReports($get){
 		global $callConfig;
 		$return = array();
 		$return['get'] =$get;
@@ -2322,7 +2317,7 @@ class rentalUserClass extends userClass{
 
 		return $return;
 	}
-	function toGetApplicationRentalOwnerSerialNumber($table_name,$owner_id){
+	public function toGetApplicationRentalOwnerSerialNumber($table_name,$owner_id){
 		global $callConfig;
 		$whr="application_table_name = '".$table_name."' AND owner_id = '".$owner_id."'";
 		$query=$callConfig->selectQuery('application_rental_owner_serial_numbers','*',$whr,'','','');
@@ -2335,7 +2330,7 @@ class rentalUserClass extends userClass{
 		}
 		return trim($data);
 	}
-	function updateRentalInvoiceData($get,$post)
+	public function updateRentalInvoiceData($get,$post)
     {
         global $callConfig;
 
@@ -2409,7 +2404,7 @@ class rentalUserClass extends userClass{
         return $return;
     }
 
-    function getrentalinvoice($get)
+    public function getrentalinvoice($get)
     {
         global $callConfig;
         $return = array();

@@ -137,7 +137,7 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
             <?php
             $sl = 1;
             $cssdata = [];
-            if (!empty($return['price_variance_report']) && !empty($return['price_variance_report'])) {
+            if (!empty($return['price_variance_report'])) {
               foreach ($return['price_variance_report'] as $data) {
 
                 $cssdata[] = [

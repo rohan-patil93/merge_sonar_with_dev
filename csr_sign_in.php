@@ -18,12 +18,12 @@
         <div class="loader-bar"></div>
     </div>
     <div class="mobile-view-logo bg-primary text-center">
-        <img class="img-100 m-0" src="<?php echo $image; ?>">   
+        <img class="img-100 m-0" src="<?php echo $image; ?>" alt="" >   
     </div>
     <div class="row align-items-center">
         <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 bg-white text-center position-relative" style="">
             <div class="p-4 custom-login-on">
-                <img class="img-100 mt-0" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>">
+                <img class="img-100 mt-0" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >
                 <h2 class="f-26 f-w-600 mt-4">Sign In</h2>
                   <?php 
                             $error = $_GET['error'];
@@ -50,8 +50,8 @@
                         <?php } }?>
                <!---  <p class="text-muted f-14 f-w-600">Your Social Campaigns</p>
                  <div class="d-block mt-5">
-                    <button class="btn border f-w-600 text-muted f-14 b-radius-5 p-2"><img class="img-20 m-r-10" src="assets/images/sign-in/google-icon.svg"> Sign in with Google</button>
-                    <button class="btn border f-w-600 text-muted f-14 b-radius-5 p-2"><img class="img-20 m-r-10" src="assets/images/sign-in/apple-black.svg"> Sign in with Apple</button>
+                    <button class="btn border f-w-600 text-muted f-14 b-radius-5 p-2"><img class="img-20 m-r-10" src="assets/images/sign-in/google-icon.svg" alt="" > Sign in with Google</button>
+                    <button class="btn border f-w-600 text-muted f-14 b-radius-5 p-2"><img class="img-20 m-r-10" src="assets/images/sign-in/apple-black.svg" alt="" > Sign in with Apple</button>
                 </div>
                 <div class="d-block mt-5">
                     <h3 class="text-muted f-14">Or with email</h3>
@@ -77,12 +77,12 @@
                 </form>
             </div>
             <div class="p-2 regsterform" style="display:none">
-                <img class="img-100 mt-0 rentalji" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>">
+                <img class="img-100 mt-0 rentalji" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >
                 <h2 class="f-26 f-w-600 mt-2 text-center">Sign Up</h2>
                <!---  <p class="text-muted f-14 f-w-600 text-center">Your Social Campaigns</p>
                  <div class="d-block mt-5 text-center">
-                    <button class="btn border f-w-600 text-muted f-14 b-radius-5 p-2"><img class="img-20 m-r-10" src="assets/images/sign-in/google-icon.svg"> Sign in with Google</button>
-                    <button class="btn border f-w-600 text-muted f-14 b-radius-5 p-2"><img class="img-20 m-r-10" src="assets/images/sign-in/apple-black.svg"> Sign in with Apple</button>
+                    <button class="btn border f-w-600 text-muted f-14 b-radius-5 p-2"><img class="img-20 m-r-10" src="assets/images/sign-in/google-icon.svg" alt="" > Sign in with Google</button>
+                    <button class="btn border f-w-600 text-muted f-14 b-radius-5 p-2"><img class="img-20 m-r-10" src="assets/images/sign-in/apple-black.svg" alt="" > Sign in with Apple</button>
                 </div>
                 <div class="d-block mt-4 text-center">
                     <h3 class="text-muted f-14">Or with email</h3>
@@ -119,7 +119,7 @@
                 <form class="md-float-material form-material" action="" method="post" novalidate>
                            
                 <div class="width-60">
-                    <img class="img-100 mt-0 rentalji" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>">
+                    <img class="img-100 mt-0 rentalji" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >
                     <h2 class="f-26 f-w-600 mt-2">Forgot Password</h2>
                     <p class="text-muted f-14 f-w-600">Enter your email to reset your password.</p>
                     <div class="form-group">
@@ -155,9 +155,9 @@
         <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 text-center desktop-view-bg">
             <div class="p-4">
                 <!-- <div class="text-center d-block">
-                    <img class="img-100 mt-3" src="assets/images/sign-in/<?php // echo LOGIN_INFO['logo']; ?>">
+                    <img class="img-100 mt-3" src="assets/images/sign-in/<?php // echo LOGIN_INFO['logo']; ?>" alt="" >
                 </div> -->
-                <!-- <img class="mt-5 mb-5" src="assets/images/sign-in/auth-screens.png" style=""> -->
+                <!-- <img class="mt-5 mb-5" src="assets/images/sign-in/auth-screens.png" style="" alt="" > -->
                 <div class="mt-4 text-center text-dark">
                     <h2 class="f-30 f-w-600">Welcome to CSR Registration Portal<?php // echo LOGIN_INFO['heding']; ?></h2>
                     <!-- <p class="f-14 text-white p-2 m-l-30 m-r-30"><?php // echo LOGIN_INFO['text']; ?></p> -->

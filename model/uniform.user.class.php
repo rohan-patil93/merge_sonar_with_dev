@@ -1,7 +1,7 @@
 <?php
 
 class uniformClass extends userClass{
-	function getUniformStockData($get) {
+	public function getUniformStockData($get) {
 	    global $callConfig;
 	    $company_id  = $get['company_id'];
 	    $location_id = isset($get['location_id']) && $get['location_id'] != "" 
@@ -81,7 +81,7 @@ class uniformClass extends userClass{
 
 	    return array("status"=>"success","category_id"=> $category_id,"category_name" => $category->name,"item"=> $item,"items"=> $items,"locations"=>$locations,"colors"=>$colors,"sizes"=>$sizes);
 	}
-	function getEmployeeUniformData($get){
+	public function getEmployeeUniformData($get){
 	    global $callConfig;
 	    $company_id = $get['company_id'];
 	    $user_id    = $get['user_id'];
@@ -230,7 +230,7 @@ class uniformClass extends userClass{
 	    );
 	}
 
-	function saveUniformStock($get, $post){
+	public function saveUniformStock($get, $post){
 	    global $callConfig;
 
 	    $return = array();
@@ -324,7 +324,7 @@ class uniformClass extends userClass{
 		}
 
 	}
-	function getUniformItemsForTopup($get){
+	public function getUniformItemsForTopup($get){
 	    global $callConfig;
 
 	    $company_id  = $get['company_id'];
@@ -395,7 +395,7 @@ class uniformClass extends userClass{
 	        "sizes"         => $sizes
 	    );
 	}
-	function loadUniformItemsByLocation($get){
+	public function loadUniformItemsByLocation($get){
 	    global $callConfig;
 
 	    $company_id  = $get['company_id'];
@@ -414,7 +414,7 @@ class uniformClass extends userClass{
 	    return array("items"=>$items);
 
 	}
-	function checkUniformCombination($get){
+	public function checkUniformCombination($get){
 		global $callConfig;
 
 	    $company_id  = $get['company_id'];
@@ -455,7 +455,7 @@ class uniformClass extends userClass{
 	}
 
 
-	function saveUniformTopup($get, $post){
+	public function saveUniformTopup($get, $post){
 	    global $callConfig;
 
 	    $company_id  = $get['company_id'];
@@ -539,7 +539,7 @@ class uniformClass extends userClass{
 	    return array("status"=>"success","new_qty"=>$new_qty);
 	}
 
-	function checkUniformItemNameExists($get, $post){
+	public function checkUniformItemNameExists($get, $post){
 	    global $callConfig;
 
 	    $company_id  = $get['company_id'];
@@ -567,7 +567,7 @@ class uniformClass extends userClass{
 
 	    return array("exists"=>0);
 	}
-	function saveStationeryRequest($get, $post){
+	public function saveStationeryRequest($get, $post){
 	    global $callConfig;
 
 	    $company_id  = $get['company_id'];
@@ -621,7 +621,7 @@ class uniformClass extends userClass{
 
 	    return array("status"=>"success","request_id"=>$request_id,"request_no"=>$req_no);
 	}
-	function saveMultipleStationeryRequests($get, $post) {
+	public function saveMultipleStationeryRequests($get, $post) {
 	    global $callConfig;
 
 	    $company_id  = $get['company_id'];
@@ -726,7 +726,7 @@ class uniformClass extends userClass{
 	}
 
 
-	function updateUniformStockAfterRequest($company_id, $item_id, $req_qty, $user_id, $req_no){
+	public function updateUniformStockAfterRequest($company_id, $item_id, $req_qty, $user_id, $req_no){
 	    global $callConfig;
 
 	    // Get current qty
@@ -767,7 +767,7 @@ class uniformClass extends userClass{
 	    return true;
 	}
 
-	function searchUniformAdmin($get, $post) {
+	public function searchUniformAdmin($get, $post) {
 	    global $callConfig;
 
 	    $company_id   = $get['company_id'];
@@ -906,7 +906,7 @@ class uniformClass extends userClass{
 	}
 
 
-	function getUniformDashboardData($get) {
+	public function getUniformDashboardData($get) {
 	    global $callConfig;
 
 	    $company_id = $get['company_id'];
@@ -948,7 +948,7 @@ class uniformClass extends userClass{
 	        "requests" => $rows
 	    );
 	}
-	function getUniformRequestItems($get) {
+	public function getUniformRequestItems($get) {
 	    global $callConfig;
 
 	    $company_id = $get['company_id'];
@@ -1013,7 +1013,7 @@ class uniformClass extends userClass{
 	    );
 	}
 
-	function getStationeryRequestView($get) {
+	public function getStationeryRequestView($get) {
 	    global $callConfig;
 	    $company_id = $get['company_id'];
 	    $rid        = $get['rid'];    // stationery_requests.id
@@ -1079,7 +1079,7 @@ class uniformClass extends userClass{
 	    );
 	}
 
-	function getStationeryRequestList($get) {
+	public function getStationeryRequestList($get) {
 	    global $callConfig;
 
 	    $company_id = $get['company_id'];
@@ -1105,7 +1105,7 @@ class uniformClass extends userClass{
 	    );
 	}
 
-	function deleteStationeryRequest($get) {
+	public function deleteStationeryRequest($get) {
 	    global $callConfig;
 	    $rid = $get['rid'] ?? 0;
 	    if (!$rid) {
@@ -1118,7 +1118,7 @@ class uniformClass extends userClass{
 	        "msg"    => "Request deleted successfully"
 	    );
 	}
-	function saveEmpJobGradeAndUniforms($get, $post) {
+	public function saveEmpJobGradeAndUniforms($get, $post) {
 	    global $callConfig;
 
 	    $company_id   = $get['company_id'];   // or $get['company_id']

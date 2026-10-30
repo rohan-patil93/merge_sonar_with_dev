@@ -15,7 +15,7 @@ class configClass
 	    public $extra_details = null;
 	    public $module_id = null;
 	    public $working_role_short_code = null;
-		function __construct($db,$extra) {
+		public function __construct($db,$extra) {
 			$this->hostname=HOSTNAME;
 			$this->username=USERNAME;
 			$this->password=PASSWORD;
@@ -31,7 +31,7 @@ class configClass
 		//	$this->con=mysqli_connect(HOSTNAME,USERNAME,PASSWORD,$db);
 			$this->con=mysqli_connect(HOSTNAME,USERNAME,PASSWORD,$db,PORT);
     	}
-		function configClass($db,$extra)
+		public function configClass($db,$extra)
 		{
 			$this->hostname=HOSTNAME;
 			$this->username=USERNAME;
@@ -46,7 +46,7 @@ class configClass
 			$this->module_id=$extra['module_id'];
 			$this->working_role_short_code=$extra['working_role_short_code'];
 		}
-		function selectQuery_two($tablename1,$tablename2,$fields1,$fields2,$where,$order,$start,$limit)
+		public function selectQuery_two($tablename1,$tablename2,$fields1,$fields2,$where,$order,$start,$limit)
 		{
 		
 		if(count($fields1)>1)
@@ -72,14 +72,14 @@ class configClass
 		return $query;
 		}
 		
-		function configConnection($db="",$extra="")
+		public function configConnection($db="",$extra="")
 		{
 			// $con=mysqli_connect($this->hostname,$this->username,$this->password);
 			// $connection=mysqli_select_db($con, $this->dbname);
 			//if(!$connection) echo "fail".mysqli_error();
 			$con=mysqli_connect(HOSTNAME,USERNAME,PASSWORD,$db,PORT);
 		}
-		function insertErorrLog($data){
+		public function insertErorrLog($data){
 			foreach ($data as $k => $values) {
 				if($values !=''){
 					$val[]=$k."='".$values."',";
@@ -90,7 +90,7 @@ class configClass
 			//echo $query; exit;
 			return mysqli_query($this->con, $query);
 		}
-		function insertActionLog($data){
+		public function insertActionLog($data){
 			foreach ($data as $k => $values) {
 				if($values !=''){
 					if($values == "'0'"){
@@ -106,7 +106,7 @@ class configClass
 			return mysqli_query($this->con, $query);
 			//return $query;
 		}
-		function executeQuery($query){
+		public function executeQuery($query){
 			//echo $query; exit;
 			$log = array();
 			$log['user_id']=$this->user_id;
@@ -142,7 +142,7 @@ class configClass
 			return $queryresult;
 		}
 		//insertAuditTrail('UPDATE',$tablename,$ids,$whereparamiter,$query);
-		function insertAuditTrail($type,$table,$id,$where,$query,$lastid=""){
+		public function insertAuditTrail($type,$table,$id,$where,$query,$lastid=""){
 			$remarks = "";
 			$cdsc = array();
 			if($type == "INSERT" || $type == "UPDATE"){
@@ -189,13 +189,13 @@ class configClass
 			//$res =configClass::executeQueryString($query);
 			return $res;	
 		}
-		function toGetcannotbenull($error_message){
+		public function toGetcannotbenull($error_message){
 			$subtring_start = strpos($error_message, "'"); 
    			$subtring_start += strlen("'");   
    			$size = strpos($error_message, "'", $subtring_start) - $subtring_start;   
     		return substr($error_message, $subtring_start, $size) ;
 		}
-		function toGetUbiquekeyFields($error_message){
+		public function toGetUbiquekeyFields($error_message){
 			$last_word_start = strrpos($error_message, ' ') + 1; // +1 so we don't  the space in our result
 				$last_word = substr($error_message, $last_word_start);
 				//echo $last_word;
@@ -207,10 +207,10 @@ class configClass
 				}
 				return implode(",",$aa);
 		}
-		function executeQueryString($query){
+		public function executeQueryString($query){
 			$result = mysqli_query($this->con, $query);
 		}
-		function checkExecuteQueryString($query){
+		public function checkExecuteQueryString($query){
 			mysqli_begin_transaction($this->con);
 			$result = mysqli_query($this->con, $query);
 			if ($result) {
@@ -225,7 +225,7 @@ class configClass
 		    }
 			return $retrun;
 		}
-		function insertRecord($tablename,$fieldnames)
+		public function insertRecord($tablename,$fieldnames)
 		{
 			
 			$status = "";
@@ -266,10 +266,10 @@ class configClass
 			}   
 			return $res;
 		}
-		function real_escape_string($value) {
+		public function real_escape_string($value) {
 		    return mysqli_real_escape_string($this->con, $value);
 		}
-		function selectIN($tablename,$fields,$where,$ids,$order=""){
+		public function selectIN($tablename,$fields,$where,$ids,$order=""){
 			//echo "hai"; exit;
 			if(is_array($ids)){
 				$field_ids=implode(",",$ids);
@@ -292,7 +292,7 @@ class configClass
 			return $query;
 			
 		}
-		function updateRecord($tablename,$fieldnames,$where,$ids,$where_con = '')
+		public function updateRecord($tablename,$fieldnames,$where,$ids,$where_con = '')
 		{
 		//echo $where_con;
 		$status = '';
@@ -354,7 +354,7 @@ class configClass
 		return $res;
 		}
 		
-		function deleteRecord($tablename,$where){
+		public function deleteRecord($tablename,$where){
 		$query=DBDEL.DBFROM.$tablename;
 		if($where!="")
 		$query.=DBWHR.$where;
@@ -363,13 +363,13 @@ class configClass
 		return $res['UpdatedRes'];
 		}
 		
-		function headerRedirect($con)
+		public function headerRedirect($con)
 		{
 			//echo HEAD_LTN.$con;exit;
 		  header(HEAD_LTN.$con);
 		}
 		
-		function selectQuery($tablename,$fields,$where,$order,$start,$limit)
+		public function selectQuery($tablename,$fields,$where,$order,$start,$limit)
 		{
 		//echo "---------------------"; print_r($fields); //exit;
 		if(is_array($fields)){
@@ -394,7 +394,7 @@ class configClass
 		//echo $query;
 		return $query;
 		}
-		function selectQueryNew($tablename, $fields, $whereConData = "", $order = "", $start = "", $limit = "") {
+		public function selectQueryNew($tablename, $fields, $whereConData = "", $order = "", $start = "", $limit = "") {
 		    $params = [];		 
 		    if(is_array($fields)) {
 		        $fields = implode(",", $fields);
@@ -429,7 +429,7 @@ class configClass
 		    return ['query' => $query, 'params' => $params];
 		}
 		
-		function create_image_byoriginal($srcpath,$dir,$width,$height)
+		public function create_image_byoriginal($srcpath,$dir,$width,$height)
 	   {
 		if(!is_dir($dir)) { mkdir($dir); }
 	
@@ -457,7 +457,7 @@ class configClass
 			{
 				$src_img = imagecreatefrompng($target_path);
 			}
-			if($extension == 'jpeg' || $extension == 'jpeg')
+			if($extension == 'jpeg')
 			{
 				$src_img = imagecreatefromjpeg($target_path);
 			}
@@ -502,12 +502,12 @@ class configClass
 		return $name;
 		}
 		
-		function imageCommonUnlink($path,$imagename)
+		public function imageCommonUnlink($path,$imagename)
 		{
 			if(file_exists($path.$imagename))@unlink($path.$imagename);
 		}*/
 		
-		function freeimageUploadcomncode($jnt,$imagename,$path,$thumb_path,$hdnimage,$width,$height)
+		public function freeimageUploadcomncode($jnt,$imagename,$path,$thumb_path,$hdnimage,$width,$height)
 		{
 			if($_FILES[$imagename]['name']!="") 
 			{// print_r($_FILES);exit;
@@ -540,7 +540,7 @@ class configClass
 		return $name;
 		}
 		
-		function imageCommonUnlink($path,$thumb_path,$imagename)
+		public function imageCommonUnlink($path,$thumb_path,$imagename)
 		{
 				if(file_exists($path.$imagename)) @unlink($path.$imagename);
 				if(file_exists($thumb_path.$imagename)) @unlink($thumb_path.$imagename);
@@ -554,7 +554,7 @@ class configClass
 			$queryresult = array(ID=>$insert_id, Result=>$result, UpdateRes=>$update_id);
 			return $queryresult;		
 		}*/
-		function getRow($query)
+		public function getRow($query)
 		{
 		/**
 			$res= mysqli_query($this->con,$query); 
@@ -572,7 +572,7 @@ class configClass
 			return $values;		
 		}
 		
-		function getAllRows($query)
+		public function getAllRows($query)
 		{
 			/**
 			$values=array();
@@ -599,7 +599,7 @@ class configClass
 			return $values;
 		} 
 		// Fetch a single row
-	    function getRowNew($sql, $params = []) {
+	    public function getRowNew($sql, $params = []) {
 	    	
 	    	if (!empty($sql) && is_array($sql)) {
 	    		$asql = $sql;
@@ -615,7 +615,7 @@ class configClass
 	    }
 	 
 	    // Fetch multiple rows
-	    function getAllRowsNew($sql, $params = []) {
+	    public function getAllRowsNew($sql, $params = []) {
 	    	if (!empty($sql) && is_array($sql)) {
 	    		$asql = $sql;
 		        $sql = $asql['query'];
@@ -626,7 +626,7 @@ class configClass
 	        $return = $result->fetch_all(MYSQLI_ASSOC);
 	        return (object)$return;
 	    }
-	    function prepareAndExecute($sql, $params) {
+	    public function prepareAndExecute($sql, $params) {
 	    	//echo "=== ".$sql; print_r($params); echo "<br>"; //exit;
 	        $stmt = $this->con->prepare($sql);
 	        //echo "++++ ".$sql; print_r($params); //exit;
@@ -650,7 +650,7 @@ class configClass
 	 		//echo "-----a------";
 	        return $stmt;
 	    }
-	    function getParamTypes($params) {
+	    public function getParamTypes($params) {
 	        $types = '';
 	        foreach ($params as $param) {
 	            if (is_int($param)) {
@@ -665,7 +665,7 @@ class configClass
 	        }
 	        return $types;
 	    }
-		function getAllRowsError($query)
+		public function getAllRowsError($query)
 		{
 			$return = array();
 			$res=mysqli_query($this->con, $query);
@@ -686,7 +686,7 @@ class configClass
 			}
 			return $return;
 		} 
-		function getCount($query)
+		public function getCount($query)
 		{
 			$res=@mysqli_query($this->con, $query); 
 			$cnt=@mysqli_num_rows($res);  
@@ -694,7 +694,7 @@ class configClass
 		}
 		
 		
-		function passwordEncrypt($str)
+		public function passwordEncrypt($str)
 		{
 			$algo = implode('', ['m', 'd', '5']);
 			if (function_exists('openssl_digest')) {
@@ -738,7 +738,7 @@ function random_code()
 }
 
 		
-		function paginavigation($start,$limit,$total,$filePath,$otherParams) 
+		public function paginavigation($start,$limit,$total,$filePath,$otherParams) 
 		{
 			$allPages = ceil($total/$limit);
 			
@@ -792,7 +792,7 @@ function random_code()
 			echo $next;
 		}
 		
-		function paginavigation_FrontEnd($start,$limit,$total,$filePath,$otherParams) 
+		public function paginavigation_FrontEnd($start,$limit,$total,$filePath,$otherParams) 
 		{
 			$allPages = ceil($total/$limit);
 			
@@ -846,14 +846,14 @@ function random_code()
 			echo $next;
 		}
 		
-		function url_EncodingStr($str){
+		public function url_EncodingStr($str){
 		return urlencode($str);
 		}
-		function url_DecodingStr($str){
+		public function url_DecodingStr($str){
 		return urldecode($str);
 		}
 		
-		function remove_special_symbols($string)
+		public function remove_special_symbols($string)
 		{
 		//Array of special charecters you want to replace
 		//$special = array('^','>','<','`','~','\'','"','\\','_','!','@','#','$','%','&','*','(',')','=','+','{','}','[',']','.',',','/','?','|','-',':',';',' '); //here you can add as many char. you want
@@ -862,7 +862,7 @@ function random_code()
 		return strtolower(str_replace($special,'-',$string));
 		}
 		
-		function remove_special_symbols2($string)
+		public function remove_special_symbols2($string)
 		{
 		//Array of special charecters you want to replace
 		//$special = array('^','>','<','`','~','\'','"','\\','_','!','@','#','$','%','&','*','(',')','=','+','{','}','[',']','.',',','/','?','|','-',':',';',' '); //here you can add as many char. you want
@@ -871,7 +871,7 @@ function random_code()
 		return strtolower(str_replace($special,'+',$string));
 		}
 		
-		function replace_str($string)
+		public function replace_str($string)
 		{
 		//Array of special charecters you want to replace
 		//$special = array('^','>','<','`','~','\'','"','\\','_','!','@','#','$','%','&','*','(',')','=','+','{','}','[',']','.',',','/','?','|','-',':',';',' '); //here you can add as many char. you want

@@ -1,6 +1,6 @@
 <?php 
 class pettyCashUserClass extends userClass{
-	function pettyCashDashboard($get){
+	public function pettyCashDashboard($get){
 		global $callConfig;
 		$return = array();
 		$todaydate = date("Y-m-d"); 
@@ -40,7 +40,7 @@ class pettyCashUserClass extends userClass{
 
 		return $return;
 	}
-	function getPettyCashBoxTopUpRequests($get){
+	public function getPettyCashBoxTopUpRequests($get){
 		global $callConfig;
 		if($get['admin_type'] != 1 OR $get['admin_access_employee'] == 'Y'){
 			$condition .= " AND pcbtr.originator = '".$get['user_id']."'";
@@ -59,7 +59,7 @@ class pettyCashUserClass extends userClass{
 		}
 		return $return;	
 	}
-	function getExpensePettyCash($get){
+	public function getExpensePettyCash($get){
 		global $callConfig;
 		if($get['admin_type'] != 1 OR $get['admin_access_employee'] == 'Y'){
 			$condition .= " AND originator = '".$get['user_id']."'";
@@ -81,10 +81,10 @@ class pettyCashUserClass extends userClass{
 		}
 		return $return;	
 	}
-	function insertPettyCashRequests($get, $post){
+	public function insertPettyCashRequests($get, $post){
 		global $callConfig;
 		$return['post']= $post;
-		$final_amount = ($post['final_amount'] !='0' AND $post['final_amount'] !='0')?$post['final_amount']:$post['request_amount'];
+		$final_amount = ($post['final_amount'] !='0')?$post['final_amount']:$post['request_amount'];
 		$insertary=array('petty_cash_boxe_id'=>$post['petty_cash_boxe_id'],'request_amount'=>$post['request_amount'],'final_amount'=>$final_amount,'transaction_date'=>$post['transaction_date'],'request_type'=>$post['request_type'],'description'=>$post['description']);
 		if($post['rid'] !=""){
 			$insertary['updated_date']=date('Y-m-d h:i:s');
@@ -105,7 +105,7 @@ class pettyCashUserClass extends userClass{
 		}
 		return $return;
 	}
-	function getPettyCashRequests($get){
+	public function getPettyCashRequests($get){
 		global $callConfig;
 		$return['get']= $get;
 		//if($get['rid'] !=""){
@@ -122,7 +122,7 @@ class pettyCashUserClass extends userClass{
 		
 		return $return;
 	}
-	function getPettyCashTopUpDashboardChart($get){
+	public function getPettyCashTopUpDashboardChart($get){
 		global $callConfig;
 		$exploderole = explode(',', $get['roleshortcode']);
 		if(!in_array(PETTY_CASH_ADMIN_ROLE, $exploderole) OR $get['admin_type'] != '1' OR $get['admin_access_employee'] == 'Y'){
@@ -146,7 +146,7 @@ class pettyCashUserClass extends userClass{
 		}
 		return $expensemontharray;
 	}
-	function getPettyCashDashboardChart($get){
+	public function getPettyCashDashboardChart($get){
 		global $callConfig;
 		$exploderole = explode(',', $get['roleshortcode']);
 		if(!in_array(PETTY_CASH_ADMIN_ROLE, $exploderole) OR $get['admin_type'] != '1' OR $get['admin_access_employee'] == 'Y'){
@@ -170,7 +170,7 @@ class pettyCashUserClass extends userClass{
 		}
 		return $expensemontharray;
 	}
-	function getPettyCashBalances($get,$petty_cash){
+	public function getPettyCashBalances($get,$petty_cash){
 		global $callConfig;
 		$return = array();
 		if($petty_cash->id !=""){
@@ -186,7 +186,7 @@ class pettyCashUserClass extends userClass{
 		$ptres = $callConfig->getRow($sql);
 		return $ptres;
 	}
-	function getPettyCash($get){
+	public function getPettyCash($get){
 		global $callConfig;
 		$return = array();
 		if($get['type'] == "add"){
@@ -220,7 +220,7 @@ class pettyCashUserClass extends userClass{
 		}
 		return $return;
 	}
-	function insertPettyCash($get,$post){
+	public function insertPettyCash($get,$post){
 		global $callConfig;
 		$return['post']= $post;
 		$pcbsql = "SELECT pcb.id, pcb.pc_box_code, pcb.pc_box_description, pcbo.owner_id, au.id as au_id, au.display_name, au.user_email, au.user_mobile, au.location_id, au.country_id, au.default_state_id FROM petty_cash_boxes pcb, petty_cash_box_owner pcbo, application_users au WHERE pcb.company_id = '".$post['company_id']."' AND pcb.company_id = pcbo.company_id AND pcb.id = pcbo.pc_box_id  AND pcb.is_active = pcbo.is_active AND pcb.id = '".$post['petty_cash_box_id']."' AND pcb.company_id = au.company_id AND pcbo.owner_id = au.id  AND pcb.is_active = au.is_active AND pcb.is_active = 0";
@@ -269,7 +269,7 @@ class pettyCashUserClass extends userClass{
 		}
 		return $return;
 	}
-	function insertPettyCashTopUpBalances($post, $balancetype){
+	public function insertPettyCashTopUpBalances($post, $balancetype){
 		global $callConfig;
 		$return['post']= $post;
 		$todaydate = date("Y-m-d");
@@ -309,7 +309,7 @@ class pettyCashUserClass extends userClass{
 		return $return;
 	}
 
-	function insertPettyCashBalances($post, $balancetype){
+	public function insertPettyCashBalances($post, $balancetype){
 		global $callConfig;
 		$return['post']= $post;
 		$todaydate = date("Y-m-d");

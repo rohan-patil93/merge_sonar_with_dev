@@ -1,12 +1,12 @@
 <?php 
 class hrUserClass extends userClass{
-	function getAttendanceData($data){
+	public function getAttendanceData($data){
 	 	global $callConfig;
 	 	$query2 = "SELECT attendace_date,check_in_type,clock_in,check_out_type,clock_out FROM employee_daily_attendance_details WHERE is_active=0 AND company_id = '".$data['company_id']."'  AND attendace_date='".$data['date']."' AND employee_id=".$data['emp_id']." order By clock_in ASC";
 	 	$datas = $callConfig->getAllRows($query2);
 	 	return $datas;
 	}
-	function togetdatewiseattendancedata($get){
+	public function togetdatewiseattendancedata($get){
 		global $callConfig;
 		$query = "SELECT id, emp_code, display_name, email_id, joining_date, user_id FROM employees WHERE company_id = '".$get['company_id']."' AND  id=".$get['employee_id'];
 		$emp_data = $callConfig->getRow($query);
@@ -23,7 +23,7 @@ class hrUserClass extends userClass{
 	 	$data['att_setting'] = $att_setting;
 	 	return $data;
 	}
-	function getEmployeeWorkAttendances($get){
+	public function getEmployeeWorkAttendances($get){
 	 	global $callConfig;
 	 	//echo "<pre>";
 	 	$emp_list = json_decode($get['emplist'],1);
@@ -302,7 +302,7 @@ class hrUserClass extends userClass{
 		//echo "<pre>"; print_r($retrunarray);
 		return $retrunarray;
 	}
-	function insertEmployeeWorkAttendances($get){
+	public function insertEmployeeWorkAttendances($get){
 		global $callConfig;
 		$submitattendancess = array();
 		$shift_check = SHIFT_CHECK; //1 meaning yes
@@ -391,9 +391,9 @@ class hrUserClass extends userClass{
 					//$arrayleave = array('emp_id'=>$ky,'categorytype'=>$leavearray[$ky][$date]->leave_type_id,'leave_year'=>$get['year'],'company_id'=>$get['company_id']);
 					//$getleaveid = $this->checkLeaveBalanceOrHalfDay($arrayleave);
 					$halfdaysleave = 1;
-					if($leavearray[$ky][$date]->start_half_day=='0' || $leavearray[$ky][$date]->start_half_day =='0'){
-						$halfdaysleave = 0.5; 
-						$attendance_key_short_code = $leavearray[$ky][$date]->attendance_key_short_code; 
+					if($leavearray[$ky][$date]->start_half_day=='0'){
+						$halfdaysleave = 0.5;
+						$attendance_key_short_code = $leavearray[$ky][$date]->attendance_key_short_code;
 						$insdailyattendance .= "('".$emp_details->id."','".$get['company_id']."', '".$ky."', '".$date."','10:00:00', '1', '1', '14:00:00','0','0', '".date("Y-m-d H:i:s")."', '".$get['user_id']."','".$attendance_key_short_code."'),";
 						$insdailyattendancedetails.="('".$get['company_id']."', '".$ky."', '".$date."','10:00:00', '1', '1', '14:00:00','0','0', '".date("Y-m-d H:i:s")."', '".$get['user_id']."'),";
 					}
@@ -439,7 +439,7 @@ class hrUserClass extends userClass{
 
 	}
 
-	function inserttempattendaceform($get,$data){
+	public function inserttempattendaceform($get,$data){
 		global $callConfig;
 		//$date2 = $_POST['date2'];
 		$datee = str_replace('/', '-', $data['attendance_date']);
@@ -521,7 +521,7 @@ class hrUserClass extends userClass{
 		}	
 		return $returnarray;		
 	}
-	function InsertImportSwapInOut($get,$post){
+	public function InsertImportSwapInOut($get,$post){
 		global $callConfig;
 		$importdata = array_map('str_getcsv', file($post['csvFile']));
 		$numRows = count($importdata);
@@ -566,7 +566,7 @@ class hrUserClass extends userClass{
 
 		return $returnaray;
 	}
-	function getImportSwapInOut($get){
+	public function getImportSwapInOut($get){
 		global $callConfig;
 		
 		$importinoutsql = "SELECT id,file_name,start_date,end_date FROM import_swap_in_outs WHERE company_id = '".$get['company_id']."' AND id = '".$get['rid']."' AND is_active = 0";
@@ -691,7 +691,7 @@ class hrUserClass extends userClass{
 
 		return $return;
 	}
-	function insertTempImportSwapInOut($get){
+	public function insertTempImportSwapInOut($get){
 		global $callConfig;
 		$sql = "SELECT `column1`, `column2`, `column3`, `column4`, `column5`, `column6`, `column7`, `column8`, `column9`, `column10`, `column11`, `column12`, `column13`, `column14`, `column15`, `column16`, `column17`, `column18`, `column19`, `column20`, `column21`, `column22`, `column23`, `column24`, `column25`, `column26`, `column27`, `column28`, `column29`, `column30`, `column31`, `column32`, `column33`, `column34`, `column35`, `column36`, `column37`, `column38`, `column39`, `column40`, `column41`, `column42`, `column43`, `column44`, `column45`, `column46`, `column47`, `column48`, `column49`, `column50`, `column51`, `column52`, `column53`, `column54`, `column55`, `column56`, `column57`, `column58`, `column59`, `column60`, `column61`, `column62`, `column63`, `column64`, `column65`, `column66`, `column67`, `column68`, `column69` FROM import_swap_in_out_details WHERE company_id = '".$get['company_id']."' AND import_swap_in_out_id = '".$get['rid']."' AND is_active = 0";
 			$res=$callConfig->getAllRows($sql);
@@ -777,7 +777,7 @@ class hrUserClass extends userClass{
 	}
 
 
-	function insertWithOutOffTempAttendanceDetails($get,$post){
+	public function insertWithOutOffTempAttendanceDetails($get,$post){
 		global $callConfig;
 		$return['post'] = $post;
 		$sql = "SELECT `column1`, `column2`, `column3`, `column4`, `column5`, `column6`, `column7`, `column8`, `column9`, `column10`, `column11`, `column12`, `column13`, `column14`, `column15`, `column16`, `column17`, `column18`, `column19`, `column20`, `column21`, `column22`, `column23`, `column24`, `column25`, `column26`, `column27`, `column28`, `column29`, `column30`, `column31`, `column32`, `column33`, `column34`, `column35`, `column36`, `column37`, `column38`, `column39`, `column40`, `column41`, `column42`, `column43`, `column44`, `column45`, `column46`, `column47`, `column48`, `column49`, `column50`, `column51`, `column52`, `column53`, `column54`, `column55`, `column56`, `column57`, `column58`, `column59`, `column60`, `column61`, `column62`, `column63`, `column64`, `column65`, `column66`, `column67`, `column68`, `column69` FROM import_swap_in_out_details WHERE company_id = '".$get['company_id']."' AND import_swap_in_out_id = '".$post['rid']."' AND is_active = 0";
@@ -865,7 +865,7 @@ class hrUserClass extends userClass{
 		$return['work_attendance_logs'] = $tapres;
 		return $return;
 	}
-	function togetlocationemployeeattendance($get){
+	public function togetlocationemployeeattendance($get){
 		global $callConfig;
 		//$return = $get;
 		$query = "SELECT location_id, id, display_name FROM employees WHERE id=".$get['empid'];
@@ -888,7 +888,7 @@ class hrUserClass extends userClass{
 		//echo "<pre>";
 		return $return;
 	}
-	function saveshiftemployee($get,$post){
+	public function saveshiftemployee($get,$post){
 		global $callConfig;
 		$query = "UPDATE emp_shifts SET is_active =1 WHERE emp_id=".$post['newempid'];
 		$res = $callConfig->executeQuery($query);
@@ -896,7 +896,7 @@ class hrUserClass extends userClass{
 		$res = $callConfig->insertRecord('emp_shifts',$insert_array);
 		return $res;
 	}
-	function employeeleaveapplyattendance($get){
+	public function employeeleaveapplyattendance($get){
 		global $callConfig;
 		$query = "SELECT  id, display_name, department_id, designation_id, location_id, gender, employee_type FROM employees WHERE id=".$get['empid'];
 		$empdata = $callConfig->getRow($query);
@@ -965,7 +965,7 @@ class hrUserClass extends userClass{
 		}
 		return array('main'=>$maindata,'sub'=>$sunmain);
 	}
-	function togetuserrolelist($get){
+	public function togetuserrolelist($get){
 		global $callConfig;
 		$query = "SELECT * FROM `application_users` WHERE company_id = ".$get['company_id']." AND is_active = 0";
 		$return['users'] = $callConfig->getAllRows($query);
@@ -973,7 +973,7 @@ class hrUserClass extends userClass{
 		$return['roles'] = $callConfig->getAllRows($query);
 		return $return;
 	}
-	function togetpayadminpayrealist($get){
+	public function togetpayadminpayrealist($get){
 		global $callConfig;
 		$query = "SELECT * FROM `payroll_admins` WHERE company_id = ".$get['company_id']." AND is_active = 0";
 		$return['payroll_admins'] = $callConfig->getAllRows($query);
@@ -981,7 +981,7 @@ class hrUserClass extends userClass{
 		$return['pay_areas'] = $callConfig->getAllRows($query);
 		return $return;
 	}
-	function tocheckpayrolldetailsfull($post){
+	public function tocheckpayrolldetailsfull($post){
 		global $callConfig;
 		$ret = array();
 		$checkavlsql = "SELECT id FROM `payroll_steps` WHERE company_id = '".$post['company_id']."' AND category_id = ".$post['payroll_steps_cat']." AND pay_month = '".$post['pay_month']."' AND pay_year = '".$post['pay_year']."' AND pay_area_id = '".$post['pay_area_id']."' AND is_active =0";
@@ -997,7 +997,7 @@ class hrUserClass extends userClass{
 		//echo "<pre>"; print_r($ret); exit;
 		return $ret;
 	}
-	function togetnewinsertemloyeedetails($get){
+	public function togetnewinsertemloyeedetails($get){
 		global $callConfig;
 		$query = "SELECT * FROM `employees` WHERE company_id = ".$get['company_id']." AND id= ".$get['empid']." AND is_active = 0";
 		$data = $callConfig->getRow($query);
@@ -1015,7 +1015,7 @@ class hrUserClass extends userClass{
 		$return['pay_area_employees'] = $callConfig->getRow($query);
 		return $return;
 	}
-	function holdpayroll_exclusions($get,$post){
+	public function holdpayroll_exclusions($get,$post){
 		global $callConfig;
 	    //print_r($post); echo "ravi"; exit;
 	    $hquery = 'SELECT id,is_active FROM payroll_exclusions WHERE company_id = '.$get['company_id'].'  AND emp_id='.$post['emp_id'].' AND pay_year='.$post['pay_year'].' AND category_id ='.$post['category_id'].' AND pay_month='.$post['pay_month'].' AND pay_area_id='.$post['pay_area_id'].' AND is_active =0';
@@ -1034,7 +1034,7 @@ class hrUserClass extends userClass{
 		}
 		return $return;
 	}
-	function insertpayrollexcludd($get,$post){
+	public function insertpayrollexcludd($get,$post){
 		global $callConfig;
 		$insert_array = array('company_id'=>$get['company_id'],'emp_id'=>$post['emp_id'],'category_id'=>$post['category_id'],'pay_year'=>$post['pay_year'],'pay_month'=>$post['pay_month'],'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'pay_area_id'=>$post['pay_area_id']);
 		$return['insert_array'] = $insert_array;
@@ -1044,7 +1044,7 @@ class hrUserClass extends userClass{
 		$hudata = $callConfig->getRow($hquery);
 		return $hudata;
 	}
-	function toinsertpayrollexcuinedata($get,$returns_data,$cat){
+	public function toinsertpayrollexcuinedata($get,$returns_data,$cat){
 		global $callConfig;
 		$returns = (array)$returns_data;
 		foreach ($returns as  $key=>$value) {
@@ -1060,7 +1060,7 @@ class hrUserClass extends userClass{
 		return $res;
 	}
 	
-	function togetpayrollstepsdetails($get){
+	public function togetpayrollstepsdetails($get){
 		global $callConfig;
 		//echo "<pre>"; print_r($get); exit;
 		$get['payroll_steps_cat'] = 1;
@@ -1212,7 +1212,7 @@ class hrUserClass extends userClass{
 		}
 		return $return; 
 	}
-	function toaddprojecttaskdetailsbyproceetime($get){
+	public function toaddprojecttaskdetailsbyproceetime($get){
 		global $callConfig;		
 		$notification_message = '';
 		$notuser2 = array(); $notuser1 = array();
@@ -1264,7 +1264,7 @@ class hrUserClass extends userClass{
 		$res = $this->emailsendmediater($senddata);
 		return $return;
 	}*/
-	function insertcustomerinvitation($get,$post){
+	public function insertcustomerinvitation($get,$post){
 		global $callConfig;
 		$return = array();
 		$return['post'] = $post;
@@ -1314,7 +1314,7 @@ class hrUserClass extends userClass{
 			}
 		}
 	}
-	function togetprofessionaltaxexemptionsdetails($get){
+	public function togetprofessionaltaxexemptionsdetails($get){
 		global $callConfig;
 		$query = $callConfig->selectQuery('professional_tax_exemptions','*','company_id = '.$get['company_id'].' AND is_active=0','','','');
 		$detals['exdata'] = $callConfig->getAllRows($query);
@@ -1322,7 +1322,7 @@ class hrUserClass extends userClass{
 		return $detals;
 
 	}
-	function savedataforprofessionaltaxexemptions($get,$post){
+	public function savedataforprofessionaltaxexemptions($get,$post){
 		global $callConfig;
 		if(isset($post['exemptions']) && count((array)$post['exemptions'])>0){
 			$upquer = "UPDATE professional_tax_exemptions SET is_active=1 WHERE company_id = ".$get['company_id']." AND is_active = 0";
@@ -1345,7 +1345,7 @@ class hrUserClass extends userClass{
 		}
 
 	}
-	function insertEmployeeTerminations($get,$post){
+	public function insertEmployeeTerminations($get,$post){
 		global $callConfig;
 		$inserttermination = array('company_id'=>$post['company_id'],'emp_id'=>$post['emp_id'],'termination_type'=>$post['termination_type'],'termination_reason'=>$post['termination_type'],'effective_date'=>$this->dateconvertdbformat($post['effective_date']),'employee_leaving_date'=>$this->dateconvertdbformat($post['effective_date']),'is_active'=>'0','current_status'=>'199','created_by'=>$post['user_id'],'created_date'=>date('Y-m-d H:i:s'));
 		$res=$callConfig->insertRecord('employee_terminations',$inserttermination);
@@ -1355,7 +1355,7 @@ class hrUserClass extends userClass{
 
 		return $res;
 	}
-	function getholdsalrylist($get){
+	public function getholdsalrylist($get){
 		global $callConfig;
 		$return['get'] = $get;
 		$whr = "";
@@ -1376,7 +1376,7 @@ class hrUserClass extends userClass{
 		$return['data'] = $callConfig->getAllRows($query);
 		return $return;
 	}
-	function togetversonyearitdecration($get){
+	public function togetversonyearitdecration($get){
 		global $callConfig;
 		$return['get'] = $get;
 		$query = $callConfig->selectQuery('it_declaration_categories','*','company_id = '.$get['company_id'].' AND is_active=0','','','');
@@ -1410,7 +1410,7 @@ class hrUserClass extends userClass{
 
 		return $return;
 	}
-	function tovmsobjothrsidecornjobvendors($get, $post){ 
+	public function tovmsobjothrsidecornjobvendors($get, $post){ 
 	 	global $callConfig;
 	 	$return['get'] = $get;
 	 	$return['post'] = $post;
@@ -1440,7 +1440,7 @@ class hrUserClass extends userClass{
 	 	$uprrr = $callConfig->executeQuery($updatequery);
 	 	return $return;
 	}
-	function getEmployeeLeaveBalanceReports($get){
+	public function getEmployeeLeaveBalanceReports($get){
 		global $callConfig;
 		$company_id = $get['company_id'];
 
@@ -1559,7 +1559,7 @@ class hrUserClass extends userClass{
 		return $return;	
 
 	}
-	function togetcontractemployeepaydetails($get){
+	public function togetcontractemployeepaydetails($get){
 		global $callConfig;
 		$emp_query = "SELECT id,emp_code, display_name FROM employees WHERE company_id = ".$get['company_id']." AND employee_type = 2 AND is_active =0";
 		$return['emp_query'] = $emp_query;
@@ -1585,7 +1585,7 @@ class hrUserClass extends userClass{
 		}
 		return $return;
 	}
-	function addsalarycontractemployeepay($get, $post){
+	public function addsalarycontractemployeepay($get, $post){
 		global $callConfig;
 		if($post['rid']!=""){
 			$upquery = "UPDATE contract_employee_pay SET is_active = NULL WHERE id =".$post['rid'];
@@ -1597,7 +1597,7 @@ class hrUserClass extends userClass{
 		$res = $callConfig->insertRecord('contract_employee_pay',$post);
 		return $res;
 	}
-	function togetcontractorctcreportdetails($data){		
+	public function togetcontractorctcreportdetails($data){		
 		global $callConfig;
 		$pay_month = $data['pay_month'];
 		$pay_year = $data['pay_year'];
@@ -1606,7 +1606,7 @@ class hrUserClass extends userClass{
 		$data['data'] = $callConfig->getAllRows($query);
 		return $data;
 	}
-	function inserttaxslab($get,$post){
+	public function inserttaxslab($get,$post){
         global $callConfig;
         if(isset($post['assessment_year_old'])){
             $query="UPDATE tax_slads SET is_active=NULL, updated_by=".$get['user_id']." WHERE assessment_year='".$post['assessment_year_old']."' AND tax_slab_name='".$post['tax_slab_name_old']."' AND is_active = 0";
@@ -1623,7 +1623,7 @@ class hrUserClass extends userClass{
         
         return $return;
     }
-    function gettaxslabdata($get){
+    public function gettaxslabdata($get){
         global $callConfig;
         $tax_sql = "SELECT id,assessment_year,tax_slab_name,slad_from,slad_to,rate FROM tax_slads WHERE company_id =".$get['company_id']." AND is_active=0 GROUP BY assessment_year,tax_slab_name";
         $tax_res = $callConfig->getAllRows($tax_sql);
@@ -1631,7 +1631,7 @@ class hrUserClass extends userClass{
         $return['tax_sql'] = $tax_sql;
         return $return;
     }
-    function getItems($get){
+    public function getItems($get){
  
         global $callConfig;
         $itemtypes_sql = "SELECT id,item_type_name FROM item_types WHERE  company_id = '".$get['company_id']."' AND is_active=0";
@@ -1672,7 +1672,7 @@ class hrUserClass extends userClass{
         $return['taxdata'] = $tax_res;
         return $return;
     }*/
-    function togetnewsalarydetails($get){
+    public function togetnewsalarydetails($get){
     	global $callConfig;
     	$query = "SELECT * FROM earnings WHERE company_id =".$get['company_id']." AND is_active = 0 ORDER BY display_seq ASC";
     	$erans = $callConfig->getAllRows($query);
@@ -1689,7 +1689,7 @@ class hrUserClass extends userClass{
     	$data['salary_stracture'] = $sal;
     	return $data;
     }
-    function togetemloyeesalarydetails($get){
+    public function togetemloyeesalarydetails($get){
     	global $callConfig;
     	$query = "SELECT id, display_name FROM employees WHERE company_id=".$get['company_id']." AND is_active=0";
     	$data['employees'] = $callConfig->getAllRows($query);
@@ -1713,7 +1713,7 @@ class hrUserClass extends userClass{
 		$data['ptalldata'] = $callConfig->getAllRows($ptquery); 
     	return $data;
     }
-    function getResignedEmployeeData($get){
+    public function getResignedEmployeeData($get){
         global $callConfig;
         $return = array();
         $query = "SELECT em.id as id , em.display_name as name, em.user_id FROM `employee_terminations` et
@@ -1742,7 +1742,7 @@ class hrUserClass extends userClass{
         return $return;
     }
 
-    function getResignedEmployeeHistoryData($get){
+    public function getResignedEmployeeHistoryData($get){
         global $callConfig;
         $return = array();
 
@@ -1774,7 +1774,7 @@ class hrUserClass extends userClass{
         }
         return $return;
     }
-    function getitadmindashboard($get){
+    public function getitadmindashboard($get){
     	global $callConfig;
     	$query = "SELECT COUNT(id) cm FROM employees WHERE company_id =".$get['company_id']." AND is_active=0";
     	$tmcc = $callConfig->getRow($query);
@@ -1818,7 +1818,7 @@ class hrUserClass extends userClass{
 
         return $return;
     }
-    function getCustomerBillingData($get){
+    public function getCustomerBillingData($get){
         global $callConfig;
         $return = array();
         $from = $get['month'].'-01';
@@ -1836,7 +1836,7 @@ class hrUserClass extends userClass{
         return $return;
 
     }
-    function getCustomerBillingDetails($get){
+    public function getCustomerBillingDetails($get){
         global $callConfig;
         $return = array();
         $rid = $get['rid'];
@@ -1873,7 +1873,7 @@ class hrUserClass extends userClass{
         return $return;
     }
 
-    function InsertCustomerEmployeeBillings($get, $post){
+    public function InsertCustomerEmployeeBillings($get, $post){
         global $callConfig;
         $return = array();
         $billing_id = $post['billing_id'] ?? '';
@@ -1938,7 +1938,7 @@ class hrUserClass extends userClass{
         }
         return $return;
     }
-    function submitemploymenttype($get, $post){
+    public function submitemploymenttype($get, $post){
     	global $callConfig;
 
     	$query = "SELECT * FROM emp_employment_type_histories WHERE company_id = ".$get['company_id']." AND emp_id = ".$post['emp_id']." AND '".$post['effective_from_date']."' >= effective_from_date  AND '".$post['effective_from_date']."' <= effective_to_date AND is_active = 0";
@@ -1952,7 +1952,7 @@ class hrUserClass extends userClass{
     	}
     	return $res;
     }
-    function togetxqwavereportdetils($get){
+    public function togetxqwavereportdetils($get){
     	global $callConfig;
     	//print_r($get); exit;
     	$emp_query = "SELECT id, emp_code, display_name, band_id, joining_date, total_experiance, career_start_date FROM employees WHERE company_id=".$get['company_id'];
@@ -1969,7 +1969,7 @@ class hrUserClass extends userClass{
 
     	return $return;
     }
-    function togetalldetailsforemployeeval($get){
+    public function togetalldetailsforemployeeval($get){
     	global $callConfig;
     	//$query2 = "SELECT attendace_date, clock_in_date, check_in_type, clock_in, clock_out_date, check_out_type, clock_out FROM employee_daily_attendances WHERE is_active=0 AND company_id = '".$get['company_id']."'  AND attendace_date='".$get['date']."' AND employee_id=".$get['at_emp_id']." order By clock_in ASC";
     	$at_data = array();
@@ -1989,7 +1989,7 @@ class hrUserClass extends userClass{
     }
 
 	// added by koti start
-	function getemployeeworkattendances_new($get){
+	public function getemployeeworkattendances_new($get){
 
 		global $callConfig;
 		$company_id = (int)$get['company_id'];
@@ -2152,7 +2152,7 @@ class hrUserClass extends userClass{
 	    return $returnarray;
 	}
 
-    function createExcelDataForEmployeeMonthlyAttedance($get){
+    public function createExcelDataForEmployeeMonthlyAttedance($get){
         global $callConfig;
         $return = array();
         $data_arr = array();
@@ -2251,7 +2251,7 @@ class hrUserClass extends userClass{
     }
 	
 
-    function Resetthrpayrolldatabasedonmonthandyearandpayarea($get,$post){
+    public function Resetthrpayrolldatabasedonmonthandyearandpayarea($get,$post){
         global $callConfig;
         $whr =  "pay_year='".$post['pay_year']."' and pay_month='".$post['pay_month']."' AND pay_area_id =".$post['pay_area_id'];
         $d1 ="DELETE FROM pay_run_summary WHERE ".$whr;
@@ -2264,7 +2264,7 @@ class hrUserClass extends userClass{
         $exr[] = $callConfig->executeQuery($d4);
         return $exr;
     }
-    function getEmployeeMissingDetails($get){
+    public function getEmployeeMissingDetails($get){
         global $callConfig;
         $company_id = isset($get['company_id']) ? intval($get['company_id']) : 0;
         $sync_user_id = isset($get['user_id']) ? intval($get['user_id']) : 0;
@@ -2647,7 +2647,7 @@ class hrUserClass extends userClass{
             'missing_employees' => $missing_employees
         );
     }
-    function togetpayareaconfigdetailsbasedonemp_id($get){
+    public function togetpayareaconfigdetailsbasedonemp_id($get){
 		global $callConfig;
         $company_id = $get['company_id'] ?? 0;
         $employee_id = $get['employee_id'] ?? 0;
@@ -2656,7 +2656,7 @@ class hrUserClass extends userClass{
         return $payarea_arr;
     }
 
-	function getemployeeworkattendancespayareawise($get){
+	public function getemployeeworkattendancespayareawise($get){
 	 	global $callConfig;
 	 	$retrunarray = array();
 	 	//echo "<pre>";
@@ -2953,7 +2953,7 @@ class hrUserClass extends userClass{
 		return $retrunarray;
 	}
 
-	function insertemployeeworkattendancespayareawise($get){
+	public function insertemployeeworkattendancespayareawise($get){
 		global $callConfig;
 		$returnarray = array();
 		$shift_check = SHIFT_CHECK; //1 meaning yes
@@ -3056,9 +3056,9 @@ class hrUserClass extends userClass{
 					//$arrayleave = array('emp_id'=>$ky,'categorytype'=>$leavearray[$ky][$date]->leave_type_id,'leave_year'=>$get['year'],'company_id'=>$get['company_id']);
 					//$getleaveid = $this->checkLeaveBalanceOrHalfDay($arrayleave);
 					$halfdaysleave = 1;
-					if($leavearray[$ky][$date]->start_half_day=='0' || $leavearray[$ky][$date]->start_half_day =='0'){
-						$halfdaysleave = 0.5; 
-						$attendance_key_short_code = $leavearray[$ky][$date]->attendance_key_short_code; 
+					if($leavearray[$ky][$date]->start_half_day=='0'){
+						$halfdaysleave = 0.5;
+						$attendance_key_short_code = $leavearray[$ky][$date]->attendance_key_short_code;
 						$insdailyattendance .= "('".$emp_details->id."','".$get['company_id']."', '".$ky."', '".$date."','10:00:00', '1', '1', '14:00:00','0','0', '".date("Y-m-d H:i:s")."', '".$get['user_id']."','".$attendance_key_short_code."'),";
 						$insdailyattendancedetails.="('".$get['company_id']."', '".$ky."', '".$date."','10:00:00', '1', '1', '14:00:00','0','0', '".date("Y-m-d H:i:s")."', '".$get['user_id']."'),";
 					}
@@ -3103,7 +3103,7 @@ class hrUserClass extends userClass{
 		return $returnarray;
 
 	}
-	function getAttendanceAuditHistoryByRid($get){
+	public function getAttendanceAuditHistoryByRid($get){
 		global $callConfig;
 		$return = array(
 			'status' => 'success',
@@ -3142,7 +3142,7 @@ class hrUserClass extends userClass{
 		$return['message'] = count((array)$return['audits']) > 0 ? 'Attendance history fetched successfully' : 'Attendance created record fetched successfully';
 		return $return;
 	}
-	function getEmployeeReportData($get){
+	public function getEmployeeReportData($get){
         global $callConfig;
         $return = array();
 
@@ -3299,7 +3299,7 @@ class hrUserClass extends userClass{
         $return['report_rows'] = $report_rows;
         return $return;
     }
-    function togetemployeesassementyear($get){
+    public function togetemployeesassementyear($get){
     	global $callConfig;
     	$query = "SELECT id, emp_code, display_name FROM employees WHERE company_id=".$get['company_id']." AND is_active=0";
     	$emp_data = $callConfig->getAllRows($query);
@@ -3321,7 +3321,7 @@ class hrUserClass extends userClass{
 	    $return['assessment_years'] = $assessmentYears;
     	return $return;
     }
-    function togetdocumentlistfile($get){
+    public function togetdocumentlistfile($get){
     	global $callConfig;
     	$whr = "";
     	if(isset($get['assessment_year']) && $get['assessment_year']!=""){
@@ -3336,7 +3336,7 @@ class hrUserClass extends userClass{
     	$return['data'] = $rows;
     	return $return;
     }
-    function multistaticinsertEmployeeTerminations($get,$post){
+    public function multistaticinsertEmployeeTerminations($get,$post){
 		global $callConfig;
 		
 		$query = "SELECT id, user_id FROM `employees` WHERE `emp_code` IN ('SM2','SM16','SM84','SM230','SM252','SM278','SM366','SM368','SM425','SM522','SM547','SM558','SM587','SM589','SM599','SM614','SM742','SM743','SM749','SM752','SM814','SM824','SM838','SM891','SM924','SM929','SM933','SM939','SM962','SM977','SM1014','SM1019','SM1028','SM1043','SM1057','SM1059','SM1066','SM1072','SM1075','SM1082','SM1088','SM1089','SM1096','SM1098','SM1109','SM1128','SM1134','SM1141','SM514','SM1160','SM1163','SM1168','SM1174','SM1181','SM1182','SM1185','SM1186','SM1188','SM1191','SM1200','SM1204','SM1210','SM1216','SM1219','SM1224','SM1227','SM1230','SM1236','SM1237','SM1239','SM1240','SM1244','SM1247','SM1249','SM1250','SM1255','SM1256','SM1261','SM1269','SM1278','SM1279','SM1314','SM1304','SM1328','SM1330')";

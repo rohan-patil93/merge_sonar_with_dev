@@ -857,7 +857,7 @@ if($register_data['current_status'] !=""){
                               </label>
                               <input  type="file" name="logo_image" id="display_logo" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
                               <input type="hidden" name="logo_remove" >
-                              <img src="<?php echo $logo; ?>" id="outputdisplay_logo" width="200"  onerror="this.src='uploads/all/no-image.jpg';"/>
+                              <img src="<?php echo $logo; ?>" id="outputdisplay_logo" width="200"  onerror="this.src='uploads/all/no-image.jpg';" alt="" />
                             </div>
                           </div>  
                           <span class="form-text text-muted"><?php //echo $helptext['logo'];?> </span>

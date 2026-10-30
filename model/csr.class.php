@@ -1,7 +1,7 @@
 <?php
 class CSRClass
 {
-    function insertData($get){
+    public function insertData($get){
         global $callConfig;
         $transaction_no = '';
         if ($get['old_id'] == '' || !$get['old_id']) {
@@ -89,7 +89,7 @@ class CSRClass
         }
     }
 
-    function getCompletedProjects($get){
+    public function getCompletedProjects($get){
         global $callConfig;
         $query = "SELECT DISTINCT c.proposal_id,  p.subject, p.date, p.total_budget_grand_total, p.name,
         (SELECT COUNT(*) 
@@ -146,7 +146,7 @@ function getCommitteMembers($get)
 // }
 //changing this function
 
-    function getCsrData($get){
+    public function getCsrData($get){
         global $callConfig;
         $return = array();
         $id = $get['id'] ?? '';
@@ -677,7 +677,7 @@ function getUsersMapPointsData($get){
         }
         return $return;
     }
-    function getEmployeeData($get){
+    public function getEmployeeData($get){
         global $callConfig;
         $return = array();
         $userids_string = $get['userids'];
@@ -688,7 +688,7 @@ function getUsersMapPointsData($get){
         return $return;
     }
 
-    function checkExistingData($get){
+    public function checkExistingData($get){
         global $callConfig;
         $return = array();
         $userid = $get['userid'];
@@ -707,7 +707,7 @@ function getUsersMapPointsData($get){
     }
 
     // adding new function
-    function getCsrProjectTracking($get){
+    public function getCsrProjectTracking($get){
         global $callConfig;
         $return = array();
         $proposal_id = $get['rid'];
@@ -722,7 +722,7 @@ function getUsersMapPointsData($get){
         return $return;
     }
 
-    function getcsrProposalData($get)
+    public function getcsrProposalData($get)
     {
         global $callConfig;
         $return = array();
@@ -788,7 +788,7 @@ function getUsersMapPointsData($get){
         return $return;
     }
 
-    function getAdminDashBordData($get){
+    public function getAdminDashBordData($get){
         global $callConfig;
         $return = array();
         $query = "SELECT id, date, subject, project_start_date, project_end_date, institue_name, created_by, total_budget_grand_total, current_status, tracking_status FROM  csr_proposal_data where  company_id = '" . $get['company_id'] . "' AND is_active=0";
@@ -877,7 +877,7 @@ function getUsersMapPointsData($get){
 
         return $return;
     }
-    function getCSRHistory($get){
+    public function getCSRHistory($get){
         global $callConfig;
         $return = array();
         $from_date = $get['from_date'];
@@ -895,7 +895,7 @@ function getUsersMapPointsData($get){
         return $return;
         
     }
-    function getCSRYearlyBudget($get){
+    public function getCSRYearlyBudget($get){
         global $callConfig;
         $return = array();
         $rid = $get['rid'] ?? '';
@@ -942,7 +942,7 @@ function getUsersMapPointsData($get){
         return $return;
     }
     
-    function getCSRContractors($get){
+    public function getCSRContractors($get){
         global $callConfig;
         $return = array();
         $id = $get['rid'] ?? '';
@@ -963,7 +963,7 @@ function getUsersMapPointsData($get){
         return $return;
     }
 
-    function getAllCSRData($get){
+    public function getAllCSRData($get){
         global $callConfig; 
         $return = array();
         $query = "SELECT * FROM  csr_proposal_data WHERE company_id = '" .$get['company_id']. "' AND current_status>0  AND is_active=0";
@@ -1041,7 +1041,7 @@ function getUsersMapPointsData($get){
     }
 
     
-    function tovCSRObjOthrSideCornJob($get, $post) {
+    public function tovCSRObjOthrSideCornJob($get, $post) {
         global $callConfig;
         $return = array();
         $data = json_decode($post['data'], 1);
@@ -1227,7 +1227,7 @@ function getUsersMapPointsData($get){
 
     }
 
-    function updateCSRTableData($get){
+    public function updateCSRTableData($get){
         global $callConfig;
         $updated_date = date('Y-m-d H:i:s');
         $query = "UPDATE " . $get['table_name'] . "  SET current_status = 199 , updated_date='" . $updated_date . "', updated_by='" . $get['user_id'] . "'  WHERE id = '" . $get['transaction_id'] . "'";
@@ -1236,7 +1236,7 @@ function getUsersMapPointsData($get){
 
     }
 
-    function getUsersData($get){
+    public function getUsersData($get){
         global $callConfig; 
         $return = array();
         $query = "SELECT * FROM  application_users WHERE company_id = '" .$get['company_id']. "' AND is_active=0";
@@ -1260,7 +1260,7 @@ function getUsersMapPointsData($get){
         return $return;
     }
 
-    function insertUsersData($get, $post){
+    public function insertUsersData($get, $post){
         global $callConfig; 
         $return = array();
         $data = json_decode($post['data'], 1);
@@ -1304,7 +1304,7 @@ function getUsersMapPointsData($get){
         return $return;
     }
 
-    function getCSRRelatedData($get){
+    public function getCSRRelatedData($get){
         global $callConfig;
         $return = array();
 
@@ -1360,7 +1360,7 @@ function getUsersMapPointsData($get){
 
     }
 
-    function insertOrUpdateCSRData($get, $post){
+    public function insertOrUpdateCSRData($get, $post){
         global $callConfig;
         $data = json_decode($post['data'], true);
         $return = array();
@@ -1421,7 +1421,7 @@ function getUsersMapPointsData($get){
         return $return;
     }
 
-    function getSingleTableData($get){
+    public function getSingleTableData($get){
         global $callConfig;
         $return = array();
         $table = $get['table_name'];
@@ -1467,7 +1467,7 @@ function getUsersMapPointsData($get){
 
     }
 
-    function insertOrUpdateSingleTableData($get, $post){
+    public function insertOrUpdateSingleTableData($get, $post){
         global $callConfig;
         $return  = array();
         $table = $get['table_name'];
@@ -1530,7 +1530,7 @@ function getUsersMapPointsData($get){
         return $return;
     }
 
-    function insertSyncLog($get, $post) {
+    public function insertSyncLog($get, $post) {
         // return $post;
         global $callConfig;
 
@@ -1548,7 +1548,7 @@ function getUsersMapPointsData($get){
 
         return $callConfig->insertRecord('sync_logs', $insertary);
     }
-    function getVerticalsData($get){
+    public function getVerticalsData($get){
         global $callConfig;
         $return = array();
         $query = "SELECT id, vertical_name FROM verticals WHERE company_id = {$get['company_id']} AND is_active = 0 ORDER BY vertical_name ASC"; 
@@ -1574,7 +1574,7 @@ function getUsersMapPointsData($get){
         return $return;
     }
     
-    function getCsrViewRelatedData($get){
+    public function getCsrViewRelatedData($get){
         global $callConfig;
         $return = array();
         $rid = $get['rid'] ?? '';
@@ -1637,7 +1637,7 @@ function getUsersMapPointsData($get){
         return $return;
     }
 
-    function getCsrInvoiceDetails($get){
+    public function getCsrInvoiceDetails($get){
         global $callConfig;
         $return = array();
         $tracking_id = $get['tracking_id'] ?? '';
@@ -1667,7 +1667,7 @@ function getUsersMapPointsData($get){
         return $return;
 
     }
-    function getCsrMasterData($get) {
+    public function getCsrMasterData($get) {
         global $callConfig;
         $return = array();
         $return['get'] = $get;
@@ -1709,7 +1709,7 @@ function getUsersMapPointsData($get){
 
         return $return;
     }
-    function getCsrProjectSummaryReport($get) {
+    public function getCsrProjectSummaryReport($get) {
         global $callConfig;
         $return = array();
         $return['get'] = $get;
@@ -1871,7 +1871,7 @@ function getUsersMapPointsData($get){
 
         return $return;
     }
-    function getCsrPoVsActualsSummary($get) {
+    public function getCsrPoVsActualsSummary($get) {
         global $callConfig;
         $return = array();
         $return['get'] = $get;
@@ -1930,7 +1930,7 @@ function getUsersMapPointsData($get){
         $return['fy_list'] = $fyRows; // 📌 FY list for frontend headers
         return $return;
     }
-    function getCsrUnspentCalculationReport($get) {
+    public function getCsrUnspentCalculationReport($get) {
         global $callConfig;
         $return = array();
         $company_id = isset($get['company_id']) ? $get['company_id'] : 0;
@@ -2023,7 +2023,7 @@ function getUsersMapPointsData($get){
         $return['report'] = $report;
         return $return;
     }
-    function getCsrSummaryReport($get) {
+    public function getCsrSummaryReport($get) {
         global $callConfig;
         $return = array();
         $company_id = isset($get['company_id']) ? $get['company_id'] : 0;
@@ -2104,7 +2104,7 @@ function getUsersMapPointsData($get){
         $return['summary'] = $summary;
         return $return;
     }
-    function getCsrYearlySummaryReport($get) {
+    public function getCsrYearlySummaryReport($get) {
         global $callConfig;
 
         $return = array();
@@ -2244,7 +2244,7 @@ function getUsersMapPointsData($get){
         return $return;
     }
     
-    function getCSRProjects($get){
+    public function getCSRProjects($get){
         global $callConfig;
         $query = "SELECT id, subject 
             FROM csr_proposal_data 
@@ -2256,7 +2256,7 @@ function getUsersMapPointsData($get){
 
         return array('table' => $data);
     }
-    function insertBulkCsrPoUpload($get, $post){
+    public function insertBulkCsrPoUpload($get, $post){
         global $callConfig;
 
         $tracking_id = $post['tracking_id'] ?? '';
@@ -2329,7 +2329,7 @@ function getUsersMapPointsData($get){
         );
     }
 
-    function insertBulkCsrInvoiceUpload($get, $post){
+    public function insertBulkCsrInvoiceUpload($get, $post){
         global $callConfig;
 
         $tracking_id = $post['tracking_id'] ?? '';
@@ -2433,7 +2433,7 @@ function getUsersMapPointsData($get){
             'missing_po_rows' => $missing_po_rows
         );
     }
-    function getCsrDashboardProposalScope($get) {
+    public function getCsrDashboardProposalScope($get) {
         global $callConfig;
 
         $company_id = isset($get['company_id']) ? (int)$get['company_id'] : 0;
@@ -2490,7 +2490,7 @@ function getUsersMapPointsData($get){
         );
     }
     
-    function getCsrFirstDashboardData($get) {
+    public function getCsrFirstDashboardData($get) {
         global $callConfig;
 
         $company_id = isset($get['company_id']) ? (int)$get['company_id'] : 0;
@@ -2787,7 +2787,7 @@ function getUsersMapPointsData($get){
         return $return;
     }
 
-    function getCsrProjectMonitoringDashboardData($get) {
+    public function getCsrProjectMonitoringDashboardData($get) {
         global $callConfig;
 
         $company_id = isset($get['company_id']) ? (int)$get['company_id'] : 0;
@@ -3083,7 +3083,7 @@ function getUsersMapPointsData($get){
 
         return $return;
     }
-    function getCsrImpactSnapshotData($get) {
+    public function getCsrImpactSnapshotData($get) {
         global $callConfig;
 
         $company_id = isset($get['company_id']) ? (int)$get['company_id'] : 0;
@@ -3200,7 +3200,7 @@ function getUsersMapPointsData($get){
 
         return $return;
     }
-    function getCsrDashboardPopupProjects($get) {
+    public function getCsrDashboardPopupProjects($get) {
         global $callConfig;
 
         $company_id = isset($get['company_id']) ? (int)$get['company_id'] : 0;
@@ -3265,7 +3265,7 @@ function getUsersMapPointsData($get){
         return $return;
     }
 
-    function getCsrApprovedProjectsForDocuments($get) {
+    public function getCsrApprovedProjectsForDocuments($get) {
         global $callConfig;
 
         $company_id = isset($get['company_id']) ? (int)$get['company_id'] : 0;
@@ -3283,7 +3283,7 @@ function getUsersMapPointsData($get){
         return $return;
     }
 
-    function getCsrProjectDocuments($get) {
+    public function getCsrProjectDocuments($get) {
         global $callConfig;
 
         $company_id = isset($get['company_id']) ? (int)$get['company_id'] : 0;
@@ -3305,7 +3305,7 @@ function getUsersMapPointsData($get){
         return $return;
     }
 
-    function insertCsrProjectDocument($get, $post = array()) {
+    public function insertCsrProjectDocument($get, $post = array()) {
         global $callConfig;
 
         if (count((array)$post) == 0) {
@@ -3332,7 +3332,7 @@ function getUsersMapPointsData($get){
         return $res;
     }
 
-    function updateCsrProjectDocument($get, $post = array()) {
+    public function updateCsrProjectDocument($get, $post = array()) {
         global $callConfig;
 
         if (count((array)$post) == 0) {
@@ -3371,7 +3371,7 @@ function getUsersMapPointsData($get){
         $res = $callConfig->updateRecord('csr_project_documents', $updateData, 'id', $document_id);
         return $res;
     }
-    function getCsrProjectTrackingManage($get) {
+    public function getCsrProjectTrackingManage($get) {
         global $callConfig;
 
         $company_id = isset($get['company_id']) ? (int)$get['company_id'] : 0;
@@ -3416,7 +3416,7 @@ function getUsersMapPointsData($get){
         return $return;
     }
 
-    function saveCsrProjectTracking($get, $post = array()) {
+    public function saveCsrProjectTracking($get, $post = array()) {
         global $callConfig;
 
         if (count((array)$post) == 0) {
@@ -3524,7 +3524,7 @@ function getUsersMapPointsData($get){
         );
     }
 
-    function getCsrProposalProjectDates($get) {
+    public function getCsrProposalProjectDates($get) {
         global $callConfig;
 
         $company_id = isset($get['company_id']) ? (int)$get['company_id'] : 0;
@@ -3556,7 +3556,7 @@ function getUsersMapPointsData($get){
         return $return;
     }
 
-    function saveCsrProposalProjectDates($get, $post = array()) {
+    public function saveCsrProposalProjectDates($get, $post = array()) {
         global $callConfig;
 
         if (count((array)$post) == 0) {
@@ -3593,7 +3593,7 @@ function getUsersMapPointsData($get){
 
         return array('status' => 'success', 'message' => 'Project dates saved');
     }
-    function togetdailyoperationsdashboard($get){
+    public function togetdailyoperationsdashboard($get){
         global $callConfig;
 
         $today =  date('Y-m-d');
@@ -3826,7 +3826,7 @@ function getUsersMapPointsData($get){
         return $return;
     }
 
-    function getDailyOpsMapPoints($get, $today, $company_id, $user_id, $admin_type, $user_wh, $user_wh_alias){
+    public function getDailyOpsMapPoints($get, $today, $company_id, $user_id, $admin_type, $user_wh, $user_wh_alias){
         global $callConfig;
 
         $role = 'admin';
@@ -4032,7 +4032,7 @@ function getUsersMapPointsData($get){
         );
     }
 
-    function getDailyOpsGreeting(){
+    public function getDailyOpsGreeting(){
         $hour = (int)date('G');
         if ($hour < 12) {
             return 'Good Morning';
@@ -4043,7 +4043,7 @@ function getUsersMapPointsData($get){
         return 'Good Evening';
     }
 
-    function getCsrObligationDashboardData($get) {
+    public function getCsrObligationDashboardData($get) {
         global $callConfig;
 
         $company_id = isset($get['company_id']) ? (int)$get['company_id'] : 0;
@@ -4466,7 +4466,7 @@ function getUsersMapPointsData($get){
 
         return $return;
     }
-    function getFieldWorkOperationsReport($get){
+    public function getFieldWorkOperationsReport($get){
         global $callConfig;
 
         $company_id = (int)$get['company_id'];
@@ -4698,7 +4698,7 @@ function getUsersMapPointsData($get){
 
         return $return;
     }
-    function getEmpExpensesReport($get){
+    public function getEmpExpensesReport($get){
         global $callConfig;
 
         $company_id = (int)$get['company_id'];

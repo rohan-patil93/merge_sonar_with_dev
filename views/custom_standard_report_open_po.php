@@ -132,7 +132,7 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
           </tr>
           <?php
           $sl = 1;
-          if (!empty($return['open_po_report']) && !empty($return['open_po_report'])) {
+          if (!empty($return['open_po_report'])) {
             foreach ($return['open_po_report'] as $data) {
               $ordered = floatval($data['ordered_qty']);
               $received = floatval($data['received_qty']);

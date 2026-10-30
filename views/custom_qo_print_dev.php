@@ -123,7 +123,7 @@ function numberToWordFormate($number){
     if($points !=''){
         $result.= $points . " Paise  ";
     }
-    echo ucwords($result." only");
+    return ucwords($result." only");
 }
 function emptyCheck($valu){
     $value = "";
@@ -151,6 +151,7 @@ function emptyCheck($valu){
 <!DOCTYPE html>
 <html>
 <head>
+    <title>InfiSuite</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style type="text/css">
@@ -213,7 +214,7 @@ function emptyCheck($valu){
         <div id="printDiv">
             <h1 style="font-size:30px;color: #000000;margin: 30px 0 50px 0;text-align: left;text-transform: uppercase;"><?php echo urldecode($_GET['title']); ?> 
             <div class="" style="float: right;margin-right: 15px;">
-                <img src="uploads/all/<?php echo $config['display_logo']; ?>" style="width:100px;">
+                <img src="uploads/all/<?php echo $config['display_logo']; ?>" style="width:100px;" alt="" >
             </div>
             </h1>
             <div class="" style="width:49%;display: inline-block;vertical-align: middle;">
@@ -334,7 +335,7 @@ function emptyCheck($valu){
                                     <td style="padding-top: 5px;text-align: left;font-size: 12px;width: 50%;"><?php echo emptyCheck($bank_accounts['bank_name']); ?></td>
                                     <td rowspan="6" align="center" style="width: 20%;">
                                         <h3 style="font-size: 12px;color:#333333;margin: 0;font-weight: 500;">Scan to pay via UPI</h3>
-                                        <img src="uploads/all/upi.jpg" style="width:80px;margin: 10px 0 0 0;">
+                                        <img src="uploads/all/upi.jpg" style="width:80px;margin: 10px 0 0 0;" alt="" >
                                         <p style="font-size: 12px;color:#333333;font-weight: bold;"><?php echo emptyCheck($bank_accounts['upi_id']); ?></p>
                                         <!-- <p style="font-size:13px;color:#333333;white-space:initial;">Maximum of 1 lakh can be transfered via UPI in a single day</p> -->
                                     </td>

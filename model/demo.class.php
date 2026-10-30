@@ -3,7 +3,7 @@ require_once "dompdf/autoload.inc.php";
 		use Dompdf\Dompdf;
 		use Dompdf\Options;
 class demoClass extends userClass{
-		function generateTenantInvoicePDF11($get,$rid=""){
+		public function generateTenantInvoicePDF11($get,$rid=""){
 			global $callConfig;
 			if($rid ==""){
 			$rid = $get['rid'];
@@ -225,7 +225,7 @@ class demoClass extends userClass{
 			**/
 		}
 		//http://www.tickday.infistaq.com//api.php/?mode=generatetenantinvoicePDF&page_option=&data_name=infistaq_infisuite_2&user_id=1&company_id=1&module_id=&module_group_id=&ipaddress=59.95.107.153
-		function generateTenantInvoicePDF($get,$rid=""){
+		public function generateTenantInvoicePDF($get,$rid=""){
 			global $callConfig;
 			$return = array();
 			echo "<pre>"; 
@@ -303,7 +303,7 @@ class demoClass extends userClass{
 				print_r($return);
 		} 
 /**
-		function generateTenantInvoicePDF11($get,$rid=""){
+		public function generateTenantInvoicePDF11($get,$rid=""){
 			global $callConfig;
 			if($rid ==""){
 			$rid = $get['rid'];
@@ -742,7 +742,7 @@ echo "step 1";
 // 		//return $return;
 
 // 	}
-	function getStandardMissiongReport($get){
+	public function getStandardMissiongReport($get){
 		global $callConfig;
 		$return = array();
 		$db = $get['data_name'];
@@ -756,7 +756,7 @@ echo "step 1";
 		return $return;
 	}
 
-	function NewUserformateNew($post,$db_name){
+	public function NewUserformateNew($post,$db_name){
 		global $callConfig;
 		$whr="db_name = '".$db_name."'";
 		$query=$callConfig->selectQuery(MAINDB.'.'.TBL_DATABASE_ALLOCATIONS,'*',$whr,'','','');
