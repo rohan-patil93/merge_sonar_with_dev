@@ -4621,9 +4621,9 @@ WHERE po.`company_id` =  pc.company_id and po.`authorized_expenses` = pc.id  and
 			$res=$callConfig->updateRecord($post['table'],array('current_status'=>$post['status']),'id',$post['hid']);
 		}else{
 			//echo "ravi"; exit;
-			$post['response_type'] = >$post['status'];
-			$post['Rid'] = >$post['hid']; 
-			$post['updated_by'] = >$post['user_id'];
+			$post['response_type'] = $post['status'];
+			$post['Rid'] = $post['hid'];
+			$post['updated_by'] = $post['user_id'];
 			$whr = "";
 			$fieldnames = array('comments'=>$post['comments'],'response_date'=>$post['response_date'],'response_type'=>$post['status']);
 			$whr = "transaction_table = '".$post['table']."' AND transaction_id='".$post['hid']."' AND user_id='".$post['user_id']."' AND send_back_flag= 0";

@@ -35418,7 +35418,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 				foreach($followup_with_userid as $userid=>$esaldata){
 					if($application_users[$userid]){ // check user available or not
 						$userdetail = $application_users[$userid];
-						$transactionlisttable = "<table width ='100%'><tr><th scope="col" style='text-align: center'>#</th><th scope="col" style='text-align: center'>Submitted Date</th><th scope="col" style='text-align: center'>Current Status</th><th scope="col" style='text-align: center'>Action</th></tr>";
+						$transactionlisttable = "<table width ='100%'><tr><th scope=\"col\" style='text-align: center'>#</th><th scope=\"col\" style='text-align: center'>Submitted Date</th><th scope=\"col\" style='text-align: center'>Current Status</th><th scope=\"col\" style='text-align: center'>Action</th></tr>";
 						$mk = 1;
 						foreach($esaldata as $datas){
 							$request_dates = date("d M Y",strtotime($datas->request_date));
@@ -35479,7 +35479,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 				foreach($escalation_with_userid as $userid=>$esaldata){
 					if($application_users[$userid]){ // check user available or not
 						$reportdetail = $application_users[$userid];
-						$transactionlisttable = "<table width ='100%'><tr><th scope="col" style='text-align: center'>#</th><th scope="col" style='text-align: center'>Submitted Date</th><th scope="col" style='text-align: center'>Submitted To</th><th scope="col" style='text-align: center'>Current Status</th><th scope="col" style='text-align: center'>Action</th></tr>";
+						$transactionlisttable = "<table width ='100%'><tr><th scope=\"col\" style='text-align: center'>#</th><th scope=\"col\" style='text-align: center'>Submitted Date</th><th scope=\"col\" style='text-align: center'>Submitted To</th><th scope=\"col\" style='text-align: center'>Current Status</th><th scope=\"col\" style='text-align: center'>Action</th></tr>";
 						$mk = 1;
 						foreach($esaldata as $datas){
 							$request_dates = date("d M Y",strtotime($datas->request_date));

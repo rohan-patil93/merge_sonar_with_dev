@@ -5259,7 +5259,7 @@ function toimportthedataintotablesemployeessalary($get){
             return true;
         };
 
-        public function non_empty_rows(array $rows, array $required, callable $rowEmpty): array
+        function non_empty_rows(array $rows, array $required, callable $rowEmpty): array
         {
             return array_values(array_filter($rows, fn($r) => !$rowEmpty($r, $required)));
         }
