@@ -44,7 +44,7 @@ ob_start();
 ini_set("display_errors", 0);
 define("HOSTNAME", "localhost");
 
-define("USERNAME", "root");
+define("USERNAME", "infistaqin_infisuitesuper");
 
 define("PASSWORD", "Th8%2xXU3P[W*t./D-X4");
 
