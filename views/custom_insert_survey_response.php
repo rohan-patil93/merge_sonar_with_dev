@@ -153,7 +153,8 @@ function callnext(qno,currentqno,qtype) {
    }
 
  }else{
-  var textval= document.getElementById('response_option'+currentqno).value;
+  var respEl = document.getElementById('response_option'+currentqno) || document.getElementById('response_option_scale_'+currentqno);
+  var textval = respEl ? respEl.value : "";
   if(textval.length>0){
     //document.getElementById('summary'+currentqno).style.backgroundColor = '#0BB783' ;
     //document.getElementById('summarytext'+currentqno).style.Color = '#000000' ;
@@ -184,7 +185,8 @@ function callclear(qno,qtype){
       inputs[i].checked = false; 
     } 
   }else{
-    document.getElementById('response_option'+qno).value = "";
+    var respEl = document.getElementById('response_option'+qno) || document.getElementById('response_option_scale_'+qno);
+    if (respEl) { respEl.value = ""; }
   }
   document.getElementById('summary'+qno).style.backgroundColor = '#FFFFFF' ;
   //document.getElementById('summarytext'+qno).style.Color = '#000000' ; 
@@ -216,9 +218,17 @@ function submitsurvey(){
    }
  }).then(function(result) {
 
-   document.getElementById('expiry_submit').style.display ='block';
-   document.getElementById('save').style.display ='none';
-   document.getElementById('previous').style.display ='none';
+   $('.expiry_submit').css('display', 'block');
+   $('.btn-previous').css('display', 'none');
+   if (document.getElementById('expiry_submit')) {
+     document.getElementById('expiry_submit').style.display = 'block';
+   }
+   if (document.getElementById('save')) {
+     document.getElementById('save').style.display = 'none';
+   }
+   if (document.getElementById('previous')) {
+     document.getElementById('previous').style.display = 'none';
+   }
    
    console.log("form submission before");
   //submitform();
@@ -310,7 +320,7 @@ function submitsurvey(){
                 ?>
 
                 <label class="mt-10">Scale from 1 to: <?php echo $option;?></label>
-                <input type="number" <?php if($display_questions[$questionid]['require_response']=="0") echo "required"; ?> id="response_option<?php echo $questionid;?>" name="response_option<?php echo $questionid?>[]" class="form-control col-md-5" value="<?php echo $markedanswer;?>" placeholder="<?php echo $selectedoption;?>"> 
+                <input type="number" <?php if($display_questions[$questionid]['require_response']=="0") echo "required"; ?> id="response_option_scale_<?php echo $questionid;?>" name="response_option<?php echo $questionid?>[]" class="form-control col-md-5" value="<?php echo $markedanswer;?>" placeholder="<?php echo $selectedoption;?>"> 
                 <?php             
               }
               else if($display_questions[$questionid]['options_display_type']==4){
@@ -330,24 +340,18 @@ function submitsurvey(){
                     <a href="#" id="start" style="display: block"   onclick="callnext('<?php echo $questionid+1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn btn-success font-weight-bold float-left">Next <i class="fas fa-chevron-right"> </i></a>
                   <?php } ?>
                 <?php } else {?>
-                  <a href="#" id="previous" onclick="callnext('<?php echo $questionid-1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn btn-success font-weight-bold float-left"><i class="fas fa-chevron-left"> </i>Previous </a>
+                  <a href="#" id="previous_<?php echo $questionid;?>" onclick="callnext('<?php echo $questionid-1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn-previous btn btn-success font-weight-bold float-left"><i class="fas fa-chevron-left"> </i>Previous </a>
                 <?php } ?>
 
                 <!-- <a href="#" id="clear" onclick="callclear('<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn btn-light-success font-weight-bold float-left">Clear Response</a> -->
                 <?php if ($questionid!=1 && $total_q!=$questionid){ ?> 
-                  <a href="#" id="previous" onclick="callnext('<?php echo $questionid-1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn btn-success font-weight-bold float-right"><i class="fas fa-chevron-left"> </i>Previous </a>
+                  <a href="#" id="previous_nav_<?php echo $questionid;?>" onclick="callnext('<?php echo $questionid-1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn-previous btn btn-success font-weight-bold float-right"><i class="fas fa-chevron-left"> </i>Previous </a>
                 <?php } ?>
                 
 
-                <?php if ($total_q==$questionid){ ?> 
-                  <div id="expiry_submit" style="display:block">
+                <div id="expiry_submit_<?php echo $questionid;?>" class="expiry_submit" style="display:<?php echo ($total_q == $questionid) ? 'block' : 'none'; ?>">
                   <input class="btn btn-success font-weight-bold float-right" type="submit" name="submit" value="Submit <?php echo $display_tag;?>">
-                  </div>
-                <?php }else{  ?>
-                <div id="expiry_submit" style="display:none">
-                  <input class="btn btn-success font-weight-bold float-right"  type="submit" name="submit" value="Submit <?php echo $display_tag;?>">
                 </div>
-              <?php } ?>
 
               </div>
 

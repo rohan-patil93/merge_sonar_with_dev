@@ -27,7 +27,7 @@ foreach($momenthistory1 as $momenthistory){
 ?>
 <script type="text/javascript">
     function selectAllocationType(){
-            var selected = $("#allocation_type:checked").val();
+            var selected = $("input[name='allocation_type']:checked").val();
             $(".select_caost_center").hide();
             $(".select_dept").hide();
             $(".select_emp").hide();

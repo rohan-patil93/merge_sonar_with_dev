@@ -274,11 +274,11 @@ if($customers['image'] !=''){
 		htmlRows += '<td>'+count+'</td>'; 
 		htmlRows += '<td><input type="text" name="ag_type[]"  class="form-control rowcount itemRow " autocomplete="off">  </td>'; 
 		htmlRows += '<td><input type="text" name="ag_number[]"  class="form-control " autocomplete="off"> </td>'; 
-		htmlRows += '<td><input type="text" name="ag_sin_date[]"  class="form-control datepicker" id="kt_datepicker_35" autocomplete="off">  </td>'; 
-		htmlRows += '<td><input type="text" name="ag_ex_date[]"  class="form-control datepicker"  id="kt_datepicker_35" autocomplete="off">  </td>'; 
+		htmlRows += '<td><input type="text" name="ag_sin_date[]"  class="form-control datepicker" id="kt_datepicker_sin_'+count+'" autocomplete="off">  </td>'; 
+		htmlRows += '<td><input type="text" name="ag_ex_date[]"  class="form-control datepicker"  id="kt_datepicker_ex_'+count+'" autocomplete="off">  </td>'; 
 
        //htmlRows += '<td><input type="text" name="score[]"  class="form-control " autocomplete="off">  </td>';   
-       htmlRows +='<td><div class="image-input image-input-empty image-input-outline" id="kt_image_5" ><span class="btn-hover-text-primary mt-2" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar" > <i class="ti-cloud-up f-20 text-primary f-30 f-w-800" data-toggle="tooltip" title="Upload"></i></div></td>'
+       htmlRows +='<td><div class="image-input image-input-empty image-input-outline" id="kt_image_5_'+count+'" ><span class="btn-hover-text-primary mt-2" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar" > <i class="ti-cloud-up f-20 text-primary f-30 f-w-800" data-toggle="tooltip" title="Upload"></i></div></td>'
 
        htmlRows += '</tr>';
 	//datepickercall();
@@ -385,7 +385,7 @@ function selectItemsWithParty(item_id,type,party_item_id=""){
 
 }
 function getVendorCustomerItems(){
-	var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+	var loader = '<div class="text-center" id="loader-show-vendor-items"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
     $("#vendor_items").html(loader);
     var transaction_table = 'customers';
 	var transaction_id = '<?php echo $rid; ?>';
@@ -401,7 +401,7 @@ function getVendorCustomerItems(){
 	});	
 }
 function getCustomerContracts(){
-	var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+	var loader = '<div class="text-center" id="loader-show-customer-contracts"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
 	$("#customer_contracts").html(loader);
 	var customer_id = '<?php echo $rid; ?>';
 	jQuery.ajax({
@@ -1297,14 +1297,14 @@ function toggleRowLock(button) {
 									<div class="kt-input-icon">
 										<input class="form-control" type="number" id="bill_with_parent" name="bill_with_parent" value="<?php echo $customers['bill_with_parent']; ?>" >	
 									</div>
-									<div style="display: none;color: red;" id="company_err"> Please enter bill_with_parent </div>  
+									<div style="display: none;color: red;" id="bill_with_parent_err"> Please enter bill_with_parent </div>  
 								</div> -->
 								<!-- <div class="form-group col-lg-3">
 									<span class="form-label">Language</span>
 									<div class="kt-input-icon">
 										<input class="form-control" type="text" id="language_id" name="language_id" value="<?php echo $customers['language_id']; ?>" >	
 									</div>
-									<div style="display: none;color: red;" id="company_err"> Please enter bill_with_parent </div>  
+									<div style="display: none;color: red;" id="language_id_err"> Please enter language </div>  
 								</div>
 								<div class="col-lg-3" style="float: left;">
 									<span class="form-label">Hold Reason</span>
@@ -1317,14 +1317,14 @@ function toggleRowLock(button) {
 										<div class="kt-input-icon">
 											<input class="form-control" type="text" id="website_url" name="website_url" value="<?php echo $customers['website_url']; ?>" >
 										</div>
-										<div style="display: none;color: red;" id="fax_err"> Please enter Fax </div>  
+										<div style="display: none;color: red;" id="website_url_err"> Please enter Website </div>  
 									</div>
 									<div class="form-group col-lg-3 p-r-5" style="float: right;">
 										<span class="form-label">Short Code</span>
 										<div class="kt-input-icon">
 											<input class="form-control" type="text" id="short_name" name="short_name" value="<?php echo $customers['short_name']; ?>" >
 										</div>
-										<div style="display: none;color: red;" id="fax_err"> Please enter Fax </div>  
+										<div style="display: none;color: red;" id="short_name_err"> Please enter Short Code </div>  
 									</div>
 								<div class="col-lg-3" style="float: left;">
 									<span class="form-label">Photo</span>
@@ -1420,13 +1420,13 @@ function toggleRowLock(button) {
 										<div class="form-group col-lg-3 p-r-5" style="float: left;">
 											<span class="form-label">Mobile</span>
 											<div class="kt-input-icon">
-												<input class="form-control" type="number" id="mobile" name="mobile[]" value="<?php echo $cvgst['mobile']; ?>" >	
+												<input class="form-control" type="number" id="mobile_<?php echo $gstkey; ?>" name="mobile[]" value="<?php echo $cvgst['mobile']; ?>" >	
 											</div>
 										</div>
 										<div class="form-group col-lg-3 p-r-5" style="float: right;">
 											<span class="form-label">Fax</span>
 											<div class="kt-input-icon">
-												<input class="form-control" type="number" id="fax" name="fax[]" value="<?php echo $cvgst['fax']; ?>" >
+												<input class="form-control" type="number" id="fax_<?php echo $gstkey; ?>" name="fax[]" value="<?php echo $cvgst['fax']; ?>" >
 											</div>
 										</div>
 									</div>
@@ -1970,13 +1970,13 @@ function toggleRowLock(button) {
 							<div class="form-group col-lg-3 p-r-5" style="float: left;">
 								<span class="form-label">Mobile</span>
 								<div class="kt-input-icon">
-									<input class="form-control" type="number" id="mobile" name="mobile[]" value="" >	
+									<input class="form-control" type="number" id="mobile_`+mkseq+`" name="mobile[]" value="" >	
 								</div>
 							</div>
 							<div class="form-group col-lg-3 p-r-5" style="float: right;">
 								<span class="form-label">Fax</span>
 								<div class="kt-input-icon">
-									<input class="form-control" type="number" id="fax" name="fax[]" value="" >
+									<input class="form-control" type="number" id="fax_`+mkseq+`" name="fax[]" value="" >
 								</div>
 							</div>
 						</div>

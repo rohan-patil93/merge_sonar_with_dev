@@ -27,7 +27,7 @@ $employees = $details['employees'];
 <script type="text/javascript">
 	function selectAllocationType(){
 		//$("#allocation_type).val();
-			var selected = $("#allocation_type:checked").val();
+			var selected = $("input[name='allocation_type']:checked").val();
 			$(".select_caost_center").hide();
 			$(".select_dept").hide();
 			$(".select_emp").hide();

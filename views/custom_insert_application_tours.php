@@ -110,33 +110,7 @@ function deleteitem(cardid){
 		<input type="text" name="table_name_txt" class="mt-2" id="table_name_txt" value="<?php echo $resarray[0]['application_table_name']; ?>" placeholder="Enter Table/Page Name"> <?php } ?>
 
 	</div>
-	<!-- <label class="col-lg-2 f-w-700 ">Select Module</label>
-<div class="form-group col-lg-3 w-full">
-		<select class="form-select js-example-basic-single" id="application_module" name="application_module">
-			<?php foreach($mopdulesetup as $modulesetup){ ?>
-				<option value="<?php echo $modulesetup['module_id']; ?>" <?php echo $jsondecode3['application_module'] == $modulesetup['module_id']?"selected":""; ?>><?php echo $modulesetup['module_name']; ?></option>
-			<?php } ?>
-		</select>
-	</div> -->
-
-<?php  /*if($Rid ==""){ ?>
-									<div class="form-group col-lg-3 w-full">
-										<select class="form-select js-example-basic-multiple" id="application_module" name="application_module[]" multiple>
-											<?php foreach($mopdulesetup as $modulesetup){ ?>
-												<option value="<?php echo $modulesetup['module_id']; ?>" <?php echo $jsondecode3['application_module'] == $modulesetup['module_id']?"selected":""; ?>><?php echo $modulesetup['module_name']; ?></option>
-											<?php } ?>
-										</select>
-									</div>
-									<?php  }else{ ?>
-										<div class="form-group col-lg-3 w-full">
-										<select class="form-select js-example-basic-single" id="application_module" name="application_module">
-											<?php foreach($mopdulesetup as $modulesetup){ ?>
-												<option value="<?php echo $modulesetup['module_id']; ?>" <?php echo $jsondecode3['application_module'] == $modulesetup['module_id']?"selected":""; ?>><?php echo $modulesetup['module_name']; ?></option>
-											<?php } ?>
-										</select>
-									</div>
-									
-									<?php } */ ?>	
+	
 
 
 </div>

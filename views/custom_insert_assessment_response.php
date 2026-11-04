@@ -220,9 +220,17 @@ function submitassessment(){
    }
  }).then(function(result) {
 
-   document.getElementById('expiry_submit').style.display ='block';
-   document.getElementById('save').style.display ='none';
-   document.getElementById('previous').style.display ='none';
+   $('.expiry_submit').css('display', 'block');
+   $('.btn-previous').css('display', 'none');
+   if (document.getElementById('expiry_submit')) {
+     document.getElementById('expiry_submit').style.display = 'block';
+   }
+   if (document.getElementById('save')) {
+     document.getElementById('save').style.display = 'none';
+   }
+   if (document.getElementById('previous')) {
+     document.getElementById('previous').style.display = 'none';
+   }
    
    console.log("form submission before");
   //submitform();
@@ -315,23 +323,17 @@ function submitassessment(){
                     <a href="#" id="start" style="display: block"  onclick="startTimer('<?php echo $allocated_time; ?>','timerdisplay')" class="btn btn-success font-weight-bold float-left">Start Now <i class="fas fa-chevron-right"> </i></a>
                   <?php } ?>
                 <?php } else {?>
-                  <a href="#" id="previous" onclick="callnext('<?php echo $questionid-1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn btn-success font-weight-bold float-left"><i class="fas fa-chevron-left"> </i>Previous </a>
+                  <a href="#" id="previous_<?php echo $questionid;?>" onclick="callnext('<?php echo $questionid-1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn-previous btn btn-success font-weight-bold float-left"><i class="fas fa-chevron-left"> </i>Previous </a>
                 <?php } ?>
 
                 <!-- <a href="#" id="clear" onclick="callclear('<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn btn-light-success font-weight-bold float-left">Clear Response</a> -->
                 <?php if ($questionid!=1 && $total_q!=$questionid){ ?> 
-                  <a href="#" id="previous" onclick="callnext('<?php echo $questionid-1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn btn-success font-weight-bold float-right"><i class="fas fa-chevron-left"> </i>Previous </a>
-                <?php } 
+                  <a href="#" id="previous_nav_<?php echo $questionid;?>" onclick="callnext('<?php echo $questionid-1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn-previous btn btn-success font-weight-bold float-right"><i class="fas fa-chevron-left"> </i>Previous </a>
+                <?php } ?>
 
-                if ($total_q==$questionid){ ?> 
-                  <div id="expiry_submit" style="display:block">
+                <div id="expiry_submit_<?php echo $questionid;?>" class="expiry_submit" style="display:<?php echo ($total_q == $questionid) ? 'block' : 'none'; ?>">
                   <input class="float-right btn btn-success font-weight-bold" type="submit" name="submit" value="Submit <?php echo $display_tag;?>">
-                  </div>
-                <?php }else{  ?>
-                <div id="expiry_submit" style="display:none">
-                  <input class="float-right btn btn-success font-weight-bold"  type="submit" name="submit" value="Submit <?php echo $display_tag;?>">
                 </div>
-              <?php } ?>
               </div>
             </div>  
           </div>

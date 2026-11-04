@@ -56,7 +56,7 @@ foreach($details['locations'] as $locations_list){
 <script type="text/javascript">
 	function selectAllocationType(){
 		//$("#allocation_type).val();
-			var selected = $("#allocation_type:checked").val();
+			var selected = $("input[name='allocation_type']:checked").val();
 			$(".select_caost_center").hide();
 			$(".select_dept").hide();
 			//$(".select_emp").hide();
@@ -177,19 +177,19 @@ function submitdetails(){
 				<label class="f-w-700">Allocation Type <span class="requried text-danger">*</span></label>
 				<div class="form-radio">
 				    <div class="radio radio-inline">
-				      <label class="form-label">
-				        <input type="radio" id="allocation_type"  name="allocation_type" value="E" onclick="selectAllocationType()" style="display: none;" checked>
+				      <label class="form-label" for="allocation_type_e">
+				        <input type="radio" id="allocation_type_e"  name="allocation_type" value="E" onclick="selectAllocationType()" style="display: none;" checked>
 				        <i class="helper"></i>User</label>
 				    </div>
 				    <div class="radio radio-inline">
-				      <label class="form-label">
-				        <input type="radio" id="allocation_type" name="allocation_type"  value="CC" onclick="selectAllocationType()"  style="display: none;">
+				      <label class="form-label" for="allocation_type_cc">
+				        <input type="radio" id="allocation_type_cc" name="allocation_type"  value="CC" onclick="selectAllocationType()"  style="display: none;">
 				        <i class="helper"></i>Cost Cneters
 				      </label>
 				    </div>
 				    <div class="radio radio-inline">
-				      <label class="form-label">
-				        <input type="radio" id="allocation_type" name="allocation_type"  value="D" onclick="selectAllocationType()" style="display: none;">
+				      <label class="form-label" for="allocation_type_d">
+				        <input type="radio" id="allocation_type_d" name="allocation_type"  value="D" onclick="selectAllocationType()" style="display: none;">
 				        <i class="helper"></i>Departments
 				      </label>
 				    </div>

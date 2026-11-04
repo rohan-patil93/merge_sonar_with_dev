@@ -1424,7 +1424,7 @@ function calculateTotal(){
         </div>
     </div>
    <div class="col-md-6 col-12 mrgn-btm-2" >
-        <div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample6">
+        <div class="accordion accordion-solid accordion-toggle-plus" id="accordionTax">
             
             <div class="card">
                 <div class="card-header" id="headingTax">
@@ -1433,7 +1433,7 @@ function calculateTotal(){
                     </div>
                     <input type="hidden" name="location_id" value="<?php echo $table1['location_id']; ?>">
                 </div>
-                <div id="collapseTax" class="collapse" aria-labelledby="headingTax" data-parent="#collapseTax">
+                <div id="collapseTax" class="collapse" aria-labelledby="headingTax" data-parent="#accordionTax">
                     <div class="card-body">                                 
                             <div class="form-group row">
                                 <label class="col-form-label col-lg-4 col-sm-12">Tax Number</label>
@@ -1595,14 +1595,14 @@ function calculateTotal(){
             
 <?php if(count((array)$commentss) > 0){ ?>
 <div class="col-lg-12" style="margin-top: 10px;clear:both;">  
-    <div class="accordion accordion-light  accordion-toggle-arrow" id="accordionExample2">
+    <div class="accordion accordion-light  accordion-toggle-arrow" id="accordionComments">
         <div class="card">
             <div class="card-header" id="headingTwo21">
                 <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseTwo21" aria-expanded="false" aria-controls="collapseTwo21">
                     Comments
                 </div>
             </div>
-            <div id="collapseTwo21" class="collapse" aria-labelledby="headingTwo21" data-parent="#accordionExample2">
+            <div id="collapseTwo21" class="collapse" aria-labelledby="headingTwo21" data-parent="#accordionComments">
                 <div class="card-body">
                     <div class="kt-timeline-v2">
                         <div class="kt-timeline-v2__items  kt-padding-top-25 kt-padding-bottom-30">

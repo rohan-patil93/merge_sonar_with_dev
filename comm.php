@@ -1745,14 +1745,14 @@ function todiplaycomments($data)
 		$stausresult = ViewStatusData();
 
 		$dis_str .= '<div class="col-lg-6">  
-			<div class="accordion accordion-solid mt-2 accordion-toggle-arrow" id="accordionExample2">
+			<div class="accordion accordion-solid mt-2 accordion-toggle-arrow" id="accordionComments">
 			<div class="card acc-bgc">
 			<div class="card-header acc-bgc" id="headingTwo21">
 			<div class="card-title scale_active collapsed f-16 f-w-600" data-bs-toggle="collapse" data-target="#collapseTwo21" aria-expanded="false" aria-controls="collapseTwo21" href="#collapseTwo21">
 			Approval Logs <!--<b class="f-24 float-right">+</b>-->
 			</div>
 			</div>
-			<div id="collapseTwo21" class="collapse" aria-labelledby="headingTwo21" data-parent="#accordionExample2">';
+			<div id="collapseTwo21" class="collapse" aria-labelledby="headingTwo21" data-parent="#accordionComments">';
 
 		$dis_str .= '
 		<div class="latest-update-card">                                            
@@ -1791,48 +1791,6 @@ function todiplaycomments($data)
 	}
 	return $dis_str;
 }
-// function todisplaytracking($data){
-// 	//$vurl = API."?mode=gettrackingdynamic"; 
-// 	$vurl = API."?mode=gettrackingdynamic&table=".$data['table']."&transaction_id=".$data['transaction_id'];
-// 	//echo $vurl;
-// 	$vdata_details = callAPI($vurl);
-// 	$vdata_details = json_decode($vdata_details,1);
-// 	print_r($vdata_details);	
-// 	$dis_str ='';
-// 	$dis_str.='<div class="accordion accordion-solid mt-2 accordion-toggle-arrow col-lg-6" id="accordionExample4">                    
-// 	<div class="card latest-update-card acc-bgc">
-// 	<div class="card-header " id="headingTwo2">
-// 	<div class="card-title collapsed f-16 f-w-600" data-bs-toggle="collapse" data-target="#collapseTwo6" aria-expanded="false" aria-controls="collapseTwo6" href="#collapseTwo6">
-// 	Transaction Tracking <b class="f-24 float-right">+</b>
-// 	</div>
-// 	</div>
-// 	<div id="collapseTwo6" class="collapse" aria-labelledby="headingTwo2" data-parent="#accordionExample4">';
-// 	$dis_str.='
-// 	<div class="latest-update-card">                                            
-//            <div class="card-block">
-//                <div class="" style=""><div class="" style="">
-//                    <div class="latest-update-box">';
-//                    foreach ($vdata_details as  $vdvalue) {
-// 		$rid = deocdeId("id:".$vdvalue['trn_id']);
-//                    	$view = "index.php?option=".$vdvalue['option_url']."&Rid=".$rid;
-//        				$dis_str.='  <div class="row  p-b-30">
-//                            <div class="col-auto text-end update-meta p-r-0">';
-//                            	if($_SESSION['user_image'][$vdvalue['user_id']]==""){
-//                               $dis_str.=' <div class="img-radius img-50 align-top m-r-10 custom_txt_round custom_txt_round-2 p-2 f-1 text-center bg-white text-black" data-bs-toggle="tooltip" data-placement="bottom" title="'.$_SESSION['users'][$vdvalue['user_id']].'"> <span class="font-size-h3 font-weight-boldest ">'.initials($_SESSION['users'][$vdvalue['user_id']]).'</span>   </div>';
-//                           		}else{
-//                           			$dis_str.=' <img src="uploads/all/'.$_SESSION['user_image'][$vdvalue['user_id']].'" alt="user image" class="img-radius img-40 align-top m-r-15 update-icon" data-bs-toggle="tooltip" data-placement="bottom" title="'.$_SESSION['users'][$vdvalue['user_id']].'">';
-//                           		}
-//                            $dis_str.='  </div>
-//                            <div class="col p-l-5">
-//                                <a href="'.$view.'" target="_blank"><h6>'.$vdvalue['table'].' -  '.$vdvalue['trn_no'].'</h6></a>
-//                                <p class="text-muted m-b-0">&nbsp;'.date("M d, Y g:i A", strtotime($vdvalue['trn_date'])).'</p>
-//                            </div>
-//                        </div>';
-//             		}
-//            $dis_str.='</div></div></div></div></div></div></div></div>';
-// 	return $dis_str;
-
-// }
 function todisplaytracking($data)
 {
 	//$vurl = API."?mode=gettrackingdynamic"; 
@@ -1902,14 +1860,14 @@ function todisplaycandidateofferhistroy($data)
 	$candhistrydata = callAPI($candhistryurl);
 	$vdata_details = json_decode($candhistrydata, 1);
 	$dis_str = '';
-	$dis_str .= '<div class="accordion accordion-solid mt-2 accordion-toggle-arrow col-lg-12" id="accordionExample2">                    
+	$dis_str .= '<div class="accordion accordion-solid mt-2 accordion-toggle-arrow col-lg-12" id="accordionOfferHistory">                    
 		<div class="card latest-update-card acc-bgc">
 		<div class="card-header " id="headingTwo2">
 		<div class="card-title collapsed f-16 f-w-600" data-bs-toggle="collapse" data-target="#collapseTwo88" aria-expanded="false" aria-controls="collapseTwo88" href="#collapseTwo88">
 		Candidate Histores<b class="f-24 float-right">+</b>
 		</div>
 		</div>
-		<div id="collapseTwo88" class="collapse" aria-labelledby="headingTwo88" data-parent="#accordionExample2">';
+		<div id="collapseTwo88" class="collapse" aria-labelledby="headingTwo88" data-parent="#accordionOfferHistory">';
 	$dis_str .= '
 		<div class="latest-update-card">                                            
 		<div class="card-block">

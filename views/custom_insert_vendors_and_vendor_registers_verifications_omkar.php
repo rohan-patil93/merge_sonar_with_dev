@@ -279,10 +279,12 @@ function showNotificationIcon($status)
             $active_class = 'active';
         }
 
+        ?>
+        <div id="step-<?php echo $step_counter; ?>" class="verification-step <?php echo $active_class; ?>">
+        <?php
         if ($verification_type == 'PAN') {
             ?>
             <!-- Step <?php echo $step_counter; ?>: PAN Verification -->
-            <div id="step-<?php echo $step_counter; ?>" class="verification-step <?php echo $active_class; ?>">
                 <div class="step-header">
                     <?php if ($is_verified): ?>
                         <h3><i class="fa fa-check-circle text-success"></i> PAN Card Verification - Completed</h3>
@@ -309,7 +311,7 @@ function showNotificationIcon($status)
 
                                 <div class="form-group mb-3">
                                     <label class="form-label fw-bold">Company Name</label>
-                                    <input type="text" id="company_name" class="form-control custom_readonly"
+                                    <input type="text" id="company_name_verified" class="form-control custom_readonly"
                                         value="<?php echo htmlspecialchars($vendordetail['company'] ?? ''); ?>" readonly
                                         tabindex="-1">
                                 </div>
@@ -389,13 +391,10 @@ function showNotificationIcon($status)
                         </div>
                     </div>
                 </div>
-            </div>
             <?php
-            $step_counter++;
         } elseif ($verification_type == 'GSTIN') {
             ?>
             <!-- Step <?php echo $step_counter; ?>: GST Verification -->
-            <div id="step-<?php echo $step_counter; ?>" class="verification-step">
                 <div class="step-header">
                     <?php if ($is_verified): ?>
                         <h3><i class="fa fa-check-circle text-success"></i> GST Number Verification - Completed</h3>
@@ -537,13 +536,10 @@ function showNotificationIcon($status)
                         </div>
                     </div>
                 </div>
-            </div>
             <?php
-            $step_counter++;
         } elseif ($verification_type == 'BANK') {
             ?>
             <!-- Step <?php echo $step_counter; ?>: Bank Verification -->
-            <div id="step-<?php echo $step_counter; ?>" class="verification-step">
                 <div class="step-header">
                     <?php if ($is_verified): ?>
                         <h3><i class="fa fa-check-circle text-success"></i> Bank Account Verification - Completed</h3>
@@ -682,13 +678,10 @@ function showNotificationIcon($status)
                         </div>
                     </div>
                 </div>
-            </div>
             <?php
-            $step_counter++;
         } elseif ($verification_type == 'MSME') {
             ?>
             <!-- Step <?php echo $step_counter; ?>: MSME Verification -->
-            <div id="step-<?php echo $step_counter; ?>" class="verification-step">
                 <div class="step-header">
                     <?php if ($is_verified): ?>
                         <h3><i class="fa fa-check-circle text-success"></i> MSME/Udyam Registration Verification - Completed</h3>
@@ -831,13 +824,10 @@ function showNotificationIcon($status)
                         </div>
                     </div>
                 </div>
-            </div>
             <?php
-            $step_counter++;
         } elseif ($verification_type == 'TAN') {
             ?>
             <!-- Step <?php echo $step_counter; ?>: TAN Verification -->
-            <div id="step-<?php echo $step_counter; ?>" class="verification-step">
                 <div class="step-header">
                     <?php if ($is_verified): ?>
                         <h3><i class="fa fa-check-circle text-success"></i> TAN Number Verification - Completed</h3>
@@ -950,10 +940,12 @@ function showNotificationIcon($status)
                         </div>
                     </div>
                 </div>
-            </div>
             <?php
-            $step_counter++;
         }
+        ?>
+        </div>
+        <?php
+        $step_counter++;
     }
     ?>
 
@@ -1022,7 +1014,7 @@ function showNotificationIcon($status)
     });
 
     function checkCompanyNameAllReadyAvilableOrNot() {
-        var company_name = $("#company_name").val();
+        var company_name = $("#company_name").val() || $("#company_name_verified").val() || "";
         if (company_name != "") {
             $.ajax({
                 url: "ajax.php",
@@ -2301,7 +2293,7 @@ function showNotificationIcon($status)
                         $("#tan_confirmation_section").show();
                         $("#verify_tan_btn").removeClass('btn-primary').addClass('btn-success').html('<i class="fa fa-check"></i> Verified');
 
-                        var company_name_entered = $("#company_name").val().toLowerCase().trim();
+                        var company_name_entered = ($("#company_name").val() || $("#company_name_verified").val() || "").toLowerCase().trim();
                         var tan_company_name = (result.result.user_full_name || "").toLowerCase().trim();
 
                         if (company_name_entered === tan_company_name) {
