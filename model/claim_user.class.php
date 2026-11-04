@@ -706,10 +706,9 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
             return true;
         };
 
-        function non_empty_rows(array $rows, array $required, callable $rowEmpty): array
-        {
+        $non_empty_rows = function(array $rows, array $required) use ($rowEmpty): array {
             return array_values(array_filter($rows, fn($r) => !$rowEmpty($r, $required)));
-        }
+        };
         $trip_id = $post['trip_id'] ?? '';
         // 2) if trip_id present, update trip and mark existing children as inactive
         if ($trip_id && $trip_id != '') {
@@ -739,7 +738,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
             $hotels = (array)($post['hotel'] ?? []);
             $cars   = (array)($post['car'] ?? []);
 
-            foreach (non_empty_rows($itins, ['travel_mode', 'origin_location', 'destination_location', 'departure_date', 'departure_time', 'trip_purpose', 'return_date', 'return_time'], $rowEmpty) as $row) {
+            foreach ($non_empty_rows($itins, ['travel_mode', 'origin_location', 'destination_location', 'departure_date', 'departure_time', 'trip_purpose', 'return_date', 'return_time']) as $row) {
                 $rec = [
                     'company_id'           => $company_id,
                     'trip_id'              => $trip_id,
@@ -765,7 +764,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
             }
 
                 // --- Trip Hotels ---
-            foreach (non_empty_rows($hotels, ['hotel_name', 'location', 'check_in', 'check_out', 'description'], $rowEmpty) as $h) {
+            foreach ($non_empty_rows($hotels, ['hotel_name', 'location', 'check_in', 'check_out', 'description']) as $h) {
                 $rec = [
                     'company_id'     => $company_id,
                     'trip_id'        => $trip_id,
@@ -786,7 +785,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
                 $res = $callConfig->insertRecord('trip_hotels', $rec);
                 $return['trip_hotels'][] = $res;
             }
-            foreach (non_empty_rows($cars, ['travel_mode', 'from_location', 'to_location', 'pickup_at', 'dropoff_at', 'car_type', 'trip_purpose'], $rowEmpty) as $c) {
+            foreach ($non_empty_rows($cars, ['travel_mode', 'from_location', 'to_location', 'pickup_at', 'dropoff_at', 'car_type', 'trip_purpose']) as $c) {
                 $rec = [
                     'company_id'     => $company_id,
                     'trip_id'        => $trip_id,
@@ -842,7 +841,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 
             // --- Domestic Round Trips ---
             if($trip_id != ''){
-                foreach (non_empty_rows($itins, ['travel_mode', 'origin_location', 'destination_location', 'departure_date', 'departure_time','trip_purpose', 'return_date', 'return_time'], $rowEmpty) as $row) {
+                foreach ($non_empty_rows($itins, ['travel_mode', 'origin_location', 'destination_location', 'departure_date', 'departure_time','trip_purpose', 'return_date', 'return_time']) as $row) {
                     $rec = [
                         'company_id'           => $company_id,
                         'trip_id'              => $trip_id,
@@ -868,7 +867,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
                 }
 
                 // --- Trip Hotels ---
-                foreach (non_empty_rows($hotels, ['hotel_name', 'location', 'check_in', 'check_out', 'description'], $rowEmpty) as $h) {
+                foreach ($non_empty_rows($hotels, ['hotel_name', 'location', 'check_in', 'check_out', 'description']) as $h) {
                     $rec = [
                         'company_id'     => $company_id,
                         'trip_id'        => $trip_id,
@@ -889,7 +888,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
                     $res = $callConfig->insertRecord('trip_hotels', $rec);
                     $return['trip_hotels'][] = $res;
                 }
-                foreach (non_empty_rows($cars, ['travel_mode', 'from_location', 'to_location', 'pickup_at', 'dropoff_at', 'car_type', 'trip_purpose'], $rowEmpty) as $c) {
+                foreach ($non_empty_rows($cars, ['travel_mode', 'from_location', 'to_location', 'pickup_at', 'dropoff_at', 'car_type', 'trip_purpose']) as $c) {
                     $rec = [
                         'company_id'     => $company_id,
                         'trip_id'        => $trip_id,
