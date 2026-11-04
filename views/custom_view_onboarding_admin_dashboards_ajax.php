@@ -395,7 +395,7 @@ foreach($employees as $emplist){
                         <h5>Unallocated Task</h5>
                         <div class="card-header-right table-card-header ">
                             <div class="input-group input-group-button mb-0">
-                                <input type="text" id="dynamicfilterhideshow_unallocated" data-id="categoryfilter" data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
+                                <input type="text" id="dynamicfilterhideshow_unallocated" data-id="categoryfilter_2" data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
                                 <span class="input-group-text addon-style">
                                     <span class=""><span class="ti-search text-white mt-2"></span></span>
                                 </span>
@@ -405,7 +405,7 @@ foreach($employees as $emplist){
                     <div class="card-body">
                             <button class="btn btn-primary checked_emp" style="display: none;" onclick="assignTaskCheckedEmployee()"> Requist Tax Declaration </button>
                           <?php if(count((array)($unallocatedTaskemployees)) != 0){ ?>
-                        <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
+                        <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter_2">
                             <thead>
                                 <tr><th scope="col"></th>
                                     <th scope="col">Employees</th>
@@ -512,7 +512,7 @@ foreach($employees as $emplist){
                 <div class="card-body">
                     <div class="custom-scroll" style="height: 500px;">
                         <?php if(count((array)($action_transaction_activity_schedule)) != 0){ ?>
-                        <table class="table table-hover m-b-0 register_vendor_filter" style="font-size:13px;" id="categoryfilter">
+                        <table class="table table-hover m-b-0 register_vendor_filter" style="font-size:13px;" id="categoryfilter_3">
                             <thead>
                                 <tr>
                                     <th scope="col" class="p-2">Task Details</th>

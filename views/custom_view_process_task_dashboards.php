@@ -242,7 +242,7 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                         <h5>Employees Task&nbsp;<span class="form-label label label-md label-warning float-right"><?php echo count((array)$onboard_employees); ?> </span></h5>
                         <div class="card-header-right table-card-header ">
                             <div class="input-group input-group-button mb-0">
-                                <input type="text" id="dynamicfilterhideshow" data-id="categoryfilter" data-type="tr" class="form-control form-control-sm width1" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
+                                <input type="text" id="dynamicfilterhideshow" data-id="categoryfilter" data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
                                 <span class="input-group-text addon-style">
                                     <span class=""><span class="ti-search text-white mt-2"></span></span>
                                 </span>
@@ -339,7 +339,7 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                         <h5>Employees</h5>
                         <div class="card-header-right table-card-header ">
                             <div class="input-group input-group-button mb-0">
-                                <input type="text" id="dynamicfilterhideshow_2" data-id="categoryfilter" data-type="tr" class="form-control form-control-sm width1" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
+                                <input type="text" id="dynamicfilterhideshow_2" data-id="categoryfilter_2" data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
                                 <span class="input-group-text addon-style">
                                     <span class=""><span class="ti-search text-white mt-2"></span></span>
                                 </span>
@@ -348,7 +348,7 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                     </div>
                     <div class="card-body">
                            <?php if(count((array)($onboard_employees)) != 0){ ?>
-                        <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
+                        <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter_2">
                             <thead>
                                 <tr><th scope="col">Emp Code</th>
                                     <th scope="col">OnBoarding</th>
@@ -414,7 +414,7 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                         <h5>Unallocated Task</h5>
                         <div class="card-header-right table-card-header ">
                             <div class="input-group input-group-button mb-0">
-                                <input type="text" id="dynamicfilterhideshow_3" data-id="categoryfilter" data-type="tr" class="form-control form-control-sm width1" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
+                                <input type="text" id="dynamicfilterhideshow_3" data-id="categoryfilter_3" data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
                                 <span class="input-group-text addon-style">
                                     <span class=""><span class="ti-search text-white mt-2"></span></span>
                                 </span>
@@ -423,7 +423,7 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                     </div>
                     <div class="card-body">
                           <?php if(count((array)($unallocatetaskemployee)) != 0){ ?>
-                        <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
+                        <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter_3">
                             <thead>
                                 <tr><th scope="col">Emp Code</th>
                                     <th scope="col">OnBoarding</th>
@@ -479,7 +479,7 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                     <h5>Review Pending  &nbsp;<span class="form-label label label-md label-warning float-right"><?php echo count((array)$reviewpendinguser); ?> </span></h5>
                     <div class="card-header-right table-card-header ">
                         <div class="input-group input-group-button mb-0">
-                            <input type="text" id="dynamicfilterhideshow_4" data-id="categoryfilter" data-type="tr" class="form-control form-control-sm width1" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
+                            <input type="text" id="dynamicfilterhideshow_4" data-id="categoryfilter_4" data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
                             <span class="input-group-text addon-style">
                                 <span class=""><span class="ti-search text-white mt-2"></span></span>
                             </span>
@@ -488,7 +488,7 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                 </div>
                 <div class="card-body">
                     <?php if(count((array)($reviewpendinguser)) != 0){ ?>
-                    <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
+                    <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter_4">
                         <thead>
                             <tr><th scope="col">Emp Code</th>
                                 <th scope="col">Name</th>

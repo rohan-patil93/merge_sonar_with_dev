@@ -789,7 +789,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                     <h5><?php echo $trnstabkey; ?></h5>
                                     <div class="card-header-right table-card-header">
                                         <div class="input-group input-group-button mb-0" >
-                                            <input type="text" id="dynamicfilterhideshow_generatedocs" data-id='costcenterfilter' data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow"  placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="Search"> 
+                                            <input type="text" id="dynamicfilterhideshow_generatedocs" data-id='costcenterfilter_2' data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow"  placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="Search"> 
                                             <span class="input-group-text addon-style">
                                                 <span class=""><span class="ti-search text-white mt-2"></span></span>
                                             </span>
@@ -797,7 +797,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                     </div>
                                 </div>
                                 <?php if(count((array)$gdocs) !=0){ ?>
-                <table class="table table-hover m-b-0" style="font-size:13px;" id="costcenterfilter">
+                <table class="table table-hover m-b-0" style="font-size:13px;" id="costcenterfilter_2">
                     <thead>
                         <th scope="col">Transaction No.</th>
                         <th scope="col">Originator</th>
@@ -858,7 +858,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
     </div>
     <div class="table-responsive p-2">
         <?php if(count((array)$result['latest_table_list']) != 0){ ?>
-        <table class="table table-hover m-b-0" style="font-size:13px;" id="costcenterfilter">
+        <table class="table table-hover m-b-0" style="font-size:13px;" id="recently_updated_table">
                                                         <thead>
                                                             <th scope="col">Transaction No.</th>
                                                             <th scope="col">Originator</th>

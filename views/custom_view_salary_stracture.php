@@ -202,7 +202,7 @@ foreach((array)$earnings as $ern){
                         <div class="card-body">
                             <h4 class="mb-3">Employee Details</h4>
                             <div id="draggablePanelList_2" class="draggableemplList draggablePanelList">
-                                <div class="row align-items-end emp_row"  id="emp_2">
+                                <div class="row align-items-end emp_row"  id="emp_1">
                                     <div class="col-lg-5">
                                         <div class="form-group">
                                             <span class="form-label f-w-600 f-14">Employee Name</span>
