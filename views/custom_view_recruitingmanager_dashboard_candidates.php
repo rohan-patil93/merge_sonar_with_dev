@@ -285,7 +285,7 @@ function SynchCandidateFolder(){
 			</div>
 			<div class="card-body">
 				<div class="input-group input-group-button mt-2">
-		            <input type="text" id="dynamicfilterhideshow" data-id="candidatefilter" data-type="div" class="form-control form-control-sm width1" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search"> 
+		            <input type="text" id="dynamicfilterhideshow_candidate" data-id="candidatefilter" data-type="div" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search"> 
 		            <span class="input-group-text addon-style">
 		                <span class=""><span class="ti-search text-white mt-2"></span></span>
 		            </span>
@@ -324,7 +324,7 @@ function SynchCandidateFolder(){
 			</div>
 			<div class="card-body">
 				<div class="input-group input-group-button mt-2">
-		            <input type="text" id="dynamicfilterhideshow" data-id="candidatefilter1" data-type="div" class="form-control form-control-sm width1" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search"> 
+		            <input type="text" id="dynamicfilterhideshow_candidate1" data-id="candidatefilter1" data-type="div" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search"> 
 		            <span class="input-group-text addon-style">
 		                <span class=""><span class="ti-search text-white mt-2"></span></span>
 		            </span>
@@ -363,7 +363,7 @@ function SynchCandidateFolder(){
 			</div>
 			<div class="card-body">
 				<div class="input-group input-group-button mt-2">
-		            <input type="text" id="dynamicfilterhideshow" data-id="candidatefilter2" data-type="div" class="form-control form-control-sm width1" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search"> 
+		            <input type="text" id="dynamicfilterhideshow_candidate2" data-id="candidatefilter2" data-type="div" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search"> 
 		            <span class="input-group-text addon-style">
 		                <span class=""><span class="ti-search text-white mt-2"></span></span>
 		            </span>
@@ -402,7 +402,7 @@ function SynchCandidateFolder(){
 			</div>
 			<div class="card-body ">
 				<div class="input-group input-group-button mt-2">
-		            <input type="text" id="dynamicfilterhideshow" data-id="candidatefilter3" data-type="div" class="form-control form-control-sm width1" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search"> 
+		            <input type="text" id="dynamicfilterhideshow_candidate3" data-id="candidatefilter3" data-type="div" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search"> 
 		            <span class="input-group-text addon-style">
 		                <span class=""><span class="ti-search text-white mt-2"></span></span>
 		            </span>

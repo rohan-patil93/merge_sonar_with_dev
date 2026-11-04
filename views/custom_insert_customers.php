@@ -1797,10 +1797,10 @@ function toggleRowLock(button) {
 											<input type="text" name="ag_number[]" class="form-control" value="<?php echo $inst['agreement_ref_no']; ?>" autocomplete="off">
 										</td>
 										<td><input type="text" name="ag_sin_date[]" class="form-control datepicker "  id="kt_datepicker_3<?php echo $k; ?>" value="<?php echo fromDate($inst['signed_date']); ?>"  autocomplete="off">  </td>
-										<td><input type="text" name="ag_ex_date[]" class="form-control datepicker" id="kt_datepicker_3<?php echo $k; ?>"  value="<?php echo fromDate($inst['expiry_date']); ?>" autocomplete="off">  </td>
+										<td><input type="text" name="ag_ex_date[]" class="form-control datepicker" id="kt_datepicker_3_2<?php echo $k; ?>"  value="<?php echo fromDate($inst['expiry_date']); ?>" autocomplete="off">  </td>
 										<td>
 											<div class="row m-t-15">
-												<div class="image-input col-lg-3" id="kt_image_5" style="display: inherit; margin-top: -2px;">
+												<div class="image-input col-lg-3" id="kt_image_5_<?php echo $k; ?>" style="display: inherit; margin-top: -2px;">
 													<span class="btn-hover-text-primary" data-action="change" data-toggle="tooltip" title="" data-original-title="Upload" >
 														<i class="ti-cloud-up f-20 text-primary f-30 f-w-800" data-toggle="tooltip" title="Upload"></i>
 														<input type="file" name="agreement_file<?php echo $dockey;?>[]" />

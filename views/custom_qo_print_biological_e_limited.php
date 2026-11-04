@@ -1,5 +1,4 @@
-    <div class="width-800 m-auto" id="printDiv" style="width: 800px; display: block; margin: 0 auto !important; background: #ffffff;"> 
-        <div id="printDiv">
+    <div class="width-800 m-auto" id="printDiv" style="width: 800px; display: block; margin: 0 auto !important; background: #ffffff;">
             <!-- <link rel="stylesheet" type="text/css" href="../assets/css/custom_qo_print_aditya_industries.css"> -->
 
 
@@ -329,5 +328,4 @@
                     </td>
                 </tr>
             </table>
-        </div> 
     </div>

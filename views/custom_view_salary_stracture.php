@@ -152,7 +152,7 @@ foreach((array)$earnings as $ern){
                     <div class="card">
                         <div class="card-body">
                             <h4 class="mb-3">Payslip Details</h4>
-                            <div   id="draggablePanelList" class="draggablepaylList">
+                            <div id="draggablePanelList" class="draggablepaylList draggablePanelList">
                                 <div class="row align-items-end pd_row" id="pd_1">
                                     <div class="col-lg-5">
                                         <div class="form-group">
@@ -201,7 +201,7 @@ foreach((array)$earnings as $ern){
                     <div class="card">
                         <div class="card-body">
                             <h4 class="mb-3">Employee Details</h4>
-                            <div  id="draggablePanelList" class="draggableemplList">
+                            <div id="draggablePanelList_2" class="draggableemplList draggablePanelList">
                                 <div class="row align-items-end emp_row"  id="emp_2">
                                     <div class="col-lg-5">
                                         <div class="form-group">
@@ -254,7 +254,7 @@ foreach((array)$earnings as $ern){
                     <div class="card">
                         <div class="card-body">
                             
-                            <div   id="draggablePanelList" class="draggablepaylList">
+                            <div id="draggablePanelList_3" class="draggablepaylList draggablePanelList">
                                 <div class="row align-items-end pd_row" id="pd_1">
                                     <div class="col-lg-5">
                                         <div class="form-group">
@@ -320,7 +320,7 @@ foreach((array)$earnings as $ern){
                                     
                                 </div>
                             </div>
-                            <div   id="draggablePanelList" class="eraningclass">
+                            <div id="draggablePanelList_4" class="eraningclass draggablePanelList">
                                 <?php $e=1; foreach((array)$earnings as $ern){
                                     if($ern['calculation_mode_type']==1 && !in_array($ern['code'],$noshow)){
                                         $show_select = 'N'; $show_text = 'Y';
@@ -358,7 +358,7 @@ foreach((array)$earnings as $ern){
                             <div class="col-lg-12">
                                 <button class="btn btn-primary" type="button" onclick="addearningdetails('earnings')"><i class="fa fa-plus"></i> Add More</button>
                             </div>
-                            <div  id="draggablePanelList" >
+                            <div id="draggablePanelList_5" class="draggablePanelList">
                                 <div class="row align-items-end mt-3">
                                     <div class="col-lg-5">
                                         <div class="form-group">
@@ -398,7 +398,7 @@ foreach((array)$earnings as $ern){
                                     
                                 </div>
                             </div>
-                            <div  id="draggablePanelList" class="deductionclass">
+                            <div id="draggablePanelList_6" class="deductionclass draggablePanelList">
                                 
                                 <?php $e=1; foreach((array)$earnings as $ern){
                                     if($ern['calculation_mode_type']==2 && !in_array($ern['code'],$noshow)){
@@ -437,7 +437,7 @@ foreach((array)$earnings as $ern){
                             <div class="col-lg-12">
                                 <button class="btn btn-primary" type="button" onclick ="addearningdetails('deduction')"><i class="fa fa-plus"></i> Add More</button>
                             </div>
-                            <div class=""  id="draggablePanelList">
+                            <div class="draggablePanelList" id="draggablePanelList_7">
                                 <div class="row align-items-end mt-3">
                                     <div class="col-lg-5">
                                         <div class="form-group">
@@ -463,7 +463,7 @@ foreach((array)$earnings as $ern){
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-6 mx-auto">
-                                    <div class="row align-items-end mt-3" id="draggablePanelList">
+                                    <div class="row align-items-end mt-3 draggablePanelList" id="draggablePanelList_8">
                                         <div class="col-lg-5">
                                             <div class="form-group">
                                                <input type="text" class="form-control" id="er_name_nt" value="<?php echo $lsv['NETPAYABLE']['name']; ?>">
@@ -493,7 +493,7 @@ foreach((array)$earnings as $ern){
                     <h4 class="mb-3">Footer Amount</h4>
                     <div class="row">
                         <div class="col-lg-6 mx-auto">
-                            <div class="row align-items-end mt-3" id="draggablePanelList">
+                            <div class="row align-items-end mt-3 draggablePanelList" id="draggablePanelList_9">
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <span class="form-label f-w-600 f-14">Amount</span>

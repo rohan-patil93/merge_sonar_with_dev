@@ -480,7 +480,7 @@ if($totaldoc != 0 AND $totaldoc !=""){
                                     <h5><?php echo $itemcatname; ?></h5>
                                     <div class="card-header-right table-card-header">
                       <div class="input-group input-group-button mb-0" >
-                                    <input type="text" id="dynamicfilterhideshow" data-id='categoryfilter' data-type="tr" class="form-control form-control-sm width1"  placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="Search"> 
+                                    <input type="text" id="dynamicfilterhideshow_category" data-id='categoryfilter' data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow"  placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="Search"> 
                                     <span class="input-group-text addon-style">
                                         <span class=""><span class="ti-search text-white mt-2"></span></span>
                                     </span>
@@ -590,7 +590,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                     <h5>Locations</h5>
                                     <div class="card-header-right table-card-header">
                                         <div class="input-group input-group-button mb-0" >
-                                            <input type="text" id="dynamicfilterhideshow" data-id='locationfilter' data-type="tr" class="form-control form-control-sm width1"  placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="Search"> 
+                                            <input type="text" id="dynamicfilterhideshow_location" data-id='locationfilter' data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow"  placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="Search"> 
                                             <span class="input-group-text addon-style">
                                                 <span class=""><span class="ti-search text-white mt-2"></span></span>
                                             </span>
@@ -688,7 +688,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                     <h5>Cost Centers</h5>
                                     <div class="card-header-right table-card-header">
                                         <div class="input-group input-group-button mb-0" >
-                                            <input type="text" id="dynamicfilterhideshow" data-id='costcenterfilter' data-type="tr" class="form-control form-control-sm width1"  placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="Search"> 
+                                            <input type="text" id="dynamicfilterhideshow_costcenter" data-id='costcenterfilter' data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow"  placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="Search"> 
                                             <span class="input-group-text addon-style">
                                                 <span class=""><span class="ti-search text-white mt-2"></span></span>
                                             </span>
@@ -789,7 +789,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                     <h5><?php echo $trnstabkey; ?></h5>
                                     <div class="card-header-right table-card-header">
                                         <div class="input-group input-group-button mb-0" >
-                                            <input type="text" id="dynamicfilterhideshow" data-id='costcenterfilter' data-type="tr" class="form-control form-control-sm width1"  placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="Search"> 
+                                            <input type="text" id="dynamicfilterhideshow_generatedocs" data-id='costcenterfilter' data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow"  placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="Search"> 
                                             <span class="input-group-text addon-style">
                                                 <span class=""><span class="ti-search text-white mt-2"></span></span>
                                             </span>

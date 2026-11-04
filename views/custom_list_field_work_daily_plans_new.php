@@ -81,7 +81,7 @@ $to_date = date('Y-m-d');
                     <div class="d-none text-danger" id="user_id_err"></div>
                 </div>
             <?php } else { ?>
-                <input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['userid'] ?>">
+                <input type="hidden" name="user_id" id="user_id_hidden" value="<?php echo $_SESSION['userid'] ?>">
             <?php } ?>
 
             <div class="col-lg-4 col-xs-6 form-group">

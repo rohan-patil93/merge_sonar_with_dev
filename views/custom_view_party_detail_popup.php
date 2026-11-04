@@ -184,7 +184,7 @@ if($vendordetail['phone']!=""){  ?>
                             <h5>All Documents <span class="form-label label label-md label-primary"><?php echo count((array)$pending_amt_transactions); ?></span></h5>
                             <div class="card-header-right table-card-header">
                                  <div class="input-group input-group-button mb-0">
-                                    <input type="text" id="dynamicfilterhideshow" data-id="all_documents" data-type="tr" class="form-control form-control-sm width1 fill" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
+                                    <input type="text" id="dynamicfilterhideshow_all_documents" data-id="all_documents" data-type="tr" class="form-control form-control-sm width1 fill dynamicfilterhideshow" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
                                     <span class="input-group-text addon-style">
                                         <span class=""><span class="ti-search text-white mt-2"></span></span>
                                     </span>
@@ -240,7 +240,7 @@ if($vendordetail['phone']!=""){  ?>
                             <h5>Due <span class="form-label label label-md label-danger"><?php echo count((array)$pending_amt_transactions); ?></span></h5>
                             <div class="card-header-right table-card-header">
                                  <div class="input-group input-group-button mb-0">
-                                    <input type="text" id="dynamicfilterhideshow" data-id="pending_payment_documents" data-type="tr" class="form-control form-control-sm width1 fill" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
+                                    <input type="text" id="dynamicfilterhideshow_pending_payment" data-id="pending_payment_documents" data-type="tr" class="form-control form-control-sm width1 fill dynamicfilterhideshow" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
                                     <span class="input-group-text addon-style">
                                         <span class=""><span class="ti-search text-white mt-2"></span></span>
                                     </span>
@@ -290,7 +290,7 @@ if($vendordetail['phone']!=""){  ?>
                 <h5>Items <span class="form-label label label-md label-danger"><?php echo count((array)$transaction_items); ?></span></h5>
                 <div class="card-header-right table-card-header">
                      <div class="input-group input-group-button mb-0">
-                        <input type="text" id="dynamicfilterhideshow" data-id="item_documents" data-type="tr" class="form-control form-control-sm width1 fill" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
+                        <input type="text" id="dynamicfilterhideshow_item_documents" data-id="item_documents" data-type="tr" class="form-control form-control-sm width1 fill dynamicfilterhideshow" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
                         <span class="input-group-text addon-style">
                             <span class=""><span class="ti-search text-white mt-2"></span></span>
                         </span>

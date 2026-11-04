@@ -301,7 +301,7 @@ foreach($employees as $emplist){
                         <h5>Allocated Task &nbsp;<span class="form-label label label-md label-warning float-right"><?php echo count((array)$allocatedTaskemployees); ?> </span></h5>
                         <div class="card-header-right table-card-header ">
                             <div class="input-group input-group-button mb-0">
-                                <input type="text" id="dynamicfilterhideshow" data-id="categoryfilter" data-type="tr" class="form-control form-control-sm width1" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
+                                <input type="text" id="dynamicfilterhideshow_allocated" data-id="categoryfilter" data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
                                 <span class="input-group-text addon-style">
                                     <span class=""><span class="ti-search text-white mt-2"></span></span>
                                 </span>
@@ -395,7 +395,7 @@ foreach($employees as $emplist){
                         <h5>Unallocated Task</h5>
                         <div class="card-header-right table-card-header ">
                             <div class="input-group input-group-button mb-0">
-                                <input type="text" id="dynamicfilterhideshow" data-id="categoryfilter" data-type="tr" class="form-control form-control-sm width1" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
+                                <input type="text" id="dynamicfilterhideshow_unallocated" data-id="categoryfilter" data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
                                 <span class="input-group-text addon-style">
                                     <span class=""><span class="ti-search text-white mt-2"></span></span>
                                 </span>

@@ -76,7 +76,7 @@ $users = isset($filter_res['users']) ? $filter_res['users'] : array();
 					</select>
 				</div>
 				<?php } else { ?>
-				<input type="hidden" id="user_id" name="user_id" value="<?php echo (int)$_SESSION['userid']; ?>">
+				<input type="hidden" id="user_id_hidden" name="user_id" value="<?php echo (int)$_SESSION['userid']; ?>">
 				<?php } ?>
 
 				<div class="col-lg-3 col-md-6 form-group">
@@ -143,7 +143,7 @@ $users = isset($filter_res['users']) ? $filter_res['users'] : array();
 		<?php if ($admin_type != '3') { ?>
 		userIds = fworFilterIds($("#user_id").val());
 		<?php } else { ?>
-		userIds = [String($("#user_id").val())];
+		userIds = [String($("#user_id_hidden").val())];
 		<?php } ?>
 
 		var statuses = fworFilterIds($("#status").val());

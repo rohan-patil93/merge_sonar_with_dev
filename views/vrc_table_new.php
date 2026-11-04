@@ -185,10 +185,6 @@
                 <label>Description</label> 
             </div>
             <div class="col-md-7">
-                 <input type="hidden" name="item_name[]" id="item_name_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['item_name']; ?>" autocomplete="off"> 
-                <input type="hidden" name="purchase_account[]" id="purchase_account_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['purchase_account']; ?>" autocomplete="off">
-                <input type="hidden" name="purchase_account_aval[]" id="purchase_account_aval_<?php echo $i; ?>" class="form-control" value="<?php echo $response_code[$tab2['purchase_account']]['a']; ?>" autocomplete="off">
-
                 <input type="text" name="productName[]" id="productName_<?php echo $i; ?>" value="<?php echo $tab2['description']; ?>" class="form-control " placeholder="Description" data-bs-toggle="tooltip" data-placement="bottom" title="Description">
 
             </div>

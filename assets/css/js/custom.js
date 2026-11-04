@@ -163,7 +163,7 @@ $('body').on('keyup', '#filter1111', function() {
         }
     });
 });
-$('body').on('keyup', '#dynamicfilterhideshow', function() {
+$('body').on('keyup', '#dynamicfilterhideshow, [id^="dynamicfilterhideshow_"], .dynamicfilterhideshow', function() {
   var filterdivid = $(this).attr("data-id"); 
   var filterdivtype = $(this).attr("data-type") !=""?$(this).attr("data-type"):'tr';
   var filter = $(this).val(),

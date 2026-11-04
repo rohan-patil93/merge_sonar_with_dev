@@ -109,7 +109,7 @@ function loadFieldWorkData(adminType, userId) {
     fwdpHideErr('to_date_err');
 
     let manager_ids = fwdpFilterIds($('#manager_id').val());
-    let user_ids = fwdpFilterIds($('#user_id').val());
+    let user_ids = fwdpFilterIds($('#user_id, #user_id_hidden').val());
     let from_date = $('#from_date').val();
     let to_date = $('#to_date').val();
     let isValid = true;
@@ -137,7 +137,7 @@ function loadFieldWorkData(adminType, userId) {
     }
 
     if (adminType == '3') {
-        user_ids = fwdpFilterIds($('#user_id').val() || userId);
+        user_ids = fwdpFilterIds($('#user_id, #user_id_hidden').val() || userId);
         manager_ids = [];
     } else if (adminType == '2') {
         manager_ids = fwdpFilterIds($('#manager_id').val() || userId);
@@ -252,16 +252,16 @@ $(document).ready(function () {
         $("#manager_id").val(userId).trigger("change");
         selectUser(managerInput);
     } else if (adminType == "3") {
-        if ($('#user_id').length == 0) {
+        if ($('#user_id, #user_id_hidden').length == 0) {
             const userInput = $('<input>', {
                 type: 'hidden',
-                id: 'user_id',
+                id: 'user_id_hidden',
                 name: 'user_id',
                 value: userId,
             });
             $(".fwdp-card").append(userInput);
         } else {
-            $('#user_id').val(userId);
+            $('#user_id, #user_id_hidden').val(userId);
         }
     }
 

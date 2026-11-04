@@ -16,7 +16,7 @@
   // });
 
 $( function() {
-    $( "#draggablePanelList,#draggableMultiple,#draggableWithoutImg" ).sortable({
+    $( "#draggablePanelList, [id^='draggablePanelList_'], .draggablePanelList, #draggableMultiple, #draggableWithoutImg" ).sortable({
       revert: true,
       animation:150
     });
