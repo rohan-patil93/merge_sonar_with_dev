@@ -112,7 +112,7 @@ $slabsval = json_decode($appraisal_bell_curves['slabs'],1);
 			            	<div class="input-group input-group-button"> 
 		                    	<input type="number" name="slabs[<?php echo $aprslab['id']; ?>][percentage]" class="form-control bell_curve_sum text-right width1" value="<?php echo $slab11['percentage']; ?>" onblur="getTotalBellCurve()" required>
 			                    <span class="input-group-text addon-style">
-								    <label class="">%</label>
+								    <span class="">%</span>
 								</span>
 							</div>
 			            </div>
@@ -123,7 +123,7 @@ $slabsval = json_decode($appraisal_bell_curves['slabs'],1);
 		                	 <label class="form-label">Total<span class="text-danger">*</span></label>
 		                </div>
 		                <div class="form-group col-lg-6 text-right">
-		                	<label class="form-label " id="bell_curve_sum_text"><?php echo $sum; ?>%</label>
+		                	<span class="form-label " id="bell_curve_sum_text"><?php echo $sum; ?>%</span>
 		                </div>
 		            </div>
                  </div>

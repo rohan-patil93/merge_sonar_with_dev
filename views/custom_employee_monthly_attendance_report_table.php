@@ -125,30 +125,30 @@ for ($day = 1; $day <= $daysInMonth; $day++) {
 		<div class="card-header">
 			<h5>Employee Attendance Report (<?= date('F Y', strtotime($month . '-01')); ?>)</h5>
 			<?php if (!empty($shift_info)): ?>
-				<label class="text-muted m-l-5">
+				<span class="text-muted m-l-5">
                     <i class="fa fa-clock-o"></i> 
                     <?= $shift_info['shift_name'] ?? 'N/A'; ?> 
                     (<?= $shift_info['clock_in'] ?? '00:00:00'; ?> - <?= $shift_info['clock_out'] ?? '00:00:00'; ?>)
-                </label>
+                </span>
 			<?php endif; ?>
-            <label class=" m-l-5">Designation : </label>
-            <label class="text-muted m-l-5"><?php echo $employee_name['designation_name']!="" ? $employee_name['designation_name'] : "-";  ?></label>
-            <label class=" m-l-5">Department :</label>
-            <label class="text-muted m-l-5"><?php echo $employee_name['department_name']!="" ? $employee_name['department_name'] : "-";  ?></label>
-            <label class=" m-l-5">Location :</label>
-            <label class="text-muted m-l-5"><?php echo $employee_name['location_name']!="" ? $employee_name['location_name'] : "-";  ?></label>
+            <span class=" m-l-5">Designation : </span>
+            <span class="text-muted m-l-5"><?php echo $employee_name['designation_name']!="" ? $employee_name['designation_name'] : "-";  ?></span>
+            <span class=" m-l-5">Department :</span>
+            <span class="text-muted m-l-5"><?php echo $employee_name['department_name']!="" ? $employee_name['department_name'] : "-";  ?></span>
+            <span class=" m-l-5">Location :</span>
+            <span class="text-muted m-l-5"><?php echo $employee_name['location_name']!="" ? $employee_name['location_name'] : "-";  ?></span>
 		</div>
         <div class="m-l-10">
-             <label class=" m-l-5"> Present Days :  </label>
-            <label class="text-muted m-l-5"> <?php echo  $atdata['P']; ?></label>
-             <label class=" m-l-5">Holidays : </label>
-            <label class="text-muted m-l-5"><?php echo  $cnt_holiday; ?></label>
-             <label class=" m-l-5">Sundays : </label>
-            <label class="text-muted m-l-5"><?php echo  $sundays; ?></label>
-             <label class=" m-l-5"> Absent Days : </label>
-            <label class="text-muted m-l-5"><?php echo  $atdata['A']; ?></label>
-              <label class=" m-l-5">Total Payable Days : </label>
-            <label class="text-muted m-l-5"><?php echo  $emp_work_days; ?></label> 
+             <span class=" m-l-5"> Present Days :  </span>
+            <span class="text-muted m-l-5"> <?php echo  $atdata['P']; ?></span>
+             <span class=" m-l-5">Holidays : </span>
+            <span class="text-muted m-l-5"><?php echo  $cnt_holiday; ?></span>
+             <span class=" m-l-5">Sundays : </span>
+            <span class="text-muted m-l-5"><?php echo  $sundays; ?></span>
+             <span class=" m-l-5"> Absent Days : </span>
+            <span class="text-muted m-l-5"><?php echo  $atdata['A']; ?></span>
+              <span class=" m-l-5">Total Payable Days : </span>
+            <span class="text-muted m-l-5"><?php echo  $emp_work_days; ?></span> 
         </div>
 
 		<div class="card-body">

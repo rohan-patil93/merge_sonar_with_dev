@@ -112,7 +112,7 @@ include_once '../comm.php';
 					    <div class="input-group input-icon-right">
 						<input type="text" class="form-control display-inline width1" name="survey_question_option[]"  placeholder="Option">
 									<span class="input-group-text addon-style">
-    <label class=""><i class="fa fa-trash" onclick="deloptionrows('s1rowid1')"></i>	</label>
+    <span class=""><i class="fa fa-trash" onclick="deloptionrows('s1rowid1')"></i>	</span>
 </span></div>
 					</div>
 				</div>
@@ -122,7 +122,7 @@ include_once '../comm.php';
 					    <div class="input-group input-icon-right">
 						<input type="text" class="form-control display-inline width1" name="survey_question_option[]"  placeholder="Option">
 						<span class="input-group-text addon-style">
-    <label class=""><i class="fa fa-trash" onclick="deloptionrows('s1rowid2')"></i>	</label>
+    <span class=""><i class="fa fa-trash" onclick="deloptionrows('s1rowid2')"></i>	</span>
 </span></div>
 					</div>
 				</div>

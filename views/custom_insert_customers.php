@@ -1041,7 +1041,7 @@ function toggleRowLock(button) {
 																<td><?php echo $inst['agreement_name']; ?></td>
 																<td><?php echo $inst['agreement_ref_no']; ?></td>
 																<td><?php echo $inst['signed_date']; ?></td>
-																<td><label class="label label-success"><?php echo $inst['expiry_date']; ?></span></td>
+																<td><span class="label label-success"><?php echo $inst['expiry_date']; ?></span></td>
 															</tr>
 
 														<?php }  ?>

@@ -380,7 +380,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 									$jobpostingcandidates55 = $job_posting_candidates[$key];
 									?>
 									<li class="nav-item">
-										<a class="nav-link f-w-600 f-12 <?php echo $mk == count((array)$montharray)?"active":""; ?>" data-bs-toggle="tab" href="#month<?php echo date("M",strtotime($ff));?>" role="tab" aria-selected="true"><?php echo date("F",strtotime($ff));?><label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$jobpostingcandidates55); ?></label></a>
+										<a class="nav-link f-w-600 f-12 <?php echo $mk == count((array)$montharray)?"active":""; ?>" data-bs-toggle="tab" href="#month<?php echo date("M",strtotime($ff));?>" role="tab" aria-selected="true"><?php echo date("F",strtotime($ff));?><span class="label label-xs label-success m-l-10"><?php echo count((array)$jobpostingcandidates55); ?></span></a>
 									</li>
 									<?php $mk++; } ?>
 
@@ -408,12 +408,12 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 															<th scope="col" class="text-center" >No. Res.</th>
 
 															<th scope="col" class="text-center" >Applied</th>
-															<th scope="col" class="text-center"><label class="form-label label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_HMSHORTLISTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="RM ShotListed">RM</label></th>
-															<th scope="col" class="text-center"><label class="form-label label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_RMSHORTLISTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="HM ShortListed">HM</label></th>
-															<th scope="col" class="text-center"><label class="form-label label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_LOIREQUESTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Requested">Req</label></th>
-															<th scope="col" class="text-center"><label class="form-label label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_LOIGENERATED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Generated">Gen</label></th>
-															<th scope="col" class="text-center"><label class="form-label label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_LOIACCEPTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Accepted">Acc</label></th>
-															<th scope="col" class="text-center"><label class="form-label label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_LOIREJECTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Rejected">Rej</label></th>
+															<th scope="col" class="text-center"><span class="label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_HMSHORTLISTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="RM ShotListed">RM</span></th>
+															<th scope="col" class="text-center"><span class="label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_RMSHORTLISTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="HM ShortListed">HM</span></th>
+															<th scope="col" class="text-center"><span class="label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_LOIREQUESTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Requested">Req</span></th>
+															<th scope="col" class="text-center"><span class="label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_LOIGENERATED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Generated">Gen</span></th>
+															<th scope="col" class="text-center"><span class="label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_LOIACCEPTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Accepted">Acc</span></th>
+															<th scope="col" class="text-center"><span class="label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_LOIREJECTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Rejected">Rej</span></th>
 														</tr>
 											
 										</thead>
@@ -461,42 +461,42 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 							<div class="col-lg-12">
 								<ul class="nav md-tabs infisuite_tab" role="tablist">
 									<li class="nav-item  m-1">
-										<a class="nav-link f-w-600 f-12 active" style="padding: 0.5rem 0.5rem !important; " data-bs-toggle="tab" href="#apshort" role="tab" aria-selected="true">Applied <label class="form-label label label-xs label-success m-l-5"><?php echo count((array)$tabdata['apshort']); ?></label></a>
+										<a class="nav-link f-w-600 f-12 active" style="padding: 0.5rem 0.5rem !important; " data-bs-toggle="tab" href="#apshort" role="tab" aria-selected="true">Applied <span class="label label-xs label-success m-l-5"><?php echo count((array)$tabdata['apshort']); ?></span></a>
 										<div class="slide"></div>
 									</li>
 									<li class="nav-item  m-1" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="RM ShortListed">
 										<a class="nav-link  f-w-600 f-12" style="padding: 0.5rem 0.5rem !important; " data-bs-toggle="tab" href="#rhshort" role="tab" aria-selected="true">RM
-											<label class="form-label label label-xs label-success m-l-5" style="background-color: <?php echo strval($stausresult[ST_RMSHORTLISTED]['background_color']);?> !important"><?php echo count((array)$tabdata['rhshort']); ?></label>
+											<span class="label label-xs label-success m-l-5" style="background-color: <?php echo strval($stausresult[ST_RMSHORTLISTED]['background_color']);?> !important"><?php echo count((array)$tabdata['rhshort']); ?></span>
 										</a>
 										<div class="slide"></div>
 									</li>
 									<li class="nav-item  m-1" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="HM ShortListed">
 										<a class="nav-link f-w-600 f-12" style="padding: 0.5rem 0.5rem !important; " data-bs-toggle="tab" href="#hmshort" role="tab" aria-selected="false">HM
-											<label class="form-label label label-xs label-success m-l-5" style="background-color: <?php echo strval($stausresult[ST_HMSHORTLISTED]['background_color']);?> !important"><?php echo count((array)$tabdata['hmshort']); ?></label>
+											<span class="label label-xs label-success m-l-5" style="background-color: <?php echo strval($stausresult[ST_HMSHORTLISTED]['background_color']);?> !important"><?php echo count((array)$tabdata['hmshort']); ?></span>
 										</a>
 										<div class="slide"></div>
 									</li>
 									<li class="nav-item  m-1" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Requested">
 										<a class="nav-link f-w-600 f-12" style="padding: 0.5rem 0.5rem !important; " data-bs-toggle="tab" href="#lorshort" role="tab" aria-selected="false">LoI Req
-											<label class="form-label label label-xs label-success m-l-5" style="background-color: <?php echo strval($stausresult[ST_LOIREQUESTED]['background_color']);?> !important"><?php echo count((array)$tabdata['lorshort']); ?></label>
+											<span class="label label-xs label-success m-l-5" style="background-color: <?php echo strval($stausresult[ST_LOIREQUESTED]['background_color']);?> !important"><?php echo count((array)$tabdata['lorshort']); ?></span>
 										</a>
 										<div class="slide"></div>
 									</li>
 									<li class="nav-item  m-1" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Generated">
 										<a class="nav-link f-w-600 f-12" style="padding: 0.5rem 0.5rem !important; " data-bs-toggle="tab" href="#logshort" role="tab" aria-selected="false" >LoI Gen
-											<label class="form-label label label-xs label-success m-l-5" style="background-color: <?php echo strval($stausresult[ST_LOIGENERATED]['background_color']);?> !important"><?php echo count((array)$tabdata['logshort']); ?></label>
+											<span class="label label-xs label-success m-l-5" style="background-color: <?php echo strval($stausresult[ST_LOIGENERATED]['background_color']);?> !important"><?php echo count((array)$tabdata['logshort']); ?></span>
 										</a>
 										<div class="slide"></div>
 									</li>
 									<li class="nav-item  m-1" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Accepted">
 										<a class="nav-link f-w-600 f-12" style="padding: 0.5rem 0.5rem !important; " data-bs-toggle="tab" href="#loashort" role="tab" aria-selected="false">LoI Acc
-											<label class="form-label label label-xs label-success m-l-5 " style="background-color: <?php echo strval($stausresult[ST_LOIACCEPTED]['background_color']);?> !important"><?php echo count((array)$tabdata['loashort']); ?></label>
+											<span class="label label-xs label-success m-l-5" style="background-color: <?php echo strval($stausresult[ST_LOIACCEPTED]['background_color']);?> !important"><?php echo count((array)$tabdata['loashort']); ?></span>
 										</a>
 										<div class="slide"></div>
 									</li>
 									<li class="nav-item m-1" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Rejected">
 										<a class="nav-link f-w-600 f-12" style="padding: 0.5rem 0.5rem !important; " data-bs-toggle="tab" href="#loashort" role="tab" aria-selected="false">LoI Rej
-											<label class="form-label label label-xs label-success m-l-5" style="background-color: <?php echo strval($stausresult[ST_LOIREJECTED]['background_color']);?> !important"><?php echo count((array)$tabdata['loarejetced']); ?></label>
+											<span class="label label-xs label-success m-l-5" style="background-color: <?php echo strval($stausresult[ST_LOIREJECTED]['background_color']);?> !important"><?php echo count((array)$tabdata['loarejetced']); ?></span>
 										</a>
 										<div class="slide"></div>
 									</li>
@@ -527,7 +527,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 																	<td><?php echo fromDate($tabval['requested_date']); ?></td>
 																	<td><?php echo $_SESSION['login_details']['allusers']['name'][$tabval['requested_by']] ; ?></td>
 																	<td>
-																		<label class="form-label label label-warning label-lg " style="background-color: <?php echo strval($stausresult[$tabval['current_status']]['background_color']);?> !important"><?php echo $tabval['view_status']; ?> </label>
+																		<span class="label label-warning label-lg" style="background-color: <?php echo strval($stausresult[$tabval['current_status']]['background_color']);?> !important"><?php echo $tabval['view_status']; ?> </span>
 																	</td> 
 																	<td class="text-center">
 																		<div class="btn-group">
@@ -613,7 +613,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 															<div class="col-lg-5 text-right">
 																<div class="d-flex align-items-center mt-3 float-right">
 																	<span class="f-18 f-w-600 m-r-10"><?php echo count((array)$jobpostingcandidates2); ?> / <?php echo $candidatecnt; ?></span>
-																	<!-- <label class="form-label label label-success">100%</label> -->
+																	<!-- <span class="label label-success">100%</span> -->
 																</div>
 															</div>
 														</div>
@@ -662,7 +662,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 															<div class="col-lg-5 text-right">
 																<div class="d-flex align-items-center mt-3 float-right">
 																	<span class="f-18 f-w-600 m-r-10"><?php echo count((array)$jobpostingcandidates2); ?> / <?php echo $candidatecnt; ?></span>
-																	<!-- <label class="form-label label label-success">100%</label> -->
+																	<!-- <span class="label label-success">100%</span> -->
 																</div>
 															</div>
 														</div>
@@ -692,7 +692,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 							<div class="card mb-2">
 								<div class="card-header">
 									<h5>Active Jobs 
-										<label class="form-label label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[$job_postings['0']['current_status']]['background_color']);?> !important" ><?php echo $result['job_postings_count']; ?></label>
+										<span class="label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[$job_postings['0']['current_status']]['background_color']);?> !important" ><?php echo $result['job_postings_count']; ?></span>
 									</h5>
 									<?php // if($result['job_postings_count']>3){ ?>
 										<!-- <a href="index.php?option=COM_LIST_VIEW_ALL_DASH_BOARD&TYPE=ACTIVE" class=" b-b-primary text-primary float-right">View all</a> -->
@@ -741,7 +741,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 								<div class="card mb-2">
 									<div class="card-header">
 										<h5><?php echo $result['job_post_status']['name']; ?>
-										<label class="form-label label label-xs label-success m-l-10"style="background-color: <?php echo strval($stausresult[$result['job_post_status']['data']['0']['current_status']]['background_color']);?> !important" ><?php echo $result['job_post_status']['count']; ?></label>
+										<span class="label label-xs label-success m-l-10"style="background-color: <?php echo strval($stausresult[$result['job_post_status']['data']['0']['current_status']]['background_color']);?> !important" ><?php echo $result['job_post_status']['count']; ?></span>
 
 									</h5>
 									<a href="#!"  onclick="viewAllRecord('COM_LIST_VIEW_ALL_DASH_BOARD','YET')" class=" b-b-primary text-primary float-right">View all</a>
@@ -797,7 +797,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 							<div class="card mb-2">
 								<div class="card-header">
 									<h5><?php echo $result['recent_publish']['name']; ?>
-									<label class="form-label label label-xs label-success m-l-10"style="background-color: <?php echo strval($stausresult[$result['recent_publish']['data']['0']['current_status']]['background_color']);?> !important" ><?php echo $result['recent_publish']['count']; ?></label>
+									<span class="label label-xs label-success m-l-10"style="background-color: <?php echo strval($stausresult[$result['recent_publish']['data']['0']['current_status']]['background_color']);?> !important" ><?php echo $result['recent_publish']['count']; ?></span>
 								</h5>
 								<a href="#!"  onclick="viewAllRecord('COM_LIST_VIEW_ALL_DASH_BOARD','PUBLISH')" class=" b-b-primary text-primary float-right">View all</a>
 							</div>
@@ -850,7 +850,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 						<div class="card mb-2">
 							<div class="card-header">
 								<h5><?php echo $result['recent_unpublish']['name']; ?>
-								<label class="form-label label label-xs label-success m-l-10"style="background-color: <?php echo strval($stausresult[$result['recent_unpublish']['data']['0']['current_status']]['background_color']);?> !important" ><?php echo $result['recent_unpublish']['count']; ?></label>
+								<span class="label label-xs label-success m-l-10"style="background-color: <?php echo strval($stausresult[$result['recent_unpublish']['data']['0']['current_status']]['background_color']);?> !important" ><?php echo $result['recent_unpublish']['count']; ?></span>
 							</h5>
 							<a href="#!"  onclick="viewAllRecord('COM_LIST_VIEW_ALL_DASH_BOARD','UNPUBLISH')" class=" b-b-primary text-primary float-right">View all</a>
 						</div>

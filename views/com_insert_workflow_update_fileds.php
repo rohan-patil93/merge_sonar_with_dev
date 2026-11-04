@@ -60,7 +60,7 @@ if($_POST['approval_type'] =='custom_process'){
 	for($i=1;$i <= $_POST['sub_approve_type'];$i++){ 
 		?>
 		<div class="form-group row">
-			<div class="col-lg-2 mt-4">Level <label class="form-label badge bg-info "><?php echo $i; ?></label></div>
+			<div class="col-lg-2 mt-4">Level <span class="badge bg-info "><?php echo $i; ?></span></div>
 			<div class="col-lg-3">
 				<label class="form-label">Status</label>
 				<select class="form-select js-example-basic-single" name="status[]" >
@@ -93,7 +93,7 @@ if($_POST['approval_type'] =='custom_process'){
 for($i=0;$i <= 1;$i++){ 
 		?>
 		<div class="form-group row">
-			<div class="col-lg-2 mt-4">Level <label class="form-label badge bg-info "><?php echo $mk; ?></label></div>
+			<div class="col-lg-2 mt-4">Level <span class="badge bg-info "><?php echo $mk; ?></span></div>
 			<div class="col-lg-3">
 				<label class="form-label">Status</label>
 				<select class="form-select js-example-basic-single" name="status[]" >
@@ -141,7 +141,7 @@ for($i=0;$i <= 1;$i++){
 	for($i=1;$i <= $_POST['sub_approve_type'];$i++){ 
 		?>
 		<div class="form-group row">
-			<div class="col-lg-2 mt-4">Level <label class="form-label badge bg-info "><?php echo $i; ?></label></div>
+			<div class="col-lg-2 mt-4">Level <span class="badge bg-info "><?php echo $i; ?></span></div>
 			<div class="col-lg-3">
 				<label class="form-label">Status</label>
 				<select class="form-select js-example-basic-single" name="status[]" >
@@ -171,7 +171,7 @@ for($i=0;$i <= 1;$i++){
 		</div>
 	<?php $mk++;  } }else{ **/  ?>
 		<div class="form-group row">
-			<div class="col-lg-2 mt-4">Level <label class="form-label badge bg-info ">1</label></div>
+			<div class="col-lg-2 mt-4">Level <span class="badge bg-info ">1</span></div>
 			<div class="col-lg-3">
 				<label class="form-label">Status</label>
 				<select class="form-select js-example-basic-single" name="status[]" >

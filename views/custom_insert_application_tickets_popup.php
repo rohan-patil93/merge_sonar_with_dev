@@ -89,7 +89,7 @@ function updateApplicationTickets(rid,status){
 					<?php }else{ echo " - "; } ?>
 				</td>
 				<td class="p-2">
-					<label class="form-label label label-md label-primary"><?php echo $status[$at['current_status']]; ?></label>
+					<span class="label label-md label-primary"><?php echo $status[$at['current_status']]; ?></span>
 				</td>
 				<!-- <td class="p-2 text-center">
 					<div class="dropdown-primary dropdown cursor-pointer">
@@ -152,7 +152,7 @@ function updateApplicationTickets(rid,status){
 					<?php }else{ echo " - "; } ?>
 				</td>
 				<td class="p-2">
-					<label class="form-label label label-md label-primary"><?php echo $status[$at['current_status']]; ?></label>
+					<span class="label label-md label-primary"><?php echo $status[$at['current_status']]; ?></span>
 					
 				</td>
 				

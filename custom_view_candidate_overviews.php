@@ -245,18 +245,18 @@ $due_date_period_list = $result['period_list'];
         console.log(response);
         var jsonres = JSON.parse(response);
       if(jsonres.status == "3"){
-        $(".statusid_"+rid).html('<label class="form-label label label-md" style="color: #FFFFFF;    background:  #f5b700; border-color: ##f5b700;">In Progress </label>');
+        $(".statusid_"+rid).html('<span class="label label-md" style="color: #FFFFFF;    background:  #f5b700; border-color: ##f5b700;">In Progress </span>');
       }
       if(jsonres.status == "10"){
         $('.sendapprove_'+rid).attr("disabled", true);
-        $(".statusid_"+rid).html('<label class="form-label label label-md" style="color: #FFFFFF;    background:  #fcca46; border-color: ##fcca46;">Approval Pending </label>');
+        $(".statusid_"+rid).html('<span class="label label-md" style="color: #FFFFFF;    background:  #fcca46; border-color: ##fcca46;">Approval Pending </span>');
       }
       tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message']['3001']; ?>','');
 
 
 
 
-       // $(".statusid_"+id).html('<label class="form-label label label-md" style="color: ###4f2424;    background:  #17c3b2; border-color: #17c3b2;">Approved</label>');
+       // $(".statusid_"+id).html('<span class="label label-md" style="color: ###4f2424;    background:  #17c3b2; border-color: #17c3b2;">Approved</span>');
        // tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message']['3001']; ?>','');
         //$('#kt_modal_KTDatatable_remote').modal("hide");
       }
@@ -351,7 +351,7 @@ $due_date_period_list = $result['period_list'];
         type: "POST",
         success:function(data){
         //console.log(data);
-        $("#docssatusbtn_"+id).html('<label class="form-label label label-md" style="color: #FFFFFF;    background:  #bc00dd; border-color: #bc00dd;">Requested</label>')
+        $("#docssatusbtn_"+id).html('<span class="label label-md" style="color: #FFFFFF;    background:  #bc00dd; border-color: #bc00dd;">Requested</span>')
         $("#docssatusbtnemt_"+id).html('');
         tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message']['3000']; ?>','');
         closeSmallPopUp();
@@ -583,7 +583,7 @@ $due_date_period_list = $result['period_list'];
                                      </a>
                             </td>
                             <td id="docssatusbtn_<?php echo $details['id']; ?>">
-                                <label class="form-label label label-md" style="color: <?php echo $statucolorname['color']; ?>;    background:  <?php echo $statucolorname['background_color']; ?>; border-color: <?php echo $statucolorname['background_color']; ?>;"><?php echo $candidatedocumentsstatusname[$candidatedocument['current_status']]; ?></label>
+                                <span class="label label-md" style="color: <?php echo $statucolorname['color']; ?>;    background:  <?php echo $statucolorname['background_color']; ?>; border-color: <?php echo $statucolorname['background_color']; ?>;"><?php echo $candidatedocumentsstatusname[$candidatedocument['current_status']]; ?></span>
                             </td>
                             <td align="right">
                               <div id="docssatusbtnemt_<?php echo $details['id']; ?>">
@@ -625,7 +625,7 @@ $due_date_period_list = $result['period_list'];
                                     </div>
                                     <div class="card-body"> 
                                       <div class="form-group">
-                                        <label class="form-label">Joining Date : <?php echo fromDate($data['reporting_date']); ?></label>
+                                        <span class="form-label d-block">Joining Date : <?php echo fromDate($data['reporting_date']); ?></span>
                                       </div>
                                       <form id="docrequestform_<?php echo $details['id']; ?>">
                                       <input type="hidden" name="category_id" value="<?php echo $parentdocuments['id']; ?>">  
@@ -711,7 +711,7 @@ $due_date_period_list = $result['period_list'];
                     <td align="center" class="statusid_<?php echo $tas['id']; ?>">
                      <?php $stausresultv = $stausresult[$tas['current_status']]; 
                      ?>
-                     <label class="form-label label label-success" style="color: <?php echo "#".$stausresultv['color']; ?>;    background:  <?php echo $stausresultv['background_color']; ?>; border-color: <?php echo $stausresultv['background_color']; ?>;" ><?php echo $stausresultv['name']; ?></label>
+                     <span class="label label-success" style="color: <?php echo "#".$stausresultv['color']; ?>;    background:  <?php echo $stausresultv['background_color']; ?>; border-color: <?php echo $stausresultv['background_color']; ?>;" ><?php echo $stausresultv['name']; ?></span>
 
                      <?php if($tas['check_list'] !=""){ ?>
                       <div class="custom-popup-open custom-popup-slide-updatechecklist-<?php echo $tas['id']; ?> text-start" style="display: none;left: 18px;top: 55px; ">
@@ -872,7 +872,7 @@ $due_date_period_list = $result['period_list'];
                             <td align="center" class="statusid_<?php echo $tas['id']; ?>">
                              <?php $stausresultv = $stausresult[$tas['current_status']]; 
                              ?>
-                             <label class="form-label label label-success" style="color: <?php echo "#".$stausresultv['color']; ?>;    background:  <?php echo $stausresultv['background_color']; ?>; border-color: <?php echo $stausresultv['background_color']; ?>;" ><?php echo $stausresultv['name']; ?></label>
+                             <span class="label label-success" style="color: <?php echo "#".$stausresultv['color']; ?>;    background:  <?php echo $stausresultv['background_color']; ?>; border-color: <?php echo $stausresultv['background_color']; ?>;" ><?php echo $stausresultv['name']; ?></span>
                            </td>
                          </tr>
                        <?php } ?>
@@ -898,7 +898,7 @@ $due_date_period_list = $result['period_list'];
                     <h6 class="mb-0 f-14">Drivers License</h6>
                     <p>Uploaded on 22 March 2023</p>
                   </td>
-                  <td align="right"><label class="form-label label label-success">Completed</label></td>
+                  <td align="right"><span class="label label-success">Completed</span></td>
                   <td align="right">
                     <div class="dropdown-primary dropdown open">
                       <button class="btn btn-primary dropdown-toggle waves-effect waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>

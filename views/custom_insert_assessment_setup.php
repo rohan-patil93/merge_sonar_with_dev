@@ -446,7 +446,7 @@ function getnamelist(){
 				         <div class="input-group input-group-button"> 
         <input type="text" class="form-control display-inline width1" name="survey_question_option'.$value_id.'[]"  placeholder="Option" value="'.$opvalue.'">
         <span class="input-group-text addon-style">
-            <label class=""><i class="fa fa-trash close text-white" onclick="delnewoptionrows('."'".$opkey."'".','."'".$value_id."'".')"></i> </label>
+            <span class=""><i class="fa fa-trash close text-white" onclick="delnewoptionrows('."'".$opkey."'".','."'".$value_id."'".')"></i></span>
         </span>
     </div>
 	 </div>';

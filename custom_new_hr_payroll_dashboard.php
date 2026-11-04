@@ -314,7 +314,7 @@
              <tr>
                <th scope="col">Provident Fund (PF)</th>
                <td>₹ <?php echo number_format($components['PF'] ?? 0, 2); ?></td>
-               <td><label class="form-label label label-success">Paid</label></td>
+               <td><span class="label label-success">Paid</span></td>
                <td>-</td>
                <td>-</td>
              </tr>
@@ -322,7 +322,7 @@
              <tr>
                <th scope="col">ESI</th>
                <td>₹ <?php echo number_format($components['ESI'] ?? 0, 2); ?></td>
-               <td><label class="form-label label label-success">Paid</label></td>
+               <td><span class="label label-success">Paid</span></td>
                <td>-</td>
                <td>-</td>
              </tr>
@@ -330,7 +330,7 @@
              <tr>
                <th scope="col">Professional Tax (PT)</th>
                <td>₹ <?php echo number_format($components['PT'] ?? 0, 2); ?></td>
-               <td><label class="form-label label label-success">Paid</label></td>
+               <td><span class="label label-success">Paid</span></td>
                <td>-</td>
                <td>-</td>
              </tr>
@@ -338,7 +338,7 @@
              <tr>
                <th scope="col">TDS</th>
                <td>₹ <?php echo number_format($components['TDS'] ?? 0, 2); ?></td>
-               <td><label class="form-label label label-success">Paid</label></td>
+               <td><span class="label label-success">Paid</span></td>
                <td>-</td>
                <td>-</td>
              </tr>
@@ -346,7 +346,7 @@
              <tr>
                <th scope="col">Gratuity</th>
                <td>₹ <?php echo number_format($components['GRATUITY'] ?? 0, 2); ?></td>
-               <td><label class="form-label label label-success">Paid</label></td>
+               <td><span class="label label-success">Paid</span></td>
                <td>-</td>
                <td>-</td>
              </tr>
@@ -581,7 +581,7 @@ $(document).ready(function() {
                  <td><?php echo $row['employee_count'] ?? 0; ?></td>
                  <td>₹ <?php echo number_format($row['gross_salary'] ?? 0, 2); ?></td>
                  <td>₹ <?php echo number_format($row['net_payable'] ?? 0, 2); ?></td>
-                 <td><label class="form-label label label-success">Completed</label></td>
+                 <td><span class="label label-success">Completed</span></td>
                </tr>
              <?php } ?>
            </table>

@@ -385,7 +385,7 @@ if($totaldoc != 0 AND $totaldoc !=""){
                                 <div class="input-group input-group-button mb-0">
                                     <input type="text" class="form-control form-control-sm width1" placeholder="Enter Minimum 3 Characters" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search" onkeyup="getEnquiryVendororCustomer(this.value)"> 
                                     <div class="input-group-text addon-style">
-                                        <label class=""><i class="ti-search text-white mt-2"></i></label>
+                                        <span class=""><i class="ti-search text-white mt-2"></i></span>
                                     </div>
                                 </div>
                             </div>
@@ -407,7 +407,7 @@ if($totaldoc != 0 AND $totaldoc !=""){
                         <?php  foreach($generatedocs as $trnstabkey=>$gdocs){ ?>
                             <li class="nav-item">
                                 <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#tabsopen" role="tab" aria-selected="true" onclick="openApprovedPage('<?php echo $trnstabkey; ?>','<?php echo $table_name; ?>')" ><?php echo "Approved ".ucwords(str_replace('_',' ',$trnstabkey)); ?>
-                                <!-- <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$gdocs);?></label>-->
+                                <!-- <span class="label label-xs label-success m-l-10"><?php echo count((array)$gdocs);?></span>-->
 </a>                            </li>
                         <?php } ?>
                         <!-- <li class="nav-item float-right">
@@ -457,20 +457,20 @@ if($totaldoc != 0 AND $totaldoc !=""){
                                         $item_categories = array(array('id'=>'purchase_invoices','category_description'=>'Purchase Invoices'),array('id'=>'supplier_bills','category_description'=>'Supplier Bills'),array('id'=>'supplier_bill_cancellations','category_description'=>'Supplier Bill Cancellations'),array('id'=>'payments','category_description'=>'Payments'),array('id'=>'receipts','category_description'=>'Receipts'),array('id'=>'sales_invoices','category_description'=>'Sales Invoices'),array('id'=>'sales_returns','category_description'=>'Sales Returns'),array('id'=>'sales_invoice_cancellations','category_description'=>'Sales Invoice Cancellations'),array('id'=>'goods_receipt_notes','category_description'=>'Goods Receipt Notes'),array('id'=>'grn_return','category_description'=>'GRN Return'),array('id'=>'delivery_orders','category_description'=>'Delivery Orders'),array('id'=>'debit_notes','category_description'=>'Debit Notes'),array('id'=>'credit_notes','category_description'=>'Credit Notes'),array('id'=>'stock_transfers','category_description'=>'Stock Transfers'),array('id'=>'stock_transfer_receipts','category_description'=>'Stock Transfer Receipts'),array('id'=>'stock_transfer_returns','category_description'=>'Stock Transfer Returns'),array('id'=>'stock_adjustments','category_description'=>'Stock Adjustments'),array('id'=>'manual','category_description'=>'Manual'));
                                     }
                                       ?> 
-                                    <?php echo $itemcatname; ?><label class="form-label label label-xs label-success m-l-10"><?php echo array_sum(array_map("count", $categorydatalist)); ?></label></a>
+                                    <?php echo $itemcatname; ?><span class="label label-xs label-success m-l-10"><?php echo array_sum(array_map("count", $categorydatalist)); ?></span></a>
 
                             </li>
                             <?php if($table_name != "debit_notes" AND $table_name != "credit_notes" AND $table_name != "journal_vouchers" AND $table_name !="bank_vouchers" AND $table_name !="cash_vouchers"){ ?>
                             <li class="nav-item">
-                                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#itemlocation" role="tab" aria-selected="true">Locations<label class="form-label label label-xs label-success m-l-10"><?php echo array_sum(array_map("count", $locationlist)); ?></label></a>
+                                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#itemlocation" role="tab" aria-selected="true">Locations<span class="label label-xs label-success m-l-10"><?php echo array_sum(array_map("count", $locationlist)); ?></span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#costcenter" role="tab" aria-selected="true">Cost Centers<label class="form-label label label-xs label-success m-l-10"><?php echo array_sum(array_map("count", $costcenterlist)); ?></label></a>
+                                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#costcenter" role="tab" aria-selected="true">Cost Centers<span class="label label-xs label-success m-l-10"><?php echo array_sum(array_map("count", $costcenterlist)); ?></span></a>
                             </li>
                             <?php } ?>
                             <?php /** foreach($generatedocs as $trnstabkey=>$gdocs){ ?>
                             <li class="nav-item">
-                                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#tabs_<?php echo $trnstabkey; ?>" role="tab" aria-selected="true"><?php echo "Approved ".ucwords($trnstabkey); ?><label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$gdocs);?></label></a>
+                                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#tabs_<?php echo $trnstabkey; ?>" role="tab" aria-selected="true"><?php echo "Approved ".ucwords($trnstabkey); ?><span class="label label-xs label-success m-l-10"><?php echo count((array)$gdocs);?></span></a>
                             </li>
                             <?php }  **/ ?>
                         </ul>
@@ -482,7 +482,7 @@ if($totaldoc != 0 AND $totaldoc !=""){
                       <div class="input-group input-group-button mb-0" >
                                     <input type="text" id="dynamicfilterhideshow" data-id='categoryfilter' data-type="tr" class="form-control form-control-sm width1"  placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="Search"> 
                                     <span class="input-group-text addon-style">
-                                        <label class=""><span class="ti-search text-white mt-2"></span></label>
+                                        <span class=""><span class="ti-search text-white mt-2"></span></span>
                                     </span>
                                 </div>
                   </div>
@@ -510,7 +510,7 @@ if($totaldoc != 0 AND $totaldoc !=""){
                                                     <i class="fa fa-star text-danger" onclick="updateApplicationFavourites('<?php echo $result['item_table_name']; ?>','<?php echo $item_categorie['id']; ?>','U')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Remove From Favourite"></i> 
                                                     <?php } ?>
                                                 </span>
-                                                <?php echo $item_categorie['category_description']; ?> <label class="form-label label label-md label-warning float-right"><?php echo count((array)$list); ?> </label></a>
+                                                <?php echo $item_categorie['category_description']; ?> <span class="label label-md label-warning float-right"><?php echo count((array)$list); ?> </span></a>
                                             <div class="accordion-desc custom-scroll p-0" style="max-height: 400px;">
                                                 <?php if(count((array)$list) !=0){ ?>
                                             <div class="row" style="position: sticky;top: 0px;">
@@ -546,7 +546,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
         $badgetext = customeummarmonyformateifine($list['pending_amount']);
     }
      ?>
-    <label class="form-label label label-md <?php echo $badgeclass; ?> mt-2"><?php echo $badgetext; ?></label>
+    <span class="label label-md <?php echo $badgeclass; ?> mt-2"><?php echo $badgetext; ?></span>
 <?php } ?>
 
 
@@ -557,7 +557,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                                                     <td class="w-b-w-s"><?php echo $list['party_name']; ?></td>
                                                                     <td class="text-right"><?php echo customeummarmonyformateifine($list['total_amount']); ?></td>
                                                                     <td >
-                                                                        <label class="form-label label label-md" style="color:<?php echo $statuse[$list['current_status']]['color']; ?>; background-color:<?php echo $statuse[$list['current_status']]['background_color']; ?>;"><?php echo $status_progress[$list['current_status']]['name']; ?></label>
+                                                                        <span class="label label-md" style="color:<?php echo $statuse[$list['current_status']]['color']; ?>; background-color:<?php echo $statuse[$list['current_status']]['background_color']; ?>;"><?php echo $status_progress[$list['current_status']]['name']; ?></span>
                                                                     </td>
                                                                 </tr>
                                                             <?php } ?>
@@ -592,7 +592,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                         <div class="input-group input-group-button mb-0" >
                                             <input type="text" id="dynamicfilterhideshow" data-id='locationfilter' data-type="tr" class="form-control form-control-sm width1"  placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="Search"> 
                                             <span class="input-group-text addon-style">
-                                                <label class=""><span class="ti-search text-white mt-2"></span></label>
+                                                <span class=""><span class="ti-search text-white mt-2"></span></span>
                                             </span>
                                         </div>
                                     </div>
@@ -619,7 +619,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                                     <i class="fa fa-star text-danger" onclick="updateApplicationFavourites('locations','<?php echo $item_categorie['id']; ?>','U')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Remove From Favourite"></i> 
                                                     <?php } ?>
                                                 </span>
-                                                <?php echo $item_categorie['location_name']; ?> <label class="form-label label label-md label-warning float-right"><?php echo count((array)$list); ?> </label></a>
+                                                <?php echo $item_categorie['location_name']; ?> <span class="label label-md label-warning float-right"><?php echo count((array)$list); ?> </span></a>
                                             <div class="accordion-desc custom-scroll p-0" style=" height: 400px;">
                                                 <?php if(count((array)$list) !=0){ ?>
                                             <div class="row" style="position: sticky;top: 0px;">
@@ -655,7 +655,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
         $badgetext = customeummarmonyformateifine($list['pending_amount']);
     }
      ?>
-    <label class="form-label label label-md <?php echo $badgeclass; ?> mt-2"><?php echo $badgetext; ?></label>
+    <span class="label label-md <?php echo $badgeclass; ?> mt-2"><?php echo $badgetext; ?></span>
 <?php } ?>
                                                                     </td>
                                                                     <td class="w-b-w-s"><?php echo $_SESSION['users'][$list['originator']]; ?></td>
@@ -663,7 +663,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                                                     <td class="w-b-w-s"><?php echo $list['party_name']; ?></td>
                                                                     <td class="text-right"><?php echo customeummarmonyformateifine($list['total_amount']); ?></td>
                                                                     <td >
-                                                                        <label class="form-label label label-md" style="color:<?php echo $statuse[$list['current_status']]['color']; ?>; background-color:<?php echo $statuse[$list['current_status']]['background_color']; ?>;"><?php echo $status_progress[$list['current_status']]['name']; ?></label>
+                                                                        <span class="label label-md" style="color:<?php echo $statuse[$list['current_status']]['color']; ?>; background-color:<?php echo $statuse[$list['current_status']]['background_color']; ?>;"><?php echo $status_progress[$list['current_status']]['name']; ?></span>
                                                                     </td>
                                                                 </tr>
                                                             <?php } ?>
@@ -690,7 +690,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                         <div class="input-group input-group-button mb-0" >
                                             <input type="text" id="dynamicfilterhideshow" data-id='costcenterfilter' data-type="tr" class="form-control form-control-sm width1"  placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="Search"> 
                                             <span class="input-group-text addon-style">
-                                                <label class=""><span class="ti-search text-white mt-2"></span></label>
+                                                <span class=""><span class="ti-search text-white mt-2"></span></span>
                                             </span>
                                         </div>
                                     </div>
@@ -718,7 +718,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                                     <i class="fa fa-star text-danger" onclick="updateApplicationFavourites('cost_centers','<?php echo $item_categorie['id']; ?>','U')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Remove From Favourite"></i> 
                                                     <?php } ?>
                                                 </span>
-                                                <?php echo $item_categorie['cost_center_name']; ?> <label class="form-label label label-md label-warning float-right"><?php echo count((array)$list); ?> </label></a>
+                                                <?php echo $item_categorie['cost_center_name']; ?> <span class="label label-md label-warning float-right"><?php echo count((array)$list); ?> </span></a>
                                             <div class="accordion-desc custom-scroll p-0" style=" height: 400px;">
                                                 <?php if(count((array)$list) !=0){ ?>
                                             <div class="row" style="position: sticky;top: 0px;">
@@ -753,14 +753,14 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
         $badgetext = customeummarmonyformateifine($list['pending_amount']);
     }
      ?>
-    <label class="form-label label label-md <?php echo $badgeclass; ?> mt-2"><?php echo $badgetext; ?></label>
+    <span class="label label-md <?php echo $badgeclass; ?> mt-2"><?php echo $badgetext; ?></span>
 <?php } ?></td>
                                                                     <td class="w-b-w-s"><?php echo $_SESSION['users'][$list['originator']]; ?></td>
                                                                     <td><?php echo fromDate($list['transaction_date']); ?></td>
                                                                     <td class="w-b-w-s"><?php echo $list['party_name']; ?></td>
                                                                     <td class="text-right"><?php echo customeummarmonyformateifine($list['total_amount']); ?></td>
                                                                     <td>
-                                                                        <label class="form-label label label-md" style="color:<?php echo $statuse[$list['current_status']]['color']; ?>; background-color:<?php echo $statuse[$list['current_status']]['background_color']; ?>;"><?php echo $status_progress[$list['current_status']]['name']; ?></label>
+                                                                        <span class="label label-md" style="color:<?php echo $statuse[$list['current_status']]['color']; ?>; background-color:<?php echo $statuse[$list['current_status']]['background_color']; ?>;"><?php echo $status_progress[$list['current_status']]['name']; ?></span>
                                                                     </td>
                                                                 </tr>
                                                             <?php } ?>
@@ -791,7 +791,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                         <div class="input-group input-group-button mb-0" >
                                             <input type="text" id="dynamicfilterhideshow" data-id='costcenterfilter' data-type="tr" class="form-control form-control-sm width1"  placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="Search"> 
                                             <span class="input-group-text addon-style">
-                                                <label class=""><span class="ti-search text-white mt-2"></span></label>
+                                                <span class=""><span class="ti-search text-white mt-2"></span></span>
                                             </span>
                                         </div>
                                     </div>
@@ -885,14 +885,14 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
         $badgetext = customeummarmonyformateifine($list['pending_amount']);
     }
      ?>
-    <label class="form-label label label-md <?php echo $badgeclass; ?> mt-2"><?php echo $badgetext; ?></label>
+    <span class="label label-md <?php echo $badgeclass; ?> mt-2"><?php echo $badgetext; ?></span>
 <?php } ?></td>
                                                                     <td class="w-b-w-s"><?php echo $_SESSION['users'][$list['originator']]; ?></td>
                                                                     <td><?php echo fromDate($list['transaction_date']); ?></td>
                                                                     <td class="w-b-w-s"><?php echo $list['party_name']; ?></td>
                                                                     <td class="text-right"><?php echo customeummarmonyformateifine($list['total_amount']); ?></td>
                                                                     <td>
-                                                                        <label class="form-label label label-md" style="color:<?php echo $statuse[$list['current_status']]['color']; ?>; background-color:<?php echo $statuse[$list['current_status']]['background_color']; ?>;"><?php echo $status_progress[$list['current_status']]['name']; ?></label>
+                                                                        <span class="label label-md" style="color:<?php echo $statuse[$list['current_status']]['color']; ?>; background-color:<?php echo $statuse[$list['current_status']]['background_color']; ?>;"><?php echo $status_progress[$list['current_status']]['name']; ?></span>
                                                                     </td>
                                                                 </tr>
                                                             <?php } ?>
@@ -917,13 +917,13 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
         <div class="col-lg-3">
             <ul class="nav md-tabs infisuite_tab mt-2 mb-2" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#selfcreated" role="tab" aria-selected="true">Self<label class="form-label label label-xs label-success m-l-10"><?php echo $transactionlogcnt; ?></label></a>
+                    <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#selfcreated" role="tab" aria-selected="true">Self<span class="label label-xs label-success m-l-10"><?php echo $transactionlogcnt; ?></span></a>
                 </li> 
 
                 <li class="nav-item">
-                    <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#selfaction" role="tab" aria-selected="true">Action<label class="form-label label label-xs label-danger m-l-10"><?php echo $createtransactioncnt; ?></label>
-                    <label class="form-label label label-xs label-success m-l-10"><?php echo $createtransactionapprovedcnt !=""?$createtransactionapprovedcnt:"0" ; ?></label>
-                    <label class="form-label label label-xs label-warning m-l-10"><?php echo count((array)$sendbacklog) !=""?count((array)$sendbacklog):"0" ; ?></label></a>
+                    <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#selfaction" role="tab" aria-selected="true">Action<span class="label label-xs label-danger m-l-10"><?php echo $createtransactioncnt; ?></span>
+                    <span class="label label-xs label-success m-l-10"><?php echo $createtransactionapprovedcnt !=""?$createtransactionapprovedcnt:"0" ; ?></span>
+                    <span class="label label-xs label-warning m-l-10"><?php echo count((array)$sendbacklog) !=""?count((array)$sendbacklog):"0" ; ?></span></a>
                 </li>
             </ul>   
             <div class="tab-content tabs ">
@@ -931,7 +931,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                     <div class="card mb-2">
                         <div class="card-header">
                             <h5>Draft 
-                                <label class="form-label label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_DRAFT]['color']; ?>; background-color:<?php echo $statuse[ST_DRAFT]['background_color']; ?>;"><?php echo count((array)$draftres); ?></label>
+                                <span class="label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_DRAFT]['color']; ?>; background-color:<?php echo $statuse[ST_DRAFT]['background_color']; ?>;"><?php echo count((array)$draftres); ?></span>
                             </h5>
                             <a href="#!"  onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>',<?php echo ST_DRAFT; ?>)" class=" b-b-primary text-primary float-right">View all</a>
                         </div>
@@ -968,7 +968,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
         $badgetext = customeummarmonyformateifine($activeres1['pending_amount']);
     }
      ?>
-    <label class="form-label label label-md <?php echo $badgeclass; ?> mt-2"><?php echo $badgetext; ?></label>
+    <span class="label label-md <?php echo $badgeclass; ?> mt-2"><?php echo $badgetext; ?></span>
 <?php } ?></h6>
                                         <span class="text-muted f-12"><?php echo $activeres1['transaction_number']; ?> - (<?php echo customeummarmonyformateifine($activeres1['total_amount']); ?>) - <?php echo fromDate($activeres1['transaction_date']); ?></span>
                                     </a>
@@ -987,7 +987,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                     <div class="card mb-2">
                         <div class="card-header">
                             <h5>Active 
-                                <label class="form-label label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_ACTIVE]['color']; ?>; background-color:<?php echo $statuse[ST_ACTIVE]['background_color']; ?>;"><?php echo count((array)$activeres); ?></label>
+                                <span class="label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_ACTIVE]['color']; ?>; background-color:<?php echo $statuse[ST_ACTIVE]['background_color']; ?>;"><?php echo count((array)$activeres); ?></span>
                             </h5>
                             <a href="#!"  onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','<?php echo ST_ACTIVE; ?>')" class=" b-b-primary text-primary float-right">View all</a>
                         </div>
@@ -1022,7 +1022,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
         $badgetext = customeummarmonyformateifine($activeres1['pending_amount']);
     }
      ?>
-    <label class="form-label label label-md <?php echo $badgeclass; ?> mt-2"><?php echo $badgetext; ?></label>
+    <span class="label label-md <?php echo $badgeclass; ?> mt-2"><?php echo $badgetext; ?></span>
 <?php } ?></h6>
                                         <span class="text-muted f-12"><?php echo $activeres1['transaction_number']; ?> - (<?php echo customeummarmonyformateifine($activeres1['total_amount']); ?>) - <?php echo fromDate($activeres1['transaction_date']); ?></span>
                                     </a>
@@ -1041,7 +1041,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                     <div class="card mb-2">
                         <div class="card-header">
                             <h5>In Process 
-                                <label class="form-label label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_APPROVED1]['color']; ?>; background-color:<?php echo $statuse[ST_APPROVED1]['background_color']; ?>;"><?php echo count((array)$inprocessres); ?></label>
+                                <span class="label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_APPROVED1]['color']; ?>; background-color:<?php echo $statuse[ST_APPROVED1]['background_color']; ?>;"><?php echo count((array)$inprocessres); ?></span>
                             </h5>
                             <a href="#!"  onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','inprocess')" class=" b-b-primary text-primary float-right">View all</a>
                         </div>
@@ -1076,11 +1076,11 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
         $badgetext = customeummarmonyformateifine($activeres1['pending_amount']);
     }
      ?>
-    <label class="form-label label label-md <?php echo $badgeclass; ?> mt-2"><?php echo $badgetext; ?></label>
+    <span class="label label-md <?php echo $badgeclass; ?> mt-2"><?php echo $badgetext; ?></span>
 <?php } ?></h6>
                                         <span class="text-muted f-12"><?php echo $activeres1['transaction_number']; ?> - (<?php echo customeummarmonyformateifine($activeres1['total_amount']); ?>) - <?php echo fromDate($activeres1['transaction_date']); ?></span>
 
-                                        <label class="form-label label label-md" style="color:<?php echo $statuse[$activeres1['current_status']]['color']; ?>; background-color:<?php echo $statuse[$activeres1['current_status']]['background_color']; ?>;"><?php echo $status_progress[$activeres1['current_status']]['name']; ?></label>
+                                        <span class="label label-md" style="color:<?php echo $statuse[$activeres1['current_status']]['color']; ?>; background-color:<?php echo $statuse[$activeres1['current_status']]['background_color']; ?>;"><?php echo $status_progress[$activeres1['current_status']]['name']; ?></span>
                                     </a>
                                 </div>
                             </div>
@@ -1097,7 +1097,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                     <div class="card mb-2">
                         <div class="card-header">
                             <h5>Approved 
-                                <label class="form-label label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_APPROVED]['color']; ?>; background-color:<?php echo $statuse[ST_APPROVED]['background_color']; ?>;"><?php echo count((array)$approvedres); ?></label>
+                                <span class="label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_APPROVED]['color']; ?>; background-color:<?php echo $statuse[ST_APPROVED]['background_color']; ?>;"><?php echo count((array)$approvedres); ?></span>
                             </h5>
                             <a href="#!"  onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','<?php echo ST_APPROVED; ?>')" class=" b-b-primary text-primary float-right">View all</a>
                         </div>
@@ -1133,7 +1133,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
         $badgetext = customeummarmonyformateifine($activeres1['pending_amount']);
     }
      ?>
-    <label class="form-label label label-md <?php echo $badgeclass; ?> mt-2"><?php echo $badgetext; ?></label>
+    <span class="label label-md <?php echo $badgeclass; ?> mt-2"><?php echo $badgetext; ?></span>
 <?php } ?>
                                         </h6>
                                         <span class="text-muted f-12"><?php echo $activeres1['transaction_number']; ?> - (<?php echo customeummarmonyformateifine($activeres1['total_amount']); ?>) - <?php echo fromDate($activeres1['transaction_date']); ?></span>
@@ -1155,7 +1155,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                     <div class="card mb-2">
                         <div class="card-header">
                             <h5>Approval Pending 
-                                <label class="form-label label label-xs label-danger m-l-10" ><?php echo count((array)$pendinglog); ?></label>
+                                <span class="label label-xs label-danger m-l-10" ><?php echo count((array)$pendinglog); ?></span>
                             </h5>
                             <a href="#!"  onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','APPROVEPENDING')" class=" b-b-primary text-primary float-right">View all</a>
                         </div>
@@ -1197,7 +1197,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                     <div class="card mb-2">
                         <div class="card-header">
                             <h5>Approved 
-                                <label class="form-label label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_APPROVED]['color']; ?>; background-color:<?php echo $statuse[ST_APPROVED]['background_color']; ?>;"><?php echo count((array)$aprovedlog); ?></label>
+                                <span class="label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_APPROVED]['color']; ?>; background-color:<?php echo $statuse[ST_APPROVED]['background_color']; ?>;"><?php echo count((array)$aprovedlog); ?></span>
                             </h5>
                             <a href="#!"  onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','APPROVELOG')" class=" b-b-primary text-primary float-right">View all</a>
                         </div>
@@ -1238,7 +1238,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                     <div class="card mb-2">
                         <div class="card-header">
                             <h5>Send Back 
-                                <label class="form-label label label-xs label-warning m-l-10" ><?php echo count((array)$sendbacklog); ?></label>
+                                <span class="label label-xs label-warning m-l-10" ><?php echo count((array)$sendbacklog); ?></span>
                             </h5>
                             <a href="#!"  onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','SENDBACK')" class=" b-b-primary text-primary float-right">View all</a>
                         </div>
@@ -1279,7 +1279,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                     <div class="card mb-2">
                         <div class="card-header">
                             <h5>Rejected
-                                <label class="form-label label label-xs label-warning m-l-10" ><?php echo count((array)$rejectlog); ?></label>
+                                <span class="label label-xs label-warning m-l-10" ><?php echo count((array)$rejectlog); ?></span>
                             </h5>
                             <a href="#!"  onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','REJECTED')" class=" b-b-primary text-primary float-right">View all</a>
                         </div>

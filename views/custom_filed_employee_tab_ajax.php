@@ -39,17 +39,17 @@ foreach ($field_tabs['all_user_map_detail'] as $key => $value) {
         <ul class="nav md-tabs infisuite_tab mt-2 m-l-15" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" data-bs-toggle="tab" href="#planned" role="tab">Planned
-                    <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$field_tabs['user_all_daily_plan']); ?></label>
+                    <span class="label label-xs label-success m-l-10"><?php echo count((array)$field_tabs['user_all_daily_plan']); ?></span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="tab" href="#visited" role="tab">Visited
-                    <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$list_vist); ?></label>
+                    <span class="label label-xs label-success m-l-10"><?php echo count((array)$list_vist); ?></span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="tab" href="#extra" role="tab">Extra
-                    <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$list_extra); ?></label>
+                    <span class="label label-xs label-success m-l-10"><?php echo count((array)$list_extra); ?></span>
                 </a>
             </li>
         </ul>
@@ -77,9 +77,9 @@ foreach ($field_tabs['all_user_map_detail'] as $key => $value) {
                             <td><?php echo  $value['map_time']; ?></td>
                             <td>
                                 <?php if(isset($vist_ids[$value['id']])  ){ ?>
-                                <label class="form-label label label-success">Visited</label>
+                                <span class="label label-success">Visited</span>
                                  <?php }else{ ?> 
-                                    <label class="form-label label label-warning">Pending</label>
+                                    <span class="label label-warning">Pending</span>
                                  <?php } ?>
                             </td>
                         </tr>
@@ -119,7 +119,7 @@ foreach ($field_tabs['all_user_map_detail'] as $key => $value) {
                             <td><?php echo $value['map_title']; ?></td>
                             <td><?php echo  fromDate($value['map_date']); ?></td>
                             <td><?php echo  $value['map_time']; ?></td>
-                            <td><label class="form-label label label-success">Visited</label></td>
+                            <td><span class="label label-success">Visited</span></td>
                         </tr>
                     <?php }
                     }else{ ?> 
@@ -157,7 +157,7 @@ foreach ($field_tabs['all_user_map_detail'] as $key => $value) {
                             <td><?php echo $value['map_title']; ?></td>
                             <td><?php echo  fromDate($value['map_date']); ?></td>
                             <td><?php echo  $value['map_time']; ?></td>
-                            <td><label class="form-label label label-success">Visited</label></td>
+                            <td><span class="label label-success">Visited</span></td>
                         </tr>
                     <?php }
                     }else{ ?> 

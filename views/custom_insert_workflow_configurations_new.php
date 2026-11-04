@@ -808,9 +808,9 @@ $stausresult = ViewStatusData();
 								<tr align="center" style="height: 75px;">
 									<td>
 										<?php //print_r($sublist); ?>
-										<label class="form-label label label-lg label-primary" style="width: -webkit-fill-available;"><span class="f-18"><?php echo $roleprecesstypearray[$approvalprocess['approval_type']]; ?></span>
+										<span class="label label-lg label-primary d-inline-block" style="width: -webkit-fill-available;"><span class="f-18"><?php echo $roleprecesstypearray[$approvalprocess['approval_type']]; ?></span>
 											<span class="d-block tetx-dark mt-1"><?php echo $sublist[$approvalprocess['sub_approve_type']]; ?></span>
-											</label>L<?php echo $i; ?>
+											</span>L<?php echo $i; ?>
 										<?php if($i <$workflowconfiguration['workflow_level']){?>
 										<i class="ti-arrow-down d-block m-0"></i>
 									<?php } ?>
@@ -832,7 +832,7 @@ $stausresult = ViewStatusData();
 								$wfdetail = $wfdetails[$unifieldkey]; ?>
 							<th scope="col">
 								<input type="hidden" name="wfd_id[<?php echo $incnumber; ?>]" value="<?php echo $wfdetail['id']; ?>">
-								<label class="form-label label label-inverse-primary">
+								<span class="label label-inverse-primary d-inline-block">
 									<?php $mk=1; foreach($dynamicdoacriterias as $fieldkey => $dynamicselection){
 							//0 = table name , 1 = lable , 2 : value 
 										$tablevalue = explode("=",$dynamicselection);
@@ -881,9 +881,9 @@ $stausresult = ViewStatusData();
 		</div>
 		<div class="card-body">
 			<div class="row mb-4">
-				<div class="col-lg-4 text-center"><label class="form-label label label-lg label-primary" onclick="getfield('T')">Process Fields</label></div>
-				<div class="col-lg-4 text-center"><label class="form-label label label-lg label-primary" onclick="getfield('S')">Session Fields</label></div>
-				<div class="col-lg-4 text-center"><label class="form-label label label-lg label-primary" onclick="getfield('E')">Creater Fields</label></div>
+				<div class="col-lg-4 text-center"><span class="label label-lg label-primary" style="cursor: pointer;" onclick="getfield('T')">Process Fields</span></div>
+				<div class="col-lg-4 text-center"><span class="label label-lg label-primary" style="cursor: pointer;" onclick="getfield('S')">Session Fields</span></div>
+				<div class="col-lg-4 text-center"><span class="label label-lg label-primary" style="cursor: pointer;" onclick="getfield('E')">Creater Fields</span></div>
 			</div>  
 			<div class="row mb-4 card">
 				<div class="col-lg-8"  id="process_fields" style="display:none">
@@ -895,7 +895,7 @@ $stausresult = ViewStatusData();
 						$valuefields = "{[".$workflowconfiguration['process_name'].".".$keyy."]}";
 						?>
 						<p id="fieldspro_<?php echo $nmt;?>" class="d-none"><?php echo $valuefields; ?></p>
-						<label class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600" onclick="copyfiled('#fieldspro_<?php echo $nmt;?>')" data-bs-toggle="tooltip" data-placement="bottom" title="Click Copy To used"><?php echo ucwords($aray['lable']); ?> <i class="ti-layers"></i></label>
+						<button type="button" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600" onclick="copyfiled('#fieldspro_<?php echo $nmt;?>')" data-bs-toggle="tooltip" data-placement="bottom" title="Click Copy To used"><?php echo ucwords($aray['lable']); ?> <i class="ti-layers"></i></button>
 						<?php $nmt++; }	?>
 					</div>
 					<div class="col-lg-12 "  id="employee_fields" style="display:none">
@@ -915,7 +915,7 @@ $stausresult = ViewStatusData();
 									$valuefields = "{[application_users.".$keyy."]}";
 									?>
 									<p id="fieldsappuser_<?php echo $nmt;?>" class="d-none"><?php echo $valuefields; ?></p>
-									<label class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600" onclick="copyfiled('#fieldsappuser_<?php echo $nmt;?>')" data-bs-toggle="tooltip" data-placement="bottom" title="Click Copy To used"><?php echo ucwords($keyy); ?> <i class="ti-layers"></i></label>
+									<button type="button" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600" onclick="copyfiled('#fieldsappuser_<?php echo $nmt;?>')" data-bs-toggle="tooltip" data-placement="bottom" title="Click Copy To used"><?php echo ucwords($keyy); ?> <i class="ti-layers"></i></button>
 									<?php $nmt++; }	?>
 								</div>
 								<div class="tab-pane" id="profileemployee" role="tabpanel">
@@ -923,7 +923,7 @@ $stausresult = ViewStatusData();
 										$valuefields = "{[employees.".$keyy."]}";
 										?>
 										<p id="fieldsemp_<?php echo $nmt;?>" class="d-none"><?php echo $valuefields; ?></p>
-										<label class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600" onclick="copyfiled('#fieldsemp_<?php echo $nmt;?>')" data-bs-toggle="tooltip" data-placement="bottom" title="Click Copy To used"><?php echo ucwords($keyy); ?> <i class="ti-layers"></i></label>
+										<button type="button" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600" onclick="copyfiled('#fieldsemp_<?php echo $nmt;?>')" data-bs-toggle="tooltip" data-placement="bottom" title="Click Copy To used"><?php echo ucwords($keyy); ?> <i class="ti-layers"></i></button>
 										<?php $nmt++; }	?>
 									</div>
 								</div>	
@@ -946,7 +946,7 @@ $stausresult = ViewStatusData();
 												$valuefields = "{[session_user.".$keyy."]}";
 												?>
 												<p id="fieldssesiuser_<?php echo $nmt;?>" class="d-none"><?php echo $valuefields; ?></p>
-												<label class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600" onclick="copyfiled('#fieldssesiuser_<?php echo $nmt;?>')" data-bs-toggle="tooltip" data-placement="bottom" title="Click Copy To used"><?php echo ucwords($keyy); ?> <i class="ti-layers"></i></label>
+												<button type="button" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600" onclick="copyfiled('#fieldssesiuser_<?php echo $nmt;?>')" data-bs-toggle="tooltip" data-placement="bottom" title="Click Copy To used"><?php echo ucwords($keyy); ?> <i class="ti-layers"></i></button>
 												<?php $nmt++; }	?>
 											</div>
 											<div class="tab-pane" id="profileemployee" role="tabpanel">
@@ -954,7 +954,7 @@ $stausresult = ViewStatusData();
 													$valuefields = "{[session_employee.".$keyy."]}";
 													?>
 													<p id="fieldssesiemp_<?php echo $nmt;?>" class="d-none"><?php echo $valuefields; ?></p>
-													<label class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600" onclick="copyfiled('#fieldssesiemp_<?php echo $nmt;?>')" data-bs-toggle="tooltip" data-placement="bottom" title="Click Copy To used"><?php echo ucwords($keyy); ?> <i class="ti-layers"></i></label>
+													<button type="button" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600" onclick="copyfiled('#fieldssesiemp_<?php echo $nmt;?>')" data-bs-toggle="tooltip" data-placement="bottom" title="Click Copy To used"><?php echo ucwords($keyy); ?> <i class="ti-layers"></i></button>
 													<?php $nmt++; }	?>
 												</div>
 											</div>

@@ -108,10 +108,10 @@
             htmlRows += '<div class="col-md-6 itemRow cardid'+count+'"> <div class="card  p-5 "><span class="deleteiconcustom text-right text-danger f-22" onclick="deleteitem('+count+')" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Delete VRC Card"><i class="ti-trash"></i></span>';  
             htmlRows += '<div class="row"><div class="col-md-5"><label>job Title</label></div><div class="col-md-7"> <select class="form-select js-data-example-ajax-multiselect selectitemorservice col-lg-4 '+count+' col-lg-4 selectitemorservice"  name= "productCode[]" id="productCode_'+count+'"  onchange="itemChangejob(this.value,'+count+')" data-tablename="job_titles"  data-fieldsname="job_title" > <option value="0"> Select Job Title </option></select><input type="hidden" name="item_name[]" id="item_name_'+count+'" class="form-control" value="" autocomplete="off">  <input type="hidden" name="purchase_account[]" id="purchase_account_'+count+'" class="form-control" value="" autocomplete="off"> <input type="hidden" name="purchase_account_aval[]" id="purchase_account_aval_'+count+'" class="form-control" value="" autocomplete="off"></div></div><hr>';
              htmlRows += '<div class="row"><div class="col-md-5"><label>Description</label></div><div class="col-md-7"> <input type="text" name="productName[]" id="productName_'+count+'" value="" class="form-control " placeholder="Description" data-bs-toggle="tooltip" data-placement="bottom" title="Description"></div></div><hr>';
-            htmlRows += '<div class="row"><div class="col-md-5"><label>Min Experience</label></div><div class="col-md-7"> <div class="input-group input-group-button "> <input type="text" name="min_exp[]" id="min_exp_'+count+'"  class="form-control form-control-sm width1" value="" placeholder="Min Exp" data-bs-toggle="tooltip" data-placement="bottom" title="Minmum Experience" > <span class="input-group-text addon-style"><label class="">Years</label></span></div></div></div><hr>';
-            htmlRows += '<div class="row"><div class="col-md-5"><label>Max Experience</label></div><div class="col-md-7"><div class="input-group input-group-button "> <input type="hidden" name="quantity_old[]" id="quantity_old_'+count+'"  class="form-control amount" value=""  autocomplete="off"><input type="text" name="max_exp[]" id="max_exp_'+count+'" class="form-control form-control-sm  width1" value="" placeholder="Max Exp" data-bs-toggle="tooltip" data-placement="bottom" title="Maxmum Experience"> <span class="input-group-text addon-style"><label class="">Years</label></span></div> </div></div><hr>';
+            htmlRows += '<div class="row"><div class="col-md-5"><label>Min Experience</label></div><div class="col-md-7"> <div class="input-group input-group-button "> <input type="text" name="min_exp[]" id="min_exp_'+count+'"  class="form-control form-control-sm width1" value="" placeholder="Min Exp" data-bs-toggle="tooltip" data-placement="bottom" title="Minmum Experience" > <span class="input-group-text addon-style"><span class="">Years</span></span></div></div></div><hr>';
+            htmlRows += '<div class="row"><div class="col-md-5"><label>Max Experience</label></div><div class="col-md-7"><div class="input-group input-group-button "> <input type="hidden" name="quantity_old[]" id="quantity_old_'+count+'"  class="form-control amount" value=""  autocomplete="off"><input type="text" name="max_exp[]" id="max_exp_'+count+'" class="form-control form-control-sm  width1" value="" placeholder="Max Exp" data-bs-toggle="tooltip" data-placement="bottom" title="Maxmum Experience"> <span class="input-group-text addon-style"><span class="">Years</span></span></div> </div></div><hr>';
 
-            htmlRows += '<div class="row"><div class="col-md-5"><label>Monthly Leaves</label></div><div class="col-md-7"><div class="input-group input-group-button"> <input type="text" name="min_leave[]" id="min_leave_'+count+'" class="form-control width1" placeholder="Monthly Leaves" data-bs-toggle="tooltip" data-placement="bottom" title="Monthly Leaves"> <span class="input-group-text addon-style"><label class="">Days</label></span></div></div></div><hr>';
+            htmlRows += '<div class="row"><div class="col-md-5"><label>Monthly Leaves</label></div><div class="col-md-7"><div class="input-group input-group-button"> <input type="text" name="min_leave[]" id="min_leave_'+count+'" class="form-control width1" placeholder="Monthly Leaves" data-bs-toggle="tooltip" data-placement="bottom" title="Monthly Leaves"> <span class="input-group-text addon-style"><span class="">Days</span></span></div></div></div><hr>';
 
             htmlRows += '<div class="row"><div class="col-md-5"><label>Unit *</label></div><div class="col-md-7"><select class="form-control form-select js-example-basic-single"  name= "uom[]"  id="uom_'+count+'"><option value="0"> Select Any UOM </option>';
             <?php if (count((array)$uomlist) > 0) {
@@ -202,7 +202,7 @@
                  <div class="input-group input-group-button ">
                     <input type="text" name="min_exp[]" id="min_exp_<?php echo $i; ?>"  class="form-control form-control-sm width1" value="<?php echo $tab2['min_exp']; ?>" placeholder="Min Exp" data-bs-toggle="tooltip" data-placement="bottom" title="Minmum Experience">
                     <span class="input-group-text addon-style">
-                        <label class="">Years</label>
+                        <span class="">Years</span>
                     </span>
                 </div> 
             </div>
@@ -216,7 +216,7 @@
                 <div class="input-group input-group-button ">
                     <input type="text" name="max_exp[]" id="max_exp_<?php echo $i; ?>" class="form-control form-control-sm width1" value="<?php echo $tab2['max_exp']; ?>" placeholder="Max Exp" data-bs-toggle="tooltip" data-placement="bottom" title="Maxmum Experience"> 
                     <span class="input-group-text addon-style">
-                        <label class="">Years</label>
+                        <span class="">Years</span>
                     </span>
                 </div>
             </div>
@@ -230,7 +230,7 @@
                   <div class="input-group input-group-button"> 
         <input type="text" class="form-control width1" name="min_leave[]" id="min_leave_<?php echo $i; ?>" placeholder="Monthly Leaves" data-bs-toggle="tooltip" value="<?php echo $tab2['min_leave']; ?>" data-placement="bottom" title="Monthly Leaves">
     <span class="input-group-text addon-style">
-    <label class="">Days</label>
+    <span class="">Days</span>
 </span>
     </div>
                

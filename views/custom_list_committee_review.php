@@ -310,7 +310,7 @@ foreach ($tracking_inprogress_arr as $row) {
 													<td><?php echo  fromDate($row['project_start_date']) ?? ''; ?> </td>
 													<td><?php echo fromDate($row['project_end_date']) ?? ''; ?> </td>
 													<td class='text-end'><?php echo customeummarmonyformate($row['total_budget_grand_total']) ?? 0; ?> </td>
-													<td><label class='form-label label label-md csr-status-label'
+													<td><span class='label label-md csr-status-label'
 															data-color="<?php echo $_SESSION['status'][$row['current_status']]['color']; ?>"
       data-bg="<?php echo $_SESSION['status'][$row['current_status']]['background_color']; ?>"><?php echo $progress_var[$row['current_status']] ; ?> </label> </td>
 												</tr>
@@ -371,7 +371,7 @@ foreach ($tracking_inprogress_arr as $row) {
 													<td><?php echo  fromDate($row['project_start_date']) ?? ''; ?> </td>
 													<td><?php echo fromDate($row['project_end_date']) ?? ''; ?> </td>
 													<td class='text-end'><?php echo customeummarmonyformate($row['total_budget_grand_total']) ?? 0; ?> </td>
-													<td><label class='form-label label label-md csr-status-label'
+													<td><span class='label label-md csr-status-label'
 															data-color="<?php echo $_SESSION['status'][$row['current_status']]['color']; ?>"
       data-bg="<?php echo $_SESSION['status'][$row['current_status']]['background_color']; ?>"><?php echo $progress_var[$row['current_status']]; ?> </label> </td>
 												</tr>
@@ -433,7 +433,7 @@ foreach ($tracking_inprogress_arr as $row) {
 													<td><?php echo  fromDate($row['project_start_date']) ?? ''; ?> </td>
 													<td><?php echo fromDate($row['project_end_date']) ?? ''; ?> </td>
 													<td class='text-end'><?php echo customeummarmonyformate($row['total_budget_grand_total']) ?? 0; ?> </td>
-													<td><label class='form-label label label-md csr-status-label'
+													<td><span class='label label-md csr-status-label'
 															data-color="<?php echo $_SESSION['status'][$row['current_status']]['color']; ?>"
       data-bg="<?php echo $_SESSION['status'][$row['current_status']]['background_color']; ?>"><?php echo $progress_var[$row['current_status']]; ?>  </label> </td>
 												</tr>
@@ -496,12 +496,12 @@ foreach ($tracking_inprogress_arr as $row) {
 													<td><?php echo  fromDate($row['project_start_date']) ?? ''; ?> </td>
 													<td><?php echo fromDate($row['project_end_date']) ?? ''; ?> </td>
 													<td class='text-end'><?php echo customeummarmonyformate($row['total_budget_grand_total']) ?? 0; ?> </td>
-													<td><label class='form-label label label-md csr-status-label'
+													<td><span class='label label-md csr-status-label'
 															data-color="<?php echo $_SESSION['status'][$row['current_status']]['color']; ?>"
       data-bg="<?php echo $_SESSION['status'][$row['current_status']]['background_color']; ?>"><?php echo $progress_var[$row['current_status']]; ?> </label>
 															</td><td>
 	<a class="" href="index.php?option=COM_VIEW_CSR_TRACKING&Rid=<?php echo deocdeId('id:' . $row['id']); ?> ">
-	<label class='btn form-label label label-md bg-primary cursor-pointer' >Tracking</label></a>
+	<span class='btn label label-md bg-primary cursor-pointer' >Tracking</span></a>
 															 </td>
 												</tr>
 										<?php

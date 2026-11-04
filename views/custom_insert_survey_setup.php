@@ -572,7 +572,7 @@ function addnewoptionrows(qid) {
                   <div class="input-group input-group-button"> 
                   <input type="text" class="form-control display-inline width1" name="survey_question_option'.$qkey.'[]"  placeholder="Option" value="'.$opvalue.'">
                   <span class="input-group-text addon-style">
-                  <label class="" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove Option"><i class="fa fa-trash close text-white" onclick="delnewoptionrows('."'".$opkey."'".','."'".$qkey."'".')"></i> </label>
+                  <span class="" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove Option"><i class="fa fa-trash close text-white" onclick="delnewoptionrows('."'".$opkey."'".','."'".$qkey."'".')"></i></span>
                   </span>
                   </div>
                   </div>

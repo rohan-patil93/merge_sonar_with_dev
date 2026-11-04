@@ -2819,7 +2819,7 @@ if($checktimeprint > 0){
                                                 </label>
                                             </td>
                                             <td class="p-2 text-center">
-                                                <label class="form-label label label-md label-primary" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="View Details" onclick="getApplicationTaskLogsPopUp('<?php echo $atl['id']; ?>')"><i class="ti-eye"></i></label>
+                                                <span class="label label-md label-primary" style="cursor: pointer;" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="View Details" onclick="getApplicationTaskLogsPopUp('<?php echo $atl['id']; ?>')"><i class="ti-eye"></i></span>
                                                 
                                             </td>
                                         </tr>
@@ -2912,7 +2912,7 @@ if($checktimeprint > 0){
                                  <input  value="<?php echo $table1['shipping_amount']; ?>"   type="hidden" class="form-control amount" name="shipping_amount" id="shipping_amount"  placeholder="shipping Amount">
                                  <input type="hidden" name="shipping_tax_amount" id="shipping_tax_amount" value="<?php echo $table1['shipping_tax_amount']; ?>">
                                 <th class="amount text-start p-2" colspan="2" id="custom-popup">
-                                    <label class="form-label label label-md label-primary"  data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Add More Additional Charges" onclick="OpenAdditionalCharges()"><i class="ti-plus"></i> Additional Charges</label>
+                                    <span class="label label-md label-primary" style="cursor: pointer;" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Add More Additional Charges" onclick="OpenAdditionalCharges()"><i class="ti-plus"></i> Additional Charges</span>
 
                                    <div class="custom-popup-open custom-popup-additionalcharges-open text-start" style="display: none; right: 0; top: auto;">
                                         <div class="card">
@@ -2958,7 +2958,7 @@ if($checktimeprint > 0){
                                         </select>
                                     </div>
                                     <input type="hidden" name="" id="tds_tax" value="0">
-                                    <label class="form-label badge bg-danger"  data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Add More Additional Charges"><i class="ti-plus"></i></label>
+                                    <span class="badge bg-danger" style="cursor: pointer;" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Add More Additional Charges"><i class="ti-plus"></i></span>
                                 </th>
                                 <td class="p-2 align-middle">
                                     <input type="hidden" name="shipping_tax_amount" id="shipping_tax_amount" value="<?php echo $table1['shipping_tax_amount']; ?>">

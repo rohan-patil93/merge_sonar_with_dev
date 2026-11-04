@@ -277,7 +277,7 @@ function refrashpage(){
                                                         <tr>
                                                             <td><?php echo $i; ?></td>
                                                             <td><?php echo fromDate($subscriptuser['request_date']); ?></td>
-                                                            <td><?php echo $subscriptuser['added_license_users']!='0'?'<label class="form-label label label-md label-success">'.$subscriptuser['added_license_users'].'</label>':'<label class="form-label label label-md label-danger">'.$subscriptuser['deletd_license_users'].'</label>'; ?></td> 
+                                                            <td><?php echo $subscriptuser['added_license_users']!='0'?'<span class="label label-md label-success">'.$subscriptuser['added_license_users'].'</span>':'<span class="label label-md label-danger">'.$subscriptuser['deletd_license_users'].'</span>'; ?></td> 
                                                             <td><?php echo $subscriptuser['price']; ?></td>
                                                             <td><?php echo $subscriptuser['payment_date'] !=""?fromDate($subscriptuser['payment_date']):"- "; ?></td>
                                                            

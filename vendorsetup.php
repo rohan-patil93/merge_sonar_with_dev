@@ -1247,7 +1247,7 @@ if($register_data['current_status'] !=""){
                                 </div> 
                               <?php } ?>
                               <div class="title" style="border-radius: 5px;">
-      <a  class="text-white" <?php if($vendor_documen['filename']!=""){ ?>  href="<?php  echo $File_Uploads_Path.$vendor_documen['filename'];   ?>"  target="_blank" <?php } ?> > <h6 class="f-14 m-l-10"> <?php if($vendor_documen['filename']!=""){ echo '<i class="ti-cloud-down"></i>'; } ?> <?php echo ucwords($docvalue['document_name']); ?> <?php if($vendor_documen['filename']!="" && $vendor_documen['current_status'] != ST_REJECTED){  ?><label class="form-label label label-info"    style="color: <?php echo "#". $filestatus['color']; ?>;    background:  <?php echo "#".strval($filestatus['background_color'] ); ?>; border-color: <?php echo "#".strval($filestatus['background_color']); ?>;"><?php echo $filestatus['name']; ?></label><?php } ?></h6> </a>
+      <a  class="text-white" <?php if($vendor_documen['filename']!=""){ ?>  href="<?php  echo $File_Uploads_Path.$vendor_documen['filename'];   ?>"  target="_blank" <?php } ?> > <h6 class="f-14 m-l-10"> <?php if($vendor_documen['filename']!=""){ echo '<i class="ti-cloud-down"></i>'; } ?> <?php echo ucwords($docvalue['document_name']); ?> <?php if($vendor_documen['filename']!="" && $vendor_documen['current_status'] != ST_REJECTED){  ?><span class="label label-info" style="color: <?php echo "#". $filestatus['color']; ?>; background: <?php echo "#".strval($filestatus['background_color'] ); ?>; border-color: <?php echo "#".strval($filestatus['background_color']); ?>;"><?php echo $filestatus['name']; ?></span><?php } ?></h6> </a>
                               </div>
                               <div class="x_content">
                                 <div class="">
@@ -1338,7 +1338,7 @@ if($register_data['current_status'] !=""){
                                                     <div class="custom-file">
                                                       <input type="hidden" name="hidden_fileToUpload<?php echo $dockey;?>" value="<?php echo $attach_filename[$dockey]; ?>">
                                                       <input type="file" class="custom-file-input" id="customFile" name="fileToUpload<?php echo $dockey;?>" />
-                                                      <label class="custom-file-label" for="customFile"></label>
+                                                      <label class="custom-file-label" for="customFile">Choose file</label>
                                                     </div>
 
                                                   </td>

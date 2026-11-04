@@ -1017,7 +1017,7 @@ if($page=='formsurveyquestions'){
 				
 		<input type="text" class="form-control display-inline width1" name="survey_question_option'.$value_id.'[]"  placeholder="Option" value="'.$opvalue.'">
 		<span class="input-group-text addon-style">
-			<label class=""><i class="ti-trash close text-white" onclick="delnewoptionrows('."'".$opkey."'".','."'".$value_id."'".')"></i> </label>
+			<span class=""><i class="ti-trash close text-white" onclick="delnewoptionrows('."'".$opkey."'".','."'".$value_id."'".')"></i> </span>
 		</span>
 
 				
@@ -1202,7 +1202,7 @@ if($page=='formassessmentquestions'){
 							 <div class="input-group input-group-button"> 
 		<input type="text" class="form-control display-inline width1" name="assessment_question_option'.$value_id.'['.$opkey.']"  placeholder="Option" value="'.$opvalue.'">
 		<span class="input-group-text addon-style">
-			<label class=""><i class="ti-trash close text-white" onclick="delnewoptionrows('."'".$opkey."'".','."'".$value_id."'".')"></i> </label>
+			<span class=""><i class="ti-trash close text-white" onclick="delnewoptionrows('."'".$opkey."'".','."'".$value_id."'".')"></i> </span>
 		</span>
 	</div>
 				
@@ -3523,7 +3523,7 @@ if($page == "setarraystatus"){
 	$statusarray[$_POST['selectkey']] = $_POST['selectval'];
 	$num = 1;
 	foreach($statusarray as $valstatuarray){
-		$mes .="<label class='form-label label label-md label-primary m-1'>".$num.":".$valstatuarray."</label>";
+		$mes .="<span class='label label-md label-primary m-1'>".$num.":".$valstatuarray."</span>";
 		$num++;
 	}
 	echo json_encode(array('status_array'=>$statusarray,'label'=>$mes));
@@ -4829,7 +4829,7 @@ if($page=="searchcourierdata"){
         <td>'.$down['courier_qty'].'</td>
          <td>'.$down['invoice_no'].'</td>
         <td>
-            <label class="form-label label label-warning">'.$data['status']['couriers'][$down['current_status']].'</label>
+            <span class="label label-warning">'.$data['status']['couriers'][$down['current_status']].'</span>
         </td>
         <td>'. $data['emps'][$down['requested_by']]['emp_code'].' - '.$data['emps'][$down['requested_by']]['display_name'].'</td>
         <td>'.$_SESSION['users'][$down['created_by']].'</td>
@@ -4884,7 +4884,7 @@ if($page=="searchstationery"){
 						<span class="text-muted f-14 f-w-600">'. $down['request_comment'].'</span>
 					</td>
 					<td>
-						<label class="form-label label label-warning">'.$data['status']['couriers'][$down['current_status']].'</label></br>
+						<span class="label label-warning">'.$data['status']['couriers'][$down['current_status']].'</span></br>
 					   <span class="text-muted f-14 f-w-600">'.$data['deliver_types'][$down['deliver_type']].'</span> 
 					</td>
 					<td>
@@ -5061,7 +5061,7 @@ if($page=='searchtransportbus'){
 		                    </div>
 		                    <div class="col-lg-4 text-right">
 		                        <h4 class="f-w-700 f-22 text-success">&#8377 '.$route['route_charges_monthly'].' </h4>
-		                        <p>Off Days: <label class="form-label label label-success">'.implode(" , ",json_decode($route['off_days'],1)).'</label></p>
+		                        <p>Off Days: <span class="label label-success">'.implode(" , ",json_decode($route['off_days'],1)).'</span></p>
 		                        <button class="btn btn-primary" onclick="viewlocation('.$route['id'].')">Select Location</button>
 		                    </div>
 		                </div>
@@ -7650,7 +7650,7 @@ if($page == "getmultireferencepagedetails"){
 		$iseq = 1;
 		//$tables = '<table class="table table-hover m-b-0"><thead><tr><th scope="col">#</th><th scope="col">Trans. No.</th><th scope="col">Item Name</th><th scope="col">Order (Pend) Qty</th><th scope="col">Price</th><th scope="col">Tax</th><th scope="col">Total</th><th scope="col">Invoice Qty</th><th scope="col">Tax</th><th scope="col">Total</th></tr></thead><tbody>';
 		$tables = '<table class="table table-hover m-b-0"><thead><tr>';
-		$tables .= "<th scope="col"><div class='checkbox-fade fade-in-primary'>
+		$tables .= "<th scope='col'><div class='checkbox-fade fade-in-primary'>
                       <label class='form-label'>
                         <input type='checkbox' class='check_all_check_box' onchange='selectAllTransactionsItems()'>
                         <span class='cr'>

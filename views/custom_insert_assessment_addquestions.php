@@ -133,7 +133,7 @@ else{
 					<div class="input-group input-icon-right">
 					<input type="text" class="form-control  display-inline width1" name="assessment_question_option[]"  placeholder="Option">
 					<span class="input-group-text addon-style">
-    <label class=""><i class="fa fa-trash" onclick="deloptionrows('s1rowid1')"></i>	</label>
+    <span class=""><i class="fa fa-trash" onclick="deloptionrows('s1rowid1')"></i>	</span>
 </span></div>
 				</div>
 			</div>
@@ -156,7 +156,7 @@ else{
 				<input type="text" class="form-control  display-inline width1" name="assessment_question_option[]"   placeholder="Option">
 				
 						<span class="input-group-text addon-style">
-    <label class=""><i class="fa fa-trash" onclick="deloptionrows('s1rowid1')"></i>	</label>
+    <span class=""><i class="fa fa-trash" onclick="deloptionrows('s1rowid1')"></i>	</span>
 </span>
 				
 				</div>

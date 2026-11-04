@@ -65,7 +65,7 @@ $companyName = isset($_SESSION['config']['name'])   ? htmlspecialchars($_SESSION
 
                         <h5>
                             Pending for Approval
-                            <label class="form-label label label-primary m-l-10"><?php echo count($pendingRows); ?></label>
+                            <span class="label label-primary m-l-10"><?php echo count($pendingRows); ?></span>
                         </h5>
                     </div>
                     <?php if (count((array)$pendingRows) > 0) { ?>
@@ -110,7 +110,7 @@ $companyName = isset($_SESSION['config']['name'])   ? htmlspecialchars($_SESSION
                     <div class="card-header ">
                         <h5>
                             Approved
-                            <label class="form-label label label-primary m-l-10"><?php echo count($approvedRows); ?></label>
+                            <span class="label label-primary m-l-10"><?php echo count($approvedRows); ?></span>
                         </h5>
                     </div>
                     <?php if (count((array)$approvedRows) > 0) { ?>

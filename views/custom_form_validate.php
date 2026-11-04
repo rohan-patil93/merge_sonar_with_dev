@@ -48,7 +48,7 @@ $_SESSION['apply_js']['from-validation'] = "1";
 			</div> -->
 		</div>
 		<div class="mb-3 row">
-			<label class="form-label col-sm-2"></label>
+			<div class="col-sm-2"></div>
 			<div class="col-sm-10">
 				<button type="submit" class="btn btn-primary m-b-0">Submit</button>
 			</div>
@@ -318,7 +318,7 @@ $_SESSION['apply_js']['from-validation'] = "1";
 
 </div>
 <div class="mb-3 row">
-			<label class="form-label col-sm-2"></label>
+			<div class="col-sm-2"></div>
 			<div class="col-sm-10">
 				<button type="submit" class="btn btn-primary m-b-0">Submit</button>
 			</div>
@@ -596,7 +596,7 @@ $_SESSION['apply_js']['from-validation'] = "1";
 </div>
 
 <div class="mb-3 row">
-			<label class="form-label col-sm-2"></label>
+			<div class="col-sm-2"></div>
 			<div class="col-sm-10">
 				<button type="submit" class="btn btn-primary m-b-0">Submit</button>
 				<button id="btndisableck12" class="btn btn-primary mr-2"   name="submit_value" value="exit" <?php echo $disable; ?>><i class="la la-check" ></i>Save & exit</button>

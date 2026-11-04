@@ -281,13 +281,13 @@ function SynchCandidateFolder(){
 	<div class="col-lg-3">
 		<div class="card mb-2">
 			<div class="card-header">
-				<h5>Today Added Candidated <label class="form-label label label-xs label-primary text-white m-l-10" style="background-color:  !important"><?php echo count((array)$candidate_dashboard_today['created_today']); ?></label></h5>
+				<h5>Today Added Candidated <span class="label label-xs label-primary text-white m-l-10" style="background-color:  !important"><?php echo count((array)$candidate_dashboard_today['created_today']); ?></span></h5>
 			</div>
 			<div class="card-body">
 				<div class="input-group input-group-button mt-2">
 		            <input type="text" id="dynamicfilterhideshow" data-id="candidatefilter" data-type="div" class="form-control form-control-sm width1" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search"> 
 		            <span class="input-group-text addon-style">
-		                <label class=""><span class="ti-search text-white mt-2"></span></label>
+		                <span class=""><span class="ti-search text-white mt-2"></span></span>
 		            </span>
 		        </div>
 		        <div class="custom-scroll" style=" height: 450px;">
@@ -319,14 +319,14 @@ function SynchCandidateFolder(){
 	<div class="col-lg-3">
 		<div class="card mb-2">
 			<div class="card-header">
-				<h5>Today Screening Started<label class="form-label label label-xs label-primary  text-white m-l-10" style="background-color:  !important"><?php echo COUNT((array)$candidate_dashboard_today['screening_start_today']); ?></label>
+				<h5>Today Screening Started<span class="label label-xs label-primary text-white m-l-10" style="background-color:  !important"><?php echo COUNT((array)$candidate_dashboard_today['screening_start_today']); ?></span>
 				</h5>
 			</div>
 			<div class="card-body">
 				<div class="input-group input-group-button mt-2">
 		            <input type="text" id="dynamicfilterhideshow" data-id="candidatefilter1" data-type="div" class="form-control form-control-sm width1" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search"> 
 		            <span class="input-group-text addon-style">
-		                <label class=""><span class="ti-search text-white mt-2"></span></label>
+		                <span class=""><span class="ti-search text-white mt-2"></span></span>
 		            </span>
 		        </div>
 		        <div class="custom-scroll" style=" height: 450px;">
@@ -358,14 +358,14 @@ function SynchCandidateFolder(){
 	<div class="col-lg-3">
 		<div class="card mb-2">
 			<div class="card-header">
-				<h5>Today Screening Completed<label class="form-label label label-xs label-primary  text-white m-l-10" style="background-color:  !important"><?php echo COUNT((array)$candidate_dashboard_today['screening_end_today']); ?></label>
+				<h5>Today Screening Completed<span class="label label-xs label-primary text-white m-l-10" style="background-color:  !important"><?php echo COUNT((array)$candidate_dashboard_today['screening_end_today']); ?></span>
 				</h5>
 			</div>
 			<div class="card-body">
 				<div class="input-group input-group-button mt-2">
 		            <input type="text" id="dynamicfilterhideshow" data-id="candidatefilter2" data-type="div" class="form-control form-control-sm width1" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search"> 
 		            <span class="input-group-text addon-style">
-		                <label class=""><span class="ti-search text-white mt-2"></span></label>
+		                <span class=""><span class="ti-search text-white mt-2"></span></span>
 		            </span>
 		        </div>
 		        <div class="custom-scroll" style=" height: 450px;">
@@ -397,14 +397,14 @@ function SynchCandidateFolder(){
 	<div class="col-lg-3">
 		<div class="card mb-2">
 			<div class="card-header">
-				<h5>Today AI Approved<label class="form-label label label-xs label-primary  text-white m-l-10" style="background-color:  !important"><?php echo COUNT((array)$candidate_dashboard_today['ai_shortlisted_today']); ?></label>
+				<h5>Today AI Approved<span class="label label-xs label-primary text-white m-l-10" style="background-color:  !important"><?php echo COUNT((array)$candidate_dashboard_today['ai_shortlisted_today']); ?></span>
 				</h5>
 			</div>
 			<div class="card-body ">
 				<div class="input-group input-group-button mt-2">
 		            <input type="text" id="dynamicfilterhideshow" data-id="candidatefilter3" data-type="div" class="form-control form-control-sm width1" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search"> 
 		            <span class="input-group-text addon-style">
-		                <label class=""><span class="ti-search text-white mt-2"></span></label>
+		                <span class=""><span class="ti-search text-white mt-2"></span></span>
 		            </span>
 		        </div>
 		        <div class="custom-scroll" style=" height: 450px;">

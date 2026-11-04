@@ -46,7 +46,7 @@ $candidates = $result['candidates'];
 								<td class="text-capitalize "><a href="tel:<?php  echo $cand['phone']; ?>" class=" text-primary"> <i class="ti-mobile"></i> <?php  echo $cand['phone']; ?> </a></td>
 								<td class="text-capitalize w-b-w-s">
 								<?php  if(count((array)$skils) != 0) { foreach((array)$skils as  $skil){ ?>
-          							<label class="form-label label label-success m-1"><?php echo  $skil; ?></label>
+          							<span class="label label-success m-1"><?php echo  $skil; ?></span>
 								<?php } }else{ echo "-"; } ?>
 								</td>	
 							<?php $k++; } 

@@ -160,8 +160,8 @@ function menudisplaytop($menuarray,$type){
                                 <div class="col-lg-6 float-left text-center">
                                     <span class="switch switch-outline switch-icon switch-success">
                                         <label>
-                                            <label class="col-form-label m-r-10"><?php echo $food_option['food_option']; ?>
-                                            </label><br />
+                                            <span class="col-form-label m-r-10"><?php echo $food_option['food_option']; ?>
+                                            </span><br />
                                             <input type="checkbox" class="js-primary-sm" onclick="checkempfoodoption(<?php echo $food_option['id'].",".$_SESSION['emp_id']; ?>)" value="<?php echo $food_option['id']; ?>"  name="" <?php if(in_array($food_option['id'],$emp_food)){ ?> checked <?php } ?> >
                                             <span></span>
                                         </label>
@@ -170,8 +170,10 @@ function menudisplaytop($menuarray,$type){
                                 <?php } ?>
                                 <div class="col-lg-6 float-left text-center">
                                     <span class="switch switch-outline switch-icon switch-success"> 
-                                    <label class="col-form-label m-r-10">Transport </label><br />       
-                                    <input type="checkbox" class="js-primary-sm" onclick="checkemptransportrequest(<?php echo $_SESSION['emp_id'].",".$emptransport['id']; ?>)" value="<?php echo $emptransport['id']; ?>"  name="" <?php if($emptransport['id']!=""){ ?> checked <?php } ?> >
+                                    <label class="col-form-label m-r-10">
+                                                    <span>Transport </span><br />
+                                                    <input type="checkbox" class="js-primary-sm" onclick="checkemptransportrequest(<?php echo $_SESSION['emp_id'].",".$emptransport['id']; ?>)" value="<?php echo $emptransport['id']; ?>"  name="" <?php if($emptransport['id']!=""){ ?> checked <?php } ?> >
+                                    </label>
                                     </span>
                                 </div>
                             </div>

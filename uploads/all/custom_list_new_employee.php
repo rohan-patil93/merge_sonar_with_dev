@@ -252,7 +252,7 @@ include_once("new_from_submit.php");
                                                             			<span class="switch switch-outline switch-icon switch-success">
                                                             				<label>
                                                             					<input type="checkbox" onclick="checkempfoodoption(<?php echo $food_option['id'].",".$_SESSION['emp_id']; ?>)" value="<?php echo $food_option['id']; ?>"  name="" <?php if(in_array($food_option['id'],$emp_food)){ ?> checked <?php } ?> >
-                                                            					<span></span><label class="col-form-label"><?php echo $food_option['food_option']; ?></label>
+                                                            					<span></span><span class="col-form-label"><?php echo $food_option['food_option']; ?></span>
                                                             				</label>
                                                             			</span>
                                                         		</div>
@@ -263,7 +263,7 @@ include_once("new_from_submit.php");
                                                             				<label>
                                                             					
                                                             					<input type="checkbox" onclick="checkemptransportrequest(<?php echo $_SESSION['emp_id'].",".$emptransport['id']; ?>)" value="<?php echo $emptransport['id']; ?>"  name="" <?php if($emptransport['id']!=""){ ?> checked <?php } ?> >
-                                                            					<span></span><label class="col-form-label">Transport Requests </label>
+                                                            					<span></span><span class="col-form-label">Transport Requests </span>
                                                             				</label>
                                                             			</span>
 														</div>

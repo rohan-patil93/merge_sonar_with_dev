@@ -358,7 +358,7 @@ function submitsurvey(){
           <div class="q-n">
             <ul>
               <?php foreach ($display_questions as $qidkey=>$qidval) { ?>
-                <li><a id="summary<?php echo $qidkey;?>" href="#" onclick="callnext('<?php echo $qidkey;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" ><label class="form-label badge badge-inverse-primary" id="summarytext<?php echo $qidkey;?>"><?php echo $qidkey; ?></label></a></li>
+                <li><a id="summary<?php echo $qidkey;?>" href="#" onclick="callnext('<?php echo $qidkey;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" ><span class="badge badge-inverse-primary" id="summarytext<?php echo $qidkey;?>"><?php echo $qidkey; ?></span></a></li>
               <?php  } ?>
             </ul>
             <div class="row">

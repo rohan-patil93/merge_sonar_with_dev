@@ -235,7 +235,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
 												<?php } ?>			
 												<div class="ml-4">		
 													<div class="text-dark-75 font-weight-bolder font-size-lg mb-0"><?php echo $empdata[$othemp['employee_id']]['display_name']; ?> <?php $statusVal = $stausresult[$othemp['current_status']];?>
-											<label class="form-label badge  m-l-50 " style="background-color: <?php echo $statusVal['background_color'] ?>; color: <?php echo $statusVal['color'] ?>; "><?php echo $statusVal['name']; ?></label></div>				
+											<span class="badge m-l-50 " style="background-color: <?php echo $statusVal['background_color'] ?>; color: <?php echo $statusVal['color'] ?>; "><?php echo $statusVal['name']; ?></span></div>				
 													<a href="index.php?option=COM_INSERT_APPROVAL_LEAVE&Rid=<?php  echo deocdeId("id:".$othemp['id']); ?>" class="text-muted font-weight-bold text-hover-primary"> <?php echo date('dS M Y',strtotime($othemp['leave_from']))." To ".date('dS M Y',strtotime($othemp['leave_to']))." (". $all_leave_categories[$othemp['leave_type_id']]['name'].")"; ?> </a>
 												</div>					
 											</div>

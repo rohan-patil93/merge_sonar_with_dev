@@ -2376,8 +2376,8 @@ function customgetstatusworkflow($table, $id, $currnet_status, $created_by)
 	$statusVal = $stausresult[$currnet_status];
 	if ($id != "") {
 		?>
-		<label class="form-label label label-md label-primary"
-			style="background-color: <?php echo $statusVal['background_color'] ?>; color: <?php echo $statusVal['color'] ?>; "><?php echo $statusVal['name']; ?></label>
+		<span class="label label-md label-primary"
+			style="background-color: <?php echo $statusVal['background_color'] ?>; color: <?php echo $statusVal['color'] ?>; "><?php echo $statusVal['name']; ?></span>
 		<?php
 	}
 }
@@ -2926,7 +2926,7 @@ function getWorkflowStatus($table_name,$transaction_no,$current_status){
 	  //  if($verifystatusflow['$current_status'])
 	// $current_transactionauthprized['updatebtn'];
 	// print_r($current_transactionauthprized);
-	// $workflow_btn.='<label class="form-label label-lg label label-inverse-info" style="border:1px solid '.$statuse[$current_status]['background_color'].'; color: '.$statuse[$current_status]['background_color'].'">'.$status_progress[$current_status]['name'].'</label>';
+	// $workflow_btn.='<span class="label-lg label label-inverse-info" style="border:1px solid '.$statuse[$current_status]['background_color'].'; color: '.$statuse[$current_status]['background_color'].'">'.$status_progress[$current_status]['name'].'</span>';
 
 	$current_status_ribbon = '<div class="ribbon ribbon-top-right"><span class="color-primary" style="background-color: '.$statuse[$current_status]['background_color'].'; color: '.$statuse[$current_status]['color'].'; z-index: 1;">'.$status_progress[$current_status]['name'].'</span></div>';
 

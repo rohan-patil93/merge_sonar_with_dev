@@ -9,12 +9,12 @@ $reviewdata = json_decode($reviewdata, 1);
 <div class="col-lg-12 col-xl-12">
 	<ul class="nav  md-tabs infisuite_tab mt-2 p-2" role="tablist">
 		<li class="nav-item">
-			<a class="nav-link active" data-bs-toggle="tab" href="#home7pending" role="tab"><i class="fa fa-hourglass-2"></i>  Pending  <label class="form-label badge bg-danger"><?php echo count((array)$reviewdata['pending']); ?></label></a>
+			<a class="nav-link active" data-bs-toggle="tab" href="#home7pending" role="tab"><i class="fa fa-hourglass-2"></i>  Pending  <span class="badge bg-danger"><?php echo count((array)$reviewdata['pending']); ?></span></a>
 			<div class="slide"></div>
 		</li>
 		
 		<li class="nav-item">
-			<a class="nav-link" data-bs-toggle="tab" href="#profile7approve" role="tab"><i class="fa fa-thumbs-up"></i> Approve  <label class="form-label badge bg-warning ml-2"><?php echo count((array)$reviewdata['approve']); ?></label></a>
+			<a class="nav-link" data-bs-toggle="tab" href="#profile7approve" role="tab"><i class="fa fa-thumbs-up"></i> Approve  <span class="badge bg-warning ml-2"><?php echo count((array)$reviewdata['approve']); ?></span></a>
 			<div class="slide"></div>
 		</li>
 	</ul>
@@ -69,9 +69,9 @@ $reviewdata = json_decode($reviewdata, 1);
 							<td>
 								<div class="reviews_status">
 									<?php foreach($reviewda['status'] as $key => $status){ ?>
-										<label class="form-label badge" style="cursor: pointer; background-color: <?php echo $stausresult[$status['status']]['background_color'][0] == '#'?$stausresult[$status['status']]['background_color']:"#".$stausresult[$status['status']]['background_color']; ?>; color:<?php echo $stausresult[$status['status']]['color'][0] =='#'?$stausresult[$status['status']]['color']:'#'.$stausresult[$status['status']]['color']; ?>"  onclick="statuspopupnew(<?php echo $reviewda['transaction_id']; ?>,'<?php echo $reviewda['table']; ?>',<?php echo $status['status']; ?>,<?php echo $status['transaction_id']; ?>,<?php echo $status['workflow_id']; ?>,'<?php echo $key; ?>')"><?php echo  $status['action_label']; ?></label>
+										<span class="badge" style="cursor: pointer; background-color: <?php echo $stausresult[$status['status']]['background_color'][0] == '#'?$stausresult[$status['status']]['background_color']:"#".$stausresult[$status['status']]['background_color']; ?>; color:<?php echo $stausresult[$status['status']]['color'][0] =='#'?$stausresult[$status['status']]['color']:'#'.$stausresult[$status['status']]['color']; ?>"  onclick="statuspopupnew(<?php echo $reviewda['transaction_id']; ?>,'<?php echo $reviewda['table']; ?>',<?php echo $status['status']; ?>,<?php echo $status['transaction_id']; ?>,<?php echo $status['workflow_id']; ?>,'<?php echo $key; ?>')"><?php echo  $status['action_label']; ?></span>
 									<?php } ?>
-									<label class="form-label badge" style="background-color: <?php echo $stausresult[ST_SEND_BACK]['background_color'] ?>; color: <?php echo $stausresult[ST_SEND_BACK]['color'] ?>; " onclick="statuspopupnew(<?php echo $reviewda['transaction_id']; ?>,'<?php echo $reviewda['table']; ?>',<?php echo ST_SEND_BACK; ?>,<?php echo $status['transaction_id']; ?>,<?php echo $status['workflow_id']; ?>,'<?php echo $key; ?>')"><?php echo $stausresult[ST_SEND_BACK]['name']; ?></label>
+									<span class="badge" style="background-color: <?php echo $stausresult[ST_SEND_BACK]['background_color'] ?>; color: <?php echo $stausresult[ST_SEND_BACK]['color'] ?>; " onclick="statuspopupnew(<?php echo $reviewda['transaction_id']; ?>,'<?php echo $reviewda['table']; ?>',<?php echo ST_SEND_BACK; ?>,<?php echo $status['transaction_id']; ?>,<?php echo $status['workflow_id']; ?>,'<?php echo $key; ?>')"><?php echo $stausresult[ST_SEND_BACK]['name']; ?></span>
 
 								</div>
 							</td>
@@ -130,7 +130,7 @@ $reviewdata = json_decode($reviewdata, 1);
 								</td>
 								<td>
 									<div class="reviews_status">
-										<label class="form-label badge" style="background-color: <?php echo $stausresult[$reviewda['currnet_status']]['background_color'] ?>; color: <?php echo $stausresult[$reviewda['currnet_status']]['color'] ?>; " ><?php echo $stausresult[$reviewda['currnet_status']]['name']; ?></label>
+										<span class="badge" style="background-color: <?php echo $stausresult[$reviewda['currnet_status']]['background_color'] ?>; color: <?php echo $stausresult[$reviewda['currnet_status']]['color'] ?>; " ><?php echo $stausresult[$reviewda['currnet_status']]['name']; ?></span>
 
 									</div>
 								</td>

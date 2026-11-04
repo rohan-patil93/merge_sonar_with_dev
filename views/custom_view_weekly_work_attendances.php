@@ -309,9 +309,9 @@ $sprogress = $statusprogress['full'] ?? array();
 <div class="card">
     <div class="card-header table-card-header">
         <h5>Weekly Attendance (Without Work Order)</h5> 
-        <label class="form-label badge bg-primary p-2 m-l-5 text-white">
+        <span class="badge bg-primary p-2 m-l-5 text-white">
             <i class='ti-user'></i> <?php echo htmlspecialchars($_SESSION['users'][$_SESSION['userid']] ?? 'Employee'); ?>
-        </label>
+        </span>
         <div class="card-header-right table-card-header">
            <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
               <i class="icofont icofont-reply"></i> Back

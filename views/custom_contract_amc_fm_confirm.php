@@ -42,19 +42,19 @@ $contractName = htmlspecialchars($schedule['contract_name'] ?? '', ENT_QUOTES, '
         <input type="hidden" name="schedule_id" value="<?php echo $schedule_id; ?>">
         <div class="row g-3 mb-3">
             <div class="col-md-6">
-                <label class="form-label f-12 text-muted mb-1">Vendor</label>
+                <div class="f-12 text-muted mb-1">Vendor</div>
                 <div class="fw-semibold"><?php echo $vendorName; ?></div>
             </div>
             <div class="col-md-6">
-                <label class="form-label f-12 text-muted mb-1">Asset</label>
+                <div class="f-12 text-muted mb-1">Asset</div>
                 <div class="fw-semibold"><?php echo $assetLabel; ?></div>
             </div>
             <div class="col-md-6">
-                <label class="form-label f-12 text-muted mb-1">Planned</label>
+                <div class="f-12 text-muted mb-1">Planned</div>
                 <div><?php echo $plannedDisplay; ?></div>
             </div>
             <div class="col-md-6">
-                <label class="form-label f-12 text-muted mb-1">Technician Completed</label>
+                <div class="f-12 text-muted mb-1">Technician Completed</div>
                 <div><?php echo $techCompleted; ?></div>
             </div>
         </div>

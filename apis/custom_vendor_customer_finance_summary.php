@@ -144,7 +144,7 @@ $financeshowtabmodule = array(4);
     <div class="tab-content tabs card-block">
       <div class="tab-pane customer-issues active" id="notification" role="tabpanel">
         <div class="mt-4">
-          <h4 class="border-bottom pb-3">Module 1 — Notifications <label class="b-radius-20 border f-12 p-l-10 p-r-10 m-l-10"><?php echo $notifications['total_unread']; ?> unread</label></h4>
+          <h4 class="border-bottom pb-3">Module 1 — Notifications <span class="b-radius-20 border f-12 p-l-10 p-r-10 m-l-10"><?php echo $notifications['total_unread']; ?> unread</span></h4>
           <div class="card-wrapper mt-4">
             <div class="card yellow mb-0">
               <div class="card-value"><?php echo $notifications['action_unread']; ?></div>
@@ -169,8 +169,8 @@ $financeshowtabmodule = array(4);
           <div class="mt-4">
             <?php foreach($notifications['flags'] as $flags){  ?>
             <p class="m-0">
-              <label class="form-label badge badge-inverse-danger"><?php echo $flags['severity']; ?></label>
-              <label class="f-12 m-l-10"><?php echo $flags['detail']; ?></label>
+              <span class="badge badge-inverse-danger"><?php echo $flags['severity']; ?></span>
+              <span class="f-12 m-l-10"><?php echo $flags['detail']; ?></span>
             </p>
             <?php } ?>
           </div> 
@@ -252,7 +252,7 @@ $financeshowtabmodule = array(4);
       </div>
       <div class="tab-pane customer-issues" id="pending-approvals" role="tabpanel">
           <div class="mt-4">
-            <h4 class="border-bottom pb-3">Module 2 — Pending Approvals <label class="b-radius-20 border f-12 p-l-10 p-r-10 m-l-10"><?php echo $approvals['total_pending']; ?> Pending</label></h4>
+            <h4 class="border-bottom pb-3">Module 2 — Pending Approvals <span class="b-radius-20 border f-12 p-l-10 p-r-10 m-l-10"><?php echo $approvals['total_pending']; ?> Pending</span></h4>
             <div class="mt-4 blue-light p-3 b-radius-20 border-blue">
               <h4 class="text-primary f-16 f-w-600">AI Summary</h4>
               <p class="m-0"> <?php echo $approvals['ai_summary']; ?></p>
@@ -272,7 +272,7 @@ $financeshowtabmodule = array(4);
                   <td><?php echo ucwords(strtolower(str_replace('_', ' ', $itemsval['transaction_table']))); ?></td>
                   <td><?php echo $itemsval['request_date']; ?></td>
                   <td class="text-danger"><?php echo $itemsval['days_pending']; ?></td>
-                  <td><label class="form-label badge badge-inverse-danger"><?php echo $itemsval['severity']; ?></label></td>
+                  <td><span class="badge badge-inverse-danger"><?php echo $itemsval['severity']; ?></span></td>
                   <td class="white-space-normal"><?php echo $itemsval['gpt_issue']; ?></td>
                   <td class="white-space-normal"><?php echo $itemsval['gpt_action']; ?></td>
                 </tr>
@@ -283,7 +283,7 @@ $financeshowtabmodule = array(4);
       </div>
       <div class="tab-pane customer-issues" id="unread-tasks" role="tabpanel">
         <div class="mt-4">
-          <h4 class="border-bottom pb-3">Module 3 - Unread Tasks <label class="b-radius-20 border f-12 p-l-10 p-r-10 m-l-10"></label></h4>
+          <h4 class="border-bottom pb-3">Module 3 - Unread Tasks <span class="b-radius-20 border f-12 p-l-10 p-r-10 m-l-10"></span></h4>
         </div>
 
         <div class="border-left mt-4 p-l-10 p-3 bg-light" style="">
@@ -304,7 +304,7 @@ $financeshowtabmodule = array(4);
               </td>
               <td><?php echo $unredtask['days_overdue']; ?></td>
               <td>
-                <label class="form-label badge badge-inverse-danger"><?php echo $unredtask['severity']; ?></label>
+                <span class="badge badge-inverse-danger"><?php echo $unredtask['severity']; ?></span>
               </td>
             </tr>
             <?php } }else{ ?>
@@ -317,7 +317,7 @@ $financeshowtabmodule = array(4);
       </div>
       <div class="tab-pane customer-issues" id="customer-issues" role="tabpanel">
             <div class="mt-4">
-                <h4 class="border-bottom pb-3">Module 4 - Customer Data Check <label class="b-radius-20 border f-12 p-l-10 p-r-10 m-l-10"><?php echo $customer_data_check['incomplete_count']; ?> Checked</label></h4>
+                <h4 class="border-bottom pb-3">Module 4 - Customer Data Check <span class="b-radius-20 border f-12 p-l-10 p-r-10 m-l-10"><?php echo $customer_data_check['incomplete_count']; ?> Checked</span></h4>
                 <div class="border-left mt-4 p-l-10 p-3 bg-light" style="">
                   <h4>AI Summary</h4>
                   <p class="m-0"><?php echo $customer_data_check['ai_summary']; ?></p>
@@ -379,12 +379,12 @@ $financeshowtabmodule = array(4);
                         </td>
                         <td class="white-space-normal">
                           <?php foreach($issuesval['missing_fields'] as $missingval){ ?>
-                          <label class="form-label label label-warning text-dark"><?php echo $missingval; ?></label>
+                          <span class="label label-warning text-dark"><?php echo $missingval; ?></span>
                           <?php } ?>
                         </td>
                         <td>-</td>
                         <td>
-                          <label class="form-label badge badge-inverse-danger"><?php echo $issuesval['severity']; ?></label>
+                          <span class="badge badge-inverse-danger"><?php echo $issuesval['severity']; ?></span>
                         </td>
                       </tr>
                     <?php } ?>
@@ -394,7 +394,7 @@ $financeshowtabmodule = array(4);
       </div>
       <div class="tab-pane customer-issues" id="vendor-issues" role="tabpanel">
             <div class="mt-4">
-              <h4 class="border-bottom pb-3">Module 5 — Vendor Data Check <label class="b-radius-20 border f-12 p-l-10 p-r-10 m-l-10"><?php echo $vendor_data_check['incomplete_count']; ?> Checked</label></h4>
+              <h4 class="border-bottom pb-3">Module 5 — Vendor Data Check <span class="b-radius-20 border f-12 p-l-10 p-r-10 m-l-10"><?php echo $vendor_data_check['incomplete_count']; ?> Checked</span></h4>
               <div class="mt-4 blue-light p-3 b-radius-20 border-blue">
                 <h4 class="text-primary f-16 f-w-600">AI Summary</h4>
                 <p class="m-0"><?php echo $vendor_data_check['ai_summary']; ?></p>
@@ -461,12 +461,12 @@ $financeshowtabmodule = array(4);
                         </td>
                         <td class="white-space-normal">
                           <?php foreach($issuesval['missing_fields'] as $missingval){ ?>
-                          <label class="form-label label label-warning text-dark"><?php echo $missingval; ?></label>
+                          <span class="label label-warning text-dark"><?php echo $missingval; ?></span>
                           <?php } ?>
                         </td>
                         <td>-</td>
                         <td>
-                          <label class="form-label badge badge-inverse-danger"><?php echo $issuesval['severity']; ?></label>
+                          <span class="badge badge-inverse-danger"><?php echo $issuesval['severity']; ?></span>
                         </td>
                       </tr>
                   <?php } ?>
@@ -477,7 +477,7 @@ $financeshowtabmodule = array(4);
       <div class="tab-pane customer-issues" id="vendor-ratings" role="tabpanel">
             <div class="mt-4">
               <h4 class="border-bottom pb-3">Module 6 — Vendor Payment Ratings 
-                <label class="b-radius-20 border f-12 p-l-10 p-r-10 m-l-10"><?php echo $vendor_payment_ratings['total_vendors']; ?> Vendors</label>
+                <span class="b-radius-20 border f-12 p-l-10 p-r-10 m-l-10"><?php echo $vendor_payment_ratings['total_vendors']; ?> Vendors</span>
               </h4>
               <div class="mt-4 blue-light p-3 b-radius-20 border-blue">
                 <h4 class="text-primary f-16 f-w-600">AI Summary</h4>
@@ -551,10 +551,10 @@ $financeshowtabmodule = array(4);
                     <td><?php echo $mkseq; ?></td>
                     <td>
                       <h6 class="f-14 m-0"><?php echo $ratingsred['company']; ?></h6>
-                      <label class="form-label label label-success text-dark">Save <?php echo $ratingsred['early_offer_savings']; ?> by <?php echo $ratingsred['early_offer_deadline']; ?></label>
+                      <span class="label label-success text-dark">Save <?php echo $ratingsred['early_offer_savings']; ?> by <?php echo $ratingsred['early_offer_deadline']; ?></span>
                     </td>
                     <td>
-                      <label class="form-label label label-danger text-white">Pay Immediately</label>
+                      <span class="label label-danger text-white">Pay Immediately</span>
                     </td>
                     <td>
                       <div class="d-block mb-1">    
@@ -564,7 +564,7 @@ $financeshowtabmodule = array(4);
                         <i class="fa fa-star f-12 text-default"></i>
                         <i class="fa fa-star f-12 text-default"></i>
                       </div>
-                      <label class="form-label badge badge-inverse-danger"><?php $ratingsred['rating_label'];?></label>
+                      <span class="badge badge-inverse-danger"><?php echo $ratingsred['rating_label'];?></span>
                     </td>
                     <td>
                       <div class="">
@@ -651,7 +651,7 @@ $financeshowtabmodule = array(4);
       <div class="tab-pane customer-issues" id="customer-ratings" role="tabpanel">
             <div class="mt-4">
               <h4 class="border-bottom pb-3">Module 7 — Customer Payment Ratings 
-                <label class="b-radius-20 border f-12 p-l-10 p-r-10 m-l-10"><?php echo $customer_payment_ratings['total_customers']; ?> Customers</label>
+                <span class="b-radius-20 border f-12 p-l-10 p-r-10 m-l-10"><?php echo $customer_payment_ratings['total_customers']; ?> Customers</span>
               </h4>
               <div class="mt-4 blue-light p-3 b-radius-20 border-blue">
                 <h4 class="text-primary f-16 f-w-600">AI Summary</h4>
@@ -729,7 +729,7 @@ $financeshowtabmodule = array(4);
                       <h6 class="f-14 m-0"><?php echo $ratingsres['company'];?></h6>
                     </td>
                     <td>
-                      <label class="form-label label label-danger text-white">Collect Now</label>
+                      <span class="label label-danger text-white">Collect Now</span>
                     </td>
                     <td>
                       <div class="d-block mb-1">    
@@ -739,7 +739,7 @@ $financeshowtabmodule = array(4);
                         <i class="fa fa-star f-12 text-default"></i>
                         <i class="fa fa-star f-12 text-default"></i>
                       </div>
-                      <label class="form-label badge badge-inverse-danger"><?php echo $ratingsres['rating_label'];?></label>
+                      <span class="badge badge-inverse-danger"><?php echo $ratingsres['rating_label'];?></span>
                     </td>
                     <td>
                       <div class="">
@@ -798,7 +798,7 @@ $financeshowtabmodule = array(4);
       <div class="tab-pane customer-issues" id="finance-health" role="tabpanel">
         <div class="mt-4">
           <h4 class="border-bottom pb-3">Module 8 — Finance Details 
-            <label class="b-radius-20 border f-12 p-l-10 p-r-10 m-l-10"><?php echo $finance['period_start']." To ".$finance['period_end'];?></label>
+            <span class="b-radius-20 border f-12 p-l-10 p-r-10 m-l-10"><?php echo $finance['period_start']." To ".$finance['period_end'];?></span>
           </h4>
           <div class="mt-4 blue-light p-3 b-radius-20 border-blue">
             <div class="d-inline-block align-middle">
@@ -836,7 +836,7 @@ $financeshowtabmodule = array(4);
                 <td><?php echo $metrics_snapshot['metric']; ?></td>
                 <td><?php echo $metrics_snapshot['value']; ?></td>
                 <!-- <td><i class="ti-angle-<?php //echo $metrics_snapshot['trend']; ?>"></i></td> -->
-                <td><label class="form-label badge badge-inverse-success"><i class="fa fa-check f-10"></i> <?php echo $metrics_snapshot['status']; ?></label></td>
+                <td><span class="badge badge-inverse-success"><i class="fa fa-check f-10"></i> <?php echo $metrics_snapshot['status']; ?></span></td>
               </tr>
             <?php } ?>
               </table>
