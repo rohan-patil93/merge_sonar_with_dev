@@ -7222,7 +7222,7 @@ if($page == 'uploadFeasibilityFiles'){
                 $destinationPath = "uploads/" . $uniqueFilename;
                 // Ensure the directory exists  
                 if (!is_dir('uploads/')) {
-                    mkdir('uploads/', 0777, true);
+                    mkdir('uploads/', 0750, true);
                 }
                 // Move uploaded file
                 if (move_uploaded_file($fileArray['tmp_name'][$index], $destinationPath)) {
@@ -9242,7 +9242,7 @@ if ($page == 'confirmcontractamcfmvisit') {
 		} else {
 			$uploadDir = 'uploads/attachments/';
 			if (!is_dir($uploadDir)) {
-				mkdir($uploadDir, 0777, true);
+				mkdir($uploadDir, 0750, true);
 			}
 			$fileName = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $originalName);
 			if (!move_uploaded_file($_FILES['fm_confirmation_file']['tmp_name'], $uploadDir . $fileName)) {
@@ -9453,7 +9453,7 @@ if ($page == 'insertVisitorBundle') {
             $newImageName = 'webcam_' . time() . '_' . uniqid() . '.jpg';
             $targetDir = 'uploads/visitors/';
             if (!is_dir($targetDir)) {
-                mkdir($targetDir, 0777, true);
+                mkdir($targetDir, 0750, true);
             }
             if (file_put_contents($targetDir . $newImageName, $decodedData) === false) {
                 $newImageName = $existingImage;
@@ -9489,7 +9489,7 @@ if ($page == 'insertVisitorBundle') {
                     $newfilename = 'proof_' . time() . '_' . uniqid() . '.' . $ext;
                     $path = 'uploads/visitors/';
                     if (!is_dir($path)) {
-                        mkdir($path, 0777, true);
+                        mkdir($path, 0750, true);
                     }
                     if (move_uploaded_file($_FILES['vendor_supplier_proof_document_file']['tmp_name'][$idx], $path . $newfilename)) {
                         $uploaded_proof_files[$idx] = $newfilename;
@@ -9783,7 +9783,7 @@ if ($page == 'validate_contracts_excel') {
 	$userId = (int) ($_SESSION['userid'] ?? 0);
 	$uploadDir = __DIR__ . '/uploads/contracts/excel_import/';
 	if (!is_dir($uploadDir)) {
-		mkdir($uploadDir, 0777, true);
+		mkdir($uploadDir, 0750, true);
 	}
 	$tempPath = '';
 	$fileName = trim((string) ($_POST['file_name'] ?? ''));
@@ -9871,8 +9871,8 @@ if ($page == 'get_contracts_excel_batch') {
 if ($page == 'createrecruitingmanagerdashboardcandidatesfolder') {
 	$folder = "uploads/candidate_resume_with_rm/resume_rm_".$_SESSION['userid'];
 	if (!file_exists($folder)) {
-	    if (mkdir($folder, 0755, true)) {
-	        chmod($folder, 0755);
+	    if (mkdir($folder, 0750, true)) {
+	        chmod($folder, 0750);
 	         $result = array('status' => 'Success', 'message' => 'Folder created successfully.'); 
 	    } else {
 	        $result = array('status' => 'Fail', 'message' => 'Failed to create folder.'); 

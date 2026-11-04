@@ -13,7 +13,7 @@ if (isset($_POST['submit_value'])) {
         $newName = "announcement_" . time() . "_" . uniqid() . ($ext ? "." . $ext : "");
         $uploadPath = "uploads/all/";
         if (!is_dir($uploadPath)) {
-            mkdir($uploadPath, 0777, true);
+            mkdir($uploadPath, 0750, true);
         }
         if (move_uploaded_file($files['image_url']['tmp_name'], $uploadPath . $newName)) {
             $image = $newName;

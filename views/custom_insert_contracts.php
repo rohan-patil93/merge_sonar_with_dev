@@ -813,7 +813,7 @@ function handleContractRenewal()
         $uploadDir = "./uploads/contracts/";
 
         if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
+            mkdir($uploadDir, 0750, true);
         }
 
         $fileCount = count($_FILES['additional_document_file']['name']);
@@ -1001,7 +1001,7 @@ function handleContractSubmission()
         $uploadDir = "./uploads/contracts/";
 
         if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
+            mkdir($uploadDir, 0750, true);
         }
 
         $fileCount = count($_FILES['additional_document_file']['name']);
@@ -1233,7 +1233,7 @@ function handleAmcContractSubmission($isRenewFlow = false)
         $uploadDir = "./uploads/contracts/";
 
         if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
+            mkdir($uploadDir, 0750, true);
         }
 
         $fileCount = count($_FILES['additional_document_file']['name']);

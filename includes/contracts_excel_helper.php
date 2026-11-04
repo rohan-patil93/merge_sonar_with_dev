@@ -395,7 +395,7 @@ function cex_write_xlsx($sheets, $filepath)
     }
     $dir = dirname($filepath);
     if (!is_dir($dir)) {
-        mkdir($dir, 0777, true);
+        mkdir($dir, 0750, true);
     }
     if (file_exists($filepath)) {
         @unlink($filepath);
