@@ -758,8 +758,7 @@ $joblevel_list = $results['job_grade'];
 <div class="mt-5">
    <input type="hidden" name="post_job"  value="save">
    <input type="hidden" name="submit_value" id="submit_form_type"   value="exit">
-							 <!--   <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit"><i class="la la-check"></i>Save & exit</button>
-						<button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="continue"><i class="la la-check-circle"></i>Save & continue</button> -->
+							 
 
                         <?php 
                         $enablebutton = array(ST_ACTIVE,'');
@@ -769,7 +768,7 @@ $joblevel_list = $results['job_grade'];
                         }
                         ?>
                         <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 <?php echo $disabledbtn; ?>"   type="button" onclick="formSubmitValidation('jobpostongform','exit')"><i class="la la-check"></i>Save & exit</button>
-                        <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 <?php echo $disabledbtn; ?>" type="button" onclick="formSubmitValidation('jobpostongform','continue')" ><i class="la la-check-circle"></i>Save & continue</button>
+                        <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 <?php echo $disabledbtn; ?>" type="button" onclick="formSubmitValidation('jobpostongform','continue')" ><i class="la la-check-circle"></i>Save & continue</button>
 
 
                     </div>

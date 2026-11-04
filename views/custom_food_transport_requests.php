@@ -73,7 +73,7 @@ if(isset($_POST['datefilter'])){
 													$req_types_count_list[] = count((array)$request)==''?'0':count((array)$request);
 													$req_types_names_list[] = $foodoptiondata[$rkey];
 													?>
-													<button type="button" class="btn circle-circle-xl border-<?php echo $bgcolorlist[$colorindex]; ?> m-l-5 "><div class="text-center font-size-h3"><?php echo count((array)$request)==''?'0':count((array)$request)==''?'0':count((array)$request);; ?></div> <div class="text-center font-size-h6"><?php echo $foodoptiondata[$rkey];?></div></button>
+													<button type="button" class="btn circle-circle-xl border-<?php echo $bgcolorlist[$colorindex]; ?> m-l-5 "><div class="text-center font-size-h3"><?php echo count((array)$request) == '' ? '0' : count((array)$request); ?></div> <div class="text-center font-size-h6"><?php echo $foodoptiondata[$rkey];?></div></button>
 													<?php $colorindex++; }
 												}else{ 
 														foreach($foodoptions as $rkey) { 
@@ -95,13 +95,13 @@ if(isset($_POST['datefilter'])){
 											<div class="col-lg-3">
 													<form method="post" action="#">
 														<div class="form-group row">
-															<label for="example-date-input" class="col-3 col-form-label">From</label>
+															<label for="example-date-input-from" class="col-3 col-form-label">From</label>
 															<div class="col-10">
-																<input class="form-control" type="date" name="fromdate" value="<?php echo $current_from_date;?>" id="example-date-input" />
+																<input class="form-control" type="date" name="fromdate" value="<?php echo $current_from_date;?>" id="example-date-input-from" />
 															</div>
-															<label for="example-date-input" class="col-3 col-form-label">To</label>
+															<label for="example-date-input-to" class="col-3 col-form-label">To</label>
 															<div class="col-10">
-																<input class="form-control" type="date" name="todate" value="<?php echo $current_to_date;?>" id="example-date-input" />
+																<input class="form-control" type="date" name="todate" value="<?php echo $current_to_date;?>" id="example-date-input-to" />
 															</div>
 														</div>
 

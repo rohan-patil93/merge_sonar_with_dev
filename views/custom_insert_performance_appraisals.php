@@ -670,7 +670,7 @@ if($pepah_res['current_status']!=ST_DRAFT){
                                                         <?php if($emp_que['options_display_type']== $typeofquestion[1] ) {
                                                             $response_Responsewered_option = json_decode($reviewer_responses[$emp_que['id']]['response_option'],1)[1];
                                                             ?>
-                                                            <select aria-label="Select option" name="response_option[2][<?php echo $emp_que['id']; ?>]" class="form-control form-select js-example-basic-single" id="exampleSelect1">
+                                                            <select aria-label="Select option" name="response_option[2][<?php echo $emp_que['id']; ?>]" class="form-control form-select js-example-basic-single" id="response_option_2_<?php echo $emp_que['id']; ?>">
                                                                 <?php foreach($optionlist as $opkey=>$opts) { $optiondata = $opts; ?>
                                                                 <option value="<?php echo $optiondata; ?>" <?php if($opts==$answer['response_option']){ echo "selected";
 } ?> ><?php echo $opts;?></option>

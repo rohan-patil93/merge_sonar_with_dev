@@ -196,6 +196,10 @@
 		$('#total').val(parseFloat(cal));
 
 	}
+
+	function deletestatickRows(val){
+		$('#qur_div_'+val).remove();
+	}
 </script>
 
 <div id="kt_modal_add_custom_field" class="modal fade" role="dialog" aria-hidden="true">
@@ -354,7 +358,7 @@
 											<?php } ?>
 											</select>
 										</td>
-										<td><button class="btn btn-warning" id="'+count+'" type="button" onclick="deletestatickRows(this.id)">Delete</button></td>
+										<td><button class="btn btn-warning" id="del_row_static_1" type="button" onclick="$(this).closest('tr').remove()">Delete</button></td>
 									</tr>
 									
 							</table>
@@ -443,7 +447,7 @@
 											<?php } ?>
 											</select>
 										</td>
-										<td><button class="btn btn-warning" id="'+count+'" type="button" onclick="deletestatickRows(this.id)">Delete</button></td>
+										<td><button class="btn btn-warning" id="del_row_dynamic_1" type="button" onclick="$(this).closest('tr').remove()">Delete</button></td>
 									</tr>
 									
 							</table>

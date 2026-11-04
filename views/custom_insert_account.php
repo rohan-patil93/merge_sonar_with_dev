@@ -1770,7 +1770,7 @@ $disable = ''; if(!in_array($table1['current_status'], (array)$check_array)){ $d
                 <?php } else{ ?>
                         <input type="hidden" name="submit1" value="Add" />
                         <button id="kt_login_signin_submit" class="btn btn-brand"   name="submit_value" value="exit"><i class="la la-check"></i>Save & exit</button>
-                        <button id="kt_login_signin_submit" class="btn btn-brand"   name="submit_value" value="continue"><i class="la la-check-circle"></i>Save & continue</button>
+                        <button id="kt_login_signin_submit_continue" class="btn btn-brand"   name="submit_value" value="continue"><i class="la la-check-circle"></i>Save & continue</button>
                         <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i>Cancel</button>
                 <?php } ?>  
             </div>

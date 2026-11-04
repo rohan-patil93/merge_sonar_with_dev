@@ -13,24 +13,7 @@ function valueemtpydash($val){
 <div class="d-flex flex-column-fluid">
 	<div class="container-fluid">
 		<div class="card card-custom card-sticky" id="kt_page_sticky_card">
-			<!-- <div class="card-header">
-				<h5 class="fl">Cost Center wise Yearly Summary</h5>
-				<form class="kt-form" id="kt_form" method="post" action="" >	
-					<div style="float: left; margin-left: 40px;" class="mr-3">
-						<input class="form-control" type="month" name="from_date" value="<?php echo $selecteddate;?>"  id="att_month_year" />
-					</div>
-					<div class="float-left m-l-10">
-						<button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"  name="applyform" value="apply">Apply</button>
-					</div>
-				</form>
-				<div class="card-header-right">
-					<a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-						<i class="icofont icofont-reply"></i>
-						Back
-					</a>
-				</div>
-			</div>
-		</div> -->
+
 			<div class="card-header">
 <div class="row">
 				<div class="col-lg-3">		

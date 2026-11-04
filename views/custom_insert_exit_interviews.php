@@ -248,7 +248,7 @@ function getnamelist(){
 
                      </div>
                      <div class="form-group">
-                        <label for="example-date-input-from" class="col-form-label font-weight-bolder"><?php echo $display_tag; ?> Initiator</label>
+                        <label for="kt_select2_48" class="col-form-label font-weight-bolder"><?php echo $display_tag; ?> Initiator</label>
                         <select aria-label="Survey Initiator" class="form-select js-example-basic-single" id="kt_select2_48" name="survey_initiator">
                            <option> Select any one</option>
                            <?php $survey_init =  $survey_details['survey_initiator']!="" ? $survey_details['survey_initiator'] :$_SESSION['emp_id'];
@@ -267,7 +267,7 @@ function getnamelist(){
                         </div>
                      </div>
                      <div class="form-group">
-                        <label for="example-date-input-to" class="col-form-label font-weight-bolder">Who can see the results</label>
+                        <label for="kt_select2_43" class="col-form-label font-weight-bolder">Who can see the results</label>
                         <select aria-label="Who Can See The Results[]" class="form-select js-example-basic-multiple" id="kt_select2_43" name="who_can_see_the_results[]" multiple="multiple">
                            <?php foreach ($employee_list as $value) { $key=$value['id']; ?>
                            <option <?php if(in_array($key,(array)$who_can_see_id)){ ?> selected <?php

@@ -455,7 +455,7 @@ function addnewoptionrows(qid) {
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="example-date-input" class="form-label"><?php echo $display_tag; ?> Initiator</label>
+                    <label for="kt_select2_48" class="form-label"><?php echo $display_tag; ?> Initiator</label>
                     <select class="form-select js-example-basic-single" id="kt_select2_48" name="survey_initiator">
                       <option> Select any one</option>
                         <?php $survey_init =  $survey_details['survey_initiator']!="" ? $survey_details['survey_initiator'] :$_SESSION['emp_id'];
@@ -477,7 +477,7 @@ function addnewoptionrows(qid) {
                   </div> 
                   <div class="form-group">
                     <?php //print_r($who_can_see_id); ?>
-                    <label for="example-date-input" class="form-label">Who can see the results</label> 
+                    <label for="kt_select2_43" class="form-label">Who can see the results</label> 
                     <select class="form-select js-example-basic-multiple" id="kt_select2_43" name="who_can_see_the_results[]" multiple="multiple">
                       <?php foreach ($employee_list as $value) { 
                       $key=$value['id']; ?>

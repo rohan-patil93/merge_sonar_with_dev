@@ -48,16 +48,16 @@ $payslip_data = $payslip_list['payslip_data'];
 		<div class="col-md-4">
 			<form method="post" action="#">
 				<div class="form-group row">
-					<label for="example-date-input" class="col-2 col-form-label">From</label>
+					<label for="example-date-input-from" class="col-2 col-form-label">From</label>
 					<div class="col-10">
-						<input class="form-control" type="date" name="fromdate" value="<?php echo date('Y-m-d');?>" id="example-date-input" />
+						<input class="form-control" type="date" name="fromdate" value="<?php echo date('Y-m-d');?>" id="example-date-input-from" />
 					</div>
 				</div>
 
 				<div class="form-group row">
-					<label for="example-date-input" class="col-2 col-form-label">To</label>
+					<label for="example-date-input-to" class="col-2 col-form-label">To</label>
 					<div class="col-10">
-						<input class="form-control" type="date" name="todate" value="<?php echo date('Y-m-d');?>" id="example-date-input" />
+						<input class="form-control" type="date" name="todate" value="<?php echo date('Y-m-d');?>" id="example-date-input-to" />
 					</div>
 				</div>
 

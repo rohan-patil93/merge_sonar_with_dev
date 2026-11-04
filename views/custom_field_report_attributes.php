@@ -159,7 +159,7 @@ $res_data = json_decode($res_data, 1);
 							</div>
 							<div class="col-lg-1">
 								<?php $att_display_list =$attribute[$keyf]['display_list'] !='' ? $attribute[$keyf]['display_list'] : 0 ; ?>
-									<select class="form-control" id="exampleSelect1" name= "display_list[]">
+									<select class="form-control" id="display_list_<?php echo $key."_".$field; ?>" name= "display_list[]">
 											<option value = "2" >No</option>
 											<option value = "1" <?php if($att_display_list == '1') { ?> selected <?php } ?> >Yes</option>
 									</select>
@@ -170,7 +170,7 @@ $res_data = json_decode($res_data, 1);
 							</div>
 							<div class="col-lg-1">
 								<?php $att_filter =$attribute[$keyf]['filter'] !='' ? $attribute[$keyf]['filter'] :0 ; ?>
-									<select class="form-control" id="exampleSelect1" name= "filter[]">
+									<select class="form-control" id="filter_<?php echo $key."_".$field; ?>" name= "filter[]">
 											<option value = "2" >No</option>
 											<option value = "1" <?php if($att_filter == '1') { ?> selected <?php } ?> >Yes</option>
 									</select>
@@ -206,7 +206,7 @@ $res_data = json_decode($res_data, 1);
 											<input type="hidden" name="table_name" value="<?php echo $table; ?>" />
 									<input type="hidden" name="id" value="<?php echo $rid; ?>" />
 											<button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit"><i class="la la-check"></i>Save & exit</button>
-											<button id="kt_login_signin_submit" class="btn btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="continue"><i class="la la-check-circle"></i>Save & continue</button>
+											<button id="kt_login_signin_submit_continue" class="btn btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="continue"><i class="la la-check-circle"></i>Save & continue</button>
 											<button type="reset" class="btn btn-light-primary font-weight-bolder mr-2" ><i class="la la-close"></i>Cancel</button>
 									
 								</div>

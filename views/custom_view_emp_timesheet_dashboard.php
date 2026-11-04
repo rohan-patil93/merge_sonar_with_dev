@@ -87,7 +87,7 @@ $currentmonth = $_GET['PAY_MONTH']!=""?$_GET['PAY_MONTH']:date('m');
 
                                                     <form method="post" action="#" >
                                                         <input type="hidden" name="emp_id" value="<?php echo $empp_id; ?>">
-                                                        <label for="example-date-input-to" class="col-3 col-form-label">Month</label>
+                                                        <label for="example-date-input-from_2" class="col-3 col-form-label">Month</label>
                                                         <div class="input-group input-group-button">
                                                             <input aria-label="Fromdate" type="month" name="fromdate" value="<?php echo $currentyear."-".$currentmonth;?>" id="example-date-input-from_2"  class="form-control form-control-sm width1" style="font-size: 14px;height: 40px !important;padding: 10px 15px;">  <button type="submit"  name="datefilter" value="exit" class="btn btn-info waves-effect waves-light input-group-text mt-0">
                                                                 Get Details

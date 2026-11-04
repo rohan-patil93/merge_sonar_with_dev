@@ -546,28 +546,7 @@ function getDepreciationMethod(){
 						</div>
                 	</div>
 
-                	<!-- <div class="row">
-	                   	<div class="form-group col-lg-6">
-							<label>Capitalization Price</label>
-							<input class="form-control text-right"  type="text"  id="capitalization_price" name="capitalization_price"  value="<?php echo $assetsdeatil['capitalization_price']; ?>">
-						</div>
-						<div class="form-group col-lg-6">
-							<label>Capitalization Date</label>
-							<input class="form-control datepicker"  type="text"  id="capitalization_date" name="capitalization_date"  value="<?php echo $assetsdeatil['capitalization_date'] !=""?fromDate($assetsdeatil['capitalization_date']):""; ?>">
-						</div>
-						<div class="form-group col-lg-6">
-							<label>End Of life</label>
-							<input class="form-control datepicker"  type="text"  id="end_of_life" name="end_of_life"  value="<?php echo  $assetsdeatil['end_of_life']!=""?fromDate($assetsdeatil['end_of_life']):""; ?>">
-						</div>
-						<div class="form-group col-lg-6">
-							<label>Scrap Price</label>
-							<input class="form-control text-right "  type="text"  id="disposal_proceeds" name="disposal_proceeds"  value="<?php echo $assetsdeatil['disposal_proceeds']; ?>">
-						</div>
-						<div class="form-group col-lg-6">
-							<label>Depreciation Rate(%)</label>
-							<input class="form-control text-right"  type="text"  id="depn_rate" name="depn_rate"  value="<?php echo $assetsdeatil['depn_rate']; ?>">
-						</div>
-                	</div> -->
+
 
 
                 </div>

@@ -469,7 +469,7 @@ function refrashpage(){
                             <span id="popup_price"></span>
                     </div>
                     <div class="form-group col-lg-6">
-                        <label for="example-date-input" class="col-4 col-form-label f-w-700">Payment Date</label>
+                        <label for="popup_paymentdate" class="col-4 col-form-label f-w-700">Payment Date</label>
                         <input class="form-control datepicker" type="text" name="payment_date"  id="popup_paymentdate">
                     </div>
                 </div>

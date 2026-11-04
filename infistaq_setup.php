@@ -1100,7 +1100,7 @@ function addslabrows(){
              <div class="card-block accordion-block">
               <div id="accordion" role="tablist" aria-multiselectable="true">
                 <div class="accordion-panel">
-                  <div class="accordion-heading" role="tab" id="headingOne">
+                  <div class="accordion-heading" role="tab" id="headingOneEpf">
                     <h3 class="card-title accordion-title">
                       <a class="accordion-msg waves-effect waves-dark" data-bs-toggle="collapse"
                       data-parent="#accordion" href="#collapseOnedd"
@@ -1109,7 +1109,7 @@ function addslabrows(){
                     </a>
                   </h3>
                 </div>
-                <div id="collapseOnedd" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div id="collapseOnedd" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOneEpf">
                   <div class="accordion-content accordion-desc">
                    <div class="card-body">
 
@@ -1173,7 +1173,7 @@ function addslabrows(){
           </div>
         </div>
         <div class="accordion-panel">
-          <div class="accordion-heading" role="tab" id="headingOne">
+          <div class="accordion-heading" role="tab" id="headingOneEsi">
             <h3 class="card-title accordion-title">
               <a class="accordion-msg waves-effect waves-dark" data-bs-toggle="collapse"
               data-parent="#accordion" href="#collapseOne"
@@ -1182,7 +1182,7 @@ function addslabrows(){
             </a>
           </h3>
         </div>
-        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOneEsi">
           <div class="accordion-content accordion-desc">
            <div class="card-body">
             <div class="form-group row">

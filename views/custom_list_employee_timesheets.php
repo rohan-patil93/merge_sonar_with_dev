@@ -286,7 +286,7 @@ console.log(JSON.stringify(id));
     </div>
 </div>
 <div class="form-group  col-lg-2">
-    <label for="example-date-input-from"  class="col-5 col-form-label">Display By</label>
+    <label for="exampleSelectd"  class="col-5 col-form-label">Display By</label>
     <div class="col-10">
         <select aria-label="Displayby" class="form-control" name="displayby" id="exampleSelectd">
             <option value="0" <?PHP echo $_POST['displayby']==0?"selected":""; ?>>All</option>

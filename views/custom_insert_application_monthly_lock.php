@@ -189,7 +189,7 @@ function checkAll(ele) {
                                     <input type="hidden" name="submit" value="Add" />
                                     <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10"   name="submit_value_exit" value="exit"><i class="la la-check"></i>Save & exit</button>
                                     <?php if($_POST['option'] ==""){ ?>
-                                    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10"   name="submit_value" value="continue"><i class="la la-check-circle"></i>Save & continue</button>
+                                    <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10"   name="submit_value" value="continue"><i class="la la-check-circle"></i>Save & continue</button>
                                     <?php } ?>
                                     <button type="reset" class="btn btn-light-primary font-weight-bolder mr-2" ><i class="la la-close"></i>Cancel</button>
                             <?php } ?>  

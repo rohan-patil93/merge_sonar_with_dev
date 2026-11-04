@@ -426,7 +426,7 @@ function callInsertApi($insert_main,$insert_sub){
                                     <input type="hidden" name="peer_questions" value="<?php echo urlencode($peer_questions); ?>">
 
                                     <div class="form-group col-lg-6">
-                                       <label for="example-date-input-to" class="col-form-label font-weight-bolder">Select Peers to get feedback </label>
+                                       <label for="kt_select2_43" class="col-form-label font-weight-bolder">Select Peers to get feedback </label>
                                        <select aria-label="Sendto Peerslist[]" class="form-control" id="kt_select2_43" name="sendto_peerslist[]" multiple="multiple">
                                           <?php foreach ($employees as $value) { $key=$value['id']; ?>
                                           <option value="<?php echo $key;?>"><?php echo $value['display_name']; ?></option>

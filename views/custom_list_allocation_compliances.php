@@ -114,13 +114,13 @@ function setcompliance(){
             </div>
             <div class="card-body">
                 <div class="form-group row">
-                   <label for="example-date-input-from" class="col-4 col-form-label">Start Date</label>
+                   <label for="popup_start_date" class="col-4 col-form-label">Start Date</label>
                    <div class="col-5">
-                      <input aria-label="Popup Start Date" class="form-control datepicker" type="text" id="popup_start_date" value="<?php echo fromDate(date('d-m-Y'))?>"  id="example-date-input-1">
+                      <input aria-label="Popup Start Date" class="form-control datepicker" type="text" id="popup_start_date" value="<?php echo fromDate(date('d-m-Y'))?>">
                    </div>
-                   <label for="example-date-input-to" class="col-4 col-form-label mt-2">End Date</label>
+                   <label for="popup_end_date" class="col-4 col-form-label mt-2">End Date</label>
                    <div class="col-5 mt-2">
-                      <input aria-label="Popup End Date" class="form-control datepicker" type="text" id="popup_end_date" value="<?php echo fromDate(date('d-m-Y',strtotime('+1 year')))?>" id="example-date-input-2">
+                      <input aria-label="Popup End Date" class="form-control datepicker" type="text" id="popup_end_date" value="<?php echo fromDate(date('d-m-Y',strtotime('+1 year')))?>">
                    </div>
                 </div>
             </div>

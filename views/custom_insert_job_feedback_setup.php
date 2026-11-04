@@ -217,7 +217,7 @@ function getnamelist(emplist){
             <div class="card card-custom gutter-b">
                <div class="card-body">
                   <div class="form-group">
-                     <label for="example-date-input-from" class="form-label font-weight-bolder">Job Titles</label>
+                     <label for="kt_select2_48" class="form-label font-weight-bolder">Job Titles</label>
                      <select aria-label="Job Title" class="form-control form-select js-example-basic-single" id="kt_select2_48" name="job_title_id">
                         <option> Select any one</option>
                         <?php foreach ($job_titles_list as $value) { ?>

@@ -88,7 +88,7 @@ $typeofquestion= array('1'=>'MCQ','2'=>'FT');
                                           <?php if($emp_que['options_display_type']== $typeofquestion[1] ) {
                                            $response_answered_option = json_decode($employee_responses[$emp_que['id']]['response_option'],1)[1];
                                            ?>
-                                           <select aria-label="Select option" name="response_option<?php echo $emp_que['id'];?>" class="form-control" id="exampleSelect1">
+                                           <select aria-label="Select option" name="response_option<?php echo $emp_que['id'];?>" class="form-control" id="response_option_<?php echo $emp_que['id'];?>">
                                               <?php foreach($optionlist as $opkey=>$opts) { $optiondata = $opkey."||".$opts; ?>
                                               <option value="<?php echo $optiondata; ?>" <?php if($opts==$response_answered_option){ echo "selected";
 } ?> ><?php echo $opts;?></option>

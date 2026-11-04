@@ -230,8 +230,8 @@ $paydata = json_decode($paydata,1);
 							<div class="kt-form__section kt-form__section--first">
 								<div class="kt-wizard-v1__form">
 									<div class="form-group">
-										<label>Time Zone </label>
-										<select class="form-control" id="exampleSelect1"   name= "time_zone">
+										<label for="time_zone">Time Zone </label>
+										<select class="form-control" id="time_zone"   name= "time_zone">
 														<?php foreach ($time_zones as $key=>$time_zone) {?>
 
 														<option <?php if($data['time_zone'] == $key){?> selected <?php } ?>  value = <?php echo $key; ?>  ><?php echo $time_zone; ?></option>
@@ -239,9 +239,9 @@ $paydata = json_decode($paydata,1);
 										</select>
 									</div>
 									<div class="form-group">
-										<label>Date Format</label>
+										<label for="date_format">Date Format</label>
 										<!--  -->
-										<select class="form-control" id="exampleSelect1"   name= "date_format">
+										<select class="form-control" id="date_format"   name= "date_format">
 														<?php $date_array = array('DD-MM-YYYY', 'MM-DD-YYYY','YYYY-MM-DD');
 														foreach ($date_array as $formate) {?>
 
@@ -254,17 +254,17 @@ $paydata = json_decode($paydata,1);
 										<input type="text" class="form-control" name="date_separator" placeholder="Date Separator" value="<?php echo $data['date_separator']; ?>" >
 									</div>
 									<div class="form-group">
-										<label>Percentage Position</label>
+										<label for="percentage_position">Percentage Position</label>
 										
-										<select class="form-control" id="exampleSelect1"   name= "percentage_position">
+										<select class="form-control" id="percentage_position"   name= "percentage_position">
 											<option <?php if($data['percentage_position'] == 'R'){?> selected <?php } ?>  value = 'r'  > Right</option>
 											<option <?php if($data['percentage_position'] == 'L'){?> selected <?php } ?>  value = 'r'  > Left</option>
 										</select>
 									</div>
 									<div class="form-group">
-										<label>Decimal places</label>
+										<label for="number_format">Decimal places</label>
 										
-										<select class="form-control" id="exampleSelect1"   name= "number_format">
+										<select class="form-control" id="number_format"   name= "number_format">
 											<?php for($i=1; $i<5; $i++){?>
 											<option <?php if($data['number_format'] == $i){?> selected <?php } ?>  value = <?php echo $i; ?>  > 
 												<?php echo substr('999.999999', 0,4+$i); ?></option>
@@ -273,8 +273,8 @@ $paydata = json_decode($paydata,1);
 									</div>
 									
 									<div class="form-group">
-										<label>Invoice PreFix</label>
-										<select class="form-control" id="exampleSelect1"   name= "invoice_perfix">
+										<label for="invoice_perfix">Invoice PreFix</label>
+										<select class="form-control" id="invoice_perfix"   name= "invoice_perfix">
 														<?php foreach ($perfixresponse as $key=>$perfix) {?>
 
 														<option <?php if($data['invoice_perfix'] == $perfix['code']){?> selected <?php } ?>  value = <?php echo $perfix['code']; ?>  ><?php echo $perfix['code']; ?></option>
@@ -325,8 +325,8 @@ $paydata = json_decode($paydata,1);
 										</div>
 									</div>
 									<div class="form-group">
-										<label>Default Language</label>
-										<select class="form-control" id="exampleSelect1"   name= "default_language_id">
+										<label for="default_language_id">Default Language</label>
+										<select class="form-control" id="default_language_id"   name= "default_language_id">
 														<?php foreach ($languagedata as $lan) {?>
 
 														<option <?php if($data['default_language_id'] == $lan['genc_detail_code']){?> selected <?php } ?>  value = <?php echo $lan['genc_detail_code']; ?>  ><?php echo $lan['description']; ?></option>
@@ -334,9 +334,9 @@ $paydata = json_decode($paydata,1);
 										</select>
 									</div>
 									<div class="form-group">
-										<label>Default Tax Rate</label>
+										<label for="default_tax_rate">Default Tax Rate</label>
 
-										<select class="form-control" id="exampleSelect1"   name= "default_tax_rate">
+										<select class="form-control" id="default_tax_rate"   name= "default_tax_rate">
 														<?php foreach ($taxres as $key=>$tax) {?>
 
 														<option <?php if($data['default_tax_rate'] == $tax['id']){?> selected <?php } ?>  value = <?php echo $tax['id']; ?>  ><?php echo $tax['name']; ?></option>
@@ -345,8 +345,8 @@ $paydata = json_decode($paydata,1);
 										
 									</div>
 									<div class="form-group">
-										<label>Default Payment Mode</label>
-										<select class="form-control" id="exampleSelect1"   name= "default_payment_mode">
+										<label for="default_payment_mode">Default Payment Mode</label>
+										<select class="form-control" id="default_payment_mode"   name= "default_payment_mode">
 														<?php foreach ($paydata as $lan) {?>
 
 														<option <?php if($data['default_payment_mode'] == $lan['genc_detail_code']){?> selected <?php } ?>  value = <?php echo $lan['genc_detail_code']; ?>  ><?php echo $lan['description']; ?></option>
