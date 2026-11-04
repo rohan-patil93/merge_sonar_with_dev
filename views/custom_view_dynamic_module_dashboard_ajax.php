@@ -598,7 +598,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                     </div>
                                 </div>
                                 <div class="card-block accordion-block color-accordion-block itemcategory_sec">
-                                    <div class="color-accordion" id="color-accordion">
+                                    <div class="color-accordion" id="color-accordion-location">
                                         <?php 
                                         // $recordaray = $norecordaray = array();
                                         // foreach($locations as $item_categorielist){ 
@@ -696,7 +696,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                     </div>
                                 </div>
                                 <div class="card-block accordion-block color-accordion-block itemcategory_sec">
-                                    <div class="color-accordion" id="color-accordion">
+                                    <div class="color-accordion" id="color-accordion-costcenter">
                                         
                                         <?php 
                                         // $recordaray = $norecordaray = array();

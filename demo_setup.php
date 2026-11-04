@@ -398,21 +398,6 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
 							<label class="form-label">Post Code</label>
 							<input type="number" class="form-control" name="postcode">
 						</div>
-                  <?php /** ?>
-                  <div class="col-lg-6 form-group w-full">
-                      <label class="form-label">Time Zone</label>
-                      <select name="time_zone" id="time_zone" class="form-control form-select js-example-basic-single">
-                        <option value="">Select Any One</option>
-                     </select>
-                  </div>
-                  <div class="col-lg-6 form-group w-full">
-                      <label class="form-label">Date Format</label>
-                      <select name="date_format" class="form-control form-select js-example-basic-single">
-                        <?php foreach($dateformatlist as $valuedates) { ?>
-                          <option value="<?php echo $valuedates;?>"><?php echo $valuedates; ?></option>
-                        <?php } ?>
-                     </select>
-                     </div> <?php **/ ?>
                  </div>
                  <div class="footer_btn">
                  	<button type="button"  class="btn btn-success m-r-50" onclick="nextsetupview(2)"><i class="ti-arrow-left"></i> Previous Step</button>

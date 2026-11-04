@@ -730,7 +730,7 @@ function addslabrows(){
                           <input type="hidden" name="state" id="selectedstate">
                           <input type="hidden" name="city" id="selectedcity">
                           <div class="input-group input-icon-right">
-                            <select class="form-select js-example-basic-single" class="form-control" id="selectedcountry" onchange="selectedcategory(this.value,'kt_select2_51','states','country_id')">
+                            <select class="form-select form-control js-example-basic-single" id="kt_select2_country" onchange="selectedcategory(this.value,'kt_select2_51','states','country_id')">
                               <option value="">Select Any One</option>
                               <?php foreach($countrieslist as $countryvalue) { ?>
                                 <option value="<?php echo $countryvalue['id'].'|'.$countryvalue['country_name'];?>"><?php echo $countryvalue['country_name']; ?></option>

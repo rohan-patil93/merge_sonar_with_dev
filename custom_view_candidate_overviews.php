@@ -574,7 +574,7 @@ $due_date_period_list = $result['period_list'];
 
                  <form method="post"  enctype="multipart/form-data">
                    <div class="accordion-block color-accordion-block">
-           <div class="color-accordion" id="color-accordion">
+           <div class="color-accordion" id="color-accordion-documents-commented">
        <?php 
        $subbtn = 1;
        foreach($parentdocumentslist as $parentdocuments){ 
@@ -606,7 +606,7 @@ $due_date_period_list = $result['period_list'];
                      }
                       $displaydocuments = "uploads/".$_SESSION['DB_NAME']."/".$_SESSION['company_id']."/".$table_name."/".$candidate_id."/Documents/".$candidatedocument['document_shared']; 
                      ?>
-                     <tr id="custom-popup">
+                      <tr id="custom-popup-docs-old">
                        <td class="w-b-w-s">
 
                            <?php if($candidatedocument['document_shared']!=""){  ?> 
@@ -639,7 +639,7 @@ $due_date_period_list = $result['period_list'];
                            <button onclick="yetToRequestDocs('<?php echo $details['id']; ?>')" class="btn btn-primary desktop-view text-capitalize" type="button" style="color: <?php echo $statucolorname['color']; ?>;    background:  <?php echo $statucolorname['background_color']; ?>; border-color: <?php echo $statucolorname['background_color']; ?>;"><?php echo $candidatedocumentsstatusnameaction[ST_INPROGRESS]; ?></button>
                          <?php }elseif($candidatedocument['current_status'] ==ST_INPROGRESS){ $subbtn = 0;?>
 
-                               <div class="image-input image-input-empty image-input-outline mr-10 mt-2" id="kt_image_5"  style=" height:0px; ">
+                               <div class="image-input image-input-empty image-input-outline mr-10 mt-2" id="kt_image_5_old"  style=" height:0px; ">
                                   <label class="btn-hover-text-primary" data-action="change" data-toggle="tooltip" title="" data-original-title="Uploade File">
                                     <i class="ti-clip" style="font-size: 20px;"></i>
                                     <input type="file" name="image_<?php echo $candidatedocument['id']; ?>" onchange="fileselected('<?php echo $candidatedocument['id'] ?>',this.value)"/>
@@ -720,7 +720,7 @@ $due_date_period_list = $result['period_list'];
              <div class="col-lg-4">                   
               <input type="hidden" name="candidate_id" value="<?php echo $candidate_id;  ?>" />
               <input type="hidden" name="submit_doc" value="submit_doc" />  
-              <button id="kt_login_signin_submit" class="btn btn-primary mr-2"   name="submitto" value="exit"><i class="la la-check"></i>Submit</button>
+              <button id="kt_login_signin_submit_old" class="btn btn-primary mr-2"   name="submitto" value="exit"><i class="la la-check"></i>Submit</button>
             </div>
           </div>
         </div>
@@ -735,7 +735,7 @@ $due_date_period_list = $result['period_list'];
                 <a class="accordion-msg b-none waves-effect waves-light f-w-700">Task </a>
                 <div class="accordion-desc">
                   <div class="accordion-block color-accordion-block">
-                    <div class="color-accordion" id="color-accordion">
+                    <div class="color-accordion" id="color-accordion-tasks">
                       <?php if (count((array) $transactionactivityschedule) != 0) {
                         foreach ($transactionactivityschedule as $key1 => $transactionactivityschedule) { ?>
                           <a class="accordion-msg b-none waves-effect waves-light f-w-700"><?php echo $taskscategories[$key1]; ?>
@@ -746,7 +746,7 @@ $due_date_period_list = $result['period_list'];
                             <table class="table table-hover">
                               <tbody>
                                 <?php foreach ($transactionactivityschedule as $tas) { ?>
-                                  <tr id="custom-popup">
+                                  <tr id="custom-popup-tas-<?php echo $tas['id']; ?>">
                                     <td class="w-b-w-s">
                                       <?php if ($tas['link_page'] == '0') { ?>
                                         <a href="<?php echo $tas['page_url']; ?>" target="_blank"
@@ -929,7 +929,7 @@ $due_date_period_list = $result['period_list'];
                  <tbody>
                    <?php foreach($transactionactivityschedule11 as $tas){ 
                      ?>
-                     <tr id="custom-popup" >
+                      <tr id="custom-popup-form-<?php echo $tas['id']; ?>" >
                        <td class="w-b-w-s">
 
                          <?php if($tas['link_page'] == '0'){?>
@@ -1139,7 +1139,7 @@ $due_date_period_list = $result['period_list'];
 
           <div class="tab-pane" id="candidatettask" role="tabpanel">
             <div class="accordion-block color-accordion-block">
-              <div class="color-accordion" id="color-accordion">
+              <div class="color-accordion" id="color-accordion-documents">
                 <a class="accordion-msg b-none waves-effect waves-light f-w-700">Documents <span class="float-end"><?php echo $totaldocuments['uploaded_cnt']
                 ; ?> of <?php echo $totaldocuments['total']; ?> Uploaded</span></a>
 
@@ -1282,7 +1282,7 @@ $due_date_period_list = $result['period_list'];
                               <div class="col-lg-4">
                                 <input type="hidden" name="candidate_id" value="<?php echo $candidate_id; ?>" />
                                 <!--  <input type="hidden" name="submit" value="submit" />   -->
-                                <button id="kt_login_signin_submit" class="btn btn-primary mr-2"
+                                <button id="kt_login_signin_submit_request" class="btn btn-primary mr-2"
                                   name="submitrequerd_docs" value="exit"><i class="la la-check"></i>Submit</button>
                               </div>
                             </div>
