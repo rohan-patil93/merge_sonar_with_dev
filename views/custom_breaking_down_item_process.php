@@ -77,8 +77,8 @@ $unit_of_measurements = $result['unit_of_measurements'];
 	                <input class="form-control datepicker" type="text"  name="breaking_down_item_date" value="<?php echo $items['breaking_down_item_date'] !=""?fromDate($items['breaking_down_item_date']):''; ?>">
 	            </div>
 	            <div class="form-group">
-	                <label class="form-label">Quantity</label>
-	                <input class="form-control" type="text" id="quantity" name="quantity" value="<?php echo $items['quantity'] !=""?$items['quantity']:1; ?>" readonly>
+	                <label class="form-label" for="parent_quantity">Quantity</label>
+	                <input class="form-control" type="text" id="parent_quantity" name="quantity" value="<?php echo $items['quantity'] !=""?$items['quantity']:1; ?>" readonly>
 	            </div>
 	        </div>
 	        <div class="col-lg-8">
@@ -90,7 +90,7 @@ $unit_of_measurements = $result['unit_of_measurements'];
 	        			<label class="form-label">UOM </label>
 		            </div>
 	        		<div class="col-lg-2">
-	        			<label class="form-label">Quantity</label>
+	        			<label class="form-label" for="item_quantity">Quantity</label>
 	        		</div>
 	        		<div class="col-lg-2">
 	        		</div>
@@ -113,7 +113,7 @@ $unit_of_measurements = $result['unit_of_measurements'];
 		                </select>
 		            </div>
 		            <div class="form-group col-lg-2">
-		                <input class="form-control" type="text" id="quantity" name="quantity" value="<?php echo $items['quantity'] !=""?$items['quantity']:1; ?>" >
+		                <input class="form-control" type="text" id="item_quantity" name="quantity" value="<?php echo $items['quantity'] !=""?$items['quantity']:1; ?>" >
 		            </div>	
 		            <div class="form-group col-lg-1">
 		            	<i class='ti ti-trash'></i>

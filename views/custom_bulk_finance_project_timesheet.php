@@ -729,7 +729,6 @@ $erp = json_decode($erp_data,1);
 																<i class="cr-icon icofont icofont-ui-check txt-primary"></i>
 															</span>
 														</label>
-														<input type="hidden" name="" id="val_select_all" value="0">
 													</div>
 												</th>
 											</tr>

@@ -70,8 +70,8 @@ $designations = json_decode($designations,1);
 							<div class="row align-items-center">
 								<div class="col-lg-3 my-2 my-md-0">
 									<div class="d-flex align-items-center">
-										<label class="mr-3 mb-0 d-none d-md-block">Departments:&nbsp;</label>
-										<select class="form-select js-example-basic-single" id="kt_datatable_search_status" name="department">
+										<label class="mr-3 mb-0 d-none d-md-block" for="kt_datatable_search_department">Departments:&nbsp;</label>
+										<select class="form-select js-example-basic-single" id="kt_datatable_search_department" name="department">
 											<option value="">All</option>
 											<?php foreach ($departments as $department) { ?>
 											<option  <?php if($_POST['department'] == $department['id']){ echo "selected"; } ?> value="<?php echo $department['id']; ?>"><?php echo $department['department_name']; ?></option>
@@ -81,8 +81,8 @@ $designations = json_decode($designations,1);
 								</div>
 								<div class="col-lg-3 my-2 my-md-0">
 									<div class="d-flex align-items-center">
-										<label class="mr-3 mb-0 d-none d-md-block">Designations:&nbsp;</label>
-										<select  class="form-select js-example-basic-single" id="kt_datatable_search_status" name="designation">
+										<label class="mr-3 mb-0 d-none d-md-block" for="kt_datatable_search_designation">Designations:&nbsp;</label>
+										<select  class="form-select js-example-basic-single" id="kt_datatable_search_designation" name="designation">
 											<option value="">All</option>
 											<?php foreach ($designations as $designation) { ?>
 											<option <?php if($_POST['designation'] == $department['id']){ echo "selected"; } ?>  value="<?php echo $department['id']; ?>"><?php echo $designation['designation_name']; ?></option>
@@ -93,7 +93,7 @@ $designations = json_decode($designations,1);
 								<?php $empsel = json_decode(json) ?>
 								<div class="col-lg-3 my-2 my-md-0">
 									<div class="d-flex align-items-center">
-										<label class="mr-3 mb-0 d-none d-md-block">Employees:&nbsp;</label>
+										<label class="mr-3 mb-0 d-none d-md-block" for="kt_select2_31">Employees:&nbsp;</label>
 										<select class="form-select js-example-basic-multiple" id="kt_select2_31" name="employee[]" multiple="multiple">
 											<option value="">All</option>
 											<?php foreach ($emp as $employee) { ?>
@@ -104,7 +104,7 @@ $designations = json_decode($designations,1);
 								</div>
 								<div class="col-lg-3 my-2 my-md-0">
 									<input type="hidden" name="submit_shift" value="submit_shift">
-									<button class="btn btn-primary px-6 font-weight-bold" id="kt_login_signin_submit" >Search</button>
+									<button class="btn btn-primary px-6 font-weight-bold" id="kt_search_submit" >Search</button>
 								</div>
 							</div>
 						</div>
@@ -117,8 +117,8 @@ $designations = json_decode($designations,1);
 						<div class="row align-items-center">
 							<div class="col-lg-3 my-2 my-md-0">
 								<div class="d-flex align-items-center">
-									<label class="mr-3 mb-0 d-none d-md-block">Shifts:&nbsp;</label>
-									<select class="form-select js-example-basic-single" id="kt_datatable_search_status" name="shift_id">
+									<label class="mr-3 mb-0 d-none d-md-block" for="kt_datatable_search_shift">Shifts:&nbsp;</label>
+									<select class="form-select js-example-basic-single" id="kt_datatable_search_shift" name="shift_id">
 										<option value="">Select Any One</option>
 										<?php foreach ($Shifts as $shif) { ?>
 										<option  value="<?php echo $shif['id']; ?>"><?php echo $shif['shift_name']; ?></option>
@@ -128,26 +128,26 @@ $designations = json_decode($designations,1);
 							</div>
 							<div class="col-lg-3 my-2 my-md-0">
 								<div class="d-flex align-items-center">
-									<label class="mr-3 mb-0 d-none d-md-block">From:&nbsp;</label>
+									<label class="mr-3 mb-0 d-none d-md-block" for="kt_datepicker_from">From:&nbsp;</label>
 									<div class="input-group date mt-3">
 										<?php $date_pic = fromDate($role[$key]); ?>
-										<input type="date" class="form-control" style="height: 45px;"  value="<?php echo  $date_pic; ?>"  name="from"  id="kt_datepicker_31" />
+										<input type="date" class="form-control" style="height: 45px;"  value="<?php echo  $date_pic; ?>"  name="from"  id="kt_datepicker_from" />
 									</div>
 								</div>
 							</div>
 							<?php $empsel = json_decode(json) ?>
 							<div class="col-lg-3 my-2 my-md-0">
 								<div class="d-flex align-items-center">
-									<label class="mr-3 mb-0 d-none d-md-block">To:&nbsp;</label>
+									<label class="mr-3 mb-0 d-none d-md-block" for="kt_datepicker_to">To:&nbsp;</label>
 									<div class="input-group date mt-3">
 										<?php $date_pic = fromDate($role[$key]); ?>
-										<input type="date" class="form-control" style="height: 45px;" value="<?php echo  $date_pic; ?>"  name="to"  id="kt_datepicker_31" />										
+										<input type="date" class="form-control" style="height: 45px;" value="<?php echo  $date_pic; ?>"  name="to"  id="kt_datepicker_to" />										
 									</div>
 								</div>
 							</div>
 							<div class="col-lg-3 my-2 my-md-0">
 								<input type="hidden" name="submit_sh" value="submit_sh">
-								<button class="btn btn-primary px-6 font-weight-bold" id="kt_login_signin_submit" >Submit</button>
+								<button class="btn btn-primary px-6 font-weight-bold" id="kt_assign_submit" >Submit</button>
 							</div>
 						</div>
 					</div>

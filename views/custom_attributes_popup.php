@@ -166,7 +166,7 @@ $comparator_array = array('=','!=','>','>=','<','<=');
 	  	arr['refer_by_field'] = $('#refer_by_field').val();
 	  	var count = $(".fitemRow").length;
 	  	arr['count'] = count;
-	  	str = 'table='+$('#table').val()+'&field='+$('#field').val()+'&type='+$('#type').val()+'&field_name='+$('#field_name').val()+'&value='+$('#value').val()+'&order_by='+$('#order_by').val()+'&sort='+$('#sort').val()+'&table_name='+$('#table_name').val()+'&dis_custom_sql='+$('#dis_custom_sql').val()+'&count='+count+'&refer_action='+refer_action+'&refer_field='+$('#refer_field').val()+'&refer_by_action='+refer_by_action+'&refer_by_field='+$('#refer_by_field').val()+'&company_id='+company_id;
+	  	str = 'table='+$('#table').val()+'&field='+$('#field').val()+'&type='+type+'&field_name='+$('#field_name').val()+'&value='+$('#value').val()+'&order_by='+$('#order_by').val()+'&sort='+$('#sort').val()+'&table_name='+$('#table_name').val()+'&dis_custom_sql='+$('#dis_custom_sql').val()+'&count='+count+'&refer_action='+refer_action+'&refer_field='+$('#refer_field').val()+'&refer_by_action='+refer_by_action+'&refer_by_field='+$('#refer_by_field').val()+'&company_id='+company_id;
 	  	for (i = 1; i < count+1 ; i++) {
 	  		str += '&whrfield_'+i+'='+$('#whrfield_'+i).val()+'&comparator_'+i+'='+$('#comparator_'+i).val()+'&whrvalue_'+i+'='+$('#whrvalue_'+i).val()+'&operand_'+i+'='+$('#operand_'+i).val();
 	  		arr['whrfield_'+i] = $('#whrfield_'+i).val();
@@ -410,7 +410,9 @@ elem.forEach(function(html) {
 			<form class="kt-form kt-form--label-right" action="" method="post">
 				<?php if($_POST['type']=='rating'){ 
 					$attribute_type = 'rating';
-					?>
+				} ?>
+				<input type="hidden"  id='type_value' value="<?php echo $attribute_type; ?>"  name="type_value">
+				<?php if($_POST['type']=='rating'){ ?>
 					<div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
 						<div class="row align-items-center">
 							<div class="col-xl-12 order-2 order-xl-1">
@@ -418,8 +420,6 @@ elem.forEach(function(html) {
 									<div class="col-lg-4">
 										<label class="d-block">Ratting</label>
 										<input type="text" name="value_field" class="form-control" id="value_field" value="<?php echo $view['value_field']; ?>" >
-										<input type="hidden"  id='type_value' value="<?php echo $attribute_type; ?>"  name="type_value">
-
 									</div>
 								</div>
 							</div>
@@ -431,15 +431,10 @@ elem.forEach(function(html) {
 							<div class="col-xl-12 order-2 order-xl-1">
 								<div class="row align-items-center">
 									<div class="col-lg-2">
-										<input type="hidden"  id='type_value' value="<?php echo $attribute_type; ?>"  name="type_value">
-									<!-- <label class="kt-radio kt-radio--solid">
-										<input type="hidden"  id='type_value' value="<?php echo $attribute_type; ?>"  name="type_value">
-									<input type="radio"  id='type' value="custom_sql" class="cursor-pointer" name="type" <?php if($attribute_type != 'static' ){ ?> checked="checked" <?php } ?> onchange="difftype(this.value)"> From Table <span></span>
-								</label> -->
 								<div class="form-radio">
 									<div class="radio radio-inline">
 										<label class="form-label">
-											<input type="radio" id='type' value="custom_sql" class="cursor-pointer" name="type" <?php if($attribute_type != 'static' ){ ?> checked="checked" <?php } ?> onchange="difftype(this.value)" style="display:none">
+											<input type="radio" id='type_custom_sql' value="custom_sql" class="cursor-pointer" name="type" <?php if($attribute_type != 'static' ){ ?> checked="checked" <?php } ?> onchange="difftype(this.value)" style="display:none">
 											<i class="helper"></i>Static values	</label>
 										</div>
 									</div>
@@ -448,14 +443,10 @@ elem.forEach(function(html) {
 									<div class="form-radio">
 										<div class="radio radio-inline">
 											<label class="form-label">
-												<input type="radio" id="type"  value="static"  name="type"  <?php if($attribute_type == 'static' ){ ?> checked="checked" <?php } ?> onchange="difftype(this.value)" style="display:none">
+												<input type="radio" id="type_static"  value="static"  name="type"  <?php if($attribute_type == 'static' ){ ?> checked="checked" <?php } ?> onchange="difftype(this.value)" style="display:none">
 												<i class="helper"></i>Static values	</label>
 											</div>
 										</div>
-
-									<!-- <label class="kt-radio">
-										<input type="radio" id="type"  value="static"  name="type"  <?php if($attribute_type == 'static' ){ ?> checked="checked" <?php } ?> onchange="difftype(this.value)"> Static values<span></span>
-									</label> -->
 								</div>
 								
 							</div>
@@ -658,7 +649,7 @@ elem.forEach(function(html) {
 																	<input type="text"class="form-control"  id="static_lable_1"  value=""  name="type"> 
 																</div>
 																<div class="col-lg-3">
-																	<input type="hidden" value="0" id="static_delete_value_<?php echo $i; ?>" >
+																	<input type="hidden" value="0" id="static_delete_value_1" >
 																	<button class="btn btn-warning" id="1" type="button" onclick="deleteRows(this.id)">Delete</button>
 																</div>
 															</div>

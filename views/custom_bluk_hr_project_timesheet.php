@@ -480,7 +480,6 @@
 														<label class="checkbox checkbox-success">
 														<input type="checkbox" checked id="" disabled class="">
 														<span></span></label>
-														<input type="hidden" name="" id="val_select_all" value="0">
 													</div>
 												</th>
 											</tr>

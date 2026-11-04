@@ -248,8 +248,6 @@
 					<div class="row align-items-center">
 						<div class="col-xl-12 order-2 order-xl-1">
 							<div class="row align-items-center">
-								<input type="hidden"  id='type_value' value="spacer"  name="type_value"> 
-									<input type="hidden"  id='field_names' value="name"  name="field_names">
 								<div class="col-lg-2">
 									<label class="kt-radio kt-radio--solid">
 									 
@@ -371,8 +369,8 @@
 						</div>
 
 							<div class="row align-items-center" style="margin-top: 10px;margin-left: 2px;">
-								<!-- <button class="btn btn-danger delete" id="removeRows" type="button">- Delete</button>&nbsp;&nbsp; -->
-								<button class="btn btn-success" id="addRows" type="button" onclick="addRowss()">+ Add More</button>&nbsp;&nbsp;
+								<!-- <button class="btn btn-danger delete" id="removeRows_static" type="button">- Delete</button>&nbsp;&nbsp; -->
+								<button class="btn btn-success" id="addRows_static" type="button" onclick="addRowss()">+ Add More</button>&nbsp;&nbsp;
 								<button type="button" class="btn btn-brand" onclick="checkcal()">Check </button>&nbsp;&nbsp;
 								<button type="button" class="btn btn-danger" onclick="createselectquery()">Excute Query</button>
 							</div>
@@ -456,8 +454,8 @@
 						
 
 							<div class="row align-items-center" style="margin-top: 10px;margin-left: 2px;">
-								<!-- <button class="btn btn-danger delete" id="removeRows" type="button">- Delete</button>&nbsp;&nbsp; -->
-								<button class="btn btn-success" id="addRows" type="button" onclick="addRowssd()">+ Add More</button>&nbsp;&nbsp;
+								<!-- <button class="btn btn-danger delete" id="removeRows_dynamic" type="button">- Delete</button>&nbsp;&nbsp; -->
+								<button class="btn btn-success" id="addRows_dynamic" type="button" onclick="addRowssd()">+ Add More</button>&nbsp;&nbsp;
 								<button type="button" class="btn btn-brand" onclick="checkval()">Check </button>&nbsp;&nbsp;
 								<button type="button" class="btn btn-danger" onclick="createselectquery()">Excute Query</button>
 							</div>

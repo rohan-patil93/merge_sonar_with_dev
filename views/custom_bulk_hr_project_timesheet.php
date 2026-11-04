@@ -684,7 +684,6 @@ $total_vs_p = (($lmonth['billable_amount'] ?? 0) + ($lmonth['nonbillable_amount'
                                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                         </span>
 																			</label>
-																				<input type="hidden" name="" id="val_select_all" value="0">
 																			</div>
 																		</th>
 												</tr>

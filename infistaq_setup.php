@@ -883,21 +883,21 @@ function addslabrows(){
                               </select>
                             </div>
                             <div class="form-group col-lg-4">
-                              <label>Minimum Working Hours In A Day <span class="requried">*</span></label>
+                              <label for="kt_timepicker_minimum_hours">Minimum Working Hours In A Day <span class="requried">*</span></label>
                               <div class="input-group input-icon-right">
-                                <input type="time" class="form-control"  id="kt_timepicker_2"  name="minimum_hours_required" placeholder="0:00:00">
+                                <input type="time" class="form-control"  id="kt_timepicker_minimum_hours"  name="minimum_hours_required" placeholder="0:00:00">
                               </div>
                             </div>
                             <div class="form-group col-lg-4">
-                             <label>Half Day Working Hours</label>
+                             <label for="kt_timepicker_half_day_hours">Half Day Working Hours</label>
                              <div class="input-group input-icon-right">
-                              <input type="time" class="form-control" id="kt_timepicker_2"  name="half_day_hours" placeholder="0:00:00" >
+                              <input type="time" class="form-control" id="kt_timepicker_half_day_hours"  name="half_day_hours" placeholder="0:00:00" >
                             </div>
                           </div>
                           <div class="form-group col-lg-4">
-                            <label>Grace Period</label>
+                            <label for="kt_timepicker_grace_period">Grace Period</label>
                             <div class="input-group input-icon-right">
-                              <input type="time" class="form-control"  id="kt_timepicker_2"  name="grace_perieod" placeholder="0:00:00" >
+                              <input type="time" class="form-control"  id="kt_timepicker_grace_period"  name="grace_perieod" placeholder="0:00:00" >
                             </div>
                           </div>
                          </div>
@@ -1043,21 +1043,21 @@ function addslabrows(){
                     </select>
                   </div>
                   <div class="form-group col-lg-4">
-                    <label>Minimum Working Hours In A Day <span class="requried">*</span></label>
+                    <label for="kt_timepicker_pay_minimum_hours">Minimum Working Hours In A Day <span class="requried">*</span></label>
                     <div class="input-group input-icon-right">
-                      <input type="time" class="form-control"  id="kt_timepicker_2"  name="minimum_hours_required" placeholder="0:00:00">
+                      <input type="time" class="form-control"  id="kt_timepicker_pay_minimum_hours"  name="minimum_hours_required" placeholder="0:00:00">
                     </div>
                   </div>
                   <div class="form-group col-lg-4">
-                   <label>Half Day Working Hours</label>
+                   <label for="kt_timepicker_pay_half_day_hours">Half Day Working Hours</label>
                      <div class="input-group input-icon-right">
-                      <input type="time" class="form-control" id="kt_timepicker_2"  name="half_day_hours" placeholder="0:00:00" >
+                      <input type="time" class="form-control" id="kt_timepicker_pay_half_day_hours"  name="half_day_hours" placeholder="0:00:00" >
                     </div>
                   </div>
                   <div class="form-group col-lg-4">
-                    <label>Grace Period</label>
+                    <label for="kt_timepicker_pay_grace_period">Grace Period</label>
                     <div class="input-group input-icon-right">
-                      <input type="time" class="form-control"  id="kt_timepicker_2"  name="grace_perieod" placeholder="0:00:00" >
+                      <input type="time" class="form-control"  id="kt_timepicker_pay_grace_period"  name="grace_perieod" placeholder="0:00:00" >
                     </div>
                   </div>
 
