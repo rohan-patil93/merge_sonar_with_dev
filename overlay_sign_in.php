@@ -54,10 +54,12 @@
                                     
                                     <div class="text-left mt-5"> 
                                         <div class="form-group">
-                                            <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="text" name="chrUserName" id="chrUserName" required="" placeholder="User Name">
+                                            <label for="chrUserName" class="visually-hidden">User Name</label>
+                                            <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="text" name="chrUserName" id="chrUserName" required="" placeholder="User Name" aria-label="User Name">
                                         </div>
                                         <div class="form-group mb-1">
-                                            <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="password" name="chrPassword" required="" placeholder="Password">
+                                            <label for="chrPassword" class="visually-hidden">Password</label>
+                                            <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="password" name="chrPassword" id="chrPassword" required="" placeholder="Password" aria-label="Password">
                                         </div>
                                         <?php if(CAPTCHA_YES_NO == 'YES'){ ?> 
                                   <div class="text-center"><img style="height: 50px;" src="captcha/captcha.php" alt="CAPTCHA" /></div>
@@ -93,13 +95,16 @@
                                     </div>  ---> 
                                     <div class="text-left mt-4">
                                         <div class="form-group">
-                                            <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" name="name" id="regUserName" required="" placeholder="User Name">
+                                            <label for="regUserName" class="visually-hidden">User Name</label>
+                                            <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" name="name" id="regUserName" required="" placeholder="User Name" aria-label="User Name">
                                         </div>
                                         <div class="form-group mb-3">
-                                            <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray"  type="text" name="email" id="regEmail" required="" placeholder="Email Id">
+                                            <label for="regEmail" class="visually-hidden">Email Id</label>
+                                            <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray"  type="text" name="email" id="regEmail" required="" placeholder="Email Id" aria-label="Email Id">
                                         </div>
                                         <div class="form-group mb-1">
-                                            <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="password" name="password"   required="" placeholder="Password">
+                                            <label for="regPassword" class="visually-hidden">Password</label>
+                                            <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="password" name="password" id="regPassword" required="" placeholder="Password" aria-label="Password">
                                              <span class="text-muted f-12 text-left ">Use 8 or more characters with a mix of letters, numbers & symbols.</span>
                    
 										</div>
@@ -124,7 +129,8 @@
                                         <h2 class="f-26 f-w-600 mt-2">Forgot Password</h2>
                                         <p class="text-muted f-14 f-w-600">Enter your email to reset your password.</p>
                                         <div class="form-group">
-                                            <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="email" name="email" placeholder="Email" required="">
+                                            <label for="forgotEmail" class="visually-hidden">Email</label>
+                                            <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="email" name="email" id="forgotEmail" placeholder="Email" required="" aria-label="Email">
                                         </div>
                                         <div class="form-group text-center">
 										<input type="hidden" name="submit" value="forgot" />

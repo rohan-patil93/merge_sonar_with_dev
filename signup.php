@@ -228,13 +228,16 @@ function getIPAddress(){
           <p class="text-muted f-14 f-w-600">Get unlimited access & earn money</p>
           <div class="text-left mt-4">
             <div class="form-group">
-              <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="text" name="name" id="regUserName" required="" placeholder="User Name">
+              <label for="regUserName" class="visually-hidden">User Name</label>
+              <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="text" name="name" id="regUserName" required="" placeholder="User Name" aria-label="User Name">
             </div>
             <div class="form-group mb-3">
-              <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="text" name="email" id="regEmail" required="" placeholder="Email Id">
+              <label for="regEmail" class="visually-hidden">Email Id</label>
+              <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="text" name="email" id="regEmail" required="" placeholder="Email Id" aria-label="Email Id">
             </div>
             <div class="form-group mb-1">
-              <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="password" name="password"   required="" placeholder="Password">
+              <label for="regPassword" class="visually-hidden">Password</label>
+              <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="password" name="password" id="regPassword" required="" placeholder="Password" aria-label="Password">
               <span class="text-muted f-12 text-left ">Use 8 or more characters with a mix of letters, numbers & symbols.</span>
 
             </div>

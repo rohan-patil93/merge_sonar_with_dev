@@ -198,9 +198,9 @@ function getIPAddress(){
 
 
                                  <div class="form-group form-primary">
-                                    <input type="password" name="chrPassword" class="form-control" required="" >
+                                    <input type="password" name="chrPassword" id="lockPassword" class="form-control" required="" aria-label="Password">
                                     <span class="form-bar"></span>
-                                    <label class="float-label">Password</label>
+                                    <label for="lockPassword" class="float-label">Password</label>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
