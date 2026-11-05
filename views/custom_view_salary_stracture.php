@@ -276,18 +276,18 @@ foreach((array)$earnings as $ern){
                                     <div class="col-lg-5">
                                         <div class="form-group">
                                             <span class="form-label f-w-600 f-14">Lable</span>
-                                           <input type="text" class="form-control" id="er_name_tt" value="<?php echo $lsv['CTC']['name']; ?>">
+                                           <input type="text" class="form-control" id="er_name_ctc" value="<?php echo $lsv['CTC']['name']; ?>">
                                         </div>
                                     </div>
                                     <div class="col-lg-5">
                                         <div class="form-group">
                                             <span class="form-label f-w-600 f-14">Code</span>
-                                            <input type="text" placeholder="10000"  id="er_code_tt" value="<?php echo $lsv['CTC']['code']; ?>" class="form-control">
+                                            <input type="text" placeholder="10000"  id="er_code_ctc" value="<?php echo $lsv['CTC']['code']; ?>" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-lg-2 text-end mb-3">
                                          <span >&nbsp;</span>
-                                        <button type="button" id="er_code_tt"  onclick="earningdata(<?php echo $lsv['CTC']['id'].",'er','tt'"; ?>)" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button>
+                                        <button type="button" id="btn_earningdata_ctc"  onclick="earningdata(<?php echo $lsv['CTC']['id'].",'er','tt'"; ?>)" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -372,7 +372,7 @@ foreach((array)$earnings as $ern){
                                     </div>
                                     <div class="col-lg-2 text-end mb-3">
                                          <span >&nbsp;</span>
-                                        <button type="button" id="er_code_tt"  onclick="earningdata(<?php echo $lsv['TOTAL_EARNING_OTHER']['id'].",'er','tt'"; ?>)" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button>
+                                        <button type="button" id="btn_earningdata_other"  onclick="earningdata(<?php echo $lsv['TOTAL_EARNING_OTHER']['id'].",'er','tt'"; ?>)" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -451,7 +451,7 @@ foreach((array)$earnings as $ern){
                                     </div>
                                     <div class="col-lg-2 text-end mb-3">
                                          <span >&nbsp;</span>
-                                        <button type="button" id="er_code_tt"  onclick="earningdata(<?php echo $lsv['TOTAL_DEDUCTION']['id'].",'dd','tt'"; ?>)" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button>
+                                        <button type="button" id="btn_earningdata_deduction"  onclick="earningdata(<?php echo $lsv['TOTAL_DEDUCTION']['id'].",'dd','tt'"; ?>)" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -476,7 +476,7 @@ foreach((array)$earnings as $ern){
                                         </div>
                                         <div class="col-lg-2 text-end mb-3">
                                              <span >&nbsp;</span>
-                                            <button type="button" id="er_code_tt"  onclick="earningdata(<?php echo $lsv['NETPAYABLE']['id'].",'er','nt'"; ?>)" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button>
+                                            <button type="button" id="btn_earningdata_netpayable"  onclick="earningdata(<?php echo $lsv['NETPAYABLE']['id'].",'er','nt'"; ?>)" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button>
                                         </div>
                                     </div>
                                 </div>
