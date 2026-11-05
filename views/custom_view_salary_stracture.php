@@ -255,7 +255,7 @@ foreach((array)$earnings as $ern){
                         <div class="card-body">
                             
                             <div id="draggablePanelList_3" class="draggablepaylList draggablePanelList">
-                                <div class="row align-items-end pd_row" id="pd_1">
+                                <div class="row align-items-end" id="pd_ctc_row">
                                     <div class="col-lg-5">
                                         <div class="form-group">
                                             <span class="form-label f-w-600 f-14">Joining Bonus Applicable</span>
