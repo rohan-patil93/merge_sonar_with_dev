@@ -36,7 +36,7 @@ foreach ($field_tabs['all_user_map_detail'] as $key => $value) {
 </div>
 <div class="m-t-10">
     <div >
-        <ul class="nav md-tabs infisuite_tab mt-2 m-l-15" role="tablist">
+        <ul class="nav md-tabs infisuite_tab mt-2 m-l-15">
             <li class="nav-item">
                 <a class="nav-link active" data-bs-toggle="tab" href="#planned" role="tab">Planned
                     <span class="label label-xs label-success m-l-10"><?php echo count((array)$field_tabs['user_all_daily_plan']); ?></span>

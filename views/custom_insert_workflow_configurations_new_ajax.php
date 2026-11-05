@@ -48,7 +48,7 @@ if(count((array)$locationslist) > 0){
 
 if($_POST['work_level_type'] =="custom_process"){
 ?>
-<ul class="nav md-tabs infisuite_tab mt-2 ml-2" role="tablist">
+<ul class="nav md-tabs infisuite_tab mt-2 ml-2">
 	<?php for($i=1; $i <= $_POST['workflowlevelcnt']; $i++){ ?>
 	<li class="nav-item">
 		<a class="nav-link f-w-600 f-12 <?php echo $i==1?"active":""; ?>" data-bs-toggle="tab" href="#approvaltab_<?php echo $i; ?>" role="tab" aria-selected="true"><i class="fa fa-check-circle text-warning"></i> <i class="fa fa-hourglass-half text-danger"></i> Level <?php echo $i; ?></a>
@@ -72,8 +72,8 @@ if($_POST['work_level_type'] =="custom_process"){
 					<input aria-label="Checkbox" type="checkbox" class="custome_js-switch" name="updatebtn[<?php echo $i; ?>]" <?php echo $approvalprocess['updatebtn']=="0"?"checked":""; ?> value="0"/>
 				</div>
 				<div class="col-lg-4 form-group w-full">
-					<label class="form-label d-block">Approval Type <?php echo $i; ?></label>
-					<select aria-label="Select option" class="form-select js-example-basic-single approval_type" name="approval_type[<?php echo $i; ?>]" onchange="selectapprovetypefun(this.value,'<?php echo $rid; ?>','<?php echo $i; ?>')" >
+					<label for="approval_type_<?php echo $i; ?>" class="form-label d-block">Approval Type <?php echo $i; ?></label>
+					<select id="approval_type_<?php echo $i; ?>" aria-label="Select option" class="form-select js-example-basic-single approval_type" name="approval_type[<?php echo $i; ?>]" onchange="selectapprovetypefun(this.value,'<?php echo $rid; ?>','<?php echo $i; ?>')" >
 						<option value="">Select Any</option>
 						<?php foreach($roleprecesstypearray as $key=>$val){ ?>
 							<option value="<?php echo $key; ?>" <?php echo $approvalprocess['approval_type']==$key?"selected":""; ?>> <?php echo $val; ?></option>

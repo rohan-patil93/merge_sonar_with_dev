@@ -109,7 +109,7 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
             <input type="hidden" name="rid" value="<?php echo $rid; ?>">
             <div class="row" >
                 <div class="col-md-3 w-full">
-                    <label for="final_item_name" class="form-label d-block">Product <span class="text-danger">*</span></label>
+                    <label for="bom_item_id" class="form-label d-block">Product <span class="text-danger">*</span></label>
                     <select aria-label="Bom Item" class="js-example-basic-single item-selection js-bom-item-root" name="bom_item_id" id="bom_item_id" data-type="ROOT" required>
                         <option value="">Select Any one</option>
                         <?php foreach ($items as $item){  if($item['stocking_type'] == "F" || $item['stocking_type'] == "W"){ ?>
@@ -119,7 +119,7 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
                     </select>
                 </div>
                 <div class="col-md-3 w-full">
-                    <label for="final_item_name" class="form-label d-block">UOM <span class="text-danger">*</span></label>
+                    <label for="bom_uom" class="form-label d-block">UOM <span class="text-danger">*</span></label>
                     <select aria-label="Bom Uom" class="js-example-basic-single"  name="bom_uom"  id="bom_uom" required>
                         <option value="">Select Any one</option>
                         <?php foreach ($unit_of_measurements as $uom){  ?>
@@ -133,17 +133,17 @@ $manufacturing_bom_byitems = $result['manufacturing_bom_byitems'];
                            value="<?php echo $manufacturing_boms['bom_quantity']; ?>" required>
                 </div>
                 <div class="col-md-2">
-                    <label for="date" class="form-label"> Date <span
+                    <label for="transaction_date" class="form-label"> Date <span
                             class="text-danger">*</span></label>
                     <input aria-label="Transaction Date" type="text" class="form-control datepicker" id="transaction_date" name="transaction_date" value="<?php echo fromDate($manufacturing_boms['transaction_date']); ?>" required>
                 </div>
                 <div class="col-md-1 text-right">
-                    <label for="parent_item_total" class="form-label d-block" >Version </label>
+                    <span class="form-label d-block">Version </span>
                     <span>0.1</span>
 
                 </div>
                 <div class="col-md-1 text-right">
-                    <label for="parent_item_total" class="form-label d-block" >Total </label>
+                    <span class="form-label d-block">Total </span>
                     <span id="bom_amount_span"><?php echo customeummarmonyformateifine($manufacturing_boms['bom_amount']); ?></span>
                     <input type="hidden" class="form-control" id="bom_amount" name="bom_amount" value="<?php echo $manufacturing_boms['bom_amount']; ?>" required>
                 </div>

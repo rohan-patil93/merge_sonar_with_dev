@@ -181,7 +181,7 @@ $dynamic_reference_tables_reference_document_type = $result['dynamic_reference_t
         <input type='hidden' id='multi_ref_transaction_table' name='multi_ref_transaction_table'  value='<?php echo $document_type; ?>'>
         <div class="row">
             <div class="form-group col-md-3 w-full <?php echo $document_type !=""?"event_disabled":""; ?>">
-                <label for="final_item_name" class="form-label d-block">Document Type <span class="text-danger">*</span></label>
+                <label for="document_type" class="form-label d-block">Document Type <span class="text-danger">*</span></label>
                 <select aria-label="Document Type" class="js-example-basic-single" id="document_type" name="document_type" onchange="selectDocumentType()" required>
                     <option value="">Select Any one</option>
                     <?php foreach ($dynamic_reference_tables_document_type as $drttype){ ?>
@@ -192,7 +192,7 @@ $dynamic_reference_tables_reference_document_type = $result['dynamic_reference_t
                 </select>
             </div>
             <div class="form-group col-md-3 w-full">
-                <label for="final_item_name" class="form-label d-block">Reference Document Type <span class="text-danger">*</span></label>
+                <label for="reference_document_type" class="form-label d-block">Reference Document Type <span class="text-danger">*</span></label>
                 <select aria-label="Reference Document Type" class="js-example-basic-single" id="reference_document_type" name="reference_document_type" onchange="getTransactionlist()" required>
                     <option value="">Select Any one</option>
                     <?php foreach ($dynamic_reference_tables_reference_document_type as $drttype){ ?>

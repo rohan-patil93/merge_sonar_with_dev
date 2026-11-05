@@ -115,7 +115,7 @@ function transactionDetailsUI($retres, $fullPathfilename){
     $lineItems = $retres['lineItems'];
     $infisuiteLastId = $retres['infisuiteLastId'];
     $encodeId = deocdeId('id:'.$infisuiteLastId);
-    $html  = '<ul class="nav md-tabs infisuite_tab mb-2" role="tablist">
+    $html  = '<ul class="nav md-tabs infisuite_tab mb-2">
                 <li class="nav-item" role="presentation">
                     <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#response" role="tab" aria-selected="false" tabindex="-1">Response</a>
                 </li>

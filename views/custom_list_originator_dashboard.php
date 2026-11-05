@@ -179,7 +179,7 @@ $progress_var =  gettableStatusArray($table_name1);
 				</div>
 				<div class="col-lg-5"></div>
 				<div class="col-lg-5">
-					<ul class="nav md-tabs infisuite_tab mt-2 ml-2 d-flex justify-content-end" role="tablist">
+					<ul class="nav md-tabs infisuite_tab mt-2 ml-2 d-flex justify-content-end">
 						<li class="nav-item">
 							<a class="nav-link active" data-bs-toggle="tab" href="#tab0" role="tab">Approval Pending </a>
 						</li>
@@ -577,7 +577,7 @@ $progress_var =  gettableStatusArray($table_name1);
 				</div>
 				<div class="col-lg-5"></div>
 				<div class="col-lg-5">
-					<ul class="nav md-tabs infisuite_tab mt-2 ml-2 d-flex justify-content-end" role="tablist">
+					<ul class="nav md-tabs infisuite_tab mt-2 ml-2 d-flex justify-content-end">
 						<li class="nav-item">
 							<a class="nav-link active" data-bs-toggle="tab" href="#tab4" role="tab">Yet to Start</a>
 						</li>

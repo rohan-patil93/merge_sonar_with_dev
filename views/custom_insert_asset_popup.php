@@ -297,12 +297,12 @@ function getDepreciationMethod(){
 					</div>
 					<?php if($assetsdeatil['qr_code'] !=""){ ?>
 					<div class=" form-group col-lg-6">
-						<label class="form-label d-block">QR Code</label>
+						<span class="form-label d-block">QR Code</span>
 						<img src="<?php echo "uploads/equipments/qr_code/".$assetsdeatil['qr_code'] ; ?>" class="img-100"  width="200" onerror="this.src='uploads/all/no-image.jpg';"/>
 					</div>
 					<?php } if($assetsdeatil['id'] !=""){ ?>
 					<div class=" form-group col-lg-6">
-						<label class="form-label d-block">Barcode </label>
+						<span class="form-label d-block">Barcode </span>
 
 						<img src="<?php echo "barcode/barcode.php?text=".$assetsdeatil['asset_code'].'-'.$assetsdeatil['asset_description']; ?>" width="300" onerror="this.src='uploads/all/no-image.jpg';"/>
 					</div>

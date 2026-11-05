@@ -4527,9 +4527,9 @@ if($page=="gettenantproperty"){
 		
 		$html .='<input type="hidden" name="property_tenant_billing_idd" id="property_tenant_billing_idd" value="'.$property_tenant_billing_id.'"><form method="post" id="form_id_new_'.$property_tenant_billing_id.'">';
 		$html .='<div class="row">';
-		$html .='<div class="col-lg-4"><label class="form-label d-block">Transaction Date</label><input type="text" class="datepicker form-control" name="transaction_date" value="'.fromDate($transaction_date).'"></div>';
-		$html .='<div class="col-lg-4"><label class="form-label  d-block">Due Date</label><input type="text" class="datepicker form-control" name="due_date" value="'.fromDate($due_date).'"></div>';
-		$html .='<div class="col-lg-4"><label class="form-label  d-block">Additional Notes</label><textarea class="form-control" placeholder="Additional Notes" name="additional_notes">'.$additional_notes.'</textarea></div>';
+		$html .='<div class="col-lg-4"><label for="transaction_date" class="form-label d-block">Transaction Date</label><input type="text" class="datepicker form-control" id="transaction_date" name="transaction_date" value="'.fromDate($transaction_date).'"></div>';
+		$html .='<div class="col-lg-4"><label for="due_date" class="form-label  d-block">Due Date</label><input type="text" class="datepicker form-control" id="due_date" name="due_date" value="'.fromDate($due_date).'"></div>';
+		$html .='<div class="col-lg-4"><label for="additional_notes" class="form-label  d-block">Additional Notes</label><textarea class="form-control" id="additional_notes" placeholder="Additional Notes" name="additional_notes">'.$additional_notes.'</textarea></div>';
 		$html .='</div>';
 
 		$html .='<table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
@@ -5833,13 +5833,13 @@ if($page == 'gettransactionactivityschedulesinglechecklist'){
 	
 
 	$html .= '<div class="col-lg-10  form-group" style="'.$stylcss.'">
-			<label class="form-label">Attchements<span class="text-danger">*</span></label>
+			<label for="popupfile" class="form-label">Attchements<span class="text-danger">*</span></label>
 			<span class="fileinputvalidation_error text-danger d-block"></span>
 			<input class="form-control mb-2 fileinputvalidation" id="popupfile" type="file" '.$accepted_files.' data-size="'.$file_upload['file_size'].'"><input class="form-control" type="hidden" value="'.$checklist_position_detail['attachment_name'].'" name="old_attachments" id="old_attachments">';
 	
 	$html .= '<span class="text-danger d-block f-12">'.$accepted_file_message.'</span>';
 
-	$html .= '</div><div class="col-lg-2"><label class="form-label d-block">File</label>';
+	$html .= '</div><div class="col-lg-2"><span class="form-label d-block">File</span>';
 	if(trim($checklist_position_detail['attachment_name']) !="" AND strlen($checklist_position_detail['attachment_name']) !='0'){ 
      	$path = "uploads/".$_SESSION['DB_NAME']."/".$_SESSION['company_id']."/".$transaction_activity_schedule['transaction_table']."/".$transaction_activity_schedule['assigned_to']."/Documents/";
     	//$html .= '<a href="'.$path.$checklist_position_detail['attachment_name'].'" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Old Attachments Download" class=" text-primary" download><i class="ti-cloud-down"></i> &nbsp; Old Attachment Download</a>';

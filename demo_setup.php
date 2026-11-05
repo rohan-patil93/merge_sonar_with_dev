@@ -374,8 +374,8 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
 							<textarea type="text" class="form-control" name="address1"></textarea>
 						</div>
 						<div class="col-lg-6 form-group w-full">
-							<label class="form-label d-block">Country</label>
-							<select name="country" class="form-control form-select js-example-basic-single" onchange="selectCounty(this.value)">
+							<label for="setup_country" class="form-label d-block">Country</label>
+							<select id="setup_country" name="country" class="form-control form-select js-example-basic-single" onchange="selectCounty(this.value)">
 								<option value="">Select Any One</option>
 								<?php foreach($countries as $countr) { ?>
 									<option value='<?php echo $countr['id']."||".$countr['time_zones']; ?>' ><?php echo $countr['country_name']; ?></option>
@@ -383,20 +383,20 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
 							</select>
 						</div>
 						<div class="col-lg-6 form-group  w-full">
-							<label class="form-label d-block">State</label>
+							<label for="getstate" class="form-label d-block">State</label>
 							<select name="state" class="form-control form-select js-example-basic-single" id="getstate" onchange="selectSatate(this.value)">
 								<option value="">Select Any One</option>
 							</select>
 						</div>
 						<div class="col-lg-6 form-group  w-full">
-							<label class="form-label d-block">City</label>
+							<label for="getcity" class="form-label d-block">City</label>
 							<select name="city" class="form-control form-select js-example-basic-single" id="getcity">
 								<option value="">Select Any One</option>
 							</select>
 						</div>
 						<div class="col-lg-6 form-group">
-							<label class="form-label">Post Code</label>
-							<input type="number" class="form-control" name="postcode">
+							<label for="setup_postcode" class="form-label">Post Code</label>
+							<input id="setup_postcode" type="number" class="form-control" name="postcode">
 						</div>
                  </div>
                  <div class="footer_btn">

@@ -1458,7 +1458,7 @@ if($register_data['current_status'] !=""){
                     </div>
                   </div>
                   <div class="main-friend-list p-2">
-                    <ul class="nav md-tabs infisuite_tab tabs mb-2" role="tablist">
+                    <ul class="nav md-tabs infisuite_tab tabs mb-2">
                       <li class="nav-item">
                         <a class="nav-link active" data-bs-toggle="tab" href="#home1" role="tab">Information</a>
                       </li>

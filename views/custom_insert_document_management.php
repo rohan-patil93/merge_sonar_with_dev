@@ -287,7 +287,7 @@ if (isset($_POST['submit']) && $_POST['submit'] != '' && $errorMessage != '') {
 
                 <div class="row mt-3">
                     <div class="col-md-12">
-                        <label class="d-block mb-2">Files <span class="text-danger">*</span></label>
+                        <span class="form-label d-block mb-2">Files <span class="text-danger">*</span></span>
                         <div id="documentFileRows">
                             <?php if (count((array)$fileRows) > 0) {
                                 foreach ($fileRows as $fileIndex => $fileRow) {

@@ -48,7 +48,7 @@ $row = $data['rowdata'];
 			<input type="text" name="courier_date" class="form-control datepicker" value="<?php echo fromDate($row['courier_date']); ?>">
 		</div>
 		<div class="form-group w-full">
-			<label  class="d-block">Requested By </label>
+			<label for="requested_by" class="d-block">Requested By </label>
 			<select  name="requested_by" id="requested_by" class="form-select js-example-basic-single">
 				<option value="">Select Any One</option>
 				<?php foreach($emps as $emp){ ?> 
@@ -57,7 +57,7 @@ $row = $data['rowdata'];
 			</select>
 		</div>
 		<div class="form-group w-full">
-				<label class="d-block">Delivey Type </label>
+				<label for="deliver_type" class="d-block">Delivey Type </label>
 				<select  name="deliver_type" id="deliver_type" class="form-select js-example-basic-single">
 					<option value="">Select Any One</option>
 					<?php foreach($data['deliver_type'] as $deliver_type){ ?> 

@@ -400,7 +400,7 @@ if($totaldoc != 0 AND $totaldoc !=""){
 
                 </div>
                 <div class="col-lg-9">
-                    <ul class="nav md-tabs infisuite_tab mb-2" role="tablist">
+                    <ul class="nav md-tabs infisuite_tab mb-2">
                         <li class="nav-item">
                             <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#selfdocuments" role="tab" aria-selected="true"><?php echo $_POST['menu_label']; ?></a>
                         </li>
@@ -443,7 +443,7 @@ if($totaldoc != 0 AND $totaldoc !=""){
                         </div>
                         <div class="tab-pane card-body active p-0" id="selfdocuments" role="tabpanel">  
                     <div class="card mb-2">
-                        <ul class="nav md-tabs infisuite_tab mt-2 ml-2" role="tablist">
+                        <ul class="nav md-tabs infisuite_tab mt-2 ml-2">
                             <li class="nav-item">
                                 <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#itemcategory" role="tab" aria-selected="true">
                                     <?php 
@@ -915,7 +915,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                 
         </div>
         <div class="col-lg-3">
-            <ul class="nav md-tabs infisuite_tab mt-2 mb-2" role="tablist">
+            <ul class="nav md-tabs infisuite_tab mt-2 mb-2">
                 <li class="nav-item">
                     <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#selfcreated" role="tab" aria-selected="true">Self<span class="label label-xs label-success m-l-10"><?php echo $transactionlogcnt; ?></span></a>
                 </li> 

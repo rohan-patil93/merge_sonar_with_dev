@@ -734,7 +734,7 @@
 							</h3>
 						</div>
 						<div class="card-toolbar">
-							<ul class="nav nav-pills nav-pills-sm nav-dark-75" role="tablist">
+							<ul class="nav nav-pills nav-pills-sm nav-dark-75">
 								<li class="nav-item">
 									<a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_charts_widget_2_chart_tab_1">
 										<span class="nav-text font-size-sm">Month</span>

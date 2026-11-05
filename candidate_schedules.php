@@ -147,11 +147,11 @@ $countries = $getreturnresponse['countries'];
                           </div>
                           <div class="col-lg-8">
                               <div class="form-group">
-                                  <label class="form-label d-block">Schedule Date</label>
+                                  <label for="schedule_date" class="form-label d-block">Schedule Date</label>
                                   <input class="form-control datepicker" type="text"  id="schedule_date" name="schedule_date" onchange="selectTimezone()" required>
                               </div>
                               <div class="form-group">
-                                  <label class="form-label d-block">Time zone</label>
+                                  <label for="time_zone" class="form-label d-block">Time zone</label>
                                   <select class="form-control js-example-basic-single" name="timezone" id="time_zone" onchange="selectTimezone()" required>
                                     <?php foreach($timezonelist as $timezonekey=>$timezonedetail){ ?>
 										

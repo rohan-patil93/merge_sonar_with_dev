@@ -198,7 +198,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 	<?php } } ?>
 </div>
 
-<ul class="nav md-tabs infisuite_tab mb-2" role="tablist">
+<ul class="nav md-tabs infisuite_tab mb-2">
 	<li class="nav-item">
 		<a class="nav-link f-w-600 f-12 <?php echo (!isset($_GET['TAB']) || $_GET['TAB'] =="JP")?"active":"";?>" data-bs-toggle="tab" href="#jobposting-tab" role="tab" aria-selected="true" onclick=" updateUrlParameter('TAB','JP')">Job Postings </a>
 	</li>
@@ -375,7 +375,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 					<div class="col-lg-9">
 						<div class="card mb-2">
 							<div class="p-2">
-								<ul class="nav md-tabs infisuite_tab" role="tablist">
+								<ul class="nav md-tabs infisuite_tab">
 								<?php $mk = 1; foreach($montharray as $key=>$ff){
 									$jobpostingcandidates55 = $job_posting_candidates[$key];
 									?>
@@ -459,7 +459,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 					<div class="card-body">
 						<div class="row ">
 							<div class="col-lg-12">
-								<ul class="nav md-tabs infisuite_tab" role="tablist">
+								<ul class="nav md-tabs infisuite_tab">
 									<li class="nav-item  m-1">
 										<a class="nav-link f-w-600 f-12 active" style="padding: 0.5rem 0.5rem !important; " data-bs-toggle="tab" href="#apshort" role="tab" aria-selected="true">Applied <span class="label label-xs label-success m-l-5"><?php echo count((array)$tabdata['apshort']); ?></span></a>
 										<div class="slide"></div>
@@ -567,7 +567,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 							<div class="card-body">
 								<div class="row ">
 									<div class="col-lg-6">
-										<ul class="nav md-tabs infisuite_tab" role="tablist">
+										<ul class="nav md-tabs infisuite_tab">
 											<li class="nav-item">
 												<a class="nav-link f-w-600 active" data-bs-toggle="tab" href="#current-quater" role="tab" aria-selected="true">Current Quater</a>
 												<div class="slide"></div>

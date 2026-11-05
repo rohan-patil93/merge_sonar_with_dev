@@ -80,7 +80,7 @@ $financeshowtabmodule = array(4);
 </div>
 <div class="card">
   <div class="card-body">
-    <ul class="nav nav-tabs md-tabs gap-2 border-0 party-summary-tab" role="tablist">
+    <ul class="nav nav-tabs md-tabs gap-2 border-0 party-summary-tab">
       <li class="nav-item">
         <a class="nav-link text-center border active" data-bs-toggle="tab" href="#notification" role="tab"
           aria-selected="true">

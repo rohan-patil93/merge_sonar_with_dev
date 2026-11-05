@@ -99,7 +99,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="card">
-                                                <ul class="nav nav-tabs md-tabs card-body" role="tablist">
+                                                <ul class="nav nav-tabs md-tabs card-body">
                                                     <li class="nav-item">
                                                         <a class="nav-link active" data-bs-toggle="tab" href="#home3" role="tab" aria-selected="true">Completed</a>
                                                         <div class="slide"></div>

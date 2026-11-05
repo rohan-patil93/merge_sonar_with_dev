@@ -327,7 +327,7 @@ foreach ($gc_details as $row) {
                 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="form-label d-block">Is there Checklist?</label>
+                            <label for="checklistToggle" class="form-label d-block">Is there Checklist?</label>
                             <div class="form-switch form-check form-check-inline">
                                 <input class="form-check-input" name="check_list" type="checkbox" id="checklistToggle"
                                     <?php echo (!empty($checklist_items))?'checked':''; ?> onchange="toggleChecklistSection()">

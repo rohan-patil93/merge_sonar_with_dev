@@ -2162,7 +2162,7 @@ if (count((array) $milestones) > 0) {
             ?>
             <div class="row mb-2">
                 <div class="col-lg-12">
-                    <ul class="nav md-tabs infisuite_tab mb-2 unified-edit-tabs" role="tablist">
+                    <ul class="nav md-tabs infisuite_tab mb-2 unified-edit-tabs">
                         <li onclick="updateUrlParameter('TAB1',1);" class="nav-item"><a
                                 class="nav-link <?= ($activeTab === 1) ? 'active' : '' ?> <?= $observerClass ?>" data-bs-toggle="pill"
                                 href="#contractdetails">Contract Details</a></li>

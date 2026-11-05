@@ -7,7 +7,7 @@ $reviewdata = callAPI($reviewurl);
 $reviewdata = json_decode($reviewdata, 1);
 ?>
 <div class="col-lg-12 col-xl-12">
-	<ul class="nav  md-tabs infisuite_tab mt-2 p-2" role="tablist">
+	<ul class="nav  md-tabs infisuite_tab mt-2 p-2">
 		<li class="nav-item">
 			<a class="nav-link active" data-bs-toggle="tab" href="#home7pending" role="tab"><i class="fa fa-hourglass-2"></i>  Pending  <span class="badge bg-danger"><?php echo count((array)$reviewdata['pending']); ?></span></a>
 			<div class="slide"></div>

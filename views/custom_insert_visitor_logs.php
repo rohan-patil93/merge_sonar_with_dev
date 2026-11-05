@@ -327,7 +327,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
 
     <?php if (!$editMode): ?>
         <!-- Navigation Tabs for IN/OUT -->
-        <ul class="nav nav-pills custom-vms-tabs mb-4" id="vmsTabs" role="tablist">
+        <ul class="nav nav-pills custom-vms-tabs mb-4" id="vmsTabs">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="checkin-tab" data-bs-toggle="tab" data-bs-target="#checkin-pane"
                     type="button" role="tab" aria-controls="checkin-pane" aria-selected="true">
@@ -1912,16 +1912,16 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                 </div>
                                             </div>
                                             <div class="mb-3">
-                                                <label class="form-label">Quantity</label>
+                                                <label for="lm_qty" class="form-label">Quantity</label>
                                                 <input type="number" min="1" class="form-control" id="lm_qty" value="1">
                                             </div>
                                             <div class="mb-3">
-                                                <label class="form-label">Serial No / Remarks</label>
+                                                <label for="lm_serial_or_remarks" class="form-label">Serial No / Remarks</label>
                                                 <input type="text" class="form-control" id="lm_serial_or_remarks"
                                                     placeholder="Enter serial or description">
                                             </div>
                                             <div class="mb-3">
-                                                <label class="form-label d-block">Returnable Item?</label>
+                                                <span class="form-label d-block">Returnable Item?</span>
                                                 <div class="form-check form-check-inline mt-1">
                                                     <input class="form-check-input" type="radio" name="lm_returnable"
                                                         id="lm_returnable_yes" value="yes" checked>
@@ -1934,7 +1934,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                 </div>
                                             </div>
                                             <div class="mb-3" id="lm_return_date_wrap">
-                                                <label class="form-label">Return Date</label>
+                                                <label for="lm_return_date" class="form-label">Return Date</label>
                                                 <input type="date" class="form-control" id="lm_return_date"
                                                     value="<?php echo date('Y-m-d'); ?>">
                                             </div>

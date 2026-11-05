@@ -170,7 +170,7 @@ $workOrderItemUom = $itemUomById[$manufacturing_work_orders['work_order_item_id'
                     <input aria-label="Transaction Date" type="text" class="form-control datepicker" id="transaction_date" name="transaction_date" value="<?php echo fromDate($manufacturing_work_orders['transaction_date']); ?>" required>
                 </div>
                 <div class="col-md-4 form-group  w-full">
-                    <label for="final_item_name" class="form-label d-block">Firm Order</label>
+                    <label for="manufacturing_firm_order_id" class="form-label d-block">Firm Order</label>
                     <select aria-label="Manufacturing Firm Order" class="js-example-basic-single item-selection js-manufacturing-firm-order" name="manufacturing_firm_order_id" id="manufacturing_firm_order_id" data-action="select-manufacturing-firm-order">
                         <option value="">Select Any one</option>
                         <?php foreach ($manufacturing_firm_orders as $mfo){ ?>

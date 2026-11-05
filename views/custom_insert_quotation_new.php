@@ -2408,7 +2408,7 @@ if($checktimeprint > 0){
 ?>
 <div class="row">
     <div class="col-lg-9">
-        <ul class="nav md-tabs infisuite_tab mb-2" role="tablist">
+        <ul class="nav md-tabs infisuite_tab mb-2">
             <li class="nav-item">
                 <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#selfdocuments" role="tab" aria-selected="true"><?php echo $title; ?></a>
             </li>
@@ -2719,7 +2719,7 @@ if($checktimeprint > 0){
                             
                            <div>
                                 <div style="float: left;width: 30%;padding: 1%;">
-                                    <label class="d-block">Attachment</label>
+                                    <span class="form-label d-block">Attachment</span>
                                     <div id="attchmentshowlist" class="custom-scroll" style="max-height: 120px; min-height:120px;">
                                         <?php
                                         $compliance_specification_documents = json_decode($table1['compliance_specification_documents'],1);
@@ -2840,7 +2840,7 @@ if($checktimeprint > 0){
                         </div>
 
                         <div class="<?php echo $ammountsummarydiv; ?> p-r-0" <?php echo $ammountsummarycss; ?>>
-                            <ul class="nav md-tabs infisuite_tab mb-2 mt-3" role="tablist">
+                            <ul class="nav md-tabs infisuite_tab mb-2 mt-3">
                                 <li class="nav-item">
                                     <a class="nav-link f-w-600 f-12 active originatercurrencycalc_tab" data-bs-toggle="tab" href="#originatercurrencycalc" role="tab" aria-selected="true">Amount</a>
                                 </li>

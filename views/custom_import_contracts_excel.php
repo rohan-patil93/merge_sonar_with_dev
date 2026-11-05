@@ -102,7 +102,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
 							</div>
 							<div class="row g-2 mb-3" id="cex-preview-stats"></div>
 							<div id="cex-preview-alerts"></div>
-							<ul class="nav md-tabs infisuite_tab mb-2" role="tablist">
+							<ul class="nav md-tabs infisuite_tab mb-2">
 								<li class="nav-item"><a class="nav-link active" data-bs-toggle="pill" href="#cex-tab-contracts">Contracts</a></li>
 								<li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#cex-tab-locations">Locations</a></li>
 								<li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#cex-tab-assets">Assets</a></li>

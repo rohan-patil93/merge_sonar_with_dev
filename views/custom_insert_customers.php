@@ -877,7 +877,7 @@ function toggleRowLock(button) {
 		</div>
 		<div class="row m-b-30 mt-5 card-body">
 			<div class="col-lg-12 col-xl-12">
-				<ul class="nav md-tabs infisuite_tab mt-2 ml-2" role="tablist">
+				<ul class="nav md-tabs infisuite_tab mt-2 ml-2">
 					<li class="nav-item">
 						<a class="nav-link  <?php echo $customers['id']!=""?"active":""; ?>" data-bs-toggle="tab" href="#overview" role="tab">Overview</a>
 						<div class="slide"></div>

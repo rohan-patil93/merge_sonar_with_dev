@@ -739,7 +739,7 @@ if ($total_budget_hrs > 0) {
                                                        
                 <div class="col-lg-12 row">  
                 	<div class="col-lg-7">                  
-                    <ul class="nav  md-tabs infisuite_tab" role="tablist">
+                    <ul class="nav  md-tabs infisuite_tab">
                         <li class="nav-item">
                             <a class="nav-link active" data-bs-toggle="tab" href="#home3" role="tab">Approved
                             		&nbsp;<span class="badge badge-warning"><?php echo $apv_count; ?></span>

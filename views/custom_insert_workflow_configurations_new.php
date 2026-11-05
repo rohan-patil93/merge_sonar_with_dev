@@ -983,7 +983,7 @@ $stausresult = ViewStatusData();
 						} ?>
 					</div>
 					<div class="col-lg-12 " id="employee_fields" style="display:none">
-						<ul class="nav nav-tabs md-tabs" role="tablist">
+						<ul class="nav nav-tabs md-tabs">
 							<li class="nav-item">
 								<a class="nav-link active" data-bs-toggle="tab" href="#homeuser" role="tab">User</a>
 								<div class="slide"></div>
@@ -1032,7 +1032,7 @@ $stausresult = ViewStatusData();
 					</div>
 					<div class="col-lg-12 " id="session_fields" style="display:none">
 						<div class="col-lg-12 col-xl-12 mt-4">
-							<ul class="nav nav-tabs md-tabs" role="tablist">
+							<ul class="nav nav-tabs md-tabs">
 								<li class="nav-item">
 									<a class="nav-link active" data-bs-toggle="tab" href="#homeuser" role="tab">User</a>
 									<div class="slide"></div>

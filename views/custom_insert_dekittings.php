@@ -178,7 +178,7 @@ if($dekitting['current_status'] !=""){
                     <input type="hidden" class="form-control" id="rid" name="rid" value="<?= $rid ?>" required>
                 </div>
                 <div class="col-md-6 mb-3 w-full">
-                    <label for="final_item_name d-block" class="form-label">Parent Item Name <span
+                    <label for="final_item_name" class="form-label d-block">Parent Item Name <span
                             class="text-danger">*</span></label>
                     <select aria-label="Parent Item" class="js-example-basic-single" id="final_item_name" name="parent_item_id" onchange="updateItemOptions()" required>
                         <option value="">Select Any one</option>

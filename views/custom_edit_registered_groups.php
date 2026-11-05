@@ -461,11 +461,11 @@ function refrashpage(){
             <div class="card-body">
                 <div class="row" >
                     <div class="col-lg-3 form-group text-center">
-                        <label class="col-form-label d-block f-w-700">Users</label>
+                        <span class="col-form-label d-block f-w-700">Users</span>
                         <span id="popup_users"></span>
                     </div>
                     <div class="col-lg-3 form-group text-center"> 
-                            <label   class="col-form-label d-block f-w-700">Price</label>
+                            <span class="col-form-label d-block f-w-700">Price</span>
                             <span id="popup_price"></span>
                     </div>
                     <div class="form-group col-lg-6">

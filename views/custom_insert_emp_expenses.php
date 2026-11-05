@@ -204,18 +204,18 @@ function itemChange(valuu,val_id,seq){
     htmlRows += '</div>';
     htmlRows += '</div>';
     htmlRows += '<div class="row  m-t-15">';
-    htmlRows += '<div class=" col-lg-5" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Select Expense Date"><label for="">Date of Spend <span class="text-danger">*</span></label><input aria-label="Expense Date[]" type="text" name="expense_date[]" class="form-control datepicker dateexpens expens_req mileage_req Perdiem_req" onchange="changedateexpense(this.value)" placeholder="" value="">';
+    htmlRows += '<div class=" col-lg-5" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Select Expense Date"><label for="expense_date_'+seqs+'">Date of Spend <span class="text-danger">*</span></label><input aria-label="Expense Date[]" type="text" id="expense_date_'+seqs+'" name="expense_date[]" class="form-control datepicker dateexpens expens_req mileage_req Perdiem_req" onchange="changedateexpense(this.value)" placeholder="" value="">';
     htmlRows += '</div>'
 
 
-    htmlRows += '<div class="col-lg-7 expens_css_'+seqs+' w-full" style="" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Select Category"><label for="" class="d-block">Category <span class="text-danger">*</span></label>';
+    htmlRows += '<div class="col-lg-7 expens_css_'+seqs+' w-full" style="" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Select Category"><label for="select_category_exp'+seqs+'" class="d-block">Category <span class="text-danger">*</span></label>';
     htmlRows += '<select aria-label="Category Exp[]" class="form-control form-select js-example-basic-single expens_req" id="select_category_exp'+seqs+'" name="category_exp[]"  ><option value="">Select Any One</option>';
         <?php foreach($datacat as $dataca){ ?>
             htmlRows += '<option value="<?php echo $dataca['category_id']; ?>"><?php echo $dataca['category_name']; ?></option>';
            <?php } ?>
     htmlRows += '</select>';
     htmlRows += '</div>';
-    htmlRows += '<div class="col-lg-7 mileage_css_'+seqs+' w-full" style="display:none" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Select Mileage"><label for="" class="d-block">Mileage <span class="text-danger">*</span></label>';
+    htmlRows += '<div class="col-lg-7 mileage_css_'+seqs+' w-full" style="display:none" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Select Mileage"><label for="select_category_mileage'+seqs+'" class="d-block">Mileage <span class="text-danger">*</span></label>';
     htmlRows += '<select aria-label="Category Mileage[]" class="form-control form-select js-example-basic-single mileage_req" id="select_category_mileage'+seqs+'" name="category_mileage[]" onchange="itemChange(this.options[this.selectedIndex].text,this.value,'+seqs+')" >';
      htmlRows += '<option value="">Select Any One</option>';
         <?php foreach($mileageslist as $mileageslists){ ?>
@@ -223,7 +223,7 @@ function itemChange(valuu,val_id,seq){
         <?php } ?>
     htmlRows += '</select>';
     htmlRows += '</div>';
-    htmlRows += '<div class="col-lg-7 Perdiem_css_'+seqs+' w-full" style="display:none" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Select Perdiem"><label for="" class="d-block">Per Diem <span class="text-danger">*</span></label>';
+    htmlRows += '<div class="col-lg-7 Perdiem_css_'+seqs+' w-full" style="display:none" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Select Perdiem"><label for="select_category_perd'+seqs+'" class="d-block">Per Diem <span class="text-danger">*</span></label>';
     htmlRows += '<select aria-label="Category Perd[]" class="form-control form-select js-example-basic-single Perdiem_req" id="select_category_perd'+seqs+'" name="category_perd[]" onchange="itemChange(this.options[this.selectedIndex].text,this.value,'+seqs+')"  >';
     htmlRows += '<option value="">Select Any One</option>';
         <?php foreach($perdiamarray as $perdieam){ ?>
@@ -234,8 +234,8 @@ function itemChange(valuu,val_id,seq){
     htmlRows += '</div>';
 
     htmlRows += '<div class="m-t-15">';
-    htmlRows += '<label for="" class="d-block">Trip Slot<span class="text-danger">*</span></label>';
-    htmlRows += '<select aria-label="Select option" class="form-control form-select js-example-basic-single trip_transaction_table" id="select_trip_transaction_table_<?php echo $seqs; ?>" name="trip_transaction_table[]"  >';
+    htmlRows += '<label for="select_trip_transaction_table_'+seqs+'" class="d-block">Trip Slot<span class="text-danger">*</span></label>';
+    htmlRows += '<select aria-label="Select option" class="form-control form-select js-example-basic-single trip_transaction_table" id="select_trip_transaction_table_'+seqs+'" name="trip_transaction_table[]"  >';
         var trip_id = $("#trip_id").val();
         if(trip_id !=""){
             jQuery.ajax({
@@ -512,11 +512,11 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                     </div>
                                     <div class="row  m-t-15">
                                         <div class=" col-lg-5" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Select Expense Date">
-                                            <label for="">Date of Spend <span class="text-danger">*</span></label>
-                                            <input aria-label="Expense Date[]" type="text" name="expense_date[]" class="form-control datepicker dateexpens expens_req mileage_req Perdiem_req" onchange="changedateexpense(this.value,'<?php echo $seqs; ?>')" placeholder="" value="<?php echo fromDate($sub_details['expense_date']); ?>" required>
+                                            <label for="expense_date_<?php echo $seqs; ?>">Date of Spend <span class="text-danger">*</span></label>
+                                            <input aria-label="Expense Date[]" type="text" id="expense_date_<?php echo $seqs; ?>" name="expense_date[]" class="form-control datepicker dateexpens expens_req mileage_req Perdiem_req" onchange="changedateexpense(this.value,'<?php echo $seqs; ?>')" placeholder="" value="<?php echo fromDate($sub_details['expense_date']); ?>" required>
                                         </div>
                                         <div class="col-lg-7 expens_css_<?php echo $seqs; ?> w-full" style="<?php echo $expens_css; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Select Category">
-                                            <label for="" class="d-block">Category <span class="text-danger">*</span></label>
+                                            <label for="select_category_exp_<?php echo $seqs; ?>" class="d-block">Category <span class="text-danger">*</span></label>
                                             <select aria-label="Select option" class="form-control form-select js-example-basic-single expens_req" id="select_category_exp_<?php echo $seqs; ?>" name="category_exp[]"  >
                                                <option value="">Select Any One</option>
                                                 <?php foreach($datacat as $dataca){
@@ -535,7 +535,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                             </select>
                                         </div>
                                         <div class="col-lg-7 mileage_css_<?php echo $seqs; ?> w-full" style="<?php echo $mileage_css; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Select Mileage">
-                                             <label for="" class="d-block">Mileage <span class="text-danger">*</span></label>
+                                             <label for="select_category_mileage_<?php echo $seqs; ?>" class="d-block">Mileage <span class="text-danger">*</span></label>
                                             <select aria-label="Select option" class="form-control form-select js-example-basic-single mileage_req" id="select_category_mileage_<?php echo $seqs; ?>" name="category_mileage[]" onchange="itemChange(this.options[this.selectedIndex].text,this.value,'<?php echo $seqs; ?>')" >
                                                    <option value="">Select Any One</option>
                                                    <?php foreach($mileageslist as $mileageslists){ ?>
@@ -544,7 +544,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                             </select>
                                         </div>
                                         <div class="col-lg-7 Perdiem_css_<?php echo $seqs; ?> w-full" style="<?php echo $Perdiem_css; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Select Perdiem">
-                                            <label for="" class="d-block">Per Diem <span class="text-danger">*</span></label>
+                                            <label for="select_category_perd_<?php echo $seqs; ?>" class="d-block">Per Diem <span class="text-danger">*</span></label>
                                              <select aria-label="Select option" class="form-control form-select js-example-basic-single Perdiem_req" id="select_category_perd_<?php echo $seqs; ?>" name="category_perd[]" onchange="itemChange(this.options[this.selectedIndex].text,this.value,'<?php echo $seqs; ?>')"  >
                                                     <option value="">Select Any One</option>
                                                 <?php foreach($perdiamarray as $perdieam){ ?>
@@ -555,7 +555,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                     </div>
 
                                     <div class="m-t-15 ">
-                                        <label for="" class="d-block">Trip Slot</label>
+                                        <label for="select_trip_transaction_table_<?php echo $seqs; ?>" class="d-block">Trip Slot</label>
                                         <select aria-label="Select option" class="form-control form-select js-example-basic-single trip_transaction_table" id="select_trip_transaction_table_<?php echo $seqs; ?>" name="trip_transaction_table[]"  >
                                             <option value="">Select Any One</option>
                                            <?php  if(count((array)$local_trips) !=0){ ?>

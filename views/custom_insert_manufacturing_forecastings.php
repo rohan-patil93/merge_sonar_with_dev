@@ -114,8 +114,8 @@ $forecast_type = array(array('id'=>'1','nameval'=>'Sales'),array('id'=>'1','name
             <input type="hidden" name="rid" value="<?php echo $rid; ?>">
             <div class="row" >
                 <div class="col-md-3 w-full">
-                    <label for="final_item_name" class="form-label d-block">Forecast Type <span class="text-danger">*</span></label>
-                    <select aria-label="Bom Item" class="js-example-basic-single item-selection" name="bom_item_id" id="" onchange="selectProductName()" required>
+                    <label for="forecast_type_id" class="form-label d-block">Forecast Type <span class="text-danger">*</span></label>
+                    <select aria-label="Bom Item" class="js-example-basic-single item-selection" name="bom_item_id" id="forecast_type_id" onchange="selectProductName()" required>
                         <option value="">Select Any one</option>
                         <?php foreach ($forecast_type as $item){ ?>
                             <option value="<?php echo $item['id']; ?>" <?php echo $manufacturing_boms['bom_item_id'] == $item['id']?"selected":""; ?>><?php echo $item['nameval']; ?></option>
@@ -123,7 +123,7 @@ $forecast_type = array(array('id'=>'1','nameval'=>'Sales'),array('id'=>'1','name
                     </select>
                 </div>
                 <div class="col-md-3 w-full">
-                    <label for="final_item_name" class="form-label d-block">Product <span class="text-danger">*</span></label>
+                    <label for="bom_item_id" class="form-label d-block">Product <span class="text-danger">*</span></label>
                     <select aria-label="Bom Item" class="js-example-basic-single item-selection" name="bom_item_id" id="bom_item_id" onchange="selectProductName()" required>
                         <option value="">Select Any one</option>
                         <?php foreach ($items as $item){ ?>

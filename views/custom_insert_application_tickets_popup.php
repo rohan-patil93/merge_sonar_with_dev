@@ -200,7 +200,7 @@ function updateApplicationTickets(rid,status){
 	            </select>
 			</div>
 			<div class="col-lg-6">
-		        <label class="form-label col-form-label d-block">Attache File</label>
+		        <label for="popattickettachment" class="form-label col-form-label d-block">Attache File</label>
 		        <input type="file" class="form-control" id="popattickettachment">
 		    </div>
 		</div>

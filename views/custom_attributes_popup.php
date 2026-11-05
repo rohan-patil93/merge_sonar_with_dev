@@ -418,7 +418,7 @@ elem.forEach(function(html) {
 							<div class="col-xl-12 order-2 order-xl-1">
 								<div class="row align-items-center">
 									<div class="col-lg-4">
-										<label class="d-block">Ratting</label>
+										<label for="value_field" class="d-block">Ratting</label>
 										<input type="text" name="value_field" class="form-control" id="value_field" value="<?php echo $view['value_field']; ?>" >
 									</div>
 								</div>
@@ -453,7 +453,7 @@ elem.forEach(function(html) {
 							<div id="radio_switch"  <?php if($attribute_type == 'static') { ?> style='display: none;' <?php } ?> >
 								<div class="row align-items-center" style="margin-top: 10px;">
 									<div class="col-lg-3 wi-full">
-										<label class="d-block">Table</label>
+										<label for="table_name" class="d-block">Table</label>
 										<select class="form-control js-example-basic-single" id="table_name" name= "table_name" onchange="Getfields(this.value)">
 											<option value="">Select Table Name</option>
 											<?php foreach ($showtables1 as $key => $data) {  ?>
@@ -462,7 +462,7 @@ elem.forEach(function(html) {
 										</select>
 									</div>
 									<div class="col-lg-2 w-full">
-										<label class="d-block">Value Field</label>
+										<label for="field_name" class="d-block">Value Field</label>
 										<div id='field_id'>
 											<select class="form-control js-example-basic-single" id='field_name' name="field_name">
 												<option value="-1">Select Filed</option>	
@@ -473,7 +473,7 @@ elem.forEach(function(html) {
 										</div>
 									</div>
 									<div class="col-lg-2 w-full">
-										<label class="d-block">Lable Field</label>
+										<label for="value" class="d-block">Lable Field</label>
 										<div id='label_id'>
 											<select class="form-control js-example-basic-single" id="value" name="value">
 												<option value="-1">Select Filed</option>
@@ -485,7 +485,7 @@ elem.forEach(function(html) {
 										</div>
 									</div>
 									<div class="col-lg-2 w-full" id='order_check_order'>
-										<label class="d-block">Order By Field</label>
+										<label for="order_by" class="d-block">Order By Field</label>
 										<div >
 											<input type="hidden" name="drop" id="drop" value="<?php echo $duplicate; ?>">
 											<select class="form-control form-select js-example-basic-single" id="order_by" name="order_by">
@@ -498,7 +498,7 @@ elem.forEach(function(html) {
 										</div>
 									</div>
 									<div class="col-lg-2 w-full" id='order_check_soft'>
-										<label class="d-block">Sort</label>
+										<label for="sort" class="d-block">Sort</label>
 										<div>
 											<select class="form-control js-example-basic-single" id="sort" name="sort">
 												<option  value="ASC">ASC</option>
@@ -509,7 +509,7 @@ elem.forEach(function(html) {
 								</div>
 								<div class="row align-items-center mt-4" >
 									<div class="col-lg-2">
-										<label class="d-block">Reference for </label>
+										<label for="refer_action" class="d-block">Reference for </label>
 										<input type="checkbox" class="js-switch-s" name="refer_action" id="refer_action" onchange="swictchrefer1()" value="0" <?php if($view_details['refer_action'] == '0'){ echo "checked";  } ?>>
 									</div>
 									<div class="col-lg-3 w-full">
@@ -524,7 +524,7 @@ elem.forEach(function(html) {
 									</div>
 									</div>
 									<div class="col-lg-2">
-										<label class="d-block">Referenced By</label>
+										<label for="refer_by_action" class="d-block">Referenced By</label>
 										<input type="checkbox" class="js-switch-s" name="refer_by_action" id="refer_by_action" onchange="swictchrefer_by1()" value="0" <?php if($view_details['refer_by_action'] == '0'){ echo "checked";  } ?>>
 									</div>
 									<div class="col-lg-3 w-full">

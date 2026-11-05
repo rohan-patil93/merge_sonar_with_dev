@@ -161,17 +161,17 @@ $account_groups = $result['account_groups'];
      </div>
      <?php **/ ?>
      <div class="form-group col-lg-6">
-        <label class="form-label d-block">Allow Reconciliation</label>
-        <input class="js-primary-sm" type="checkbox" name="reconciliation" <?php echo ($chartofaccountssingle['reconciliation']=='0')?"checked":"";?> value="0" >
+        <label for="reconciliation" class="form-label d-block">Allow Reconciliation</label>
+        <input id="reconciliation" class="js-primary-sm" type="checkbox" name="reconciliation" <?php echo ($chartofaccountssingle['reconciliation']=='0')?"checked":"";?> value="0" >
      </div>
 
      <div class="form-group col-lg-6">
-        <label class="form-label d-block">Allow Posting</label>
-        <input class="js-primary-sm" type="checkbox" name="allow_posting" <?php echo ($chartofaccountssingle['allow_posting']=='0')?"checked":"";?> value="0" >
+        <label for="allow_posting" class="form-label d-block">Allow Posting</label>
+        <input id="allow_posting" class="js-primary-sm" type="checkbox" name="allow_posting" <?php echo ($chartofaccountssingle['allow_posting']=='0')?"checked":"";?> value="0" >
      </div>
      <div class="form-group col-lg-6">
-        <label class="form-label d-block">Allow Manual Entries</label>
-        <input class="js-primary-sm" type="checkbox" name="allow_manual_entries" <?php echo ($chartofaccountssingle['allow_manual_entries']=='0')?"checked":"";?> value="0" >
+        <label for="allow_manual_entries" class="form-label d-block">Allow Manual Entries</label>
+        <input id="allow_manual_entries" class="js-primary-sm" type="checkbox" name="allow_manual_entries" <?php echo ($chartofaccountssingle['allow_manual_entries']=='0')?"checked":"";?> value="0" >
      </div>
      <?php if($chartofaccountssingle['id']==""){ ?>
      <div class="form-group col-lg-6">
@@ -222,8 +222,8 @@ $account_groups = $result['account_groups'];
                   </select>
                 </div>
                 <div class="col-lg-3 text-center">  
-                  <label class="form-label d-block">Balance</label>
-                  <label class="form-label d-block" id="balance_cnt_label">Total : 0</label>
+                  <span class="form-label d-block">Balance</span>
+                  <span class="form-label d-block" id="balance_cnt_label">Total : 0</span>
                 </div>
               </dic>
              <div class="custom-scroll" style="max-height: 400px;">

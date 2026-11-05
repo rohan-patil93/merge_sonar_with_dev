@@ -39,20 +39,20 @@ $statuse = ViewStatusData();
 <div class="modal-body m-l-50 m-r-50" <?php if($application_task_logs['follow_up_type'] == EMAIL_TASK['type']){ ?>style="height: 450px;" <?php } ?>>
 	<div class="row">
 		<div class="form-group col-lg-3 text-center">
-			<label class="form-label d-block">Task Name</label>
+			<span class="form-label d-block">Task Name</span>
 			<span><?php echo $application_task_logs['task_name'];?></span>
 		</div>
 		<div class="form-group col-lg-3 text-center">
-			<label class="form-label d-block">Task Date</label>
+			<span class="form-label d-block">Task Date</span>
 			<span><?php echo fromDate($application_task_logs['planned_start']);?></span>
 		</div>
 		<div class="form-group col-lg-3  text-center">
-			<label class="form-label d-block">Task Type</label>
+			<span class="form-label d-block">Task Type</span>
 			<span><?php echo $application_task_logs['follow_up_type'];?></span>
 		</div>
 		<div class="form-group col-lg-3  text-center">
-			<label class="form-labe d-block">Status</label>
-			<label class="form-label label label-md" style="color:<?php echo $statuse[$application_task_logs['current_status']]['color']; ?>; background-color:<?php echo $statuse[$application_task_logs['current_status']]['background_color']; ?>;">
+			<span class="form-label d-block">Status</span>
+			<span class="form-label label label-md" style="color:<?php echo $statuse[$application_task_logs['current_status']]['color']; ?>; background-color:<?php echo $statuse[$application_task_logs['current_status']]['background_color']; ?>;">
                 <?php echo $statuse[$application_task_logs['current_status']]['name']; ?>
             </label>
 		</div>
@@ -60,7 +60,7 @@ $statuse = ViewStatusData();
 	<?php if($application_task_logs['follow_up_type'] == EMAIL_TASK['type']){ ?>
 	<div class="row">
 		<div class="col-lg1-12">
-			<label class="form-label d-block">Attach Document</label>
+			<span class="form-label d-block">Attach Document</span>
 			<a class="text-primary" href="uploads/invoices/<?php echo $email_logs['mail_attachments']; ?>" download><?php echo $email_logs['mail_attachments']; ?></a>
 		</div>
 		<div class="col-lg-12">

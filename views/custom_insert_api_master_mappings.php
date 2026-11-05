@@ -65,7 +65,7 @@ $selectdata = $data['table_filed'];
               </select>
 			</div>
 			<div class="col-lg-2">
-				<label class="form-label d-block">&nbsp</label>
+				<span class="form-label d-block">&nbsp;</span>
 				<button class="btn btn-primary form-control" onclick="filterSubmitForm()" type="submit" >
 					<i class="ti-search m-r-2"></i>View
 				</button>

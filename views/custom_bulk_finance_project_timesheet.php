@@ -668,7 +668,7 @@ $erp = json_decode($erp_data,1);
 						
 						<div class="col-lg-6 ">
 							<div class=""  >
-								<ul class="nav  md-tabs infisuite_tab" role="tablist"> 
+								<ul class="nav  md-tabs infisuite_tab"> 
 									<li class="nav-item" name="approved_tab"> 
 										<a class="nav-link py-2 px-4"
 										data-bs-toggle="tab" href="#kt_tab_pane_11_2">Approved &nbsp;<span class="lable-round"><?php echo $apv_count; ?></span>

@@ -75,7 +75,7 @@ foreach ($roledata as $roles) {
 		<?php  } ?>
 		</select>
 	</div>
-	<ul class="nav md-tabs" role="tablist" style="margin-top: 20px ;">
+	<ul class="nav md-tabs" style="margin-top: 20px ;">
 			<?php 
 				$i=1;
 				foreach ($navelistdata as  $navdata) { ?>
@@ -176,7 +176,7 @@ foreach ($roledata as $roles) {
 							<?php }else{ ?>
 							<div class="card-body">
 								<div class="kt-portlet__body">
-									<ul class="nav nav-tabs" role="tablist">
+									<ul class="nav nav-tabs">
 										<?php $j=1; foreach ($menu['child'] as $key=>$child) { ?>
 										<li class="nav-item">
 											<a class="nav-link <?php if ($j==1){ ?> active <?php } ?> " data-bs-toggle="tab" href="#kt_tabs_2_<?php echo $key; ?>">

@@ -215,17 +215,17 @@ function addMoreAdditionalSettings(){
 				<input type="hidden" class="form-control" name="process_name" value="<?php echo $process_name; ?>">
 				<div class="row">
 					<div class="form-group col-lg-12">
-						<label class="form-label d-block">Output</label>
+						<span class="form-label d-block">Output</span>
 						<span id="serialnumberoutput"> <?php echo serialNumberPreview($asnres);  ?>	</span>
 					</div>
 
 					<div class="form-group col-lg-3">
-						<label class="form-label d-block">Number Length</label>
+						<label for="doc_no_length" class="form-label d-block">Number Length</label>
 						<span class="text-danger empty_error" id="error_doc_no_length"></span>
 						<input type="number" class="form-control" name="doc_no_length" id="doc_no_length" value="<?php echo $asnres['doc_no_length']!=""?$asnres['doc_no_length']:3; ?>" onblur="serialNumberPreview()">
 					</div>
 					<div class="form-group col-lg-3">
-						<label class="form-label d-block">separator symbols</label>
+						<label for="separator_symbols" class="form-label d-block">separator symbols</label>
 						<select class ="form-control form-control-lg form-select js-example-basic-single" id="separator_symbols" name="separator_symbols"  onchange="serialNumberPreview()"> 
 							<option value="-" <?php echo $asnres['separator_symbols'] =="-"?"selected":""; ?>>-</option>
 							<option value="/" <?php echo $asnres['separator_symbols'] =="/"?"selected":""; ?>>/</option>
@@ -234,7 +234,7 @@ function addMoreAdditionalSettings(){
 					</div>
 
 					<div class="form-group col-lg-3">
-						<label class="form-label d-block">Start Serial Number</label>
+						<label for="serial_number" class="form-label d-block">Start Serial Number</label>
 
 						<input type="text" class="form-control  mt-2" name="serial_number" id="serial_number"  value="<?php echo $asnres['serial_number']!=""?$asnres['serial_number']:1; ?>" onblur="serialNumberPreview()" readonly>
 
@@ -250,7 +250,7 @@ function addMoreAdditionalSettings(){
 
 					</div>
 					<div class="form-group col-lg-3">
-						<label class="form-label d-block">Financial Year</label>
+						<label for="financial_year_check" class="form-label d-block">Financial Year</label>
 						<input type="checkbox" class="js-switch-finanaceyear" value="Y" name="financial_year_check" id="financial_year_check"  onchange="financeYearonChange()" <?php echo ($asnres['financial_year_check'] =="" || $asnres['financial_year_check'] =="Y")?"checked":""; ?> readonly>
 
 						<div class="form-group mt-2 financial_year_check_css <?php echo $asnres['financial_year_check'] =="N"?"event_disabled":""; ?>">
@@ -268,8 +268,8 @@ function addMoreAdditionalSettings(){
 				</div>
 				<div class="row">
 					<div class="form-group col-lg-3">
-						<label class="form-label d-block">Reset Serial Number Type</label>
-						<select class ="form-control form-control-lg form-select js-example-basic-single" name="reset_type"  > 
+						<label for="reset_type" class="form-label d-block">Reset Serial Number Type</label>
+						<select id="reset_type" class ="form-control form-control-lg form-select js-example-basic-single" name="reset_type"  > 
 							<option value="MT" <?php echo $asnres['reset_type'] =="MT"?"selected":""; ?>>Monthly Reset</option>
 							<option value="YR" <?php echo $asnres['reset_type'] =="YR"?"selected":""; ?>>Yearly Reset</option>
 							<option value="LT" <?php echo $asnres['reset_type'] =="LT"?"selected":""; ?>>Life Time Same Serial Number</option>
@@ -285,13 +285,13 @@ function addMoreAdditionalSettings(){
 				    <div class="card-body">
 				    		<div class="row">
 								<div class="col-lg-3">
-									<label class="form-label d-block">Display Type</label>
+									<span class="form-label d-block">Display Type</span>
 								</div>
 								<div class="col-lg-3">
-									<label class="form-label d-block">Value/Field</label>
+									<span class="form-label d-block">Value/Field</span>
 								</div>
 								<div class="col-lg-3 text-left">
-									<label class="form-label d-block">Position</label>
+									<span class="form-label d-block">Position</span>
 								</div>
 								<div class="col-lg-3">
 								

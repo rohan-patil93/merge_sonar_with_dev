@@ -217,8 +217,8 @@ function checkVendorValidationEmpty() {
 				<div class="col-lg-6">
 					<div class="row"><input class="form-control" type="hidden" name="customer_vendor_gst_billing_details_id[]" value="" >
 						<div class="col-lg-6 p-r-5 w-full" style="float: left;">
-							<label class="form-label d-block">GST  Registration type</label>
-							<select  name="gsttype[]" class="form-select js-example-basic-single">`;
+							<label for="gsttype_` + mkseq + `" class="form-label d-block">GST  Registration type</label>
+							<select id="gsttype_` + mkseq + `" name="gsttype[]" class="form-select js-example-basic-single">`;
 				html += gsttype_id;				
 						html += `</select>
 						</div>
@@ -282,7 +282,7 @@ function checkVendorValidationEmpty() {
 				<div class="col-lg-6" style="float: left;">
 					<div class="row">
 						<div class="form-group col-lg-9" >
-							<label class="form-label d-block"></label>
+							<span class="form-label d-block"></span>
 							<div class="border-checkbox-section  ">
 								<div class="border-checkbox-group border-checkbox-group-primary m-t-30">
 									<input class="border-checkbox cloneShipping" type="checkbox" id="checkbox`+ mkseq + `"  data-seq="`+mkseq+`" >

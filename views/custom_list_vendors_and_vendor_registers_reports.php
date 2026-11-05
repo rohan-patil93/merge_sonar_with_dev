@@ -33,16 +33,16 @@ $_SESSION['download_data'] = array();
 		<form method="post" action="" id="typeForm">
 	        <div class="row ">
 	          	<div class="col-lg-2 mb-2 w-full">
-	            	<label class="form-label d-block">Transaction Type</label>
-	            	<select class="form-select js-example-basic-single" name="transaction_table"  >
+	            	<label for="transaction_table" class="form-label d-block">Transaction Type</label>
+	            	<select id="transaction_table" class="form-select js-example-basic-single" name="transaction_table"  >
 	              		<option value="vendors" <?php echo ($transaction_table == 'vendors') ? 'selected' : ''; ?>>Vendors</option>
 	              		<option value="vendor_registers" <?php echo ($transaction_table == 'vendor_registers') ? 'selected' : ''; ?>>
 	                Vendor Registers</option>
 	            	</select>
 	          	</div>
 	          	<div class="col-lg-2 mb-2 w-full">
-	            	<label class="form-label d-block">Vendor Types</label>
-	            	<select class="form-select js-example-basic-single" name="vendor_types_id"  >
+	            	<label for="vendor_types_id" class="form-label d-block">Vendor Types</label>
+	            	<select id="vendor_types_id" class="form-select js-example-basic-single" name="vendor_types_id"  >
 	            		<option value="">All Vendor Types</option>
 	              		<?php foreach($vendor_types as $vt){ ?>
 	              		<option value="<?php echo $vt['id']; ?>" <?php echo ($_POST['vendor_types_id'] == $vt['id']) ? 'selected' : ''; ?>><?php echo $vt['type_name']; ?></option>
@@ -50,8 +50,8 @@ $_SESSION['download_data'] = array();
 	            	</select>
 	          	</div>
 	          	<div class="col-lg-2 mb-2 w-full">
-	            	<label class="form-label d-block">Locations</label>
-	            	<select class="form-select js-example-basic-single" name="location_id"  >
+	            	<label for="location_id" class="form-label d-block">Locations</label>
+	            	<select id="location_id" class="form-select js-example-basic-single" name="location_id"  >
 	            		<option value="">All Locations</option>
 	            		<?php foreach($locations as $loc){ ?>
 	              		<option value="<?php echo $loc['id']; ?>" <?php echo ($_POST['location_id'] == $loc['id']) ? 'selected' : ''; ?>><?php echo $loc['location_name']; ?></option>
@@ -60,8 +60,8 @@ $_SESSION['download_data'] = array();
 	            	</select>
 	          	</div>
 	          	<div class="col-lg-2 mb-2 w-full">
-	            	<label class="form-label d-block">User Connect</label>
-	            	<select class="form-select js-example-basic-single" name="vendor_connect_user"  >
+	            	<label for="vendor_connect_user" class="form-label d-block">User Connect</label>
+	            	<select id="vendor_connect_user" class="form-select js-example-basic-single" name="vendor_connect_user"  >
 	              		<option value="">All User Connect</option>
 	            		<?php foreach($application_users as $au){ ?>
 	              		<option value="<?php echo $au['id']; ?>" <?php echo ($_POST['vendor_connect_user'] == $au['id']) ? 'selected' : ''; ?>><?php echo $au['display_name']; ?></option>

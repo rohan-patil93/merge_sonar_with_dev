@@ -17,7 +17,7 @@ if (!empty($formData['contact_persons'])) {
 ?>
 <?php if ($contract_services_contact_section == 'services') { ?>
                         <div class="col-md-12" style="<?= $fieldDisplay['contract_services_id']['style'] ?>">
-                            <label class="form-label d-block">Services <?= $fieldDisplay['contract_services_id']['star'] ?></label>
+                            <label for="unified_contract_services_multiselect" class="form-label d-block">Services <?= $fieldDisplay['contract_services_id']['star'] ?></label>
                             <select name="contract_services_id[]" multiple class="form-control js-example-basic-multiple" id="unified_contract_services_multiselect" <?= $fieldDisplay['contract_services_id']['required'] ?> <?= $amc_renew_disabled ?? '' ?>>
                                 <?php if (count((array)$contract_services) > 0) {
                                     foreach ($contract_services as $conservRow) {

@@ -139,7 +139,7 @@ $emp_pf_list = json_decode($configesponse,1);
                                                 <th scope="col"><?php echo $pf_data['emp_display_name']; ?></th>
                                                 <th scope="col"><?php echo $pf_data['emp_pf_number']; ?></th>
                                                 <th scope="col"><?php echo round($pf_data['emp_pf_wages'],2); ?></th>
-                                                <td class="dtr-control" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?php echo round($pf_data['emp_pf_amount'],2); ?></td>
+                                                <td class="dtr-control"><?php echo round($pf_data['emp_pf_amount'],2); ?></td>
                                                 <td class=""><?php echo round($pf_data['emp_voluntary_pf'],2); ?> </td>
                                                 <td><?php echo round($pf_data['employer_pf_amount'],2); ?></td>
                                                 <td><?php echo round($pf_data['emp_eps_rate'],2); ?></td>

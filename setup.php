@@ -679,8 +679,8 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 									<textarea type="text" class="form-control" name="address1" ><?php echo $companies['address1'] ;  ?></textarea>
 								</div>
 								<div class="col-lg-6 form-group w-full">
-									<label class="form-label d-block">Country</label>
-									<select name="country" class="form-control form-select js-example-basic-single" onchange="selectCounty(this.value)" value="<?php echo $config['display_logo'] ;  ?>">
+									<label for="setup_country" class="form-label d-block">Country</label>
+									<select id="setup_country" name="country" class="form-control form-select js-example-basic-single" onchange="selectCounty(this.value)" value="<?php echo $config['display_logo'] ;  ?>">
 										<option value="">Select Any One</option>
 										<?php 
 										$timezone = "";
@@ -694,7 +694,7 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 									</select>
 								</div>
 								<div class="col-lg-6 form-group  w-full">
-									<label class="form-label d-block">State</label>
+									<label for="getstate" class="form-label d-block">State</label>
 									<select name="state" class="form-control form-select js-example-basic-single" id="getstate" onchange="selectSatate(this.value)" >
 										<option value="">Select Any One</option>
 										<?php foreach((array)$states as $state) { ?>
@@ -703,7 +703,7 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 									</select>
 								</div>
 								<div class="col-lg-6 form-group  w-full">
-									<label class="form-label d-block">City</label>
+									<label for="getcity" class="form-label d-block">City</label>
 									<select name="city" class="form-control form-select js-example-basic-single" id="getcity">
 										<option value="">Select Any One</option>
 										<?php foreach((array)$cities as $city) { ?>
@@ -712,8 +712,8 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 									</select>
 								</div>
 								<div class="col-lg-6 form-group">
-									<label class="form-label">Post Code</label>
-									<input type="number" class="form-control" name="postcode" value="<?php echo $companies['postcode'] ;  ?>">
+									<label for="setup_postcode" class="form-label">Post Code</label>
+									<input id="setup_postcode" type="number" class="form-control" name="postcode" value="<?php echo $companies['postcode'] ;  ?>">
 								</div>
 							</div>
 							<input type="hidden" name="setup_page_id" value="3">

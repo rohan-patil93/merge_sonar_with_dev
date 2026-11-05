@@ -1542,7 +1542,7 @@ function addslabrows(){
 
     </div>
 
-    <ul class="nav md-tabs mt-2 infisuite_tab" role="tablist">
+    <ul class="nav md-tabs mt-2 infisuite_tab">
       <li class="nav-item">
         <a class="nav-link active" data-bs-toggle="tab" href="#kt_tab_pane_1" role="tab">Earnings</a>
       </li>

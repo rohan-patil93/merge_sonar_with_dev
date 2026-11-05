@@ -507,7 +507,7 @@ $due_date_period_list = $result['period_list'];
 
     <div class="col-lg-6">
       <div class="card mb-4">
-        <!--   <ul class="nav md-tabs infisuite_tab mb-2" role="tablist">
+        <!--   <ul class="nav md-tabs infisuite_tab mb-2">
           <li class="nav-item">
             <a class="nav-link active" data-bs-toggle="tab" href="#candidateprofiletab" role="tab">Profile Readiness</a>
           </li>
@@ -680,8 +680,8 @@ $due_date_period_list = $result['period_list'];
                                   <input type="hidden" name="reporting_date" value="<?php echo $data['reporting_date']; ?>"> 
                                  <div class="row">
                                    <div class="form-group col-lg-8 w-full">
-                                     <label class="form-label d-block">Due Date</label>
-                                      <select name="before_or_after" style="width:150px;" class="form-control form-select js-example-basic-single" >
+                                     <label for="before_or_after_<?php echo $details['id']; ?>" class="form-label d-block">Due Date</label>
+                                      <select name="before_or_after" id="before_or_after_<?php echo $details['id']; ?>" style="width:150px;" class="form-control form-select js-example-basic-single" >
                                          <option value="AT">Any Time</option>
                                          <?php foreach ($due_date_period_list as $due){  ?>
                                            <option value="<?php echo $due['genc_detail_code'];?>" ><?php echo $due['genc_detail_name']." Joining";?></option>
@@ -689,8 +689,8 @@ $due_date_period_list = $result['period_list'];
                                        </select> 
                                    </div>
                                    <div class="form-group col-lg-4">
-                                     <label class="form-label">Days</label>
-                                     <input type="text" name="day" class="form-control" value="0"/>
+                                     <label for="day_<?php echo $details['id']; ?>" class="form-label">Days</label>
+                                     <input type="text" name="day" id="day_<?php echo $details['id']; ?>" class="form-control" value="0"/>
                                    </div>
                                  </div>
                                </form>
@@ -1145,7 +1145,7 @@ $due_date_period_list = $result['period_list'];
 
 
                 <div class="accordion-desc">
-                  <ul class="nav md-tabs infisuite_tab mb-2" role="tablist">
+                  <ul class="nav md-tabs infisuite_tab mb-2">
                     <li class="nav-item">
                       <a class="nav-link active" data-bs-toggle="tab" href="#uploaddocumentstab" role="tab">Upload
                         Documents</a>

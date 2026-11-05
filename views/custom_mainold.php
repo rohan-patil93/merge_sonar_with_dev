@@ -527,7 +527,7 @@
 
 											</div>
 											<div class="kt-portlet__head-toolbar">
-												<ul class="nav nav-tabs nav-tabs-line nav-tabs-bold nav-tabs-line-brand" role="tablist">
+												<ul class="nav nav-tabs nav-tabs-line nav-tabs-bold nav-tabs-line-brand">
 													<li class="nav-item">
 														<a class="nav-link active" data-toggle="tab" href="#kt_widget11_tab1_content" role="tab">
 															YTD
@@ -607,7 +607,7 @@
 
 											</div>
 											<div class="kt-portlet__head-toolbar">
-												<ul class="nav nav-tabs nav-tabs-line nav-tabs-bold nav-tabs-line-brand" role="tablist">
+												<ul class="nav nav-tabs nav-tabs-line nav-tabs-bold nav-tabs-line-brand">
 													<li class="nav-item">
 														<a class="nav-link active" data-toggle="tab" href="#kt_widget11_tab1_content" role="tab">
 															YTD
@@ -861,7 +861,7 @@
 												</h3>
 											</div>
 											<div class="kt-portlet__head-toolbar">
-												<ul class="nav nav-pills nav-pills-sm nav-pills-label nav-pills-bold" role="tablist">
+												<ul class="nav nav-pills nav-pills-sm nav-pills-label nav-pills-bold">
 													<li class="nav-item">
 														<a class="nav-link active" data-toggle="tab" href="#kt_widget3_tab1_content" role="tab">
 															Today

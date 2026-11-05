@@ -405,7 +405,7 @@ $joblevel_list = $results['job_grade'];
      <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
 
-           <label class="form-label mt-1 d-block">Job Posting Type</label>
+           <span class="form-label mt-1 d-block">Job Posting Type</span>
            <div class="form-radio d-inline-block align-middle">
             <div class="radio radio-inline">
               <label class="form-label">
