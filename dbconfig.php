@@ -42,13 +42,20 @@
 ob_start();
 //session_start(); 
 ini_set("display_errors", 0);
-define("HOSTNAME", "localhost");
 
-define("USERNAME", "infistaqin_infisuitesuper");
+require_once __DIR__ . '/vendor/autoload.php';
 
-define("PASSWORD", "Th8%2xXU3P[W*t./D-X4");
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
-define("PORT", "3306");
+define("HOSTNAME", $_ENV['DB_HOST']);
+
+define("USERNAME", $_ENV['DB_USERNAME']);
+
+define("PASSWORD", $_ENV['DB_PASSWORD']);
+
+define("PORT", $_ENV['DB_PORT']);
+
 
 $subdomain = '';
 $host = $_SERVER['HTTP_HOST'];
@@ -68,9 +75,10 @@ if ($subdomain != "" && is_dir($dbconfig_floder) && file_exists($dbconfig_file))
 
 
 
-define("MAINDB", 'infistaqin_infisuite_common');
 
-define("DUMPTABLE", 'infistaqin_infisuite_super_admin');
+define("MAINDB", $_ENV['MAIN_DATABASE']);
+
+define("DUMPTABLE", $_ENV['DB_DUMPTABLE']);
 
 
 //$db = $_SESSION['DB_NAME'].".";
