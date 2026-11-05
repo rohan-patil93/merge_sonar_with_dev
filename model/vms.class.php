@@ -1,6 +1,7 @@
 <?php 
 class vMSUserClass extends userClass{
 	public function toGetEmployessWorkorderswthTimesheet($get){
+		$data = array();
 		global $callConfig;
 		$query = "select distinct mpc.id, mpc.transaction_number, (select display_name from vendors where id = mpc.customer_id) vendor_name, mpc.customer_id vendor_id, emp.display_name, emp.id as emp_id, emp.image,emp.email_id,( select job_title from job_titles where id = emp.job_title_id) designation, item_price monthlyrate, pt.timesheet_date, pt.billable_hrs, (item_price/160) *pt.billable_hrs chargable_amount from manpower_contracts mpc, mpc_items, employees emp, emp_work_order ewo, project_timesheets pt WHERE mpc.company_id = mpc_items.company_id AND mpc.id = mpc_items.transaction_id AND mpc.id = 4 AND emp.company_id =ewo.company_id AND emp.id = ewo.emp_id AND ewo.work_order_id = mpc.id AND emp.job_title_id = mpc_items.item_id AND pt.company_id = ewo.company_id AND pt.work_order = ewo.work_order_id AND pt.emp_id = emp.id order by 1";
 		$returns = $callConfig->getAllRows($query);

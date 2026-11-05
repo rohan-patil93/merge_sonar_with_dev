@@ -68,6 +68,7 @@ class amcAccountDetailsClass extends userClass{
     return $return;
   }
   public function toafterapprovaltoupdatemanufirmorder($transaction_no, $get){
+    $exquery = null;
     global $callConfig;
     print_r($get); echo "transaction_no".$transaction_no; exit;
     /*$query = "SELECT * FROM manufacturing_forecast WHERE company_id=".$get['company_id']." AND id=".$transaction_no;

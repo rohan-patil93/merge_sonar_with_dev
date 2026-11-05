@@ -58,6 +58,7 @@ class vendorPortelUserClass extends userClass{
 		return $res;
 	}
 	function updateApplicationTickets($get,$post){
+		$res = null;
 		global $callConfig;
 		$updateary=array('current_status'=>$post['status'],'updated_by'=>$post['user_id'],'updated_date'=>date("Y-m-d H:i:s"));
 		if($post['status'] == '1'){

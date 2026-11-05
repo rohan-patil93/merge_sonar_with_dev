@@ -540,6 +540,7 @@ function getPerFormanceAppraisal($get){ //please removed not working code
 
 	}
 	public function insertPerformanceAppraisalQuestions($get,$post){
+		$return = array();
 		global $callConfig;
 		$returnarray = array();
 		$updateset = array("is_active"=>null);
@@ -565,6 +566,7 @@ function getPerFormanceAppraisal($get){ //please removed not working code
 			}
 		}
 		//$returnarray['insert'] = $insert;
+		$return = $returnarray;
 		return $return;
 	}
 	public function getKipAndKraDetails($get){// getOrganizationGoalsSetails

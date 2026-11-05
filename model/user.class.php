@@ -2638,6 +2638,7 @@ class userClass{
 		return $pr;
 	}
 	function toGetDynamicInvoicetables(){ 
+		$table_list = array();
 		global $callConfig;
 		$where = " item_table != '' AND tax_table != '' AND is_active = 0";
 		$configesponse = $this->getAllTablesData(TBL_DYNAMIC_MAPPING_TABLES,'*',$where);
@@ -2651,6 +2652,7 @@ class userClass{
 		return $table_list;
 	}
 	function toGetInvoicetables(){ 
+		$table_list = array();
 		global $callConfig;
 		$configesponse = $this->getAllTablesData(TBL_DYNAMIC_MAPPING_TABLES,'*','','');
 		foreach($configesponse AS $con){
@@ -2664,6 +2666,7 @@ class userClass{
 		return $table_list;
 	}
 	function toGetDynamicTables($table,$option=''){ 
+		$table_list = array();
 		global $callConfig;
 		$where = " application_table_name = '".$table."' AND is_active = 0";
 		if($option !=''){
@@ -10803,6 +10806,7 @@ function payrolldisplaydata($get){
 
 
 function togetemployeeslist1($get) {
+	$employee_details = array();
 
 	echo $employee_list_query = "select * from employees where company_id='".$get['company_id']."' and is_active='0'";
 	//echo "sdfsdf";
@@ -14336,6 +14340,7 @@ function convertToYYYYMMDD($dateString) {
        }
 
        function savevendortojobpostings($post){
+       	$details = array();
        	global $callConfig;
 
        	$query="SELECT *  FROM `manpower_contracts` WHERE company_id='".$post['company_id']."' and is_active=0 and id=".$post['mpc_id'];
@@ -14357,6 +14362,7 @@ function convertToYYYYMMDD($dateString) {
        	return $details;
        }
        function updatejobmanpowerrq($post){
+       	$details = array();
        	global $callConfig;
        	$query="SELECT *  FROM vendor_rate_cards WHERE company_id='".$post['company_id']."' and is_active=0 and id=".$post['mpc_id'];
        	$vrcards = $callConfig->getRow($query);
@@ -20694,6 +20700,7 @@ function closeNotificationInfo($data){
 }
 
 function tocerateapplicationuserbasedonalltype($get){
+	$update_data = array();
 	global $callConfig;
 		//$query="SELECT distinct `reporting_manager_id`, lower(replace(concat(`reporting_manager_id`, '@vendorstaq.com'),' ','-'))  as email_id FROM `multi_table_import_data` WHERE 1";
 	$query="SELECT distinct `approving_manager`, lower(replace(concat(`approving_manager`, '@vendorstaq.com'),' ','-'))  as email_id FROM `multi_table_import_data` WHERE id in(111,121)";
@@ -34117,6 +34124,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
     	return $res33;
     }
     function insertContactDetails($get){
+        $return = array();
         global $callConfig;
        // echo "<pre>";
         // $sql = "SELECT * FROM vendors WHERE company_id = '".$get['company_id']."' AND is_active =0";
@@ -36185,6 +36193,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 		return $return;
 	}
 	function updateTransactionTDS($get){
+		$talres = array();
 		global $callConfig; 
 		$transaction_table = $get['transaction_table'];
 		$transaction_no = $get['transaction_no'];

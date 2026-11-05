@@ -89,9 +89,9 @@
                                             <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="password" name="chrPassword" required="" placeholder="Password">
                                         </div>
                                         <?php if(CAPTCHA_YES_NO == 'YES'){ ?> 
-                                        <center><img style="height: 50px;" src="captcha/captcha.php" alt="" /></center>
+                                        <div class="text-center"><img style="height: 50px;" src="captcha/captcha.php" alt="CAPTCHA" /></div>
                                         <div class="form-group form-primary login-mean-class" >
-                                            <input type="text" class="form-control" name="captcha" placeholder="Enter Captcha" required="required"/>
+                                            <input type="text" class="form-control" name="captcha" id="captcha" placeholder="Enter Captcha" aria-label="Enter Captcha" required="required"/>
                                         </div>
                                         <?php } ?>
 										<div class="row text-right">

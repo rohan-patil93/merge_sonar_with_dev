@@ -19,21 +19,22 @@
 		<div class="col-md-6">
 			<form action="" method="POST">
 				<div class="form-group">
-					<label>Username</label>
-					<input type="text" name="username" class="form-control" required="required"/>
+					<label for="username">Username</label>
+					<input type="text" id="username" name="username" class="form-control" required="required"/>
 				</div>
 				<div class="form-group">
-					<label>Password</label>
-					<input type="password" name="password" class="form-control" required="required"/>
+					<label for="password">Password</label>
+					<input type="password" id="password" name="password" class="form-control" required="required"/>
 				</div>
-				<center><img src="captcha.php" alt="" /></center>
+				<div class="text-center"><img src="captcha.php" alt="CAPTCHA" /></div>
 				<br />
 				<br />
 				<div class="form-group">
-					<input type="text" class="form-control" name="captcha" required="required"/>
+					<label for="captcha">Security Code</label>
+					<input type="text" id="captcha" class="form-control" name="captcha" placeholder="Enter captcha" required="required"/>
 				</div>
 				<?php include_once 'login.php'?>
-				<center><button name="login" class="btn btn-primary"><span class="glyphicon glyphicon-log-in"></span> login</button></center>
+				<div class="text-center"><button name="login" class="btn btn-primary"><span class="glyphicon glyphicon-log-in"></span> login</button></div>
 			</form>
 		</div>	
 	</div>

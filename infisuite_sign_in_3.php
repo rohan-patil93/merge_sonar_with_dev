@@ -149,9 +149,9 @@
                                             </span>
                                         </div>
                                         <?php if(CAPTCHA_YES_NO == 'YES' && $subdomain !='uat' ){ ?> 
-                                        <center><img style="height: 50px;" src="captcha/captcha.php" alt="" /></center>
+                                        <div class="text-center"><img style="height: 50px;" src="captcha/captcha.php" alt="CAPTCHA" /></div>
                                         <div class="form-group form-primary login-mean-class" >
-                                            <input type="text" class="form-control" name="captcha" placeholder="Enter Captcha" required="required"/>
+                                            <input type="text" class="form-control" name="captcha" id="captcha" placeholder="Enter Captcha" aria-label="Enter Captcha" required="required"/>
                                         </div>
                                         <?php } ?>
 										<div class="row text-right">

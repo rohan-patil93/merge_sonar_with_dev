@@ -185,6 +185,8 @@ function imageuploadwitharray($jnt, $imagename, $hidimage, $exname = "", $array_
 }
 function toGETUsersList()
 {
+	$status = array();
+	$imagess = array();
 	$userurl = API . "?mode=gettabledetails&table=" . TBL_USERS;
 	$usres = callAPI($userurl);
 	$userresult = json_decode($usres, 1);
@@ -200,6 +202,7 @@ function toGETUsersList()
 
 function toGETStatuList()
 {
+	$status = array();
 	$userurl = API . "?mode=gettabledetails&table=" . TBL_STATUS;
 	$usres = callAPI($userurl);
 	$userresult = json_decode($usres, 1);
@@ -520,6 +523,7 @@ function toGetErrorMessages()
 	//$erroresponse = json_decode($erroresponse,1);
 	//print_r($erroresponse)
 
+	$error_data = array();
 	$wh1["where"] = array('company_id' => $_SESSION['company_id']);
 	$wh1["field"] = "id,message_number,message_description";
 	$data1 = urlencode(json_encode($wh1));
@@ -715,6 +719,7 @@ function toGetMenuDetailsBaseMenuPageName($page)
 }
 function toGetIdformateApplicationPagesList()
 {
+	$data = array();
 	foreach ($_SESSION['application_pages'] as $page) {
 		$data[$page['id']] = $page;
 	}
@@ -746,6 +751,7 @@ function toGETModuleList()
 }
 function toGetApplicationMenuList()
 {
+	$module = array();
 	foreach ($_SESSION['module_setp'] as $modu) {
 		$module[] = $modu['module_id'];
 	}
@@ -763,6 +769,7 @@ function toGetApplicationMenuList()
 }
 function toGETNavDetailslastest($type)
 {
+	$array = array();
 	$menu = $_SESSION['application_menu'];
 	//echo $type."<pre>"; print_r($_SESSION['role_permission']); echo $type." Menus:"; print_r($menu); //exit;
 	//echo "<pre>".$type." Menus:"; print_r($menu);
@@ -1023,6 +1030,7 @@ function getParentidmenus($pid, $len)
 }
 function getParentidmenuscheck($pid, $len)
 {
+	$array1 = array();
 	$menu = $_SESSION['application_menu'];
 	foreach ($menu as $key => $value) {
 		if ($value['parent_menu'] == $pid) {
@@ -1235,6 +1243,7 @@ function toGetTaxrates()
 }
 function toCreateInvoicePages()
 {
+	$table_list = array();
 	if (count((array) $_SESSION['invoice_pages']) > 0) {
 		$configesponse = $_SESSION['invoice_pages'];
 	} else {
@@ -1325,6 +1334,7 @@ function toGetApplicationSerialNumber($table_name)
 }
 function toGetCompanyList()
 {
+	$datas = array();
 	$vurl = API . "?mode=gettabledetailswithconditions&table=" . TBL_COMPANIES;
 	$res = callAPI($vurl);
 	$res = json_decode($res, 1);
@@ -1408,7 +1418,7 @@ function insertatchments($data)
 	$vdata = urlencode(json_encode($data));
 	$vurl = API . "?mode=adddata&table=" . TBL_APPLICATION_ATTACHMENTS . "&data=" . $vdata;
 	//echo $vurl;  exit;
-	$res = callAPI($vurl);
+	$response = callAPI($vurl);
 	return $response;
 }
 
@@ -2292,6 +2302,8 @@ function getstatusprogresslist($table)
 }
 function customgetstatusworkflow($table, $id, $currnet_status, $created_by)
 {
+	$type = "";
+	$statuse = array();
 	$stausresult = ViewStatusData();
 	$url = API . "?mode=getuserstatusstep&table=" . $table . "&transaction_id=" . $id . "&type=" . $type . "&currnet_status=" . $currnet_status;
 	$responce = callAPI($url);
@@ -2387,6 +2399,7 @@ function todisplayviewfiled($value, $type)
 }
 function toGETFieldSecruityList()
 {
+	$result = array();
 	$userurl = API . "?mode=gettabledetails&table=field_secruity_configurations";
 	$usres = callAPI($userurl);
 	$fieldresult = json_decode($usres, 1);
@@ -2397,6 +2410,7 @@ function toGETFieldSecruityList()
 }
 function gettableStatusArray($table)
 {
+	$getstatusarray = array();
 	$wh1f["where"] = array('table_name' => $table, 'is_active' => 0, 'company_id' => $_SESSION['company_id']);
 	$wh1f["field"] = "id,name,status";
 	$data12 = urlencode(json_encode($wh1f));
@@ -2549,6 +2563,7 @@ function get_weeks($year, $month)
 }
 function dynamictabledetails($table, $display = "")
 {
+	$return = array();
 	$wh1f["where"] = array('company_id' => $_SESSION['company_id']);
 	$data12 = urlencode(json_encode($wh1f));
 	$url12 = API . "?mode=gettabledetailswithconditions&table=" . $table . "&data=" . $data12;

@@ -6,12 +6,12 @@
 		
 		if($username == "admin" && $password == "admin"){
 			if($_SESSION['captcha'] == $captcha){
-				echo "<center><label class='text-success'>Login successfully</label></center>";
+				echo "<div class='text-center'><span class='text-success'>Login successfully</span></div>";
 			}else{
-				echo "<center><label class='text-danger'>Invalid captcha!</label></center>";
+				echo "<div class='text-center'><span class='text-danger'>Invalid captcha!</span></div>";
 			}
 		}else{
-			echo "<center><label class='text-danger'>Invalid username or password</label></center>";
+			echo "<div class='text-center'><span class='text-danger'>Invalid username or password</span></div>";
 		}
 	}
 ?>
