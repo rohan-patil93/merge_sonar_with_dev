@@ -290,6 +290,7 @@ class mobileUserClass extends userClass{
 		$datas = $callConfig->getAllRows($query);
 		//print_r($datas);
 		$all = 'N';
+		$modules = array();
 		foreach($datas as $data){
 			if($data->role_short_code == 'ADMIN'){
 				$all = 'Y';
@@ -572,6 +573,8 @@ class mobileUserClass extends userClass{
 			$list_table[$apdata->list_page_name] = $apdata->application_table_name;
 		}
 		//echo $ap_query."</br>".$sat;
+		$create_da = array();
+		$all_data = array();
 		foreach($datas as $data){
 			$talee = $list_table[$data->page_name];
 			$cquery = "SELECT tb.id,".$get['module_id']." module_setup_id ,tb.id as transaction_id, '".$talee."' transaction_table ,tb.transaction_number, tb.total_amount, tb.transaction_date, tb.current_status,  au.display_name originator_name,  sp.name status_name,  au.user_photo  originator_image FROM ".$list_table[$data->page_name]." tb, application_users au, status_progress sp WHERE tb.company_id =".$get['company_id']." AND (tb.created_by = ".$get['user_id']." OR tb.originator = ".$get['user_id'].") AND tb.originator = au.id AND sp.table_name = '".$list_table[$data->page_name]."' AND tb.current_status = sp.status AND tb.is_active =0";
@@ -1065,6 +1068,7 @@ class mobileUserClass extends userClass{
     	
     	$query = "SELECT holiday_date FROM `holidays` WHERE company_id =".$get['company_id']." AND holiday_date >= '".$fromdate."' AND holiday_date <= '".$todate."' AND location_id IN (SELECT location_id FROM employees WHERE id=".$emp_id.") AND is_active =0";
     	$listholidays = $callConfig->getAllRows($query);
+    	$holidays = array();
     	foreach((array)$listholidays as $listholiday){
     		$holidays[] = $listholiday->holiday_date;
     	}
@@ -1108,6 +1112,7 @@ class mobileUserClass extends userClass{
 		$datediff = floor($datediff/(60*60*24));
 		$today = date('Y-m-d');
 
+		$work_days = array();
 		for($i = 0; $i < $datediff + 1; $i++){
 			$otSeconds = 0;
             $utSeconds = 0;
@@ -1203,6 +1208,7 @@ class mobileUserClass extends userClass{
     	
     	$query = "SELECT holiday_date FROM `holidays` WHERE company_id =".$get['company_id']." AND holiday_date >= '".$fromdate."' AND holiday_date <= '".$todate."' AND location_id IN (SELECT location_id FROM employees WHERE id=".$emp_id.") AND is_active =0";
     	$listholidays = $callConfig->getAllRows($query);
+    	$holidays = array();
     	foreach((array)$listholidays as $listholiday){
     		$holidays[] = $listholiday->holiday_date;
     	}
@@ -1246,6 +1252,7 @@ class mobileUserClass extends userClass{
 		$datediff = floor($datediff/(60*60*24));
 		$today = date('Y-m-d');
 
+		$work_days = array();
 		for($i = 0; $i < $datediff + 1; $i++){
 			$otSeconds = 0;
             $utSeconds = 0;
@@ -1359,7 +1366,7 @@ class mobileUserClass extends userClass{
 				}else{
 					$week_off[]=$day."--".$valday."//".$valda;
 				}
-				$alldays = $alldays++;
+				$alldays++;
 	    	}
 	    	/*$workingDaysByMonth[$month]['total_days'] = $day;
 	    	$workingDaysByMonth[$month]['datediff'] = $datediff;
@@ -1410,6 +1417,8 @@ class mobileUserClass extends userClass{
  		$leave_balance = $callConfig->getAllRows($query);
  		//print_r($leave); exit;
  		$leave_left = 0; $leave_used=0;
+ 		$leave_type_data = array();
+ 		$leftdd = array();
  		foreach($leave_balance as $balance){
 
  			$leavetypedate['name'] = $leave[$balance->leave_type];
@@ -1803,6 +1812,7 @@ class mobileUserClass extends userClass{
  			$roleshort = array('OFFICE_SECURITY_GUARD', 'OFFICE_USER'); 			
  			$query = "SELECT role_short_code FROM application_user_module_roles WHERE company_id =".$get['company_id']." AND user_id = ".$get['user_id']." AND is_active=0";
  			$data = $callConfig->getAllRows($query);
+ 			$check = array();
  			foreach($data as $da){
  				$check[] = $da->role_short_code; 
  				if(!in_array($da->role_short_code,$roleshort)){
@@ -1909,6 +1919,8 @@ class mobileUserClass extends userClass{
 		}
 		//print_r($allearns); exit;
 		$actual_amount =0; $dedaction_amount = 0;
+		$actual = array();
+		$dedaction = array();
 //echo "<pre>";print_r($allearns); //exit;
 		foreach ($stmp as  $value) {
 			if($allearns[$value->component_id]['display_in_payslip']==0){
@@ -2009,6 +2021,8 @@ class mobileUserClass extends userClass{
  		$wrdatas = $callConfig->getAllRows($ddquery);
  		
  		//$workdd = array();
+ 		$workdd = array();
+ 		$nonworkdd = array();
  		foreach($wrdatas as $wrdat){
  			if($wrdat->field_work_daily_plan_id!=""){
  				$workdd[$wrdat->field_work_daily_plan_id] = (array)$wrdat;
@@ -2073,6 +2087,7 @@ class mobileUserClass extends userClass{
  		$query = "SELECT id, display_name, user_email, user_mobile, user_photo FROM application_users WHERE company_id = 1 AND reports_to = ".$get['user_id']." AND is_active =0";
  		$user_datas = $callConfig->getAllRows($query);
  		if(count((array)$user_datas)>0){
+ 			$user_ids = array();
  			foreach((array)$user_datas as $user_dat){
 	 			$userda[$user_dat->id] = (array)$user_dat;
 	 			$userda[$user_dat->id]['child'] = array();
@@ -2261,6 +2276,8 @@ class mobileUserClass extends userClass{
  		$wrdatas = $callConfig->getAllRows($ddquery);
  		//print_r($wrdatas); exit;
  		//$workdd = array();
+ 		$workdd = array();
+ 		$nonworkdd = array();
  		foreach((array)$wrdatas as $wrdat){
  			if($wrdat->field_work_daily_plan_id!=""){
  				$workdd[$wrdat->field_work_daily_plan_id] = (array)$wrdat;
@@ -3356,6 +3373,7 @@ class mobileUserClass extends userClass{
     	//echo $query; 
     	$works = $callConfig->getAllRows($query);
     	//print_r($works); exit;
+    	$work_ids = array();
     	foreach($works as $work){
     		//print_r($work);
     		$work_ids[] = $work->id;
@@ -9062,41 +9080,6 @@ $creditside = array('credit_notes','payments');
 			$mobres = $this->tocallmobilenotificationmob($mobilsendnotification);
 			
 			return $task_data;
-
-			$query = "SELECT id, company_id,display_name, user_email, user_mobile FROM application_users WHERE company_id = ".$get['company_id']." AND id = ".$post['assigen_id']." AND is_active =0";
-			$user_data = $callConfig->getRow($query);
-			$get['mobile'] = $user_data->user_mobile;
-
-			$message = 'You have been assigned the task '.$task_data->task_name;
-
-			$array = array('company_id'=>$get['company_id'], 'mobile_no'=>$get['mobile'], 'message'=>$message, 'send_no'=> '8179947020', 'recivce_no'=> $get['mobile'],'data_name'=>$get['data_name']);
-			
-			//print_r($mobilsendnotification); exit;
-			
-			//$res['msg_otp']['whatsup'] = $this->tosendwhatsappdata($array);
-			//$mobilsendnotification = array('company_id'=>$notarry['company_id'],'message'=>$message,'user_id'=>$post['assigen_id'],'title'=>$revalue);
-			
-
-			
-
-
-			$ce_query = "SELECT id, company_id,display_name, user_email, user_mobile FROM application_users WHERE company_id = ".$get['company_id']." AND id = ".$task_data->created_by." AND is_active =0";
-			$asg_data = $callConfig->getRow($ce_query);
-
-			$array['user_name'] = $user_data->display_name;
-			$array['user_email_id'] = $user_data->user_email;
-			$array['session_company_id'] = $user_data->company_id;
-			$array['task_name'] =$task_data->task_name;
-			$array['default_module_id']=25;
-			$array['databasename']=$get['data_name'];
-			$array['revicer'][] = $user_data->user_email;
-			$array['user_display_name'] = $user_data->display_name;
-			$array['assigners_name'] = $asg_data->display_name;
-			$notarry = array();
-			$notarry = array('company_id'=>$get['company_id'], 'notification_message'=> $message, 'transaction_number'=>$task_data->id, 'application_table_name'=>'project_task_details', 'type'=>'INFORMATION', 'notification_users'=>array($post['assigen_id']),'option'=>'','module_setup_id'=>25);
-			//$emill = $this->sendNotificationAndEmails($notarry,$array,36);
-			//echo "---qqq";print_r($emill); exit;
-		return $res;
     }
     public function updatedynamicfiedrojecttaskdetail( $get, $post){
 		global $callConfig;

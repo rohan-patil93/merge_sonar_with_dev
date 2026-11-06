@@ -2767,37 +2767,6 @@ if($checktimeprint > 0){
                                 </div>
                             </div>
                             <div class="table-responsive" style="padding: 1%;">
-                                 <?php if(count((array)$jv_items) !=0 AND $table_name == "purchase_invoices" AND 1 != 1){  ?>
-                                    <table   class="table table-bordered">
-                                        <tr class="bg-primary" >
-                                            <th scope="col" align="center" colspan="5" class="p-2 text-center">Journal Vouchers</th>
-                                        </tr>
-                                        <tr> 
-                                            <th scope="col" class="p-2 text-left"><span>Account</span></th>
-                                            <th scope="col" class="p-2 text-left"><span>Account Name</span></th>
-                                            <th scope="col" class="p-2 text-left"><span>Particulars</span></th>
-                                            <th scope="col" class="p-2 text-right">Debit</th>
-                                            <th scope="col" class="p-2 text-right">Credit</th>
-                                        </tr>
-                                        <?php $debitsum = $creditsum = 0; foreach((array)$jv_items as $jvitems){ 
-                                            $debitsum = $debitsum +$jvitems['debit_amount'];
-                                            $creditsum = $creditsum +$jvitems['debit_amount'];
-                                            ?>
-                                        <tr> 
-                                            <td class=" p-2 text-left"><span><?php echo $jvitems['account_code']; ?></span></td>
-                                            <td class=" p-2 text-left"><span><?php echo $chart_of_accounts[$jvitems['account_code']]; ?></span></td>
-                                            <td class=" p-2 text-left"><span><?php echo $jvitems['particulars']; ?></span></td>
-                                            <td class="p-2 text-right"><span><?php echo customeummarmonyformate($jvitems['debit_amount']); ?> </span></td>
-                                            <td class="p-2 text-right"> <span><?php echo customeummarmonyformate($jvitems['credit_amount']); ?> </span></td>
-                                        </tr>
-                                    <?php } ?>
-                                        <tr> 
-                                            <th scope="col" class="p-2 text-left" colspan="3"><span>Total</span></th>
-                                            <th scope="col" class="p-2 text-right"><?php echo customeummarmonyformate($debitsum); ?> </th>
-                                            <th scope="col" class="p-2 text-right"><?php echo customeummarmonyformate($creditsum); ?> </th>
-                                        </tr>
-                                    </table>
-                                <?php } ?>
 
                                 <?php if(count((array)$project_task_details) !=0){  ?>
                                     <div class="mt-3">

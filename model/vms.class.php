@@ -1508,6 +1508,7 @@ class vMSUserClass extends userClass{
 	  	$upp = $callConfig->executeQuery($query);
 	  	$quere = "SELECT user_id,display_name,email_id FROM `employees` WHERE `id`=".$hrb->hr_buddy;
 	  	$urb = $callConfig->getRow($quere);
+	  	$user_ids = array();
 	  	$user_ids[] = $urb->user_id;
 	  	//echo "test1"; exit;
 	  	//print_r($user_ids);
@@ -1536,6 +1537,9 @@ class vMSUserClass extends userClass{
 	  	
 	  	
 	  	$allemp_ids = explode(",",$post['hid']);
+	  	$reporting_mangers = array();
+	  	$approval_managers = array();
+	  	$user_emailids = array();
 	  	//$mail_data = array('month-year'=>$month_year,'approval_manager_name'=>ucwords($approvemanagerdata->display_name),'hr_buddy_name'=>ucwords($urb->display_name),'month_year'=>$month_year);
 	  	foreach($listemployes as $sinemp){
 	  		if($sinemp->reporting_manager_id != $sinemp->approval_manager_id){
@@ -1599,6 +1603,7 @@ class vMSUserClass extends userClass{
 		$this->tosendnotifiations($notdataa);
 	  	//echo "test6"; exit;
 	  	//print_r($email);  print_r($$urb); print_r($reporting_mangers); print_r($approval_managers); exit;
+	  	$listquries = array();
 	  	$listquries[] = $quer;$listquries[] = $empquery;$listquries[] = $quere;$listquries[] = $approvequery;$listquries[] = $reportmangerquery;$listquries[] = $approvalmanagerquery;
 	  	$nott[]=$notdataa;
 	  	return array('queries'=>$listquries,'upp'=>$upp,'email'=>$email,'notification'=>$nott);
@@ -1625,12 +1630,17 @@ class vMSUserClass extends userClass{
 
 		$option = "COM_BULK_FINANCE_PROJECT_TIMESHEET&PAY_YEAR=".date('Y',strtotime($post['extra']))."&PAY_MONTH=".date('m',strtotime($post['extra']));
 		$msg = date('M Y',strtotime($post['extra']))." Your Time Sheet is Approved by HR";
+		$user_ids = array();
 		$notdataa = array('company_id'=>$get['company_id'], 'notification_message'=>$msg, 'transaction_number'=>'', 'application_table_name'=>'project_timesheets', 'type'=>'ACTION', 'notification_users'=>$user_ids,'option'=>$option);
 		$month_year =  date('M Y',strtotime($post['extra']));
 		$hrbquery = "SELECT id,display_name,user_name,user_email FROM application_users WHERE is_active = 0 AND company_id = '".$get['company_id']."' AND id =".$get['user_id'];
 		$hrbdata = $callConfig->getRow($hrbquery);
 		$mail_data = array('month-year'=>$month_year,'hr_buddy_name'=>$hrbdata->display_name,'finance_buddy_name'=>$urb->display_name,'month_year'=>$month_year);
 		//---------------------------User Names -------------------//
+		$reporting_mangers = array();
+		$approval_managers = array();
+		$hrbuddies = array();
+		$user_emailids = array();
 		foreach($listemployes as $sinemp){
 		if($sinemp->reporting_manager_id != $sinemp->approval_manager_id){
 		$reporting_mangers[$sinemp->reporting_manager_id] = $sinemp->reporting_manager_id;
@@ -1705,6 +1715,7 @@ class vMSUserClass extends userClass{
 		print_r($reporting_mangers);print_r($approval_managers); print_r($user_emailids);
 		print_r($email); exit;*/
 		$nott[]=$notdataa;
+		$listquries = array();
 		return array('queries'=>$listquries,'upp'=>$user_emailids,'email'=>$email,'notification'=>$nott);
 	}
 	public function updateprojecttimesheetsblukapprovefinace($post,$get){
@@ -1720,10 +1731,16 @@ class vMSUserClass extends userClass{
 		$urb = $callConfig->getRow($quere);
 		$month_year =  date('M Y',strtotime($post['extra']));
 		$option = "COM_BULK_FINANCE_PROJECT_TIMESHEET&PAY_YEAR=".date('Y',strtotime($post['extra']))."&PAY_MONTH=".date('m',strtotime($post['extra']));
+		$msg = '';
+		$user_ids = array();
 		$notdataa = array('company_id'=>$get['company_id'], 'notification_message'=>$msg, 'transaction_number'=>'', 'application_table_name'=>'project_timesheets', 'type'=>'ACTION', 'notification_users'=>$user_ids,'option'=>$option);
 		$mail_data = array('month-year'=>$month_year,'approval_manager_name'=>'','hr_buddy_name'=>'','finance_buddy_name'=>$urb->display_name,'month_year'=>$month_year);
 
 		//---------------------------User Names -------------------//
+		$reporting_mangers = array();
+		$approval_managers = array();
+		$hrbuddies = array();
+		$user_emailids = array();
 		foreach($listemployes as $sinemp){
 		if($sinemp->reporting_manager_id != $sinemp->approval_manager_id){
 		$reporting_mangers[$sinemp->reporting_manager_id] = $sinemp->reporting_manager_id;
@@ -1800,6 +1817,7 @@ class vMSUserClass extends userClass{
 		$this->tosendnotifiations($notdataa);
 
 		$nott[]=$notdataa;
+		$listquries = array();
 		return array('queries'=>$listquries,'upp'=>$user_emailids,'email'=>$email,'notification'=>$nott);
 	}
 	public function togetteamcount($get){
@@ -2996,9 +3014,11 @@ class vMSUserClass extends userClass{
 		/*$upadate_array = array('updated_by'=>$post['user_id'],'updated_date'=>date("Y-m-d H:i:s"),'current_status'=>$post['status']);
 		$inserttasks = $callConfig->updateRecord('project_timesheets',$upadate_array,'id',$post['hid']);*/
 		$ndcndfc['approval_id'] =  $approval_id;
+		$inserttasks = null;
 		$ndcndfc['task'] =  $inserttasks;
 		//$msg = $post['table']." - ".$post['hid'];
-
+		$msg = '';
+		$user_ids = array();
 		$notdataa = array('company_id'=>$post['company_id'], 'id'=>$post['hid'],'notification_message'=>$msg, 'id'=>$post['hid'],'application_table_name'=>$post['table'], 'type'=>'ACTION', 'notification_users'=>$user_ids,'option'=>"COM_INSERT_PROJECT_TIMESHEETS",'action_label'=>'', 'transaction_type'=>$post['table'], 'transaction_number'=>$post['hid'], 'transaction_date'=>date('Y-m-d'),'status'=>$post['status']);
 
 		$usermangerquery = "SELECT id,display_name,user_name,user_email FROM application_users WHERE is_active = 0 AND company_id = '".$post['company_id']."' AND id IN (".$user_id.",".$reporting_manager_id.",".$approval_manager_id.")";
@@ -5194,9 +5214,11 @@ class vMSUserClass extends userClass{
 		$employee = $callConfig->getRow($query);
 		 $query = "SELECT * FROM holidays WHERE holiday_date >= '".$fristdate."' AND holiday_date <= '".$lastdate."' AND location_id = ".$employee->location_id." AND is_active = 0";
 		$holidays = $callConfig->getAllRows($query);
+		$holileave = array();
+		$workdays = array();
 		foreach($holidays as $holiday){
 			$n = date("n",strtotime($holiday->holiday_date));
-			$holileave[$n] = $holileave[$n]+1;
+			$holileave[$n] = ($holileave[$n] ?? 0)+1;
 		}
 		$fdate=$fristdate;
 		for($i=1;$i<190;$i++){
@@ -5205,15 +5227,16 @@ class vMSUserClass extends userClass{
 				$n = date("n",strtotime($fdate));
 				$day = date("w",strtotime($fdate));
 				if($day!=0 && $day!=6 ){
-					$workdays[$n] = $workdays[$n]+1;
+					$workdays[$n] = ($workdays[$n] ?? 0)+1;
 				}
 			}else{
 				break;
 			}
 			$fdate = date('Y-m-d', strtotime("+1 day", strtotime($fdate)));
 		}
+		$nonetworkindays = array();
 		foreach($workdays as $key=>$work){
-			$nonetworkindays[$key] = $work-$holileave[$key];
+			$nonetworkindays[$key] = $work-($holileave[$key] ?? 0);
 		}
 		 $query = "SELECT * FROM holidays WHERE assessment_year >= '".date("Y")."' AND location_id = ".$employee->location_id." AND holiday_date >= '".date('Y-m-d')."' AND  is_active = 0";
 		$assmentholidays = $callConfig->getAllRows($query);
@@ -6821,9 +6844,11 @@ function  vmssingleemployeedashoard_new($get){
 		
 		 $query = "SELECT * FROM holidays WHERE holiday_date >= '".$fristdate."' AND holiday_date <= '".$lastdate."' AND location_id = ".$employee->location_id." AND is_active = 0";
 		$holidays = $callConfig->getAllRows($query);
+		$holileave = array();
+		$workdays = array();
 		foreach($holidays as $holiday){
 			$n = date("n",strtotime($holiday->holiday_date));
-			$holileave[$n] = $holileave[$n]+1;
+			$holileave[$n] = ($holileave[$n] ?? 0)+1;
 		}
 		$fdate=$fristdate;
 		for($i=1;$i<190;$i++){
@@ -6832,34 +6857,36 @@ function  vmssingleemployeedashoard_new($get){
 				$n = date("n",strtotime($fdate));
 				$day = date("w",strtotime($fdate));
 				if($day!=0 && $day!=6 ){
-					$workdays[$n] = $workdays[$n]+1;
+					$workdays[$n] = ($workdays[$n] ?? 0)+1;
 				}
 			}else{
 				break;
 			}
 			$fdate = date('Y-m-d', strtotime("+1 day", strtotime($fdate)));
 		}
+		$nonetworkindays = array();
 		foreach($workdays as $key=>$work){
-			$nonetworkindays[$key] = $work-$holileave[$key];
+			$nonetworkindays[$key] = $work-($holileave[$key] ?? 0);
 		}
 		 $query = "SELECT * FROM holidays WHERE assessment_year >= '".date("Y")."' AND location_id = ".$employee->location_id." AND holiday_date >= '".date('Y-m-d')."' AND  is_active = 0";
 		$assmentholidays = $callConfig->getAllRows($query);
 
 		$query = "SELECT * FROM holidays WHERE holiday_date >= '".$fristdate."' AND location_id = ".$employee->location_id." AND  is_active = 0";
 		$assmentholiydays = $callConfig->getAllRows($query);
-		//echo "<pre>"; print_r($assmentholiydays); 
+		//echo "<pre>"; print_r($assmentholiydays);
 		$holicountmy = array();
 
 		foreach($assmentholiydays as $assmentholiday){
 			$daymoonty = date("Y-m", strtotime($assmentholiday->holiday_date));
 			//echo  $daymoonty."<br>";
-			$holicountmy[$daymoonty] = $holicountmy[$daymoonty]+1;
+			$holicountmy[$daymoonty] = ($holicountmy[$daymoonty] ?? 0)+1;
 		}
 		//print_r($holicountmy); exit;
+		$cc_da = array();
 		for($k=0;$k<12;$k++){
-			$ccdd =  date("Y-m-01", strtotime( date( $fristdate )." +".$k." months")); 
+			$ccdd =  date("Y-m-01", strtotime( date( $fristdate )." +".$k." months"));
 			$ccmm = date('Y-m',strtotime($ccdd));
-			
+
 			$numDays = date('t',strtotime($ccdd));
 			$sundayCount =0;
 			for ($day = 0; $day < $numDays; $day++) {
@@ -6868,7 +6895,7 @@ function  vmssingleemployeedashoard_new($get){
 		            $sundayCount++;
 		        }
 		    }
-		    $cc_da[$ccmm]  = $numDays-$sundayCount-$holicountmy[$ccmm];
+		    $cc_da[$ccmm]  = $numDays-$sundayCount-($holicountmy[$ccmm] ?? 0);
 		}
 
 		return array('timesheet'=>$timesheet, 'empquery'=>$empquery , 'submited'=>$sumit, 'approved'=>$approve, 'create'=>$create,'employee'=>$employee, 'holidays'=>$holidays,'holileave'=>$holileave, 'workdays'=>$workdays, 'nonetworkindays'=>$nonetworkindays, 'assmentholidays'=>$assmentholidays, 'weekdates'=>$weekdates,'queries'=>$queries,'huor_query'=>$huor_query, 'huor_data'=>$huor_data, 'hr_dis_data'=> $hr_dis_data,'count_days'=>$cc_da);
@@ -7044,11 +7071,13 @@ function  vmssingleemployeedashoard_new($get){
 		$query = "SELECT DISTINCT pt. emp_id, emp.location_id FROM `project_timesheets` pt, employees emp WHERE emp.id = pt.emp_id AND pt.company_id =1  AND pt.timesheet_date LIKE '%".$get['ym']."-%' AND pt.is_active =0".$whr_emp;
 		$emp_datas = $callConfig->getAllRows($query);
 		//	echo $query; print_r($emp_datas); exit;
+		$updata = array();
 		foreach($emp_datas as $emp_data){
 			$dd = $dw[$emp_data->location_id];
 			$query = "SELECT pt.emp_id, pt.rate_per_hrs, pt.billable_hrs ,pt.bill_amount, round(((vr.item_price/ ".$dd.")/8),2) as val, vr.item_price, vr.purchase_uom FROM  project_timesheets pt, emp_work_order ew, vrc_items vr WHERE pt.emp_id = ew.emp_id AND pt.work_order = ew.work_order_id AND ew.vrc_item_id = vr.id AND pt.timesheet_date LIKE '%".$get['ym']."-%' AND pt.is_active =0 AND ew.is_active =0  AND pt.emp_id =".$emp_data->emp_id;
 
 			$emp_val = $callConfig->getRow($query);
+			$rate_hr = 0;
 			if($emp_val->purchase_uom=='PM'){
 				$rate_hr =  round((($emp_val->item_price/ $dd)/8),2);
 			}

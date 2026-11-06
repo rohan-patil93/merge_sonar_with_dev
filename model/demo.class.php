@@ -245,8 +245,9 @@ class demoClass extends userClass{
 						$sql = "select COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='".$tablesname."'";
 						//$sql = "SHOW COLUMNS FROM infistaq_infisuite_2.".$tablesname;
 						$res=$callConfig->getAllRows($sql);
-						$display_postion = 10; 
+						$display_postion = 10;
 						$data1 = $data = array();
+						$gte = array();
 						$data['company_id'] = $gte['company_id'];
 						//print_r($res);
 						foreach($res as $dsfvdgv){
@@ -269,7 +270,7 @@ class demoClass extends userClass{
 							$data1[$postvalue]['add_custom_field'] = null;
 							$data1[$postvalue]['add_exter'] = 0;
 							$data1[$postvalue]['accordions'] = 'N';
-							$display_postion+10;
+							$display_postion += 10;
 						}
 						$data_json = json_encode($data1);
 						$data['application_table_name'] = $tablesname;
@@ -286,6 +287,7 @@ class demoClass extends userClass{
 						$data['current_status'] = 0;
 						$data['is_active'] = 0;
 						//$res_rg_group_user = $callConfig->insertRecord('display_attributes',$data);
+						$res_rg_group_user = array();
 						$return[$tablesname][] = $res_rg_group_user;
 					}	
 
@@ -296,6 +298,7 @@ class demoClass extends userClass{
 					if($data33->id ==''){
 						$field=array('company_id'=>$get['company_id'],'application_table_name'=>$tablesname,'list_page_name'=>strtoupper("COM_LIST_".$tablesname),'insert_page_name'=>strtoupper("COM_INSERT_".$tablesname),'edit_page_name'=>strtoupper("COM_EDIT_".$tablesname),'view_page_name'=>strtoupper("COM_view_".$tablesname),'list_page_type'=>1,'insert_page_type'=>1,'edit_page_type'=>1,'view_page_type'=>1,'Current_Status'=>0,'is_active'=>'0');
 					//	$res222=$callConfig->insertRecord(TBL_APPLICATION_PAGES,$field);
+						$res222 = array();
 						$return[$tablesname][] = $res222;
 					}
 					$totalcnt++;
@@ -774,6 +777,7 @@ echo "step 1";
 				
 				$notarry = array();
 				if($post['user_type'] != '5'){
+					$useridd = array();
 					$useridd[$post['user_id']] = $post['user_id'];
 					$msglist = $post['display_name']." User successfully created";
 					$notarry = array('company_id'=>$get['company_id'],'notification_message'=>$msglist, 'id'=>'','application_table_name'=>'application_users','type'=>'INFORMATION', 'notification_users'=>$useridd,'option'=>'','assigner_id'=>$post['user_id']);

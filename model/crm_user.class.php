@@ -402,6 +402,7 @@ class crmuserClass extends userClass{
 				}
 			}
 			$touserarray = $post['member'];
+			$ccuserarray = array();
 			$ccuserarray[] = $post['user_id'];
 			if($post['lead_type'] == '6'){
 				$senddata = array('session_company_id'=>$get['company_id'],'template_reference_id'=>'28','to_users'=>$touserarray,'cc_users'=>$ccuserarray);
@@ -481,6 +482,7 @@ class crmuserClass extends userClass{
 		foreach($emaildata as $emaild){
 			$useremail[$emaild->id] = $emaild->user_email;
 		}
+		$ress = array();
 		foreach($email_send_types as $key=>$email_send_type){
 			$revicer = array();
 			$senddata['email_send_type'] =$key;
@@ -725,6 +727,7 @@ class crmuserClass extends userClass{
 		if($get['admin_type'] != 1){
 			$originatercondition = " AND originator = '".$get['user_id']."'";
 		}
+		$user_id = array();
 		if($post['assign_type'] =="2"){ //project
 			$sql = "SELECT user_id FROM project_teams WHERE company_id ='".$post['company_id']."' AND project_id ='".$post['project_id']."'  AND is_active = 0";
 			$resul=$callConfig->getAllRows($sql);
@@ -1411,6 +1414,7 @@ payment tersm**/
 		global $callConfig;
         $accountlist = array();
         // $return['get'] = $get;
+        $condlimi = '';
         if($get['LIMIT']!=""){
         	$condlimi = " LIMIT ".$get['LIMIT'];
         }
@@ -1577,6 +1581,7 @@ payment tersm**/
 
 				$total_tax_split_details_json = json_encode($total_tax_split_details);
 
+				$payment_term_historyary = array();
 				$payment_term_historyary[] = array('amount'=>$saleinvitem['total_amount'],'due_date'=>$this->dateconvertdbformat($first->bill_date),'extra_amt'=>'0','extra_date'=>'','percentage'=>'100','tax_amount'=>$totaltax,'without_tax_amount'=>$saleinvitem['amount']);
 				
 				$payment_term_history = json_encode($payment_term_historyary);

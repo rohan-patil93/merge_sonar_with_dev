@@ -91,14 +91,16 @@ class attendanceUserClass extends userClass{
 	}
 	public function attendaceswdatainsert($get, $post){
 		global $callConfig;
-		//$insert = $callConfig->insertRecord('sw_attendance_data',$post);		
+		//$insert = $callConfig->insertRecord('sw_attendance_data',$post);
 		$data = json_decode($post['data'],1);
 		$query = "SELECT id, emp_code From employees";
 		$emp_datta= $callConfig->getAllRows($query);
 
+		$emp_code = array();
 		foreach($emp_datta as $emp_dat){
 			$emp_code[$emp_dat->emp_code] = $emp_dat->id;
 		}
+		$insert = array();
 		foreach($data as $dat){
 			$emp_id = 11;		
 			$insert_array = array('company_id' =>'1', 'employee_id' =>$emp_id, 'attendace_date' =>$dat['new_date'], 'clock_in_date' =>$dat['new_date'], 'clock_in' =>$dat['in_time'], 'check_in_type' =>1, 'check_out_type' =>1, 'clock_out_date' =>$dat['out_date'], 'clock_out' =>$dat['out_time'], 'in_out' =>0, 'device_type' =>'biometric',  'shift_code' =>$dat['d_ind'], 'swipes' =>$dat['biometric_code'], 'is_active' =>'0', 'current_status' =>'0');
@@ -477,12 +479,6 @@ class attendanceUserClass extends userClass{
             }
 
             return $process_res;
-        // }
-
-        return array(
-            'status' => 'error',
-            'message' => 'Failed to save biometric data'
-        );
     }
 
     public function getPullEmployeeAttendanceKey($company_id, $emp_id, $clock_in, $clock_out, $clock_in_date, $clock_out_date) {
@@ -839,6 +835,7 @@ class attendanceUserClass extends userClass{
 
         $completed_ids = array();
         $failed_ids = array();
+        $result = array();
 
         $rows = $callConfig->getAllRows("SELECT id, data FROM employee_biometric_raw_data WHERE id > 15 AND id < 250 ORDER BY id ASC");
 
@@ -1431,11 +1428,14 @@ class attendanceUserClass extends userClass{
         //echo "<pre>"; print_r($data); exit;
        $query = "SELECT id, b_machine_id From employees";
         $emp_datta= $callConfig->getAllRows($query);
+        $emp_code = array();
          foreach($emp_datta as $emp_dat){
             // $emp_code[$emp_dat->emp_code] = $emp_dat->id; changed by koti
             $emp_code[$emp_dat->b_machine_id] = $emp_dat->id;
-        } 
+        }
         //echo $query."<pre>"; print_r($emp_datta);print_r($emp_code); exit;
+        $insert = array();
+        $allinsert_array = array();
            foreach($data as $dat){
                 // $emp_id = $get['employee_id'] ?? 190;
                 $dat = (array)$dat;

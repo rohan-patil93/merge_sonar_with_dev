@@ -243,13 +243,7 @@ if($user['user_type'] ==4){  //db config get candidate type
     }    
 
     //$check = array('com_logout','COM_INSERT_VENDOR','COM_LIST_EMPLOYEES','COM_INSERT_VENDORS','COM_LIST_VENDOR_RATE_CARDS','COM_INSERT_VENDOR_RATE_CARDS','COM_LIST_JOB_POSTING_CANDIDATES','COM_LIST_CONTRACT_EMPLOYEES','COM_LIST_INBOX','COM_LIST_JOB_POSTING_CANDIDATE','COM_INSERT_CANDIDATE','COM_INSERT_EMP_CONTRACTS','COM_INSERT_EMPLOYEE_CONTRACT','COM_INSERT_CANDIDATES','COM_LIST_CANDIDATE_DOCUMENTS','COM_LIST_CANDIDATE_QUERY','COM_LIST_CANDIDATE_OFFER','COM_LIST_JOIN_REQUIRED_DOCUMENTS','COM_VIEW_PROJECT_TIMESHEETS','COM_VIEW_DASHBOARD_VENDORS','COM_INSERT_PURCHASE_INVOICES','COM_LIST_TABLE_FILTERS');
-    if(!in_array($_GET['option'], (array)$check)){
-        include_once("includes/controller.php");
-       // $disptemp = "views/custom_logout.php";
-    }else{
-        //$_GET['option'] = 'COM_LIST_CANDIDATE_INFO';
-        include_once("includes/controller.php");
-    }
+    include_once("includes/controller.php");
 }else{
 	
 	

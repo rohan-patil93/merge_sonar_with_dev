@@ -118,6 +118,7 @@ class hrUserClass extends userClass{
 	 	}
 	 	$holidays = "SELECT holiday_date FROM holidays WHERE is_active=0 and company_id=".$get['company_id']." AND MONTH(holiday_date) = '".$month."' AND YEAR(holiday_date) = '".$year."'";
 		$holidaysdata = $callConfig->getAllRows($holidays); //holidays
+		$holidaysdatas = array();
 		foreach ($holidaysdata as $hkey=>$hvalue) {
 			$holidaysdatas[] = $hvalue->holiday_date;
 		}
@@ -327,6 +328,7 @@ class hrUserClass extends userClass{
 		$tempdetailsdata = $callConfig->getAllRows($tempdetails); //holidays
 		$holidays = "SELECT holiday_date FROM holidays WHERE is_active=0 and company_id=".$get['company_id']." AND MONTH(holiday_date) = '".$month."' AND YEAR(holiday_date) = '".$year."'";
 		$holidaysdata = $callConfig->getAllRows($holidays); //holidays
+		$holidaysdatas = array();
 		foreach ($holidaysdata as $hkey=>$hvalue) {
 			$holidaysdatas[] = $hvalue->holiday_date;
 		}
@@ -473,6 +475,7 @@ class hrUserClass extends userClass{
 		
 		$holidays = "SELECT holiday_date FROM holidays WHERE is_active=0 and company_id=".$data['company_id']." AND MONTH(holiday_date) = '".$month."' AND YEAR(holiday_date) = '".$year."'";
 		$holidaysdata = $callConfig->getAllRows($holidays); //holidays
+		$holidaysdatas = array();
 		foreach ($holidaysdata as $hkey=>$hvalue){
 			$holidaysdatas[] = $hvalue->holiday_date;
 		}
@@ -916,6 +919,7 @@ class hrUserClass extends userClass{
 			$fdata[$fltdata->transaction_id] = (array)$fltdata;
 		}
 		//echo "<pre>"; print_r($fdata);  exit;
+		$maindata = array();
 		foreach($leavedatas as $leavedata){
 			$cond = array();
 			$lscond = array();
@@ -1268,6 +1272,7 @@ class hrUserClass extends userClass{
 		global $callConfig;
 		$return = array();
 		$return['post'] = $post;
+		$rolesids = array();
 		foreach($post['first_name'] as $key=>$value){
 			if($post['user_email'][$key] !=""){
 				$post['user_name'] = $post['first_name'][$key]." ".$post['last_name'][$key];
@@ -1359,6 +1364,7 @@ class hrUserClass extends userClass{
 		global $callConfig;
 		$return['get'] = $get;
 		$whr = "";
+		$arearid = array();
 		if($get['admin_type']!=1){
 			$query = "SELECT pay_area_id FROM payroll_area_admins WHERE company_id = ".$get['company_id']." AND user_id = ".$get['user_id']." AND is_active = 0";
 			$return['payroll_area_admins_query'] = $query;
@@ -1420,6 +1426,8 @@ class hrUserClass extends userClass{
 	 	$insert_array = array('company_id'=>$get['company_id'], 'start_date_time'=>date('Y-m-d h:i:s'), 'command'=> 'cronjob/vms_add_vendors.php' , 'is_active'=>'0', 'current_status'=>'0', 'created_date'=>date('Y-m-d h:i:s'));
 	 	$ccres = $callConfig->insertRecord('cron_jobs', $insert_array);
 	 	$outarray = array('id', 'user_id', 'check_import', 'status_date', 'from_date', 'to_date', 'created_by', 'created_date', 'updated_by', 'updated_date', 'old_ref_id', 'vendor_import_date', 'vendor_import_details');
+	 	$insertids = array();
+	 	$resids = array();
 	 	foreach($data['details'] as $vendorfields ){
 	 		$insert_array = array();
 	 		$insert_array['old_ref_id'] = $vendorfields['id'];
@@ -2255,6 +2263,7 @@ class hrUserClass extends userClass{
         global $callConfig;
         $whr =  "pay_year='".$post['pay_year']."' and pay_month='".$post['pay_month']."' AND pay_area_id =".$post['pay_area_id'];
         $d1 ="DELETE FROM pay_run_summary WHERE ".$whr;
+        $exr = array();
         $exr[] = $callConfig->executeQuery($d1);
         $d2 ="DELETE FROM pay_run_summary_components WHERE ".$whr;
         $exr[] = $callConfig->executeQuery($d2);
@@ -2768,6 +2777,7 @@ class hrUserClass extends userClass{
 	 	}
 	 	$holidays = "SELECT holiday_date FROM holidays WHERE is_active=0 and company_id=".$get['company_id']." AND MONTH(holiday_date) = '".$month."' AND YEAR(holiday_date) = '".$year."'";
 		$holidaysdata = $callConfig->getAllRows($holidays); //holidays
+		$holidaysdatas = array();
 		foreach ($holidaysdata as $hkey=>$hvalue) {
 			$holidaysdatas[] = $hvalue->holiday_date;
 		}
@@ -2978,6 +2988,7 @@ class hrUserClass extends userClass{
 		$tempdetailsdata = $callConfig->getAllRows($tempdetails); //holidays
 		$holidays = "SELECT holiday_date FROM holidays WHERE is_active=0 and company_id=".$get['company_id']." AND MONTH(holiday_date) = '".$month."' AND YEAR(holiday_date) = '".$year."'";
 		$holidaysdata = $callConfig->getAllRows($holidays); //holidays
+		$holidaysdatas = array();
 		foreach ($holidaysdata as $hkey=>$hvalue) {
 			$holidaysdatas[] = $hvalue->holiday_date;
 		}

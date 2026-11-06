@@ -1117,8 +1117,8 @@ GROUP BY tl.item_id";
  		$itemids[$res_parent->parent_item_id] = $res_parent->parent_item_id;
  		$mainitem = $this->togetitemvalues($res_parent->parent_item_id);
 		//$day_rate = $this->togetitemwadayrate($res_parent->parent_item_id, $get['company_id']);	
-		$day_rate = $res_parent->parent_item_day_rate;	
-		
+		$day_rate = $res_parent->parent_item_day_rate;
+		$itemres = null;
 		$len = array('company_id' =>$get['company_id'] , 'location_id' =>$aures->location_id, 'transaction_warehouse_id' => $aures->default_warehouse_id, 'transaction_date' => $res_parent->transaction_date, 'item_id' =>$res_parent->parent_item_id,'document_no'=>$res_parent->id,'document_type' =>$transaction_table,'document_ref_no' =>'','in_qty' =>$res_parent->parent_quantity,'in_value'=>0,'item_in_value' =>0,'reason_id'=>0,'out_qty' =>$res_parent->parent_quantity,'out_value' =>0,'sale_price'=>0,'sale_value'=>0,'item_wa_cost'=>$day_rate,'item_st_cost'=>$mainitem->purchase_price,'is_active'=>'0','current_status'=>'0','sales_qty'=>0,'purchase_qty'=>0,'day_rate'=>$day_rate);
 		if($transaction_table == 'dekittings'){
 			$len['purchase_uom'] =$mainitem->sale_base_uom;
@@ -1139,7 +1139,7 @@ GROUP BY tl.item_id";
 			$len = array();
 		}
 		if(count((array)$len) !=0){
-			$ddf = $this->invoiceUpdates($transaction_table,$len);
+			$this->invoiceUpdates($transaction_table,$len);
 		} 
  //parent related transaction
  //child related transaction
@@ -1200,7 +1200,7 @@ GROUP BY tl.item_id";
 				$len = array();
 			}
 			if(count((array)$len) !=0){
-				$ddf = $this->invoiceUpdates($transaction_table,$len);
+				$this->invoiceUpdates($transaction_table,$len);
 			} 
 		}
 //End Child Related transaction
@@ -1384,6 +1384,7 @@ GROUP BY tl.item_id";
 	 		$total_debit_amt += round($totalamt,$rounddigits);
 		}
 		$witemlist[]  = $witemlistary;
+		$party_accountt = '';
 		$itemref[$party_accountt][] = $jvary;
 //End parent data
 
@@ -1422,6 +1423,7 @@ GROUP BY tl.item_id";
 		}
 
 
+		$ref_id = '';
 		$senddata = array('company_id'=>$get['company_id'],'transaction_location_id'=>$transaction_location_id,  'department_id'=>$department_id,  'cost_center_id'=> $cost_center_id,  'transaction_number'=>'',  'transaction_date'=>$res_parent->transaction_date,  'currency_id'=>$aures->default_currency_id,  'currency_rate'=>1,  'originator'=>$res_parent->originator, 'created_date'=>date('Y-m-d h:i:s'),  'created_by'=>$get['user_id'],'credit_amount'=>$total_credit_amt, 'debit_amount'=>$total_debit_amt,'debit_tax'=>0,'credit_tax'=>'0','current_status'=>ST_APPROVED); // master table entry
 
 		//echo "<pre>";print_r($witemlist); 

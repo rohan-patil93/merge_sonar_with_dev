@@ -7,7 +7,6 @@ class userClass{
 		global $callConfig;
 		$login_type = 'N';
 	   //print_r($post); echo "kkkkk"; exit;
-	   $params = [$query, $callConfig->selectQuery, $where];
 	   $where="user_email='?'  and is_active ='0'";
 	   $params = [$where, $post];
 	   if($post['zqr_connect'] !=""){

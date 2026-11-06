@@ -979,10 +979,13 @@ class rentalUserClass extends userClass{
 		$montharay = array('1'=>'01','2'=>'02','3'=>'03','4'=>'04','5'=>'05','6'=>'06','7'=>'07','8'=>'08','9'=>'09','10'=>'10','11'=>'11','12'=>'12');
 		$expensessql = "SELECT sum(total_amount) as total_amount, sum(pending_amount) as pending_amount, MONTH(due_date) as month,YEAR(due_date) as year FROM `rental_invoices` WHERE company_id = '".$get['company_id']."' ".$condition." AND due_date >= '".$startdate."' AND due_date <= '".$lastdate."' AND party_id IN(".$customersid.") AND is_active = 0 GROUP BY YEAR(due_date), MONTH(due_date)";
 		$expensesres = $callConfig->getAllRows($expensessql);
+		$expensetotal = array();
+		$expensepending = array();
 		foreach($expensesres as $empexp){
 			$expensetotal[$empexp->month]= $empexp->total_amount;
 			$expensepending[$empexp->month]= $empexp->pending_amount;
 		}
+		$expensemontharray = array();
 		foreach($montharay as $monthary=>$moth){
 			$expensetotalamt = isset($expensetotal[$monthary])?$expensetotal[$monthary]:"0";
 			$expensependingamt = isset($expensepending[$monthary])?$expensepending[$monthary]:"0";

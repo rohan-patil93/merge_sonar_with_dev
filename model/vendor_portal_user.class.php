@@ -140,8 +140,6 @@ class vendorPortelUserClass extends userClass
 
 		if ($get['country_id'] != "") {
 			$country_id = $get['country_id'];
-		} elseif ($get['country_id'] != "") {
-			$country_id = $vendor_registration_requestsres->country_id;
 		} else {
 			$country_id = 101;
 		}
@@ -264,6 +262,7 @@ class vendorPortelUserClass extends userClass
 			$return['emailarray'] = $emailarray;
 
 			$msg = "New Vendor Registration Requests Submited From - " . $createruserres->display_name;
+			$user_ids = array();
 			$user_ids[] = $userres->id;
 			if ($adminuserres->id != "") {
 				$user_ids[] = $adminres->id;
@@ -506,6 +505,7 @@ class vendorPortelUserClass extends userClass
 		$transaction_id = $post['transaction_id'];
 		$verification_type = $post['verification_type'];
 		$now = date("Y-m-d H:i:s");
+		$previousres = null;
 		if ($transaction_id != "") {
 			$previoussql = "SELECT id, company_id, user_id, email, company, bank_account_no, ifsc_code, pan_no, gstin, tan_number, msme_number, vendor_verifications, previous_verifications FROM " . $transaction_table . " WHERE company_id = '" . $post['company_id'] . "' AND id = '" . $transaction_id . "' AND is_active = 0";
 			$previousres = $callConfig->getRow($previoussql);
@@ -1076,6 +1076,7 @@ class vendorPortelUserClass extends userClass
 			$roleres = $callConfig->getAllRows($query);
 			$retresult['application_roles'] = $roleres;
 			$retresult['application_roles_sql'] = $query;
+			$rolesids = array();
 			foreach ($roleres as $rolere) {
 				$insertarray = array("company_id" => $post['company_id'], "user_id" => $res['LASTID'], "module_setup_id" => $rolere->application_module, "application_module_id" => $rolere->application_module, "role_id" => $rolere->id, "role_short_code" => $rolere->role_short_code, "is_active" => "0", "current_status" => "0", "created_date" => date('Y-m-d h:i:s'), "created_by" => $post['user_id']);
 				$insert = $callConfig->insertRecord('application_user_module_roles', $insertarray);

@@ -592,6 +592,7 @@ class assetUserClass extends userClass{
 	public function insertAssetVerification($get,$post){
 		global $callConfig;
 		$assetary = explode(',', $post['asset_id']);
+		$res = array();
 		foreach($assetary as $asset_id){
 			$insert_array = array('company_id' =>$post['company_id'],'asset_id' =>$asset_id,'user_id'=>$post['verification_user_id'],'start_date_time'=>$post['start_date_time'],'end_date_time'=>$post['end_date_time'],'is_active'=>'0','current_status'=>'0','created_date'=>date('Y-m-d H:i:s'),'created_by'=>$post['user_id']);
 			$res[] = $callConfig->insertRecord('asset_verifications',$insert_array);
@@ -746,8 +747,9 @@ function insertAsset($post){
 	$qruploadDir =  SITEROOT.'/uploads/equipments/qr_code/';
 	$table = "assets";
 	$attributes =implode(",",(array)$post['attribute']);
+	$depreciation_table = array();
 	foreach((array)$post['depreciation_date'] as $keyid=>$valu){
-		$depreciation_table[] =array('depreciation_date'=>$valu,'per_year_deprciation'=>$post['per_year_deprciation'][$keyid],'accumulated_depreciation'=>$post['accumulated_depreciation'][$keyid],'depreciation_price'=>$post['depreciation_price'][$keyid]); 
+		$depreciation_table[] =array('depreciation_date'=>$valu,'per_year_deprciation'=>$post['per_year_deprciation'][$keyid],'accumulated_depreciation'=>$post['accumulated_depreciation'][$keyid],'depreciation_price'=>$post['depreciation_price'][$keyid]);
 	}
 	$depreciationtable = json_encode((array)$depreciation_table);
 	//return $returncdc;
@@ -1256,6 +1258,10 @@ function insertAsset($post){
 	}
 	public function addupdateassetsallocation($post, $get){
 		global $callConfig;
+		$resquery = array();
+		$rlist_assets = array();
+		$alist_assets = array();
+		$adminusers = array();
 		foreach($post['asset_id'] as $key=>$asset){
 			if($asset!=""){
 				$query = "SELECT id,current_status FROM user_assets WHERE company_id =".$get['company_id']." AND asset_id =".$asset." AND user_id =".$post['emp_id']." AND is_active =0";
@@ -1289,6 +1295,7 @@ function insertAsset($post){
 		if(count((array)$alist_assets)>0){
 			$query = "SELECT id,asset_code,asset_description FROM assets WHERE id IN(".implode(",",(array)$alist_assets).")";
 			$asdata = $callConfig->getAllRows($query);
+			$namerassets = array();
 			foreach($asdata as $astdata){
 				$namerassets[] = $astdata->asset_description." - ".$astdata->asset_code;
 			}
@@ -1300,6 +1307,7 @@ function insertAsset($post){
 		if(count((array)$rlist_assets)>0){
 			$query = "SELECT id,asset_code,asset_description FROM assets WHERE id IN(".implode(",",(array)$rlist_assets).")";
 			$asdata = $callConfig->getAllRows($query);
+			$nameassets = array();
 			foreach($asdata as $astdata){
 				$nameassets[] = $astdata->asset_description." - ".$astdata->asset_code;
 			}

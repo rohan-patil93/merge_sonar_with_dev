@@ -259,20 +259,6 @@ class surveyPollUserClass extends userClass
 				
     		}
 			return $details;
-			
-    		$whr2="company_id=".$get['company_id']." and is_active='0' and genc_code='SURVEY_QTYPE'";
-    		$query=$callConfig->selectQuery('general_code_details','genc_detail_code,genc_detail_name',$whr2,'','','');
-    		$details['qustion_types'] = $callConfig->getAllRows($query);
-    		foreach($details['qustion_types'] as $qustion_types){
-    			$qtype[$qustion_types->genc_detail_code] = $qustion_types->genc_detail_name;
-
-    			$whr="company_id=".$get['company_id']." and is_active='0' and options_display_type=".$qustion_types->genc_detail_code;
-    			$questions=$callConfig->selectQuery(TBL_SURVEY_SETUP_QUESTIONS,'count(id) as totaltypequestion',$whr,'','','');
-    			$qresponse = $callConfig->getRow($questions);
-    			$survey_qtypes[$qustion_types->genc_detail_name] = $qresponse->totaltypequestion;
-    		}
-    		$details['survey_qtypes'] = $survey_qtypes;
-    		return $details;
 
     	}
 
@@ -1242,6 +1228,7 @@ class surveyPollUserClass extends userClass
 		$holidays = "SELECT holiday_date, location_id FROM holidays WHERE company_id=".$get['company_id']." AND holiday_date >='".$get['from_date']."' AND holiday_date <='".$get['to_date']."' AND is_active=0 ";
 		//echo $holidays;//exit;
 		$holidaysdata = $callConfig->getAllRows($holidays);
+		$holidaydates = array();
 		foreach ((array)$holidaysdata as $hkey=>$hvalue) {
 			$holidaydates[$hvalue->location_id][] = $hvalue->holiday_date;
 			//$locations_holidays[$hvalue->location_id] = $hvalue->location_id;

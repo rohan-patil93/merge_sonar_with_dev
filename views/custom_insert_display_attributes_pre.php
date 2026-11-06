@@ -72,11 +72,6 @@ if(isset($_POST['submit'])){
 	}		
 	$response = file_post_contents($url, $data);
 	if ($response) {
-		if ($_POST['submit_value'] == 'continue'){
-			//header("location:index.php?option=".$_GET['option']."&table=".$_POST['table_name']."&&display_list=".$_POST['display_list_type']);
-		}else{
-			//header("location:index.php?option=COM_LIST_DISPLAY_ATTRIBUTES");
-		}
 		
 	}
 }

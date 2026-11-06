@@ -7879,7 +7879,6 @@ if ($page == "insertvendorsandvendorregisters") {
 		$verrifyary['user_id'] = $_SESSION['userid'];
 		$verrifyary['company_id'] = $_SESSION['company_id'];
 		$verrifyary['transaction_table'] = $_POST['transaction_table'];
-		$verrifyary['address'] = $_POST['address'];
 		$verrifyary['transaction_id'] = $_POST['vendor_id'];
 		$verrifyary['verification_type'] = $_POST['verification_type'];
 		$verrifyary['api_hit_id'] = $_POST['api_hit_id'];
@@ -8250,7 +8249,6 @@ if ($page == 'get_vehicle_details') {
 		$vehicleData = json_decode($response, true);
 		$emp_ids_array = !empty($vehicleData['emp_ids']) ? explode(',', $vehicleData['emp_ids']) : [];
 		$wh1["where"] = array('is_active'=>0,'company_id'=>$_SESSION['company_id']);
-		$wh1["field"] = "id,display_name";
 		$wh1["whr_in_key"] = "id";
 		$wh1["where_in"] = $emp_ids_array;
 		$wh1["field"] = "id,display_name";

@@ -1555,6 +1555,7 @@ function getOrganizationGoals($get){
 		global $callConfig;
 		$return = array();
 		$condition = "";
+		$post = array();
 		$return['post'] = $post;
 		$appraisal_rating_slabssql = "SELECT id, slabs_name, background_color, font_color FROM appraisal_rating_slabs WHERE company_id='".$get['company_id']."' AND is_active=0"; 
 		$appraisal_rating_slabsres = $callConfig->getAllRows($appraisal_rating_slabssql);

@@ -37,6 +37,7 @@ class accountUserClass extends userClass{
     	$return['chart_of_accounts_sql']= $chartofaccountssql;
     	$chartofaccounts = array();
     	$accode = array();
+    	$chartofaccountsparent = array();
     	foreach($chartofaccountsres as $chartofaccountsre){
     		$accode[$chartofaccountsre->account_code] = $chartofaccountsre->account_code;
     		if($chartofaccountsre->parent_account_code =='0'){
@@ -391,9 +392,10 @@ class accountUserClass extends userClass{
         global $callConfig;
         $return =array();
         $return['post'] = $post;
+        $journal_details = array();
         foreach($post['currency_id'] as $keyid=>$valu){
             if($valu !=""){
-                $journal_details[] =array('currency_id'=>$valu,'item_account'=>$post['item_account'][$keyid],'provision_account_check'=>$post['provision_account_check'][$keyid],'provision_account'=>$post['provision_account'][$keyid]); 
+                $journal_details[] =array('currency_id'=>$valu,'item_account'=>$post['item_account'][$keyid],'provision_account_check'=>$post['provision_account_check'][$keyid],'provision_account'=>$post['provision_account'][$keyid]);
             }
         }
         $journal_detail = json_encode((array)$journal_details);
@@ -638,8 +640,9 @@ class accountUserClass extends userClass{
         global $callConfig;
         $return =array();
         $return['post'] = $post;
+        $deferred_revenue_table = array();
         foreach($post['depreciation_date'] as $keyid=>$valu){
-            $deferred_revenue_table[] =array('depreciation_date'=>$valu,'per_year_deprciation'=>$post['per_year_deprciation'][$keyid],'accumulated_depreciation'=>$post['accumulated_depreciation'][$keyid],'depreciation_price'=>$post['depreciation_price'][$keyid]); 
+            $deferred_revenue_table[] =array('depreciation_date'=>$valu,'per_year_deprciation'=>$post['per_year_deprciation'][$keyid],'accumulated_depreciation'=>$post['accumulated_depreciation'][$keyid],'depreciation_price'=>$post['depreciation_price'][$keyid]);
         }
         $deferredrevenuetable = json_encode((array)$deferred_revenue_table);
         $insertary=array('company_id'=>$post['company_id'],'deferred_revenue_name'=>$post['deferred_revenue_name'],'original_amount'=>$post['original_amount'],'acquisition_date'=>$this->dateconvertdbformat($post['acquisition_date']),'scrap_amount'=>$post['scrap_amount'],'deferred_revenue_amount'=>$post['deferred_revenue_amount'],'duration'=>$post['duration'],'end_deferred_revenue_date'=>$this->dateconvertdbformat($post['end_deferred_revenue_date']),'deferred_revenue_account'=>$post['deferred_revenue_account'],'revenue_account'=>$post['revenue_account'],'Journal'=>$post['Journal'],'deferred_revenue_table'=>$deferredrevenuetable);
@@ -792,6 +795,7 @@ class accountUserClass extends userClass{
 		global $callConfig;
 		$query = "SELECT * FROM chart_of_accounts WHERE account_code IN (SELECT account_code FROM gl_account_users WHERE user_id = ".$post['user_id'].")";
 		$data = $callConfig->getAllRows($query);
+		$group_ids = array();
 		foreach ($data as $value) {
 			$return [$value->accgro_group_id][] = (array)$value;
 			$group_ids[] = $value->accgro_group_id;
@@ -799,6 +803,7 @@ class accountUserClass extends userClass{
 		$group_ids = implode(",", (array)$group_ids);
 		$query2 = "SELECT id,group_name,parent_group_id,accsec_section_id FROM account_groups WHERE id in(".$group_ids.")";
 		$data2 = $callConfig->getAllRows($query2);
+		$account_section = array();
 		foreach ($data2 as  $value2) {
 			$returns1  = (array)$value2;
 			$returns1['details'] = $return[$value2->id];

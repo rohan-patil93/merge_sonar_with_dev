@@ -79,6 +79,7 @@ class recruitmentUserClass extends userClass{
 
         $user_ids1  = array($rm_users_sql->id, $candidatesres->user_id);
         $msg1 = $candidatesres->display_name." Offer Accepted";
+        $option = '';
 		$crfeatebynotdataa = array('company_id'=>$candidatesres->company_id, 'notification_message'=>$msg1, 'id'=>$candidatesres->id, 'application_table_name'=>'candidates', 'type'=>'INFORMATION', 'notification_users'=>$user_ids1,'option'=>$option);
 		$notres1 = $this->tosendnotifiations($crfeatebynotdataa);
         return $return;
@@ -347,6 +348,7 @@ class recruitmentUserClass extends userClass{
     	$citiesres = $callConfig->getAllRows($citiessql);
     	$return['cities'] = $citiesres;
 
+		$vendorres = null;
 		$spihitsql = "SELECT id, api_master_id, api_request_parameters, api_response_details, response_date_time FROM api_hits WHERE company_id = '".$get['company_id']."' AND application_table = '".$get['transaction_table']."' AND transaction_id = '".$vendorres->id."'  AND is_active = 0 ORDER BY response_date_time DESC";
 		$spihitres=$callConfig->getAllRows($spihitsql);
 		$return['api_hits'] = $spihitres;
@@ -463,7 +465,8 @@ class recruitmentUserClass extends userClass{
 		/*--------- All Recently Un-Published 3 Job Details ---------------- */
 		$recent_unpublishsql = "SELECT id, requested_date, job_number, job_name,current_status, updated_date FROM `job_postings` WHERE company_id = '".$get['company_id']."' ".$whr." AND current_status = ".ST_UNPUBLISH." AND is_active = 0  ORDER BY updated_date DESC LIMIT 0,3";
 		$return['recent_unpublish']['name'] = "Recently Un-Published";
-		$recent_publish = $callConfig->getAllRows($recent_unpublishsql);	
+		$recent_unpublish = array();
+		$recent_publish = $callConfig->getAllRows($recent_unpublishsql);
 		$return['recent_unpublish']['data'] = $recent_unpublish;
 		$countsql = "SELECT count(id) cc FROM `job_postings` WHERE company_id = '".$get['company_id']."' ".$whr." AND current_status = ".ST_UNPUBLISH." AND is_active = 0";
 		$return['recent_unpublish']['name'] = "Recently Un-Published ";

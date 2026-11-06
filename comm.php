@@ -3542,6 +3542,7 @@ function getPagePermision($option = "", $transaction_table = "", $transaction_ty
 	if ($_SESSION['permission_check'] == 'Y') {
 		if ($option != "" || $transaction_table != "") {
 			if ($transaction_table == "") {
+				$name = $option;
 				foreach ($_SESSION['application_pages'] as $value) {
 					if ($value['list_page_name'] == $name || $value['insert_page_name'] == $name || $value['edit_page_name'] == $name || $value['view_page_name'] == $name || $value['approval_page_name'] == $name) {
 						$transaction_table = $value['application_table_name'];
@@ -3759,7 +3760,7 @@ function fromtime($time)
 
 function resolveContractAmcServiceMode($contractRow)
 {
-	$row = is_object($contractRow) ? (array) $contractRow : (array) $contractRow;
+	$row = (array) $contractRow;
 	if (($row['service_mode'] ?? '') == 'inhouse') {
 		return 'inhouse';
 	}

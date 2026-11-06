@@ -2388,6 +2388,7 @@ class reactClass extends userClass{
 			$return['seluser'] = $seluser;
 			$seluserres = $callConfig->getAllRows($seluser);
 			$emailuserdetails = array();
+			$sendnotification = array();
 			foreach($seluserres as $seluser){
 				$emailarray  = $post;
 				$emailarray['user_email_id'] = $seluser->user_email;
@@ -2396,7 +2397,7 @@ class reactClass extends userClass{
 				$emailarray['session_company_id'] = $seluser->company_id;
 				$emailarray['default_module_id'] = 40;
 				$emailarray['created_by'] = $get['user_id'];
-				$emailarray['extra_informations'] = $email_body;		
+				$emailarray['extra_informations'] = $email_body;
 				$notarry = array();
 				$sendnotification[] =$this->sendNotificationAndEmails($notarry,$emailarray,76);
 			}
@@ -2585,6 +2586,7 @@ class reactClass extends userClass{
 					$seluser = "SELECT id FROM application_users WHERE company_id = '".$get['company_id']."' AND is_active = 0 AND JSON_SEARCH(role_id, 'one', 'CONTRACT_ADMIN') IS NOT NULL";
 					$return['seluser'] = $seluser;
 					$seluserres = $callConfig->getAllRows($seluser);
+					$notification_users = array();
 					$notification_users[] = $final_data['originator'];
 					foreach($seluserres as $seluser){
 						$notification_users[] = $seluser->id;
@@ -2687,10 +2689,11 @@ class reactClass extends userClass{
 					$return['seluser'] = $seluser;
 					$seluserres = $callConfig->getAllRows($seluser);
 					//$notification_users[] = $insert_array['originator'];
+					$notification_users = array();
 					foreach($seluserres as $seluser){
 						if($seluser->id == $insert_array['originator']){
 								$originatordetailary = $seluser;
-						} 
+						}
 					}
 					foreach($seluserres as $seluser){
 						$notification_users[] = $seluser->id;
@@ -3464,7 +3467,7 @@ class reactClass extends userClass{
 			}
 			$allDay = $this->amcPlannedDatetimeIsAllDay($planned);
 			$event = array(
-				'title' => ($freq === 'daily' && !$allDay) ? 'Scheduled Visit' : 'Scheduled Visit',
+				'title' => 'Scheduled Visit',
 				'start' => $allDay ? substr($planned, 0, 10) : str_replace(' ', 'T', $planned),
 				'allDay' => $allDay,
 				'color' => '#17a2b8',
@@ -4042,7 +4045,7 @@ class reactClass extends userClass{
 
 	public function resolveContractAmcServiceMode($contractRow)
 	{
-		$row = is_object($contractRow) ? (array) $contractRow : (array) $contractRow;
+		$row = (array) $contractRow;
 		if (($row['service_mode'] ?? '') == 'inhouse') {
 			return 'inhouse';
 		}
@@ -5032,7 +5035,7 @@ class reactClass extends userClass{
 
 	public function resolveContractAmcFmVisitStatus($row)
 	{
-		$row = is_object($row) ? (array) $row : (array) $row;
+		$row = (array) $row;
 		$fmConfirmed = trim((string) ($row['fm_confirmed_datetime'] ?? ''));
 		if ($fmConfirmed != '') {
 			return array('code' => 'closed', 'label' => 'Closed', 'class' => 'bg-success');
@@ -5054,7 +5057,7 @@ class reactClass extends userClass{
 	public function enrichContractAmcFmVisitRow($row)
 	{
 		global $callConfig;
-		$r = is_object($row) ? (array) $row : (array) $row;
+		$r = (array) $row;
 		$assetCode = $r['asset_code'] ?? '';
 		$assetName = $r['asset_name'] ?? $r['ca_asset_name'] ?? '—';
 		if ($assetCode != '') {
@@ -8280,47 +8283,6 @@ class reactClass extends userClass{
 		$countRow = $callConfig->getRow($countSql);
 		$total = (int) ($countRow->c ?? 0);
 		return $get;
-		$sql = "SELECT c.id, c.transaction_date, c.current_status, ct.contract_name,
-			CASE WHEN ct.party_type = 'vendor' THEN v.display_name ELSE '' END AS vendor_name,
-			a.asset_code, a.asset_description, s.name AS status_name, s.background_color, s.color
-			FROM complaints c
-			LEFT JOIN assets a ON a.id = c.asset_id AND a.company_id = c.company_id
-			LEFT JOIN status s ON s.name_value = c.current_status
-			LEFT JOIN contracts ct ON ct.id = c.contract_id AND ct.company_id = c.company_id
-			LEFT JOIN vendors v ON v.id = ct.party_id AND ct.party_type = 'vendor' AND v.company_id = ct.company_id
-			WHERE {$baseWhere}
-			ORDER BY c.transaction_date DESC, c.id DESC
-			LIMIT 5";
-		$dbRows = $callConfig->getAllRows($sql);
-		$rows = array();
-		if (count((array)$dbRows) > 0) {
-			foreach ($dbRows as $dbRow) {
-				$r = is_array($dbRow) ? $dbRow : (array) $dbRow;
-				$assetLabel = trim((string) ($r['asset_code'] ?? ''));
-				if ($assetLabel != '' && !empty($r['asset_description'])) {
-					$assetLabel .= ' — ' . $r['asset_description'];
-				} elseif ($assetLabel == '') {
-					$assetLabel = $r['asset_description'] ?? '—';
-				}
-				$statusLabel = trim((string) ($r['status_name'] ?? ''));
-				if ($statusLabel == '') {
-					$statusLabel = ((int) ($r['current_status'] ?? 0) == 0) ? 'Active' : '-';
-				}
-				$contractName = trim((string) ($r['contract_name'] ?? ''));
-				$vendorName = trim((string) ($r['vendor_name'] ?? ''));
-				$rows[] = array(
-					'id' => (int) ($r['id'] ?? 0),
-					'contract_name' => $contractName != '' ? $contractName : '—',
-					'vendor_name' => $vendorName != '' ? $vendorName : '—',
-					'asset_label' => $assetLabel,
-					'date' => !empty($r['transaction_date']) ? date('Y-m-d', strtotime($r['transaction_date'])) : '',
-					'status_label' => $statusLabel,
-					'status_color' => !empty($r['background_color']) ? $r['background_color'] : '#6c757d',
-					'status_text_color' => !empty($r['color']) ? $r['color'] : '#fff',
-				);
-			}
-		}
-		return array('total' => $total, 'rows' => $rows);
 	}
 
 	private function buildAmcAdminLandingRepairs($get)

@@ -56,10 +56,6 @@ if($transaction_table!=""){
 		      	}elseif($header['type'] == 'color_pick'){
 		        	$str = "<div style='background: #".$bill[$header['name']].";width: 20px;height: 20px;'>&nbsp;</div>";
 		      	}elseif( $header['type'] == 'image'){
-		        	//$bimage = 'uploads/all/'.$bill[$header['name']];
-		        	//$str = "<img src='$bimage' style='width:35px;'>";
-		        	$str = '-';
-		      	}elseif( $header['type'] == 'image'){
 		        	$str =  $bill[$header['name']];
 		        	$str = $field[$header['name']][$str];
 		      	}else{

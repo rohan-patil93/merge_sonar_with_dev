@@ -343,23 +343,21 @@ $amc_contract_data = !empty($data['amccontractres']) ? $data['amccontractres'] :
 $amc_assets = array();
 $amc_service_frequencies = array();
 $amc_asset_categories = array();
-if (true) {
-    $amcLookupResponse = json_decode(callAPI(API . "?mode=getallproductdetails"), true);
-    $amc_assets = $amcLookupResponse['asset_details'] ?? array();
-    $amc_asset_categories = $amcLookupResponse['asset_categories'] ?? array();
-    $amc_departments = $amcLookupResponse['departments'] ?? array();
-    $amc_gc_details = $amcLookupResponse['gc_details'] ?? array();
-    $amc_service_frequencies_raw = array();
-    if (count((array) $amc_gc_details) > 0) {
-        foreach ($amc_gc_details as $gcRow) {
-            $gcRowArr = is_array($gcRow) ? $gcRow : json_decode(json_encode($gcRow), true);
-            if (($gcRowArr['genc_code'] ?? '') == 'AMCSERVICE') {
-                $amc_service_frequencies_raw[] = $gcRowArr;
-            }
+$amcLookupResponse = json_decode(callAPI(API . "?mode=getallproductdetails"), true);
+$amc_assets = $amcLookupResponse['asset_details'] ?? array();
+$amc_asset_categories = $amcLookupResponse['asset_categories'] ?? array();
+$amc_departments = $amcLookupResponse['departments'] ?? array();
+$amc_gc_details = $amcLookupResponse['gc_details'] ?? array();
+$amc_service_frequencies_raw = array();
+if (count((array) $amc_gc_details) > 0) {
+    foreach ($amc_gc_details as $gcRow) {
+        $gcRowArr = is_array($gcRow) ? $gcRow : json_decode(json_encode($gcRow), true);
+        if (($gcRowArr['genc_code'] ?? '') == 'AMCSERVICE') {
+            $amc_service_frequencies_raw[] = $gcRowArr;
         }
     }
-    $amc_service_frequencies = merge_amc_service_frequency_options($amc_service_frequencies_raw);
 }
+$amc_service_frequencies = merge_amc_service_frequency_options($amc_service_frequencies_raw);
 function loadContractDataFallback($id, $data)
 {
     global $formData, $documentDetails, $permissionDetails, $workflow, $originator;

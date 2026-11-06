@@ -1227,9 +1227,6 @@ class spaceUserClass extends userClass{
 					$emailarray['requester_user_email_id'] = $application_users[$post['user_id']]->user_email;
 					$emailarray['requester_display_name'] = $application_users[$post['user_id']]->display_name;
 					return array('data_email'=>$emailarray,'data_notarry'=>$notarry);	
-					$insertApplication['emails'] =$this->sendNotificationAndEmails($notarry,$emailarray,61);
-					$return['notarry'][]=$notarry;
-					$return['emailarray'][]=$emailarray;
 		}
 		if($emp_asssign_status=="Y" OR $emp_asssign_status=="N"){
 			
@@ -1261,6 +1258,7 @@ class spaceUserClass extends userClass{
 						//$insertApplication['emails'] =$this->sendNotificationAndEmails($notarry,$emailarray,66);
 					}
 					$return['notarry'][]=$notarry;
+					$insertApplication = array();
 					$return['emails'][]=$insertApplication;
 				}	
 			}
@@ -1310,6 +1308,7 @@ class spaceUserClass extends userClass{
 		$notarry['company_id']= $get['company_id'];
 		$notarry['option'] = 'COM_VIEW_OFFICE_MANAGEMENT&TAB=7';
 		$notarry['type'] = "INFORMATION";
+		$resbfsa_id = '';
 		$notarry['id'] = $resbfsa_id;
 		$notarry['notification_message'] = $employeesres->display_name." - ".$buildares->cabin_name." - (".$buildares->building_name.") Cubicle Space Allocation Successfully Approved";
 		

@@ -300,6 +300,7 @@ class tallyClass extends userClass{
 			//print_r($item_trans);
 			$main_transaction_sql = "SELECT id, company_id, transaction_number, DATE_FORMAT(transaction_date, '%d-%m-%Y') AS transaction_date, party_id, party_name, party_email, party_phone, party_address, supplier_state_id, place_of_supply, ref_type, ref_no FROM ".$dmtres->application_table_name." WHERE company_id='".$company_id."' AND is_active = '0'";
 			$main_transaction_res = $callConfig->getAllRows($main_transaction_sql);
+			$transaction_entry = array();
 			foreach($main_transaction_res as $trans){
 				$trans->company_id = $companies[$trans->company_id];
 				$trans->place_of_supply = $cities[$trans->place_of_supply];
@@ -412,6 +413,7 @@ class tallyClass extends userClass{
 		$jvsql = "SELECT jv.transaction_number, DATE_FORMAT(jv.transaction_date, '%d-%m-%Y') AS transaction_date, jv.ref_type, jv.ref_id, ijv.account_code, ijv.account_name as ledger_name, ijv.debit_amount, ijv.credit_amount FROM journal_vouchers jv, jv_items ijv WHERE jv.company_id='".$company_id."' AND jv.ref_type = 'receipts' AND jv.company_id = ijv.company_id AND jv.id = ijv.transaction_id AND jv.is_active = ijv.is_active AND jv.is_active = 0";
 		$jvres = $callConfig->getAllRows($jvsql);
 		$journal_vouchers = array();
+		$transaction_entry = array();
 		foreach($jvres as $jv){
 			$jv->amount = ($jv->debit_amount !="0" AND $jv->debit_amount !="")?$jv->debit_amount:$jv->credit_amount;
 			$journal_vouchers[$jv->ref_id][] = $jv;
@@ -450,6 +452,7 @@ class tallyClass extends userClass{
 		//print_r($item_trans);
 		$payments_sql = "SELECT id, company_id, transaction_no, DATE_FORMAT(payment_date, '%d-%m-%Y') AS payment_date, payment_type, account_code FROM payments WHERE company_id='".$company_id."' AND is_active = '0'";
 		$payments_res = $callConfig->getAllRows($payments_sql);
+		$transaction_entry = array();
 		foreach($payments_res as $paytrans){
 			$paytrans->company_id = $companies[$paytrans->company_id];
 			if($paytrans->payment_type == 'bank'){
@@ -517,6 +520,7 @@ class tallyClass extends userClass{
 		$jvsql = "SELECT jv.transaction_number, DATE_FORMAT(jv.transaction_date, '%d-%m-%Y') AS transaction_date, jv.ref_type, jv.ref_id, ijv.account_code, ijv.account_name as ledger_name, ijv.debit_amount, ijv.credit_amount FROM journal_vouchers jv, jv_items ijv WHERE jv.company_id='".$company_id."' AND jv.ref_type = 'receipts' AND jv.company_id = ijv.company_id AND jv.id = ijv.transaction_id AND jv.is_active = ijv.is_active AND jv.is_active = 0";
 		$jvres = $callConfig->getAllRows($jvsql);
 		$journal_vouchers = array();
+		$transaction_entry = array();
 		foreach($jvres as $jv){
 			$jv->amount = ($jv->debit_amount !="0" AND $jv->debit_amount !="")?$jv->debit_amount:$jv->credit_amount;
 			$journal_vouchers[$jv->ref_id][] = $jv;
@@ -555,6 +559,7 @@ class tallyClass extends userClass{
 		//print_r($item_trans);
 		$payments_sql = "SELECT id, company_id, transaction_no, DATE_FORMAT(payment_date, '%d-%m-%Y') AS payment_date, payment_type, account_code FROM receipts WHERE company_id='".$company_id."' AND is_active = '0'";
 		$payments_res = $callConfig->getAllRows($payments_sql);
+		$transaction_entry = array();
 		foreach($payments_res as $paytrans){
 			$paytrans->company_id = $companies[$paytrans->company_id];	
 			if($paytrans->payment_type == 'bank'){
@@ -608,6 +613,7 @@ class tallyClass extends userClass{
 	   	$jvsql = "SELECT id, transaction_number, DATE_FORMAT(transaction_date, '%d-%m-%Y') AS transaction_date, ref_type, ref_id FROM journal_vouchers WHERE company_id='".$company_id."' AND is_active = 0";
 		$jvres = $callConfig->getAllRows($jvsql);
 		$journal_vouchers = array();
+		$transaction_entry = array();
 		foreach($jvres as $jv){
 			//$journal_vouchers[$jv->ref_id][] = $jv;
 			if(isset($jv_items[$jv->id])){
@@ -885,6 +891,7 @@ class tallyClass extends userClass{
 			    	$paymentarray['$transaction_no'] =$transaction_no;  
 			    	$res = $callConfig->insertRecord('receipts',$paymentarray);
 					$receipt_id = $res['LASTID'];
+					$payallocationres = array();
 					if($res['status'] == 'sucess'){
 						foreach($paymentallocationarrayre as $paymentallocationarray){
 							$paymentallocationarray['receipt_id'] = $receipt_id;
@@ -1042,6 +1049,7 @@ class tallyClass extends userClass{
 			    	$paymentarray['$transaction_no'] =$transaction_no;  
 			    	$res = $callConfig->insertRecord('receipts',$paymentarray);
 					$receipt_id = $res['LASTID'];
+					$payallocationres = array();
 					if($res['status'] == 'sucess'){
 						foreach($paymentallocationarrayre as $paymentallocationarray){
 							$paymentallocationarray['receipt_id'] = $receipt_id;
@@ -1174,11 +1182,12 @@ class tallyClass extends userClass{
 				}
 				//End VALIDATION PART
 
-				if($checkstatus == "S" AND count((array)$valuenotavailablefieldary) ==0){ 
+				if($checkstatus == "S" AND count((array)$valuenotavailablefieldary) ==0){
 					$maintransactionaryres = $callConfig->insertRecord($dmtres->application_table_name,$maintransactionary);
 					$transaction_id = $maintransactionaryres['LASTID'];
 				}
-				if($checkstatus == "S" && $maintransactionaryres['status'] == 'sucess' AND count((array)$valuenotavailablefieldary) ==0){ 
+				$transactionitemres = array();
+				if($checkstatus == "S" && $maintransactionaryres['status'] == 'sucess' AND count((array)$valuenotavailablefieldary) ==0){
 					foreach($transactionitemsql as $transitemarry){
 						$transitemarry['transaction_id'] = $transaction_id;
 			        	$transactionitemres[] = $callConfig->insertRecord($dmtres->item_table,$transitemarry);
@@ -1278,6 +1287,7 @@ class tallyClass extends userClass{
 				//echo "<pre>"; print_r($displayattributesres); exit;
 		$fieldkeywithvalue = array();
 		$checklists = array('InvDate'=>'transaction_date', 'VOUCHERNUMBER'=>'transaction_number', 'PARTYNAME'=>'party_name', 'STATE'=>'party_address', 'PLACEOFSUPPLY'=>'place_of_supply', 'mobile_number'=>'party_phone', 'email_address'=>'party_email');
+		$checkfiled = array();
 		foreach($checklists as $checklis){
 			$checkfiled[] = $checklis;
 		}
@@ -1285,6 +1295,7 @@ class tallyClass extends userClass{
 			$lists = json_decode($displayattributesres->list_attributes,1);
 			$type_array = array('select','auto_select','multi_select','disable_select','radio','checkbox', 'color_pick','image');
 			//print_r($lists);
+			$listsechck = array();
 			foreach ($lists as $key => $value){
 				//if(in_array($value['type'], (array)$checkfiled)){
 					if(in_array($value['type'], (array)$type_array)){
@@ -1417,7 +1428,9 @@ class tallyClass extends userClass{
 					$maintransactionaryres = $callConfig->insertRecord($dmtres->application_table_name,$maintransactionary);
 					$transaction_id = $maintransactionaryres['LASTID'];
 				}
-				if($checkstatus == "S" && $maintransactionaryres['status'] == 'sucess' AND count((array)$valuenotavailablefieldary) ==0){ 
+				$transactionitemres = array();
+				$transactionitemtaxres = array();
+				if($checkstatus == "S" && $maintransactionaryres['status'] == 'sucess' AND count((array)$valuenotavailablefieldary) ==0){
 					foreach($transactionitemsql as $transitemarry){
 						$transitemarry['transaction_id'] = $transaction_id;
 			        	$transactionitemres[] = $callConfig->insertRecord($dmtres->item_table,$transitemarry);
@@ -1963,6 +1976,7 @@ class tallyClass extends userClass{
 		foreach( $itemres as $itemr){
 			$resit[$itemr->item_name] = (array)$itemr;
 		}
+		$initemres = array();
 		foreach($apihitre['Item_Entries'] as $item_data){
 			$item_insert = array();
 			foreach($item_array as $ikey=>$iarr){

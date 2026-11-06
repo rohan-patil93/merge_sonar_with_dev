@@ -109,6 +109,7 @@ class employeeManagementUserClass extends userClass{
                         $days_ago = $employees->joining_date;
                     }
                     $approval_id = "";
+                    $task = null;
                     if($tasks->approval_type == 'AB'){
                         $approval_id = $connectdetails['admin_connect'];
                     }elseif($tasks->approval_type == 'FB'){ 

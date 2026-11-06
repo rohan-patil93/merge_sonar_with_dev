@@ -27,8 +27,8 @@ class phptextClass
 		list($x, $y) = $this->ImageTTFCenter($im, $text, $font, $fontSize);	
 		imagettftext($im, $fontSize, 0, $x, $y, $textColor, $font, $text);
 		if(imagejpeg($im,$dir.$fileName,90)){/*save image as JPG*/
+			imagedestroy($im);
 			return json_encode(array('status'=>TRUE,'image'=>$dir.$fileName));
-		imagedestroy($im);	
 		}
 	}	
 	

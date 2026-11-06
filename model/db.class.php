@@ -133,6 +133,7 @@ class configClass
 				$error_no = mysqli_errno($this->con);
 				$error_message =  $error_no." : ".mysqli_error($this->con);
 				$log['log_message']=str_replace("'", " ", $error_message);
+				$fields = null;
 				if($error_no == '1062' || $error_no == '1406' ){ $fields = $this->toGetUbiquekeyFields($error_message); }
 				if($error_no == '1048'){ $fields = $this->toGetcannotbenull($error_message); }
 				$queryresult = array('status' => 'fail' , 'message' => $error_message, 'error_no' => $error_no, 'other' => $fields, 'query' => $query);
@@ -731,6 +732,7 @@ function random_code()
 	$string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789";
 	$rand = '';
 	
+	$rand = '';
 	for($i = 0;$i <= 10;$i++) {
 		$num = random_int(0, 60);
 		$tmp = substr($string, $num, 1);

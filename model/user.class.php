@@ -82,6 +82,7 @@ class userClass{
 			$login_type = $post['platform'] !="" ? $post['platform'] : 'Web';
 			$array = array('company_id'=>$user->company_id,'user_id'=>$user->id,'login_type'=>$login_type ,'db_name'=>$user->db);
 			//$retun_token = $this->tocreateusertoken($array);
+			$retun_token = '';
 			$user->user_token = $retun_token;
 	   		$return = $user;
 	   	}else{
@@ -569,7 +570,7 @@ class userClass{
 		$emailarray['to_company_id'] = $row->company_id;
 		$emailarray['session_company_id'] = $row->company_id;
 		$emailarray['temp_password'] = $gen_password;
-		$roles = json_decode($userres->role_id,1);
+		$roles = json_decode($row->role_id,1);
 		$emailarray['user_company_id'] = $row->company_id;
 		$emailarray['user_display_name'] = $row->display_name;
 		$emailarray['user_email_id'] = $row->user_email;
@@ -991,7 +992,7 @@ class userClass{
    			$maxtablecnt++;
    		}
    		if(count((array)$comman_table) == $maxtablecnt){
-   			$res['completed']  == "Y";
+   			$res['completed'] = "Y";
    		}
    		$res['completed_cnt']  = $maxtablecnt;
    		$res['completed_total_cnt']  = count((array)$comman_table);
@@ -1619,13 +1620,15 @@ class userClass{
 		$rstr = "";
 		//print_r($data);
 		unset($data[0]);
+		$edi_dump = array();
+		$edi_master = array();
 
 		foreach ($data as  $feilddata) {
 			$rstr.= "('".$filename."',";
 			$i =1;
 			foreach ($feilddata as  $value) {
 				$key ='field'.$i.'_datatype';
-				if ($edi_dump[$key] == 'date') { 
+				if ($edi_dump[$key] == 'date') {
 					$value = $this->dateformate($edi_master['EDI_Date_Formater'],$value);
 
 				}
@@ -2322,7 +2325,8 @@ class userClass{
 			//echo $query1; exit;
 				$emailids = array();
 				$email = $callConfig->getAllRows($query1);
-			foreach ($email as $xvalue) { //print_r($xvalue);
+			$i = 0;
+		foreach ($email as $xvalue) { //print_r($xvalue);
 				if($i<7){
 					$emailids[]= $xvalue->email_id;
 				}else{
@@ -3100,7 +3104,6 @@ class userClass{
 			
 			//start - Serial Number Masters
 			$post['transaction_date'] = $invoiced_at;
-			$post['party_id'] = $post['party_id'];
 			$post['transaction_type'] = $post['type'];
 			$transaction_number_details = $this->generatingApplicationSerialNumberMasters($table,$post);
 			$fieldnames['transaction_number'] = $transaction_number_details['main_transaction_number'];
@@ -3123,7 +3126,7 @@ class userClass{
 			$fieldnames['transaction_type'] = $table;
 			$fieldnames['transaction_id'] = $insert_id;
 			if(($table =='goods_receipt_notes' || $table =='delivery_orders') && $post['random']){
-				$ram = $this->updaterandomvalueforlotandseries($post, $insert_id);
+				$this->updaterandomvalueforlotandseries($post, $insert_id);
 			}
 		}
 		$return['res'] =$res; /**/
@@ -3503,7 +3506,7 @@ class userClass{
 			$fieldnames['transaction_type'] = $table;
 			$fieldnames['transaction_id'] = $insert_id;
 			if($table =='goods_receipt_notes' && $post['random']){
-				$ram = $this->updaterandomvalueforlotandseries($post, $insert_id);
+				$this->updaterandomvalueforlotandseries($post, $insert_id);
 			}
 			//$res = $this->addAndUpdateBulkApprovalTransaction($fieldnames,'insert');
 		}
@@ -5247,7 +5250,7 @@ class userClass{
 					$itemremaning_count =0;
 				}
 			}else{
-				if($itemdata->closing_qty < -(-$itemcount)){
+				if($itemdata->closing_qty < $itemcount){
 					$remaning_count = $itemcount+ $itemdata->closing_qty;
 					$itemcount = "-".$itemdata->closing_qty;
 				}else{
@@ -5273,7 +5276,7 @@ class userClass{
 		   			$remaning_count =0;
 		   		}
 		   	}else{
-		   		if($row->closing_qty < -(-$count)){
+		   		if($row->closing_qty < $count){
 		   			$remaning_count = $count+ $row->closing_qty;
 		   			$count = "-".$row->closing_qty;
 		   		}else{
@@ -5357,7 +5360,7 @@ class userClass{
 					$itemremaning_count =0;
 				}
 			}else{
-				if($itemdata->closing_qty < -(-$itemcount)){
+				if($itemdata->closing_qty < $itemcount){
 					$remaning_count = $itemcount+ $itemdata->closing_qty;
 					$itemcount = "-".$itemdata->closing_qty;
 				}else{
@@ -5384,7 +5387,7 @@ class userClass{
 	   			$remaning_count =0;
 	   		}
 	   	}else{
-	   		if($row->closing_qty < -(-$count)){
+	   		if($row->closing_qty < $count){
 	   			$remaning_count = $count+ $row->closing_qty;
 	   			$count = "-".$row->closing_qty;
 	   		}else{
@@ -7314,7 +7317,6 @@ class userClass{
         	$return ['expenss_id'] = $data2->id;
         	$return ['expense_name'] = $data2->expense_name;
         	$return ['expenss_description'] = $data2->description;
-        	$return ['expense_gl_account'] = $data2->gl_account;
         	$return ['consume'] = 8500;
         	$return ['available'] = $return ['pc_limit'] - $return ['consume'];
         	$return ['republish_date'] = date("d-m-Y",strtotime('2020-05-26'));
@@ -8625,14 +8627,10 @@ function togetemployeeteamdata($data){
 				$post['status_old'] = $data11['current_status'];
 				$post['amount'] =  $data11[$data22->doa_field_name];
 				$post['originator']  = $data11['created_by'];
-				$post['status_old'] = $data11['current_status'];
-				$post['amount'] =  $data11[$data22->doa_field_name];
-				$post['originator']  = $data11['created_by'];
 				$post['transaction_type'] = $post['table'];
 				$post['transaction_number'] = $post['hid'];
 				if(isset($data11['transaction_number'])){ $post['transaction_number'] = $data11['transaction_number']; }
 				$post['total_amount'] = $post['amount'];
-				$post['status'] = $post['status'];
 				$post['status_old_value'] = $post['status_old'];
 				$post['Rid'] = $post['hid'];
 
@@ -8661,16 +8659,16 @@ function togetemployeeteamdata($data){
 
 				$array = array('emp_ids'=>$post['hid'],'user_id'=>$post['user_id'],'company_id'=>$post['company_id'],'status'=>$post['status'],'extra'=>$post['extra'],'company_id'=>$post['company_id'],'emp_id'=>$post['emp_id']);
 			    //echo "ravi"; print_r($array); //exit;
-				$rr = $this->updateprojecttimesheetsbluk($array);
+				$this->updateprojecttimesheetsbluk($array);
 			}
 			if($post['table'] == 'employee_terminations' && $post['status'] == ST_APPROVAL_PENDING){
 				$array = array('trn_id'=>$post['hid'],'user_id'=>$post['user_id'],'company_id'=>$post['company_id']);
 			    //echo "ravi"; print_r($array); //exit;
-				$rr = $this->exitprocesssteps($array);
+				$this->exitprocesssteps($array);
 			}
 			if($post['table'] == 'project_tasks' && $post['status'] == ST_APPROVAL_PENDING){
 				$array = array('id'=>$post['hid'],'user_id'=>$post['user_id'],'company_id'=>$post['company_id']);
-				$rr = $this->taskassignttoadmin($array);
+				$this->taskassignttoadmin($array);
 			}
 			if($post['table'] == 'attendenace_regularization_requests' && $post['status'] == ST_APPROVED){
 				$array = array('transaction_id'=>$post['hid'],'user_id'=>$post['user_id'],'company_id'=>$post['company_id']);
@@ -9296,7 +9294,7 @@ function addjobpostingapplicatantdata($post,$get){
 		if(isset($post['id'][$key])){
 			$insert=$callConfig->updateRecord('job_posting_candidates',$insert_array,'id',$post['id'][$key]);
 		}else{
-			$insert_array['is_active'] = '0'; $insert_array['current_status']= 0; $insert_array['current_status']='0'; $insert_array['created_by']= $post['created_by'];$insert_array['created_by'] =$post['created_by'];
+			$insert_array['is_active'] = '0'; $insert_array['current_status']='0'; $insert_array['created_by'] =$post['created_by'];
 			$insert = $callConfig->insertRecord('job_posting_candidates',$insert_array);
 			}//exit;
 			
@@ -9800,9 +9798,9 @@ function addjobpostingapplicatantdata($post,$get){
 		$res=$callConfig->updateRecord(MAINDB.'.user_registered_groups',array('is_active'=>'1'),'','',$where);
 		$returnarray['update_old_user_email_group'] = $res;
 		if($post['submit_employee'] == "E"){
-			$post['user_type'] == "5";
+			$post['user_type'] = "5";
 		}else{
-			$post['user_type'] == "1";
+			$post['user_type'] = "1";
 		}
 		$role = json_encode(array(EMPLOYEE_ONBOARDING,EMPLOYEE_ROLE));
 		$insert_array = array('company_id'=>$get['company_id'],'first_name'=>$cddata->first_name,'middle_name'=>$cddata->middle_name,'last_name'=>$cddata->last_name,'user_email'=>$post['email'],'user_mobile'=>$cddata->phone,'display_name'=>$cddata->display_name,'user_type'=>$post['user_type'],'role_id'=>$role);
@@ -14578,25 +14576,14 @@ function convertToYYYYMMDD($dateString) {
     				$total_utilized = 0;
     				foreach($result as $data){
     					$empid = $data->employee_id;
-    					if(in_array($employeedata[$empid]->location_id,(array)$selected_locations) || in_array($employeedata[$empid]->department_id,(array)$selected_departments) || in_array($employeedata[$empid]->job_title_id,(array)$selected_job_titles)) {
-    						$budget_data_report[$empid]['department_id']  = $employeedata[$empid]->department_id;
-    						$budget_data_report[$empid]['location_id'] = $employeedata[$empid]->location_id;
-    						$budget_data_report[$empid]['job_title_id'] = $employeedata[$empid]->job_title_id;
-    						$total_budget = $total_budget + $data->budgeted_amount;
-    						$total_utilized = $total_utilized + $data->billable_amount;
-    						$budget_data_report[$empid]['estimated'] = $budget_data_report[$empid]['estimated'] + $data->budgeted_amount;
-    						$budget_data_report[$empid]['utilized'] = $budget_data_report[$empid]['utilized'] + $data->billable_amount;
-    						$budget_data_report[$empid]['display_name'] = $employeedata[$empid]->display_name;
-    					} else {
-    						$budget_data_report[$empid]['department_id']  = $employeedata[$empid]->department_id;
-    						$budget_data_report[$empid]['location_id'] = $employeedata[$empid]->location_id;
-    						$budget_data_report[$empid]['job_title_id'] = $employeedata[$empid]->job_title_id;
-    						$total_budget = $total_budget + $data->budgeted_amount;
-    						$total_utilized = $total_utilized + $data->billable_amount;
-    						$budget_data_report[$empid]['estimated'] = $budget_data_report[$empid]['estimated'] + $data->budgeted_amount;
-    						$budget_data_report[$empid]['utilized'] = $budget_data_report[$empid]['utilized'] + $data->billable_amount;
-    						$budget_data_report[$empid]['display_name'] = $employeedata[$empid]->display_name;
-    					}
+    					$budget_data_report[$empid]['department_id']  = $employeedata[$empid]->department_id;
+    					$budget_data_report[$empid]['location_id'] = $employeedata[$empid]->location_id;
+    					$budget_data_report[$empid]['job_title_id'] = $employeedata[$empid]->job_title_id;
+    					$total_budget = $total_budget + $data->budgeted_amount;
+    					$total_utilized = $total_utilized + $data->billable_amount;
+    					$budget_data_report[$empid]['estimated'] = $budget_data_report[$empid]['estimated'] + $data->budgeted_amount;
+    					$budget_data_report[$empid]['utilized'] = $budget_data_report[$empid]['utilized'] + $data->billable_amount;
+    					$budget_data_report[$empid]['display_name'] = $employeedata[$empid]->display_name;
 
 
     				}
@@ -19988,7 +19975,6 @@ function startWorkFlow($data){
 		$option = "COM_INSERT_".strtoupper($data['table']);
 		$notdataa = array('company_id'=>$data['company_id'], 'notification_message'=>$msg, 'id'=>$data['rid'], 'application_table_name'=>$data['table'], 'type'=>'ACTION', 'notification_users'=>$user_ids,'option'=>$option);
 		$returnarray['next_user']= $getuserid->created_by;
-		$returnarray['noti_array']= $notdataa;
 		$notres = $this->tosendnotifiations($notdataa);
 		$returnarray['noti_array']= $notres;
 		return $returnarray;
@@ -21182,9 +21168,9 @@ function insertemployeedetails($post){
 	if($post['create_user']=='0' || (isset($post['roll_short_code']) && $post['roll_short_code'] ==EMPLOYEE_ROLE)){
 
 		if($post['create_user']=='0'){
-				$post['user_type'] == "1";
+				$post['user_type'] = "1";
 			}else{
-				$post['user_type'] == "5";
+				$post['user_type'] = "5";
 			}
 		$role = json_encode(array(EMPLOYEE_ROLE));
 		$fieldnames=array('company_id'=>$post['company_id'],'first_name'=>$post['first_name'],"first_name"=>$post['first_name'],"middle_name"=>$post['middle_name'],"last_name"=>$post['last_name'],"display_name"=>$post['display_name'],'user_email'=>$post['email_id'],"location_id"=>$post['location_id'],"reports_to"=>$post['reporting_manager_id'],'current_status'=>'0','is_active' =>'0',"created_date"=>date('Y-m-d H:i:s'),"created_by"=>$post['user_id'],'user_type'=>$post['user_type'],'role_id'=>$role);
@@ -22369,7 +22355,6 @@ function getLeaveWithStatus($data){
 				//echo "<pre>"; print_r($insert_array);exit;
 				//echo "DDDDDDDDDDDD"; 
 				$insert_componet_array = array();
-				$codeactual['ARREAR_SPA'] = 0;
 				$codeactual['ARREAR_BASIC'] = 0;
 				$codeactual['ARREAR_SPA'] = 0;
 				$codeactual['ARREAR_LTA'] = 0;
@@ -25669,9 +25654,6 @@ function inserttasks($post, $get){
 		$post['name'] = $post['display_name'];
 		$post['password'] = $post['user_password'] !=""?$post['user_password']:'PensAndPencils123';
 		$post['email'] = trim($post['email_id']);
-		$post['user_mobile'] = $post['user_mobile'];
-		$post['company_name'] = $post['company_name'];
-		$post['domain_name'] = $post['domain_name'];
 		$post['email_check'] = 0;
 		
 		// $data[] = $callConfig->executeQuery("UPDATE ".MAINDB.".database_allocations SET `is_active` = NULL, `allcoated_date` = NULL WHERE `database_allocations`.`id` = 223;");
@@ -27951,10 +27933,9 @@ function updatetransactionactivityschedule($post){
 	function insertCandidateAccessRight($post){
 		global $callConfig;
 		$return = array();
-		$return['post'] = $post;	
 		$fielddata = json_encode($post['fieldgrpaccess']);
 		$dashboard_field_list = json_encode($post['dashboard_field_list']);
-		$return['post'] = $post;	
+		$return['post'] = $post;
 		if(isset($post['Rid']) AND $post['Rid'] !=""){
 			$post_array= array("role_short_code"=>$post['role_short_code'],"field_list"=>$fielddata,"dashboard_field_list"=>$dashboard_field_list,"updated_by"=>$post['user_id'],"updated_date"=>date('Y-m-d H:i:s'));
 			$res=$callConfig->updateRecord('candidate_display_fields',$post_array,'id',$post['Rid']);	
@@ -28400,7 +28381,6 @@ function updatetransactionactivityschedule($post){
 		$emailarray['user_display_name'] = $usersetailres->display_name;
 		$emailarray['to_company_id'] = $usersetailres->company_id;
 		$emailarray['session_company_id'] = $usersetailres->company_id;
-		$emailarray['created_by'] = $post['user_id'];
 		$emailarray['user_module'] = $modulenamelist;
 		$emailarray['default_module_id'] = $usersetailres->default_module_id;
 		$emailarray['created_by'] = $post['user_id'];
@@ -28421,7 +28401,6 @@ function updatetransactionactivityschedule($post){
 			$condition = " AND pt.".$originator." = '".$checkuserid."'";
 		}
 		$get['transaction_date_check'] = date('Y-m-d');
-		$get['transaction_table'] = $get['transaction_table'];
 		$getdocaccesssetup = $this->getdocumentsAccessSetupsRule($get);
 		$return['docpermisions'] = $getdocaccesssetup;
 		$allowcostcenter = $getdocaccesssetup['allowcostcenter'];
@@ -28589,9 +28568,8 @@ function updatetransactionactivityschedule($post){
 			$return['generatesql']= $dmtsql1;
 			$dmtres1=$callConfig->getAllRows($dmtsql1);
 			foreach ($dmtres1 as $dmtress){
-				$conditionbuild = ""; 
+				$conditionbuild = "";
 				$get['transaction_date_check'] = date('Y-m-d');
-				$get['transaction_table'] = $get['transaction_table'];
 				$getdocaccesssetup = $this->getdocumentsAccessSetupsRule($get);
 				$document_access_setupsres  = $getdocaccesssetup['document_access_setupsres'];
 				$docaccesssetupsuser = $getdocaccesssetup['document_access_setups_user'];
@@ -30984,8 +30962,8 @@ function updateTransactionItemsQty($get,$transaction,$operation =""){
 			$len = array();
 		}
 		if(count((array)$len) !=0){
-			$ddf = $this->invoiceUpdates($get['transaction_table'],$len);
-		} 
+			$this->invoiceUpdates($get['transaction_table'],$len);
+		}
 	}
 	//stock In And Out Code End
 	
@@ -32206,7 +32184,7 @@ function getDisplayAttributesNewVersion($get){
 
 	function insertpaymentstojv($transaction_id,$post,$transaction_table){
 		global $callConfig;	
-		$transaction_table = $transaction_table =!""?$transaction_table:"payments";
+		$transaction_table = $transaction_table != "" ? $transaction_table : "payments";
 		$whrs = "company_id= ".$post['company_id']." AND is_active = 0";
 		$query = $callConfig->selectQuery('config','*',$whrs,'','','');
 		$config = $callConfig->getRow($query);
@@ -34930,10 +34908,6 @@ $itemref[$vendorsres->account_code][] = $jvary;
 		$currenciesres = $callConfig->getAllRows($currenciessql);
 		$return['currencies'] =$currenciesres;
 
-		$currenciessql = "SELECT id, currency_list FROM currencies WHERE company_id = '".$get['company_id']."' AND is_active = 0";
-		$currenciesres = $callConfig->getAllRows($currenciessql);
-		$return['currencies'] =$currenciesres;
-
 		$otpsql = "SELECT `otp_number` FROM `user_otp_authentication` WHERE company_id = '".$get['company_id']."' AND user_id = '".$rid."' AND current_status =0 AND is_active =0 ORDER BY id DESC LIMIT 0,1";
 		$otpdata = $callConfig->getRow($otpsql);
 		$return['otp'] =$otpdata->otp_number;
@@ -35557,7 +35531,6 @@ $itemref[$vendorsres->account_code][] = $jvary;
 						$get['transaction_no'] = $tl->transaction_id;
 						$get['transaction_table'] = $tl->transaction_table;
 						$get['current_status'] = $tl->current_status;
-						$get['company_id'] = $get['company_id'];
 						$getDynamicWorkFlowSteps = $this->getDynamicWorkFlowSteps($get);
 						$nextstepkeyvalue = $getDynamicWorkFlowSteps['nextstepkeyvalue'];
 						$nextstatus = $nextstepkeyvalue[$tl->current_status];
@@ -36957,7 +36930,7 @@ function gerReferanceTableDetails($get){
         		$mainitem = $this->togetitemvalues($rid);
 				$day_rate = $this->togetitemwadayrate($rid, $post['company_id']);	
 				$len = array('company_id' =>$post['company_id'] , 'location_id' =>$location_id, 'transaction_warehouse_id' =>$transaction_warehouse_id, 'transaction_date' =>$opening_quantity_date , 'item_id' =>$rid,'document_no'=>$rid,'document_type' =>'items','document_ref_no' =>'','in_qty' =>$post['opening_quantity'],'in_value'=>$in_value,'item_in_value' =>$in_value,'reason_id'=>'','out_qty' =>0,'out_value' =>0,'sale_price'=>0,'sale_value'=>0,'item_wa_cost'=>$day_rate,'item_st_cost'=>$mainitem->purchase_price,'is_active'=>'0','current_status'=>'0','sales_qty'=>0,'purchase_qty'=>$in_value);
-				$ddf = $this->invoiceUpdates('items',$len);
+				$this->invoiceUpdates('items',$len);
 			}
 
 
@@ -38127,9 +38100,8 @@ function gerReferanceTableDetails($get){
 			}
        }else{
             $query = "SELECT * FROM `application_finance_year_serial_numbers` WHERE application_table_name = '".$table_name."' AND is_active =0";  
-            $return['query_2_res'] = $query;   
             $res = $callConfig->getRow($query);
-            $return['query_2_res'] = $res;  
+            $return['query_2_res'] = $res;
             if(isset($res->doc_no_length)){
                 $le = $res->doc_no_length;
                 $var = "%0".$le."d";

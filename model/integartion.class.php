@@ -6,6 +6,7 @@ class integartionClass{
 		$returrara['post'] = $post;
 		$returrara['get'] = $get;
 		$insert_array = array('company_id'=>$post['company_id'],'job_post_id'=>$post['post_id'],'job_hiring_source_id'=>$post['source_id'],'publish_date'=>date('Y-m-d'),'ref_id'=>$post['ref_id'],'acknowledgement_details'=>$post['response_data'],'is_active'=>'0','current_status'=>52,'created_by'=>$get['user_id']);
+		$insert = array();
 		if($post['type']=='CREATE'){
 			$insert = $callConfig->insertRecord('job_posting_publish_details',$insert_array);
 			$upquery =$callConfig->updateRecord('job_postings',array('current_status'=>52),'id',$post['post_id']);
@@ -71,6 +72,7 @@ class integartionClass{
 		$insertarray1['candidate_code'] = $transation;
 		$insertarray1['display_name'] = $post['candidate_name'];
 		$insert1 = $callConfig->insertRecord('candidates',$insertarray1);
+		$insert = array();
 		if($insert1['status'] == "sucess"){
 			$insert_array = array('company_id'=>$get['company_id'],'candidate_id'=>$insert1['LASTID'],'job_posting_id'=>$post_id,'candidate_name'=>$post['candidate_name'],'candidate_email'=>$post['candidate_email'],'candidate_phone'=>$post['candidate_phone'],'file'=>$file_name,'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'remarks'=>json_encode($post));
 			$insert = $callConfig->insertRecord('job_posting_candidates',$insert_array);	
@@ -137,10 +139,11 @@ class integartionClass{
 			$recent_publish = $callConfig->getAllRows($recent_publishsql);	
 			$return['data'] = $recent_publish;
 		}
+		$recent_unpublish = array();
 		if($get['type']=='UNPUBLISH'){
 			$recent_unpublishsql = "SELECT id, requested_date, job_number, job_name, no_of_resources, required_date, job_status, current_status, updated_date  FROM `job_postings` WHERE company_id = '".$get['company_id']."' ".$whr." AND current_status = ".ST_UNPUBLISH." AND job_status !='1' AND is_active = 0";
 			$return['name'] = "Recently Un-Published";
-			$recent_publish = $callConfig->getAllRows($recent_unpublishsql);	
+			$recent_publish = $callConfig->getAllRows($recent_unpublishsql);
 			$return['data'] = $recent_unpublish;
 		}
 		return $return;
@@ -1733,6 +1736,7 @@ function checkandupdatecolorprojecttask($post, $get){
 		$msg1 = "Task ".$task_data->task_name." is updated : Label (".$label_data->label_name.") is added.";
 
 	}
+	$notuser1 = array();
 	$notuser1[] = $get['user_id'];
 	$notuser1[] = $task_data->assigen_id;
 	$notdata1 = array('company_id'=>$get['company_id'], 'notification_message'=> $msg1, 'transaction_number'=>$transaction_number, 'application_table_name'=>'project_task_details', 'type'=>'INFORMATION', 'notification_users'=>$notuser1,'option'=>'COM_VIEW_PROJECT_KANBAN&TAB=3&RID='.$task_data->project_id,'module_setup_id'=>25);
@@ -3405,6 +3409,7 @@ function updatestationeryrequest($post, $get){
 	$user = $callConfig->getRow("SELECT display_name FROM application_users WHERE id=".$req->user_id);
 	$status = $callConfig->getRow("SELECT name FROM status_progress WHERE company_id=".$get['company_id']." AND table_name='stationery_requests' AND status = ".$post['current_status']." AND is_active =0");
 	$msg1 = "We are pleased to inform you that ".$user->display_name."  requested stationery request(".$req->request_no.")   have been successfully ".$status->name;
+	$notuser1 = array();
 	$notdata1 = array('company_id'=>$get['company_id'], 'notification_message'=> $msg1, 'transaction_number'=>$req->id, 'application_table_name'=>'stationery_requests', 'type'=>'ACTION', 'notification_users'=>$notuser1,'option'=>'COM_VIEW_OFFICE_MANAGEMENT&TAB=2','module_setup_id'=>25);
 	$notuser1[] = $req->user_id;
 	$notuser1[] = $req->request_id;
@@ -3441,6 +3446,7 @@ function updatetranspotfrom($get){
 	$user = $callConfig->getRow("SELECT display_name FROM application_users WHERE id=".$req->user_id);
 	$status = $callConfig->getRow("SELECT name,action_label FROM status_progress WHERE company_id=".$get['company_id']." AND table_name='employee_transport_requests' AND status = ".$get['current_status']." AND is_active =0");
 	$msg1 = "We are pleased to inform you that ".$user->display_name."  requested transport request(".$req->request_no.")   have been successfully ".$status->action_label;
+	$notuser1 = array();
 	$notdata1 = array('company_id'=>$get['company_id'], 'notification_message'=> $msg1, 'transaction_number'=>$req->id, 'application_table_name'=>'employee_transport_requests', 'type'=>'ACTION', 'notification_users'=>$notuser1,'option'=>'COM_VIEW_OFFICE_MANAGEMENT&TAB=3','module_setup_id'=>25);
 	$notuser1[] = $req->created_by;
 	$notuser1[] = $get['user_id'];
@@ -3507,6 +3513,7 @@ function updatefoodrequest($get){
 	$user = $callConfig->getRow("SELECT display_name FROM application_users WHERE id=".$req->user_id);
 	$status = $callConfig->getRow("SELECT name,action_label FROM status_progress WHERE company_id=".$get['company_id']." AND table_name='employee_food_requests' AND status = ".$get['current_status']." AND is_active =0");
 	$msg1 = "We are pleased to inform you that ".$user->display_name."  requested food service request(".$req->start_date." to ".$req->stop_date." )  have been successfully ".$status->action_label;
+	$notuser1 = array(); $notuser2 = array();
 	$notdata1 = array('company_id'=>$get['company_id'], 'notification_message'=> $msg1, 'transaction_number'=>$req->id, 'application_table_name'=>'employee_transport_requests', 'type'=>'ACTION', 'notification_users'=>$notuser1,'option'=>'COM_VIEW_OFFICE_MANAGEMENT&TAB=3','module_setup_id'=>25);
 	$notuser1[] = $req->created_by;
 	$notuser1[] = $get['user_id'];
@@ -4085,6 +4092,7 @@ function toimportthedataintotablesemployeessalary($get){
 		$query = "SELECT id FROM general_code_role_permissions WHERE company_id =".$get['company_id']." AND genc_code='".$get['code']."' AND role_short_code='".$get['role']."' AND is_active =0";
 		$data = $callConfig->getRow($query);
 		$res['status'] = 'Y';
+		$upquery = '';
 		if($data->id!=""){
 			$upquery = "UPDATE general_code_role_permissions SET is_active = 1 WHERE id = '".$data->id."'";
 			$return['next_level'][] = $upquery;
@@ -4100,8 +4108,9 @@ function toimportthedataintotablesemployeessalary($get){
 	public function toinsertapplication_table_histories($get){
  		global $callConfig;
  		$return['get'] = $get;
- 		$table_name = $get['table_name']; 	
- 		$transaction_id = $get['transaction_id'];	
+ 		$jempdata = null;
+ 		$table_name = $get['table_name'];
+ 		$transaction_id = $get['transaction_id'];
  		$type = $get['type'];
  		$dquery = "SELECT * FROM  dynamic_mapping_tables WHERE company_id = ".$get['company_id']." AND application_table_name= '".$table_name."' AND is_active =0";
  		$return['dynamic_query'] = $dquery;
@@ -4463,6 +4472,7 @@ function toimportthedataintotablesemployeessalary($get){
  	}
  	public function togetanddifflisttablefields($get){
  		global $callConfig;
+ 		$listone = array(); $listtwo = array(); $tabone = array(); $tabtwo = array(); $checktables = array(); $tablefiled = array();
  		$db1 = 'infistaq_infisuite_2';
  		$db2 = 'infistaq_infisuite_live_vms';
  		$query = "SHOW TABLES FROM ".$db1;
@@ -4849,6 +4859,7 @@ function toimportthedataintotablesemployeessalary($get){
 	    	}
 	    	
 	    	$parts = [];
+	    	$serial = '';
 		    for ($m = 1; $m <= 10; $m++) {
 		    	if (!empty($asnres->serial_number) && $serial_number_position == $m){
 		            $parts[$m] = $serial;

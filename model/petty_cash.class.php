@@ -217,6 +217,7 @@ class pettyCashUserClass extends userClass{
 				$topup_frequency[$frq->genc_detail_code] = $frq->genc_detail_name;
 			}
 			$return['topup_frequency'] = $topup_frequency;
+			$condition = '';
 			$sql = "SELECT pcbo.id, pcbo.pc_box_id, pcbo.pc_limit, pcbo.pc_type_id, pcb.pc_box_code, pcb.pc_box_description, pcb.topup_frequency, pcb.topup_amount FROM petty_cash_box_owner pcbo, petty_cash_boxes pcb WHERE pcbo.company_id = '".$get['company_id']."' AND pcbo.company_id = pcb.company_id AND pcbo.pc_box_id = pcb.id  AND pcbo.is_active = pcb.is_active ".$condition." AND pcbo.is_active = 0";
 			$res=$callConfig->getAllRows($sql);
 			$return['petty_cash_box_owner'] = $res;

@@ -1449,6 +1449,7 @@ class employeeLoanClass extends userClass
     		$weak_off_arr = $callConfig->getRow($query);
 
 		    $shift_info = array();
+		    $shift_times = null;
 
 	    	if($weak_off_arr->id == ''){
 		    	$qry = "SELECT id, working_days, full_day_hours, half_day_hours, grace_perieod FROM attendance_settings 

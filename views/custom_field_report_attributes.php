@@ -19,11 +19,7 @@ if (isset($_POST['submit'])){
 	//echo $url; exit;
 	$response = file_post_contents($url, $data);
 	if ($response) {
-		if ($_POST['submit_value'] == 'continue'){
-				header("location:index.php?option=COM_LIST_REPORT_ATTRIBUTES&error=3001");
-		}else{
-				header("location:index.php?option=COM_LIST_REPORT_ATTRIBUTES&error=3001");
-		}
+		header("location:index.php?option=COM_LIST_REPORT_ATTRIBUTES&error=3001");
 		
 	}
 
