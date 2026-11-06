@@ -69,8 +69,8 @@
                     </div>
                     <a href="#" class="float-right f-w-600 text-primary forgot-pwd-open" onclick="fergotpassworddisplay()">Forgot Password?</a>
                     <div class="form-group mt-4">
-					<input class="form-control" type="hidden"  name="ip" autocomplete="off" value="<?php echo getIPAddress();?>" >
-                                      <input class="form-control" type="hidden"  name="browser" autocomplete="off" value="<?php echo getBrowser();?>" >
+					<input class="form-control" type="hidden"  name="ip" value="<?php echo getIPAddress();?>" >
+                                      <input class="form-control" type="hidden"  name="browser" value="<?php echo getBrowser();?>" >
                                       <input type="hidden" name="submit" value="Login" />
                         <button type="submit" class="btn btn-primary waves-effect waves-light w-100 mt-4 btn-custom-color" style="">Sign In</button>
                     </div>
@@ -111,8 +111,8 @@
                         <label for="trem">I Accept the <a class="text-primary" href="">Terms</a></label>
                     </div>  -->
                     <div class="form-group">
-					  <input class="form-control" type="hidden"  name="ip" autocomplete="off" value="<?php echo getIPAddress();?>" >
-                                      <input class="form-control" type="hidden"  name="browser" autocomplete="off" value="<?php echo getBrowser();?>" >
+					  <input class="form-control" type="hidden"  name="ip" value="<?php echo getIPAddress();?>" >
+                                      <input class="form-control" type="hidden"  name="browser" value="<?php echo getBrowser();?>" >
                                       <input type="hidden" name="submit" value="signup" />
                         <button type="submit" class="btn btn-primary waves-effect waves-light w-100 mt-3" >Sign Up</button>
                     </div>

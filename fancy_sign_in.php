@@ -63,8 +63,8 @@
                             <div class="row mt-4">
                                 <div class="col-lg-6">
                                     <div class="form-group mb-0">
-    								<input class="form-control" type="hidden"  name="ip" autocomplete="off" value="<?php echo getIPAddress();?>" >
-                                          <input class="form-control" type="hidden"  name="browser" autocomplete="off" value="<?php echo getBrowser();?>" >
+    								<input class="form-control" type="hidden"  name="ip" value="<?php echo getIPAddress();?>" >
+                                          <input class="form-control" type="hidden"  name="browser" value="<?php echo getBrowser();?>" >
                                           <input type="hidden" name="submit" value="Login" />
                                         <button type="submit" class="btn btn-primary waves-effect waves-light w-100 mt-4 mob-btn">Sign In</button>
                                     </div>
@@ -120,8 +120,8 @@
                         <div class="row mt-4">
                             <div class="col-lg-6">
                                 <div class="form-group">
-								  <input class="form-control" type="hidden"  name="ip" autocomplete="off" value="<?php echo getIPAddress();?>" >
-                                      <input class="form-control" type="hidden"  name="browser" autocomplete="off" value="<?php echo getBrowser();?>" >
+								  <input class="form-control" type="hidden"  name="ip" value="<?php echo getIPAddress();?>" >
+                                      <input class="form-control" type="hidden"  name="browser" value="<?php echo getBrowser();?>" >
                                       <input type="hidden" name="submit" value="signup" />
                                     <button type="submit" class="btn btn-primary waves-effect waves-light w-100 mt-4">Submit</button>
                                 </div>

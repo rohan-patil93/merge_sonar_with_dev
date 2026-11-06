@@ -294,7 +294,7 @@
                
                 <?php }else { ?>
                 <input type="text" name="item_name[]" id="item_name_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['item_name']; ?>" autocomplete="off">
-                <input type="hidden" name="productCode[]" id="productCode_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['productCode']; ?>" autocomplete="off">
+                <input type="hidden" name="productCode[]" id="productCode_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['productCode']; ?>">
                 <?php } ?>
             </td>
             <td>

@@ -187,8 +187,8 @@ function getIPAddress(){
                           
                         <?php } }?>
 
-    <input class="form-control" type="hidden"  name="ip" autocomplete="off" value="<?php echo getIPAddress();?>" >
-    <input class="form-control" type="hidden"  name="browser" autocomplete="off" value="<?php echo getBrowser();?>" >
+    <input class="form-control" type="hidden"  name="ip" value="<?php echo getIPAddress();?>" >
+    <input class="form-control" type="hidden"  name="browser" value="<?php echo getBrowser();?>" >
     <input type="hidden" name="submit" value="Login" />
     <input type="hidden" name="chrUserName" id="chrUserName" class="form-control" value="<?php echo $_COOKIE['user_email']; ?>">
     <input type="hidden" name="option" id="option" class="form-control" value="<?php echo $_COOKIE['cookie_option']; ?>">

@@ -1790,7 +1790,7 @@ function toggleRowLock(button) {
 
 											<td><?php echo $k; ?>
 
-											<input type="hidden" name="ag_rowid[]" class="form-control itemRow" value="<?php echo $inst['id']; ?>" autocomplete="off">
+											<input type="hidden" name="ag_rowid[]" class="form-control itemRow" value="<?php echo $inst['id']; ?>">
 										</td>
 										<td><input type="text" name="ag_type[]" class="form-control" value="<?php echo $inst['agreement_name']; ?>" autocomplete="off">  </td>
 										<td>
