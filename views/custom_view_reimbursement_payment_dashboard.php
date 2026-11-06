@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $_SESSION['apply_js']['amchart'] = '1';
 $_SESSION['apply_js']['float'] = '1';
 $_SESSION['apply_css']['widgetcss'] = '1';
@@ -310,7 +310,7 @@ foreach($status_progress as $sp) {
         $paidamount= $emp_expenses_cnt['paid_amount'];
         $percengraf = 0;
         if($paidamount !="" && $paidamount !=0){
-          $percengraf = customNanAndEmptyValidation(round(($paidamount/$tamount)*100),1);
+          $percengraf = customNanAndEmptyValidation(round(($paidamount/$tamount)*100));
         }       ?>
       <div class="card-block text-center">
         <div class="m-b-20" style="text-align: -webkit-center;">

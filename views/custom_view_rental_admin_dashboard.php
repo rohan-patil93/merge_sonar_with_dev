@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $_SESSION['apply_js']['amchart'] =1;
 
 if($_SESSION['config']['system_start_date'] !=""){
@@ -293,7 +293,7 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                     $totalpaidamount= round($vendorinvoicecnt['total_amount'])-round($vendorinvoicecnt['total_pending']);
                     $percengraf = 0;
                     if($tamount !="" && $tamount !=0){
-                      $percengraf = customNanAndEmptyValidation(round(($totalpaidamount/$tamount)*100),1);
+                      $percengraf = customNanAndEmptyValidation(round(($totalpaidamount/$tamount)*100));
                     }
                   ?>
                 <div class="m-b-20" style="text-align: -webkit-center;">
@@ -851,7 +851,7 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
         $pending_amount= $vendorslist['total_amount']-$vendorslist['pending_amount'];
         $percengraf = 0;
         if($tamount !="" && $tamount !=0){
-        $percengraf = customNanAndEmptyValidation(round(($pending_amount/$tamount)*100),1);
+        $percengraf = customNanAndEmptyValidation(round(($pending_amount/$tamount)*100));
 }
 
 
@@ -919,7 +919,7 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                           $pending_amount= $vendorsrecentjoin['total_amount']-$vendorsrecentjoin['pending_amount'];
                           $percengraf = 0;
                           if($tamount !="" && $tamount !=0){
-                          $percengraf = customNanAndEmptyValidation(round(($pending_amount/$tamount)*100),1);
+                          $percengraf = customNanAndEmptyValidation(round(($pending_amount/$tamount)*100));
 }
 
 

@@ -4129,7 +4129,7 @@ function formatCsrSummaryAmount($amount)
 		$label = 'L';
 	}
 	return array(
-		'value' => customeummarmonyformate((float) $amount / $divisor, 2),
+		'value' => customeummarmonyformate((float) $amount / $divisor),
 		'label' => $label
 	);
 }
