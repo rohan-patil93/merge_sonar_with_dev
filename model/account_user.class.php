@@ -228,6 +228,7 @@ class accountUserClass extends userClass{
  	public function getTOCHeader($get){
     	global $callConfig;
     	$returnarray = array();
+    	$codition = "";
     	if($get['id'] != ""){
     		$codition .= " AND id = '".$get['id']."'";
     		$tocheaderssql = "SELECT id, parent_toc_header_id, header_name, display_priority, header_contain FROM toc_headers WHERE company_id = '".$get['company_id']."' ".$codition." AND is_active = 0";
@@ -1867,6 +1868,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
     } 
     public function getPurchaseLedger($get){
         global $callConfig;
+        $condition = "";
         if($get['from_date'] !="" AND $get['to_date'] !=""){
             $condition .= " AND '".$this->dateconvertdbformat($get['from_date'])."' <= transaction_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= transaction_date";
         }
@@ -1886,6 +1888,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
     }
      public function getSalesLedger($get){
         global $callConfig;
+        $condition = "";
         if($get['from_date'] !="" AND $get['to_date'] !=""){
             $condition .= " AND '".$this->dateconvertdbformat($get['from_date'])."' <= transaction_date  AND '".$this->dateconvertdbformat($get['to_date'])."' >= transaction_date";
         }
@@ -2117,6 +2120,7 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
     public function getdynamicmappingtableinvoices($get){
         global $callConfig;
         $return = array();
+        $condition = "";
         $transaction_table = $get['transaction_table'];
         if($get['from_date'] !="" AND $get['to_date'] !=""){
             $condition .= " AND transaction_date >= '".$this->dateconvertdbformat($get['from_date'])."'  AND transaction_date <= '".$this->dateconvertdbformat($get['to_date'])."'";
@@ -2155,6 +2159,8 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
     }
     public function getCustomerLedger($get){
         global $callConfig;
+        $condition = "";
+        $paycondition = "";
         $transactionwithdates = array();
         $getFinanceialYear = $this->getFinanceialYear($get['from_date']);
         $financeyear = $getFinanceialYear['fullstartyear'].$getFinanceialYear['fullendyear'];
@@ -2216,6 +2222,8 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
     }
     public function getCustomerStatements($get){
         global $callConfig;
+        $condition = "";
+        $paycondition = "";
         $transactionwithdates = array();
         $getFinanceialYear = $this->getFinanceialYear($get['from_date']);
         $financeyear = $getFinanceialYear['fullstartyear'].$getFinanceialYear['fullendyear'];
@@ -2285,6 +2293,8 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
 
     public function getVendorledger($get){
         global $callConfig;
+        $condition = "";
+        $paycondition = "";
         $transactionwithdates = array();
         $getFinanceialYear = $this->getFinanceialYear($get['from_date']);
         $financeyear = $getFinanceialYear['fullstartyear'].$getFinanceialYear['fullendyear'];
@@ -2346,6 +2356,8 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
     }
     public function getVendorstatements($get){
         global $callConfig;
+        $condition = "";
+        $paycondition = "";
         $transactionwithdates = array();
         $getFinanceialYear = $this->getFinanceialYear($get['from_date']);
         $financeyear = $getFinanceialYear['fullstartyear'].$getFinanceialYear['fullendyear'];

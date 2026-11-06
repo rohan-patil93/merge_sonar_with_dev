@@ -2341,6 +2341,12 @@ class reactClass extends userClass{
 			foreach($locationsres as $red){
 				$locations[$red->id] = $red;
 			}
+			$todayContracts = array();
+			$weeklyContracts = array();
+			$monthlyContracts = array();
+			$quarterlyContracts = array();
+			$expiredContracts = array();
+			$email_body = "";
 	 		foreach ($consres as $contract) {
 	 			$locationsid = json_decode($contract->locations ,1);
              	$locationnames = "";

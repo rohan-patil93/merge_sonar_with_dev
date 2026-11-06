@@ -1506,6 +1506,10 @@ payment tersm**/
 
 		       	
 		       	$saleinvitem = array('amount'=>0,'total_amount'=>0,'total_tax_amount'=>0,'discount_amount'=>0);
+		       	$txvalc1 = 0;
+		       	$txvalc2 = 0;
+		       	$txperc1 = 0;
+		       	$txperc2 = 0;
 		       	foreach($billitems as $itmlist){
 		       		$saleinvitem['amount'] += $itmlist->plan_amount;
 		       		$saleinvitem['total_amount'] += $itmlist->bill_amount;

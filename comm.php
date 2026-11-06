@@ -86,6 +86,7 @@ function dyanamicselectdata($table_name, $filed_name)
 }
 function dyanamicselectdatatablename($table_name, $filed_name)
 {
+	$data1 = array();
 	$data1["where"] = array('application_table_name' => $table_name, 'field_name' => $filed_name, 'company_id' => $_SESSION['company_id']);
 	$data = urlencode(json_encode($data1));
 	$curl = API . "?mode=gettabledetailswithconditions&table=display_attribute_types&data=" . $data;
@@ -97,6 +98,7 @@ function dyanamicselectdatatablename($table_name, $filed_name)
 }
 function dyanamicSelectDataTablenameAllFileds($table_name, $filed_name)
 {
+	$data1 = array();
 	$data1["where"] = array('application_table_name' => $table_name, 'field_name' => $filed_name, 'company_id' => $_SESSION['company_id']);
 	$data = urlencode(json_encode($data1));
 	$curl = API . "?mode=gettabledetailswithconditions&table=display_attribute_types&data=" . $data;
@@ -524,6 +526,7 @@ function toGetErrorMessages()
 	//print_r($erroresponse)
 
 	$error_data = array();
+	$wh1 = array();
 	$wh1["where"] = array('company_id' => $_SESSION['company_id']);
 	$wh1["field"] = "id,message_number,message_description";
 	$data1 = urlencode(json_encode($wh1));
@@ -669,6 +672,7 @@ function callAPI($page)
 }
 function toGetApplicationPagesList()
 {
+	$wh1 = array();
 	$wh1["where"] = array('is_active' => '0', 'company_id' => $_SESSION['company_id']);
 	$wh1['field'] = "application_table_name,list_page_name,insert_page_name,edit_page_name,view_page_name,approval_page_name,insert_page_type,edit_page_type,view_page_type,list_page_type";
 	$data1 = urlencode(json_encode($wh1));
@@ -727,7 +731,7 @@ function toGetIdformateApplicationPagesList()
 }
 function toGetApplicationMenuListold()
 {
-
+	$vdata1 = array();
 	$vdata1['order'] = "display_priority ASC";
 	$vdata1["where"] = array('company_id' => $_SESSION['company_id'], 'aplication_module' => $_SESSION['config']['application_module'], 'is_active' => 0);
 	$vdata = urlencode(json_encode($vdata1));
@@ -742,6 +746,7 @@ function toGETModuleList()
 {
 	//$vdata1["where"] = array('company_id'=> $_SESSION['company_id'],'is_active'=>0);
 
+	$vdata1 = array();
 	$vdata1["where"] = array('company_id' => $_SESSION['company_id'], 'is_active' => 0, 'module_id' => $_SESSION['work_module_setup_id']);
 	$vdata = urlencode(json_encode($vdata1));
 	$menu = API . "?mode=gettabledetailswithconditions&table=module_setup&data=" . $vdata;
@@ -756,6 +761,7 @@ function toGetApplicationMenuList()
 		$module[] = $modu['module_id'];
 	}
 	$_SESSION['module_list'] = $module;
+	$vdata1 = array();
 	$vdata1['order'] = "display_priority ASC";
 	$vdata1["where"] = array('company_id' => $_SESSION['company_id'], 'is_active' => 0);
 	$vdata1['where_in'] = $module;
@@ -1062,6 +1068,7 @@ function toGetNotigficationListByUsingUserIdAndGrpId($user_id, $type = "", $defa
 	$res = json_decode($res, 1);
 	$notifiction = array();
 	$grpsum = array();
+	$retrun = array();
 	foreach ($res as $restl) {
 		$grpsum[$restl['module_group_id']]++;
 		if ($restl['module_group_id'] == $defaultgrpid AND $defaultgrpid != "") {
@@ -1264,6 +1271,7 @@ function toCreateInvoicePages()
 }
 function toGetpageOptionName($table, $page_option = "")
 {
+	$vdata1 = array();
 	$vdata1["where"] = array('application_table_name' => $table);
 	if ($page_option != "") {
 		$vdata1["where"]['option_url'] = $page_option;
@@ -1278,6 +1286,7 @@ function toGetpageOptionName($table, $page_option = "")
 }
 function toGETactionloglastetrecards()
 {
+	$vdata1 = array();
 	$vdata1['order'] = "id DESC";
 	$vdata1['limit'] = "0,5";
 	$vdata1["where"] = array('company_id' => $_SESSION['company_id'], 'user_id' => $_SESSION['userid']);
@@ -1290,6 +1299,10 @@ function toGETactionloglastetrecards()
 }
 function togetaprovaluserlist($table_name, $rid)
 {
+	$vdata1 = array();
+	$user = array();
+	$approvaldata = array();
+	$return = array();
 	$vdata1["where"] = array('transaction_table' => $table_name, 'transaction_id' => $rid, 'company_id' => $_SESSION['company_id']);
 	$vdata = urlencode(json_encode($vdata1));
 	// print_r($vdata1);
@@ -1320,6 +1333,7 @@ function toGetPendingRequisitionQty($table)
 function toGetApplicationSerialNumber($table_name)
 {
 	//echo $table_name;
+	$vdata1 = array();
 	$vdata1["where"] = array('application_table_name' => $table_name, 'is_active' => 0);
 	$vdata = urlencode(json_encode($vdata1));
 	$vurl = API . "?mode=gettabledetailswithconditions&table=" . TBL_APPLICATION_SERIAL_NUMBERS . "&data=" . $vdata;
@@ -1369,6 +1383,7 @@ function Insertqueries($post)
 {
 	//print_r($post);//exit;
 	//$dats = $post;
+	$dats = array();
 	$dats['query_type'] = $post['query_type'];
 	$dats['query_text'] = $post['query_text'];
 	$dats['table_name'] = $post['table_name'];
@@ -1398,6 +1413,7 @@ function Insertqueries($post)
 }
 function updatequeries($da)
 {
+	$data = array();
 	$data['new_reply'] = $da['query_reply'];
 	$data['updated_by'] = $da['user_id'];
 	$data['updated_date'] = nowDate();
@@ -1467,6 +1483,7 @@ function gst_error_check($gst_number)
 }
 function emaildatareplaceNew($data, $val)
 {
+	$inputFildsArray = array();
 	foreach ($data as $fieldkey => $result) {
 		$inputFildsArray["{" . trim($fieldkey) . "}"] = trim($result);
 	}
@@ -1557,6 +1574,7 @@ function dyanamicserialnumber($table)
 }
 function toGetclockdata()
 {
+	$vdata1 = array();
 	$vdata1["where"] = array('is_active' => '0', 'employee_id' => $_SESSION['emp_id'], 'attendace_date' => date('Y-m-d'));
 	//print_r($vdata1); exit;
 	$vdata = urlencode(json_encode($vdata1));
@@ -1570,6 +1588,7 @@ function toGetclockdata()
 }
 function toGetEmployeeData()
 {
+	$vdata1 = array();
 	$vdata1["where"] = array('is_active' => '0', 'user_id' => $_SESSION['userid']);
 	//print_r($vdata1); exit;
 	$vdata = urlencode(json_encode($vdata1));
@@ -1587,6 +1606,7 @@ function phonenumberdisplay($result)
 }
 function toupdateuserconfirmedbasicinfo()
 {
+	$updata = array();
 	$updata['confirmed_basic_ino'] = '0';
 	$url = API . "?mode=updaterowtabledata&rid=" . $_SESSION['userid'] . "&table=" . TBL_USERS . "&method=post";
 	$response = file_post_contents($url, $updata, 'update');
@@ -1594,6 +1614,7 @@ function toupdateuserconfirmedbasicinfo()
 function toupdateemployee($name)
 {
 
+	$updata = array();
 	$updata['image'] = $name;
 	//print_r($data); exit;
 	$url = API . "?mode=updaterowtabledata&rid=" . $_SESSION['emp_id'] . "&table=employees&method=post";
@@ -1701,6 +1722,7 @@ function todisplayquerylist($data)
 function todisplaytimeline($data)
 {
 	// print_r($data);
+	$vdata1 = array();
 	$vdata1["where"] = array('transaction_primary_1' => $data['value_id'], 'transaction_table' => $data['table'], 'company_id' => $_SESSION['company_id']);
 	$vdata1["field"] = "id,transaction_type,user_id,action_log,action_date,status_value";
 	$vdata1['order'] = "id ASC";
@@ -1862,6 +1884,7 @@ function todisplaytracking($data)
 }
 function todisplaycandidateofferhistroy($data)
 {
+	$candhistry = array();
 	$candhistry["where"] = array('is_active' => 0, 'candidate_id' => $data['candidate_id'], 'company_id' => $_SESSION['company_id']);
 	$candhistry['order'] = "id DESC";
 	$candhistry["field"] = "id,current_status,status_date,comments,created_by";
@@ -2368,6 +2391,7 @@ function todisplayviewfiled($value, $type)
 		$fixed = $prefix + $postfix;
 		$value_count = strlen($value);
 		if ($value_count > $fixed) {
+			$str = array();
 			$str_array = str_split($value);
 
 			foreach ($str_array as $key => $char) {
@@ -2411,6 +2435,7 @@ function toGETFieldSecruityList()
 function gettableStatusArray($table)
 {
 	$getstatusarray = array();
+	$wh1f = array();
 	$wh1f["where"] = array('table_name' => $table, 'is_active' => 0, 'company_id' => $_SESSION['company_id']);
 	$wh1f["field"] = "id,name,status";
 	$data12 = urlencode(json_encode($wh1f));
@@ -2489,6 +2514,7 @@ function checkApproveManager($id, $status)
 {
 	$returnres = ST_APPROVAL_PENDING;
 	if ($status == ST_ACTIVE) {
+		$wh1f = array();
 		$wh1f["where"] = array('is_active' => 0, 'company_id' => $_SESSION['company_id'], 'id' => $id);
 		$wh1f["field"] = "approval_manager,reports_to";
 		$data12 = urlencode(json_encode($wh1f));
@@ -2505,6 +2531,7 @@ function checkApproveManager($id, $status)
 }
 function checkTimesheetsSendStatus()
 {
+	$wh1f = array();
 	$wh1f["where"] = array('is_active' => 0, 'company_id' => $_SESSION['company_id'], 'id' => $_SESSION['userid']);
 	$wh1f["field"] = "reports_to,approval_manager";
 	$data12 = urlencode(json_encode($wh1f));
@@ -2564,6 +2591,7 @@ function get_weeks($year, $month)
 function dynamictabledetails($table, $display = "")
 {
 	$return = array();
+	$wh1f = array();
 	$wh1f["where"] = array('company_id' => $_SESSION['company_id']);
 	$data12 = urlencode(json_encode($wh1f));
 	$url12 = API . "?mode=gettabledetailswithconditions&table=" . $table . "&data=" . $data12;
@@ -2586,6 +2614,7 @@ function pagePermisionCheck($option, $permisiontype)
 function getUserRoles()
 {
 	$role_id = array();
+	$application_user_roleswher = array();
 	if ($_SESSION['admin_type'] == 1) {
 		$application_user_roleswher["where"] = array('is_active' => '0', 'module_group_id' => '0', 'user_id' => $_SESSION['userid']);
 	} else {
@@ -2663,6 +2692,7 @@ function todisplayWorkflowstatuslist($data)
 		$wlcount = count((array) $wlist);
 		$cw = 1;
 		$ork = 0;
+		$activearray = array();
 		$activearray[] = array('action_label' => 'Active', 'status' => ST_ACTIVE);
 		$newarray = array_merge($activearray, $wlist);
 		$newarray[30] = array('action_label' => 'Reject', 'status' => ST_REJECTED);
@@ -2768,6 +2798,7 @@ function emptytextdashShow($val)
 function gettTimeZone($datetimezone = "", $timezone)
 {
 	date_default_timezone_set(INTERVIEWER_TIMEZONE);
+	$returnresult = array();
 	$returnresult['timezonename'] = $timezone;
 	$date_time = new DateTime($datetimezone);
 	$date_time->setTimezone(new DateTimeZone(INTERVIEWER_TIMEZONE));
@@ -2802,6 +2833,7 @@ function DynamicPhoneNumberFormt($phone_number)
 }
 function insertAuditTrail($parent_option = "", $extra_paramiter = "", $extra_details = "")
 {
+	$paramiter = "";
 	if ($extra_paramiter == "") {
 		$extra_paramiter = json_encode($_GET);
 	}
@@ -3127,6 +3159,12 @@ function getWorkflowStatus($table_name, $transaction_no, $current_status, $devic
 	} else {
 		$current_status_ribbon = '<div class="ribbon ribbon-top-right"><span class="color-primary" style="background-color: ' . $statuse[$current_status]['background_color'] . '; color: ' . $statuse[$current_status]['color'] . '; z-index: 1;">' . $status_progress[$current_status]['name'] . '</span></div>';
 	}
+	$dis_str = '';
+	$workflow_btn = '';
+	$breadcrumbwidthcall = '';
+	$activeclassr = '';
+	$successiconsr = '';
+	$next_step_owner = '';
 	if (!isset($result['error'])) {
 		$dis_str .= '<ul class="breadcrumbs p-3">';
 		$successicons = '<i class="far fa-check-circle text-success f-18 position-absolute m-t-10" style="left: 5px;" id="custom-popup"></i> &nbsp;';
@@ -3298,6 +3336,7 @@ function resequenceMenuList($ary)
 	$menucnt = 16;
 	$runcnt = 0;
 	$recall = array();
+	$return = array();
 	$rowcnt = 0;
 	$k = 1;
 	foreach ($ary as $key => $child) {
@@ -3352,6 +3391,7 @@ function resequenceMenuListWorking($data)
 	$menucnt = 18;
 	$runcnt = 0;
 	$recall = array();
+	$return = array();
 	$rowcnt = 0;
 	$k = 1;
 	foreach ($data as $keyid => $values) {

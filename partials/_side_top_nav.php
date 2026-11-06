@@ -1,6 +1,5 @@
 <?php 
 function menudisplaytop($menuarray,$type){
-    $str .= '<ul class="pcoded-submenu">';
     $str = '<ul class="pcoded-submenu">';
     foreach ($menuarray as $menuarrayvalue) {
         $child = count($menuarrayvalue['child']);

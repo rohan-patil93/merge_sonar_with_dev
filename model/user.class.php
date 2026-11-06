@@ -2962,6 +2962,9 @@ class userClass{
 		}
 		// tax splite details End
 		$txperc1 = 0;
+		$txperc2 = 0;
+		$txvalc1 = 0;
+		$txvalc2 = 0;
 		foreach ($post['productCode'] as $key => $item) {
 			if($post['tax'][$key] !='0' AND $post['tax'][$key]!=''){ 
 				if($tax_flag == "S"){
@@ -18212,6 +18215,7 @@ function insertEmpHistries($data){
 		$return['filter'] = $decode_myreportresult1;
 		$whr = json_decode($data['where'],1);
 		$whr = $whr['where'];
+		$where = "";
 		if($whr !=''){
 			foreach ($whr as $key => $value) {
 				if(isset($filtertype[$key])){
@@ -18997,6 +19001,7 @@ function checkLeaveApplicable($data){
 
 
 			$decodejsoncontain = $employee_filter;
+			$condition = "";
 			foreach($decodejsoncontain as $keys=>$vale){
 				$st = "";
 				foreach($vale as $keym=>$vs){
@@ -22805,6 +22810,7 @@ function getLeaveWithStatus($data){
 		function getVendorDashboard($get){
 			global $callConfig;
 			$returnarray = array();
+			$condition = "";
 			if($get['admin_type'] != 1 OR $get['admin_access_employee'] == 'Y'){
 				$condition .= " AND originator = '".$get['user_id']."'";
 			}
@@ -24960,6 +24966,8 @@ function inserttasks($post, $get){
 
 		$startmonth0 = new DateTime($get['startdate']);
 		$endmonth0 = new DateTime($get['enddate']);
+		$total_earnings_in_current_year = 0;
+		$total_deductions_in_current_year = 0;
 		$k=0;
 		while($startmonth0 <= $endmonth0){
 			$data1 = array();
@@ -25304,6 +25312,7 @@ function inserttasks($post, $get){
     		}
     	}
     	$ftextseq = 1;
+    	$textcondition = "";
     	foreach ($lists as $key => $value) {
     		if(in_array($key, (array)$emp_array)){
     			if($get['user_type']==3){
@@ -25689,6 +25698,7 @@ function inserttasks($post, $get){
     	$returnary['post'] = $post;
 
     	$addition = 0;
+    	$updatesql = "";
     	if($post['subscription_type']== "N"){	
     		$addition = $post['standard_user_limit_popup'];
     		$updatesql .=" ,agreed_user_limit='".$post['standard_user_limit_popup']."',discounted_price='".$post['additional_license_lot_discount']."',agreed_price='".$post['standard_price_popup']."' ";
@@ -28306,6 +28316,7 @@ function updatetransactionactivityschedule($post){
 		$decod = json_decode($get['action_type'],1);
 		$user_id = isset($get['user_profie_id']) && $get['user_profie_id']!='' ? $get['user_profie_id'] : $get['user_id'];
 		$return['decod'] = $decod;
+		$condition = "";
 		if($get['type'] == "login"){
 			if($get['from_date'] !="" && $get['to_date'] !=""){
 				$condition .=" AND login_from between '".$this->dateconvertdbformat($get['from_date'])." 00:00:00' AND '".$this->dateconvertdbformat($get['to_date'])." 23:59:59'";	
@@ -28377,6 +28388,7 @@ function updatetransactionactivityschedule($post){
 		$modulesql = "SELECT id,module_name FROM module_setup WHERE company_id = '".$post['company_id']."' AND is_active = 0";
 		$moduleres=$callConfig->getAllRows($modulesql);
 		$return['modulesql'] = $moduleres;
+		$modulenamelist = "";
 		$mk = 1; foreach ($moduleres as $modulename) {
 			$modulenamelist .= "<p>".$mk.") ".$modulename->module_name."</p>"; 
 			$mk++;
@@ -28519,6 +28531,7 @@ function updatetransactionactivityschedule($post){
 	//End costcenter
 
 
+			$conditionpopup = "";
 			if($get['viewallpopup'] =='Y'){
 				if($get['type'] == "inprocess"){
 					$conditionpopup .= " AND pt.current_status NOT IN('".ST_ACTIVE."','".ST_DRAFT."','".ST_APPROVED."')";
@@ -39031,6 +39044,7 @@ function gerReferanceTableDetails($get){
 		$return['get'] = $get;
 		$decod = json_decode($get['action_type'],1);
 		$return['decod'] = $decod;
+		$condition = "";
 		if($get['type'] == "login"){
 			if($get['from_date'] !="" && $get['to_date'] !=""){
 				$condition .=" AND login_from between '".$this->dateconvertdbformat($get['from_date'])." 00:00:00' AND '".$this->dateconvertdbformat($get['to_date'])." 23:59:59'";	

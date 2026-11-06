@@ -1703,7 +1703,7 @@ if($page == "getfildsarraycreatedocuments"){
 //print designing
 if($page == "printdesigningtextfields"){
 	$tableattributes= getListAttributes($_POST['tablename']);
-	$fileds="";
+	$fields="";
 	foreach($tableattributes as $result){ 
 		$fields .="<option value='".$result['Field']."'>".$result['Field']."</option>"; 
 	}
@@ -3999,7 +3999,7 @@ if($page=="getesopplansbuckets"){
 	$vesting_detail = json_decode($res['vesting_schedule'],1);
 
 
-	$html .= '<div id="addmorediv-1"> 
+	$html = '<div id="addmorediv-1"> 
 			<div class="row">
 				<div class="form-group col-lg-4">
 					<label>Allocation Date <span class="text-danger">*</span></label>
@@ -4542,6 +4542,7 @@ if($page=="gettenantproperty"){
 						</tr>
 					</thead>
 					<tbody>';
+						$html2 = '';
 						 $i=1;foreach($bill_detail as $bd){ 
 						 	$redonlytext = $extrlebl = '';
 							if($bd['transaction_table']=='property_owner_detail_areas' OR $bd['utility_bill_auto_and_fix']=='F'){
@@ -5236,6 +5237,7 @@ if($page == "updatemodulestatus"){
 	//$nextseqstartnumber = $pagedetail['sequence'];
 	$previousseqnumber = "6";
 	$lastsetup_page_id = $_POST['nextpageseq'];
+	$includedData = '';
 	foreach((array)$seqpageary as $nextkey=>$spage){
 	//foreach($seqpageary as $spage){
 		$pagedetail = $setuppages[$spage];

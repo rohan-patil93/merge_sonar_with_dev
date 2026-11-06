@@ -313,6 +313,11 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
        $tax_valuenamearray[$taxs['transaction_item_row_id']] = $taxs['tax_name'];
        $tax_valueamountarray[$taxs['transaction_item_row_id']] = $taxs['amount'];  
     }
+    $subt_amount = 0;
+    $stax_amount = 0;
+    $totaldiscountamt = 0;
+    $discount_amt = 0;
+    $shipping_amounttax = 0;
     foreach((array)$items as $item){
         if(($table_name == 'quotations' || $table_name == 'purchase_orders') && $rtable_name !='' && $table_name != 'purchase_invoices'){
             if(count((array)$reftableitemlist)>0){
@@ -2992,6 +2997,7 @@ if($checktimeprint > 0){
                             <table class=" table table-bordered mb-0">
                                 <tbody id='display_tax'>
                          <?php  if(count((array)$distax)){
+                                    $tattax = 0;
                                     foreach((array)$distax as $ktax){  $tattax +=$ktax['tax_amount']; ?>
                                     <?php //if($table1['tax_state'] == 'S'){ 
                                         if($table1['originator_state_id'] == $table1['supplier_state_id']){ ?>

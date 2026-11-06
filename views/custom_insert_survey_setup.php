@@ -514,6 +514,7 @@ function addnewoptionrows(qid) {
             <div class="card card-custom" style="min-height:631px;">
               <?php if($_GET['Rid']!='') { 
                 $value_id = 0;
+                $display_question = "";
                 $totalquestion = count((array)$_SESSION['questions_list']);
                 foreach ($_SESSION['questions_list'] as $qkey => $qvalue) {
                 $value_id ++;

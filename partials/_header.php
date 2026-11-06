@@ -670,6 +670,9 @@
                         }
                         $modulfunction = "chnageModuleWithRole('".base64_encode($module_list['module_id'])."','".$modulerolename."')";
                         $icon = "";
+                        $style = "";
+                        $modultitle = "";
+                        $href = "";
                        // $href = "index.php?option=COM_CHANGE_MODULE_GROUPS&Rid=".base64_encode($module_list['module_id']);
                         if(!isset($_SESSION['application_user_module_roles'][$module_list['module_id']]) AND !in_array(ADMIN_ROLES,(array)$_SESSION['role_ids'])){
                             $style = "background-color: #cccc;'";

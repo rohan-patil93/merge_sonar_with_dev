@@ -385,6 +385,7 @@ function emptyCheck($valu){
                             </tr>
 
                             <?php  if(count((array)$distax)){
+                                    $tattax = 0;
                                     foreach((array)$distax as $ktax){  $tattax +=$ktax['tax_amount']; ?>
                                     <?php //if($table1['tax_state'] == 'S'){ 
                                         if($transaction['originator_state_id'] == $transaction['supplier_state_id']){ ?>

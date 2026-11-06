@@ -231,6 +231,7 @@ class configClass
 			$status = "";
 			$tablename = trim($tablename);
 			$val=array();
+		$status = "";
 			foreach($fieldnames as $k=>$values)
 			{  
 				$values = mysqli_real_escape_string($this->con,$values);
@@ -302,6 +303,7 @@ class configClass
 		$field_ids=$ids;
 		}
 		$val=array();
+		$status = "";
 		foreach($fieldnames as $k=>$values)
 		{  	
 			$values = mysqli_real_escape_string($this->con,$values);
@@ -324,7 +326,7 @@ class configClass
 		$str=rtrim(implode($val),',');
 		$query=DBUP.$tablename.DBSET.$str;
 		
-		$whereparamiter .= "";
+		$whereparamiter = "";
 		if($where!="" AND $field_ids !=""){
 			$query.=' '.DBWHR.$where." IN('".$field_ids."')";
 			$whereparamiter .= $where." IN('".$field_ids."')"; 

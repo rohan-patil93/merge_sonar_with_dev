@@ -385,6 +385,7 @@ function getnamelist(){
       <div class="col-lg-6 p-10" id="assessment_questions">
         <?php if($_GET['Rid']!='') { 
          $value_id = 0;
+         $display_question = "";
          foreach ($_SESSION['questions_list'] as $qkey => $qvalue) {
             $value = json_decode($qvalue,1);
             $options = $value['option_data'];

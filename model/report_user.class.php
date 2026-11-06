@@ -4,6 +4,7 @@ class reportUserClass extends userClass{
 	public function getDynamicDownloadPDFInvoices($get){
 		 global $callConfig;
         $return = array();
+        $condition = "";
         $transaction_table = $get['transaction_table'];
        if($get['from_date'] !="" AND $get['to_date'] !=""){
             $condition .= " AND transaction_date >= '".$this->dateconvertdbformat($get['from_date'])."'  AND transaction_date <= '".$this->dateconvertdbformat($get['to_date'])."'";
@@ -624,6 +625,7 @@ function getSalesRegisterReport($get)
 	public function toGetStandardTransactionDetailsReports($get){
 		global $callConfig;
 		$return = array();
+		$condition = "";
 		$transaction_table = $get['transaction_table'];
 		$transaction_list = $unit_of_measurements =$items = array();
 		if (!empty($get['from_date']) && !empty($get['to_date'])) {

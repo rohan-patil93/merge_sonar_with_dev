@@ -697,6 +697,9 @@ function getPerFormanceAppraisal($get){ //please removed not working code
 	public function getorganizationgoalcheck($get){
 	global $callConfig;
 	$where="";
+	$dipartcondition = "";
+	$locationcondition = "";
+	$designationcondition = "";
 	$returnaray = array();
 	$filtersql = "SELECT ft.id,ft.content, ft.filter_condition FROM filter_tables ft  WHERE ft.company_id = '".$get['company_id']."' AND ft.transaction_id = '".$get['appraisal_id']."' AND ft.application_tablename ='performance_setup'";
 	$filterres = $callConfig->getRow($filtersql);
@@ -752,6 +755,9 @@ function getPerFormanceAppraisal($get){ //please removed not working code
 function getKRATagging($get){
 	global $callConfig;
 	$retuenres = array();
+	$dipartcondition = "";
+	$locationcondition = "";
+	$designationcondition = "";
 	if($get['edit']=='Y'){
 		$krasql ="SELECT og.id as ogid,kra.id,og.job_title_id,og.department_id,og.location_id,og.key_performance_id,og.traget,og.assessment_frequency FROM organization_goals og, appraisal_key_result_areas kra WHERE og.company_id = kra.company_id AND og.company_id = '".$get['company_id']."' AND og.key_reslut_id = kra.id AND og.job_title_id = '".$get['des_id']."' AND og.department_id = '".$get['dep_id']."' AND og.location_id = '".$get['loc_id']."' AND og.is_active = 0 AND og.is_active = kra.is_active AND kra.appraisal_id= '".$get['appraisal_id']."' AND kra.appraisal_id= '".$get['appraisal_id']."'";
 		$krares = $callConfig->getAllRows($krasql);
@@ -1449,6 +1455,7 @@ function getOrganizationGoals($get){
 		global $callConfig;
 		$return = array();
 		$condition = "";
+		$emp_condition = "";
 		$return['post'] = $post;
 		if($post['submit_btn'] == 'submitnormalizations'){
 			foreach($post['employee_performance_appraisal_id'] as $epaid){

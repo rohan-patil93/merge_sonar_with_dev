@@ -559,7 +559,8 @@ if($party_table == "customers" || $party_table =""){
 
 
                             <?php  if(count((array)$distax)){
-                                    foreach((array)$distax as $ktax){  $tattax +=$ktax['tax_amount']; ?>
+                                    $tattax = 0;
+                                    foreach((array)$distax as $ktax){  $tattax +=$ktax['tax_amount']; 
                                         if($transaction['originator_state_id'] == $transaction['supplier_state_id']){ ?>
                                     <tr>
                                         <td style="padding-top: 5px;font-size: 12px;text-align: left;">  <?php echo $split_1_name; ?>  @ <?php echo $ktax['percentage']*$split_1; ?>% on <?php echo currencyFormat($ktax['amount'],$config); ?>

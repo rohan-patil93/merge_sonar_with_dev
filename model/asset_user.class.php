@@ -7,6 +7,8 @@ class assetUserClass extends userClass{
 		$return['get']= $get;
 		$todaytedate = date('Y-m-d');
 		if($get['resultgettype'] =="ADMINDASH"){
+			$codition = "";
+			$conditionassetlist = "";
 			// echo "<pre>";
 			// $display_attributessql = "SELECT * FROM display_attributes WHERE  company_id = '".$get['company_id']."' AND is_active =0 GROUP BY application_table_name";
 			// $display_attributessres=$callConfig->getAllRows($display_attributessql);
@@ -487,6 +489,7 @@ class assetUserClass extends userClass{
 			$alreadyusedasset = $this->getactiveassetanystage($get);
 			//$return['assetsql'] = $alreadyusedasset;
 
+			$conditionrequest = "";
 			if(isset($get['categroy_list']) AND $get['categroy_list'] !=""){
 				$conditionrequest .= " AND category_id  IN (".$get['categroy_list'].")";
 			}
@@ -969,6 +972,7 @@ function insertAsset($post){
 		}
 
 		if($get['request']=='Y'){   // request page sqls
+			$conditionrequest = "";
 			$requestsql = "SELECT * FROM asset_transfer_requests WHERE is_active =0 AND company_id = '".$get['company_id']."' AND id  IN(".$get['req_id'].")";
 			$requestres=$callConfig->getRow($requestsql);
 			$returnresult['request'] = $requestres;

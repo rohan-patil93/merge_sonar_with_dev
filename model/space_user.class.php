@@ -312,6 +312,7 @@ class spaceUserClass extends userClass{
 				$building_floor_ids = $get['building_floor_id'];
 			}
 			$return['building_floors_report'] =$building_floorsres;
+			$spacealcondition = "";
 			if($get['space_type_id'] !=""){
 				$spacealcondition .= " AND bfs.space_type_id = ".$get['space_type_id'];
 			}
@@ -674,6 +675,7 @@ class spaceUserClass extends userClass{
 				$return['equipment_allocations'] =$equipment_allocationsres;
 			}elseif($get['pagetype'] == 'ASSETS'){ //Equipment Tab
 				$condition = "";
+				$assets_condition = "";
 				if($get['equipment_category_id'] !=""){
 					$assets_condition .= " AND category_id = ".$get['equipment_category_id'];
 				}
@@ -715,6 +717,7 @@ class spaceUserClass extends userClass{
 
 			}elseif($get['pagetype'] == 'IEM'){ // Employees Tab
 				$condition = "";
+				$empcondition = "";
 				//$return['get'] = $get;
 				if($get['building_id'] !=""){
 					$condition .= " AND bf.building_id = ".$get['building_id'];

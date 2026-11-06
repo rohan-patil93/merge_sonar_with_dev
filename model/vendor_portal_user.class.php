@@ -1040,7 +1040,7 @@ class vendorPortelUserClass extends userClass
 		$emailarray['to_company_id'] = $post['company_id'];
 		$emailarray['session_company_id'] = $post['company_id'];
 		$emailarray['created_by'] = $post['user_id'];
-		$extramsg .= "<table width='100%'><tbody>";
+		$extramsg = "<table width='100%'><tbody>";
 		if (empty($api_result['result']) || count((array) $api_result['result']) == 0) {
 			$extramsg .= "<tr><th scope=\"col\" style='text-align: left; width:50%'> Response:</th><td style='text-align: left; width:50%'>" . $api_result['response_message'] . "</td></tr>";
 		} else {

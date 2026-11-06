@@ -3,6 +3,7 @@ class pettyCashUserClass extends userClass{
 	public function pettyCashDashboard($get){
 		global $callConfig;
 		$return = array();
+		$condition = "";
 		$todaydate = date("Y-m-d"); 
 		if($get['admin_type'] != 1 OR $get['admin_access_employee'] == 'Y'){
 			$condition .= " AND pcbo.owner_id = '".$get['user_id']."'";
@@ -42,6 +43,7 @@ class pettyCashUserClass extends userClass{
 	}
 	public function getPettyCashBoxTopUpRequests($get){
 		global $callConfig;
+		$condition = "";
 		if($get['admin_type'] != 1 OR $get['admin_access_employee'] == 'Y'){
 			$condition .= " AND pcbtr.originator = '".$get['user_id']."'";
 		}
@@ -61,6 +63,7 @@ class pettyCashUserClass extends userClass{
 	}
 	public function getExpensePettyCash($get){
 		global $callConfig;
+		$condition = "";
 		if($get['admin_type'] != 1 OR $get['admin_access_employee'] == 'Y'){
 			$condition .= " AND originator = '".$get['user_id']."'";
 		}

@@ -1308,6 +1308,8 @@ GROUP BY tl.item_id";
 			}
 
 		}
+		$total_debit_amt = 0;
+		$total_credit_amt = 0;
 		foreach($itemref as $refaccountno=>$list){
 			$item_amount = 0;
 			$creditamount = 0;

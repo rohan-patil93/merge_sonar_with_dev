@@ -93,6 +93,7 @@ class demoClass extends userClass{
 						                </tr>
                                     </thead>
                                     <tbody>';
+                                    $tablecontent = "";
                                     $i=1;  foreach ($rental_invoice_items as $item) {
                                     $tablecontent .= '<tr>
 							                    <td style="text-align:left;padding:5pt;font-size:10px;">

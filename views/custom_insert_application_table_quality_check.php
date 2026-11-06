@@ -239,6 +239,10 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
         $i++;  
     }
 */
+$subt_amount = 0;
+$stax_amount = 0;
+$totaldiscountamt = 0;
+$discount_amt = 0;
 foreach($items as $item){
     if(($table_name == 'quotations' || $table_name == 'purchase_orders') && $rtable_name !=''){
         if(count((array)$reftableitemlist) !=0){
@@ -1539,6 +1543,7 @@ function viewApprovalAllUsers(id){
                             <table class=" table table-bordered mb-0">
                                 <tbody id='display_tax'>
                          <?php  if(count((array)$distax)){
+                                    $tattax = 0;
                                     foreach ($distax as $ktax){  $tattax +=$ktax['tax_amount']; ?>
                                     <?php if($table1['tax_state'] == 'S'){ ?>
                                     <tr>
