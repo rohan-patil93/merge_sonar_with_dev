@@ -1497,7 +1497,8 @@ class vMSUserClass extends userClass{
 		return $data;
 	}
   	public function updateprojecttimesheetsblukforhr($get,$geet){
-	  	global $callConfig; 
+	  	global $callConfig;
+	  	$post = array('hid'=>'');
 	  	$quer = "SELECT `hr_buddy` FROM `employee_buddies` WHERE `employee_id`=".$get['emp_id'];
 	  	$hrb = $callConfig->getRow($quer);
 	  	//print_r($hrb); exit;
@@ -1514,6 +1515,7 @@ class vMSUserClass extends userClass{
 	  	//print_r($user_ids);
 	  	$msg = date('M Y',strtotime($get['extra']))." Timesheet sumitted for your approval by Hiring Manager";
 	  	$option = "COM_BULK_HR_PROJECT_TIMESHEET&PAY_YEAR=".date('Y',strtotime($get['extra']))."&PAY_MONTH=".date('m',strtotime($get['extra']));
+	  	$notarry = array('id'=>'');
 	  	$notdataa = array('company_id'=>$geet['company_id'], 'notification_message'=>$msg, 'transaction_number'=>$notarry['id'], 'application_table_name'=>'project_timesheets', 'type'=>'ACTION', 'notification_users'=>$user_ids,'option'=>$option);
 			//print_r($notdataa);
 	  	/*$ss = $this->tosendnotifiations($notdataa);*/
@@ -3028,7 +3030,7 @@ class vMSUserClass extends userClass{
 			$allthreeuseremail[$usermangerdetail->id] = $usermangerdetail->user_email;
 		}
 		
-		$configquery = "SELECT date_format,date_separator FROM config WHERE company_id=".$get['company_id']." is_active=0";
+		$configquery = "SELECT date_format,date_separator FROM config WHERE company_id=".$post['company_id']." is_active=0";
 		$config_data = $callConfig->getRow($configquery);
 		$date_latcount = count($updateprojecttimesheet)-1;
 		$from_date = $this->dateformates($updateprojecttimesheet['0'],$config_data->date_format,$config_data->date_separator);
@@ -5244,6 +5246,7 @@ class vMSUserClass extends userClass{
 	}
 	public function tocalworkingdays($data){
 		global $callConfig;
+		$get = $data;
 		if($get['fromdate']!=""){
 			$ym = explode("-", $get['fromdate']);
 			$month = $ym[1];
@@ -6961,6 +6964,7 @@ function  vmssingleemployeedashoard_new($get){
 
 		$todate =$get['endingdate'];
 		$fromdate =$get['startingdate'];
+		$emp_id = 0;
 
 		$query = "SELECT working_days FROM attendance_settings WHERE company_id =".$get['company_id']." AND is_active =0";
     	$attendances = $callConfig->getRow($query);
@@ -7111,6 +7115,8 @@ function  vmssingleemployeedashoard_new($get){
 		$enddate = date("Y-m-t",strtotime($startdate));
 		$start = $startdate;
 		$end = $enddate;
+		$wo = 0;
+		$allday = 0;
 		while ($start <= $end) {
 			$dayOfWeek =  date("N",strtotime($start)); 
 			if ($dayOfWeek == 6 || $dayOfWeek == 7) {

@@ -338,6 +338,7 @@ class rentalUserClass extends userClass{
 	}
 	public function insertRentalInvoices($get){
 		global $callConfig;
+		$post = array('user_id'=>'');
 		$return['get']= $get;
 		//echo "<pre>";
 		$property_tenant_detailssql = "SELECT * FROM property_tenant_details WHERE company_id = '".$get['company_id']."' AND id = '".$get['rid']."'  AND is_active =0";
@@ -426,6 +427,7 @@ class rentalUserClass extends userClass{
 				$amount =$totalmonthly_tax =$rent_amount = $rent_total_amount = 0;
 				$bill_detail =$utility_details =  array();
 				$per_sq_ft_with_discount = array();
+				$remainingdays = 0;
 				//$monthlyrant = $increase_ret = $per_sq_ft_with_discount = 0;
 				foreach($podaajax as $keyyy=>$poda){
 					$totaldays = ($totaldays !='0' || $totaldays !='')?$totaldays:"1";
@@ -1162,6 +1164,7 @@ class rentalUserClass extends userClass{
 	}
 	public function insertRentalInvoicesNew($get,$property_tenant_billings_id,$status=''){
 		global $callConfig;
+		$post = array('user_id'=>'');
 		$return = array();
 		$ptbsql = "SELECT id,property_tenant_detail_id,bill_detail,utility_details,month_start_date, rent_amount, rent_tax, rent_total_amount, utility_amount, total_amount, rent_due_date, rent_additional_notes, utility_transaction_date,utility_due_date,utility_additional_notes,rent_transaction_date FROM property_tenant_billings WHERE company_id = '".$get['company_id']."' AND id = '".$property_tenant_billings_id."' AND is_active = 0";      
 

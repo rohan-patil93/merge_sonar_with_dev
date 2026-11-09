@@ -1517,7 +1517,7 @@ payment tersm**/
 		       	$txperc2 = 0;
 		       	$split_1 = 0;
 		       	$split_2 = 0;
-		       	foreach($billitems as $itmlist){
+		       	foreach($billitems as $key => $itmlist){
 		       		$saleinvitem['amount'] += $itmlist->plan_amount;
 		       		$saleinvitem['total_amount'] += $itmlist->bill_amount;
 		       		$cgstamt = ($itmlist->cgst !="")?$itmlist->cgst:0;

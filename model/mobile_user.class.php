@@ -9168,6 +9168,7 @@ $creditside = array('credit_notes','payments');
 		$notdata1['type'] = "ACTION";
 		$notdata1['notification_users'] = $owneuser;
 		//$ss = $this->tosendnotifiations($notdata1);
+		$project = (object)array('project_name'=>'');
 		$email_content_id =38;
 		$senddata = array('session_company_id'=>$get['company_id'],'email_content_id'=>$email_content_id, 'project_name'=>$project->project_name,'user_display_name'=>$taskowner->display_name,'cc_users'=>$notuser,'to_users'=>$owneuser,'task_name'=>$taskdetails->task_name,'assigners_name'=>'','planned_start'=>$taskdetails->planned_start,'planned_finish'=>$taskdetails->planned_finish,'current_status'=>$statuslist[$taskdetails->current_status]);
 		$res = $this->emailsendmediater($senddata);

@@ -264,6 +264,7 @@ class vendorPortelUserClass extends userClass
 			$msg = "New Vendor Registration Requests Submited From - " . $createruserres->display_name;
 			$user_ids = array();
 			$user_ids[] = $userres->id;
+			$adminres = $adminuserres;
 			if ($adminuserres->id != "") {
 				$user_ids[] = $adminres->id;
 			}
@@ -633,6 +634,12 @@ class vendorPortelUserClass extends userClass
 	{
 		global $callConfig;
 		$return = array();
+		$postdata = array();
+		$notupdateinsert = array();
+		$transaction = array();
+		$outside_db_name = '';
+		$transaction_id = '';
+		$post = array('user_id'=>'');
 		$outsidedatabase = "infistaqin_infisuite_3";
 		$transaction_table = "vendors";
 		$urlDev = "https://dev.infistaq.in/api.php?mode=getvendorandvendorregisterssynchapi&company_id=1&user_id=1&data_name=" . $outsidedatabase;
@@ -1096,7 +1103,7 @@ class vendorPortelUserClass extends userClass
 			}
 			$vendor_verifications = json_encode(array("PAN" => array("status" => "N"), "GSTIN" => array("status" => "N"), "TAN" => array("status" => "N"), "BANK" => array("status" => "N"), 'MSME' => array("status" => "N")));
 			$msme_register_yes_no = $post['msme_register_yes_no'] == "Y" ? "Y" : "N";
-			$vendor_registersary = array('company_id' => $post['company_id'], 'user_id' => $res['LASTID'], 'company' => $post['company_name'], 'first_name' => $post['first_name'], 'last_name' => $post['last_name'], 'display_name' => $display_name, 'email' => $post['user_email'], 'phone' => $post['user_mobile'], 'hr_connect' => $connectuser['hr_connect'], 'finance_connect' => $connectuser['finance_connect'], 'admin_connect' => $connectuser['admin_connect'], 'project_connect' => $connectuser['project_connect'], 'location_connect' => $connectuser['location_connect'], 'legal_connect' => $connectuser['legal_connect'], 'is_active' => '0', 'current_status' => '0', 'created_by' => $post['user_id'], 'created_date' => date('Y-m-d H:i:s'), 'originator' => $post['user_id'], 'vendor_registration_request_id' => $post['vendor_registration_request_id'], 'company_registration_country' => $country_id, 'fax' => $facsimile_numberm, 'website_url' => $web_site, 'vendor_verifications' => $vendor_verifications, 'vendor_type_id' => $post['vendor_type_id'], 'msme_register_yes_no' => $msme_register_yes_no, 'msme_number' => $post['msme_number']);
+			$vendor_registersary = array('company_id' => $post['company_id'], 'user_id' => $res['LASTID'], 'company' => $post['company_name'], 'first_name' => $post['first_name'], 'last_name' => $post['last_name'], 'display_name' => $display_name, 'email' => $post['user_email'], 'phone' => $post['user_mobile'], 'hr_connect' => $connectuser['hr_connect'], 'finance_connect' => $connectuser['finance_connect'], 'admin_connect' => $connectuser['admin_connect'], 'project_connect' => $connectuser['project_connect'], 'location_connect' => $connectuser['location_connect'], 'legal_connect' => $connectuser['legal_connect'], 'is_active' => '0', 'current_status' => '0', 'created_by' => $post['user_id'], 'created_date' => date('Y-m-d H:i:s'), 'originator' => $post['user_id'], 'vendor_registration_request_id' => $post['vendor_registration_request_id'], 'company_registration_country' => $country_id, 'fax' => $facsimile_number, 'website_url' => $web_site, 'vendor_verifications' => $vendor_verifications, 'vendor_type_id' => $post['vendor_type_id'], 'msme_register_yes_no' => $msme_register_yes_no, 'msme_number' => $post['msme_number']);
 			$vendregistres = $callConfig->insertRecord($transaction_table, $vendor_registersary);
 			$vendor_register_id = $vendregistres['LASTID'];
 			$retresult['vendor_register_id'] = $vendor_register_id;
@@ -1302,6 +1309,8 @@ class vendorPortelUserClass extends userClass
 		} else {
 			$return['get'] = $get;
 			$dashboard_transaction_table = "vendor_registers";
+			$extracondi = '';
+			$getvrid = '';
 			if ($get['entervendornamefind'] != "") {
 				$extracondi = " AND (company LIKE '%" . $get['entervendornamefind'] . "%' OR display_name LIKE '%" . $get['entervendornamefind'] . "%')";
 			}
@@ -1406,6 +1415,7 @@ class vendorPortelUserClass extends userClass
 	{
 		global $callConfig;
 		$return = array();
+		$comdition = '';
 		$return['get'] = $get;
 		$type = $get['transaction_table'] != "" ? $get['transaction_table'] : $get['table'];
 
@@ -1435,7 +1445,7 @@ class vendorPortelUserClass extends userClass
 			$return['sql'] = $taskactivitysql;
 			$return['transaction_activity_schedule'] = $taskactivityres;
 
-			$tasks_cntssql = "SELECT count(*) as total_task_cnt, sum(if(current_status=" . ST_APPROVED . ",1,0)) as approve_cnt, sum(if(current_status=" . ST_COMPLETE . ",1,0)) as review_cnt, sum(if(current_status=" . ST_INPROGRESS . ",1,0)) as inprogress_cnt, sum(if(current_status=" . ST_ACTIVE . ",1,0)) as yet_to_start_cnt FROM transaction_activity_schedule tas WHERE  tas.company_id = '" . $get['company_id'] . "' AND tas.transaction_table = '" . $type . "'  AND transaction_id= '" . $vendor_registersres->id . "'  " . $comdition . " AND tas.is_active = 0";
+			$tasks_cntssql = "SELECT count(*) as total_task_cnt, sum(if(current_status=" . ST_APPROVED . ",1,0)) as approve_cnt, sum(if(current_status=" . ST_COMPLETE . ",1,0)) as review_cnt, sum(if(current_status=" . ST_INPROGRESS . ",1,0)) as inprogress_cnt, sum(if(current_status=" . ST_ACTIVE . ",1,0)) as yet_to_start_cnt FROM transaction_activity_schedule tas WHERE  tas.company_id = '" . $get['company_id'] . "' AND tas.transaction_table = '" . $type . "'  AND transaction_id= '" . $vendorres->id . "'  " . $comdition . " AND tas.is_active = 0";
 			$tasks_cntsres = $callConfig->getRow($tasks_cntssql);
 			$return['task_cnt'] = $tasks_cntsres;
 

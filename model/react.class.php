@@ -2388,6 +2388,7 @@ class reactClass extends userClass{
 			$seluser = "SELECT id, company_id, user_email, display_name FROM application_users WHERE company_id = '".$get['company_id']."' AND is_active = 0".$conditins;
 			$return['seluser'] = $seluser;
 			$seluserres = $callConfig->getAllRows($seluser);
+			$post = array();
 			$emailuserdetails = array();
 			$sendnotification = array();
 			foreach($seluserres as $seluser){

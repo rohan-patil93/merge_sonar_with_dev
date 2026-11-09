@@ -261,7 +261,7 @@ class assetUserClass extends userClass{
 
 		}elseif($get['resultgettype'] =='DIRECTASSETALLOCATE'){ //Insert Page data
 
-
+			$conditionrequest = '';
 
 			$departmentsql = "SELECT id,department_name FROM departments WHERE company_id = '".$get['company_id']."' AND is_active =0";
 			$departmentres=$callConfig->getAllRows($departmentsql);
