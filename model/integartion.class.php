@@ -73,6 +73,7 @@ class integartionClass{
 		$insertarray1['display_name'] = $post['candidate_name'];
 		$insert1 = $callConfig->insertRecord('candidates',$insertarray1);
 		$insert = array();
+		$insertarray = array();
 		if($insert1['status'] == "sucess"){
 			$insert_array = array('company_id'=>$get['company_id'],'candidate_id'=>$insert1['LASTID'],'job_posting_id'=>$post_id,'candidate_name'=>$post['candidate_name'],'candidate_email'=>$post['candidate_email'],'candidate_phone'=>$post['candidate_phone'],'file'=>$file_name,'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'remarks'=>json_encode($post));
 			$insert = $callConfig->insertRecord('job_posting_candidates',$insert_array);	
@@ -1713,6 +1714,7 @@ function updatemoretabledata($post, $get){
 
 function checkandupdatecolorprojecttask($post, $get){
 	global $callConfig;
+	$transaction_number = '';
 	$rres ="add";
 	$query = "SELECT * FROM `application_attach_labels` WHERE company_id =".$get['company_id']." AND application_tablename='".$post['application_tablename']."' AND transaction_id=".$post['transaction_id']." AND application_label_id= ".$post['application_label_id']." AND is_active = 0";
 	$row = $callConfig->getRow($query);

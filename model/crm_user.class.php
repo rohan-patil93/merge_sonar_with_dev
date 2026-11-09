@@ -1433,6 +1433,7 @@ payment tersm**/
 	function createSalesInvoice($get, $post) {
 	    global $callConfig;
 	    $return =  array();
+	    $table = '';
 	    $return['post'] = $post;
     	$selected_ids = $post['selected_ids'];
     	$sales_tables = array('enquiries','estimates','delivery_orders','sales_orders','sales_returns');
@@ -1514,6 +1515,8 @@ payment tersm**/
 		       	$txvalc2 = 0;
 		       	$txperc1 = 0;
 		       	$txperc2 = 0;
+		       	$split_1 = 0;
+		       	$split_2 = 0;
 		       	foreach($billitems as $itmlist){
 		       		$saleinvitem['amount'] += $itmlist->plan_amount;
 		       		$saleinvitem['total_amount'] += $itmlist->bill_amount;
@@ -1663,6 +1666,10 @@ payment tersm**/
 
 						//$descriptions = $itmlist->site." ".$itmlist->building_name." ".$itmlist->zone_name." ".$itmlist->operator_name." ".$itmlist->franchisee_name;
 
+						$req_date = '';
+						$wa_day_rate = 0;
+						$fifo_day_rate = 0;
+						$lifo_day_rate = 0;
 						$descriptions = $itmlist->site." ".$itmlist->building_name." ".$itmlist->zone_name." ".$itmlist->operator_name." ".$itmlist->franchisee_name." Plan Activation Date - ".$itmlist->plan_activation_date." To ".$itmlist->expiry_date;
 						$itemfieldnames=array('company_id'=>$post['company_id'],'transaction_id'=>$res1['LASTID'],'item_id'=>$itemdetail->id,'item_name'=>$itemdetail->item_name,'description'=>$descriptions,'purchase_uom'=>31,'item_quantity'=>1,'item_price'=>$itmlist->plan_amount,'item_amount'=>$itmlist->plan_amount,'tax_amount'=>($itmlist->sgst + $itmlist->cgst),'total_amount'=>$itmlist->bill_amount,'discount_amount'=>$itmlist->discount_amount,'req_date'=>$req_date,'account_code'=>'','item_wa_cost'=>$wa_day_rate,'item_fifo_cost'=>$fifo_day_rate,'item_lifo_cost'=>$lifo_day_rate,'pending_qty'=>1,'is_active'=>'0','current_status'=>'0','ref_transaction_item_table_id'=>'');
 	                    $res2 = $callConfig->insertRecord('si_items', $itemfieldnames);
@@ -2782,6 +2789,7 @@ $html .= "</div>";
     function createCustomerWithContactLeadDetails($crm_contactsres, $crm_lead_contact_id, $crm_company_id="", $get){
     	global $callConfig;
     	$return = array();
+    	$post = array();
     	$crecustom = "INSERT INTO customers(company_id, first_name, middle_name, last_name, display_name, email, phone, mobile, fax, website_url, billing_address, shipping_address,billing_post_code, shipping_post_code, billing_country, shipping_country, billing_state, shipping_state, billing_city, shipping_city,  company, is_active, current_Status, Created_By, Created_Date, image, pan_no)";
     	if($crm_company_id !=""){
     		$crecustom .="SELECT ".$get['company_id'].",cc.first_name, cc.middle_name, cc.last_name, cc.display_name, cc.email_id, cc.phone, cc.office_phone, cc.fax, ccomp.website_url, ccomp.address, ccomp.address, ccomp.post_code, ccomp.post_code, ccomp.country_id, ccomp.country_id, ccomp.state_id, ccomp.state_id, ccomp.city_id, ccomp.city_id, ccomp.company_name ,0,0,'".$get['user_id']."','".date("Y-m-d H:i:s")."', ccomp.image, ccomp.pan_no FROM crm_contacts cc, crm_companies ccomp WHERE cc.id = '".$crm_lead_contact_id."' AND ccomp.id = '".$crm_company_id."' AND cc.is_active = ccomp.is_active";
@@ -2800,6 +2808,7 @@ $html .= "</div>";
 				$insertary=array('company_id'=>$get['company_id'], 'default_crm_contact_id'=>$crm_lead_contact_id, 'company_name'=>$crm_contactsres->company_name, 'customer_id'=> $res['LASTID'], 'website_url'=>$crm_contactsres->website, 'address'=>$crm_contactsres->address, 'post_code'=>$crm_contactsres->post_code, 'country_id'=>$crm_contactsres->country_id, 'state_id'=>$crm_contactsres->state_id, 'city_id'=>$crm_contactsres->city_id, 'is_active'=>'0', 'current_status'=>'0','created_by'=>$post['user_id'], 'created_date'=>date("Y-m-d H:i:s"));
 				$crmleaddetails = $callConfig->insertRecord('crm_companies',$insertary);
 
+				$insertary1 = array();
 				$insertary1['updated_date']=date('Y-m-d H:i:s');
 				$insertary1['updated_by']=$get['user_id'];
 				$insertary1['crm_company_id']=$crmleaddetails['LASTID'];
@@ -2979,6 +2988,7 @@ $html .= "</div>";
 	    	}
 	    	
 	    	$parts = [];
+	    	$serial = '';
 		    for ($m = 1; $m <= 10; $m++) {
 		    	if (!empty($asnres->serial_number) && $serial_number_position == $m){
 		            $parts[$m] = $serial;
@@ -3166,6 +3176,7 @@ $html .= "</div>";
 	function getCRMAIDashboards($get){
 		global $callConfig;
 		$todaydate = date("Y-m-d");
+		$originatercondition = '';
 		// if($get['admin_type'] != 1){
 		// 	$originatercondition = " AND originator = '".$get['user_id']."'";
 		// 	$prooriginatercondition = " AND assigner_id = '".$get['user_id']."'";

@@ -7,7 +7,7 @@ class dashboardUserClass{
 
 		$company_id = $get['company_id'];
 		$month = $get['month'];
-		$month = $get['year'];
+		$year = $get['year'];
 	     // Default to current month/year if not passed
 		if ($month == '') {
 			$month = date('m');
@@ -138,7 +138,8 @@ class dashboardUserClass{
 		$return['count_upcoming_birthdays'] = count((array)$upcoming_birthdays);
 		$return['upcoming_birthdays'] = $upcoming_birthdays;
 
-	      //  Employee Headcount - Last 6 Months ===== 
+	      //  Employee Headcount - Last 6 Months =====
+		$extraWhere = '';
 		$employee_headcount_last_6_months = array();
 		for ($i = 5; $i >= 0; $i--) {
 
@@ -291,7 +292,7 @@ class dashboardUserClass{
 
 	     // Default Month / Year
 	     $month = $get['month'];
-		$month = $get['year'];
+		$year = $get['year'];
 	     // Default to current month/year if not passed
 		if ($month == '') {
 			$month = date('m');
@@ -309,8 +310,10 @@ class dashboardUserClass{
 		$detail['month'] = $month;
 		$detail['year'] = $year;
 		$return['detail'] = $detail;
-	    
-	     // Employee Profile 
+		$monthCondition = '';
+		$holidays = array();
+
+	     // Employee Profile
 	       $query = "
 	       SELECT
 	       id,

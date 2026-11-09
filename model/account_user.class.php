@@ -2230,6 +2230,10 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         $condition = "";
         $paycondition = "";
         $transactionwithdates = array();
+        $sales_invoices_amt = array();
+        $debit_notes_amt = array();
+        $credit_notes_amt = array();
+        $receipts_amt = array();
         $getFinanceialYear = $this->getFinanceialYear($get['from_date']);
         $financeyear = $getFinanceialYear['fullstartyear'].$getFinanceialYear['fullendyear'];
         $customerssql = "SELECT id,display_name,company, account_code, email, phone FROM `customers` WHERE company_id = ".$get['company_id']." AND is_active =0";
@@ -2364,6 +2368,10 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         $condition = "";
         $paycondition = "";
         $transactionwithdates = array();
+        $sales_invoices_amt = array();
+        $debit_notes_amt = array();
+        $credit_notes_amt = array();
+        $receipts_amt = array();
         $getFinanceialYear = $this->getFinanceialYear($get['from_date']);
         $financeyear = $getFinanceialYear['fullstartyear'].$getFinanceialYear['fullendyear'];
         $customerssql = "SELECT id,display_name,company, account_code, email, phone FROM `vendors` WHERE company_id = ".$get['company_id']." AND is_active =0";

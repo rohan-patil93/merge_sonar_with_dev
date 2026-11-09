@@ -318,6 +318,7 @@ class mobileUserClass extends userClass{
 	public function togetbaseonmoduluelistandapprovals($get){
 		global $callConfig;
 		//echo "RRRR"; exit;
+		$lists = array();
 
 		$auquery = "SELECT id, display_name, user_photo FROM application_users WHERE company_id ='".$get['company_id']."' AND is_active =0";
     	$aures = $callConfig->getAllRows($auquery);
@@ -418,6 +419,7 @@ class mobileUserClass extends userClass{
 	} 
 	public function togetuserdetailsbaseonuserid($get){
 		global $callConfig;
+		$row_db = (object) array('db_name' => '');
 		$query = "SELECT * FROM application_users WHERE id=".$get['user_id'];
 		$row_data = $callConfig->getRow($query);
 		$query_employee = "SELECT id FROM ".$row_db->db_name.".employees where user_id =".$row_data->id." AND is_active=0 ";
@@ -482,6 +484,7 @@ class mobileUserClass extends userClass{
     }
     public function togetcreatedapproverejectinvoicedetails($get){
     	global $callConfig;
+    	$lists = array();
     	$query = "SELECT page_name,menu_label FROM `application_menu` WHERE `company_id` = ".$get['company_id']." AND `aplication_module` = ".$get['module_id']." AND `dashboard` = 0 AND `is_active` = 0";
 		$datas = $callConfig->getAllRows($query);
 		$query = "SELECT name_value, name, background_color, color FROM `status` WHERE `company_id` = ".$get['company_id']." AND `is_active` = 0";
@@ -699,6 +702,7 @@ class mobileUserClass extends userClass{
     }
     public function togetrecjectinvoicedetails($get){
     	global $callConfig;
+    	$lists = array();
     	$auquery = "SELECT id, display_name, user_photo FROM application_users WHERE company_id ='".$get['company_id']."' AND is_active =0";
     	$aures = $callConfig->getAllRows($auquery);
     	$application_users = array();
@@ -1536,6 +1540,7 @@ class mobileUserClass extends userClass{
  	}
  	public function tocreatecomplanatedetails($get, $post){
  		global $callConfig;
+ 		$complaint_image = '';
  		$insert_array = array('company_id'=>$get['company_id'],'user_id'=>$get['user_id'],'complaint_name'=>$post['complaint_name'],'complaint_type'=>$post['complaint_type'], 'transaction_date'=>$post['transaction_date'] ,'complaint_priority'=>$post['complaint_priority'],'building_id'=>$post['building_id'],'building_floor_id'=>$post['building_floor_id'],'building_floor_space_id'=>$post['building_floor_space_id'],'item_id'=>$post['item_id'],'asset_id'=>$post['asset_id'],'complaint_image'=>$complaint_image, 'remarks'=>$post['remarks'], 'table_name'=>$post['table_name'],'party_id'=>$post['party_id'], 'ref_id'=>$post['ref_id'], 'is_active'=>0,'current_status'=>0,'created_by'=>$get['user_id']);
  		$insert = $callConfig->insertRecord('complaints',$insert_array);
  		$ret['insert'] =$insert;
@@ -1852,6 +1857,7 @@ class mobileUserClass extends userClass{
  	}
  	public function toupdatecomplanatedetails($get, $post){
  		global $callConfig;
+ 		$complaint_image = '';
  		$insert_array = array('complaint_name'=>$post['complaint_name'],'complaint_type'=>$post['complaint_type'], 'complaint_priority'=>$post['complaint_priority'],'building_id'=>$post['building_id'],'building_floor_id'=>$post['building_floor_id'],'building_floor_space_id'=>$post['building_floor_space_id'],'item_id'=>$post['item_id'],'asset_id'=>$post['asset_id'],'complaint_image'=>$complaint_image, 'remarks'=>$post['remarks'],'is_active'=>0,'current_status'=>0,'updated_by'=>$get['user_id']);
  		$res=$callConfig->updateRecord('complaints', $insert_array,'id',$get['complaint_id']);
 		$ret['Update'] =$res;
@@ -1860,6 +1866,7 @@ class mobileUserClass extends userClass{
  	}
  	public function toaddcomplaintshisorydetails($get, $post){
  		global $callConfig;
+ 		$complaint_image = '';
  		if($post['remarks']!=""){
 	 		$insert_array = array('company_id'=>$get['company_id'],'complaint_id'=>$post['complaint_id'],'user_id'=>$get['user_id'],'transaction_date'=>$post['transaction_date'] ,'complaint_image'=>$complaint_image, 'remarks'=>$post['remarks'],'is_active'=>0,'current_status'=>0,'created_by'=>$get['user_id']);
 	 		$insert = $callConfig->insertRecord('complaint_responses',$insert_array);
@@ -3079,7 +3086,7 @@ class mobileUserClass extends userClass{
 	    $talapproved = $result['transaction_approval_logs_approved'];
 	    $application_user_module_roles = $result['application_user_module_roles'];
 	    $current_transactionauthprized=$breadcrumb[$current_status];
-	 	$rejecturl = $sendbackurl = "";
+	 	$rejecturl = $sendbackurl = $workflow_btn = "";
 	    if(!isset($result['error'])){
 			if($current_status != ST_APPROVED AND $current_status != ST_REJECTED){
 				//$workflow_btn .= '<div class="btn-group workflow-btn" role="group" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title=".btn-xlg">';
@@ -3208,6 +3215,7 @@ class mobileUserClass extends userClass{
 	}
 	public function togetinprocesstripdetailswithexpencess($get){
 		global $callConfig;
+		$ress = null;
 		$query = "SELECT id, expense_code, user_id, emp_id, expense_date, tax_amount, total_amount, transport_assign_id, client_reimbursement, description, pending_amount, current_status FROM emp_expenses WHERE company_id = ".$get['company_id']." AND id =".$get['exp_id']." AND is_active =0";
     	//echo $query;
     	$row = $callConfig->getRow($query);
@@ -4107,6 +4115,7 @@ class mobileUserClass extends userClass{
 	        	$mainfieldsary['shipping_tax_amount'] = $shipping_tax_amount;
 	        }
 	        //
+	        $invoiced_at = '';
 	        if($post['rid'] !=""){
 	        	$mainfieldsary['updated_by']=$post['user_id'];
 				$mainfieldsary['updated_date']=date('Y-m-d H:i:s');
@@ -8885,6 +8894,7 @@ $creditside = array('credit_notes','payments');
 		global $callConfig;
 
 		//echo "<pre>"; print_r($get); print_r($post); exit;
+		$user_id = $get['user_id'];
 		$data = json_decode($post['data'],1);
 		$trip_id = $get['trip_id'];
 		$insert_trip = array('trip_name' => $data['trip_name'], 'trip_type' => $data['trip_type'], 'trip_purpose' => $data['work_description'], 'project_id' => $data['project_id'], 'customer_id' => $data['client_id'],  'updated_by'=>$get['user_id']);
@@ -8936,9 +8946,11 @@ $creditside = array('credit_notes','payments');
 	}
 	
 	public function toaddprojecttaskdetails($get,$post){
-		global $callConfig;		
+		global $callConfig;
 		//echo "<pre>"; print_r($get); print_r($post); exit;
 		$notification_message = '';
+		$message = '';
+		$whatsup = '';
 		$notuser2 = array(); $notuser1 = array();
 		$post['is_active']=0;
 		$post['current_status']=0;
@@ -9132,6 +9144,7 @@ $creditside = array('credit_notes','payments');
 		$projectteamuserowner =$projectteamuserlist['1'][0];
 		$projectteamuserreviewer =$projectteamuserlist['3']; 
 		$status_list = $passprojecttaskid['status_list']; 
+		$statuslist = array();
 		foreach($status_list as $status_lists){
 			$statuslist[$status_lists->status] = $status_lists->name;
 		}

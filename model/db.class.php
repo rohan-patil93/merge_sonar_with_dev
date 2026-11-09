@@ -122,8 +122,9 @@ class configClass
 			//if($sub=='SELECT' || $sub=='select') { $this->insertAuditTrail('SELECT',$query); }
 			if($sub=='DELETE' || $sub=='delete') { $this->insertAuditTrail('DELETE','','','',$query); }
 			//print_r($log); exit;
+			$result = null;
 			if (mysqli_query($this->con, $query)) {
-				
+
 			    $insert_id = mysqli_insert_id($this->con);
 				$update_id = mysqli_affected_rows($this->con);
 				$queryresult = array('status' => 'sucess', 'LASTID'=>$insert_id, 'Result'=>$result, 'UpdatedRes'=>$update_id);
@@ -738,6 +739,7 @@ function random_code()
 		$tmp = substr($string, $num, 1);
 		$rand = $rand.$tmp;
 	}
+	$salt = '';
 	return time().random_int(1, time()).$rand.$salt;
 }
 

@@ -306,6 +306,7 @@ class hrUserClass extends userClass{
 	public function insertEmployeeWorkAttendances($get){
 		global $callConfig;
 		$submitattendancess = array();
+		$lastid = '';
 		$shift_check = SHIFT_CHECK; //1 meaning yes
 		$month = $get['month'];
 		$year = $get['year'];
@@ -560,6 +561,7 @@ class hrUserClass extends userClass{
 		$returnaray['res'] = $res;
 		$post['rid']= $lastid;
 		//$resattendance = $this->insertTempImportSwapInOut($post);
+		$resattendance = array();
 		$returnaray['temp_respons'] = $resattendance;
 
 		$insertuserarray2=array('company_id'=>$post['company_id'],'import_swap_in_out_id'=>$lastid,'month_year'=>$post['month_year'],'type'=>'I','user_id'=>$post['user_id'],'is_active'=>'0','current_status'=>'0','created_by'=>$post['user_id'],'created_date'=>date("Y-m-d H:i:s"));
@@ -610,7 +612,7 @@ class hrUserClass extends userClass{
 			unset($imposrtfileres[0]);
 			foreach($imposrtfileres as $importres){
 				$empid[$importres->column2] = $importres->column2;
-			    $offarray = $sundaycnt =$pressentcnt = $absenttcnt= $total_day  =$leaveclcnt =$leaveelcnt=$leavemlcnt =$leaveslcnt =$leavewpcnt =$leavecocnt = $leaveplcnt = $leavemrcnt= $halfdaycnt = $halfdayabsentcnt = 0;
+			    $offarray = $sundaycnt =$pressentcnt = $absenttcnt= $total_day  =$leaveclcnt =$leaveelcnt=$leavemlcnt =$leaveslcnt =$leavewpcnt =$leavecocnt = $leaveplcnt = $leavemrcnt= $halfdaycnt = $halfdayabsentcnt = $leavecnt = 0;
 			    foreach($dates as $field=>$columns){
 			    	$total_day++;
 			    	// $sunday = date("D",strtotime($columns));
@@ -736,6 +738,7 @@ class hrUserClass extends userClass{
 			$insdailyattendancedetails = "INSERT INTO `temp_attendance_details`(`company_id`, `employee_id`, `attendance_date`, `attendance_key_short_code`, `clock_in`, `clock_out`, `is_active`, `current_status`,`created_date`, `created_by`) VALUES ";
 			$insertattendanceempcount = 0;
 			$notinsertattendanceempcount = 0;
+			$attendanceempcount = 0;
 			$all_emp = $insert_emp = $not_insert_emp = array();
 			foreach ($departmentwithemp as $empcodekey => $value){
 				$empid = $emplist[$empcodekey]->id;	
@@ -1287,6 +1290,7 @@ class hrUserClass extends userClass{
 					$query = "SELECT application_module,id,role_short_code FROM application_roles where role_short_code IN('".$role_id."')";
 					$roleres = $callConfig->getAllRows($query);
 					$retresult['query'] = $query;
+					$rolere = (object) array('application_module' => '', 'id' => '', 'role_short_code' => '');
 					$insertarray = array("company_id"=>$post['company_id'],"user_id"=>$res['LASTID'],"module_setup_id"=>$rolere->application_module,"application_module_id"=>$rolere->application_module,"role_id"=>$rolere->id,"role_short_code"=>$rolere->role_short_code,"is_active"=>"0","current_status"=>"0","created_date"=>date('Y-m-d h:i:s'),"created_by"=>$post['user_id']);
 					$insert = $callConfig->insertRecord('application_user_module_roles',$insertarray);
 					$rolesids[] = $rolere->role_short_code;	
@@ -2966,6 +2970,7 @@ class hrUserClass extends userClass{
 	public function insertemployeeworkattendancespayareawise($get){
 		global $callConfig;
 		$returnarray = array();
+		$lastid = '';
 		$shift_check = SHIFT_CHECK; //1 meaning yes
 		$month = $get['month'];
 		$year = $get['year'];

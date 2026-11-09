@@ -762,6 +762,7 @@ echo "step 1";
 
 	public function NewUserformateNew($post,$db_name){
 		global $callConfig;
+		$get = array();
 		$whr="db_name = '".$db_name."'";
 		$query=$callConfig->selectQuery(MAINDB.'.'.TBL_DATABASE_ALLOCATIONS,'*',$whr,'','','');
 		$row=$callConfig->getRow($query);

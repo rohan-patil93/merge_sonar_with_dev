@@ -425,6 +425,7 @@ class rentalUserClass extends userClass{
 				$podaajax = json_decode($property_tenant_detailsres->property_owner_detail_areas,1);
 				$amount =$totalmonthly_tax =$rent_amount = $rent_total_amount = 0;
 				$bill_detail =$utility_details =  array();
+				$per_sq_ft_with_discount = array();
 				//$monthlyrant = $increase_ret = $per_sq_ft_with_discount = 0;
 				foreach($podaajax as $keyyy=>$poda){
 					$totaldays = ($totaldays !='0' || $totaldays !='')?$totaldays:"1";
@@ -581,6 +582,7 @@ class rentalUserClass extends userClass{
 				}else{
 					$due_date = $month_start_date;
 				}
+				$bill_details = $bill_detail;
 				$insertcust = array('company_id'=>$get['company_id'],'property_tenant_detail_id'=>$property_tenant_detailsres->id,'month_start_date'=>$month_start_date,'month_end_date'=>$month_end_date,'rent_amount'=>$rent_amount,'rent_tax'=>$totalmonthly_tax,'rent_total_amount'=>$rent_total_amount,'utility_amount'=>$total_utility_amount,'total_amount'=>$amount,'bill_detail'=>$bill_details,'utility_details'=>$utility_detail,'is_active'=>0,'current_status'=>0,'created_by'=>$post['user_id'],'created_date'=>date("Y-m-d H:i:s"),'rent_due_date'=>$due_date,'rent_transaction_date'=>$month_start_date,'utility_transaction_date'=>$month_start_date, 'utility_due_date'=>$due_date);
 				$submonthstartdate = date("Ym",strtotime($month_start_date));
 				if($property_tenant_billingsYD[$submonthstartdate] ==""){
@@ -963,6 +965,8 @@ class rentalUserClass extends userClass{
 		// if($get['admin_type'] != 1){
 		// 	$condition = " AND emp_id = ".$get['emp_id'];
 		// }
+		$condition = '';
+		$custcondition = '';
 		$customer_id = array();
 		if($get['admin_type'] != 1 OR $get['admin_access_employee'] == 'Y'){
 			$custcondition = " AND created_by = '".$get['user_id']."'";
@@ -1198,6 +1202,9 @@ class rentalUserClass extends userClass{
 			$invoicetable = "rental_invoices";
 			$invoiceitemtable = "rental_invoice_items";
 			$invoiceitemtaxtable = "rental_invoice_item_taxes";
+			$due_date = '';
+			$transaction_date = '';
+			$additional_notes = '';
 		}
 		$property_tenant_detailssql = "SELECT * FROM property_tenant_details WHERE company_id = '".$get['company_id']."' AND id = '".$ptbres->property_tenant_detail_id."' AND is_active = 0";
 		$return['property_tenant_detailssql'] = $property_tenant_detailssql;
@@ -1604,6 +1611,7 @@ class rentalUserClass extends userClass{
 	}
 	public function getOwnerReports($get){
 		global $callConfig;
+		$post = array();
 		$return['post']= $post;
 		$condition = "";
 		if($get['property_owner_id'] !=""){

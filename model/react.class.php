@@ -322,6 +322,7 @@ class reactClass extends userClass{
 				$return = [];
 				$return['post'] = $post;
 				$return['get'] = $get;
+				$option = '';
 				$contract_creation_or_updation = "";
 				$locations = '';
 				if (isset($post['locations']) && is_array($post['locations'])) {
@@ -2455,6 +2456,7 @@ class reactClass extends userClass{
 		$return = [];
 		$return['post'] = $post;
 		$return['get'] = $get;
+		$option = '';
 
 		$locations = '';
 		if (isset($post['locations']) && is_array($post['locations'])) {

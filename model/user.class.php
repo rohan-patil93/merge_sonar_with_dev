@@ -2918,6 +2918,7 @@ class userClass{
 	function insertInvoiceType($post, $table, $get){
 		global $callConfig;
 		$return = array();
+		$res = array();
 		$sales_tables = array('enquiries','estimates','delivery_orders','sales_orders','sales_returns','rgp_delivery_orders','rgp_sales_returns','nrgp_delivery_orders','sales_invoices');
 		$return['post'] =$post; 
 		$return['table'] =$table; 
@@ -3140,7 +3141,8 @@ class userClass{
 				$callConfig->updateRecord($fieldarray[$table]['tax'],$updaterecord,'transaction_id',$insert_id);
 				// update all items table end
 			}
-			foreach ($post['productCode'] as $key => $item){
+			$itemres = (object)array('item_id'=>'');
+		foreach ($post['productCode'] as $key => $item){
 				$litemids[] = $item;
 				if($post['doc_ref_date'][$key] !=''){
 					$item_doc_ref_date =  $this->dateconvertdbformat($post['doc_ref_date'][$key]);
@@ -3222,6 +3224,7 @@ class userClass{
 					}	
 				}	
 
+				$item_id = '';
 				if($type == 'update'){
 					//Item table Insert data Start
 					$transaction_item_row_id = $post['transaction_item_row_id'][$key];
@@ -4229,6 +4232,7 @@ class userClass{
 			$chartofaccount[$coa->account_code] = $coa->account_code;
 		}
 		$total_debit_amt = $total_credit_amt = 0;
+		$transaction_item_id = array('code'=>'');
 		foreach ($itemrows as $key => $itemrow){ // all entry with transaction items
 			$itemrow = (array)$itemrow;
 			$itemtabledetails = $items[$itemrow['item_id']];
@@ -6013,6 +6017,7 @@ class userClass{
 		//echo $query1; exit;
 		$emailids = $callConfig->getRow($query1);
 		//print_r($emailids);exit;
+		$email_ids = (object)array('email'=>'');
 		$emails[] = $email_ids->email;
 		//print_r($email_data);exit;
 		$whrstp="table_name = '".$data['transaction_type']."' AND status='".$data['status']."'";
@@ -6098,6 +6103,7 @@ class userClass{
 		}
 		$itemlist = $itemresult = array();
 		//$pr['items'] = $itemsre;
+		$itaares = (object)array('sales_order_qty'=>0,'purchase_order_qty'=>0,'stock_in_hand'=>0,'available_qty'=>0,'minimum_level'=>0,'maximum_capacity'=>0);
 		$transaction_item_ref_id = array();
 		if(count((array)$itemsre) != 0){
 			foreach ($itemsre as $itlist) {

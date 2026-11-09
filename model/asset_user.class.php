@@ -559,6 +559,7 @@ class assetUserClass extends userClass{
 		$asset_requestsres=$callConfig->getRow($asset_requestssql);
 
 
+		$insert_requstres = array();
 		$user_ids = array('0'=>$post['user_id']);
 		$msg = "Asset Request Transfer Successfully";
 		$notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$insert_requstres['LASTID'],'application_table_name'=>'asset_transfer_requests', 'type'=>'INFORMATION', 'notification_users'=>$user_ids,'option'=>'COM_LIST_ASSET_REQUESTS');
@@ -598,6 +599,7 @@ class assetUserClass extends userClass{
 			$res[] = $callConfig->insertRecord('asset_verifications',$insert_array);
 		}
 
+		$insert_requstres = array();
 		$user_ids = array('0'=>$post['verification_user_id']);
 		$msg = "Asset Verification Schedule From - ".$post['start_date_time']." TO ".$post['end_date_time'];
 		$notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$insert_requstres['LASTID'],'application_table_name'=>'asset_transfer_requests', 'type'=>'ACTION', 'notification_users'=>$user_ids,'option'=>'COM_VIEW_ASSET_VERIFICATIONS');
@@ -836,7 +838,7 @@ function insertAsset($post){
 			$user_ids = array('0'=>$assetsres->asset_custodian);
 			$msg = "Asset Return Request - ".$res['LASTID'];
 			$option = "COM_LIST_ASSET_RETURNS";
-			$notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$insert_requstres['LASTID'],'application_table_name'=>'asset_requests', 'type'=>'ACTION', 'notification_users'=>$user_ids,'option'=>$option);
+			$notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$res['LASTID'],'application_table_name'=>'asset_requests', 'type'=>'ACTION', 'notification_users'=>$user_ids,'option'=>$option);
 			$returnresult['notification_array']  = $notdataa;
 			$sendnotification = $this->tosendnotifiations($notdataa);
 			$notdataa['option'] = "";
@@ -1084,7 +1086,8 @@ function insertAsset($post){
 			$assetupdate=$callConfig->updateRecord("asset_transfer_requests",$requestassetary,"","",$where);
 			$returnresult['assetupdate'][]  =$assetupdate;
 			$assetupdatearray = array('asset_location'=>$post['location_id'],'conditions'=>$post['candition'],'asset_status'=>$post['status'],'allocation_status'=>'Y','user_id'=>$emp_id);
-			$returnresult['history'][] = $this->insertAssetTransaction($post,$table,$res,$assetupdatearray);	
+			$returnresult['history'][] = $this->insertAssetTransaction($post,$table,$res,$assetupdatearray);
+			$useriid = (object) array('user_id' => '');
 			$user_ids = array('0'=>$useriid->user_id);
 			$user_ids = array('0'=>$emp_id);
 			$msg = "Asset Allocate ".$res['LASTID'];
@@ -1175,6 +1178,7 @@ function insertAsset($post){
 		$get['employee_id'] = $post['emp_id'];
 		$get['company_id'] = $post['company_id'];
 		//$user_id  =  $this->getempconnect($get);
+		$user_id = array('admin_connect' => 'NOT-CONFIGURED');
 		$returnresult['admin_buddy']  = $user_id; 
 		if($post['extension_type'] == "A"){
 			$attributes =implode(",",(array)$post['attribute']);
@@ -1203,6 +1207,7 @@ function insertAsset($post){
 		$get['employee_id'] = $post['emp_id'];
 		$get['company_id'] = $post['company_id'];
 		//$user_id  =  $this->getempconnect($get);
+		$user_id = array('admin_connect' => 'NOT-CONFIGURED');
 		$returnresult['admin_buddy']  = $user_id; 
 		if($user_id['admin_connect'] != "NOT-CONFIGURED"){
 			$attributes =implode(",",(array)$post['attribute']);

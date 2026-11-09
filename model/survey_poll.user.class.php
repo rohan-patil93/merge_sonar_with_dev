@@ -1211,6 +1211,8 @@ class surveyPollUserClass extends userClass
     		$joining_timestamp = strtotime($emp->joining_date);
 			$current_exp = (time() - $joining_timestamp) / (365 * 24 * 60 * 60);
 			$experience = $emp->total_experiance + $current_exp;
+			$min_exp = $emp_all['min_exp'];
+			$max_exp = $emp_all['max_exp'];
 			$remark = ($experience >= $min_exp && $experience <= $max_exp) ? '' : 'Experience Mismatch';
     		$emp_all['remark'] = $remark;
     		//echo $emp_vendor_id; exit;

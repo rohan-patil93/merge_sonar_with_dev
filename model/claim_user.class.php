@@ -489,7 +489,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 	 	if($insert_id!=""){
 
 	 		$upary = array();
-	 		$upary['updated_by'] = $data['user_id'];
+	 		$upary['updated_by'] = $post['user_id'];
 			$upary['updated_date'] = date('Y-m-d H:i:s');
 			$upary['is_active'] =null;
 			$callConfig->updateRecord("emp_expenses_details",$upary,"emp_expenses_id",$insert_id);

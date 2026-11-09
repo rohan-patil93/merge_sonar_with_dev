@@ -1100,6 +1100,7 @@ GROUP BY tl.item_id";
 	public function insertKittingAndDekkitingStockUpdate($get){
 		global $callConfig;
 		$return = array();
+		$post = array();
 		$transaction_id = $get['transaction_no'];
 		$transaction_table = $get['transaction_table'];
 		if($transaction_table == 'dekittings'){

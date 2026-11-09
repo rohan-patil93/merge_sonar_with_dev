@@ -184,7 +184,7 @@ class tallyClass extends userClass{
 
 	public function getTransactionInvoices($get,$post,$transaction_table=""){
 	 	global $callConfig;
-	 	$return = $transaction_entry =$item_trans =  array();
+	 	$return = $transaction_entry = $item_trans = $ledger_master = array();
 	 	$uniquecode = $get['uniquecode'];
 	 	$company_id = $get['company_id'];
 	 	$vendcustarray = array('20003501','1004001');
@@ -800,7 +800,8 @@ class tallyClass extends userClass{
  		$api_hit_api_response_details = json_decode(urldecode($api_hitsres->api_response_details),1);
 		$api_mastersr_api_response_details = json_decode($apimastersres->api_response_details, 1);
 		$responsary = $receipt_allocations= array();
-		
+		$getstringlist = '';
+
 		//recept list
 		$receiptssql = "SELECT id, transaction_no, amount, unallocated_amount, allocated_amount, paid_amonut, tds_amount FROM receipts WHERE company_id='".$company_id."' AND is_active = '0'";
       	$receiptsres = $callConfig->getAllRows($receiptssql);
@@ -961,7 +962,9 @@ class tallyClass extends userClass{
  		$api_hit_api_response_details = json_decode(urldecode($api_hitsres->api_response_details),1);
 		$api_mastersr_api_response_details = json_decode($apimastersres->api_response_details, 1);
 		$responsary = $receipt_allocations= array();
-		
+		$getstringlist = '';
+		$payment_id = '';
+
 		//recept list
 		$receiptssql = "SELECT id, transaction_no, amount, unallocated_amount, allocated_amount, paid_amonut, tds_amount FROM payments WHERE company_id='".$company_id."' AND is_active = '0'";
       	$receiptsres = $callConfig->getAllRows($receiptssql);
@@ -1125,16 +1128,17 @@ class tallyClass extends userClass{
 
 		$transactionssql = "SELECT id, transaction_date, transaction_number, party_name, party_address, place_of_supply, party_phone, party_email FROM ".$application_table." WHERE company_id='".$company_id."' AND is_active = '0'";
       	$transactionres = $callConfig->getAllRows($transactionssql);
-		foreach($transactionres as $recpt){  
+		foreach($transactionres as $recpt){
 			$transaction[$recpt->transaction_number] =  $recpt; //marge two table data
  		}
 
  		foreach($api_hit_api_response_details[$api_code] as $apihitre){  //api Hites response fileds
  			$valuenotavailablefieldary = array();
   			$stringary = array();
-  			$maintransactionary = $transactionitemtaxary = $transactionitemsql = array();
+  			$maintransactionary = $transactionitemtaxary = $transactionitemsql = $paymentarray = array();
+  			$getstringlist = '';
   			if(isset($transaction[$apihitre['VOUCHERNUMBER']])){
-				$stringary['status'] = 1062; 
+				$stringary['status'] = 1062;
 		        $stringary['query'] = $getstringlist;
 		        $stringary['error'] = 'Duplicate Entry';
 			}else{	
