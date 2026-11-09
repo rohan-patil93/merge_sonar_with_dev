@@ -95,7 +95,7 @@ if ($userData['user_photo'] != '') {
               <div class="card card-body mt-2">
                 <label for="template_name" class="form-label">Template Name</label>
                 <div class="form-group">
-                  <input class="form-control mb-1" type="text" id="template_name" placeholder="Enter template name">
+                  <input class="form-control mb-1" type="text" id="template_name" placeholder="Enter template name" aria-label="Enter template name">
                 </div>
               </div>
             </div>
@@ -116,7 +116,7 @@ if ($userData['user_photo'] != '') {
             <div id="borderOptions" class="dynamic-options">
               <div class="card card-body mt-2">
                 <label for="borderStyle" class="form-label">Border Style</label>
-                <select class="form-select" id="borderStyle" name="borderStyle">
+                <select class="form-select" id="borderStyle" name="borderStyle" aria-label="Borderstyle">
                   <option value="solid">Solid</option>
                   <option value="dashed">Dashed</option>
                   <option value="dotted">Dotted</option>
@@ -128,14 +128,14 @@ if ($userData['user_photo'] != '') {
               <div class="card card-body mt-2">
                 <label for="borderColor" class="form-label">Border Color</label>
                 <input type="color" class="form-control form-control-color" style="max-width:100%;" id="borderColor"
-                  title="Choose border color" value="" name="borderColor">
+                  title="Choose border color" value="" name="borderColor" aria-label="Choose border color">
               </div>
             </div>
             <div id="widthOptions" class="dynamic-options">
               <div class="card card-body mt-2">
                 <label for="borderWidth" class="form-label">Border Width</label>
                 <input type="number" class="form-control" id="borderWidth" min="1" max="10"
-                  placeholder="Enter width (in px)" value="" name="borderWidth">
+                  placeholder="Enter width (in px)" value="" name="borderWidth" aria-label="Enter width (in px)">
               </div>
             </div>
           </div>
@@ -164,7 +164,7 @@ if ($userData['user_photo'] != '') {
             <div id="textStyleOptions" class="dynamic-options">
               <div class="card card-body mt-2">
                 <label for="fontFamily" class="form-label">Font Family</label>
-                <select class="form-select" id="fontFamily" name="fontFamily">
+                <select class="form-select" id="fontFamily" name="fontFamily" aria-label="Fontfamily">
                   <option value="Arial">Arial</option>
                   <option value="Times New Roman">Times New Roman</option>
                   <option value="Courier New">Courier New</option>
@@ -182,7 +182,7 @@ if ($userData['user_photo'] != '') {
               <div class="card card-body mt-2">
                 <label for="marginInput" class="form-label">Margin (in px)</label>
                 <input type="number" class="form-control" id="marginInput" value="" name="marginInput" min="0"
-                  placeholder="Enter margin">
+                  placeholder="Enter margin" aria-label="Enter margin">
               </div>
             </div>
 
@@ -191,7 +191,7 @@ if ($userData['user_photo'] != '') {
               <div class="card card-body mt-2">
                 <label for="paddingInput" class="form-label">Padding (in px)</label>
                 <input type="number" class="form-control" id="paddingInput" value="" name="paddingInput" min="0"
-                  placeholder="Enter padding">
+                  placeholder="Enter padding" aria-label="Enter padding">
               </div>
             </div>
 
@@ -200,7 +200,7 @@ if ($userData['user_photo'] != '') {
               <div class="card card-body mt-2">
                 <label for="heightInput" class="form-label">Height (in px)</label>
                 <input type="number" class="form-control" id="heightInput" value="" name="heightInput" min="100"
-                  placeholder="Enter height">
+                  placeholder="Enter height" aria-label="Enter height">
               </div>
             </div>
           </div>
@@ -225,7 +225,7 @@ if ($userData['user_photo'] != '') {
               <div class="card card-body mt-2">
                 <span class="form-label mb-2">Toggle Logo</span>
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showLogo" checked>
+                  <input class="form-check-input" type="checkbox" id="showLogo" checked aria-label="Input">
                   <label class="form-check-label" for="showLogo">Show Logo</label>
                 </div>
               </div>
@@ -234,7 +234,7 @@ if ($userData['user_photo'] != '') {
             <div id="logoPosition" class="dynamic-options">
               <div class="card card-body mt-2">
                 <label for="logoPositionSelect" class="form-label">Logo Position</label>
-                <select class="form-select" id="logoPositionSelect">
+                <select class="form-select" id="logoPositionSelect" aria-label="Select">
                   <option value="left">Left</option>
                   <option value="center">Center</option>
                   <option value="right">Right</option>
@@ -245,7 +245,7 @@ if ($userData['user_photo'] != '') {
             <div id="logoSize" class="dynamic-options">
               <div class="card card-body mt-2">
                 <label for="logoSizeSelect" class="form-label">Logo Size</label>
-                <select class="form-select" id="logoSizeSelect">
+                <select class="form-select" id="logoSizeSelect" aria-label="Select">
                   <option value="small">Small</option>
                   <option value="medium">Medium</option>
                   <option value="large">Large</option>
@@ -253,7 +253,7 @@ if ($userData['user_photo'] != '') {
                 </select>
                 <div id="customLogoSizeInputContainer" class="mt-2" style="display: none;">
                   <label for="customLogoSizeInput" class="form-label">Custom Logo Size (px)</label>
-                  <input type="number" id="customLogoSizeInput" class="form-control" placeholder="Enter size in px" />
+                  <input type="number" id="customLogoSizeInput" class="form-control" placeholder="Enter size in px" / aria-label="Enter size in px">
                 </div>
               </div>
             </div>
@@ -262,7 +262,7 @@ if ($userData['user_photo'] != '') {
               <div class="card card-body mt-2">
                 <span class="form-label mb-2">Toggle Top Header Options</span>
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showinvoiceno" checked>
+                  <input class="form-check-input" type="checkbox" id="showinvoiceno" checked aria-label="Input">
                   <label class="form-check-label" for="showinvoiceno">Show Invoice No.</label>
                   <select aria-label="Invoiceno Select" class="form-select" id="invoicenoSelect" style="display: none;">
                     <option value="id">ID</option>
@@ -327,7 +327,7 @@ if ($userData['user_photo'] != '') {
                   </select>
                 </div>
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showdate" checked>
+                  <input class="form-check-input" type="checkbox" id="showdate" checked aria-label="Input">
                   <label class="form-check-label" for="showdate">Show Date</label>
                   <select aria-label="Invoicedate Select" class="form-select" id="invoicedateSelect" style="display: none;">
                     <option value="id">ID</option>
@@ -392,7 +392,7 @@ if ($userData['user_photo'] != '') {
                   </select>
                 </div>
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showduedate" checked>
+                  <input class="form-check-input" type="checkbox" id="showduedate" checked aria-label="Input">
                   <label class="form-check-label" for="showduedate">Show Due Date</label>
                   <select aria-label="Invoiceduedate Select" class="form-select" id="invoiceduedateSelect" style="display: none;">
                     <option value="id">ID</option>
@@ -457,7 +457,7 @@ if ($userData['user_photo'] != '') {
                   </select>
                 </div>
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showpo_num" checked>
+                  <input class="form-check-input" type="checkbox" id="showpo_num" checked aria-label="Input">
                   <label class="form-check-label" for="showpo_num">Show P.O. Number</label>
                   <select aria-label="Invoiceponum Select" class="form-select" id="invoiceponumSelect" style="display: none;">
                     <option value="id">ID</option>
@@ -522,7 +522,7 @@ if ($userData['user_photo'] != '') {
                   </select>
                 </div>
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showpo_date" checked>
+                  <input class="form-check-input" type="checkbox" id="showpo_date" checked aria-label="Input">
                   <label class="form-check-label" for="showpo_date">Show P.O Date</label>
                   <select aria-label="Invoicepodate Select" class="form-select" id="invoicepodateSelect" style="display: none;">
                     <option value="id">ID</option>
@@ -611,7 +611,7 @@ if ($userData['user_photo'] != '') {
               <div class="card card-body mt-2">
                 <span class="form-label mb-2">Toggle Header</span>
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showAddress" checked>
+                  <input class="form-check-input" type="checkbox" id="showAddress" checked aria-label="Input">
                   <label class="form-check-label" for="showAddress">Show Header</label>
                 </div>
               </div>
@@ -623,7 +623,7 @@ if ($userData['user_photo'] != '') {
                 <label for="addressvisibilitySelect" class="form-label">Header Address Visibility</label>
 
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showFirstAddress" checked>
+                  <input class="form-check-input" type="checkbox" id="showFirstAddress" checked aria-label="Input">
                   <label class="form-check-label" for="showFirstAddress">Show Bill From Address</label>
                   <input aria-label="Inputheading1" class="form-control mb-1" type="text" id="inputheading1" value="Invoiced To">
                   <select aria-label="Address1Select" class="form-select" id="address1Select" style="display: none;">
@@ -634,7 +634,7 @@ if ($userData['user_photo'] != '') {
                 </div>
 
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showSecondAddress" checked>
+                  <input class="form-check-input" type="checkbox" id="showSecondAddress" checked aria-label="Input">
                   <label class="form-check-label" for="showSecondAddress">Show Bill TO Address</label>
                   <input aria-label="Inputheading2" class="form-control mb-1" type="text" id="inputheading2" value="Bill To">
                   <select aria-label="Address2Select" class="form-select" id="address2Select" style="display: none;">
@@ -645,7 +645,7 @@ if ($userData['user_photo'] != '') {
                 </div>
 
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showThirdAddress" checked>
+                  <input class="form-check-input" type="checkbox" id="showThirdAddress" checked aria-label="Input">
                   <label class="form-check-label" for="showThirdAddress">Show Company Address</label>
                   <input aria-label="Inputheading3" class="form-control mb-1" type="text" id="inputheading3" value="Company">
                   <select aria-label="Address3Select" class="form-select" id="address3Select" style="display: none;">
@@ -662,7 +662,7 @@ if ($userData['user_photo'] != '') {
               <div class="card card-body mt-2">
                 <div class="form-group">
                   <label for="address1position" class="form-label">Address 1</label>
-                  <select class="form-select" id="address1position">
+                  <select class="form-select" id="address1position" aria-label="Select">
                     <option value="left" selected>Left</option>
                     <option value="center">Center</option>
                     <option value="right">Right</option>
@@ -670,7 +670,7 @@ if ($userData['user_photo'] != '') {
                 </div>
                 <div class="form-group">
                   <label for="address2position" class="form-label">Address 2</label>
-                  <select class="form-select" id="address2position">
+                  <select class="form-select" id="address2position" aria-label="Select">
                     <option value="left">Left</option>
                     <option value="center" selected>Center</option>
                     <option value="right">Right</option>
@@ -678,7 +678,7 @@ if ($userData['user_photo'] != '') {
                 </div>
                 <div class="form-group">
                   <label for="address3position" class="form-label">Address 3</label>
-                  <select class="form-select" id="address3position">
+                  <select class="form-select" id="address3position" aria-label="Select">
                     <option value="left">Left</option>
                     <option value="center">Center</option>
                     <option value="right" selected>Right</option>
@@ -691,7 +691,7 @@ if ($userData['user_photo'] != '') {
             <div id="addressSize" class="dynamic-options">
               <div class="card card-body mt-2">
                 <label for="addressSizeSelect" class="form-label">Text Size</label>
-                <select class="form-select" id="addressSizeSelect">
+                <select class="form-select" id="addressSizeSelect" aria-label="Select">
                   <option value="small">Small</option>
                   <option value="medium" selected>Medium</option>
                   <option value="large">Large</option>
@@ -721,7 +721,7 @@ if ($userData['user_photo'] != '') {
               <div class="card card-body mt-2">
                 <span class="form-label mb-2">Toggle Table</span>
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showTable" readonly disabled checked>
+                  <input class="form-check-input" type="checkbox" id="showTable" readonly disabled checked aria-label="Input">
                   <label class="form-check-label" for="showTable">Show Table</label>
                 </div>
               </div>
@@ -801,11 +801,11 @@ if ($userData['user_photo'] != '') {
               <div class="card card-body mt-2">
                 <span class="form-label mb-2">Toggle Columns</span>
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showtaxsumcol" checked>
+                  <input class="form-check-input" type="checkbox" id="showtaxsumcol" checked aria-label="Input">
                   <label class="form-check-label" for="showtaxsumcol">Show Tax Summary</label>
                 </div>
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showimagecol" checked>
+                  <input class="form-check-input" type="checkbox" id="showimagecol" checked aria-label="Input">
                   <label class="form-check-label" for="showimagecol">Show Image Columns</label>
                   <input aria-label="Enter Feild Name" type="text" id="imagecolumnInput" class="form-control" style="display: none;"
                     placeholder="Enter Feild Name" />
@@ -842,7 +842,7 @@ if ($userData['user_photo'] != '') {
                   </select>
                 </div>
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showitemcol" checked>
+                  <input class="form-check-input" type="checkbox" id="showitemcol" checked aria-label="Input">
                   <label class="form-check-label" for="showitemcol">Show Item Name Columns</label>
                   <input aria-label="Enter Feild Name" type="text" id="itemcolumnInput" class="form-control" style="display: none;"
                     placeholder="Enter Feild Name" />
@@ -914,7 +914,7 @@ if ($userData['user_photo'] != '') {
                   </select>
                 </div>
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showhsnsaccol" checked>
+                  <input class="form-check-input" type="checkbox" id="showhsnsaccol" checked aria-label="Input">
                   <label class="form-check-label" for="showhsnsaccol">Show HSN/SAC Columns</label>
                   <input aria-label="Enter Feild Name" type="text" id="hsnsaccolumnInput" class="form-control" style="display: none;"
                     placeholder="Enter Feild Name" />
@@ -951,7 +951,7 @@ if ($userData['user_photo'] != '') {
                   </select>
                 </div>
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showuomcol" checked>
+                  <input class="form-check-input" type="checkbox" id="showuomcol" checked aria-label="Input">
                   <label class="form-check-label" for="showuomcol">Show UOM Columns</label>
                   <input aria-label="Enter Feild Name" type="text" id="uomcolumnInput" class="form-control" style="display: none;"
                     placeholder="Enter Feild Name" />
@@ -987,7 +987,7 @@ if ($userData['user_photo'] != '') {
                   </select>
                 </div>
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showtaxcol" checked>
+                  <input class="form-check-input" type="checkbox" id="showtaxcol" checked aria-label="Input">
                   <label class="form-check-label" for="showtaxcol">Show TAX Columns</label>
                   <input aria-label="Enter Feild Name" type="text" id="taxcolumnInput" class="form-control" style="display: none;"
                     placeholder="Enter Feild Name" />
@@ -1023,7 +1023,7 @@ if ($userData['user_photo'] != '') {
                   </select>
                 </div>
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showratecol" checked>
+                  <input class="form-check-input" type="checkbox" id="showratecol" checked aria-label="Input">
                   <label class="form-check-label" for="showratecol">Show Rate Columns</label>
                   <input aria-label="Enter Feild Name" type="text" id="ratecolumnInput" class="form-control" style="display: none;"
                     placeholder="Enter Feild Name" />
@@ -1059,7 +1059,7 @@ if ($userData['user_photo'] != '') {
                   </select>
                 </div>
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showqtycol" checked>
+                  <input class="form-check-input" type="checkbox" id="showqtycol" checked aria-label="Input">
                   <label class="form-check-label" for="showqtycol">Show QTY Columns</label>
                   <input aria-label="Enter Feild Name" type="text" id="qtycolumnInput" class="form-control" style="display: none;"
                     placeholder="Enter Feild Name" />
@@ -1095,7 +1095,7 @@ if ($userData['user_photo'] != '') {
                   </select>
                 </div>
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showamountcol" checked>
+                  <input class="form-check-input" type="checkbox" id="showamountcol" checked aria-label="Input">
                   <label class="form-check-label" for="showamountcol">Show Amount Columns</label>
                   <input aria-label="Enter Feild Name" type="text" id="amountcolumnInput" class="form-control" style="display: none;"
                     placeholder="Enter Feild Name" />
@@ -1138,7 +1138,7 @@ if ($userData['user_photo'] != '') {
               <div class="card card-body mt-2">
                 <label for="itemsInput" class="form-label">Items In Each Page Show</label>
                 <input type="number" class="form-control" id="itemsInput" min="100"
-                  placeholder="Enter No. Of Items In Each Page Show">
+                  placeholder="Enter No. Of Items In Each Page Show" aria-label="Enter No. Of Items In Each Page Show">
               </div>
             </div>
           </div>
@@ -1161,7 +1161,7 @@ if ($userData['user_photo'] != '') {
               <div class="card card-body mt-2">
                 <span class="form-label mb-2">Toggle Page Footer</span>
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showpagefooter" checked>
+                  <input class="form-check-input" type="checkbox" id="showpagefooter" checked aria-label="Input">
                   <label class="form-check-label" for="showpagefooter">Show Page Footer</label>
                 </div>
               </div>
@@ -1173,22 +1173,22 @@ if ($userData['user_photo'] != '') {
                 <label for="page_footer_optionsVisibility" class="form-label">Footer Options Visibility</label>
 
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showtotalinalpha" checked>
+                  <input class="form-check-input" type="checkbox" id="showtotalinalpha" checked aria-label="Input">
                   <label class="form-check-label" for="showtotalinalpha">Show Total In Alphabet</label>
                 </div>
 
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showsignature" checked>
+                  <input class="form-check-input" type="checkbox" id="showsignature" checked aria-label="Input">
                   <label class="form-check-label" for="showsignature">Show Signature</label>
                 </div>
 
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showqr" checked>
+                  <input class="form-check-input" type="checkbox" id="showqr" checked aria-label="Input">
                   <label class="form-check-label" for="showqr">Show QR</label>
                 </div>
 
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showtotalbeforetax" checked>
+                  <input class="form-check-input" type="checkbox" id="showtotalbeforetax" checked aria-label="Input">
                   <label class="form-check-label" for="showtotalbeforetax">Show Total Before Tax</label>
                   <input aria-label="Heading1" class="form-control mb-1" type="text" id="heading1" value="Total Before Tax">
                   <select aria-label="Value1" class="form-select" id="value1" style="display: none;">
@@ -1255,7 +1255,7 @@ if ($userData['user_photo'] != '') {
                 </div>
 
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showdiscount" checked>
+                  <input class="form-check-input" type="checkbox" id="showdiscount" checked aria-label="Input">
                   <label class="form-check-label" for="showdiscount">Show Discount</label>
                   <input aria-label="Heading2" class="form-control mb-1" type="text" id="heading2" value="Discount">
                   <select aria-label="Value2" class="form-select" id="value2" style="display: none;">
@@ -1322,7 +1322,7 @@ if ($userData['user_photo'] != '') {
                 </div>
 
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showtotaltaxamount" checked>
+                  <input class="form-check-input" type="checkbox" id="showtotaltaxamount" checked aria-label="Input">
                   <label class="form-check-label" for="showtotaltaxamount">Show Total Tax Amount</label>
                   <input aria-label="Heading3" class="form-control mb-1" type="text" id="heading3" value="Total Tax Amount">
                   <select aria-label="Value3" class="form-select" id="value3" style="display: none;">
@@ -1389,7 +1389,7 @@ if ($userData['user_photo'] != '') {
                 </div>
 
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showroundedoff" checked>
+                  <input class="form-check-input" type="checkbox" id="showroundedoff" checked aria-label="Input">
                   <label class="form-check-label" for="showroundedoff">Show Rounded Off</label>
                   <input aria-label="Heading4" class="form-control mb-1" type="text" id="heading4" value="Rounded Off">
                   <select aria-label="Value4" class="form-select" id="value4" style="display: none;">
@@ -1456,7 +1456,7 @@ if ($userData['user_photo'] != '') {
                 </div>
 
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showtotalamount" checked>
+                  <input class="form-check-input" type="checkbox" id="showtotalamount" checked aria-label="Input">
                   <label class="form-check-label" for="showtotalamount">Show Total Amount</label>
                   <input aria-label="Heading5" class="form-control mb-1" type="text" id="heading5" value="Total Amount">
                   <select aria-label="Value5" class="form-select" id="value5" style="display: none;">
@@ -1523,7 +1523,7 @@ if ($userData['user_photo'] != '') {
                 </div>
 
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="showtotaldue" checked>
+                  <input class="form-check-input" type="checkbox" id="showtotaldue" checked aria-label="Input">
                   <label class="form-check-label" for="showtotaldue">Show Total Due</label>
                   <input aria-label="Heading6" class="form-control mb-1" type="text" id="heading6" value="Total Due">
                   <select aria-label="Value6" class="form-select" id="value6" style="display: none;">

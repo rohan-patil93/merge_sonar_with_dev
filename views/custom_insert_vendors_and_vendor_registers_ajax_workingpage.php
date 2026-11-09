@@ -913,7 +913,7 @@ if ($isAdd) : ?>
                             <label class="-label" for="display_logo">
                                 <span> <i class="fa fa-camera"></i> &nbsp; Change Image</span>
                             </label>
-                            <input type="file" name="image" id="display_logo" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
+                            <input type="file" name="image" id="display_logo" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/ aria-label="Image">
                             <img src="<?php echo "uploads/all/".$vendordetail['image'] ; ?>" id="outputdisplay_logo" width="200" alt="Logo" />
                             <input type="hidden" name="hid_image" value="<?php echo $vendordetail['image'] ;  ?>">
                         </div>
@@ -2676,7 +2676,7 @@ window.addEventListener('load', function () {
                             <span class="form-label d-block"></span>
                             <div class="border-checkbox-section  ">
                                 <div class="border-checkbox-group border-checkbox-group-primary m-t-30">
-                                    <input class="border-checkbox" type="checkbox" id="checkbox`+mkseq+`" onclick="cloneShipping(this,`+mkseq+`)" onkeydown="">
+                                    <input class="border-checkbox" type="checkbox" id="checkbox`+mkseq+`" onclick="cloneShipping(this,`+mkseq+`)" onkeydown="" aria-label="Input">
                                     <label class="form-label border-checkbox-label" for="checkbox`+mkseq+`">My shipping address is the same as my billing address</label>
                                 </div>
                             </div>

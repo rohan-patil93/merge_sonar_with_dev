@@ -306,14 +306,14 @@ function showNotificationIcon($status)
                                     <label class="form-label fw-bold">PAN Number</label>
                                     <input type="text" class="form-control custom_readonly"
                                         value="<?php echo htmlspecialchars($vendordetail['pan_no'] ?? ''); ?>" readonly
-                                        tabindex="-1" title="Input">
+                                        tabindex="-1" title="Input" aria-label="Input">
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label class="form-label fw-bold">Company Name</label>
                                     <input type="text" id="company_name_verified" class="form-control custom_readonly"
                                         value="<?php echo htmlspecialchars($vendordetail['company'] ?? ''); ?>" readonly
-                                        tabindex="-1" title="Input">
+                                        tabindex="-1" title="Input" aria-label="Input">
                                 </div>
 
                                 <small class="text-muted d-block mt-2">
@@ -327,7 +327,7 @@ function showNotificationIcon($status)
                                 <label class="form-label">Company Name</label>
                                 <input type="text" onblur="checkCompanyNameAllReadyAvilableOrNot()" class="form-control"
                                     id="company_name" placeholder="Enter company name"
-                                    value="<?php echo $vendordetail['company'] ?? ''; ?>" title="Enter company name">
+                                    value="<?php echo $vendordetail['company'] ?? ''; ?>" title="Enter company name" aria-label="Enter company name">
                                 <span class="text-danger f-12" id="allreadycompanyname" style="display:none">
                                     Company Name Already Register
                                 </span>
@@ -338,7 +338,7 @@ function showNotificationIcon($status)
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="pan_number" placeholder="ABCDE1234F"
                                         oninput="formatPANInput(this)" maxlength="10" style="text-transform: uppercase;"
-                                        value="<?php echo $vendordetail['pan_no'] ?? ''; ?>" title="ABCDE1234F">
+                                        value="<?php echo $vendordetail['pan_no'] ?? ''; ?>" title="ABCDE1234F" aria-label="ABCDE1234F">
                                     <span class="input-group-text status-icon">
                                         <i class="fa fa-clock-o text-muted"></i>
                                     </span>
@@ -372,15 +372,15 @@ function showNotificationIcon($status)
                             <div class="row">
                                 <div class="col-12 form-group">
                                     <label class="form-label">Verified Name</label>
-                                    <input type="text" class="form-control custom_readonly" id="pan_verified_name" readonly title="Input">
+                                    <input type="text" class="form-control custom_readonly" id="pan_verified_name" readonly title="Input" aria-label="Input">
                                 </div>
                                 <div class="col-6 form-group">
                                     <label class="form-label">PAN Type</label>
-                                    <input type="text" class="form-control custom_readonly" id="pan_verified_type" readonly title="Input">
+                                    <input type="text" class="form-control custom_readonly" id="pan_verified_type" readonly title="Input" aria-label="Input">
                                 </div>
                                 <div class="col-6 form-group">
                                     <label class="form-label">Status</label>
-                                    <input type="text" class="form-control custom_readonly" id="pan_verified_status" readonly title="Input">
+                                    <input type="text" class="form-control custom_readonly" id="pan_verified_status" readonly title="Input" aria-label="Input">
                                 </div>
                             </div>
                         </div>
@@ -416,14 +416,14 @@ function showNotificationIcon($status)
                                     <label class="form-label fw-bold">GST Number</label>
                                     <input type="text" class="form-control custom_readonly"
                                         value="<?php echo htmlspecialchars($vendordetail['gstin'] ?? ''); ?>" readonly
-                                        tabindex="-1" title="Input">
+                                        tabindex="-1" title="Input" aria-label="Input">
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label class="form-label fw-bold">Verification Date</label>
                                     <input type="text" class="form-control custom_readonly" value="<?php echo !empty($vendor_verifications['GSTIN']['verification_datetime'])
                                         ? date('d M Y, h:i A', strtotime($vendor_verifications['GSTIN']['verification_datetime']))
-                                        : ''; ?>" readonly tabindex="-1" title="Input">
+                                        : ''; ?>" readonly tabindex="-1" title="Input" aria-label="Input">
                                 </div>
 
                                 <small class="text-muted d-block mt-2">
@@ -439,7 +439,7 @@ function showNotificationIcon($status)
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="gstin" placeholder="22AAAAA0000A1Z5"
                                         oninput="formatGSTInput(this)" maxlength="15" style="text-transform: uppercase;"
-                                        value="<?php echo $vendordetail['gstin'] ?? ''; ?>" title="22AAAAA0000A1Z5">
+                                        value="<?php echo $vendordetail['gstin'] ?? ''; ?>" title="22AAAAA0000A1Z5" aria-label="22AAAAA0000A1Z5">
                                     <span class="input-group-text status-icon">
                                         <i class="fa fa-clock-o text-muted"></i>
                                     </span>
@@ -498,34 +498,34 @@ function showNotificationIcon($status)
                             <div class="row">
                                 <div class="col-6 form-group">
                                     <label class="form-label">Legal Name</label>
-                                    <input type="text" class="form-control custom_readonly" id="gstin_legal_name" readonly title="Input">
+                                    <input type="text" class="form-control custom_readonly" id="gstin_legal_name" readonly title="Input" aria-label="Input">
                                 </div>
                                 <div class="col-6 form-group">
                                     <label class="form-label">Trade Name</label>
-                                    <input type="text" class="form-control custom_readonly" id="gstin_trade_name" readonly title="Input">
+                                    <input type="text" class="form-control custom_readonly" id="gstin_trade_name" readonly title="Input" aria-label="Input">
                                 </div>
                                 <div class="col-6 form-group">
                                     <label class="form-label">Registration Status</label>
                                     <input type="text" class="form-control custom_readonly" id="gstin_registration_status"
-                                        readonly title="Input">
+                                        readonly title="Input" aria-label="Input">
                                 </div>
                                 <div class="col-6 form-group">
                                     <label class="form-label">Taxpayer Type</label>
-                                    <input type="text" class="form-control custom_readonly" id="gstin_taxpayer_type" readonly title="Input">
+                                    <input type="text" class="form-control custom_readonly" id="gstin_taxpayer_type" readonly title="Input" aria-label="Input">
                                 </div>
                                 <div class="col-6 form-group">
                                     <label class="form-label">Business Nature</label>
-                                    <input type="text" class="form-control custom_readonly" id="gstin_business_nature" readonly title="Input">
+                                    <input type="text" class="form-control custom_readonly" id="gstin_business_nature" readonly title="Input" aria-label="Input">
                                 </div>
                                 <div class="col-6 form-group">
                                     <label class="form-label">Registration Date</label>
                                     <input type="text" class="form-control custom_readonly" id="gstin_registration_date"
-                                        readonly title="Input">
+                                        readonly title="Input" aria-label="Input">
                                 </div>
                                 <div class="col-12 form-group">
                                     <label class="form-label">Business Address</label>
                                     <textarea class="form-control custom_readonly" id="gstin_business_address" rows="2"
-                                        readonly title="Textarea"></textarea>
+                                        readonly title="Textarea" aria-label="Textarea"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -561,21 +561,21 @@ function showNotificationIcon($status)
                                     <label class="form-label fw-bold">IFSC Code</label>
                                     <input type="text" class="form-control custom_readonly"
                                         value="<?php echo htmlspecialchars($vendordetail['ifsc_code'] ?? ''); ?>" readonly
-                                        tabindex="-1" title="Input">
+                                        tabindex="-1" title="Input" aria-label="Input">
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label class="form-label fw-bold">Bank Account Number</label>
                                     <input type="text" class="form-control custom_readonly"
                                         value="<?php echo htmlspecialchars($vendordetail['bank_account_no'] ?? ''); ?>" readonly
-                                        tabindex="-1" title="Input">
+                                        tabindex="-1" title="Input" aria-label="Input">
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label class="form-label fw-bold">Verification Date</label>
                                     <input type="text" class="form-control custom_readonly" value="<?php echo !empty($vendor_verifications['BANK']['verification_datetime'])
                                         ? date('d M Y, h:i A', strtotime($vendor_verifications['BANK']['verification_datetime']))
-                                        : ''; ?>" readonly tabindex="-1" title="Input">
+                                        : ''; ?>" readonly tabindex="-1" title="Input" aria-label="Input">
                                 </div>
 
                                 <small class="text-muted d-block mt-2">
@@ -591,7 +591,7 @@ function showNotificationIcon($status)
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="ifsc_code" placeholder="SBIN0001234"
                                         oninput="formatIFSCInput(this)" maxlength="11" style="text-transform: uppercase;"
-                                        value="<?php echo htmlspecialchars($vendordetail['ifsc_code'] ?? ''); ?>" title="SBIN0001234">
+                                        value="<?php echo htmlspecialchars($vendordetail['ifsc_code'] ?? ''); ?>" title="SBIN0001234" aria-label="SBIN0001234">
                                     <span class="input-group-text status-icon">
                                         <i class="fa fa-clock-o text-muted"></i>
                                     </span>
@@ -604,7 +604,7 @@ function showNotificationIcon($status)
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="bank_account_no" placeholder="Enter account number"
                                         oninput="formatBankAccountInput(this)"
-                                        value="<?php echo htmlspecialchars($vendordetail['bank_account_no'] ?? ''); ?>" title="Enter account number">
+                                        value="<?php echo htmlspecialchars($vendordetail['bank_account_no'] ?? ''); ?>" title="Enter account number" aria-label="Enter account number">
                                     <span class="input-group-text status-icon">
                                         <i class="fa fa-clock-o text-muted"></i>
                                     </span>
@@ -655,19 +655,19 @@ function showNotificationIcon($status)
                             <div class="row">
                                 <div class="col-6 form-group">
                                     <label class="form-label">IFSC Code</label>
-                                    <input type="text" class="form-control custom_readonly" id="bank_verified_ifsc" readonly title="Input">
+                                    <input type="text" class="form-control custom_readonly" id="bank_verified_ifsc" readonly title="Input" aria-label="Input">
                                 </div>
                                 <div class="col-6 form-group">
                                     <label class="form-label">Account Number</label>
-                                    <input type="text" class="form-control custom_readonly" id="bank_verified_account" readonly title="Input">
+                                    <input type="text" class="form-control custom_readonly" id="bank_verified_account" readonly title="Input" aria-label="Input">
                                 </div>
                                 <div class="col-6 form-group">
                                     <label class="form-label">Beneficiary Name</label>
-                                    <input type="text" class="form-control custom_readonly" id="bank_verified_name" readonly title="Input">
+                                    <input type="text" class="form-control custom_readonly" id="bank_verified_name" readonly title="Input" aria-label="Input">
                                 </div>
                                 <div class="col-6 form-group">
                                     <label class="form-label">Verification Status</label>
-                                    <input type="text" class="form-control custom_readonly" id="bank_verified_status" readonly title="Input">
+                                    <input type="text" class="form-control custom_readonly" id="bank_verified_status" readonly title="Input" aria-label="Input">
                                 </div>
                             </div>
                         </div>
@@ -703,14 +703,14 @@ function showNotificationIcon($status)
                                     <label class="form-label fw-bold">MSME/Udyam Registration Number</label>
                                     <input type="text" class="form-control custom_readonly"
                                         value="<?php echo htmlspecialchars($vendordetail['msme_number'] ?? ''); ?>" readonly
-                                        tabindex="-1" title="Input">
+                                        tabindex="-1" title="Input" aria-label="Input">
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label class="form-label fw-bold">Verification Date</label>
                                     <input type="text" class="form-control custom_readonly" value="<?php echo !empty($vendor_verifications['MSME']['verification_datetime'])
                                         ? date('d M Y, h:i A', strtotime($vendor_verifications['MSME']['verification_datetime']))
-                                        : ''; ?>" readonly tabindex="-1" title="Input">
+                                        : ''; ?>" readonly tabindex="-1" title="Input" aria-label="Input">
                                 </div>
 
                                 <small class="text-muted d-block mt-2">
@@ -726,7 +726,7 @@ function showNotificationIcon($status)
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="msme_number" placeholder="UDYAM-XX-00-0000000"
                                         oninput="formatMSMEInput(this)" maxlength="19" style="text-transform: uppercase;"
-                                        value="<?php echo $vendordetail['msme_number'] ?? ''; ?>" title="UDYAM-XX-00-0000000">
+                                        value="<?php echo $vendordetail['msme_number'] ?? ''; ?>" title="UDYAM-XX-00-0000000" aria-label="UDYAM-XX-00-0000000">
                                     <span class="input-group-text status-icon">
                                         <i class="fa fa-clock-o text-muted"></i>
                                     </span>
@@ -779,41 +779,41 @@ function showNotificationIcon($status)
                                 <div class="col-6 form-group">
                                     <label class="form-label">Enterprise Name</label>
                                     <input type="text" class="form-control custom_readonly" id="msme_verified_enterprise_name"
-                                        readonly title="Input">
+                                        readonly title="Input" aria-label="Input">
                                 </div>
                                 <div class="col-6 form-group">
                                     <label class="form-label">Major Activity</label>
                                     <input type="text" class="form-control custom_readonly" id="msme_verified_major_activity"
-                                        readonly title="Input">
+                                        readonly title="Input" aria-label="Input">
                                 </div>
                                 <div class="col-6 form-group">
                                     <label class="form-label">Organization Type</label>
                                     <input type="text" class="form-control custom_readonly" id="msme_verified_organization_type"
-                                        readonly title="Input">
+                                        readonly title="Input" aria-label="Input">
                                 </div>
                                 <div class="col-6 form-group">
                                     <label class="form-label">Social Category</label>
                                     <input type="text" class="form-control custom_readonly" id="msme_verified_social_category"
-                                        readonly title="Input">
+                                        readonly title="Input" aria-label="Input">
                                 </div>
                                 <div class="col-6 form-group">
                                     <label class="form-label">Commencement Date</label>
                                     <input type="text" class="form-control custom_readonly" id="msme_verified_commencement_date"
-                                        readonly title="Input">
+                                        readonly title="Input" aria-label="Input">
                                 </div>
                                 <div class="col-6 form-group">
                                     <label class="form-label">DIC Name</label>
                                     <input type="text" class="form-control custom_readonly" id="msme_verified_dic_name"
-                                        readonly title="Input">
+                                        readonly title="Input" aria-label="Input">
                                 </div>
                                 <div class="col-6 form-group">
                                     <label class="form-label">Registration Date</label>
                                     <input type="text" class="form-control custom_readonly" id="msme_verified_registration_date"
-                                        readonly title="Input">
+                                        readonly title="Input" aria-label="Input">
                                 </div>
                                 <div class="col-6 form-group">
                                     <label class="form-label">Status</label>
-                                    <input type="text" class="form-control custom_readonly" id="msme_verified_status" readonly title="Input">
+                                    <input type="text" class="form-control custom_readonly" id="msme_verified_status" readonly title="Input" aria-label="Input">
                                 </div>
                             </div>
                         </div>
@@ -849,14 +849,14 @@ function showNotificationIcon($status)
                                     <label class="form-label fw-bold">TAN Number</label>
                                     <input type="text" class="form-control custom_readonly"
                                         value="<?php echo htmlspecialchars($vendordetail['tan_number'] ?? ''); ?>" readonly
-                                        tabindex="-1" title="Input">
+                                        tabindex="-1" title="Input" aria-label="Input">
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label class="form-label fw-bold">Verification Date</label>
                                     <input type="text" class="form-control custom_readonly" value="<?php echo !empty($vendor_verifications['TAN']['verification_datetime'])
                                         ? date('d M Y, h:i A', strtotime($vendor_verifications['TAN']['verification_datetime']))
-                                        : ''; ?>" readonly tabindex="-1" title="Input">
+                                        : ''; ?>" readonly tabindex="-1" title="Input" aria-label="Input">
                                 </div>
 
                                 <small class="text-muted d-block mt-2">
@@ -872,7 +872,7 @@ function showNotificationIcon($status)
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="tan_number" placeholder="ABCD12345E"
                                         oninput="formatTANInput(this)" maxlength="10" style="text-transform: uppercase;"
-                                        value="<?php echo $vendordetail['tan_number'] ?? ''; ?>" title="ABCD12345E">
+                                        value="<?php echo $vendordetail['tan_number'] ?? ''; ?>" title="ABCD12345E" aria-label="ABCD12345E">
                                     <span class="input-group-text status-icon">
                                         <i class="fa fa-clock-o text-muted"></i>
                                     </span>
@@ -924,12 +924,12 @@ function showNotificationIcon($status)
                             <div class="row">
                                 <div class="col-12 form-group">
                                     <label class="form-label">Company Name</label>
-                                    <input type="text" class="form-control custom_readonly" id="tan_verified_company" readonly title="Input">
+                                    <input type="text" class="form-control custom_readonly" id="tan_verified_company" readonly title="Input" aria-label="Input">
 
                                 </div>
                                 <div class="col-12 form-group">
                                     <label class="form-label">Verification Status</label>
-                                    <input type="text" class="form-control custom_readonly" id="tan_verified_status" readonly title="Input">
+                                    <input type="text" class="form-control custom_readonly" id="tan_verified_status" readonly title="Input" aria-label="Input">
                                 </div>
                             </div>
                         </div>

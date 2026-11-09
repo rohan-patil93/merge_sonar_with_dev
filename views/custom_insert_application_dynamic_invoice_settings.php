@@ -102,7 +102,7 @@ if ($userData['user_photo'] != '') {
                   <label for="template_name" class="form-label">Template Name</label>
                   <div class="form-group">
                     <input class="form-control mb-1" type="text" id="template_name" value="<?= $invoice_options ?>"
-                      placeholder="Enter template name" title="Enter template name">
+                      placeholder="Enter template name" title="Enter template name" aria-label="Enter template name">
                     <input class="form-control mb-1" type="hidden" id="rid" value="<?= $rid ?>">
                   </div>
                 </div>
@@ -134,7 +134,7 @@ if ($userData['user_photo'] != '') {
                 <div class="card card-body mt-2">
                   <label class="form-label mb-2">Toggle Logo</label>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showLogo" name="showLogo" <?php echo $logoOptions['showLogo'] ? 'checked' : ''; ?> title="Showlogo">
+                    <input class="form-check-input" type="checkbox" id="showLogo" name="showLogo" <?php echo $logoOptions['showLogo'] ? 'checked' : ''; ?> title="Showlogo" aria-label="Showlogo">
                     <label class="form-check-label" for="showLogo">Show Logo</label>
                   </div>
                 </div>
@@ -144,7 +144,7 @@ if ($userData['user_photo'] != '') {
               <div id="logoPosition" class="dynamic-options">
                 <div class="card card-body mt-2">
                   <label for="logoPositionSelect" class="form-label">Top Header Position</label>
-                  <select class="form-select" id="logoPositionSelect" name="logoPosition" title="Logoposition">
+                  <select class="form-select" id="logoPositionSelect" name="logoPosition" title="Logoposition" aria-label="Logoposition">
                     <option value="left" <?php echo (empty($logoOptions['logoPosition']) || $logoOptions['logoPosition'] === 'left') ? 'selected' : ''; ?>>
                       Left(Logo) to Right(Details)
                     </option>
@@ -163,7 +163,7 @@ if ($userData['user_photo'] != '') {
               <div id="logoSize" class="dynamic-options">
                 <div class="card card-body mt-2">
                   <label for="logoSizeSelect" class="form-label">Logo Size</label>
-                  <select class="form-select" id="logoSizeSelect" name="logoSize" title="Logosize">
+                  <select class="form-select" id="logoSizeSelect" name="logoSize" title="Logosize" aria-label="Logosize">
                     <option value="small" <?php echo (empty($logoOptions['logoSize']) || $logoOptions['logoSize'] === 'small') ? 'selected' : ''; ?>>Small
                     </option>
                     <option value="medium" <?php echo $logoOptions['logoSize'] === 'medium' ? 'selected' : ''; ?>>Medium
@@ -179,7 +179,7 @@ if ($userData['user_photo'] != '') {
                     <label for="customLogoSizeInput" class="form-label">Custom Logo Size (px)</label>
                     <input type="number" id="customLogoSizeInput" class="form-control" name="customLogoSize"
                       value="<?php echo htmlspecialchars($logoOptions['customLogoSize']); ?>"
-                      placeholder="Enter size in px" / title="Enter size in px">
+                      placeholder="Enter size in px" / title="Enter size in px" aria-label="Enter size in px">
                   </div>
                 </div>
               </div>
@@ -189,11 +189,11 @@ if ($userData['user_photo'] != '') {
                 <div class="card card-body mt-2">
                   <label class="form-label mb-2">Toggle Top Header Options</label>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showinvoiceno" name="showInvoiceNo" <?php echo $logoOptions['showInvoiceNo'] ? 'checked' : ''; ?> title="Showinvoiceno">
+                    <input class="form-check-input" type="checkbox" id="showinvoiceno" name="showInvoiceNo" <?php echo $logoOptions['showInvoiceNo'] ? 'checked' : ''; ?> title="Showinvoiceno" aria-label="Showinvoiceno">
                     <label class="form-check-label" for="showinvoiceno">Show Invoice No.</label>
                     <input class="form-control mb-1 mt-2" type="text" id="invoicenoheading"
-                      value="<?php echo !empty($logoOptions['invoiceNoHeading']) ? $logoOptions['invoiceNoHeading'] : 'Invoice No.'; ?>" title="Input">
-                    <select class="form-select" id="invoicenoSelect" style="display: none;" title="Select">
+                      value="<?php echo !empty($logoOptions['invoiceNoHeading']) ? $logoOptions['invoiceNoHeading'] : 'Invoice No.'; ?>" title="Input" aria-label="Input">
+                    <select class="form-select" id="invoicenoSelect" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'id' ? 'selected' : ''; ?> value="id">ID
                       </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'company_id' ? 'selected' : ''; ?>
@@ -310,11 +310,11 @@ if ($userData['user_photo'] != '') {
                     </select>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showdate" <?php echo $logoOptions['showDate'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showdate" <?php echo $logoOptions['showDate'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showdate">Show Date</label>
                     <input class="form-control mb-1 mt-2" type="text" id="dateheading"
-                      value="<?php echo !empty($logoOptions['dateHeading']) ? $logoOptions['dateHeading'] : 'Date'; ?>" title="Input">
-                    <select class="form-select" id="invoicedateSelect" style="display: none;" title="Select">
+                      value="<?php echo !empty($logoOptions['dateHeading']) ? $logoOptions['dateHeading'] : 'Date'; ?>" title="Input" aria-label="Input">
+                    <select class="form-select" id="invoicedateSelect" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $logoOptions['dateValue'] === 'id' ? 'selected' : ''; ?> value="id">ID</option>
                       <option <?php echo $logoOptions['dateValue'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id">Company Id</option>
@@ -446,11 +446,11 @@ if ($userData['user_photo'] != '') {
                     </select>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showduedate" <?php echo $logoOptions['showDueDate'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showduedate" <?php echo $logoOptions['showDueDate'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showduedate">Show Due Date</label>
                     <input class="form-control mb-1 mt-2" type="text" id="duedateheading"
-                      value="<?php echo !empty($logoOptions['dueDateHeading']) ? $logoOptions['dueDateHeading'] : 'Due Date'; ?>" title="Input">
-                    <select class="form-select" id="invoiceduedateSelect" style="display: none;" title="Select">
+                      value="<?php echo !empty($logoOptions['dueDateHeading']) ? $logoOptions['dueDateHeading'] : 'Due Date'; ?>" title="Input" aria-label="Input">
+                    <select class="form-select" id="invoiceduedateSelect" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $logoOptions['dueDateValue'] === 'id' ? 'selected' : ''; ?> value="id">ID
                       </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'company_id' ? 'selected' : ''; ?>
@@ -579,11 +579,11 @@ if ($userData['user_photo'] != '') {
                     </select>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showpo_num" <?php echo $logoOptions['showPoNum'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showpo_num" <?php echo $logoOptions['showPoNum'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showpo_num">Show P.O. Number</label>
                     <input class="form-control mb-1 mt-2" type="text" id="po_numheading"
-                      value="<?php echo !empty($logoOptions['poNumHeading']) ? $logoOptions['poNumHeading'] : 'P.O. Number'; ?>" title="Input">
-                    <select class="form-select" id="invoiceponumSelect" style="display: none;" title="Select">
+                      value="<?php echo !empty($logoOptions['poNumHeading']) ? $logoOptions['poNumHeading'] : 'P.O. Number'; ?>" title="Input" aria-label="Input">
+                    <select class="form-select" id="invoiceponumSelect" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $logoOptions['poNumValue'] === 'id' ? 'selected' : ''; ?> value="id">ID</option>
                       <option <?php echo $logoOptions['poNumValue'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id">Company Id</option>
@@ -708,11 +708,11 @@ if ($userData['user_photo'] != '') {
                     </select>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showpo_date" <?php echo $logoOptions['showPoDate'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showpo_date" <?php echo $logoOptions['showPoDate'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showpo_date">Show P.O Date</label>
                     <input class="form-control mb-1 mt-2" type="text" id="po_dateheading"
-                      value="<?php echo !empty($logoOptions['poDateHeading']) ? $logoOptions['poDateHeading'] : 'P.O Date'; ?>" title="Input">
-                    <select class="form-select" id="invoicepodateSelect" style="display: none;" title="Select">
+                      value="<?php echo !empty($logoOptions['poDateHeading']) ? $logoOptions['poDateHeading'] : 'P.O Date'; ?>" title="Input" aria-label="Input">
+                    <select class="form-select" id="invoicepodateSelect" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $logoOptions['poDateValue'] === 'id' ? 'selected' : ''; ?> value="id">ID</option>
                       <option <?php echo $logoOptions['poDateValue'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id">Company Id</option>
@@ -839,11 +839,11 @@ if ($userData['user_photo'] != '') {
                   </div>
                   <!-- om new -->
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showname" <?php echo $logoOptions['showName'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showname" <?php echo $logoOptions['showName'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showname">Show Name</label>
                     <input class="form-control mb-1 mt-2" type="text" id="nameheading"
-                      value="<?php echo !empty($logoOptions['nameHeading']) ? $logoOptions['nameHeading'] : 'Name'; ?>" title="Input">
-                    <select class="form-select" id="invoicenameSelect" style="display: none;" title="Select">
+                      value="<?php echo !empty($logoOptions['nameHeading']) ? $logoOptions['nameHeading'] : 'Name'; ?>" title="Input" aria-label="Input">
+                    <select class="form-select" id="invoicenameSelect" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $logoOptions['nameValue'] === 'id' ? 'selected' : ''; ?> value="id">ID</option>
                       <option <?php echo $logoOptions['nameValue'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id">Company Id</option>
@@ -859,11 +859,11 @@ if ($userData['user_photo'] != '') {
                   </div>
                   <!-- om new -->
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showemail" <?php echo $logoOptions['showEmail'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showemail" <?php echo $logoOptions['showEmail'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showemail">Show Email</label>
                     <input class="form-control mb-1 mt-2" type="text" id="emailheading"
-                      value="<?php echo !empty($logoOptions['emailHeading']) ? $logoOptions['emailHeading'] : 'Email'; ?>" title="Input">
-                    <select class="form-select" id="invoiceemailSelect" style="display: none;" title="Select">
+                      value="<?php echo !empty($logoOptions['emailHeading']) ? $logoOptions['emailHeading'] : 'Email'; ?>" title="Input" aria-label="Input">
+                    <select class="form-select" id="invoiceemailSelect" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $logoOptions['emailValue'] === 'id' ? 'selected' : ''; ?> value="id">ID</option>
                       <option <?php echo $logoOptions['emailValue'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id">Company Id</option>
@@ -879,11 +879,11 @@ if ($userData['user_photo'] != '') {
                   </div>
                   <!-- om new -->
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showphone" <?php echo $logoOptions['showPhone'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showphone" <?php echo $logoOptions['showPhone'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showphone">Show Phone</label>
                     <input class="form-control mb-1 mt-2" type="text" id="phoneheading"
-                      value="<?php echo !empty($logoOptions['phoneHeading']) ? $logoOptions['phoneHeading'] : 'Phone'; ?>" title="Input">
-                    <select class="form-select" id="invoicephoneSelect" style="display: none;" title="Select">
+                      value="<?php echo !empty($logoOptions['phoneHeading']) ? $logoOptions['phoneHeading'] : 'Phone'; ?>" title="Input" aria-label="Input">
+                    <select class="form-select" id="invoicephoneSelect" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $logoOptions['phoneValue'] === 'id' ? 'selected' : ''; ?> value="id">ID</option>
                       <option <?php echo $logoOptions['phoneValue'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id">Company Id</option>
@@ -924,7 +924,7 @@ if ($userData['user_photo'] != '') {
                 <div class="card card-body mt-2">
                   <label class="form-label mb-2">Toggle Header</label>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showAddress" <?php echo $headerOptions['showAddress'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showAddress" <?php echo $headerOptions['showAddress'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showAddress">Show Header</label>
                   </div>
                 </div>
@@ -937,12 +937,12 @@ if ($userData['user_photo'] != '') {
 
                   <!-- Address 1 -->
                   <div class="form-check form-switch mb-3">
-                    <input class="form-check-input" type="checkbox" id="showFirstAddress" <?php echo $headerOptions['showFirstAddress'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showFirstAddress" <?php echo $headerOptions['showFirstAddress'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showFirstAddress">Show Billing Address</label>
                     <input class="form-control mb-1 mt-2" type="text" id="inputheading1"
-                      value="<?php echo !empty($headerOptions['firstAddressHeading']) ? $headerOptions['firstAddressHeading'] : 'Billing Address'; ?>" title="Input">
+                      value="<?php echo !empty($headerOptions['firstAddressHeading']) ? $headerOptions['firstAddressHeading'] : 'Billing Address'; ?>" title="Input" aria-label="Input">
 
-                    <select class="form-select mb-2" id="address1Select" style="display: none;" title="Select">
+                    <select class="form-select mb-2" id="address1Select" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo (empty($headerOptions['firstAddressValue']) || $headerOptions['firstAddressValue'] === 'party_address') ? 'selected' : ''; ?>
                         value="party_address">Party Address</option>
                       <option <?php echo $headerOptions['firstAddressValue'] === 'party_ship_adderss' ? 'selected' : ''; ?> value="party_ship_adderss">Party Shipping Address</option>
@@ -950,7 +950,7 @@ if ($userData['user_photo'] != '') {
                         value="company_address">Company Address</option>
                     </select>
 
-                    <select class="form-select" id="address1position" title="Select">
+                    <select class="form-select" id="address1position" title="Select" aria-label="Select">
                       <option <?php echo (empty($headerOptions['firstAddressPosition']) || $headerOptions['firstAddressPosition'] === 'left') ? 'selected' : ''; ?> value="left">
                         Position 1
                       </option>
@@ -964,19 +964,19 @@ if ($userData['user_photo'] != '') {
                     <div class="mt-3">
                       <h6 class="text-muted">Address Field Visibility</h6>
                       <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="showFirstAddressField" <?php echo ($headerOptions['showFirstAddressField'] ?? true) ? 'checked' : ''; ?> disabled title="Input">
+                        <input class="form-check-input" type="checkbox" id="showFirstAddressField" <?php echo ($headerOptions['showFirstAddressField'] ?? true) ? 'checked' : ''; ?> disabled title="Input" aria-label="Input">
                         <label class="form-check-label" for="showFirstAddressField">Show Address Field</label>
                       </div>
                       <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="showFirstPincodeField" <?php echo ($headerOptions['showFirstPincodeField'] ?? true) ? 'checked' : ''; ?> title="Input">
+                        <input class="form-check-input" type="checkbox" id="showFirstPincodeField" <?php echo ($headerOptions['showFirstPincodeField'] ?? true) ? 'checked' : ''; ?> title="Input" aria-label="Input">
                         <label class="form-check-label" for="showFirstPincodeField">Show Phone Field</label>
                       </div>
                       <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="showFirstGstField" <?php echo ($headerOptions['showFirstGstField'] ?? true) ? 'checked' : ''; ?> title="Input">
+                        <input class="form-check-input" type="checkbox" id="showFirstGstField" <?php echo ($headerOptions['showFirstGstField'] ?? true) ? 'checked' : ''; ?> title="Input" aria-label="Input">
                         <label class="form-check-label" for="showFirstGstField">Show GST Field</label>
                       </div>
                       <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="showFirstPanField" <?php echo ($headerOptions['showFirstPanField'] ?? true) ? 'checked' : ''; ?> title="Input">
+                        <input class="form-check-input" type="checkbox" id="showFirstPanField" <?php echo ($headerOptions['showFirstPanField'] ?? true) ? 'checked' : ''; ?> title="Input" aria-label="Input">
                         <label class="form-check-label" for="showFirstPanField">Show PAN Field</label>
                       </div>
                     </div>
@@ -984,12 +984,12 @@ if ($userData['user_photo'] != '') {
 
                   <!-- Address 2 -->
                   <div class="form-check form-switch mb-3">
-                    <input class="form-check-input" type="checkbox" id="showSecondAddress" <?php echo $headerOptions['showSecondAddress'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showSecondAddress" <?php echo $headerOptions['showSecondAddress'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showSecondAddress">Show Shipping Address</label>
                     <input class="form-control mb-1 mt-2" type="text" id="inputheading2"
-                      value="<?php echo !empty($headerOptions['secondAddressHeading']) ? $headerOptions['secondAddressHeading'] : 'Shipping Address'; ?>" title="Input">
+                      value="<?php echo !empty($headerOptions['secondAddressHeading']) ? $headerOptions['secondAddressHeading'] : 'Shipping Address'; ?>" title="Input" aria-label="Input">
 
-                    <select class="form-select mb-2" id="address2Select" style="display: none;" title="Select">
+                    <select class="form-select mb-2" id="address2Select" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $headerOptions['secondAddressValue'] === 'party_address' ? 'selected' : ''; ?>
                         value="party_address">Party Address</option>
                       <option <?php echo (empty($headerOptions['secondAddressValue']) || $headerOptions['secondAddressValue'] === 'party_ship_adderss') ? 'selected' : ''; ?>
@@ -998,7 +998,7 @@ if ($userData['user_photo'] != '') {
                         value="company_address">Company Address</option>
                     </select>
 
-                    <select class="form-select" id="address2position" title="Select">
+                    <select class="form-select" id="address2position" title="Select" aria-label="Select">
                       <option <?php echo $headerOptions['secondAddressPosition'] === 'left' ? 'selected' : ''; ?>
                         value="left">Position 1</option>
                       <option <?php echo (empty($headerOptions['secondAddressPosition']) || $headerOptions['secondAddressPosition'] === 'center') ? 'selected' : ''; ?> value="center">Position 2
@@ -1011,19 +1011,19 @@ if ($userData['user_photo'] != '') {
                     <div class="mt-3">
                       <h6 class="text-muted">Address Field Visibility</h6>
                       <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="showSecondAddressField" <?php echo ($headerOptions['showSecondAddressField'] ?? true) ? 'checked' : ''; ?> disabled title="Input">
+                        <input class="form-check-input" type="checkbox" id="showSecondAddressField" <?php echo ($headerOptions['showSecondAddressField'] ?? true) ? 'checked' : ''; ?> disabled title="Input" aria-label="Input">
                         <label class="form-check-label" for="showSecondAddressField">Show Address Field</label>
                       </div>
                       <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="showSecondPincodeField" <?php echo ($headerOptions['showSecondPincodeField'] ?? true) ? 'checked' : ''; ?> title="Input">
+                        <input class="form-check-input" type="checkbox" id="showSecondPincodeField" <?php echo ($headerOptions['showSecondPincodeField'] ?? true) ? 'checked' : ''; ?> title="Input" aria-label="Input">
                         <label class="form-check-label" for="showSecondPincodeField">Show Phone Number</label>
                       </div>
                       <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="showSecondGstField" <?php echo ($headerOptions['showSecondGstField'] ?? true) ? 'checked' : ''; ?> title="Input">
+                        <input class="form-check-input" type="checkbox" id="showSecondGstField" <?php echo ($headerOptions['showSecondGstField'] ?? true) ? 'checked' : ''; ?> title="Input" aria-label="Input">
                         <label class="form-check-label" for="showSecondGstField">Show GST Field</label>
                       </div>
                       <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="showSecondPanField" <?php echo ($headerOptions['showSecondPanField'] ?? true) ? 'checked' : ''; ?> title="Input">
+                        <input class="form-check-input" type="checkbox" id="showSecondPanField" <?php echo ($headerOptions['showSecondPanField'] ?? true) ? 'checked' : ''; ?> title="Input" aria-label="Input">
                         <label class="form-check-label" for="showSecondPanField">Show PAN Field</label>
                       </div>
                     </div>
@@ -1031,12 +1031,12 @@ if ($userData['user_photo'] != '') {
 
                   <!-- Address 3 -->
                   <div class="form-check form-switch mb-3">
-                    <input class="form-check-input" type="checkbox" id="showThirdAddress" <?php echo $headerOptions['showThirdAddress'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showThirdAddress" <?php echo $headerOptions['showThirdAddress'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showThirdAddress">Show Company Address</label>
                     <input class="form-control mb-1 mt-2" type="text" id="inputheading3"
-                      value="<?php echo !empty($headerOptions['thirdAddressHeading']) ? $headerOptions['thirdAddressHeading'] : 'Company'; ?>" title="Input">
+                      value="<?php echo !empty($headerOptions['thirdAddressHeading']) ? $headerOptions['thirdAddressHeading'] : 'Company'; ?>" title="Input" aria-label="Input">
 
-                    <select class="form-select mb-2" id="address3Select" style="display: none;" title="Select">
+                    <select class="form-select mb-2" id="address3Select" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $headerOptions['thirdAddressValue'] === 'party_address' ? 'selected' : ''; ?>
                         value="party_address">Party Address</option>
                       <option <?php echo $headerOptions['thirdAddressValue'] === 'party_ship_adderss' ? 'selected' : ''; ?> value="party_ship_adderss">Party Shipping Address</option>
@@ -1044,7 +1044,7 @@ if ($userData['user_photo'] != '') {
                         value="company_address">Company Address</option>
                     </select>
 
-                    <select class="form-select" id="address3position" title="Select">
+                    <select class="form-select" id="address3position" title="Select" aria-label="Select">
                       <option <?php echo $headerOptions['thirdAddressPosition'] === 'left' ? 'selected' : ''; ?>
                         value="left">Position 1</option>
                       <option <?php echo $headerOptions['thirdAddressPosition'] === 'center' ? 'selected' : ''; ?>
@@ -1057,19 +1057,19 @@ if ($userData['user_photo'] != '') {
                     <div class="mt-3">
                       <h6 class="text-muted">Address Field Visibility</h6>
                       <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="showThirdAddressField" <?php echo ($headerOptions['showThirdAddressField'] ?? true) ? 'checked' : ''; ?> disabled title="Input">
+                        <input class="form-check-input" type="checkbox" id="showThirdAddressField" <?php echo ($headerOptions['showThirdAddressField'] ?? true) ? 'checked' : ''; ?> disabled title="Input" aria-label="Input">
                         <label class="form-check-label" for="showThirdAddressField">Show Address Field</label>
                       </div>
                       <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="showThirdPincodeField" <?php echo ($headerOptions['showThirdPincodeField'] ?? true) ? 'checked' : ''; ?> title="Input">
+                        <input class="form-check-input" type="checkbox" id="showThirdPincodeField" <?php echo ($headerOptions['showThirdPincodeField'] ?? true) ? 'checked' : ''; ?> title="Input" aria-label="Input">
                         <label class="form-check-label" for="showThirdPincodeField">Show Phone Number</label>
                       </div>
                       <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="showThirdGstField" <?php echo ($headerOptions['showThirdGstField'] ?? true) ? 'checked' : ''; ?> title="Input">
+                        <input class="form-check-input" type="checkbox" id="showThirdGstField" <?php echo ($headerOptions['showThirdGstField'] ?? true) ? 'checked' : ''; ?> title="Input" aria-label="Input">
                         <label class="form-check-label" for="showThirdGstField">Show GST Field</label>
                       </div>
                       <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="showThirdPanField" <?php echo ($headerOptions['showThirdPanField'] ?? true) ? 'checked' : ''; ?> title="Input">
+                        <input class="form-check-input" type="checkbox" id="showThirdPanField" <?php echo ($headerOptions['showThirdPanField'] ?? true) ? 'checked' : ''; ?> title="Input" aria-label="Input">
                         <label class="form-check-label" for="showThirdPanField">Show PAN Field</label>
                       </div>
                     </div>
@@ -1082,7 +1082,7 @@ if ($userData['user_photo'] != '') {
               <div id="addressSize" class="dynamic-options">
                 <div class="card card-body mt-2">
                   <label for="addressSizeSelect" class="form-label">Text Size</label>
-                  <select class="form-select" id="addressSizeSelect" title="Select">
+                  <select class="form-select" id="addressSizeSelect" title="Select" aria-label="Select">
                     <option value="small" <?php echo $headerOptions['addressTextSize'] === 'small' ? 'selected' : ''; ?>>
                       Small</option>
                     <option value="medium" <?php echo (empty($headerOptions['addressTextSize']) || $headerOptions['addressTextSize'] === 'medium') ? 'selected' : ''; ?>>Medium</option>
@@ -1116,7 +1116,7 @@ if ($userData['user_photo'] != '') {
                 <div class="card card-body mt-2">
                   <label class="form-label mb-2">Toggle Table</label>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showTable" readonly disabled checked title="Input">
+                    <input class="form-check-input" type="checkbox" id="showTable" readonly disabled checked title="Input" aria-label="Input">
                     <label class="form-check-label" for="showTable">Show Table</label>
                   </div>
                 </div>
@@ -1131,49 +1131,49 @@ if ($userData['user_photo'] != '') {
                   <div class="mb-1">
                     <label class="form-label">Table Header Background</label>
                     <input type="color" class="form-control form-control-color" style="max-width:100%;"
-                      id="tableHeaderbgColor" value="<?php echo $tableOptions['headerBgColor'] ?? '#f0f0f0'; ?>" title="Input">
+                      id="tableHeaderbgColor" value="<?php echo $tableOptions['headerBgColor'] ?? '#f0f0f0'; ?>" title="Input" aria-label="Input">
                   </div>
 
                   <!-- Table Header color -->
                   <div class="mb-1">
                     <label class="form-label">Table Header Text Color</label>
                     <input type="color" class="form-control form-control-color" style="max-width:100%;"
-                      id="tableHeaderColor" value="<?php echo $tableOptions['headerTextColor'] ?? '#000'; ?>" title="Input">
+                      id="tableHeaderColor" value="<?php echo $tableOptions['headerTextColor'] ?? '#000'; ?>" title="Input" aria-label="Input">
                   </div>
 
                   <!-- Table Body Background -->
                   <div class="mb-1">
                     <label class="form-label">Table Body Background</label>
                     <input type="color" class="form-control form-control-color" style="max-width:100%;"
-                      id="tableBodybgColor" value="<?php echo $tableOptions['bodyBgColor'] ?? '#ffffff'; ?>" title="Input">
+                      id="tableBodybgColor" value="<?php echo $tableOptions['bodyBgColor'] ?? '#ffffff'; ?>" title="Input" aria-label="Input">
                   </div>
 
                   <!-- Table body color -->
                   <div class="mb-1">
                     <label class="form-label">Table body Text Color</label>
                     <input type="color" class="form-control form-control-color" style="max-width:100%;"
-                      id="tableBodyColor" value="<?php echo $bodyTextColor['bodyBgColor'] ?? '#000'; ?>" title="Input">
+                      id="tableBodyColor" value="<?php echo $bodyTextColor['bodyBgColor'] ?? '#000'; ?>" title="Input" aria-label="Input">
                   </div>
 
                   <!-- Table Footer Background -->
                   <div class="mb-1">
                     <label class="form-label">Table Footer Background</label>
                     <input type="color" class="form-control form-control-color" style="max-width:100%;"
-                      id="tableFooterbgColor" value="<?php echo $bodyTextColor['footerBgColor'] ?? '#f8f9fa'; ?>" title="Input">
+                      id="tableFooterbgColor" value="<?php echo $bodyTextColor['footerBgColor'] ?? '#f8f9fa'; ?>" title="Input" aria-label="Input">
                   </div>
 
                   <!-- Table Header color -->
                   <div class="mb-1">
                     <label class="form-label">Table Footer Text Color</label>
                     <input type="color" class="form-control form-control-color" style="max-width:100%;"
-                      id="tableFooterColor" value="<?php echo $bodyTextColor['footerTextColor'] ?? '#000000'; ?>" title="Input">
+                      id="tableFooterColor" value="<?php echo $bodyTextColor['footerTextColor'] ?? '#000000'; ?>" title="Input" aria-label="Input">
                   </div>
 
                   <!-- Row Height -->
                   <div class="mb-1">
                     <label class="form-label">Table Row Height</label>
                     <input type="number" class="form-control" id="rowHeight" min="20"
-                      placeholder="Enter Row Height (px)" value="<?php echo $bodyTextColor['rowHeight'] ?? '40'; ?>" title="Enter Row Height (px)">
+                      placeholder="Enter Row Height (px)" value="<?php echo $bodyTextColor['rowHeight'] ?? '40'; ?>" title="Enter Row Height (px)" aria-label="Enter Row Height (px)">
                   </div>
 
                   <!-- Heading Height -->
@@ -1181,14 +1181,14 @@ if ($userData['user_photo'] != '') {
                     <label class="form-label">Table Heading Height</label>
                     <input type="number" class="form-control" id="headingHeight" min="20"
                       placeholder="Enter Heading Height (px)"
-                      value="<?php echo $bodyTextColor['headingHeight'] ?? '40'; ?>" title="Enter Heading Height (px)">
+                      value="<?php echo $bodyTextColor['headingHeight'] ?? '40'; ?>" title="Enter Heading Height (px)" aria-label="Enter Heading Height (px)">
                   </div>
 
                   <!-- Font Size -->
                   <div class="mb-1">
                     <label class="form-label">Table Font Size</label>
                     <input type="number" class="form-control" id="fontSize" min="8" max="36"
-                      placeholder="Enter Font Size (px)" value="<?php echo $bodyTextColor['fontSize'] ?? '16'; ?>" title="Enter Font Size (px)">
+                      placeholder="Enter Font Size (px)" value="<?php echo $bodyTextColor['fontSize'] ?? '16'; ?>" title="Enter Font Size (px)" aria-label="Enter Font Size (px)">
                   </div>
                 </div>
               </div>
@@ -1199,12 +1199,12 @@ if ($userData['user_photo'] != '') {
                   <label class="form-label mb-2">Toggle Columns</label>
 
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showimagecol" <?php echo $tableOptions['showColumns']['img'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showimagecol" <?php echo $tableOptions['showColumns']['img'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showimagecol">Show Image</label>
                     <input type="text" id="imagecolumnInput" class="form-control" style="display: none;"
                       placeholder="Enter Feild Name"
-                      value="<?php echo !empty($tableOptions['heading_img']) ? $tableOptions['heading_img'] : 'Img'; ?>" title="Enter Feild Name">
-                    <select class="form-select mt-1" id="itemimageSelect" style="display: none;" title="Select">
+                      value="<?php echo !empty($tableOptions['heading_img']) ? $tableOptions['heading_img'] : 'Img'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
+                    <select class="form-select mt-1" id="itemimageSelect" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $tableOptions['value_img'] === 'id' ? 'selected' : ''; ?> value="id">id</option>
                       <option <?php echo $tableOptions['value_img'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id">Company Id</option>
@@ -1269,12 +1269,12 @@ if ($userData['user_photo'] != '') {
                     </select>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showitemcol" <?php echo $tableOptions['showColumns']['item'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showitemcol" <?php echo $tableOptions['showColumns']['item'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showitemcol">Show Item Name</label>
                     <input type="text" id="itemcolumnInput" class="form-control" style="display: none;"
                       placeholder="Enter Feild Name"
-                      value="<?php echo !empty($tableOptions['heading_item']) ? $tableOptions['heading_item'] : 'Item'; ?>" title="Enter Feild Name">
-                    <select class="form-select mt-1" id="itemnameSelect" style="display: none;" title="Select">
+                      value="<?php echo !empty($tableOptions['heading_item']) ? $tableOptions['heading_item'] : 'Item'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
+                    <select class="form-select mt-1" id="itemnameSelect" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $tableOptions['value_item'] === 'id' ? 'selected' : ''; ?> value="id">id</option>
                       <option <?php echo $tableOptions['value_item'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id">Company Id</option>
@@ -1336,12 +1336,12 @@ if ($userData['user_photo'] != '') {
                     </select>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showdescol" <?php echo $tableOptions['showColumns']['des'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showdescol" <?php echo $tableOptions['showColumns']['des'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showitemcol">Show Item Description</label>
                     <input type="text" id="descolumnInput" class="form-control" style="display: none;"
                       placeholder="Enter Feild Name"
-                      value="<?php echo !empty($tableOptions['heading_des']) ? $tableOptions['heading_des'] : 'Description'; ?>" title="Enter Feild Name">
-                    <select class="form-select mt-1" id="itemdescriptionSelect" style="display: none;" title="Select">
+                      value="<?php echo !empty($tableOptions['heading_des']) ? $tableOptions['heading_des'] : 'Description'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
+                    <select class="form-select mt-1" id="itemdescriptionSelect" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $tableOptions['value_des'] === 'id' ? 'selected' : ''; ?> value="id">id</option>
                       <option <?php echo $tableOptions['value_des'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id">Company Id</option>
@@ -1406,12 +1406,12 @@ if ($userData['user_photo'] != '') {
                     </select>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showuomcol" <?php echo $tableOptions['showColumns']['uom'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showuomcol" <?php echo $tableOptions['showColumns']['uom'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showuomcol">Show UOM</label>
                     <input type="text" id="uomcolumnInput" class="form-control" style="display: none;"
                       placeholder="Enter Feild Name"
-                      value="<?php echo !empty($tableOptions['heading_uom']) ? $tableOptions['heading_uom'] : 'UOM'; ?>" title="Enter Feild Name">
-                    <select class="form-select mt-1" id="itemuomSelect" style="display: none;" title="Select">
+                      value="<?php echo !empty($tableOptions['heading_uom']) ? $tableOptions['heading_uom'] : 'UOM'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
+                    <select class="form-select mt-1" id="itemuomSelect" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $tableOptions['value_uom'] === 'id' ? 'selected' : ''; ?> value="id">id</option>
                       <option <?php echo $tableOptions['value_uom'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id">Company Id</option>
@@ -1478,12 +1478,12 @@ if ($userData['user_photo'] != '') {
                     </select>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showhsnsaccol" <?php echo $tableOptions['showColumns']['hsnsac'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showhsnsaccol" <?php echo $tableOptions['showColumns']['hsnsac'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showhsnsaccol">Show HSN/SAC</label>
                     <input type="text" id="hsnsaccolumnInput" class="form-control" style="display: none;"
                       placeholder="Enter Feild Name"
-                      value="<?php echo !empty($tableOptions['heading_hsnsac']) ? $tableOptions['heading_hsnsac'] : 'Hsn/Sac'; ?>" title="Enter Feild Name">
-                    <select class="form-select mt-1" id="itemhsnsacSelect" style="display: none;" title="Select">
+                      value="<?php echo !empty($tableOptions['heading_hsnsac']) ? $tableOptions['heading_hsnsac'] : 'Hsn/Sac'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
+                    <select class="form-select mt-1" id="itemhsnsacSelect" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $tableOptions['value_hsnsac'] === 'id' ? 'selected' : ''; ?> value="id">id
                       </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'company_id' ? 'selected' : ''; ?>
@@ -1548,12 +1548,12 @@ if ($userData['user_photo'] != '') {
                     </select>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showqtycol" <?php echo $tableOptions['showColumns']['qty'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showqtycol" <?php echo $tableOptions['showColumns']['qty'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showqtycol">Show QTY</label>
                     <input type="text" id="qtycolumnInput" class="form-control" style="display: none;"
                       placeholder="Enter Feild Name"
-                      value="<?php echo !empty($tableOptions['heading_qty']) ? $tableOptions['heading_qty'] : 'QTY'; ?>" title="Enter Feild Name">
-                    <select class="form-select mt-1" id="itemqtySelect" style="display: none;" title="Select">
+                      value="<?php echo !empty($tableOptions['heading_qty']) ? $tableOptions['heading_qty'] : 'QTY'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
+                    <select class="form-select mt-1" id="itemqtySelect" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $tableOptions['value_qty'] === 'id' ? 'selected' : ''; ?> value="id">id</option>
                       <option <?php echo $tableOptions['value_qty'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id">Company Id</option>
@@ -1621,12 +1621,12 @@ if ($userData['user_photo'] != '') {
                     </select>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showratecol" <?php echo $tableOptions['showColumns']['rate'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showratecol" <?php echo $tableOptions['showColumns']['rate'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showratecol">Show Rate</label>
                     <input type="text" id="ratecolumnInput" class="form-control" style="display: none;"
                       placeholder="Enter Feild Name"
-                      value="<?php echo !empty($tableOptions['heading_rate']) ? $tableOptions['heading_rate'] : 'Rate'; ?>" title="Enter Feild Name">
-                    <select class="form-select mt-1" id="itemrateSelect" style="display: none;" title="Select">
+                      value="<?php echo !empty($tableOptions['heading_rate']) ? $tableOptions['heading_rate'] : 'Rate'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
+                    <select class="form-select mt-1" id="itemrateSelect" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $tableOptions['value_rate'] === 'id' ? 'selected' : ''; ?> value="id">id</option>
                       <option <?php echo $tableOptions['value_rate'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id">Company Id</option>
@@ -1690,12 +1690,12 @@ if ($userData['user_photo'] != '') {
                     </select>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showtaxcol" <?php echo $tableOptions['showColumns']['tax'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showtaxcol" <?php echo $tableOptions['showColumns']['tax'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showtaxcol">Show TAX</label>
                     <input type="text" id="taxcolumnInput" class="form-control" style="display: none;"
                       placeholder="Enter Feild Name"
-                      value="<?php echo !empty($tableOptions['heading_tax']) ? $tableOptions['heading_tax'] : 'Tax'; ?>" title="Enter Feild Name">
-                    <select class="form-select mt-1" id="itemtaxSelect" style="display: none;" title="Select">
+                      value="<?php echo !empty($tableOptions['heading_tax']) ? $tableOptions['heading_tax'] : 'Tax'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
+                    <select class="form-select mt-1" id="itemtaxSelect" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $tableOptions['value_tax'] === 'id' ? 'selected' : ''; ?> value="id">id</option>
                       <option <?php echo $tableOptions['value_tax'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id">Company Id</option>
@@ -1762,12 +1762,12 @@ if ($userData['user_photo'] != '') {
                     </select>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showdiscountcol" <?php echo $tableOptions['showColumns']['discount'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showdiscountcol" <?php echo $tableOptions['showColumns']['discount'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showdiscountcol">Show Discount</label>
                     <input type="text" id="discountcolumnInput" class="form-control" style="display: none;"
                       placeholder="Enter Feild Name"
-                      value="<?php echo !empty($tableOptions['heading_discount']) ? $tableOptions['heading_discount'] : 'Discount'; ?>" title="Enter Feild Name">
-                    <select class="form-select mt-1" id="itemdiscountSelect" style="display: none;" title="Select">
+                      value="<?php echo !empty($tableOptions['heading_discount']) ? $tableOptions['heading_discount'] : 'Discount'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
+                    <select class="form-select mt-1" id="itemdiscountSelect" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $tableOptions['value_qty'] === 'id' ? 'selected' : ''; ?> value="id">id</option>
                       <option <?php echo $tableOptions['value_qty'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id">Company Id</option>
@@ -1835,12 +1835,12 @@ if ($userData['user_photo'] != '') {
                     </select>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showamountcol" <?php echo $tableOptions['showColumns']['amount'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showamountcol" <?php echo $tableOptions['showColumns']['amount'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showamountcol">Show Amount</label>
                     <input type="text" id="amountcolumnInput" class="form-control" style="display: none;"
                       placeholder="Enter Feild Name"
-                      value="<?php echo !empty($tableOptions['heading_amount']) ? $tableOptions['heading_amount'] : 'Amount'; ?>" title="Enter Feild Name">
-                    <select class="form-select mt-1" id="itemamountSelect" style="display: none;" title="Select">
+                      value="<?php echo !empty($tableOptions['heading_amount']) ? $tableOptions['heading_amount'] : 'Amount'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
+                    <select class="form-select mt-1" id="itemamountSelect" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $tableOptions['value_amount'] === 'id' ? 'selected' : ''; ?> value="id">id
                       </option>
                       <option <?php echo $tableOptions['value_amount'] === 'company_id' ? 'selected' : ''; ?>
@@ -1905,7 +1905,7 @@ if ($userData['user_photo'] != '') {
                     </select>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showtaxsumcol" <?php echo $tableOptions['showColumns']['taxsum'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showtaxsumcol" <?php echo $tableOptions['showColumns']['taxsum'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showtaxsumcol">Show Tax Summary</label>
                   </div>
                 </div>
@@ -1917,7 +1917,7 @@ if ($userData['user_photo'] != '') {
                   <label for="itemsInput" class="form-label">Items In Each Page Show</label>
                   <input type="number" class="form-control" id="itemsInput"
                     value="<?php echo $tableOptions['itemstable'] ?? '0'; ?>"
-                    placeholder="Enter No. Of Items In Each Page Show" title="Enter No. Of Items In Each Page Show">
+                    placeholder="Enter No. Of Items In Each Page Show" title="Enter No. Of Items In Each Page Show" aria-label="Enter No. Of Items In Each Page Show">
                 </div>
               </div>
             </div>
@@ -1941,7 +1941,7 @@ if ($userData['user_photo'] != '') {
                 <div class="card card-body mt-2">
                   <label class="form-label mb-2">Toggle Page Footer</label>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showpagefooter" <?php echo $footerOptions['showFooter'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showpagefooter" <?php echo $footerOptions['showFooter'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showpagefooter">Show Page Footer</label>
                   </div>
                 </div>
@@ -1952,36 +1952,36 @@ if ($userData['user_photo'] != '') {
                   <label for="page_footer_optionsVisibility" class="form-label">Footer Options Visibility</label>
 
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showtotalinalpha" <?php echo $footerOptions['showTotalAlpha'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showtotalinalpha" <?php echo $footerOptions['showTotalAlpha'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showtotalinalpha">Show Total In Alphabet</label>
                   </div>
 
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showsignature" <?php echo $footerOptions['showSignature'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showsignature" <?php echo $footerOptions['showSignature'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showsignature">Show Signature</label>
                   </div>
 
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showqr" <?php echo $footerOptions['showQr'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showqr" <?php echo $footerOptions['showQr'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showqr">Show QR</label>
                   </div>
 
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showbankdetails" <?php echo isset($footerOptions['showBankDetails']) && $footerOptions['showBankDetails'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showbankdetails" <?php echo isset($footerOptions['showBankDetails']) && $footerOptions['showBankDetails'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showbankdetails">Show Bank Details</label>
                   </div>
 
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showadditionaldetails" <?php echo isset($footerOptions['showAdditionalDetails']) && $footerOptions['showAdditionalDetails'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showadditionaldetails" <?php echo isset($footerOptions['showAdditionalDetails']) && $footerOptions['showAdditionalDetails'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showadditionaldetails">Show Additional Details</label>
                   </div>
 
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showtotalbeforetax" <?php echo $footerOptions['totalbeforetax']['visible'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showtotalbeforetax" <?php echo $footerOptions['totalbeforetax']['visible'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showtotalbeforetax">Show Sub Total</label>
                     <input class="form-control mb-1" type="text" id="heading1"
-                      value="<?php echo !empty($footerOptions['totalbeforetax']['heading']) ? $footerOptions['totalbeforetax']['heading'] : 'Sub Total'; ?>" title="Input">
-                    <select class="form-select" id="value1" style="display: none;" title="Select">
+                      value="<?php echo !empty($footerOptions['totalbeforetax']['heading']) ? $footerOptions['totalbeforetax']['heading'] : 'Sub Total'; ?>" title="Input" aria-label="Input">
+                    <select class="form-select" id="value1" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $footerOptions['totalbeforetax']['value'] === 'id' ? 'selected' : ''; ?>
                         value="id">ID </option>
                       <option <?php echo $footerOptions['totalbeforetax']['value'] === 'company_id' ? 'selected' : ''; ?>
@@ -2071,11 +2071,11 @@ if ($userData['user_photo'] != '') {
                   </div>
 
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showdiscount" <?php echo (isset($footerOptions['showFields']['discount']['visible']) && $footerOptions['showFields']['discount']['visible']) || (isset($footerOptions['discount']['visible']) && $footerOptions['discount']['visible']) ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showdiscount" <?php echo (isset($footerOptions['showFields']['discount']['visible']) && $footerOptions['showFields']['discount']['visible']) || (isset($footerOptions['discount']['visible']) && $footerOptions['discount']['visible']) ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showdiscount">Show Discount</label>
                     <input class="form-control mb-1" type="text" id="heading2"
-                      value="<?php echo !empty($footerOptions['showFields']['discount']['heading']) ? $footerOptions['showFields']['discount']['heading'] : (!empty($footerOptions['discount']['heading']) ? $footerOptions['discount']['heading'] : 'Discount'); ?>" title="Input">
-                    <select class="form-select" id="value2" style="display: none;" title="Select">
+                      value="<?php echo !empty($footerOptions['showFields']['discount']['heading']) ? $footerOptions['showFields']['discount']['heading'] : (!empty($footerOptions['discount']['heading']) ? $footerOptions['discount']['heading'] : 'Discount'); ?>" title="Input" aria-label="Input">
+                    <select class="form-select" id="value2" style="display: none;" title="Select" aria-label="Select">
                       <?php $discountValue = isset($footerOptions['showFields']['discount']['value']) ? $footerOptions['showFields']['discount']['value'] : (isset($footerOptions['discount']['value']) ? $footerOptions['discount']['value'] : ''); ?>
                       <option <?php echo $discountValue === 'id' ? 'selected' : ''; ?> value="id">ID
                       </option>
@@ -2188,11 +2188,11 @@ if ($userData['user_photo'] != '') {
                   </div>
 
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showtotaltaxamount" <?php echo $footerOptions['totaltaxamount']['visible'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showtotaltaxamount" <?php echo $footerOptions['totaltaxamount']['visible'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showtotaltaxamount">Show Total Tax Amount</label>
                     <input class="form-control mb-1" type="text" id="heading3"
-                      value="<?php echo !empty($footerOptions['totaltaxamount']['heading3']) ? $footerOptions['totalbeforetax']['heading'] : 'Total Tax Amount'; ?>" title="Input">
-                    <select class="form-select" id="value3" style="display: none;" title="Select">
+                      value="<?php echo !empty($footerOptions['totaltaxamount']['heading3']) ? $footerOptions['totalbeforetax']['heading'] : 'Total Tax Amount'; ?>" title="Input" aria-label="Input">
+                    <select class="form-select" id="value3" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $footerOptions['totaltaxamount']['value'] === 'id' ? 'selected' : ''; ?>
                         value="id">ID </option>
                       <option <?php echo $footerOptions['totaltaxamount']['value'] === 'company_id' ? 'selected' : ''; ?>
@@ -2282,11 +2282,11 @@ if ($userData['user_photo'] != '') {
                   </div>
 
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showroundedoff" <?php echo $footerOptions['roundedoff']['visible'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showroundedoff" <?php echo $footerOptions['roundedoff']['visible'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showroundedoff">Show Rounded Off</label>
                     <input class="form-control mb-1" type="text" id="heading4"
-                      value="<?php echo !empty($footerOptions['roundedoff']['heading4']) ? $footerOptions['totalbeforetax']['heading'] : 'Rounded Off'; ?>" title="Input">
-                    <select class="form-select" id="value4" style="display: none;" title="Select">
+                      value="<?php echo !empty($footerOptions['roundedoff']['heading4']) ? $footerOptions['totalbeforetax']['heading'] : 'Rounded Off'; ?>" title="Input" aria-label="Input">
+                    <select class="form-select" id="value4" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'id' ? 'selected' : ''; ?> value="id">
                         ID
                       </option>
@@ -2394,11 +2394,11 @@ if ($userData['user_photo'] != '') {
                   </div>
 
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showtotalamount" <?php echo $footerOptions['totalamount']['visible'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showtotalamount" <?php echo $footerOptions['totalamount']['visible'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showtotalamount">Show Total Amount</label>
                     <input class="form-control mb-1" type="text" id="heading5"
-                      value="<?php echo !empty($footerOptions['totalamount']['heading5']) ? $footerOptions['totalamount']['heading'] : 'Total Amount'; ?>" title="Input">
-                    <select class="form-select" id="value5" style="display: none;" title="Select">
+                      value="<?php echo !empty($footerOptions['totalamount']['heading5']) ? $footerOptions['totalamount']['heading'] : 'Total Amount'; ?>" title="Input" aria-label="Input">
+                    <select class="form-select" id="value5" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $footerOptions['totalamount']['value'] === 'id' ? 'selected' : ''; ?> value="id">
                         ID
                       </option>
@@ -2504,11 +2504,11 @@ if ($userData['user_photo'] != '') {
                   </div>
 
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showsecurityamount" <?php echo $footerOptions['securityamount']['visible'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showsecurityamount" <?php echo $footerOptions['securityamount']['visible'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showsecurityamount">Show Security Amount</label>
                     <input class="form-control mb-1" type="text" id="heading4_5"
-                      value="<?php echo !empty($footerOptions['securityamount']['heading']) ? $footerOptions['securityamount']['heading'] : 'Security Amount'; ?>" title="Input">
-                    <select class="form-select" id="value4_5" style="display: none;" title="Select">
+                      value="<?php echo !empty($footerOptions['securityamount']['heading']) ? $footerOptions['securityamount']['heading'] : 'Security Amount'; ?>" title="Input" aria-label="Input">
+                    <select class="form-select" id="value4_5" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $footerOptions['securityamount']['value'] === 'id' ? 'selected' : ''; ?> value="id">ID</option>
                       <option <?php echo $footerOptions['securityamount']['value'] === 'company_id' ? 'selected' : ''; ?> value="company_id">Company Id</option>
                       <option <?php echo $footerOptions['securityamount']['value'] === 'cost_center_id' ? 'selected' : ''; ?> value="cost_center_id">Cost Center Id</option>
@@ -2573,11 +2573,11 @@ if ($userData['user_photo'] != '') {
                   </div>
 
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showtotaldue" <?php echo $footerOptions['totaldue']['visible'] ? 'checked' : ''; ?> title="Input">
+                    <input class="form-check-input" type="checkbox" id="showtotaldue" <?php echo $footerOptions['totaldue']['visible'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showtotaldue">Show Total Due</label>
                     <input class="form-control mb-1" type="text" id="heading6"
-                      value="<?php echo !empty($footerOptions['totaldue']['heading6']) ? $footerOptions['totaldue']['heading'] : 'Total Due'; ?>" title="Input">
-                    <select class="form-select" id="value6" style="display: none;" title="Select">
+                      value="<?php echo !empty($footerOptions['totaldue']['heading6']) ? $footerOptions['totaldue']['heading'] : 'Total Due'; ?>" title="Input" aria-label="Input">
+                    <select class="form-select" id="value6" style="display: none;" title="Select" aria-label="Select">
                       <option <?php echo $footerOptions['totaldue']['value'] === 'id' ? 'selected' : ''; ?> value="id">ID
                       </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'company_id' ? 'selected' : ''; ?>
@@ -2694,14 +2694,14 @@ if ($userData['user_photo'] != '') {
                 <div class="card card-body mt-2">
                   <div class="form-group">
                     <label for="address1position" class="form-label">Signature & QR</label>
-                    <select class="form-select" id="signatureqr1position" title="Select">
+                    <select class="form-select" id="signatureqr1position" title="Select" aria-label="Select">
                       <option value="left" <?php echo (empty($footerOptions['positions']['signatureqr']) || $footerOptions['positions']['signatureqr'] === 'left') ? 'selected' : ''; ?>>Left</option>
                       <option value="right" <?php echo $footerOptions['positions']['signatureqr'] === 'right' ? 'selected' : ''; ?>>Right</option>
                     </select>
                   </div>
                   <div class="form-group">
                     <label for="address2position" class="form-label">Invoice Summary</label>
-                    <select class="form-select" id="invoicesummary2position" title="Select">
+                    <select class="form-select" id="invoicesummary2position" title="Select" aria-label="Select">
                       <option value="left" <?php echo $footerOptions['positions']['invoicesummary'] === 'left' ? 'selected' : ''; ?>>Left</option>
                       <option value="right" <?php echo (empty($footerOptions['positions']['invoicesummary']) || $footerOptions['positions']['invoicesummary'] === 'right') ? 'selected' : ''; ?>>Right</option>
                     </select>
@@ -2725,7 +2725,7 @@ if ($userData['user_photo'] != '') {
               <div id="borderOptions" class="dynamic-options">
                 <div class="card card-body mt-2">
                   <label for="borderStyle" class="form-label">Border Style</label>
-                  <select class="form-select" id="borderStyle" name="borderStyle" title="Borderstyle">
+                  <select class="form-select" id="borderStyle" name="borderStyle" title="Borderstyle" aria-label="Borderstyle">
                     <option value="solid" <?php echo $borderstyle == 'solid' ? 'selected' : ''; ?>>Solid</option>
                     <option value="dashed" <?php echo $borderstyle == 'dashed' ? 'selected' : ''; ?>>Dashed</option>
                     <option value="dotted" <?php echo $borderstyle == 'dotted' ? 'selected' : ''; ?>>Dotted</option>
@@ -2737,14 +2737,14 @@ if ($userData['user_photo'] != '') {
                 <div class="card card-body mt-2">
                   <label for="borderColor" class="form-label">Border Color</label>
                   <input type="color" class="form-control form-control-color" style="max-width:100%;" id="borderColor"
-                    title="Choose border color" value="<?php echo $bordercolor !=""?$bordercolor:'#000'; ?>" name="borderColor">
+                    title="Choose border color" value="<?php echo $bordercolor !=""?$bordercolor:'#000'; ?>" name="borderColor" aria-label="Choose border color">
                 </div>
               </div>
               <div id="widthOptions" class="dynamic-options">
                 <div class="card card-body mt-2">
                   <label for="borderWidth" class="form-label">Border Width</label>
                   <input type="number" class="form-control" id="borderWidth" min="1" max="10"
-                    placeholder="Enter width (in px)" value="<?php echo $borderwidth!=""?$borderwidth:1; ?>" name="borderWidth" title="Enter width (in px)">
+                    placeholder="Enter width (in px)" value="<?php echo $borderwidth!=""?$borderwidth:1; ?>" name="borderWidth" title="Enter width (in px)" aria-label="Enter width (in px)">
                 </div>
               </div>
             </div>
@@ -2773,7 +2773,7 @@ if ($userData['user_photo'] != '') {
               <div id="textStyleOptions" class="dynamic-options">
                 <div class="card card-body mt-2">
                   <label for="fontFamily" class="form-label">Font Family</label>
-                  <select class="form-select" id="fontFamily" name="fontFamily" title="Fontfamily">
+                  <select class="form-select" id="fontFamily" name="fontFamily" title="Fontfamily" aria-label="Fontfamily">
                     <option value="Arial" <?php echo $fontFamily == 'Arial' ? 'selected' : ''; ?>>Arial</option>
                     <option value="Times New Roman" <?php echo $fontFamily == 'Times New Roman' ? 'selected' : ''; ?>>
                       Times
@@ -2796,7 +2796,7 @@ if ($userData['user_photo'] != '') {
                 <div class="card card-body mt-2">
                   <label for="marginInput" class="form-label">Margin (in px)</label>
                   <input type="number" class="form-control" id="marginInput" name="marginInput"
-                    value="<?php echo $margin; ?>" min="0" placeholder="Enter margin" title="Enter margin">
+                    value="<?php echo $margin; ?>" min="0" placeholder="Enter margin" title="Enter margin" aria-label="Enter margin">
                 </div>
               </div>
 
@@ -2805,7 +2805,7 @@ if ($userData['user_photo'] != '') {
                 <div class="card card-body mt-2">
                   <label for="paddingInput" class="form-label">Padding (in px)</label>
                   <input type="number" class="form-control" id="paddingInput" name="paddingInput"
-                    value="<?php echo isset($padding) && $padding !== '' ? $padding : 10; ?>" min="10" placeholder="Enter padding" title="Enter padding">
+                    value="<?php echo isset($padding) && $padding !== '' ? $padding : 10; ?>" min="10" placeholder="Enter padding" title="Enter padding" aria-label="Enter padding">
                 </div>
               </div>
 
@@ -2814,7 +2814,7 @@ if ($userData['user_photo'] != '') {
                 <div class="card card-body mt-2">
                   <label for="heightInput" class="form-label">Height (in %)</label>
                   <input type="number" class="form-control" id="heightInput" name="heightInput"
-                    value="<?php echo isset($height) && $height !== '' ? $height : 100; ?>" min="100" placeholder="Enter height (Minimum 100%)" title="Enter height (Minimum 100%)">
+                    value="<?php echo isset($height) && $height !== '' ? $height : 100; ?>" min="100" placeholder="Enter height (Minimum 100%)" title="Enter height (Minimum 100%)" aria-label="Enter height (Minimum 100%)">
                 </div>
               </div>
             </div>

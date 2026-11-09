@@ -2251,7 +2251,7 @@ function showAttchmentInAvailableItemTables(){
                 $.each(attachments, function(index, item) {
                     htmlv +='<input type="hidden" name="compliance_specification_documents['+item.attachment+'][item_name]" value="'+item_name+'"><input type="hidden" name="compliance_specification_documents['+item.attachment+'][attachment_name]" value="'+item.attachment_name+'"><input type="hidden" name="compliance_specification_documents['+item.attachment+'][attachment]" value="'+item.attachment+'">';
                     htmlv +='<div class="checkbox-fade fade-in-primary" >';
-                    htmlv +='<label class="form-label"><input type="checkbox" name="compliance_specification_documents['+item.attachment+'][show_print]" class="" title="Compliance Specification Documents[&#039;+item.attachment+&#039;][show Print]"><span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>'+item.attachment_name+'</label>';
+                    htmlv +='<label class="form-label"><input type="checkbox" name="compliance_specification_documents['+item.attachment+'][show_print]" class="" title="Compliance Specification Documents[&#039;+item.attachment+&#039;][show Print]" aria-label="Compliance Specification Documents[&amp;#039;+item.attachment+&amp;#039;][show Print]"><span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>'+item.attachment_name+'</label>';
                     htmlv +='</div>';
                     //console.log("Attachment Name: " + item.attachment_name);
                     //console.log("File Path: " + item.attachment);
@@ -2650,13 +2650,13 @@ if($checktimeprint > 0){
                             <div class="card-header-right table-card-header select_custom">
                                 <div class="row">
                                 <div class="w-full  col-lg-6">
-                                    <select class="form-control form-select js-example-basic-single" id="discount_mode" name= "discount_mode" onchange="changeDiscountMode()" title="Discount Mode">
+                                    <select class="form-control form-select js-example-basic-single" id="discount_mode" name= "discount_mode" onchange="changeDiscountMode()" title="Discount Mode" aria-label="Discount Mode">
                                             <option  <?php if($table1['discount_mode'] =="" OR $table1['discount_mode'] == 'DO'){ ?>selected <?php } ?> value="DO"> Discount Overall </option>
                                             <option  <?php if($table1['discount_mode'] == 'DI'){ ?>selected <?php } ?> value="DI"> Discount Inline </option>
                                     </select>
                                 </div>
                                 <div class="w-full col-lg-6">
-                                    <select class="form-control form-select js-example-basic-single " id="taxtype" name= "tax_type" onchange="calculateTotal()" title="Tax Type">
+                                    <select class="form-control form-select js-example-basic-single " id="taxtype" name= "tax_type" onchange="calculateTotal()" title="Tax Type" aria-label="Tax Type">
                                             <option  <?php if($table1['taxtype'] == 'E'){ ?>selected <?php } ?> value="E"> Exclusive </option>
                                             <option  <?php if($table1['taxtype'] == 'I'){ ?>selected <?php } ?> value="I"> Inclusive </option>
                                             <option  <?php if($table1['taxtype'] == 'O'){ ?>selected <?php } ?> value="O"> Out Of scope </option>
@@ -2745,7 +2745,7 @@ if($checktimeprint > 0){
                                         <input type="hidden" name="compliance_specification_documents[<?php echo $atchmntval['attachment']; ?>][attachment_name]" value="<?php echo $atchmntval['attachment_name']; ?>">
                                         <input type="hidden" name="compliance_specification_documents[<?php echo $atchmntval['attachment']; ?>][attachment]" value="<?php echo $atchmntval['attachment']; ?>">
                                         <div class="checkbox-fade fade-in-primary" >
-                                            <label class="form-label"><input type="checkbox" name="compliance_specification_documents[<?php echo $atchmntval['attachment']; ?>][show_print]" class="" <?php echo $atchmntval['show_print']=='on'?"checked":""; ?> title="Input"><span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span><?php echo $atchmntval['attachment_name']; ?></label>
+                                            <label class="form-label"><input type="checkbox" name="compliance_specification_documents[<?php echo $atchmntval['attachment']; ?>][show_print]" class="" <?php echo $atchmntval['show_print']=='on'?"checked":""; ?> title="Input" aria-label="Input"><span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span><?php echo $atchmntval['attachment_name']; ?></label>
                                             </div>
                                             <?php } ?>
                                         
@@ -2759,11 +2759,11 @@ if($checktimeprint > 0){
                             </div>
                                 <div style="float: left;width: 35%;padding: 1%;">
                                     <label class="">Internal Note(s) </label>
-                                    <textarea style="height: 120px;" name="notes" class="form-control mob-custom-width" title="Notes"><?php echo $table1['notes']; ?></textarea>
+                                    <textarea style="height: 120px;" name="notes" class="form-control mob-custom-width" title="Notes" aria-label="Notes"><?php echo $table1['notes']; ?></textarea>
                                 </div>
                                 <div style="float: left;width: 35%;padding: 1%;">
                                     <label class="">Printing Note(s) </label>
-                                    <textarea style="height: 120px;" name="printing_notes" id="printing_notes" class="form-control mob-custom-width" title="Printing Notes"><?php echo $table1['printing_notes']; ?></textarea>
+                                    <textarea style="height: 120px;" name="printing_notes" id="printing_notes" class="form-control mob-custom-width" title="Printing Notes" aria-label="Printing Notes"><?php echo $table1['printing_notes']; ?></textarea>
                                 </div>
                             </div>
                             <div class="table-responsive" style="padding: 1%;">
@@ -2805,7 +2805,7 @@ if($checktimeprint > 0){
                             <?php if($small_sub == 0  ){ ?>
                             <div style="margin-top: 10px;clear:both;">
                                 <label class="">Comment(s)</label>
-                                <textarea style="height: 120px;" name="comments" class="form-control" id="comments" title="Comments"><?php echo $comments; ?></textarea>
+                                <textarea style="height: 120px;" name="comments" class="form-control" id="comments" title="Comments" aria-label="Comments"><?php echo $comments; ?></textarea>
                             </div>
                             <div class="btn-group" style="margin-top: 10px;float: right;">
                                 <button id="kt_llogin_signup_submit"  class="btn btn-brand" >Submit1</button>
@@ -2842,16 +2842,16 @@ if($checktimeprint > 0){
                                     <span>Discount </span>
                                     <div class="radio radio-inline m-0">
                                         <label class="d-inline-block m-l-5">
-                                            <input type="radio"  name="discount_type" class="calculateTotal_discount" id="disType" onclick="calculateTotal()" value="A" <?php echo $table1['discount_type'] == 'A'?"checked":""; ?> title="Discount Type">
+                                            <input type="radio"  name="discount_type" class="calculateTotal_discount" id="disType" onclick="calculateTotal()" value="A" <?php echo $table1['discount_type'] == 'A'?"checked":""; ?> title="Discount Type" aria-label="Discount Type">
                                             <i class="helper"></i><?php echo $_SESSION['config']['currency_symbol']; ?>
                                         </label>
                                         <label class="m-l-10 d-inline-block">
-                                            <input type="radio" name="discount_type" class="calculateTotal_discount" id="disType" onclick="calculateTotal()" value="P" <?php echo ($table1['discount_type'] == 'P' OR $table1['discount_type'] =="")?"checked":""; ?> title="Discount Type">
+                                            <input type="radio" name="discount_type" class="calculateTotal_discount" id="disType" onclick="calculateTotal()" value="P" <?php echo ($table1['discount_type'] == 'P' OR $table1['discount_type'] =="")?"checked":""; ?> title="Discount Type" aria-label="Discount Type">
                                             <i class="helper"></i> %
                                         </label>
                                     </div>
                                 </div>
-                                    <input value="<?php echo $table1['discount_value']; ?>" type="text" class="form-control amount mt-2 text-right decimalnumberallowe" onblur="discountRestrictions()"  placeholder="Enter value" name="discount_value" id="disValue" title="Enter value"> 
+                                    <input value="<?php echo $table1['discount_value']; ?>" type="text" class="form-control amount mt-2 text-right decimalnumberallowe" onblur="discountRestrictions()"  placeholder="Enter value" name="discount_value" id="disValue" title="Enter value" aria-label="Enter value"> 
                                 </th> 
                                 <td class="p-2 align-middle text-right">
                                     <span id="dis_discountid">
@@ -2900,7 +2900,7 @@ if($checktimeprint > 0){
                                                 <div class="row">
                                                     <div class="form-group col-lg-8">
                                                         <label class="form-label">Charge Name</label>
-                                                        <select class="form-select js-example-basic-single"  name="additional_charge_id" id="additional_charge_id" title="Additional Charge Id">
+                                                        <select class="form-select js-example-basic-single"  name="additional_charge_id" id="additional_charge_id" title="Additional Charge Id" aria-label="Additional Charge Id">
                                                             <?php foreach ((array)$additional_charges_list as $acharges) {  ?>
                                                             <option <?php echo (in_array($acharges['id'], (array)$alreadyselectac))?"disabled":""; ?> value = <?php echo $acharges['id'];  ?>   > <?php echo $acharges['charge_name']; ?> </option>
                                                             <?php } ?>
@@ -2909,7 +2909,7 @@ if($checktimeprint > 0){
                                                     </div>
                                                     <div class="form-group col-lg-4">
                                                         <label class="form-label">Amount</label>
-                                                        <input  value="0" type="text" class="form-control amount decimalnumberallowe" id="additional_charge_amount" title="Input">
+                                                        <input  value="0" type="text" class="form-control amount decimalnumberallowe" id="additional_charge_amount" title="Input" aria-label="Input">
                                                     </div>
                                                 </div>     
                                             </div>
@@ -2924,7 +2924,7 @@ if($checktimeprint > 0){
                             <tr>
                                 <th scope="col" class="amount text-start p-2">
                                     <div class="">  
-                                        <select class="form-select js-example-basic-single"  name="shipping_tax" id="shipping_tax" title="Shipping Tax">
+                                        <select class="form-select js-example-basic-single"  name="shipping_tax" id="shipping_tax" title="Shipping Tax" aria-label="Shipping Tax">
                                             <option value="0">Additional Charges</option>
                                             <?php foreach ($additional_charges as $acharges) {  ?>
                                             <option  <?php if($acharges['id'] == $key){ ?> selected  <?php } ?> value = <?php echo $key ?>   > <?php echo $acharges['charge_name']; ?> </option>
@@ -2936,7 +2936,7 @@ if($checktimeprint > 0){
                                 </th>
                                 <td class="p-2 align-middle">
                                     <input type="hidden" name="shipping_tax_amount" id="shipping_tax_amount" value="<?php echo $table1['shipping_tax_amount']; ?>">
-                                    <input  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="shipping_amount"  placeholder="shipping Amount" title="shipping Amount">
+                                    <input  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="shipping_amount"  placeholder="shipping Amount" title="shipping Amount" aria-label="shipping Amount">
                                 </td>
                             </tr>
                             
@@ -2944,7 +2944,7 @@ if($checktimeprint > 0){
                                 <th scope="col" class="amount text-start p-2">
                                     <span >Shipping</span>
                                     <div class="">  
-                                        <select class="form-select js-example-basic-single"  name="shipping_tax" id="shipping_tax" onchange="calculateTotal()" title="Shipping Tax">
+                                        <select class="form-select js-example-basic-single"  name="shipping_tax" id="shipping_tax" onchange="calculateTotal()" title="Shipping Tax" aria-label="Shipping Tax">
                                             <option value="0">Tax</option>
                                             <?php foreach ($taxres as $key => $tax) {  ?>
                                             <option  <?php if($table1['shipping_tax'] == $key){ ?> selected  <?php } ?> value = <?php echo $key ?>   > <?php echo $tax; ?> </option>
@@ -2955,7 +2955,7 @@ if($checktimeprint > 0){
                                 </th>
                                 <td class="p-2 align-middle">
                                     <input type="hidden" name="shipping_tax_amount" id="shipping_tax_amount" value="<?php echo $table1['shipping_tax_amount']; ?>">
-                                    <input  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="shipping_amount" onblur="calculateTotal()" placeholder="shipping Amount" title="shipping Amount">
+                                    <input  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="shipping_amount" onblur="calculateTotal()" placeholder="shipping Amount" title="shipping Amount" aria-label="shipping Amount">
                                 </td>
                             </tr> 
                             <?php **/ ?>
@@ -3013,7 +3013,7 @@ if($checktimeprint > 0){
                                             <span >TDS</span>
                                         </div>
                                         <div style="float: left;width: 50%;padding: 3px;">  
-                                            <select class="form-control"  name="shipping_tax" id="tds_tax" onchange="calculateTotal()" title="Shipping Tax">
+                                            <select class="form-control"  name="shipping_tax" id="tds_tax" onchange="calculateTotal()" title="Shipping Tax" aria-label="Shipping Tax">
                                                 <option value="0"> Select Any Tax Rate </option>
                                                 <?php foreach ((array)$tdstaxres as $key => $tax) {  ?>
                                                 <option  <?php if($table1['shipping_tax'] == $key){ ?> selected  <?php } ?> value = <?php echo $key; ?>   > <?php echo $tax; ?> </option>
@@ -3025,7 +3025,7 @@ if($checktimeprint > 0){
                                 <td>
                                     <input type="hidden" name="shipping_tax_amount" id="tds_tax_amount" value="0">
                                     <input  value=""   type="hidden" class="form-control amount" id="shipping_amount" onblur="calculateTotal()" placeholder="TDS Amount">
-                                    <input  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="tds_amount" onblur="calculateTotal()" placeholder="TDS Amount" title="TDS Amount">
+                                    <input  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="tds_amount" onblur="calculateTotal()" placeholder="TDS Amount" title="TDS Amount" aria-label="TDS Amount">
                                 </td>
                             </tr>
                         <?php } ?>
@@ -3055,7 +3055,7 @@ if($checktimeprint > 0){
                                                     </div>
                                                     <div class="col-lg-6 form-group">
                                                         <label class="form-label">Adjust Payment</label>
-                                                        <input type="number" class="form-control" placeholder="" id="enteradjustadvancepayment"  value="" onblur="enterAdjustAdvancePayment(this.value)" title="Input">
+                                                        <input type="number" class="form-control" placeholder="" id="enteradjustadvancepayment"  value="" onblur="enterAdjustAdvancePayment(this.value)" title="Input" aria-label="Input">
                                                     </div>
                                                 </div>
                                             </div>
@@ -3113,11 +3113,11 @@ if($checktimeprint > 0){
                             </tr>
                             <tr style="display: none;">
                                 <th scope="col" class="amount" ><span >Amount Paid</span></th>
-                                <td><input value="" type="text" class="form-control amount" name="amountPaid" id="amountPaid" placeholder="Amount Paid" title="Amount Paid"></td>
+                                <td><input value="" type="text" class="form-control amount" name="amountPaid" id="amountPaid" placeholder="Amount Paid" title="Amount Paid" aria-label="Amount Paid"></td>
                             </tr>
                             <tr style="display: none;">
                                 <td  ><span >Amount Due</span></td>
-                                <td><input value="" type="text" class="form-control amount" name="amountDue" id="amountDue" placeholder="Amount Due" title="Amount Due"></td>
+                                <td><input value="" type="text" class="form-control amount" name="amountDue" id="amountDue" placeholder="Amount Due" title="Amount Due" aria-label="Amount Due"></td>
                             </tr>
                             
                             <tr class="p-0" id="display_paymentstermsshow">

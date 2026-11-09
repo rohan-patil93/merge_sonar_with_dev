@@ -923,7 +923,7 @@ if($fieldaccesright['field']['image']!="NA"){
                         <label class="-label" for="profile_image">
                             <span> <i class="fa fa-camera"></i> &nbsp; Change Image</span>
                         </label>
-                        <input type="file" name="profile_image" id="profile_image" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
+                        <input type="file" name="profile_image" id="profile_image" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/ aria-label="Profile Image">
                         <img src="<?php echo "uploads/all/".$data['image'] ; ?>" id="outputprofile_image" width="200" alt="User Profile" />
                         <input type="hidden" name="old_profile_image" value="<?php echo $data['image'] ;  ?>">
                     </div>
