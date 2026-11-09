@@ -207,8 +207,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
                                 <td>
                                     <div class="border-checkbox-section">
                                         <div class="border-checkbox-group border-checkbox-group-primary">
-                                <input name="education" id="education" class="border-checkbox csr-checkbox" type="checkbox" value="0" <?php echo isset($return['education'])?'checked':''; ?>
-                                            >
+                                <input name="education" id="education" class="border-checkbox csr-checkbox" type="checkbox" value="0" <?php echo isset($return['education'])?'checked':''; ?> title="Education">
                                             <label class="form-label border-checkbox-label" for="education">(ii) promotion of education including special education</label>
                                         </div>
                                     </div>
@@ -219,7 +218,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
                                 <td>
                                     <div class="border-checkbox-section">
                                         <div class="border-checkbox-group border-checkbox-group-primary">
-                                            <input name="env_sustian" class="border-checkbox csr-checkbox" type="checkbox" id="env_sustian" value="0" <?php echo isset($return['env_sustian'])?'checked':''; ?>>
+                                            <input name="env_sustian" class="border-checkbox csr-checkbox" type="checkbox" id="env_sustian" value="0" <?php echo isset($return['env_sustian'])?'checked':''; ?> title="Env Sustian">
                                             <label class="form-label border-checkbox-label" for="env_sustian">(iv) Ensuring environmental sustainability</label>
                                         </div>
                                     </div>
@@ -230,7 +229,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
                                 <td>
                                     <div class="border-checkbox-section">
                                         <div class="border-checkbox-group border-checkbox-group-primary">
-                                            <input name="health" class="border-checkbox csr-checkbox" type="checkbox" id="health" value="0" <?php echo isset($return['health'])?'checked':''; ?>>
+                                            <input name="health" class="border-checkbox csr-checkbox" type="checkbox" id="health" value="0" <?php echo isset($return['health'])?'checked':''; ?> title="Health">
                                             <label class="form-label border-checkbox-label" for="health">(i) promoting healthcare including preventive healthcare and sanitation</label>
                                         </div>
                                     </div>
@@ -241,7 +240,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
                                 <td>
                                     <div class="border-checkbox-section">
                                         <div class="border-checkbox-group border-checkbox-group-primary">
-                                            <input name="skill_development" class="border-checkbox csr-checkbox" type="checkbox" id="skill_development" value="0" <?php echo isset($return['skill_development'])?'checked':''; ?>>
+                                            <input name="skill_development" class="border-checkbox csr-checkbox" type="checkbox" id="skill_development" value="0" <?php echo isset($return['skill_development'])?'checked':''; ?> title="Skill Development">
                                             <label class="form-label border-checkbox-label" for="skill_development">(ii) employment enhancing vocational skills and livelihood enhancement projects</label>
                                         </div>
                                     </div>
@@ -252,7 +251,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
                                 <td>
                                     <div class="border-checkbox-section">
                                         <div class="border-checkbox-group border-checkbox-group-primary">
-                                            <input name="comu_development" class="border-checkbox csr-checkbox" type="checkbox" id="comu_development" value="0" <?php echo isset($return['comu_development'])?'checked':''; ?>>
+                                            <input name="comu_development" class="border-checkbox csr-checkbox" type="checkbox" id="comu_development" value="0" <?php echo isset($return['comu_development'])?'checked':''; ?> title="Comu Development">
                                             <label class="form-label border-checkbox-label" for="comu_development">(x) Rural development projects/ Multiple categories</label>
                                         </div>
                                     </div>
@@ -521,11 +520,11 @@ if (!empty($percent)) {
                                 <span class="f-w-600">Form A :- CHECKLIST FOR SUBMISSION OF DOCUMENTS</span>
                                 <div class="border-checkbox-section mt-2">
                                     <div class="border-checkbox-group border-checkbox-group-primary">
-                            <input class="border-checkbox csr-form-radio" type="radio" id="form_a_yes" name="form_a" value="1"  <?php echo $return['form_a']=='1'?'checked':''  ?> />
+                            <input class="border-checkbox csr-form-radio" type="radio" id="form_a_yes" name="form_a" value="1"  <?php echo $return['form_a']=='1'?'checked':''  ?> / title="Form A">
                                         <label class="form-label border-checkbox-label" for="form_a_yes">Yes</label>
                                     </div>
                                     <div class="border-checkbox-group border-checkbox-group-primary">
-                                        <input class="border-checkbox  csr-form-radio" type="radio" id="form_a_no" name="form_a" value="0"  <?php echo isset($return['form_a'])&&($return['form_a']=='0' || $return['form_a'] == '') ?'checked':''  ?> />
+                                        <input class="border-checkbox  csr-form-radio" type="radio" id="form_a_no" name="form_a" value="0"  <?php echo isset($return['form_a'])&&($return['form_a']=='0' || $return['form_a'] == '') ?'checked':''  ?> / title="Form A">
                                         <label class="form-label border-checkbox-label" for="form_a_no">No</label>
                                     </div>
 
@@ -545,11 +544,11 @@ if (!empty($percent)) {
                                 <span class="f-w-600">Form B :- CHECKLIST FOR INFRASTRUCTURE PROJECTS</span>
                                 <div class="border-checkbox-section mt-2">
                                     <div class="border-checkbox-group border-checkbox-group-primary">
-                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_b_yes" name="form_b" value="1"  <?php echo $return['form_b']?'checked':''  ?> />
+                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_b_yes" name="form_b" value="1"  <?php echo $return['form_b']?'checked':''  ?> / title="Form B">
                                         <label class="form-label border-checkbox-label" for="form_b_yes">Yes</label>
                                     </div>
                                     <div class="border-checkbox-group border-checkbox-group-primary">
-                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_b_no" name="form_b" value="0"  <?php echo isset($return['form_b'])&&($return['form_b']=='0' || $return['form_b'] == '') ?'checked':''  ?>  />
+                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_b_no" name="form_b" value="0"  <?php echo isset($return['form_b'])&&($return['form_b']=='0' || $return['form_b'] == '') ?'checked':''  ?>  / title="Form B">
                                         <label class="form-label border-checkbox-label" for="form_b_no">No</label>
                                     </div>
                                     <?php if (!empty($return['form_b_file'])): ?>
@@ -567,11 +566,11 @@ if (!empty($percent)) {
                                 <span class="f-w-600">Form C :- CHECKLIST FOR SUBMISSION OF PROPOSAL</span>
                                 <div class="border-checkbox-section mt-2">
                                     <div class="border-checkbox-group border-checkbox-group-primary">
-                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_c_yes" name="form_c" value="1"  <?php echo $return['form_c']?'checked':''  ?> />
+                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_c_yes" name="form_c" value="1"  <?php echo $return['form_c']?'checked':''  ?> / title="Form C">
                                         <label class="form-label border-checkbox-label" for="form_c_yes">Yes</label>
                                     </div>
                                     <div class="border-checkbox-group border-checkbox-group-primary">
-                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_c_no" name="form_c" value="0"  <?php echo isset($return['form_c'])&&($return['form_c']=='0' || $return['form_c'] == '') ?'checked':''  ?> />
+                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_c_no" name="form_c" value="0"  <?php echo isset($return['form_c'])&&($return['form_c']=='0' || $return['form_c'] == '') ?'checked':''  ?> / title="Form C">
                                         <label class="form-label border-checkbox-label" for="form_c_no">No</label>
                                     </div>
                                 <?php if (!empty($return['form_c_file'])): ?>
@@ -588,11 +587,11 @@ if (!empty($percent)) {
                                 <span class="f-w-600">Form D :- SUMMARY SHEET FOR THE PROPOSAL</span>
                                 <div class="border-checkbox-section mt-2">
                                     <div class="border-checkbox-group border-checkbox-group-primary">
-                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_d_yes" name="form_d" value="1" <?php echo $return['form_d']?'checked':''  ?> />
+                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_d_yes" name="form_d" value="1" <?php echo $return['form_d']?'checked':''  ?> / title="Form D">
                                         <label class="form-label border-checkbox-label" for="form_d_yes">Yes</label>
                                     </div>
                                     <div class="border-checkbox-group border-checkbox-group-primary">
-                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_d_no" name="form_d" value="0"  <?php echo isset($return['form_d'])&&($return['form_d']=='0' || $return['form_d'] == '') ?'checked':''  ?> />
+                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_d_no" name="form_d" value="0"  <?php echo isset($return['form_d'])&&($return['form_d']=='0' || $return['form_d'] == '') ?'checked':''  ?> / title="Form D">
                                         <label class="form-label border-checkbox-label" for="form_d_no">No</label>
                                     </div>
                                 <?php if (!empty($return['form_d_file'])): ?>
@@ -609,11 +608,11 @@ if (!empty($percent)) {
                                 <span class="f-w-600">Form E :- TRACK RECORD OF PROJECTS</span>
                                 <div class="border-checkbox-section mt-2">
                                     <div class="border-checkbox-group border-checkbox-group-primary">
-                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_e_yes" name="form_e" value="1"  <?php echo $return['form_e']?'checked':''  ?> />
+                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_e_yes" name="form_e" value="1"  <?php echo $return['form_e']?'checked':''  ?> / title="Form E">
                                         <label class="form-label border-checkbox-label" for="form_e_yes">Yes</label>
                                     </div>
                                     <div class="border-checkbox-group border-checkbox-group-primary">
-                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_e_no" name="form_e" value="0"   <?php echo isset($return['form_e'])&&($return['form_e']=='0' || $return['form_e'] == '') ?'checked':''  ?>/>
+                                        <input class="border-checkbox csr-form-radio" type="radio" id="form_e_no" name="form_e" value="0"   <?php echo isset($return['form_e'])&&($return['form_e']=='0' || $return['form_e'] == '') ?'checked':''  ?>/ title="Form E">
                                         <label class="form-label border-checkbox-label" for="form_e_no">No</label>
                                     </div>
                                 <?php if (!empty($return['form_e_file'])): ?>
