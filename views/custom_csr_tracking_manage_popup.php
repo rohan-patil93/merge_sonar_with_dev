@@ -164,11 +164,11 @@ $rowCounter = 0;
             newRow.innerHTML =
                 '<td>' + rowCounter + '</td>' +
                 '<td><input type="hidden" name="tracking_id[' + rowCounter + ']" value="">' +
-                '<input type="text" class="form-control" name="tracking_name[' + rowCounter + ']" value="" aria-label="Tracking Name[&#039; + Rowcounter + &#039;]"></td>' +
-                '<td><textarea class="form-control" name="description[' + rowCounter + ']" aria-label="Description[&#039; + Rowcounter + &#039;]"></textarea></td>' +
-                '<td><input type="date" class="form-control csr-track-start-date" data-row="' + rowCounter + '" name="start_date[' + rowCounter + ']" value="" aria-label="Start Date[&#039; + Rowcounter + &#039;]"></td>' +
-                '<td><input type="date" class="form-control" id="csr_track_end_date_' + rowCounter + '" name="end_date[' + rowCounter + ']" value="" aria-label="End Date[&#039; + Rowcounter + &#039;]"></td>' +
-                '<td><input type="number" min="0" class="form-control text_align_right" name="tracking_budget[' + rowCounter + ']" value="" aria-label="Tracking Budget[&#039; + Rowcounter + &#039;]"></td>';
+                '<input type="text" class="form-control" name="tracking_name[' + rowCounter + ']" value="" aria-label="Tracking Name"></td>' +
+                '<td><textarea class="form-control" name="description[' + rowCounter + ']" aria-label="Description"></textarea></td>' +
+                '<td><input type="date" class="form-control csr-track-start-date" data-row="' + rowCounter + '" name="start_date[' + rowCounter + ']" value="" aria-label="Start Date"></td>' +
+                '<td><input type="date" class="form-control" id="csr_track_end_date_' + rowCounter + '" name="end_date[' + rowCounter + ']" value="" aria-label="End Date"></td>' +
+                '<td><input type="number" min="0" class="form-control text_align_right" name="tracking_budget[' + rowCounter + ']" value="" aria-label="Tracking Budget"></td>';
             tableBody.appendChild(newRow);
         });
     }

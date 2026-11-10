@@ -2251,7 +2251,7 @@ function showAttchmentInAvailableItemTables(){
                 $.each(attachments, function(index, item) {
                     htmlv +='<input type="hidden" name="compliance_specification_documents['+item.attachment+'][item_name]" value="'+item_name+'"><input type="hidden" name="compliance_specification_documents['+item.attachment+'][attachment_name]" value="'+item.attachment_name+'"><input type="hidden" name="compliance_specification_documents['+item.attachment+'][attachment]" value="'+item.attachment+'">';
                     htmlv +='<div class="checkbox-fade fade-in-primary" >';
-                    htmlv +='<label class="form-label"><input type="checkbox" name="compliance_specification_documents['+item.attachment+'][show_print]" class="" title="Compliance Specification Documents[&#039;+item.attachment+&#039;][show Print]" aria-label="Compliance Specification Documents[&amp;#039;+item.attachment+&amp;#039;][show Print]"><span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>'+item.attachment_name+'</label>';
+                    htmlv +='<label class="form-label"><input type="checkbox" name="compliance_specification_documents['+item.attachment+'][show_print]" class="" title="Compliance Specification Documents" aria-label="Compliance Specification Documents[&amp;#039;+item.attachment+&amp;#039;][show Print]"><span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>'+item.attachment_name+'</label>';
                     htmlv +='</div>';
                     //console.log("Attachment Name: " + item.attachment_name);
                     //console.log("File Path: " + item.attachment);

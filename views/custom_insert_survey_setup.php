@@ -540,14 +540,14 @@ function addnewoptionrows(qid) {
                 <div class="card-body mt-3">
                 <div class="form-group text-left">
                 <label>Question Text: <span class="text-danger"></span></label>
-                <textarea id="survey_question'.$qkey.'" name="survey_question'.$qkey.'" class="form-control border" placeholder="" aria-label="Survey Question&#039;.$qkey.&#039;"> '.$value['question'].' </textarea>
+                <textarea id="survey_question'.$qkey.'" name="survey_question'.$qkey.'" class="form-control border" placeholder="" aria-label="Survey Question"> '.$value['question'].' </textarea>
                 </div>
                 <div class="form-group text-left">
                 <div class="checkbox-inline">';
                 if($value['type']==1 || $value['type']==3)   { 
                   $display_question .='
                   <label class="checkbox checkbox-primary">
-                    <input class="border" type="checkbox" name="allow_multiple_selections'.$qkey.'" id="allow_multiple_selections'.$qkey.'" '.$allow_multiple_selections_status.'/ aria-label="Allow Multiple Selections&#039;.$qkey.&#039;">
+                    <input class="border" type="checkbox" name="allow_multiple_selections'.$qkey.'" id="allow_multiple_selections'.$qkey.'" '.$allow_multiple_selections_status.'/ aria-label="Allow Multiple Selections">
                     <span></span>
                     Allow multiple selections
                   </label>';
@@ -557,7 +557,7 @@ function addnewoptionrows(qid) {
                 }
                 $display_question .='
                 <label class="checkbox checkbox-primary">
-                  <input class="border" type="checkbox" name="require_response'.$qkey.'" id="require_response'.$qkey.'" '.$require_response_status.' aria-label="Require Response&#039;.$qkey.&#039;">
+                  <input class="border" type="checkbox" name="require_response'.$qkey.'" id="require_response'.$qkey.'" '.$require_response_status.' aria-label="Require Response">
                   <span></span>
                   Require a Response
                 </label>
@@ -591,7 +591,7 @@ function addnewoptionrows(qid) {
               if($value['type']==2)   { 
                 $display_question .= ' <div class="form-group text-left mt-10">
                 <label>Scale from 1 to: <span class="text-danger">*</span></label>
-                <input type="number" name="survey_question_option'.$qkey.'[]" class="form-control border" placeholder="'.$options[0].'" value"'.$options[0].'" aria-label="&#039;.$options[0].&#039;"> 
+                <input type="number" name="survey_question_option'.$qkey.'[]" class="form-control border" placeholder="'.$options[0].'" value"'.$options[0].'" aria-label="Survey Question Option"> 
                 </div>';
               }  
               if($value['type']==4)   { 

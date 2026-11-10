@@ -103,11 +103,11 @@ $comparator_array = array('=','!=','>','>=','<','<=');
 			type: "POST",
 			success:function(data){
 				console.log(data);
-				$("#field_id").html("<select class='form-control form-select js-example-basic-single' id ='field_name' name='field_name' aria-label="Select">"+data+"</select>");
-				$("#label_id").html("<select class='form-control form-select js-example-basic-single' id='value' name='value' aria-label="Select">"+data+"</select>");
-				$("#order_by").html("<select class='form-control form-select js-example-basic-single' id='order_by' name='order_by' aria-label="Select">"+data+"</select>");
+				$("#field_id").html("<select class='form-control form-select js-example-basic-single' id ='field_name' name='field_name' aria-label='Select'>"+data+"</select>");
+				$("#label_id").html("<select class='form-control form-select js-example-basic-single' id='value' name='value' aria-label='Select'>"+data+"</select>");
+				$("#order_by").html("<select class='form-control form-select js-example-basic-single' id='order_by' name='order_by' aria-label='Select'>"+data+"</select>");
 
-				$("#refer_by_field").html("<select class='form-control form-select js-example-basic-single' id='refer_by_field' name='refer_by_field' aria-label="Select">"+data+"</select>");
+				$("#refer_by_field").html("<select class='form-control form-select js-example-basic-single' id='refer_by_field' name='refer_by_field' aria-label='Select'>"+data+"</select>");
 
 
 

@@ -565,8 +565,8 @@ function getDepreciationMethod(){
                 			}
                 		 ?>
                         <div class="form-group col-lg-6">
-							<label for="fld_fieldvalue__">Manufacturing Date</label>
-							<input id="fld_fieldvalue__" class="form-control <?php echo $clss; ?>  fieldname"  type="<?php echo $types; ?>"   name="fieldvalue[]"  value="<?php echo $custom_fields['fieldvalue']; ?>">
+							<label for="fld_fieldvalue_<?php echo $fld_fieldvalue_n = ($fld_fieldvalue_n ?? 0) + 1; ?>">Manufacturing Date</label>
+							<input id="fld_fieldvalue_<?php echo $fld_fieldvalue_n; ?>" class="form-control <?php echo $clss; ?>  fieldname"  type="<?php echo $types; ?>"   name="fieldvalue[]"  value="<?php echo $custom_fields['fieldvalue']; ?>">
 							<input  type="hidden" class="fieldname"  name="fieldname[]"  value="<?php echo $custom_fields['fieldname']; ?>">
 							<input  type="hidden" class="fieldname"  name="fieldtype[]"  value="<?php echo $custom_fields['fieldtype']; ?>">
 						</div>

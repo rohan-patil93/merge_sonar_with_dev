@@ -157,9 +157,9 @@ if(isset($_POST['create'])){
       var optionlistid = "optionlist"+qid+op;
 
       if(type=='MCQ'){
-         var appenddiv = '<label class="radio radio-primary  mt-4""><input type="radio" name="assessment_correct_option'+qid+'['+op+']" id="singlechoice'+qid+op+'" aria-label="Assessment Correct Option&#039;+qid+&#039;[&#039;+op+&#039;]"><span></span></label>';
+         var appenddiv = '<label class="radio radio-primary  mt-4""><input type="radio" name="assessment_correct_option'+qid+'['+op+']" id="singlechoice'+qid+op+'" aria-label="Assessment Correct Option"><span></span></label>';
       }else{
-         var appenddiv = '<label class="checkbox checkbox-primary  mt-4""><input type="checkbox"  name="assessment_correct_option'+qid+'['+op+']" id="multiplechoice'+qid+op+'" aria-label="Assessment Correct Option&#039;+qid+&#039;[&#039;+op+&#039;]"><span></span></label>';
+         var appenddiv = '<label class="checkbox checkbox-primary  mt-4""><input type="checkbox"  name="assessment_correct_option'+qid+'['+op+']" id="multiplechoice'+qid+op+'" aria-label="Assessment Correct Option"><span></span></label>';
       }
 
       $("#options"+qid).append('<div id='+"'"+optionlistid+"'"+'> <div class="col-lg-1 mt-4">'+appenddiv+'</div><div class="col-lg-8"><div class="input-group input-icon-right"><input type="text" class="form-control display-inline"  name="assessment_question_option'+qid+'[]" placeholder="Option" aria-label="Option"><div class="input-group-append"><span class="input-group-text bg-primary"><i class="flaticon-delete btn-primary" onclick="delnewoptionrows('+"'"+op+"'"+','+"'"+qid+"'"+')"></i></span></span></div></div></div></div>');
@@ -411,11 +411,11 @@ function getnamelist(){
             <div class="form-group text-left row">
             <div class="col-lg-8">
             <label>Question Text: <span class="text-danger"></span></label>
-            <textarea id="assessment_question'.$value_id.'" name="assessment_question'.$value_id.'" class="form-control" placeholder="" aria-label="Assessment Question&#039;.$value Id.&#039;"> '.$value['question'].' </textarea>
+            <textarea id="assessment_question'.$value_id.'" name="assessment_question'.$value_id.'" class="form-control" placeholder="" aria-label="Assessment Question"> '.$value['question'].' </textarea>
             </div>';
             $display_question .= '<div class="col-lg-4">
             <label>Marks <span class="text-danger">*</span></label>
-            <input type="text" class="form-control" id="markfield" name="marks'.$value_id.'" value="'.$marks.'" aria-label="Marks&#039;.$value Id.&#039;">
+            <input type="text" class="form-control" id="markfield" name="marks'.$value_id.'" value="'.$marks.'" aria-label="Marks">
             </div>'; 
             
             $display_question .= '</div>';
@@ -429,13 +429,13 @@ function getnamelist(){
                   <div class="col-lg-12  row ml-5"> <div class="">'; 
                   if($value['type']== $typeofquestion['1'] ) {
                      $display_question .= '<label class="radio radio-primary mt-4">
-                     <input type="radio"  name="assessment_correct_option'.$value_id.'['.$opkey.']" id="singlechoice'.$value_id.$opkey.'" '.$checkstatus.' aria-label="Assessment Correct Option&#039;.$value Id.&#039;[&#039;.$opkey.&#039;]">"
+                     <input type="radio"  name="assessment_correct_option'.$value_id.'['.$opkey.']" id="singlechoice'.$value_id.$opkey.'" '.$checkstatus.' aria-label="Assessment Correct Option">"
                      <span></span>
                      </label>
                      <input type="hidden" name="allow_multiple_selections'.$value_id.'" id="allow_multiple_selections'.$value_id.'" value="0" />';
                   } else {
                      $display_question .= '<label class="checkbox checkbox-primary mt-4">
-                    <input type="checkbox"  name="assessment_correct_option'.$value_id.'['.$opkey.']"  id="multiplechoice'.$value_id.$opkey.'" '.$checkstatus.' aria-label="Assessment Correct Option&#039;.$value Id.&#039;[&#039;.$opkey.&#039;]">
+                    <input type="checkbox"  name="assessment_correct_option'.$value_id.'['.$opkey.']"  id="multiplechoice'.$value_id.$opkey.'" '.$checkstatus.' aria-label="Assessment Correct Option">
                      <span></span>
                      </label>
                      <input type="hidden" name="allow_multiple_selections'.$value_id.'" id="allow_multiple_selections'.$value_id.'" value="1" />';
