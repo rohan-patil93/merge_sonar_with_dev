@@ -1530,7 +1530,7 @@ function viewApprovalAllUsers(id= ""){
                             <h5 class="col-lg-8">Products / Services</h5>
                             <div class="card-header-right table-card-header col-lg-4 text-right">
                                 <div class="w-full">
-                                    <select class="form-control form-select js-example-basic-single " id="taxtype" name= "tax_type" onchange="calculateTotal()" >
+                                    <select class="form-control form-select js-example-basic-single " id="taxtype" name= "tax_type" onchange="calculateTotal()" aria-label="Tax Type">
                                             <option  <?php if($table1['taxtype'] == 'E'){ ?>selected <?php } ?> value="E"> Exclusive </option>
                                             <option  <?php if($table1['taxtype'] == 'I'){ ?>selected <?php } ?> value="I"> Inclusive </option>
                                             <option  <?php if($table1['taxtype'] == 'O'){ ?>selected <?php } ?> value="O"> Out Of scope </option>
@@ -1566,17 +1566,17 @@ function viewApprovalAllUsers(id= ""){
                            <div>
                                 <div style="float: left;width: 48%;padding: 1%;">
                                     <label class="">Internal Note(s) </label>
-                                    <textarea style="height: 120px;" name="notes" class="form-control" ><?php echo $table1['notes']; ?></textarea>
+                                    <textarea style="height: 120px;" name="notes" class="form-control" aria-label="Notes"><?php echo $table1['notes']; ?></textarea>
                                 </div>
                                 <div style="float: left;width: 48%;padding: 1%;">
                                     <label class="">Printing Note(s) </label>
-                                    <textarea style="height: 120px;" name="printing_notes" class="form-control" ><?php echo $table1['printing_notes']; ?></textarea>
+                                    <textarea style="height: 120px;" name="printing_notes" class="form-control" aria-label="Printing Notes"><?php echo $table1['printing_notes']; ?></textarea>
                                 </div>
                             </div>
                             <?php if($small_sub == 0  ){ ?>
                             <div style="margin-top: 10px;clear:both;">
                                 <label class="">Comment(s)</label>
-                                <textarea style="height: 120px;" name="comments" class="form-control" id="comments" ><?php echo $comments; ?></textarea>
+                                <textarea style="height: 120px;" name="comments" class="form-control" id="comments" aria-label="Comments"><?php echo $comments; ?></textarea>
                             </div>
                             <div class="btn-group" style="margin-top: 10px;float: right;">
                                      <button id="kt_llogin_signup_submit"  class="btn btn-brand" >Submit1</button>
@@ -1604,11 +1604,11 @@ function viewApprovalAllUsers(id= ""){
                                     <span>Discount </span>
                                     <div class="radio radio-inline m-0">
                                         <label class="d-inline-block m-l-5">
-                                            <input type="radio"  name="discount_type" id="disType" onclick="calculateTotal()" value="A" <?php echo $table1['discount_type'] == 'A'?"checked":""; ?> >
+                                            <input type="radio"  name="discount_type" id="disType" onclick="calculateTotal()" value="A" <?php echo $table1['discount_type'] == 'A'?"checked":""; ?> aria-label="Discount Type">
                                             <i class="helper"></i><?php echo $_SESSION['config']['currency_symbol']; ?>
                                         </label>
                                         <label class="m-l-10 d-inline-block">
-                                            <input type="radio" name="discount_type" id="disType" onclick="calculateTotal()" value="P" <?php echo ($table1['discount_type'] == 'P' OR $table1['discount_type'] =="")?"checked":""; ?>>
+                                            <input type="radio" name="discount_type" id="disType" onclick="calculateTotal()" value="P" <?php echo ($table1['discount_type'] == 'P' OR $table1['discount_type'] =="")?"checked":""; ?> aria-label="Discount Type">
                                             <i class="helper"></i> %
                                         </label>
                                     </div>
@@ -1616,12 +1616,12 @@ function viewApprovalAllUsers(id= ""){
 
 
                                     <!-- <div  class="w-full">  
-                                        <select class="form-select js-example-basic-single" id="disType" name="discount_type" onchange="calculateTotal()">
+                                        <select class="form-select js-example-basic-single" id="disType" name="discount_type" onchange="calculateTotal()" aria-label="Discount Type">
                                             <option value="P">Percentage</option>
                                             <option <?php if($table1['discount_type'] == 'A'){ ?> selected <?php } ?> value="A">Amount</option>
                                         </select>
                                     </div> -->
-                                    <input value="<?php echo $table1['discount_value']; ?>" type="text" class="form-control amount mt-2 text-right" placeholder="Enter value" name="discount_value" id="disValue" > 
+                                    <input value="<?php echo $table1['discount_value']; ?>" type="text" class="form-control amount mt-2 text-right" placeholder="Enter value" name="discount_value" id="disValue" aria-label="Enter value"> 
                                 </th>
                                 <td class="p-2 align-middle text-right">
                                     <span id="dis_discountid">
@@ -1636,7 +1636,7 @@ function viewApprovalAllUsers(id= ""){
                                 <th scope="col" class="amount text-start p-2">
                                     <span >Shipping</span>
                                     <div class="">  
-                                        <select class="form-select js-example-basic-single"  name="shipping_tax" id="shipping_tax" onchange="calculateTotal()" >
+                                        <select class="form-select js-example-basic-single"  name="shipping_tax" id="shipping_tax" onchange="calculateTotal()" aria-label="Shipping Tax">
                                             <option value="0">Tax</option>
                                             <?php foreach ($taxres as $key => $tax) {  ?>
                                             <option  <?php if($table1['shipping_tax'] == $key){ ?> selected  <?php } ?> value = <?php echo $key ?>   > <?php echo $tax; ?> </option>
@@ -1647,7 +1647,7 @@ function viewApprovalAllUsers(id= ""){
                                 </th>
                                 <td class="p-2 align-middle">
                                     <input type="hidden" name="shipping_tax_amount" id="shipping_tax_amount" value="<?php echo $table1['shipping_tax_amount']; ?>">
-                                    <input  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="shipping_amount" onblur="calculateTotal()" placeholder="shipping Amount">
+                                    <input  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="shipping_amount" onblur="calculateTotal()" placeholder="shipping Amount" aria-label="shipping Amount">
                                 </td>
                             </tr>
                         <?php } ?>
@@ -1703,7 +1703,7 @@ function viewApprovalAllUsers(id= ""){
                                             <span >TDS</span>
                                         </div>
                                         <div style="float: left;width: 50%;padding: 3px;">  
-                                            <select class="form-control"  name="shipping_tax" id="tds_tax" onchange="calculateTotal()" >
+                                            <select class="form-control"  name="shipping_tax" id="tds_tax" onchange="calculateTotal()" aria-label="Shipping Tax">
                                                 <option value="0"> Select Any Tax Rate </option>
                                                 <?php foreach ($tdstaxres as $key => $tax) {  ?>
                                                 <option  <?php if($table1['shipping_tax'] == $key){ ?> selected  <?php } ?> value = <?php echo $key; ?>   > <?php echo $tax; ?> </option>
@@ -1715,7 +1715,7 @@ function viewApprovalAllUsers(id= ""){
                                 <td>
                                     <input type="hidden" name="shipping_tax_amount" id="tds_tax_amount" value="0">
                                     <input  value=""   type="hidden" class="form-control amount" id="shipping_amount" onblur="calculateTotal()" placeholder="TDS Amount">
-                                    <input  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="tds_amount" onblur="calculateTotal()" placeholder="TDS Amount">
+                                    <input  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="tds_amount" onblur="calculateTotal()" placeholder="TDS Amount" aria-label="TDS Amount">
                                 </td>
                             </tr>
                         <?php } ?>
@@ -1733,11 +1733,11 @@ function viewApprovalAllUsers(id= ""){
                             </tr>
                             <tr style="display: none;">
                                 <th scope="col" class="amount" ><span >Amount Paid</span></th>
-                                <td><input value="" type="text" class="form-control amount" name="amountPaid" id="amountPaid" placeholder="Amount Paid"></td>
+                                <td><input value="" type="text" class="form-control amount" name="amountPaid" id="amountPaid" placeholder="Amount Paid" aria-label="Amount Paid"></td>
                             </tr>
                             <tr style="display: none;">
                                 <td  ><span >Amount Due</span></td>
-                                <td><input value="" type="text" class="form-control amount" name="amountDue" id="amountDue" placeholder="Amount Due"></td>
+                                <td><input value="" type="text" class="form-control amount" name="amountDue" id="amountDue" placeholder="Amount Due" aria-label="Amount Due"></td>
                             </tr>
                             <?php //if($table1['currency_id'] != $_SESSION['config']['default_currency_id'] && $table1['currency_id'] != '0'){ $css = ""; }else{ $css = 'style="display: none;"'; }?>
                             <tr <?php echo $css; ?> style="display: none;">
@@ -1751,11 +1751,11 @@ function viewApprovalAllUsers(id= ""){
                                             <th scope="col" class="amount">Grand Total </th>
                                         </tr>
                                         <tr>
-                                            <!-- <td><input value="<?php echo $table1['currency_rate']; ?>" type="text" readonly  class="form-control amount" name="" id="ex_rate" ></td> -->
-                                            <td><input value="<?php echo customeummarmonyformate($table1['sub_total']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_sub_total" ></td>
-                                            <td><input value="<?php echo customeummarmonyformate($table1['tax_amount']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_tax" ></td>
-                                            <td><input value="<?php echo customeummarmonyformate($table1['discount_amount']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_discount" ></td>
-                                            <td> <input value="<?php echo customeummarmonyformate($table1['grand_total']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_grand_total"> </td>
+                                            <!-- <td><input value="<?php echo $table1['currency_rate']; ?>" type="text" readonly  class="form-control amount" name="" id="ex_rate" aria-label="Input"></td> -->
+                                            <td><input value="<?php echo customeummarmonyformate($table1['sub_total']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_sub_total" aria-label="Input"></td>
+                                            <td><input value="<?php echo customeummarmonyformate($table1['tax_amount']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_tax" aria-label="Input"></td>
+                                            <td><input value="<?php echo customeummarmonyformate($table1['discount_amount']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_discount" aria-label="Input"></td>
+                                            <td> <input value="<?php echo customeummarmonyformate($table1['grand_total']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_grand_total" aria-label="Input"> </td>
                                         </tr>
                                     </table>
                                 </td>

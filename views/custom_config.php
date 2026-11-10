@@ -137,17 +137,17 @@ $paydata = json_decode($paydata,1);
 								<div class="kt-wizard-v1__form">
 									<div class="form-group">
 										<label>Name</label>
-										<input type="text" class="form-control" name="name" placeholder="Name" value="<?php echo $data['name']; ?>">
+										<input type="text" class="form-control" name="name" placeholder="Name" value="<?php echo $data['name']; ?>" aria-label="Name">
 										<span class="form-text text-muted">Please enter your Name.</span>
 									</div>
 									<div class="form-group">
 										<label>Email</label>
-										<input type="text" class="form-control" name="admin_email" placeholder="Email" value="<?php echo $data['admin_email']; ?>">
+										<input type="text" class="form-control" name="admin_email" placeholder="Email" value="<?php echo $data['admin_email']; ?>" aria-label="Email">
 										<span class="form-text text-muted">Please enter your Email Address.</span>
 									</div>
 									<div class="form-group">
 										<label>Phone Number</label>
-										<input type="text" class="form-control" name="phone_number" placeholder="phone_number" value="<?php echo $data['phone_number']; ?>">
+										<input type="text" class="form-control" name="phone_number" placeholder="phone_number" value="<?php echo $data['phone_number']; ?>" aria-label="phone_number">
 										<span class="form-text text-muted">Please enter your Phone Number.</span>
 									</div>
 								</div>
@@ -163,12 +163,12 @@ $paydata = json_decode($paydata,1);
 								<div class="kt-wizard-v1__form">
 									<div class="form-group">
 										<label>Contact Address</label>
-										<input type="text" class="form-control" name="contact_address" placeholder="Contact Address" value="<?php echo $data['contact_address']; ?>">
+										<input type="text" class="form-control" name="contact_address" placeholder="Contact Address" value="<?php echo $data['contact_address']; ?>" aria-label="Contact Address">
 										<span class="form-text text-muted">Please enter your Contact Address.</span>
 									</div>
 									<div class="form-group">
 										<label>Billing Adderess</label>
-										<input type="text" class="form-control" name="billing_address" placeholder="Package Weight" value="<?php echo $data['billing_address']; ?>">
+										<input type="text" class="form-control" name="billing_address" placeholder="Package Weight" value="<?php echo $data['billing_address']; ?>" aria-label="Package Weight">
 										<span class="form-text text-muted">Please enter your Billing Adderess.</span>
 									</div>
 								</div>
@@ -184,19 +184,19 @@ $paydata = json_decode($paydata,1);
 								<div class="kt-wizard-v1__form">
 									<div class="form-group">
 										<label>PAN Number</label>
-										<input type="text" class="form-control" name="pan_number" placeholder="Pan Number" value="<?php echo $data['pan_number']; ?>">
+										<input type="text" class="form-control" name="pan_number" placeholder="Pan Number" value="<?php echo $data['pan_number']; ?>" aria-label="Pan Number">
 									</div>
 									<div class="form-group">
 										<label>TAN Number</label>
-										<input type="text" class="form-control" name="tax_number" placeholder="TAN Number"  value="<?php echo $data['tax_numberme']; ?>" >
+										<input type="text" class="form-control" name="tax_number" placeholder="TAN Number"  value="<?php echo $data['tax_numberme']; ?>" aria-label="TAN Number">
 									</div>
 									<div class="form-group">
 										<label>GST Number</label>
-										<input type="text" class="form-control" name="gst_number" placeholder="GST Number" value="<?php echo $data['gst_number']; ?>" >
+										<input type="text" class="form-control" name="gst_number" placeholder="GST Number" value="<?php echo $data['gst_number']; ?>" aria-label="GST Number">
 									</div>
 									<div class="form-group">
 										<label>CIN Number</label>
-										<input type="text" class="form-control" name="cin_number" placeholder="CIN Number"  value="<?php echo $data['cin_number']; ?>" >
+										<input type="text" class="form-control" name="cin_number" placeholder="CIN Number"  value="<?php echo $data['cin_number']; ?>" aria-label="CIN Number">
 									</div>
 								</div>
 							</div>
@@ -211,11 +211,11 @@ $paydata = json_decode($paydata,1);
 								<div class="kt-wizard-v1__form">
 									<div class="form-group">
 										<label>Liscense Number</label>
-										<input type="text" class="form-control" name="liscense_number" placeholder="liscense number" value="<?php echo $data['liscense_number']; ?>" >
+										<input type="text" class="form-control" name="liscense_number" placeholder="liscense number" value="<?php echo $data['liscense_number']; ?>" aria-label="liscense number">
 									</div>
 									<div class="form-group">
 										<label>Subscription Info</label>
-										<input type="text" class="form-control" name="subscription_info" placeholder="Subscription Info" value="<?php echo $data['subscription_info']; ?>" >
+										<input type="text" class="form-control" name="subscription_info" placeholder="Subscription Info" value="<?php echo $data['subscription_info']; ?>" aria-label="Subscription Info">
 									</div>	
 								</div>
 							</div>
@@ -231,7 +231,7 @@ $paydata = json_decode($paydata,1);
 								<div class="kt-wizard-v1__form">
 									<div class="form-group">
 										<label for="time_zone">Time Zone </label>
-										<select class="form-control" id="time_zone"   name= "time_zone">
+										<select class="form-control" id="time_zone"   name= "time_zone" aria-label="Time Zone">
 														<?php foreach ($time_zones as $key=>$time_zone) {?>
 
 														<option <?php if($data['time_zone'] == $key){?> selected <?php } ?>  value = <?php echo $key; ?>  ><?php echo $time_zone; ?></option>
@@ -241,7 +241,7 @@ $paydata = json_decode($paydata,1);
 									<div class="form-group">
 										<label for="date_format">Date Format</label>
 										<!--  -->
-										<select class="form-control" id="date_format"   name= "date_format">
+										<select class="form-control" id="date_format"   name= "date_format" aria-label="Date Format">
 														<?php $date_array = array('DD-MM-YYYY', 'MM-DD-YYYY','YYYY-MM-DD');
 														foreach ($date_array as $formate) {?>
 
@@ -251,12 +251,12 @@ $paydata = json_decode($paydata,1);
 									</div>
 									<div class="form-group">
 										<label>Date Separator</label>
-										<input type="text" class="form-control" name="date_separator" placeholder="Date Separator" value="<?php echo $data['date_separator']; ?>" >
+										<input type="text" class="form-control" name="date_separator" placeholder="Date Separator" value="<?php echo $data['date_separator']; ?>" aria-label="Date Separator">
 									</div>
 									<div class="form-group">
 										<label for="percentage_position">Percentage Position</label>
 										
-										<select class="form-control" id="percentage_position"   name= "percentage_position">
+										<select class="form-control" id="percentage_position"   name= "percentage_position" aria-label="Percentage Position">
 											<option <?php if($data['percentage_position'] == 'R'){?> selected <?php } ?>  value = 'r'  > Right</option>
 											<option <?php if($data['percentage_position'] == 'L'){?> selected <?php } ?>  value = 'r'  > Left</option>
 										</select>
@@ -264,7 +264,7 @@ $paydata = json_decode($paydata,1);
 									<div class="form-group">
 										<label for="number_format">Decimal places</label>
 										
-										<select class="form-control" id="number_format"   name= "number_format">
+										<select class="form-control" id="number_format"   name= "number_format" aria-label="Number Format">
 											<?php for($i=1; $i<5; $i++){?>
 											<option <?php if($data['number_format'] == $i){?> selected <?php } ?>  value = <?php echo $i; ?>  > 
 												<?php echo substr('999.999999', 0,4+$i); ?></option>
@@ -274,7 +274,7 @@ $paydata = json_decode($paydata,1);
 									
 									<div class="form-group">
 										<label for="invoice_perfix">Invoice PreFix</label>
-										<select class="form-control" id="invoice_perfix"   name= "invoice_perfix">
+										<select class="form-control" id="invoice_perfix"   name= "invoice_perfix" aria-label="Invoice Perfix">
 														<?php foreach ($perfixresponse as $key=>$perfix) {?>
 
 														<option <?php if($data['invoice_perfix'] == $perfix['code']){?> selected <?php } ?>  value = <?php echo $perfix['code']; ?>  ><?php echo $perfix['code']; ?></option>
@@ -283,7 +283,7 @@ $paydata = json_decode($paydata,1);
 									</div>
 									<div class="form-group">
 										<label>Invoice PostFix</label>
-										<input type="text" class="form-control" name="invoice_postfix" placeholder="Invoice PostFix" value="<?php echo $data['invoice_postfix']; ?>" >
+										<input type="text" class="form-control" name="invoice_postfix" placeholder="Invoice PostFix" value="<?php echo $data['invoice_postfix']; ?>" aria-label="Invoice PostFix">
 									</div>
 								</div>
 							</div>
@@ -299,7 +299,7 @@ $paydata = json_decode($paydata,1);
 									<div class="form-group">
 										<label>Default Currency</label>
 										<div class="col-lg-12">
-										<select class="form-control" id="kt_select2_11"   name= "default_currency_id" style="width: 100%">
+										<select class="form-control" id="kt_select2_11"   name= "default_currency_id" style="width: 100%" aria-label="Default Currency Id">
 														<?php foreach ($currencyres as $currenc) {?>
 
 														<option <?php if($data['default_currency_id'] == $currenc['id']){?> selected <?php } ?>  value = <?php echo $currenc['id']; ?>  >
@@ -317,7 +317,7 @@ $paydata = json_decode($paydata,1);
 													<?php $currency_formate  = array('99,99,99,99,999','99,999,999,999' );
 														foreach ($currency_formate as  $cu_formate) {  ?> 
 														<label class="kt-radio">
-															<input type="radio"  <?php if($data['currency_formate'] == $cu_formate){ ?>checked <?php } ?> name="currency_formate" value='<?php echo $cu_formate; ?>'><?php echo $cu_formate; ?>	
+															<input type="radio"  <?php if($data['currency_formate'] == $cu_formate){ ?>checked <?php } ?> name="currency_formate" value='<?php echo $cu_formate; ?>' aria-label="Currency Formate"><?php echo $cu_formate; ?>	
 															 <span></span>
 														</label>
 													<?php } ?>
@@ -326,7 +326,7 @@ $paydata = json_decode($paydata,1);
 									</div>
 									<div class="form-group">
 										<label for="default_language_id">Default Language</label>
-										<select class="form-control" id="default_language_id"   name= "default_language_id">
+										<select class="form-control" id="default_language_id"   name= "default_language_id" aria-label="Default Language Id">
 														<?php foreach ($languagedata as $lan) {?>
 
 														<option <?php if($data['default_language_id'] == $lan['genc_detail_code']){?> selected <?php } ?>  value = <?php echo $lan['genc_detail_code']; ?>  ><?php echo $lan['description']; ?></option>
@@ -336,7 +336,7 @@ $paydata = json_decode($paydata,1);
 									<div class="form-group">
 										<label for="default_tax_rate">Default Tax Rate</label>
 
-										<select class="form-control" id="default_tax_rate"   name= "default_tax_rate">
+										<select class="form-control" id="default_tax_rate"   name= "default_tax_rate" aria-label="Default Tax Rate">
 														<?php foreach ($taxres as $key=>$tax) {?>
 
 														<option <?php if($data['default_tax_rate'] == $tax['id']){?> selected <?php } ?>  value = <?php echo $tax['id']; ?>  ><?php echo $tax['name']; ?></option>
@@ -346,7 +346,7 @@ $paydata = json_decode($paydata,1);
 									</div>
 									<div class="form-group">
 										<label for="default_payment_mode">Default Payment Mode</label>
-										<select class="form-control" id="default_payment_mode"   name= "default_payment_mode">
+										<select class="form-control" id="default_payment_mode"   name= "default_payment_mode" aria-label="Default Payment Mode">
 														<?php foreach ($paydata as $lan) {?>
 
 														<option <?php if($data['default_payment_mode'] == $lan['genc_detail_code']){?> selected <?php } ?>  value = <?php echo $lan['genc_detail_code']; ?>  ><?php echo $lan['description']; ?></option>
@@ -355,7 +355,7 @@ $paydata = json_decode($paydata,1);
 									</div>	
 									<div class="form-group">
 										<label>Copy Rights</label>
-										<input type="text" class="form-control" name="copy_right" placeholder="Copy Rights" value="<?php echo $data['copy_right']; ?>" >
+										<input type="text" class="form-control" name="copy_right" placeholder="Copy Rights" value="<?php echo $data['copy_right']; ?>" aria-label="Copy Rights">
 									</div>					
 								</div>
 							</div>

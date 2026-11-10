@@ -21,19 +21,19 @@ include_once('../comm.php');
 			<div class="row">
 				<div class="col-lg-4 form-group">
 					<label class="form-label">KRA Name <span class="text-danger">*</span></label>
-					<input type="text"  class="form-control text-capitalize"  id="pop_area_name" value="<?php echo $json['area_name']; ?>" />
+					<input type="text"  class="form-control text-capitalize"  id="pop_area_name" value="<?php echo $json['area_name']; ?>" / aria-label="Input">
 				</div>
 				<div class="col-lg-4 form-group">
 					<label class="form-label">Description <span class="text-danger">*</span></label>
-					<textarea class="form-control"   id="pop_descrption"> <?php echo $json['description']; ?></textarea>
+					<textarea class="form-control"   id="pop_descrption" aria-label="Textarea"> <?php echo $json['description']; ?></textarea>
 				</div>
 				<div class="col-lg-2 form-group">
 					<label class="form-label">Weightage<span class="text-danger">*</span></label>
-					<input type="text"  class="form-control text-capitalize"  id="pop_weightage"  value="<?php echo $json['weightage']; ?>" />
+					<input type="text"  class="form-control text-capitalize"  id="pop_weightage"  value="<?php echo $json['weightage']; ?>" / aria-label="Input">
 				</div>
 				<div class="col-lg-2 form-group w-full">
 					<label class="form-label">Type<span class="text-danger">*</span></label>
-					<select class="form-control  form-select js-example-basic-single"  id="pop_kra_type" ><option value="1" <?php echo $json['kra_type'] == '1'?'selected':''; ?>>Professional</option><option value="2" <?php echo $json['kra_type'] == '2'?'selected':''; ?>>Personal</option></select>
+					<select class="form-control  form-select js-example-basic-single"  id="pop_kra_type" aria-label="Select"><option value="1" <?php echo $json['kra_type'] == '1'?'selected':''; ?>>Professional</option><option value="2" <?php echo $json['kra_type'] == '2'?'selected':''; ?>>Personal</option></select>
 				</div>
 
 			</div>		

@@ -55,7 +55,7 @@ $company_subscription_plan_licenses = $subscriptusers['company_subscription_plan
  function addMoreField(){
     var htmlRows = '';
     var cnt = $(".fieldnamecnt").length+1;
-    htmlRows += '<tr id="deleterow'+cnt+'"><td><input class="form-control fieldnamecnt" type="text" name="fieldname[]"></td><td><input class="form-control" type="text" name="fieldvalue[]"></td><td><i class="ti-trash" onclick="deleteRow('+cnt+')"></i> </td></tr>';  
+    htmlRows += '<tr id="deleterow'+cnt+'"><td><input class="form-control fieldnamecnt" type="text" name="fieldname[]" aria-label="Fieldname"></td><td><input class="form-control" type="text" name="fieldvalue[]" aria-label="Fieldvalue"></td><td><i class="ti-trash" onclick="deleteRow('+cnt+')"></i> </td></tr>';  
     $('#appendfield').append(htmlRows);
 }
 function deleteRow(row){
@@ -284,7 +284,7 @@ function refrashpage(){
 
 
                                                             <td>
-<input type="checkbox" class="js-switch" <?php echo $subscriptuser['payment_type']=="Y"?"checked disabled":"";?> onchange="acceptPaymentSubscription('<?php echo $subscriptuser['id']; ?>','<?php echo $subscriptuser['added_license_users']; ?>','<?php echo $subscriptuser['price']; ?>')"   /></td>
+<input type="checkbox" class="js-switch" <?php echo $subscriptuser['payment_type']=="Y"?"checked disabled":"";?> onchange="acceptPaymentSubscription('<?php echo $subscriptuser['id']; ?>','<?php echo $subscriptuser['added_license_users']; ?>','<?php echo $subscriptuser['price']; ?>')"   / aria-label="Input"></td>
                                                         </tr>
                                                         <?php $i++; } ?>
                                                     </tbody>
@@ -328,10 +328,10 @@ function refrashpage(){
                                                      ?> 
                                                      <tr id="deleterow1">
                                                         <td>
-                                                            <input class="form-control fieldnamecnt" type="text" name="fieldname[]" value="<?php echo $kk; ?>">
+                                                            <input class="form-control fieldnamecnt" type="text" name="fieldname[]" value="<?php echo $kk; ?>" aria-label="Fieldname">
                                                         </td>
                                                         <td>
-                                                            <input class="form-control" type="text" name="fieldvalue[]" value="<?php echo $custoval; ?>">
+                                                            <input class="form-control" type="text" name="fieldvalue[]" value="<?php echo $custoval; ?>" aria-label="Fieldvalue">
                                                         </td>
                                                         <td>
                                                             <i class="ti-trash text-danger" onclick="deleteRow('1')"></i>
@@ -348,13 +348,13 @@ function refrashpage(){
                                     <h6 class="mt-2">Invoice footer 
                                         <i class="ti-info ms-1 fs-7 color-default text-white border-radius p-1" data-bs-toggle="tooltip" data-placement="bottom" title="Add custom field to the billing invoice"></i>
                                     </h6>
-                                    <textarea class="form-control" name="invoice_footer" style="height:80px"><?php echo $applicationuser['invoice_footer']; ?></textarea>
+                                    <textarea class="form-control" name="invoice_footer" style="height:80px" aria-label="Invoice Footer"><?php echo $applicationuser['invoice_footer']; ?></textarea>
                                     <div class="alert alert-primary background-primary alert-dismissible mt-4">
                                         <div class="row">
                                             <div class="col-lg-4">
                                                 <div class="checkbox-fade fade-in-warning  d-block">
                                                     <label class="form-label  d-block mb-0">
-                                                        <input type="checkbox" name="usage_trash_holder_type" id="usagetreshold" value="Y" onchange="checkUsageTreshold()" <?php echo $applicationuser['usage_trash_holder_type']=='Y'?"checked":""; ?>>
+                                                        <input type="checkbox" name="usage_trash_holder_type" id="usagetreshold" value="Y" onchange="checkUsageTreshold()" <?php echo $applicationuser['usage_trash_holder_type']=='Y'?"checked":""; ?> aria-label="Usage Trash Holder Type">
                                                         <span class="cr mt-0">
                                                           <i class="cr-icon icofont icofont-ui-check txt-warning"></i>
                                                       </span>
@@ -367,7 +367,7 @@ function refrashpage(){
                                             <div class="row align-items-center">
                                                 <label class="form-label col-lg-3 f-w-700 f-14">Days</label>
                                                 <div class="col-lg-7">
-                                                    <input type="number" name="usage_trash_holder_day"  class="form-control" value="<?php echo $applicationuser['usage_trash_holder_day']; ?>" >
+                                                    <input type="number" name="usage_trash_holder_day"  class="form-control" value="<?php echo $applicationuser['usage_trash_holder_day']; ?>" aria-label="Usage Trash Holder Day">
                                                 </div>
                                             </div>
                                         </div>
@@ -377,7 +377,7 @@ function refrashpage(){
 
                                     <div class="checkbox-fade fade-in-warning  d-block">
                                         <label class="form-label  d-block">
-                                            <input type="checkbox" name="pro_rata_billing" id="usagetreshold" value="Y" <?php echo $applicationuser['pro_rata_billing']=='Y'?"checked":""; ?>>
+                                            <input type="checkbox" name="pro_rata_billing" id="usagetreshold" value="Y" <?php echo $applicationuser['pro_rata_billing']=='Y'?"checked":""; ?> aria-label="Pro Rata Billing">
                                             <span class="cr mt-0">
                                               <i class="cr-icon icofont icofont-ui-check txt-warning"></i>
                                           </span>
@@ -470,7 +470,7 @@ function refrashpage(){
                     </div>
                     <div class="form-group col-lg-6">
                         <label for="popup_paymentdate" class="col-4 col-form-label f-w-700">Payment Date</label>
-                        <input class="form-control datepicker" type="text" name="payment_date"  id="popup_paymentdate">
+                        <input class="form-control datepicker" type="text" name="payment_date"  id="popup_paymentdate" aria-label="Payment Date">
                     </div>
                 </div>
             </div>

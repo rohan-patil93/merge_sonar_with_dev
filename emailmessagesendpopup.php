@@ -146,19 +146,19 @@ session_start();
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-12 p-r-40 padd-mob">
                                         <h3 class="txt-primary f-w-600">Get in Touch</h3>
                                         <div class="form-group form-primary mt-4 mb-0">
-                                            <input type="text" required name="name" id="name" class="form-control" required="">
+                                            <input type="text" required name="name" id="name" class="form-control" required="" aria-label="Name">
                                             <span class="form-bar"></span>
                                             <label class="form-label float-label">Name*</label>
                                         </div>
                                         <div id="name_err" class="text-danger f-12 position-absolute" style="display:none;">Please enter the name</div>
                                         <div class="form-group form-primary mt-4 mb-0">
-                                            <input type="text" name="email" id="email" class="form-control" required="">
+                                            <input type="text" name="email" id="email" class="form-control" required="" aria-label="Email">
                                             <span class="form-bar"></span>
                                             <label class="form-label float-label">Email ID*</label>
                                         </div>
                                         <div id="email_err" class="text-danger f-12 position-absolute" style="display:none;">Please enter the email</div>
                                         <div class="form-group form-primary mt-4 mb-0 txtarea-sec">
-                                            <textarea style="height: 100px;" class="form-control" name="message" id="message"></textarea>
+                                            <textarea style="height: 100px;" class="form-control" name="message" id="message" aria-label="Message"></textarea>
                                             <span class="form-bar"></span>
                                             <label class="form-label float-label">Message*</label>
                                         </div>
@@ -168,7 +168,7 @@ session_start();
 
                                         <div class="form-group mb-1">
                                             <img src="captcha.php?rand=<?php echo random_int(0, PHP_INT_MAX);?>" id='captchaimg' alt="" ><br>
-                                            <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray"  id="captcha_code11" name="captcha_code" type="text" placeholder="Enter Captcha">
+                                            <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray"  id="captcha_code11" name="captcha_code" type="text" placeholder="Enter Captcha" aria-label="Enter Captcha">
                                            
                                             <br>
                                             Can't read the image? click <a href='javascript: refreshCaptcha();' class="text-primary">here</a> to refresh.

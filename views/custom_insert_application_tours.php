@@ -53,14 +53,14 @@ $mopdulesetup = json_decode($mopdule_setup,1);
      	var count = $(".itemRow").length;
      	var htmlRows = '';
         htmlRows += '<tr class="itemRow cardid'+count+'">';  
-        htmlRows += '<td><div class="row"><div class="col-lg-2"><span class="deleteiconcustom text-danger f-22" onclick="deleteitem('+count+')" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Delete VRC Card"><i class="ti-trash"></i></span></div><div class="col-lg-10"><input type="hidden" name="rid[]" ><input type="text" name="field_name[]"  class="form-control"  required ></div></div></td>';
-        htmlRows += '<td><input type="text" name="menu_path[]"  class="form-control"  ></td>';
-        htmlRows += '<td><input type="text" name="reference_field_name[]" class="form-control"  required ></td>';
-        htmlRows += '<td><textarea  name="help_text[]" class="form-control" required ></textarea></td>';
-        htmlRows += '<td> <select class="form-select js-example-basic-single"  name="field_type[]" ><?php foreach($filed_array as $key=>$value){ ?>
+        htmlRows += '<td><div class="row"><div class="col-lg-2"><span class="deleteiconcustom text-danger f-22" onclick="deleteitem('+count+')" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Delete VRC Card"><i class="ti-trash"></i></span></div><div class="col-lg-10"><input type="hidden" name="rid[]" ><input type="text" name="field_name[]"  class="form-control"  required aria-label="Field Name"></div></div></td>';
+        htmlRows += '<td><input type="text" name="menu_path[]"  class="form-control" aria-label="Menu Path"></td>';
+        htmlRows += '<td><input type="text" name="reference_field_name[]" class="form-control"  required aria-label="Reference Field Name"></td>';
+        htmlRows += '<td><textarea  name="help_text[]" class="form-control" required aria-label="Help Text"></textarea></td>';
+        htmlRows += '<td> <select class="form-select js-example-basic-single"  name="field_type[]" aria-label="Field Type"><?php foreach($filed_array as $key=>$value){ ?>
 <option value="<?php echo $key; ?>"  <?php echo $respons['field_type']==$key?"selected":""; ?>><?php echo $value; ?></option><?php } ?></select></td>';
-   htmlRows += '<td><input type="text" name="sequence[]"  class="form-control"  required></td>';
-   htmlRows += '<td><input type="checkbox" class="js-switch'+count+'" name="display['+count+']" value="1" /></td>';
+   htmlRows += '<td><input type="text" name="sequence[]"  class="form-control"  required aria-label="Sequence"></td>';
+   htmlRows += '<td><input type="checkbox" class="js-switch'+count+'" name="display['+count+']" value="1" / aria-label="Display[&#039;+count+&#039;]"></td>';
         htmlRows += '</tr>';
         $('#toureaddmore').append(htmlRows);
          $(".js-example-basic-single").select2();
@@ -99,7 +99,7 @@ function deleteitem(cardid){
 <div class="row">
 	<label class="col-lg-2 f-w-700 ">Select table name</label>
 	<div class="col-lg-3">
-	  <select class="form-select js-example-basic-single" name="application_table_name" onchange="selecttablename(this.value)">
+	  <select class="form-select js-example-basic-single" name="application_table_name" onchange="selecttablename(this.value)" aria-label="Application Table Name">
 			<option value = "0"> Select Any One</option>
 			<?php foreach ($showtables as $data) {  ?>
 				<option  <?php if($resarray[0]['application_table_name'] == $data['application_table_name']){ ?> selected  <?php } ?> value = <?php echo $data['application_table_name'] ?>   > <?php echo ucwords(str_replace('_',' ',$data['application_table_name'])); ?> </option>
@@ -107,7 +107,7 @@ function deleteitem(cardid){
 				<option value = "-1"  <?php echo $_GET['table']=="-1"?"selected":""?>>Other Table</option>
 		</select>
 		<?php if($_GET['table']=="-1"){ ?>
-		<input type="text" name="table_name_txt" class="mt-2" id="table_name_txt" value="<?php echo $resarray[0]['application_table_name']; ?>" placeholder="Enter Table/Page Name"> <?php } ?>
+		<input type="text" name="table_name_txt" class="mt-2" id="table_name_txt" value="<?php echo $resarray[0]['application_table_name']; ?>" placeholder="Enter Table/Page Name" aria-label="Enter Table/Page Name"> <?php } ?>
 
 	</div>
 	
@@ -135,18 +135,18 @@ function deleteitem(cardid){
 	  <tr class="itemRow">
 		<td> 
 			<input type="hidden" name="rid[]" value="<?php echo $respons['id']; ?>">
-	  		<input type="text" name="field_name[]" id="field_name<?php echo $i; ?>" class="form-control" value="<?php echo $respons['field_name']; ?>"  readonly>
+	  		<input type="text" name="field_name[]" id="field_name<?php echo $i; ?>" class="form-control" value="<?php echo $respons['field_name']; ?>"  readonly aria-label="Field Name">
 	  	</td>
 	  	<td> 
-	  		<input type="text" name="menu_path[]" id="menu_path<?php echo $i; ?>" class="form-control" value="<?php echo $respons['menu_path']; ?>"  >
+	  		<input type="text" name="menu_path[]" id="menu_path<?php echo $i; ?>" class="form-control" value="<?php echo $respons['menu_path']; ?>" aria-label="Menu Path">
 	  	</td>
 		<td> 
-	  		<input type="text" name="reference_field_name[]" id="reference_field_name<?php echo $i; ?>" class="form-control" value="<?php echo $respons['reference_field_name']; ?>"  >
+	  		<input type="text" name="reference_field_name[]" id="reference_field_name<?php echo $i; ?>" class="form-control" value="<?php echo $respons['reference_field_name']; ?>" aria-label="Reference Field Name">
 	  	</td>
-		<td><textarea  name="help_text[]" class="form-control" ><?php echo $respons['help_text']; ?></textarea></td>
+		<td><textarea  name="help_text[]" class="form-control" aria-label="Help Text"><?php echo $respons['help_text']; ?></textarea></td>
 		<td> 
 
- <select class="form-select js-example-basic-single" id="" name="field_type[]"  id="field_type<?php echo $i; ?>">
+ <select class="form-select js-example-basic-single" id="" name="field_type[]"  id="field_type<?php echo $i; ?>" aria-label="Field Type">
                
                <?php foreach($filed_array as $key=>$value){ ?>
 <option value="<?php echo $key; ?>"  <?php echo $respons['field_type']==$key?"selected":""; ?>><?php echo $value; ?></option>
@@ -156,10 +156,10 @@ function deleteitem(cardid){
 
 	  	</td>
 	  	<td> 
-	  		<input type="text" name="sequence[]" id="sequence<?php echo $i; ?>" class="form-control" value="<?php echo $respons['sequence']; ?>"  >
+	  		<input type="text" name="sequence[]" id="sequence<?php echo $i; ?>" class="form-control" value="<?php echo $respons['sequence']; ?>" aria-label="Sequence">
 	  	</td>
 	  	<td>
-	  		<input type="checkbox" class="js-switch" name="display[<?php echo $i; ?>]" value="1" <?php echo $respons['display']=='1'?"checked":""; ?>  />
+	  		<input type="checkbox" class="js-switch" name="display[<?php echo $i; ?>]" value="1" <?php echo $respons['display']=='1'?"checked":""; ?>  / aria-label="Input">
 
 	  	</td>
 

@@ -85,25 +85,25 @@ if (!empty($_SESSION['sku_msg'])) {
                             <input type="text" name="sku_generator_name" id="sku_generator_name"
                                 class="form-control form-control-lg shadow-sm" 
                                 value="<?= htmlspecialchars($sku['sku_generator_name'] ?? '') ?>" 
-                                placeholder="Enter name" required>
+                                placeholder="Enter name" required aria-label="Enter name">
                         </div>
                         <div class=" col-lg-6 mb-3">
                             <label class="form-label">Serial Number <span class="text-danger">*</span></label>
                             <input type="number" name="serial_number" id="serial_number"
                                 class="form-control form-control-lg shadow-sm"
-                                value="<?= htmlspecialchars($sku['serial_number'] ?? '') ?>" required>
+                                value="<?= htmlspecialchars($sku['serial_number'] ?? '') ?>" required aria-label="Serial Number">
                         </div>
                         <div class="col-lg-6 mb-3">
                             <label class="form-label">Serial Number Length <span class="text-danger">*</span></label>
                             <input type="number" name="serial_number_length" id="serial_number_length"
                                 class="form-control form-control-lg shadow-sm" 
-                                value="<?= htmlspecialchars($sku['serial_number_length'] ?? '') ?>" min="1" required>
+                                value="<?= htmlspecialchars($sku['serial_number_length'] ?? '') ?>" min="1" required aria-label="Serial Number Length">
                         </div>
                         <div class="col-lg-6 mb-3">
                             <label class="form-label">Separation Symbol <span class="text-danger">*</span></label>
                             <input type="text" name="separation_symbol" id="separation_symbol"
                                 class="form-control form-control-lg shadow-sm" maxlength="1"
-                                value="<?= htmlspecialchars($sku['separation_symbol'] ?? '') ?>" required>
+                                value="<?= htmlspecialchars($sku['separation_symbol'] ?? '') ?>" required aria-label="Separation Symbol">
                             <div id="sepError" class="invalid-feedback d-none">
                                 Please enter a valid symbol (not letter/number).
                             </div>
@@ -144,13 +144,13 @@ if (!empty($_SESSION['sku_msg'])) {
                                         <label><?= $label ?></label>
                                         <div class="switch-field">
                                             <input class="js-switch component-toggle" type="checkbox" id="<?= $key ?>"
-                                                data-key="<?= $key ?>" <?= ($enabled ? 'checked' : '') ?>>
+                                                data-key="<?= $key ?>" <?= ($enabled ? 'checked' : '') ?> aria-label="Input">
                                         </div>
                                     </div>
                                     <label class="form-label small">Sequence</label>
                                     <select class="form-select sequence-select js-example-basic-single" 
                                             id="<?= $key ?>_seq" data-key="<?= $key ?>" 
-                                            onchange="handleSequenceChange(this)">
+                                            onchange="handleSequenceChange(this)" aria-label="Select">
                                         <option value="">Select</option>
                                         <?php for($i=1; $i<=4; $i++): ?>
                                             <option value="<?= $i ?>" <?= ($sequence == $i ? 'selected' : '') ?>>

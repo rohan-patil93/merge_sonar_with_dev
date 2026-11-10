@@ -67,12 +67,12 @@ echo "<pre>"; print_r($result);echo "</pre>";
 		var id = 'rowapplicationemptytransactions_'+maxsar; 
 	    var html ="";
 	    html += '<div class="row mt-3" id="'+id+'">';
-	    html += '<div class="col-lg-3"><select name="transaction_table[]" class="form-control form-select js-example-basic-single" id="transaction_table_'+maxsar+'"  onchange="getTransactionTable('+maxsar+')"><option value="">Select Any One </option><?php foreach($transaction_table as $tableval) {  ?><option value="<?php echo $tableval; ?>"><?php echo $tableval;?></option><?php } ?></select></div>';
-	    html += '<div class="col-lg-2"><select name="option_type[]" class="form-control form-select js-example-basic-single"> <?php foreach($option_type as $optkey=>$optype) {  ?><option value="<?php echo $optkey; ?>" <?php echo $optkey ==$ttj['transaction_table']?"selected":""; ?>><?php echo $optype;?></option><?php } ?></select></div>';
+	    html += '<div class="col-lg-3"><select name="transaction_table[]" class="form-control form-select js-example-basic-single" id="transaction_table_'+maxsar+'"  onchange="getTransactionTable('+maxsar+')" aria-label="Transaction Table"><option value="">Select Any One </option><?php foreach($transaction_table as $tableval) {  ?><option value="<?php echo $tableval; ?>"><?php echo $tableval;?></option><?php } ?></select></div>';
+	    html += '<div class="col-lg-2"><select name="option_type[]" class="form-control form-select js-example-basic-single" aria-label="Option Type"> <?php foreach($option_type as $optkey=>$optype) {  ?><option value="<?php echo $optkey; ?>" <?php echo $optkey ==$ttj['transaction_table']?"selected":""; ?>><?php echo $optype;?></option><?php } ?></select></div>';
 
-	    html += '<div class="col-lg-3"><select name="application_message_code[]" class="form-control form-select js-example-basic-single"><option value="">Select Any One </option><?php foreach($application_messages as $amessage) {  ?><option <?php if($amessage['message_number']=='9097'){ echo "selected"; } ?>  value="<?php echo $amessage['message_number']; ?>" ><?php echo preg_replace("/\s+/", " ", $amessage['message_number']." - ".$amessage['message_description']);?></option><?php } ?></select></div>';
+	    html += '<div class="col-lg-3"><select name="application_message_code[]" class="form-control form-select js-example-basic-single" aria-label="Application Message Code"><option value="">Select Any One </option><?php foreach($application_messages as $amessage) {  ?><option <?php if($amessage['message_number']=='9097'){ echo "selected"; } ?>  value="<?php echo $amessage['message_number']; ?>" ><?php echo preg_replace("/\s+/", " ", $amessage['message_number']." - ".$amessage['message_description']);?></option><?php } ?></select></div>';
 	    
-	    html += '<div class="col-lg-3"><textarea type="text" class="form-control" name="extra_message[]" id="extra_message_'+maxsar+'"></textarea> </div>';
+	    html += '<div class="col-lg-3"><textarea type="text" class="form-control" name="extra_message[]" id="extra_message_'+maxsar+'" aria-label="Extra Message"></textarea> </div>';
 
 	    html += '<div class="col-lg-1"><i class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="removeRow(\''+id+ '\')"></i></div>';
 	    html += '</div>';
@@ -107,7 +107,7 @@ echo "<pre>"; print_r($result);echo "</pre>";
     	<div class="row">
 	    	<div class="form-group col-lg-5">
 		        <label class="form-label">Module Setup </label>
-		        <select name="module_setup_id" class="form-control form-select js-example-basic-single">
+		        <select name="module_setup_id" class="form-control form-select js-example-basic-single" aria-label="Module Setup Id">
 		            <option value="">Select Any One </option>
 		            <?php foreach($module_setup as $mods) {  ?>
 		              <option value="<?php echo $mods['module_id']; ?>" <?php echo $mods['module_id'] ==$application_empty_transactions['module_setup_id']?"selected":""; ?>><?php echo $mods['display_name'];?></option>
@@ -119,7 +119,7 @@ echo "<pre>"; print_r($result);echo "</pre>";
 	        </div>
 	        <div class="form-group col-lg-5">
 	          	<label class="form-label"> Option <span class="text-danger">*</span></label>
-	          	<select name="page_option" class="form-control form-select js-example-basic-single">
+	          	<select name="page_option" class="form-control form-select js-example-basic-single" aria-label="Page Option">
 		            <option value="">Select Any One </option>
 		            <?php foreach($application_pages as $optionkey=>$val) {  ?>
 		              <option value="<?php echo $optionkey; ?>" <?php echo $optionkey ==$application_empty_transactions['page_option']?"selected":""; ?>><?php echo $val;?></option>
@@ -152,7 +152,7 @@ echo "<pre>"; print_r($result);echo "</pre>";
 	    	?>
 			    <div class="row mt-2" id="<?php echo $rowid; ?>">
 			    	<div class="col-lg-3">
-			    		<select name="transaction_table[]"  id="transaction_table_<?php echo $im; ?>" class="form-control form-select js-example-basic-single" onchange="getTransactionTable('<?php echo $im; ?>')">
+			    		<select name="transaction_table[]"  id="transaction_table_<?php echo $im; ?>" class="form-control form-select js-example-basic-single" onchange="getTransactionTable('<?php echo $im; ?>')" aria-label="Transaction Table">
 				            <option value="">Select Any One </option>
 				            <?php foreach($transaction_table as $tableval) {  ?>
 				              <option value="<?php echo $tableval; ?>" <?php echo $tableval ==$ttj['transaction_table']?"selected":""; ?>><?php echo $tableval;?></option>
@@ -160,14 +160,14 @@ echo "<pre>"; print_r($result);echo "</pre>";
 				        </select>  
 			    	</div>
 			    	<div class="col-lg-2">
-			    		<select name="option_type[]" class="form-control form-select js-example-basic-single">
+			    		<select name="option_type[]" class="form-control form-select js-example-basic-single" aria-label="Option Type">
 				            <?php foreach($option_type as $optkey=>$optype) {  ?>
 				              <option value="<?php echo $optkey; ?>" <?php echo $optkey ==$ttj['option_type']?"selected":""; ?>><?php echo $optype;?></option>
 				            <?php } ?>
 				        </select>  
 			    	</div>
 			    	<div class="col-lg-3">
-			    		<select name="application_message_code[]" class="form-control form-select js-example-basic-single">
+			    		<select name="application_message_code[]" class="form-control form-select js-example-basic-single" aria-label="Application Message Code">
 				            <option value="">Select Any One </option>
 				            <?php foreach($application_messages as $amessage) {  ?>
 				              <option value="<?php echo $amessage['message_number']; ?>" <?php echo $amessage['message_number'] ==$ttj['application_message_code']?"selected":""; ?>><?php echo $amessage['message_number']." - ".$amessage['message_description'];?></option>
@@ -175,7 +175,7 @@ echo "<pre>"; print_r($result);echo "</pre>";
 				        </select>  
 			    	</div>
 			    	<div class="col-lg-3">
-			    		<textarea type="text" class="form-control" name="extra_message[]" id="extra_message_<?php echo $im; ?>"><?php echo $ttj['extra_message']; ?></textarea> 
+			    		<textarea type="text" class="form-control" name="extra_message[]" id="extra_message_<?php echo $im; ?>" aria-label="Extra Message"><?php echo $ttj['extra_message']; ?></textarea> 
 			    	</div>
 			    	<div class="col-lg-1">
 			    		<i class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="removeRow('<?php echo $rowid; ?>')"></i>

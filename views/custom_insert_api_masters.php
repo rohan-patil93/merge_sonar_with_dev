@@ -217,24 +217,24 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
             <div class="row"> 
                 <div class="col-md-6 form-group">
                     <label class="form-label">Service Provider</label>
-                    <input name="api_service_provider" type="text" class="form-control" id="api-service-provider" value="<?php echo $details['api_service_provider']; ?>" placeholder="">
+                    <input name="api_service_provider" type="text" class="form-control" id="api-service-provider" value="<?php echo $details['api_service_provider']; ?>" placeholder="" aria-label="Api Service Provider">
                 </div>
                 <div class="col-md-6 form-group">
                     <label class="form-label">API Name</label>
-                    <input name="api_name" type="text" class="form-control" id="api-name" placeholder="" value="<?php echo $details['api_name']; ?>">
+                    <input name="api_name" type="text" class="form-control" id="api-name" placeholder="" value="<?php echo $details['api_name']; ?>" aria-label="Api Name">
                 </div>
                 <div class="col-md-6 form-group">
                     <label class="form-label">API Code</label>
-                    <input name="api_code" type="text" class="form-control" id="api_code" placeholder="" value="<?php echo $details['api_code']; ?>" onkeypress="if (event.keyCode === 32) return false;" onblur="buildDynamicUrl()">
+                    <input name="api_code" type="text" class="form-control" id="api_code" placeholder="" value="<?php echo $details['api_code']; ?>" onkeypress="if (event.keyCode === 32) return false;" onblur="buildDynamicUrl()" aria-label="Api Code">
                 </div>
                 <div class="col-md-6 form-group">
                     <label class="form-label">Unique ID</label>
-                    <input name="unique_id" id="unique_id" type="text" class="form-control" placeholder="" value="<?php echo $details['unique_id']; ?>">
+                    <input name="unique_id" id="unique_id" type="text" class="form-control" placeholder="" value="<?php echo $details['unique_id']; ?>" aria-label="Unique Id">
                 </div>
                 <div class="col-md-6 form-group">
                     <label class="form-label">Method
                         Input</label>
-                    <select name="api_method" class="form-control js-example-basic-single" id="method" onchange="buildDynamicUrl()">
+                    <select name="api_method" class="form-control js-example-basic-single" id="method" onchange="buildDynamicUrl()" aria-label="Api Method">
                         <option value="GET" <?php echo $details['api_method'] == 'GET' ? 'selected' : ''; ?>>GET</option>
                         <option value="POST" <?php echo $details['api_method'] == 'POST' ? 'selected' : ''; ?>>POST</option>
                         <option value="PUT" <?php echo $details['api_method'] == 'PUT' ? 'selected' : ''; ?>>PUT</option>
@@ -243,7 +243,7 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                 </div>
                 <div class="col-md-6 form-group">
                     <label class="form-label">Results Format</label>
-                    <select name="request_format" class="form-control js-example-basic-single" id="results-format" >
+                    <select name="request_format" class="form-control js-example-basic-single" id="results-format" aria-label="Request Format">
                         <option value="json" <?php echo $details['request_format'] == 'json' ? 'selected' : ''; ?>>JSON string</option>
                         <option value="xml" <?php echo $details['request_format'] == 'xml' ? 'selected' : ''; ?>>XML</option>
                         <option value="text" <?php echo $details['request_format'] == 'text' ? 'selected' : ''; ?>>Plain Text</option>
@@ -251,22 +251,22 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                 </div>
                 <div class="col-md-6 form-group">
                     <label class="form-label">API Type</label>
-                    <select name="api_type" class="form-control js-example-basic-single" id="api_type" onchange="getAPIType()">
+                    <select name="api_type" class="form-control js-example-basic-single" id="api_type" onchange="getAPIType()" aria-label="Api Type">
                         <option value="S" <?php echo $details['api_type'] == 'S' ? 'selected' : ''; ?>>Send</option>
                         <option value="R" <?php echo $details['api_type'] == 'R' ? 'selected' : ''; ?>>Receive</option>
                     </select>
                 </div>
                 <div class="col-md-6 form-group">
                     <label class="form-label">Base(Test) URL</label>
-                    <input name="testing_url" id="testing_url" type="text" class="form-control" placeholder="" value="<?php echo $details['testing_url']; ?>">
+                    <input name="testing_url" id="testing_url" type="text" class="form-control" placeholder="" value="<?php echo $details['testing_url']; ?>" aria-label="Testing Url">
                 </div>
                 <div class="col-md-6 form-group">
                     <label class="form-label">Production URL</label>
-                    <input name="production_url" id="production_url" type="text" class="form-control" placeholder="" value="<?php echo $details['production_url']; ?>">
+                    <input name="production_url" id="production_url" type="text" class="form-control" placeholder="" value="<?php echo $details['production_url']; ?>" aria-label="Production Url">
                 </div>
                 <div class="col-md-12 form-group">
                     <label class="form-label">Endpoint</label>
-                    <input name="end_point" id="end_point" type="text" class="form-control" placeholder="" value="<?php echo $details['end_point']; ?>" readonly>
+                    <input name="end_point" id="end_point" type="text" class="form-control" placeholder="" value="<?php echo $details['end_point']; ?>" readonly aria-label="End Point">
                 </div>
             </div>
             <div class="row">
@@ -287,10 +287,10 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                                     <tr>
 
                                         <td>
-                                            <input type="text" class="form-control request-parameter-row requestparmfield" name="get_name[]" value="<?php echo $name; ?>" onkeypress="if (event.keyCode === 32) return false;" data-keyid="<?php echo $mk; ?>" onblur="buildDynamicUrl()">
+                                            <input type="text" class="form-control request-parameter-row requestparmfield" name="get_name[]" value="<?php echo $name; ?>" onkeypress="if (event.keyCode === 32) return false;" data-keyid="<?php echo $mk; ?>" onblur="buildDynamicUrl()" aria-label="Get Name">
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control requestparmvalue" name="get_value[]" value="<?php echo $value; ?>" data-keyid="<?php echo $mk; ?>" onblur="buildDynamicUrl()">
+                                            <input type="text" class="form-control requestparmvalue" name="get_value[]" value="<?php echo $value; ?>" data-keyid="<?php echo $mk; ?>" onblur="buildDynamicUrl()" aria-label="Get Value">
                                         </td>
                                     </tr>
                                 <?php $mk++; endforeach; ?>
@@ -316,8 +316,8 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                                 </thead>
                                 <?php foreach (json_decode($details['request_header'], true) as $name => $value): ?>
                                     <tr>
-                                        <td><input type="text" class="form-control headersrow" name="get_header_name[]" value="<?php echo $name; ?>" onkeypress="if (event.keyCode === 32) return false;"></td>
-                                        <td><input type="text" class="form-control" name="get_header_value[]" value="<?php echo $value; ?>"></td>
+                                        <td><input type="text" class="form-control headersrow" name="get_header_name[]" value="<?php echo $name; ?>" onkeypress="if (event.keyCode === 32) return false;" aria-label="Get Header Name"></td>
+                                        <td><input type="text" class="form-control" name="get_header_value[]" value="<?php echo $value; ?>" aria-label="Get Header Value"></td>
                                     </tr>
                                 <?php endforeach; ?>
                             </table>
@@ -341,8 +341,8 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                                 </thead>
                                 <?php foreach (json_decode($details['api_request_post_parameters'], true) as $name => $value): ?>
                                     <tr>
-                                        <td><input type="text" class="form-control postfieldsrow" name="get_post_field_name[]" value="<?php echo $name; ?>" onkeypress="if (event.keyCode === 32) return false;"></td>
-                                        <td><input type="text" class="form-control" name="get_post_field_value[]" value="<?php echo $value; ?>"></td>
+                                        <td><input type="text" class="form-control postfieldsrow" name="get_post_field_name[]" value="<?php echo $name; ?>" onkeypress="if (event.keyCode === 32) return false;" aria-label="Get Post Field Name"></td>
+                                        <td><input type="text" class="form-control" name="get_post_field_value[]" value="<?php echo $value; ?>" aria-label="Get Post Field Value"></td>
                                     </tr>
                                 <?php endforeach; ?>
                             </table>
@@ -361,7 +361,7 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                         <div class="card-block">
                             <div class="form-group">
                                 <label class="form-label">Transaction</label>
-                                <select name="application_table" class="form-control js-example-basic-single" id="api_application_table"  onchange="getApplicationTable()">
+                                <select name="application_table" class="form-control js-example-basic-single" id="api_application_table"  onchange="getApplicationTable()" aria-label="Application Table">
                                      <option value="" >Select Any One</option>
                                     <?php foreach($display_attributes as $datr){ ?>
                                         <option value="<?php echo $datr['application_table_name']; ?>" <?php echo $datr['application_table_name'] == $details['application_table']? 'selected' : ''; ?>> <?php echo ucwords(str_replace('_',' ',$datr['application_table_name'])); ?> </option>
@@ -370,7 +370,7 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Response Records</label>
-                                <select name="response_row_type" class="form-control js-example-basic-single" id="response_row_type">
+                                <select name="response_row_type" class="form-control js-example-basic-single" id="response_row_type" aria-label="Response Row Type">
                                     <option value="" >Select Any One</option>
                                     <option value="M" <?php echo $details['response_row_type'] == 'M' ? 'selected' : ''; ?>>Multiple</option>
                                     <option value="S" <?php echo $details['response_row_type'] == 'S' ? 'selected' : ''; ?>>Single</option>
@@ -389,10 +389,10 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                                     </thead>
                                     <?php $sqo = 1; foreach(json_decode($details['api_response_details'], true) as $name => $value): ?>
                                         <tr>
-                                            <td><input type="text" class="form-control responsedetailsrow" name="get_response_details_name[<?php echo $sqo; ?>]" value="<?php echo $name; ?>" id="get_response_details_name_<?php echo $sqo; ?>" <?php echo $details['api_type'] == 'S'?"readonly":""; ?> onkeypress="if (event.keyCode === 32) return false;"></td>
-                                            <!-- <td><input type="text" class="form-control" name="get_response_details_value[]" value="<?php //echo $value['value']; ?>" readonly></td> -->
+                                            <td><input type="text" class="form-control responsedetailsrow" name="get_response_details_name[<?php echo $sqo; ?>]" value="<?php echo $name; ?>" id="get_response_details_name_<?php echo $sqo; ?>" <?php echo $details['api_type'] == 'S'?"readonly":""; ?> onkeypress="if (event.keyCode === 32) return false;" aria-label="Input"></td>
+                                            <!-- <td><input type="text" class="form-control" name="get_response_details_value[]" value="<?php //echo $value['value']; ?>" readonly aria-label="Get Response Details Value"></td> -->
                                             <td>
-                                                <select name="get_response_details_value[<?php echo $sqo; ?>]" class="form-control js-example-basic-single application_table_fields" onchange="getMappingField('<?php echo $sqo; ?>')" id="get_response_details_value_<?php echo $sqo; ?>">
+                                                <select name="get_response_details_value[<?php echo $sqo; ?>]" class="form-control js-example-basic-single application_table_fields" onchange="getMappingField('<?php echo $sqo; ?>')" id="get_response_details_value_<?php echo $sqo; ?>" aria-label="Select">
                                                     <option value="" >Select Any One</option>
                                                     <?php foreach($list_attributes as $feild=>$datr){ ?>
                                                         <option value="<?php echo $feild; ?>" <?php echo $feild == $value['application_table_field']? 'selected' : ''; ?>> <?php echo ucwords(str_replace('_',' ',$datr['lable'])); ?> </option>
@@ -400,7 +400,7 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                                                 </select> 
                                             </td>
                                             <td>
-                                                <input class="js-primary-sm" type="checkbox" name="uniqueness[<?php echo $sqo; ?>]" <?php echo ($value['uniqueness']=='Y')?"checked":"";?> value="Y"  id="api_response_uniqueness_<?php echo $sqo; ?>">
+                                                <input class="js-primary-sm" type="checkbox" name="uniqueness[<?php echo $sqo; ?>]" <?php echo ($value['uniqueness']=='Y')?"checked":"";?> value="Y"  id="api_response_uniqueness_<?php echo $sqo; ?>" aria-label="Input">
                                             </td>
                                                 
                                         </tr>
@@ -459,8 +459,8 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
         count++;
         var htmlRows = '';
         htmlRows += '<tr>';
-        htmlRows += '<td><input type="text" class="form-control request-parameter-row requestparmfield" name="get_name[]" value="" onkeypress="if (event.keyCode === 32) return false;" data-keyid="'+sqon+'" onblur="buildDynamicUrl()"></td>';
-        htmlRows += '<td><input type="text" class="form-control requestparmvalue" name="get_value[]" value="" data-keyid="'+sqon+'" onblur="buildDynamicUrl()"></td>';
+        htmlRows += '<td><input type="text" class="form-control request-parameter-row requestparmfield" name="get_name[]" value="" onkeypress="if (event.keyCode === 32) return false;" data-keyid="'+sqon+'" onblur="buildDynamicUrl()" aria-label="Get Name"></td>';
+        htmlRows += '<td><input type="text" class="form-control requestparmvalue" name="get_value[]" value="" data-keyid="'+sqon+'" onblur="buildDynamicUrl()" aria-label="Get Value"></td>';
         htmlRows += '</tr>';
         $('#request_parameters').append(htmlRows);
     }
@@ -474,8 +474,8 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
         count++;
         var htmlRows = '';
         htmlRows += '<tr>';
-        htmlRows += '<td><input type="text" class="form-control headersrow" name="get_header_name[]" value="" onkeypress="if (event.keyCode === 32) return false;"></td>';
-        htmlRows += '<td><input type="text" class="form-control" name="get_header_value[]" value=""></td>';
+        htmlRows += '<td><input type="text" class="form-control headersrow" name="get_header_name[]" value="" onkeypress="if (event.keyCode === 32) return false;" aria-label="Get Header Name"></td>';
+        htmlRows += '<td><input type="text" class="form-control" name="get_header_value[]" value="" aria-label="Get Header Value"></td>';
         htmlRows += '</tr>';
         $('#headers').append(htmlRows);
     }
@@ -485,8 +485,8 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
         count++;
         var htmlRows = '';
         htmlRows += '<tr>';
-        htmlRows += '<td><input type="text" class="form-control postfieldsrow" name="get_post_field_name[]" value="" onkeypress="if (event.keyCode === 32) return false;"></td>';
-        htmlRows += '<td><input type="text" class="form-control" name="get_post_field_value[]" value=""></td>';
+        htmlRows += '<td><input type="text" class="form-control postfieldsrow" name="get_post_field_name[]" value="" onkeypress="if (event.keyCode === 32) return false;" aria-label="Get Post Field Name"></td>';
+        htmlRows += '<td><input type="text" class="form-control" name="get_post_field_value[]" value="" aria-label="Get Post Field Value"></td>';
         htmlRows += '</tr>';
         $('#postField').append(htmlRows);
     }
@@ -498,11 +498,11 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
         count++;
         var htmlRows = '';
         htmlRows += '<tr>';
-        htmlRows += '<td><input type="text" class="form-control responsedetailsrow" name="get_response_details_name['+sqo+']" value="" id="get_response_details_name_'+sqo+'" onkeypress="if (event.keyCode === 32) return false;"></td>';
-      // htmlRows += '<td><input type="text" class="form-control" name="get_response_details_value[]" value="" readonly></td>';
+        htmlRows += '<td><input type="text" class="form-control responsedetailsrow" name="get_response_details_name['+sqo+']" value="" id="get_response_details_name_'+sqo+'" onkeypress="if (event.keyCode === 32) return false;" aria-label="Get Response Details Name[&#039;+sqo+&#039;]"></td>';
+      // htmlRows += '<td><input type="text" class="form-control" name="get_response_details_value[]" value="" readonly aria-label="Get Response Details Value"></td>';
 
         htmlRows += '<td>';
-        htmlRows += '<select name="get_response_details_value['+sqo+']" class="form-control js-example-basic-single application_table_fields" onchange="getMappingField('+sqo+')" id="get_response_details_value_'+sqo+'"><option value="" >Select Any One</option>';
+        htmlRows += '<select name="get_response_details_value['+sqo+']" class="form-control js-example-basic-single application_table_fields" onchange="getMappingField('+sqo+')" id="get_response_details_value_'+sqo+'" aria-label="Get Response Details Value[&#039;+sqo+&#039;]"><option value="" >Select Any One</option>';
 
 
 
@@ -520,7 +520,7 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
 
         htmlRows += '</select></td>';
 
-        htmlRows += '<td><input class="js-primary-sm-'+sqo+'" type="checkbox" name="uniqueness['+sqo+']" value="Y"  id="api_response_uniqueness_'+sqo+'"></td>';
+        htmlRows += '<td><input class="js-primary-sm-'+sqo+'" type="checkbox" name="uniqueness['+sqo+']" value="Y"  id="api_response_uniqueness_'+sqo+'" aria-label="Uniqueness[&#039;+sqo+&#039;]"></td>';
     
         htmlRows += '</tr>';
         $('#responseDetails').append(htmlRows);

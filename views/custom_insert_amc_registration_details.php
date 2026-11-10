@@ -91,7 +91,7 @@ foreach ($gc_details as $row) {
                     <div class="col-md-3">
                         <div class="form-group">
                             <label class="form-label">AMC Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="amc_name" id="amc_name" placeholder="Enter AMC Name" value="<?php echo $isEdit?$editData['amc_name']:''; ?>" required>
+                            <input type="text" class="form-control" name="amc_name" id="amc_name" placeholder="Enter AMC Name" value="<?php echo $isEdit?$editData['amc_name']:''; ?>" required aria-label="Enter AMC Name">
                         </div>
                     </div>
                     <?php
@@ -112,13 +112,13 @@ foreach ($gc_details as $row) {
 
                             <label class="mr-3">
                                 <input type="radio" name="party_type" value="customer"
-                                    <?php echo $selectedType == 'customer' ? 'checked' : ''; ?>>
+                                    <?php echo $selectedType == 'customer' ? 'checked' : ''; ?> aria-label="Party Type">
                                 Customer
                             </label>
 
                             <label>
                                 <input type="radio" name="party_type" value="vendor"
-                                    <?php echo $selectedType == 'vendor' ? 'checked' : ''; ?>>
+                                    <?php echo $selectedType == 'vendor' ? 'checked' : ''; ?> aria-label="Party Type">
                                 Vendor
                             </label>
                         </div>
@@ -130,7 +130,7 @@ foreach ($gc_details as $row) {
                     <div class="col-md-3">
                         <div class="form-group">
                             <label class="form-label">Product <span class="text-danger">*</span></label>
-                            <select name="product_id" class="form-control js-example-basic-single" required>
+                            <select name="product_id" class="form-control js-example-basic-single" required aria-label="Product Id">
                                 <option value="">Select Any One</option>
                                 <?php foreach ($products as $p){ ?>
                                     <option value="<?php echo $p['id']; ?>" <?php echo $isEdit && $editData['product_id']==$p['id']?'selected':''; ?>>
@@ -148,7 +148,7 @@ foreach ($gc_details as $row) {
                             <label class="form-label">Customer <span class="text-danger">*</span></label>
                             <select name="customer_id" id="customer_id"
                                 class="form-control js-example-basic-single"
-                                <?php echo $selectedType == 'customer' ? 'required' : ''; ?>>
+                                <?php echo $selectedType == 'customer' ? 'required' : ''; ?> aria-label="Customer Id">
 
                                 <option value="">Select Any One</option>
 
@@ -169,7 +169,7 @@ foreach ($gc_details as $row) {
                         <label class="form-label">Vendor <span class="text-danger">*</span></label>
                         <select name="vendor_id" id="vendor_id"
                             class="form-control js-example-basic-single"
-                            <?php echo $selectedType == 'vendor' ? 'required' : ''; ?>>
+                            <?php echo $selectedType == 'vendor' ? 'required' : ''; ?> aria-label="Vendor Id">
 
                             <option value="">Select Any One</option>
 
@@ -188,14 +188,14 @@ foreach ($gc_details as $row) {
                         <div class="form-group">
                             <label class="form-label">Activation Date <span class="text-danger">*</span></label>
                             <input type="date" name="activation_date" id="activationDate" class="form-control"
-                                value="<?php echo $isEdit?$editData['activation_date']:''; ?>" onchange="setDeactivationDate()" required>
+                                value="<?php echo $isEdit?$editData['activation_date']:''; ?>" onchange="setDeactivationDate()" required aria-label="Activation Date">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label class="form-label">Deactivation Date</label>
                             <input type="date" name="deactivation_date" id="deactivationDate" class="form-control"
-                                value="<?php echo $isEdit?$editData['deactivation_date']:''; ?>" readonly>
+                                value="<?php echo $isEdit?$editData['deactivation_date']:''; ?>" readonly aria-label="Deactivation Date">
                         </div>
                     </div>
 
@@ -203,7 +203,7 @@ foreach ($gc_details as $row) {
                     <div class="col-md-3">
                         <div class="form-group">
                             <label class="form-label">Payment / Service Type <span class="text-danger">*</span></label>
-                            <select name="payment_type" class="form-control js-example-basic-single" id="serviceType" onchange="toggleServiceCharge()" required>
+                            <select name="payment_type" class="form-control js-example-basic-single" id="serviceType" onchange="toggleServiceCharge()" required aria-label="Payment Type">
                                 <option value="">Select Any One</option>
                                 <?php foreach ($payment_types as $pt){ ?>
                                     <option value="<?php echo $pt['genc_detail_code']; ?>" <?php echo $isEdit && $editData['payment_type']==$pt['genc_detail_code']?'selected':''; ?>>
@@ -220,14 +220,14 @@ foreach ($gc_details as $row) {
                             <label class="form-label">Service Charge <span class="text-danger">*</span></label>
                             <input type="number" name="service_charge" id="serviceCharge" class="form-control"
                                    value="<?php echo $isEdit?$editData['service_charge']:''; ?>"
-                                   <?php echo ($isEdit && $editData['payment_type']=='2')?'required':''; ?>>
+                                   <?php echo ($isEdit && $editData['payment_type']=='2')?'required':''; ?> aria-label="Service Charge">
                         </div>
                     </div>
                     <!-- Account Group -->
                     <div class="col-md-3">
                         <div class="form-group">
                             <label class="form-label">Service  Name<span class="text-danger">*</span></label>
-                            <select name="account_group_id" class="form-control js-example-basic-single" id="selectGroup" onchange="updateGroups(this)" required>
+                            <select name="account_group_id" class="form-control js-example-basic-single" id="selectGroup" onchange="updateGroups(this)" required aria-label="Account Group Id">
                                 <option value="">Select Any One</option>
                                 <?php foreach ($ag_details as $k=>$v){ ?>
                                     <option value="<?php echo $k; ?>" <?php echo $isEdit && $editData['account_group_id']==$k?'selected':''; ?>>
@@ -242,7 +242,7 @@ foreach ($gc_details as $row) {
                     <div class="col-md-3">
                         <div class="form-group">
                             <label class="form-label">Service Company <span class="text-danger">*</span></label>
-                            <select name="technician_id" class="form-control js-example-basic-single" id="selectTech" required>
+                            <select name="technician_id" class="form-control js-example-basic-single" id="selectTech" required aria-label="Technician Id">
                                 <option value="">Select Any One</option>
                                 <?php if ($isEdit && !empty($editData['technician_id'])){ ?>
                                     <option value="<?php echo $editData['technician_id']; ?>" selected><?php echo $editData['technician_name']; ?></option>
@@ -254,7 +254,7 @@ foreach ($gc_details as $row) {
                     <div class="col-md-3">
                         <div class="form-group">
                             <label class="form-label">Service On <span class="text-danger">*</span></label>
-                            <select name="service_on" id="serviceOn" class="form-control js-example-basic-single" onchange="resetDynamicFields()" required>
+                            <select name="service_on" id="serviceOn" class="form-control js-example-basic-single" onchange="resetDynamicFields()" required aria-label="Service On">
                                 <option value="">Select Any One</option>
                                 <?php foreach ($services as $s){ ?>
                                     <option value="<?php echo $s['genc_detail_code']; ?>" <?php echo $isEdit && $editData['service_on']==$s['genc_detail_code']?'selected':''; ?>>
@@ -270,7 +270,7 @@ foreach ($gc_details as $row) {
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">No of Services <span class="text-danger">*</span></label>
-                            <select name="no_of_services" id="noOfService" class="form-control js-example-basic-single" onchange="generateServiceFields()" required>
+                            <select name="no_of_services" id="noOfService" class="form-control js-example-basic-single" onchange="generateServiceFields()" required aria-label="No Of Services">
                                 <option value="">Select Any One</option>
                                 <?php for ($i=1;$i<=10;$i++){ ?>
                                     <option value="<?php echo $i; ?>" <?php echo $isEdit && $editData['no_of_services']==$i?'selected':''; ?>>
@@ -287,7 +287,7 @@ foreach ($gc_details as $row) {
                             <div class="form-group">
                                 <label class="form-label">Building Name<span class="text-danger">*</span></label>
                                 <select name="building_id" class="form-control js-example-basic-single" 
-                                        id="selectBuilding" onchange="updateFloors(this)" required>
+                                        id="selectBuilding" onchange="updateFloors(this)" required aria-label="Building Id">
                                     <option value="">Select Any One</option>
                                     <?php foreach ($buildings as $row){ ?>
                                         <option value="<?php echo $row['id']; ?>" 
@@ -304,7 +304,7 @@ foreach ($gc_details as $row) {
                             <div class="form-group">
                                 <label class="form-label">Floor <span class="text-danger">*</span></label>
                                 <select name="building_floor_id" class="form-control js-example-basic-single"
-                                        id="selectFloor" onchange="updateFloorSpaces(this)" disabled required>
+                                        id="selectFloor" onchange="updateFloorSpaces(this)" disabled required aria-label="Building Floor Id">
                                     <option value="">Select Any One</option>
                                 </select>
                             </div>
@@ -315,7 +315,7 @@ foreach ($gc_details as $row) {
                             <div class="form-group">
                                 <label class="form-label">Floor Space <span class="text-danger">*</span></label>
                                 <select name="building_floor_space_id" class="form-control js-example-basic-single"
-                                        id="selectFloorSpace" disabled required>
+                                        id="selectFloorSpace" disabled required aria-label="Building Floor Space Id">
                                     <option value="">Select Any One</option>
                                 </select>
                             </div>
@@ -330,7 +330,7 @@ foreach ($gc_details as $row) {
                             <label for="checklistToggle" class="form-label d-block">Is there Checklist?</label>
                             <div class="form-switch form-check form-check-inline">
                                 <input class="form-check-input" name="check_list" type="checkbox" id="checklistToggle"
-                                    <?php echo (!empty($checklist_items))?'checked':''; ?> onchange="toggleChecklistSection()">
+                                    <?php echo (!empty($checklist_items))?'checked':''; ?> onchange="toggleChecklistSection()" aria-label="Check List">
                             </div>
                         </div>
                     
@@ -341,7 +341,7 @@ foreach ($gc_details as $row) {
                                     <div class="col-md-12 d-flex align-items-start checklist-item">
                                         <div class="form-group flex-grow-1 me-2">
                                             <input type="hidden" name="existing_checklist_ids[]" value="<?php echo htmlspecialchars($item_id); ?>">
-                                            <input type="text" name="checklist_items[]" class="form-control" value="<?php echo htmlspecialchars($item); ?>" required>
+                                            <input type="text" name="checklist_items[]" class="form-control" value="<?php echo htmlspecialchars($item); ?>" required aria-label="Checklist Items">
                                         </div>
                                         <button type="button" class="btn btn-sm btn-outline-danger" onclick="this.parentNode.remove();">
                                             <i class="icofont icofont-trash"></i>
@@ -512,20 +512,20 @@ function generateServiceFields(){
 
     for(let i=1;i<=count;i++){
         let key='', html='';
-        if(serviceOn==='1'){ key=`time_${i}`; html=`<input type="time" class="form-control" required name="dynamic_field[${key}]" value="${savedMap[key]||''}">`; }
+        if(serviceOn==='1'){ key=`time_${i}`; html=`<input type="time" class="form-control" required name="dynamic_field[${key}]" value="${savedMap[key]||''}" aria-label="Dynamic Field[${key}]">`; }
         else if(serviceOn==='2'){
             key=`week_${i}`;
-            html=`<select class="form-control js-example-basic-single" required  name="dynamic_field[${key}]">
+            html=`<select class="form-control js-example-basic-single" required  name="dynamic_field[${key}]" aria-label="Dynamic Field[${key}]">
                 ${['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'].map(day=>`<option value="${day}" ${(savedMap[key]==day)?'selected':''}>${day}</option>`).join('')}
             </select>`;
         }else if(serviceOn==='3'){
             key=`month_${i}`;
-            html=`<select class="form-control js-example-basic-single" required name="dynamic_field[${key}]">
+            html=`<select class="form-control js-example-basic-single" required name="dynamic_field[${key}]" aria-label="Dynamic Field[${key}]">
                 ${Array.from({length:30},(_,d)=>d+1).map(day=>`<option value="${day}" ${(savedMap[key]==day)?'selected':''}>Day ${day}</option>`).join('')}
             </select>`;
         }else if(serviceOn==='4'){
             key=`year_${i}`;
-            html=`<input type="date" class="form-control" required name="dynamic_field[${key}]" value="${savedMap[key]||''}">`;
+            html=`<input type="date" class="form-control" required name="dynamic_field[${key}]" value="${savedMap[key]||''}" aria-label="Dynamic Field[${key}]">`;
         }
 
         container.append(`<div class="col-md-12"><div class="form-group">
@@ -543,7 +543,7 @@ function addChecklistField(value=''){
     $('#checklistContainer').append(`
         <div class="col-md-12 d-flex align-items-start checklist-item">
             <div class="form-group flex-grow-1 me-2">
-                <input type="text" name="checklist_items[]" class="form-control" value="${value}" required>
+                <input type="text" name="checklist_items[]" class="form-control" value="${value}" required aria-label="Checklist Items">
             </div>
             <button type="button" class="btn btn-sm btn-outline-danger" onclick="this.parentNode.remove();">
                 <i class="icofont icofont-trash"></i>

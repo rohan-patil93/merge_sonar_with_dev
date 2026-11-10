@@ -62,7 +62,7 @@ $fyRows = $return['fyRows'] ?? array();
                     <input type="hidden" name="id[]" value="<?php echo $row['id']; ?>">
                     <div class="col-lg-2 form-group w-full">
                         <label>PO No</label>
-                        <select class="form-control js-example-basic-single" name="csr_po_details_id[]">
+                        <select class="form-control js-example-basic-single" name="csr_po_details_id[]" aria-label="Csr Po Details Id">
                             <option value="">Select Any One</option>
                             <?php foreach ((array)$csr_pos as $po) { ?>
                                 <option value="<?php echo htmlspecialchars($po['id']); ?>" <?php if ($row['csr_po_details_id'] == $po['id']) echo 'selected'; ?>>
@@ -73,7 +73,7 @@ $fyRows = $return['fyRows'] ?? array();
                     </div>
                     <div class="col-lg-2 form-group">
                         <label>Financial Year <span class="text-danger">*</span></label>
-                        <select name="financial_year[]" class="form-control form-select financial_year" required>
+                        <select name="financial_year[]" class="form-control form-select financial_year" required aria-label="Financial Year">
                             <option value="">Select FY</option>
                             <?php
                                 $saved_fy = $row['financial_year'] ?? '';
@@ -89,56 +89,56 @@ $fyRows = $return['fyRows'] ?? array();
                     </div>
                     <div class="col-lg-2 form-group">
                         <label>Invoice No <span class="text-danger">*</span></label>
-                        <input class="form-control inv_no" type="text" name="inv_no[]" value="<?php echo htmlspecialchars($row['inv_no']); ?>">
+                        <input class="form-control inv_no" type="text" name="inv_no[]" value="<?php echo htmlspecialchars($row['inv_no']); ?>" aria-label="Inv No">
                     </div>
 
                     <div class="col-lg-2 form-group">
                         <label>Invoice Date <span class="text-danger">*</span></label>
-                        <input class="form-control inv_date" type="date" name="inv_date[]" value="<?php echo htmlspecialchars($row['inv_date']); ?>">
+                        <input class="form-control inv_date" type="date" name="inv_date[]" value="<?php echo htmlspecialchars($row['inv_date']); ?>" aria-label="Inv Date">
                     </div>
 
                     <div class="col-lg-2 form-group">
                         <label>Taxable Value <span class="text-danger">*</span></label>
-                        <input class="form-control taxable_value" type="number" step="any" name="taxable_value[]" value="<?php echo htmlspecialchars($row['taxable_value']); ?>">
+                        <input class="form-control taxable_value" type="number" step="any" name="taxable_value[]" value="<?php echo htmlspecialchars($row['taxable_value']); ?>" aria-label="Taxable Value">
                     </div>
                      <div class="col-lg-2 form-group">
                         <label>GST % <span class="text-danger">*</span></label>
-                        <input class="form-control gst_percent text-end" type="number" step="any" name="gst_percent[]" value="<?php echo htmlspecialchars($row['gst_percent']); ?>">
+                        <input class="form-control gst_percent text-end" type="number" step="any" name="gst_percent[]" value="<?php echo htmlspecialchars($row['gst_percent']); ?>" aria-label="Gst Percent">
                     </div>
 
 
                     <div class="col-lg-2 form-group">
                         <label>GST Amount <span class="text-danger">*</span></label>
-                        <input class="form-control gst_amount" type="number" min="0" step="any" name="gst_amount[]" value="<?php echo htmlspecialchars($row['gst_amount']); ?>">
+                        <input class="form-control gst_amount" type="number" min="0" step="any" name="gst_amount[]" value="<?php echo htmlspecialchars($row['gst_amount']); ?>" aria-label="Gst Amount">
                     </div>
 
                     <div class="col-lg-2 form-group">
                         <label>Total Spent <span class="text-danger">*</span></label>
-                        <input class="form-control total_spent" type="number" step="any" name="total_spent[]" value="<?php echo htmlspecialchars($row['total_spent']); ?>">
+                        <input class="form-control total_spent" type="number" step="any" name="total_spent[]" value="<?php echo htmlspecialchars($row['total_spent']); ?>" aria-label="Total Spent">
                     </div>
 
                     <div class="col-lg-2 form-group">
                         <label>TDS Deducted</label>
-                        <input class="form-control tds_deducted" type="number" step="any" name="tds_deducted[]" value="<?php echo htmlspecialchars($row['tds_deducted']); ?>">
+                        <input class="form-control tds_deducted" type="number" step="any" name="tds_deducted[]" value="<?php echo htmlspecialchars($row['tds_deducted']); ?>" aria-label="Tds Deducted">
                     </div>
                     
                     <div class="col-lg-2 form-group">
                         <label>Net Payable <span class="text-danger">*</span></label>
-                        <input class="form-control net_payable" type="number" step="any" name="net_payable[]" value="<?php echo htmlspecialchars($row['net_payable']); ?>">
+                        <input class="form-control net_payable" type="number" step="any" name="net_payable[]" value="<?php echo htmlspecialchars($row['net_payable']); ?>" aria-label="Net Payable">
                     </div>
                     <div class="col-lg-2 form-group">
                         <label>Paid Date <span class="text-danger">*</span></label>
-                        <input class="form-control paid_date" type="date" name="paid_date[]" value="<?php echo htmlspecialchars($row['paid_date']); ?>">
+                        <input class="form-control paid_date" type="date" name="paid_date[]" value="<?php echo htmlspecialchars($row['paid_date']); ?>" aria-label="Paid Date">
                     </div>
 
                     <div class="col-lg-2 form-group">
                         <label>Paid Amount <span class="text-danger">*</span></label>
-                        <input class="form-control paid_amount" type="number" step="any" name="paid_amount[]" value="<?php echo htmlspecialchars($row['paid_amount']); ?>">
+                        <input class="form-control paid_amount" type="number" step="any" name="paid_amount[]" value="<?php echo htmlspecialchars($row['paid_amount']); ?>" aria-label="Paid Amount">
                     </div>
 
                     <div class="col-lg-2 form-group">
                         <label>Paid Bank <span class="text-danger">*</span></label>
-                        <input class="form-control paid_bank" type="text" name="paid_bank[]" value="<?php echo htmlspecialchars($row['paid_bank']); ?>">
+                        <input class="form-control paid_bank" type="text" name="paid_bank[]" value="<?php echo htmlspecialchars($row['paid_bank']); ?>" aria-label="Paid Bank">
                     </div>
                     <?php if(in_array($_SESSION['working_role_short_code'], array('CSR_ADMIN', 'ADMIN'))){ ?>
                     <div class="col-lg-1 d-flex align-items-center">

@@ -67,26 +67,26 @@ $account_groups = $result['account_groups'];
       <div class="form-group col-lg-6">
         <label class="form-label">Account Name <span class="text-danger">*</span></label>
          <span class="d-block error-message text-danger"></span>
-        <input type="text"  class="form-control requried_field"  name="account_name" value="<?php echo $chartofaccountssingle['account_name']; ?>" />
+        <input type="text"  class="form-control requried_field"  name="account_name" value="<?php echo $chartofaccountssingle['account_name']; ?>" / aria-label="Account Name">
       </div>
       <div class="form-group col-lg-6">
         <label class="form-label">Short Name <span class="text-danger">*</span></label>
          <span class="d-block error-message text-danger"></span>
-        <input type="text"  class="form-control requried_field"  name="account_short_name" value="<?php echo $chartofaccountssingle['account_short_name']; ?>" />
+        <input type="text"  class="form-control requried_field"  name="account_short_name" value="<?php echo $chartofaccountssingle['account_short_name']; ?>" / aria-label="Account Short Name">
       </div>
       
       <div class="form-group col-lg-6">
         <label class="form-label">Account Code</label>
-        <input type="text"  class="form-control"  name="account_code" value="<?php echo $chartofaccountssingle['account_code']; ?>" readonly>
+        <input type="text"  class="form-control"  name="account_code" value="<?php echo $chartofaccountssingle['account_code']; ?>" readonly aria-label="Account Code">
       </div>
       <div class="form-group col-lg-6">
         <label class="form-label">Display Priority </label>
-        <input type="number"  class="form-control "  name="display_priority" value="<?php echo $chartofaccountssingle['display_priority']; ?>" />
+        <input type="number"  class="form-control "  name="display_priority" value="<?php echo $chartofaccountssingle['display_priority']; ?>" / aria-label="Display Priority">
       </div>
       <div class="form-group col-lg-6">
         <label class="form-label">Parent Account Code</label>
  
-        <select class="form-control border js-example-basic-single" name="parent_account_code" style="-webkit-appearance:auto;" >
+        <select class="form-control border js-example-basic-single" name="parent_account_code" style="-webkit-appearance:auto;" aria-label="Parent Account Code">
             <option  value="0">Parent Account</option>
           <?php 
           foreach($chart_of_accounts as $chartofaccount){ ?>
@@ -96,7 +96,7 @@ $account_groups = $result['account_groups'];
      </div>
       <div class="form-group col-lg-6">
         <label class="form-label">Account Currency</label>
-        <select class="form-control border js-example-basic-single" name="currency_id" style="-webkit-appearance:auto;" >
+        <select class="form-control border js-example-basic-single" name="currency_id" style="-webkit-appearance:auto;" aria-label="Currency Id">
           <option  value="">Select Any One</option>
           <?php 
           foreach($currencies as $currencie){ ?>
@@ -109,7 +109,7 @@ $account_groups = $result['account_groups'];
         <label class="form-label">Account Groups <span class="text-danger">*</span></label>
         <span class="d-block error-message text-danger"></span>
         <select class="form-control border js-example-basic-single requried_field" name="account_groups"
-          style="-webkit-appearance:auto;">
+          style="-webkit-appearance:auto;" aria-label="Account Groups">
           <option value="">Select Any One</option>
           <?php
           foreach ($account_groups as $accountgroups) { ?>
@@ -124,7 +124,7 @@ $account_groups = $result['account_groups'];
      <div class="form-group col-lg-6 <?php echo ($reportgroupid !="" AND $reportgroupid !="0")?"event_disabled":""; ?>">
         <label class="form-label">Account Type <span class="text-danger">*</span></label>
         <span class="d-block error-message text-danger"></span>
-        <select class="form-control border js-example-basic-single requried_field" name="account_type" style="-webkit-appearance:auto;" >
+        <select class="form-control border js-example-basic-single requried_field" name="account_type" style="-webkit-appearance:auto;" aria-label="Account Type">
           <option  value="">Select Any One</option>
           <?php 
           foreach($account_type as $accounttype){ ?>
@@ -136,7 +136,7 @@ $account_groups = $result['account_groups'];
      <?php /** ?>
      <div class="form-group col-lg-6">
         <label class="form-label">Default Tax</label>
-        <select class="form-control border js-example-basic-single" name="tax_id" style="-webkit-appearance:auto;" >
+        <select class="form-control border js-example-basic-single" name="tax_id" style="-webkit-appearance:auto;" aria-label="Tax Id">
           <option  value="">Select Any One</option>
           <?php 
           foreach($taxes as $tax){ ?>
@@ -150,7 +150,7 @@ $account_groups = $result['account_groups'];
      <?php /** ?>
      <div class="form-group col-lg-6">
         <label class="form-label">Allowed Journals</label>
-        <select class="form-control border js-example-basic-single" name="journal_id" style="-webkit-appearance:auto;" >
+        <select class="form-control border js-example-basic-single" name="journal_id" style="-webkit-appearance:auto;" aria-label="Journal Id">
           <option  value="">Select Any One</option>
           <?php 
           foreach($journals as $journal){ ?>
@@ -162,22 +162,22 @@ $account_groups = $result['account_groups'];
      <?php **/ ?>
      <div class="form-group col-lg-6">
         <label for="reconciliation" class="form-label d-block">Allow Reconciliation</label>
-        <input id="reconciliation" class="js-primary-sm" type="checkbox" name="reconciliation" <?php echo ($chartofaccountssingle['reconciliation']=='0')?"checked":"";?> value="0" >
+        <input id="reconciliation" class="js-primary-sm" type="checkbox" name="reconciliation" <?php echo ($chartofaccountssingle['reconciliation']=='0')?"checked":"";?> value="0" aria-label="Reconciliation">
      </div>
 
      <div class="form-group col-lg-6">
         <label for="allow_posting" class="form-label d-block">Allow Posting</label>
-        <input id="allow_posting" class="js-primary-sm" type="checkbox" name="allow_posting" <?php echo ($chartofaccountssingle['allow_posting']=='0')?"checked":"";?> value="0" >
+        <input id="allow_posting" class="js-primary-sm" type="checkbox" name="allow_posting" <?php echo ($chartofaccountssingle['allow_posting']=='0')?"checked":"";?> value="0" aria-label="Allow Posting">
      </div>
      <div class="form-group col-lg-6">
         <label for="allow_manual_entries" class="form-label d-block">Allow Manual Entries</label>
-        <input id="allow_manual_entries" class="js-primary-sm" type="checkbox" name="allow_manual_entries" <?php echo ($chartofaccountssingle['allow_manual_entries']=='0')?"checked":"";?> value="0" >
+        <input id="allow_manual_entries" class="js-primary-sm" type="checkbox" name="allow_manual_entries" <?php echo ($chartofaccountssingle['allow_manual_entries']=='0')?"checked":"";?> value="0" aria-label="Allow Manual Entries">
      </div>
      <?php if($chartofaccountssingle['id']==""){ ?>
      <div class="form-group col-lg-6">
        <!--  <label class="form-label">Opening Balance <span class="text-danger">*</span></label> -->
          <span class="d-block error-message text-danger"></span>
-        <input type="number"  class="form-control text-right requried_field"  id="opening_balance" value="0" readonly="" />
+        <input type="number"  class="form-control text-right requried_field"  id="opening_balance" value="0" readonly="" / aria-label="Input">
       </div>
       <div class="form-group col-lg-6" id="custom-popup">
         <label class="form-label">&nbsp;</label>
@@ -194,7 +194,7 @@ $account_groups = $result['account_groups'];
                 <dic class="row">
                 <div class="form-group col-lg-3">
                   <label class="form-label">Location</label>
-                  <select class="form-select js-example-basic-single" id="location_filter" onchange="getfilterSearch()">
+                  <select class="form-select js-example-basic-single" id="location_filter" onchange="getfilterSearch()" aria-label="Select">
                     <option value="0">Select Any One</option>
                     <?php foreach((array)$locations as $applicationquery){ ?>
                       <option   value="<?php echo $applicationquery['id']; ?>"><?php echo $applicationquery['location_name'];  ?></option>
@@ -205,7 +205,7 @@ $account_groups = $result['account_groups'];
 
                 <div class="form-group  col-lg-3">
                   <label class="form-label">Department</label>
-                  <select class="form-select js-example-basic-single" id="department_filter" onchange="getfilterSearch()">
+                  <select class="form-select js-example-basic-single" id="department_filter" onchange="getfilterSearch()" aria-label="Select">
                     <option value="0">Select Any One</option>
                     <?php foreach((array)$departments as $applicationquery){ ?>
                       <option   value="<?php echo $applicationquery['id']; ?>"><?php echo $applicationquery['department_name'];  ?></option>
@@ -214,7 +214,7 @@ $account_groups = $result['account_groups'];
                 </div>
                 <div class="form-group  col-lg-3">
                   <label class="form-label">Cost Centers</label>
-                  <select class="form-select js-example-basic-single" id="cost_center_filter" onchange="getfilterSearch()">
+                  <select class="form-select js-example-basic-single" id="cost_center_filter" onchange="getfilterSearch()" aria-label="Select">
                     <option value="0">Select Any One</option>
                     <?php foreach((array)$cost_centers as $applicationquery){ ?>
                       <option   value="<?php echo $applicationquery['id']; ?>"><?php echo $applicationquery['cost_center_name'];  ?></option>
@@ -244,7 +244,7 @@ $account_groups = $result['account_groups'];
                                 <label class="form-label"><?php echo $cc['cost_center_name']; ?></label>
                               </div>
                               <div class="form-group  col-lg-3">
-                                 <input type="number"  class="form-control balance_cnt_text"  name="opening_balance[<?php echo $loc['id']; ?>][<?php echo $dep['id']; ?>][<?php echo $cc['id']; ?>]" value="0" onblur="updatebalanceamount()" />
+                                 <input type="number"  class="form-control balance_cnt_text"  name="opening_balance[<?php echo $loc['id']; ?>][<?php echo $dep['id']; ?>][<?php echo $cc['id']; ?>]" value="0" onblur="updatebalanceamount()" / aria-label="Input">
                               </div>
                             </div>
                             <?php

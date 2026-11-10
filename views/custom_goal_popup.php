@@ -10,12 +10,12 @@ include_once('../comm.php');
          count++;
         var htmlRows = '';
         htmlRows += '<tr class="itemRow123">'; 
-        htmlRows += '<td><input type="text" name="name[]" class="form-control" value="" id="name_'+count+'"></td> ';
-        htmlRows += '<td><textarea class="form-control" name="descrption[]" id="descrption_'+count+'"></textarea></td>';   
+        htmlRows += '<td><input type="text" name="name[]" class="form-control" value="" id="name_'+count+'" aria-label="Name"></td> ';
+        htmlRows += '<td><textarea class="form-control" name="descrption[]" id="descrption_'+count+'" aria-label="Descrption"></textarea></td>';   
 
-        htmlRows += '<td><input type="text" name="short_code[]" class="form-control" value="" id="short_code_'+count+'"></td>';    
-        htmlRows += '<td><input type="text" name="frequency[]" class="form-control" value="" id="frequency_'+count+'"></td>';
-        htmlRows += '<td><select class="form-control" name="mandatory[]" id="mandatory_'+count+'"><option value="0"> NO</option><option value="1"> Yes</option></select></td>';
+        htmlRows += '<td><input type="text" name="short_code[]" class="form-control" value="" id="short_code_'+count+'" aria-label="Short Code"></td>';    
+        htmlRows += '<td><input type="text" name="frequency[]" class="form-control" value="" id="frequency_'+count+'" aria-label="Frequency"></td>';
+        htmlRows += '<td><select class="form-control" name="mandatory[]" id="mandatory_'+count+'" aria-label="Mandatory"><option value="0"> NO</option><option value="1"> Yes</option></select></td>';
         htmlRows += '<td><input type="hidden" value="0" id="delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deletestatickRows(this.id)">Delete</button></td>'; 
         
         htmlRows += '</tr>';
@@ -105,19 +105,19 @@ include_once('../comm.php');
 
 												<tr class="itemRow123" id="qur_div_<?php echo $count; ?>"  >
 													<td>
-														<input type="text" name="name[]" class="form-control" value="" id="name_1">
+														<input type="text" name="name[]" class="form-control" value="" id="name_1" aria-label="Name">
 													</td>
 													<td>
-														<textarea class="form-control" name="descrption[]" id="descrption_1"></textarea>
+														<textarea class="form-control" name="descrption[]" id="descrption_1" aria-label="Descrption"></textarea>
 													</td>
 													<td>
-														<input type="text" name="short_code[]" class="form-control" value="" id="short_code_1">
+														<input type="text" name="short_code[]" class="form-control" value="" id="short_code_1" aria-label="Short Code">
 													</td>
 													<td>
-														<input type="text" name="frequency[]" class="form-control" value="" id="frequency_1">
+														<input type="text" name="frequency[]" class="form-control" value="" id="frequency_1" aria-label="Frequency">
 													</td>
 													<td>
-														<select class="form-control" name="mandatory[]" id="mandatory_1">
+														<select class="form-control" name="mandatory[]" id="mandatory_1" aria-label="Mandatory">
 															<option value="0"> NO</option>
 															<option value="1"> Yes</option>
 														</select>

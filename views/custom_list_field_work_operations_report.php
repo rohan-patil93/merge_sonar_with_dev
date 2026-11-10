@@ -64,7 +64,7 @@ $users = isset($filter_res['users']) ? $filter_res['users'] : array();
 				<?php if ($admin_type != '3') { ?>
 				<div class="col-lg-3 col-md-6 form-group">
 					<label>Users</label>
-					<select class="form-control js-example-basic-multiple" id="user_id" name="user_id[]" multiple="multiple" style="width:100%">
+					<select class="form-control js-example-basic-multiple" id="user_id" name="user_id[]" multiple="multiple" style="width:100%" aria-label="User Id">
 						<?php if (count((array)$users) > 0) {
 							foreach ($users as $user_row) {
 								$uid = is_array($user_row) ? $user_row['id'] : $user_row->id;
@@ -81,15 +81,15 @@ $users = isset($filter_res['users']) ? $filter_res['users'] : array();
 
 				<div class="col-lg-3 col-md-6 form-group">
 					<label>From Date <span class="text-danger">*</span></label>
-					<input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo $today; ?>">
+					<input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo $today; ?>" aria-label="From Date">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
 					<label>To Date <span class="text-danger">*</span></label>
-					<input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo $today; ?>">
+					<input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo $today; ?>" aria-label="To Date">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
 					<label>Status</label>
-					<select class="form-control js-example-basic-multiple" id="status" name="status[]" multiple="multiple" style="width:100%">
+					<select class="form-control js-example-basic-multiple" id="status" name="status[]" multiple="multiple" style="width:100%" aria-label="Status">
 						<option value="Visited">Visited</option>
 						<option value="Pending">Pending</option>
 						<option value="Extra">Extra</option>

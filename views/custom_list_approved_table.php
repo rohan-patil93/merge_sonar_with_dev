@@ -213,7 +213,7 @@ $get_option = $_REQUEST['option'];
 				<div class="row kt-margin-b-20">
 					<div class="col-lg-2 kt-margin-b-10-tablet-and-mobile mb-2">
 						<!-- <label  class="form-label"><?php echo $cus_list['lable']; ?>:</label> -->
-						<select class="form-control form-select js-example-basic-single"  name="vendor_id">
+						<select class="form-control form-select js-example-basic-single"  name="vendor_id" aria-label="Vendor Id">
 							<option value=""> All <?php echo $cus_list['lable']; ?> </option>
 							<?php foreach ($selectdata as $selectkey => $selectvalue) {  ?> 
 								<option  <?php if($ress['vendor_id'] == $selectkey  ){ ?> selected <?php } ?> value="<?php echo $selectkey; ?>"><?php echo $selectvalue; ?></option>
@@ -222,7 +222,7 @@ $get_option = $_REQUEST['option'];
 					</div>
 					<div class="col-lg-2 kt-margin-b-10-tablet-and-mobile mb-2">
 						<!-- <label  class="form-label"><?php //echo "Capex/Opex"; ?>:</label> -->
-						<select class="form-control form-select js-example-basic-single" id="kt_select2_42" name="opex_cpex">
+						<select class="form-control form-select js-example-basic-single" id="kt_select2_42" name="opex_cpex" aria-label="Opex Cpex">
 							<option value=""> All CAPEX / OPEX </option>
 							<?php foreach($capexopex as $selectcat){ ?>
 								<option  <?php if($ress['opex_cpex'] == $selectcat['genc_detail_code'] ){ ?> selected <?php } ?> value="<?php echo $selectcat['genc_detail_code']; ?>"><?php echo $selectcat['genc_detail_name']; ?></option>
@@ -230,7 +230,7 @@ $get_option = $_REQUEST['option'];
 						</select>
 					</div>
 					<!-- <div class="col-lg-2 kt-margin-b-10-tablet-and-mobile mb-2">
-						<select class="form-control form-select js-example-basic-single" id="kt_select2_43" name="cost_center_id">
+						<select class="form-control form-select js-example-basic-single" id="kt_select2_43" name="cost_center_id" aria-label="Cost Center Id">
 							<option value=""> All Cost Center </option>
 							<?php foreach($datacost as $selectcost){ ?>
 								<option   <?php if($ress['cost_center_id'] == $selectcost['id'] ){ ?> selected <?php } ?> value="<?php echo $selectcost['id']; ?>"><?php echo $selectcost['cost_center_name']; ?></option>
@@ -240,11 +240,11 @@ $get_option = $_REQUEST['option'];
 				<?php /** ?>	
 					<div class="col-lg-2">
 						<label class="form-label">Start Date <span class="text-danger">*</span></label>
-						<input type="text" class="form-control datepicker" name="from" placeholder="From" data-col-index="5" value="<?php echo $ress['from']; ?>" required/>
+						<input type="text" class="form-control datepicker" name="from" placeholder="From" data-col-index="5" value="<?php echo $ress['from']; ?>" required/ aria-label="From">
 					</div>
 					<div class="col-lg-2">
 						<label class="form-label">End Date <span class="text-danger">*</span></label>
-						<input type="text" class="form-control datepicker" name="to" placeholder="To" data-col-index="5" value="<?php echo $ress['to']; ?>" required="" />
+						<input type="text" class="form-control datepicker" name="to" placeholder="To" data-col-index="5" value="<?php echo $ress['to']; ?>" required="" / aria-label="To">
 					</div> 
 <?php **/ ?>
 
@@ -278,10 +278,10 @@ $get_option = $_REQUEST['option'];
 							</div>
 							<div class="row mt-2" style="display: none" id="custome_date">
 							    <div  class="col-lg-6">
-									<input type="text" class="form-control filterdynamic datepicker" name="from" id="from_date" value="<?php echo $from_date; ?>">
+									<input type="text" class="form-control filterdynamic datepicker" name="from" id="from_date" value="<?php echo $from_date; ?>" aria-label="From">
 								</div>
 								<div class="col-lg-6">
-									<input type="text" class="form-control filterdynamic datepicker" name="to" id="to_date" value="<?php echo $to_date; ?>">
+									<input type="text" class="form-control filterdynamic datepicker" name="to" id="to_date" value="<?php echo $to_date; ?>" aria-label="To">
 								</div>
 							</div>				            
 						</div> 

@@ -86,19 +86,19 @@ include_once '../comm.php';
 	<div class="card-body">
 		<div class="form-group text-left">
 			<label>Question Text: <span class="text-danger">*</span></label>
-			<textarea id="survey_question" name="survey_question" class="form-control" placeholder=""> </textarea>
+			<textarea id="survey_question" name="survey_question" class="form-control" placeholder="" aria-label="Survey Question"> </textarea>
 		</div>
 		<div class="form-group text-left">
 			<div class="checkbox-inline">
 				<?php if($_GET['type']==1 || $_GET['type']==3)	{ ?>
 					<label class="checkbox checkbox-primary">
-						<input type="checkbox" name="allow_multiple_selections" id="allow_multiple_selections" />
+						<input type="checkbox" name="allow_multiple_selections" id="allow_multiple_selections" / aria-label="Allow Multiple Selections">
 						<span></span>
 						Allow multiple selections
 					</label>
 				<?php } ?>
 				<label class="checkbox checkbox-primary">
-					<input type="checkbox" value="require_response" id="require_response">
+					<input type="checkbox" value="require_response" id="require_response" aria-label="Input">
 					<span></span>
 					Require a Response
 				</label>
@@ -110,7 +110,7 @@ include_once '../comm.php';
 					<div class="col-lg-1"></div>
 					<div class="col-lg-8">
 					    <div class="input-group input-icon-right">
-						<input type="text" class="form-control display-inline width1" name="survey_question_option[]"  placeholder="Option">
+						<input type="text" class="form-control display-inline width1" name="survey_question_option[]"  placeholder="Option" aria-label="Option">
 									<span class="input-group-text addon-style">
     <span class=""><i class="fa fa-trash" onclick="deloptionrows('s1rowid1')"></i>	</span>
 </span></div>
@@ -120,7 +120,7 @@ include_once '../comm.php';
 					<div class="col-lg-1"></div>
 					<div class="col-lg-8">
 					    <div class="input-group input-icon-right">
-						<input type="text" class="form-control display-inline width1" name="survey_question_option[]"  placeholder="Option">
+						<input type="text" class="form-control display-inline width1" name="survey_question_option[]"  placeholder="Option" aria-label="Option">
 						<span class="input-group-text addon-style">
     <span class=""><i class="fa fa-trash" onclick="deloptionrows('s1rowid2')"></i>	</span>
 </span></div>
@@ -134,7 +134,7 @@ include_once '../comm.php';
 		<?php if($_GET['type']==2)	{ ?>
 			<div class="form-group text-left mt-10">
 				<label>Scale from 1 to: <span class="text-danger">*</span></label>
-				<input type="number" name="survey_question_option[]"  class="form-control" placeholder="10"> 
+				<input type="number" name="survey_question_option[]"  class="form-control" placeholder="10" aria-label="10"> 
 			</div>
 		<?php } ?>	
 		<?php if($_GET['type']==4)	{ ?>

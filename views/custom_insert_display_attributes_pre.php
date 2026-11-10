@@ -154,7 +154,7 @@ $accordion_array = array('N' => 'Normal','R' => 'Rigth','L' => 'Left');
     	var htmlRows = '';
     	htmlRows += '<div class="form-group  row wizardcount">';  
     	htmlRows += '<span class="col-xl-3 col-lg-3 col-form-label">Wizard '+count+' <span class="requried"></span></span>';
-    	htmlRows += '<div class="col-lg-9 col-xl-6"><input class="form-control" type="text"   name="wizard_name[]" value=""></div></div>';
+    	htmlRows += '<div class="col-lg-9 col-xl-6"><input class="form-control" type="text"   name="wizard_name[]" value="" aria-label="Wizard Name"></div></div>';
     	$("#display_wizard").append(htmlRows);
     	
     }
@@ -196,16 +196,16 @@ $accordion_array = array('N' => 'Normal','R' => 'Rigth','L' => 'Left');
 		count++;
 		var htmlRows = '';
 		htmlRows += '<div class="form-group row itemRowadd extracount">';  
-		htmlRows += '<div class="col-lg-1"><input type="text" class="form-control" readonly name="add_db[]"  value="field_'+count+'" ></div>';    
-		htmlRows += '<div class="col-lg-1">	<input type="text" class="form-control" name="add_display_postion[]" value="">	</div>';
-		htmlRows += '<div class="col-lg-1"><span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--warning"><span><input type="checkbox" value="1"  name="add_display_list['+excount+']" ><span></span></span></span></div>';
-		htmlRows += '<div class="col-lg-2"><input type="text" class="form-control"  name="add_lable[]" value=""></div>';
-		htmlRows += '<div class="col-lg-1"><span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--warning"><span><input type="checkbox"  value="1"  name="add_insert_display_list['+excount+']"><span></span></span></span></div>';
-		htmlRows += '<div class="col-lg-2"><select class="form-select js-example-basic-single" id="<?php echo $table."#field_"; ?>'+count+'" onchange="Getinserttype(this.id,this.value)"  name= "add_type[]"><?php foreach ($filed_array as $typekey => $typevalue) {?><option value = "<?php echo $typekey; ?>"  ><?php echo $typevalue; ?></option><?php } ?></select></div>';
-		htmlRows += '<div class="col-lg-1"><span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--warning"><span><input type="checkbox" value="1"  name="add_mandatory['+excount+']" ><span></span></span></span></div>';
-		htmlRows += '<div class="col-lg-1"><select class="form-select js-example-basic-single"  name= "add_insert_view_width[]"><?php for($i=1; $i<13;$i++){ $view_type = "col-lg-".$i; ?><option  value = "<?php echo $i; ?>" ><?php echo $view_type; ?> </option><?php } ?></select> </div>';
-		//htmlRows +='<div class="col-lg-1-5"><select class="form-control"  id="" onchange="custompop(this.id,this.value)" name="add_add_custom_field[]"><option value = "2" >No </option><option value = "1" >Yes</option></select></div>';
-		htmlRows +='<div class="col-lg-1"><select class="form-select js-example-basic-single"   name= "add_accordions[]"><?php foreach ($accordion_array as $akey => $aarray) { ?><option value = "<?php echo $akey; ?>" <?php if($value['add_custom_field'] == $akey) { ?> selected <?php } ?> ><?php echo $aarray; ?></option><?php } ?></select></div> ';
+		htmlRows += '<div class="col-lg-1"><input type="text" class="form-control" readonly name="add_db[]"  value="field_'+count+'" aria-label="Add Db"></div>';    
+		htmlRows += '<div class="col-lg-1">	<input type="text" class="form-control" name="add_display_postion[]" value="" aria-label="Add Display Postion">	</div>';
+		htmlRows += '<div class="col-lg-1"><span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--warning"><span><input type="checkbox" value="1"  name="add_display_list['+excount+']" aria-label="Add Display List[&#039;+excount+&#039;]"><span></span></span></span></div>';
+		htmlRows += '<div class="col-lg-2"><input type="text" class="form-control"  name="add_lable[]" value="" aria-label="Add Lable"></div>';
+		htmlRows += '<div class="col-lg-1"><span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--warning"><span><input type="checkbox"  value="1"  name="add_insert_display_list['+excount+']" aria-label="Add Insert Display List[&#039;+excount+&#039;]"><span></span></span></span></div>';
+		htmlRows += '<div class="col-lg-2"><select class="form-select js-example-basic-single" id="<?php echo $table."#field_"; ?>'+count+'" onchange="Getinserttype(this.id,this.value)"  name= "add_type[]" aria-label="Add Type"><?php foreach ($filed_array as $typekey => $typevalue) {?><option value = "<?php echo $typekey; ?>"  ><?php echo $typevalue; ?></option><?php } ?></select></div>';
+		htmlRows += '<div class="col-lg-1"><span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--warning"><span><input type="checkbox" value="1"  name="add_mandatory['+excount+']" aria-label="Add Mandatory[&#039;+excount+&#039;]"><span></span></span></span></div>';
+		htmlRows += '<div class="col-lg-1"><select class="form-select js-example-basic-single"  name= "add_insert_view_width[]" aria-label="Add Insert View Width"><?php for($i=1; $i<13;$i++){ $view_type = "col-lg-".$i; ?><option  value = "<?php echo $i; ?>" ><?php echo $view_type; ?> </option><?php } ?></select> </div>';
+		//htmlRows +='<div class="col-lg-1-5"><select class="form-control"  id="" onchange="custompop(this.id,this.value)" name="add_add_custom_field[]" aria-label="Add Add Custom Field"><option value = "2" >No </option><option value = "1" >Yes</option></select></div>';
+		htmlRows +='<div class="col-lg-1"><select class="form-select js-example-basic-single"   name= "add_accordions[]" aria-label="Add Accordions"><?php foreach ($accordion_array as $akey => $aarray) { ?><option value = "<?php echo $akey; ?>" <?php if($value['add_custom_field'] == $akey) { ?> selected <?php } ?> ><?php echo $aarray; ?></option><?php } ?></select></div> ';
 		htmlRows += '</div>';
 		$("#display_content").append(htmlRows);
 	}
@@ -256,7 +256,7 @@ function fileUplodingDisplay(){
 				 			  </div>
 							  <div class="col-lg-4">
 
-							   <select class="form-select js-example-basic-single" id="kt_select2_11" name= "table_name" style="width: 300px;" onchange="GetSelectedTextValue(this.value)">
+							   <select class="form-select js-example-basic-single" id="kt_select2_11" name= "table_name" style="width: 300px;" onchange="GetSelectedTextValue(this.value)" aria-label="Table Name">
 							   			<option value = "0"> Select Any One</option>
 							   			<?php foreach ($showtables as $key => $data) {  ?>
 							   				<option  <?php if($table == $data){ ?> selected  <?php } ?> value = <?php echo $data ?>   > <?php echo ucwords(str_replace('_',' ',$data)); ?> </option>
@@ -273,7 +273,7 @@ function fileUplodingDisplay(){
 				 			  </div>
 							  <div class="col-lg-3">
 
-							   <select class="form-select js-example-basic-single" id="display_list" name="display_list_type" style="width: 300px;" onchange="GetSelectedTextValue(this.value)">
+							   <select class="form-select js-example-basic-single" id="display_list" name="display_list_type" style="width: 300px;" onchange="GetSelectedTextValue(this.value)" aria-label="Display List Type">
 							   			
 							   			<option  <?php if($display_list_type == 1){ ?> selected  <?php } ?> value = "1"> Simple List </option>
 							   			<option  <?php if($display_list_type == 2){ ?> selected  <?php } ?> value = "2"> Tab List </option>			
@@ -298,28 +298,28 @@ function fileUplodingDisplay(){
 											<span class="col-xl-3 col-lg-3 col-form-label">Page Title<span class="requried">*</span></span>
 											<div class="col-lg-9 col-xl-6">									
 												<input class="form-control" type="hidden" name="page_name" value="<?php echo $page_name; ?>">
-												<input class="form-control" type="text" name="page_title" value="<?php echo $page_title; ?>">								
+												<input class="form-control" type="text" name="page_title" value="<?php echo $page_title; ?>" aria-label="Page Title">								
 											</div>
 										</div>
 										<div class="form-group  row">
 											<span class="col-xl-3 col-lg-3 col-form-label">Right Accordion Name<span class="requried">*</span></span>
 											<div class="col-lg-9 col-xl-6">
 
-												<input class="form-control" type="text" name="title_accordion[right]" value="<?php echo $rtitle_accordiont['right']; ?>">
+												<input class="form-control" type="text" name="title_accordion[right]" value="<?php echo $rtitle_accordiont['right']; ?>" aria-label="Title Accordion[right]">
 											</div>	
 										</div>
 										<div class="form-group  row">
 											<span class="col-xl-3 col-lg-3 col-form-label">Left Accordion Name<span class="requried">*</span></span>
 											<div class="col-lg-9 col-xl-6">
 
-												<input class="form-control" type="text" name="title_accordion[left]" value="<?php echo $rtitle_accordiont['left']; ?>">
+												<input class="form-control" type="text" name="title_accordion[left]" value="<?php echo $rtitle_accordiont['left']; ?>" aria-label="Title Accordion[left]">
 
 											</div>
 										</div>
 										<div class="form-group  row">
 											<span class="col-xl-3 col-lg-3 col-form-label" >Select Page Type</span>
 											<div class="col-lg-9 col-xl-6">
-												<select class="form-select js-example-basic-single" name="insert_page_type">
+												<select class="form-select js-example-basic-single" name="insert_page_type" aria-label="Insert Page Type">
 													<option <?php if($role['insert_page_type'] == 0){ ?> selected <?php } ?> value="0">Genral</option>
 													<option <?php if($role['insert_page_type'] == 1){ ?> selected <?php } ?> value="1">POP UP</option>
 													<option <?php if($role['insert_page_type'] == 2){ ?> selected <?php } ?> value="2">Open New Tab</option>
@@ -329,7 +329,7 @@ function fileUplodingDisplay(){
 										<div class="form-group  row">
 											<span class="col-xl-3 col-lg-3 col-form-label" >Originator Check Required Or Not</span>
 											<div class="col-lg-9 col-xl-6">
-												<select class="form-select js-example-basic-single" name="originator_check_required_or_not">
+												<select class="form-select js-example-basic-single" name="originator_check_required_or_not" aria-label="Originator Check Required Or Not">
 													<option <?php if($role['originator_check_required_or_not'] == 'Y'){ ?> selected <?php } ?> value="Y">Yes</option>
 													<option <?php if($role['originator_check_required_or_not'] == 'N'){ ?> selected <?php } ?> value="N">No</option>
 												</select>
@@ -341,8 +341,8 @@ function fileUplodingDisplay(){
 						<div class="form-group  row">
 							<span class="col-xl-3 col-lg-3 col-form-label" >Display As Tab?</span>
 							<div class="col-lg-9 col-xl-6">
-								<input class="js-switch" <?php if($role['wizard']==0){ ?> checked <?php } ?> type="checkbox" name="dis_wizard"  onchange="displaywizard(this.value)" value="0"  >	
-								<!-- <select class="form-select js-example-basic-single" name="dis_wizard" onchange="displaywizard(this.value)">
+								<input class="js-switch" <?php if($role['wizard']==0){ ?> checked <?php } ?> type="checkbox" name="dis_wizard"  onchange="displaywizard(this.value)" value="0" aria-label="Dis Wizard">	
+								<!-- <select class="form-select js-example-basic-single" name="dis_wizard" onchange="displaywizard(this.value)" aria-label="Dis Wizard">
 									<option value="1">NO</option>
 									<option  <?php //if($role['wizard']==0){ ?> selected <?php } ?> value="0">Yes</option>
 								</select> -->
@@ -355,7 +355,7 @@ function fileUplodingDisplay(){
 		?>
 		<span class="col-xl-3 col-lg-3 col-form-label">Content<span class="requried"></span></span>
 		<div class="col-lg-9 col-xl-6">
-			<input class="form-control" type="text"   name="content" value="<?php echo $help_content; ?>">
+			<input class="form-control" type="text"   name="content" value="<?php echo $help_content; ?>" aria-label="Content">
 		</div>
 			</div> 
 					<div class="col-lg-12"> 
@@ -406,30 +406,30 @@ function fileUplodingDisplay(){
 							?>
 							<div class="form-group row <?php echo $itemRowadd;  ?>">
 								<div class="col-lg-1">
-									<input type="text" class="form-control" name="db[]" readonly value=<?php echo $key;?> >
+									<input type="text" class="form-control" name="db[]" readonly value=<?php echo $key;?> aria-label="Db">
 								</div>
 								<div class="col-lg-1">
-									<input type="text" class="form-control" name="display_postion[]" value=<?php echo $value['display_postion'];?>>
+									<input type="text" class="form-control" name="display_postion[]" value=<?php echo $value['display_postion'];?> aria-label="Display Postion">
 								</div>
 
 								<div class="col-lg-1">			
 									<?php// echo $value['display_list']; ?>
 									<span class="switch switch-outline switch-icon switch-primary">
-										<input class="js-switch" type="checkbox" <?php if($value['display_list'] == '1') { ?> checked="checked" <?php } ?>  value="1"  name="display_list[<?php echo $len; ?>]" >
+										<input class="js-switch" type="checkbox" <?php if($value['display_list'] == '1') { ?> checked="checked" <?php } ?>  value="1"  name="display_list[<?php echo $len; ?>]" aria-label="Input">
 									</span>
 								</div>
 								<div class="col-lg-2">
-									<input type="text" class="form-control"  name="lable[]" value="<?php echo str_replace('EDI_', ' ', $value['lable']);?>">
+									<input type="text" class="form-control"  name="lable[]" value="<?php echo str_replace('EDI_', ' ', $value['lable']);?>" aria-label="Lable">
 								</div>
 								<div class="col-lg-1">
 									<span class="switch switch-outline switch-icon switch-primary">
 										<span>			
 											<?php if(in_array($key, (array)$array)){ ?> 
-												<input class="js-switch" type="checkbox" disabled  <?php if($value['insert_display_list'] == '1') { ?> checked="checked" <?php } ?> >
+												<input class="js-switch" type="checkbox" disabled  <?php if($value['insert_display_list'] == '1') { ?> checked="checked" <?php } ?> aria-label="Input">
 												<input type="hidden" name="insert_display_list[<?php echo $len; ?>]" value="2">
 
 											<?php }else{ ?>
-												<input class="js-switch" type="checkbox" <?php if($value['insert_display_list'] == '1') { ?> checked="checked" <?php } ?>  value="1"  name="insert_display_list[<?php echo $len; ?>]" >
+												<input class="js-switch" type="checkbox" <?php if($value['insert_display_list'] == '1') { ?> checked="checked" <?php } ?>  value="1"  name="insert_display_list[<?php echo $len; ?>]" aria-label="Input">
 											<?php } ?>
 
 											<span></span>
@@ -439,7 +439,7 @@ function fileUplodingDisplay(){
 								</div>
 
 								<div class="col-lg-2">	
-									<select class="form-select js-example-basic-single" id="<?php echo $table."#".$key; ?>" onchange="Getinserttype(this.id,this.value)" name= "type[]">
+									<select class="form-select js-example-basic-single" id="<?php echo $table."#".$key; ?>" onchange="Getinserttype(this.id,this.value)" name= "type[]" aria-label="Type">
 										<option value = "<?php echo $value['type']; ?>"  ><?php echo $filed_array[$value['type']]; ?></option>
 										<?php foreach ($filed_array as $typekey => $typevalue) {?>
 											<option value = "<?php echo $typekey; ?>"  ><?php echo $typevalue; ?></option>
@@ -449,14 +449,14 @@ function fileUplodingDisplay(){
 								<div class="col-lg-1">
 									<span class="switch switch-outline switch-icon switch-primary">
 										<span>			
-											<input type="checkbox" class="js-switch" <?php if($value['mandatory'] == '1') { ?> checked <?php } ?>  value="1"  name="mandatory[<?php echo $len; ?>]" >
+											<input type="checkbox" class="js-switch" <?php if($value['mandatory'] == '1') { ?> checked <?php } ?>  value="1"  name="mandatory[<?php echo $len; ?>]" aria-label="Input">
 											<span></span>
 										</span>	
 									</span>	
 								</div>
 								<div class="col-lg-1">	<?php //echo $value['insert_view_width']; ?>
 
-									<select class="form-select js-example-basic-single"  name= "insert_view_width[]">
+									<select class="form-select js-example-basic-single"  name= "insert_view_width[]" aria-label="Insert View Width">
 
 										<?php for($i=1; $i<13;$i++){ 
 											$view_type = "col-lg-".$i; ?>
@@ -466,21 +466,21 @@ function fileUplodingDisplay(){
 								</div>
 
 								<?php /** ?> <div class="col-lg-1-5">	
-									<select class="form-control"  id="<?php //echo $key; ?>" onchange="custompop(this.id,this.value)" name= "add_custom_field[]">
+									<select class="form-control"  id="<?php //echo $key; ?>" onchange="custompop(this.id,this.value)" name= "add_custom_field[]" aria-label="Add Custom Field">
 										<option value = "2" >No </option>
 										<option value = "1" <?php //if($value['add_custom_field'] == '1') { ?> selected <?php } ?> >Yes</option>
 									</select>
 								</div> <?php **/ ?>
 
 								<div class="col-lg-1">	
-									<select class="form-select js-example-basic-single"   name= "accordions[]">
+									<select class="form-select js-example-basic-single"   name= "accordions[]" aria-label="Accordions">
 										<?php foreach ($accordion_array as $akey => $aarray) { ?>
 											<option value = "<?php echo $akey; ?>" <?php if($value['accordions'] == $akey) { ?> selected <?php } ?> ><?php echo $aarray; ?></option>
 										<?php } ?>
 									</select>
 								</div> 
 								<div class="col-lg-1">
-									<select class="form-select js-example-basic-single" name= "insert_view_wizard[]">
+									<select class="form-select js-example-basic-single" name= "insert_view_wizard[]" aria-label="Insert View Wizard">
 										<?php for($i=1; $i<11;$i++){ 
 											$view_type = $i."- Wizard"; ?>
 											<option  value = "<?php echo $i; ?>" <?php if($value['insert_view_wizard']== $i){ ?> selected <?php }?>><?php echo $view_type; ?> </option>
@@ -503,7 +503,7 @@ function fileUplodingDisplay(){
 							<div class="col-lg-9 col-xl-6">
 								<div class="input-group">
 									<div class="input-group-prepend"><span class="input-group-text"><i class="la la-user" aria-hidden="true"></i></span></div>
-									<input class="form-control" type="text"    name="view" value="<?php //echo $role['view']; ?>">
+									<input class="form-control" type="text"    name="view" value="<?php //echo $role['view']; ?>" aria-label="View">
 								</div>
 							</div>
 						</div>
@@ -512,7 +512,7 @@ function fileUplodingDisplay(){
 							<div class="col-lg-9 col-xl-6">
 								<div class="input-group">
 									<div class="input-group-prepend"><span class="input-group-text"><i class="la la-user" aria-hidden="true"></i></span></div>
-									<input class="form-control" type="text" name="add_url"  value="<?php //echo $role['add_url']; ?>">
+									<input class="form-control" type="text" name="add_url"  value="<?php //echo $role['add_url']; ?>" aria-label="Add Url">
 								</div>
 							</div>
 						</div>
@@ -521,7 +521,7 @@ function fileUplodingDisplay(){
 							<div class="col-lg-9 col-xl-6">
 								<div class="input-group">
 									<div class="input-group-prepend"><span class="input-group-text"><i class="la la-user" aria-hidden="true"></i></span></div>
-									<input class="form-control" type="text"    name="insert_view" value="<?php //echo $role['insert_view']; ?>">
+									<input class="form-control" type="text"    name="insert_view" value="<?php //echo $role['insert_view']; ?>" aria-label="Insert View">
 								</div>
 							</div>
 						</div> -->
@@ -546,14 +546,14 @@ function fileUplodingDisplay(){
 								<div class="form-group  row wizardcount">
 									<span class="col-xl-3 col-lg-3 col-form-label">Wizard <?php echo $z; ?> <span class="requried"></span></span>
 									<div class="col-lg-9 col-xl-6">
-										<input class="form-control" type="text"   name="wizard_name[]" value="<?php echo $wdata; ?>">
+										<input class="form-control" type="text"   name="wizard_name[]" value="<?php echo $wdata; ?>" aria-label="Wizard Name">
 									</div>
 								</div>
 								<?php $z++; } }else{ ?>
 								<div class="form-group  row wizardcount">
 									<span class="col-xl-3 col-lg-3 col-form-label">Wizard 1 <span class="requried"></span></span>
 									<div class="col-lg-9 col-xl-6">
-										<input class="form-control" type="text"   name="wizard_name[]" value="<?php echo ""; ?>">
+										<input class="form-control" type="text"   name="wizard_name[]" value="<?php echo ""; ?>" aria-label="Wizard Name">
 									</div>
 								</div>
 								<?php } ?>
@@ -578,8 +578,8 @@ function fileUplodingDisplay(){
 													<div class="form-group row">  	
 														<span class="col-xl-4 col-form-label">File Upload Allowed</span>
 														<div class="col-lg-8 mt-2">
-															<input class="js-switch filuplodingdispayclass"  <?php if($file_data['file_upload']==0){ ?> checked <?php } ?> type="checkbox"  name="file_upload[file_upload]" onchange="fileUplodingDisplay()" value="0"  >	
-															<!--<select class="form-select js-example-basic-single" name="file_upload[file_upload]" >
+															<input class="js-switch filuplodingdispayclass"  <?php if($file_data['file_upload']==0){ ?> checked <?php } ?> type="checkbox"  name="file_upload[file_upload]" onchange="fileUplodingDisplay()" value="0" aria-label="File Upload[file Upload]">	
+															<!--<select class="form-select js-example-basic-single" name="file_upload[file_upload]" aria-label="File Upload[file Upload]">
 																<option value="1">NO</option>
 																<option  value="0">Yes</option>
 															</select> -->
@@ -591,13 +591,13 @@ function fileUplodingDisplay(){
 														<div class="form-group row">  	
 															<span class="col-lg-4 col-form-label">Title</span>
 															<div class="col-lg-8 ">
-																<input type="text" name="file_upload[fileuplodinglabel]" value="<?php echo $file_data['fileuplodinglabel']; ?>" class="form-control">
+																<input type="text" name="file_upload[fileuplodinglabel]" value="<?php echo $file_data['fileuplodinglabel']; ?>" class="form-control" aria-label="File Upload[fileuplodinglabel]">
 															</div>
 														</div> 
 														<div class="form-group row">  	
 															<span class="col-xl-4 col-lg-4 col-form-label">Width</span>
 															<div class="col-lg-8 col-xl-8">
-																<select class="form-select js-example-basic-single" name="file_upload[fileuplodingwidth]" >
+																<select class="form-select js-example-basic-single" name="file_upload[fileuplodingwidth]" aria-label="File Upload[fileuplodingwidth]">
 																	<?php for($i=1; $i<13;$i++){ 
 																		$view_type = "col-lg-".$i; ?>
 																		<option  value = "<?php echo $i; ?>" <?php if(($file_data['fileuplodingwidth']== $i) OR ($file_data['fileuplodingwidth'] =="" AND $file_data['fileuplodingwidth'] == '6')){ ?> selected <?php }?>><?php echo $view_type; ?> </option>
@@ -608,20 +608,20 @@ function fileUplodingDisplay(){
 														<div class="form-group row">  	
 															<span class="col-xl-4 col-lg-4 col-form-label">Number Of Files</span>
 															<div class="col-lg-8 col-xl-8">
-																<input type="text" name="file_upload[number_of_files]" value="<?php echo $file_data['number_of_files']; ?>" class="form-control">
+																<input type="text" name="file_upload[number_of_files]" value="<?php echo $file_data['number_of_files']; ?>" class="form-control" aria-label="File Upload[number Of Files]">
 															</div>
 														</div> 	
 														<div class="form-group row">  	
 															<span class="col-xl-4 col-lg-4 col-form-label">individual file size limit (bytes)</span>
 															<div class="col-lg-8 col-xl-8">
-																<input type="text" name="file_upload[file_size]" value="<?php echo $file_data['file_size']; ?>" class="form-control">
+																<input type="text" name="file_upload[file_size]" value="<?php echo $file_data['file_size']; ?>" class="form-control" aria-label="File Upload[file Size]">
 															</div>
 														</div> 	
 														<div class="form-group row">
 															<?php $acceptetfilearray = array('image/*'=>'All Image Formats','.jpg'=>'JPG (Image)','.jpeg'=>'JPEG (Image)','.png'=>'PNG (Image)','.gif'=>'GIF (Image)','.bmp'=>'BMP (Image)','.tiff'=>'TIFF (Image)','.svg'=>'SVG (Image)','.docs'=>'DOCX','.pdf'=>'PDF','.odt'=>'ODT','.txt'=>'TXT','.rtf'=>'RTF','.doc'=>'DOC'); ?>
 															<span class="col-xl-4 col-lg-4 col-form-label">Accepted Files</span>
 															<div class="col-lg-8 col-xl-8">
-															   	<select class="form-select js-example-basic-multiple"  name="file_upload[accepted_files][]" style="width: 300px;" multiple>
+															   	<select class="form-select js-example-basic-multiple"  name="file_upload[accepted_files][]" style="width: 300px;" multiple aria-label="File Upload[accepted Files]">
 															   		<?php foreach ($acceptetfilearray as $accceptkeyname=>$accceptfilename) {  ?>
 															   			<option <?php echo (in_array($accceptkeyname, (array)$file_data['accepted_files']))?"selected":""; ?> value = <?php echo $accceptkeyname ?>   > <?php echo $accceptfilename; ?> </option>
 															   		<?php } ?>
@@ -631,14 +631,14 @@ function fileUplodingDisplay(){
 														<div class="form-group row">  	
 															<span class="col-xl-4 col-lg-4 col-form-label">Display Deleted Files</span>
 															<div class="col-lg-8 col-xl-8 mt-2">
-																<input class="js-switch"  <?php if($file_data['file_upload']==0){ ?> checked <?php } ?> type="checkbox"  name="file_upload[fileuplodingdeleteddisplay]"  value="0"  >	
+																<input class="js-switch"  <?php if($file_data['file_upload']==0){ ?> checked <?php } ?> type="checkbox"  name="file_upload[fileuplodingdeleteddisplay]"  value="0" aria-label="File Upload[fileuplodingdeleteddisplay]">	
 														
 															</div>
 														</div>	
 														<div class="form-group row">  	
 															<span class="col-xl-4 col-lg-4 col-form-label"> Deleted Files Box Width</span>
 															<div class="col-lg-8 col-xl-8">
-																<select class="form-select js-example-basic-single" name="file_upload[fileuplodingdleetewidth]" >
+																<select class="form-select js-example-basic-single" name="file_upload[fileuplodingdleetewidth]" aria-label="File Upload[fileuplodingdleetewidth]">
 																	<?php for($i=1; $i<13;$i++){ 
 																		$view_type = "col-lg-".$i; ?>
 																		<option  value = "<?php echo $i; ?>" <?php if($file_data['fileuplodingdleetewidth']== $i){ ?> selected <?php }?>><?php echo $view_type; ?> </option>

@@ -157,12 +157,12 @@ if(isset($_POST['create'])){
       var optionlistid = "optionlist"+qid+op;
 
       if(type=='MCQ'){
-         var appenddiv = '<label class="radio radio-primary  mt-4""><input type="radio" name="assessment_correct_option'+qid+'['+op+']" id="singlechoice'+qid+op+'"><span></span></label>';
+         var appenddiv = '<label class="radio radio-primary  mt-4""><input type="radio" name="assessment_correct_option'+qid+'['+op+']" id="singlechoice'+qid+op+'" aria-label="Assessment Correct Option&#039;+qid+&#039;[&#039;+op+&#039;]"><span></span></label>';
       }else{
-         var appenddiv = '<label class="checkbox checkbox-primary  mt-4""><input type="checkbox"  name="assessment_correct_option'+qid+'['+op+']" id="multiplechoice'+qid+op+'"><span></span></label>';
+         var appenddiv = '<label class="checkbox checkbox-primary  mt-4""><input type="checkbox"  name="assessment_correct_option'+qid+'['+op+']" id="multiplechoice'+qid+op+'" aria-label="Assessment Correct Option&#039;+qid+&#039;[&#039;+op+&#039;]"><span></span></label>';
       }
 
-      $("#options"+qid).append('<div id='+"'"+optionlistid+"'"+'> <div class="col-lg-1 mt-4">'+appenddiv+'</div><div class="col-lg-8"><div class="input-group input-icon-right"><input type="text" class="form-control display-inline"  name="assessment_question_option'+qid+'[]" placeholder="Option"><div class="input-group-append"><span class="input-group-text bg-primary"><i class="flaticon-delete btn-primary" onclick="delnewoptionrows('+"'"+op+"'"+','+"'"+qid+"'"+')"></i></span></span></div></div></div></div>');
+      $("#options"+qid).append('<div id='+"'"+optionlistid+"'"+'> <div class="col-lg-1 mt-4">'+appenddiv+'</div><div class="col-lg-8"><div class="input-group input-icon-right"><input type="text" class="form-control display-inline"  name="assessment_question_option'+qid+'[]" placeholder="Option" aria-label="Option"><div class="input-group-append"><span class="input-group-text bg-primary"><i class="flaticon-delete btn-primary" onclick="delnewoptionrows('+"'"+op+"'"+','+"'"+qid+"'"+')"></i></span></span></div></div></div></div>');
 
       document.getElementById('option_row').value = op ;
 
@@ -283,7 +283,7 @@ function getnamelist(){
                      <div class="card-body">
                         <div class="form-group">
                            <label class="font-weight-bolder"><?php echo $display_tag; ?> Name <span class="text-danger">*</span></label>
-                           <input type="text" name="assessment_name" value="<?php echo $assessment_details['assessment_name'];?>" class="form-control" placeholder="Enter Title">
+                           <input type="text" name="assessment_name" value="<?php echo $assessment_details['assessment_name'];?>" class="form-control" placeholder="Enter Title" aria-label="Enter Title">
                            <!-- <span class="form-text text-muted">We'll never share your email with anyone else.</span> -->
                         </div>
                         <div class="form-group">
@@ -292,7 +292,7 @@ function getnamelist(){
                               <div class="radio-inline">
                                  <?php foreach ($assessment_types as $value) { ?>
                                     <label class="radio radio-primary">
-                                       <input type="radio" name="assessment_type" value="<?php echo $value['genc_detail_code'];?>" <?php if($assessment_details['assessment_type'] == $value['genc_detail_code']) {?> checked="checked" <?php } ?>  />
+                                       <input type="radio" name="assessment_type" value="<?php echo $value['genc_detail_code'];?>" <?php if($assessment_details['assessment_type'] == $value['genc_detail_code']) {?> checked="checked" <?php } ?>  / aria-label="Assessment Type">
                                        <span></span><?php echo $value['genc_detail_name']; ?></label>
                                     <?php } ?>
                                  </div>
@@ -300,19 +300,19 @@ function getnamelist(){
                               </div>
                               <div class="form-group mt-3">
                                  <label class="font-weight-bolder"><?php echo $display_tag; ?> Description <span class="text-danger">*</span></label>
-                                 <textarea class="form-control" name="description" placeholder="Enter Title"> <?php echo $assessment_details['description'];?> </textarea>
+                                 <textarea class="form-control" name="description" placeholder="Enter Title" aria-label="Enter Title"> <?php echo $assessment_details['description'];?> </textarea>
                                  <!-- <span class="form-text text-muted">We'll never share your email with anyone else.</span> -->
                               </div>
                               <div class="form-group mt-3">
                                  <label class="font-weight-bolder"><?php echo $display_tag; ?> Date Range <span class="text-danger">*</span></label>
                                  <div class='row' id='kt_daterangepicker_survey'>
 								   <div class="col-lg-6">
-										<input type='text' class="form-control datepicker"  name="assessment_start_date"  value="<?php echo $assessment_details['assessment_start_date']; ?>" />
+										<input type='text' class="form-control datepicker"  name="assessment_start_date"  value="<?php echo $assessment_details['assessment_start_date']; ?>" / aria-label="Assessment Start Date">
 									</div>
 									<div class="col-lg-6">
-										<input type='text' class="form-control datepicker"  name="assessment_end_date" value="<?php echo $assessment_details['assessment_end_date']; ?>" />
+										<input type='text' class="form-control datepicker"  name="assessment_end_date" value="<?php echo $assessment_details['assessment_end_date']; ?>" / aria-label="Assessment End Date">
 									</div>
-								 <!--  <input type='date' class="form-control"  name="assessment_date" placeholder="Select date &amp; time range" value="<?php echo $assessment_date; ?> " /> -->
+								 <!--  <input type='date' class="form-control"  name="assessment_date" placeholder="Select date &amp; time range" value="<?php echo $assessment_date; ?> " / aria-label="Select date &amp;amp; time range"> -->
 								   
 								</div>
 								<!-- <div class='input-group' id='kt_daterangepicker_assessment'>
@@ -327,12 +327,12 @@ function getnamelist(){
                               <div class="form-group mt-3">
                                  <label class="font-weight-bolder"><?php echo $display_tag; ?> Duration In Minutes<span class="text-danger">*</span></label>
                                  <div class='input-group'>
-                                    <input type='number' class="form-control"  name="allocated_time" placeholder="Total Minutes" value="<?php echo $allocated_time; ?>" />
+                                    <input type='number' class="form-control"  name="allocated_time" placeholder="Total Minutes" value="<?php echo $allocated_time; ?>" / aria-label="Total Minutes">
                                  </div>
                               </div>
                               <div class="form-group">
                                  <label for="kt_select2_48" class="col-form-label font-weight-bolder"><?php echo $display_tag; ?> Initiator</label>
-                                 <select class="form-select js-example-basic-single" id="kt_select2_48" name="assessment_initiator">
+                                 <select class="form-select js-example-basic-single" id="kt_select2_48" name="assessment_initiator" aria-label="Assessment Initiator">
                                     <option> Select any one</option>
                                     <?php $assessment_init =  $assessment_details['assessment_initiator']!="" ? $assessment_details['assessment_initiator'] :$_SESSION['emp_id'];
                                     foreach ($employee_list as $value) { ?>
@@ -350,7 +350,7 @@ function getnamelist(){
                               </div>
                               <div class="form-group">
                                  <label for="kt_select2_43" class="col-form-label font-weight-bolder">Who can see the results</label>
-                                 <select class="form-select js-example-basic-multiple" id="kt_select2_43" name="who_can_see_the_results[]" multiple="multiple">
+                                 <select class="form-select js-example-basic-multiple" id="kt_select2_43" name="who_can_see_the_results[]" multiple="multiple" aria-label="Who Can See The Results">
                                     <?php foreach ($employee_list as $value) { $key=$value['id']; ?>
                                     <option <?php if(in_array($key,(array)$who_can_see_id)){ ?> selected <?php } ?> value="<?php echo $key;?>"><?php echo $value['display_name']; ?></option>
                                  <?php } ?>
@@ -411,11 +411,11 @@ function getnamelist(){
             <div class="form-group text-left row">
             <div class="col-lg-8">
             <label>Question Text: <span class="text-danger"></span></label>
-            <textarea id="assessment_question'.$value_id.'" name="assessment_question'.$value_id.'" class="form-control" placeholder=""> '.$value['question'].' </textarea>
+            <textarea id="assessment_question'.$value_id.'" name="assessment_question'.$value_id.'" class="form-control" placeholder="" aria-label="Assessment Question&#039;.$value Id.&#039;"> '.$value['question'].' </textarea>
             </div>';
             $display_question .= '<div class="col-lg-4">
             <label>Marks <span class="text-danger">*</span></label>
-            <input type="text" class="form-control" id="markfield" name="marks'.$value_id.'" value="'.$marks.'"  >
+            <input type="text" class="form-control" id="markfield" name="marks'.$value_id.'" value="'.$marks.'" aria-label="Marks&#039;.$value Id.&#039;">
             </div>'; 
             
             $display_question .= '</div>';
@@ -429,13 +429,13 @@ function getnamelist(){
                   <div class="col-lg-12  row ml-5"> <div class="">'; 
                   if($value['type']== $typeofquestion['1'] ) {
                      $display_question .= '<label class="radio radio-primary mt-4">
-                     <input type="radio"  name="assessment_correct_option'.$value_id.'['.$opkey.']" id="singlechoice'.$value_id.$opkey.'" '.$checkstatus.'>"
+                     <input type="radio"  name="assessment_correct_option'.$value_id.'['.$opkey.']" id="singlechoice'.$value_id.$opkey.'" '.$checkstatus.' aria-label="Assessment Correct Option&#039;.$value Id.&#039;[&#039;.$opkey.&#039;]">"
                      <span></span>
                      </label>
                      <input type="hidden" name="allow_multiple_selections'.$value_id.'" id="allow_multiple_selections'.$value_id.'" value="0" />';
                   } else {
                      $display_question .= '<label class="checkbox checkbox-primary mt-4">
-                    <input type="checkbox"  name="assessment_correct_option'.$value_id.'['.$opkey.']"  id="multiplechoice'.$value_id.$opkey.'" '.$checkstatus.'>
+                    <input type="checkbox"  name="assessment_correct_option'.$value_id.'['.$opkey.']"  id="multiplechoice'.$value_id.$opkey.'" '.$checkstatus.' aria-label="Assessment Correct Option&#039;.$value Id.&#039;[&#039;.$opkey.&#039;]">
                      <span></span>
                      </label>
                      <input type="hidden" name="allow_multiple_selections'.$value_id.'" id="allow_multiple_selections'.$value_id.'" value="1" />';
@@ -445,7 +445,7 @@ function getnamelist(){
                                   
                   </div><div class="col-lg-8"> 
 				         <div class="input-group input-group-button"> 
-        <input type="text" class="form-control display-inline width1" name="survey_question_option'.$value_id.'[]"  placeholder="Option" value="'.$opvalue.'">
+        <input type="text" class="form-control display-inline width1" name="survey_question_option'.$value_id.'[]"  placeholder="Option" value="'.$opvalue.'" aria-label="Option">
         <span class="input-group-text addon-style">
             <span class=""><i class="fa fa-trash close text-white" onclick="delnewoptionrows('."'".$opkey."'".','."'".$value_id."'".')"></i></span>
         </span>

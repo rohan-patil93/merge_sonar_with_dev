@@ -619,17 +619,17 @@
                    // if(in_array(ADMIN_ROLES,(array)$_SESSION['role_ids'])){ ?>
                     <!-- <div class="col-lg-3 text-white">Employee</div> -->
                     <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                        <!-- <input type="checkbox" class="js-switch" id="admin_access_employee" onchange="changeAdminToEmployee()" <?php // echo $_SESSION['admin_access_employee']=="Y"?"checked":"";?>> -->
+                        <!-- <input type="checkbox" class="js-switch" id="admin_access_employee" onchange="changeAdminToEmployee()" <?php // echo $_SESSION['admin_access_employee']=="Y"?"checked":"";?> aria-label="Input"> -->
                         <?php /** ?><div class="toggle-button-cover mt-2">
                             <div class="button-cover">
                                 <div class="button b2" id="button-16">
-                                    <input type="checkbox" class="checkbox" id="admin_access_employee" onchange="changeAdminToEmployee()" <?php echo $_SESSION['admin_access_employee']=="Y"?"checked":"";?> />
+                                    <input type="checkbox" class="checkbox" id="admin_access_employee" onchange="changeAdminToEmployee()" <?php echo $_SESSION['admin_access_employee']=="Y"?"checked":"";?> / aria-label="Input">
                                     <div class="knobs"></div>
                                     <div class="layer"></div>
                                 </div>
                             </div>
                         </div> <?php **/ ?>
-                        <select id="working_role_short_code" onchange="chnageModuleWithRole()">
+                        <select id="working_role_short_code" onchange="chnageModuleWithRole()" aria-label="Select">
                             <?php foreach($_SESSION['modulewithroledetails'][$_SESSION['work_module_setup_id']] as $mwithrole){ ?>
                             <option value="<?php echo $mwithrole['role_short_code']; ?>" <?php echo $mwithrole['role_short_code'] == $_SESSION['working_role_short_code']?"selected":""; ?>><?php echo $mwithrole['display_name']; ?></option>
                         <?php } ?>
@@ -900,7 +900,7 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
             <span class="input-group-text search-close">
                 <i class="ti-close input-group-text text-dark"></i>
             </span>
-            <input type="text" class="form-control" placeholder="Enter Keyword">
+            <input type="text" class="form-control" placeholder="Enter Keyword" aria-label="Enter Keyword">
             <span class="input-group-text search-btn">
                 <i class="ti-search input-group-text"></i>
             </span>
@@ -933,7 +933,7 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
                     </a>
                     <div class="right-icon-control">
                         <div class="input-group input-group-button">
-                            <input type="text" id="search-friends" name="footer-email" class="form-control" placeholder="Search a notiffication">
+                            <input type="text" id="search-friends" name="footer-email" class="form-control" placeholder="Search a notiffication" aria-label="Search a notiffication">
                          <!--   <button class="btn btn-primary waves-effect waves-light" type="button">
                                 <i class="ti-search"></i>
                             </button>  -->
@@ -962,7 +962,7 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
                     </a>
                     <div class="right-icon-control">
                         <div class="input-group input-group-button">
-                            <input type="text" id="search-friends" name="footer-email" class="form-control" placeholder="Search Friend">
+                            <input type="text" id="search-friends" name="footer-email" class="form-control" placeholder="Search Friend" aria-label="Search Friend">
                             <button class="btn btn-primary waves-effect waves-light" type="button">
                                 <i class="feather icon-search"></i>
                             </button>
@@ -1068,7 +1068,7 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
     <div class="chat-reply-box">
         <div class="right-icon-control">
             <div class="input-group input-group-button">
-                <input type="text" class="form-control" placeholder="Write hear . . ">
+                <input type="text" class="form-control" placeholder="Write hear . . " aria-label="Write hear . .">
                 <button class="btn btn-primary waves-effect waves-light" type="button">
                     <i class="feather icon-message-circle"></i>
                 </button>

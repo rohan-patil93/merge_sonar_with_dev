@@ -28,15 +28,15 @@ $today = date('Y-m-d');
 			<div class="row">
 				<div class="col-lg-3 col-md-6 form-group">
 					<label>From Date <span class="text-danger">*</span></label>
-					<input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo $today; ?>">
+					<input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo $today; ?>" aria-label="From Date">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
 					<label>To Date <span class="text-danger">*</span></label>
-					<input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo $today; ?>">
+					<input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo $today; ?>" aria-label="To Date">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
 					<label>Location</label>
-					<select class="form-control js-example-basic-single" id="location_id" name="location_id" style="width:100%">
+					<select class="form-control js-example-basic-single" id="location_id" name="location_id" style="width:100%" aria-label="Location Id">
 						<option value="">All Locations</option>
 						<?php if(count((array)$locations) > 0){
 							foreach($locations as $loc_row){
@@ -50,7 +50,7 @@ $today = date('Y-m-d');
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
 					<label>Whom to Meet</label>
-					<select class="form-control js-example-basic-single" id="whom_to_meet" name="whom_to_meet" style="width:100%">
+					<select class="form-control js-example-basic-single" id="whom_to_meet" name="whom_to_meet" style="width:100%" aria-label="Whom To Meet">
 						<option value="">All</option>
 						<?php if(count((array)$employees) > 0){
 							foreach($employees as $employee_row){
@@ -64,7 +64,7 @@ $today = date('Y-m-d');
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
 					<label>Movement</label>
-					<select class="form-control js-example-basic-single" id="movement" name="movement" style="width:100%">
+					<select class="form-control js-example-basic-single" id="movement" name="movement" style="width:100%" aria-label="Movement">
 						<option value="">All</option>
 						<option value="inside">Still Inside</option>
 						<option value="exited">Exited</option>
@@ -72,7 +72,7 @@ $today = date('Y-m-d');
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
 					<label>Search</label>
-					<input class="form-control" type="text" name="search" id="search" placeholder="Name / Phone / Card No" value="">
+					<input class="form-control" type="text" name="search" id="search" placeholder="Name / Phone / Card No" value="" aria-label="Name / Phone / Card No">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
 					<label>&nbsp;</label>

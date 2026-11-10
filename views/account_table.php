@@ -138,7 +138,7 @@
     for( var k =0 ; k < arr2.length; k++){
 
                 str+= "<tr><td style='text-align:right;'> IGST @ "+arr2[k]['id']+"% </td>";
-                str+= "<td class='mob_amount' width='18%'>  <input  type='text' class='form-control amount'   readonly value='"+parseFloat(arr2[k]['d_tax_amount']).toFixed(2)+"''> </td><td class='mob_amount' width='18%'>  <input  type='text' class='form-control amount' readonly  value='"+parseFloat(arr2[k]['c_tax_amount']).toFixed(2)+"''> </td></tr>";
+                str+= "<td class='mob_amount' width='18%'>  <input  type='text' class='form-control amount'   readonly value='"+parseFloat(arr2[k]['d_tax_amount']).toFixed(2)+"''> </td><td class='mob_amount' width='18%'>  <input  type='text' class='form-control amount' readonly  value='"+parseFloat(arr2[k]['c_tax_amount']).toFixed(2)+"'' aria-label="Input"> </td></tr>";
          
     }
     $("#display_tax").html(str);
@@ -170,19 +170,19 @@
         var credit_send = 0.00; var debit_send = 0.00;
         var htmlRows = '';
         htmlRows += '<tr>';  
-        htmlRows += '<td><div class="checkbox-fade fade-in-primary "><label class="form-label"> <input type="checkbox" class="itemRow" data-rowid="'+count+'"><span class="cr"> <i class="cr-icon icofont icofont-ui-check txt-primary"></i> </span></label></div> </td>';      
+        htmlRows += '<td><div class="checkbox-fade fade-in-primary "><label class="form-label"> <input type="checkbox" class="itemRow" data-rowid="'+count+'" aria-label="Input"><span class="cr"> <i class="cr-icon icofont icofont-ui-check txt-primary"></i> </span></label></div> </td>';      
         
- htmlRows += '<td id="other_'+count+'"><select class="form-select js-data-example-ajax-multiselectss'+count+' col-lg-4 selectitemorservice"   onchange="itemChange(this.value,'+count+')" name= "accountcode[]"  data-tablename="chart_of_accounts"  data-fieldsname="account_name" > <option value="0"> Select Any Account </option></select> <input type="hidden" name="account_name[]" id="account_name_'+count+'" class="form-control"><input type="hidden" name="account_code[]" id="account_code_'+count+'" class="form-control">        <input type="hidden" name="account_type[]" id="account_type_'+count+'" class="form-control"></td>';      
+ htmlRows += '<td id="other_'+count+'"><select class="form-select js-data-example-ajax-multiselectss'+count+' col-lg-4 selectitemorservice"   onchange="itemChange(this.value,'+count+')" name= "accountcode[]"  data-tablename="chart_of_accounts"  data-fieldsname="account_name" aria-label="Accountcode"> <option value="0"> Select Any Account </option></select> <input type="hidden" name="account_name[]" id="account_name_'+count+'" class="form-control"><input type="hidden" name="account_code[]" id="account_code_'+count+'" class="form-control">        <input type="hidden" name="account_type[]" id="account_type_'+count+'" class="form-control"></td>';      
         
 
-        htmlRows += '<td> <textarea  name="description[]"  class="form-control" autocomplete="off"></textarea></textarea></td> ';  
-        htmlRows += '<td><select class="form-control form-select js-example-basic-single"  name= "name[]"  >option value="0"> Select Any Name  </option> <?php foreach ($name_li as $nam) {  ?><option  value ="<?php echo $nam['id']."#".$nam['type']; ?>" > <?php echo $nam['display_name']; ?> </option> <?php } ?>  </select></td> '; 
+        htmlRows += '<td> <textarea  name="description[]"  class="form-control" autocomplete="off" aria-label="Description"></textarea></textarea></td> ';  
+        htmlRows += '<td><select class="form-control form-select js-example-basic-single"  name= "name[]" aria-label="Name">option value="0"> Select Any Name  </option> <?php foreach ($name_li as $nam) {  ?><option  value ="<?php echo $nam['id']."#".$nam['type']; ?>" > <?php echo $nam['display_name']; ?> </option> <?php } ?>  </select></td> '; 
        <?php /** ?> 
-        htmlRows += '<td><select class="form-control form-select js-example-basic-single"  name= "taxes[]" onchange="calucateaccountsum()" id="taxes_'+count+'"><option value="0"> Select Any Tax Rate </option>   <?php foreach ($taxres as $key => $tax) {  ?> <option  value = "<?php echo $key ?>"   > <?php echo $tax; ?> </option> <?php } ?> </select><input type="hidden" name="taxes_amount[]" value="0" id="taxes_amount_'+count+'">   <input type="hidden" name="taxes_type[]" value="i" id="taxes_type_'+count+'"></td>';  
+        htmlRows += '<td><select class="form-control form-select js-example-basic-single"  name= "taxes[]" onchange="calucateaccountsum()" id="taxes_'+count+'" aria-label="Taxes"><option value="0"> Select Any Tax Rate </option>   <?php foreach ($taxres as $key => $tax) {  ?> <option  value = "<?php echo $key ?>"   > <?php echo $tax; ?> </option> <?php } ?> </select><input type="hidden" name="taxes_amount[]" value="0" id="taxes_amount_'+count+'">   <input type="hidden" name="taxes_type[]" value="i" id="taxes_type_'+count+'"></td>';  
        <?php **/ ?>  
-        htmlRows += '<td><select class="form-control form-select js-example-basic-single"  name= "location[]"> <option value="0"> Select Any location  </option> <?php foreach ($locations_data as $locationn) {  ?><option value ="<?php echo $locationn['id']; ?>" ><?php echo $locationn['location_name']; ?></option><?php } ?></select></td>';
-        htmlRows += '<td><input type="text" name="debit[]" onblur="checkdebitandcredit('+count+',  '+debit+')" id="debit_'+count+'" class="form-control price amount" value="'+debit_send+'" autocomplete="off"></td>';  
-       htmlRows += '<td><input type="text" name="credit[]" onblur="checkdebitandcredit('+count+', '+cerdit+')" id="credit_'+count+'" class="form-control price amount" value="'+credit_send+'" autocomplete="off"></td>';    
+        htmlRows += '<td><select class="form-control form-select js-example-basic-single"  name= "location[]" aria-label="Location"> <option value="0"> Select Any location  </option> <?php foreach ($locations_data as $locationn) {  ?><option value ="<?php echo $locationn['id']; ?>" ><?php echo $locationn['location_name']; ?></option><?php } ?></select></td>';
+        htmlRows += '<td><input type="text" name="debit[]" onblur="checkdebitandcredit('+count+',  '+debit+')" id="debit_'+count+'" class="form-control price amount" value="'+debit_send+'" autocomplete="off" aria-label="Debit"></td>';  
+       htmlRows += '<td><input type="text" name="credit[]" onblur="checkdebitandcredit('+count+', '+cerdit+')" id="credit_'+count+'" class="form-control price amount" value="'+credit_send+'" autocomplete="off" aria-label="Credit"></td>';    
         htmlRows += '</tr>';
         $('#invoiceItem').append(htmlRows);
          $(".js-example-basic-single").select2();
@@ -250,7 +250,7 @@
             <th scope="col" class="thheader" width="2%"> 
                    <div class="checkbox-fade fade-in-primary">
                     <label class="kt-checkbox">
-                        <input id="checkAll"  type="checkbox">
+                        <input id="checkAll"  type="checkbox" aria-label="Input">
                         <span class="cr">
                       <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                     </span>
@@ -271,7 +271,7 @@
             <td>
                 <div class="checkbox-fade fade-in-primary ">
                   <label class="form-label">
-                    <input type="checkbox" class="itemRow" data-rowid="<?php echo $i; ?>">
+                    <input type="checkbox" class="itemRow" data-rowid="<?php echo $i; ?>" aria-label="Input">
                     <span class="cr">
                       <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                     </span>
@@ -281,7 +281,7 @@
 
             <td id='other_<?php echo $i; ?>'> 
                 <?php if($tab2['item_id'] >= 0){ ?>
-                <select class="form-select js-data-example-ajax-multiselect selectitemorservice col-lg-4"  data-tablename="chart_of_accounts"  data-fieldsname="account_name"name= "productCode[]" onchange="itemChange(this.value,<?php echo $i; ?>)" id="productCode_<?php echo $i; ?>">
+                <select class="form-select js-data-example-ajax-multiselect selectitemorservice col-lg-4"  data-tablename="chart_of_accounts"  data-fieldsname="account_name"name= "productCode[]" onchange="itemChange(this.value,<?php echo $i; ?>)" id="productCode_<?php echo $i; ?>" aria-label="Productcode">
                  <option value="0"> Select Any Account  </option>
                 <?php $like_item_check = 0; foreach ($itemres as $item) {  if($tab2['item_id']== $item['id']) { $like_item_check = 1; }   if($tab2['item_id']== $item['id']){  ?>
                  <option selected value ='<?php echo $item['id']; ?>'> <?php echo $item['account_name']; ?> 
@@ -293,15 +293,15 @@
                 <input type="hidden" name="account_type[]" id="account_type_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['purchase_account']; ?>" >
                
                 <?php }else { ?>
-                <input type="text" name="item_name[]" id="item_name_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['item_name']; ?>" autocomplete="off">
+                <input type="text" name="item_name[]" id="item_name_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['item_name']; ?>" autocomplete="off" aria-label="Item Name">
                 <input type="hidden" name="productCode[]" id="productCode_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['productCode']; ?>">
                 <?php } ?>
             </td>
             <td>
-                <textarea name="description[]" class="form-control mob_width_txtarea" autocomplete="off"><?php echo $tab2['description']; ?></textarea>
+                <textarea name="description[]" class="form-control mob_width_txtarea" autocomplete="off" aria-label="Description"><?php echo $tab2['description']; ?></textarea>
             </td>  
             <td class="mob_name">
-                <select class="form-control form-select js-example-basic-single"  name= "name[]"  >
+                <select class="form-control form-select js-example-basic-single"  name= "name[]" aria-label="Name">
                     <option value="0">Select Any Name</option>
                     <?php foreach ($name_li as $nam) {  ?>
                          <option   <?php if($tab2['name_id']."#".$tab2['name_type'] ==  $nam['id']."#".$nam['type']){ ?>selected <?php } ?>  value ="<?php echo $nam['id']."#".$nam['type'];  ?>" > <?php echo $nam['display_name']; ?> </option>
@@ -311,7 +311,7 @@
             </td>  
             <?php /** ?>
              <td>
-                <select class="form-control form-select js-example-basic-single"  name= "taxes[]" onchange="calucateaccountsum()" id="taxes_<?php echo $i; ?>" >
+                <select class="form-control form-select js-example-basic-single"  name= "taxes[]" onchange="calucateaccountsum()" id="taxes_<?php echo $i; ?>" aria-label="Taxes">
                     <option value="0"> Select Any Tax Rate </option>
                     <?php foreach ($taxres as $key => $tax) {  ?>
                     <option  <?php if($tab2['tax_id'] == $key){ ?> selected  <?php } ?> value = <?php echo $key ?>   > <?php echo $tax; ?> </option>
@@ -323,7 +323,7 @@
             </td> 
             <?php **/ ?>  
              <td class="mob_location">
-                 <select class="form-control form-select js-example-basic-single"  name= "location[]"  >
+                 <select class="form-control form-select js-example-basic-single"  name= "location[]" aria-label="Location">
                     <option value="0"> Select Any location  </option>
                     <?php foreach ($locations_data as $locationn) {  ?>
                          <option   <?php if($tab2['location'] == $locationn['id']){ ?>selected <?php } ?>  value ="<?php echo $locationn['id']; ?>" > <?php echo $locationn['location_name']; ?> </option>
@@ -332,11 +332,11 @@
                 <div style="display: none;color: red;" id="<?php echo 'tax_err_'.$i; ?>"> Enter Tax</div>
             </td>  
             <td class="mob_amount">
-                <input type="text" name="debit[]" onblur="checkdebitandcredit(<?php echo $i; ?>, 'debit')" id="debit_<?php echo $i; ?>" class="form-control price amount" value="<?php echo number_format($tab2['debit_amount'],2, '.', ''); ?>" autocomplete="off">
+                <input type="text" name="debit[]" onblur="checkdebitandcredit(<?php echo $i; ?>, 'debit')" id="debit_<?php echo $i; ?>" class="form-control price amount" value="<?php echo number_format($tab2['debit_amount'],2, '.', ''); ?>" autocomplete="off" aria-label="Debit">
             </td>
            
             <td class="mob_amount">
-                <input type="text" name="credit[]" onblur="checkdebitandcredit(<?php echo $i; ?>, 'credit')" value="<?php echo customeummarmonyformate($tab2['credit_amount']); ?>"  class="form-control price amount" id="credit_<?php echo $i; ?>">
+                <input type="text" name="credit[]" onblur="checkdebitandcredit(<?php echo $i; ?>, 'credit')" value="<?php echo customeummarmonyformate($tab2['credit_amount']); ?>"  class="form-control price amount" id="credit_<?php echo $i; ?>" aria-label="Credit">
             </td>
         </tr>
         <?php $i++; } } ?>                      

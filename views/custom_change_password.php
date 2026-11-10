@@ -84,14 +84,14 @@
                     <div class="row">
                         <label class="form-label col-sm-4 col-lg-4 col-form-label">Old Password</label>
                         <div class="col-sm-8 col-lg-8">
-                            <input type="Password" name="old_password" id="old_password" class="form-control ">
+                            <input type="Password" name="old_password" id="old_password" class="form-control " aria-label="Old Password">
                             <span class="f-12 text-danger old_password"></span>
                         </div>
                     </div>
                     <div class="row mt-2">
                         <label class="form-label col-sm-4 col-lg-4 col-form-label">New Password</label>
                         <div class="col-sm-8 col-lg-8">
-                            <input type="Password" name="new_password"  id="new_password"  class="form-control ">
+                            <input type="Password" name="new_password"  id="new_password"  class="form-control " aria-label="New Password">
                             <span class="f-12 text-danger new_password"></span>
                         </div>
                     </div>
@@ -99,7 +99,7 @@
                         <label class="form-label col-sm-4 col-lg-4 col-form-label">Confirm Password</label>
                         <div class="col-sm-8 col-lg-8">
 
-                            <input type="Password" name="confirm_password" id="confirm_password" class="form-control">
+                            <input type="Password" name="confirm_password" id="confirm_password" class="form-control" aria-label="Confirm Password">
                             <span class="f-12 text-danger confirm_password"></span>
                         </div>
 

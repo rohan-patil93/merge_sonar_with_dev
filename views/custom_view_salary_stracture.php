@@ -37,8 +37,8 @@ foreach((array)$earnings as $ern){
         var htmlRows = "";
         count = count+1;
         htmlRows+='<div class="row align-items-end pd_row" id="pd_'+count+'">';
-        htmlRows+='<div class="col-lg-5"> <div class="form-group"><span class="form-label f-w-600 f-14">Title</span><input type="text" class="form-control"></div> </div>';
-        htmlRows+='<div class="col-lg-5"><div class="form-group"><span class="form-label f-w-600 f-14">Value</span><input type="text" class="form-control" placeholder=""> </div></div>';
+        htmlRows+='<div class="col-lg-5"> <div class="form-group"><span class="form-label f-w-600 f-14">Title</span><input type="text" class="form-control" aria-label="Input"></div> </div>';
+        htmlRows+='<div class="col-lg-5"><div class="form-group"><span class="form-label f-w-600 f-14">Value</span><input type="text" class="form-control" placeholder="" aria-label="Input"> </div></div>';
         htmlRows+='<div class="col-lg-2 text-end mb-3"><span onclick="deleterow(\'pd_' + count + '\',\'paydetails\')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-trash"></i> </span><button type="button" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button>  </div>';
         htmlRows+='</div>';
         console.log(htmlRows);
@@ -49,8 +49,8 @@ foreach((array)$earnings as $ern){
         var count = $(".emp_row").length;
          count = count+1;
         htmlRows+='<div class="row align-items-end emp_row" id="emp_'+count+'">';
-        htmlRows+='<div class="col-lg-5"> <div class="form-group"><span class="form-label f-w-600 f-14">Title</span><input type="text" class="form-control"></div> </div>';
-        htmlRows+='<div class="col-lg-5"><div class="form-group"><span class="form-label f-w-600 f-14">Value</span><input type="text" class="form-control" placeholder=""> </div></div>';
+        htmlRows+='<div class="col-lg-5"> <div class="form-group"><span class="form-label f-w-600 f-14">Title</span><input type="text" class="form-control" aria-label="Input"></div> </div>';
+        htmlRows+='<div class="col-lg-5"><div class="form-group"><span class="form-label f-w-600 f-14">Value</span><input type="text" class="form-control" placeholder="" aria-label="Input"> </div></div>';
         htmlRows+='<div class="col-lg-2 text-end mb-3"> <span onclick="deleterow(\'emp_' + count + '\',\'paydetails\')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <i class="fa fa-trash"></i> </span> <button type="button" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button>  </div>';
         htmlRows+='</div>';
         $('.draggableemplList').append(htmlRows);
@@ -68,8 +68,8 @@ foreach((array)$earnings as $ern){
         }
         
         htmlRows+='<div class="row align-items-end" id="'+ids+'">';
-        htmlRows+=' <div class="col-lg-5"><div class="form-group"> <input type="text" class="form-control" id="er_name_'+count+'"></div> </div>';
-        htmlRows+='<div class="col-lg-5"><div class="form-group"><input type="text" readonly class="form-control" id="er_code_'+count+'"> </div></div>';
+        htmlRows+=' <div class="col-lg-5"><div class="form-group"> <input type="text" class="form-control" id="er_name_'+count+'" aria-label="Input"></div> </div>';
+        htmlRows+='<div class="col-lg-5"><div class="form-group"><input type="text" readonly class="form-control" id="er_code_'+count+'" aria-label="Input"> </div></div>';
         htmlRows+='<div class="col-lg-2 text-end mb-3"> <span onclick="deleterow(\'' + ids + '\',\'paydetails\')" > <i class="fa fa-trash"></i><button type="button" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button></div>';
         htmlRows+='</div>';        
         if(type=='deduction'){
@@ -125,19 +125,19 @@ foreach((array)$earnings as $ern){
             <div class="col-lg-4">
                 <div class="form-group m-l-5">
                     <span class="form-label f-w-600 f-14">Page Title</span>
-                    <input type="text" class="form-control" name="page_title" value="<?php echo $res['page_title']; ?>">
+                    <input type="text" class="form-control" name="page_title" value="<?php echo $res['page_title']; ?>" aria-label="Page Title">
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="form-group">
                     <span class="form-label f-w-600 f-14">Company Name</span>
-                    <input type="text" class="form-control" name="company_name" value="<?php echo $res['company_name']; ?>">
+                    <input type="text" class="form-control" name="company_name" value="<?php echo $res['company_name']; ?>" aria-label="Company Name">
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="form-group">
                     <span class="form-label f-w-600 f-14">Company Address</span>
-                    <textarea class="form-control" name="company_address"><?php echo $res['company_address']; ?></textarea>
+                    <textarea class="form-control" name="company_address" aria-label="Company Address"><?php echo $res['company_address']; ?></textarea>
                 </div>
             </div>
         </div>
@@ -157,13 +157,13 @@ foreach((array)$earnings as $ern){
                                     <div class="col-lg-5">
                                         <div class="form-group">
                                             <span class="form-label f-w-600 f-14">Pay Date</span>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" aria-label="Input">
                                         </div>
                                     </div>
                                     <div class="col-lg-5">
                                         <div class="form-group">
                                             <span class="form-label f-w-600 f-14">Pay Date</span>
-                                            <input type="date" class="form-control">
+                                            <input type="date" class="form-control" aria-label="Input">
                                         </div>
                                     </div>
                                     <div class="col-lg-2 text-end mb-3">
@@ -176,13 +176,13 @@ foreach((array)$earnings as $ern){
                                     <div class="col-lg-5">
                                         <div class="form-group">
                                             <span class="form-label f-w-600 f-14">Working Days</span>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" aria-label="Input">
                                         </div>
                                     </div>
                                     <div class="col-lg-5">
                                         <div class="form-group">
                                             <span class="form-label f-w-600 f-14">Working Days</span>
-                                            <input type="date" class="form-control" placeholder="26">
+                                            <input type="date" class="form-control" placeholder="26" aria-label="26">
                                         </div>
                                     </div>
                                     <div class="col-lg-2 text-end mb-3">
@@ -206,13 +206,13 @@ foreach((array)$earnings as $ern){
                                     <div class="col-lg-5">
                                         <div class="form-group">
                                             <span class="form-label f-w-600 f-14">Employee Name</span>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" aria-label="Input">
                                         </div>
                                     </div>
                                     <div class="col-lg-5">
                                         <div class="form-group">
                                             <span class="form-label f-w-600 f-14">James Bond</span>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" aria-label="Input">
                                         </div>
                                     </div>
                                     <div class="col-lg-2 text-end mb-3">
@@ -225,13 +225,13 @@ foreach((array)$earnings as $ern){
                                     <div class="col-lg-5">
                                         <div class="form-group">
                                             <span class="form-label f-w-600 f-14">Employee ID</span>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" aria-label="Input">
                                         </div>
                                     </div>
                                     <div class="col-lg-5">
                                         <div class="form-group">
                                             <span class="form-label f-w-600 f-14">Employee ID</span>
-                                            <input type="date" class="form-control" placeholder="007">
+                                            <input type="date" class="form-control" placeholder="007" aria-label="007">
                                         </div>
                                     </div>
                                     <div class="col-lg-2 text-end mb-3">
@@ -260,7 +260,7 @@ foreach((array)$earnings as $ern){
                                         <div class="form-group">
                                             <span class="form-label f-w-600 f-14">Joining Bonus Applicable</span>
                                             <div>
-                                            <input type="checkbox" name="joining_bonus_applicable"  class="js-switch" value="0" <?php if($res['  joining_bonus_applicable']== 0 ){ ?> checked <?php } ?>  />
+                                            <input type="checkbox" name="joining_bonus_applicable"  class="js-switch" value="0" <?php if($res['  joining_bonus_applicable']== 0 ){ ?> checked <?php } ?>  / aria-label="Joining Bonus Applicable">
                                             </div>
                                         </div>
                                     </div>
@@ -268,7 +268,7 @@ foreach((array)$earnings as $ern){
                                         <div class="form-group">
                                             <span class="form-label f-w-600 f-14">Variable Applicable</span>
                                             <div>
-                                            <input type="checkbox" name="variable_applicable" class="js-switch" value="0"  <?php if($res['variable_applicable']== 0 ){ ?> checked <?php } ?>  />
+                                            <input type="checkbox" name="variable_applicable" class="js-switch" value="0"  <?php if($res['variable_applicable']== 0 ){ ?> checked <?php } ?>  / aria-label="Variable Applicable">
                                                 </div>
                                         </div>
                                     </div>
@@ -276,13 +276,13 @@ foreach((array)$earnings as $ern){
                                     <div class="col-lg-5">
                                         <div class="form-group">
                                             <span class="form-label f-w-600 f-14">Lable</span>
-                                           <input type="text" class="form-control" id="er_name_ctc" value="<?php echo $lsv['CTC']['name']; ?>">
+                                           <input type="text" class="form-control" id="er_name_ctc" value="<?php echo $lsv['CTC']['name']; ?>" aria-label="Input">
                                         </div>
                                     </div>
                                     <div class="col-lg-5">
                                         <div class="form-group">
                                             <span class="form-label f-w-600 f-14">Code</span>
-                                            <input type="text" placeholder="10000"  id="er_code_ctc" value="<?php echo $lsv['CTC']['code']; ?>" class="form-control">
+                                            <input type="text" placeholder="10000"  id="er_code_ctc" value="<?php echo $lsv['CTC']['code']; ?>" class="form-control" aria-label="10000">
                                         </div>
                                     </div>
                                     <div class="col-lg-2 text-end mb-3">
@@ -328,16 +328,16 @@ foreach((array)$earnings as $ern){
                                 <div class="row align-items-end er_row" id="er_<?php echo $e; ?>">
                                     <div class="col-lg-5">
                                         <div class="form-group mt-3">
-                                            <input type="text" class="form-control" id="er_name_<?php echo $e; ?>" value="<?php echo $ern['name']; ?>">
+                                            <input type="text" class="form-control" id="er_name_<?php echo $e; ?>" value="<?php echo $ern['name']; ?>" aria-label="Input">
                                         </div>
                                     </div>
                                     <div class="col-lg-5">
                                         <div class="form-group mt-3">
                                             <div id="code_text" <?php if($show_text == 'N'){ ?> style="display: none;" <?php } ?>>
-                                                <input class="form-control" readonly type="text" id="er_code_<?php echo $e; ?>" name="code"  value="<?php echo $ern['code']; ?>">
+                                                <input class="form-control" readonly type="text" id="er_code_<?php echo $e; ?>" name="code"  value="<?php echo $ern['code']; ?>" aria-label="Code">
                                             </div>
                                             <div id="code_select" <?php if($show_select == 'N'){ ?> style="display: none;" <?php } ?> >
-                                                <select class="form-control js-example-basic-single" name="code_select" id="code" onchange="othervalchange(this.value)" >
+                                                <select class="form-control js-example-basic-single" name="code_select" id="code" onchange="othervalchange(this.value)" aria-label="Code Select">
                                                     <option value=""> Select Any</option>
                                                     <?php foreach($show_fixed as $keyfix=>$fixed){ ?>
                                                         <option value="<?php echo $keyfix; ?>"><?php echo $fixed; ?></option>
@@ -362,12 +362,12 @@ foreach((array)$earnings as $ern){
                                 <div class="row align-items-end mt-3">
                                     <div class="col-lg-5">
                                         <div class="form-group">
-                                           <input type="text" class="form-control" id="er_name_tt" value="<?php echo $lsv['TOTAL_EARNING_OTHER']['name']; ?>">
+                                           <input type="text" class="form-control" id="er_name_tt" value="<?php echo $lsv['TOTAL_EARNING_OTHER']['name']; ?>" aria-label="Input">
                                         </div>
                                     </div>
                                     <div class="col-lg-5">
                                         <div class="form-group">
-                                            <input type="text" placeholder="10000"  id="er_code_tt" value="<?php echo $lsv['TOTAL_EARNING_OTHER']['code']; ?>" class="form-control">
+                                            <input type="text" placeholder="10000"  id="er_code_tt" value="<?php echo $lsv['TOTAL_EARNING_OTHER']['code']; ?>" class="form-control" aria-label="10000">
                                         </div>
                                     </div>
                                     <div class="col-lg-2 text-end mb-3">
@@ -407,17 +407,17 @@ foreach((array)$earnings as $ern){
                                 <div class="row align-items-end dd_row" id="dd_<?php echo $e; ?>">
                                     <div class="col-lg-5">
                                         <div class="form-group mt-3">
-                                            <input type="text" class="form-control" value="<?php echo $ern['name']; ?>">
+                                            <input type="text" class="form-control" value="<?php echo $ern['name']; ?>" aria-label="Input">
                                         </div>
                                     </div>
                                     <div class="col-lg-5">
                                         <div class="form-group mt-3">
                                            
                                             <div id="code_text" <?php if($show_text == 'N'){ ?> style="display: none;" <?php } ?>>
-                                                <input class="form-control" id="dd_name_<?php echo $e; ?>" <?php if(in_array($ern['code'],(array)$fixedcd)){ echo "readonly"; } ?> type="text" name="code"  value="<?php echo $ern['code']; ?>">
+                                                <input class="form-control" id="dd_name_<?php echo $e; ?>" <?php if(in_array($ern['code'],(array)$fixedcd)){ echo "readonly"; } ?> type="text" name="code"  value="<?php echo $ern['code']; ?>" aria-label="Code">
                                             </div>
                                             <div id="code_select" <?php if($show_select == 'N'){ ?> style="display: none;" <?php } ?> >
-                                                <select class="form-control js-example-basic-single" name="code_select" id="dd_code_<?php echo $e; ?>" onchange="othervalchange(this.value)" >
+                                                <select class="form-control js-example-basic-single" name="code_select" id="dd_code_<?php echo $e; ?>" onchange="othervalchange(this.value)" aria-label="Code Select">
                                                     <option value=""> Select Any</option>
                                                     <?php foreach($show_fixed as $keyfix=>$fixed){ ?>
                                                         <option value="<?php echo $keyfix; ?>"><?php echo $fixed; ?></option>
@@ -441,12 +441,12 @@ foreach((array)$earnings as $ern){
                                 <div class="row align-items-end mt-3">
                                     <div class="col-lg-5">
                                         <div class="form-group">
-                                           <input type="text" class="form-control" id="dd_name_tt" value="<?php echo $lsv['TOTAL_DEDUCTION']['name']; ?>">
+                                           <input type="text" class="form-control" id="dd_name_tt" value="<?php echo $lsv['TOTAL_DEDUCTION']['name']; ?>" aria-label="Input">
                                         </div>
                                     </div>
                                     <div class="col-lg-5">
                                         <div class="form-group">
-                                            <input type="text" placeholder="10000"  id="dd_code_tt" value="<?php echo $lsv['TOTAL_DEDUCTION']['code']; ?>" class="form-control">
+                                            <input type="text" placeholder="10000"  id="dd_code_tt" value="<?php echo $lsv['TOTAL_DEDUCTION']['code']; ?>" class="form-control" aria-label="10000">
                                         </div>
                                     </div>
                                     <div class="col-lg-2 text-end mb-3">
@@ -466,12 +466,12 @@ foreach((array)$earnings as $ern){
                                     <div class="row align-items-end mt-3 draggablePanelList" id="draggablePanelList_8">
                                         <div class="col-lg-5">
                                             <div class="form-group">
-                                               <input type="text" class="form-control" id="er_name_nt" value="<?php echo $lsv['NETPAYABLE']['name']; ?>">
+                                               <input type="text" class="form-control" id="er_name_nt" value="<?php echo $lsv['NETPAYABLE']['name']; ?>" aria-label="Input">
                                             </div>
                                         </div>
                                         <div class="col-lg-5">
                                             <div class="form-group">
-                                                <input type="text" placeholder="10000"  id="er_code_nt" value="<?php echo $lsv['NETPAYABLE']['code']; ?>" class="form-control">
+                                                <input type="text" placeholder="10000"  id="er_code_nt" value="<?php echo $lsv['NETPAYABLE']['code']; ?>" class="form-control" aria-label="10000">
                                             </div>
                                         </div>
                                         <div class="col-lg-2 text-end mb-3">
@@ -497,13 +497,13 @@ foreach((array)$earnings as $ern){
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <span class="form-label f-w-600 f-14">Amount</span>
-                                        <input type="text" class="form-control" placeholder="Ex: 75800.00">
+                                        <input type="text" class="form-control" placeholder="Ex: 75800.00" aria-label="Ex: 75800.00">
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <span class="form-label f-w-600 f-14">On Words</span>
-                                        <input type="text" placeholder="Ex: Seventy five thousand eight hundred" class="form-control">
+                                        <input type="text" placeholder="Ex: Seventy five thousand eight hundred" class="form-control" aria-label="Ex: Seventy five thousand eight hundred">
                                     </div>
                                 </div>
                             </div>

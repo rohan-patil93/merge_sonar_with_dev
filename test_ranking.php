@@ -99,19 +99,19 @@
 
   <div class="rating-group">
     <label class="rating-label">Service Quality</label>
-    <input type="range" min="1" max="10" value="4" id="111" class="rating-range" style="background: linear-gradient(90deg, rgb(34, 197, 94) 33.333%, rgb(229, 231, 235) 33.333%);">
+    <input type="range" min="1" max="10" value="4" id="111" class="rating-range" style="background: linear-gradient(90deg, rgb(34, 197, 94) 33.333%, rgb(229, 231, 235) 33.333%);" aria-label="Input">
     <div class="rating-value">Rating: <span>5</span> / 10</div>
   </div>
 
   <div class="rating-group">
     <label class="rating-label">Response Time</label>
-    <input type="range" min="1" max="10" value="7" class="rating-range" style="background: linear-gradient(90deg, rgb(34, 197, 94) 66.7778%, rgb(229, 231, 235) 66.7778%);">
+    <input type="range" min="1" max="10" value="7" class="rating-range" style="background: linear-gradient(90deg, rgb(34, 197, 94) 66.7778%, rgb(229, 231, 235) 66.7778%);" aria-label="Input">
     <div class="rating-value">Rating: <span>5</span> / 10</div>
   </div>
 
   <div class="rating-group">
     <label class="rating-label">Overall Experience</label>
-    <input type="range" min="1" max="10" value="8" class="rating-range" style="background: linear-gradient(90deg, rgb(34, 197, 94) 77.7778%, rgb(229, 231, 235) 77.7778%);">
+    <input type="range" min="1" max="10" value="8" class="rating-range" style="background: linear-gradient(90deg, rgb(34, 197, 94) 77.7778%, rgb(229, 231, 235) 77.7778%);" aria-label="Input">
     <div class="rating-value">Rating: <span>5</span> / 10</div>
   </div>
 </div>

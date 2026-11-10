@@ -59,7 +59,7 @@ $to_date = date('Y-m-d');
                 if ($admin_type != '2') { ?>
                     <div class="form-group col-lg-6">
                         <label class="fwdp-label">Manager</label>
-                        <select class="form-select js-example-basic-single" id="manager_id" name="manager_id[]" multiple="multiple">
+                        <select class="form-select js-example-basic-single" id="manager_id" name="manager_id[]" multiple="multiple" aria-label="Manager Id">
                             <option value="0">Select Any one</option>
                             <?php if (count((array)$application_users) > 0) {
                                 foreach ($application_users as $row) { ?>
@@ -75,7 +75,7 @@ $to_date = date('Y-m-d');
 
                 <div class="form-group col-lg-6">
                     <label class="fwdp-label">User</label>
-                    <select class="form-select js-example-basic-single" id="user_id" name="user_id[]" multiple="multiple">
+                    <select class="form-select js-example-basic-single" id="user_id" name="user_id[]" multiple="multiple" aria-label="User Id">
                         <option value="0">Select Any one</option>
                     </select>
                     <div class="d-none text-danger" id="user_id_err"></div>
@@ -86,12 +86,12 @@ $to_date = date('Y-m-d');
 
             <div class="col-lg-4 col-xs-6 form-group">
                 <label class="fwdp-label">From Date <span class="text-danger">*</span></label>
-                <input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo $from_date; ?>">
+                <input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo $from_date; ?>" aria-label="From Date">
                 <div class="d-none text-danger" id="from_date_err"></div>
             </div>
             <div class="col-lg-4 col-xs-4 form-group">
                 <label class="fwdp-label">To Date <span class="text-danger">*</span></label>
-                <input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo $to_date; ?>">
+                <input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo $to_date; ?>" aria-label="To Date">
                 <div class="d-none text-danger" id="to_date_err"></div>
             </div>
             <div class="col-lg-4 col-xs-6 form-group">

@@ -587,10 +587,10 @@ if(catlink=='PTX'){
        var htmlRows = '';
        var note = "'"+data.note+"'";
        htmlRows += '<tr id="'+id+'">'; 
-       htmlRows += '<td><div class="form-group col-lg-11" ><input type="text" class="form-control itemRow f-w-800" readonly value="'+data.name+' ('+data.code+')" name="name[]"><input type="hidden" class="form-control " readonly value="'+data.id+'" id="id_'+count+'"  name="id[]"></div></td>';     
-       htmlRows += '<td><div class="form-group col-lg-11">  <div class="input-group input-group-button"> <input type="text" onblur="monthlytoyearlycat(this.value,'+count+')" '+reead+' class="form-control text-right width1" value="'+data.calculation_number+'" id="change_val_'+count+'" name="calucation[]" /> <button class="btn btn-primary w-100PX" type="button">'+codedetail+'</button> </td>';
-       htmlRows += '<td><div class="form-group col-lg-11"><input type="text" class="form-control text-right"  placeholder="0.00" name="monthly_amount[]" readonly id="m_amount_'+count+'"  value ="'+month_amount+'"  ></div> <input type="hidden" name="cat_type[]" value="'+data.calculation_type+'" id="cat_type_'+count+'">  <input type="hidden" name="cat_calculation_category[]" value="'+data.calculation_category+'" id="cat_calculation_category_'+count+'"> <input type="hidden" name="cat_code[]" value="'+data.code+'" id="cat_code_'+count+'">     <input type="hidden" name="cat_cat[]" value="'+data.category_id+'" id="cat_cat_'+count+'"> <input type="hidden" name="cat_num[]" value="'+data.calculation_number+'" id="cat_num_'+count+'"></td>';            
-       htmlRows += '<td><div class="form-group col-lg-11"><div class="input-group"> <input type="hidden" name="'+data.code+'" value="'+month_amount+'" id="'+data.code+'"><input type="text" readonly id="y_amount_'+count+'" name="yearly_amount[]"  value ="'+gettotalamt+'" class="form-control text-right width1" placeholder="0.00"><a href="#" class="mt-6" onclick="dynamicinformationopup('+encodeURI(note)+')">&nbsp;<i class="fa fa-info-circle f-14"></i> </a></div> </div></td>'; 
+       htmlRows += '<td><div class="form-group col-lg-11" ><input type="text" class="form-control itemRow f-w-800" readonly value="'+data.name+' ('+data.code+')" name="name[]" aria-label="Name"><input type="hidden" class="form-control " readonly value="'+data.id+'" id="id_'+count+'"  name="id[]"></div></td>';     
+       htmlRows += '<td><div class="form-group col-lg-11">  <div class="input-group input-group-button"> <input type="text" onblur="monthlytoyearlycat(this.value,'+count+')" '+reead+' class="form-control text-right width1" value="'+data.calculation_number+'" id="change_val_'+count+'" name="calucation[]" / aria-label="Calucation"> <button class="btn btn-primary w-100PX" type="button">'+codedetail+'</button> </td>';
+       htmlRows += '<td><div class="form-group col-lg-11"><input type="text" class="form-control text-right"  placeholder="0.00" name="monthly_amount[]" readonly id="m_amount_'+count+'"  value ="'+month_amount+'" aria-label="0.00"></div> <input type="hidden" name="cat_type[]" value="'+data.calculation_type+'" id="cat_type_'+count+'">  <input type="hidden" name="cat_calculation_category[]" value="'+data.calculation_category+'" id="cat_calculation_category_'+count+'"> <input type="hidden" name="cat_code[]" value="'+data.code+'" id="cat_code_'+count+'">     <input type="hidden" name="cat_cat[]" value="'+data.category_id+'" id="cat_cat_'+count+'"> <input type="hidden" name="cat_num[]" value="'+data.calculation_number+'" id="cat_num_'+count+'"></td>';            
+       htmlRows += '<td><div class="form-group col-lg-11"><div class="input-group"> <input type="hidden" name="'+data.code+'" value="'+month_amount+'" id="'+data.code+'"><input type="text" readonly id="y_amount_'+count+'" name="yearly_amount[]"  value ="'+gettotalamt+'" class="form-control text-right width1" placeholder="0.00" aria-label="0.00"><a href="#" class="mt-6" onclick="dynamicinformationopup('+encodeURI(note)+')">&nbsp;<i class="fa fa-info-circle f-14"></i> </a></div> </div></td>'; 
        htmlRows += '</tr>';
        $("#invoiceItem"+data.category_id).css("display", "block");
        $('#invoiceItem'+data.category_id).append(htmlRows);
@@ -662,7 +662,7 @@ if(catlink=='PTX'){
                                                         <label class="form-label ">
                                                             <input type="hidden" name="addsaldata" id="<?php echo $addsaldata."_detail"; ?>" value='<?php echo json_encode($value); ?>' >
                                                             <input type="hidden" id="<?php echo $addsaldata."check"; ?>" value="<?php echo in_array($addsaldata, (array)$checkdata) ? 1 : 0 ; ?>">
-                                                            <input type="checkbox"   <?php if(in_array($addsaldata, (array)$checkdata)){ echo "checked "; } ?> <?php if(in_array($addsaldata, (array)$mandatroy)){ echo "disabled"; } ?>   name="Checkboxes1" onclick="addsaldata(<?php echo "'".$addsaldata."'"; ?>)">
+                                                            <input type="checkbox"   <?php if(in_array($addsaldata, (array)$checkdata)){ echo "checked "; } ?> <?php if(in_array($addsaldata, (array)$mandatroy)){ echo "disabled"; } ?>   name="Checkboxes1" onclick="addsaldata(<?php echo "'".$addsaldata."'"; ?>)" aria-label="Checkboxes1">
                                                             <span class="cr">
                                                               <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                           </span>
@@ -703,7 +703,7 @@ if(catlink=='PTX'){
                                         <?php if($_GET['SCid']==""){ ?>
                                             <div class="col-lg-4">
                                                 <label>Employee </label>
-                                                <select class="form-select js-example-basic-single" id="kt_select2_41" name='employee_id'>
+                                                <select class="form-select js-example-basic-single" id="kt_select2_41" name='employee_id' aria-label="Select">
                                                     <option> Select Any One</option>
                                                     <?php foreach ($employees as $employe) { ?>
                                                        <option <?php if( $sal_emp_id == $employe['id'] ){ echo "selected"; } ?> value="<?php echo $employe['id'] ?>"> <?php echo $employe['display_name'] ?></option>
@@ -713,16 +713,16 @@ if(catlink=='PTX'){
                                        <?php  } ?>
                                        <div class="col-lg-4">
                                         <label>Description</label>
-                                        <textarea class="form-control" id="kt_autosize_2" ><?php echo $salarydata['description']; ?></textarea>
+                                        <textarea class="form-control" id="kt_autosize_2" aria-label="Textarea"><?php echo $salarydata['description']; ?></textarea>
                                     </div>
                                     <div class="col-lg-4">
                                         <label>Notes</label>
-                                        <textarea class="form-control" id="kt_autosize_2" name="note" placeholder="Max 500 characters" ><?php echo $salarydata['note']; ?></textarea>
+                                        <textarea class="form-control" id="kt_autosize_2" name="note" placeholder="Max 500 characters" aria-label="Max 500 characters"><?php echo $salarydata['note']; ?></textarea>
                                     </div>
 
                                     <div class="col-lg-4 ">
                                         <label>Effective Date <?php echo $salarydata['affected_date']; ?></label>
-                                        <input class="form-control datepicker" type="text" name="affected_date" value="<?php echo fromDate($salarydata['affected_date']); ?>">
+                                        <input class="form-control datepicker" type="text" name="affected_date" value="<?php echo fromDate($salarydata['affected_date']); ?>" aria-label="Affected Date">
                                     </div>
                                 </div>
                             </div>
@@ -779,7 +779,7 @@ if(catlink=='PTX'){
                                                  <tr  id="<?php echo $value['id']; ?>" > 
                                                     <td style="width: 30%">
                                                         <div class="form-group col-lg-11" >
-                                                            <input type="text" class="form-control itemRow f-w-800" readonly value="<?php echo $value['name']."(".$value['code'].")"; ?>" name="name[]">
+                                                            <input type="text" class="form-control itemRow f-w-800" readonly value="<?php echo $value['name']."(".$value['code'].")"; ?>" name="name[]" aria-label="Name">
                                                             <input type="hidden" class="form-control" readonly id="id_<?php echo $value['id'];?>" value="<?php echo $value['id']; ?>" name="id[]">
                                                         </div>
                                                     </td>   
@@ -790,7 +790,7 @@ if(catlink=='PTX'){
                                                             if($placevalue[$value['id']]['component_number']==""){ $component_number=$value['calculation_number'];
                                                         } ?>
                                                         <div class="input-group input-group-button"> 
-                                                            <input type="text" <?php echo $read_only; ?> onblur="monthlytoyearlycat(this.value,<?php echo$value['id'] ?>)" class="form-control text-right width1" value="<?php echo $component_number; ?>" name="calucation[]" aria-describedby="basic-addon2"/>  
+                                                            <input type="text" <?php echo $read_only; ?> onblur="monthlytoyearlycat(this.value,<?php echo$value['id'] ?>)" class="form-control text-right width1" value="<?php echo $component_number; ?>" name="calucation[]" aria-describedby="basic-addon2"/ aria-label="Calucation">  
                                                             <button class="btn btn-primary w-100PX" type="button"><?php echo $codedetail; ?> </button>
                                                         </div>
                                                     </div>
@@ -807,7 +807,7 @@ if(catlink=='PTX'){
                                                  }
                                                  ?>
                                                  <div class="form-group col-lg-11">
-                                                    <input type="text" class="form-control text-right" readonly placeholder="0.00" name="monthly_amount[]" value ="<?php echo $placevalue[$value['id']]['monthly_amount'];?>"  id="m_amount_<?php echo $value['id']; ?>">
+                                                    <input type="text" class="form-control text-right" readonly placeholder="0.00" name="monthly_amount[]" value ="<?php echo $placevalue[$value['id']]['monthly_amount'];?>"  id="m_amount_<?php echo $value['id']; ?>" aria-label="0.00">
                                                     <input type="hidden" name="cat_type[]" value="<?php echo $cat_type; ?>" id="cat_type_<?php echo $value['id']; ?>"> 
                                                     <input type="hidden" name="cat_calculation_category[]" value="<?php echo $value['calculation_category'] ?>" id="cat_calculation_category_<?php echo $value['id']; ?>">
                                                     <input type="hidden" name="cat_code[]" value="<?php echo $value['code'] ?>" id="cat_code_<?php echo $value['id']; ?>">    
@@ -825,7 +825,7 @@ if(catlink=='PTX'){
                                                     <div class="input-group"> 
                                                         <input type="hidden" name="<?php echo $value['code']; ?>" value="<?php echo $ddcode; ?>" id="<?php echo $value['code']; ?>" >
 
-                                                        <input type="text" readonly id="y_amount_<?php echo $value['id'] ?>" name="yearly_amount[]"  value ="<?php echo   $placevalue[$value['id']]['yearly_amount']; ?>" class="form-control text-right width1"placeholder="0.00">
+                                                        <input type="text" readonly id="y_amount_<?php echo $value['id'] ?>" name="yearly_amount[]"  value ="<?php echo   $placevalue[$value['id']]['yearly_amount']; ?>" class="form-control text-right width1"placeholder="0.00" aria-label="0.00">
 
                                                         <a href="#" class="mt-6" onclick="dynamicinformationopup(<?php echo "'".$note."'"; ?>)">&nbsp;<i class="fa fa-info-circle f-14"></i></a>
 

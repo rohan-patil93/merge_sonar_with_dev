@@ -224,11 +224,11 @@ $stausresult = ViewStatusData();
 		var html = '';
 		html += '<div class="row mt-2 location_wise_row" data-level="' + level + '" data-row="' + rowIdx + '">';
 		html += '<div class="col-lg-4 form-group">';
-		html += '<select class="form-select js-example-basic-single location_wise_location_select" name="location_wise_location[' + level + '][' + rowIdx + ']" data-level="' + level + '" data-row="' + rowIdx + '" onchange="locationWiseLocationChange(this)">';
+		html += '<select class="form-select js-example-basic-single location_wise_location_select" name="location_wise_location[' + level + '][' + rowIdx + ']" data-level="' + level + '" data-row="' + rowIdx + '" onchange="locationWiseLocationChange(this)" aria-label="Location Wise Location[&#039; + Level + &#039;][&#039; + Rowidx + &#039;]">';
 		html += locationOptionsHtml;
 		html += '</select></div>';
 		html += '<div class="col-lg-6 form-group">';
-		html += '<select class="form-select js-example-basic-multiple location_wise_users_select" name="location_wise_users[' + level + '][' + rowIdx + '][]" multiple="multiple" data-level="' + level + '" data-row="' + rowIdx + '" data-selected-users="[]"></select>';
+		html += '<select class="form-select js-example-basic-multiple location_wise_users_select" name="location_wise_users[' + level + '][' + rowIdx + '][]" multiple="multiple" data-level="' + level + '" data-row="' + rowIdx + '" data-selected-users="[]" aria-label="Location Wise Users[&#039; + Level + &#039;][&#039; + Rowidx + &#039;]"></select>';
 		html += '</div>';
 		html += '<div class="col-lg-2 form-group p-t-25"><i class="ti-trash text-danger f-18 remove_location_wise_row"></i></div>';
 		html += '</div>';
@@ -384,7 +384,7 @@ $stausresult = ViewStatusData();
 		});
 		var cntarray = Object.getOwnPropertyNames(ary);
 		if (cntarray != 0) {
-			htmldiv += '<div class="form-group col-lg-4" id="deletdiv_' + criterianum + '"><label class="form-label">Criteria - ' + criterianum + '</label><span class="float-right"><i class="ti-close text-danger f-12" onclick="deletecriteria(\'deletdiv_' + criterianum + '\')"></i></span><select class="form-select js-example-basic-single selectcriteria" name="criteria[]" >';
+			htmldiv += '<div class="form-group col-lg-4" id="deletdiv_' + criterianum + '"><label class="form-label">Criteria - ' + criterianum + '</label><span class="float-right"><i class="ti-close text-danger f-12" onclick="deletecriteria(\'deletdiv_' + criterianum + '\')"></i></span><select class="form-select js-example-basic-single selectcriteria" name="criteria[]" aria-label="Criteria">';
 			$.each(ary, function (key, value) {
 				htmldiv += '<option value="' + key + '" >' + value + '</option>';
 			});
@@ -494,7 +494,7 @@ $stausresult = ViewStatusData();
 		}
 	}
 	function copyfiled(element) {
-		var $temp = $("<input>");
+		var $temp = $("<input aria-label="Input">");
 		$("body").append($temp);
 		$temp.val($(element).text()).select();
 		document.execCommand("copy");
@@ -586,7 +586,7 @@ $stausresult = ViewStatusData();
 							<div class="row">
 								<!-- <div class="form-group col-lg-3 w-full">
 							<label class="form-label">Module</label>
-							<select class="form-select js-example-basic-single" id="module_setup_id" name="module_setup_id">
+							<select class="form-select js-example-basic-single" id="module_setup_id" name="module_setup_id" aria-label="Module Setup Id">
 								<?php foreach ($mopdulesetup as $modulesetup) { ?>
 									<option value="<?php echo $modulesetup['module_id']; ?>" <?php echo $workflowlist['module_setup_id'] == $modulesetup['module_id'] ? "selected" : ""; ?>><?php echo $modulesetup['module_name']; ?></option>
 								<?php } ?>
@@ -595,7 +595,7 @@ $stausresult = ViewStatusData();
 								<div class="form-group col-lg-12">
 									<label class="form-label">Process Name</label>
 									<select class="form-select js-example-basic-single process_name" name="process_name"
-										id="process_name" onchange="selectProcessName(this.value)">
+										id="process_name" onchange="selectProcessName(this.value)" aria-label="Process Name">
 										<option value="0">Select Any One</option>
 										<?php foreach ($pagenamesrow as $process) { ?>
 											<option value="<?php echo $process['application_table_name']; ?>" <?php echo $prefillProcess == $process['application_table_name'] ? "selected" : "" ?>>
@@ -608,7 +608,7 @@ $stausresult = ViewStatusData();
 									style="<?php echo ($prefillProcess == 'document_management') ? '' : 'display:none;'; ?>">
 									<label class="form-label">Document Type</label>
 									<select class="form-select js-example-basic-single" name="document_type_id"
-										id="document_type_id">
+										id="document_type_id" aria-label="Document Type Id">
 										<!-- <option value="">Select Document Type</option> -->
 										<?php if (count((array) $documentTypes) > 0) {
 											foreach ($documentTypes as $docType) {
@@ -628,11 +628,11 @@ $stausresult = ViewStatusData();
 								<div class="form-group col-lg-12">
 									<label class="form-label">Description</label>
 									<textarea class="form-control "
-										name="process_description"><?php echo $workflowconfiguration['process_description']; ?></textarea>
+										name="process_description" aria-label="Process Description"><?php echo $workflowconfiguration['process_description']; ?></textarea>
 								</div>
 								<div class="form-group col-lg-12">
 									<label class="form-label">Workflow Trigger Status</label>
-									<select class="form-select js-example-basic-single" name="workflow_trigger_status">
+									<select class="form-select js-example-basic-single" name="workflow_trigger_status" aria-label="Workflow Trigger Status">
 										<?php foreach ($stausresult as $statukey => $statusvalue) { ?>
 											<option value="<?php echo $statukey; ?>" <?php echo $workflowconfiguration['workflow_trigger_status'] == $statukey ? "selected" : "" ?>><?php echo $statusvalue['name']; ?></option>
 										<?php } ?>
@@ -643,17 +643,17 @@ $stausresult = ViewStatusData();
 										<div class="radio radio-inline">
 											<label class="form-label">
 												<input type="radio" name="work_level_type" value="user_hierarchical"
-													onclick="selectWorkflowLevel()" <?php echo $workflowconfiguration['work_level_type'] == "user_hierarchical" ? "checked" : ""; ?>>
+													onclick="selectWorkflowLevel()" <?php echo $workflowconfiguration['work_level_type'] == "user_hierarchical" ? "checked" : ""; ?> aria-label="Work Level Type">
 												<i class="helper"></i> Hierarchical
 											</label>
 											<label class="form-label">
 												<input type="radio" name="work_level_type" value="role_levels"
-													onchange="selectWorkflowLevel()" <?php echo $workflowconfiguration['work_level_type'] == "role_levels" ? "checked" : ""; ?>>
+													onchange="selectWorkflowLevel()" <?php echo $workflowconfiguration['work_level_type'] == "role_levels" ? "checked" : ""; ?> aria-label="Work Level Type">
 												<i class="helper"></i> Role Level
 											</label>
 											<label class="form-label">
 												<input type="radio" name="work_level_type" value="custom_process"
-													onchange="selectWorkflowLevel()" <?php echo ($workflowconfiguration['work_level_type'] == "custom_process" || $workflowconfiguration['work_level_type'] == "") ? "checked" : ""; ?>>
+													onchange="selectWorkflowLevel()" <?php echo ($workflowconfiguration['work_level_type'] == "custom_process" || $workflowconfiguration['work_level_type'] == "") ? "checked" : ""; ?> aria-label="Work Level Type">
 												<i class="helper"></i> Custom WorkFlow
 											</label>
 										</div>
@@ -662,7 +662,7 @@ $stausresult = ViewStatusData();
 								<div class="form-group col-lg-12">
 									<label class="form-label">Workflow Level</label>
 									<select class="form-select js-example-basic-single" name="workflow_level"
-										id="select_workflow_level" onchange="selectWorkflowLevel('remove')">
+										id="select_workflow_level" onchange="selectWorkflowLevel('remove')" aria-label="Workflow Level">
 										<?php for ($m = 0; $m <= 30; $m++) { ?>
 											<option value="<?php echo $m; ?>" <?php echo $workflowconfiguration['workflow_level'] == $m ? "selected" : "" ?>>
 												<?php echo $m . "- Level" ?></option>
@@ -673,7 +673,7 @@ $stausresult = ViewStatusData();
 								<div class="form-group col-lg-12">
 									<span class="form-label d-block">Transaction Owner</span>
 									<select class="form-select js-example-basic-single fieldlist"
-										name="transaction_owner_field">
+										name="transaction_owner_field" aria-label="Transaction Owner Field">
 										<option value="0" data-select2-id="2"> Select Any One</option>
 										<?php foreach ($listfields as $feldname => $listfield) { ?>
 											<option value="<?php echo $feldname; ?>" <?php echo $workflowconfiguration['transaction_owner_field'] == $feldname ? "selected" : "" ?>> <?php echo $listfield['lable']; ?> </option>
@@ -683,7 +683,7 @@ $stausresult = ViewStatusData();
 								<?php /**/ ?>
 								<div class="form-group col-lg-12">
 									<span class="form-label d-block">Transaction Owner Type</span>
-									<select class="form-select js-example-basic-single" name="transaction_owner_type">
+									<select class="form-select js-example-basic-single" name="transaction_owner_type" aria-label="Transaction Owner Type">
 										<?php foreach ($ownertype as $keyval => $values) { ?>
 											<option value="<?php echo $keyval; ?>" <?php echo $workflowconfiguration['transaction_owner_type'] == $keyval ? "selected" : "" ?>>
 												<?php echo $values; ?> </option>
@@ -693,7 +693,7 @@ $stausresult = ViewStatusData();
 								<?php /**/ ?>
 								<!-- <div class="form-group col-lg-12">
 							<label class="form-label">Email Template</label>
-							<select class="form-select js-example-basic-single" name="email_content_ref_id">
+							<select class="form-select js-example-basic-single" name="email_content_ref_id" aria-label="Email Content Ref Id">
 								<option value="0" > Select Any One</option>
 								<?php foreach ($email_content as $emailcontent) { ?>
 									<option value="<?php echo $emailcontent['template_reference_id']; ?>" <?php echo $workflowconfiguration['email_content_ref_id'] == $emailcontent['template_reference_id'] ? "selected" : "" ?> ><?php echo $emailcontent['template_name']; ?>  </option>
@@ -704,17 +704,17 @@ $stausresult = ViewStatusData();
 									<span class="form-label d-block">Follow Up</span>
 									<input type="checkbox" class="js-switch" value="Y" name="follow_up" id="follow_up"
 										<?php echo $workflowconfiguration['follow_up'] == "Y" ? "checked" : ""; ?>
-										onchange="followUp()">
+										onchange="followUp()" aria-label="Follow Up">
 								</div>
 								<div class="form-group col-lg-6 followup">
 									<label class="form-label">Days</label>
 									<input type="number" class="form-control" name="follow_up_day" placeholder="Day"
-										value="<?php echo $workflowconfiguration['follow_up_day']; ?>">
+										value="<?php echo $workflowconfiguration['follow_up_day']; ?>" aria-label="Day">
 								</div>
 								<div class="form-group col-lg-6 followup">
 									<label class="form-label">Follow Up Email</label>
 									<select class="form-select js-example-basic-single"
-										name="follow_up_email_content_ref_id">
+										name="follow_up_email_content_ref_id" aria-label="Follow Up Email Content Ref Id">
 										<option value="0"> Select Any One</option>
 										<?php foreach ($email_content as $emailcontent) { ?>
 											<option value="<?php echo $emailcontent['template_reference_id']; ?>" <?php echo $workflowconfiguration['follow_up_email_content_ref_id'] == $emailcontent['template_reference_id'] ? "selected" : "" ?>><?php echo $emailcontent['template_name']; ?> </option>
@@ -725,17 +725,17 @@ $stausresult = ViewStatusData();
 									<span class="form-label d-block">Escalation</span>
 									<input type="checkbox" class="js-switch" value="Y" name="escalation" id="escalation"
 										<?php echo $workflowconfiguration['escalation'] == "Y" ? "checked" : ""; ?>
-										onchange="Escalation()">
+										onchange="Escalation()" aria-label="Escalation">
 								</div>
 								<div class="form-group col-lg-6 escalationclass">
 									<label class="form-label">Days</label>
 									<input type="number" class="form-control" name="escalation_day" placeholder="Day"
-										value="<?php echo $workflowconfiguration['escalation_day']; ?>">
+										value="<?php echo $workflowconfiguration['escalation_day']; ?>" aria-label="Day">
 								</div>
 								<div class="form-group col-lg-6 escalationclass">
 									<label class="form-label">Escalation Email</label>
 									<select class="form-select js-example-basic-single"
-										name="escalation_email_content_ref_id">
+										name="escalation_email_content_ref_id" aria-label="Escalation Email Content Ref Id">
 										<option value="0"> Select Any One</option>
 										<?php foreach ($email_content as $emailcontent) { ?>
 											<option value="<?php echo $emailcontent['template_reference_id']; ?>" <?php echo $workflowconfiguration['escalation_email_content_ref_id'] == $emailcontent['template_reference_id'] ? "selected" : "" ?>><?php echo $emailcontent['template_name']; ?> </option>
@@ -746,12 +746,12 @@ $stausresult = ViewStatusData();
 									<span class="form-label d-block">Auto Forward</span>
 									<input type="checkbox" class="js-switch" value="Y" name="auto_forward"
 										id="auto_forward" <?php echo $workflowconfiguration['auto_forward'] == "Y" ? "checked" : ""; ?>
-										onchange="autoForward()">
+										onchange="autoForward()" aria-label="Auto Forward">
 								</div>
 								<div class="form-group col-lg-8 autoforward_class">
 									<label class="form-label">Days</label>
 									<input type="number" class="form-control" name="auto_forward_day" placeholder="Day"
-										value="<?php echo $workflowconfiguration['auto_forward_day']; ?>">
+										value="<?php echo $workflowconfiguration['auto_forward_day']; ?>" aria-label="Day">
 								</div>
 							</div>
 						</div>
@@ -776,7 +776,7 @@ $stausresult = ViewStatusData();
 												onclick="deletecriteria('deletdiv_<?php echo $j; ?>')"></i></span>
 										<div <?php echo $criterias != "-1" ? 'style="pointer-events: none; opacity: 0.6;"' : ""; ?>>
 											<select class="form-select js-example-basic-single selectcriteria"
-												name="criteria[]">
+												name="criteria[]" aria-label="Criteria">
 												<?php foreach ($customselectfieldarray as $trans_table => $customselectfield) { ?>
 													<option value="<?php echo $trans_table; ?>" <?php echo $criterias == $trans_table ? "selected" : "" ?>>
 														<?php echo $customselectfield; ?></option>
@@ -823,12 +823,12 @@ $stausresult = ViewStatusData();
 				<div class="row">
 					<div class="form-group col-lg-1 text-center">
 						<span class="form-label d-block">DOA</span>
-						<input type="checkbox" class="js-switch" name="doa" <?php echo $workflowconfiguration['doa'] == '0' || $workflowconfiguration['doa'] == '' ? "checked" : "" ?> onchange="checkDOA(this.checked)" value="0" />
+						<input type="checkbox" class="js-switch" name="doa" <?php echo $workflowconfiguration['doa'] == '0' || $workflowconfiguration['doa'] == '' ? "checked" : "" ?> onchange="checkDOA(this.checked)" value="0" / aria-label="Doa">
 					</div>
 					<div class="form-group col-lg-4 doatriger w-full"
 						style="<?php echo $workflowconfiguration['doa'] == '0' || $workflowconfiguration['doa'] == '' ? "" : "display:none" ?>">
 						<span class="form-label d-block">DOA Trigger Field</span>
-						<select class="form-select js-example-basic-single fieldlist" name="doa_trigger_field">
+						<select class="form-select js-example-basic-single fieldlist" name="doa_trigger_field" aria-label="Doa Trigger Field">
 							<option value="0"> Select Any One</option>
 							<?php foreach ($listfields as $feldname => $listfield) { ?>
 								<option value="<?php echo $feldname; ?>" <?php echo $workflowconfiguration['doa_trigger_field'] == $feldname ? "selected" : "" ?>>
@@ -923,14 +923,14 @@ $stausresult = ViewStatusData();
 														name="doa_amount[<?php echo $incnumber; ?>][<?php echo $i; ?>]" type="text"
 														value="<?php echo $doa_amount[$i]['end_doa']; ?>" placeholder="Eg. 0"
 														data-a-sign="<?php echo $_SESSION['config']['currency_symbol']; ?>"
-														id="pendingcriteria_<?php echo $incnumber . $i; ?>" <?php echo ($wfdetail['final_approval'] < $i && $wfdetail['final_approval'] != "") ? "disabled" : ""; ?>>
+														id="pendingcriteria_<?php echo $incnumber . $i; ?>" <?php echo ($wfdetail['final_approval'] < $i && $wfdetail['final_approval'] != "") ? "disabled" : ""; ?> aria-label="Eg. 0">
 													<span class="input-group-text form-radio p-0">
 														<div class="radio radio-inline m-0">
 															<label class="form-label">
 																<input type="radio" name="final_approval_<?php echo $incnumber; ?>"
 																	id="pendingcriteriachek_<?php echo $incnumber . $i; ?>"
 																	onchange="finalApprovalstage(<?php echo $incnumber; ?>,<?php echo $i; ?>,<?php echo $workflowconfiguration['workflow_level']; ?>)"
-																	value="<?php echo $i; ?>" <?php echo ($wfdetail['final_approval'] == $i || $wfdetail['final_approval'] == "") ? "checked" : ""; ?>>
+																	value="<?php echo $i; ?>" <?php echo ($wfdetail['final_approval'] == $i || $wfdetail['final_approval'] == "") ? "checked" : ""; ?> aria-label="Input">
 																<i class="helper"></i>
 															</label>
 														</div>
@@ -1089,12 +1089,12 @@ $stausresult = ViewStatusData();
 								<div class="form-group">
 									<label>Submit/Approve</label>
 									<textarea class="form-control "
-										name="approve_message"><?php echo $transaction_message_res['approve_message']; ?></textarea>
+										name="approve_message" aria-label="Approve Message"><?php echo $transaction_message_res['approve_message']; ?></textarea>
 								</div>
 								<div class="form-group">
 									<label>Submit/Approve Informations</label>
 									<textarea class="form-control "
-										name="approve_message_information"><?php echo $transaction_message_res['approve_message_information']; ?></textarea>
+										name="approve_message_information" aria-label="Approve Message Information"><?php echo $transaction_message_res['approve_message_information']; ?></textarea>
 								</div>
 							</div>
 						</div>
@@ -1105,27 +1105,27 @@ $stausresult = ViewStatusData();
 								<div class="form-group">
 									<label>Reject</label>
 									<textarea class="form-control "
-										name="reject_message"><?php echo $transaction_message_res['reject_message']; ?></textarea>
+										name="reject_message" aria-label="Reject Message"><?php echo $transaction_message_res['reject_message']; ?></textarea>
 								</div>
 								<div class="form-group">
 									<label>Send Back</label>
 									<textarea class="form-control "
-										name="sendback_message"><?php echo $transaction_message_res['sendback_message']; ?></textarea>
+										name="sendback_message" aria-label="Sendback Message"><?php echo $transaction_message_res['sendback_message']; ?></textarea>
 								</div>
 								<div class="form-group">
 									<label>Completed Workflow</label>
 									<textarea class="form-control "
-										name="completed_workflow_message"><?php echo $transaction_message_res['completed_workflow_message']; ?></textarea>
+										name="completed_workflow_message" aria-label="Completed Workflow Message"><?php echo $transaction_message_res['completed_workflow_message']; ?></textarea>
 								</div>
 								<div class="form-group">
 									<label>Call Back</label>
 									<textarea class="form-control "
-										name="callback"><?php echo $transaction_message_res['callback']; ?></textarea>
+										name="callback" aria-label="Callback"><?php echo $transaction_message_res['callback']; ?></textarea>
 								</div>
 								<div class="form-group ">
 									<label>Information</label>
 									<textarea class="form-control "
-										name="employee_message"><?php echo $transaction_message_res['employee_message']; ?></textarea>
+										name="employee_message" aria-label="Employee Message"><?php echo $transaction_message_res['employee_message']; ?></textarea>
 								</div>
 							</div>
 						</div>

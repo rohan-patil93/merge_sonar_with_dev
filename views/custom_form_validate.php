@@ -115,7 +115,7 @@ $_SESSION['apply_js']['from-validation'] = "1";
 					type: "POST",
 					success:function(data){
 						console.log(data);
-						$("#grade").html("<select class='form-control' name='pay_template'>"+data+"</select>");
+						$("#grade").html("<select class='form-control' name='pay_template' aria-label="Select">"+data+"</select>");
 					},
 					error:function (){}
 				});	
@@ -138,7 +138,7 @@ $_SESSION['apply_js']['from-validation'] = "1";
 				type: "POST",
 				success:function(data){
 					var fun ="selectchange('ref_id',this.value,'"+key+"')";
-					$(".refkey_ref_no").html("<select class='form-control' name='ref_id' data-tablename='ref_id'  data-fieldsname='ref_id' data-pagename='comman_form' name='ref_id' id='ref_id' onchange="+fun+">"+data+"</select>");
+					$(".refkey_ref_no").html("<select class='form-control' name='ref_id' data-tablename='ref_id'  data-fieldsname='ref_id' data-pagename='comman_form' name='ref_id' id='ref_id' onchange="+fun+" aria-label="Select">"+data+"</select>");
 					window.location.href = 'index.php?option='+option+'&table='+key+'&Rid=0&TD='+trandate;
 				}
 			}); 
@@ -218,14 +218,14 @@ $_SESSION['apply_js']['from-validation'] = "1";
 			 <div class="form-group row"> 
 				<label id="label_transaction_number" class="col-lg-2 col-form-label text-lg-right ">Transaction Number</label>
 				<div class="col-lg-3 " style="">
-					<input class="form-control" type="text" readonly="" autocomplete="off" value="" id="transaction_number" name="transaction_number">
+					<input class="form-control" type="text" readonly="" autocomplete="off" value="" id="transaction_number" name="transaction_number" aria-label="Transaction Number">
 					<span class="messages"></span>
 				</div>
 		<div class="col-lg-1"></div>  
 				<label id="label_transaction_date" class="col-lg-2 col-form-label text-lg-right ">Transaction Date&nbsp;<span class="text-danger">*</span></label>
 				<div class="col-lg-3" style="">
 					<div class="">
-						<input class="form-control datepicker hasDatepicker" type="text" value="29-08-2023" dateformat="d M y" id="transaction_date" name="transaction_date"  required=""><button type="button" class="ui-datepicker-trigger"><i class="ti-calendar text-dark f-20 f-w-800 m-r-10"></i></button>
+						<input class="form-control datepicker hasDatepicker" type="text" value="29-08-2023" dateformat="d M y" id="transaction_date" name="transaction_date"  required="" aria-label="Transaction Date"><button type="button" class="ui-datepicker-trigger"><i class="ti-calendar text-dark f-20 f-w-800 m-r-10"></i></button>
 				</div>
 				<span class="messages"></span>
 			</div>
@@ -235,7 +235,7 @@ $_SESSION['apply_js']['from-validation'] = "1";
 			<div class="col-lg-3 " style="">
 				<div class="w-full refkey_party_id form-validation-class">
 					
-					<select class="form-select js-example-basic-single" onchange="selectchange('party_id',this.value,'vendors')" name="party_id" id="party_id" >
+					<select class="form-select js-example-basic-single" onchange="selectchange('party_id',this.value,'vendors')" name="party_id" id="party_id" aria-label="Party Id">
 						<option value="" data-select2-id="2"> Select Any one </option>
 						<option value="4">Infisuite Hospitals</option>
 						<option value="1">Infisuite Hotel</option>
@@ -252,7 +252,7 @@ $_SESSION['apply_js']['from-validation'] = "1";
 			<label id="label_ref_id" class="col-lg-2 col-form-label text-lg-right ">Reference Number&nbsp;<span class="text-danger">*</span></label>
 			<div class="col-lg-3 form-validation-class" style="">
 				<div class="w-full refkey_ref_id">
-					<select class="form-select js-example-basic-single select2-hidden-accessible" onchange="selectchange('ref_id',this.value,'purchase_orders')" name="ref_id" id="ref_id">
+					<select class="form-select js-example-basic-single select2-hidden-accessible" onchange="selectchange('ref_id',this.value,'purchase_orders')" name="ref_id" id="ref_id" aria-label="Ref Id">
 						<option value="" data-select2-id="4"> Select Any one </option>
 						<option value="1">PO00003</option>
 						<option value="2">PO00004</option>

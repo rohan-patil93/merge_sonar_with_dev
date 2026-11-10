@@ -21,7 +21,7 @@ $projects = $result['table'] ?? array();
                 <!-- Project -->
                 <div class="form-group col-md-4">
                     <label>Project <span class="text-danger">*</span></label>
-                    <select class="form-select js-example-basic-single" id="project_id">
+                    <select class="form-select js-example-basic-single" id="project_id" aria-label="Select">
                         <option value="0">Select Project</option>
                         <?php foreach ($projects as $row): ?>
                             <option value="<?= $row['id']; ?>">
@@ -35,7 +35,7 @@ $projects = $result['table'] ?? array();
                 <!-- Tracking -->
                 <div class="form-group col-md-4">
                     <label>Tracking <span class="text-danger">*</span></label>
-                    <select class="form-select js-example-basic-single" id="tracking_id">
+                    <select class="form-select js-example-basic-single" id="tracking_id" aria-label="Select">
                         <option value="0">Select Tracking</option>
                     </select>
 
@@ -45,11 +45,11 @@ $projects = $result['table'] ?? array();
                 <div class="form-group col-md-2">
                     <label>Type <span class="text-danger">*</span></label><br>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="doc_type" value="PO">
+                        <input class="form-check-input" type="radio" name="doc_type" value="PO" aria-label="Doc Type">
                         <label class="form-check-label">PO</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="doc_type" value="INVOICE">
+                        <input class="form-check-input" type="radio" name="doc_type" value="INVOICE" aria-label="Doc Type">
                         <label class="form-check-label">Invoice</label>
                     </div>
                 </div>

@@ -18,7 +18,7 @@ $lineItemId = (int) ($line['item_id'] ?? 0);
 
         <input type="hidden" name="repair_lines[<?php echo $lineIdx; ?>][line_id]" value="<?php echo (int) ($line['id'] ?? 0); ?>">
 
-        <select class="form-select form-select-sm js-example-basic-single repair-line-item" name="repair_lines[<?php echo $lineIdx; ?>][item_id]">
+        <select class="form-select form-select-sm js-example-basic-single repair-line-item" name="repair_lines[<?php echo $lineIdx; ?>][item_id]" aria-label="Select">
 
             <option value="">Select</option>
 
@@ -64,7 +64,7 @@ $lineItemId = (int) ($line['item_id'] ?? 0);
 
         <?php if ($rowEditable) { ?>
 
-        <input type="text" class="form-control form-control-sm" name="repair_lines[<?php echo $lineIdx; ?>][part_description]" value="<?php echo htmlspecialchars($line['part_description'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
+        <input type="text" class="form-control form-control-sm" name="repair_lines[<?php echo $lineIdx; ?>][part_description]" value="<?php echo htmlspecialchars($line['part_description'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" aria-label="Input">
 
         <?php } else {
 
@@ -78,7 +78,7 @@ $lineItemId = (int) ($line['item_id'] ?? 0);
 
         <?php if ($rowEditable) { ?>
 
-        <input type="number" step="0.01" min="0" class="form-control form-control-sm" name="repair_lines[<?php echo $lineIdx; ?>][qty]" value="<?php echo htmlspecialchars($line['qty'] ?? '1', ENT_QUOTES, 'UTF-8'); ?>">
+        <input type="number" step="0.01" min="0" class="form-control form-control-sm" name="repair_lines[<?php echo $lineIdx; ?>][qty]" value="<?php echo htmlspecialchars($line['qty'] ?? '1', ENT_QUOTES, 'UTF-8'); ?>" aria-label="Input">
 
         <?php } else {
 
@@ -92,7 +92,7 @@ $lineItemId = (int) ($line['item_id'] ?? 0);
 
         <?php if ($rowEditable) { ?>
 
-        <input type="text" class="form-control form-control-sm repair-line-po" name="repair_lines[<?php echo $lineIdx; ?>][po_number]" value="<?php echo htmlspecialchars($line['po_number'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" placeholder="Optional">
+        <input type="text" class="form-control form-control-sm repair-line-po" name="repair_lines[<?php echo $lineIdx; ?>][po_number]" value="<?php echo htmlspecialchars($line['po_number'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" placeholder="Optional" aria-label="Optional">
 
         <?php } else {
 
@@ -106,7 +106,7 @@ $lineItemId = (int) ($line['item_id'] ?? 0);
 
         <?php if ($rowEditable) { ?>
 
-        <input type="number" step="0.01" min="0" class="form-control form-control-sm" name="repair_lines[<?php echo $lineIdx; ?>][amount]" value="<?php echo htmlspecialchars($line['amount'] ?? '0', ENT_QUOTES, 'UTF-8'); ?>">
+        <input type="number" step="0.01" min="0" class="form-control form-control-sm" name="repair_lines[<?php echo $lineIdx; ?>][amount]" value="<?php echo htmlspecialchars($line['amount'] ?? '0', ENT_QUOTES, 'UTF-8'); ?>" aria-label="Input">
 
         <?php } else {
 

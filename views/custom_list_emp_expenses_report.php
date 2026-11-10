@@ -76,7 +76,7 @@ if ($admin_type == '3') {
 				<?php if ($admin_type != '3') { ?>
 				<div class="col-lg-3 col-md-6 form-group">
 					<label>Employees</label>
-					<select class="form-control js-example-basic-multiple" id="emp_id" name="emp_id[]" multiple="multiple" style="width:100%">
+					<select class="form-control js-example-basic-multiple" id="emp_id" name="emp_id[]" multiple="multiple" style="width:100%" aria-label="Emp Id">
 						<?php if (count((array)$employees) > 0) {
 							foreach ($employees as $emp_row) {
 								$eid = is_array($emp_row) ? $emp_row['id'] : $emp_row->id;
@@ -93,15 +93,15 @@ if ($admin_type == '3') {
 
 				<div class="col-lg-3 col-md-6 form-group">
 					<label>From Date <span class="text-danger">*</span></label>
-					<input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo $today; ?>">
+					<input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo $today; ?>" aria-label="From Date">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
 					<label>To Date <span class="text-danger">*</span></label>
-					<input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo $today; ?>">
+					<input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo $today; ?>" aria-label="To Date">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
 					<label>Status</label>
-					<select class="form-control js-example-basic-multiple" id="status" name="status[]" multiple="multiple" style="width:100%">
+					<select class="form-control js-example-basic-multiple" id="status" name="status[]" multiple="multiple" style="width:100%" aria-label="Status">
 						<option value="2">Draft</option>
 						<option value="0">Active</option>
 						<option value="199">Approved</option>
@@ -109,7 +109,7 @@ if ($admin_type == '3') {
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
 					<label>Expense Type</label>
-					<select class="form-control js-example-basic-multiple" id="expense_type" name="expense_type[]" multiple="multiple" style="width:100%">
+					<select class="form-control js-example-basic-multiple" id="expense_type" name="expense_type[]" multiple="multiple" style="width:100%" aria-label="Expense Type">
 						<option value="0">Expense</option>
 						<option value="1">Mileage</option>
 						<option value="2">Per Diem</option>

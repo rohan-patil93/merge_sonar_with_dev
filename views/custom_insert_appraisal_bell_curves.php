@@ -88,7 +88,7 @@ $slabsval = json_decode($appraisal_bell_curves['slabs'],1);
             <div class="row">
                 <div class="form-group col-lg-4">
                     <label class="form-label">Bell Curve Name<span class="text-danger">*</span></label>
-                    <input type="text" name="bell_curve_name" class="form-control" value="<?php echo $appraisal_bell_curves['bell_curve_name']; ?>" required>
+                    <input type="text" name="bell_curve_name" class="form-control" value="<?php echo $appraisal_bell_curves['bell_curve_name']; ?>" required aria-label="Bell Curve Name">
                 </div>
                 <div class="form-group col-lg-8">
                 	<div class="row">
@@ -106,11 +106,11 @@ $slabsval = json_decode($appraisal_bell_curves['slabs'],1);
                 	<div class="row">
                 		<div class="form-group col-lg-6">
                 			<input type="hidden" name="slabs[<?php echo $aprslab['id']; ?>][appraisal_rating_slab_id]" value="<?php echo $aprslab['id']; ?>">
-		                    <input type="text" class="form-control" value="<?php echo $aprslab['slabs_name']; ?>" style="background-color:<?php echo $aprslab['background_color']; ?>; color: <?php echo $aprslab['font_color']; ?> " readonly>
+		                    <input type="text" class="form-control" value="<?php echo $aprslab['slabs_name']; ?>" style="background-color:<?php echo $aprslab['background_color']; ?>; color: <?php echo $aprslab['font_color']; ?> " readonly aria-label="Input">
 			            </div>
 			            <div class="form-group col-lg-6">
 			            	<div class="input-group input-group-button"> 
-		                    	<input type="number" name="slabs[<?php echo $aprslab['id']; ?>][percentage]" class="form-control bell_curve_sum text-right width1" value="<?php echo $slab11['percentage']; ?>" onblur="getTotalBellCurve()" required>
+		                    	<input type="number" name="slabs[<?php echo $aprslab['id']; ?>][percentage]" class="form-control bell_curve_sum text-right width1" value="<?php echo $slab11['percentage']; ?>" onblur="getTotalBellCurve()" required aria-label="Input">
 			                    <span class="input-group-text addon-style">
 								    <span class="">%</span>
 								</span>

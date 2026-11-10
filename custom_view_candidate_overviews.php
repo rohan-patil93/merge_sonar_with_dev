@@ -399,14 +399,14 @@ $due_date_period_list = $result['period_list'];
                 <?php echo $candidates['candidate_current_role'] != "" ? $candidates['candidate_current_role'] : "N/A"; ?></p>
               <input class="form-control contact_detailsT" data-type="text" type="text" id="candidate_current_role"
                 name="candidate_current_role" value="<?php echo $candidates['candidate_current_role']; ?>"
-                style="display: none">
+                style="display: none" aria-label="Candidate Current Role">
             </div>
             <div class="mb-2 pb-2">
               <label class="f-w-600 form-label">Department</label>
               <p class="f-14 mb-0 contact_detailsL">
                 <?php echo $candidates['department_id'] != "" ? $job_titles[$candidates['department_id']] : "N/A"; ?></p>
               <select class="form-select contact_detailsT" data-type="select" id="department_id" name="department_id"
-                style="display: none">
+                style="display: none" aria-label="Department Id">
                 <?php foreach ($departments as $key4 => $department) { ?>
                   <option <?php if ($key4 == $candidates['department_id']) { ?> selected <?php } ?>
                     value="<?php echo $key4; ?>"><?php echo $department; ?></option>
@@ -418,7 +418,7 @@ $due_date_period_list = $result['period_list'];
               <p class="f-14 mb-0 contact_detailsL">
                 <?php echo $candidates['job_tittle_id'] != "" ? $job_titles[$candidates['job_tittle_id']] : "N/A"; ?></p>
               <select class="form-select  contact_detailsT" data-type="select" id="job_tittle_id" name="job_tittle_id"
-                style="display: none">
+                style="display: none" aria-label="Job Tittle Id">
                 <?php foreach ($job_titles as $key5 => $job_title) { ?>
                   <option <?php if ($key5 == $candidates['job_tittle_id']) { ?> selected <?php } ?>
                     value="<?php echo $key5; ?>"><?php echo $job_title; ?></option>
@@ -461,7 +461,7 @@ $due_date_period_list = $result['period_list'];
               <p class="f-14 mb-0 personal_detailsL">
                 <?php echo $candidates['hr_connect'] != "" ? $_SESSION['users'][$candidates['hr_connect']] : "N/A"; ?></p>
               <select class="form-select  personal_detailsT" data-type="select" id="hr_connect" name="hr_connect"
-                style="display: none">
+                style="display: none" aria-label="Hr Connect">
                 <?php foreach ($applicationusers as $key7 => $displayname) { ?>
                   <option <?php if ($candidates['hr_connect'] == $key7) { ?> selected <?php } ?> value="<?php echo $key7; ?>">
                     <?php echo $displayname; ?></option>
@@ -642,7 +642,7 @@ $due_date_period_list = $result['period_list'];
                                <div class="image-input image-input-empty image-input-outline mr-10 mt-2" id="kt_image_5_old"  style=" height:0px; ">
                                   <label class="btn-hover-text-primary" data-action="change" data-toggle="tooltip" title="" data-original-title="Uploade File">
                                     <i class="ti-clip" style="font-size: 20px;"></i>
-                                    <input type="file" name="image_<?php echo $candidatedocument['id']; ?>" onchange="fileselected('<?php echo $candidatedocument['id'] ?>',this.value)"/>
+                                    <input type="file" name="image_<?php echo $candidatedocument['id']; ?>" onchange="fileselected('<?php echo $candidatedocument['id'] ?>',this.value)"/ aria-label="Input">
                                     <input type="hidden" name="hidimage_<?php echo $candidatedocument['id']; ?>" value="<?php echo $candidatedocument['document_shared']; ?>"/>
                                   </label>
 
@@ -681,7 +681,7 @@ $due_date_period_list = $result['period_list'];
                                  <div class="row">
                                    <div class="form-group col-lg-8 w-full">
                                      <label for="before_or_after_<?php echo $details['id']; ?>" class="form-label d-block">Due Date</label>
-                                      <select name="before_or_after" id="before_or_after_<?php echo $details['id']; ?>" style="width:150px;" class="form-control form-select js-example-basic-single" >
+                                      <select name="before_or_after" id="before_or_after_<?php echo $details['id']; ?>" style="width:150px;" class="form-control form-select js-example-basic-single" aria-label="Before Or After">
                                          <option value="AT">Any Time</option>
                                          <?php foreach ($due_date_period_list as $due){  ?>
                                            <option value="<?php echo $due['genc_detail_code'];?>" ><?php echo $due['genc_detail_name']." Joining";?></option>
@@ -690,7 +690,7 @@ $due_date_period_list = $result['period_list'];
                                    </div>
                                    <div class="form-group col-lg-4">
                                      <label for="day_<?php echo $details['id']; ?>" class="form-label">Days</label>
-                                     <input type="text" name="day" id="day_<?php echo $details['id']; ?>" class="form-control" value="0"/>
+                                     <input type="text" name="day" id="day_<?php echo $details['id']; ?>" class="form-control" value="0"/ aria-label="Day">
                                    </div>
                                  </div>
                                </form>
@@ -800,7 +800,7 @@ $due_date_period_list = $result['period_list'];
                                                             <label
                                                               class="form-label check-task <?php echo $classcheck; ?> campliancecros_<?php echo $tas['id'] . "_" . $keyval; ?>">
                                                               <input type="checkbox" value="" <?php echo $checkboxcl; ?>
-                                                                class="checkcheckboxcopliance_<?php echo $tas['id'] . "_" . $keyval; ?>">
+                                                                class="checkcheckboxcopliance_<?php echo $tas['id'] . "_" . $keyval; ?>" aria-label="Input">
                                                               <span class="cr">
                                                                 <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                               </span>
@@ -1201,7 +1201,7 @@ $due_date_period_list = $result['period_list'];
                                               <div class="image-input image-input-empty image-input-outline mr-10 mt-2" id="kt_image_5"  style=" height:0px; ">
                                                 <label class="btn-hover-text-primary mt-1 <?php //echo $value['document_shared']!=""?"mt-3":"mt-1"; ?>" data-action="change" data-toggle="tooltip" title="" data-original-title="Uploade File">
                                                   <i class="ti-clip" style="font-size: 20px;"></i>
-                                                  <input type="file" name="image_<?php echo $value['id']; ?>" onchange="fileselected('<?php echo $value['id'] ?>',this.value)"/>
+                                                  <input type="file" name="image_<?php echo $value['id']; ?>" onchange="fileselected('<?php echo $value['id'] ?>',this.value)"/ aria-label="Input">
                                                   <input type="hidden" name="hidimage_<?php echo $value['id']; ?>" value="<?php echo $value['document_shared']; ?>"/>
                                                 </label>
 

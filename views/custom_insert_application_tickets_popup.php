@@ -183,17 +183,17 @@ function updateApplicationTickets(rid,status){
 			<div class="col-lg-12">
 				<label class="form-label col-form-label">Issue Name <span class="requried">*</span></label>
 				<span class="d-block error-message text-danger"></span>
-				<input type="text" class="form-control requried_field" name="issue_name">
+				<input type="text" class="form-control requried_field" name="issue_name" aria-label="Issue Name">
 			</div>
 			<div class="col-lg-12">
 				<label class="form-label col-form-label">Issue Description <span class="requried">*</span></label>
 				<span class="d-block error-message text-danger"></span>
-				<textarea class="form-control requried_field" name="issue_description"></textarea>
+				<textarea class="form-control requried_field" name="issue_description" aria-label="Issue Description"></textarea>
 			</div>
 			<div class="col-lg-6 w-full">
 				<label class="form-label col-form-label">Priority <span class="requried">*</span></label>
 				<span class="d-block error-message text-danger"></span>
-				<select class="form-control form-select js-example-basic-single requried_field" name="priority">
+				<select class="form-control form-select js-example-basic-single requried_field" name="priority" aria-label="Priority">
 					<?php foreach($priority as $priok=>$priov){ ?>
 	                    <option value="<?php echo $priok; ?>" ><?php echo $priov; ?></option>
 	                <?php } ?>
@@ -201,7 +201,7 @@ function updateApplicationTickets(rid,status){
 			</div>
 			<div class="col-lg-6">
 		        <label for="popattickettachment" class="form-label col-form-label d-block">Attache File</label>
-		        <input type="file" class="form-control" id="popattickettachment">
+		        <input type="file" class="form-control" id="popattickettachment" aria-label="Input">
 		    </div>
 		</div>
 	</form>

@@ -153,24 +153,24 @@ $countriesres   = json_decode($countriesres,1);
 						<div class="row">
 							<div class="form-group col-lg-4">
 								<label class="">First Name&nbsp;<span class="requried">*</span></label>
-								<input class="form-control" type="text" id="first_name" name="first_name" value="<?php echo $application_users['first_name']; ?>" required >
+								<input class="form-control" type="text" id="first_name" name="first_name" value="<?php echo $application_users['first_name']; ?>" required aria-label="First Name">
 							</div>
 							<div class="form-group col-lg-4">
 								<label class="">Last Name</label>
-								<input class="form-control" type="text" id="last_name" name="last_name" value="<?php echo $application_users['last_name']; ?>">
+								<input class="form-control" type="text" id="last_name" name="last_name" value="<?php echo $application_users['last_name']; ?>" aria-label="Last Name">
 							</div>
 							<div class="form-group col-lg-4">
 								<label class="">Display Name</label>
-								<input class="form-control" type="text" id="display_name" name="display_name" value="<?php echo $application_users['display_name']; ?>" required >
+								<input class="form-control" type="text" id="display_name" name="display_name" value="<?php echo $application_users['display_name']; ?>" required aria-label="Display Name">
 							</div>
 							<div class="form-group col-lg-4">
 								<label class="">User Email</label>
-								<input class="form-control" type="text" id="user_email" name="user_email" value="<?php echo $application_users['user_email']; ?>"  <?php echo $rid!=""?"readonly":""; ?> required >
+								<input class="form-control" type="text" id="user_email" name="user_email" value="<?php echo $application_users['user_email']; ?>"  <?php echo $rid!=""?"readonly":""; ?> required aria-label="User Email">
 								<div style="display: none;color: red;" id="user_email_err"> Please enter User Email </div> 
 							</div>
 							<div class="form-group col-lg-4">
 								<label class="">User Mobile</label>
-								<input class="form-control" type="text" id="user_mobile" name="user_mobile" value="<?php echo $application_users['user_mobile']; ?>">
+								<input class="form-control" type="text" id="user_mobile" name="user_mobile" value="<?php echo $application_users['user_mobile']; ?>" aria-label="User Mobile">
 								<div style="display: none;color: red;" id="user_mobile_err"> Please enter User Mobile </div> 
 							</div>
 							<?php $disablerole= ""; 
@@ -181,7 +181,7 @@ $countriesres   = json_decode($countriesres,1);
 							?>
 							<div class="form-group col-lg-4" style="<?php echo $disablerole; ?>">
 								<label>User Role</label>
-								<select class="form-select js-example-basic-multiple" multiple="multiple" name="role_id[]">
+								<select class="form-select js-example-basic-multiple" multiple="multiple" name="role_id[]" aria-label="Role Id">
 									<?php foreach($application_roles as $application_roled){ ?>
 										<option value="<?php echo $application_roled['role_short_code']; ?>" <?php echo in_array($application_roled['role_short_code'],(array)$role_idd)?"selected":""; ?>><?php echo $application_roled['name']; ?></option>
 									<?php  } ?>
@@ -198,7 +198,7 @@ $countriesres   = json_decode($countriesres,1);
 							<?php **/ ?>
 							<div class="form-group col-lg-4">
 								<label>Country </label>
-								<select class="form-select js-example-basic-single"  name="country_id">
+								<select class="form-select js-example-basic-single"  name="country_id" aria-label="Country Id">
 									<option value="" > Select Any One Country</option>
 									<?php foreach($countriesres as $countries){ ?>
 										<option value="<?php echo  $countries['id']; ?>" <?php echo $application_users['country_id'] == $countries['id']?"selected":""; ?>> <?php echo  $countries['country_name']; ?> </option>
@@ -207,7 +207,7 @@ $countriesres   = json_decode($countriesres,1);
 							</div>
 							<div class="form-group col-lg-4">
 								<label>Location </label>
-								<select class="form-select js-example-basic-single"  name="location_id">
+								<select class="form-select js-example-basic-single"  name="location_id" aria-label="Location Id">
 									<option value="" > Select Any one Location</option>
 									<?php foreach($locations as $location){ ?>
 										<option value="<?php echo  $location['id']; ?>" <?php echo $application_users['location_id'] == $location['id']?"selected":""; ?>> <?php echo  $location['location_name']; ?> </option>
@@ -222,13 +222,13 @@ $countriesres   = json_decode($countriesres,1);
 
  				<div class="form-group col-lg-4">
 					<label class="form-label">Config Name</label>
-					<input class="form-control" type="text" id="config_name" name="config_name" value="<?php echo $_SESSION['company'][$application_users['company_id']]; ?>">
+					<input class="form-control" type="text" id="config_name" name="config_name" value="<?php echo $_SESSION['company'][$application_users['company_id']]; ?>" aria-label="Config Name">
 				</div>
 
 
 			<div class="form-group col-lg-4">
 				<label class="form-label">Date Format </label>
-				<select class="form-select js-example-basic-single"  name="date_format">
+				<select class="form-select js-example-basic-single"  name="date_format" aria-label="Date Format">
 			    <option value="">Select Any One </option>
 			    <?php foreach($dateformatlist as $valuedates) { ?>
 			      <option value="<?php echo $valuedates;?>"><?php echo $valuedates; ?></option>
@@ -242,7 +242,7 @@ $countriesres   = json_decode($countriesres,1);
 								<label class="-label" for="image1">
 									<span><i class="fa fa-camera"></i> &nbsp; Change Image</span>
 								</label>
-								<input type="file" name="image1" id="image1" accept=".png, .jpg, .jpeg"  onchange="loadFile(event,this.id)">
+								<input type="file" name="image1" id="image1" accept=".png, .jpg, .jpeg"  onchange="loadFile(event,this.id)" aria-label="Image1">
 								
 								<input type="hidden" name="hidimage" value="<?php echo $application_users['user_photo']; ?>">
 								<img src="<?php echo $File_Uploads_Path.$application_users['display_logo'] ; ?>" id="outputimage1" width="200" onerror="this.src='uploads/all/no-image.jpg';" alt="" />
@@ -276,7 +276,7 @@ $countriesres   = json_decode($countriesres,1);
 								<label class="-label" for="image">
 									<span><i class="fa fa-camera"></i> &nbsp; Change Image</span>
 								</label>
-								<input type="file" name="image" id="image" accept=".png, .jpg, .jpeg"  onchange="loadFile(event,this.id)">
+								<input type="file" name="image" id="image" accept=".png, .jpg, .jpeg"  onchange="loadFile(event,this.id)" aria-label="Image">
 								<input type="hidden" name="hidimage1" value="<?php echo $application_users['user_photo']; ?>">
 								<img src="<?php echo $File_Uploads_Path.$application_users['user_photo'] ; ?>" id="outputimage" width="200" onerror="this.src='uploads/all/no-image.jpg';" alt="" />
 							</div>

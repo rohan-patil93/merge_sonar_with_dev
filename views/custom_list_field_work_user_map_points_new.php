@@ -48,7 +48,7 @@ $application_users = $result['application_users'];
         <div class="row g-3">
             <div class="form-group col-lg-5">
                 <label class="fwdp-label">User <span class="text-danger">*</span></label>
-                <select class="form-select js-example-basic-multiple" id="user_id" name="user_id[]" multiple="multiple">
+                <select class="form-select js-example-basic-multiple" id="user_id" name="user_id[]" multiple="multiple" aria-label="User Id">
                     <option value="0">Select Any one</option>
                     <?php if (count((array)$application_users) > 0) {
                         foreach ($application_users as $row) { ?>
@@ -63,12 +63,12 @@ $application_users = $result['application_users'];
 
             <div class="col-lg-3 col-xs-4 form-group">
                 <label class="fwdp-label">From Date <span class="text-danger">*</span></label>
-                <input class="form-control" type="date" name="from_date" id="from_date" value="">
+                <input class="form-control" type="date" name="from_date" id="from_date" value="" aria-label="From Date">
                 <div class="d-none text-danger" id="from_date_err"></div>
             </div>
             <div class="col-lg-3 col-xs-4 form-group">
                 <label class="fwdp-label">To Date <span class="text-danger">*</span></label>
-                <input class="form-control" type="date" name="to_date" id="to_date" value="">
+                <input class="form-control" type="date" name="to_date" id="to_date" value="" aria-label="To Date">
                 <div class="d-none text-danger" id="to_date_err"></div>
             </div>
 

@@ -63,7 +63,7 @@ if($_POST['approval_type'] =='custom_process'){
 			<div class="col-lg-2 mt-4">Level <span class="badge bg-info "><?php echo $i; ?></span></div>
 			<div class="col-lg-3">
 				<label class="form-label">Status</label>
-				<select class="form-select js-example-basic-single" name="status[]" >
+				<select class="form-select js-example-basic-single" name="status[]" aria-label="Status">
 				<option value="">Select Any One</option>	
 					<?php foreach($statusrow as $statusrows){ ?>
 						<option value="<?php echo $statusrows['status']; ?>" <?php echo $statusrows['status']==$updatefields[$mk]['status']?"selected":""; ?>><?php echo $statusrows['name'];?></option>
@@ -72,15 +72,15 @@ if($_POST['approval_type'] =='custom_process'){
 			</div>
 			<div class="col-lg-2">
 				<label class="form-label">Followup Days</label>
-				<input class="form-control"  type="number" name="followup_days[]" value="<?php echo  $updatefields[$mk]['followup_days']; ?>" placeholder="Eg.5">
+				<input class="form-control"  type="number" name="followup_days[]" value="<?php echo  $updatefields[$mk]['followup_days']; ?>" placeholder="Eg.5" aria-label="Eg.5">
 			</div>
 			<div class="col-lg-2">
 				<label class="form-label">Auto Forward Days</label>
-				<input class="form-control"  type="number" name="auto_forword_days[]" value="<?php echo  $updatefields[$mk]['auto_forword_days']; ?>" placeholder="Eg.2">
+				<input class="form-control"  type="number" name="auto_forword_days[]" value="<?php echo  $updatefields[$mk]['auto_forword_days']; ?>" placeholder="Eg.2" aria-label="Eg.2">
 			</div>
 			<div class="col-lg-3">
 				<label class="form-label">Work Flow Field</label>
-				<select class="form-select js-example-basic-single" name="work_flow_field[]" >
+				<select class="form-select js-example-basic-single" name="work_flow_field[]" aria-label="Work Flow Field">
 				<option value="">Select Any One</option>	
 					<?php  foreach($field_list as $ros){  ?>
 						<option value="<?php echo $ros['Field']; ?>" <?php echo $ros['Field']==$updatefields[$mk]['work_flow_field']?"selected":""; ?>><?php echo $ros['Field'];?></option>
@@ -96,7 +96,7 @@ for($i=0;$i <= 1;$i++){
 			<div class="col-lg-2 mt-4">Level <span class="badge bg-info "><?php echo $mk; ?></span></div>
 			<div class="col-lg-3">
 				<label class="form-label">Status</label>
-				<select class="form-select js-example-basic-single" name="status[]" >
+				<select class="form-select js-example-basic-single" name="status[]" aria-label="Status">
 				<option value="">Select Any One</option>	
 					<?php foreach($statusrow as $statusrows){ ?>
 						<option value="<?php echo $statusrows['status']; ?>" <?php echo $statusrows['status']==$updatefields[$i]['status']?"selected":""; ?>><?php echo $statusrows['name'];?></option>
@@ -105,15 +105,15 @@ for($i=0;$i <= 1;$i++){
 			</div>
 			<div class="col-lg-2">
 				<label class="form-label">Followup Days</label>
-				<input class="form-control"  type="number" name="followup_days[]" value="<?php echo  $updatefields[$i]['followup_days']; ?>" placeholder="Eg.5">
+				<input class="form-control"  type="number" name="followup_days[]" value="<?php echo  $updatefields[$i]['followup_days']; ?>" placeholder="Eg.5" aria-label="Eg.5">
 			</div>
 			<div class="col-lg-2">
 				<label class="form-label">Auto Forward Days</label>
-				<input class="form-control"  type="number" name="auto_forword_days[]" value="<?php echo  $updatefields[$i]['auto_forword_days']; ?>" placeholder="Eg.2">
+				<input class="form-control"  type="number" name="auto_forword_days[]" value="<?php echo  $updatefields[$i]['auto_forword_days']; ?>" placeholder="Eg.2" aria-label="Eg.2">
 			</div>
 			<div class="col-lg-3">
 				<label class="form-label">Work Flow Field</label>
-				<select class="form-select js-example-basic-single" name="work_flow_field[]" >
+				<select class="form-select js-example-basic-single" name="work_flow_field[]" aria-label="Work Flow Field">
 				<option value="">Select Any One</option>	
 					<?php  foreach($field_list as $ros){  ?>
 						<option value="<?php echo $ros['Field']; ?>" <?php echo $ros['Field']==$updatefields[$i]['work_flow_field']?"selected":""; ?>><?php echo $ros['Field'];?></option>
@@ -144,7 +144,7 @@ for($i=0;$i <= 1;$i++){
 			<div class="col-lg-2 mt-4">Level <span class="badge bg-info "><?php echo $i; ?></span></div>
 			<div class="col-lg-3">
 				<label class="form-label">Status</label>
-				<select class="form-select js-example-basic-single" name="status[]" >
+				<select class="form-select js-example-basic-single" name="status[]" aria-label="Status">
 				<option value="">Select Any One</option>	
 					<?php foreach($statusrow as $statusrows){ ?>
 						<option value="<?php echo $statusrows['status']; ?>" <?php echo $statusrows['status']==$updatefields[$mk]['status']?"selected":""; ?>><?php echo $statusrows['name'];?></option>
@@ -153,15 +153,15 @@ for($i=0;$i <= 1;$i++){
 			</div>
 			<div class="col-lg-2">
 				<label class="form-label">Followup Days</label>
-				<input class="form-control"  type="number" name="followup_days[]" value="<?php echo  $updatefields[$mk]['followup_days']; ?>" placeholder="Eg.5">
+				<input class="form-control"  type="number" name="followup_days[]" value="<?php echo  $updatefields[$mk]['followup_days']; ?>" placeholder="Eg.5" aria-label="Eg.5">
 			</div>
 			<div class="col-lg-2">
 				<label class="form-label">Auto Forward Days</label>
-				<input class="form-control"  type="number" name="auto_forword_days[]" value="<?php echo  $updatefields[$mk]['auto_forword_days']; ?>" placeholder="Eg.2">
+				<input class="form-control"  type="number" name="auto_forword_days[]" value="<?php echo  $updatefields[$mk]['auto_forword_days']; ?>" placeholder="Eg.2" aria-label="Eg.2">
 			</div>
 			<div class="col-lg-3">
 				<label class="form-label">Work Flow Field</label>
-				<select class="form-select js-example-basic-single" name="work_flow_field[]" >
+				<select class="form-select js-example-basic-single" name="work_flow_field[]" aria-label="Work Flow Field">
 				<option value="">Select Any One</option>	
 					<?php  foreach($field_list as $ros){  ?>
 						<option value="<?php echo $ros['Field']; ?>" <?php echo $ros['Field']==$updatefields[$mk]['work_flow_field']?"selected":""; ?>><?php echo $ros['Field'];?></option>
@@ -174,7 +174,7 @@ for($i=0;$i <= 1;$i++){
 			<div class="col-lg-2 mt-4">Level <span class="badge bg-info ">1</span></div>
 			<div class="col-lg-3">
 				<label class="form-label">Status</label>
-				<select class="form-select js-example-basic-single" name="status[]" >
+				<select class="form-select js-example-basic-single" name="status[]" aria-label="Status">
 				<option value="">Select Any One</option>	
 					<?php foreach($statusrow as $statusrows){ ?>
 						<option value="<?php echo $statusrows['status']; ?>" <?php echo $statusrows['status']==$updatefields[0]['status']?"selected":""; ?>><?php echo $statusrows['name'];?></option>
@@ -183,15 +183,15 @@ for($i=0;$i <= 1;$i++){
 			</div>
 			<div class="col-lg-2">
 				<label class="form-label">Followup Days</label>
-				<input class="form-control"  type="number" name="followup_days[]" value="<?php echo  $updatefields[0]['followup_days']; ?>" placeholder="Eg.5">
+				<input class="form-control"  type="number" name="followup_days[]" value="<?php echo  $updatefields[0]['followup_days']; ?>" placeholder="Eg.5" aria-label="Eg.5">
 			</div>
 			<div class="col-lg-2">
 				<label class="form-label">Auto Forward Days</label>
-				<input class="form-control"  type="number" name="auto_forword_days[]" value="<?php echo  $updatefields[0]['auto_forword_days']; ?>" placeholder="Eg.2">
+				<input class="form-control"  type="number" name="auto_forword_days[]" value="<?php echo  $updatefields[0]['auto_forword_days']; ?>" placeholder="Eg.2" aria-label="Eg.2">
 			</div>
 			<div class="col-lg-3">
 				<label class="form-label">Work Flow Field</label>
-				<select class="form-select js-example-basic-single" name="work_flow_field[]" >
+				<select class="form-select js-example-basic-single" name="work_flow_field[]" aria-label="Work Flow Field">
 				<option value="">Select Any One</option>	
 					<?php  foreach($field_list as $ros){  ?>
 						<option value="<?php echo $ros['Field']; ?>" <?php echo $ros['Field']==$updatefields[0]['work_flow_field']?"selected":""; ?>><?php echo $ros['Field'];?></option>

@@ -125,7 +125,7 @@ function checkAll(ele) {
                             <div class="form-group col-lg-6">
                                 <label>Lock Type&nbsp;<span class="requried">*</span></label>
                                 <div id="frist" class="mt-2">
-                                    <select class="form-control form-select js-example-basic-single" id="lock_type" onchange ="vendorsshow(this.value)"  name="lock_type" id="lock_type">
+                                    <select class="form-control form-select js-example-basic-single" id="lock_type" onchange ="vendorsshow(this.value)"  name="lock_type" id="lock_type" aria-label="Lock Type">
                                         <option value=""> Select Any one </option>
                                         <?php $listtype = array('0'=>"Month Wise Lock", '1'=>"Vendor Wise Lock");
                                          foreach ($listtype as  $lkey=>$listlock) {  ?> 
@@ -140,7 +140,7 @@ function checkAll(ele) {
                             }   ?>
                             <div class="form-group col-lg-6">
                                 <label>Month Lock&nbsp;<span class="requried">*</span></label>
-                                <input type="month" name="month" value="<?php echo $lom; ?>" id="month" class="form-control mt-2">
+                                <input type="month" name="month" value="<?php echo $lom; ?>" id="month" class="form-control mt-2" aria-label="Month">
                                 <div style="display: none;color: red;" id="month_err"> Please Enter Month Lock</div> 
                             </div> 
                             
@@ -152,7 +152,7 @@ function checkAll(ele) {
                                 <div class="col-lg-3 mb-3">
                                     <div class="checkbox-zoom zoom-primary mt-1">
                                         <label class="form-label">
-                                            <input type="checkbox"    name="" value= "" onclick="checkAll(this)" >
+                                            <input type="checkbox"    name="" value= "" onclick="checkAll(this)" aria-label="Input">
                                             <span class="cr">
                                                  <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                              </span>  <span class="f-16"> Check / Uncheck All</span>
@@ -163,11 +163,11 @@ function checkAll(ele) {
                                 <?php foreach($vendordata as $vkey=>$vendor){ ?>
                                  <div class="form-group col-lg-3">
                                    <?php /**?> <label><?php echo $vendor['company']; ?></label>  
-                                    <input type="checkbox"  class="js-switch" value="<?php echo $vendor['id']; ?>"  name="lock_list[<?php echo $vendor['id']; ?>]" />
+                                    <input type="checkbox"  class="js-switch" value="<?php echo $vendor['id']; ?>"  name="lock_list[<?php echo $vendor['id']; ?>]" / aria-label="Input">
                                     </div> <?php **/ ?>
                                     <div class="checkbox-zoom zoom-primary mt-1">
                                         <label class="form-label">
-                                            <input type="checkbox"  <?php if(in_array($vendor['id'],(array)$checkven) ){  echo "checked"; } ?>  name="lock_list[<?php echo $vendor['id']; ?>]" value= "<?php echo $vendor['id']; ?>" >
+                                            <input type="checkbox"  <?php if(in_array($vendor['id'],(array)$checkven) ){  echo "checked"; } ?>  name="lock_list[<?php echo $vendor['id']; ?>]" value= "<?php echo $vendor['id']; ?>" aria-label="Input">
                                             <span class="cr">
                                                  <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                              </span>  <span class="f-14"><?php echo $vendor['company']; ?> </span>

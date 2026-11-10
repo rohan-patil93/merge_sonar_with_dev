@@ -700,7 +700,7 @@ if ($total_budget_hrs > 0) {
 									<div class="col-lg-3">
 										<div class="d-flex align-items-center">
 											<label class="mr-3 mb-0 d-none d-md-block">Reporting Manager:&nbsp;</label>
-											<select class="form-control form-select js-example-basic-single" id="kt_datatable_search_typew" name="approval_manager">
+											<select class="form-control form-select js-example-basic-single" id="kt_datatable_search_typew" name="approval_manager" aria-label="Approval Manager">
 												<option value="0">All</option>
 												<?php foreach((array)$approvemanager as $appkey=>$appm){ ?>
 													<option  <?php echo ($approval_manager==$appkey) ? 'selected' :""; ?> value="<?php echo $appkey; ?>"><?php echo $_SESSION['users'][$appm]; ?></option>
@@ -711,7 +711,7 @@ if ($total_budget_hrs > 0) {
 									<div class="col-lg-3">
 										<div class="d-flex align-items-center">
 											<label class="mr-3 mb-0 d-none d-md-block">Vendor:&nbsp;</label>
-											<select class="form-control form-select js-example-basic-single" id="kt_datatable_search_type" name="vendor">
+											<select class="form-control form-select js-example-basic-single" id="kt_datatable_search_type" name="vendor" aria-label="Vendor">
 												<option value="0">All</option>
 												<?php foreach((array)$allvendors as $vkey =>$vlist){
 													if(in_array($vkey,$approvevendor)){ ?>
@@ -723,7 +723,7 @@ if ($total_budget_hrs > 0) {
 									<div class="col-lg-3">
 										<div class="d-flex align-items-center">
 											<label class="mr-3 mb-0 d-none d-md-block">Name:&nbsp;</label>
-											<input type="text" class="form-control " name="emp_name" value="<?php echo $emp_name=='0' ? '' : $emp_name; ?>">
+											<input type="text" class="form-control " name="emp_name" value="<?php echo $emp_name=='0' ? '' : $emp_name; ?>" aria-label="Emp Name">
 										</div>
 									</div>
 									
@@ -798,7 +798,7 @@ if ($total_budget_hrs > 0) {
 																	<th scope="col" class=" min-w-50px text-center">
 																		<div class="checkbox-fade fade-in-primary">
 																			<label class="checkbox checkbox-success">
-																				<input type="checkbox" checked id="" disabled class="">
+																				<input type="checkbox" checked id="" disabled class="" aria-label="Input">
 																				<span class="cr">
                                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                         </span>
@@ -906,7 +906,7 @@ if($sb['vrc_purchase_uom']=='PD'){
 	<?php if($sb['pt_status_id'] != "104"){ ?>	
 	<div class="checkbox-fade fade-in-primary">
 		<label class="checkbox checkbox-success">
-			<input type="checkbox" class="" checked name="" disabled value="<?php echo $sb['employee_id']; ?>">
+			<input type="checkbox" class="" checked name="" disabled value="<?php echo $sb['employee_id']; ?>" aria-label="Input">
 			<span class="cr">
 			<i class="cr-icon icofont icofont-ui-check txt-primary"></i>
 			</span>
@@ -979,7 +979,7 @@ if($sb['vrc_purchase_uom']=='PD'){
 													<th scope="col" class=" min-w-50px text-center">
 														<div class="checkbox-fade fade-in-primary">
 															<label class="checkbox checkbox-success">
-																<input type="checkbox" id="select_all" class="itemRow" onclick="tocheckallboxes()">
+																<input type="checkbox" id="select_all" class="itemRow" onclick="tocheckallboxes()" aria-label="Input">
 																<span class="cr">
                                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                         </span>
@@ -1088,7 +1088,7 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 												<td class="text-center pr-0">
 													<div class="checkbox-fade fade-in-primary">
 														<label class="checkbox checkbox-success">
-															<input type="checkbox" onclick="tocheckdrodown()" class="itemRow checkbox1" name="checkbox1" value="<?php echo $sb['employee_id']; ?>">
+															<input type="checkbox" onclick="tocheckdrodown()" class="itemRow checkbox1" name="checkbox1" value="<?php echo $sb['employee_id']; ?>" aria-label="Checkbox1">
 															<span class="cr">
                                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                         </span>

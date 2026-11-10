@@ -72,7 +72,7 @@ if(isset($_POST['submit'])){
     					<div class="form-group row ml-20 mr-20">
     						<div class="form-group col-lg-6">
     							<label>User Name&nbsp;<span class="requried">*</span></label>
-    								<input class="form-control"  type="text"  id="user_name" name="user_name"  value="">
+    								<input class="form-control"  type="text"  id="user_name" name="user_name"  value="" aria-label="User Name">
     								
     							<div style="display: none;color: red;" id="user_name_err"> Please enter User Name </div> 
     						</div>
@@ -80,7 +80,7 @@ if(isset($_POST['submit'])){
     						<div class="form-group col-lg-6">
     							<label>First Name&nbsp;<span class="requried">*</span></label>
     							
-    								<input class="form-control"  type="text"  id="first_name" name="first_name"  value="">
+    								<input class="form-control"  type="text"  id="first_name" name="first_name"  value="" aria-label="First Name">
     								
     							<div style="display: none;color: red;" id="first_name_err"> Please enter First Name </div> 
     						</div>
@@ -88,7 +88,7 @@ if(isset($_POST['submit'])){
     						<div class="form-group col-lg-6">
     							<label>Last Name</label>
     							
-    								<input class="form-control"  type="text"  id="last_name" name="last_name"  value="">
+    								<input class="form-control"  type="text"  id="last_name" name="last_name"  value="" aria-label="Last Name">
     								
     							<div style="display: none;color: red;" id="last_name_err"> Please enter Last Name </div> 
     						</div>
@@ -96,7 +96,7 @@ if(isset($_POST['submit'])){
     						<div class="form-group col-lg-6">
     							<label>Email</label>
     							
-    								<input class="form-control"  type="text"  id="user_email" name="user_email"  value="">
+    								<input class="form-control"  type="text"  id="user_email" name="user_email"  value="" aria-label="User Email">
     								
     							<div style="display: none;color: red;" id="user_email_err"> Please enter Email </div> 
     						</div>
@@ -104,7 +104,7 @@ if(isset($_POST['submit'])){
     						<div class="form-group col-lg-6">
     							<label>Mobile</label>
     							
-    								<input class="form-control"  type="text"  id="user_mobile" name="user_mobile"  value="">
+    								<input class="form-control"  type="text"  id="user_mobile" name="user_mobile"  value="" aria-label="User Mobile">
     								
     							<div style="display: none;color: red;" id="user_mobile_err"> Please enter Mobile </div> 
     						</div> 

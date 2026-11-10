@@ -67,7 +67,7 @@ foreach ($roledata as $roles) {
 	<form class="kt-form j-pro" id="kt_form" method="post" action="" onsubmit="return validateForm()" name="myForm" enctype="multipart/form-data">
 	<div class="col-lg-6 mt-5">
 		<label>Role </label>
-		<select class="form-select js-example-basic-single" id="kt_select2_1" name="role" onchange="GetSelectedTextValue(this.value)">
+		<select class="form-select js-example-basic-single" id="kt_select2_1" name="role" onchange="GetSelectedTextValue(this.value)" aria-label="Role">
 			
 		<?php foreach ($show as  $selectvalue) {  ?> 
 				<option <?php if($selectvalue['id'] == $role_id){ ?> selected <?php } ?> value="<?php echo $selectvalue['id']; ?>"><?php echo $selectvalue['name']; ?></option>
@@ -136,12 +136,12 @@ foreach ($roledata as $roles) {
 													<?php if($table_name != ''){ ?>
 													<input type="hidden" class="form-control"  name="table[]" value="<?php echo $table_name;?>" >
 												<?php } ?>
-													<input type="text" class="form-control" readonly name="" value="<?php echo $menu['Label'];?>" >
+													<input type="text" class="form-control" readonly name="" value="<?php echo $menu['Label'];?>" aria-label="Input">
 												</div>
 												<div class="col-lg-2 p-1">
 													<span class="switch switch-outline switch-icon switch-primary">
 														<label>
-															<input type="checkbox" class="js-switch" name="<?php echo $table_name."_view"; ?>"  <?php if($role[$table_name]['view'] == 1){ ?> checked <?php } ?> >
+															<input type="checkbox" class="js-switch" name="<?php echo $table_name."_view"; ?>"  <?php if($role[$table_name]['view'] == 1){ ?> checked <?php } ?> aria-label="Input">
 															<span></span>
 														</label>
 													</span>
@@ -149,7 +149,7 @@ foreach ($roledata as $roles) {
 												<div class="col-lg-2 p-1">
 													<span class="switch switch-outline switch-icon switch-primary">
 														<label>
-															<input type="checkbox" class="js-switch" name="<?php echo $table_name."_insert"; ?>"  <?php if($role[$table_name]['insert'] == 1){ ?> checked <?php } ?> >
+															<input type="checkbox" class="js-switch" name="<?php echo $table_name."_insert"; ?>"  <?php if($role[$table_name]['insert'] == 1){ ?> checked <?php } ?> aria-label="Input">
 															<span></span>
 														</label>
 													</span>
@@ -157,7 +157,7 @@ foreach ($roledata as $roles) {
 												<div class="col-lg-2 p-1">
 													<span class="switch switch-outline switch-icon switch-primary">
 														<label>
-															<input type="checkbox" class="js-switch" name="<?php echo $table_name."_update"; ?>"  <?php if($role[$table_name]['update'] == 1){ ?> checked <?php } ?> >
+															<input type="checkbox" class="js-switch" name="<?php echo $table_name."_update"; ?>"  <?php if($role[$table_name]['update'] == 1){ ?> checked <?php } ?> aria-label="Input">
 															<span></span>
 														</label>
 													</span>
@@ -165,7 +165,7 @@ foreach ($roledata as $roles) {
 												<div class="col-lg-2 p-1">
 													<span class="switch switch-outline switch-icon switch-primary">
 														<label>
-															<input type="checkbox" class="js-switch" name="<?php echo $table_name."_delete"; ?>"  <?php if($role[$table_name]['delete'] == 1){ ?> checked <?php } ?> >
+															<input type="checkbox" class="js-switch" name="<?php echo $table_name."_delete"; ?>"  <?php if($role[$table_name]['delete'] == 1){ ?> checked <?php } ?> aria-label="Input">
 															<span></span>
 														</label>
 													</span>
@@ -212,12 +212,12 @@ foreach ($roledata as $roles) {
 													<?php if($table_name != ''){ ?>
 													<input type="hidden" class="form-control"  name="table[]" value="<?php echo $table_name;?>" >
 												<?php } ?>
-													<input type="text" class="form-control" readonly name="" value="<?php echo $value['Label'];?>" >
+													<input type="text" class="form-control" readonly name="" value="<?php echo $value['Label'];?>" aria-label="Input">
 												</div>
 												<div class="col-lg-2 p-1">
 													<span class="switch switch-outline switch-icon switch-primary">
 														<label>
-															<input type="checkbox" class="js-switch" name="<?php echo $table_name."_view"; ?>"  <?php if($role[$table_name]['view'] == 1){ ?> checked <?php } ?> > 
+															<input type="checkbox" class="js-switch" name="<?php echo $table_name."_view"; ?>"  <?php if($role[$table_name]['view'] == 1){ ?> checked <?php } ?> aria-label="Input"> 
 															<span></span>
 														</label>
 													</span>
@@ -225,7 +225,7 @@ foreach ($roledata as $roles) {
 												<div class="col-lg-2 p-1">
 													<span class="switch switch-outline switch-icon switch-primary">
 														<label>
-															<input type="checkbox" class="js-switch"  name="<?php echo $table_name."_insert"; ?>"  <?php if($role[$table_name]['insert'] == 1){ ?> checked <?php } ?> >
+															<input type="checkbox" class="js-switch"  name="<?php echo $table_name."_insert"; ?>"  <?php if($role[$table_name]['insert'] == 1){ ?> checked <?php } ?> aria-label="Input">
 															<span></span>
 														</label>
 													</span>
@@ -233,7 +233,7 @@ foreach ($roledata as $roles) {
 												<div class="col-lg-2 p-1">
 													<span class="switch switch-outline switch-icon switch-primary">
 														<label>
-															<input type="checkbox" class="js-switch"  name="<?php echo $table_name."_update"; ?>"  <?php if($role[$table_name]['update'] == 1){ ?> checked <?php } ?> >
+															<input type="checkbox" class="js-switch"  name="<?php echo $table_name."_update"; ?>"  <?php if($role[$table_name]['update'] == 1){ ?> checked <?php } ?> aria-label="Input">
 															<span></span>
 														</label>
 													</span>
@@ -241,7 +241,7 @@ foreach ($roledata as $roles) {
 												<div class="col-lg-2 p-1">
 													<span class="switch switch-outline switch-icon switch-primary">
 														<label>
-															<input type="checkbox" class="js-switch" name="<?php echo $table_name."_delete"; ?>"  <?php if($role[$table_name]['delete'] == 1){ ?> checked <?php } ?> >
+															<input type="checkbox" class="js-switch" name="<?php echo $table_name."_delete"; ?>"  <?php if($role[$table_name]['delete'] == 1){ ?> checked <?php } ?> aria-label="Input">
 															<span></span>
 														</label>
 													</span>

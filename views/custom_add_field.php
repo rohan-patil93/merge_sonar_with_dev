@@ -110,11 +110,11 @@
 		count++;
 		var htmlRows = '';
 		htmlRows += '<tr id="qur_div_'+count+'" >';  
-		htmlRows += '<td><div class="col-lg-6" style="float: left;"><select class="form-control" id="ds_1_'+count+'" ><option value="0"> Select </option><?php foreach($response as $res){?><option value="<?php echo $res; ?>"><?php echo $res; ?></option><?php } ?></select>	</div><div class="col-lg-6" style="float: left;"><input  class="form-control itemRows" type="text" id="f1_'+count+'" name=""></td>';        
-		htmlRows += '<td><select class="form-control" id="op1_1_'+count+'" ><?php foreach($operator as $ope){?><option value="<?php echo $ope; ?>"> <?php echo $ope; ?></option><?php } ?> </select></td>';   		
-		htmlRows += '<td><div class="col-lg-6" style="float: left;"><select class="form-control" id="ds_2_'+count+'" ><option value="0"> Select </option><?php foreach($response as $res){?><option value="<?php echo $res; ?>"><?php echo $res; ?></option><?php } ?></select>	</div><div class="col-lg-6" style="float: left;"><input type="text" class="form-control" id="s1_'+count+'" name=""></td>';	
-		//htmlRows += '<td><input type="text" class="form-control" id="v_'+count+'" name=""></td>';	
-		htmlRows += '<td><select class="form-control" id="op1_2_'+count+'" ><?php foreach($operator as $ope){?><option value="<?php echo $ope; ?>"> <?php echo $ope; ?></option><?php } ?> </select></td>';
+		htmlRows += '<td><div class="col-lg-6" style="float: left;"><select class="form-control" id="ds_1_'+count+'" aria-label="Select"><option value="0"> Select </option><?php foreach($response as $res){?><option value="<?php echo $res; ?>"><?php echo $res; ?></option><?php } ?></select>	</div><div class="col-lg-6" style="float: left;"><input  class="form-control itemRows" type="text" id="f1_'+count+'" name="" aria-label="Input"></td>';        
+		htmlRows += '<td><select class="form-control" id="op1_1_'+count+'" aria-label="Select"><?php foreach($operator as $ope){?><option value="<?php echo $ope; ?>"> <?php echo $ope; ?></option><?php } ?> </select></td>';   		
+		htmlRows += '<td><div class="col-lg-6" style="float: left;"><select class="form-control" id="ds_2_'+count+'" aria-label="Select"><option value="0"> Select </option><?php foreach($response as $res){?><option value="<?php echo $res; ?>"><?php echo $res; ?></option><?php } ?></select>	</div><div class="col-lg-6" style="float: left;"><input type="text" class="form-control" id="s1_'+count+'" name="" aria-label="Input"></td>';	
+		//htmlRows += '<td><input type="text" class="form-control" id="v_'+count+'" name="" aria-label="Input"></td>';	
+		htmlRows += '<td><select class="form-control" id="op1_2_'+count+'" aria-label="Select"><?php foreach($operator as $ope){?><option value="<?php echo $ope; ?>"> <?php echo $ope; ?></option><?php } ?> </select></td>';
 		htmlRows += '<td><button class="btn btn-warning" id="'+count+'" type="button" onclick="deletestatickRows(this.id)">Delete</button></td>';   
 		htmlRows += '</tr>';
 		$('#invoiceItem1').append(htmlRows); 
@@ -144,11 +144,11 @@
 		count++;
 		var htmlRows = '';
 		htmlRows += '<tr id="qur_div_'+count+'" >';  
-		htmlRows += '<td><input  class="form-control itemRow" type="text" id="f_'+count+'" name=""></td>';        
-		htmlRows += '<td><select class="form-control" id="op_1_'+count+'" ><?php foreach($operator as $ope){?><option value="<?php echo $ope; ?>"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $ope; ?></option><?php } ?> </select></td>';   		
-		htmlRows += '<td><input type="text" class="form-control" id="s_'+count+'" name=""></td>';	
-		htmlRows += '<td><input type="text" class="form-control" id="v_'+count+'" name=""></td>';	
-		htmlRows += '<td><select class="form-control" id="op_2_'+count+'" ><?php foreach($operator as $ope){?><option value="<?php echo $ope; ?>"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $ope; ?></option><?php } ?> </select></td>';
+		htmlRows += '<td><input  class="form-control itemRow" type="text" id="f_'+count+'" name="" aria-label="Input"></td>';        
+		htmlRows += '<td><select class="form-control" id="op_1_'+count+'" aria-label="Select"><?php foreach($operator as $ope){?><option value="<?php echo $ope; ?>"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $ope; ?></option><?php } ?> </select></td>';   		
+		htmlRows += '<td><input type="text" class="form-control" id="s_'+count+'" name="" aria-label="Input"></td>';	
+		htmlRows += '<td><input type="text" class="form-control" id="v_'+count+'" name="" aria-label="Input"></td>';	
+		htmlRows += '<td><select class="form-control" id="op_2_'+count+'" aria-label="Select"><?php foreach($operator as $ope){?><option value="<?php echo $ope; ?>"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $ope; ?></option><?php } ?> </select></td>';
 		htmlRows += '<td><button class="btn btn-warning" id="'+count+'" type="button" onclick="deletestatickRows(this.id)">Delete</button></td>';   
 		htmlRows += '</tr>';
 		$('#invoiceItem').append(htmlRows); 
@@ -227,23 +227,23 @@
 								<div class="col-lg-2">
 									<label class="kt-radio kt-radio--solid">
 									 
-									<input type="radio"  id='spacer' value="custom_sql"  name="type" checked="checked" onclick="difftype(this.id)"> 
+									<input type="radio"  id='spacer' value="custom_sql"  name="type" checked="checked" onclick="difftype(this.id)" aria-label="Type"> 
 									spacer <span></span>
 									</label>
 								</div>
 								<div class="col-lg-2">
 									<label class="kt-radio kt-radio--solid">
-										<input type="radio" id="text"  value="static"  name="type" onclick="difftype(this.id)"> Test <span></span>
+										<input type="radio" id="text"  value="static"  name="type" onclick="difftype(this.id)" aria-label="Type"> Test <span></span>
 									</label>
 								</div>
 								<div class="col-lg-2">
 									<label class="kt-radio kt-radio--solid">
-										<input type="radio" id="static"  value="static"  name="type" onchange="difftype(this.id)"> Static Formula <span></span>
+										<input type="radio" id="static"  value="static"  name="type" onchange="difftype(this.id)" aria-label="Type"> Static Formula <span></span>
 									</label>
 								</div>
 								<div class="col-lg-2">
 									<label class="kt-radio kt-radio--solid">
-										<input type="radio" id="dynamic"  value="dynamic"  name="type" onchange="difftype(this.id)"> Dynamic Formula <span></span>
+										<input type="radio" id="dynamic"  value="dynamic"  name="type" onchange="difftype(this.id)" aria-label="Type"> Dynamic Formula <span></span>
 									</label>
 								</div>
 							</div>
@@ -255,18 +255,18 @@
 								<div class="col-lg-2">
 									<label class="kt-radio kt-radio--solid">
 									 
-									<input type="radio"  id='insert' value="insert" onclick="viewtype(this.id)"  name="view" checked="checked" > 
+									<input type="radio"  id='insert' value="insert" onclick="viewtype(this.id)"  name="view" checked="checked" aria-label="View"> 
 									Insert <span></span>
 									</label>
 								</div>
 								<div class="col-lg-2">
 									<label class="kt-radio kt-radio--solid">
-										<input type="radio" id="list"  value="list" onclick="viewtype(this.id)"  name="view" > List <span></span>
+										<input type="radio" id="list"  value="list" onclick="viewtype(this.id)"  name="view" aria-label="View"> List <span></span>
 									</label>
 								</div>
 								<div class="col-lg-2">
 									<label class="kt-radio kt-radio--solid">
-										<input type="radio" id="all"  value="all" onclick="viewtype(this.id)"  name="view" > All <span></span>
+										<input type="radio" id="all"  value="all" onclick="viewtype(this.id)"  name="view" aria-label="View"> All <span></span>
 									</label>
 								</div>
 								<input type="hidden" id="view_value" value="insert">
@@ -277,7 +277,7 @@
 					<div class="row align-items-center" id="spacer_data" style="margin-top: 10px;" >
 						<div class="form-group col-lg-3">
 							<label>Lenth</label>
-							<select class="form-control" id="width" name= "width">
+							<select class="form-control" id="width" name= "width" aria-label="Width">
 								<?php for($i=1; $i<13;$i++){ 
 									$view_type = "col-lg-".$i; ?>
 									<option  value = "<?php echo $i; ?>" ><?php echo $view_type; ?> </option>
@@ -290,7 +290,7 @@
 					<div class="row align-items-center" id="text_data" style="margin-top: 10px;display: none;" >
 						<div class="form-group col-lg-3">
 							<label>Lenth</label>
-							<select class="form-control" id="width_text" name= "width">
+							<select class="form-control" id="width_text" name= "width" aria-label="Width">
 								<?php for($i=1; $i<13;$i++){ 
 									$view_type = "col-lg-".$i; ?>
 									<option  value = "<?php echo $i; ?>" > <?php echo $view_type; ?> </option>
@@ -299,11 +299,11 @@
 						</div>
 						<div class="form-group col-lg-3">
 							<label>Lable</label>
-							<input class="form-control"  type="text" id="lable" name="lable"  value="">	 
+							<input class="form-control"  type="text" id="lable" name="lable"  value="" aria-label="Lable">	 
 						</div>
 						<div class="form-group col-lg-6">
 							<label>Content</label>
-							<textarea class="form-control" id="content" rows="3"></textarea> 
+							<textarea class="form-control" id="content" rows="3" aria-label="Textarea"></textarea> 
 						</div>
 					</div>
 					<!---- end test----->
@@ -311,7 +311,7 @@
 					<div class="row align-items-center" id="static_data" style="margin-top: 10px;display: none;" >
 						<div class="form-group col-lg-3" >
 							<label>Lenth</label>
-							<select class="form-control" id="width_static" name= "insert_view_width[]">
+							<select class="form-control" id="width_static" name= "insert_view_width[]" aria-label="Insert View Width">
 								<?php for($i=1; $i<13;$i++){ 
 									$view_type = "col-lg-".$i; ?>
 									<option  value = "<?php echo $i; ?>"><?php echo $view_type; ?> </option>
@@ -320,7 +320,7 @@
 						</div>
 						<div class="form-group col-lg-3" >
 							<label>Lable</label>
-							<input class="form-control"  type="text" id="static_lable" name="lable"  value="">	 
+							<input class="form-control"  type="text" id="static_lable" name="lable"  value="" aria-label="Lable">	 
 						</div>
 					
 						<div class="col-lg-7">
@@ -336,23 +336,23 @@
 									</tr>	
 									<tr>
 										<td> 
-											<input  class="form-control itemRow" type="text" id="f_1" name="">
+											<input  class="form-control itemRow" type="text" id="f_1" name="" aria-label="Input">
 										</td>
 										<td> 
-											<select class="form-control" id="op_1_1" >
+											<select class="form-control" id="op_1_1" aria-label="Select">
 											<?php foreach($operator as $ope){?>
 												<option value="<?php echo $ope; ?>"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $ope; ?></option>
 											<?php } ?>
 											</select>
 										</td>
 										<td> 
-											<input type="text" class="form-control" id="s_1" name="">
+											<input type="text" class="form-control" id="s_1" name="" aria-label="Input">
 										</td>
 										<td> 
-											<input type="text" class="form-control" id="v_1" name="">
+											<input type="text" class="form-control" id="v_1" name="" aria-label="Input">
 										</td>
 										<td> 
-											<select class="form-control" id="op_2_1">
+											<select class="form-control" id="op_2_1" aria-label="Select">
 											<?php foreach($operator as $ope){?>
 												<option value="<?php echo $ope; ?>"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $ope; ?></option>
 											<?php } ?>
@@ -365,7 +365,7 @@
 							<table>
 								<tr>
 										<td > Total</td>
-										<td > <input type="text" class="form-control" id="total"  name=""></td>
+										<td > <input type="text" class="form-control" id="total"  name="" aria-label="Input"></td>
 										<td></td>
 										<td></td>
 									</tr>
@@ -384,7 +384,7 @@
 					<div class="row align-items-center" id="dynamic_data" style="margin-top: 10px;display: none;" >
 						<div class="form-group col-lg-3">
 							<label>Lenth</label>
-							<select class="form-control" id="width_dynamic" name= "width">
+							<select class="form-control" id="width_dynamic" name= "width" aria-label="Width">
 								<?php for($i=1; $i<13;$i++){ 
 									$view_type = "col-lg-".$i; ?>
 									<option  value = "<?php echo $i; ?>"><?php echo $view_type; ?> </option>
@@ -393,7 +393,7 @@
 						</div>
 						<div class="form-group col-lg-3">
 							<label>Lable</label>
-							<input class="form-control"  type="text" id="lable_dynamic" name="lable"  value="">	 
+							<input class="form-control"  type="text" id="lable_dynamic" name="lable"  value="" aria-label="Lable">	 
 						</div>
 					
 						<div class="col-lg-12">
@@ -409,7 +409,7 @@
 									<tr>
 										<td>
 										<div class="col-lg-6" style="float: left;">
-											<select class="form-control" id="ds_1_1" >
+											<select class="form-control" id="ds_1_1" aria-label="Select">
 												<option value="0"> Select </option>
 											<?php foreach($response as $res){?>
 												<option value="<?php echo $res; ?>"><?php echo $res; ?></option>
@@ -417,18 +417,18 @@
 											</select>
 										</div>
 										<div class="col-lg-6" style="float: left;">
-											<input  class="form-control itemRows" type="text" id="f1_1" name="">
+											<input  class="form-control itemRows" type="text" id="f1_1" name="" aria-label="Input">
 										</div>
 										</td>
 										<td> 
-											<select class="form-control" id="op1_1_1" >
+											<select class="form-control" id="op1_1_1" aria-label="Select">
 											<?php foreach($operator as $ope){?>
 												<option value="<?php echo $ope; ?>"> <?php echo $ope; ?></option>
 											<?php } ?>
 											</select>
 										</td>
 										<td> <div class="col-lg-6" style="float: left;">
-											<select class="form-control" id="ds_2_1" >
+											<select class="form-control" id="ds_2_1" aria-label="Select">
 												<option value="0"> Select </option>
 											<?php foreach($response as $res){?>
 												<option value="<?php echo $res; ?>"><?php echo $res; ?></option>
@@ -436,12 +436,12 @@
 											</select>
 										</div>
 										<div class="col-lg-6" style="float: left;">
-											<input type="text" class="form-control" id="s1_1" name="">
+											<input type="text" class="form-control" id="s1_1" name="" aria-label="Input">
 										</div>
 										</td>
 										
 										<td> 
-											<select class="form-control" id="op1_2_1">
+											<select class="form-control" id="op1_2_1" aria-label="Select">
 											<?php foreach($operator as $ope){?>
 												<option value="<?php echo $ope; ?>"> <?php echo $ope; ?></option>
 											<?php } ?>

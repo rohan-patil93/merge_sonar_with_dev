@@ -264,7 +264,7 @@ if (isset($_POST['submit']) && $_POST['submit'] != '' && $errorMessage != '') {
                 <div class="row">
                     <div class="col-md-4 form-group">
                         <label>Document Type <span class="text-danger">*</span></label>
-                        <select name="document_type_id" class="form-control js-example-basic-single" required>
+                        <select name="document_type_id" class="form-control js-example-basic-single" required aria-label="Document Type Id">
                             <option value="">Select Document Type</option>
                             <?php if (count((array)$documentTypes) > 0) {
                                 foreach ($documentTypes as $typeRow) {
@@ -281,7 +281,7 @@ if (isset($_POST['submit']) && $_POST['submit'] != '' && $errorMessage != '') {
                     </div>
                     <div class="col-md-4 form-group">
                         <label>Document Name <span class="text-danger">*</span></label>
-                        <input type="text" name="document_name" class="form-control" value="<?php echo dmText($selectedDocumentName); ?>" required>
+                        <input type="text" name="document_name" class="form-control" value="<?php echo dmText($selectedDocumentName); ?>" required aria-label="Document Name">
                     </div>
                 </div>
 
@@ -297,10 +297,10 @@ if (isset($_POST['submit']) && $_POST['submit'] != '' && $errorMessage != '') {
                                     <div class="row document-file-row mb-2">
                                         <div class="col-md-4 form-group">
                                             <input type="hidden" name="file_id[]" value="<?php echo dmText($fileRow['id'] ?? ''); ?>">
-                                            <input type="text" name="file_name[]" class="form-control" placeholder="File Name" value="<?php echo dmText($fileRow['file_name'] ?? ''); ?>" required>
+                                            <input type="text" name="file_name[]" class="form-control" placeholder="File Name" value="<?php echo dmText($fileRow['file_name'] ?? ''); ?>" required aria-label="File Name">
                                         </div>
                                         <div class="col-md-4 form-group">
-                                            <input type="file" name="document_file[]" class="form-control" <?php echo $hasStoredFile ? '' : 'required'; ?>>
+                                            <input type="file" name="document_file[]" class="form-control" <?php echo $hasStoredFile ? '' : 'required'; ?> aria-label="Document File">
                                             <input type="hidden" name="file[]" value="<?php echo dmText($fileRow['file'] ?? ''); ?>">
                                             <input type="hidden" name="actual_file_name[]" value="<?php echo dmText($fileRow['actual_file_name'] ?? ''); ?>">
                                             <?php if ($hasStoredFile) { ?>
@@ -457,10 +457,10 @@ if (isset($_POST['submit']) && $_POST['submit'] != '' && $errorMessage != '') {
             + '<div class="row document-file-row mb-2">'
             + '<div class="col-md-4 form-group">'
             + '<input type="hidden" name="file_id[]" value="">'
-            + '<input type="text" name="file_name[]" class="form-control" placeholder="File Name" required>'
+            + '<input type="text" name="file_name[]" class="form-control" placeholder="File Name" required aria-label="File Name">'
             + '</div>'
             + '<div class="col-md-4 form-group">'
-            + '<input type="file" name="document_file[]" class="form-control" required>'
+            + '<input type="file" name="document_file[]" class="form-control" required aria-label="Document File">'
             + '<input type="hidden" name="file[]" value="">'
             + '<input type="hidden" name="actual_file_name[]" value="">'
             + '</div>'

@@ -52,7 +52,7 @@ $dynamic_fields = $return['dynamic_fields_details'];
                     </div>
                     <div class="col-lg-8">
                         <div class="form-group">
-                            <select name="customer_id" class="form-control js-example-basic-single" id="selectCustomer">
+                            <select name="customer_id" class="form-control js-example-basic-single" id="selectCustomer" aria-label="Customer Id">
                                 <option value="0">--Select--</option>
                                 <?php foreach ($customers as $customer): ?>
                                     <option value="<?php echo $customer['id']; ?>" <?php echo $customer['id'] == $registration_details['customer_id'] ? 'selected' : ''; ?>>
@@ -69,7 +69,7 @@ $dynamic_fields = $return['dynamic_fields_details'];
                     </div>
                     <div class="col-lg-8">
                         <div class="form-group">
-                            <input name="activation_date" class="form-control" type="date" id="activationDate" value="<?php echo $registration_details['activation_date']; ?>" onchange="setDeactivationDate()">
+                            <input name="activation_date" class="form-control" type="date" id="activationDate" value="<?php echo $registration_details['activation_date']; ?>" onchange="setDeactivationDate()" aria-label="Activation Date">
                         </div>
                     </div>
 
@@ -79,7 +79,7 @@ $dynamic_fields = $return['dynamic_fields_details'];
                     </div>
                     <div class="col-lg-8">
                         <div class="form-group">
-                            <input name="deactivation_date" class="form-control" type="date" id="deactivationDate" value="<?php echo $registration_details['deactivation_date']; ?>" readonly>
+                            <input name="deactivation_date" class="form-control" type="date" id="deactivationDate" value="<?php echo $registration_details['deactivation_date']; ?>" readonly aria-label="Deactivation Date">
                         </div>
                     </div>
 
@@ -89,7 +89,7 @@ $dynamic_fields = $return['dynamic_fields_details'];
                     </div>
                     <div class="col-lg-8">
                         <div class="form-group">
-                            <select name="payment_type" class="form-control js-example-basic-single" id="serviceType" onchange="toggleServiceCharge()">
+                            <select name="payment_type" class="form-control js-example-basic-single" id="serviceType" onchange="toggleServiceCharge()" aria-label="Payment Type">
                                 <option value="0">--Select--</option>
                                 <option value="Free" <?php echo $registration_details['payment_type'] == 'Free' ? 'selected' : ''; ?>>Free</option>
                                 <option value="Paid" <?php echo $registration_details['payment_type'] == 'Paid' ? 'selected' : ''; ?>>Paid</option>
@@ -103,7 +103,7 @@ $dynamic_fields = $return['dynamic_fields_details'];
                     </div>
                     <div class="col-lg-8" id="serviceChargeInputContainer" style="display: none;">
                         <div class="form-group">
-                            <input name="service_charge" type="number" class="form-control border" id="serviceCharge" value="<?php echo $registration_details['service_charge']; ?>" placeholder="0.00" />
+                            <input name="service_charge" type="number" class="form-control border" id="serviceCharge" value="<?php echo $registration_details['service_charge']; ?>" placeholder="0.00" / aria-label="0.00">
                         </div>
                     </div>
 
@@ -112,7 +112,7 @@ $dynamic_fields = $return['dynamic_fields_details'];
                     </div>
                     <div class="col-lg-8">
                         <div class="form-group">
-                            <select name="service_on" class="form-control js-example-basic-single" id="serviceOn" name="serviceOn" onchange="handleServiceTypeChange()">
+                            <select name="service_on" class="form-control js-example-basic-single" id="serviceOn" name="serviceOn" onchange="handleServiceTypeChange()" aria-label="Service On">
                                 <option value="0">--Select--</option>
                                 <option value="Daily" <?php echo $registration_details['service_on'] == 'Daily' ? 'selected' : ''; ?>>Daily</option>
                                 <option value="Weekly" <?php echo $registration_details['service_on'] == 'Weekly' ? 'selected' : ''; ?>>Weekly</option>
@@ -128,7 +128,7 @@ $dynamic_fields = $return['dynamic_fields_details'];
                     </div>
                     <div class="col-lg-8">
                         <div class="form-group">
-                            <input name="no_of_services" value="<?php echo $registration_details['no_of_services']; ?>" class="form-control" type="number" id="noOfService" min="0" placeholder="Enter Number of Service" oninput="generateServiceFields()">
+                            <input name="no_of_services" value="<?php echo $registration_details['no_of_services']; ?>" class="form-control" type="number" id="noOfService" min="0" placeholder="Enter Number of Service" oninput="generateServiceFields()" aria-label="Enter Number of Service">
                         </div>
                     </div>
 
@@ -141,7 +141,7 @@ $dynamic_fields = $return['dynamic_fields_details'];
                     </div>
                     <div class="col-lg-8">
                         <div class="form-group">
-                            <select name="technician_id" class="form-control js-example-basic-single" id='selectTech'>
+                            <select name="technician_id" class="form-control js-example-basic-single" id='selectTech' aria-label="Technician Id">
                                 <option value="0">--Select--</option>
                                 <?php foreach ($tech_details as $tech): ?>
                                     <option value="<?php echo $tech['account_id']; ?>" <?php echo $tech['account_id'] == $registration_details['technician_id'] ? 'selected' : ''; ?>>

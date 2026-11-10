@@ -27,7 +27,7 @@ $employees = isset($filter_res['employees']) ? $filter_res['employees'] : array(
 			<div class="row">
 				<div class="col-lg-3 col-md-6 form-group">
 					<label>Project</label>
-					<select class="form-control js-example-basic-single" id="project_id" name="project_id" style="width:100%">
+					<select class="form-control js-example-basic-single" id="project_id" name="project_id" style="width:100%" aria-label="Project Id">
 						<option value="">All Projects</option>
 						<?php if(count((array)$projects) > 0){
 							foreach($projects as $project_row){
@@ -41,7 +41,7 @@ $employees = isset($filter_res['employees']) ? $filter_res['employees'] : array(
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
 					<label>Employee</label>
-					<select class="form-control js-example-basic-single" id="employee_id" name="employee_id" style="width:100%">
+					<select class="form-control js-example-basic-single" id="employee_id" name="employee_id" style="width:100%" aria-label="Employee Id">
 						<option value="">All Employees</option>
 						<?php if(count((array)$employees) > 0){
 							foreach($employees as $employee_row){
@@ -55,11 +55,11 @@ $employees = isset($filter_res['employees']) ? $filter_res['employees'] : array(
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
 					<label>From Date <span class="text-danger">*</span></label>
-					<input class="form-control" type="date" name="from_date" id="from_date" value="">
+					<input class="form-control" type="date" name="from_date" id="from_date" value="" aria-label="From Date">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
 					<label>To Date <span class="text-danger">*</span></label>
-					<input class="form-control" type="date" name="to_date" id="to_date" value="">
+					<input class="form-control" type="date" name="to_date" id="to_date" value="" aria-label="To Date">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
 					<label>&nbsp;</label>

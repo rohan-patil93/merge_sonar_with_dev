@@ -73,18 +73,18 @@ $fyRows = $return ?? array();
                             <div class="col-lg-2 form-group">
                                 <label>PO Available? <span class="text-danger">*</span></label><br>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input po_toggle" type="radio" name="po_toggle_<?php echo $index; ?>" value="0" <?php echo $checkedYes; ?>>
+                                    <input class="form-check-input po_toggle" type="radio" name="po_toggle_<?php echo $index; ?>" value="0" <?php echo $checkedYes; ?> aria-label="Input">
                                     <label class="form-check-label">Yes</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input po_toggle" type="radio" name="po_toggle_<?php echo $index; ?>" value="1" <?php echo $checkedNo; ?>>
+                                    <input class="form-check-input po_toggle" type="radio" name="po_toggle_<?php echo $index; ?>" value="1" <?php echo $checkedNo; ?> aria-label="Input">
                                     <label class="form-check-label">No</label>
                                 </div>
                             </div>
 
                             <div class="col-lg-2 form-group">
                                 <label>Financial Year <span class="text-danger">*</span></label>
-                                <select name="financial_year[]" class="form-control form-select financial_year" required>
+                                <select name="financial_year[]" class="form-control form-select financial_year" required aria-label="Financial Year">
                                     <option value="">Select FY</option>
                                     <?php
                                     $saved_fy = $row['financial_year'] ?? '';
@@ -102,52 +102,52 @@ $fyRows = $return ?? array();
 
                             <div class="col-lg-2 form-group po_no_div <?php echo $poNoHidden; ?>" >
                                 <label>PO No. <span class="text-danger">*</span></label>
-                                <input class="form-control po_no" type="text" name="po_no[]" value="<?php echo htmlspecialchars($row['po_no']); ?>">
+                                <input class="form-control po_no" type="text" name="po_no[]" value="<?php echo htmlspecialchars($row['po_no']); ?>" aria-label="Po No">
                             </div>
 
                             <div class="col-lg-2 form-group">
                                 <label>PO Date <span class="text-danger">*</span></label>
-                                <input class="form-control po_date" type="date" name="po_date[]" step="any" value="<?php echo htmlspecialchars($row['po_date']); ?>">
+                                <input class="form-control po_date" type="date" name="po_date[]" step="any" value="<?php echo htmlspecialchars($row['po_date']); ?>" aria-label="Po Date">
                             </div>
 
                             <div class="col-lg-2 form-group">
                                 <label>PO Amount <span class="text-danger">*</span></label>
-                                <input class="form-control po_amount" type="number" step="any" name="po_amount[]" value="<?php echo htmlspecialchars($row['po_amount']); ?>">
+                                <input class="form-control po_amount" type="number" step="any" name="po_amount[]" value="<?php echo htmlspecialchars($row['po_amount']); ?>" aria-label="Po Amount">
                             </div>
 
                             <div class="col-lg-2 form-group">
                                 <label>PO Value (Excl. Tax) <span class="text-danger">*</span></label>
-                                <input class="form-control po_value_ex" type="number" step="any" name="po_value_ex[]" value="<?php echo htmlspecialchars($row['po_value_ex']); ?>">
+                                <input class="form-control po_value_ex" type="number" step="any" name="po_value_ex[]" value="<?php echo htmlspecialchars($row['po_value_ex']); ?>" aria-label="Po Value Ex">
                             </div>
 
                             <div class="col-lg-1 form-group">
                                 <label>GST %</label>
-                                <input class="form-control gst" type="number" step="any" name="gst[]" value="<?php echo htmlspecialchars($row['gst']); ?>">
+                                <input class="form-control gst" type="number" step="any" name="gst[]" value="<?php echo htmlspecialchars($row['gst']); ?>" aria-label="Gst">
                             </div>
 
                             <div class="col-lg-2 form-group">
                                 <label>PO Value (Incl. Tax)</label>
-                                <input class="form-control po_value_in" type="number" step="any" name="po_value_in[]" value="<?php echo htmlspecialchars($row['po_value_in']); ?>" >
+                                <input class="form-control po_value_in" type="number" step="any" name="po_value_in[]" value="<?php echo htmlspecialchars($row['po_value_in']); ?>" aria-label="Po Value In">
                             </div>
 
                             <div class="col-lg-2 form-group">
                                 <label>Business Code</label>
-                                <input class="form-control business_code" type="text" name="business_code[]" value="<?php echo htmlspecialchars($row['business_code']); ?>">
+                                <input class="form-control business_code" type="text" name="business_code[]" value="<?php echo htmlspecialchars($row['business_code']); ?>" aria-label="Business Code">
                             </div>
 
                             <div class="col-lg-2 form-group">
                                 <label>Business Name</label>
-                                <input class="form-control business_name" type="text" name="business_name[]" value="<?php echo htmlspecialchars($row['business_name']); ?>">
+                                <input class="form-control business_name" type="text" name="business_name[]" value="<?php echo htmlspecialchars($row['business_name']); ?>" aria-label="Business Name">
                             </div>
 
                             <div class="col-lg-2 form-group">
                                 <label>Other PO  Details</label>
-                                <textarea class="form-control po_details" name="po_details[]" rows="1"><?php echo htmlspecialchars($row['po_details']); ?></textarea>
+                                <textarea class="form-control po_details" name="po_details[]" rows="1" aria-label="Po Details"><?php echo htmlspecialchars($row['po_details']); ?></textarea>
                             </div>
 
                             <div class="col-lg-2 form-group">
                                 <label>Remarks</label>
-                                <textarea class="form-control remarks" name="remarks[]" rows="1"><?php echo htmlspecialchars($row['remarks']); ?></textarea>
+                                <textarea class="form-control remarks" name="remarks[]" rows="1" aria-label="Remarks"><?php echo htmlspecialchars($row['remarks']); ?></textarea>
                             </div>
                             <?php if(in_array($_SESSION['working_role_short_code'], array('CSR_ADMIN', 'ADMIN'))){ ?>
                             <div class="col-lg-1 d-flex align-items-center">

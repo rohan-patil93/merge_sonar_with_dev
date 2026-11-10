@@ -85,7 +85,7 @@ foreach ($st_details as $st) {
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <input name="customer_name" class="form-control" type="text" value="<?php echo  $amc_customer_details['customer_name'] ?? ""; ?>" placeholder="Enter Customer Name">
+                                    <input name="customer_name" class="form-control" type="text" value="<?php echo  $amc_customer_details['customer_name'] ?? ""; ?>" placeholder="Enter Customer Name" aria-label="Enter Customer Name">
                                 </div>
                             </div>
 
@@ -94,7 +94,7 @@ foreach ($st_details as $st) {
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <input name="email_id" class="form-control" type="text" value="<?php echo  $amc_customer_details['email_id'] ?? ""; ?>" placeholder="Enter Email ID">
+                                    <input name="email_id" class="form-control" type="text" value="<?php echo  $amc_customer_details['email_id'] ?? ""; ?>" placeholder="Enter Email ID" aria-label="Enter Email ID">
                                 </div>
                             </div>
                             <div class="col-lg-6 text-center">
@@ -102,7 +102,7 @@ foreach ($st_details as $st) {
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <input name="mobile_no" class="form-control" type="text" value="<?php echo  $amc_customer_details['mobile_no'] ?? ""; ?>" placeholder="Enter Mobile No">
+                                    <input name="mobile_no" class="form-control" type="text" value="<?php echo  $amc_customer_details['mobile_no'] ?? ""; ?>" placeholder="Enter Mobile No" aria-label="Enter Mobile No">
                                 </div>
                             </div>
                             <div class="col-lg-6 text-center">
@@ -110,7 +110,7 @@ foreach ($st_details as $st) {
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <input name="alternative_no" class="form-control" value="<?php echo  $amc_customer_details['alternative_no'] ?? ""; ?>" type="text" placeholder="Enter Alternative No">
+                                    <input name="alternative_no" class="form-control" value="<?php echo  $amc_customer_details['alternative_no'] ?? ""; ?>" type="text" placeholder="Enter Alternative No" aria-label="Enter Alternative No">
                                 </div>
                             </div>
                             <div class="col-lg-6 text-center">
@@ -118,7 +118,7 @@ foreach ($st_details as $st) {
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <input name="pan_no" class="form-control" type="text" value="<?php echo  $amc_customer_details['pan_no'] ?? ""; ?>" placeholder="Enter Customer Pan No">
+                                    <input name="pan_no" class="form-control" type="text" value="<?php echo  $amc_customer_details['pan_no'] ?? ""; ?>" placeholder="Enter Customer Pan No" aria-label="Enter Customer Pan No">
                                 </div>
                             </div>
                             <div class="col-lg-6 text-center">
@@ -126,7 +126,7 @@ foreach ($st_details as $st) {
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <input name="gst_no" class="form-control" type="text" value="<?php echo  $amc_customer_details['gst_no'] ?? ""; ?>" placeholder="Enter Customer GST No">
+                                    <input name="gst_no" class="form-control" type="text" value="<?php echo  $amc_customer_details['gst_no'] ?? ""; ?>" placeholder="Enter Customer GST No" aria-label="Enter Customer GST No">
                                 </div>
                             </div>
                         </div>
@@ -159,7 +159,7 @@ foreach ($st_details as $st) {
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <textarea name="address_line1" class="form-control" type="text" placeholder="Enter Address"><?php echo $amc_customer_details['address_line1'] ?? ""; ?> </textarea>
+                                    <textarea name="address_line1" class="form-control" type="text" placeholder="Enter Address" aria-label="Enter Address"><?php echo $amc_customer_details['address_line1'] ?? ""; ?> </textarea>
                                 </div>
                             </div>
                             <div class="col-lg-6 text-center">
@@ -167,7 +167,7 @@ foreach ($st_details as $st) {
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <textarea name="address_line2" class="form-control" type="text" placeholder="Enter Address"><?php echo $amc_customer_details['address_line2'] ?? ""; ?> </textarea>
+                                    <textarea name="address_line2" class="form-control" type="text" placeholder="Enter Address" aria-label="Enter Address"><?php echo $amc_customer_details['address_line2'] ?? ""; ?> </textarea>
                                 </div>
                             </div>
                             <div class="col-lg-6 text-center">
@@ -176,7 +176,7 @@ foreach ($st_details as $st) {
                             <div class="col-lg-6">
                                 <div class="form-group">
 
-                                    <select name="country_id" id="country_id" class="form-control js-example-basic-single" onchange="updateStatesandCities(this)" data-selected-state="<?php echo $amc_customer_details['state_id']; ?>" data-selected-city="<?php echo $amc_customer_details['city_id']; ?>">
+                                    <select name="country_id" id="country_id" class="form-control js-example-basic-single" onchange="updateStatesandCities(this)" data-selected-state="<?php echo $amc_customer_details['state_id']; ?>" data-selected-city="<?php echo $amc_customer_details['city_id']; ?>" aria-label="Country Id">
                                         <option value="0">--Select--</option>
                                         <?php foreach ($states_list as $id => $country_name): ?>
                                             <option value="<?php echo $id; ?>" <?php if ($amc_customer_details['country_id'] == $id) echo 'selected'; ?>>
@@ -191,7 +191,7 @@ foreach ($st_details as $st) {
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <select name="state_id" id="state_id" class="form-control js-example-basic-single" onchange="updateStatesandCities(this)">
+                                    <select name="state_id" id="state_id" class="form-control js-example-basic-single" onchange="updateStatesandCities(this)" aria-label="State Id">
                                         <option value="0">--Select--</option>
                                     </select>
                                 </div>
@@ -201,7 +201,7 @@ foreach ($st_details as $st) {
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <select name="city_id" id="city_id" class="form-control js-example-basic-single">
+                                    <select name="city_id" id="city_id" class="form-control js-example-basic-single" aria-label="City Id">
                                         <option value="0">--Select--</option>
                                     </select>
                                 </div>
@@ -212,7 +212,7 @@ foreach ($st_details as $st) {
                             </div>
                             <div class="col-lg-6 ">
                                 <div class="form-group">
-                                    <input name="pin_code" class="form-control" type="text" value="<?php echo  $amc_customer_details['pin_code'] ?? ""; ?>" placeholder="Enter Pin code">
+                                    <input name="pin_code" class="form-control" type="text" value="<?php echo  $amc_customer_details['pin_code'] ?? ""; ?>" placeholder="Enter Pin code" aria-label="Enter Pin code">
                                 </div>
                             </div>
                         </div>

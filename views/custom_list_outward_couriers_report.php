@@ -28,15 +28,15 @@ $today = date('Y-m-d');
 			<div class="row">
 				<div class="col-lg-3 col-md-6 form-group">
 					<label>From Date <span class="text-danger">*</span></label>
-					<input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo $today; ?>">
+					<input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo $today; ?>" aria-label="From Date">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
 					<label>To Date <span class="text-danger">*</span></label>
-					<input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo $today; ?>">
+					<input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo $today; ?>" aria-label="To Date">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
 					<label>Location</label>
-					<select class="form-control js-example-basic-single" id="location_id" name="location_id" style="width:100%">
+					<select class="form-control js-example-basic-single" id="location_id" name="location_id" style="width:100%" aria-label="Location Id">
 						<option value="">All Locations</option>
 						<?php if(count((array)$locations) > 0){
 							foreach($locations as $loc_row){
@@ -50,19 +50,19 @@ $today = date('Y-m-d');
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
 					<label>Tracking No</label>
-					<input class="form-control" type="text" name="tracking_no" id="tracking_no" value="">
+					<input class="form-control" type="text" name="tracking_no" id="tracking_no" value="" aria-label="Tracking No">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
 					<label>Courier Company</label>
-					<input class="form-control" type="text" name="courier_company" id="courier_company" value="">
+					<input class="form-control" type="text" name="courier_company" id="courier_company" value="" aria-label="Courier Company">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
 					<label>Taken By</label>
-					<input class="form-control" type="text" name="taken_by" id="taken_by" placeholder="Taken by name" value="">
+					<input class="form-control" type="text" name="taken_by" id="taken_by" placeholder="Taken by name" value="" aria-label="Taken by name">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
 					<label>Status</label>
-					<select class="form-control js-example-basic-single" id="current_status" name="current_status" style="width:100%">
+					<select class="form-control js-example-basic-single" id="current_status" name="current_status" style="width:100%" aria-label="Current Status">
 						<option value="">All</option>
 						<?php if(count((array)$statuses) > 0){
 							foreach($statuses as $status_row){

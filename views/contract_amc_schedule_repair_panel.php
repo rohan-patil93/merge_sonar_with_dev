@@ -86,7 +86,7 @@ $isRepairEditable = ($repairEligibility == 'editable');
 
                 <?php if ($isRepairEditable) { ?>
 
-                <input type="text" class="form-control form-control-sm" name="servicenow_ref" value="<?php echo htmlspecialchars($repairOrder['servicenow_ref'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" placeholder="Optional">
+                <input type="text" class="form-control form-control-sm" name="servicenow_ref" value="<?php echo htmlspecialchars($repairOrder['servicenow_ref'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" placeholder="Optional" aria-label="Optional">
 
                 <?php } else { ?>
 
@@ -102,7 +102,7 @@ $isRepairEditable = ($repairEligibility == 'editable');
 
                 <?php if ($isRepairEditable) { ?>
 
-                <input type="text" class="form-control form-control-sm" name="default_po_number" id="repair_default_po" value="<?php echo htmlspecialchars($repairOrder['default_po_number'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" placeholder="Optional">
+                <input type="text" class="form-control form-control-sm" name="default_po_number" id="repair_default_po" value="<?php echo htmlspecialchars($repairOrder['default_po_number'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" placeholder="Optional" aria-label="Optional">
 
                 <?php } else { ?>
 

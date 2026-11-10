@@ -97,7 +97,7 @@ if($_POST['work_level_type'] =="custom_process"){
 				</div>
 				<div class="col-lg-4 form-group w-full" id="sub_approve_field<?php echo $i; ?>" style="display:<?php echo $approvalprocess['approval_type']=='location_wise'?'':'none'; ?>">
 					<span class="form-label d-block">Sub Field </span>
-					<select class="form-select js-example-basic-single sub_approve_field<?php echo $i; ?>" name="sub_approve_field[<?php echo $i; ?>]">
+					<select class="form-select js-example-basic-single sub_approve_field<?php echo $i; ?>" name="sub_approve_field[<?php echo $i; ?>]" aria-label="Select">
 						<option value="">Select Any</option>
 						<?php $fieldlist = $getresult['custom_field'];
 						if(count((array)$fieldlist) > 0){
@@ -113,19 +113,19 @@ if($_POST['work_level_type'] =="custom_process"){
 					<div class="form-radio">
 						<div class="radio radio-inline">
 							<label class="form-label">
-								<input type="radio" name="approval_user_type<?php echo $i; ?>" value="A" class="d-none" <?php echo $approvalprocess['approval_user_type']=="A"?"checked":""; ?> onchange="approvalProcess(this.value,'<?php echo $i; ?>')">
+								<input type="radio" name="approval_user_type<?php echo $i; ?>" value="A" class="d-none" <?php echo $approvalprocess['approval_user_type']=="A"?"checked":""; ?> onchange="approvalProcess(this.value,'<?php echo $i; ?>')" aria-label="Input">
 								<i class="helper"></i>Anyone
 							</label>
 						</div>
 						<div class="radio radio-inline">
 							<label class="form-label">
-								<input type="radio" name="approval_user_type<?php echo $i; ?>" value="E"  class="d-none" <?php echo $approvalprocess['approval_user_type']=="E" || $approvalprocess['approval_type']==""?"checked":""; ?> onchange="approvalProcess(this.value,'<?php echo $i; ?>')">
+								<input type="radio" name="approval_user_type<?php echo $i; ?>" value="E"  class="d-none" <?php echo $approvalprocess['approval_user_type']=="E" || $approvalprocess['approval_type']==""?"checked":""; ?> onchange="approvalProcess(this.value,'<?php echo $i; ?>')" aria-label="Input">
 								<i class="helper"></i>Everyone
 							</label>
 						</div>
 						<div class="radio radio-inline">
 							<label class="form-label">
-								<input type="radio" name="approval_user_type<?php echo $i; ?>" value="M" class="d-none" <?php echo $approvalprocess['approval_user_type']=="M"?"checked":""; ?> onchange="approvalProcess(this.value,'<?php echo $i; ?>')">
+								<input type="radio" name="approval_user_type<?php echo $i; ?>" value="M" class="d-none" <?php echo $approvalprocess['approval_user_type']=="M"?"checked":""; ?> onchange="approvalProcess(this.value,'<?php echo $i; ?>')" aria-label="Input">
 								<i class="helper"></i>Minimum
 							</label>
 						</div>
@@ -133,7 +133,7 @@ if($_POST['work_level_type'] =="custom_process"){
 				</div>
 				<div class="col-lg-7 row" >
 					<div class="col-lg-2 minimum<?php echo $i; ?>" style="display:<?php echo (!in_array($approvalprocess['approval_type'], $showsublistanyall) && $approvalprocess['approval_user_type']=='M')?"":"none"; ?>">
-						<input class="form-control " id="minimums<?php echo $i; ?>" type="text" name="minimum[<?php echo $i; ?>]" value="<?php echo $approvalprocess['minimum']; ?>" placeholder="Eg. 11">
+						<input class="form-control " id="minimums<?php echo $i; ?>" type="text" name="minimum[<?php echo $i; ?>]" value="<?php echo $approvalprocess['minimum']; ?>" placeholder="Eg. 11" aria-label="Eg. 11">
 					</div>
 				</div>
 			</div>
@@ -161,7 +161,7 @@ if($_POST['work_level_type'] =="custom_process"){
 						?>
 						<div class="row mt-2 location_wise_row" data-level="<?php echo $i; ?>" data-row="<?php echo $rowIdx; ?>">
 							<div class="col-lg-4 form-group">
-								<select class="form-select location_wise_location_select" name="location_wise_location[<?php echo $i; ?>][<?php echo $rowIdx; ?>]" data-level="<?php echo $i; ?>" data-row="<?php echo $rowIdx; ?>" onchange="locationWiseLocationChange(this)">
+								<select class="form-select location_wise_location_select" name="location_wise_location[<?php echo $i; ?>][<?php echo $rowIdx; ?>]" data-level="<?php echo $i; ?>" data-row="<?php echo $rowIdx; ?>" onchange="locationWiseLocationChange(this)" aria-label="Select">
 									<option value="">Select Location</option>
 									<?php if(count((array)$locationslist) > 0){ foreach($locationslist as $loc){
 										$locid = is_array($loc)?$loc['id']:$loc->id;
@@ -172,7 +172,7 @@ if($_POST['work_level_type'] =="custom_process"){
 								</select>
 							</div>
 							<div class="col-lg-6 form-group">
-								<select class="form-select location_wise_users_select" name="location_wise_users[<?php echo $i; ?>][<?php echo $rowIdx; ?>][]" multiple="multiple" data-level="<?php echo $i; ?>" data-row="<?php echo $rowIdx; ?>" data-selected-users="<?php echo $selectedUsersAttr; ?>"></select>
+								<select class="form-select location_wise_users_select" name="location_wise_users[<?php echo $i; ?>][<?php echo $rowIdx; ?>][]" multiple="multiple" data-level="<?php echo $i; ?>" data-row="<?php echo $rowIdx; ?>" data-selected-users="<?php echo $selectedUsersAttr; ?>" aria-label="Select"></select>
 							</div>
 							<div class="col-lg-2 form-group p-t-25">
 								<i class="ti-trash text-danger f-18 remove_location_wise_row"></i>

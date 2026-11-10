@@ -103,7 +103,7 @@ $res_data = json_decode($res_data, 1);
 				 			  </div>
 				 			  <div style="float: left;">
 
-							   <select class="form-control" id="kt_select2_41" name= "display_list"  onchange="GetSelectedTextValue(this.value)">
+							   <select class="form-control" id="kt_select2_41" name= "display_list"  onchange="GetSelectedTextValue(this.value)" aria-label="Display List">
 							   	<option> Select Any One</option>
 							   			<?php foreach ($res_data as $key => $ress) {  ?>
 							   				<option  <?php if($ress['id'] == $report_id){ ?> selected  <?php } ?> value = <?php echo $ress['id']; ?>   > <?php echo ucwords(str_replace('_',' ',$ress['report_name'])); ?> </option>
@@ -147,26 +147,26 @@ $res_data = json_decode($res_data, 1);
 							 ?>
 						<div class="form-group row">
 							<div class="col-lg-3">
-								<input type="text" class="form-control" name="field[]" value=<?php echo $key.".".$field;?> >
+								<input type="text" class="form-control" name="field[]" value=<?php echo $key.".".$field;?> aria-label="Field">
 							</div>
 							<div class="col-lg-3">
 								<?php $lables =$attribute[$keyf]['lable'] !='' ? $attribute[$keyf]['lable'] : ucwords(str_replace('_', ' ', $field)); ?>
-								<input type="text" class="form-control"  name="lable[]" value="<?php echo $lables; ?>">
+								<input type="text" class="form-control"  name="lable[]" value="<?php echo $lables; ?>" aria-label="Lable">
 							</div>
 							<div class="col-lg-1">
 								<?php $att_display_list =$attribute[$keyf]['display_list'] !='' ? $attribute[$keyf]['display_list'] : 0 ; ?>
-									<select class="form-control" id="display_list_<?php echo $key."_".$field; ?>" name= "display_list[]">
+									<select class="form-control" id="display_list_<?php echo $key."_".$field; ?>" name= "display_list[]" aria-label="Display List">
 											<option value = "2" >No</option>
 											<option value = "1" <?php if($att_display_list == '1') { ?> selected <?php } ?> >Yes</option>
 									</select>
 							</div>
 							<div class="col-lg-2">
 								<?php $att_display_postion =$attribute[$keyf]['display_postion'] !='' ? $attribute[$keyf]['display_postion'] : $i ; ?>
-								<input type="text" class="form-control" name="display_postion[]" value=<?php echo $att_display_postion;?>>
+								<input type="text" class="form-control" name="display_postion[]" value=<?php echo $att_display_postion;?> aria-label="Display Postion">
 							</div>
 							<div class="col-lg-1">
 								<?php $att_filter =$attribute[$keyf]['filter'] !='' ? $attribute[$keyf]['filter'] :0 ; ?>
-									<select class="form-control" id="filter_<?php echo $key."_".$field; ?>" name= "filter[]">
+									<select class="form-control" id="filter_<?php echo $key."_".$field; ?>" name= "filter[]" aria-label="Filter">
 											<option value = "2" >No</option>
 											<option value = "1" <?php if($att_filter == '1') { ?> selected <?php } ?> >Yes</option>
 									</select>
@@ -174,7 +174,7 @@ $res_data = json_decode($res_data, 1);
 							<div class="col-lg-2">
 									<?php $filed_array = array('text' => 'Simple Text',  'date_pick' => 'Date', 'date_range' => 'Date Range', 'select'=> 'List');
 									 $att_filter_type =$attribute[$keyf]['filter_type'] !='' ? $attribute[$keyf]['filter_type'] : 'text'; ?>
-										<select class="form-control" id="<?php echo $key.".".$field;; ?>" onchange="Getinserttype(this.id,this.value)" name= "type[]">
+										<select class="form-control" id="<?php echo $key.".".$field;; ?>" onchange="Getinserttype(this.id,this.value)" name= "type[]" aria-label="Type">
 
 											<?php foreach ($filed_array as $typekey => $typevalue) {?>
 												<option value = "<?php echo $typekey; ?>" <?php if($att_filter_type == $typekey) { ?> selected <?php } ?>  ><?php echo $typevalue; ?></option>
@@ -190,7 +190,7 @@ $res_data = json_decode($res_data, 1);
 							<div class="col-lg-9 col-xl-6">
 								<div class="input-group">
 									<div class="input-group-prepend"><span class="input-group-text"><i class="la la-user" aria-hidden="true"></i></span></div>
-									<input class="form-control" type="text"   name="content" value="<?php echo $role['help_text']; ?>">
+									<input class="form-control" type="text"   name="content" value="<?php echo $role['help_text']; ?>" aria-label="Content">
 								</div>
 							</div>
 					</div>

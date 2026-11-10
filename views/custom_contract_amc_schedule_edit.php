@@ -520,7 +520,7 @@ if ($checklistTotal > 0) {
 
             <?php if ($isInhouse) { ?>
 
-            <select name="employee_id" class="form-control js-example-basic-single contract-amc-assignee-select" data-schedule-id="<?php echo $schedule_id; ?>" data-assignee-type="employee">
+            <select name="employee_id" class="form-control js-example-basic-single contract-amc-assignee-select" data-schedule-id="<?php echo $schedule_id; ?>" data-assignee-type="employee" aria-label="Employee Id">
 
                 <option value="">Select employee</option>
 
@@ -558,7 +558,7 @@ if ($checklistTotal > 0) {
 
             <?php } else { ?>
 
-            <select name="technician_id" class="form-control js-example-basic-single contract-amc-assignee-select" data-schedule-id="<?php echo $schedule_id; ?>" data-assignee-type="technician">
+            <select name="technician_id" class="form-control js-example-basic-single contract-amc-assignee-select" data-schedule-id="<?php echo $schedule_id; ?>" data-assignee-type="technician" aria-label="Technician Id">
 
                 <option value="">Select technician</option>
 
@@ -710,7 +710,7 @@ if ($checklistTotal > 0) {
 
                                 <div class="form-check mb-0">
 
-                                    <input type="checkbox" class="form-check-input" name="checklist_status[<?php echo htmlspecialchars($checkKey, ENT_QUOTES, 'UTF-8'); ?>]" value="1" id="contract_amc_chk_<?php echo $ci; ?>" <?php echo $isDone ? 'checked' : ''; ?>>
+                                    <input type="checkbox" class="form-check-input" name="checklist_status[<?php echo htmlspecialchars($checkKey, ENT_QUOTES, 'UTF-8'); ?>]" value="1" id="contract_amc_chk_<?php echo $ci; ?>" <?php echo $isDone ? 'checked' : ''; ?> aria-label="Input">
 
                                     <label class="form-check-label f-12" for="contract_amc_chk_<?php echo $ci; ?>">Done</label>
 
@@ -734,7 +734,7 @@ if ($checklistTotal > 0) {
 
                                 <?php if ($canExecute) { ?>
 
-                                <input type="text" class="form-control form-control-sm" name="checklist_remarks[<?php echo $ci; ?>]" value="<?php echo htmlspecialchars($savedRemarks, ENT_QUOTES, 'UTF-8'); ?>" placeholder="Add remarks">
+                                <input type="text" class="form-control form-control-sm" name="checklist_remarks[<?php echo $ci; ?>]" value="<?php echo htmlspecialchars($savedRemarks, ENT_QUOTES, 'UTF-8'); ?>" placeholder="Add remarks" aria-label="Add remarks">
 
                                 <?php } else { ?>
 

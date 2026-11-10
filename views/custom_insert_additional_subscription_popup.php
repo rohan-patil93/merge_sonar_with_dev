@@ -113,20 +113,20 @@ function popDiscount(){
 				</div>
 				<div class="col-lg-3 form-group">
 					<label class="form-label ">Additi License Users</label>
-				 	<input class="form-control text-right" type="text" name="additional_license_lot_popup" id="additional_license_lot_popup" value="" onblur="additionalLicenseValidation()"> 
+				 	<input class="form-control text-right" type="text" name="additional_license_lot_popup" id="additional_license_lot_popup" value="" onblur="additionalLicenseValidation()" aria-label="Additional License Lot Popup"> 
 				</div>
 				<div class="col-lg-3 form-group">
 					<label class="form-label">Additi License Price</label>
-				 	<input class="form-control text-right" type="text" name="additional_license_lot_price" id="additional_license_lot_price" value="0" readonly=""> 
+				 	<input class="form-control text-right" type="text" name="additional_license_lot_price" id="additional_license_lot_price" value="0" readonly="" aria-label="Additional License Lot Price"> 
 				</div>
 				<div class="col-lg-3 form-group">
 					<label class="form-label">Discount</label>
-				 	<input class="form-control text-right" type="text" name="additional_license_lot_discount" id="additional_license_lot_discount" value="0" onblur="popDiscount()"> 
+				 	<input class="form-control text-right" type="text" name="additional_license_lot_discount" id="additional_license_lot_discount" value="0" onblur="popDiscount()" aria-label="Additional License Lot Discount"> 
 				</div>
 				<div class="col-lg-3 form-group">
 					<label class="form-label">Total Price</label>
 
-				 	<input class="form-control text-right" type="text" name="total_license_lot_price" id="total_license_lot_price" value="0" readonly=""> 
+				 	<input class="form-control text-right" type="text" name="total_license_lot_price" id="total_license_lot_price" value="0" readonly="" aria-label="Total License Lot Price"> 
 				</div>
 			</div>
 
