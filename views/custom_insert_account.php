@@ -1283,10 +1283,10 @@ function calculateTotal(){
         </select>
     </div>
 <?php } ?>
-    <label for="ord_no" class="col-lg-2 col-form-label">Transaction Number:</label>
+    <label for="invoice_number" class="col-lg-2 col-form-label">Transaction Number:</label>
     <div class="col-lg-3">
         <input class="form-control" type='hidden' id="ord_no" value='<?php echo $invoicenumber; ?>' name="invoice_serial_number"/>
-        <input  class="form-control" readonly type='text' value='<?php echo $tran_no; ?>'   name="invoice_number" id="invoice_number" aria-label="Invoice Number" />
+        <input  class="form-control" readonly type='text' value='<?php echo $tran_no; ?>'   name="invoice_number" id="invoice_number" />
 
     </div>
 </div>

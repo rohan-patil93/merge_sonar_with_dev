@@ -725,12 +725,12 @@ function addslabrows(){
                           <textarea id="fld_address" type="text" class="form-control"  name="address"></textarea>
                         </div>
                         <div class="form-group col-lg-6">
-                          <label for="selectedcountry">Country</label>
+                          <label for="kt_select2_country">Country</label>
                           <input type="hidden" name="country" id="selectedcountry">
                           <input type="hidden" name="state" id="selectedstate">
                           <input type="hidden" name="city" id="selectedcity">
                           <div class="input-group input-icon-right">
-                            <select class="form-select form-control js-example-basic-single" id="kt_select2_country" onchange="selectedcategory(this.value,'kt_select2_51','states','country_id')" title="Select" aria-label="Select">
+                            <select class="form-select form-control js-example-basic-single" id="kt_select2_country" onchange="selectedcategory(this.value,'kt_select2_51','states','country_id')">
                               <option value="">Select Any One</option>
                               <?php foreach($countrieslist as $countryvalue) { ?>
                                 <option value="<?php echo $countryvalue['id'].'|'.$countryvalue['country_name'];?>"><?php echo $countryvalue['country_name']; ?></option>

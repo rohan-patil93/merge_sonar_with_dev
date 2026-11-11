@@ -823,9 +823,9 @@ if($register_data['current_status'] !=""){
     <input type="hidden" name="purchase_connect" id="purchase_connect" value="<?php echo $connect_user['purchase_connect']; ?>">
     <input type="hidden" name="admin_connect" id="admin_connect" value="<?php echo $connect_user['admin_connect']; ?>">
                 
-                                  <label for="user_id">Proprietor/Owner/CEO Name <span class="requried">*</span></label>
+                                  <label for="fld_first_name">Proprietor/Owner/CEO Name <span class="requried">*</span></label>
                                   <input type="hidden" name="user_id" id="user_id" value="<?php echo $user_id;?>">
-                                   <input type="text" class="form-control required text-capitalize" name="first_name" placeholder="<?php echo $placeholder['first_name']; ?>" value="<?php echo $register_data['first_name'] !=""?$register_data['first_name']:$_SESSION['user']['first_name'];?>" title="First Name" aria-label="First Name" />
+                                   <input id="fld_first_name" type="text" class="form-control required text-capitalize" name="first_name" placeholder="<?php echo $placeholder['first_name']; ?>" value="<?php echo $register_data['first_name'] !=""?$register_data['first_name']:$_SESSION['user']['first_name'];?>" />
 
                                </div>
                                <!--end::Input-->
