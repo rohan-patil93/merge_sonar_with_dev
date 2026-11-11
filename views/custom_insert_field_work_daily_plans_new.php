@@ -185,8 +185,8 @@ if ($rid != "" && $view == '1') {
                         <form id="fieldWorkDailyPlansForm" method="post">
                             <div class="row g-3">
                                 <div class="col-md-4 form-group">
-                                    <label class="fwdp-label">User <span class="text-danger">*</span></label>
-                                    <select class="form-select js-example-basic-single" id="user_id" name="user_id" aria-label="User Id">
+                                    <label for="user_id" class="fwdp-label">User <span class="text-danger">*</span></label>
+                                    <select class="form-select js-example-basic-single" id="user_id" name="user_id">
                                         <option value="0">Select Any one</option>
                                         <?php if (count((array)$application_users) > 0) {
                                             foreach ($application_users as $row) { ?>
@@ -200,8 +200,8 @@ if ($rid != "" && $view == '1') {
                                 </div>
 
                                 <div id="toDateDiv" class="col-md-4 form-group d-none">
-                                    <label class="fwdp-label">Date <span class="text-danger">*</span></label>
-                                    <input class="form-control" type="date" name="plan_date" id="plan_date" value="<?php echo isset($date) && $date != '' ? date('Y-m-d', strtotime($date)) : ''; ?>" <?php echo $planDateReadonly; ?> min="<?php echo date('Y-m-d'); ?>" / aria-label="Plan Date">
+                                    <label for="plan_date" class="fwdp-label">Date <span class="text-danger">*</span></label>
+                                    <input class="form-control" type="date" name="plan_date" id="plan_date" value="<?php echo isset($date) && $date != '' ? date('Y-m-d', strtotime($date)) : ''; ?>" <?php echo $planDateReadonly; ?> min="<?php echo date('Y-m-d'); ?>" />
                                     <div class="d-none text-danger" id="plan_date_err"></div>
                                 </div>
                             </div>
@@ -223,24 +223,24 @@ if ($rid != "" && $view == '1') {
                                         </div>
                                         <div class="row g-3">
                                             <div class="col-md-3">
-                                                <label class="fwdp-label">Contact Person</label>
-                                                <input class="form-control" type="text" name="contact_person[]" aria-label="Contact Person">
+                                                <label for="fld_contact_person__" class="fwdp-label">Contact Person</label>
+                                                <input id="fld_contact_person__" class="form-control" type="text" name="contact_person[]">
                                             </div>
                                             <div class="col-md-3">
-                                                <label class="fwdp-label">Phone No.</label>
-                                                <input class="form-control" type="text" name="mobile[]" aria-label="Mobile">
+                                                <label for="fld_mobile__" class="fwdp-label">Phone No.</label>
+                                                <input id="fld_mobile__" class="form-control" type="text" name="mobile[]">
                                             </div>
                                             <div class="col-md-3">
-                                                <label class="fwdp-label">Location Name</label>
-                                                <input class="form-control" type="text" name="plan_location[]" aria-label="Plan Location">
+                                                <label for="fld_plan_location__" class="fwdp-label">Location Name</label>
+                                                <input id="fld_plan_location__" class="form-control" type="text" name="plan_location[]">
                                             </div>
                                             <div class="col-md-3">
-                                                <label class="fwdp-label">Planned Time</label>
-                                                <input class="form-control" type="time" name="plan_time[]" aria-label="Plan Time">
+                                                <label for="fld_plan_time__" class="fwdp-label">Planned Time</label>
+                                                <input id="fld_plan_time__" class="form-control" type="time" name="plan_time[]">
                                             </div>
                                             <div class="col-12">
-                                                <label class="fwdp-label">Address</label>
-                                                <textarea class="form-control fwdp-address-field" name="plan_address[]" rows="2" readonly aria-label="Plan Address"></textarea>
+                                                <label for="fld_plan_address__" class="fwdp-label">Address</label>
+                                                <textarea id="fld_plan_address__" class="form-control fwdp-address-field" name="plan_address[]" rows="2" readonly></textarea>
                                             </div>
                                             <div class="col-md-6 d-none">
                                                 <input class="form-control lat" type="text" name="plan_latitude[]" readonly aria-label="Plan Latitude">
@@ -272,50 +272,50 @@ if ($rid != "" && $view == '1') {
                                 <div class="fwdp-security-card">
                                     <div class="row g-3">
                                         <div class="col-lg-6 form-group">
-                                            <label class="fwdp-label">From Date <span class="text-danger">*</span></label>
-                                            <input class="form-control" type="date" name="work_from_date" id="work_from_date" value="" min="<?php echo date('Y-m-d'); ?>" aria-label="Work From Date">
+                                            <label for="work_from_date" class="fwdp-label">From Date <span class="text-danger">*</span></label>
+                                            <input class="form-control" type="date" name="work_from_date" id="work_from_date" value="" min="<?php echo date('Y-m-d'); ?>">
                                             <div class="d-none text-danger" id="work_from_date_err"></div>
                                         </div>
                                         <div class="col-lg-6 form-group">
-                                            <label class="fwdp-label">To Date <span class="text-danger">*</span></label>
-                                            <input class="form-control" type="date" name="work_to_date" id="work_to_date" aria-label="Work To Date">
+                                            <label for="work_to_date" class="fwdp-label">To Date <span class="text-danger">*</span></label>
+                                            <input class="form-control" type="date" name="work_to_date" id="work_to_date">
                                             <div class="d-none text-danger" id="work_to_date_err"></div>
                                         </div>
                                         <div class="col-lg-6 form-group">
-                                            <label class="fwdp-label">Time <span class="text-danger">*</span></label>
-                                            <input class="form-control" type="time" name="work_time" id="work_time" aria-label="Work Time">
+                                            <label for="work_time" class="fwdp-label">Time <span class="text-danger">*</span></label>
+                                            <input class="form-control" type="time" name="work_time" id="work_time">
                                             <div class="d-none text-danger" id="work_time_err"></div>
                                         </div>
                                         <div class="col-lg-6 form-group">
-                                            <label class="fwdp-label">Work Radius</label>
-                                            <input class="form-control" type="number" name="work_radius" id="work_radius" aria-label="Work Radius">
+                                            <label for="work_radius" class="fwdp-label">Work Radius</label>
+                                            <input class="form-control" type="number" name="work_radius" id="work_radius">
                                             <div class="d-none text-danger" id="work_radius_err"></div>
                                         </div>
                                         <div class="col-lg-4 form-group">
-                                            <label class="fwdp-label">Contact Person</label>
-                                            <input class="form-control" type="text" name="contact_person" id="contact_person" aria-label="Contact Person">
+                                            <label for="contact_person" class="fwdp-label">Contact Person</label>
+                                            <input class="form-control" type="text" name="contact_person" id="contact_person">
                                         </div>
                                         <div class="col-lg-4 form-group">
-                                            <label class="fwdp-label">Phone No.</label>
-                                            <input class="form-control" type="text" name="mobile" id="mobile" aria-label="Mobile">
+                                            <label for="mobile" class="fwdp-label">Phone No.</label>
+                                            <input class="form-control" type="text" name="mobile" id="mobile">
                                         </div>
                                         <div class="col-lg-4 form-group">
-                                            <label class="fwdp-label">Location Name</label>
-                                            <input class="form-control" type="text" name="location_name" id="location_name" aria-label="Location Name">
+                                            <label for="location_name" class="fwdp-label">Location Name</label>
+                                            <input class="form-control" type="text" name="location_name" id="location_name">
                                         </div>
                                         <div class="col-lg-4 form-group">
-                                            <label class="fwdp-label">Latitude <span class="text-danger">*</span></label>
-                                            <input class="form-control lat" type="text" name="work_latitude" id="work_latitude" readonly aria-label="Work Latitude">
+                                            <label for="work_latitude" class="fwdp-label">Latitude <span class="text-danger">*</span></label>
+                                            <input class="form-control lat" type="text" name="work_latitude" id="work_latitude" readonly>
                                             <div class="d-none text-danger" id="work_latitude_err"></div>
                                         </div>
                                         <div class="col-lg-4 form-group">
-                                            <label class="fwdp-label">Longitude <span class="text-danger">*</span></label>
-                                            <input class="form-control lng" type="text" name="work_longitude" id="work_longitude" readonly aria-label="Work Longitude">
+                                            <label for="work_longitude" class="fwdp-label">Longitude <span class="text-danger">*</span></label>
+                                            <input class="form-control lng" type="text" name="work_longitude" id="work_longitude" readonly>
                                             <div class="d-none text-danger" id="work_longitude_err"></div>
                                         </div>
                                         <div class="col-lg-4 form-group">
-                                            <label class="fwdp-label">Address</label>
-                                            <textarea class="form-control fwdp-address-field" name="work_address" id="work_address" rows="2" readonly aria-label="Work Address"></textarea>
+                                            <label for="work_address" class="fwdp-label">Address</label>
+                                            <textarea class="form-control fwdp-address-field" name="work_address" id="work_address" rows="2" readonly></textarea>
                                         </div>
                                         <div class="col-12">
                                             <button type="button" class="fwdp-btn fwdp-btn-map addMapBtn">
@@ -363,7 +363,7 @@ if ($rid != "" && $view == '1') {
                     <div id="fwdpMapDistance" class="fwdp-map-distance" style="display:none;"></div>
                 </div>
                 <div class="fwdp-map-selected" id="fwdpMapSelectedWrap">
-                    <label class="fwdp-label">Route Summary</label>
+                    <span class="fwdp-label">Route Summary</span>
                     <p id="fwdpSelectedAddress">Click on the map or search to select a location.</p>
                     <div id="fwdpRouteSummary" class="fwdp-route-summary" style="display:none;"></div>
                     <div id="fwdpNavActions" class="fwdp-nav-actions" style="display:none;">
