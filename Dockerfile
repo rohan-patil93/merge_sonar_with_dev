@@ -1,0 +1,36 @@
+FROM php:8.3-apache
+
+RUN apt-get update && apt-get install -y \
+    git \
+    unzip \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+    libzip-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install gd zip \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN docker-php-ext-install mysqli pdo pdo_mysql
+
+# Composer binary
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+COPY ./apache2/infi.conf /etc/apache2/conf-available/infi.conf
+
+RUN a2enconf infi.conf
+
+RUN a2enmod rewrite \
+    && a2enmod ssl
+
+RUN rm -f /var/www/html/index.html
+
+COPY --chown=www-data:www-data . /var/www/html/
+
+# Install packages from composer.lock (creates vendor/)
+RUN cd /var/www/html && composer install --no-dev --optimize-autoloader --no-interaction \
+    && chown -R www-data:www-data /var/www/html/vendor
+
+EXPOSE 80 443
+
+CMD ["apache2-foreground"]
