@@ -1,4 +1,18 @@
  <script type="text/javascript">
+    function changeApplicationLanguage(selected_application_languages) {
+        $.ajax({
+            url: 'views/custom_set_application_languages.php',
+            type: 'POST',
+            data: {
+                selected_application_languages: selected_application_languages
+            },
+            dataType: 'json',
+            success: function(response) {
+                console.log(response);
+                window.location.href = window.location.href;
+            }
+        });
+    }
     function clicktransport(){
         //alert("hai");
         jQuery.ajax({
@@ -550,6 +564,16 @@
                         <i class="ti-settings"></i> Settings
                     </a>
                 </li>  --->
+                <?php if(!empty($_SESSION['application_languages']) && is_array($_SESSION['application_languages'])){ ?>
+                    <li class="px-3 py-2">
+                        <label for="application_language_select" class="d-block mb-1"><?= __('Language'); ?></label>
+                        <select id="application_language_select" class="form-control" onchange="changeApplicationLanguage(this.value)">
+                            <?php foreach($_SESSION['application_languages'] as $header_language_row){ ?>
+                                <option value="<?php echo htmlspecialchars($header_language_row['language_field_name'], ENT_QUOTES, 'UTF-8'); ?>" <?php echo $header_language_row['language_field_name'] == $_SESSION['selected_application_languages'] ? 'selected' : ''; ?>><?php echo htmlspecialchars($header_language_row['language_name'], ENT_QUOTES, 'UTF-8'); ?></option>
+                            <?php } ?>
+                        </select>
+                    </li>
+                <?php } ?>
                 <li>
                     <?php  
                         if($user['user_type'] ==3){

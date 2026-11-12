@@ -4133,4 +4133,640 @@ function formatCsrSummaryAmount($amount)
 		'label' => $label
 	);
 }
+function dynamicDataDecode($encodedData){
+	$key = hash('sha256', DATA_ENCRYPTION_KEY, true);
+	$data = base64_decode(
+		strtr($encodedData, '-_', '+/'),
+		true
+	);
+	$iv = substr($data, 0, 16);
+	$encrypted = substr($data, 16);
+	return openssl_decrypt($encrypted,'AES-256-CBC',$key,OPENSSL_RAW_DATA,$iv);
+}
+
+
+if (!function_exists('getAllSupportedSensitiveTypes')) {
+    function getAllSupportedSensitiveTypes() {
+        return [
+            'email' => [
+                'key' => 'email',
+                'name' => 'Email Address',
+                'sample_original' => 'rohan@gmail.com',
+                'show_first' => 1,
+                'show_last' => 0,
+                'mask_char' => '*',
+                'preserve_domain' => 1,
+                'preserve_separators' => 1,
+                'default_pattern' => 'r****@gmail.com',
+                'description' => 'User or contact email address'
+            ],
+            'pan' => [
+                'key' => 'pan',
+                'name' => 'PAN Number',
+                'sample_original' => 'ABCDE1234F',
+                'show_first' => 2,
+                'show_last' => 2,
+                'mask_char' => '*',
+                'preserve_domain' => 0,
+                'preserve_separators' => 1,
+                'default_pattern' => 'AB******4F',
+                'description' => 'Income Tax Permanent Account Number (10 alphanumeric)'
+            ],
+            'gst' => [
+                'key' => 'gst',
+                'name' => 'GST Number',
+                'sample_original' => '27ABCDE1234F1Z5',
+                'show_first' => 2,
+                'show_last' => 3,
+                'mask_char' => '*',
+                'preserve_domain' => 0,
+                'preserve_separators' => 1,
+                'default_pattern' => '27**********1Z5',
+                'description' => 'Goods & Services Tax Identification Number (15 alphanumeric)'
+            ],
+            'mobile' => [
+                'key' => 'mobile',
+                'name' => 'Mobile Number',
+                'sample_original' => '9876543210',
+                'show_first' => 2,
+                'show_last' => 2,
+                'mask_char' => '*',
+                'preserve_domain' => 0,
+                'preserve_separators' => 1,
+                'default_pattern' => '98******10',
+                'description' => '10-digit mobile or contact phone number'
+            ],
+            'aadhaar' => [
+                'key' => 'aadhaar',
+                'name' => 'Aadhaar Number',
+                'sample_original' => '123456789012',
+                'show_first' => 0,
+                'show_last' => 4,
+                'mask_char' => 'X',
+                'preserve_domain' => 0,
+                'preserve_separators' => 1,
+                'default_pattern' => 'XXXX XXXX 9012',
+                'description' => '12-digit Indian National Identity Number'
+            ],
+            'bank_account' => [
+                'key' => 'bank_account',
+                'name' => 'Bank Account Number',
+                'sample_original' => '1234567890123456',
+                'show_first' => 0,
+                'show_last' => 4,
+                'mask_char' => '*',
+                'preserve_domain' => 0,
+                'preserve_separators' => 1,
+                'default_pattern' => '************3456',
+                'description' => 'Customer or vendor bank account number'
+            ],
+            'ifsc' => [
+                'key' => 'ifsc',
+                'name' => 'IFSC Code',
+                'sample_original' => 'HDFC0001234',
+                'show_first' => 5,
+                'show_last' => 0,
+                'mask_char' => '*',
+                'preserve_domain' => 0,
+                'preserve_separators' => 1,
+                'default_pattern' => 'ABCD0******',
+                'description' => 'Indian Financial System Code (11 alphanumeric)'
+            ],
+            'passport' => [
+                'key' => 'passport',
+                'name' => 'Passport Number',
+                'sample_original' => 'A1234567',
+                'show_first' => 1,
+                'show_last' => 1,
+                'mask_char' => '*',
+                'preserve_domain' => 0,
+                'preserve_separators' => 1,
+                'default_pattern' => 'A******7',
+                'description' => 'Passport identification code (8 alphanumeric)'
+            ],
+            'driving_licence' => [
+                'key' => 'driving_licence',
+                'name' => 'Driving Licence',
+                'sample_original' => 'DL-1420110012345',
+                'show_first' => 2,
+                'show_last' => 4,
+                'mask_char' => '*',
+                'preserve_domain' => 0,
+                'preserve_separators' => 1,
+                'default_pattern' => 'DL*********2345',
+                'description' => 'Driving Licence registration number'
+            ],
+            'pf_number' => [
+                'key' => 'pf_number',
+                'name' => 'PF Number',
+                'sample_original' => 'MH/BAN/0012345/000/0001234',
+                'show_first' => 2,
+                'show_last' => 4,
+                'mask_char' => '*',
+                'preserve_domain' => 0,
+                'preserve_separators' => 1,
+                'default_pattern' => 'MH/BAN/0012345/000/****234',
+                'description' => 'Provident Fund member account number'
+            ],
+            'uan_number' => [
+                'key' => 'uan_number',
+                'name' => 'UAN Number',
+                'sample_original' => '100912345678',
+                'show_first' => 2,
+                'show_last' => 2,
+                'mask_char' => '*',
+                'preserve_domain' => 0,
+                'preserve_separators' => 1,
+                'default_pattern' => '10********78',
+                'description' => 'Universal Account Number (12 digits)'
+            ],
+            'gosi_number' => [
+                'key' => 'gosi_number',
+                'name' => 'GOSI Number',
+                'sample_original' => '123456789',
+                'show_first' => 2,
+                'show_last' => 2,
+                'mask_char' => '*',
+                'preserve_domain' => 0,
+                'preserve_separators' => 1,
+                'default_pattern' => '12*****89',
+                'description' => 'General Organization for Social Insurance number (9 digits)'
+            ]
+        ];
+    }
+}
+
+if (!function_exists('normalizeSensitiveDataType')) {
+    function normalizeSensitiveDataType($type) {
+        $type = strtolower(trim((string)$type));
+        $type = str_replace(['-', ' '], '_', $type);
+
+        $map = [
+            'email_id' => 'email',
+            'mail' => 'email',
+            'user_email' => 'email',
+            'pan_card' => 'pan',
+            'pan_number' => 'pan',
+            'pan_no' => 'pan',
+            'gstin' => 'gst',
+            'gst_number' => 'gst',
+            'gst_no' => 'gst',
+            'phone' => 'mobile',
+            'phone_number' => 'mobile',
+            'phone_no' => 'mobile',
+            'contact_number' => 'mobile',
+            'mobile_no' => 'mobile',
+            'user_mobile' => 'mobile',
+            'aadhar' => 'aadhaar',
+            'aadhaar_no' => 'aadhaar',
+            'aadhaar_number' => 'aadhaar',
+            'uid' => 'aadhaar',
+            'account' => 'bank_account',
+            'account_number' => 'bank_account',
+            'bank_acc' => 'bank_account',
+            'bank_acc_no' => 'bank_account',
+            'account_no' => 'bank_account',
+            'ifsc_code' => 'ifsc',
+            'passport_no' => 'passport',
+            'passport_number' => 'passport',
+            'driving_license' => 'driving_licence',
+            'drivinglicense' => 'driving_licence',
+            'drivinglicence' => 'driving_licence',
+            'dl' => 'driving_licence',
+            'dl_no' => 'driving_licence',
+            'dl_number' => 'driving_licence',
+            'driving_licence_number' => 'driving_licence',
+            'driving_license_number' => 'driving_licence',
+            'pf_no' => 'pf_number',
+            'pf' => 'pf_number',
+            'pfno' => 'pf_number',
+            'provident_fund' => 'pf_number',
+            'provident_fund_no' => 'pf_number',
+            'epf' => 'pf_number',
+            'epf_no' => 'pf_number',
+            'epf_number' => 'pf_number',
+            'uan' => 'uan_number',
+            'uan_no' => 'uan_number',
+            'pf_uan' => 'uan_number',
+            'pf_uan_no' => 'uan_number',
+            'gosi' => 'gosi_number',
+            'gosi_no' => 'gosi_number'
+        ];
+
+        return $map[$type] ?? $type;
+    }
+}
+
+if (!function_exists('isSensitiveDataDateEffective')) {
+    function isSensitiveDataDateEffective($fromDate, $toDate) {
+        $today = date('Y-m-d');
+        if (!empty($fromDate) && $fromDate !== '0000-00-00') {
+            if ($today < $fromDate) {
+                return false;
+            }
+        }
+        if (!empty($toDate) && $toDate !== '0000-00-00') {
+            if ($today > $toDate) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+if (!function_exists('maskValueDynamically')) {
+    function maskValueDynamically($value, $type, array $config = []) {
+        if ($value === '' || $value === null) {
+            return '';
+        }
+        $valStr = (string)$value;
+        $normType = normalizeSensitiveDataType($type);
+
+        $defaults = getAllSupportedSensitiveTypes()[$normType] ?? [
+            'show_first' => 2,
+            'show_last' => 2,
+            'mask_char' => '*',
+            'preserve_domain' => 1,
+            'preserve_separators' => 1
+        ];
+
+        $showFirst = isset($config['show_first']) ? (int)$config['show_first'] : (int)$defaults['show_first'];
+        $showLast  = isset($config['show_last'])  ? (int)$config['show_last']  : (int)$defaults['show_last'];
+        $maskChar  = !empty($config['mask_char']) ? substr($config['mask_char'], 0, 1) : $defaults['mask_char'];
+        $preserveDomain = isset($config['preserve_domain']) ? (bool)$config['preserve_domain'] : (bool)$defaults['preserve_domain'];
+        $preserveSeparators = isset($config['preserve_separators']) ? (bool)$config['preserve_separators'] : (bool)$defaults['preserve_separators'];
+
+        if (!empty($config['masking_pattern'])) {
+            $pat = $config['masking_pattern'];
+            if ($normType === 'email' && strpos($pat, '@') !== false) {
+                list($pUser, $pDomain) = explode('@', $pat, 2);
+                if (strpos($pDomain, '*') !== false || strpos($pDomain, 'X') !== false || strpos($pDomain, 'x') !== false) {
+                    $preserveDomain = false;
+                }
+                $firstMask = strcspn($pUser, '*Xx');
+                if ($firstMask < strlen($pUser)) {
+                    $showFirst = $firstMask;
+                }
+            }
+        }
+
+        // 1. Specialized Email Handling
+        if ($normType === 'email' && strpos($valStr, '@') !== false) {
+            list($username, $domain) = explode('@', $valStr, 2);
+            $uLen = strlen($username);
+
+            $uFirst = max(0, $showFirst);
+            $uLast  = max(0, $showLast);
+
+            if ($uFirst + $uLast >= $uLen) {
+                $uFirst = min($uFirst, max(1, $uLen - 1));
+                $uLast  = min($uLast, max(0, $uLen - $uFirst - 1));
+            }
+
+            $uMaskCount = max(1, $uLen - $uFirst - $uLast);
+            $prefix = substr($username, 0, $uFirst);
+            $suffix = ($uLast > 0) ? substr($username, -$uLast) : '';
+            $maskedUser = $prefix . str_repeat($maskChar, $uMaskCount) . $suffix;
+
+            if ($preserveDomain) {
+                return $maskedUser . '@' . $domain;
+            } else {
+                if (strpos($domain, '.') !== false) {
+                    $lastDot = strrpos($domain, '.');
+                    $dName = substr($domain, 0, $lastDot);
+                    $dExt  = substr($domain, $lastDot);
+                    $dMaskCount = max(3, strlen($dName));
+                    if (!empty($config['masking_pattern']) && strpos($config['masking_pattern'], '@') !== false) {
+                        list(, $pD) = explode('@', $config['masking_pattern'], 2);
+                        $starMatches = preg_match_all('/[\*Xx]/', $pD);
+                        if ($starMatches > 0) {
+                            $dMaskCount = $starMatches;
+                        }
+                    }
+                    return $maskedUser . '@' . str_repeat($maskChar, $dMaskCount) . $dExt;
+                } else {
+                    return $maskedUser . '@' . str_repeat($maskChar, strlen($domain));
+                }
+            }
+        }
+
+        // 2. Aadhaar with Spaced Formatting Support
+        if ($normType === 'aadhaar') {
+            $clean = preg_replace('/[^0-9]/', '', $valStr);
+            $len = strlen($clean);
+            if ($len === 12) {
+                $sFirst = max(0, $showFirst);
+                $sLast  = max(0, $showLast);
+                if ($sFirst + $sLast >= 12) {
+                    $sFirst = min($sFirst, 11);
+                    $sLast  = min($sLast, max(0, 12 - $sFirst - 1));
+                }
+                $maskCount = max(0, 12 - $sFirst - $sLast);
+                $pre = ($sFirst > 0) ? substr($clean, 0, $sFirst) : '';
+                $suf = ($sLast > 0) ? substr($clean, -$sLast) : '';
+                $masked12 = $pre . str_repeat($maskChar, $maskCount) . $suf;
+
+                if ($preserveSeparators) {
+                    return substr($masked12, 0, 4) . ' ' . substr($masked12, 4, 4) . ' ' . substr($masked12, 8, 4);
+                } else {
+                    return $masked12;
+                }
+            }
+        }
+
+        // 3. Universal Dynamic Formula for All Other Types (PAN, GST, Mobile, etc.)
+        $len = strlen($valStr);
+        if ($len === 0) {
+            return '';
+        }
+
+        $sFirst = max(0, $showFirst);
+        $sLast  = max(0, $showLast);
+
+        if ($sFirst + $sLast >= $len) {
+            $sFirst = min($sFirst, max(1, $len - 1));
+            $sLast  = min($sLast, max(0, $len - $sFirst - 1));
+        }
+
+        // Formula: Mask character count = Total characters - showFirst - showLast
+        $maskCount = max(0, $len - $sFirst - $sLast);
+        $prefix = ($sFirst > 0) ? substr($valStr, 0, $sFirst) : '';
+        $suffix = ($sLast > 0)  ? substr($valStr, -$sLast)  : '';
+
+        return $prefix . str_repeat($maskChar, $maskCount) . $suffix;
+    }
+}
+
+if (!function_exists('maskSensitiveValue')) {
+    function maskSensitiveValue($value, $type, $pattern = null) {
+        if ($value === '' || $value === null) {
+            return '';
+        }
+        $normType = normalizeSensitiveDataType($type);
+        $allTypes = getAllSupportedSensitiveTypes();
+        $config = $allTypes[$normType] ?? [
+            'show_first' => 2,
+            'show_last' => 2,
+            'mask_char' => '*',
+            'preserve_domain' => 1
+        ];
+
+        if (!empty($pattern)) {
+            $config['masking_pattern'] = $pattern;
+            if ($normType === 'email' && strpos($pattern, '@') !== false) {
+                list($pUser, $pDomain) = explode('@', $pattern, 2);
+                $firstMask = strcspn($pUser, '*Xx');
+                $config['show_first'] = ($firstMask < strlen($pUser)) ? $firstMask : 1;
+                $config['show_last']  = 0;
+                $config['preserve_domain'] = (strpos($pDomain, '*') === false && strpos($pDomain, 'X') === false);
+            } else {
+                $maskChar = (strpos($pattern, 'X') !== false) ? 'X' : '*';
+                $config['mask_char'] = $maskChar;
+
+                if (preg_match('/^([^' . preg_quote($maskChar, '/') . ']+)[' . preg_quote($maskChar, '/') . ']+([^' . preg_quote($maskChar, '/') . ']+)$/', $pattern, $m)) {
+                    $config['show_first'] = strlen($m[1]);
+                    $config['show_last']  = strlen($m[2]);
+                } elseif (preg_match('/^[\*Xx]+([A-Za-z0-9]+)$/', $pattern, $m)) {
+                    $config['show_first'] = 0;
+                    $config['show_last']  = strlen($m[1]);
+                } elseif (preg_match('/^([A-Za-z0-9]+)[\*Xx]+$/', $pattern, $m)) {
+                    $config['show_first'] = strlen($m[1]);
+                    $config['show_last']  = 0;
+                }
+            }
+        }
+
+        return maskValueDynamically($value, $normType, $config);
+    }
+}
+
+if (!function_exists('getSensitiveDataPolicy')) {
+    function getSensitiveDataPolicy($company_id = null, $force_refresh = false) {
+        if (session_status() === PHP_SESSION_NONE && !headers_sent()) {
+            @session_start();
+        }
+
+        if ($company_id === null) {
+            $company_id = $_SESSION['company_id'] ?? 1;
+        }
+        $company_id = (int)$company_id;
+
+        // Check session cache if force refresh is not requested
+        if (!$force_refresh && isset($_SESSION['sensitive_data_policy'][$company_id])) {
+            $cached = $_SESSION['sensitive_data_policy'][$company_id];
+            if (!empty($cached['policy_active'])) {
+                $isEffective = isSensitiveDataDateEffective($cached['from_date'] ?? null, $cached['to_date'] ?? null);
+                if (!$isEffective) {
+                    $cached['policy_active'] = false;
+                    $_SESSION['sensitive_data_policy'][$company_id] = $cached;
+                }
+            }
+            return $cached;
+        }
+
+        // Default empty policy structure
+        $policy = [
+            'success' => true,
+            'company_id' => $company_id,
+            'policy_active' => false,
+            'policy_id' => null,
+            'policy_name' => '',
+            'from_date' => null,
+            'to_date' => null,
+            'cached_at' => time(),
+            'restrictions' => []
+        ];
+
+        // 1. Fetch via API if available (Standard ERP flow - accesses only via api.php)
+        if (defined('API') && function_exists('callAPI')) {
+            $apiUrl = API . "?mode=get_sensitive_data_policy&company_id=" . $company_id . "&method=get";
+            $apiRes = callAPI($apiUrl);
+            $apiData = json_decode($apiRes, true);
+            if (!empty($apiData) && isset($apiData['success']) && $apiData['success']) {
+                $policy = $apiData;
+                $policy['cached_at'] = time();
+                $_SESSION['sensitive_data_policy'][$company_id] = $policy;
+                return $policy;
+            }
+        }
+
+        // Cache the policy in session
+        $_SESSION['sensitive_data_policy'][$company_id] = $policy;
+        return $policy;
+    }
+}
+
+if (!function_exists('refreshSensitiveDataPolicy')) {
+    function refreshSensitiveDataPolicy($company_id = null) {
+        if (session_status() === PHP_SESSION_NONE && !headers_sent()) {
+            @session_start();
+        }
+        if ($company_id === null) {
+            $company_id = $_SESSION['company_id'] ?? 1;
+        }
+        $company_id = (int)$company_id;
+
+        if (isset($_SESSION['sensitive_data_policy'][$company_id])) {
+            unset($_SESSION['sensitive_data_policy'][$company_id]);
+        }
+        return getSensitiveDataPolicy($company_id, true);
+    }
+}
+
+if (!function_exists('applyDynamicSensitiveDataRestriction')) {
+    function applyDynamicSensitiveDataRestriction($value, $type = 'text', $action = 'mask') {
+        // If caller explicitly requested 'show', return original value
+        if ($action === 'show') {
+            return ['applied' => true, 'value' => (string)$value];
+        }
+        if ($value === '' || $value === null) {
+            return ['applied' => true, 'value' => ''];
+        }
+
+        if (session_status() === PHP_SESSION_NONE && !headers_sent()) {
+            @session_start();
+        }
+
+        $company_id = $_SESSION['company_id'] ?? null;
+        if (empty($company_id)) {
+            return ['applied' => false];
+        }
+
+        // Retrieve cached policy from session
+        $policy = getSensitiveDataPolicy($company_id);
+        if (empty($policy) || empty($policy['policy_active'])) {
+            return ['applied' => false];
+        }
+
+        $normType = normalizeSensitiveDataType($type);
+
+        // If this data type is not defined in policy restrictions, fall back to legacy behavior
+        if (!isset($policy['restrictions'][$normType])) {
+            return ['applied' => false];
+        }
+
+        $restriction = $policy['restrictions'][$normType];
+        $isRestricted = !empty($restriction['is_restricted']);
+
+        if ($isRestricted) {
+            $masked = maskValueDynamically($value, $normType, $restriction);
+            return ['applied' => true, 'value' => $masked];
+        } else {
+            // Restriction disabled for this type -> preserve original unmasked value!
+            return ['applied' => true, 'value' => (string)$value];
+        }
+    }
+}
+function sensitiveDataEncoded($value, $type = 'text', $showFirst = 2, $showLast = 2, $action = 'mask'){
+    $value = (string) $value;
+    // Return original value when decode/show is requested.
+    // Use this only when the caller is authorized.
+    if ($action === 'show') {
+        return $value;
+    }
+    if ($value === '') {
+        return '';
+    }
+
+    // Dynamic Sensitive Data Restriction Policy check
+    if (function_exists('applyDynamicSensitiveDataRestriction')) {
+        $policyResult = applyDynamicSensitiveDataRestriction($value, $type, $action);
+        if (!empty($policyResult['applied'])) {
+            return $policyResult['value'];
+        }
+    }
+
+    // For email, mask only the username and preserve the domain.
+    if ($type === 'email' && strpos($value, '@') !== false) {
+        list($username, $domain) = explode('@', $value, 2);
+        $value = $username;
+        $length = strlen($value);
+        $showFirst = max(0, (int) $showFirst);
+        $showLast = max(0, (int) $showLast);
+        if ($showFirst + $showLast >= $length) {
+            $showFirst = min($showFirst, max(0, $length - 1));
+            $showLast = min($showLast, max(0, $length - $showFirst - 1));
+        }
+        $masked = substr($value, 0, $showFirst)
+            . str_repeat('X', max(0, $length - $showFirst - $showLast))
+            . ($showLast > 0 ? substr($value, -$showLast) : '');
+
+        return $masked . '@' . $domain;
+    }
+    // Phone, text, account numbers, and other values.
+    $length = strlen($value);
+    $showFirst = max(0, (int) $showFirst);
+    $showLast = max(0, (int) $showLast);
+    if ($showFirst + $showLast >= $length) {
+        return $value;
+    }
+    return substr($value, 0, $showFirst).str_repeat('X', $length - $showFirst - $showLast).($showLast > 0 ? substr($value, -$showLast) : '');
+}
+
+if (!function_exists('renderSensitiveDataWithToggle')) {
+    /**
+     * Renders a sensitive data value with masking and an interactive eye toggle icon.
+     * When clicked, the eye icon toggles the field between masked and unmasked (decoded).
+     *
+     * @param string|null $encodedOrRawValue Encrypted or raw sensitive value
+     * @param string $type Sensitive data type (e.g. 'aadhaar', 'pan', 'mobile', 'passport', etc.)
+     * @param bool $isEncoded Whether the input is encrypted with dynamicDataEncode (default true)
+     * @return string HTML output with value and toggle icon
+     */
+    function renderSensitiveDataWithToggle($encodedOrRawValue, $type = 'text', $isEncoded = true) {
+        $rawValue = $isEncoded ? dynamicDataDecode($encodedOrRawValue) : $encodedOrRawValue;
+        if (empty($rawValue) && !empty($encodedOrRawValue)) {
+            $rawValue = $encodedOrRawValue;
+        }
+        $rawValue = trim((string)$rawValue);
+        if ($rawValue === '' || $rawValue === '-') {
+            return '-';
+        }
+
+        $maskedValue = sensitiveDataEncoded($rawValue, $type);
+
+        // Format 12-digit raw Aadhaar with 4-4-4 spacing for clean visual alignment
+        $displayRaw = $rawValue;
+        $normType = normalizeSensitiveDataType($type);
+        if ($normType === 'aadhaar') {
+            $clean12 = preg_replace('/[^0-9]/', '', $rawValue);
+            if (strlen($clean12) === 12) {
+                $displayRaw = substr($clean12, 0, 4) . ' ' . substr($clean12, 4, 4) . ' ' . substr($clean12, 8, 4);
+            }
+        }
+
+        // If not masked (or masking equals raw), show directly without toggle icon
+        if ($maskedValue === $displayRaw || $maskedValue === $rawValue) {
+            return htmlspecialchars($displayRaw);
+        }
+
+        return '<span class="sensitive-data-container d-inline-flex align-items-center">'
+             . '<span class="sensitive-data-text font-monospace" data-masked="' . htmlspecialchars($maskedValue) . '" data-unmasked="' . htmlspecialchars($displayRaw) . '" data-state="masked">' . htmlspecialchars($maskedValue) . '</span>'
+             . '<i class="fa fa-eye ms-2 text-primary cursor-pointer toggle-sensitive-btn" title="Click to view sensitive information" style="cursor: pointer; font-size: 14px;" onclick="toggleSensitiveDataVisibility(this)"></i>'
+             . '</span>';
+    }
+}
+function __($input_label){
+	if(!is_scalar($input_label)){
+		return $input_label;
+	}
+	$input_label = trim((string)$input_label);
+	if(isset($_SESSION['application_language_translations']) && is_array($_SESSION['application_language_translations'])){
+		if(isset($_SESSION['application_language_translations'][$input_label]) && trim((string)$_SESSION['application_language_translations'][$input_label]) !== ''){
+			$input_label = $_SESSION['application_language_translations'][$input_label][$_SESSION['selected_application_languages']];
+		}else{
+			$dynamic_label = "";
+			$strtoary = explode(" ", $input_label);	
+			foreach ($strtoary as $labvalue) {
+				if(isset($_SESSION['application_language_translations'][$labvalue]) && trim((string)$_SESSION['application_language_translations'][$labvalue]) !== ''){
+					$dynamic_label .= " ".$_SESSION['application_language_translations'][$labvalue][$_SESSION['selected_application_languages']];
+				}else{
+					$dynamic_label .= " ".$labvalue;
+				}
+			}	
+			$input_label = $dynamic_label;
+		}
+	}	
+	return $input_label;
+}
 ?>

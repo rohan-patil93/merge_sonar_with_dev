@@ -360,6 +360,30 @@ class userClass{
     	$query = "SELECT * FROM emp_clock_status WHERE  company_id =".$get['company_id']." AND user_id = ".$get['user_id']." AND  effective_from_date <= '".$today."' AND effective_to_date >= '".$today."' AND is_active = 0";		
 		$return['emp_clock_status'] = $callConfig->getRow($query);
 		$return['emp_clock_status_query'] = $query;
+
+		$langquery = "SELECT id, language_name, language_code, language_field_name, is_default FROM application_languages WHERE is_active = 0";		
+		$langres = $callConfig->getAllRows($langquery);
+		$languagefieldname = $application_language_translations = array();
+		$default_application_languages = "english";
+		$implodedfieldnamestr = "`english`, `hindi`, `marathi`, `gujarati`, `tamil`, `telugu`, `arabic`";
+		foreach($langres as $lng){
+			$languagefieldname[] = $lng->language_field_name;
+			if($lng->is_default == 1){
+				$default_application_languages = $lng->language_field_name;
+			}
+		}
+		$return['application_languages'] = $langres;
+		if(count((array)$languagefieldname) != 0){
+			$implodedfieldnamestr = implode(",",$languagefieldname);
+			$langtranquery = "SELECT ".$implodedfieldnamestr." FROM application_language_translations WHERE is_active = 0";		
+			$langtranres = $callConfig->getAllRows($langtranquery);
+			foreach($langtranres as $langtr){
+				$application_language_translations[$langtr->$default_application_languages]= $langtr;
+			}
+		}
+		$return['default_application_languages'] = $default_application_languages;
+		$return['application_language_translations'] = $application_language_translations;
+		
 		return $return;
 	}
 	function getMainDomainName(){

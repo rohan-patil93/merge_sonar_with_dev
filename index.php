@@ -41,6 +41,16 @@ $login_details = togetlogindetails();
    if(count((array)$_SESSION['login_details']['emp_clock_status'])>0){
         $_SESSION['user_clock_status'] = 'Y';
    }
+    if(!isset($_SESSION['default_application_languages'])){
+        $_SESSION['default_application_languages'] = $login_details['default_application_languages'];
+        $_SESSION['selected_application_languages'] = $login_details['default_application_languages'];
+    }
+    if(!isset($_SESSION['application_language_translations'])){
+        $_SESSION['application_language_translations'] = $login_details['application_language_translations'];
+    }
+    if(!isset($_SESSION['application_languages'])){
+        $_SESSION['application_languages'] = $login_details['application_languages'];
+    }
    //echo "<pre>"; print_r($_SESSION); exit;
 //}else{
  //  $login_details = $_SESSION['login_details'];
