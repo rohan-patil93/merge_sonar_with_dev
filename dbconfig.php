@@ -41,7 +41,7 @@
 
 ob_start();
 //session_start(); 
-ini_set("display_errors", 1);
+ini_set("display_errors", 0);
 
 require_once __DIR__ . '/vendor/autoload.php';
 
