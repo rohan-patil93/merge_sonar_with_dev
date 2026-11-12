@@ -453,7 +453,7 @@ if(isset($_SESSION['work_module_setup_id']) && $_SESSION['work_module_setup_id']
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" <?php echo $_SESSION['selected_application_languages']=='arabic'?'dir="rtl"':''; ?>>
 <head>
 <title>InfiSuite | Home</title>
 <?php  include_once("partials/_head.php");
