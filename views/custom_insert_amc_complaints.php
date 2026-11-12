@@ -114,8 +114,8 @@ $contracts = $result['contracts'] ?? array();
 					<input type="hidden" name="source_type" id="source_type" value="<?php echo htmlspecialchars($return['source_type'] ?? 'adhoc', ENT_QUOTES, 'UTF-8'); ?>">
 					<div class="row">
 						<div class="form-group col-lg-3 w-full">
-							<label>Complaint priority <span style="color:red;">*</span></label>
-							<select class="form-select js-example-basic-single" id="complaint_priority" name="complaint_priority" aria-label="Complaint Priority">
+							<label for="complaint_priority">Complaint priority <span style="color:red;">*</span></label>
+							<select class="form-select js-example-basic-single" id="complaint_priority" name="complaint_priority">
 								<option value="0"> Select Any one </option>
 								<option value="L" <?php echo $return['complaint_priority']=="L"? 'selected': '' ?>> Low</option>
 								<option value="M" <?php echo $return['complaint_priority']=="M"? 'selected': '' ?>> Medium </option>
@@ -124,18 +124,18 @@ $contracts = $result['contracts'] ?? array();
 							<div style="display: none;color: red;" id="complaint_priority_err"></div>
 						</div>
 						<div class="col-lg-3 col-xs-6 form-group">
-							<label>Date<span style="color:red;">*</span></label>
-							<input class="form-control" type="date" name="transaction_date" id="transaction_date" value="<?php echo isset($return['transaction_date']) && $return['transaction_date'] != '' ? date('Y-m-d', strtotime($return['transaction_date'])) :  date('Y-m-d'); ?>"/ aria-label="Transaction Date">
+							<label for="transaction_date">Date<span style="color:red;">*</span></label>
+							<input class="form-control" type="date" name="transaction_date" id="transaction_date" value="<?php echo isset($return['transaction_date']) && $return['transaction_date'] != '' ? date('Y-m-d', strtotime($return['transaction_date'])) :  date('Y-m-d'); ?>"/>
 							<div style="display: none;color: red;" id="transaction_date_err"></div>
 						</div>
 						<div class="form-group col-lg-3 col-xs-6 ">
-							<label>Complaint Name<span style="color:red;">*</span></label>
-							<input class="form-control" placeholder="Enter Complaint Name" type="text" name="complaint_name" id="complaint_name" value="<?php echo $return['complaint_name'] ?? ''; ?>" aria-label="Enter Complaint Name">
+							<label for="complaint_name">Complaint Name<span style="color:red;">*</span></label>
+							<input class="form-control" placeholder="Enter Complaint Name" type="text" name="complaint_name" id="complaint_name" value="<?php echo $return['complaint_name'] ?? ''; ?>">
 							<div style="display: none;color: red;" id="complaint_name_err"></div>
 						</div>
 						<div class="form-group col-lg-3 w-full">
-							<label>Approved Contract<span style="color:red;">*</span></label>
-							<select class="form-select js-example-basic-single" id="contract_id" name="contract_id" aria-label="Contract Id">
+							<label for="contract_id">Approved Contract<span style="color:red;">*</span></label>
+							<select class="form-select js-example-basic-single" id="contract_id" name="contract_id">
 								<option value="0"> Select Any one </option>
 								<?php if (count((array)$contracts) > 0) {
 									foreach ($contracts as $row) {
@@ -151,57 +151,57 @@ $contracts = $result['contracts'] ?? array();
 							<div style="display: none;color: red;" id="contract_id_err"></div>
 						</div>
 						<div class="col-md-3 w-full">
-							<label class="form-label">Location <span class="text-danger">*</span></label>
-							<select class="form-select js-example-basic-single" id="location_id" name="location_id" aria-label="Location Id">
+							<label for="location_id" class="form-label">Location <span class="text-danger">*</span></label>
+							<select class="form-select js-example-basic-single" id="location_id" name="location_id">
 								<option value="">Select Location</option>
 							</select>
 							<div style="display: none;color: red;" id="location_id_err"></div>
 						</div>
 						<div class="form-group col-lg-3 w-full">
-							<label>Asset<span style="color:red;">*</span></label>
-							<select class="form-select js-example-basic-single" id="asset_id" name="asset_id" aria-label="Asset Id">
+							<label for="asset_id">Asset<span style="color:red;">*</span></label>
+							<select class="form-select js-example-basic-single" id="asset_id" name="asset_id">
 								<option value="0"> Select Any one </option>
 							</select>
 							<div style="display: none;color: red;" id="asset_id_err"></div>
 						</div>
 						<div class="form-group col-lg-3 w-full">
-							<label>Linked Schedule Visit</label>
-							<select class="form-select js-example-basic-single" id="schedule_id" name="schedule_id" aria-label="Schedule Id">
+							<label for="schedule_id">Linked Schedule Visit</label>
+							<select class="form-select js-example-basic-single" id="schedule_id" name="schedule_id">
 								<option value="">None — Adhoc</option>
 							</select>
 						</div>
 						<div class="form-group col-lg-3 w-full">
-							<label>ServiceNow Ref</label>
-							<input type="text" class="form-control" name="servicenow_ref" id="servicenow_ref" value="<?php echo htmlspecialchars($return['servicenow_ref'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" placeholder="Optional" aria-label="Optional">
+							<label for="servicenow_ref">ServiceNow Ref</label>
+							<input type="text" class="form-control" name="servicenow_ref" id="servicenow_ref" value="<?php echo htmlspecialchars($return['servicenow_ref'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" placeholder="Optional">
 						</div>
 						<div class="form-group col-lg-3 w-full">
-							<label>Building<span style="color:red;">*</span></label>
-							<select class="form-select js-example-basic-single" id="building_id" name="building_id" aria-label="Building Id">
+							<label for="building_id">Building<span style="color:red;">*</span></label>
+							<select class="form-select js-example-basic-single" id="building_id" name="building_id">
 								<option value="0"> Select Any one </option>
 							</select>
 							<div style="display: none;color: red;" id="building_id_err"></div>
 						</div>
 						<div class="form-group col-lg-3 w-full">
-							<label>Building Floor<span style="color:red;">*</span></label>
-							<select class="form-select js-example-basic-single" id="building_floor_id" name="building_floor_id" aria-label="Building Floor Id">
+							<label for="building_floor_id">Building Floor<span style="color:red;">*</span></label>
+							<select class="form-select js-example-basic-single" id="building_floor_id" name="building_floor_id">
 								<option value="0"> Select Any one </option>
 							</select>
 							<div style="display: none;color: red;" id="building_floor_id_err"></div>
 						</div>
 						<div class="form-group col-lg-3 w-full">
-							<label>Building Floor Space<span style="color:red;">*</span></label>
-							<select class="form-select js-example-basic-single" id="building_floor_space_id" name="building_floor_space_id" aria-label="Building Floor Space Id">
+							<label for="building_floor_space_id">Building Floor Space<span style="color:red;">*</span></label>
+							<select class="form-select js-example-basic-single" id="building_floor_space_id" name="building_floor_space_id">
 								<option value="0"> Select Any one </option>
 							</select>
 							<div style="display: none;color: red;" id="building_floor_space_id_err"></div>
 						</div>
 						<div class="col-lg-3 col-xs-6 form-group">
-							<label>Remarks</label>
-							<textarea class="form-control" placeholder="Enter Remarks" type="text" name="remarks" id="remarks" aria-label="Enter Remarks"><?php echo $return['remarks'] ?? ''; ?></textarea>
+							<label for="remarks">Remarks</label>
+							<textarea class="form-control" placeholder="Enter Remarks" type="text" name="remarks" id="remarks"><?php echo $return['remarks'] ?? ''; ?></textarea>
 						</div>
 						<div class="col-lg-3 col-xs-6 form-group">
-							<label>Complaint Image </label>
-							<input class="form-control mb-1" type="file" name="complaint_images[]" id="complaint_images" multiple / aria-label="Complaint Images">
+							<label for="complaint_images">Complaint Image </label>
+							<input class="form-control mb-1" type="file" name="complaint_images[]" id="complaint_images" multiple />
 							<?php 
 							if(!empty($rid)){
 								$application_table_name  = 'complaints';
