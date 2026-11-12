@@ -794,7 +794,7 @@ define("USER_IMAGE_ROOT", SITEROOT . "/images/");
 define("DYNAMIC_SITEURL", "https://www.{domain_name}.");
 
 
-define("SITEURL", "https://" . $_SERVER['HTTP_HOST'] . "/merge_sonar_with_dev/");
+define("SITEURL", "https://" . $_SERVER['HTTP_HOST'] . "/");
 
 /*define("TEST", 				SITEURL."/api.php");*/
 

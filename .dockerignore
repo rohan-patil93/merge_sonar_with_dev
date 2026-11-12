@@ -1,0 +1,11 @@
+vendor
+.git
+.github
+.gitignore
+*.swp
+debug.log
+.env
+**/.env
+Dockerfile
+.dockerignore
+docker-compose.yml
