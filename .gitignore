@@ -16,3 +16,5 @@
 /test_cul.php
 /test_head.php
 /test_ranking.php
+# Database configuration - never commit
+/dbconfig.php
