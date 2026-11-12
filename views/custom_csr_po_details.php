@@ -71,20 +71,20 @@ $fyRows = $return ?? array();
                         <div class="row po-row border-bottom mb-3 pb-2" data-row="<?php echo $index; ?>">
                             <input type="hidden" name="id[]" value="<?php echo $row['id']; ?>">
                             <div class="col-lg-2 form-group">
-                                <label>PO Available? <span class="text-danger">*</span></label><br>
+                                <span class="form-label d-inline-block fw-bold">PO Available? <span class="text-danger">*</span></span><br>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input po_toggle" type="radio" name="po_toggle_<?php echo $index; ?>" value="0" <?php echo $checkedYes; ?> aria-label="Input">
-                                    <label class="form-check-label">Yes</label>
+                                    <input id="po_toggle_yes_<?php echo $index; ?>" class="form-check-input po_toggle" type="radio" name="po_toggle_<?php echo $index; ?>" value="0" <?php echo $checkedYes; ?>>
+                                    <label class="form-check-label" for="po_toggle_yes_<?php echo $index; ?>">Yes</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input po_toggle" type="radio" name="po_toggle_<?php echo $index; ?>" value="1" <?php echo $checkedNo; ?> aria-label="Input">
-                                    <label class="form-check-label">No</label>
+                                    <input id="po_toggle_no_<?php echo $index; ?>" class="form-check-input po_toggle" type="radio" name="po_toggle_<?php echo $index; ?>" value="1" <?php echo $checkedNo; ?>>
+                                    <label class="form-check-label" for="po_toggle_no_<?php echo $index; ?>">No</label>
                                 </div>
                             </div>
 
                             <div class="col-lg-2 form-group">
-                                <label>Financial Year <span class="text-danger">*</span></label>
-                                <select name="financial_year[]" class="form-control form-select financial_year" required aria-label="Financial Year">
+                                <label for="fld_financial_year_<?php echo $index; ?>">Financial Year <span class="text-danger">*</span></label>
+                                <select id="fld_financial_year_<?php echo $index; ?>" name="financial_year[]" class="form-control form-select financial_year" required>
                                     <option value="">Select FY</option>
                                     <?php
                                     $saved_fy = $row['financial_year'] ?? '';
@@ -101,53 +101,53 @@ $fyRows = $return ?? array();
                             </div>
 
                             <div class="col-lg-2 form-group po_no_div <?php echo $poNoHidden; ?>" >
-                                <label>PO No. <span class="text-danger">*</span></label>
-                                <input class="form-control po_no" type="text" name="po_no[]" value="<?php echo htmlspecialchars($row['po_no']); ?>" aria-label="Po No">
+                                <label for="fld_po_no_<?php echo $index; ?>">PO No. <span class="text-danger">*</span></label>
+                                <input id="fld_po_no_<?php echo $index; ?>" class="form-control po_no" type="text" name="po_no[]" value="<?php echo htmlspecialchars($row['po_no']); ?>">
                             </div>
 
                             <div class="col-lg-2 form-group">
-                                <label>PO Date <span class="text-danger">*</span></label>
-                                <input class="form-control po_date" type="date" name="po_date[]" step="any" value="<?php echo htmlspecialchars($row['po_date']); ?>" aria-label="Po Date">
+                                <label for="fld_po_date_<?php echo $index; ?>">PO Date <span class="text-danger">*</span></label>
+                                <input id="fld_po_date_<?php echo $index; ?>" class="form-control po_date" type="date" name="po_date[]" step="any" value="<?php echo htmlspecialchars($row['po_date']); ?>">
                             </div>
 
                             <div class="col-lg-2 form-group">
-                                <label>PO Amount <span class="text-danger">*</span></label>
-                                <input class="form-control po_amount" type="number" step="any" name="po_amount[]" value="<?php echo htmlspecialchars($row['po_amount']); ?>" aria-label="Po Amount">
+                                <label for="fld_po_amount_<?php echo $index; ?>">PO Amount <span class="text-danger">*</span></label>
+                                <input id="fld_po_amount_<?php echo $index; ?>" class="form-control po_amount" type="number" step="any" name="po_amount[]" value="<?php echo htmlspecialchars($row['po_amount']); ?>">
                             </div>
 
                             <div class="col-lg-2 form-group">
-                                <label>PO Value (Excl. Tax) <span class="text-danger">*</span></label>
-                                <input class="form-control po_value_ex" type="number" step="any" name="po_value_ex[]" value="<?php echo htmlspecialchars($row['po_value_ex']); ?>" aria-label="Po Value Ex">
+                                <label for="fld_po_value_ex_<?php echo $index; ?>">PO Value (Excl. Tax) <span class="text-danger">*</span></label>
+                                <input id="fld_po_value_ex_<?php echo $index; ?>" class="form-control po_value_ex" type="number" step="any" name="po_value_ex[]" value="<?php echo htmlspecialchars($row['po_value_ex']); ?>">
                             </div>
 
                             <div class="col-lg-1 form-group">
-                                <label>GST %</label>
-                                <input class="form-control gst" type="number" step="any" name="gst[]" value="<?php echo htmlspecialchars($row['gst']); ?>" aria-label="Gst">
+                                <label for="fld_gst_<?php echo $index; ?>">GST %</label>
+                                <input id="fld_gst_<?php echo $index; ?>" class="form-control gst" type="number" step="any" name="gst[]" value="<?php echo htmlspecialchars($row['gst']); ?>">
                             </div>
 
                             <div class="col-lg-2 form-group">
-                                <label>PO Value (Incl. Tax)</label>
-                                <input class="form-control po_value_in" type="number" step="any" name="po_value_in[]" value="<?php echo htmlspecialchars($row['po_value_in']); ?>" aria-label="Po Value In">
+                                <label for="fld_po_value_in_<?php echo $index; ?>">PO Value (Incl. Tax)</label>
+                                <input id="fld_po_value_in_<?php echo $index; ?>" class="form-control po_value_in" type="number" step="any" name="po_value_in[]" value="<?php echo htmlspecialchars($row['po_value_in']); ?>">
                             </div>
 
                             <div class="col-lg-2 form-group">
-                                <label>Business Code</label>
-                                <input class="form-control business_code" type="text" name="business_code[]" value="<?php echo htmlspecialchars($row['business_code']); ?>" aria-label="Business Code">
+                                <label for="fld_business_code_<?php echo $index; ?>">Business Code</label>
+                                <input id="fld_business_code_<?php echo $index; ?>" class="form-control business_code" type="text" name="business_code[]" value="<?php echo htmlspecialchars($row['business_code']); ?>">
                             </div>
 
                             <div class="col-lg-2 form-group">
-                                <label>Business Name</label>
-                                <input class="form-control business_name" type="text" name="business_name[]" value="<?php echo htmlspecialchars($row['business_name']); ?>" aria-label="Business Name">
+                                <label for="fld_business_name_<?php echo $index; ?>">Business Name</label>
+                                <input id="fld_business_name_<?php echo $index; ?>" class="form-control business_name" type="text" name="business_name[]" value="<?php echo htmlspecialchars($row['business_name']); ?>">
                             </div>
 
                             <div class="col-lg-2 form-group">
-                                <label>Other PO  Details</label>
-                                <textarea class="form-control po_details" name="po_details[]" rows="1" aria-label="Po Details"><?php echo htmlspecialchars($row['po_details']); ?></textarea>
+                                <label for="fld_po_details_<?php echo $index; ?>">Other PO  Details</label>
+                                <textarea id="fld_po_details_<?php echo $index; ?>" class="form-control po_details" name="po_details[]" rows="1"><?php echo htmlspecialchars($row['po_details']); ?></textarea>
                             </div>
 
                             <div class="col-lg-2 form-group">
-                                <label>Remarks</label>
-                                <textarea class="form-control remarks" name="remarks[]" rows="1" aria-label="Remarks"><?php echo htmlspecialchars($row['remarks']); ?></textarea>
+                                <label for="fld_remarks_<?php echo $index; ?>">Remarks</label>
+                                <textarea id="fld_remarks_<?php echo $index; ?>" class="form-control remarks" name="remarks[]" rows="1"><?php echo htmlspecialchars($row['remarks']); ?></textarea>
                             </div>
                             <?php if(in_array($_SESSION['working_role_short_code'], array('CSR_ADMIN', 'ADMIN'))){ ?>
                             <div class="col-lg-1 d-flex align-items-center">
