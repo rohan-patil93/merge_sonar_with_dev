@@ -70,19 +70,20 @@ $job  = $data['job'];
 				<div class="form-group row">
 					<div class="row col-lg-12">
 						<div class="col-lg-6 form-group">
-							<label>Vendor Rate Card</label>
-							<input type="text" name="vrc_name" id="vrc_name" readonly value="<?php echo $data['vrcmain']['transaction_number']; ?>" class="form-control vcs" aria-label="Vrc Name">
+							<label for="vrc_name">Vendor Rate Card</label>
+							<input type="text" name="vrc_name" id="vrc_name" readonly value="<?php echo $data['vrcmain']['transaction_number']; ?>" class="form-control vcs" aria-label="Vendor Rate Card">
 							<input type="hidden" name="vrc_id" id="vrc_id"  value="<?php echo $data['vrcmain']['id']; ?>" class="form-control vcs">
 						</div>
 						
 						 <div class="col-lg-6 form-group">
-							<label>Rate Card job Title</label>
 							<?php if($_POST['type'] == 'vrc'){ ?>
-								<input type="text" name="vrc_item_name" id="vrc_item_name" readonly value="<?php echo $job[$data['sub_vrc']['item_id']]." ( ".$data['sub_vrc']['min_exp']." - ".$data['sub_vrc']['max_exp']." ) - ".customeummarmonyformate($data['sub_vrc']['item_price']); ?>" class="form-control vcs" aria-label="Vrc Item Name">
+								<label for="vrc_item_name">Rate Card job Title</label>
+								<input type="text" name="vrc_item_name" id="vrc_item_name" readonly value="<?php echo $job[$data['sub_vrc']['item_id']]." ( ".$data['sub_vrc']['min_exp']." - ".$data['sub_vrc']['max_exp']." ) - ".customeummarmonyformate($data['sub_vrc']['item_price']); ?>" class="form-control vcs" aria-label="Rate Card job Title">
 							<input type="hidden" name="vrc_item_id" id="vrc_item_id" readonly value="<?php echo $data['sub_vrc']['id']; ?>" class="form-control ">
 							<?php } ?>
 							<?php if($_POST['type'] == 'mpc'){ ?>
-								<select class="form-select js-example-basic-single vcs" name="vrc_item_id" id="vrc_item_id" aria-label="Vrc Item Id">
+								<label for="vrc_item_id">Rate Card job Title</label>
+								<select class="form-select js-example-basic-single vcs" name="vrc_item_id" id="vrc_item_id" aria-label="Rate Card job Title">
 								<?php foreach($data['sub_vrc'] as $mpc_item ){ ?>
 									<option value="<?php echo $mpc_item['id']; ?>"> <?php echo $job[$mpc_item['item_id']]." ( ".$mpc_item['min_exp']." - ".$mpc_item['max_exp']." ) - ".customeummarmonyformate($mpc_item['item_price']); ?></option>
 								<?php } ?>
@@ -90,18 +91,19 @@ $job  = $data['job'];
 							<?php } ?>		
 						</div>
 						<div class="col-lg-6 form-group">
-							<label>Purchase order</label>
-							<input type="text" name="mpc_name" id="mpc_name" readonly value="<?php echo $data['mpcmain']['transaction_number']; ?>" class="form-control vcs" aria-label="Mpc Name">
+							<label for="mpc_name">Purchase order</label>
+							<input type="text" name="mpc_name" id="mpc_name" readonly value="<?php echo $data['mpcmain']['transaction_number']; ?>" class="form-control vcs" aria-label="Purchase order">
 							<input type="hidden" name="mpc_id" id="mpc_id"  value="<?php echo $data['mpcmain']['id']; ?>" class="form-control">
 						</div>
 						 <div class="col-lg-6 form-group">
-							<label>PO Job Title</label>
 							<?php if($_POST['type'] == 'mpc'){ ?>
-								<input type="text" name="mpc_item_name" id="mpc_item_name" readonly value="<?php echo $job[$data['sub_mpc']['item_id']]." ( ".$data['sub_mpc']['min_exp']." - ".$data['sub_mpc']['max_exp']." ) - ".customeummarmonyformate($data['sub_mpc']['item_price']); ?>" class="form-control vcs" aria-label="Mpc Item Name">
+								<label for="mpc_item_name">PO Job Title</label>
+								<input type="text" name="mpc_item_name" id="mpc_item_name" readonly value="<?php echo $job[$data['sub_mpc']['item_id']]." ( ".$data['sub_mpc']['min_exp']." - ".$data['sub_mpc']['max_exp']." ) - ".customeummarmonyformate($data['sub_mpc']['item_price']); ?>" class="form-control vcs" aria-label="PO Job Title">
 							<input type="hidden" name="mpc_item_id" id="mpc_item_id" readonly value="<?php echo $data['sub_mpc']['id']; ?>" class="form-control ">
 							<?php } ?>
 							 <?php if($_POST['type'] == 'vrc'){ ?>
-							 		<select class="form-select js-example-basic-single vcs" name="mpc_item_id" id="mpc_item_id" aria-label="Mpc Item Id">
+							 		<label for="mpc_item_id">PO Job Title</label>
+							 		<select class="form-select js-example-basic-single vcs" name="mpc_item_id" id="mpc_item_id" aria-label="PO Job Title">
 								<?php foreach($data['sub_mpc'] as $mpc_item ){ ?>
 									<option value="<?php echo $mpc_item['id']; ?>"> <?php echo $job[$mpc_item['item_id']]." ( ".$mpc_item['min_exp']." - ".$mpc_item['max_exp']." ) - ".customeummarmonyformate($mpc_item['item_price']); ?></option>
 								<?php } ?>
@@ -109,12 +111,12 @@ $job  = $data['job'];
 							 <?php } ?>
 						</div>
 						<div class="col-lg-6 form-group">
-							<label>Valid From</label>
+							<label for="valid_from">Valid From</label>
 							<input type="text" name="valid_from" id="valid_from"  value="<?php echo $data['mpcmain']['effective_from_date'];; ?>" class="form-control datepicker vcs" aria-label="Valid From">
 							
 						</div>	
 						<div class="col-lg-6 form-group">
-							<label>Valid To</label>
+							<label for="valid_to">Valid To</label>
 							<input type="text" name="valid_to" id="valid_to"  value="<?php echo $data['mpcmain']['effective_to_date']; ?>" class="form-control datepicker vcs" aria-label="Valid To">
 						</div>
 					</div>								

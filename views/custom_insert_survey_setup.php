@@ -420,43 +420,43 @@ function addnewoptionrows(qid) {
             <div class="card card-custom gutter-b">
               <div class="card-body">
                 <div class="form-group">
-                  <label class="form-label"><?php echo $display_tag; ?> Name <span class="text-danger">*</span></label>
-                  <input type="text" name="survey_name" value="<?php echo $survey_details['survey_name'];?>" class="form-control" placeholder="Enter Title" required aria-label="Enter Title">
+                  <label for="survey_name" class="form-label"><?php echo $display_tag; ?> Name <span class="text-danger">*</span></label>
+                  <input type="text" id="survey_name" name="survey_name" value="<?php echo $survey_details['survey_name'];?>" class="form-control" placeholder="Enter Title" required aria-label="<?php echo $display_tag; ?> Name">
                 </div>
                 <div class="form-group">
-                  <label class="form-label"><?php echo $display_tag; ?> Type <span class="text-danger">*</span></label>
+                  <label for="survey_type" class="form-label"><?php echo $display_tag; ?> Type <span class="text-danger">*</span></label>
                   <div class="col-9 col-form-label">
                     <div class="radio-inline">
-                      <?php foreach ($survey_types as $value) { ?>
+                      <?php foreach ($survey_types as $k => $value) { ?>
                       <label class="radio radio-success">
-                        <input type="radio" name="survey_type" value="<?php echo $value['genc_detail_code'];?>" <?php if($survey_details['survey_type'] == $value['genc_detail_code'] || $survey_details['survey_type'] =="") {?> checked="checked" <?php } ?>  / aria-label="Survey Type">
+                        <input type="radio" name="survey_type" id="survey_type<?php echo $k > 0 ? '_'.$k : ''; ?>" value="<?php echo $value['genc_detail_code'];?>" <?php if($survey_details['survey_type'] == $value['genc_detail_code'] || $survey_details['survey_type'] =="") {?> checked="checked" <?php } ?> aria-label="Survey Type <?php echo $value['genc_detail_name']; ?>">
                         <span></span><?php echo $value['genc_detail_name']; ?>
                       </label>
                       <?php } ?>
                     </div>
                   </div>
                   <div class="form-group mt-3">
-                    <label class="form-label"><?php echo $display_tag; ?> Description <span class="text-danger">*</span></label>
-                    <textarea class="form-control" name="description" placeholder="Enter Title" required aria-label="Enter Title"><?php echo $survey_details['description'];?></textarea>
+                    <label for="survey_description" class="form-label"><?php echo $display_tag; ?> Description <span class="text-danger">*</span></label>
+                    <textarea class="form-control" id="survey_description" name="description" placeholder="Enter Title" required aria-label="<?php echo $display_tag; ?> Description"><?php echo $survey_details['description'];?></textarea>
                   </div>
                   <div class="form-group">
-                    <label class="form-label"><?php echo $display_tag; ?> Date Range <span class="text-danger">*</span></label>
+                    <label for="survey_start_date" class="form-label"><?php echo $display_tag; ?> Date Range <span class="text-danger">*</span></label>
                     <div class='row' id='kt_daterangepicker_survey'>
                       <div class="col-lg-6">
                         <div class="form-group">
-                          <input type='text' class="form-control datepicker"  name="survey_start_date"  value="<?php echo $survey_details['survey_start_date']; ?>" required / aria-label="Survey Start Date">
+                          <input type='text' class="form-control datepicker" id="survey_start_date" name="survey_start_date" value="<?php echo $survey_details['survey_start_date']; ?>" required aria-label="Survey Start Date">
                         </div>
                       </div>
                       <div class="col-lg-6">
                         <div class="form-group">
-                          <input type='text' class="form-control datepicker"  name="survey_end_date" value="<?php echo $survey_details['survey_end_date']; ?>" required / aria-label="Survey End Date">
+                          <input type='text' class="form-control datepicker" id="survey_end_date" name="survey_end_date" value="<?php echo $survey_details['survey_end_date']; ?>" required aria-label="Survey End Date">
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="kt_select2_48" class="form-label"><?php echo $display_tag; ?> Initiator</label>
-                    <select class="form-select js-example-basic-single" id="kt_select2_48" name="survey_initiator" aria-label="Survey Initiator">
+                    <select class="form-select js-example-basic-single" id="kt_select2_48" name="survey_initiator" aria-label="<?php echo $display_tag; ?> Initiator">
                       <option> Select any one</option>
                         <?php $survey_init =  $survey_details['survey_initiator']!="" ? $survey_details['survey_initiator'] :$_SESSION['emp_id'];
                         foreach ($employee_list as $value) { ?>
@@ -466,8 +466,8 @@ function addnewoptionrows(qid) {
                     </select>
                   </div>
                   <div class="form-group">
-                    <label class="form-label w-100">Asign to <span class="text-danger">*</span>
-                      <a href="#" class="float-end f-w-600" onclick="showpopup();">Edit</a>
+                    <label for="btn_assign_to" class="form-label w-100">Asign to <span class="text-danger">*</span>
+                      <button type="button" class="btn btn-link p-0 float-end f-w-600 border-0 text-decoration-none" id="btn_assign_to" onclick="showpopup();">Edit</button>
                     </label>
                     <div id="tsk_fortable"></div>
                     <div class="col-xl-12">
@@ -539,15 +539,15 @@ function addnewoptionrows(qid) {
                 </div>
                 <div class="card-body mt-3">
                 <div class="form-group text-left">
-                <label>Question Text: <span class="text-danger"></span></label>
-                <textarea id="survey_question'.$qkey.'" name="survey_question'.$qkey.'" class="form-control border" placeholder="" aria-label="Survey Question"> '.$value['question'].' </textarea>
+                <label for="survey_question'.$qkey.'">Question Text: <span class="text-danger"></span></label>
+                <textarea id="survey_question'.$qkey.'" name="survey_question'.$qkey.'" class="form-control border" placeholder="" aria-label="Question Text"> '.$value['question'].' </textarea>
                 </div>
                 <div class="form-group text-left">
                 <div class="checkbox-inline">';
                 if($value['type']==1 || $value['type']==3)   { 
                   $display_question .='
-                  <label class="checkbox checkbox-primary">
-                    <input class="border" type="checkbox" name="allow_multiple_selections'.$qkey.'" id="allow_multiple_selections'.$qkey.'" '.$allow_multiple_selections_status.'/ aria-label="Allow Multiple Selections">
+                  <label for="allow_multiple_selections'.$qkey.'" class="checkbox checkbox-primary">
+                    <input class="border" type="checkbox" name="allow_multiple_selections'.$qkey.'" id="allow_multiple_selections'.$qkey.'" '.$allow_multiple_selections_status.' aria-label="Allow multiple selections">
                     <span></span>
                     Allow multiple selections
                   </label>';
@@ -556,8 +556,8 @@ function addnewoptionrows(qid) {
                  $display_question .='<input type="hidden" name="allow_multiple_selections'.$qkey.'" id="allow_multiple_selections'.$qkey.'" value="1"/>';
                 }
                 $display_question .='
-                <label class="checkbox checkbox-primary">
-                  <input class="border" type="checkbox" name="require_response'.$qkey.'" id="require_response'.$qkey.'" '.$require_response_status.' aria-label="Require Response">
+                <label for="require_response'.$qkey.'" class="checkbox checkbox-primary">
+                  <input class="border" type="checkbox" name="require_response'.$qkey.'" id="require_response'.$qkey.'" '.$require_response_status.' aria-label="Require a Response">
                   <span></span>
                   Require a Response
                 </label>
@@ -590,8 +590,8 @@ function addnewoptionrows(qid) {
               }  
               if($value['type']==2)   { 
                 $display_question .= ' <div class="form-group text-left mt-10">
-                <label>Scale from 1 to: <span class="text-danger">*</span></label>
-                <input type="number" name="survey_question_option'.$qkey.'[]" class="form-control border" placeholder="'.$options[0].'" value"'.$options[0].'" aria-label="Survey Question Option"> 
+                <label for="survey_question_scale_'.$qkey.'">Scale from 1 to: <span class="text-danger">*</span></label>
+                <input type="number" id="survey_question_scale_'.$qkey.'" name="survey_question_option'.$qkey.'[]" class="form-control border" placeholder="'.$options[0].'" value="'.$options[0].'" aria-label="Scale Option"> 
                 </div>';
               }  
               if($value['type']==4)   { 

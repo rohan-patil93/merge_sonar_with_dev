@@ -390,7 +390,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                         class="visit-type-card <?php echo ($type === 'visitor' || $type === '') ? 'active' : ''; ?> <?php echo $lockVisitType && $type !== 'visitor' ? 'disabled' : ''; ?>"
                                         for="vt_visitor">
                                         <input class="form-check-input" type="radio" name="visit_type" id="vt_visitor"
-                                            value="visitor" <?= vtAttrs('visitor', $type, $lockVisitType) ?>>
+                                            value="visitor" <?= vtAttrs('visitor', $type, $lockVisitType) ?> title="Visit Type" aria-label="Visit Type">
                                         <i class="fa fa-user"></i>
                                         <span>Visitor</span>
                                     </label>
@@ -399,7 +399,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                         class="visit-type-card <?php echo ($type === 'delivery') ? 'active' : ''; ?> <?php echo $lockVisitType && $type !== 'delivery' ? 'disabled' : ''; ?>"
                                         for="vt_delivery">
                                         <input class="form-check-input" type="radio" name="visit_type" id="vt_delivery"
-                                            value="delivery" <?= vtAttrs('delivery', $type, $lockVisitType) ?>>
+                                            value="delivery" <?= vtAttrs('delivery', $type, $lockVisitType) ?> title="Visit Type" aria-label="Visit Type">
                                         <i class="fa fa-truck"></i>
                                         <span>Delivery</span>
                                     </label>
@@ -408,7 +408,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                         class="visit-type-card <?php echo ($type === 'service') ? 'active' : ''; ?> <?php echo $lockVisitType && $type !== 'service' ? 'disabled' : ''; ?>"
                                         for="vt_service">
                                         <input class="form-check-input" type="radio" name="visit_type" id="vt_service"
-                                            value="service" <?= vtAttrs('service', $type, $lockVisitType) ?>>
+                                            value="service" <?= vtAttrs('service', $type, $lockVisitType) ?> title="Visit Type" aria-label="Visit Type">
                                         <i class="fa fa-wrench"></i>
                                         <span>Service</span>
                                     </label>
@@ -417,7 +417,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                         class="visit-type-card <?php echo ($type === 'employee') ? 'active' : ''; ?> <?php echo $lockVisitType && $type !== 'employee' ? 'disabled' : ''; ?>"
                                         for="vt_employee">
                                         <input class="form-check-input" type="radio" name="visit_type" id="vt_employee"
-                                            value="employee" <?= vtAttrs('employee', $type, $lockVisitType) ?>>
+                                            value="employee" <?= vtAttrs('employee', $type, $lockVisitType) ?> title="Visit Type" aria-label="Visit Type">
                                         <i class="fa fa-id-badge"></i>
                                         <span>Employee</span>
                                     </label>
@@ -426,7 +426,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                         class="visit-type-card <?php echo ($type === 'doctor') ? 'active' : ''; ?> <?php echo $lockVisitType && $type !== 'doctor' ? 'disabled' : ''; ?>"
                                         for="vt_doctor">
                                         <input class="form-check-input" type="radio" name="visit_type" id="vt_doctor"
-                                            value="doctor" <?= vtAttrs('doctor', $type, $lockVisitType) ?>>
+                                            value="doctor" <?= vtAttrs('doctor', $type, $lockVisitType) ?> title="Visit Type" aria-label="Visit Type">
                                         <i class="fa fa-user-md"></i>
                                         <span>Doctor</span>
                                     </label>
@@ -436,7 +436,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                         for="vt_vendor_supplier">
                                         <input class="form-check-input" type="radio" name="visit_type"
                                             id="vt_vendor_supplier" value="vendor_supplier"
-                                            <?= vtAttrs('vendor_supplier', $type, $lockVisitType) ?>>
+                                            <?= vtAttrs('vendor_supplier', $type, $lockVisitType) ?> title="Visit Type" aria-label="Visit Type">
                                         <i class="fa fa-handshake"></i>
                                         <span>Vendor/Supplier</span>
                                     </label>
@@ -445,7 +445,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                         class="visit-type-card <?php echo ($type === 'others') ? 'active' : ''; ?> <?php echo $lockVisitType && $type !== 'others' ? 'disabled' : ''; ?>"
                                         for="vt_others">
                                         <input class="form-check-input" type="radio" name="visit_type" id="vt_others"
-                                            value="others" <?= vtAttrs('others', $type, $lockVisitType) ?>>
+                                            value="others" <?= vtAttrs('others', $type, $lockVisitType) ?> title="Visit Type" aria-label="Visit Type">
                                         <i class="fa fa-ellipsis-h"></i>
                                         <span>Others</span>
                                     </label>
@@ -457,7 +457,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                     <input type="text" class="form-control" name="visit_type_other"
                                         id="visit_type_other"
                                         value="<?php echo htmlspecialchars($return['visit_type_other'] ?? ''); ?>"
-                                        placeholder="Please specify">
+                                        placeholder="Please specify" title="Please specify" aria-label="Please specify">
                                 </div>
 
                                 <div class="row">
@@ -470,7 +470,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                     }
                                     ?>
                                     <div class="form-group col-md-12">
-                                        <label for="in_gate_no" class="mb-3"><i class="fa fa-door-open text-primary me-1"></i> Select
+                                        <label class="mb-3"><i class="fa fa-door-open text-primary me-1"></i> Select
                                             Gate <b class="text-danger">*</b></label>
 
                                         <!-- Modern Gate Cards Grid -->
@@ -531,7 +531,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                     <!-- Autocomplete Profile Search Bar -->
                                     <div class="row mb-3">
                                         <div class="form-group col-md-12">
-                                            <label for="visitor_profile_search" class="form-label font-weight-bold text-dark"><i
+                                            <label class="form-label font-weight-bold text-dark"><i
                                                     class="fa fa-search text-primary me-1"></i> Quick Profile
                                                 Autofill</label>
                                             <div class="input-group" style="position: relative;">
@@ -540,7 +540,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                 <input type="text" id="visitor_profile_search"
                                                     class="form-control border-start-0 ps-0"
                                                     placeholder="Search past records by Name, Phone, or Driver details..."
-                                                    autocomplete="off">
+                                                    autocomplete="off" title="Search past records by Name, Phone, or Driver details..." aria-label="Search past records by Name, Phone, or Driver details...">
                                                 <div id="search_results_container"
                                                     class="search-results-dropdown d-none">
                                                 </div>
@@ -555,24 +555,24 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                     <div id="visitorDiv"
                                         class="row <?php echo $showVisitor ? 'd-view-block' : 'd-none'; ?>">
                                         <div class="form-group col-md-6">
-                                            <label for="phone"><i class="fa fa-phone text-muted me-1"></i> Phone Number <b
+                                            <label><i class="fa fa-phone text-muted me-1"></i> Phone Number <b
                                                     class="text-danger">*</b></label>
                                             <input class="form-control" type="text" name="phone" id="phone"
                                                 value="<?php echo htmlspecialchars($return['phone'] ?? ''); ?>"
                                                 placeholder="Enter Phone to auto-search"
-                                                onblur="lookupVisitorByPhone()">
+                                                onblur="lookupVisitorByPhone()" title="Enter Phone to auto-search" aria-label="Enter Phone to auto-search">
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="name"><i class="fa fa-user text-muted me-1"></i> Name</label>
+                                            <label><i class="fa fa-user text-muted me-1"></i> Name</label>
                                             <input class="form-control" type="text" name="name" id="name"
                                                 value="<?php echo htmlspecialchars($return['name'] ?? ''); ?>"
-                                                placeholder="Visitor Name">
+                                                placeholder="Visitor Name" title="Visitor Name" aria-label="Visitor Name">
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="whom_to_meet"><i class="fa fa-user-tie text-muted me-1"></i> Whom To Meet <b
+                                            <label><i class="fa fa-user-tie text-muted me-1"></i> Whom To Meet <b
                                                     class="text-danger">*</b></label>
                                             <select class="form-select js-example-basic-single" id="whom_to_meet"
-                                                name="whom_to_meet">
+                                                name="whom_to_meet" title="Whom To Meet" aria-label="Whom To Meet">
                                                 <option value="0">Select Employee</option>
                                                 <?php if (count((array) $employees_res) > 0) {
                                                     foreach ($employees_res as $e) {
@@ -583,7 +583,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <span class="d-inline-block fw-bold" style="margin-bottom:5px"><i class="fa fa-bullseye text-muted me-1"></i> Purpose</span><br>
+                                            <label><i class="fa fa-bullseye text-muted me-1"></i> Purpose</label><br>
                                             <div id="purpose-radios-container" class="d-inline-flex flex-wrap align-items-center gap-2 w-100">
                                                 <?php 
                                                 $visit_purpose_res = $result['visit_purpose_res'] ?? [];
@@ -594,7 +594,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                         $checked = ($purpose === $code || ($purpose === '' && $code === 'official')) ? 'checked' : '';
                                                         ?>
                                                         <div class="form-check form-check-inline mt-2">
-                                                            <input class="form-check-input" type="radio" name="purpose" id="purpose_<?= $code ?>" value="<?= $code ?>" data-icon="<?= htmlspecialchars($vp['option_icon'] ?? '') ?>" <?= $checked ?>>
+                                                            <input class="form-check-input" type="radio" name="purpose" id="purpose_<?= $code ?>" value="<?= $code ?>" data-icon="<?= htmlspecialchars($vp['option_icon'] ?? '') ?>" <?= $checked ?> title="Purpose" aria-label="Purpose">
                                                             <label class="form-check-label" for="purpose_<?= $code ?>">
                                                                 <?php if (!empty($vp['option_icon'])): ?>
                                                                     <i class="<?= htmlspecialchars($vp['option_icon']) ?> me-1"></i>
@@ -607,15 +607,15 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                 } else {
                                                     ?>
                                                     <div class="form-check form-check-inline mt-2">
-                                                        <input class="form-check-input" type="radio" name="purpose" id="purpose_official" value="official" data-icon="fa fa-briefcase" <?php echo ($purpose === 'official' ? 'checked' : ''); ?>>
+                                                        <input class="form-check-input" type="radio" name="purpose" id="purpose_official" value="official" data-icon="fa fa-briefcase" <?php echo ($purpose === 'official' ? 'checked' : ''); ?> title="Purpose" aria-label="Purpose">
                                                         <label class="form-check-label" for="purpose_official">Official</label>
                                                     </div>
                                                     <div class="form-check form-check-inline mt-2">
-                                                        <input class="form-check-input" type="radio" name="purpose" id="purpose_personal" value="personal" data-icon="fa fa-user" <?php echo ($purpose === 'personal' ? 'checked' : ''); ?>>
+                                                        <input class="form-check-input" type="radio" name="purpose" id="purpose_personal" value="personal" data-icon="fa fa-user" <?php echo ($purpose === 'personal' ? 'checked' : ''); ?> title="Purpose" aria-label="Purpose">
                                                         <label class="form-check-label" for="purpose_personal">Personal</label>
                                                     </div>
                                                     <div class="form-check form-check-inline mt-2">
-                                                        <input class="form-check-input" type="radio" name="purpose" id="purpose_others" value="others" data-icon="fa fa-ellipsis-h" <?php echo ($purpose === 'others' ? 'checked' : ''); ?>>
+                                                        <input class="form-check-input" type="radio" name="purpose" id="purpose_others" value="others" data-icon="fa fa-ellipsis-h" <?php echo ($purpose === 'others' ? 'checked' : ''); ?> title="Purpose" aria-label="Purpose">
                                                         <label class="form-check-label" for="purpose_others">Others</label>
                                                     </div>
                                                     <?php
@@ -626,18 +626,18 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                         </div>
                                         <div id="purpose_other_wrap"
                                             class="form-group col-md-6 <?php echo $showPurposeOther ? 'd-view-block' : 'd-none'; ?>">
-                                            <label for="purpose_other"><i class="fa fa-comment-dots text-muted me-1"></i> Specify Visit
+                                            <label><i class="fa fa-comment-dots text-muted me-1"></i> Specify Visit
                                                 Purpose</label>
                                             <div class="input-group">
                                                 <input type="text" class="form-control" name="purpose_other"
                                                     id="purpose_other"
                                                     value="<?php echo htmlspecialchars($return['purpose_other'] ?? ''); ?>"
-                                                    placeholder="Explain purpose">
+                                                    placeholder="Explain purpose" title="Explain purpose" aria-label="Explain purpose">
                                                 <button type="button" class="btn btn-primary btn-add-inline-other" data-type="visit_purpose" data-input-id="purpose_other" data-select-id="purpose"><i class="fa fa-plus"></i> Add</button>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6 d-none">
-                                            <label for="visiting_company_id_visitor"><i class="fa fa-id-badge text-muted me-1"></i> Visiting Id Card No <b
+                                            <label><i class="fa fa-id-badge text-muted me-1"></i> Visiting Id Card No <b
                                                     class="text-danger">*</b></label>
                                             <input class="form-control" type="hidden" name="visiting_company_id_visitor"
                                                 id="visiting_company_id_visitor"
@@ -655,26 +655,26 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                         <div class="additional-fields-section d-none row w-100 m-0 p-0">
                                             <div id="company_name_wrap"
                                                 class="form-group col-md-6 <?php echo $showCompany ? 'd-view-block' : 'd-none'; ?>">
-                                                <label for="company_name"><i class="fa fa-building text-muted me-1"></i> Company
+                                                <label><i class="fa fa-building text-muted me-1"></i> Company
                                                     Name</label>
                                                 <input class="form-control" type="text" name="company_name"
                                                     id="company_name"
                                                     value="<?php echo htmlspecialchars($return['company_name'] ?? ''); ?>"
-                                                    placeholder="Visitor's Company">
+                                                    placeholder="Visitor's Company" title="Visitor&#039;s Company" aria-label="Visitor&#039;s Company">
                                             </div>
                                             <div id="address_wrap"
                                                 class="form-group col-md-6 <?php echo $showAddress ? 'd-view-block' : 'd-none'; ?>">
-                                                <label for="address"><i class="fa fa-map-marker-alt text-muted me-1"></i>
+                                                <label><i class="fa fa-map-marker-alt text-muted me-1"></i>
                                                     Address</label>
                                                 <textarea class="form-control" rows="3" id="address" name="address"
-                                                    placeholder="Visitor's Address"><?php echo htmlspecialchars($return['address'] ?? ''); ?></textarea>
+                                                    placeholder="Visitor's Address" title="Visitor&#039;s Address" aria-label="Visitor&#039;s Address"><?php echo htmlspecialchars($return['address'] ?? ''); ?></textarea>
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label for="idcard_type"><i class="fa fa-id-card text-muted me-1"></i> Identity Card
+                                                <label><i class="fa fa-id-card text-muted me-1"></i> Identity Card
                                                     Type</label>
                                                 <div class="d-flex align-items-center gap-1">
                                                     <select class="form-select js-example-basic-single flex-grow-1" id="idcard_type"
-                                                        name="idcard_type">
+                                                        name="idcard_type" title="Idcard Type" aria-label="Idcard Type">
                                                         <option value="0">Select ID Card</option>
                                                         <?php if (count((array) $id_card_types_res) > 0) {
                                                             foreach ($id_card_types_res as $value) {
@@ -688,38 +688,38 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                 </div>
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label for="idcard_number"><i class="fa fa-hashtag text-muted me-1"></i> Identity Card
+                                                <label><i class="fa fa-hashtag text-muted me-1"></i> Identity Card
                                                     No.</label>
                                                 <input class="form-control" type="text" name="idcard_number"
                                                     id="idcard_number"
                                                     value="<?php echo htmlspecialchars($return['idcard_number'] ?? ''); ?>"
-                                                    placeholder="ID Card Number">
+                                                    placeholder="ID Card Number" title="ID Card Number" aria-label="ID Card Number">
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <span class="d-inline-block fw-bold" style="margin-bottom:5px"><i class="fa fa-venus-mars text-muted me-1"></i>
-                                                    Gender</span><br>
+                                                <label><i class="fa fa-venus-mars text-muted me-1"></i>
+                                                    Gender</label><br>
                                                 <div class="form-check form-check-inline mt-2">
                                                     <input class="form-check-input" type="radio" name="gender"
-                                                        id="gender_male" value="Male" <?php echo (($return['gender'] ?? '') === 'Male' ? 'checked' : ''); ?>>
+                                                        id="gender_male" value="Male" <?php echo (($return['gender'] ?? '') === 'Male' ? 'checked' : ''); ?> title="Gender" aria-label="Gender">
                                                     <label class="form-check-label" for="gender_male">Male</label>
                                                 </div>
                                                 <div class="form-check form-check-inline mt-2">
                                                     <input class="form-check-input" type="radio" name="gender"
-                                                        id="gender_female" value="Female" <?php echo (($return['gender'] ?? '') === 'Female' ? 'checked' : ''); ?>>
+                                                        id="gender_female" value="Female" <?php echo (($return['gender'] ?? '') === 'Female' ? 'checked' : ''); ?> title="Gender" aria-label="Gender">
                                                     <label class="form-check-label" for="gender_female">Female</label>
                                                 </div>
                                                 <div class="form-check form-check-inline mt-2">
                                                     <input class="form-check-input" type="radio" name="gender"
-                                                        id="gender_other" value="Other" <?php echo (($return['gender'] ?? '') === 'Other' ? 'checked' : ''); ?>>
+                                                        id="gender_other" value="Other" <?php echo (($return['gender'] ?? '') === 'Other' ? 'checked' : ''); ?> title="Gender" aria-label="Gender">
                                                     <label class="form-check-label" for="gender_other">Other</label>
                                                 </div>
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label for="expected_duration"><i class="fa fa-clock text-muted me-1"></i> Expected Duration of
+                                                <label><i class="fa fa-clock text-muted me-1"></i> Expected Duration of
                                                     Visit</label>
                                                 <div class="d-flex align-items-center gap-1">
                                                     <select class="form-select js-example-basic-single flex-grow-1"
-                                                        id="expected_duration" name="expected_duration">
+                                                        id="expected_duration" name="expected_duration" title="Expected Duration" aria-label="Expected Duration">
                                                         <option value="">Select Duration</option>
                                                         <?php 
                                                          $expected_duration_res = $result['expected_duration_res'] ?? [];
@@ -744,10 +744,10 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                 </div>
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label for="vehicle_type"><i class="fa fa-car text-muted me-1"></i> Vehicle Type</label>
+                                                <label><i class="fa fa-car text-muted me-1"></i> Vehicle Type</label>
                                                 <div class="d-flex align-items-center gap-1">
                                                     <select class="form-select js-example-basic-single flex-grow-1" id="vehicle_type"
-                                                        name="vehicle_type">
+                                                        name="vehicle_type" title="Vehicle Type" aria-label="Vehicle Type">
                                                         <option value="">None / Walk-in</option>
                                                         <?php 
                                                         $vehicle_type_res = $result['vehicle_type_res'] ?? [];
@@ -770,12 +770,12 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                 </div>
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label for="vehicle_number"><i class="fa fa-sort-numeric-up text-muted me-1"></i> Vehicle
+                                                <label><i class="fa fa-sort-numeric-up text-muted me-1"></i> Vehicle
                                                     Number</label>
                                                 <input class="form-control" type="text" name="vehicle_number"
                                                     id="vehicle_number"
                                                     value="<?php echo htmlspecialchars($return['vehicle_number'] ?? ''); ?>"
-                                                    placeholder="e.g. MH 12 AB 1234">
+                                                    placeholder="e.g. MH 12 AB 1234" title="e.g. MH 12 AB 1234" aria-label="e.g. MH 12 AB 1234">
                                             </div>
                                         </div>
                                     </div>
@@ -784,11 +784,11 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                     <div id="deliveryDiv"
                                         class="row <?php echo $showDelivery ? 'd-view-block' : 'd-none'; ?>">
                                         <div class="form-group col-md-6">
-                                            <label for="delivery_company_person"><i class="fa fa-truck text-muted me-1"></i> Delivery Company/Person
+                                            <label><i class="fa fa-truck text-muted me-1"></i> Delivery Company/Person
                                                 <b class="text-danger">*</b></label>
                                             <div class="d-flex align-items-center gap-1">
                                                 <select class="form-select js-example-basic-single flex-grow-1"
-                                                    id="delivery_company_person" name="delivery_company_person">
+                                                    id="delivery_company_person" name="delivery_company_person" title="Delivery Company Person" aria-label="Delivery Company Person">
                                                     <option value="">Select Company</option>
                                                     <?php if (!empty($delivery_company_res)) {
                                                         foreach ($delivery_company_res as $e) {
@@ -810,17 +810,17 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="delivery_phone"><i class="fa fa-phone text-muted me-1"></i> Contact Number</label>
+                                            <label><i class="fa fa-phone text-muted me-1"></i> Contact Number</label>
                                             <input class="form-control" type="text" name="delivery_phone"
                                                 id="delivery_phone"
                                                 value="<?php echo htmlspecialchars($return['delivery_phone'] ?? ''); ?>"
-                                                placeholder="Delivery Phone">
+                                                placeholder="Delivery Phone" title="Delivery Phone" aria-label="Delivery Phone">
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="deliver_to"><i class="fa fa-user-tie text-muted me-1"></i> Whom To Deliver <b
+                                            <label><i class="fa fa-user-tie text-muted me-1"></i> Whom To Deliver <b
                                                     class="text-danger">*</b></label>
                                             <select class="form-select js-example-basic-single" id="deliver_to"
-                                                name="deliver_to">
+                                                name="deliver_to" title="Deliver To" aria-label="Deliver To">
                                                 <option value="0">Select Employee</option>
                                                 <?php if (!empty($employees_res)) {
                                                     foreach ($employees_res as $e) {
@@ -831,10 +831,10 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="delivery_type"><i class="fa fa-box text-muted me-1"></i> Delivery Type</label>
+                                            <label><i class="fa fa-box text-muted me-1"></i> Delivery Type</label>
                                             <div class="d-flex align-items-center gap-1">
                                                 <select class="form-select js-example-basic-single flex-grow-1" id="delivery_type"
-                                                    name="delivery_type">
+                                                    name="delivery_type" title="Delivery Type" aria-label="Delivery Type">
                                                     <option value="">Select Delivery Type</option>
                                                     <?php 
                                                     $delivery_type_res = $result['delivery_type_res'] ?? [];
@@ -859,16 +859,16 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="vehicle_number_delivery"><i class="fa fa-car text-muted me-1"></i> Delivery Vehicle
+                                            <label><i class="fa fa-car text-muted me-1"></i> Delivery Vehicle
                                                 Number</label>
                                             <input class="form-control" type="text" name="vehicle_number_delivery"
                                                 id="vehicle_number_delivery"
                                                 value="<?php echo htmlspecialchars($return['vehicle_number'] ?? ''); ?>"
-                                                placeholder="e.g. MH 12 AB 1234">
+                                                placeholder="e.g. MH 12 AB 1234" title="e.g. MH 12 AB 1234" aria-label="e.g. MH 12 AB 1234">
                                         </div>
 
                                         <div class="form-group col-md-6 d-none">
-                                            <label for="visiting_company_id_delivery"><i class="fa fa-id-badge text-muted me-1"></i> Visiting Id Card No <b
+                                            <label><i class="fa fa-id-badge text-muted me-1"></i> Visiting Id Card No <b
                                                     class="text-danger">*</b></label>
                                             <input class="form-control" type="hidden"
                                                 name="visiting_company_id_delivery" id="visiting_company_id_delivery"
@@ -889,26 +889,26 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
 
                                         <div class="additional-fields-section d-none row w-100 m-0 p-0">
                                             <div class="form-group col-md-6">
-                                                <label for="delivery_awb_no"><i class="fa fa-barcode text-muted me-1"></i> AWB No. (Tracking
+                                                <label><i class="fa fa-barcode text-muted me-1"></i> AWB No. (Tracking
                                                     Number)</label>
                                                 <input class="form-control" type="text" name="delivery_awb_no"
                                                     id="delivery_awb_no"
                                                     value="<?php echo htmlspecialchars($return['delivery_awb_no'] ?? ''); ?>"
-                                                    placeholder="AWB/Ref No.">
+                                                    placeholder="AWB/Ref No." title="AWB/Ref No." aria-label="AWB/Ref No.">
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label for="package_count"><i class="fa fa-boxes text-muted me-1"></i> Package Count</label>
+                                                <label><i class="fa fa-boxes text-muted me-1"></i> Package Count</label>
                                                 <input class="form-control" type="number" min="1" name="package_count"
                                                     id="package_count"
-                                                    value="<?php echo htmlspecialchars($return['package_count'] ?? '1'); ?>">
+                                                    value="<?php echo htmlspecialchars($return['package_count'] ?? '1'); ?>" title="Package Count" aria-label="Package Count">
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label for="security_cleared"><i class="fa fa-shield-alt text-muted me-1"></i> Security Checked
+                                                <label><i class="fa fa-shield-alt text-muted me-1"></i> Security Checked
                                                     /
                                                     Cleared?</label><br>
                                                 <div class="form-check form-switch mt-2">
                                                     <input class="form-check-input" type="checkbox"
-                                                        id="security_cleared" name="security_cleared" value="1" <?php echo (!empty($return['security_cleared']) ? 'checked' : ''); ?>>
+                                                        id="security_cleared" name="security_cleared" value="1" <?php echo (!empty($return['security_cleared']) ? 'checked' : ''); ?> title="Security Cleared" aria-label="Security Cleared">
                                                     <label class="form-check-label ms-2" for="security_cleared">Yes,
                                                         Cleared</label>
                                                 </div>
@@ -920,11 +920,11 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                     <div id="serviceDiv"
                                         class="row <?php echo $showService ? 'd-view-block' : 'd-none'; ?>">
                                         <div class="form-group col-md-6">
-                                            <label for="service_company"><i class="fa fa-tools text-muted me-1"></i> Service Company <b
+                                            <label><i class="fa fa-tools text-muted me-1"></i> Service Company <b
                                                     class="text-danger">*</b></label>
                                             <div class="d-flex align-items-center gap-1">
                                                 <select class="form-select js-example-basic-single flex-grow-1" id="service_company"
-                                                    name="service_company">
+                                                    name="service_company" title="Service Company" aria-label="Service Company">
                                                     <option value="">Select Service Company</option>
                                                     <?php if (!empty($service_company_res)) {
                                                         foreach ($service_company_res as $e) {
@@ -946,27 +946,27 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="service_phone"><i class="fa fa-phone text-muted me-1"></i> Service Person
+                                            <label><i class="fa fa-phone text-muted me-1"></i> Service Person
                                                 Phone</label>
                                             <input class="form-control" type="text" name="service_phone"
                                                 id="service_phone"
                                                 value="<?php echo htmlspecialchars($return['service_phone'] ?? ''); ?>"
-                                                placeholder="Phone">
+                                                placeholder="Phone" title="Phone" aria-label="Phone">
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="service_person"><i class="fa fa-user text-muted me-1"></i> Service Person
+                                            <label><i class="fa fa-user text-muted me-1"></i> Service Person
                                                 Name</label>
                                             <input class="form-control" type="text" name="service_person"
                                                 id="service_person"
                                                 value="<?php echo htmlspecialchars($return['service_person'] ?? ''); ?>"
-                                                placeholder="Name">
+                                                placeholder="Name" title="Name" aria-label="Name">
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="authorized_employee"><i class="fa fa-user-check text-muted me-1"></i> Authorized By
+                                            <label><i class="fa fa-user-check text-muted me-1"></i> Authorized By
                                                 (Employee)
                                                 <b class="text-danger">*</b></label>
                                             <select class="form-select js-example-basic-single" id="authorized_employee"
-                                                name="authorized_employee">
+                                                name="authorized_employee" title="Authorized Employee" aria-label="Authorized Employee">
                                                 <option value="0">Select Employee</option>
                                                 <?php if (!empty($employees_res)) {
                                                     foreach ($employees_res as $e) {
@@ -978,7 +978,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                         </div>
 
                                         <div class="form-group col-md-6 d-none">
-                                            <label for="visiting_company_id_service"><i class="fa fa-id-badge text-muted me-1"></i> Visiting Id Card No <b
+                                            <label><i class="fa fa-id-badge text-muted me-1"></i> Visiting Id Card No <b
                                                     class="text-danger">*</b></label>
                                             <input class="form-control" type="hidden" name="visiting_company_id_service"
                                                 id="visiting_company_id_service" value="<?php
@@ -998,11 +998,11 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
 
                                         <div class="additional-fields-section d-none row w-100 m-0 p-0">
                                             <div class="form-group col-md-6">
-                                                <label for="idcard_type_service"><i class="fa fa-id-card text-muted me-1"></i> Identity Card
+                                                <label><i class="fa fa-id-card text-muted me-1"></i> Identity Card
                                                     Type</label>
                                                 <div class="d-flex align-items-center gap-1">
                                                     <select class="form-select js-example-basic-single flex-grow-1"
-                                                        id="idcard_type_service" name="idcard_type_service">
+                                                        id="idcard_type_service" name="idcard_type_service" title="Idcard Type Service" aria-label="Idcard Type Service">
                                                         <option value="0">Select ID Card</option>
                                                         <?php if (!empty($id_card_types_res)) {
                                                             foreach ($id_card_types_res as $v) {
@@ -1016,19 +1016,19 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                 </div>
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label for="idcard_number_service"><i class="fa fa-hashtag text-muted me-1"></i> Identity Card
+                                                <label><i class="fa fa-hashtag text-muted me-1"></i> Identity Card
                                                     No.</label>
                                                 <input class="form-control" type="text" name="idcard_number_service"
                                                     id="idcard_number_service"
                                                     value="<?php echo htmlspecialchars($return['idcard_number_service'] ?? ''); ?>"
-                                                    placeholder="ID Card Number">
+                                                    placeholder="ID Card Number" title="ID Card Number" aria-label="ID Card Number">
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label for="service_classification"><i class="fa fa-tags text-muted me-1"></i> Service
+                                                <label><i class="fa fa-tags text-muted me-1"></i> Service
                                                     Classification</label>
                                                 <div class="d-flex align-items-center gap-1">
                                                     <select class="form-select js-example-basic-single flex-grow-1"
-                                                        id="service_classification" name="service_classification">
+                                                        id="service_classification" name="service_classification" title="Service Classification" aria-label="Service Classification">
                                                         <option value="">Select Classification</option>
                                                         <?php 
                                                         $service_classification_res = $result['service_classification_res'] ?? [];
@@ -1054,19 +1054,19 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                 </div>
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label for="work_permit_no"><i class="fa fa-file-contract text-muted me-1"></i> Work Permit
+                                                <label><i class="fa fa-file-contract text-muted me-1"></i> Work Permit
                                                     Number</label>
                                                 <input class="form-control" type="text" name="work_permit_no"
                                                     id="work_permit_no"
                                                     value="<?php echo htmlspecialchars($return['work_permit_no'] ?? ''); ?>"
-                                                    placeholder="Permit reference (optional)">
+                                                    placeholder="Permit reference (optional)" title="Permit reference (optional)" aria-label="Permit reference (optional)">
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label for="safety_briefing"><i class="fa fa-hard-hat text-muted me-1"></i> Safety Briefing
+                                                <label><i class="fa fa-hard-hat text-muted me-1"></i> Safety Briefing
                                                     Completed?</label><br>
                                                 <div class="form-check form-switch mt-2">
                                                     <input class="form-check-input" type="checkbox" id="safety_briefing"
-                                                        name="safety_briefing" value="1" <?php echo (!empty($return['safety_briefing']) ? 'checked' : ''); ?>>
+                                                        name="safety_briefing" value="1" <?php echo (!empty($return['safety_briefing']) ? 'checked' : ''); ?> title="Safety Briefing" aria-label="Safety Briefing">
                                                     <label class="form-check-label ms-2" for="safety_briefing">Yes,
                                                         Briefed</label>
                                                 </div>
@@ -1086,7 +1086,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input" type="checkbox"
                                                         id="service_tag_enable" name="service_tag_enable" value="1"
-                                                        <?php echo $has_service_tags ? 'checked' : ''; ?>>
+                                                        <?php echo $has_service_tags ? 'checked' : ''; ?> title="Service Tag Enable" aria-label="Service Tag Enable">
                                                     <label class="form-check-label ms-2" for="service_tag_enable">Tag
                                                         Multiple Visitors (Group entry)</label>
                                                 </div>
@@ -1095,14 +1095,14 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                 <div class="row <?php echo $has_service_tags ? 'd-view-block' : 'd-none'; ?>"
                                                     id="serviceTagControls">
                                                     <div class="form-group col-md-4">
-                                                        <label for="service_tag_count"><i class="fa fa-users text-muted me-1"></i> Group Size
+                                                        <label><i class="fa fa-users text-muted me-1"></i> Group Size
                                                             (How
                                                             many visitors?)</label>
                                                         <input type="number" min="1" step="1" class="form-control"
                                                             name="service_tag_count" id="service_tag_count"
                                                             placeholder="e.g. 3"
                                                             value="<?php echo $has_service_tags ? count((array) $service_tag_children) : ''; ?>"
-                                                            <?php echo count((array) $service_tag_children) > 0 ? 'readonly' : ''; ?>>
+                                                            <?php echo count((array) $service_tag_children) > 0 ? 'readonly' : ''; ?> title="e.g. 3" aria-label="e.g. 3">
                                                     </div>
                                                     <div class="form-group col-md-4 d-flex align-items-end">
                                                         <button type="button" class="btn btn-vms-secondary btn-sm"
@@ -1176,26 +1176,26 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                     <div id="employeeDiv"
                                         class="row <?php echo $showEmployee ? 'd-view-block' : 'd-none'; ?>">
                                         <div class="form-group col-md-4">
-                                            <label for="employee_code"><i class="fa fa-id-card-alt text-muted me-1"></i> Employee ID <b
+                                            <label><i class="fa fa-id-card-alt text-muted me-1"></i> Employee ID <b
                                                     class="text-danger">*</b></label>
                                             <input class="form-control" type="text" name="employee_code"
                                                 id="employee_code"
                                                 value="<?php echo htmlspecialchars($return['employee_code'] ?? ''); ?>"
-                                                placeholder="Enter Emp ID">
+                                                placeholder="Enter Emp ID" title="Enter Emp ID" aria-label="Enter Emp ID">
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <label for="employee_name"><i class="fa fa-user text-muted me-1"></i> Name</label>
+                                            <label><i class="fa fa-user text-muted me-1"></i> Name</label>
                                             <input class="form-control" type="text" name="employee_name"
                                                 id="employee_name"
                                                 value="<?php echo htmlspecialchars($return['employee_name'] ?? ''); ?>"
-                                                placeholder="Employee Name">
+                                                placeholder="Employee Name" title="Employee Name" aria-label="Employee Name">
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <label for="employee_department"><i class="fa fa-building text-muted me-1"></i> Department</label>
+                                            <label><i class="fa fa-building text-muted me-1"></i> Department</label>
                                             <input class="form-control" type="text" name="employee_department"
                                                 id="employee_department"
                                                 value="<?php echo htmlspecialchars($return['employee_department'] ?? ''); ?>"
-                                                placeholder="Department">
+                                                placeholder="Department" title="Department" aria-label="Department">
                                         </div>
 
                                         <?php if ($rid != '' && ($return['visit_type'] ?? '') === 'employee') { ?>
@@ -1221,7 +1221,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                             <div class="form-group col-md-12 mt-3">
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input" type="checkbox" id="emp_temp_enable"
-                                                        name="emp_temp_enable" value="1" <?php echo $emp_temp_enable ? 'checked' : ''; ?>>
+                                                        name="emp_temp_enable" value="1" <?php echo $emp_temp_enable ? 'checked' : ''; ?> title="Emp Temp Enable" aria-label="Emp Temp Enable">
                                                     <label class="form-check-label ms-2" for="emp_temp_enable">Issue
                                                         Visitor
                                                         Pass (Temp Pass / Forgot ID)</label>
@@ -1229,24 +1229,24 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                             </div>
 
                                             <div id="empTempReasonWrap" class="form-group col-md-12 d-none">
-                                                <span class="d-inline-block fw-bold" style="margin-bottom:5px"><i class="fa fa-question-circle text-muted me-1"></i> Reason for
+                                                <label><i class="fa fa-question-circle text-muted me-1"></i> Reason for
                                                     Temp
-                                                    Pass</span><br>
+                                                    Pass</label><br>
                                                 <div class="form-check form-check-inline mt-1">
                                                     <input class="form-check-input" type="radio" name="emp_temp_reason"
-                                                        id="emp_reason_forgot" value="forgot" <?php echo ($emp_temp_reason == 'forgot') ? 'checked' : ''; ?>>
+                                                        id="emp_reason_forgot" value="forgot" <?php echo ($emp_temp_reason == 'forgot') ? 'checked' : ''; ?> title="Emp Temp Reason" aria-label="Emp Temp Reason">
                                                     <label class="form-check-label" for="emp_reason_forgot"><i class="fa fa-id-card me-1"></i>Forgot ID
                                                         Card</label>
                                                 </div>
                                                 <div class="form-check form-check-inline mt-1">
                                                     <input class="form-check-input" type="radio" name="emp_temp_reason"
-                                                        id="emp_reason_new" value="new" <?php echo ($emp_temp_reason === 'new') ? 'checked' : ''; ?>>
+                                                        id="emp_reason_new" value="new" <?php echo ($emp_temp_reason === 'new') ? 'checked' : ''; ?> title="Emp Temp Reason" aria-label="Emp Temp Reason">
                                                     <label class="form-check-label" for="emp_reason_new"><i class="fa fa-user-plus me-1"></i>New Employee
                                                         (Onboarding)</label>
                                                 </div>
                                                 <div class="form-check form-check-inline mt-1">
                                                     <input class="form-check-input" type="radio" name="emp_temp_reason"
-                                                        id="emp_reason_xbranch" value="xbranch" <?php echo ($emp_temp_reason === 'xbranch') ? 'checked' : ''; ?>>
+                                                        id="emp_reason_xbranch" value="xbranch" <?php echo ($emp_temp_reason === 'xbranch') ? 'checked' : ''; ?> title="Emp Temp Reason" aria-label="Emp Temp Reason">
                                                     <label class="form-check-label" for="emp_reason_xbranch"><i class="fa fa-building me-1"></i>Visiting
                                                         from
                                                         another Branch</label>
@@ -1255,27 +1255,27 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
 
                                             <div id="empTempFields" class="row d-none w-100 m-0">
                                                 <div class="form-group col-md-6 pl-0">
-                                                    <label for="emp_temp_phone"><i class="fa fa-phone text-muted me-1"></i> Phone <b
+                                                    <label><i class="fa fa-phone text-muted me-1"></i> Phone <b
                                                             class="text-danger">*</b></label>
                                                     <input class="form-control" type="text" name="emp_temp_phone"
                                                         id="emp_temp_phone"
                                                         value="<?php echo $emp_temp_enable ? htmlspecialchars($return['emp_temp_phone'] ?? '') : ''; ?>"
-                                                        placeholder="Emp Temp Phone">
+                                                        placeholder="Emp Temp Phone" title="Emp Temp Phone" aria-label="Emp Temp Phone">
                                                 </div>
                                                 <div class="form-group col-md-6 pr-0">
-                                                    <label for="emp_temp_name"><i class="fa fa-user text-muted me-1"></i> Name <b
+                                                    <label><i class="fa fa-user text-muted me-1"></i> Name <b
                                                             class="text-danger">*</b></label>
                                                     <input class="form-control" type="text" name="emp_temp_name"
                                                         id="emp_temp_name"
                                                         value="<?php echo $emp_temp_enable ? htmlspecialchars($return['emp_temp_name'] ?? '') : ''; ?>"
-                                                        placeholder="Emp Temp Name">
+                                                        placeholder="Emp Temp Name" title="Emp Temp Name" aria-label="Emp Temp Name">
                                                 </div>
                                                 <div class="form-group col-md-6 pl-0" id="empTempHostWrap">
-                                                    <label for="emp_temp_whom_to_meet"><i class="fa fa-user-tie text-muted me-1"></i> Whom To Meet
+                                                    <label><i class="fa fa-user-tie text-muted me-1"></i> Whom To Meet
                                                         (Host
                                                         Employee) <b class="text-danger">*</b></label>
                                                     <select class="form-select js-example-basic-single"
-                                                        id="emp_temp_whom_to_meet" name="emp_temp_whom_to_meet">
+                                                        id="emp_temp_whom_to_meet" name="emp_temp_whom_to_meet" title="Emp Temp Whom To Meet" aria-label="Emp Temp Whom To Meet">
                                                         <option value="0">Select Employee</option>
                                                         <?php if (!empty($employees_res)) {
                                                             foreach ($employees_res as $e) {
@@ -1286,13 +1286,13 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-md-6 pr-0 d-none" id="empTempVisitorIdWrap">
-                                                    <label for="visiting_company_id_employee_temp"><i class="fa fa-id-badge text-muted me-1"></i> Temp Card No
+                                                    <label><i class="fa fa-id-badge text-muted me-1"></i> Temp Card No
                                                         <b class="text-danger">*</b></label>
                                                     <input class="form-control" type="text"
                                                         name="visiting_company_id_employee_temp"
                                                         id="visiting_company_id_employee_temp"
                                                         value="<?php echo $emp_temp_enable ? htmlspecialchars($return['visiting_company_id'] ?? '') : ''; ?>"
-                                                        placeholder="Temp Badge ID">
+                                                        placeholder="Temp Badge ID" title="Temp Badge ID" aria-label="Temp Badge ID">
                                                 </div>
                                             </div>
                                         </div>
@@ -1302,23 +1302,23 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                     <div id="doctorDiv"
                                         class="row <?php echo $showDoctor ? 'd-view-block' : 'd-none'; ?>">
                                         <div class="form-group col-md-6">
-                                            <label for="doctor_phone"><i class="fa fa-phone text-muted me-1"></i> Phone Number <b
+                                            <label><i class="fa fa-phone text-muted me-1"></i> Phone Number <b
                                                     class="text-danger">*</b></label>
                                             <input class="form-control" type="text" name="doctor_phone"
                                                 id="doctor_phone"
                                                 value="<?php echo htmlspecialchars($return['doctor_phone'] ?? ''); ?>"
-                                                placeholder="Phone">
+                                                placeholder="Phone" title="Phone" aria-label="Phone">
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="doctor_name"><i class="fa fa-user-md text-muted me-1"></i> Doctor Name <b
+                                            <label><i class="fa fa-user-md text-muted me-1"></i> Doctor Name <b
                                                     class="text-danger">*</b></label>
                                             <input class="form-control" type="text" name="doctor_name" id="doctor_name"
                                                 value="<?php echo htmlspecialchars($return['doctor_name'] ?? ''); ?>"
-                                                placeholder="Name">
+                                                placeholder="Name" title="Name" aria-label="Name">
                                         </div>
 
                                         <div class="form-group col-md-6 d-none">
-                                            <label for="visiting_company_id_doctor"><i class="fa fa-id-badge text-muted me-1"></i> Visiting Id Card No <b
+                                            <label><i class="fa fa-id-badge text-muted me-1"></i> Visiting Id Card No <b
                                                     class="text-danger">*</b></label>
                                             <input class="form-control" type="hidden" name="visiting_company_id_doctor"
                                                 id="visiting_company_id_doctor"
@@ -1336,10 +1336,10 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
 
                                         <div class="additional-fields-section d-none row w-100 m-0 p-0">
                                             <div class="form-group col-md-6">
-                                                <label for="doctor_idcard_type"><i class="fa fa-id-card text-muted me-1"></i> Identity Card
+                                                <label><i class="fa fa-id-card text-muted me-1"></i> Identity Card
                                                     Type</label>
                                                 <select class="form-select js-example-basic-single"
-                                                    id="doctor_idcard_type" name="doctor_idcard_type">
+                                                    id="doctor_idcard_type" name="doctor_idcard_type" title="Doctor Idcard Type" aria-label="Doctor Idcard Type">
                                                     <option value="0">Select ID Card</option>
                                                     <?php if (count((array) $id_card_types_res) > 0) {
                                                          foreach ($id_card_types_res as $value) {
@@ -1351,29 +1351,29 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label for="doctor_idcard_number"><i class="fa fa-hashtag text-muted me-1"></i> Identity Card
+                                                <label><i class="fa fa-hashtag text-muted me-1"></i> Identity Card
                                                     No.</label>
                                                 <input class="form-control" type="text" name="doctor_idcard_number"
                                                     id="doctor_idcard_number"
                                                     value="<?php echo htmlspecialchars($return['doctor_idcard_number'] ?? ''); ?>"
-                                                    placeholder="ID Card Number">
+                                                    placeholder="ID Card Number" title="ID Card Number" aria-label="ID Card Number">
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label for="doctor_specialization"><i class="fa fa-stethoscope text-muted me-1"></i> Specialization
+                                                <label><i class="fa fa-stethoscope text-muted me-1"></i> Specialization
                                                     /
                                                     Department</label>
                                                 <input class="form-control" type="text" name="doctor_specialization"
                                                     id="doctor_specialization"
                                                     value="<?php echo htmlspecialchars($return['doctor_specialization'] ?? ''); ?>"
-                                                    placeholder="e.g. Cardiology, Emergency">
+                                                    placeholder="e.g. Cardiology, Emergency" title="e.g. Cardiology, Emergency" aria-label="e.g. Cardiology, Emergency">
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label for="is_emergency"><i class="fa fa-exclamation-triangle text-muted me-1"></i>
+                                                <label><i class="fa fa-exclamation-triangle text-muted me-1"></i>
                                                     Emergency
                                                     Visit?</label><br>
                                                 <div class="form-check form-switch mt-2">
                                                     <input class="form-check-input" type="checkbox" id="is_emergency"
-                                                        name="is_emergency" value="1" <?php echo (!empty($return['is_emergency']) ? 'checked' : ''); ?>>
+                                                        name="is_emergency" value="1" <?php echo (!empty($return['is_emergency']) ? 'checked' : ''); ?> title="Is Emergency" aria-label="Is Emergency">
                                                     <label class="form-check-label ms-2" for="is_emergency">Yes,
                                                         Emergency</label>
                                                 </div>
@@ -1386,10 +1386,10 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                         class="row <?php echo $showVendorSupplier ? 'd-view-block' : 'd-none'; ?>">
                                         <!-- 1. Department -->
                                         <div class="form-group col-md-4">
-                                            <label for="vendor_supplier_department_id"><i class="fa fa-building text-muted me-1"></i> Department <b
+                                            <label><i class="fa fa-building text-muted me-1"></i> Department <b
                                                     class="text-danger">*</b></label>
                                             <select class="form-select js-example-basic-single"
-                                                name="vendor_supplier_department_id" id="vendor_supplier_department_id">
+                                                name="vendor_supplier_department_id" id="vendor_supplier_department_id" title="Vendor Supplier Department Id" aria-label="Vendor Supplier Department Id">
                                                 <option value=""> Select Any one </option>
                                                 <?php foreach ($departments_res as $d): ?>
                                                     <option value="<?php echo $d['id']; ?>" <?php echo ($return['vendor_supplier_department_id'] ?? '') == $d['id'] ? 'selected' : ''; ?>>
@@ -1401,10 +1401,10 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
 
                                         <!-- 2. Whom to Meet -->
                                         <div class="form-group col-md-4">
-                                            <label for="whom_to_meet_vendor"><i class="fa fa-user-tie text-muted me-1"></i> Whom To Meet <b
+                                            <label><i class="fa fa-user-tie text-muted me-1"></i> Whom To Meet <b
                                                     class="text-danger">*</b></label>
                                             <select class="form-select js-example-basic-single" id="whom_to_meet_vendor"
-                                                name="whom_to_meet_vendor">
+                                                name="whom_to_meet_vendor" title="Whom To Meet Vendor" aria-label="Whom To Meet Vendor">
                                                 <option value="0">Select Employee</option>
                                                 <?php if (count((array) $employees_res) > 0) {
                                                     foreach ($employees_res as $e) {
@@ -1417,11 +1417,11 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
 
                                         <!-- 3. Entry Type -->
                                         <div class="form-group col-md-4">
-                                            <label for="vendor_supplier_entry_type"><i class="fa fa-sign-in-alt text-muted me-1"></i> Entry Type <b
+                                            <label><i class="fa fa-sign-in-alt text-muted me-1"></i> Entry Type <b
                                                     class="text-danger">*</b></label>
                                             <div class="d-flex align-items-center gap-1">
                                                 <select class="form-select js-example-basic-single flex-grow-1"
-                                                    name="vendor_supplier_entry_type" id="vendor_supplier_entry_type">
+                                                    name="vendor_supplier_entry_type" id="vendor_supplier_entry_type" title="Vendor Supplier Entry Type" aria-label="Vendor Supplier Entry Type">
                                                     <?php 
                                                     $vendor_supplier_entry_type_res = $result['vendor_supplier_entry_type_res'] ?? [];
                                                     if (count((array) $vendor_supplier_entry_type_res) > 0) {
@@ -1449,11 +1449,11 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
 
                                         <!-- 4. Reference Type -->
                                         <div class="form-group col-md-4">
-                                            <label for="vendor_supplier_document_type"><i class="fa fa-file-invoice text-muted me-1"></i> Reference
+                                            <label><i class="fa fa-file-invoice text-muted me-1"></i> Reference
                                                 Type</label>
                                             <select class="form-select js-example-basic-single"
                                                 name="vendor_supplier_document_type" id="vendor_supplier_document_type"
-                                                onchange="getReferenceTransactions(); toggleVsDocNoWrap();">
+                                                onchange="getReferenceTransactions(); toggleVsDocNoWrap();" title="Vendor Supplier Document Type" aria-label="Vendor Supplier Document Type">
                                                 <option value="NOREF" <?php echo ($return['vendor_supplier_document_type'] ?? 'NOREF') === 'NOREF' ? 'selected' : ''; ?>>No Reference</option>
                                                 <option value="purchase_orders" <?php echo ($return['vendor_supplier_document_type'] ?? '') === 'purchase_orders' ? 'selected' : ''; ?>>Purchase Order</option>
                                                 <option value="returnable_gate_passes" <?php echo ($return['vendor_supplier_document_type'] ?? '') === 'returnable_gate_passes' ? 'selected' : ''; ?>>RGP</option>
@@ -1466,12 +1466,12 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
 
                                         <!-- 5. Document No -->
                                         <div class="form-group col-md-4" id="vs_document_no_wrap" <?php echo (($return['vendor_supplier_document_type'] ?? 'NOREF') === 'NOREF') ? 'style="display:none"' : ''; ?>>
-                                            <label for="vendor_supplier_transaction_id"><i class="fa fa-hashtag text-muted me-1"></i> Document No. <b
+                                            <label><i class="fa fa-hashtag text-muted me-1"></i> Document No. <b
                                                     class="text-danger">*</b></label>
                                             <select class="form-select js-example-basic-single"
                                                 id="vendor_supplier_transaction_id"
                                                 name="vendor_supplier_transaction_id"
-                                                onchange="goToAnotherPageAndPrint()">
+                                                onchange="goToAnotherPageAndPrint()" title="Vendor Supplier Transaction Id" aria-label="Vendor Supplier Transaction Id">
                                                 <option value="">Select Any One</option>
                                                 <?php if (!empty($return['vendor_supplier_transaction_id'])): ?>
                                                     <option
@@ -1487,10 +1487,10 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
 
                                         <!-- 6. Vendor/Supplier -->
                                         <div class="form-group col-md-4">
-                                            <label for="vendor_supplier_vendor_id"><i class="fa fa-handshake text-muted me-1"></i> Vendor/Supplier <b
+                                            <label><i class="fa fa-handshake text-muted me-1"></i> Vendor/Supplier <b
                                                     class="text-danger">*</b></label>
                                             <select class="form-select js-example-basic-single"
-                                                id="vendor_supplier_vendor_id" name="vendor_supplier_vendor_id">
+                                                id="vendor_supplier_vendor_id" name="vendor_supplier_vendor_id" title="Vendor Supplier Vendor Id" aria-label="Vendor Supplier Vendor Id">
                                                 <option value=""> Select Any one </option>
                                                 <?php foreach ($vendors_res as $v): ?>
                                                     <option value="<?php echo $v['id']; ?>" <?php echo ($return['vendor_supplier_vendor_id'] ?? '') == $v['id'] ? 'selected' : ''; ?>>
@@ -1503,13 +1503,13 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                         <!-- 7. Gate Pass Number (only shown in editMode) -->
                                         <div class="form-group col-md-4 <?php echo $editMode ? '' : 'd-none'; ?>"
                                             id="gatePassNumberWrap">
-                                            <label for="vendor_supplier_transaction_no"><i class="fa fa-ticket-alt text-muted me-1"></i> Gate Pass
+                                            <label><i class="fa fa-ticket-alt text-muted me-1"></i> Gate Pass
                                                 Number</label>
                                             <input class="form-control" type="text"
                                                 name="vendor_supplier_transaction_no"
                                                 id="vendor_supplier_transaction_no"
                                                 value="<?php echo htmlspecialchars($return['vendor_supplier_transaction_no'] ?? ''); ?>"
-                                                readonly placeholder="Auto-generated on save">
+                                                readonly placeholder="Auto-generated on save" title="Auto-generated on save" aria-label="Auto-generated on save">
                                             <small class="text-muted">Will be generated automatically on save</small>
                                         </div>
 
@@ -1588,18 +1588,18 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="vendor_supplier_driver_name"><i class="fa fa-user text-muted me-1"></i> Driver Name</label>
+                                            <label><i class="fa fa-user text-muted me-1"></i> Driver Name</label>
                                             <input class="form-control" type="text" name="vendor_supplier_driver_name"
                                                 id="vendor_supplier_driver_name"
                                                 value="<?php echo htmlspecialchars($return['vendor_supplier_driver_name'] ?? ''); ?>"
-                                                placeholder="Full name">
+                                                placeholder="Full name" title="Full name" aria-label="Full name">
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="vendor_supplier_driver_mobile"><i class="fa fa-phone text-muted me-1"></i> Driver Mobile</label>
+                                            <label><i class="fa fa-phone text-muted me-1"></i> Driver Mobile</label>
                                             <input class="form-control" type="text" name="vendor_supplier_driver_mobile"
                                                 id="vendor_supplier_driver_mobile"
                                                 value="<?php echo htmlspecialchars($return['vendor_supplier_driver_mobile'] ?? ''); ?>"
-                                                placeholder="Mobile number">
+                                                placeholder="Mobile number" title="Mobile number" aria-label="Mobile number">
                                         </div>
 
                                         <!-- ── Vehicle Details ─── -->
@@ -1612,9 +1612,9 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="vendor_supplier_vehicle_type"><i class="fa fa-truck text-muted me-1"></i> Vehicle Type</label>
+                                            <label><i class="fa fa-truck text-muted me-1"></i> Vehicle Type</label>
                                             <select class="form-select js-example-basic-single"
-                                                name="vendor_supplier_vehicle_type" id="vendor_supplier_vehicle_type">
+                                                name="vendor_supplier_vehicle_type" id="vendor_supplier_vehicle_type" title="Vendor Supplier Vehicle Type" aria-label="Vendor Supplier Vehicle Type">
                                                 <option value="">None / Walk-in</option>
                                                 <option value="TRK" <?php echo ($return['vendor_supplier_vehicle_type'] ?? '') === 'TRK' ? 'selected' : ''; ?>>Truck</option>
                                                 <option value="TMP" <?php echo ($return['vendor_supplier_vehicle_type'] ?? '') === 'TMP' ? 'selected' : ''; ?>>Tempo</option>
@@ -1629,13 +1629,13 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="vendor_supplier_vehicle_number"><i class="fa fa-sort-numeric-up text-muted me-1"></i> Vehicle
+                                            <label><i class="fa fa-sort-numeric-up text-muted me-1"></i> Vehicle
                                                 Number</label>
                                             <input class="form-control" type="text"
                                                 name="vendor_supplier_vehicle_number"
                                                 id="vendor_supplier_vehicle_number"
                                                 value="<?php echo htmlspecialchars($return['vendor_supplier_vehicle_number'] ?? ''); ?>"
-                                                placeholder="e.g. MH 12 AB 1234">
+                                                placeholder="e.g. MH 12 AB 1234" title="e.g. MH 12 AB 1234" aria-label="e.g. MH 12 AB 1234">
                                         </div>
 
                                         <!-- ── Optional Details Toggle ─────────────────── -->
@@ -1666,9 +1666,9 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                 </div>
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label for="fld_vendor_supplier_document_file"><i class="fa fa-file text-muted me-1"></i> Document File</label>
-                                                <input id="fld_vendor_supplier_document_file" class="form-control" type="file"
-                                                    name="vendor_supplier_document_file">
+                                                <label><i class="fa fa-file text-muted me-1"></i> Document File</label>
+                                                <input class="form-control" type="file"
+                                                    name="vendor_supplier_document_file" title="Vendor Supplier Document File" aria-label="Vendor Supplier Document File">
                                                 <?php if (!empty($return['vendor_supplier_document_file'])): ?>
                                                     <input type="hidden" name="existing_vendor_supplier_document_file"
                                                         value="<?php echo htmlspecialchars($return['vendor_supplier_document_file']); ?>">
@@ -1679,11 +1679,11 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                 <?php endif; ?>
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label for="vendor_supplier_purpose"><i class="fa fa-comment-dots text-muted me-1"></i> Purpose of
+                                                <label><i class="fa fa-comment-dots text-muted me-1"></i> Purpose of
                                                     Visit</label>
                                                 <textarea class="form-control" rows="2" id="vendor_supplier_purpose"
                                                     name="vendor_supplier_purpose"
-                                                    placeholder="Describe purpose of visit"><?php echo htmlspecialchars($return['vendor_supplier_purpose'] ?? ''); ?></textarea>
+                                                    placeholder="Describe purpose of visit" title="Describe purpose of visit" aria-label="Describe purpose of visit"><?php echo htmlspecialchars($return['vendor_supplier_purpose'] ?? ''); ?></textarea>
                                             </div>
 
                                             <!-- ── ID Proof ─── -->
@@ -1704,9 +1704,9 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                             $pfile = $proof_files_arr[0] ?? '';
                                             ?>
                                             <div class="form-group col-md-4">
-                                                <label for="fld_vendor_supplier_proof_type__"><i class="fa fa-id-card text-muted me-1"></i> Proof Type</label>
-                                                <select id="fld_vendor_supplier_proof_type__" class="form-select js-example-basic-single"
-                                                    name="vendor_supplier_proof_type[]">
+                                                <label><i class="fa fa-id-card text-muted me-1"></i> Proof Type</label>
+                                                <select class="form-select js-example-basic-single"
+                                                    name="vendor_supplier_proof_type[]" title="Vendor Supplier Proof Type" aria-label="Vendor Supplier Proof Type">
                                                     <option value="">Select Proof Type</option>
                                                     <option value="AAD" <?php echo $ptype === 'AAD' ? 'selected' : ''; ?>>
                                                         Aadhaar</option>
@@ -1719,18 +1719,18 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-4">
-                                                <label for="fld_vendor_supplier_proof_document_no__"><i class="fa fa-hashtag text-muted me-1"></i> ID Proof
+                                                <label><i class="fa fa-hashtag text-muted me-1"></i> ID Proof
                                                     Number</label>
-                                                <input id="fld_vendor_supplier_proof_document_no__" class="form-control" type="text"
+                                                <input class="form-control" type="text"
                                                     name="vendor_supplier_proof_document_no[]"
                                                     value="<?php echo htmlspecialchars($pno); ?>"
-                                                    placeholder="Enter ID Proof number">
+                                                    placeholder="Enter ID Proof number" title="Enter ID Proof number" aria-label="Enter ID Proof number">
                                             </div>
                                             <div class="form-group col-md-4">
-                                                <label for="fld_vendor_supplier_proof_document_file__"><i class="fa fa-paperclip text-muted me-1"></i> Proof
+                                                <label><i class="fa fa-paperclip text-muted me-1"></i> Proof
                                                     Document</label>
-                                                <input id="fld_vendor_supplier_proof_document_file__" class="form-control" type="file"
-                                                    name="vendor_supplier_proof_document_file[]">
+                                                <input class="form-control" type="file"
+                                                    name="vendor_supplier_proof_document_file[]" title="Vendor Supplier Proof Document File" aria-label="Vendor Supplier Proof Document File">
                                                 <?php if ($pfile): ?>
                                                     <input type="hidden"
                                                         name="existing_vendor_supplier_proof_document_file[]"
@@ -1753,10 +1753,10 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                 </div>
                                             </div>
                                             <div class="form-group col-md-4">
-                                                <label for="vendor_supplier_vehicle_status">Vehicle Stay Status</label>
+                                                <label>Vehicle Stay Status</label>
                                                 <select class="form-select js-example-basic-single"
                                                     name="vendor_supplier_vehicle_status"
-                                                    id="vendor_supplier_vehicle_status">
+                                                    id="vendor_supplier_vehicle_status" title="Vendor Supplier Vehicle Status" aria-label="Vendor Supplier Vehicle Status">
                                                     <option value="Waiting" <?php echo ($return['vendor_supplier_vehicle_status'] ?? '') === 'Waiting' ? 'selected' : ''; ?>>Waiting</option>
                                                     <option value="Loading" <?php echo ($return['vendor_supplier_vehicle_status'] ?? '') === 'Loading' ? 'selected' : ''; ?>>Loading</option>
                                                     <option value="Unloading" <?php echo ($return['vendor_supplier_vehicle_status'] ?? '') === 'Unloading' ? 'selected' : ''; ?>>Unloading</option>
@@ -1764,17 +1764,17 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-4">
-                                                <label for="vendor_supplier_loading_start">Loading/Unloading Start Time</label>
+                                                <label>Loading/Unloading Start Time</label>
                                                 <input class="form-control" type="datetime-local"
                                                     name="vendor_supplier_loading_start"
                                                     id="vendor_supplier_loading_start"
-                                                    value="<?php echo !empty($return['vendor_supplier_loading_start']) ? str_replace(' ', 'T', $return['vendor_supplier_loading_start']) : ''; ?>">
+                                                    value="<?php echo !empty($return['vendor_supplier_loading_start']) ? str_replace(' ', 'T', $return['vendor_supplier_loading_start']) : ''; ?>" title="Vendor Supplier Loading Start" aria-label="Vendor Supplier Loading Start">
                                             </div>
                                             <div class="form-group col-md-4">
-                                                <label for="vendor_supplier_loading_end">Loading/Unloading End Time</label>
+                                                <label>Loading/Unloading End Time</label>
                                                 <input class="form-control" type="datetime-local"
                                                     name="vendor_supplier_loading_end" id="vendor_supplier_loading_end"
-                                                    value="<?php echo !empty($return['vendor_supplier_loading_end']) ? str_replace(' ', 'T', $return['vendor_supplier_loading_end']) : ''; ?>">
+                                                    value="<?php echo !empty($return['vendor_supplier_loading_end']) ? str_replace(' ', 'T', $return['vendor_supplier_loading_end']) : ''; ?>" title="Vendor Supplier Loading End" aria-label="Vendor Supplier Loading End">
                                             </div>
 
                                         </div><!-- /additional-fields-section -->
@@ -1786,16 +1786,16 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                             <div class="vms-card">
                                 <div class="vms-section-title">Carrying Luggage / Materials</div>
                                 <div class="form-group">
-                                    <span class="d-inline-block fw-bold me-4" style="margin-bottom:5px"><i class="fa fa-suitcase text-muted me-1"></i> Is carrying any
-                                        items / tools?</span>
+                                    <label class="me-4"><i class="fa fa-suitcase text-muted me-1"></i> Is carrying any
+                                        items / tools?</label>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="has_luggage" id="lug_no"
-                                            value="no" checked>
+                                            value="no" checked title="Has Luggage" aria-label="Has Luggage">
                                         <label class="form-check-label" for="lug_no">No</label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="has_luggage" id="lug_yes"
-                                            value="yes">
+                                            value="yes" title="Has Luggage" aria-label="Has Luggage">
                                         <label class="form-check-label" for="lug_yes">Yes, specify items</label>
                                     </div>
                                 </div>
@@ -1887,12 +1887,12 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                         <div class="modal-body">
                                             <input type="hidden" id="lm_item_key">
                                             <div class="mb-3">
-                                                <label for="lm_item_label" class="form-label">Item Category</label>
-                                                <input type="text" class="form-control" id="lm_item_label" readonly>
+                                                <label class="form-label">Item Category</label>
+                                                <input type="text" class="form-control" id="lm_item_label" readonly title="Input" aria-label="Input">
                                             </div>
                                             <div class="mb-3">
-                                                <label for="lm_brand_name" class="form-label">Brand Name</label>
-                                                <select class="form-select" id="lm_brand_name">
+                                                <label class="form-label">Brand Name</label>
+                                                <select class="form-select" id="lm_brand_name" title="Select" aria-label="Select">
                                                     <option value="">Select brand</option>
                                                     <?php if (!empty($luggage_brands)): ?>
                                                         <?php foreach ($luggage_brands as $brand): ?>
@@ -1913,30 +1913,30 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                             </div>
                                             <div class="mb-3">
                                                 <label for="lm_qty" class="form-label">Quantity</label>
-                                                <input type="number" min="1" class="form-control" id="lm_qty" value="1">
+                                                <input type="number" min="1" class="form-control" id="lm_qty" value="1" title="Input" aria-label="Input">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="lm_serial_or_remarks" class="form-label">Serial No / Remarks</label>
                                                 <input type="text" class="form-control" id="lm_serial_or_remarks"
-                                                    placeholder="Enter serial or description">
+                                                    placeholder="Enter serial or description" title="Enter serial or description" aria-label="Enter serial or description">
                                             </div>
                                             <div class="mb-3">
                                                 <span class="form-label d-block">Returnable Item?</span>
                                                 <div class="form-check form-check-inline mt-1">
                                                     <input class="form-check-input" type="radio" name="lm_returnable"
-                                                        id="lm_returnable_yes" value="yes" checked>
+                                                        id="lm_returnable_yes" value="yes" checked title="Lm Returnable" aria-label="Lm Returnable">
                                                     <label class="form-check-label" for="lm_returnable_yes">Yes</label>
                                                 </div>
                                                 <div class="form-check form-check-inline mt-1">
                                                     <input class="form-check-input" type="radio" name="lm_returnable"
-                                                        id="lm_returnable_no" value="no">
+                                                        id="lm_returnable_no" value="no" title="Lm Returnable" aria-label="Lm Returnable">
                                                     <label class="form-check-label" for="lm_returnable_no">No</label>
                                                 </div>
                                             </div>
                                             <div class="mb-3" id="lm_return_date_wrap">
                                                 <label for="lm_return_date" class="form-label">Return Date</label>
                                                 <input type="date" class="form-control" id="lm_return_date"
-                                                    value="<?php echo date('Y-m-d'); ?>">
+                                                    value="<?php echo date('Y-m-d'); ?>" title="Input" aria-label="Input">
                                             </div>
                                         </div>
                                         <div class="modal-footer py-2 border-top">
@@ -1957,12 +1957,12 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                 <div class="vms-section-title">Visitor Photo</div>
                                 <div class="row">
                                     <div class="form-group col-md-12">
-                                        <label for="image_path" class="mb-2"><i class="fa fa-camera text-muted me-1"></i> Capture /
+                                        <label class="mb-2"><i class="fa fa-camera text-muted me-1"></i> Capture /
                                             Upload Photo</label>
 
                                         <!-- Hidden inputs -->
                                         <input type="file" name="image_path" id="image_path" accept="image/*"
-                                            class="d-none">
+                                            class="d-none" title="Image Path" aria-label="Image Path">
                                         <input type="hidden" name="webcam_image" id="webcam_image" value="">
 
                                         <!-- Option A: Action Selection Cards (Visible when no photo is selected/captured) -->
@@ -2141,14 +2141,14 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                             <div class="card-body p-0">
                                 <div class="search-grid">
                                     <div class="flex-grow-1">
-                                        <label for="checkoutSearchText" class="form-label font-weight-bold">Search Term</label>
+                                        <label class="form-label font-weight-bold">Search Term</label>
                                         <input type="text" class="form-control" id="checkoutSearchText"
-                                            placeholder="e.g. Name, Phone, Visitor Pass ID (VST-xxxx), ID Card No.">
+                                            placeholder="e.g. Name, Phone, Visitor Pass ID (VST-xxxx), ID Card No." title="e.g. Name, Phone, Visitor Pass ID (VST-xxxx), ID Card No." aria-label="e.g. Name, Phone, Visitor Pass ID (VST-xxxx), ID Card No.">
                                     </div>
                                     <div>
-                                        <label for="checkoutSearchType" class="form-label font-weight-bold">Visit Type</label>
+                                        <label class="form-label font-weight-bold">Visit Type</label>
                                         <select class="form-select js-example-basic-single" id="checkoutSearchType"
-                                            style="height: 42px;">
+                                            style="height: 42px;" title="Select" aria-label="Select">
                                             <option value="">All Types</option>
                                             <option value="visitor">Visitor</option>
                                             <option value="delivery">Delivery</option>
@@ -2160,9 +2160,9 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                         </select>
                                     </div>
                                     <div>
-                                        <label for="checkoutSearchDate" class="form-label font-weight-bold">Check-in Date</label>
+                                        <label class="form-label font-weight-bold">Check-in Date</label>
                                         <input type="date" class="form-control" id="checkoutSearchDate"
-                                            value="<?php echo date('Y-m-d'); ?>">
+                                            value="<?php echo date('Y-m-d'); ?>" title="Input" aria-label="Input">
                                     </div>
                                     <input type="hidden" name="location_id" id="location_id_checkout"
                                         value="<?php echo $_SESSION['location_id'] ?? 1; ?>">
@@ -2703,7 +2703,7 @@ if (!empty($delivery_company_res)) {
                     <input type="hidden" id="modal_select_id" name="select_id">
                     <div class="form-group mb-0">
                         <label for="modal_option_value" class="form-label font-weight-bold" style="color: #475569; font-size: 14px;">Value/Label <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="modal_option_value" name="option_value" placeholder="Enter option value" style="padding: 10px 14px; font-size: 14px; border-radius: 8px;" required>
+                        <input type="text" class="form-control" id="modal_option_value" name="option_value" placeholder="Enter option value" style="padding: 10px 14px; font-size: 14px; border-radius: 8px;" required title="Enter option value" aria-label="Enter option value">
                     </div>
                 </form>
             </div>

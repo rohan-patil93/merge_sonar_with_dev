@@ -138,7 +138,7 @@
     for( var k =0 ; k < arr2.length; k++){
 
                 str+= "<tr><td style='text-align:right;'> IGST @ "+arr2[k]['id']+"% </td>";
-                str+= "<td class='mob_amount' width='18%'>  <input  type='text' class='form-control amount'   readonly value='"+parseFloat(arr2[k]['d_tax_amount']).toFixed(2)+"''> </td><td class='mob_amount' width='18%'>  <input  type='text' class='form-control amount' readonly  value='"+parseFloat(arr2[k]['c_tax_amount']).toFixed(2)+"'' aria-label='Input'> </td></tr>";
+                str+= "<td class='mob_amount' width='18%'>  <input  type='text' class='form-control amount'   readonly value='"+parseFloat(arr2[k]['d_tax_amount']).toFixed(2)+"''> </td><td class='mob_amount' width='18%'>  <input  type='text' class='form-control amount' readonly  value='"+parseFloat(arr2[k]['c_tax_amount']).toFixed(2)+"'' aria-label="Input"> </td></tr>";
          
     }
     $("#display_tax").html(str);

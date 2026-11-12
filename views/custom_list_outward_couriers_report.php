@@ -27,15 +27,15 @@ $today = date('Y-m-d');
 		<div class="card-body p-4">
 			<div class="row">
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>From Date <span class="text-danger">*</span></label>
+					<label for="from_date">From Date <span class="text-danger">*</span></label>
 					<input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo $today; ?>" aria-label="From Date">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>To Date <span class="text-danger">*</span></label>
+					<label for="to_date">To Date <span class="text-danger">*</span></label>
 					<input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo $today; ?>" aria-label="To Date">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>Location</label>
+					<label for="location_id">Location</label>
 					<select class="form-control js-example-basic-single" id="location_id" name="location_id" style="width:100%" aria-label="Location Id">
 						<option value="">All Locations</option>
 						<?php if(count((array)$locations) > 0){
@@ -49,19 +49,19 @@ $today = date('Y-m-d');
 					</select>
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>Tracking No</label>
+					<label for="tracking_no">Tracking No</label>
 					<input class="form-control" type="text" name="tracking_no" id="tracking_no" value="" aria-label="Tracking No">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>Courier Company</label>
+					<label for="courier_company">Courier Company</label>
 					<input class="form-control" type="text" name="courier_company" id="courier_company" value="" aria-label="Courier Company">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>Taken By</label>
+					<label for="taken_by">Taken By</label>
 					<input class="form-control" type="text" name="taken_by" id="taken_by" placeholder="Taken by name" value="" aria-label="Taken by name">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>Status</label>
+					<label for="current_status">Status</label>
 					<select class="form-control js-example-basic-single" id="current_status" name="current_status" style="width:100%" aria-label="Current Status">
 						<option value="">All</option>
 						<?php if(count((array)$statuses) > 0){
@@ -75,7 +75,7 @@ $today = date('Y-m-d');
 					</select>
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>&nbsp;</label>
+					<label for="getOutwardCouriersReportBtn" aria-label="Search">&nbsp;</label>
 					<button type="button" class="btn btn-primary form-control" id="getOutwardCouriersReportBtn">Search</button>
 				</div>
 			</div>

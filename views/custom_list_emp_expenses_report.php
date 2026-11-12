@@ -13,15 +13,15 @@ if ($role_code == 'MANAGER' || $role_code == 'FIELD_MANAGER') {
 $today = date('Y-m-d');
 $filter_url = API . "?mode=getempexpensesreport&method=get&filters_only=Y&admin_type=" . $admin_type;
 $filter_res = json_decode(callAPI($filter_url), true);
-$employees = isset($filter_res['employees']) ? $filter_res['employees'] : array();
+$employees = (isset($filter_res['employees']) && is_array($filter_res['employees'])) ? $filter_res['employees'] : array();
 
 $self_emp_id = '';
 if ($admin_type == '3') {
 	if (isset($_SESSION['emp_id']) && $_SESSION['emp_id'] != '') {
 		$self_emp_id = (int)$_SESSION['emp_id'];
-	} elseif (count((array)$employees) > 0) {
+	} elseif (!empty($employees)) {
 		$first = $employees[0];
-		$self_emp_id = is_array($first) ? (int)$first['id'] : (int)$first->id;
+		$self_emp_id = is_array($first) ? (int)($first['id'] ?? 0) : (int)($first->id ?? 0);
 	}
 }
 ?>
@@ -62,27 +62,27 @@ if ($admin_type == '3') {
 				<div class="dropdown-primary dropdown open">
 					<button class="btn btn-primary dropdown-toggle waves-light" type="button" id="empExpensesReportDownload" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
 					<div class="dropdown-menu p-0" aria-labelledby="empExpensesReportDownload" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-						<a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Employee Expenses Report" target="_blank">CSV</a>
+						<a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Employee%20Expenses%20Report" target="_blank" rel="noopener noreferrer">CSV</a>
 					</div>
 				</div>
-				<a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
-					<i class="icofont icofont-reply"></i>
+				<button type="button" onclick="history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
+					<i class="icofont icofont-reply" aria-hidden="true"></i>
 					Back
-				</a>
+				</button>
 			</div>
 		</div>
 		<div class="card-body p-4">
 			<div class="row">
 				<?php if ($admin_type != '3') { ?>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>Employees</label>
+					<label for="emp_id">Employees</label>
 					<select class="form-control js-example-basic-multiple" id="emp_id" name="emp_id[]" multiple="multiple" style="width:100%" aria-label="Emp Id">
-						<?php if (count((array)$employees) > 0) {
+						<?php if (!empty($employees)) {
 							foreach ($employees as $emp_row) {
-								$eid = is_array($emp_row) ? $emp_row['id'] : $emp_row->id;
-								$ename = is_array($emp_row) ? $emp_row['display_name'] : $emp_row->display_name;
+								$eid = is_array($emp_row) ? ($emp_row['id'] ?? '') : ($emp_row->id ?? '');
+								$ename = is_array($emp_row) ? ($emp_row['display_name'] ?? '') : ($emp_row->display_name ?? '');
 						?>
-							<option value="<?php echo $eid; ?>"><?php echo htmlspecialchars($ename); ?></option>
+							<option value="<?php echo htmlspecialchars((string)$eid, ENT_QUOTES); ?>"><?php echo htmlspecialchars((string)$ename, ENT_QUOTES); ?></option>
 						<?php }
 						} ?>
 					</select>
@@ -92,15 +92,15 @@ if ($admin_type == '3') {
 				<?php } ?>
 
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>From Date <span class="text-danger">*</span></label>
+					<label for="from_date">From Date <span class="text-danger">*</span></label>
 					<input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo $today; ?>" aria-label="From Date">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>To Date <span class="text-danger">*</span></label>
+					<label for="to_date">To Date <span class="text-danger">*</span></label>
 					<input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo $today; ?>" aria-label="To Date">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>Status</label>
+					<label for="status">Status</label>
 					<select class="form-control js-example-basic-multiple" id="status" name="status[]" multiple="multiple" style="width:100%" aria-label="Status">
 						<option value="2">Draft</option>
 						<option value="0">Active</option>
@@ -108,7 +108,7 @@ if ($admin_type == '3') {
 					</select>
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>Expense Type</label>
+					<label for="expense_type">Expense Type</label>
 					<select class="form-control js-example-basic-multiple" id="expense_type" name="expense_type[]" multiple="multiple" style="width:100%" aria-label="Expense Type">
 						<option value="0">Expense</option>
 						<option value="1">Mileage</option>
@@ -116,7 +116,7 @@ if ($admin_type == '3') {
 					</select>
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>&nbsp;</label>
+					<label for="getEmpExpensesReportBtn" aria-label="Search">&nbsp;</label>
 					<button type="button" class="btn btn-primary form-control" id="getEmpExpensesReportBtn">Search</button>
 				</div>
 			</div>
@@ -134,7 +134,7 @@ if ($admin_type == '3') {
 		if (val == null || val == '') {
 			return [];
 		}
-		if (!$.isArray(val)) {
+		if (!Array.isArray(val)) {
 			val = [val];
 		}
 		return val.filter(function (id) {
@@ -168,7 +168,7 @@ if ($admin_type == '3') {
 
 		var statuses = eerFilterIds($("#status").val());
 		var expenseTypes = eerFilterIds($("#expense_type").val());
-		var loader = '<div class="col-12 text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;"></div>';
+		var loader = '<div class="col-12 text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Loading..."></div>';
 		$("#Tablecontent").html(loader);
 
 		$.ajax({

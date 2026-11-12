@@ -823,9 +823,9 @@ if($register_data['current_status'] !=""){
     <input type="hidden" name="purchase_connect" id="purchase_connect" value="<?php echo $connect_user['purchase_connect']; ?>">
     <input type="hidden" name="admin_connect" id="admin_connect" value="<?php echo $connect_user['admin_connect']; ?>">
                 
-                                  <label for="fld_first_name">Proprietor/Owner/CEO Name <span class="requried">*</span></label>
+                                  <label>Proprietor/Owner/CEO Name <span class="requried">*</span></label>
                                   <input type="hidden" name="user_id" id="user_id" value="<?php echo $user_id;?>">
-                                   <input id="fld_first_name" type="text" class="form-control required text-capitalize" name="first_name" placeholder="<?php echo $placeholder['first_name']; ?>" value="<?php echo $register_data['first_name'] !=""?$register_data['first_name']:$_SESSION['user']['first_name'];?>" />
+                                   <input type="text" class="form-control required text-capitalize" name="first_name" placeholder="<?php echo $placeholder['first_name']; ?>" value="<?php echo $register_data['first_name'] !=""?$register_data['first_name']:$_SESSION['user']['first_name'];?>" / title="First Name" aria-label="First Name">
 
                                </div>
                                <!--end::Input-->
@@ -833,29 +833,29 @@ if($register_data['current_status'] !=""){
                              <div class="col-xl-6">
                               <!--begin::Input-->
                               <div class="form-group">
-                               <label for="fld_last_name">Last Name</label>
-                                <input id="fld_last_name" type="text" class="form-control text-capitalize" name="last_name" value="<?php echo $register_data['last_name']!=""?$register_data['last_name']:$_SESSION['user']['last_name'];?>" placeholder="<?php echo $placeholder['user']['last_name']; ?>"  />
+                               <label>Last Name</label>
+                                <input type="text" class="form-control text-capitalize" name="last_name" value="<?php echo $register_data['last_name']!=""?$register_data['last_name']:$_SESSION['user']['last_name'];?>" placeholder="<?php echo $placeholder['user']['last_name']; ?>"  / title="Last Name" aria-label="Last Name">
                              </div>
                              <!--end::Input-->
                            </div>
                            <div class="col-xl-6">
                             <!--begin::Input-->
                             <div class="form-group">
-                              <label for="fld_display_name">Display Name<span class="requried">*</span></label>
-                              <input id="fld_display_name" type="text" class="form-control required text-capitalize" name="display_name" value="<?php echo $register_data['display_name'] !=""?$register_data['display_name']:$_SESSION['user']['display_name'];?>" placeholder="<?php echo $placeholder['display_name']; ?>"  />
+                              <label>Display Name<span class="requried">*</span></label>
+                              <input type="text" class="form-control required text-capitalize" name="display_name" value="<?php echo $register_data['display_name'] !=""?$register_data['display_name']:$_SESSION['user']['display_name'];?>" placeholder="<?php echo $placeholder['display_name']; ?>"  / title="Display Name" aria-label="Display Name">
                            </div>
                            <!--end::Input-->
                          </div>
                          <div class="form-group col-lg-4">
                           <?php
                           $logo = $register_data['image']==''?  $File_Uploads_Path.'no-image.jpg':$File_Uploads_Path.$register_data['image']; ?>
-                          <span class="ml-5 d-inline-block fw-bold" style="margin-bottom:5px">Logo</span>
+                          <label class="ml-5">Logo</label>
                           <div class="col-lg-9 col-xl-6">
                             <div class="profile-pic">
                               <label class="-label" for="display_logo">
                                 <span> <i class="fa fa-camera"></i> &nbsp; Image</span>
                               </label>
-                              <input  type="file" name="logo_image" id="display_logo" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
+                              <input  type="file" name="logo_image" id="display_logo" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/ title="Logo Image" aria-label="Logo Image">
                               <input type="hidden" name="logo_remove" >
                               <img src="<?php echo $logo; ?>" id="outputdisplay_logo" width="200"  onerror="this.src='uploads/all/no-image.jpg';" alt="" />
                             </div>
@@ -863,14 +863,14 @@ if($register_data['current_status'] !=""){
                           <span class="form-text text-muted"><?php //echo $helptext['logo'];?> </span>
                         </div> 
                         <div class="form-group col-lg-12">
-                         <label for="fld_email">Email <span class="requried">*</span></label>
-                          <input id="fld_email" type="text" class="form-control input-group-solid required"  name="email" readonly value="<?php echo $_SESSION['email'];?>" placeholder="<?php //echo $placeholder['email']; ?>"  />
+                         <label>Email <span class="requried">*</span></label>
+                          <input type="text" class="form-control input-group-solid required"  name="email" readonly value="<?php echo $_SESSION['email'];?>" placeholder="<?php //echo $placeholder['email']; ?>"  / title="Email" aria-label="Email">
                         </div>
                         <div class="col-xl-6">
                           <!--begin::Input-->
                           <div class="form-group">
-                           <label for="fld_contact_person">Contact Person</label>
-                             <input id="fld_contact_person" type="text" class="form-control " name="contact_person" value="<?php echo $register_data['contact_person'];?>" placeholder="<?php echo $placeholder['contact_person']; ?>"  />
+                           <label>Contact Person</label>
+                             <input type="text" class="form-control " name="contact_person" value="<?php echo $register_data['contact_person'];?>" placeholder="<?php echo $placeholder['contact_person']; ?>"  / title="Contact Person" aria-label="Contact Person">
 
                          </div>
                          <!--end::Input-->
@@ -878,21 +878,21 @@ if($register_data['current_status'] !=""){
                        <div class="col-lg-6">
                         <!--begin::Input-->
                         <div class="form-group">
-                         <label for="fld_mobile">Mobile Number <span class="requried">*</span></label>
-                         <input id="fld_mobile" type="number" class="form-control required" name="mobile" value="<?php echo $register_data['mobile'];?>" placeholder="<?php echo $placeholder['mobile']; ?>"  />
+                         <label>Mobile Number <span class="requried">*</span></label>
+                         <input type="number" class="form-control required" name="mobile" value="<?php echo $register_data['mobile'];?>" placeholder="<?php echo $placeholder['mobile']; ?>"  / title="Mobile" aria-label="Mobile">
                        </div>
                        <!--end::Input-->
                      </div>
                      <div class="col-xl-6"> 
                       <div class="form-group">
-                       <label for="fld_phone">Phone Number</label>
-                         <input id="fld_phone" type="number" class="form-control" name="phone" value="<?php echo $register_data['phone'];?>" placeholder="<?php echo $placeholder['phone']; ?>"  />
+                       <label>Phone Number</label>
+                         <input type="number" class="form-control" name="phone" value="<?php echo $register_data['phone'];?>" placeholder="<?php echo $placeholder['phone']; ?>"  / title="Phone" aria-label="Phone">
                      </div>
                    </div>
                    <div class="col-xl-6">
                     <div class="form-group">
-                     <label for="fld_fax">Fax</label>
-                       <input id="fld_fax" type="number" class="form-control" value="<?php echo $register_data['fax'];?>" name="fax" placeholder="<?php echo $placeholder['fax']; ?>"  />
+                     <label>Fax</label>
+                       <input type="number" class="form-control" value="<?php echo $register_data['fax'];?>" name="fax" placeholder="<?php echo $placeholder['fax']; ?>"  / title="Fax" aria-label="Fax">
                      </div>
                    </div>
                  </div>
@@ -907,23 +907,23 @@ if($register_data['current_status'] !=""){
                   <!--begin::Select-->
                   <div class="row" <?php echo $disablecss; ?>>
                     <div class="form-group col-lg-12">
-                     <label for="fld_company">Company Name <span class="requried">*</span></label>
-                      <input id="fld_company" type="text" class="form-control required" name="company" value="<?php echo $register_data['company']!=""?$register_data['company']:$invitation['company_name'];?>" placeholder="<?php echo $placeholder['company']; ?>"  />
+                     <label>Company Name <span class="requried">*</span></label>
+                      <input type="text" class="form-control required" name="company" value="<?php echo $register_data['company']!=""?$register_data['company']:$invitation['company_name'];?>" placeholder="<?php echo $placeholder['company']; ?>"  / title="Company" aria-label="Company">
                   </div>
 
                   <div class="form-group col-lg-12">
-                   <label for="fld_website_url">Website</label>
-                    <input id="fld_website_url" type="text" class="form-control" value="<?php echo $register_data['website_url'];?>" name="website_url" placeholder="<?php echo $placeholder['website_url']; ?>"  />
+                   <label>Website</label>
+                    <input type="text" class="form-control" value="<?php echo $register_data['website_url'];?>" name="website_url" placeholder="<?php echo $placeholder['website_url']; ?>"  / title="Website Url" aria-label="Website Url">
                 </div>
                 <div class="form-group col-lg-6">
-                 <label for="kt_datepicker_2">Year of Establishment</label>
-                  <input type="text" class="form-control"  id="kt_datepicker_2" name="established_year" value="<?php echo $register_data['established_year'];?>" placeholder="<?php echo $placeholder['established_year']; ?>"  />
+                 <label>Year of Establishment</label>
+                  <input type="text" class="form-control"  id="kt_datepicker_2" name="established_year" value="<?php echo $register_data['established_year'];?>" placeholder="<?php echo $placeholder['established_year']; ?>"  / title="Established Year" aria-label="Established Year">
               </div>
 
 
               <div class="form-group col-xl-6 w-full">
-               <label for="fld_business_type">Business Type</label></br>
-               <select id="fld_business_type" name="business_type" class="form-control form-select js-example-basic-single">
+               <label>Business Type</label></br>
+               <select name="business_type" class="form-control form-select js-example-basic-single" title="Business Type" aria-label="Business Type">
                 <option value="">Select Any One</option>
                 <?php foreach($businesstypes as $buztype) { ?>
                   <option value="<?php echo $buztype?>" <?php echo $register_data['business_type']==$buztype?'selected':'';?> ><?php echo $buztype; ?></option>
@@ -932,8 +932,8 @@ if($register_data['current_status'] !=""){
             </div>
 
             <div class="form-group col-xl-6 w-full">
-             <label for="fld_business_size">Size</label></br>
-             <select id="fld_business_size" name="business_size" class="form-control form-select js-example-basic-single">
+             <label>Size</label></br>
+             <select name="business_size" class="form-control form-select js-example-basic-single" title="Business Size" aria-label="Business Size">
               <option value="">Select Any One</option>
               <?php foreach($businesssize as $buztype) { ?>
                 <option value="<?php echo $buztype?>" <?php echo $register_data['business_size']==$buztype?'selected':'';?>><?php echo $buztype; ?></option>
@@ -943,8 +943,8 @@ if($register_data['current_status'] !=""){
           </div>
 
           <div class="form-group col-xl-6 w-full">
-           <label for="fld_business_status">Industry</label></br>
-           <select id="fld_business_status" name="business_status" class="form-control form-select js-example-basic-single">
+           <label>Industry</label></br>
+           <select name="business_status" class="form-control form-select js-example-basic-single" title="Business Status" aria-label="Business Status">
             <option value="">Select Any One</option>
             <?php foreach($businessstatus as $buztype) { ?>
               <option value="<?php echo $buztype?>" <?php echo $register_data['business_status']==$buztype ? 'selected':'';?> ><?php echo $buztype; ?></option>
@@ -956,8 +956,8 @@ if($register_data['current_status'] !=""){
 
 
         <div class="form-group col-lg-12">
-          <label for="fld_vendor_po_notes">Business Description</label></br>
-          <textarea id="fld_vendor_po_notes" type="text" class="form-control" name="vendor_po_notes"><?php echo $register_data['vendor_po_notes'];?></textarea>
+          <label>Business Description</label></br>
+          <textarea type="text" class="form-control" name="vendor_po_notes" title="Vendor Po Notes" aria-label="Vendor Po Notes"><?php echo $register_data['vendor_po_notes'];?></textarea>
         </div>
 
 
@@ -976,17 +976,17 @@ if($register_data['current_status'] !=""){
       <!--begin::Select-->
       <div class="row" <?php echo $disablecss; ?>>
         <div class="form-group col-lg-12">
-          <label for="billing_address">Billing Address</label>
-          <textarea type="text" class="form-control" id="billing_address" name="billing_address"><?php echo $register_data['billing_address'];?></textarea>
+          <label>Billing Address</label>
+          <textarea type="text" class="form-control" id="billing_address" name="billing_address" title="Billing Address" aria-label="Billing Address"><?php echo $register_data['billing_address'];?></textarea>
         </div>
         <div class="form-group col-lg-6">
-         <label for="billing_post_code">Post Code</label>
-          <input type="text" class="form-control"id='billing_post_code' value="<?php echo $register_data['billing_post_code'];?>" name="billing_post_code" placeholder="<?php echo $placeholder['post_code']; ?>"  />
+         <label>Post Code</label>
+          <input type="text" class="form-control"id='billing_post_code' value="<?php echo $register_data['billing_post_code'];?>" name="billing_post_code" placeholder="<?php echo $placeholder['post_code']; ?>"  / title="Billing Post Code" aria-label="Billing Post Code">
       </div>
 
       <div class="form-group col-lg-6 w-full">
-       <label for="kt_select2_102">Country</label></br>
-       <select id="kt_select2_102" class="form-select js-example-basic-single" name="billing_country"  onchange="selectedcategory(this.value,'kt_select2_101','states','country_id','selectedbillcountry')">
+       <label>Country</label></br>
+       <select id="kt_select2_102" class="form-select js-example-basic-single" name="billing_country"  onchange="selectedcategory(this.value,'kt_select2_101','states','country_id','selectedbillcountry')" title="Billing Country" aria-label="Billing Country">
         <option value="">Select Any One</option>
         <?php foreach($countrieslist as $countryvalue) { ?>
           <option <?php echo $register_data['billing_country']==$countryvalue['id'] ? 'selected':'' ?> value="<?php echo $countryvalue['id']; ?>"><?php echo $countryvalue['country_name']; ?></option>
@@ -994,8 +994,8 @@ if($register_data['current_status'] !=""){
       </select>
     </div>
     <div class="form-group col-xl-6 w-full">
-     <label for="kt_select2_101">State </label></br>
-     <select id="kt_select2_101" name="billing_state" class="form-select js-example-basic-single" onchange="selectedcategory(this.value,'kt_select2_103','cities','state_id','selectedbillstate')">
+     <label>State </label></br>
+     <select id="kt_select2_101" name="billing_state" class="form-select js-example-basic-single" onchange="selectedcategory(this.value,'kt_select2_103','cities','state_id','selectedbillstate')" title="Billing State" aria-label="Billing State">
       <option value="">Select Any One</option>
       <?php foreach($states as $states1) { ?>
           <option <?php echo $register_data['billing_state']==$states1['id'] ? 'selected':'' ?> value="<?php echo $states1['id'];?>"><?php echo $states1['state_name']; ?></option>
@@ -1004,8 +1004,8 @@ if($register_data['current_status'] !=""){
   </div>
 
   <div class="form-group col-xl-6 w-full">
-   <label for="kt_select2_103">City</label></br>
-   <select id="kt_select2_103" name="billing_city" class="form-select js-example-basic-single" onchange="selectedcategory(this.value,'','city','','selectedbillcity')">
+   <label>City</label></br>
+   <select id="kt_select2_103" name="billing_city" class="form-select js-example-basic-single" onchange="selectedcategory(this.value,'','city','','selectedbillcity')" title="Billing City" aria-label="Billing City">
     <option value="">Select Any One</option>
      <?php foreach($cities as $cities1) { ?>
           <option <?php echo $register_data['billing_city']==$cities1['id'] ? 'selected':'' ?> value="<?php echo $cities1['id'];?>"><?php echo $cities1['city_name']; ?></option>
@@ -1024,18 +1024,18 @@ if($register_data['current_status'] !=""){
 </div> </div>
 
 <div class="form-group col-lg-12">
-  <label for="shipping_address">Shipping Address</label>
-  <textarea type="text" class="form-control" name="shipping_address" id="shipping_address"><?php echo $register_data['shipping_address'];?></textarea>
+  <label>Shipping Address</label>
+  <textarea type="text" class="form-control" name="shipping_address" id="shipping_address" title="Shipping Address" aria-label="Shipping Address"><?php echo $register_data['shipping_address'];?></textarea>
 </div>
 
 <div class="form-group col-lg-6">
- <label for="shipping_post_code">Post Code</label></br>
-  <input type="text" class="form-control outline-blue" name="shipping_post_code" id="shipping_post_code" value="<?php echo $register_data['shipping_post_code'];?>" placeholder="<?php echo $placeholder['post_code']; ?>"  />
+ <label>Post Code</label></br>
+  <input type="text" class="form-control outline-blue" name="shipping_post_code" id="shipping_post_code" value="<?php echo $register_data['shipping_post_code'];?>" placeholder="<?php echo $placeholder['post_code']; ?>"  / title="Shipping Post Code" aria-label="Shipping Post Code">
 </div>
 
 <div class="form-group col-xl-6 w-full">
- <label for="kt_select2_104">Country</label></br>
- <select id="kt_select2_104" class="form-select js-example-basic-single"  name="shipping_country" onchange="selectedcategory(this.value,'kt_select2_105','states','country_id','selectedshipcountry')">
+ <label>Country</label></br>
+ <select id="kt_select2_104" class="form-select js-example-basic-single"  name="shipping_country" onchange="selectedcategory(this.value,'kt_select2_105','states','country_id','selectedshipcountry')" title="Shipping Country" aria-label="Shipping Country">
   <option value="">Select Any One</option>
   <?php foreach($countrieslist as $countryvalue) { ?>
     <option <?php echo $register_data['shipping_country']==$countryvalue['id'] ? 'selected':'' ?> value="<?php echo $countryvalue['id'];?>"><?php echo $countryvalue['country_name']; ?></option>
@@ -1045,8 +1045,8 @@ if($register_data['current_status'] !=""){
 
 
 <div class="form-group col-xl-6 w-full">
- <label for="kt_select2_105">State</label></br>
- <select id="kt_select2_105" name="shipping_state" class="form-select js-example-basic-single" onchange="selectedcategory(this.value,'kt_select2_106','cities','state_id','selectedshipstate')">
+ <label>State</label></br>
+ <select id="kt_select2_105" name="shipping_state" class="form-select js-example-basic-single" onchange="selectedcategory(this.value,'kt_select2_106','cities','state_id','selectedshipstate')" title="Shipping State" aria-label="Shipping State">
   <option value="">Select Any One</option>
     <?php foreach($states as $states1) { ?>
           <option <?php echo $register_data['shipping_state']==$states1['id'] ? 'selected':'' ?> value="<?php echo $states1['id'];?>"><?php echo $states1['state_name']; ?></option>
@@ -1056,8 +1056,8 @@ if($register_data['current_status'] !=""){
 </div>
 
 <div class="form-group col-xl-6 w-full">
- <label for="kt_select2_106">City</label></br>
- <select id="kt_select2_106" name="shipping_city" class="form-select js-example-basic-single" onchange="selectedcategory(this.value,'','city','','selectedshipcity')">
+ <label>City</label></br>
+ <select id="kt_select2_106" name="shipping_city" class="form-select js-example-basic-single" onchange="selectedcategory(this.value,'','city','','selectedshipcity')" title="Shipping City" aria-label="Shipping City">
   <option value="">Select Any One</option>
      <?php foreach($cities as $cities1) { ?>
           <option <?php echo $register_data['shipping_city']==$cities1['id'] ? 'selected':'' ?> value="<?php echo $cities1['id'];?>"><?php echo $cities1['city_name']; ?></option>
@@ -1077,9 +1077,9 @@ if($register_data['current_status'] !=""){
                                                   <div class="row" <?php echo $disablecss; ?>>
 
                                                     <div class="form-group col-lg-6">
-                                                     <label for="fld_pan_no">PAN Number<span class="requried">*</span></label>
+                                                     <label>PAN Number<span class="requried">*</span></label>
                                                      <div class="input-group input-icon-right">
-                                                      <input id="fld_pan_no" type="text" class="form-control outline-blue required" value="<?php echo $register_data['pan_no'];?>" name="pan_no" placeholder="<?php echo $placeholder['pan_no'];?>">
+                                                      <input type="text" class="form-control outline-blue required" value="<?php echo $register_data['pan_no'];?>" name="pan_no" placeholder="<?php echo $placeholder['pan_no'];?>" title="Pan No" aria-label="Pan No">
                                                       
                                                     </div>
                                                     <!--       <span class="form-text text-muted"><?php echo $helptext['pan_no'];?> </span> -->
@@ -1087,35 +1087,35 @@ if($register_data['current_status'] !=""){
                                                   </div>
                                                   
                                                   <div class="form-group col-lg-6">
-                                                   <label for="fld_vat_number">VAT Number<span class="requried">*</span></label>
+                                                   <label>VAT Number<span class="requried">*</span></label>
                                                    <div class="input-group input-icon-right">
-                                                    <input id="fld_vat_number" type="text" class="form-control outline-blue required"  name="vat_number" value="<?php echo $register_data['vat_number'];?>" placeholder="<?php echo $placeholder['vat_number'];?>">
+                                                    <input type="text" class="form-control outline-blue required"  name="vat_number" value="<?php echo $register_data['vat_number'];?>" placeholder="<?php echo $placeholder['vat_number'];?>" title="Vat Number" aria-label="Vat Number">
                                                     
                                                   </div>
                                                   <!--    <span class="form-text text-muted"><?php echo $helptext['vat_number'];?> </span> -->
 
                                                 </div>
                                                 <div class="form-group col-lg-6">
-                                                 <label for="fld_tin_number">TIN Number</label>
+                                                 <label>TIN Number</label>
                                                  <div class="input-group input-icon-right">
-                                                  <input id="fld_tin_number" type="text" class="form-control" value="<?php echo $register_data['tin_number'];?>" name="tin_number" placeholder="<?php echo $placeholder['tin_number'];?>">
+                                                  <input type="text" class="form-control" value="<?php echo $register_data['tin_number'];?>" name="tin_number" placeholder="<?php echo $placeholder['tin_number'];?>" title="Tin Number" aria-label="Tin Number">
                                                   
                                                 </div>
                                                 <!--   <span class="form-text text-muted"><?php echo $helptext['tin_number'];?> </span> -->
 
                                               </div>
                                               <div class="form-group col-lg-6">
-                                               <label for="fld_cst_reg_no">CST Number<span class="requried">*</span></label>
+                                               <label>CST Number<span class="requried">*</span></label>
                                                <div class="input-group input-icon-right">
-                                                <input id="fld_cst_reg_no" type="text" class="form-control required"  value="<?php echo $register_data['cst_reg_no'];?>" name="cst_reg_no" placeholder="<?php echo $placeholder['cst_reg_no'];?>">
+                                                <input type="text" class="form-control required"  value="<?php echo $register_data['cst_reg_no'];?>" name="cst_reg_no" placeholder="<?php echo $placeholder['cst_reg_no'];?>" title="Cst Reg No" aria-label="Cst Reg No">
                                               </div>
                                               <!--   <span class="form-text text-muted"><?php echo $helptext['cst_reg_no'];?> </span> -->
 
                                             </div>
                                             <div class="form-group col-lg-6">
-                                             <label for="fld_gstin">GST Number</label>
+                                             <label>GST Number</label>
                                              <div class="input-group input-icon-right">
-                                              <input id="fld_gstin" type="text" class="form-control" value="<?php echo $register_data['gstin'];?>"  name="gstin" placeholder="<?php echo $placeholder['gstin'];?>">
+                                              <input type="text" class="form-control" value="<?php echo $register_data['gstin'];?>"  name="gstin" placeholder="<?php echo $placeholder['gstin'];?>" title="Gstin" aria-label="Gstin">
                                               
                                             </div>
                                             <!--       <span class="form-text text-muted"><?php echo $helptext['gstin'];?> </span> -->
@@ -1140,9 +1140,9 @@ if($register_data['current_status'] !=""){
                                         <div class="row">
 
                                           <div class="form-group col-lg-6">
-                                           <label for="fld_bank_account_name">Bank Account Name<span class="requried">*</span></label>
+                                           <label>Bank Account Name<span class="requried">*</span></label>
                                            <div class="input-group input-icon-right">
-                                            <input id="fld_bank_account_name" type="text" class="form-control required" value="<?php echo $register_data['bank_account_name'];?>" name="bank_account_name" placeholder="<?php echo $placeholder['bank_ac_name'];?>">
+                                            <input type="text" class="form-control required" value="<?php echo $register_data['bank_account_name'];?>" name="bank_account_name" placeholder="<?php echo $placeholder['bank_ac_name'];?>" title="Bank Account Name" aria-label="Bank Account Name">
                                             
                                           </div>
                                           <!--    <span class="form-text text-muted"><?php echo $helptext['bank_ac_name'];?> </span> -->
@@ -1150,18 +1150,18 @@ if($register_data['current_status'] !=""){
                                         </div>
                                         
                                         <div class="form-group col-lg-6">
-                                         <label for="fld_bank_name">Bank Name<span class="requried">*</span></label>
+                                         <label>Bank Name<span class="requried">*</span></label>
                                          <div class="input-group input-icon-right">
-                                          <input id="fld_bank_name" type="text" class="form-control required"  name="bank_name" value="<?php echo $register_data['bank_name'];?>" placeholder="<?php echo $placeholder['bank_name'];?>">
+                                          <input type="text" class="form-control required"  name="bank_name" value="<?php echo $register_data['bank_name'];?>" placeholder="<?php echo $placeholder['bank_name'];?>" title="Bank Name" aria-label="Bank Name">
                                           
                                         </div>
                                         <!--    <span class="form-text text-muted"><?php echo $helptext['bank_name'];?> </span> -->
 
                                       </div>
                                  <?php /** ?>     <div class="form-group col-lg-6">
-                                       <label for="fld_account_type">Account Type</label>
+                                       <label>Account Type</label>
                                        <div class="input-group input-icon-right">
-                                        <input id="fld_account_type" type="text" class="form-control" value="<?php echo $register_data['account_type'];?>" name="account_type" placeholder="<?php echo $placeholder['account_type'];?>">
+                                        <input type="text" class="form-control" value="<?php echo $register_data['account_type'];?>" name="account_type" placeholder="<?php echo $placeholder['account_type'];?>" title="Account Type" aria-label="Account Type">
                                         
                                       </div>
                                       <!--   <span class="form-text text-muted"><?php echo $helptext['account_type'];?> </span> -->
@@ -1170,8 +1170,8 @@ if($register_data['current_status'] !=""){
                                     <?php **/ ?>
 
                                     <div class="form-group col-xl-6 w-full">
-                                     <label for="kt">Account Type</label></br>
-                                     <select id="kt" class="form-select js-example-basic-single" name="account_type">
+                                     <label>Account Type</label></br>
+                                     <select id="kt" class="form-select js-example-basic-single" name="account_type" title="Account Type" aria-label="Account Type">
                                        <option value="">Select Any One</option>
 
                                        <?php
@@ -1184,27 +1184,27 @@ if($register_data['current_status'] !=""){
 
 
                                   <div class="form-group col-lg-6">
-                                   <label for="fld_bank_account_no">Bank Account Number<span class="requried">*</span></label>
+                                   <label>Bank Account Number<span class="requried">*</span></label>
                                    <div class="input-group input-icon-right">
-                                    <input id="fld_bank_account_no" type="text" class="form-control required"  value="<?php echo $register_data['bank_account_no'];?>" name="bank_account_no" placeholder="<?php echo $placeholder['bank_account_no'];?>">
+                                    <input type="text" class="form-control required"  value="<?php echo $register_data['bank_account_no'];?>" name="bank_account_no" placeholder="<?php echo $placeholder['bank_account_no'];?>" title="Bank Account No" aria-label="Bank Account No">
 
                                   </div>
                                   <!--     <span class="form-text text-muted"><?php echo $helptext['bank_account_no'];?> </span> -->
 
                                 </div>
                                 <div class="form-group col-lg-6">
-                                 <label for="fld_ifsc_code">IFSC Code</label>
+                                 <label>IFSC Code</label>
                                  <div class="input-group input-icon-right">
-                                  <input id="fld_ifsc_code" type="text" class="form-control" value="<?php echo $register_data['ifsc_code'];?>"  name="ifsc_code" placeholder="<?php echo $placeholder['ifsc_code'];?>">
+                                  <input type="text" class="form-control" value="<?php echo $register_data['ifsc_code'];?>"  name="ifsc_code" placeholder="<?php echo $placeholder['ifsc_code'];?>" title="Ifsc Code" aria-label="Ifsc Code">
 
                                 </div>
                                 <!--   <span class="form-text text-muted"><?php echo $helptext['ifsc_code'];?> </span> -->
 
                               </div>
                               <div class="form-group col-lg-6">
-                               <label for="bank_address">Bank Address</label>
+                               <label>Bank Address</label>
                                <div class="input-group input-icon-right">
-                                 <textarea type="text" class="form-control" id="bank_address" name="bank_address"><?php echo $register_data['bank_address'];?></textarea>
+                                 <textarea type="text" class="form-control" id="bank_address" name="bank_address" title="Bank Address" aria-label="Bank Address"><?php echo $register_data['bank_address'];?></textarea>
 
                                </div>
                                <!-- <span class="form-text text-muted"><?php echo $helptext['bank_address'];?> </span> -->
@@ -1283,7 +1283,7 @@ if($register_data['current_status'] !=""){
                                         <div class="image-input image-input-empty image-input-outline mr-10" id="kt_image_5"  style=" height:0px; ">
                                           <label class="btn-hover-text-primary  <?php //echo $value['document_shared']!=""?"mt-3":"mt-1"; ?>" data-action="change" data-toggle="tooltip" title="" data-original-title="Uploade File">
                                             <i class="ti-clip" style="font-size: 20px;"></i>
-                                            <input type="file" class="custom-file-input" id="customFile" name="fileToUpload[]"  onchange="checkFileSelect(event,'<?php echo $dockey; ?>')"/>			
+                                            <input type="file" class="custom-file-input" id="customFile" name="fileToUpload[]"  onchange="checkFileSelect(event,'<?php echo $dockey; ?>')"/ title="Filetoupload" aria-label="Filetoupload">			
                                             <input type="hidden" name="hidden_fileToUpload[]" value="<?php echo $vendor_documen['filename']; ?>">
                                           </label>
                                         </div>
@@ -1337,7 +1337,7 @@ if($register_data['current_status'] !=""){
                                                     
                                                     <div class="custom-file">
                                                       <input type="hidden" name="hidden_fileToUpload<?php echo $dockey;?>" value="<?php echo $attach_filename[$dockey]; ?>">
-                                                      <input type="file" class="custom-file-input" id="customFile" name="fileToUpload<?php echo $dockey;?>" />
+                                                      <input type="file" class="custom-file-input" id="customFile" name="fileToUpload<?php echo $dockey;?>" / title="Input" aria-label="Input">
                                                       <label class="custom-file-label" for="customFile">Choose file</label>
                                                     </div>
 

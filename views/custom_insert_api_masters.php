@@ -498,11 +498,11 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
         count++;
         var htmlRows = '';
         htmlRows += '<tr>';
-        htmlRows += '<td><input type="text" class="form-control responsedetailsrow" name="get_response_details_name['+sqo+']" value="" id="get_response_details_name_'+sqo+'" onkeypress="if (event.keyCode === 32) return false;" aria-label="Get Response Details Name"></td>';
+        htmlRows += '<td><input type="text" class="form-control responsedetailsrow" name="get_response_details_name['+sqo+']" value="" id="get_response_details_name_'+sqo+'" onkeypress="if (event.keyCode === 32) return false;" aria-label="Get Response Details Name[&#039;+sqo+&#039;]"></td>';
       // htmlRows += '<td><input type="text" class="form-control" name="get_response_details_value[]" value="" readonly aria-label="Get Response Details Value"></td>';
 
         htmlRows += '<td>';
-        htmlRows += '<select name="get_response_details_value['+sqo+']" class="form-control js-example-basic-single application_table_fields" onchange="getMappingField('+sqo+')" id="get_response_details_value_'+sqo+'" aria-label="Get Response Details Value"><option value="" >Select Any One</option>';
+        htmlRows += '<select name="get_response_details_value['+sqo+']" class="form-control js-example-basic-single application_table_fields" onchange="getMappingField('+sqo+')" id="get_response_details_value_'+sqo+'" aria-label="Get Response Details Value[&#039;+sqo+&#039;]"><option value="" >Select Any One</option>';
 
 
 
@@ -520,7 +520,7 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
 
         htmlRows += '</select></td>';
 
-        htmlRows += '<td><input class="js-primary-sm-'+sqo+'" type="checkbox" name="uniqueness['+sqo+']" value="Y"  id="api_response_uniqueness_'+sqo+'" aria-label="Uniqueness"></td>';
+        htmlRows += '<td><input class="js-primary-sm-'+sqo+'" type="checkbox" name="uniqueness['+sqo+']" value="Y"  id="api_response_uniqueness_'+sqo+'" aria-label="Uniqueness[&#039;+sqo+&#039;]"></td>';
     
         htmlRows += '</tr>';
         $('#responseDetails').append(htmlRows);

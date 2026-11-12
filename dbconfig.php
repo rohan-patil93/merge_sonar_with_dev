@@ -41,7 +41,7 @@
 
 ob_start();
 //session_start(); 
-ini_set("display_errors", 0);
+ini_set("display_errors", 1);
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -794,7 +794,7 @@ define("USER_IMAGE_ROOT", SITEROOT . "/images/");
 define("DYNAMIC_SITEURL", "https://www.{domain_name}.");
 
 
-define("SITEURL", "https://" . $_SERVER['HTTP_HOST'] . "/");
+define("SITEURL", "https://" . $_SERVER['HTTP_HOST'] . "/merge_sonar_with_dev/");
 
 /*define("TEST", 				SITEURL."/api.php");*/
 

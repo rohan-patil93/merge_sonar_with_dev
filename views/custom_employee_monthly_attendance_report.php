@@ -1,23 +1,23 @@
 <?php
 $_SESSION['apply_js']['multiselest'] = 1;
 
+$employee_id = 0;
+$month = '';
+
 // Fetch employees
-//print_r($_POST);
-if((isset($_POST['search'])) ){
+if ((isset($_POST['search']))) {
     $employee_id = $_REQUEST['employee_id'] ?? 0;
     $month       = $_REQUEST['month'] ?? '';
     header("location:index?option=COM_EMPLOYEE_MONTHLY_ATTENDANCE_REPORT&employee_id=".$employee_id."&month=".$month ); exit;
 }
-if(isset($_GET['employee_id'])){
+if (isset($_GET['employee_id'])) {
     $employee_id = $_REQUEST['employee_id'] ?? 0;
     $month       = $_REQUEST['month'] ?? '';
 }
 
-
 $url = API . "?mode=getEmployeesAttendanceData&method=get";
 $result = callAPI($url);
 $result = json_decode($result, true);
-//echo "<pre>"; print_r($result); echo "<pre>";
 $employees = $result['table'] ?? array();
 
 ?>
@@ -32,27 +32,34 @@ $employees = $result['table'] ?? array();
             <div class="row">
                 <!-- Employee -->
                 <div class="form-group col-md-4">
-                    <label>Employee <span style="color:red;">*</span></label>
-                    <select class="form-select js-example-basic-single" name="employee_id" id="employee_id">
+                    <label for="employee_id">Employee <span class="text-danger">*</span></label>
+                    <select class="form-select js-example-basic-single" name="employee_id" id="employee_id" aria-label="Employee">
                         <option value="0">Select Employee</option>
-                        <?php foreach ($employees as $row): ?>
-                            <option <?php if( $row['id'] == $employee_id){ echo "selected" ;} ?> value="<?= $row['id']; ?>">
-                                <?= $row['display_name'].' ('. $row['emp_code'].')'; ?>
+                        <?php if (!empty($employees) && is_array($employees)) {
+                            foreach ($employees as $row) {
+                                $empId = is_array($row) ? ($row['id'] ?? '') : ($row->id ?? '');
+                                $empCode = is_array($row) ? ($row['emp_code'] ?? '') : ($row->emp_code ?? '');
+                                $displayName = is_array($row) ? ($row['display_name'] ?? '') : ($row->display_name ?? '');
+                                $selected = ((string)$empId === (string)$employee_id) ? 'selected="selected"' : '';
+                        ?>
+                            <option <?php echo $selected; ?> value="<?php echo htmlspecialchars((string)$empId, ENT_QUOTES); ?>">
+                                <?php echo htmlspecialchars($displayName . ' (' . $empCode . ')', ENT_QUOTES); ?>
                             </option>
-                        <?php endforeach; ?>
+                        <?php }
+                        } ?>
                     </select>
                 </div>
 
                 <!-- Month -->
                 <div class="form-group col-md-3">
-                    <label>Month <span style="color:red;">*</span></label>
-                    <input type="month" name="month" class="form-control" id="report_month" value="<?php echo $month; ?>">
+                    <label for="report_month">Month <span class="text-danger">*</span></label>
+                    <input type="month" name="month" class="form-control" id="report_month" value="<?php echo htmlspecialchars($month, ENT_QUOTES); ?>" aria-label="Month">
                 </div>
 
                 <!-- Search -->
                 <div class="form-group col-md-2">
-                    <label>&nbsp;</label>
-                    <button type="submit" class="btn btn-primary form-control" name="search" value="search">
+                    <label for="searchBtn" aria-label="Search">&nbsp;</label>
+                    <button type="submit" class="btn btn-primary form-control" name="search" id="searchBtn" value="search">
                         Search
                     </button>
                 </div>
@@ -65,7 +72,7 @@ $employees = $result['table'] ?? array();
     </div>
     <div class="mt-4" id="TableContent">
         <?php
-    if(isset($_GET['employee_id']) && isset($_GET['month']) ){
+    if (isset($_GET['employee_id']) && isset($_GET['month'])) {
         include_once('custom_employee_monthly_attendance_report_table.php'); 
     }
     ?>
@@ -74,13 +81,6 @@ $employees = $result['table'] ?? array();
 
 <script src="assets/bower_components/jquery/js/jquery.min.js"></script>
 <script>
-/*$(document).ready(function () {
-
-    $('#searchBtn').click(function () {
-        reloadAttendanceTable();
-    });
-
-});*/
 /**
  * Reload the attendance report table
  */
@@ -105,7 +105,7 @@ function reloadAttendanceTable() {
 
     var loader = `
         <div class="text-center">
-            <img src="assets/images/spiner/spiner3.gif" style="width:300px;">
+            <img src="assets/images/spiner/spiner3.gif" alt="Loading..." style="width:300px;">
         </div>
     `;
     $('#TableContent').html(loader);

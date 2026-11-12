@@ -20,8 +20,8 @@ $projects = $result['table'] ?? array();
 
                 <!-- Project -->
                 <div class="form-group col-md-4">
-                    <label>Project <span class="text-danger">*</span></label>
-                    <select class="form-select js-example-basic-single" id="project_id" aria-label="Select">
+                    <label for="project_id">Project <span class="text-danger">*</span></label>
+                    <select class="form-select js-example-basic-single" id="project_id" aria-label="Project">
                         <option value="0">Select Project</option>
                         <?php foreach ($projects as $row): ?>
                             <option value="<?= $row['id']; ?>">
@@ -34,8 +34,8 @@ $projects = $result['table'] ?? array();
 
                 <!-- Tracking -->
                 <div class="form-group col-md-4">
-                    <label>Tracking <span class="text-danger">*</span></label>
-                    <select class="form-select js-example-basic-single" id="tracking_id" aria-label="Select">
+                    <label for="tracking_id">Tracking <span class="text-danger">*</span></label>
+                    <select class="form-select js-example-basic-single" id="tracking_id" aria-label="Tracking">
                         <option value="0">Select Tracking</option>
                     </select>
 
@@ -43,20 +43,20 @@ $projects = $result['table'] ?? array();
 
                 <!-- Radio Buttons -->
                 <div class="form-group col-md-2">
-                    <label>Type <span class="text-danger">*</span></label><br>
+                    <label for="doc_type_po">Type <span class="text-danger">*</span></label><br>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="doc_type" value="PO" aria-label="Doc Type">
-                        <label class="form-check-label">PO</label>
+                        <input class="form-check-input" type="radio" name="doc_type" id="doc_type_po" value="PO" aria-label="PO">
+                        <label class="form-check-label" for="doc_type_po">PO</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="doc_type" value="INVOICE" aria-label="Doc Type">
-                        <label class="form-check-label">Invoice</label>
+                        <input class="form-check-input" type="radio" name="doc_type" id="doc_type_invoice" value="INVOICE" aria-label="Invoice">
+                        <label class="form-check-label" for="doc_type_invoice">Invoice</label>
                     </div>
                 </div>
 
                 <!-- Search -->
                 <div class="form-group col-md-2">
-                    <label>&nbsp;</label>
+                    <label for="searchBtn" aria-label="Search">&nbsp;</label>
                     <button type="button" class="btn btn-primary form-control" id="searchBtn">
                         Search
                     </button>

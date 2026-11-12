@@ -1,10 +1,18 @@
-# Environment & secrets — never commit
+# Environment & secrets
 .env
 *.env
 .env.*
 
 # Firebase service account keys
-*-adminsdk-*.json
+*-admindsk-*.json
 
 # Vendor dependencies
 /vendor/
+
+# Temporary and diagnostic files
+/phpinfo.php
+/phpmyinfo.php
+/test.php
+/test_cul.php
+/test_head.php
+/test_ranking.php

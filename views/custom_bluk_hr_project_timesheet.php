@@ -1,40 +1,62 @@
 <?php
-	if($_GET['PAY_MONTH']==''){ $_GET['PAY_MONTH'] = date('m'); }
-	if($_GET['PAY_YEAR']==''){ $_GET['PAY_YEAR'] = date('Y');}
-	$approval_url = API."?mode=toGetblukHrProjectTimesheet&month=".$_GET['PAY_MONTH']."&year=".$_GET['PAY_YEAR']."&emp_id=".$_SESSION['emp_id'];
+	if(!isset($_GET['PAY_MONTH']) || $_GET['PAY_MONTH']==''){ $_GET['PAY_MONTH'] = date('m'); }
+	if(!isset($_GET['PAY_YEAR']) || $_GET['PAY_YEAR']==''){ $_GET['PAY_YEAR'] = date('Y');}
+	$emp_id = isset($_SESSION['emp_id']) ? $_SESSION['emp_id'] : '';
+	$approval_url = API."?mode=toGetblukHrProjectTimesheet&month=".$_GET['PAY_MONTH']."&year=".$_GET['PAY_YEAR']."&emp_id=".$emp_id;
 	//echo $approval_url;
 	$app_data = callAPI($approval_url);
 	$app_data = json_decode($app_data,1);
-	$lastapproval_url = API."?mode=toGetblukHrProjectTimesheetlastmonths&month=".$_GET['PAY_MONTH']."&year=".$_GET['PAY_YEAR']."&emp_id=".$_SESSION['emp_id'];
+	$lastapproval_url = API."?mode=toGetblukHrProjectTimesheetlastmonths&month=".$_GET['PAY_MONTH']."&year=".$_GET['PAY_YEAR']."&emp_id=".$emp_id;
 	//echo $lastapproval_url;
 	$last_data = callAPI($lastapproval_url);
 	$last_data = json_decode($last_data,1);
 	//echo "<pre>"; print_r($app_data); print_r($last_data); exit;
+	$apv = array();
+	$sba = array();
+	$employees = array();
+	$vendors = array();
+	$billables_employee = array();
+	$dismonth = array();
+	$disuitlize = array();
+	$lmonth = array(
+		'billable_amount' => 0,
+		'budgeted_amount' => 0,
+		'vendor_ids' => 0,
+		'employee_ids' => 0,
+		'period' => date('Y-m-d')
+	);
+	$fid = 0;
 	$apv_billable_amount = 0;
-	$sba_billable_amount =0;
-	$total_budget_amount =0;
-	$total_billabe_hrs =0;
-	$total_budget_hrs =0;
-	$total_leave_days =0;
+	$sba_billable_amount = 0;
+	$total_budget_amount = 0;
+	$total_billabe_hrs = 0;
+	$total_budget_hrs = 0;
+	$total_leave_days = 0;
 	
-	foreach($app_data as $apps){
-		if($apps['pt_status_id']=="199"){
-			$sba[]=$apps;
-			$fid = $apps['id'];
-			$sba_billable_amount = $sba_billable_amount+$apps['billable_amount'];
-		}
-		if($apps['pt_status_id']=="120"){
-			$apv[]=$apps;
-			$apv_billable_amount = $apv_billable_amount+$apps['billable_amount'];
-		}
-		$total_leave_days = $total_leave_days+$apps['leave_days'];
-		$total_budget_amount = $total_budget_amount+$apps['budgeted_amount'];
-		$total_billabe_hrs = $total_billabe_hrs+$apps['billable_hrs'];
-		$total_budget_hrs = $total_budget_hrs+176;
-		$employees[$apps['employee_id']] = $apps['employee_id'];
-		$vendors[$apps['vendor_id']] = $apps['vendor_id'];
-		if($apps['vendor_id'] !="0"){
-			$billables_employee[$apps['employee_id']]= $apps['employee_id'];
+	if (is_array($app_data)) {
+		foreach($app_data as $apps){
+			if(isset($apps['pt_status_id']) && $apps['pt_status_id']=="199"){
+				$sba[]=$apps;
+				$fid = $apps['id'] ?? 0;
+				$sba_billable_amount = $sba_billable_amount+($apps['billable_amount'] ?? 0);
+			}
+			if(isset($apps['pt_status_id']) && $apps['pt_status_id']=="120"){
+				$apv[]=$apps;
+				$apv_billable_amount = $apv_billable_amount+($apps['billable_amount'] ?? 0);
+			}
+			$total_leave_days = $total_leave_days+($apps['leave_days'] ?? 0);
+			$total_budget_amount = $total_budget_amount+($apps['budgeted_amount'] ?? 0);
+			$total_billabe_hrs = $total_billabe_hrs+($apps['billable_hrs'] ?? 0);
+			$total_budget_hrs = $total_budget_hrs+176;
+			if(isset($apps['employee_id'])){
+				$employees[$apps['employee_id']] = $apps['employee_id'];
+			}
+			if(isset($apps['vendor_id'])){
+				$vendors[$apps['vendor_id']] = $apps['vendor_id'];
+				if($apps['vendor_id'] !="0" && isset($apps['employee_id'])){
+					$billables_employee[$apps['employee_id']]= $apps['employee_id'];
+				}
+			}
 		}
 	}
 	$billables_count = count((array)$billables_employee);
@@ -44,28 +66,33 @@
 	$table = "project_timesheets";
 	$stausresult = ViewStatusData();
 	$k=1; $ltotal=0; 
-	foreach($last_data as $key=>$last){
-		$dismonth[] = date('M-Y',strtotime($key));
-		$la_billable_amount = 0;
-		$la_budgeted_amount = 0;
-		$la_employee = 0; 
-		foreach($last as $lastt){
-			$la_billable_amount = $la_billable_amount+$lastt['billable_amount'];
-			$la_budgeted_amount = $la_budgeted_amount+$lastt['budgeted_amount'];
-			$la_vendor = $lastt['vendor_ids'];
-			$la_employee = $la_employee+$lastt['employee_ids'];
+	if (is_array($last_data)) {
+		foreach($last_data as $key=>$last){
+			$dismonth[] = date('M-Y',strtotime($key));
+			$la_billable_amount = 0;
+			$la_budgeted_amount = 0;
+			$la_employee = 0;
+			$la_vendor = 0;
+			if (is_array($last)) {
+				foreach($last as $lastt){
+					$la_billable_amount = $la_billable_amount+($lastt['billable_amount'] ?? 0);
+					$la_budgeted_amount = $la_budgeted_amount+($lastt['budgeted_amount'] ?? 0);
+					$la_vendor = $lastt['vendor_ids'] ?? 0;
+					$la_employee = $la_employee+($lastt['employee_ids'] ?? 0);
+				}
+			}
+			if($k==1){
+				$lmonth['billable_amount'] = $la_billable_amount;
+				$lmonth['budgeted_amount'] = $la_budgeted_amount;
+				$lmonth['vendor_ids'] = $la_vendor ;
+				$lmonth['employee_ids'] = $la_employee;
+				$lmonth['period']=$key;
+			}
+			//$dismonth[] = $key;
+			$disuitlize[] = $la_billable_amount!="" ? number_format($la_billable_amount/100000,2):'0' ;
+			$ltotal =$ltotal+$la_budgeted_amount;
+			$k++;
 		}
-		if($k==1){
-		 		$lmonth['billable_amount'] = $la_billable_amount;
-		 		$lmonth['budgeted_amount'] = $la_budgeted_amount;
-		 		$lmonth['vendor_ids'] = $la_vendor ;
-		 		$lmonth['employee_ids'] = $la_employee;
-		 		$lmonth['period']=$key;
-		  }
-		//$dismonth[] = $key;
-		$disuitlize[] = $la_billable_amount!="" ? number_format($la_billable_amount/100000,2):'0' ;
-		$ltotal =$ltotal+$la_budgeted_amount;
-		$k++;
 	}
 	//echo "<pre>"; print_r($last_data); print_r($lmonth);print($disuitlize); exit;
 	krsort($dismonth);
@@ -171,7 +198,7 @@
 		                                $dis_year = date('Y',$month);
 		                                $dis_month = date('m',$month);
 		                                //echo $dis_year."_".$dis_month.",";
-		                                if($_GET['PAY_YEAR'] == $dis_year && $_GET['PAY_MONTH'] == $dis_month ){
+		                                if(isset($_GET['PAY_YEAR']) && isset($_GET['PAY_MONTH']) && $_GET['PAY_YEAR'] == $dis_year && $_GET['PAY_MONTH'] == $dis_month ){
 		                                     $class = 'btn btn-primary';
 		                                 }else{                  
 		                                    //$class = 'text-dark text-hover-primary'; btn-light
@@ -188,9 +215,9 @@
 								<div class="col-lg-2">
 									<div class="d-flex align-items-center flex-lg-fill mb-2 float-left">
 										<div class="btn-group" id="status_dropdown" style="display:none;">
-		                                     <button class="btn btn-primary dropdown-toggle" style="color: <?php echo "#".$stausresult['10']['color']; ?>;    background:  <?php echo "#".strval($stausresult['10']['background_color']); ?>; border-color: <?php echo "#".strval($stausresult['10']['background_color']); ?>;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><?php echo $stausresult['10']['name']; ?> </button>
+		                                     <button class="btn btn-primary dropdown-toggle" style="color: <?php echo "#".($stausresult['10']['color'] ?? 'ffffff'); ?>;    background:  <?php echo "#".strval($stausresult['10']['background_color'] ?? '007bff'); ?>; border-color: <?php echo "#".strval($stausresult['10']['background_color'] ?? '007bff'); ?>;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><?php echo $stausresult['10']['name'] ?? 'Approved'; ?> </button>
 		                                    <div class="dropdown-menu" id="dropdownlist_<?php echo $fid; ?>">
-		                            			<div class="dropdown-item" onclick="statuspopup('199','2')" name="status" id="status" value="199">Approved</div>
+		                            			<button type="button" class="dropdown-item" onclick="statuspopup('199','2')" name="status" id="status" value="199">Approved</button>
 		                                    </div>
 		                                </div>
 									</div>
@@ -270,10 +297,10 @@
 							</div>
 							
 							<div class="d-flex align-items-center flex-lg-fill mb-2 float-left">
-								<div class="btn-group" id="status_dropdown" style="display:none;">
-                                     <button class="btn btn-primary dropdown-toggle" style="color: <?php echo "#".$stausresult['10']['color']; ?>;    background:  <?php echo "#".strval($stausresult['10']['background_color']); ?>; border-color: <?php echo "#".strval($stausresult['10']['background_color']); ?>;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><?php echo $stausresult['10']['name']; ?> </button>
-                                    <div class="dropdown-menu" id="dropdownlist_<?php echo $fid; ?>">
-                            			<div class="dropdown-item" onclick="statuspopup('199','2')" name="status" id="status" value="199">Approved</div>
+								<div class="btn-group" id="status_dropdown_commented" style="display:none;">
+                                     <button class="btn btn-primary dropdown-toggle" style="color: <?php echo "#".($stausresult['10']['color'] ?? 'ffffff'); ?>;    background:  <?php echo "#".strval($stausresult['10']['background_color'] ?? '007bff'); ?>; border-color: <?php echo "#".strval($stausresult['10']['background_color'] ?? '007bff'); ?>;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><?php echo $stausresult['10']['name'] ?? 'Approved'; ?> </button>
+                                    <div class="dropdown-menu" id="dropdownlist_commented_<?php echo $fid; ?>">
+                            			<button type="button" class="dropdown-item" onclick="statuspopup('199','2')" name="status" id="status_commented" value="199">Approved</button>
                                     </div>
                                 </div>
 							</div>
@@ -292,7 +319,7 @@
 							</div>
 							<!--end::Stats-->
 							<!--begin::Progress-->
-							<?php $total_p = number_format((($ttcount/$total_budget_amount)*100),2); ?>
+							<?php $total_p = $total_budget_amount > 0 ? number_format((($ttcount/$total_budget_amount)*100),2) : '0.00'; ?>
 							<div class="d-flex align-items-center justify-content-between">
 								<div class="text-muted font-weight-bold mr-2">Utilized</div>
 								<div class="text-muted font-weight-bold"><?php echo $total_p; ?>%</div>
@@ -477,16 +504,16 @@
 												<th scope="col" class="p-0 min-w-110px text-center">Status</th>
 												<th scope="col" class="py-0 min-w-50px text-center">
 													<div class="checkbox-inline">
-														<label class="checkbox checkbox-success">
-														<input type="checkbox" checked id="" disabled class="">
-														<span></span></label>
+														<label for="select_all_approved" class="checkbox checkbox-success" aria-label="Select all approved timesheets">
+														<input type="checkbox" checked id="select_all_approved" disabled class="" aria-label="Select all approved timesheets">
+														<span></span><span class="sr-only">Select all approved timesheets</span></label>
 													</div>
 												</th>
 											</tr>
 										</thead>
 										<tbody>
 											<?php $k=3; foreach($apv as $sb ){ 
-												$sb_bp = number_format((($sb['billable_amount']/$sb['budgeted_amount'])*100),2); 
+												$sb_bp = (!empty($sb['budgeted_amount']) && $sb['budgeted_amount'] > 0) ? number_format((($sb['billable_amount']/$sb['budgeted_amount'])*100),2) : '0.00'; 
 												$bbg_color= lableandbgcolor($sb_bp);	
 												$llablecolor = lableandleave($k);
 												?>
@@ -535,9 +562,10 @@
 												</td>
 												<td class="text-center pr-0">
 													<div class="checkbox-inline">
-														<label class="checkbox checkbox-success">
-														<input type="checkbox" class="" checked name="" disabled value="<?php echo $sb['employee_id']; ?>">
-														<span></span></label>
+														<?php $approved_emp_name = !empty($sb['reporting_manger']) ? $sb['reporting_manger'] : (!empty($sb['employee_name']) ? $sb['employee_name'] : ('Employee ' . $sb['employee_id'])); ?>
+														<label for="approved_emp_<?php echo $sb['employee_id']; ?>" class="checkbox checkbox-success" aria-label="Select <?php echo htmlspecialchars($approved_emp_name, ENT_QUOTES); ?>">
+														<input type="checkbox" id="approved_emp_<?php echo $sb['employee_id']; ?>" class="" checked name="" disabled value="<?php echo $sb['employee_id']; ?>" aria-label="Select <?php echo htmlspecialchars($approved_emp_name, ENT_QUOTES); ?>">
+														<span></span><span class="sr-only">Select <?php echo htmlspecialchars($approved_emp_name, ENT_QUOTES); ?></span></label>
 													</div>
 												</td>
 											</tr>
@@ -562,9 +590,9 @@
 												<th scope="col" class="p-0 min-w-110px text-center">Status</th>
 												<th scope="col" class="py-0 min-w-50px text-center">
 													<div class="checkbox-inline">
-														<label class="checkbox checkbox-success">
-														<input type="checkbox" id="select_all" class="itemRow" onclick="tocheckallboxes()">
-														<span></span></label>
+														<label for="select_all" class="checkbox checkbox-success" aria-label="Select all pending approvals">
+														<input type="checkbox" id="select_all" class="itemRow" onclick="tocheckallboxes()" aria-label="Select all pending approvals">
+														<span></span><span class="sr-only">Select all pending approvals</span></label>
 														<input type="hidden" name="" id="val_select_all" value="0">
 													</div>
 												</th>
@@ -572,7 +600,7 @@
 										</thead>
 										<tbody>
 											<?php $k=3; foreach($sba as $sb ){ 
-													$sb_bp = number_format((($sb['billable_amount']/$sb['budgeted_amount'])*100),2);
+													$sb_bp = (!empty($sb['budgeted_amount']) && $sb['budgeted_amount'] > 0) ? number_format((($sb['billable_amount']/$sb['budgeted_amount'])*100),2) : '0.00';
 													$bbg_color= lableandbgcolor($sb_bp);	
 														$llablecolor = lableandleave($k);
 												?>
@@ -622,9 +650,10 @@
 												</td>
 												<td class="text-center pr-0">
 													<div class="checkbox-inline">
-														<label class="checkbox checkbox-success">
-														<input type="checkbox" onclick="tocheckdrodown()" class="itemRow checkbox1" name="checkbox1" value="<?php echo $sb['employee_id']; ?>">
-														<span></span></label>
+														<?php $pending_emp_name = !empty($sb['reporting_manger']) ? $sb['reporting_manger'] : (!empty($sb['employee_name']) ? $sb['employee_name'] : ('Employee ' . $sb['employee_id'])); ?>
+														<label for="pending_emp_<?php echo $sb['employee_id']; ?>" class="checkbox checkbox-success" aria-label="Select <?php echo htmlspecialchars($pending_emp_name, ENT_QUOTES); ?>">
+														<input type="checkbox" id="pending_emp_<?php echo $sb['employee_id']; ?>" onclick="tocheckdrodown()" class="itemRow checkbox1" name="checkbox1" value="<?php echo $sb['employee_id']; ?>" aria-label="Select <?php echo htmlspecialchars($pending_emp_name, ENT_QUOTES); ?>">
+														<span></span><span class="sr-only">Select <?php echo htmlspecialchars($pending_emp_name, ENT_QUOTES); ?></span></label>
 													</div>
 												</td>
 											</tr>

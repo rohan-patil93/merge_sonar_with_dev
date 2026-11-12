@@ -115,7 +115,7 @@ $_SESSION['apply_js']['from-validation'] = "1";
 					type: "POST",
 					success:function(data){
 						console.log(data);
-						$("#grade").html("<select class='form-control' name='pay_template' aria-label='Select'>"+data+"</select>");
+						$("#grade").html("<select class='form-control' name='pay_template' aria-label="Select">"+data+"</select>");
 					},
 					error:function (){}
 				});	
@@ -138,7 +138,7 @@ $_SESSION['apply_js']['from-validation'] = "1";
 				type: "POST",
 				success:function(data){
 					var fun ="selectchange('ref_id',this.value,'"+key+"')";
-					$(".refkey_ref_no").html("<select class='form-control' name='ref_id' data-tablename='ref_id'  data-fieldsname='ref_id' data-pagename='comman_form' name='ref_id' id='ref_id' onchange="+fun+" aria-label='Select'>"+data+"</select>");
+					$(".refkey_ref_no").html("<select class='form-control' name='ref_id' data-tablename='ref_id'  data-fieldsname='ref_id' data-pagename='comman_form' name='ref_id' id='ref_id' onchange="+fun+" aria-label="Select">"+data+"</select>");
 					window.location.href = 'index.php?option='+option+'&table='+key+'&Rid=0&TD='+trandate;
 				}
 			}); 

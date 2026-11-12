@@ -60,7 +60,7 @@ $mopdulesetup = json_decode($mopdule_setup,1);
         htmlRows += '<td> <select class="form-select js-example-basic-single"  name="field_type[]" aria-label="Field Type"><?php foreach($filed_array as $key=>$value){ ?>
 <option value="<?php echo $key; ?>"  <?php echo $respons['field_type']==$key?"selected":""; ?>><?php echo $value; ?></option><?php } ?></select></td>';
    htmlRows += '<td><input type="text" name="sequence[]"  class="form-control"  required aria-label="Sequence"></td>';
-   htmlRows += '<td><input type="checkbox" class="js-switch'+count+'" name="display['+count+']" value="1" / aria-label="Display"></td>';
+   htmlRows += '<td><input type="checkbox" class="js-switch'+count+'" name="display['+count+']" value="1" / aria-label="Display[&#039;+count+&#039;]"></td>';
         htmlRows += '</tr>';
         $('#toureaddmore').append(htmlRows);
          $(".js-example-basic-single").select2();

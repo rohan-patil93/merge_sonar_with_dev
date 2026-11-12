@@ -264,12 +264,12 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
   						<div class="row mb-5">
   							<div class="col-lg-6">
   								<div class="form-group">
-  									<label for="fld_name" class="form-label">Company Name</label>
-  									<input id="fld_name" type="text" class="form-control" name="name" value="<?php echo $companies['name']; ?>" readonly>
+  									<label class="form-label">Company Name</label>
+  									<input type="text" class="form-control" name="name" value="<?php echo $companies['name']; ?>" readonly aria-label="Name">
   								</div>
   								<div class="form-group w-full">
-  									<label for="fld_company_type_id" class="form-label">Type of Company</label>
-  									<select id="fld_company_type_id" name="company_type_id" class="form-control form-select js-example-basic-single">
+  									<label class="form-label">Type of Company</label>
+  									<select name="company_type_id" class="form-control form-select js-example-basic-single" aria-label="Company Type Id">
   										<option value="">Select Any One </option>
   										<?php foreach($company_types as $ct){ ?>
   											<option value="<?php echo $ct['id']; ?>"><?php echo $ct['company_type_name']; ?></option>
@@ -277,8 +277,8 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
   									</select>
   								</div>
   								<div class="form-group  w-full">
-  									<label for="fld_industry">Industry</label>
-  									<select id="fld_industry" class="form-select js-example-basic-single"  name="industry">
+  									<label>Industry</label>
+  									<select class="form-select js-example-basic-single"  name="industry" aria-label="Industry">
   										<option value="">Select Any One </option>
   										<?php foreach($industrylist as $valueindustry) { ?>
   											<option value="<?php echo $valueindustry['id'];?>"><?php echo $valueindustry['industries']; ?></option>
@@ -288,27 +288,27 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
   							</div>
   							<div class="col-lg-6 text-center">
   								<div class=" form-group">
-  									<span class="form-label d-inline-block fw-bold">Company logo</span>
+  									<label class="form-label">Company logo</label>
   									<div class="profile-pic mt-2">
   										<label class="-label" for="display_logo">
   											<span> <i class="fa fa-camera"></i> &nbsp; Upload Logo</span>
   										</label>
-  										<input type="file" name="image" id="display_logo" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
+  										<input type="file" name="image" id="display_logo" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/ aria-label="Image">
   										<img src="<?php echo "uploads/all/".$role['image'] ; ?>" id="outputdisplay_logo" width="200" onerror="this.src='uploads/all/no-image.jpg';" alt="" />
   										<input type="hidden" name="hid_image" value="<?php echo $role['image'] ;  ?>">
   									</div>
   								</div>
   							</div>
 <!--                   <div class="col-lg-6 form-group w-full">
-                      <label for="fld_no_of_users" class="form-label">Number of Employee</label>
-                      <input id="fld_no_of_users" type="number" class="form-control" name="no_of_users" value="0">
+                      <label class="form-label">Number of Employee</label>
+                      <input type="number" class="form-control" name="no_of_users" value="0" aria-label="No Of Users">
                   </div> 
                   <div class="col-lg-12 form-group">
-                      <label for="fld_min_revenue" class="form-label">Revenue</label>
+                      <label class="form-label">Revenue</label>
                       <div class="row">
                         <div class="col-lg-6">
                            <div class="input-group input-group-button "> 
-                          <input id="fld_min_revenue" type="number" class="form-control width1" name="min_revenue" value="">
+                          <input type="number" class="form-control width1" name="min_revenue" value="" aria-label="Min Revenue">
                            <span class="input-group-text addon-style">
                                 <label class="">Lac</label>
                             </span>
@@ -358,24 +358,24 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
 					<h3 class="f-w-600 mb-5">Contact Details</h3>
 					<div class="row mb-5">
 						<div class="col-lg-6 form-group">
-							<label for="fld_incharge_name" class="form-label">Contact Person Name</label>
-							<input id="fld_incharge_name" type="text" class="form-control" name="incharge_name">
+							<label class="form-label">Contact Person Name</label>
+							<input type="text" class="form-control" name="incharge_name" aria-label="Incharge Name">
 						</div>
 						<div class="col-lg-6 form-group">
-							<label for="fld_telephone" class="form-label">Contact Number</label>
-							<input id="fld_telephone" type="text" class="form-control" name="telephone">
+							<label class="form-label">Contact Number</label>
+							<input type="text" class="form-control" name="telephone" aria-label="Telephone">
 						</div>
 						<div class="col-lg-6 form-group">
-							<label for="fld_email" class="form-label">Email</label>
-							<input id="fld_email" type="text" class="form-control" name="email">
+							<label class="form-label">Email</label>
+							<input type="text" class="form-control" name="email" aria-label="Email">
 						</div>
 						<div class="col-lg-6 form-group">
-							<label for="fld_address1" class="form-label">Address</label>
-							<textarea id="fld_address1" type="text" class="form-control" name="address1"></textarea>
+							<label class="form-label">Address</label>
+							<textarea type="text" class="form-control" name="address1" aria-label="Address1"></textarea>
 						</div>
 						<div class="col-lg-6 form-group w-full">
 							<label for="setup_country" class="form-label d-block">Country</label>
-							<select id="setup_country" name="country" class="form-control form-select js-example-basic-single" onchange="selectCounty(this.value)">
+							<select id="setup_country" name="country" class="form-control form-select js-example-basic-single" onchange="selectCounty(this.value)" aria-label="Country">
 								<option value="">Select Any One</option>
 								<?php foreach($countries as $countr) { ?>
 									<option value='<?php echo $countr['id']."||".$countr['time_zones']; ?>' ><?php echo $countr['country_name']; ?></option>
@@ -384,19 +384,19 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
 						</div>
 						<div class="col-lg-6 form-group  w-full">
 							<label for="getstate" class="form-label d-block">State</label>
-							<select name="state" class="form-control form-select js-example-basic-single" id="getstate" onchange="selectSatate(this.value)">
+							<select name="state" class="form-control form-select js-example-basic-single" id="getstate" onchange="selectSatate(this.value)" aria-label="State">
 								<option value="">Select Any One</option>
 							</select>
 						</div>
 						<div class="col-lg-6 form-group  w-full">
 							<label for="getcity" class="form-label d-block">City</label>
-							<select name="city" class="form-control form-select js-example-basic-single" id="getcity">
+							<select name="city" class="form-control form-select js-example-basic-single" id="getcity" aria-label="City">
 								<option value="">Select Any One</option>
 							</select>
 						</div>
 						<div class="col-lg-6 form-group">
 							<label for="setup_postcode" class="form-label">Post Code</label>
-							<input id="setup_postcode" type="number" class="form-control" name="postcode">
+							<input id="setup_postcode" type="number" class="form-control" name="postcode" aria-label="Postcode">
 						</div>
                  </div>
                  <div class="footer_btn">
@@ -432,24 +432,24 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
 					<h3 class="f-w-600 mb-5">Tax Information</h3>
 					<div class="row">
 						<div class="form-group col-lg-6">
-							<label for="fld_license_number" class="form-label">License Number</label>
-							<input id="fld_license_number" type="text" class="form-control"  name="license_number" placeholder="<?php echo $placeholder['licensenumber'];?>">
+							<label class="form-label">License Number</label>
+							<input type="text" class="form-control"  name="license_number" placeholder="<?php echo $placeholder['licensenumber'];?>" aria-label="License Number">
 						</div>
 						<div class="form-group col-lg-6">
-							<label for="fld_pan_number" class="form-label">PAN Number</label>
-							<input id="fld_pan_number" type="text" class="form-control"  name="pan_number" placeholder="<?php echo $placeholder['licensenumber'];?>">
+							<label class="form-label">PAN Number</label>
+							<input type="text" class="form-control"  name="pan_number" placeholder="<?php echo $placeholder['licensenumber'];?>" aria-label="Pan Number">
 						</div>
 						<div class="form-group col-lg-6">
-							<label for="fld_tan_number" class="form-label">TAN Number</label>
-							<input id="fld_tan_number" type="text" class="form-control"  name="tan_number" placeholder="<?php echo $placeholder['licensenumber'];?>">
+							<label class="form-label">TAN Number</label>
+							<input type="text" class="form-control"  name="tan_number" placeholder="<?php echo $placeholder['licensenumber'];?>" aria-label="Tan Number">
 						</div>
 						<div class="form-group col-lg-6">
-							<label for="fld_gst_number" class="form-label">GST Number</label>
-							<input id="fld_gst_number" type="text" class="form-control"  name="gst_number" placeholder="<?php echo $placeholder['licensenumber'];?>">
+							<label class="form-label">GST Number</label>
+							<input type="text" class="form-control"  name="gst_number" placeholder="<?php echo $placeholder['licensenumber'];?>" aria-label="Gst Number">
 						</div>
 						<div class="form-group col-lg-6">
-							<label for="fld_cin_number" class="form-label">CIN Number</label>
-							<input id="fld_cin_number" type="text" class="form-control"  name="cin_number" placeholder="<?php echo $placeholder['licensenumber'];?>">
+							<label class="form-label">CIN Number</label>
+							<input type="text" class="form-control"  name="cin_number" placeholder="<?php echo $placeholder['licensenumber'];?>" aria-label="Cin Number">
 						</div>
 					</div>
 					<div class="footer_btn">
@@ -484,34 +484,34 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
 					<h3 class="f-w-600 mb-5">System Configuration</h3>
 					<div class="row">
 						<div class="col-lg-6 form-group w-full">
-		                      <label for="time_zone" class="form-label">Time Zone</label>
-		                      <select name="time_zone" id="time_zone" class="form-control form-select js-example-basic-single">
+		                      <label class="form-label">Time Zone</label>
+		                      <select name="time_zone" id="time_zone" class="form-control form-select js-example-basic-single" aria-label="Time Zone">
 		                        <option value="">Select Any One</option>
 		                     </select>
 		                 </div>
 		                <div class="col-lg-6 form-group w-full">
-		                      <label for="fld_date_format" class="form-label">Date Format</label>
-		                      <select id="fld_date_format" name="date_format" class="form-control form-select js-example-basic-single">
+		                      <label class="form-label">Date Format</label>
+		                      <select name="date_format" class="form-control form-select js-example-basic-single" aria-label="Date Format">
 		                        <?php foreach($dateformatlist as $valuedates) { ?>
 		                          <option value="<?php echo $valuedates;?>"><?php echo $valuedates; ?></option>
 		                        <?php } ?>
 		                     </select>
 		                </div>
 						<div class="form-group col-lg-6">
-							<label for="fld_number_format" class="form-label">Number Format</label>
-							<select id="fld_number_format" name="number_format" class="form-control form-select js-example-basic-single">
+							<label class="form-label">Number Format</label>
+							<select name="number_format" class="form-control form-select js-example-basic-single" aria-label="Number Format">
 								<option value="">Select Any One</option>
 							</select>
 						</div>
 						<div class="form-group col-lg-6">
-							<label for="fld_default_currency_id" class="form-label">Default Currency</label>
-							<select id="fld_default_currency_id" name="default_currency_id" class="form-control form-select js-example-basic-single">
+							<label class="form-label">Default Currency</label>
+							<select name="default_currency_id" class="form-control form-select js-example-basic-single" aria-label="Default Currency Id">
 								<option value="">Select Any One</option>
 							</select>
 						</div>
 						<div class="form-group col-lg-6">
-							<label for="fld_currency_formate" class="form-label">Currency Format</label>
-							<select id="fld_currency_formate" name="currency_formate" class="form-control form-select js-example-basic-single">
+							<label class="form-label">Currency Format</label>
+							<select name="currency_formate" class="form-control form-select js-example-basic-single" aria-label="Currency Formate">
 								<option value="">Select Any One</option>
 							</select>
 						</div>
@@ -548,12 +548,12 @@ $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/
 					<h3 class="f-w-600 mb-5">Locations</h3>
 					<div class="row">
 						<div class="col-lg-6">
-							<label for="fld_location_name__" class="form-label">Locations Name</label>
-							<input id="fld_location_name__" type="text" class="form-control" name="location_name[]">
+							<label class="form-label">Locations Name</label>
+							<input type="text" class="form-control" name="location_name[]" aria-label="Location Name">
 						</div>
 						<div class="col-lg-6">
-							<label for="fld_short_name__" class="form-label">Locations Short Name</label>
-							<input id="fld_short_name__" type="text" class="form-control" name="short_name[]">
+							<label class="form-label">Locations Short Name</label>
+							<input type="text" class="form-control" name="short_name[]" aria-label="Short Name">
 						</div>
 					</div>
 					<div id="newaddmorelocation"></div>
