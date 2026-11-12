@@ -1,4 +1,4 @@
-FROM php:8.3-apache
+FROM php:8.5.12-apache
 
 RUN apt-get update && apt-get install -y \
     git \
@@ -7,6 +7,8 @@ RUN apt-get update && apt-get install -y \
     libjpeg62-turbo-dev \
     libpng-dev \
     libzip-dev \
+    libicu-dev \
+    && docker-php-ext-install intl \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd zip \
     && rm -rf /var/lib/apt/lists/*
