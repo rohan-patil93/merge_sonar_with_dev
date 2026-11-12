@@ -3,6 +3,7 @@
 *.env
 .env.*
 
+/dbconfig.php
 
 # Firebase service account keys
 *-adminsdk-*.json
