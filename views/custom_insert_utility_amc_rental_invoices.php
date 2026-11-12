@@ -1,0 +1,731 @@
+<?php 
+$_SESSION['apply_js']['multiselest'] = 1;
+
+if (isset($_POST['submitrentalinvoice'])) {
+    $_POST['company_id'] = $_SESSION['company_id'];
+    $_POST['user_id'] = $_SESSION['userid'];
+    $url = API . "?mode=updateutilityamcrentalinvoices&method=post";
+    $response1 = file_post_contents($url, $_POST, 'insert');
+    $response1 = json_decode($response1, 1);
+    $response = $response1['res'];
+  // echo "<pre>"; print_r($response1); echo "</pre>";
+    if($response['status'] == 'sucess'){ 
+        if($response['LASTID'] == 0){
+            $msgcode = 3001; //update
+        }else{
+            $msgcode = 3000; //insert
+            $_SESSION['insert_msg'] = $msgcode;
+            header("location:index?option=COM_LIST_UTILITY_AMC_RENTAL_INVOICES");
+        }   
+        ?>
+          <script type="text/javascript">
+            document.onreadystatechange = function(){
+              if(document.readyState == "complete") {
+                tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message'][$msgcode]; ?>','');
+              } 
+            }
+          </script>
+          <?php    
+    }else{
+        if($response['status'] == 'fail'){
+            $dis_err = explode(",", $response['other']);
+            foreach ($dis_err as $va) {
+              $dis_er [] = $dis_labels[$va];
+            }
+            $error_message = $response['error_no'] ." : ".$_SESSION['error'][$response['error_no']]." : ".implode(", ", (array)$dis_er);
+          }else{
+            $error_message = $response['message'];
+          }
+    }
+}
+
+
+
+
+$rid1 =$_GET['Rid'];
+$rid2 =  encodeId($rid1);
+$rid3 = urldecode($rid2);
+$rrid = explode(":", $rid3);
+$transaction_id = $rrid['1'];
+$cusurl = API."?mode=getutilityamcrentalinvoices&transaction_id=" . $transaction_id;
+$apicall = callAPI($cusurl);
+$result = json_decode($apicall, 1);
+$transaction_data = $result['utility_rental_invoices'];
+$utility_rental_invoice_items = $result['utility_rental_invoice_items'];
+$utility_rental_invoice_item_taxes = $result['utility_rental_invoice_item_taxes'];
+$utilitytaxtable = array();
+foreach($utility_rental_invoice_item_taxes as $utrent){
+	$utilitytaxtable[$utrent['transaction_item_id']] = $utrent;
+}
+$party_additional_details = json_decode($transaction_data['party_additional_details'],1);
+$owner_additional_details = json_decode($transaction_data['owner_additional_details'],1);
+$utility_uom = $result['utility_uom'];
+$states= $result['states'];
+//echo "<pre>"; print_r($utility_rental_invoice_item_taxes); echo "</pre>";
+$operation_symbol = array('+','/','*','%','=');
+
+
+$check_array = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK,'');
+if(in_array($transaction_data['current_status'], (array)$check_array) OR ($transaction_data['current_status'] == ST_CALLBACK AND $transaction_data['originator'] == $_SESSION['userid'])){
+        $disable = "" ;
+}else{ 
+    $disable = "event_disabled" ;
+}
+
+?>
+
+<script>
+<?php if($transaction_data['current_status'] != ST_APPROVED){ ?>
+window.addEventListener("load", function() {	
+	$('.allitemsid').each(function(index) {
+	    var item_id = $(this).val();
+	    var parent_id = $('.allparenid').eq(index).val();
+	    console.log(item_id,'-------------------------',parent_id);
+	   rentalInvoicePopupCalculattion(item_id, parent_id);
+	});
+});
+<?php } ?>
+
+
+function rentalInvoicePopupCalculattion(ruid,parent_id){
+	
+	var originator_state_id = $("#originator_state_id").val();
+	var supplier_state_id = $("#supplier_state_id").val();
+	var rentinvpopup_qty = $("#rentinvpopup_qty_"+ruid).val();
+	var rentinvpopup_rate = $("#rentinvpopup_rate_"+ruid).val();
+	var rentinvpopup_condition = $("#rentinvpopup_condition_"+ruid).val();
+	var calculate = 0;
+	if(rentinvpopup_qty !="" && rentinvpopup_condition !=""  && rentinvpopup_rate !=""){
+		if(rentinvpopup_condition == "="){
+			calculate = parseFloat(rentinvpopup_rate);
+		}else if(rentinvpopup_condition == "%"){
+			calculate = (parseFloat(rentinvpopup_qty) / 100) * parseFloat(rentinvpopup_rate);
+		}else{
+			calculate = parseFloat(rentinvpopup_qty)+rentinvpopup_condition+parseFloat(rentinvpopup_rate);
+		}
+	}
+	var returnvalue = Math.round(eval(calculate));
+	$("#rentinvpopup_rent_"+ruid).val(returnvalue.toFixed(2));
+	var totalamt = 0;
+	$(".rentinvpopup_child_rent_"+parent_id).each(function() {
+		totalamt = parseFloat(totalamt)+parseFloat(this.value);
+		//console.log(this.value);
+	});
+	$("#rentinvpopup_parent_rent_"+parent_id).val(totalamt.toFixed(2));
+	$("#rentinvpopup_parent_rent_item_price_"+parent_id).val(totalamt.toFixed(2));
+	
+	var total_percentage = percentage = 0
+	
+	if ($('#utility_gst_'+parent_id).is(':checked')){
+		$("#utility_gst_utility_text_"+parent_id).text(totalamt.toFixed(2));
+		$("#utility_gst_utility_"+parent_id).val(totalamt.toFixed(2));
+		
+		var percentage = $('#utility_gst_percentage_'+parent_id).val();
+		total_percentage = ((totalamt * percentage) / 100);
+		totalamt = totalamt+total_percentage;
+	    
+	   // $("#utility_gst_total_tax_text_"+parent_id).text(total_percentage.toFixed(2)+" ("+percentage+"%)");
+	    
+	   $("#utility_gst_total_tax_text_"+parent_id).text(total_percentage.toFixed(2));
+	    $("#utility_gst_total_tax_"+parent_id).val(total_percentage.toFixed(2));
+	    console.log('gst -',total_percentage);
+	    $("#tax_html_table").show();
+	} else {
+		$("#utility_gst_utility_text_"+parent_id).text(totalamt.toFixed(2));
+		$("#utility_gst_utility_"+parent_id).val(totalamt.toFixed(2));
+	    $("#utility_gst_total_tax_text_"+parent_id).text("0");
+	    $("#utility_gst_total_tax_"+parent_id).val(0);
+	    $("#tax_html_table").hide();
+	    console.log('gst 8888-',0);
+	}
+	$("#rentinvpopup_parent_rent_with_tax_"+parent_id).val(totalamt.toFixed(2));
+	
+	calculatetotals();
+
+}
+
+
+function calculatetotals(){
+
+	var originator_state_id = $("#originator_state_id").val();
+	var supplier_state_id = $("#supplier_state_id").val();
+	var totalallparentamount = 0;
+	$(".all_parent_amount_with_tax").each(function() {
+		totalallparentamount = parseFloat(totalallparentamount)+parseFloat(this.value);
+		console.log(this.value);
+	});
+	grandTotal = roundingOffVal(totalallparentamount);
+	$(".total_amount_display").text(grandTotal.toFixed(2));
+	$(".total_amount_input").val(grandTotal.toFixed(2));
+
+	var taxtotal = 0;
+	$(".utility_gst_total_tax").each(function() {
+		taxtotal = parseFloat(taxtotal)+parseFloat(this.value);
+	});
+	$("#tax_amount_display_total").text(taxtotal.toFixed(2));
+	$("#tax_amount_input").val(taxtotal.toFixed(2));
+
+	var withouttaxtotal = 0;
+	$(".utility_gst_without_tax").each(function() {
+		withouttaxtotal = parseFloat(withouttaxtotal)+parseFloat(this.value);
+	});
+	$("#totalallparentamount_text").text(withouttaxtotal.toFixed(2));
+	$("#totalallparentamount_input").val(withouttaxtotal.toFixed(2));
+	var html = ``;
+	if(originator_state_id == supplier_state_id){
+		 html = `<tr>
+	                    <th class="text-start p-2 border">
+	                        <span>
+	                            CGST @
+	                            <span
+	                                class="tax_value">9</span>
+	                            %
+	                            on <br>
+	                            <span class="sub_amount_display">
+	                                `+(withouttaxtotal.toFixed(2))+`
+	                            </span>
+	                        </span>
+	                    </th>
+	                    <th class="p-2 text-end border">
+	                        <span class="tax_amount_display">
+	                            `+(taxtotal.toFixed(2)/2)+`
+	                        </span>
+	                    </th>
+	                </tr>
+	                <tr>
+	                    <th class="text-start p-2 border">
+	                        <span>
+	                            SGST @
+	                            <span
+	                                class="tax_value">9</span>
+	                            %
+	                            on <br>
+	                            <span class="sub_amount_display">
+	                                `+(withouttaxtotal.toFixed(2))+`
+	                            </span>
+	                        </span>
+	                    </th>
+	                    <th class="p-2 text-end border">
+	                        <span class="tax_amount_display">
+	                             `+(taxtotal.toFixed(2)/2)+`
+	                        </span>
+	                    </th>
+	                </tr>`;
+	}else{
+		html = `<tr>
+                <th class="text-start p-2 border">
+                    <span>
+                        IGST @
+                        <span
+                            class="tax_value">18</span>
+                        %
+                        on <br>
+                        <span class="sub_amount_display">
+                           `+(withouttaxtotal.toFixed(2))+`
+                        </span>
+                    </span>
+                </th>
+                <th class="p-2 text-end border">
+                    <span class="tax_amount_display">
+                        `+(taxtotal.toFixed(2))+`
+                    </span>
+                </th>
+            </tr>`;
+	}
+	
+	$("#tax_html_table").html(html);
+}
+
+function roundingOffVal(grandtotal){
+    var rounding_off = Math.round(parseFloat(grandtotal)) - parseFloat(grandtotal);
+    if(isNaN(grandtotal)){ 
+        $(".rounding_off").val(0)
+    }else{
+        grandtotal = parseFloat(grandtotal) + parseFloat(rounding_off);
+        document.querySelector("#rounding_off").textContent = rounding_off.toFixed(2);
+        $(".rounding_off").val(rounding_off.toFixed(2))
+    }
+    return grandtotal;
+}
+
+    function submitDynamicWorkflowPopUp(table_name,transaction_id,current_status,next_status){
+    //var validate = checkMandatoryArray();
+    //if(validate == 0){
+        jQuery.ajax({
+            url: "views/custom_insert_dynamic_status_popup.php",
+            data:'table_name='+table_name+'&current_status='+current_status+'&transaction_id='+transaction_id+'&next_status='+next_status,
+            type: "POST",
+            success:function(data){
+                $('#popup1').html(data);
+                $('#kt_modal_KTDatatable_remote').modal("show");
+            },
+            error:function (){}
+        });
+    //}
+}
+
+function submitDynamicWorkflow(table_name,transaction_id,current_status,next_status,old_status_name,new_status_name){
+    var validate = checkMandatoryArray();
+    if(validate == 0){
+        swal({
+                title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
+                text: "Please note the status of the document will change to "+new_status_name,
+                type: "info",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes",
+                cancelButtonText: "No",
+                closeOnConfirm: false
+            },
+            function(){
+                console.log("dataa aa");
+                jQuery.ajax({
+                    url: "ajax.php",
+                    data:'page=submitstatusdynamicworkflow&table_name='+table_name+'&current_status='+current_status+'&transaction_id='+transaction_id+'&next_status='+next_status,
+                    type: "POST",
+                    success:function(response){
+                        console.log(response);
+                        var res = JSON.parse(response);
+                        //console.log(res);
+                        window.location.href = window.location.href;
+                        if(res.transaction_update.status=='sucess'){
+                             window.location.href = window.location.href;
+                            swal({
+                                title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
+                                text: "<?php echo $_SESSION['error_message']['9059']; ?>",
+                                type: "success",
+                                showCancelButton: false,
+                                closeOnConfirm: false,
+                                showLoaderOnConfirm: true
+                            }, function () {
+                                window.location.href = window.location.href;
+                            });
+                        }else{
+                            swal({
+                                title: "Oops...",
+                                text: res.transaction_update.message,
+                                type: "error",
+                                showCancelButton: true,
+                                showConfirmButton: false,
+                                cancelButtonText: "Ok",
+                                confirmButtonClass: "btn-danger",
+                                closeOnCancel: false
+                            });
+                        }
+                    },
+                    error:function (){}
+                });
+            }); 
+    }
+}
+
+function cancelInvoices(transaction_table,transaction_id){
+    jQuery.ajax({
+        url: "views/custom_insert_invoice_cancellations_popup.php",
+        data:'transaction_table='+transaction_table+'&transaction_id='+transaction_id,
+        type: "POST",
+        success:function(data){
+            $('#popup1').html(data);
+            $('#kt_modal_KTDatatable_remote').modal("show");
+            $( ".datepicker" ).datepicker({
+                showOn: "both",
+                buttonText: "<i class='ti-calendar text-dark f-20 f-w-800 m-r-10'></i>",
+                dateFormat: date_format,
+                minDate: 0,
+                maxDate: "+30D",
+                setDate: new Date(),
+                changeMonth: true,
+                changeYear: true,
+            });
+            var elemdefault = document.querySelector('.js-primary-sm-popup');
+            var switchery = new Switchery(elemdefault, { color: '#4099ff', jackColor: '#fff',size: 'small' });
+
+        },
+        error:function (){}
+    });
+}
+</script>
+
+<?php if($error_message !=''){ ?>
+        <div class="alert alert-danger background-danger alert-dismissible">
+            <strong><?php echo $error_message; ?></strong>
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>  
+<?php } ?>
+<div class="card">
+	 <?php if($transaction_data['cancel_invoice'] =="Y"){ ?>
+<div id="dynamiccanceldiv"><span>Cancelled Invoice</span></div>
+<?php } ?>
+	 <?php 
+        $workflowsteps = getWorkflowStatus('utility_amc_rental_invoices',$transaction_data['id'],$transaction_data['current_status']);
+            ?>
+	<div class="card-header table-card-header">
+        <h5> Rental Invoice</h5>
+        <div class="card-header-right table-card-header ">
+		    <?php   /**
+                if($transaction_data['current_status'] == ST_APPROVED AND $transaction_data['cancel_invoice'] !="Y" && $transaction_data['originator'] ==$_SESSION['userid']){ ?>
+                        <button type="button" class="btn btn-danger btn-sm waves-effect waves-light" onclick="cancelInvoices('utility_rental_invoices','<?php echo $transaction_id; ?>')">
+                            <i class="text-white fa fa-times-circle"></i> &nbsp;Cancel Invoice
+                        </button>
+                <?php  }  **/ 
+                	echo $workflowsteps['workflow_btn']; 
+                 	//$printurl = "index.php?option=COM_VIEW_RENTAL_INVOICES&rid=".$rid."&table=utility_rental_invoices&title=".urlencode('Rental Invoices');
+
+                    $printurl = "index.php?option=COM_VIEW_RENTAL_INVOICES&rid=".$transaction_id."&table=utility_amc_rental_invoices&title=".urlencode('Utility AMC Invoices'); 
+                	 ?> 
+             	<a target="_blank" href="<?php echo $printurl; ?>" class="btn btn-clean kt-margin-r-10"><i class="ti-printer"></i> </a> 
+
+            <a href="javascript:history.go(-1)" class="btn waves-effect waves-light m-r-50">
+                <i class="icofont icofont-reply"></i>
+                Back 
+            </a>
+        </div>
+    </div>
+
+	<div class="card-body">
+		<?php echo $workflowsteps['current_status_ribbon']; ?>
+		<form method="post" class="<?php echo $disable; ?>">
+		<div class="row">
+			<input type="hidden" name="rid" value="<?php echo $transaction_id; ?>">
+			
+			<div class="col-lg-3 form-group">
+	            <label for="transaction_number" class="inline-block mb-1 f-w-600">Transaction Number</label>
+	            
+	            <input type="text" id="transaction_number" name="transaction_number" class="form-control" placeholder="Enter Transaction no." value="<?= htmlspecialchars($transaction_data['transaction_number'] ?? '') ?>" readonly>
+            </div>
+            <div class="col-lg-3 form-group">
+                <label for="transaction_date" class="inline-block mb-1 f-w-600">Transaction Date</label>
+                <input type="text" id="transaction_date" value="<?= htmlspecialchars(fromDate($transaction_data['transaction_date']) ?? '') ?>" name="transaction_date" class="form-control datepicker" placeholder="Transaction Date">
+            </div>
+            <div class="col-lg-3 form-group">
+                <label for="due_date" class="inline-block mb-1 f-w-600">Due Date </label>
+                <input type="text" id="due_date" name="due_date" class="form-control datepicker" placeholder="Due Date" value="<?= htmlspecialchars(fromDate($transaction_data['due_date']) ?? '') ?>">
+            </div>
+            <div class="col-lg-3 form-group">
+                <label for="originator" class="inline-block mb-1 f-w-600">Originator</label>
+                <input type="text" class="form-control" value="<?= $_SESSION['users'][$transaction_data['originator']]; ?>"  readonly>
+            </div>
+            <div class="col-lg-3 form-group">
+                <label for="parent_ref_id" class="inline-block mb-1 f-w-600">Property Owner</label>
+                 <input type="text" class="form-control" value="<?php echo  $owner_additional_details['owner_company_name']; ?>"  readonly>
+                
+            </div>
+            <div class="col-lg-3 form-group">
+                <label for="ref_no" class="inline-block mb-1 f-w-600">Refrence No.</label>
+                <input type="text" id="ref_no" name="ref_no" class="form-control" placeholder="Refrence Number" value="<?= htmlspecialchars($transaction_data['ref_no'] ?? '') ?>">
+            </div>
+            <div class="col-lg-3 form-group">
+                <label for="refrence_bill" class="inline-block mb-1 f-w-600">Refrence Date</label>
+                <input type="text" id="refrence_bill" name="ref_date" class="form-control datepicker" placeholder="Refrence Bill"  value="<?= htmlspecialchars(fromDate($transaction_data['ref_date']) ?? '') ?>">
+            </div>
+            <div class="col-lg-3 form-group">
+                <label for="party" class="inline-block mb-1 f-w-600">Party/Tenant</label>
+                <input type="text" class="form-control"  value="<?= htmlspecialchars($transaction_data['party_name'] ?? '') ?>" readonly>
+            </div>
+            <div class="col-lg-3 form-group">
+                <label for="party_email" class="inline-block mb-1 f-w-600">Party
+                    Email</label>
+                <input type="text" id="party_email" name="party_email" class="form-control" value="<?= htmlspecialchars($transaction_data['party_email'] ?? '') ?>"  readonly>
+            </div>
+            <div class="col-lg-3 form-group">
+                <label for="party_phone" class="inline-block mb-1 f-w-600">Party Contact Number</label>
+                <input type="text" value="<?= htmlspecialchars($transaction_data['party_phone'] ?? '') ?>" name="party_phone" class="form-control"  readonly>
+            </div>
+            <div class="col-lg-3 form-group">
+                <label for="party_address" class="inline-block mb-1 f-w-600">Billing Address</label>
+                <textarea name="party_address" disabled id="party_address" Class="form-control"><?= htmlspecialchars($transaction_data['party_address'] ?? '') ?> </textarea>
+            </div>
+            <div class="col-lg-3 form-group">
+                <label for="party_address" class="inline-block mb-1 f-w-600">Shiping Address</label>
+                <textarea name="party_ship_adderss" disabled id="party_ship_adderss" Class="form-control"><?= htmlspecialchars($transaction_data['party_ship_adderss'] ?? '') ?> </textarea>
+            </div>
+
+           <!--  <input type="hidden" id="originator_state_id" value="<?php echo $transaction_data['originator_state_id']; ?>">
+			<input type="hidden" id="supplier_state_id" value="<?php echo $transaction_data['supplier_state_id']; ?>">
+            -->
+            <div class="col-lg-3 form-group">
+                <label for="party_address" class="inline-block mb-1 f-w-600">Billing State</label>
+                <select name="originator_state_id" id="originator_state_id" class="form-control js-example-basic-single" onchange="calculatetotals()">
+                    <option value="">Select Any One</option>
+                    <?php foreach($states as $stn){ ?>
+                    	<option value="<?php echo $stn['id']; ?>" <?php echo $transaction_data['originator_state_id'] == $stn['id']?"SELECTED":"";?> ><?php echo $stn['state_name']; ?></option>
+                    <?php } ?>
+                </select>
+            
+            </div>
+            <div class="col-lg-3 form-group">
+                <label for="party_address" class="inline-block mb-1 f-w-600">Party/Tenant State</label>
+            	<select name="supplier_state_id"  id="supplier_state_id"  class="form-control js-example-basic-single" onchange="calculatetotals()">
+                    <option value="">Select Any One</option>
+                    <?php foreach($states as $stn){ ?>
+                    	<option value="<?php echo $stn['id']; ?>" <?php echo $transaction_data['supplier_state_id'] == $stn['id']?"SELECTED":"";?> ><?php echo $stn['state_name']; ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="row">
+        	<div class="col-lg-9">
+        <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
+					<thead>
+						<tr>
+							<th width="5%">#</th>
+							<th width="15%">Utility</th>
+							<th width="15%">Remark</th>
+							<th width="5%">Tax</th>
+							<th width="5%">UOM</th>
+							<th width="10%">QTY</th>
+							<th width="10%">Formula</th>
+							<th width="10%">Rate</th>
+							<th width="10%" class="text-right" colspan="5">Amount</th>
+							
+						</tr>
+					</thead>
+					<tbody>
+					<?php 	
+						$i=1;
+						foreach($utility_rental_invoice_items as $bd){ 
+							$utility_rental_invoice_items_id = $utilitytaxtable[$bd['item_id']];
+						?>
+						<tr>
+							<input type="hidden" name="item_id[]" class="allitemsid" value="<?php echo $bd['item_id']; ?>">
+							<input type="hidden" name="utility_rental_invoice_items_id[]" value="<?php echo $bd['id']; ?>">
+							<input type="hidden" name="parent_id[]" class="allparenid" value="<?php echo $bd['parent_id']; ?>">
+							<td  class="p-1"><?php echo $bd['parent_id'] == 0?$i:"-"; ?></td>
+							<td class="p-1"><?php echo $bd['item_name']; ?></td>
+							<td class="p-1">
+								<textarea class="form-control" name="description[]"><?php echo $bd['description']; ?></textarea>
+							</td>
+							<td class="p-1">
+
+
+								<input type="hidden" name="utility_rental_invoice_item_taxes_id[]" value="<?php echo $utility_rental_invoice_items_id['id']; ?>">
+								
+								<input type="hidden" name="tax_name[]" value="<?php echo $utility_rental_invoice_items_id['tax_name']!=""?$utility_rental_invoice_items_id['tax_name']:'997212'; ?>"  >
+								
+								<input type="hidden" name="tax_id[]" value="<?php echo $utility_rental_invoice_items_id['tax_id']!=""?$utility_rental_invoice_items_id['tax_id']:'9015'; ?>"  >
+								
+								<input type="hidden" name="utility_gst_switch[]" value="<?php echo $bd['item_id']; ?>">
+								
+								<input type="hidden" name="utility_gst_percentage[]" value="<?php echo $utility_rental_invoice_items_id['tax_value']!=""?$utility_rental_invoice_items_id['tax_value']:18; ?>" id="utility_gst_percentage_<?php echo $bd['item_id']; ?>" >
+
+								<?php if($bd['parent_id'] == 0){ 
+									$checkedswitch = ""; $onetimecheck = "0";
+									if($bd['tax_amount'] !="" AND $bd['tax_amount'] !="0"){
+										$checkedswitch = "checked"; $onetimecheck = "1";
+									}
+									?>
+								<input type="checkbox" class="js-switch" name="utility_gst[<?php echo $bd['item_id']; ?>]" value="Y" id="utility_gst_<?php echo $bd['item_id']; ?>" onchange="rentalInvoicePopupCalculattion('<?php echo $bd['item_id']; ?>','<?php echo $bd['item_id']; ?>')" <?php echo $checkedswitch; ?>>
+								
+								<input type="hidden" name="utility_gst_total_tax[]" class="utility_gst_total_tax" value="<?php echo $bd['tax_amount']; ?>" id="utility_gst_total_tax_<?php echo $bd['item_id']; ?>" >
+								<input type="hidden" name="utility_gst_without_tax[]" value="<?php echo $bd['item_amount']; ?>" id="utility_gst_utility_<?php echo $bd['item_id']; ?>" class="utility_gst_without_tax">
+								<?php } ?>	
+								
+							</td>
+							<?php if($bd['parent_id'] != 0){ ?>
+							<td class="p-1">
+								<select name="purchase_uom[]"  class="form-control js-example-basic-single">
+			                        <option value="">N/A</option>
+			                        <?php foreach($utility_uom as $utiuom){ ?>
+			                        	<option value="<?php echo $utiuom['genc_detail_name']; ?>" <?php echo $bd['purchase_uom'] == $utiuom['genc_detail_name']?"SELECTED":"";?> ><?php echo $utiuom['genc_detail_code']; ?></option>
+			                        <?php } ?>
+			                    </select>
+							</td>
+							<td class="p-1">
+								<input type="text" class="form-control" id="rentinvpopup_qty_<?php echo $bd['item_id']; ?>"  name="item_quantity[]" value="<?php echo $bd['item_quantity']!=""?round($bd['item_quantity'],2):0; ?>" onblur="rentalInvoicePopupCalculattion('<?php echo $bd['item_id']; ?>','<?php echo $bd['parent_id']; ?>')">
+							</td>
+							<td class="p-1">
+								<select name="operation_symbol[]"  class="form-control js-example-basic-single" id="rentinvpopup_condition_<?php echo $bd['item_id']; ?>"  onchange="rentalInvoicePopupCalculattion('<?php echo $bd['item_id']; ?>','<?php echo $bd['parent_id']; ?>')">
+			                        <?php foreach($operation_symbol as $os){ ?>
+			                        	<option value="<?php echo $os; ?>" <?php echo $bd['operation_symbol'] == $os?"SELECTED":"";?> ><?php echo $os; ?></option>
+			                        <?php } ?>
+			                    </select>
+							</td>
+							<td class="p-1">
+								<input type="text" class="form-control" name="item_price[]" id="rentinvpopup_rate_<?php echo $bd['item_id']; ?>" value="<?php echo $bd['item_price']!=""?round($bd['item_price'],2):0; ?>" onblur="rentalInvoicePopupCalculattion('<?php echo $bd['item_id']; ?>','<?php echo $bd['parent_id']; ?>')">
+							</td>
+							<td class="p-1">
+								<input type="text" class="form-control rentinvpopup_child_rent_<?php echo  $bd['parent_id']; ?>" id="rentinvpopup_rent_<?php echo $bd['item_id']; ?>" name="total_amount[]" value="<?php echo $bd['total_amount']!=""?round($bd['total_amount'],2):0; ?>" readonly>
+							</td>
+							<?php }else{ $i++; ?>
+								<td colspan="4" class="p-1">
+									<input type="hidden" name="purchase_uom[]" value="">
+									<input type="hidden" name="item_quantity[]" value="1">
+									<input type="hidden" name="operation_symbol[]" value="*">
+									<input type="hidden" name="item_price[]" id="rentinvpopup_parent_rent_item_price_<?php echo $bd['item_id']; ?>" value="<?php echo $bd['total_amount']!=""?$bd['total_amount']:0; ?>">
+								</td>
+							<?php /** ?>
+							<td colspan="4" class="p-1">
+								<p class="text-center">Utility (<span id="utility_gst_utility_text_<?php echo $bd['item_id']; ?>"><?php echo customeummarmonyformate($bd['item_amount']); ?></span>) + Tax (<span id="utility_gst_total_tax_text_<?php echo $bd['item_id']; ?>"><?php echo customeummarmonyformate($bd['tax_amount']); ?></span>)</p>
+							</td>
+							<?php **/ ?>
+							<td class="p-1">
+								<input type="hidden" class="form-control all_parent_amount_with_tax" id="rentinvpopup_parent_rent_with_tax_<?php echo $bd['item_id']; ?>" name="total_amount_with_tax[]" value="<?php echo $bd['total_amount']!=""?round(($bd['total_amount']+$bd['tax_amount']),2):0; ?>" readonly>
+
+								<input type="text" class="form-control all_parent_amount" id="rentinvpopup_parent_rent_<?php echo $bd['item_id']; ?>" name="total_amount[]" value="<?php echo $bd['total_amount']!=""?round($bd['total_amount'],2):0; ?>" readonly>
+								<p class="text-center">+ Tax (<span id="utility_gst_total_tax_text_<?php echo $bd['item_id']; ?>"><?php echo customeummarmonyformate($bd['tax_amount']); ?></span>) </p>
+
+							</td>
+						<?php } ?>
+						</tr> 
+						<?php } ?>	
+			 		</tbody>
+			 	</table>
+
+			</div>
+			<div class="col-lg-3">
+				<div class="py-2 text-center border bg-primary">
+                    Summary
+                </div>
+                <table class="w-100">
+                    <tbody class="item-list">
+                        <tr>
+                            <th class="text-start py-2 border">
+                                <span>Sub Total</span>
+                            </th>
+                            <th class="text-end py-2 border">
+                                <span id="totalallparentamount_text"><?php echo round($transaction_data['amount'], 2); ?></span>
+                                <input type="hidden" id="totalallparentamount_input" name="sub_amount" value="">
+                            </th>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="border p-2">
+                                <table class="w-100" id="tax_html_table" <?php echo $onetimecheck == "0"?"style='display:none'":""; ?>>
+                                 <?php     
+                                 if($transaction_data['originator_state_id'] == $transaction_data['supplier_state_id']){ ?>
+                               	 	<tr>
+                                        <th class="text-start p-2 border">
+                                            <span>
+                                                CGST @
+                                                <span
+                                                    class="tax_value">9</span>
+                                                %
+                                                on <br>
+                                                <span class="sub_amount_display">
+                                                    ₹<?= number_format(($transaction_data['amount']), 2) ?>
+                                                </span>
+                                            </span>
+                                        </th>
+                                        <th class="p-2 text-end border">
+                                            <span class="tax_amount_display">
+                                                ₹<?= number_format($transaction_data['tax_amount']/2, 2) ?>
+                                            </span>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-start p-2 border">
+                                            <span>
+                                                SGST @
+                                                <span
+                                                    class="tax_value">9</span>
+                                                %
+                                                on <br>
+                                                <span class="sub_amount_display">
+                                                    ₹<?= number_format(($transaction_data['amount']), 2) ?>
+                                                </span>
+                                            </span>
+                                        </th>
+                                        <th class="p-2 text-end border">
+                                            <span class="tax_amount_display">
+                                                ₹<?= number_format($transaction_data['tax_amount']/2, 2) ?>
+                                            </span>
+                                        </th>
+                                    </tr>
+                            <?php } else{  ?>
+                                    <tr>
+                                        <th class="text-start p-2 border">
+                                            <span>
+                                                IGST @
+                                                <span
+                                                    class="tax_value">18</span>
+                                                %
+                                                on <br>
+                                                <span class="sub_amount_display">
+                                                    ₹<?= number_format($transaction_data['amount'] ?? 0, 2) ?>
+                                                </span>
+                                            </span>
+                                        </th>
+                                        <th class="p-2 text-end border">
+                                            <span class="tax_amount_display">
+                                                ₹<?= number_format($transaction_data['tax_amount'], 2) ?>
+                                            </span>
+                                        </th>
+                                    </tr>
+                                <?php } ?>
+                                </table>
+                               <table class="w-100" > 
+                                    <tr>
+                                        <th class="text-start p-2 border">
+                                            <span>Total Tax</span>
+                                        </th>
+                                        <th class="p-2 text-end border">
+                                            <span id="tax_amount_display_total">
+                                                ₹<?= number_format($transaction_data['tax_amount'], 2) ?>
+                                            </span>
+                                            <input type="hidden" id="tax_amount_input" name="total_tax_amount" value="">
+                                        </th>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-start p-2 border">
+                                <span>Grand Total</span>
+                            </th>
+                            <th class="p-2 text-end border">
+                                <span class="total_amount_display"> <?= number_format($transaction_data['total_amount'], 2) ?>
+                                </span>
+                                <input type="hidden" class="total_amount_input" name="grand_total_amount" value="<?= $transaction_data['total_amount'] ?>">
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="text-start p-2 border">
+                                <span>Rounding Off</span>
+                            </th>
+                            <th class="p-2 text-end border">
+                                <input type="hidden" class="rounding_off" name="rounding_off" value="<?php echo $transaction_data['rounding_off']!=""?$transaction_data['rounding_off']:0; ?>">
+                                <span id="rounding_off">
+                                    ₹<?= number_format($transaction_data['rounding_off'], 2) ?>
+                                </span>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+			</div>
+		</div>
+			
+
+		<div class="col-lg-12 m-t-40">
+            <div class="row">
+                <div class="col-lg-4 form-group">
+                    <label for="transaction_number" class="inline-block mb-1 f-w-600">Internal Note(s) </label>
+                    <textarea id="notes" name="notes" rows="4" class="form-control border" placeholder="Enter Description"><?= htmlspecialchars($transaction_data['notes'] ?? '') ?></textarea>
+                </div>
+                <div class="col-lg-4 form-group">
+                    <label for="transaction_number" class="inline-block mb-1 f-w-600">Printing Note(s) </label>
+                    <textarea id="printing_notes" name="printing_notes" rows="4" class="form-control border" placeholder="Enter Description"><?= htmlspecialchars($transaction_data['printing_notes'] ?? '') ?></textarea>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="flex gap-2 mt-4 <?php echo $disable; ?>">
+	        <?php if($transaction_data['id'] !=""){ ?>
+	        <button type="submit" name="submitrentalinvoice" class="btn btn-primary">Update</button>
+	        <?php }else{ echo "Record Not Fund"; } ?>
+	    </div>
+
+
+
+	</form>
+
+
+
+
+
+
+	</div>
+
+
+</div>

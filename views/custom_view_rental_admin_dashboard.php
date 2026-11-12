@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $_SESSION['apply_js']['amchart'] =1;
 
 if($_SESSION['config']['system_start_date'] !=""){
@@ -15,7 +15,7 @@ $admindashboardd = json_decode($admindashboardres,1);
 $customers = $admindashboardd['customers'];
 $approvedinvoices = $unapprovedinvoices = array();
 $rental_invoices_transnumber = array();
-foreach($admindashboardd['rental_invoices_list'] as $pending_list){
+foreach($admindashboardd['rental_invoices_list'] as $pending_list){ 
     if($pending_list['pending_amount'] <='0'){
         $paidinvoicse[] = $pending_list;
     }elseif($pending_list['shared']=='0'){
@@ -23,10 +23,12 @@ foreach($admindashboardd['rental_invoices_list'] as $pending_list){
     }elseif($pending_list['generated_invoice']=='0'){
         $generatedinvoice[] = $pending_list;
     }
+   // $rental_invoices_transnumber[$pending_list['id']] = $pending_list['transaction_number'];
 }
-foreach($admindashboardd['all_rental_invoices_list'] as $pending_list){
+foreach($admindashboardd['all_rental_invoices_list'] as $pending_list){ 
     $rental_invoices_transnumber[$pending_list['id']] = $pending_list['transaction_number'];
 }
+//print_r($admindashboardd);
 $transaction_approval_logs = $admindashboardd['transaction_approval_logs'];
 foreach($transaction_approval_logs as $tal){
     if($tal['response_type'] == 0){
@@ -89,9 +91,25 @@ foreach($recent_renewal_contract as $rcc){
 }
 $top_rent_res = $admindashboardd['top_rent_res'];
 $top_oldest = $admindashboardd['top_oldest'];
+//echo "<pre>"; print_r($admindashboardd['vendors_recent_join']); echo "</pre>";
 ?>
 <script>
 
+/**
+	function displaypopupdetailslist(option){
+ $.ajax({
+   url: "views/view_roll_back1.php",
+   data:'option='+option,
+   type: "POST",
+   success:function(data){
+console.log(data);
+                $('#dynamic_popup11').html(data);
+                $('#kt_modal_dynamic_popup2').modal("show");
+   },
+   error:function (){}
+ });
+}
+**/
   function billChart(){
     var reimbursementsyear = $("#billchartyear").val();
     jQuery.ajax({
@@ -174,7 +192,7 @@ $top_oldest = $admindashboardd['top_oldest'];
     });
 }
 function getRentMonth(monthyear){
-    var htmloader = '<div style="display: block;  margin-left: auto;  margin-right: auto;  width: 40%;"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+    var htmloader = '<div style="display: block;  margin-left: auto;  margin-right: auto;  width: 40%;"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;"></div>';
     $('#biilingrent').html(htmloader);
     jQuery.ajax({
         url: "views/custom_insert_property_tenant_billings.php",
@@ -195,6 +213,15 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
             $('#dynamic_popup11').html(data);
             $('#kt_modal_dynamic_popup2').modal("show");
             $(".js-example-basic-single").select2();
+            $( ".datepicker" ).datepicker({
+            showOn: "both",
+            buttonText: "<i class='ti-calendar text-dark f-20 f-w-800 m-r-10'></i>",
+            //dateFormat: date_format,
+            yearRange: "-60:+10",
+            setDate: new Date(),
+            changeMonth: true,
+            changeYear: true
+        }).next("button.ui-datepicker-trigger").html("<i class='ti-calendar text-dark f-12 f-w-800 m-r-10'></i>");
         }
     });
 }
@@ -202,14 +229,15 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
 
 <div class="banner">
     <img src="assets/images/student-courses/banner-1.jpg" class="" alt="">
-    <div class="banner-text">
+    <div class="banner-text" style="top: 3%;">
         <h2>Start managing Rental invoices with ease!</h2>
         <p>Helps you in managing: Rental bills and Payments. Renatl does this all through your modern Web Browser. Be assured to track your bills and payments from anywhere anytime.</p>
-        <button type="button" !' class="btn-white b-radius-5 text-uppercase f-w-600" onclick="OpenInsertRentalInvoicePopUp()">Rent Invoice</button>
+        <a href='#!' class="btn-white b-radius-5 text-uppercase f-w-600" onclick="OpenInsertRentalInvoicePopUp()">Rent Invoice</a>
         <?php if(RENTAL_INVOICE_SPLIT =="Y"){ ?>
-            <button type="button" !' class="btn-white b-radius-5 text-uppercase f-w-600" onclick="OpenInsertRentalInvoicePopUp('U')">Utility  Invoice</button>
+            <a href='#!' class="btn-white b-radius-5 text-uppercase f-w-600" onclick="OpenInsertRentalInvoicePopUp('U')">Utility  Invoice</a>
+            <a href='#!' class="btn-white b-radius-5 text-uppercase f-w-600" onclick="OpenInsertRentalInvoicePopUp('AMC')">AMC Invoice</a>
         <?php } ?>
-            <a href="index.php?option=COM_LIST_TENANAT_CUSTOMERS" class="btn-white b-radius-5 text-uppercase f-w-600 m-r-10"> Tenants</a>
+            <a href="index.php?option=COM_LIST_TENANAT_CUSTOMERS" class="btn-white b-radius-5 text-uppercase f-w-600 m-r-10"> Tenants</a>       
         <?php $_SESSION['payment_transaction_type'] = 'customers'; ?>
          <a href="index.php?option=COM_LIST_PAYMENTS" class="btn-white b-radius-5 text-uppercase f-w-600 m-r-10">Payments</a>
          <?php if(in_array('RENTAL_ADMIN',(array)$_SESSION['role_ids']) || in_array('ADMIN',(array)$_SESSION['role_ids'])){ ?>
@@ -221,7 +249,7 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
     <div class="card-block">
         <div class="width-77">
             <div class="row align-items-center">
-               <div class="d-flex align-items-center col-md" >
+               <div class="d-flex align-items-center col-md" > 
                 <div class="rounded-circle bg-primary p-3 m-r-10">
                     <i class="fa fa-user-plus f-20"></i>
                 </div>
@@ -235,7 +263,7 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                 <div class="rounded-circle bg-primary p-3  m-r-10">
                     <i class="fa fa-shopping-basket f-20"></i>
                 </div>
-                <div class="flex">
+                <div class="flex"> 
                    <a href="index.php?option=COM_LIST_RENTAL_INVOICES">
                     <div class="card-title f-w-600 f-16"><?php echo $admindashboardd['supplier_bill_cnt']!=""?$admindashboardd['supplier_bill_cnt']:0;?> Invoices</div>
                     <p class="card-subtitle text-muted mt-1 f-12"> Rental Invoices Created In the System</p>
@@ -264,15 +292,15 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
             <div class="card-header">
                 <h5>Tenants Invoice/Payments</h5>
                 <div class="float-right">
-            <select aria-label="Billchartyear" class ="form-control js-example-basic-single" id="billchartyear" onchange="billChart()">
+            <select class ="form-control js-example-basic-single" id="billchartyear" onchange="billChart()">
               <?php $startyear = date("Y"); for($mk=$startyear-10;$mk <= $startyear; $mk++){
                 ?>
                 <option  value="<?php echo  $mk; ?>" <?php echo date('Y')==$mk?"selected":"";?>>
                   <?php echo $mk; ?>
                 </option>
                 <?php
-
-             } ?>
+               
+             } ?> 
            </select>
         </div>
             </div>
@@ -286,15 +314,18 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
             <div class="card-header">
                 <h5>Tenants Invoice</h5>
             </div>
+            <?php  //print($vendorinvoicecnt); ?>
             <div class="card-block text-center">
-                 <?php
+                 <?php 
 
                     $tamount = $vendorinvoicecnt['total_amount'];
+                   // $pending_amount= $vendorinvoicecnt['pending_amount'];
                     $totalpaidamount= round($vendorinvoicecnt['total_amount'])-round($vendorinvoicecnt['total_pending']);
                     $percengraf = 0;
-                    if($tamount !="" && $tamount !=0){
-                      $percengraf = customNanAndEmptyValidation(round(($totalpaidamount/$tamount)*100));
-                    }
+                    if($tamount !="" AND $tamount !=0){
+                      $percengraf = customNanAndEmptyValidation(round(($totalpaidamount/$tamount)*100),1); 
+                       //$percengraf = customNanAndEmptyValidation(round(($tamount/)*100),1); 
+                    }       
                   ?>
                 <div class="m-b-20" style="text-align: -webkit-center;">
                       <div class="circle_gradiant mb-2" style="--p1: <?php echo ($percengraf*3.6).'deg';?>; --p1_color: #dc3545;--p2_color: #2ed8b6;">
@@ -325,16 +356,16 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
     <div class="row mb-3">
         <div class="col-lg-8"></div>
         <div class="col-lg-2 text-right">
-            <span class="form-label"> Rent Month </span>
+            <label class="form-label"> Rent Month </label>
         </div>
         <div class="col-lg-2">
             <div class=" form-group mb-0">
-                <input aria-label="Month" type="month" class="form-control" name="month" id="month" value="<?php echo $year."-".$month; ?>" onchange="getRentMonth(this.value)" min="<?php echo $_SESSION['config']['system_start_date'] !=""?date("Y-m",strtotime($_SESSION['config']['system_start_date'])):date("Y-m"); ?>">
+                <input type="month" class="form-control" name="month" id="month" value="<?php echo $year."-".$month; ?>" onchange="getRentMonth(this.value)" min="<?php echo $_SESSION['config']['system_start_date'] !=""?date("Y-m",strtotime($_SESSION['config']['system_start_date'])):date("Y-m"); ?>">
             </div>
         </div>
     </div>
     <div class="" id="biilingrent">
-    <?php include_once "custom_insert_property_tenant_billings.php";?>
+    <?php include("custom_insert_property_tenant_billings.php");?>
     </div>
 
 <div class="row">
@@ -347,15 +378,15 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                 </div>
             </div>
             <div class="card-body" >
-                <ul class="nav md-tabs infisuite_tab mt-2 ml-2 mb-3">
+                <ul class="nav md-tabs infisuite_tab mt-2 ml-2 mb-3" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#recent15days" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">  15 Days <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$recent15days);?></span></a>
+                        <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#recent15days" role="tab" aria-selected="true">  15 Days <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$recent15days);?></label></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#recent30days" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> 30 Days <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$recent30days);?></span></a>
+                        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#recent30days" role="tab" aria-selected="true"> 30 Days <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$recent30days);?></label></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#recent45days" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> 45 Days <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$recent45days);?></span></a>
+                        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#recent45days" role="tab" aria-selected="true"> 45 Days <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$recent45days);?></label></a>
                     </li>
                 </ul>
                 <div class="tab-content tabs">
@@ -364,12 +395,12 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                         <table class="table table-hover m-b-0" style="font-size:13px;" >
                             <thead>
                                 <tr>
-                                    <th scope="col">Tenant Name</th>
-                                    <th scope="col">Contract Date</th>
+                                    <th>Tenant Name</th>
+                                    <th>Contract Date</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($recent15days as $rcc){?>
+                            <?php foreach($recent15days as $rcc){?>    
                                 <tr>
                                     <td class="p-2"><a href="index?option=COM_INSERT_PROPERTY_TENANT_DETAILS&Rid=<?php echo deocdeId("id:".$rcc['id']);?>" target="_blank" class="text-primary"><?php echo $rcc['tenant_name']; ?></a></td>
                                     <td class="p-2"><?php echo fromDate($rcc['created_date']); ?></td>
@@ -379,10 +410,10 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                         </table>
                     <?php }else{ ?>
                         <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Contract</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Contract</p>   
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-                            </div>
+                            </div>   
                         </div>
                     <?php } ?>
                     </div>
@@ -391,12 +422,12 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                         <table class="table table-hover m-b-0" style="font-size:13px;" >
                             <thead>
                                 <tr>
-                                    <th scope="col">Tenant Name</th>
-                                    <th scope="col">Contract Date</th>
+                                    <th>Tenant Name</th>
+                                    <th>Contract Date</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($recent30days as $rcc){?>
+                            <?php foreach($recent30days as $rcc){?>    
                                 <tr>
                                      <td class="p-2"><a href="index?option=COM_INSERT_PROPERTY_TENANT_DETAILS&Rid=<?php echo deocdeId("id:".$rcc['id']);?>" target="_blank" class="text-primary"><?php echo $rcc['tenant_name']; ?></a></td>
                                     <td class="p-2"><?php echo fromDate($rcc['created_date']); ?></td>
@@ -406,10 +437,10 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                         </table>
                         <?php }else{ ?>
                         <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Contract</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Contract</p>   
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-                            </div>
+                            </div>   
                         </div>
                     <?php } ?>
                     </div>
@@ -418,12 +449,12 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                         <table class="table table-hover m-b-0" style="font-size:13px;" >
                             <thead>
                                 <tr>
-                                    <th scope="col">Tenant Name</th>
-                                    <th scope="col">Contract Date</th>
+                                    <th>Tenant Name</th>
+                                    <th>Contract Date</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($recent45days as $rcc){?>
+                            <?php foreach($recent45days as $rcc){?>    
                                 <tr>
                                      <td class="p-2"><a href="index?option=COM_INSERT_PROPERTY_TENANT_DETAILS&Rid=<?php echo deocdeId("id:".$rcc['id']);?>" target="_blank" class="text-primary"><?php echo $rcc['tenant_name']; ?></a></td>
                                     <td class="p-2"><?php echo fromDate($rcc['created_date']); ?></td>
@@ -433,10 +464,10 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                         </table>
                          <?php }else{ ?>
                         <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Contract</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Contract</p>   
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-                            </div>
+                            </div>   
                         </div>
                     <?php } ?>
                     </div>
@@ -453,15 +484,15 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                 </div>
             </div>
             <div class="card-body" >
-                <ul class="nav md-tabs infisuite_tab mt-2 ml-2 mb-3">
+                <ul class="nav md-tabs infisuite_tab mt-2 ml-2 mb-3" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#expire15days" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">  15 Days <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$expire15days);?></span></a>
+                        <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#expire15days" role="tab" aria-selected="true">  15 Days <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$expire15days);?></label></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#expire30days" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> 30 Days <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$expire30days);?></span></a>
+                        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#expire30days" role="tab" aria-selected="true"> 30 Days <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$expire30days);?></label></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#expire45days" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> 45 Days <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$expire45days);?></span></a>
+                        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#expire45days" role="tab" aria-selected="true"> 45 Days <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$expire45days);?></label></a>
                     </li>
                 </ul>
                 <div class="tab-content tabs">
@@ -470,12 +501,12 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                         <table class="table table-hover m-b-0" style="font-size:13px;" >
                             <thead>
                                 <tr>
-                                    <th scope="col">Tenant Name</th>
-                                    <th scope="col">Expire Date</th>
+                                    <th>Tenant Name</th>
+                                    <th>Expire Date</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($expire15days as $rcc){ ?>
+                            <?php foreach($expire15days as $rcc){ ?>    
                                 <tr>
                                      <td class="p-2"><a href="index?option=COM_INSERT_PROPERTY_TENANT_DETAILS&Rid=<?php echo deocdeId("id:".$rcc['id']);?>" target="_blank" class="text-primary"><?php echo $rcc['tenant_name']; ?></a></td>
                                     <td class="p-2"><?php echo fromDate($rcc['lease_period_end_date']); ?></td>
@@ -485,10 +516,10 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                         </table>
                         <?php }else{ ?>
                         <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Contract</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Contract</p>   
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-                            </div>
+                            </div>   
                         </div>
                     <?php } ?>
                     </div>
@@ -497,12 +528,12 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                         <table class="table table-hover m-b-0" style="font-size:13px;" >
                             <thead>
                                 <tr>
-                                    <th scope="col">Tenant Name</th>
-                                    <th scope="col">Expire Date</th>
+                                    <th>Tenant Name</th>
+                                    <th>Expire Date</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($expire30days as $rcc){ ?>
+                            <?php foreach($expire30days as $rcc){ ?>    
                                 <tr>
                                      <td class="p-2"><a href="index?option=COM_INSERT_PROPERTY_TENANT_DETAILS&Rid=<?php echo deocdeId("id:".$rcc['id']);?>" target="_blank" class="text-primary"><?php echo $rcc['tenant_name']; ?></a></td>
                                     <td class="p-2"><?php echo fromDate($rcc['lease_period_end_date']); ?></td>
@@ -512,10 +543,10 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                         </table>
                         <?php }else{ ?>
                         <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Contract</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Contract</p>   
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-                            </div>
+                            </div>   
                         </div>
                     <?php } ?>
                     </div>
@@ -524,12 +555,12 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                         <table class="table table-hover m-b-0" style="font-size:13px;" >
                             <thead>
                                 <tr>
-                                    <th scope="col">Tenant Name</th>
-                                    <th scope="col">Expire Date</th>
+                                    <th>Tenant Name</th>
+                                    <th>Expire Date</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($expire45days as $rcc){ ?>
+                            <?php foreach($expire45days as $rcc){ ?>    
                                 <tr>
                                      <td class="p-2"><a href="index?option=COM_INSERT_PROPERTY_TENANT_DETAILS&Rid=<?php echo deocdeId("id:".$rcc['id']);?>" target="_blank" class="text-primary"><?php echo $rcc['tenant_name']; ?></a></td>
                                     <td class="p-2"><?php echo fromDate($rcc['lease_period_end_date']); ?></td>
@@ -539,10 +570,10 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                         </table>
                         <?php }else{ ?>
                         <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Contract</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Contract</p>   
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-                            </div>
+                            </div>   
                         </div>
                     <?php } ?>
                     </div>
@@ -559,15 +590,15 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                 </div>
             </div>
             <div class="card-body" >
-                <ul class="nav md-tabs infisuite_tab mt-2 ml-2 mb-3">
+                <ul class="nav md-tabs infisuite_tab mt-2 ml-2 mb-3" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#renewal15days" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">  15 Days <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$renewal15days);?></span></a>
+                        <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#renewal15days" role="tab" aria-selected="true">  15 Days <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$renewal15days);?></label></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#renewal30days" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> 30 Days <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$renewal30days);?></span></a>
+                        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#renewal30days" role="tab" aria-selected="true"> 30 Days <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$renewal30days);?></label></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#renewal45days" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> 45 Days <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$renewal45days);?></span></a>
+                        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#renewal45days" role="tab" aria-selected="true"> 45 Days <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$renewal45days);?></label></a>
                     </li>
                 </ul>
                 <div class="tab-content tabs">
@@ -576,12 +607,12 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                         <table class="table table-hover m-b-0" style="font-size:13px;" >
                             <thead>
                                 <tr>
-                                    <th scope="col">Tenant Name</th>
-                                    <th scope="col">Renewal Date</th>
+                                    <th>Tenant Name</th>
+                                    <th>Renewal Date</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($renewal15days as $rcc){ ?>
+                            <?php foreach($renewal15days as $rcc){ ?>    
                                 <tr>
                                      <td class="p-2"><a href="index?option=COM_INSERT_PROPERTY_TENANT_DETAILS&Rid=<?php echo deocdeId("id:".$rcc['id']);?>" target="_blank" class="text-primary"><?php echo $rcc['tenant_name']; ?></a></td>
                                     <td class="p-2"><?php echo fromDate($rcc['renewal_date']); ?></td>
@@ -591,10 +622,10 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                         </table>
                          <?php }else{ ?>
                         <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Contract</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Contract</p>   
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-                            </div>
+                            </div>   
                         </div>
                     <?php } ?>
                     </div>
@@ -603,12 +634,12 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                         <table class="table table-hover m-b-0" style="font-size:13px;" >
                             <thead>
                                 <tr>
-                                    <th scope="col">Tenant Name</th>
-                                    <th scope="col">Renewal Date</th>
+                                    <th>Tenant Name</th>
+                                    <th>Renewal Date</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($renewal30days as $rcc){ ?>
+                            <?php foreach($renewal30days as $rcc){ ?>    
                                 <tr>
                                      <td class="p-2"><a href="index?option=COM_INSERT_PROPERTY_TENANT_DETAILS&Rid=<?php echo deocdeId("id:".$rcc['id']);?>" target="_blank" class="text-primary"><?php echo $rcc['tenant_name']; ?></a></td>
                                     <td class="p-2"><?php echo fromDate($rcc['renewal_date']); ?></td>
@@ -617,10 +648,10 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                             </tbody>
                              <?php }else{ ?>
                         <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Contract</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Contract</p>   
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-                            </div>
+                            </div>   
                         </div>
                     <?php } ?>
                         </table>
@@ -630,12 +661,12 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                         <table class="table table-hover m-b-0" style="font-size:13px;" >
                             <thead>
                                 <tr>
-                                    <th scope="col">Tenant Name</th>
-                                    <th scope="col">Renewal Date</th>
+                                    <th>Tenant Name</th>
+                                    <th>Renewal Date</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($renewal45days as $rcc){ ?>
+                            <?php foreach($renewal45days as $rcc){ ?>    
                                 <tr>
                                     <td class="p-2"><a href="index?option=COM_INSERT_PROPERTY_TENANT_DETAILS&Rid=<?php echo deocdeId("id:".$rcc['id']);?>" target="_blank" class="text-primary"><?php echo $rcc['tenant_name']; ?></a></td>
                                     <td class="p-2"><?php echo fromDate($rcc['renewal_date']); ?></td>
@@ -645,10 +676,10 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                         </table>
                          <?php }else{ ?>
                         <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Contract</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Contract</p>   
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-                            </div>
+                            </div>   
                         </div>
                     <?php } ?>
                     </div>
@@ -657,7 +688,7 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
         </div>
     </div>
      <div class="col-lg-4">
-        <div class="card">
+        <div class="card"> 
             <div class="card-header">
                 <h5>Top 5 Rent</h5>
                 <div class="card-header-right table-card-header ">
@@ -669,12 +700,12 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                 <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
                     <thead>
                         <tr>
-                            <th scope="col">Tenant Name</th>
-                            <th scope="col" class="text-right">Monthly Rent</th>
+                            <th>Tenant Name</th>
+                            <th class="text-right">Monthly Rent</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <?php foreach($top_rent_res as $rcc){ ?>
+                    <?php foreach($top_rent_res as $rcc){ ?>    
                         <tr>
                              <td class="p-2"><a href="index?option=COM_INSERT_PROPERTY_TENANT_DETAILS&Rid=<?php echo deocdeId("id:".$rcc['id']);?>" target="_blank" class="text-primary"><?php echo $rcc['tenant_name']; ?></a></td>
                             <td class="p-2 text-right"><?php echo customeummarmonyformateifine($rcc['monthly_rent']); ?></td>
@@ -684,10 +715,10 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                 </table>
                 <?php }else{ ?>
                         <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Contract</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Contract</p>   
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-                            </div>
+                            </div>   
                         </div>
                     <?php } ?>
             </div>
@@ -701,17 +732,17 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                     <a href="index.php?option=COM_INSERT_PROPERTY_TENANT_DETAILS" class=" b-b-primary text-primary float-right">View all</a>
                 </div>
             </div>
-            <div class="card-body custom-scroll" style=" height: 300px;">
+            <div class="card-body custom-scroll" style=" height: 300px;"> 
                 <?php if(count((array)$top_oldest) !=0 ){ ?>
-                <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter_2">
+                <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
                     <thead>
                         <tr>
-                            <th scope="col">Tenant Name</th>
-                            <th scope="col" class="text-right">Days</th>
+                            <th>Tenant Name</th>
+                            <th class="text-right">Days</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <?php foreach($top_oldest as $rcc){ ?>
+                    <?php foreach($top_oldest as $rcc){ ?>    
                         <tr>
                             <td class="p-2"><a href="index?option=COM_INSERT_PROPERTY_TENANT_DETAILS&Rid=<?php echo deocdeId("id:".$rcc['id']);?>" target="_blank" class="text-primary"><?php echo $rcc['tenant_name']; ?></a></td>
                             <td class="p-2 text-right"><?php echo $rcc['days']; ?></td>
@@ -721,10 +752,10 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                 </table>
                 <?php }else{ ?>
                         <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Contract</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Contract</p>   
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-                            </div>
+                            </div>   
                         </div>
                     <?php } ?>
             </div>
@@ -737,36 +768,38 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
             </div>
             <div class="card-body custom-scroll" style=" height: 300px;">
                 <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Contract</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Contract</p>   
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-                            </div>
+                            </div>   
                         </div>
             </div>
         </div>
     </div>
 </div>
 
+
+
 <div class="row">
         <div class="col-lg-6">
           <div class="card table-card">
             <div class="card-header">
-              <h5>Approval Pending</h5>
+              <h5>Approval Pending</h5> 
             </div>
             <div class="card-body custom-scroll" style="max-height: 400px; min-height: 400px;">
                 <div class="card-block table-responsive" >
                   <table   class="table table-hover m-b-0" style="font-size:13px;">
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Payment Number</th>
-                        <th scope="col">Request Date</th>
-                        <th scope="col">Transaction Date</th>
-                        <th scope="col" class="text-right">Price</th>
+                        <th>#</th>
+                        <th>Payment Number</th>
+                        <th>Request Date</th>
+                        <th>Transaction Date</th>
+                        <th class="text-right">Price</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <?php $mq = 1; if(count((array)$transactionapprovallogs['pending'])!='0'){
+                      <?php $mq = 1; if(count((array)$transactionapprovallogs['pending'])!='0'){ 
                         foreach($transactionapprovallogs['pending'] as $empe){ $ridrecengtbils = deocdeId("id:".$empe['id']); ?>
                           <tr>
                           <td><?php echo $mq; ?></td>
@@ -775,11 +808,9 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                           <td><?php echo fromDate($empe['payment_date']); ?></td>
                           <td class="text-right"><?php echo $empe['amount']; ?></td>
                         </tr>
-                    <?php $mq++;
-}
-}else{
+                    <?php $mq++; } }else{ 
                           echo "<tr><td colspan='7' class='text-center'><h4 ><i class='fa fa-warning'></i> No Approval Pending</h4></td></tr>";
-                        } ?>
+                        } ?>                  
                       </tbody>
                     </table>
                 </div>
@@ -789,22 +820,22 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
         <div class="col-lg-6">
           <div class="card table-card">
             <div class="card-header">
-              <h5>Approved</h5>
+              <h5>Approved</h5> 
             </div>
             <div class="card-body custom-scroll" style="max-height: 400px; min-height: 400px;">
                 <div class="card-block table-responsive" >
                   <table class="table table-hover m-b-0" style="font-size:13px;">
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Payment Number</th>
-                        <th scope="col">Response Date</th>
-                        <th scope="col">Transaction Date</th>
-                        <th scope="col" class="text-right">Price</th>
+                        <th>#</th>
+                        <th>Payment Number</th>
+                        <th>Response Date</th>
+                        <th>Transaction Date</th>
+                        <th class="text-right">Price</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <?php $mq = 1; if(count((array)$transactionapprovallogs['approved'])!='0'){
+                      <?php $mq = 1; if(count((array)$transactionapprovallogs['approved'])!='0'){ 
                         foreach($transactionapprovallogs['approved'] as $empe){
                             $ridrecengtbils = deocdeId("id:".$empe['id']);
                              ?>
@@ -815,11 +846,9 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                           <td><?php echo fromDate($empe['payment_date']); ?></td>
                           <td class="text-right"><?php echo $empe['amount']; ?></td>
                         </tr>
-                    <?php $mq++;
-}
-}else{
+                    <?php $mq++; } }else{ 
                           echo "<tr><td colspan='7' class='text-center'><h4 ><i class='fa fa-warning'></i> No Approved</h4></td></tr>";
-                        } ?>
+                        } ?>                  
                       </tbody>
                     </table>
                 </div>
@@ -828,43 +857,44 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
         </div>
       </div>
 
+
+
 <div class="pcoded-inner-content">
     <div class="main-body">
         <div class="page-wrapper">
             <?php if(count((array)$admindashboardd['vendors_list']) != 0){ ?>
             <div class="page-body border-bottom">
-                <div class="width-77">
+                <div class="width-77"> 
                     <div class="row">
                         <div class="card-header">
-                            <h5>TOP 3 Tenants</h5>
+                            <h5>TOP 3 Tenants</h5> 
                             <div class="card-header-right table-card-header ">
                                 <a href="index.php?option=COM_LIST_TENANAT_CUSTOMERS" class=" b-b-primary text-primary float-right">View all</a>
                             </div>
                         </div>
                         <?php
-                        $bg_color_array = array('bg-primary','bg-success','bg-info','bg-danger');
+                        $bg_color_array = array('bg-primary','bg-success','bg-info','bg-danger');  
                         $tven = 0;
-
-                            foreach($admindashboardd['vendors_list'] as $vendorslist){
+                        
+                            foreach($admindashboardd['vendors_list'] as $vendorslist){ 
 
         $tamount = $vendorslist['total_amount'];
         $pending_amount= $vendorslist['total_amount']-$vendorslist['pending_amount'];
         $percengraf = 0;
-        if($tamount !="" && $tamount !=0){
-        $percengraf = customNanAndEmptyValidation(round(($pending_amount/$tamount)*100));
-}
+        if($tamount !="" AND $tamount !=0){
+        $percengraf = customNanAndEmptyValidation(round(($pending_amount/$tamount)*100),1); } 
+      
 
-
-                              ?>
+                              ?>    
                                 <div class="col-xl-4 col-md-12">
                                     <a href="index?option=COM_INSERT_CUSTOMERS&Rid=<?php echo deocdeId("id:".$vendorslist['id']);?>">
                                         <div class="card <?php echo $bg_color_array[$tven]; ?>" style="min-height:100px">
                                             <div class="card-body">
                                                 <div class="row align-items-center">
                                                     <div class="col-auto">
-                                                        <?php
+                                                        <?php 
                                                         if($vendorslist['image']!=""){ ?>
-                                                           <img src="<?php echo "uploads/customer/".$vendorslist['image']; ?>" class="img-radius img-50" alt="">
+                                                           <img src="<?php echo "uploads/customer/".$vendorslist['image']; ?>" class="img-radius img-50" alt="" onerror="this.src='uploads/all/no-image.jpg';">
                                                        <?php }else{ ?>
                                                         <span class="img-radius img-50 align-top m-r-10 custom_txt_round custom_txt_round p-2 f-1 text-center bg-white text-mute"><?php echo initials($vendorslist['display_name']); ?></span>
                                                     <?php } ?>
@@ -896,43 +926,49 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
 
                                 </a>
                             </div>
-                            <?php $tven++;
-} ?>
+                            <?php $tven++; } ?>
+                        <?php /** }else{?>
+                            <div class="card-px text-center py-20 m-t-30">
+                              <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Customers</p>   
+                              <div class="text-center px-4">
+                                <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+                            </div>   
+                        </div>
+                    <?php } **/ ?>
                 </div>
-            </div>
-            <?php } ?>
+            </div> 
+            <?php } ?>    
         </div>
         <?php    if(count((array)$admindashboardd['vendors_recent_join']) != 0){ ?>
         <div class="page-body mt-4 border-bottom">
             <div class="width-77">
                 <div class="row">
                     <div class="card-header">
-                        <h5>Recent Customers</h5>
+                        <h5>Recent Customers</h5> 
                         <div class="card-header-right table-card-header ">
                             <a href="index.php?option=COM_LIST_TENANAT_CUSTOMERS" class=" b-b-primary text-primary float-right">View all</a>
                         </div>
                     </div>
 
-                    <?php foreach($admindashboardd['vendors_recent_join'] as $vendorsrecentjoin){
+                    <?php foreach($admindashboardd['vendors_recent_join'] as $vendorsrecentjoin){ 
 
                           $tamount = $vendorsrecentjoin['total_amount'];
                           $pending_amount= $vendorsrecentjoin['total_amount']-$vendorsrecentjoin['pending_amount'];
                           $percengraf = 0;
-                          if($tamount !="" && $tamount !=0){
-                          $percengraf = customNanAndEmptyValidation(round(($pending_amount/$tamount)*100));
-}
+                          if($tamount !="" AND $tamount !=0){
+                          $percengraf = customNanAndEmptyValidation(round(($pending_amount/$tamount)*100),1); } 
+      
 
-
-                      ?>
+                      ?> 
                         <div class="col-xl-4 col-md-12">
                             <a href="index?option=COM_INSERT_CUSTOMERS&Rid=<?php echo deocdeId("id:".$vendorsrecentjoin['id']);?>">
                                 <div class="card proj-t-card" style="min-height: 90px;">
                                     <div class="card-body">
                                         <div class="row align-items-center">
                                             <div class="col-auto">
-                                               <?php
+                                               <?php 
                                                if($vendorsrecentjoin['image']!=""){ ?>
-                                                   <img src="<?php echo "uploads/customer/".$vendorsrecentjoin['image']; ?>" class="img-radius img-50" alt="">
+                                                   <img src="<?php echo "uploads/customer/".$vendorsrecentjoin['image']; ?>" class="img-radius img-50" alt="" onerror="this.src='uploads/all/no-image.jpg';">
                                                <?php }else{ ?>
                                                 <span class="img-radius img-50 align-top m-r-10 custom_txt_round custom_txt_round p-2 f-1 text-center bg-white text-mute"><?php echo initials($vendorsrecentjoin['display_name']); ?></span>
                                                 <?php } ?></div>
@@ -957,7 +993,15 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                                 </a>
                             </div>
                         <?php } ?>
-            </div>
+                    <?php /** }else{?>
+                        <div class="card-px text-center py-20 m-t-30">
+                          <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Customers</p>   
+                          <div class="text-center px-4">
+                            <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+                        </div>   
+                    </div>
+                <?php } **/ ?>
+            </div>  
         </div>
     </div>
 <?php } ?>
@@ -965,12 +1009,12 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
         <div class="width-77">
             <div class="row">
                 <div class="col-lg-12" >
-                    <?php include_once 'views/custom_rental_aging_and_projection_reports.php'; ?>
+                    <?php include('views/custom_rental_aging_and_projection_reports.php'); ?>
                 </div>
                 <div class="col-lg-12" >
-                    <?php include_once 'views/custom_list_rental_invoices_table.php'; ?>
-                </div>
-
+                    <?php include('views/custom_list_rental_invoices_table.php'); ?>
+                </div>	
+     
             </div>
         </div>
     </div>

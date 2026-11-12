@@ -9,23 +9,24 @@ if (isset($_POST['submitrentalinvoice'])) {
     $response1 = file_post_contents($url, $_POST, 'insert');
     $response1 = json_decode($response1, 1);
     $response = $response1['res'];
-    if($response['status'] == 'sucess'){
+   //echo "<pre>"; print_r($response); echo "</pre>";
+    if($response['status'] == 'sucess'){ 
         if($response['LASTID'] == 0){
             $msgcode = 3001; //update
         }else{
             $msgcode = 3000; //insert
             $_SESSION['insert_msg'] = $msgcode;
             header("location:index?option=COM_LIST_RENTAL_INVOICES");
-        }
+        }   
         ?>
           <script type="text/javascript">
             document.onreadystatechange = function(){
               if(document.readyState == "complete") {
                 tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message'][$msgcode]; ?>','');
-              }
+              } 
             }
           </script>
-          <?php
+          <?php    
     }else{
         if($response['status'] == 'fail'){
             $dis_err = explode(",", $response['other']);
@@ -54,20 +55,26 @@ $paymentTermsData = $result['payment_terms'];
 $generalCodeDetailsData = $result['general_code_details'];
 $invoiceItemsTaxData = $result['rental_invoice_item_taxes'];
 $invoiceallItemsTaxData = $result['rental_invoice_all_item_taxes'];
+$taxdatawithitemdataid = array();
+foreach($invoiceallItemsTaxData as $taxdata){
+    $taxdatawithitemdataid[$taxdata['transaction_item_id']] = $taxdata;
+}
 $hsnSacCodesData = $result['hsn_and_sac_codes'];
 $userData = $result['application_users'];
+$dynamic_mapping_tables = $result['dynamic_mapping_tables'];
+//echo "<pre>"; print_r($taxdatawithitemdataid); echo "</pre>";
 
 $check_array = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK,'');
-if(in_array($invoiceData['current_status'], (array)$check_array) || ($invoiceData['current_status'] == ST_CALLBACK && $invoiceData['originator'] == $_SESSION['userid'])){
+if(in_array($invoiceData['current_status'], (array)$check_array) OR ($invoiceData['current_status'] == ST_CALLBACK AND $invoiceData['originator'] == $_SESSION['userid'])){
         $disable = "" ;
-}else{
+}else{ 
     $disable = "event_disabled" ;
 }
 ?>
 <script type="text/javascript">
     function submitDynamicWorkflowPopUp(table_name,transaction_id,current_status,next_status){
-    var validate = checkMandatoryArray();
-    if(validate == 0){
+    //var validate = checkMandatoryArray();
+    //if(validate == 0){
         jQuery.ajax({
             url: "views/custom_insert_dynamic_status_popup.php",
             data:'table_name='+table_name+'&current_status='+current_status+'&transaction_id='+transaction_id+'&next_status='+next_status,
@@ -78,7 +85,7 @@ if(in_array($invoiceData['current_status'], (array)$check_array) || ($invoiceDat
             },
             error:function (){}
         });
-    }
+    //}
 }
 
 function submitDynamicWorkflow(table_name,transaction_id,current_status,next_status,old_status_name,new_status_name){
@@ -103,6 +110,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                     success:function(response){
                         console.log(response);
                         var res = JSON.parse(response);
+                        //console.log(res);
                         window.location.href = window.location.href;
                         if(res.transaction_update.status=='sucess'){
                              window.location.href = window.location.href;
@@ -131,32 +139,86 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                     },
                     error:function (){}
                 });
-            });
+            }); 
     }
 }
+
+function cancelInvoices(transaction_table,transaction_id){
+    jQuery.ajax({
+        url: "views/custom_insert_invoice_cancellations_popup.php",
+        data:'transaction_table='+transaction_table+'&transaction_id='+transaction_id,
+        type: "POST",
+        success:function(data){
+            $('#popup1').html(data);
+            $('#kt_modal_KTDatatable_remote').modal("show");
+            $( ".datepicker" ).datepicker({
+                showOn: "both",
+                buttonText: "<i class='ti-calendar text-dark f-20 f-w-800 m-r-10'></i>",
+                dateFormat: date_format,
+                minDate: 0,
+                maxDate: "+30D",
+                setDate: new Date(),
+                changeMonth: true,
+                changeYear: true,
+            });
+            var elemdefault = document.querySelector('.js-primary-sm-popup');
+            var switchery = new Switchery(elemdefault, { color: '#4099ff', jackColor: '#fff',size: 'small' });
+
+        },
+        error:function (){}
+    });
+}
+
 </script>
 <?php if($error_message !=''){ ?>
         <div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+        </div>  
 <?php } ?>
 <div class="card">
-     <?php
+   <?php if($invoiceData['cancel_invoice'] =="Y"){ ?>
+<div id="dynamiccanceldiv"><span>Cancel Invoice</span></div>
+<?php } ?>
+     <?php 
         $workflowsteps = getWorkflowStatus('rental_invoices',$invoiceData['id'],$invoiceData['current_status']);
             ?>
      <div class="card-header table-card-header">
         <h5> Rental Invoice</h5>
         <div class="card-header-right table-card-header ">
-                <?php echo $workflowsteps['workflow_btn'];
-                 $printurl = "index.php?option=COM_VIEW_RENTAL_INVOICES&rid=".$rid."&table=rental_invoices&title=".urlencode('Rental Invoices');
 
+             <?php  
+                if($dynamic_mapping_tables['cancellation_application_table_name'] !="" AND $invoiceData['current_status'] == ST_APPROVED AND $invoiceData['cancel_invoice'] !="Y" && $invoiceData['originator'] ==$_SESSION['userid']){ ?>
+                        <button type="button" class="btn btn-danger btn-sm waves-effect waves-light" onclick="cancelInvoices('rental_invoices','<?php echo $rid; ?>')">
+                            <i class="text-white fa fa-times-circle"></i> &nbsp;Cancel Invoice
+                        </button>
+                <?php  }  ?>
+
+                <?php echo $workflowsteps['workflow_btn']; 
+                 $printurl = "index.php?option=COM_VIEW_RENTAL_INVOICES&rid=".$rid."&table=rental_invoices&title=".urlencode('Rental Invoices');
+                
                 ?>
-             <a target="_blank" href="<?php echo $printurl; ?>" class="btn btn-clean kt-margin-r-10" <?php echo $permission_listbtn; ?>><i class="ti-printer"></i> </a>
+
+                <?php 
+               // $invoicetables = array('sales_invoices','purchase_invoices','supplier_bills','rental_invoices','utility_rental_invoices'); 
+                if($invoiceData['current_status'] == ST_APPROVED){  ?>
+                    <a href="index.php?option=COM_INSERT_DEBIT_NOTES&ref_type=rental_invoices&ref_id=<?php echo $rid; ?>"  class=" cursor-pointer  btn btn-success" > <i class="icofont icofont-plus icon-white"></i> Debit Note </a>
+                    <a href="index.php?option=COM_INSERT_CREDIT_NOTES&ref_type=rental_invoices&ref_id=<?php echo $rid; ?>" class="cursor-pointer  btn btn-danger" ><i class="icofont icofont-plus icon-white"></i> Credit Note </a>
+                <?php } ?> 
+
+
+             <a target="_blank" href="<?php echo $printurl; ?>" class="btn btn-clean kt-margin-r-10" <?php echo $permission_listbtn; ?>><i class="ti-printer"></i> </a> 
+
+             <?php 
+             if($invoiceData['cancel_invoice'] =="N"){ ?>
+                 <button type="button" class="btn btn-danger btn-sm waves-effect waves-light" onclick="cancelInvoices('rental_invoices','<?php echo $rid; ?>')">
+                    <i class="text-white fa fa-times-circle"></i> &nbsp;Cancel Invoice
+                </button>
+          <?php  }  ?>
 
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light m-r-50">
                 <i class="icofont icofont-reply"></i>
-                Back
+                Back 
             </a>
         </div>
     </div>
@@ -248,49 +310,58 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                 <table class="col-lg-9 col-md-9">
                     <thead>
                         <tr>
-                            <th scope="col" class="border px-3 py-2">
+                            <th class="border px-3 py-2">
                                 Items / Services
                             </th>
-                            <th scope="col" class="border px-3 py-2">
+                            <th class="border px-3 py-2">
                                 HSN/Tax *
                             </th>
-                            <th scope="col" class="border px-3 py-2 text-end">
+                            <th class="border px-3 py-2 text-end">
                                 Qty *
                             </th>
-                            <th scope="col" class="border px-3 py-2">
+                            <th class="border px-3 py-2">
                                 UOM *
                             </th>
-                            <th scope="col" class="border px-3 py-2 text-end">
+                            <th class="border px-3 py-2 text-end">
                                 Rate *
                             </th>
-                            <th scope="col" class="border px-3 py-2 text-end">
+                            <th class="border px-3 py-2 text-end">
+                                Tax 
+                            </th>
+                            <th class="border px-3 py-2 text-end">
                                 Amount
                             </th>
                         </tr>
                     </thead>
                     <tbody class="before:block before:h-3 item-list">
                         <?php if (!empty($invoiceItemsData)): ?>
-                            <?php foreach ($invoiceItemsData as $rental_item): ?>
+                            <?php foreach ($invoiceItemsData as $rental_item): 
+                                $tax_row_detail = $taxdatawithitemdataid[$rental_item['item_id']];
+                                ?>
                                 <tr class="item">
                                     <td class="border p-1">
                                         <input type="hidden" name="id[]"
                                             value="<?= htmlspecialchars($rental_item['id']) ?>">
-                                        <input aria-label="Item Name" type="text" id="itemName" class="form-control"
+                                            <input type="hidden" id="originator_state_id" 
+                                            value="<?= htmlspecialchars($rental_item['originator_state_id']) ?>">
+                                        <input type="hidden" id="supplier_state_id"
+                                            value="<?= htmlspecialchars($rental_item['supplier_state_id']) ?>">
+                                        <input type="text" id="itemName" class="form-control"
                                             placeholder="Item Name" name="item_name[]"
                                             value="<?= htmlspecialchars($rental_item['item_name']) ?>" readonly>
                                     </td>
                                     <td class="w-52 border">
-                                        <input aria-label="Hsntax[]" type="text" id="hsntax" name="hsntax[]"
+                                        <input type="text" id="hsntax" name="hsntax[]"
                                             value="HSN - <?= htmlspecialchars($hsnSacCodesData['code'] ?? 'N/A') ?> / Tax - <?= htmlspecialchars($invoiceItemsTaxData['tax_value'] ?? 'N/A') ?>"
                                             class="form-control" placeholder="Enter HSN TAX" readonly>
                                     </td>
                                     <td class="w-28 border text-end">
-                                        <input aria-label="Item Quantity[]" type="number" id="item_qty" name="item_quantity[]"
+                                        <input type="number" id="item_qty" name="item_quantity[]"
                                             value="<?= htmlspecialchars($rental_item['item_quantity'] ?? 0) ?>"
                                             class="form-control text-end" placeholder="Enter QTY">
                                     </td>
                                     <td class="w-28 border">
-                                        <select aria-label="Purchase Uom[]" name="purchase_uom[]" id="purchase_uom" class="form-control js-example-basic-single">
+                                        <select name="purchase_uom[]"  class="form-control js-example-basic-single">
                                             <?php foreach ($generalCodeDetailsData as $uom): ?>
                                                 <option value="<?= htmlspecialchars($uom['genc_detail_code']) ?>">
                                                     <?= htmlspecialchars($uom['genc_detail_name']) ?>
@@ -299,23 +370,27 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                         </select>
                                     </td>
                                     <td class="w-28 border text-end">
-                                        <input aria-label="Item Price[]" type="text" id="item_rate" name="item_price[]"
-                                            value="<?= number_format($rental_item['item_price'] ?? 0, 2) ?>"
+                                        <input type="text" id="item_rate" name="item_price[]"
+                                            value="<?= $rental_item['item_price']; ?>"
                                             class="form-control text-end" placeholder="Enter Rate">
                                     </td>
+                                    <td class="w-28 border text-end">
+                                        <input type="hidden" id="tax_percentage" name="tax_percentage[]" value="<?php echo $tax_row_detail['tax_value']; ?>">
+                                        <input type="text" class="form-control text-end" id="tax_amount" name="tax_amount[]"
+                                            value="<?= htmlspecialchars($rental_item['tax_amount'] ?? '') ?>" readonly>
+                                    </td>
                                     <td class="w-40 border text-end">
-                                        <input aria-label="Item Amount[]" type="text" id="item_amount" name="item_amount[]"
-                                            value="<?= number_format($rental_item['item_amount'] ?? 0, 2) ?>"
+                                        <input type="text" id="item_amount" name="item_amount[]"
+                                            value="<?= $rental_item['item_amount'] ?>"
                                             class="form-control text-end" placeholder="Enter Amount" readonly>
-                                        <input type="hidden" id="tax_amount" name="tax_amount[]"
-                                            value="<?= htmlspecialchars($rental_item['tax_amount'] ?? '') ?>">
+                                        
                                         <input type="hidden" id="total_amount" name="total_amount[]"
                                             value="<?= htmlspecialchars($rental_item['total_amount'] ?? '') ?>">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="border border-slate-200">
-                                        <textarea aria-label="Enter Description" id="itemdescription1" name="description[]" rows="1"
+                                        <textarea id="itemdescription1" name="description[]" rows="1"
                                             style="height: 15vh;" class="form-control"
                                             placeholder="Enter Description"><?= htmlspecialchars($rental_item['description'] ?? '') ?></textarea>
                                     </td>
@@ -342,10 +417,10 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                     <table class="w-100">
                         <tbody class="item-list">
                             <tr>
-                                <th scope="col" class="text-start py-2 border">
+                                <th class="text-start py-2 border">
                                     <span>Sub Total</span>
                                 </th>
-                                <th scope="col" class="text-end py-2 border">
+                                <th class="text-end py-2 border">
                                     <span class="sub_amount_display">
                                         ₹<?= number_format($rental_item['item_amount'], 2) ?>
                                     </span>
@@ -357,8 +432,49 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                             <tr>
                                 <td colspan="2" class="border p-2">
                                     <table class="w-100">
+                                     <?php     
+                                     if($invoiceData['originator_state_id'] == $invoiceData['supplier_state_id']){ ?>
+                                    <tr>
+                                            <th class="text-start p-2 border">
+                                                <span>
+                                                    CGST @
+                                                    <span
+                                                        class="tax_value"><?= number_format(($invoiceItemsTaxData['tax_value']/2), 2) ?></span>
+                                                    %
+                                                    on <br>
+                                                    <span class="sub_amount_display">
+                                                        ₹<?= number_format(($rental_item['item_amount']/2), 2) ?>
+                                                    </span>
+                                                </span>
+                                            </th>
+                                            <th class="p-2 text-end border">
+                                                <span class="tax_amount_display">
+                                                    ₹<?= number_format($rental_item['tax_amount'], 2) ?>
+                                                </span>
+                                            </th>
+                                        </tr>
                                         <tr>
-                                            <th scope="col" class="text-start p-2 border">
+                                            <th class="text-start p-2 border">
+                                                <span>
+                                                    SGST @
+                                                    <span
+                                                        class="tax_value"><?= number_format(($invoiceItemsTaxData['tax_value']/2), 2) ?></span>
+                                                    %
+                                                    on <br>
+                                                    <span class="sub_amount_display">
+                                                        ₹<?= number_format(($rental_item['item_amount']/2), 2) ?>
+                                                    </span>
+                                                </span>
+                                            </th>
+                                            <th class="p-2 text-end border">
+                                                <span class="tax_amount_display">
+                                                    ₹<?= number_format($rental_item['tax_amount'], 2) ?>
+                                                </span>
+                                            </th>
+                                        </tr>
+                                <?php } else{  ?>
+                                        <tr>
+                                            <th class="text-start p-2 border">
                                                 <span>
                                                     IGST @
                                                     <span
@@ -370,18 +486,19 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                                     </span>
                                                 </span>
                                             </th>
-                                            <th scope="col" class="p-2 text-end border">
+                                            <th class="p-2 text-end border">
                                                 <span class="tax_amount_display">
                                                     ₹<?= number_format($rental_item['tax_amount'], 2) ?>
                                                 </span>
                                             </th>
                                         </tr>
+                                    <?php } ?>
                                         <tr>
-                                            <th scope="col" class="text-start p-2 border">
+                                            <th class="text-start p-2 border">
                                                 <span>Total Tax</span>
                                             </th>
-                                            <th scope="col" class="p-2 text-end border">
-                                                <span class="tax_amount_display">
+                                            <th class="p-2 text-end border">
+                                                <span class="tax_amount_display_total">
                                                     ₹<?= number_format($rental_item['tax_amount'], 2) ?>
                                                 </span>
                                                 <input type="hidden" class="tax_amount_input"
@@ -393,15 +510,26 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                             </tr>
 
                             <tr>
-                                <th scope="col" class="text-start p-2 border">
+                                <th class="text-start p-2 border">
                                     <span>Grand Total</span>
                                 </th>
-                                <th scope="col" class="p-2 text-end border">
+                                <th class="p-2 text-end border">
                                     <span class="total_amount_display">
-                                        ₹<?= number_format($rental_item['total_amount'], 2) ?>
+                                        ₹<?= number_format($invoiceData['total_amount'], 2) ?>
                                     </span>
                                     <input type="hidden" class="total_amount_input"
-                                        name="grand_total_amount" value="">
+                                        name="grand_total_amount" value="<?= $invoiceData['total_amount'] ?>">
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="text-start p-2 border">
+                                    <span>Rounding Off</span>
+                                </th>
+                                <th class="p-2 text-end border">
+                                    <input type="hidden" class="rounding_off" name="rounding_off" value="<?php echo $invoiceData['rounding_off']!=""?$invoiceData['rounding_off']:0; ?>">
+                                    <span id="rounding_off">
+                                        ₹<?= number_format($invoiceData['rounding_off'], 2) ?>
+                                    </span>
                                 </th>
                             </tr>
                         </tbody>
@@ -412,13 +540,13 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                         <div class="col-lg-4 form-group">
                             <label for="transaction_number" class="inline-block mb-1 f-w-600">Internal
                                 Note(s) </label>
-                            <textarea aria-label="Enter Description" id="notes" name="notes" rows="4" class="form-control border"
+                            <textarea id="notes" name="notes" rows="4" class="form-control border"
                                 placeholder="Enter Description"><?= htmlspecialchars($invoiceData['notes'] ?? '') ?></textarea>
                         </div>
                         <div class="col-lg-4 form-group">
                             <label for="transaction_number" class="inline-block mb-1 f-w-600">Printing
                                 Note(s) </label>
-                            <textarea aria-label="Enter Description" id="printing_notes" name="printing_notes" rows="4"
+                            <textarea id="printing_notes" name="printing_notes" rows="4"
                                 class="form-control border"
                                 placeholder="Enter Description"><?= htmlspecialchars($invoiceData['printing_notes'] ?? '') ?></textarea>
                         </div>
@@ -428,8 +556,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
             <div class="flex gap-2 mt-4 <?php echo $disable; ?>">
                 <?php if($invoiceData['id'] !=""){ ?>
                 <button type="submit" name="submitrentalinvoice" class="btn btn-primary">Update</button>
-                <?php }else{ echo "Record Not Fund";
-} ?>
+                <?php }else{ echo "Record Not Fund"; } ?>
             </div>
         </form>
     </div>
@@ -438,6 +565,10 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
     (function () {
         const taxValueElement = document.querySelector('.tax_value');
         const taxValue = parseFloat(taxValueElement?.textContent || 0) / 100;
+        //console.log("taxValueElement  -----",taxValueElement);
+        //console.log("taxValue  -----",taxValue);
+
+        
 
         function calculateRow(row) {
             const qtyInput = row.querySelector('#item_qty');
@@ -445,6 +576,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
             const amountInput = row.querySelector('#item_amount');
             const taxAmountInput = row.querySelector('#tax_amount');
             const totalAmountInput = row.querySelector('#total_amount');
+            const tax_percentage = row.querySelector('#tax_percentage');
 
             if (!qtyInput || !rateInput || !amountInput || !taxAmountInput || !totalAmountInput) {
                 console.error("Critical input elements not found for a row.");
@@ -454,9 +586,12 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
             const qty = parseFloat(qtyInput.value) || 0;
             const rate = parseFloat(rateInput.value) || 0;
             const amount = qty * rate;
-            const tax = amount * taxValue;
+            if(tax_percentage.value !="" || tax_percentage.value !="0"){
+                var tax = ((tax_percentage.value/100)*amount);
+            }else{
+                var tax = 0;
+            }
             const total = amount + tax;
-
             amountInput.value = amount.toFixed(2);
             taxAmountInput.value = tax.toFixed(2);
             totalAmountInput.value = total.toFixed(2);
@@ -465,6 +600,8 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
         }
 
         function calculateTotals() {
+            const originator_state_id = document.querySelector("#originator_state_id");
+            const supplier_state_id = document.querySelector("#supplier_state_id");
             const rows = document.querySelectorAll('.item');
             let subtotal = 0;
             let totalTax = 0;
@@ -476,15 +613,27 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                 totalTax += tax;
                 grandTotal += total;
             });
+            //console.log("totalTax ---- ",totalTax);
+            // Update Sub Total
+            
+            document.querySelectorAll('.tax_amount_display_total').forEach(el => el.textContent = `₹${totalTax.toFixed(2)}`);
 
+            if(originator_state_id.value == supplier_state_id.value){
+                totalTax = (totalTax/2);
+            }
             document.querySelectorAll('.sub_amount_display').forEach(el => el.textContent = `₹${subtotal.toFixed(2)}`);
             document.querySelectorAll('.sub_amount_input').forEach(el => el.value = subtotal.toFixed(2));
 
+            // Update Tax Amount
             document.querySelectorAll('.tax_amount_display').forEach(el => el.textContent = `₹${totalTax.toFixed(2)}`);
             document.querySelectorAll('.tax_amount_input').forEach(el => el.value = totalTax.toFixed(2));
 
+            grandTotal = roundingOffVal(grandTotal);
+            // Update Grand Total
             document.querySelectorAll('.total_amount_display').forEach(el => el.textContent = `₹${grandTotal.toFixed(2)}`);
             document.querySelectorAll('.total_amount_input').forEach(el => el.value = grandTotal.toFixed(2));
+
+
         }
 
         const rows = document.querySelectorAll('.item');
@@ -500,4 +649,17 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
         calculateTotals();
     })();
 
+    function roundingOffVal(grandtotal){
+        console.log("-----------------------------",grandtotal);
+    var rounding_off = Math.round(parseFloat(grandtotal)) - parseFloat(grandtotal);
+    if(isNaN(grandtotal)){ 
+        $(".rounding_off").val(0)
+    }else{
+        grandtotal = parseFloat(grandtotal) + parseFloat(rounding_off);
+        document.querySelector("#rounding_off").textContent = rounding_off.toFixed(2);
+        $(".rounding_off").val(rounding_off.toFixed(2))
+    }
+    
+    return grandtotal;
+}
 </script>
