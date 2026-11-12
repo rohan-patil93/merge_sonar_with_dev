@@ -59,19 +59,19 @@ $contractName = htmlspecialchars($schedule['contract_name'] ?? '', ENT_QUOTES, '
             </div>
         </div>
         <div class="mb-3">
-            <label class="form-label">Remarks <span class="text-danger">*</span></label>
-            <textarea class="form-control" name="fm_confirmation_remarks" rows="3" placeholder="Enter confirmation remarks" required></textarea>
+            <label for="fm_confirmation_remarks" class="form-label">Remarks <span class="text-danger">*</span></label>
+            <textarea class="form-control" name="fm_confirmation_remarks" id="fm_confirmation_remarks" rows="3" placeholder="Enter confirmation remarks" aria-label="Remarks" required></textarea>
         </div>
         <div class="mb-0">
-            <label class="form-label">Job Done Document <span class="text-danger">*</span></label>
-            <input type="file" class="form-control" name="fm_confirmation_file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.gif,.xls,.xlsx" required>
+            <label for="fm_confirmation_file" class="form-label">Job Done Document <span class="text-danger">*</span></label>
+            <input type="file" class="form-control" name="fm_confirmation_file" id="fm_confirmation_file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.gif,.xls,.xlsx" aria-label="Job Done Document" required>
             <small class="text-muted f-12">PDF, Word, Excel, or image files</small>
         </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary contract-amc-fm-confirm-close-btn" data-bs-dismiss="modal">Cancel</button>
         <button type="button" class="btn btn-primary" id="submitContractAmcFmConfirmBtn">
-            <i class="ti-check me-1"></i> Submit Confirmation
+            <i class="ti-check me-1" aria-hidden="true"></i> Submit Confirmation
         </button>
     </div>
 </form>

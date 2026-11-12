@@ -20,20 +20,20 @@ $companyName = isset($_SESSION['config']['name'])   ? htmlspecialchars($_SESSION
             <h5>Document Management Dashboard</h5>
             <div class="card-header-right">
                 <a href="index.php?option=COM_LIST_DOCUMENT_MANAGEMENT_WORKFLOW_CONFIGURATIONS_NEW" class="btn btn-success mb-2 desktop-view">
-                <i class="icofont icofont-settings"></i>
+                <i class="icofont icofont-settings" aria-hidden="true"></i>
                     Workflow Configurations
                 </a>
                 <a href="index.php?option=COM_LIST_DOCUMENT_TYPES" class="btn btn-success mb-2 desktop-view">
-                <i class="icofont icofont-list"></i>
+                <i class="icofont icofont-list" aria-hidden="true"></i>
                     Document Types            
                 </a>
 
                 <a href="index.php?option=COM_INSERT_DOCUMENT_MANAGEMENT" class="btn btn-success mb-2 desktop-view">
-                <i class="icofont icofont-plus icon-white "></i>
+                <i class="icofont icofont-plus icon-white" aria-hidden="true"></i>
                     Documents            
                 </a>
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
-                    <i class="icofont icofont-reply"></i> Back
+                    <i class="icofont icofont-reply" aria-hidden="true"></i> Back
                 </a>
             </div>
         </div>
@@ -43,42 +43,42 @@ $companyName = isset($_SESSION['config']['name'])   ? htmlspecialchars($_SESSION
             <div class="rounded p-3 mb-4 d-flex align-items-center justify-content-between text-white"
                  style="background: linear-gradient(135deg, #1e2a4a 0%, #2e3f6e 100%);">
                 <div>
-                    <p class="mb-0 f-18 f-w-600"><i class="icofont icofont-user-alt-3"></i> Welcome, <?php echo $adminName; ?></p>
+                    <p class="mb-0 f-18 f-w-600"><i class="icofont icofont-user-alt-3" aria-hidden="true"></i> Welcome, <?php echo $adminName; ?></p>
                     <?php if ($companyName != '') { ?>
                         <p class="mb-0 f-13" style="opacity:0.8;"><?php echo $companyName; ?></p>
                     <?php } ?>
                 </div>
                 <div class="f-36" style="opacity:0.6;">
-                    <i class="icofont icofont-files-stack"></i>
+                    <i class="icofont icofont-files-stack" aria-hidden="true"></i>
                 </div>
             </div>
 
             <!-- Summary cards -->
             <div class="row mb-4">
                 <div class="col-lg-3 col-md-6 mb-3">
-                    <div class="kpi-card kpi-blue" style="cursor:pointer;" id="dmCardAll" onclick="loadDmTable('', this)">
-                        <div class="fs-2 mb-2"><i class="icofont icofont-folder-open"></i></div>
+                    <div class="kpi-card kpi-blue" style="cursor:pointer;" id="dmCardAll" role="button" tabindex="0" aria-label="All Documents" onclick="loadDmTable('', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();loadDmTable('', this);}">
+                        <div class="fs-2 mb-2"><i class="icofont icofont-folder-open" aria-hidden="true"></i></div>
                         <div class="kpi-number"><?php echo $totalAll; ?></div>
                         <div class="kpi-label">All Documents</div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-3">
-                    <div class="kpi-card kpi-blue" style="cursor:pointer;" id="dmCardActive" onclick="loadDmTable('0', this)">
-                        <div class="fs-2 mb-2"><i class="icofont icofont-check-circled"></i></div>
+                    <div class="kpi-card kpi-blue" style="cursor:pointer;" id="dmCardActive" role="button" tabindex="0" aria-label="Active Documents" onclick="loadDmTable('0', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();loadDmTable('0', this);}">
+                        <div class="fs-2 mb-2"><i class="icofont icofont-check-circled" aria-hidden="true"></i></div>
                         <div class="kpi-number"><?php echo $totalActive; ?></div>
                         <div class="kpi-label">Active</div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-3">
-                    <div class="kpi-card kpi-orange" style="cursor:pointer;" id="dmCardInprogress" onclick="loadDmTable('inprogress', this)">
-                        <div class="fs-2 mb-2"><i class="icofont icofont-clock-time"></i></div>
+                    <div class="kpi-card kpi-orange" style="cursor:pointer;" id="dmCardInprogress" role="button" tabindex="0" aria-label="In Progress Documents" onclick="loadDmTable('inprogress', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();loadDmTable('inprogress', this);}">
+                        <div class="fs-2 mb-2"><i class="icofont icofont-clock-time" aria-hidden="true"></i></div>
                         <div class="kpi-number"><?php echo $totalInprogress; ?></div>
                         <div class="kpi-label">In Progress</div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-3">
-                    <div class="kpi-card kpi-green" style="cursor:pointer;" id="dmCardApproved" onclick="loadDmTable('199', this)">
-                        <div class="fs-2 mb-2"><i class="icofont icofont-badge"></i></div>
+                    <div class="kpi-card kpi-green" style="cursor:pointer;" id="dmCardApproved" role="button" tabindex="0" aria-label="Approved Documents" onclick="loadDmTable('199', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();loadDmTable('199', this);}">
+                        <div class="fs-2 mb-2"><i class="icofont icofont-badge" aria-hidden="true"></i></div>
                         <div class="kpi-number"><?php echo $totalApproved; ?></div>
                         <div class="kpi-label">Approved</div>
                     </div>
@@ -88,7 +88,7 @@ $companyName = isset($_SESSION['config']['name'])   ? htmlspecialchars($_SESSION
             <!-- Table content loaded by ajax -->
             <div id="dmTableContent" class="custom-scroll" style="max-height: 500px;">
                 <div class="text-center py-5">
-                    <img src="assets/images/spiner/spiner3.gif" style="width:200px;" alt="" >
+                    <img src="assets/images/spiner/spiner3.gif" style="width:200px;" alt="Loading..." >
                 </div>
             </div>
 
@@ -98,7 +98,7 @@ $companyName = isset($_SESSION['config']['name'])   ? htmlspecialchars($_SESSION
 
 <script type="text/javascript">
     function loadDmTable(status, el) {
-        var loader = '<div class="text-center py-5"><img src="assets/images/spiner/spiner3.gif" style="width:200px;" alt="" ></div>';
+        var loader = '<div class="text-center py-5"><img src="assets/images/spiner/spiner3.gif" style="width:200px;" alt="Loading..." ></div>';
         $('#dmTableContent').html(loader);
         $.ajax({
             url: 'views/custom_dashboard_document_management_ajax.php',

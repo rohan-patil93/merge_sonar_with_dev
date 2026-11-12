@@ -95,7 +95,7 @@ $sprogress = $statusprogress['full'] ?? array();
     align-items: center;
 }
 .badge-hover {
-    box-shadow: none; padding: 0; width: 25px; height: 22px; border-radius: 4px; line-height: 22px; text-align: center; color: #fff; font-weight: 600; display: inline-block; cursor: pointer; transition: transform 0.1s, opacity 0.1s;
+    border: none; box-shadow: none; padding: 0; width: 25px; height: 22px; border-radius: 4px; line-height: 22px; text-align: center; color: #fff; font-weight: 600; display: inline-block; cursor: pointer; transition: transform 0.1s, opacity 0.1s;
 }
 .badge-hover:hover { opacity: 0.85; transform: scale(1.08); }
 .badge-sec { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -314,7 +314,7 @@ $sprogress = $statusprogress['full'] ?? array();
         </span>
         <div class="card-header-right table-card-header">
            <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-              <i class="icofont icofont-reply"></i> Back
+              <i class="icofont icofont-reply" aria-hidden="true"></i> Back
           </a>
         </div>
     </div>
@@ -325,19 +325,20 @@ $sprogress = $statusprogress['full'] ?? array();
         <div class="row align-items-center mb-3">
             <div class="col-lg-5 col-md-6 d-flex align-items-center gap-2">
                 <button type="button" class="btn btn-outline-secondary week-nav-btn" title="Previous Week" onclick="changeselectweek('<?php echo $prev_week; ?>')">
-                    <i class="fa fa-chevron-left"></i> Prev Week
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i> Prev Week
                 </button>
                 <div class="input-group mt-3" style="max-width: 200px;">
-                    <input type="date" name="week_date" id="selected_week_date" value="<?php echo $start_date; ?>" onchange="changeselectweek(this.value)" class="form-control form-control-sm" style="height: 38px;">
+                    <label for="selected_week_date" class="visually-hidden sr-only">Select Week Date</label>
+                    <input type="date" name="week_date" id="selected_week_date" value="<?php echo $start_date; ?>" onchange="changeselectweek(this.value)" class="form-control form-control-sm" style="height: 38px;" aria-label="Select Week Date">
                 </div>
                 <button type="button" class="btn btn-outline-secondary week-nav-btn" title="Next Week" onclick="changeselectweek('<?php echo $next_week; ?>')">
-                    Next Week <i class="fa fa-chevron-right"></i>
+                    Next Week <i class="fa fa-chevron-right" aria-hidden="true"></i>
                 </button>
             </div>
 
             <div class="col-lg-3 col-md-6 text-center text-md-start">
                 <span class="badge bg-light text-dark border p-2 f-14">
-                    <i class="ti-calendar text-primary"></i> 
+                    <i class="ti-calendar text-primary" aria-hidden="true"></i> 
                     <b><?php echo date('d M Y', strtotime($start_date)); ?></b> &ndash; <b><?php echo date('d M Y', strtotime($end_date)); ?></b>
                 </span>
             </div>
@@ -489,15 +490,15 @@ $sprogress = $statusprogress['full'] ?? array();
                                         <!-- Attendance Action Buttons (P / Z / A / L) -->
                                         <?php if(!$is_future && $ccww != 'o' && $ccww != 'h' && !$is_appr_leave && !$is_pend_leave){ ?>
                                             <div class="mt-2 btn-att-group">
-                                                <span class="badge badge-hover" style="background-color:#2a9d8f;" title="Mark Present (8h)"
-                                                    <?php if($checkcurrent_status != 1){ ?> onclick="attendanceupload('p','<?php echo $predate; ?>',<?php echo $num; ?>,'Present')" <?php }else{ ?> onclick="alradysubmitedmanager()" <?php } ?>>P</span>
-                                                <span class="badge badge-hover" style="background-color:#e76f51;" title="Mark Half Day (4h)"
-                                                    <?php if($checkcurrent_status != 1){ ?> onclick="attendanceupload('z','<?php echo $predate; ?>',<?php echo $num; ?>,'Half Day')" <?php }else{ ?> onclick="alradysubmitedmanager()" <?php } ?>>Z</span>
-                                                <span class="badge badge-hover" style="background-color:#d62828;" title="Mark Absent"
-                                                    <?php if($checkcurrent_status != 1){ ?> onclick="attendanceupload('a','<?php echo $predate; ?>',<?php echo $num; ?>,'Absent')" <?php }else{ ?> onclick="alradysubmitedmanager()" <?php } ?>>A</span>
+                                                <button type="button" class="badge badge-hover" style="background-color:#2a9d8f;" title="Mark Present (8h)" aria-label="Mark Present (8h)"
+                                                    <?php if($checkcurrent_status != 1){ ?> onclick="attendanceupload('p','<?php echo $predate; ?>',<?php echo $num; ?>,'Present')" <?php }else{ ?> onclick="alradysubmitedmanager()" <?php } ?>>P</button>
+                                                <button type="button" class="badge badge-hover" style="background-color:#e76f51;" title="Mark Half Day (4h)" aria-label="Mark Half Day (4h)"
+                                                    <?php if($checkcurrent_status != 1){ ?> onclick="attendanceupload('z','<?php echo $predate; ?>',<?php echo $num; ?>,'Half Day')" <?php }else{ ?> onclick="alradysubmitedmanager()" <?php } ?>>Z</button>
+                                                <button type="button" class="badge badge-hover" style="background-color:#d62828;" title="Mark Absent" aria-label="Mark Absent"
+                                                    <?php if($checkcurrent_status != 1){ ?> onclick="attendanceupload('a','<?php echo $predate; ?>',<?php echo $num; ?>,'Absent')" <?php }else{ ?> onclick="alradysubmitedmanager()" <?php } ?>>A</button>
                                                 <?php if($ccedit == 0){ ?>
-                                                    <span class="badge badge-hover" id="btn_leave_<?php echo $num; ?>" style="background-color:#e9c46a; color:#fff;" title="Apply Leave for <?php echo date('d M Y', strtotime($predate)); ?>"
-                                                        onclick="directApplyLeave('<?php echo $predate; ?>', <?php echo $num; ?>)">L</span>
+                                                    <button type="button" class="badge badge-hover" id="btn_leave_<?php echo $num; ?>" style="background-color:#e9c46a; color:#fff;" title="Apply Leave for <?php echo date('d M Y', strtotime($predate)); ?>" aria-label="Apply Leave for <?php echo date('d M Y', strtotime($predate)); ?>"
+                                                        onclick="directApplyLeave('<?php echo $predate; ?>', <?php echo $num; ?>)">L</button>
                                                 <?php } ?>
                                             </div>
                                         <?php } ?>

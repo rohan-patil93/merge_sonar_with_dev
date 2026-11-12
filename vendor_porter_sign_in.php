@@ -26,7 +26,7 @@
                 <img class="img-100 mt-0" src="assets/images/sign-in/<?php echo LOGIN_INFO['logo']; ?>" alt="" >
                 <h2 class="f-26 f-w-600 mt-4">Sign In</h2>
                   <?php 
-                            $error = $_GET['error'];
+                            $error = $_GET['error'] ?? '';
                             $dis_error['6001'] = "Thank you very much for confirming your registration, </br> please login using email ID.";
                             $dis_error['6002'] = "Incorrect username or password.  Please try again.";
                             $dis_error['6003'] = "We have sent a verification email, </br> please login into your email and verify.";
@@ -67,7 +67,7 @@
                         <label for="chrPassword" class="visually-hidden">Password</label>
                         <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="password" name="chrPassword" id="chrPassword" required="" placeholder="password" aria-label="Password">
                     </div>
-                    <span class="float-right f-w-600 text-primary forgot-pwd-open cursor-pointer" onclick="fergotpassworddisplay()">Forgot Password?</span>
+                    <button type="button" class="btn btn-link float-right f-w-600 text-primary forgot-pwd-open cursor-pointer p-0 text-decoration-none border-0 bg-transparent" onclick="fergotpassworddisplay()">Forgot Password?</button>
                     <div class="form-group mt-4">
                     <input class="form-control" type="hidden"  name="ip" value="<?php echo getIPAddress();?>" >
                                       <input class="form-control" type="hidden"  name="browser" value="<?php echo getBrowser();?>" >
@@ -116,7 +116,7 @@
                                       <input type="hidden" name="submit" value="signup" />
                         <button type="submit" class="btn btn-primary waves-effect waves-light w-100 mt-3" >Sign Up</button>
                     </div>
-                    <p class="text-muted f-w-600 text-center sign-in-click">Already A Member <a class="text-primary" href="#" onclick="loginpagedisplay()">Sign In</a></p>
+                    <p class="text-muted f-w-600 text-center sign-in-click">Already A Member <button type="button" class="btn btn-link text-primary f-w-600 p-0 text-decoration-none border-0 bg-transparent" onclick="loginpagedisplay()">Sign In</button></p>
                 </div>
                 </form>
             </div>
@@ -155,7 +155,7 @@
             </div>
 
             <div class="" style="bottom: 10px; left: 20px; right: 20px;">
-                <b class="f-w-600 f-13">For any issues (login credentials, registration, technical assistance, etc.) in accessing the portal <span class="text-primary cursor-pointer"  onclick="loginemailpopup()" >click here</span></b>
+                <b class="f-w-600 f-13">For any issues (login credentials, registration, technical assistance, etc.) in accessing the portal <button type="button" class="btn btn-link text-primary cursor-pointer p-0 text-decoration-none border-0 bg-transparent f-w-600 f-13 align-baseline" onclick="loginemailpopup()">click here</button></b>
             </div>
         </div>
         <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 text-center desktop-view-bg">
@@ -179,11 +179,11 @@
                     </ul>
                     <b class="f-w-600 text-start d-block mt-3">Forgot Password?</b>
                     <ul class="text-start mt-2 login-ul m-l-10" style="list-style: disc; list-style-position: inside;">
-                        <li class="">Click here to reset your password: <span class="text-primary f-w-600 cursor-pointer" onclick="fergotpassworddisplay()">Forgot Password</span></li>
+                        <li class="">Click here to reset your password: <button type="button" class="btn btn-link text-primary f-w-600 cursor-pointer p-0 text-decoration-none border-0 bg-transparent align-baseline" onclick="fergotpassworddisplay()">Forgot Password</button></li>
                     </ul>
                     <b class="f-w-600 text-start d-block mt-3">New Vendor Registration</b>
                     <ul class="text-start mt-2 m-l-10" style="list-style: disc; list-style-position: inside;">
-                        <li class="">If you are a new vendor seeking to establish a business relationship with us, please <span class="text-primary cursor-pointer"  onclick="loginemailpopup()" >click here</span></li>
+                        <li class="">If you are a new vendor seeking to establish a business relationship with us, please <button type="button" class="btn btn-link text-primary cursor-pointer p-0 text-decoration-none border-0 bg-transparent f-w-600 align-baseline" onclick="loginemailpopup()">click here</button></li>
                     </ul>
                     <b class="f-w-600 text-start d-block mt-3">For Your Security</b> 
                     <p class="text-start mt-2 mb-2">We prioritize the security of your account information. Please be mindful of the following:</p>

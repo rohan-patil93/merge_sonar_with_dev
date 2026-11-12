@@ -114,8 +114,8 @@ function checkAll(ele) {
         <div class="card card-custom card-sticky j-content" id="kt_page_sticky_card">           
             <div class="card-header">
                 <h5><?php echo "Application Monthly Lock";  ?></h5>
-                <div class="card-header-right">
-                    <a  href="javascript:history.go(-1)" class="btn btn-primary waves-effect waves-ligh"> <i class="ti-arrow-left text-white"></i> Back</a>
+                <div class="header-right card-header-right">
+                    <a  href="javascript:history.go(-1)" class="btn btn-primary waves-effect waves-ligh"> <i class="ti-arrow-left text-white" aria-hidden="true"></i> Back</a>
                 </div>
             </div>
             <div class="card card-custom mt-2">
@@ -123,9 +123,9 @@ function checkAll(ele) {
                     <form class="kt-form" id="kt_form" method="post" action="" onsubmit="return validateForm()" name="myForm" enctype="multipart/form-data">
                         <div class="form-group row col-lg-12">
                             <div class="form-group col-lg-6">
-                                <label>Lock Type&nbsp;<span class="requried">*</span></label>
+                                <label class="form-label" for="lock_type">Lock Type&nbsp;<span class="requried">*</span></label>
                                 <div id="frist" class="mt-2">
-                                    <select class="form-control form-select js-example-basic-single" id="lock_type" onchange ="vendorsshow(this.value)"  name="lock_type" id="lock_type" aria-label="Lock Type">
+                                    <select class="form-control form-select js-example-basic-single" id="lock_type" onchange="vendorsshow(this.value)" name="lock_type" aria-label="Lock Type">
                                         <option value=""> Select Any one </option>
                                         <?php $listtype = array('0'=>"Month Wise Lock", '1'=>"Vendor Wise Lock");
                                          foreach ($listtype as  $lkey=>$listlock) {  ?> 
@@ -139,8 +139,8 @@ function checkAll(ele) {
                                 $lom = date("Y-m",strtotime($role['year']."-".$role['month']."-01")); 
                             }   ?>
                             <div class="form-group col-lg-6">
-                                <label>Month Lock&nbsp;<span class="requried">*</span></label>
-                                <input type="month" name="month" value="<?php echo $lom; ?>" id="month" class="form-control mt-2" aria-label="Month">
+                                <label class="form-label" for="month">Month Lock&nbsp;<span class="requried">*</span></label>
+                                <input type="month" name="month" value="<?php echo $lom; ?>" id="month" class="form-control mt-2" aria-label="Month Lock">
                                 <div style="display: none;color: red;" id="month_err"> Please Enter Month Lock</div> 
                             </div> 
                             
@@ -148,13 +148,13 @@ function checkAll(ele) {
                             <input type="hidden" name="company_id" id="company_id" value="<?php echo $_SESSION['company_id']; ?>">
                             <div class="form-group row col-lg-12" id="locktype" <?php if(count((array)$checkven)>0){ echo ""; }else{ ?>  style="display:none;" <?php } ?>>
                                 
-                                <div class="col-lg-9 mb-3"> <label class="form-label"> Vendors </label> </div>
+                                <div class="col-lg-9 mb-3"> <span class="form-label fw-bold font-weight-bold"> Vendors </span> </div>
                                 <div class="col-lg-3 mb-3">
                                     <div class="checkbox-zoom zoom-primary mt-1">
-                                        <label class="form-label">
-                                            <input type="checkbox"    name="" value= "" onclick="checkAll(this)" aria-label="Input">
+                                        <label class="form-label" for="check_all_vendors">
+                                            <input type="checkbox" id="check_all_vendors" name="check_all_vendors" value="" onclick="checkAll(this)" onkeydown="if(event.key==='Enter'){this.click();}" aria-label="Check or Uncheck All">
                                             <span class="cr">
-                                                 <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
+                                                 <i class="cr-icon icofont icofont-ui-check txt-primary" aria-hidden="true"></i>
                                              </span>  <span class="f-16"> Check / Uncheck All</span>
                                          </label>
                                     </div>
@@ -166,11 +166,11 @@ function checkAll(ele) {
                                     <input type="checkbox"  class="js-switch" value="<?php echo $vendor['id']; ?>"  name="lock_list[<?php echo $vendor['id']; ?>]" / aria-label="Input">
                                     </div> <?php **/ ?>
                                     <div class="checkbox-zoom zoom-primary mt-1">
-                                        <label class="form-label">
-                                            <input type="checkbox"  <?php if(in_array($vendor['id'],(array)$checkven) ){  echo "checked"; } ?>  name="lock_list[<?php echo $vendor['id']; ?>]" value= "<?php echo $vendor['id']; ?>" aria-label="Input">
+                                        <label class="form-label" for="vendor_<?php echo $vendor['id']; ?>">
+                                            <input type="checkbox" id="vendor_<?php echo $vendor['id']; ?>" <?php if(in_array($vendor['id'],(array)$checkven) ){  echo "checked"; } ?>  name="lock_list[<?php echo $vendor['id']; ?>]" value="<?php echo $vendor['id']; ?>" aria-label="<?php echo htmlspecialchars($vendor['company']); ?>">
                                             <span class="cr">
-                                                 <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
-                                             </span>  <span class="f-14"><?php echo $vendor['company']; ?> </span>
+                                                 <i class="cr-icon icofont icofont-ui-check txt-primary" aria-hidden="true"></i>
+                                             </span>  <span class="f-14"><?php echo htmlspecialchars($vendor['company']); ?> </span>
                                          </label>
                                     </div>
                                 </div>
@@ -183,19 +183,19 @@ function checkAll(ele) {
                                 <div class="col-lg-9 col-md-6 col-sm-6 col-6">
                                     <input type="hidden" name="hid" value=<?php echo $rid; ?> />
                                     <input type="hidden" name="submit" value="Update" />
-                                    <button id="kt_llogin_signup_submit" <?php if($status_res == '1'){ ?> disabled="disabled" <?php } ?> class="btn btn-primary mr-2" ><i class="la la-check"></i>Upadate</button>                       
+                                    <button id="kt_llogin_signup_submit" <?php if($status_res == '1'){ ?> disabled="disabled" <?php } ?> class="btn btn-primary mr-2" ><i class="la la-check" aria-hidden="true"></i>Upadate</button>                       
                             <?php } else{ ?>
                                 <div class="col-lg-9">
                                     <input type="hidden" name="submit" value="Add" />
-                                    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10"   name="submit_value_exit" value="exit"><i class="la la-check"></i>Save & exit</button>
+                                    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10"   name="submit_value_exit" value="exit"><i class="la la-check" aria-hidden="true"></i>Save & exit</button>
                                     <?php if($_POST['option'] ==""){ ?>
-                                    <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10"   name="submit_value" value="continue"><i class="la la-check-circle"></i>Save & continue</button>
+                                    <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10"   name="submit_value" value="continue"><i class="la la-check-circle" aria-hidden="true"></i>Save & continue</button>
                                     <?php } ?>
-                                    <button type="reset" class="btn btn-light-primary font-weight-bolder mr-2" ><i class="la la-close"></i>Cancel</button>
+                                    <button type="reset" class="btn btn-light-primary font-weight-bolder mr-2" ><i class="la la-close" aria-hidden="true"></i>Cancel</button>
                             <?php } ?>  
                                 </div>            
                                 <div class="col-lg-3 col-md-6 col-sm-6 col-6 text-right">
-                                    <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i>Delete</button>
+                                    <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash" aria-hidden="true"></i>Delete</button>
                                 </div> 
                             </div>
                         </div>

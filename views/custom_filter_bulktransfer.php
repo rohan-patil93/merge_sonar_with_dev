@@ -106,11 +106,11 @@ $select_value_json = json_encode($select_value);
     <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
       <div class="row">
         <div class="col-lg-6">
-          <label>Include</label>
+          <label for="filterfor">Include</label>
           <input type="hidden" name="filterlist" id="filterlist" value="">
           <input type="hidden" name="filter_id" id="filter_id" value="<?php echo $filter_id; ?>">
           <input type="hidden" name="tablename" id="tablename" value="<?php echo $filter_table; ?>">
-          <select id="filterfor" name="filterfor" class="form-control form-select js-example-basic-single filter-bulktransfer-filterfor">
+          <select id="filterfor" name="filterfor" class="form-control form-select js-example-basic-single filter-bulktransfer-filterfor" aria-label="Include">
             <?php
             if(count((array)$filter_list) > 0){
              foreach ($filter_list as $filter) {
@@ -129,11 +129,11 @@ $select_value_json = json_encode($select_value);
         <div class="col-lg-12">
           <div class="bg-white rounded row mt-4 <?php if($selectedoption !== 'Only Some Employees') { ?>filter-bulktransfer-hidden-container<?php } ?>" id="filtershow">
             <div class="col-lg-6">
-              <label>Filter <?php echo $filter_table; ?> by</label>
-              <i class="fas fa-user icon-nm pl-40"></i>
-              <label>
+              <span class="font-weight-bold">Filter <?php echo htmlspecialchars($filter_table); ?> by</span>
+              <i class="fas fa-user icon-nm pl-40" aria-hidden="true"></i>
+              <span class="font-weight-bold">
                 <span id="matches_count"><?php echo $emp_count;?> </span> Matches
-              </label>
+              </span>
             </div>
             <div class="col-lg-6">
               <div class="card card-custom card-border">
@@ -161,7 +161,7 @@ $select_value_json = json_encode($select_value);
                         $table_details = dyanamicselectdata($targettable, $targettable_field);
                         ?>
                         <div class="w-full">
-                          <select multiple="multiple" class="form-control mt-5 form-select js-example-basic-multiple filter-bulktransfer-empstatus" name="empstatus[]" id="exampleSelect<?php echo $index;?>">
+                          <select multiple="multiple" class="form-control mt-5 form-select js-example-basic-multiple filter-bulktransfer-empstatus" name="empstatus[]" id="exampleSelect<?php echo $index;?>" aria-label="<?php echo htmlspecialchars($filter['filter_name']); ?>">
                           <?php
                             if(count((array)$table_details) > 0){
                             foreach ($table_details as $key => $value) { ?>
@@ -291,7 +291,7 @@ $select_value_json = json_encode($select_value);
      maxlimit = result.count;
     }
 
-    var imagelist = '  <label>Employees</label> <div class="text-start"><div class="symbol-group symbol-hover justify-content-center">';
+    var imagelist = '  <span class="font-weight-bold d-block">Employees</span> <div class="text-start"><div class="symbol-group symbol-hover justify-content-center">';
     for (var k = 0; k < maxlimit; k++) {
      var imgpath = 'uploads/all/' + result.details[k].image;
      if (result.details[k].image != '') {

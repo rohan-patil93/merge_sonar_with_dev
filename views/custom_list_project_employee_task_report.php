@@ -3,8 +3,8 @@ $_SESSION['apply_js']['multiselect'] = 1;
 
 $filter_url = API . "?mode=getprojectemployeetaskreport&method=get&filters_only=Y";
 $filter_res = json_decode(callAPI($filter_url), true);
-$projects = isset($filter_res['projects']) ? $filter_res['projects'] : array();
-$employees = isset($filter_res['employees']) ? $filter_res['employees'] : array();
+$projects = (isset($filter_res['projects']) && is_array($filter_res['projects'])) ? $filter_res['projects'] : array();
+$employees = (isset($filter_res['employees']) && is_array($filter_res['employees'])) ? $filter_res['employees'] : array();
 ?>
 <div class="page-body">
 	<div class="card">
@@ -14,11 +14,11 @@ $employees = isset($filter_res['employees']) ? $filter_res['employees'] : array(
 				<div class="dropdown-primary dropdown open">
 					<button class="btn btn-primary dropdown-toggle waves-light" type="button" id="projectEmpTaskReportDownload" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
 					<div class="dropdown-menu p-0" aria-labelledby="projectEmpTaskReportDownload" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-						<a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Project Employee Task Report" target="_blank">CSV</a>
+						<a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Project%20Employee%20Task%20Report" target="_blank" rel="noopener noreferrer">CSV</a>
 					</div>
 				</div>
 				<a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
-					<i class="icofont icofont-reply"></i>
+					<i class="icofont icofont-reply" aria-hidden="true"></i>
 					Back
 				</a>
 			</div>
@@ -26,43 +26,43 @@ $employees = isset($filter_res['employees']) ? $filter_res['employees'] : array(
 		<div class="card-body p-4">
 			<div class="row">
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>Project</label>
-					<select class="form-control js-example-basic-single" id="project_id" name="project_id" style="width:100%" aria-label="Project Id">
+					<label for="project_id">Project</label>
+					<select class="form-control js-example-basic-single" id="project_id" name="project_id" style="width:100%" aria-label="Project">
 						<option value="">All Projects</option>
-						<?php if(count((array)$projects) > 0){
+						<?php if (!empty($projects)) {
 							foreach($projects as $project_row){
-								$pid = is_array($project_row) ? $project_row['id'] : $project_row->id;
-								$pname = is_array($project_row) ? $project_row['project_name'] : $project_row->project_name;
+								$pid = is_array($project_row) ? ($project_row['id'] ?? '') : ($project_row->id ?? '');
+								$pname = is_array($project_row) ? ($project_row['project_name'] ?? '') : ($project_row->project_name ?? '');
 						?>
-								<option value="<?php echo $pid; ?>"><?php echo htmlspecialchars($pname); ?></option>
+								<option value="<?php echo htmlspecialchars((string)$pid, ENT_QUOTES); ?>"><?php echo htmlspecialchars((string)$pname, ENT_QUOTES); ?></option>
 						<?php }
 						} ?>
 					</select>
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>Employee</label>
-					<select class="form-control js-example-basic-single" id="employee_id" name="employee_id" style="width:100%" aria-label="Employee Id">
+					<label for="employee_id">Employee</label>
+					<select class="form-control js-example-basic-single" id="employee_id" name="employee_id" style="width:100%" aria-label="Employee">
 						<option value="">All Employees</option>
-						<?php if(count((array)$employees) > 0){
+						<?php if (!empty($employees)) {
 							foreach($employees as $employee_row){
-								$eid = is_array($employee_row) ? $employee_row['id'] : $employee_row->id;
-								$ename = is_array($employee_row) ? $employee_row['display_name'] : $employee_row->display_name;
+								$eid = is_array($employee_row) ? ($employee_row['id'] ?? '') : ($employee_row->id ?? '');
+								$ename = is_array($employee_row) ? ($employee_row['display_name'] ?? '') : ($employee_row->display_name ?? '');
 						?>
-								<option value="<?php echo $eid; ?>"><?php echo htmlspecialchars($ename); ?></option>
+								<option value="<?php echo htmlspecialchars((string)$eid, ENT_QUOTES); ?>"><?php echo htmlspecialchars((string)$ename, ENT_QUOTES); ?></option>
 						<?php }
 						} ?>
 					</select>
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>From Date <span class="text-danger">*</span></label>
+					<label for="from_date">From Date <span class="text-danger">*</span></label>
 					<input class="form-control" type="date" name="from_date" id="from_date" value="" aria-label="From Date">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>To Date <span class="text-danger">*</span></label>
+					<label for="to_date">To Date <span class="text-danger">*</span></label>
 					<input class="form-control" type="date" name="to_date" id="to_date" value="" aria-label="To Date">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>&nbsp;</label>
+					<label for="getProjectEmployeeTaskReportBtn" aria-label="Search"><span class="visually-hidden">Search</span>&nbsp;</label>
 					<button type="button" class="btn btn-primary form-control" id="getProjectEmployeeTaskReportBtn">Search</button>
 				</div>
 			</div>
@@ -108,7 +108,7 @@ $employees = isset($filter_res['employees']) ? $filter_res['employees'] : array(
 				return;
 			}
 
-			var loader = '<div class="col-12 text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;"></div>';
+			var loader = '<div class="col-12 text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" alt="Loading..." style="width: 300px;"></div>';
 			$("#tableContent").html(loader);
 
 			$.ajax({

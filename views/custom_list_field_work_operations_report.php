@@ -12,7 +12,7 @@ if ($_SESSION['working_role_short_code'] == 'FIELD_MANAGER') {
 $today = date('Y-m-d');
 $filter_url = API . "?mode=getfieldworkoperationsreport&method=get&filters_only=Y&admin_type=" . $admin_type;
 $filter_res = json_decode(callAPI($filter_url), true);
-$users = isset($filter_res['users']) ? $filter_res['users'] : array();
+$users = (isset($filter_res['users']) && is_array($filter_res['users'])) ? $filter_res['users'] : array();
 ?>
 <style>
 	.fwor-summary { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
@@ -50,11 +50,11 @@ $users = isset($filter_res['users']) ? $filter_res['users'] : array();
 				<div class="dropdown-primary dropdown open">
 					<button class="btn btn-primary dropdown-toggle waves-light" type="button" id="fieldWorkOperationsReportDownload" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
 					<div class="dropdown-menu p-0" aria-labelledby="fieldWorkOperationsReportDownload" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-						<a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Field Work Operations Report" target="_blank">CSV</a>
+						<a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Field%20Work%20Operations%20Report" target="_blank" rel="noopener noreferrer">CSV</a>
 					</div>
 				</div>
 				<a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
-					<i class="icofont icofont-reply"></i>
+					<i class="icofont icofont-reply" aria-hidden="true"></i>
 					Back
 				</a>
 			</div>
@@ -63,14 +63,14 @@ $users = isset($filter_res['users']) ? $filter_res['users'] : array();
 			<div class="row">
 				<?php if ($admin_type != '3') { ?>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>Users</label>
-					<select class="form-control js-example-basic-multiple" id="user_id" name="user_id[]" multiple="multiple" style="width:100%" aria-label="User Id">
-						<?php if (count((array)$users) > 0) {
+					<label for="user_id">Users</label>
+					<select class="form-control js-example-basic-multiple" id="user_id" name="user_id[]" multiple="multiple" style="width:100%" aria-label="Users">
+						<?php if (!empty($users)) {
 							foreach ($users as $user_row) {
-								$uid = is_array($user_row) ? $user_row['id'] : $user_row->id;
-								$uname = is_array($user_row) ? $user_row['display_name'] : $user_row->display_name;
+								$uid = is_array($user_row) ? ($user_row['id'] ?? '') : ($user_row->id ?? '');
+								$uname = is_array($user_row) ? ($user_row['display_name'] ?? '') : ($user_row->display_name ?? '');
 						?>
-							<option value="<?php echo $uid; ?>"><?php echo htmlspecialchars($uname); ?></option>
+							<option value="<?php echo htmlspecialchars((string)$uid, ENT_QUOTES); ?>"><?php echo htmlspecialchars((string)$uname, ENT_QUOTES); ?></option>
 						<?php }
 						} ?>
 					</select>
@@ -80,15 +80,15 @@ $users = isset($filter_res['users']) ? $filter_res['users'] : array();
 				<?php } ?>
 
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>From Date <span class="text-danger">*</span></label>
+					<label for="from_date">From Date <span class="text-danger">*</span></label>
 					<input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo $today; ?>" aria-label="From Date">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>To Date <span class="text-danger">*</span></label>
+					<label for="to_date">To Date <span class="text-danger">*</span></label>
 					<input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo $today; ?>" aria-label="To Date">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>Status</label>
+					<label for="status">Status</label>
 					<select class="form-control js-example-basic-multiple" id="status" name="status[]" multiple="multiple" style="width:100%" aria-label="Status">
 						<option value="Visited">Visited</option>
 						<option value="Pending">Pending</option>
@@ -96,7 +96,7 @@ $users = isset($filter_res['users']) ? $filter_res['users'] : array();
 					</select>
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>&nbsp;</label>
+					<label for="getFieldWorkOperationsReportBtn" aria-label="Search"><span class="visually-hidden">Search</span>&nbsp;</label>
 					<button type="button" class="btn btn-primary form-control" id="getFieldWorkOperationsReportBtn">Search</button>
 				</div>
 			</div>
@@ -114,7 +114,7 @@ $users = isset($filter_res['users']) ? $filter_res['users'] : array();
 		if (val == null || val == '') {
 			return [];
 		}
-		if (!$.isArray(val)) {
+		if (!Array.isArray(val)) {
 			val = [val];
 		}
 		return val.filter(function (id) {
@@ -147,7 +147,7 @@ $users = isset($filter_res['users']) ? $filter_res['users'] : array();
 		<?php } ?>
 
 		var statuses = fworFilterIds($("#status").val());
-		var loader = '<div class="col-12 text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;"></div>';
+		var loader = '<div class="col-12 text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" alt="Loading..." style="width: 300px;"></div>';
 		$("#Tablecontent").html(loader);
 
 		$.ajax({

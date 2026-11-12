@@ -18,3 +18,5 @@
 /test_ranking.php
 # Database configuration - never commit
 /dbconfig.php
+
+/dbconfig.php
