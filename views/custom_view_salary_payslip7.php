@@ -65,84 +65,84 @@ $organization_name  = $_SESSION['is_data']['pay_area_config'] == 1 ? $_SESSION['
                         <?php echo $organization_name; ?>
                     </div>
                     <div style="width: 20%; float:left; text-align: right;">
-                        <img src="uploads/all/<?php echo $_SESSION['is_data']['pay_area_config'] ? $_SESSION['pay_area_config']['display_logo'] : $_SESSION['config']['display_logo'];  ?>" style="width: 125px;" alt="Logo">
+                        <img src="uploads/all/<?php echo $_SESSION['is_data']['pay_area_config'] ? $_SESSION['pay_area_config']['display_logo'] : $_SESSION['config']['display_logo'];  ?>" style="width: 125px;" alt="<?= htmlspecialchars(__('Logo'), ENT_QUOTES, 'UTF-8'); ?>">
                     </div>
 
                 </th>
             </tr>
             <tr>
-                <th scope="col" class="text-center" colspan="3" style="">Salary Slip</th>
-                <th scope="col" class="text-center" ><?php echo "Month-Year"; ?></th>
+                <th scope="col" class="text-center" colspan="3" style=""><?= __('Salary Slip'); ?></th>
+                <th scope="col" class="text-center" ><?php echo __("Month-Year"); ?></th>
             </tr>
             <tr>
-                <th scope="col" style="text-align: left; width: 20%;">Employee Name</th>
+                <th scope="col" style="text-align: left; width: 20%;"><?= __('Employee Name'); ?></th>
                 <td style="text-align: left; width: 30%;"><?php echo $payslip_data_list['emp_name']; ?></td>
-                <th scope="col" style="text-align: left; width: 20%;">Date of Joning</th>
+                <th scope="col" style="text-align: left; width: 20%;"><?= __('Date of Joning'); ?></th>
                 <th scope="col" class="text-end" style="width: 30%;">
                     <?php echo date('F d, Y',strtotime($payslip_data_list['doj'])); ?>
                 </th>
             </tr>
             <tr>
-                <th scope="col" style="text-align: left;">Employee Code</th>
+                <th scope="col" style="text-align: left;"><?= __('Employee Code'); ?></th>
                 <td style="text-align: left;">
                     <?php echo $payslip_data_list['emp_number']; ?>
                 </td>
-                <th scope="col" style="text-align: left;">Total working days</th>
+                <th scope="col" style="text-align: left;"><?= __('Total working days'); ?></th>
                 <th scope="col" class="text-end" style="">
                     <?php echo "-"; ?>
                 </th>
             </tr>
             <tr>
-                <th scope="col" style="text-align: left;">Designation</th>
+                <th scope="col" style="text-align: left;"><?= __('Designation'); ?></th>
                 <td style="text-align: left;">
                 <?php echo $payslip_data_list['designation']; ?>
                 </td>
-                <th scope="col" style="text-align: left;">Working days Attended</th>
+                <th scope="col" style="text-align: left;"><?= __('Working days Attended'); ?></th>
                 <th scope="col" class="text-end" style="">
                     <?php echo "-"; ?>
                 </th>
             </tr>
             <tr>
-                <th scope="col" style="text-align: left;">PAN</th>
+                <th scope="col" style="text-align: left;"><?= __('PAN'); ?></th>
                 <td style="text-align: left;">
                     <?php echo $payslip_data_list['pan_number']; ?>
                 </td>
-                <th scope="col" style="text-align: left;">LOP</th>
+                <th scope="col" style="text-align: left;"><?= __('LOP'); ?></th>
                 <th scope="col" class="text-end" style="">
                     <?php echo "-"; ?>
                 </th>
             </tr>
             <tr>
-                <th scope="col" style="text-align: left;">Bank Account Number</th>
+                <th scope="col" style="text-align: left;"><?= __('Bank Account Number'); ?></th>
                 <td style="text-align: left;">
                     <?php echo $payslip_data_list['bank_account_no']; ?>
                 </td>
 
-                <th scope="col" style="text-align: left;">PF UAN</th>
+                <th scope="col" style="text-align: left;"><?= __('PF UAN'); ?></th>
                 <th scope="col" class="text-end" style="">
                     <?php echo $payslip_data_list['pf_uan']; ?>
                 </th>
             </tr>
             <tr>
-                <th scope="col" style="text-align: left;">Bank Name</th>
+                <th scope="col" style="text-align: left;"><?= __('Bank Name'); ?></th>
                 <td style="text-align: left;">
                     <?php echo $payslip_data_list['bank']; ?>
                 </td>
-                <th scope="col" style="text-align: left;">PF No</th>
+                <th scope="col" style="text-align: left;"><?= __('PF No'); ?></th>
                 <th scope="col" class="text-end" style="">
                     <?php echo $payslip_data_list['pf']; ?>
                 </th>
             </tr>
             <tr>
-                <th scope="col" style="text-align: left;">Grade</th>
+                <th scope="col" style="text-align: left;"><?= __('Grade'); ?></th>
                 <td style="text-align: left;">
                     <?php echo $payslip_data_list['grade']; ?>
                 </td>
-                <th scope="col" style="text-align: left;">Opted Under</th>
-                <th scope="col" class="text-end" style="">New Scheme</th>
+                <th scope="col" style="text-align: left;"><?= __('Opted Under'); ?></th>
+                <th scope="col" class="text-end" style=""><?= __('New Scheme'); ?></th>
             </tr>
             <tr>
-                <th scope="col" style="text-align: left;">Location</th>
+                <th scope="col" style="text-align: left;"><?= __('Location'); ?></th>
                 <td style="text-align: left;">
                     <?php echo $payslip_data_list['location']; ?>
                 </td>
@@ -153,16 +153,16 @@ $organization_name  = $_SESSION['is_data']['pay_area_config'] == 1 ? $_SESSION['
         </table>
         <table class="table table-hover table-bordered mt-3 table-sm" style="">
             <tr>
-                <th scope="col" class="text-center" colspan="3" style="width: 50%;">Income</th>
-                <th scope="col" class="text-center" colspan="3" style="text-align: center; width: 50%;">Deductions</th>
+                <th scope="col" class="text-center" colspan="3" style="width: 50%;"><?= __('Income'); ?></th>
+                <th scope="col" class="text-center" colspan="3" style="text-align: center; width: 50%;"><?= __('Deductions'); ?></th>
             </tr>
             <tr>
-                <th scope="col" class="text-center" style="width: 18%;">Particulars</th>
-                <th scope="col" class="text-center" style="width: 16%;">Amount</th>
-                <th scope="col" class="text-center" style="width: 16%;">Annual</th>
-                <th scope="col" class="text-center" style="width: 18%;">Particulars</th>
-                <th scope="col" class="text-center" style="width: 16%;">Amount</th>
-                <th scope="col" class="text-center" style="width: 16%;">Annual</th>
+                <th scope="col" class="text-center" style="width: 18%;"><?= __('Particulars'); ?></th>
+                <th scope="col" class="text-center" style="width: 16%;"><?= __('Amount'); ?></th>
+                <th scope="col" class="text-center" style="width: 16%;"><?= __('Annual'); ?></th>
+                <th scope="col" class="text-center" style="width: 18%;"><?= __('Particulars'); ?></th>
+                <th scope="col" class="text-center" style="width: 16%;"><?= __('Amount'); ?></th>
+                <th scope="col" class="text-center" style="width: 16%;"><?= __('Annual'); ?></th>
             </tr>
             <?php
                 $actual_count= count((array)$payslip_data_list['actual']);
@@ -200,14 +200,14 @@ $organization_name  = $_SESSION['is_data']['pay_area_config'] == 1 ? $_SESSION['
             </tr>
             <?php } ?>
             <tr>
-                <th scope="col" style="text-align: left;">Total</th>
+                <th scope="col" style="text-align: left;"><?= __('Total'); ?></th>
                 <th scope="col" class="text-end" style="">
                     <?php echo customePayslipNumberFormate($earnings); ?>
                 </th>
                 <th scope="col" class="text-end" style="">
                     <?php echo customePayslipNumberFormate($st_earnings*12); ?>
                 </th>
-                <th scope="col" style="text-align: left;">Total</th>
+                <th scope="col" style="text-align: left;"><?= __('Total'); ?></th>
                 <th scope="col" class="text-end" style="">
                     <?php echo customePayslipNumberFormate($dedaction); ?>
                 </th>
@@ -216,7 +216,7 @@ $organization_name  = $_SESSION['is_data']['pay_area_config'] == 1 ? $_SESSION['
                 </th>
             </tr>
             <tr>
-                <th scope="col" colspan="4" style="background-color: #cccccc; text-align: center;">Net Salary</th>
+                <th scope="col" colspan="4" style="background-color: #cccccc; text-align: center;"><?= __('Net Salary'); ?></th>
                 <th scope="col" class="text-end" style="">
                     <?php echo customePayslipNumberFormate($earnings-$dedaction); ?>
                 </th>
@@ -229,13 +229,13 @@ $organization_name  = $_SESSION['is_data']['pay_area_config'] == 1 ? $_SESSION['
                 <th scope="col" colspan="3" style="height: 60px; text-align: center;"></th>
             </tr>
             <tr>
-                <th scope="col" colspan="3" style="text-align: center;">Employee Signature</th>
-                <th scope="col" colspan="3" style="text-align: center;">Employer Signature</th>
+                <th scope="col" colspan="3" style="text-align: center;"><?= __('Employee Signature'); ?></th>
+                <th scope="col" colspan="3" style="text-align: center;"><?= __('Employer Signature'); ?></th>
             </tr>
         </table>
     </div>
     <div class="card-body">
-        <button type="button" class="btn btn-primary font-weight-bolder mr-3 mr-sm-14 my-1" onclick="printDiv('printableArea')" >Print Payslip</button>
+        <button type="button" class="btn btn-primary font-weight-bolder mr-3 mr-sm-14 my-1" onclick="printDiv('printableArea')" ><?= __('Print Payslip'); ?></button>
     </div>
 </div>
 </div>
