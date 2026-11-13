@@ -23,10 +23,10 @@
     <div class="col-xl-3 col-md-6">
         <div class="card ticket-card">
             <div class="card-body">
-                <p class="m-b-30 bg-c-red lbl-card"><i class="fas fa-folder-open"></i> Total Head Count </p>
+                <p class="m-b-30 bg-c-red lbl-card"><i class="fas fa-folder-open"></i> <?= __('Total Head Count'); ?> </p>
                 <div class="text-center">
                     <h2 class="m-b-0 d-inline-block text-c-red"><?php echo $emp_count_dashboard['total_emp']; ?></h2>
-                    <p class="m-b-0 m-t-15">As of Today</p>
+                    <p class="m-b-0 m-t-15"><?= __('As of Today'); ?></p>
                 </div>
             </div>
         </div>
@@ -34,12 +34,12 @@
     <div class="col-xl-3 col-md-6">
         <div class="card ticket-card">
             <div class="card-body">
-                <p class="m-b-30 bg-c-blue lbl-card"><i class="fas fa-file-archive"></i> This month joinings</p>
+                <p class="m-b-30 bg-c-blue lbl-card"><i class="fas fa-file-archive"></i> <?= __('This month joinings'); ?></p>
                 <div class="text-center">
                     <h2 class="m-b-0 d-inline-block text-c-blue"><?php echo $emp_count_dashboard['this_month_join']; ?></h2>
                     <p class="m-b-0 m-t-15">
                         <?php echo $emp_count_dashboard['this_month_join'] >= $emp_count_dashboard['previous_month_join'] ?"<i class='fas fa-caret-up m-r-10 f-18 text-c-blue'></i>":"<i class='fas fa-caret-down m-r-10 f-18 text-c-red'></i>"; ?>
-                        From Previous Month (<?php echo $emp_count_dashboard['previous_month_join'];?>)</p>
+                        <?= __('From Previous Month ('); ?><?php echo $emp_count_dashboard['previous_month_join'];?>)</p>
                     </div>
                 </div>
             </div>
@@ -47,11 +47,11 @@
         <div class="col-xl-3 col-md-6">
             <div class="card ticket-card">
                 <div class="card-body">
-                    <p class="m-b-30 bg-c-green lbl-card"><i class="fas fa-users"></i>This Month Separation </p>
+                    <p class="m-b-30 bg-c-green lbl-card"><i class="fas fa-users"></i><?= __('This Month Separation'); ?> </p>
                     <div class="text-center">
                         <h2 class="m-b-0 d-inline-block text-c-green"><?php echo $emp_count_dashboard['this_month_leaving']; ?></h2>
 
-                        <p class="m-b-0 m-t-15"><?php echo $emp_count_dashboard['this_month_leaving'] >= $emp_count_dashboard['previous_month_leaving'] ?"<i class='fas fa-caret-up m-r-10 f-18 text-c-blue'></i>":"<i class='fas fa-caret-down m-r-10 f-18 text-c-red'></i>"; ?>From Previous Month (<?php echo $emp_count_dashboard['previous_month_leaving'];?>)</p>
+                        <p class="m-b-0 m-t-15"><?php echo $emp_count_dashboard['this_month_leaving'] >= $emp_count_dashboard['previous_month_leaving'] ?"<i class='fas fa-caret-up m-r-10 f-18 text-c-blue'></i>":"<i class='fas fa-caret-down m-r-10 f-18 text-c-red'></i>"; ?><?= __('From Previous Month ('); ?><?php echo $emp_count_dashboard['previous_month_leaving'];?>)</p>
                     </div>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                         <input type="hidden" name="timesheetdata"  id="timesheetdata" value="<?php echo $stringconverttimesheet; ?>">
                         <div class="col-8">
                             <h4 class="m-b-0"><?php echo customeummarmonyformate(array_sum($timesheet['timesheet_total_hrs'])); ?></h4>
-                            <p class="m-b-0">Timesheet Summary</p>
+                            <p class="m-b-0"><?= __('Timesheet Summary'); ?></p>
                         </div>
                         <div class="col-4 text-end">
                             <i class="fas fa-user f-20"></i>
@@ -79,7 +79,7 @@
     <div class="col-md-12">
         <div class="card table-card">
             <div class="card-header">
-                <h5>Employee TimeSheets</h5>
+                <h5><?= __('Employee TimeSheets'); ?></h5>
             </div>
             <div class="row col-lg-12 mt-2">
                 <div class="col-lg-12">
@@ -101,12 +101,12 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Employe Name</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Billable Amount</th>
-                                <th scope="col">Billable Hrs </th>
-                                <th scope="col">Non Billable Hrs</th>
-                                <th scope="col">Actieon</th>
+                                <th scope="col"><?= __('Employe Name'); ?></th>
+                                <th scope="col"><?= __('Email'); ?></th>
+                                <th scope="col"><?= __('Billable Amount'); ?></th>
+                                <th scope="col"><?= __('Billable Hrs'); ?> </th>
+                                <th scope="col"><?= __('Non Billable Hrs'); ?></th>
+                                <th scope="col"><?= __('Actieon'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -123,7 +123,7 @@
                                 <td><?php echo $emp_data['billable_hrs'];?></td>
                                 <td><?php echo $emp_data['nonbillable_hrs'];?></td>
                                 <td>
-                                    <a class="btn btn-primary waves-effect waves-light" href="index.php?option=COM_VIEW_EMP_TIMESHEETS&PAY_YEAR=<?php echo date('Y',strtotime($fromdate)) ?>&PAY_MONTH=<?php echo date('m',strtotime($fromdate)) ?>&EMP=<?php echo $emp_data['emp_id'];?>">View
+                                    <a class="btn btn-primary waves-effect waves-light" href="index.php?option=COM_VIEW_EMP_TIMESHEETS&PAY_YEAR=<?php echo date('Y',strtotime($fromdate)) ?>&PAY_MONTH=<?php echo date('m',strtotime($fromdate)) ?>&EMP=<?php echo $emp_data['emp_id'];?>"><?= __('View'); ?>
                                     </a>
                                 </td>
                             </tr>
