@@ -88,14 +88,14 @@ function formatBuddyType($buddy_type) {
         <div class="card shadow-sm">
             <div class="card-header bg-primary text-white">
                 <h4 class="mb-0">
-                    <i class="fas fa-history me-2"></i>Buddy Reassignment History
+                    <i class="fas fa-history me-2"></i><?= __('Buddy Reassignment History'); ?>
                 </h4>
             </div>
             <div class="card-body">
 
                 <div class="mb-3">
                     <a href="index.php?option=COM_VIEW_BUDDY_REASSIGNMENT" class="btn btn-primary">
-                        <i class="fas fa-arrow-left me-1"></i>Back to Reassignment
+                        <i class="fas fa-arrow-left me-1"></i><?= __('Back to Reassignment'); ?>
                     </a>
                 </div>
 
@@ -104,14 +104,14 @@ function formatBuddyType($buddy_type) {
                     <table id="history_table" class="table table-striped table-bordered">
                         <thead class="table-dark">
                             <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Buddy Type</th>
-                                <th scope="col">From Buddy</th>
-                                <th scope="col">To Buddy</th>
-                                <th scope="col">Employees Affected</th>
-                                <th scope="col">Created By</th>
-                                <th scope="col">Created Date</th>
-                                <th scope="col">Action</th>
+                                <th scope="col"><?= __('ID'); ?></th>
+                                <th scope="col"><?= __('Buddy Type'); ?></th>
+                                <th scope="col"><?= __('From Buddy'); ?></th>
+                                <th scope="col"><?= __('To Buddy'); ?></th>
+                                <th scope="col"><?= __('Employees Affected'); ?></th>
+                                <th scope="col"><?= __('Created By'); ?></th>
+                                <th scope="col"><?= __('Created Date'); ?></th>
+                                <th scope="col"><?= __('Action'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -129,7 +129,7 @@ function formatBuddyType($buddy_type) {
                                         <td><?php echo getEmployeeName($record['from_buddy'], $employee_names); ?></td>
                                         <td><?php echo getEmployeeName($record['to_buddy'], $employee_names); ?></td>
                                         <td>
-                                            <span class="badge bg-success"><?php echo $emp_count; ?> employee(s)</span>
+                                            <span class="badge bg-success"><?php echo $emp_count; ?> <?= __('employee(s)'); ?></span>
                                         </td>
                                         <td><?php echo $_SESSION['users'][$record['created_by']] ?? 'Unknown'; ?></td>
                                         <td><?php echo fromDate($record['created_date']); ?></td>
@@ -140,14 +140,14 @@ function formatBuddyType($buddy_type) {
                                                     data-buddy-type="<?php echo formatBuddyType($record['buddy_type']); ?>"
                                                     data-from-buddy="<?php echo getEmployeeName($record['from_buddy'], $employee_names); ?>"
                                                     data-to-buddy="<?php echo getEmployeeName($record['to_buddy'], $employee_names); ?>">
-                                                <i class="fas fa-eye me-1"></i>View Details
+                                                <i class="fas fa-eye me-1"></i><?= __('View Details'); ?>
                                             </button>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
                             <?php else: ?>
                                 <tr>
-                                    <td colspan="8" class="text-center">No reassignment history found</td>
+                                    <td colspan="8" class="text-center"><?= __('No reassignment history found'); ?></td>
                                 </tr>
                             <?php endif; ?>
                         </tbody>
@@ -163,36 +163,36 @@ function formatBuddyType($buddy_type) {
             <div class="modal-content">
                 <div class="modal-header bg-primary text-white">
                     <h5 class="modal-title" id="detailsModalLabel">
-                        <i class="fas fa-info-circle me-2"></i>Reassignment Details
+                        <i class="fas fa-info-circle me-2"></i><?= __('Reassignment Details'); ?>
                     </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
                 </div>
                 <div class="modal-body">
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <strong>Buddy Type:</strong>
+                            <strong><?= __('Buddy Type'); ?>:</strong>
                             <p id="modal_buddy_type"></p>
                         </div>
                         <div class="col-md-6">
-                            <strong>From Buddy:</strong>
+                            <strong><?= __('From Buddy'); ?>:</strong>
                             <p id="modal_from_buddy"></p>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <strong>To Buddy:</strong>
+                            <strong><?= __('To Buddy'); ?>:</strong>
                             <p id="modal_to_buddy"></p>
                         </div>
                     </div>
                     <hr>
-                    <h6><strong>Affected Employees:</strong></h6>
+                    <h6><strong><?= __('Affected Employees'); ?>:</strong></h6>
                     <div class="table-responsive">
                         <table class="table table-sm table-bordered">
                             <thead class="table-secondary">
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Employee Code</th>
-                                    <th scope="col">Employee Name</th>
+                                    <th scope="col"><?= __('Employee Code'); ?></th>
+                                    <th scope="col"><?= __('Employee Name'); ?></th>
                                 </tr>
                             </thead>
                             <tbody id="modal_employees_tbody">
@@ -202,7 +202,7 @@ function formatBuddyType($buddy_type) {
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= __('Close'); ?></button>
                 </div>
             </div>
         </div>
