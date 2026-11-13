@@ -219,36 +219,36 @@ $st_show_type=$_SESSION['st_show_type'];
                 <div class="col-lg-9 col-md-9 col-sm-12 col-12">
                     <ul class="nav nav-tabs md-tabs infisuite_tab m-r-20 font-weight-bold stationery-inventory" style="border:0px;">
                         <li class="nav-item">
-                            <a class="nav-link active" data-bs-toggle="tab" href="#stitems" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Items</a>
+                            <a class="nav-link active" data-bs-toggle="tab" href="#stitems" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Items'); ?></a>
                         </li>
                         <?php if($st_show_type==1){ ?>
 
                         <?php if($_SESSION['admin_type']==1){ ?>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#stmyorder" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">My Orders</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#stmyorder" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('My Orders'); ?></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#stapprovalorder" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">To Be Approved</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#stapprovalorder" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('To Be Approved'); ?></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#sthistory" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">History</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#sthistory" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('History'); ?></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#streport" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Report</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#streport" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Report'); ?></a>
                         </li>
                         <?php } ?>
                         <?php }else{ ?>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#stallorder" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> Orders</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#stallorder" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?= __('Orders'); ?></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#availableitem" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">  Available Items </a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#availableitem" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">  <?= __('Available Items'); ?> </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#reportingitem" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> Reporting Items</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#reportingitem" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?= __('Reporting Items'); ?></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#monthlyreport" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> Monthly Report</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#monthlyreport" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?= __('Monthly Report'); ?></a>
                         </li>
                         <?php } ?>
                     </ul>
@@ -256,7 +256,7 @@ $st_show_type=$_SESSION['st_show_type'];
                 <div class="col-lg-3 col-md-3 col-sm-12 col-12">
                     <?php if($_SESSION['admin_type']==1){ ?>
                         <button type="button" class="btn waves-effect waves-light btn-primary float-right m-l-5 btn-sm" onclick="addandupdatestationery()">
-                            <span class="ti-plus m-r-5"></span>Create
+                            <span class="ti-plus m-r-5"></span><?= __('Create'); ?>
                         </button>
                     <?php } ?>
                 </div>
@@ -267,9 +267,9 @@ $st_show_type=$_SESSION['st_show_type'];
                     <div class="row align-items-end">
                         <div class="col-lg-4 col-md-4 col-sm-6 col-12">
                             <div class="form-group w-full">
-                                <span class="form-label w-100">Category:</span>
-                                <select aria-label="Stationery Cat" class="form-control border js-example-basic-single" name="stationery_cat_id" id="stationery_cat_id">
-                                    <option value="">Select Any One</option>
+                                <span class="form-label w-100"><?= __('Category'); ?>:</span>
+                                <select aria-label="<?= htmlspecialchars(__('Stationery Cat'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control border js-example-basic-single" name="stationery_cat_id" id="stationery_cat_id">
+                                    <option value=""><?= __('Select Any One'); ?></option>
                                     <?php foreach((array)$data['stationery_categories'] as $cate){ ?>
                                         <option value="<?php echo $cate['id']; ?>"><?php echo $cate['name']; ?></option>
                                     <?php } ?>
@@ -278,14 +278,14 @@ $st_show_type=$_SESSION['st_show_type'];
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-6 col-12">
                             <div class="form-group">
-                                <span class="form-label w-100">Search:</span>
-                                <input aria-label="Stationery Search" type="text" class="form-control" name="stationery_search" id="stationery_search">
+                                <span class="form-label w-100"><?= __('Search'); ?>:</span>
+                                <input aria-label="<?= htmlspecialchars(__('Stationery Search'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="stationery_search" id="stationery_search">
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-6 col-12">
                             <div class="form-group">
 
-                                <button class="btn btn-success p-2" onclick="tosearchstationeritems()" >Search</button>
+                                <button class="btn btn-success p-2" onclick="tosearchstationeritems()" ><?= __('Search'); ?></button>
                             </div>
                         </div>
                     </div>
@@ -298,13 +298,13 @@ $st_show_type=$_SESSION['st_show_type'];
                         <div class="card-block">
                             <ul class="nav nav-tabs md-tabs infisuite_tab m-r-20 font-weight-bold stationery-inventory" style="border:0px;">
                                 <li class="nav-item">
-                                    <a class="nav-link active" data-bs-toggle="tab" href="#mysactive" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Active</a>
+                                    <a class="nav-link active" data-bs-toggle="tab" href="#mysactive" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Active'); ?></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link " data-bs-toggle="tab" href="#myspending" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Pending</a>
+                                    <a class="nav-link " data-bs-toggle="tab" href="#myspending" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Pending'); ?></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" data-bs-toggle="tab" href="#mysapproved" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Approved</a>
+                                    <a class="nav-link" data-bs-toggle="tab" href="#mysapproved" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Approved'); ?></a>
                                 </li>
                             </ul>
                         </div>
@@ -499,12 +499,12 @@ $st_show_type=$_SESSION['st_show_type'];
                     <div class="row mt-3" id="availableitemreport">
                         <table class="table table-framed">
                             <thead>
-                                <th scope="col">Category</th>
-                                <th scope="col">Item</th>
-                                <th scope="col">Received</th>
-                                <th scope="col">Current Stock</th>
-                                <th scope="col">Consumed </th>
-                                <th scope="col">Balance </th>
+                                <th scope="col"><?= __('Category'); ?></th>
+                                <th scope="col"><?= __('Item'); ?></th>
+                                <th scope="col"><?= __('Received'); ?></th>
+                                <th scope="col"><?= __('Current Stock'); ?></th>
+                                <th scope="col"><?= __('Consumed'); ?> </th>
+                                <th scope="col"><?= __('Balance'); ?> </th>
                             </thead>
                         </table>
                     </div>
@@ -515,11 +515,11 @@ $st_show_type=$_SESSION['st_show_type'];
                     <div class="row mt-3" id="reportingitemreport">
                         <table class="table table-framed">
                             <thead>
-                                <th scope="col">Employee Name</th>
-                                <th scope="col">Item</th>
-                                <th scope="col">Quantity </th>
-                                <th scope="col">Date of Issue</th>
-                                <th scope="col">Issued By </th>
+                                <th scope="col"><?= __('Employee Name'); ?></th>
+                                <th scope="col"><?= __('Item'); ?></th>
+                                <th scope="col"><?= __('Quantity'); ?> </th>
+                                <th scope="col"><?= __('Date of Issue'); ?></th>
+                                <th scope="col"><?= __('Issued By'); ?> </th>
                             </thead>
                         </table>
                     </div>
@@ -530,11 +530,11 @@ $st_show_type=$_SESSION['st_show_type'];
                     <div class="row mt-3" id="monthlyreportreport">
                         <table class="table table-framed">
                             <thead>
-                                <th scope="col">Category</th>
-                                <th scope="col">Item</th>
-                                <th scope="col">Quantity </th>
-                                <th scope="col">Date of Issue</th>
-                                <th scope="col">Issued By </th>
+                                <th scope="col"><?= __('Category'); ?></th>
+                                <th scope="col"><?= __('Item'); ?></th>
+                                <th scope="col"><?= __('Quantity'); ?> </th>
+                                <th scope="col"><?= __('Date of Issue'); ?></th>
+                                <th scope="col"><?= __('Issued By'); ?> </th>
                             </thead>
                         </table>
                     </div>
@@ -547,13 +547,13 @@ $st_show_type=$_SESSION['st_show_type'];
                             <ul class="nav nav-tabs md-tabs infisuite_tab m-r-20 font-weight-bold stationery-inventory" style="border:0px;">
 
                                 <li class="nav-item p-l-10 p-r-10">
-                                    <a class="nav-link active" data-bs-toggle="tab" href="#spending" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Pending</a>
+                                    <a class="nav-link active" data-bs-toggle="tab" href="#spending" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Pending'); ?></a>
                                 </li>
                                 <li class="nav-item p-l-10 p-r-10">
-                                    <a class="nav-link" data-bs-toggle="tab" href="#sapproved" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Approved</a>
+                                    <a class="nav-link" data-bs-toggle="tab" href="#sapproved" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Approved'); ?></a>
                                 </li>
                                 <li class="nav-item p-l-10 p-r-10">
-                                    <a class="nav-link" data-bs-toggle="tab" href="#stsearch" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Search</a>
+                                    <a class="nav-link" data-bs-toggle="tab" href="#stsearch" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Search'); ?></a>
                                 </li>
                             </ul>
                         </div>
@@ -651,17 +651,17 @@ $st_show_type=$_SESSION['st_show_type'];
                                 <div class="input-group input-group-button">
                                     <div class="bus-bg" style="background: url(../assets/images/bus.jpg); height:250px; background-size: 100%; background-repeat: no-repeat; position: relative; width: 100%;">
                                         <div class="banner-txt">
-                                            <h2 class="f-w-700 f-20">Get your Search,<b class="d-block">Stationery Order Details</b></h2>
+                                            <h2 class="f-w-700 f-20"><?= __('Get your Search,'); ?><b class="d-block"><?= __('Stationery Order Details'); ?></b></h2>
                                         </div>
                                         <div class="booking-form">
-                                            <h3 class="">Search</h3>
+                                            <h3 class=""><?= __('Search'); ?></h3>
                                             <div class="row mb-1 mt-4">
                                                 <div class="col-lg-4 col-md-4 col-sm-6 col-12 m-b-10">
                                                     <div class="input-group">
                                                         <span class="input-group-text addon-style">
                                                             <span class=""><i class="ti-write"></i></span>
                                                         </span>
-                                                        <input aria-label="Stationery Request Number" type="text" name="stationery_request_ref_no" id="stationery_request_ref_no" class="form-control border" placeholder="Stationery Request Number">
+                                                        <input aria-label="<?= htmlspecialchars(__('Stationery Request Number'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="stationery_request_ref_no" id="stationery_request_ref_no" class="form-control border" placeholder="<?= htmlspecialchars(__('Stationery Request Number'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-6 col-12 m-b-10">
@@ -669,13 +669,13 @@ $st_show_type=$_SESSION['st_show_type'];
                                                         <span class="input-group-text addon-style">
                                                             <span class=""><i class="ti-time"></i></span>
                                                         </span>
-                                                        <input aria-label="Request Date" class="form-control" type="date" name="request_date" id='request_date'>
+                                                        <input aria-label="<?= htmlspecialchars(__('Request Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="request_date" id='request_date'>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-6 col-12 m-b-10">
                                                     <div class="input-group w-full">
-                                                        <select aria-label="Stationery User" class="form-control border js-example-basic-single" name="stationery_user_id" id="stationery_user_id">
-                                                            <option value="">Select Employee</option>
+                                                        <select aria-label="<?= htmlspecialchars(__('Stationery User'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control border js-example-basic-single" name="stationery_user_id" id="stationery_user_id">
+                                                            <option value=""><?= __('Select Employee'); ?></option>
                                                             <?php foreach($data['emps'] as $employ){ ?>
                                                                 <option value="<?php echo $employ['id']; ?>"><?php echo $employ['display_name']; ?></option>
                                                             <?php } ?>
@@ -687,13 +687,13 @@ $st_show_type=$_SESSION['st_show_type'];
                                                         <span class="input-group-text addon-style">
                                                             <span class=""><i class="ti-time"></i></span>
                                                         </span>
-                                                        <input aria-label="Require Date" class="form-control" type="date" name="require_date" id='require_date'>
+                                                        <input aria-label="<?= htmlspecialchars(__('Require Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="require_date" id='require_date'>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-6 col-12 m-b-10">
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-12 col-12 m-b-10">
-                                                    <button class="btn btn-primary w-100 p-2" onclick="searchstationery()" fdprocessedid="s99pj">Find Orders</button>
+                                                    <button class="btn btn-primary w-100 p-2" onclick="searchstationery()" fdprocessedid="s99pj"><?= __('Find Orders'); ?></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -725,7 +725,7 @@ $st_show_type=$_SESSION['st_show_type'];
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                    <span class="f-14 f-w-600">Descroption: </span>
+                                    <span class="f-14 f-w-600"><?= __('Descroption'); ?>: </span>
                                     <span class="text-muted"><?php echo $stationery_item['description']; ?></span>
                                 </div>
                             </div>
@@ -737,11 +737,11 @@ $st_show_type=$_SESSION['st_show_type'];
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Type</th>
-                                            <th scope="col">Date</th>
-                                            <th scope="col" class="text-end">In</th>
-                                            <th scope="col" class="text-end">Out</th>
-                                            <th scope="col" class="text-end">Run</th>
+                                            <th scope="col"><?= __('Type'); ?></th>
+                                            <th scope="col"><?= __('Date'); ?></th>
+                                            <th scope="col" class="text-end"><?= __('In'); ?></th>
+                                            <th scope="col" class="text-end"><?= __('Out'); ?></th>
+                                            <th scope="col" class="text-end"><?= __('Run'); ?></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -779,7 +779,7 @@ $st_show_type=$_SESSION['st_show_type'];
                                         <?php if (empty($data['stationery_item_ledger'][$stationery_item['id']])) { ?>
                                             <tr>
                                                 <td colspan="6" class="text-center">
-                                                    No Record Found
+                                                    <?= __('No Record Found'); ?>
                                                 </td>
                                             </tr>
                                         <?php } ?>
@@ -795,15 +795,15 @@ $st_show_type=$_SESSION['st_show_type'];
                 <div class="tab-pane" id="streport" role="tabpanel">
                     <div class="bus-bg" style="background: url(../assets/images/bus.jpg); height:250px; background-size: 100%; background-repeat: no-repeat; position: relative; width: 100%;">
                         <div class="banner-txt">
-                            <h2 class="f-w-700 f-20">Get your Search ,<b class="d-block">Stationery  Item  Details</b></h2>
+                            <h2 class="f-w-700 f-20"><?= __('Get your Search ,'); ?><b class="d-block"><?= __('Stationery Item Details'); ?></b></h2>
                         </div>
                         <div class="booking-form">
-                            <h3 class="">Search</h3>
+                            <h3 class=""><?= __('Search'); ?></h3>
                             <div class="row mb-1 mt-4">
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-12 m-b-10">
                                     <div class="input-group w-full">
-                                        <select aria-label="Report Stationery Item" class="form-control border js-example-basic-single" name="report_stationery_item_id" id="report_stationery_item_id">
-                                            <option value="">Select Item</option>
+                                        <select aria-label="<?= htmlspecialchars(__('Report Stationery Item'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control border js-example-basic-single" name="report_stationery_item_id" id="report_stationery_item_id">
+                                            <option value=""><?= __('Select Item'); ?></option>
                                             <?php foreach($data['stationery_items'] as $stationery_item){ ?>
                                                 <option value="<?php echo $stationery_item['id']; ?>"><?php echo $stationery_item['item_name']; ?></option>
                                             <?php } ?>
@@ -815,11 +815,11 @@ $st_show_type=$_SESSION['st_show_type'];
                                         <span class="input-group-text addon-style">
                                             <span class=""><i class="ti-time"></i></span>
                                         </span>
-                                        <input aria-label="List Date" class="form-control" type="date" name="list_date" id='list_date'>
+                                        <input aria-label="<?= htmlspecialchars(__('List Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="list_date" id='list_date'>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12 m-b-10 text-end">
-                                    <button class="btn btn-primary p-2" onclick="searchstationeryreport()" fdprocessedid="s99pj">Find Orders</button>
+                                    <button class="btn btn-primary p-2" onclick="searchstationeryreport()" fdprocessedid="s99pj"><?= __('Find Orders'); ?></button>
                                 </div>
                             </div>
                         </div>
@@ -835,7 +835,7 @@ $st_show_type=$_SESSION['st_show_type'];
     <div class="col-lg-4 col-md-12 col-sm-12 col-12"  id="side_view_2" >
         <div class="card">
             <div class="card-header">
-                <h5>Stationery</h5>
+                <h5><?= __('Stationery'); ?></h5>
 
             </div>
             <div class="card-body" id="sidestationary">
@@ -855,7 +855,7 @@ $st_show_type=$_SESSION['st_show_type'];
                                         <i class="ti-minus m-0"></i>
                                     </button>
                                 </b>
-                                <input aria-label="Quantity" type="text"  name='quantity' id="sidqty_<?php echo $key; ?>" value='<?php echo $siditem; ?>'  onblur="addqty(<?php echo $key; ?>)"  class="form-control input-number text-center" min="1" max="100">
+                                <input aria-label="<?= htmlspecialchars(__('Quantity'), ENT_QUOTES, 'UTF-8'); ?>" type="text"  name='quantity' id="sidqty_<?php echo $key; ?>" value='<?php echo $siditem; ?>'  onblur="addqty(<?php echo $key; ?>)"  class="form-control input-number text-center" min="1" max="100">
                                 <b class="input-group-btn position-static">
                                     <button type="button" class="quantity-right-plus btn btn-success btn-number p-1" onclick="addmins('add',<?php echo $key; ?>)" >
                                         <i class="ti-plus m-0"></i>
@@ -874,9 +874,9 @@ $st_show_type=$_SESSION['st_show_type'];
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-12 col-12 w-full">
                         <div class="form-group w-full">
-                            <span class="d-block">Building</span>
-                            <select aria-label="Building"  name="building_id" id="building_id" onchange="todisplayfloor(this.value)"  class="form-select js-example-basic-single" >
-                                <option value="">Select Any One</option>
+                            <span class="d-block"><?= __('Building'); ?></span>
+                            <select aria-label="<?= htmlspecialchars(__('Building'), ENT_QUOTES, 'UTF-8'); ?>"  name="building_id" id="building_id" onchange="todisplayfloor(this.value)"  class="form-select js-example-basic-single" >
+                                <option value=""><?= __('Select Any One'); ?></option>
                                 <?php foreach($data['buildings'] as $build){ ?>
                                 <option value="<?php echo $build['id']; ?>"><?php echo $build['building_name']; ?></option>
                                 <?php } ?>
@@ -885,27 +885,27 @@ $st_show_type=$_SESSION['st_show_type'];
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-12 w-full">
                         <div class="form-group w-full">
-                            <span class="d-block">Building Floor</span>
-                            <select aria-label="Building Floor"  name="building_floor_id" id="building_floor_id" onchange="todisplayspace(this.value)" class="form-select js-example-basic-single" >
-                                <option value="">Select Any One</option>
+                            <span class="d-block"><?= __('Building Floor'); ?></span>
+                            <select aria-label="<?= htmlspecialchars(__('Building Floor'), ENT_QUOTES, 'UTF-8'); ?>"  name="building_floor_id" id="building_floor_id" onchange="todisplayspace(this.value)" class="form-select js-example-basic-single" >
+                                <option value=""><?= __('Select Any One'); ?></option>
                             </select>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-12 w-full">
                         <div class="form-group w-full">
-                            <span class="d-block">Space</span>
-                            <select aria-label="Building Floor Space"  name="building_floor_space_id" id="building_floor_space_id" <?php if( $row['deliver_type']!=""){ echo "disabled";
+                            <span class="d-block"><?= __('Space'); ?></span>
+                            <select aria-label="<?= htmlspecialchars(__('Building Floor Space'), ENT_QUOTES, 'UTF-8'); ?>"  name="building_floor_space_id" id="building_floor_space_id" <?php if( $row['deliver_type']!=""){ echo "disabled";
 } ?> class="form-select js-example-basic-single" >
-                                <option value="">Select Any One</option>
+                                <option value=""><?= __('Select Any One'); ?></option>
                             </select>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-12 w-full">
                         <div class="form-group w-full">
-                            <span>Delivey Type</span>
-                            <select aria-label="Deliver Type"  name="deliver_type" id="deliver_type" <?php if( $row['deliver_type']!=""){ echo "disabled";
+                            <span><?= __('Delivey Type'); ?></span>
+                            <select aria-label="<?= htmlspecialchars(__('Deliver Type'), ENT_QUOTES, 'UTF-8'); ?>"  name="deliver_type" id="deliver_type" <?php if( $row['deliver_type']!=""){ echo "disabled";
 } ?> class="form-select js-example-basic-single" >
-                                <option value="">Select Any One</option>
+                                <option value=""><?= __('Select Any One'); ?></option>
                                 <?php foreach($data['deliver_types'] as $keydeliver=>$deliver_type){ ?>
                                     <option value="<?php echo $keydeliver; ?>"><?php echo $deliver_type; ?></option>
                                 <?php } ?>
@@ -914,14 +914,14 @@ $st_show_type=$_SESSION['st_show_type'];
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                         <div class="form-group">
-                            <span>Request Date</span>
-                            <input aria-label="Request Date" type="text" name="request_date" id="request_date_st" class="form-control datepicker" value="<?php echo fromDate();?>">
+                            <span><?= __('Request Date'); ?></span>
+                            <input aria-label="<?= htmlspecialchars(__('Request Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="request_date" id="request_date_st" class="form-control datepicker" value="<?php echo fromDate();?>">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                         <div class="form-group">
-                            <span>Required Date</span>
-                            <input aria-label="Require Date" type="text" name="require_date" id="require_date_st" class="form-control datepicker" value="<?php echo fromDate();?>">
+                            <span><?= __('Required Date'); ?></span>
+                            <input aria-label="<?= htmlspecialchars(__('Require Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="require_date" id="require_date_st" class="form-control datepicker" value="<?php echo fromDate();?>">
                         </div>
                     </div>
 
@@ -929,26 +929,26 @@ $st_show_type=$_SESSION['st_show_type'];
                     <?php if($st_show_type=='2'){ ?>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-12 w-full">
                         <div class="form-group w-full">
-                            <span>Employee </span>
-                            <select aria-label="Emp"  name="emp_id" id="emp_id" onchange="tocheckempdd(this.value)" class="form-select js-example-basic-single" >
-                                <option value="">Select Any One</option>
+                            <span><?= __('Employee'); ?> </span>
+                            <select aria-label="<?= htmlspecialchars(__('Emp'), ENT_QUOTES, 'UTF-8'); ?>"  name="emp_id" id="emp_id" onchange="tocheckempdd(this.value)" class="form-select js-example-basic-single" >
+                                <option value=""><?= __('Select Any One'); ?></option>
                                 <?php foreach($data['emps'] as $emp_val){ ?>
                                     <option value="<?php echo $emp_val['id']; ?>"><?php echo $emp_val['display_name']; ?></option>
                                 <?php } ?>
-                                <option value="999999">Other</option>
+                                <option value="999999"><?= __('Other'); ?></option>
                             </select>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-12" style="display:none;" id="othername">
                         <div class="form-group">
-                            <span>Other Name</span>
-                            <input aria-label="Other Name" type="text" name="other_name" id="other_name" class="form-control" value="">
+                            <span><?= __('Other Name'); ?></span>
+                            <input aria-label="<?= htmlspecialchars(__('Other Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="other_name" id="other_name" class="form-control" value="">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                         <div class="form-group">
-                            <span>Date of Issue</span>
-                            <input aria-label="Request Date" type="text" name="request_date" id="require_date_st_2" class="form-control datepicker" value="<?php echo fromDate();?>">
+                            <span><?= __('Date of Issue'); ?></span>
+                            <input aria-label="<?= htmlspecialchars(__('Request Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="request_date" id="require_date_st_2" class="form-control datepicker" value="<?php echo fromDate();?>">
                         </div>
                     </div>
 
@@ -956,8 +956,8 @@ $st_show_type=$_SESSION['st_show_type'];
 
                     <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                         <div class="form-group">
-                            <span>Comments </span>
-                            <textarea aria-label="Request Comment" name="request_comment" class="form-control" id="request_comment"></textarea>
+                            <span><?= __('Comments'); ?> </span>
+                            <textarea aria-label="<?= htmlspecialchars(__('Request Comment'), ENT_QUOTES, 'UTF-8'); ?>" name="request_comment" class="form-control" id="request_comment"></textarea>
                         </div>
                     </div>
 
@@ -967,7 +967,7 @@ $st_show_type=$_SESSION['st_show_type'];
 }else{ echo "10";
 } ?>">
 
-                        <button class="btn btn-primary" name="checkout" onclick="submitinstationaryfrom()">Check Out </button>
+                        <button class="btn btn-primary" name="checkout" onclick="submitinstationaryfrom()"><?= __('Check Out'); ?> </button>
                     </div>
                 </div>
             </div>
