@@ -91,7 +91,7 @@ if (isset($_POST['submit'])) {
     <!-- Pradeep HTML Start here -->
     <div class="card mt-4">
         <div class="card-header">
-            <h5>Resign Employee Assets</h5>
+            <h5><?= __('Resign Employee Assets'); ?></h5>
 
             <div class="card-header-right">
 
@@ -99,8 +99,8 @@ if (isset($_POST['submit'])) {
         </div>
         <div class="card-body">
             <div class="mb-10">
-            <span class="m-r-5 spanactive" id="resignBtn" >Resign Employee</span>
-            <button type="button" class="btn p-0 border-0 bg-transparent m-r-5 spandeactive" onclick="resignhistorydaybyempid()" id="historyBtn" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">History</button>
+            <span class="m-r-5 spanactive" id="resignBtn" ><?= __('Resign Employee'); ?></span>
+            <button type="button" class="btn p-0 border-0 bg-transparent m-r-5 spandeactive" onclick="resignhistorydaybyempid()" id="historyBtn" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('History'); ?></button>
             </div>
             <div class="row m-t-20" id="resigningContainer">
                 <?php include_once 'custom_view_resign_employee_asset.php'; ?>
@@ -139,7 +139,7 @@ if (isset($_POST['submit'])) {
                 <div class="col-lg-4 cc_val">
                     <div class="form-group">
                         <select aria-label="Asset []" class="form-control form-select js-example-basic-single asset-select" name="asset_id[]" id="asset_id_`+count+`" required>
-                            <option value="">Select Asset</option>
+                            <option value=""><?= htmlspecialchars(__('Select Asset'), ENT_QUOTES, 'UTF-8'); ?></option>
                             <?php foreach ($assets as $asset){ ?>
                                 <option value="<?php echo $asset['id']; ?>"><?php echo $asset['asset_description']; ?></option>
                             <?php } ?>
@@ -148,12 +148,12 @@ if (isset($_POST['submit'])) {
                 </div>
                 <div class="col-lg-3">
                     <div class="form-group">
-                        <input aria-label="Received Date[]" type="date" class="form-control"  name="received_date[]" id="received_date" required>
+                        <input aria-label="<?= htmlspecialchars(__('Received Date'), ENT_QUOTES, 'UTF-8'); ?>[]" type="date" class="form-control"  name="received_date[]" id="received_date" required>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="form-group">
-                        <textarea aria-label="Remarks" class="form-control" placeholder="Remarks"  name="received_note[]" id="received_note"></textarea>
+                        <textarea aria-label="<?= htmlspecialchars(__('Remarks'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" placeholder="<?= htmlspecialchars(__('Remarks'), ENT_QUOTES, 'UTF-8'); ?>"  name="received_note[]" id="received_note"></textarea>
                     </div>
                 </div>
                 <div class="col-lg-2">
@@ -174,7 +174,7 @@ if (isset($_POST['submit'])) {
 
             document.querySelectorAll(".asset-select").forEach(select => {
                 let currentValue = select.value;
-                select.innerHTML = '<option value="">Select Asset</option>';
+                select.innerHTML = '<option value=""><?= htmlspecialchars(__('Select Asset'), ENT_QUOTES, 'UTF-8'); ?></option>';
 
                 <?php foreach ($assets as $asset) : ?>
                     if (!selectedValues.includes("<?php echo $asset['id']; ?>") || currentValue === "<?php echo $asset['id']; ?>") {
