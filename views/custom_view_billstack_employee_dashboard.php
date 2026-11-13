@@ -87,10 +87,10 @@ function closedPopup(){
 <div class="banner">
   <img src="assets/images/student-courses/banner-1.jpg" class="" alt="">
   <div class="banner-text">
-    <h2>Start managing expenses and reimbursements With ease! </h2>
-    <p>Helps you in managing: Expenses And Reimbursements. BillStack does this all through your modern Web Browser. Be assured to track your bills and payments from anywhere anytime.</p>
-    <button type="button" onclick="expensesDetailsPopUp(<?php echo $_SESSION['emp_id']; ?>)" class="btn-white b-radius-5 text-uppercase f-w-600 cursor-pointer"> New Expense Report</button>
-    <a href="index?option=COM_LIST_EMP_EXPENSES" class="btn-white b-radius-5 text-uppercase f-w-600 cursor-pointer"> Browse Expense Report</a>
+    <h2><?= __('Start managing expenses and reimbursements With ease!'); ?> </h2>
+    <p><?= __('Helps you in managing: Expenses And Reimbursements. BillStack does this all through your modern Web Browser. Be assured to track your bills and payments from anywhere anytime.'); ?></p>
+    <button type="button" onclick="expensesDetailsPopUp(<?php echo $_SESSION['emp_id']; ?>)" class="btn-white b-radius-5 text-uppercase f-w-600 cursor-pointer"> <?= __('New Expense Report'); ?></button>
+    <a href="index?option=COM_LIST_EMP_EXPENSES" class="btn-white b-radius-5 text-uppercase f-w-600 cursor-pointer"> <?= __('Browse Expense Report'); ?></a>
   </div>
 </div>
 <div class="card">
@@ -104,7 +104,7 @@ function closedPopup(){
         </div>
         <div class="flex">
           <a href="#"><div class="card-title f-w-600 f-16"><?php echo count((array)$admindashboardd['bill_cnt'])."+ BillS"?></div>
-            <p class="card-subtitle text-muted mt-1 f-12"> Total Number Of Bills</p>
+            <p class="card-subtitle text-muted mt-1 f-12"> <?= __('Total Number Of Bills'); ?></p>
           </a>
         </div>
 
@@ -116,7 +116,7 @@ function closedPopup(){
         <div class="flex">
          <a href="#">
           <div class="card-title f-w-600 f-16"><?php echo count((array)$admindashboardd['bill_approved'])."+ Bills"?></div>
-          <p class="card-subtitle text-muted mt-1 f-12"> Total Number Of Bills Cleared</p>
+          <p class="card-subtitle text-muted mt-1 f-12"> <?= __('Total Number Of Bills Cleared'); ?></p>
         </a>
       </div>
     </div>
@@ -127,7 +127,7 @@ function closedPopup(){
       <div class="flex">
        <a href="#">
         <div class="card-title f-w-600 f-16"><?php echo count((array)$admindashboardd['pending_approved'])."+ Bills"?></div>
-        <p class="card-subtitle text-muted mt-1 f-12"> Total Number Of Bills Pendding</p>
+        <p class="card-subtitle text-muted mt-1 f-12"> <?= __('Total Number Of Bills Pendding'); ?></p>
       </a>
     </div>
   </div>
@@ -149,14 +149,14 @@ function closedPopup(){
                 <div class="card-body">
                   <div class="row align-items-center m-b-30">
                     <div class="col">
-                      <h6 class="m-b-5 text-white">Un-Submited</h6>
+                      <h6 class="m-b-5 text-white"><?= __('Un-Submited'); ?></h6>
                       <h3 class="m-b-0 f-w-700 text-white"><?php echo $admindashboardd['unsubmited_amt']!=""?customeummarmonyformate($admindashboardd['unsubmited_amt']):"0.00"; ?></h3>
                     </div>
                     <div class="col-auto">
                       <i class="ti-help text-c-red f-18 p-2"></i>
                     </div>
                   </div>
-                  <p class="m-b-0 text-white"><span class="label label-danger m-r-10"><?php echo $admindashboardd['unsubmited_cnt']; ?> </span>Reports</p>
+                  <p class="m-b-0 text-white"><span class="label label-danger m-r-10"><?php echo $admindashboardd['unsubmited_cnt']; ?> </span><?= __('Reports'); ?></p>
                 </div>
               </div>
             </div>
@@ -165,14 +165,14 @@ function closedPopup(){
                 <div class="card-body">
                   <div class="row align-items-center m-b-30">
                     <div class="col">
-                      <h6 class="m-b-5 text-white">Submited</h6>
+                      <h6 class="m-b-5 text-white"><?= __('Submited'); ?></h6>
                       <h3 class="m-b-0 f-w-700 text-white"><?php echo $admindashboardd['pending_approved_amt']!=""?customeummarmonyformate( $admindashboardd['pending_approved_amt']):"0.00"; ?></h3>
                     </div>
                     <div class="col-auto">
                      <i class="ti-thumb-up text-c-blue f-18 p-2"></i>
                    </div>
                  </div>
-                 <p class="m-b-0 text-white"><span class="label label-primary m-r-10"><?php echo $admindashboardd['pending_approved_cnt']; ?></span>Reports</p>
+                 <p class="m-b-0 text-white"><span class="label label-primary m-r-10"><?php echo $admindashboardd['pending_approved_cnt']; ?></span><?= __('Reports'); ?></p>
                </div>
              </div>
            </div>
@@ -181,14 +181,14 @@ function closedPopup(){
               <div class="card-body">
                 <div class="row align-items-center m-b-30">
                   <div class="col">
-                    <h6 class="m-b-5 text-white"> Reimbursed</h6>
+                    <h6 class="m-b-5 text-white"> <?= __('Reimbursed'); ?></h6>
                     <h3 class="m-b-0 f-w-700 text-white"><?php echo $admindashboardd['bill_approved_amonut']!=""?customeummarmonyformate($admindashboardd['bill_approved_amonut']):"0.00"; ?></h3>
                   </div>
                   <div class="col-auto">
                     <i class="fas fa-money-bill-alt text-c-green f-18 p-2"></i>
                   </div>
                 </div>
-                <p class="m-b-0 text-white"><span class="label label-success m-r-10"><?php echo $admindashboardd['bill_approved_cnt']; ?> </span>Reports</p>
+                <p class="m-b-0 text-white"><span class="label label-success m-r-10"><?php echo $admindashboardd['bill_approved_cnt']; ?> </span><?= __('Reports'); ?></p>
               </div>
             </div>
           </div>
@@ -200,7 +200,7 @@ function closedPopup(){
       <div class="page-body mt-4 border-bottom">
         <div class="width-77">
           <div class="row">
-            <h3 class="f-20 mb-3">Recet Bills</h3>
+            <h3 class="f-20 mb-3"><?= __('Recet Bills'); ?></h3>
             <?php if(count((array)$admindashboardd['billsres']) != 0){ foreach($admindashboardd['billsres'] as $billsreslist){
               $stausresult = $_SESSION['status'][$billsreslist['current_status']];
               $ridrecengtbils = deocdeId("id:".$billsreslist['id']);
@@ -214,7 +214,7 @@ function closedPopup(){
                     </div>
                     <div class="col p-l-0">
                       <h6 class="m-b-5 f-16"><?php echo $billsreslist['expense_code']; ?></h6>
-                      <h6 class="m-b-0 text-muted f-12">Rs. <?php echo customeummarmonyformate($billsreslist['amount']); ?></h6>
+                      <h6 class="m-b-0 text-muted f-12"><?= __('Rs.'); ?> <?php echo customeummarmonyformate($billsreslist['amount']); ?></h6>
                     </div>
                   </div>
                   <h6 class="pt-badge f-10" style="background-color: <?php echo $stausresult['background_color'][0] == '#'?$stausresult['background_color']:"#".$stausresult['background_color']; ?>; color:<?php echo $stausresult['color'][0] =='#'?$stausresult['color']:'#'.$stausresult['color']; ?>"><?php echo $statusprogress[$billsreslist['current_status']]?></h6>
@@ -223,9 +223,9 @@ function closedPopup(){
                   <div class="custom-popup-open custom-popup-slide-<?php echo $billsreslist['id']; ?>" style="left: 14px; top: 70px;">
                       <div class="card">
                         <div class="card-header">
-                          <h5>Expense</h5>
+                          <h5><?= __('Expense'); ?></h5>
                           <div class="card-header-right">
-                            <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closedPopup()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Closed" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+                            <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closedPopup()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Closed'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
                           </div>
                         </div>
                         <div class="card-body">
@@ -235,7 +235,7 @@ function closedPopup(){
                             </div>
                             <div class="col p-l-0">
                               <h6 class="m-b-5 f-16"><?php echo $billsreslist['expense_code']; ?></h6>
-                              <h6 class="m-b-0 text-muted f-12">Rs. <?php echo customeummarmonyformate($billsreslist['amount']); ?></h6>
+                              <h6 class="m-b-0 text-muted f-12"><?= __('Rs.'); ?> <?php echo customeummarmonyformate($billsreslist['amount']); ?></h6>
                             </div>
                           </div>
                           <p class="mt-3 text-muted"><?php echo $billsreslist['description']; ?></p>
@@ -254,7 +254,7 @@ function closedPopup(){
                             </div>
                           </div>
                           <div class="mt-4">
-                            <a href="index.php?option=COM_INSERT_EMP_EXPENSES&Rid=<?php echo $ridrecengtbils; ?>" class="btn btn-primary">Edit</a>
+                            <a href="index.php?option=COM_INSERT_EMP_EXPENSES&Rid=<?php echo $ridrecengtbils; ?>" class="btn btn-primary"><?= __('Edit'); ?></a>
                          </div>
                       </div>
                     </div>
@@ -264,7 +264,7 @@ function closedPopup(){
         <?php  } ?>
       <?php }else{?>
         <div class="card-px text-center py-20 m-t-30">
-              <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Recet Bills</p>
+              <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Recet Bills'); ?></p>
               <div class="text-center px-4">
                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
             </div>
@@ -283,7 +283,7 @@ function closedPopup(){
            <div class="card social-card custom_hover_card" style="min-height: 365px;">
             <div class="card-body text-center">
              <div class="text-facebook m-b-20"><i class="ti-announcement "></i></div>
-             <h3 class="text-facebook f-w-700">Announcements</h3>
+             <h3 class="text-facebook f-w-700"><?= __('Announcements'); ?></h3>
              <?php
              $anouncement =  API."?mode=togetlatestannouncement";
              $anouncement_list = callAPI($anouncement);
@@ -297,7 +297,7 @@ function closedPopup(){
        <div class="col-lg-6 col-xl-6 col-sm-6 col-12">
          <div class="card new-cust-card custom_hover_card">
           <div class="card-header">
-           <h5>Holidays List</h5> <span class="form-label label label-success"><?php echo $total_holidays; ?></span>
+           <h5><?= __('Holidays List'); ?></h5> <span class="form-label label label-success"><?php echo $total_holidays; ?></span>
 
          </div>
          <div class="card-block custom-scroll" style=" height: 300px;">
@@ -310,7 +310,7 @@ function closedPopup(){
               $Notification_DateTime = $holiday['holiday_date'];
               ?>
               <div class="align-middle m-b-35">
-               <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($Notification_Message); ?></span>
+               <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($Notification_Message); ?></span>
                <div class="d-inline-block">
                 <a href="#!"><h6><?php echo $Notification_Message; ?></h6></a>
                 <p class="text-muted m-b-0"><?php echo $Notification_DateTime; ?></p>
@@ -319,7 +319,7 @@ function closedPopup(){
           <?php } ?>
           <?php } else {
 
-            echo "<h4><i class='fa fa-warning'></i> No Holidays Available</h4>";
+            echo "<h4><i class='fa fa-warning'></i> ".__('No Holidays Available')."</h4>";
           } ?>
 
         </div>
@@ -330,7 +330,7 @@ function closedPopup(){
 
      <div class="card">
       <div class="card-header">
-       <h5>Tasks due in 7 days
+       <h5><?= __('Tasks due in 7 days'); ?>
        </h5>
        <span class="form-label label label-danger"><?php echo count((array)$count_task['due']); ?></span>
        <span class="form-label label label-warning"><?php echo count((array)$count_task['now']); ?></span>
@@ -367,7 +367,7 @@ function closedPopup(){
                                   <div class="to-do-list">
                                       <div class="checkbox-fade fade-in-primary" >
                                           <label class="form-label check-task " id="checkstausid<?php echo $Notification_Table_Id; ?>">
-                                              <input aria-label="Checkbox" type="checkbox"  value="" id="checkstausinput<?php echo $Notification_Table_Id; ?>" onclick="statuspopup('<?php echo $task['status_list'][0]['status']; ?>','<?php echo $Notification_Table_Id; ?>','<?php echo $Notification_Table; ?>','<?php echo $task['view_status']=="0"?"0":$_SESSION['error_message'][$task['view_status']]; ?>','task')" onkeydown="">
+                                              <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox"  value="" id="checkstausinput<?php echo $Notification_Table_Id; ?>" onclick="statuspopup('<?php echo $task['status_list'][0]['status']; ?>','<?php echo $Notification_Table_Id; ?>','<?php echo $Notification_Table; ?>','<?php echo $task['view_status']=="0"?"0":$_SESSION['error_message'][$task['view_status']]; ?>','task')" onkeydown="">
                                               <span class="cr ">
                                                   <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                               </span>
@@ -378,7 +378,7 @@ function closedPopup(){
                            <?php } ?>
                            <?php } else {
 
-                            echo "<h4 class='p-40 text-center'><i class='fa fa-warning'></i> No Task Available</h4>";
+                            echo "<h4 class='p-40 text-center'><i class='fa fa-warning'></i> ".__('No Task Available')."</h4>";
                          } ?>
 
                         </div>
@@ -391,7 +391,7 @@ function closedPopup(){
                    <div class="col-lg-12">
                     <div class="card table-card">
                      <div class="card-header">
-                      <h5>Reviews</h5><span class="form-label badge bg-danger"><?php echo count((array)$reviewdata['total_review_count']['due']); ?></span><span class="form-label badge bg-warning ml-2"><?php echo count((array)$reviewdata['total_review_count']['now']); ?></span>
+                      <h5><?= __('Reviews'); ?></h5><span class="form-label badge bg-danger"><?php echo count((array)$reviewdata['total_review_count']['due']); ?></span><span class="form-label badge bg-warning ml-2"><?php echo count((array)$reviewdata['total_review_count']['now']); ?></span>
 
                     </div>
                     <div class="card-block custom-scroll" style="height: 300px;">
