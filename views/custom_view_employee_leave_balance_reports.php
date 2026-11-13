@@ -18,7 +18,7 @@ $pagecnt = ceil(count((array)$emp_leave_balance)/$pagingrecord);
 function printReport(divId) {
     var printContents = $("#" + divId).html();
   var printWindow = window.open('', '_blank');
-  printWindow.document.write('<html lang="en"><head><title>Employee Leave Balance Report</title></head><body>' + printContents + '</body></html>');
+  printWindow.document.write('<html lang="en"><head><title><?= htmlspecialchars(__('Employee Leave Balance Report'), ENT_QUOTES, 'UTF-8'); ?></title></head><body>' + printContents + '</body></html>');
   printWindow.document.close(); // close the document stream
   printWindow.print();
   printWindow.onafterprint = function() {
@@ -50,9 +50,9 @@ function showNext(){
 </script>
 <div class="card">
     <div class="card-header">
-        <h5>Employee Leaves</h5>
+        <h5><?= __('Employee Leaves'); ?></h5>
         <div class="card-header-right table-card-header ">
-      <button type="button" class="btn waves-effect waves-light"><i class="icofont icofont-reply"></i>Back</button>
+      <button type="button" class="btn waves-effect waves-light"><i class="icofont icofont-reply"></i><?= __('Back'); ?></button>
       </div>
     </div>
     <div class="card-body">
@@ -61,9 +61,9 @@ function showNext(){
             <div class="row">
                 <div class="col-lg-2">
                     <div class=" form-group">
-                        <span class="form-label">Employee</span>
-                        <select aria-label="Employee  Filter" class="js-example-basic-single form-control"  name="employee_id_filter">
-                            <option value="">All Employees</option>
+                        <span class="form-label"><?= __('Employee'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Employee Filter'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single form-control"  name="employee_id_filter">
+                            <option value=""><?= __('All Employees'); ?></option>
                             <?php foreach($employees as $cust){ ?>
                                 <option value="<?php echo $cust['id'];?>" <?php echo $_POST['employee_id_filter'] == $cust['id']?"selected":""; ?>><?php echo $cust['display_name'];?></option>
                             <?php } ?>
@@ -72,14 +72,14 @@ function showNext(){
                 </div>
                 <div class="col-lg-2">
                     <div class="form-group w-full">
-                        <span class="form-label ">Employee Name/Emp Code </span>
-                        <input aria-label="Employee Filter" type="text" class="form-control" name="employee_filter"  value="<?php echo $_POST['employee_filter'];?>" >
+                        <span class="form-label "><?= __('Employee Name/Emp Code'); ?> </span>
+                        <input aria-label="<?= htmlspecialchars(__('Employee Filter'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="employee_filter"  value="<?php echo $_POST['employee_filter'];?>" >
                     </div>
                 </div>
                 <div class="col-lg-2">
                     <div class=" form-group">
-                        <span class="form-label">Year</span>
-                        <select aria-label="Year Filter" class="js-example-basic-single form-control"  name="year_filter">
+                        <span class="form-label"><?= __('Year'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Year Filter'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single form-control"  name="year_filter">
                             <?php
                             $year = date('Y')-10;
                              for($y=1; $y <= 11; $y++){  ?>
@@ -91,7 +91,7 @@ function showNext(){
                 </div>
 
                 <div class="col-lg-2 text-right">
-                    <button type="submit" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-t-30" name="searchfilter"> <i class="ti-search"></i> Search</button>
+                    <button type="submit" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-t-30" name="searchfilter"> <i class="ti-search"></i> <?= __('Search'); ?></button>
                 </div>
             </div>
         </form>
@@ -102,9 +102,9 @@ function showNext(){
               <link rel="stylesheet" type="text/css" href="assets/css/custom.css">
               <div class="row mt-2">
                   <h3 class="text-center text-primary">
-                Employee Leaves (<?php echo date("Y"); ?>)
-                <h4 class="f-14 d-block text-dark mt-1 text-center">View By : <?php echo $_SESSION['display_name']; ?></h4>
-                <span class="f-10 text-center">Date & Time : <?php echo date("Y-m-d H:i:s"); ?></span>
+                <?= __('Employee Leaves ('); ?><?php echo date("Y"); ?>)
+                <h4 class="f-14 d-block text-dark mt-1 text-center"><?= __('View By'); ?> : <?php echo $_SESSION['display_name']; ?></h4>
+                <span class="f-10 text-center"><?= htmlspecialchars(__('Date & Time'), ENT_QUOTES, 'UTF-8'); ?> : <?php echo date("Y-m-d H:i:s"); ?></span>
                   </h3>
             </div>
             <?php $emc = 1; $pagerow=1;
@@ -126,23 +126,23 @@ function showNext(){
                   <thead>
                       <tr>
                           <th scope="col" rowspan="2">#</th>
-                          <th scope="col" rowspan="2">Leave type</th>
-                          <th scope="col" rowspan="2" class="text-center">Open</th>
-                          <th scope="col" colspan="2" class="text-center">Jan</th>
-                          <th scope="col" colspan="2" class="text-center">Feb</th>
-                          <th scope="col" colspan="2" class="text-center">Mar</th>
-                          <th scope="col" colspan="2" class="text-center">Apr</th>
-                          <th scope="col" colspan="2" class="text-center">May</th>
-                          <th scope="col" colspan="2" class="text-center">Jun</th>
-                          <th scope="col" colspan="2" class="text-center">Jul</th>
-                          <th scope="col" colspan="2" class="text-center">Aug</th>
-                          <th scope="col" colspan="2" class="text-center">Sep</th>
-                          <th scope="col" colspan="2" class="text-center">Oct</th>
-                          <th scope="col" colspan="2" class="text-center">Nov</th>
-                          <th scope="col" colspan="2" class="text-center">Dec</th>
-                          <th scope="col" rowspan="2" class="text-right">Allocated</th>
-                          <th scope="col" rowspan="2" class="text-right text-danger">Consumed</th>
-                          <th scope="col" rowspan="2" class="text-right">Balance</th>
+                          <th scope="col" rowspan="2"><?= __('Leave type'); ?></th>
+                          <th scope="col" rowspan="2" class="text-center"><?= __('Open'); ?></th>
+                          <th scope="col" colspan="2" class="text-center"><?= __('Jan'); ?></th>
+                          <th scope="col" colspan="2" class="text-center"><?= __('Feb'); ?></th>
+                          <th scope="col" colspan="2" class="text-center"><?= __('Mar'); ?></th>
+                          <th scope="col" colspan="2" class="text-center"><?= __('Apr'); ?></th>
+                          <th scope="col" colspan="2" class="text-center"><?= __('May'); ?></th>
+                          <th scope="col" colspan="2" class="text-center"><?= __('Jun'); ?></th>
+                          <th scope="col" colspan="2" class="text-center"><?= __('Jul'); ?></th>
+                          <th scope="col" colspan="2" class="text-center"><?= __('Aug'); ?></th>
+                          <th scope="col" colspan="2" class="text-center"><?= __('Sep'); ?></th>
+                          <th scope="col" colspan="2" class="text-center"><?= __('Oct'); ?></th>
+                          <th scope="col" colspan="2" class="text-center"><?= __('Nov'); ?></th>
+                          <th scope="col" colspan="2" class="text-center"><?= __('Dec'); ?></th>
+                          <th scope="col" rowspan="2" class="text-right"><?= __('Allocated'); ?></th>
+                          <th scope="col" rowspan="2" class="text-right text-danger"><?= __('Consumed'); ?></th>
+                          <th scope="col" rowspan="2" class="text-right"><?= __('Balance'); ?></th>
                       </tr>
                       <tr>
                           <td class="text-right">A</td>
@@ -215,27 +215,27 @@ function showNext(){
 } ?>
 
         </div>
-        <nav aria-label="Page navigation example ">
+        <nav aria-label="<?= htmlspecialchars(__('Page navigation example'), ENT_QUOTES, 'UTF-8'); ?> ">
 
             <ul class="pagination justify-content-end mt-4">
                 <li class="page-item">
-                    <button type="button" class="page-link" tabindex="-1" onclick="showPrevious()">Previous</button>
+                    <button type="button" class="page-link" tabindex="-1" onclick="showPrevious()"><?= __('Previous'); ?></button>
                 </li>
                 <?php for($c=1; $c <= $pagecnt; $c++){ ?>
                 <li class="page-item remove_active_page <?php echo $c == '1'?"active":""; ?>" id="activepage_<?php echo $c; ?>"><button type="button" class="page-link" onclick="showRecord(<?php echo $c; ?>)"><?php echo $c; ?></button></li>
                 <?php } ?>
                 <li class="page-item">
-                    <button type="button" class="page-link" onclick="showNext()">Next</button>
+                    <button type="button" class="page-link" onclick="showNext()"><?= __('Next'); ?></button>
                 </li>
                 <input type="hidden" id="show_paging_no" value="1">
             </ul>
         </nav>
         <div class="row mt-5 m-l-5">
-            <button class="btn waves-effect waves-light btn-grd-success col-lg-2" onclick="printReport('print_report_div');"><i class="fa fa-print"></i> &nbsp Print Report</button>
+            <button class="btn waves-effect waves-light btn-grd-success col-lg-2" onclick="printReport('print_report_div');"><i class="fa fa-print"></i> &nbsp <?= __('Print Report'); ?></button>
           </div>
       <?php }else{ ?>
           <div class="card-px text-center ">
-            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-alert"></i> No Employee Leaves</p>
+            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-alert"></i> <?= __('No Employee Leaves'); ?></p>
             <div class="text-center px-4">
                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
             </div>
