@@ -29,11 +29,11 @@ $_SESSION['apply_js']['Switch'] = 1;
   <div class="container-fluid">
     <div class="card card-custom mb-5 ">
       <div class="card-header">
-        <h5>Work Attendance</h5>
+        <h5><?= __('Work Attendance'); ?></h5>
         <div class="card-header-right">
           <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
             <i class="icofont icofont-reply"></i>
-            Back
+            <?= __('Back'); ?>
           </a>
         </div>
       </div>
@@ -45,12 +45,12 @@ $_SESSION['apply_js']['Switch'] = 1;
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                     <th scope="col">Leave Policy Name </th>
-                    <th scope="col">Leave Day </th>
-                    <th scope="col">Accured Action</th>
-                    <th scope="col">Joining </th>
-                    <th scope="col">Action Days </th>
-                    <th scope="col">Max Carry Leaves</th>
+                     <th scope="col"><?= __('Leave Policy Name'); ?> </th>
+                    <th scope="col"><?= __('Leave Day'); ?> </th>
+                    <th scope="col"><?= __('Accured Action'); ?></th>
+                    <th scope="col"><?= __('Joining'); ?> </th>
+                    <th scope="col"><?= __('Action Days'); ?> </th>
+                    <th scope="col"><?= __('Max Carry Leaves'); ?></th>
                    <
                   </tr>
                 </thead>
@@ -83,7 +83,7 @@ $_SESSION['apply_js']['Switch'] = 1;
       </div>
       <div class="text-right p-3">
         <button class="btn btn-primary" onclick="saveleaveemployee()" >
-          Save
+          <?= __('Save'); ?>
         </button>
       </div>
     </div>
