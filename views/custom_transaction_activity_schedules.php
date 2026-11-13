@@ -71,11 +71,11 @@ $tasklist = json_decode($configesponse,1);
 
 
             <div class="card-header table-card-header">
-                <h5> Process Task</h5>
+                <h5> <?= __('Process Task'); ?></h5>
                 <div class="card-header-right table-card-header ">
                     <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                         <i class="icofont icofont-reply"></i>
-                        Back
+                        <?= __('Back'); ?>
                     </a>
                 </div></div>
 
@@ -105,9 +105,9 @@ foreach($proceslist as $fef){
                         <div class="col-lg-2">
 
                             <?php if($row['user_photo']!=""){ ?>
-                                <img src="uploads/all/<?php echo $row['user_photo']; ?>"   class="img-radius img-50 align-top m-r-15" alt="User Profile">
+                                <img src="uploads/all/<?php echo $row['user_photo']; ?>"   class="img-radius img-50 align-top m-r-15" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                             <?php } else { ?>
-                                <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-14 text-center bg-white  f-w-700" ><?php echo initials($row['display_name']); ?></span>
+                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-14 text-center bg-white  f-w-700" ><?php echo initials($row['display_name']); ?></span>
                             <?php } ?>
                         </div>
                         <div class="col-lg-10">
@@ -125,7 +125,7 @@ foreach($proceslist as $fef){
                                         <li>
                                             <div class="checkbox-fade fade-in-primary">
                                                 <label class="form-label">
-                                                    <input aria-label="Checkbox" type="checkbox"  <?php echo $processrow['check_value']!=''?"checked='checked'":""; ?>   disabled="disabled" value="" />
+                                                    <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox"  <?php echo $processrow['check_value']!=''?"checked='checked'":""; ?>   disabled="disabled" value="" />
                                                     <span class="cr">
                                                         <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                     </span>
@@ -148,7 +148,7 @@ foreach($proceslist as $fef){
 }else{ $mck++;
 }
 }
-}else{   echo '<div class="text-center"><h4 class="text-info"><i class="fa fa-warning"></i> No Process Task</h
+}else{   echo '<div class="text-center"><h4 class="text-info"><i class="fa fa-warning"></i> '.__('No Process Task').'</h
   4></div>';
 } ?>
         </div>
