@@ -60,13 +60,13 @@ if(count((array)($vendors)) != 0){  ?>
     <table class="table table-hover m-b-0 register_vendor_filter f-13">
         <thead>
             <tr>
-                <th scope="col" class="p-2" style="width: 35%;">Vendor Details</th>
-                <th scope="col" class="p-2" style="width: 10%;">Satuse</th>
-                <th scope="col" class="text-end p-2" style="width: 10%;">Total</th>
-                <th scope="col" class="text-end p-2" style="width: 10%;">To Start</th>
-                <th scope="col" class="text-end p-2" style="width: 10%;">Inprogress</th>
-                <th scope="col" class="text-end p-2" style="width: 10%;">Review</th>
-                <th scope="col" class="text-end p-2" style="width: 10%;">Completed</th>
+                <th scope="col" class="p-2" style="width: 35%;"><?= __('Vendor Details'); ?></th>
+                <th scope="col" class="p-2" style="width: 10%;"><?= __('Satuse'); ?></th>
+                <th scope="col" class="text-end p-2" style="width: 10%;"><?= __('Total'); ?></th>
+                <th scope="col" class="text-end p-2" style="width: 10%;"><?= __('To Start'); ?></th>
+                <th scope="col" class="text-end p-2" style="width: 10%;"><?= __('Inprogress'); ?></th>
+                <th scope="col" class="text-end p-2" style="width: 10%;"><?= __('Review'); ?></th>
+                <th scope="col" class="text-end p-2" style="width: 10%;"><?= __('Completed'); ?></th>
 
             </tr>
         </thead>
@@ -94,12 +94,12 @@ if(count((array)($vendors)) != 0){  ?>
                     <td class="p-2" style="width: 50%;">
                         <div class="align-middle">
                             <?php if($onboard_emp['image'] !=""){?>
-                                <img src="uploads/all/<?php echo $onboard_emp['image']; ?>"  class="img-radius img-40 align-top m-r-5" onerror="this.src='uploads/all/no-image.jpg';" alt="Attachment Preview">
+                                <img src="uploads/all/<?php echo $onboard_emp['image']; ?>"  class="img-radius img-40 align-top m-r-5" onerror="this.src='uploads/all/no-image.jpg';" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                             <?php } else { ?>
-                                <span  alt="user" class="img-radius img-40 align-top m-r-5 custom_txt_round pt-1 f-12 text-center"><?php echo initials($onboard_emp['display_name']); ?></span>
+                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-5 custom_txt_round pt-1 f-12 text-center"><?php echo initials($onboard_emp['display_name']); ?></span>
                             <?php } ?>
                             <div class="d-inline-block width73 text-primary">
-                                <a href="index.php?option=COM_INSERT_VENDOR_REGISTERS&VTYPE=VR&Rid=<?php echo $empiddecode; ?>" target="_blank" data-bs-toggle="tooltip" data-placement="bottom" title=""  data-bs-original-title="Click To Open Registration Vendor Details"><h6 class="mb-0 text-primary"><?php
+                                <a href="index.php?option=COM_INSERT_VENDOR_REGISTERS&VTYPE=VR&Rid=<?php echo $empiddecode; ?>" target="_blank" data-bs-toggle="tooltip" data-placement="bottom" title=""  data-bs-original-title="<?= htmlspecialchars(__('Click To Open Registration Vendor Details'), ENT_QUOTES, 'UTF-8'); ?>"><h6 class="mb-0 text-primary"><?php
                                 if($onboard_emp['company'] !=""){ ?>
                                     <h6 class="mb-0 text-primary"><?php echo $onboard_emp['company']; ?></h6>
                                     <p class="text-muted m-b-0"><i class="ti-user f-12"></i> <?php echo $onboard_emp['display_name']; ?></p>
@@ -125,7 +125,7 @@ if(count((array)($vendors)) != 0){  ?>
                                                 $allaproveprofile = 1;
                                             }
                                             ?>
-                                            <span alt="user" class="img-radius img-30 align-top m-r-10 custom_txt_round f-12 text-center <?php echo $bgcolor; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $label_title; ?>"><?php echo initials($_SESSION['users'][$uidkey]); ?></span>
+                                            <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-30 align-top m-r-10 custom_txt_round f-12 text-center <?php echo $bgcolor; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $label_title; ?>"><?php echo initials($_SESSION['users'][$uidkey]); ?></span>
                                         <?php }
                                         echo "</div>";
                                     } ?>
@@ -134,7 +134,7 @@ if(count((array)($vendors)) != 0){  ?>
                                     if (($onboard_emp['vendor_id'] == "" && ($_SESSION['admin_type'] == '1' || $onboard_emp['originator'] == $_SESSION['userid']) && $taskresult['total_task_cnt'] == $taskresult['approve_cnt'] && $onboard_emp['send_verification_profile_status'] == "Y" && $allaproveprofile == '0' && $onboard_emp['vendor_type_id'] == "1")) {
 
                                         ?>
-                                        <button class="btn btn-info waves-effect waves-light btn-mini createVendorRegisterToVendor" data-vendor-id="<?php echo $onboard_emp['id']; ?>"><i class="ti ti-user"></i> Create Vendor</button>
+                                        <button class="btn btn-info waves-effect waves-light btn-mini createVendorRegisterToVendor" data-vendor-id="<?php echo $onboard_emp['id']; ?>"><i class="ti ti-user"></i> <?= __('Create Vendor'); ?></button>
                                     <?php } ?>
 
                                 </div>
@@ -154,7 +154,7 @@ if(count((array)($vendors)) != 0){  ?>
         </table>
     <?php  }else{ ?>
         <div class="card-px text-center py-20 mt-2">
-            <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> No Registration Vendors </p>
+            <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> <?= __('No Registration Vendors'); ?> </p>
             <div class="text-center px-4">
                 <img class="mw-100 mh-300px mx-height-300" alt="" src="assets/images/work.png">
             </div>
@@ -162,10 +162,10 @@ if(count((array)($vendors)) != 0){  ?>
     <?php } ?>
  </div>
  <div class="mt-5   custom-scroll height-75" >
-    <nav aria-label="Page navigation example p-2" >
+    <nav aria-label="<?= htmlspecialchars(__('Page navigation example p-2'), ENT_QUOTES, 'UTF-8'); ?>" >
         <ul class="pagination">
           <li class="page-item <?php echo ($current_page =="1" || $current_page =="")?"disabled":""; ?>">
-              <a class="page-link dynamicVendorAdminDashboard"  data-current_status = "" data-current_page="<?php echo $current_page-1; ?>" href="#!" tabindex="-1" >Previous</a>
+              <a class="page-link dynamicVendorAdminDashboard"  data-current_status = "" data-current_page="<?php echo $current_page-1; ?>" href="#!" tabindex="-1" ><?= __('Previous'); ?></a>
           </li>
         <?php
           for ($i = 1; $i <= $total_pages; $i++){
@@ -177,7 +177,7 @@ if(count((array)($vendors)) != 0){  ?>
             <?php } ?>
 
             <li class="page-item <?php echo ($total_pages <= $current_page)?"disabled":""; ?>">
-                <a class="page-link dynamicVendorAdminDashboard"  data-current_status = "" data-current_page="<?php echo $current_page+1; ?>"  href="#!" tabindex="-1">Next</a>
+                <a class="page-link dynamicVendorAdminDashboard"  data-current_status = "" data-current_page="<?php echo $current_page+1; ?>"  href="#!" tabindex="-1"><?= __('Next'); ?></a>
             </li>
         </ul>
     </nav>
