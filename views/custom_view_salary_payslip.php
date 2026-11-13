@@ -71,7 +71,7 @@ $org_location =  $org_details['location'];
                         <div class="col-md-9">
                             <!-- begin: Invoice header-->
                             <div class="d-flex justify-content-between pb-10 pb-md-20 flex-column flex-md-row">
-                                <h1 class="display-5 font-weight-boldest mb-10">PAYSLIP FOR <?php echo $payslip_data_list['month']." ".$payslip_data_list['year'];?></h1>
+                                <h1 class="display-5 font-weight-boldest mb-10"><?= __('PAYSLIP FOR'); ?> <?php echo $payslip_data_list['month']." ".$payslip_data_list['year'];?></h1>
                                 <div class="d-flex flex-column align-items-md-end px-0">
                                     <!--begin::Logo-->
                                     <img src="uploads/all/<?php echo $organization_logo; ?>" style="width: 220px;" alt="" />
@@ -92,10 +92,10 @@ $org_location =  $org_details['location'];
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col" class="pl-0 font-weight-boldest text-muted text-uppercase ">Earnings</th>
-                                                    <th scope="col" class="text-right font-weight-boldest text-muted text-uppercase">Amount</th>
-                                                    <th scope="col" class="pl-0 font-weight-boldest text-muted text-uppercase">Deductions</th>
-                                                    <th scope="col" class="text-right font-weight-boldest text-muted text-uppercase">Amount</th>
+                                                    <th scope="col" class="pl-0 font-weight-boldest text-muted text-uppercase "><?= __('Earnings'); ?></th>
+                                                    <th scope="col" class="text-right font-weight-boldest text-muted text-uppercase"><?= __('Amount'); ?></th>
+                                                    <th scope="col" class="pl-0 font-weight-boldest text-muted text-uppercase"><?= __('Deductions'); ?></th>
+                                                    <th scope="col" class="text-right font-weight-boldest text-muted text-uppercase"><?= __('Amount'); ?></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -124,14 +124,14 @@ $org_location =  $org_details['location'];
                                                 <?php } ?>
 
                                                 <tr class="font-weight-boldest border-bottom-0 font-size-lg">
-                                                    <td class="pl-0 f-w-700">GROSS EARNINGS</td>
+                                                    <td class="pl-0 f-w-700"><?= __('GROSS EARNINGS'); ?></td>
                                                     <td class="text-right text-primary"><?php echo $payslip_data_list['actual_amount'];?></td>
-                                                    <td class="pl-0 f-w-700">TOTAL DEDUCTIONS</td>
+                                                    <td class="pl-0 f-w-700"><?= __('TOTAL DEDUCTIONS'); ?></td>
                                                     <td class="text-right text-danger"><?php echo $payslip_data_list['dedaction_amount'];?></td>
                                                 </tr>
 
                                                 <tr class="font-weight-boldest border-bottom-0 font-size-lg">
-                                                    <td class="pl-0 f-w-700">TOTAL NET PAYABLE</td>
+                                                    <td class="pl-0 f-w-700"><?= __('TOTAL NET PAYABLE'); ?></td>
                                                     <td class="text-right text-primary"></td>
                                                     <td class="pl-0"></td>
                                                     <td class="text-right text-primary"><?php echo $payslip_data_list['net'];?></td>
@@ -145,18 +145,18 @@ $org_location =  $org_details['location'];
                                 </div>
                                 <div class="col-md-3 border-left-md pl-md-10 py-md-10 text-right">
                                     <!--begin::Total Amount-->
-                                    <div class="font-size-h4 font-weight-bolder text-muted mb-3">NET SALARY</div>
+                                    <div class="font-size-h4 font-weight-bolder text-muted mb-3"><?= __('NET SALARY'); ?></div>
                                     <div class="font-size-h1 font-weight-boldest">₹<?php echo $payslip_data_list['net'];?></div>
                                     <div class="text-muted font-weight-bold mb-16">(<?php echo  numberToWordFormateRupees($payslip_data_list['net']);  ?> )</div>
                                     <!--end::Total Amount-->
                                     <div class="border-bottom w-100 mb-16"></div>
                                     <!--begin::Invoice To-->
-                                    <div class="text-dark-50 font-size-lg font-weight-bold mb-3">EMPLOYEE </div>
+                                    <div class="text-dark-50 font-size-lg font-weight-bold mb-3"><?= __('EMPLOYEE'); ?> </div>
                                     <div class="font-size-lg font-weight-bold mb-10"><span><?php echo $payslip_data_list['emp_number']; ?> - <?php echo $payslip_data_list['emp_name']; ?></span>
                                         <span class="opacity-70"><?php echo $payslip_data_list['designation']; ?></span>
                                     </div>
 
-                                    <div class="text-dark-50 font-size-lg font-weight-bold mb-3">DATE OF JOINING</div>
+                                    <div class="text-dark-50 font-size-lg font-weight-bold mb-3"><?= __('DATE OF JOINING'); ?></div>
                                     <div class="font-size-lg font-weight-bold"><?php
                                     echo date('F d, Y',strtotime($payslip_data_list['doj'])); ?></div>
                                     <!--end::Invoice To-->
@@ -174,8 +174,8 @@ $org_location =  $org_details['location'];
                     <div class="row justify-content-center py-8 px-8 py-md-28 px-md-0">
                         <div class="col-md-9">
                             <div class="d-flex font-size-sm flex-wrap">
-                                <button type="button" class="btn btn-primary font-weight-bolder py-4 mr-3 mr-sm-14 my-1" onclick="window.print();">Print Payslip</button>
-                                <button type="button" class="btn btn-light-primary font-weight-bolder mr-3 my-1">Download</button>
+                                <button type="button" class="btn btn-primary font-weight-bolder py-4 mr-3 mr-sm-14 my-1" onclick="window.print();"><?= __('Print Payslip'); ?></button>
+                                <button type="button" class="btn btn-light-primary font-weight-bolder mr-3 my-1"><?= __('Download'); ?></button>
 
                             </div>
                         </div>
