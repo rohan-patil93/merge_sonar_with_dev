@@ -4,14 +4,14 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Lead Status</h5>
+                        <h5><?= __('Lead Status'); ?></h5>
                         <div class="card-header-right"></div>
                     </div>
                     <div class="card-body custom-scroll" style="min-height: 400px; max-height: 400px;">
                         <input type="hidden" name="chart_data_lead_chart" id="chart_data_lead_chart" value='<?php echo json_encode((array)$crm_leads_chart); ?>' >
                         <?php if(count((array)$crm_leads_chart) =='0'){ ?>
                           <div class="card-px text-center py-20 m-t-30">
-                                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Data</p>
+                                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Data'); ?></p>
                                 <div class="text-center px-4">
                                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                 </div>
@@ -26,12 +26,12 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Recently Created Leads</h5>
+                        <h5><?= __('Recently Created Leads'); ?></h5>
 
                           <div class="card-header-right">
-                            <button type="button" !" class="mr-5" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Add Lead" onclick="leadPageCall('LEAD')"> <i class="icofont icofont-plus icon-dark"></i> </button>
+                            <button type="button" !" class="mr-5" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Add Lead'), ENT_QUOTES, 'UTF-8'); ?>" onclick="leadPageCall('LEAD')"> <i class="icofont icofont-plus icon-dark"></i> </button>
 
-                            <button type="button" !" onclick="viewAllListPage('crm_leads')" class=" b-b-primary text-primary float-right">View all</button>
+                            <button type="button" !" onclick="viewAllListPage('crm_leads')" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></button>
 
                         </div>
 
@@ -41,9 +41,9 @@
                             <?php  if(count((array)$crm_leads) !=0){ ?>
                             <table class="table table-hover">
                                 <tr>
-                                    <th scope="col">Lead</th>
-                                    <th scope="col">Source</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col"><?= __('Lead'); ?></th>
+                                    <th scope="col"><?= __('Source'); ?></th>
+                                    <th scope="col"><?= __('Status'); ?></th>
                                 </tr>
                                <?php $im=1; foreach($crm_leads as $crmleads){ if($im ==5){ break;
 } ?>
@@ -51,9 +51,9 @@
                                     <td class="p-2">
                                         <div class="align-middle">
                                             <?php if($crmleads['image']) { ?>
-                                                <img src="uploads/all/<?php echo $crmleads['image']; ?>"  class="img-radius img-50 align-top m-r-15" alt="Attachment Preview">
+                                                <img src="uploads/all/<?php echo $crmleads['image']; ?>"  class="img-radius img-50 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <?php } else { ?>
-                                                <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($crmleads['display_name']); ?></span>
+                                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($crmleads['display_name']); ?></span>
                                             <?php } ?>
                                             <div class="d-inline-block width73">
                                                 <button type="button" !" class="leadsidebar text-primary" onclick="leadPageCall('LEAD','<?php echo $crmleads['id']; ?>')"><h6><?php echo $crmleads['display_name']; ?></h6></button>
@@ -86,17 +86,17 @@
                 <div class="card">
                     <div class="card-header">
                         <h5>Recently Created Contacts</h5>
-                        <button type="button" !" onclick="viewAllListPage('crm_contacts')" class=" b-b-primary text-primary float-right">View all</button>
+                        <button type="button" !" onclick="viewAllListPage('crm_contacts')" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></button>
                     </div>
                     <div class="card-body custom-scroll" style="min-height: 400px; max-height: 400px;">
                         <div class="">
                             <?php  if(count((array)$crm_contacts) !=0){ ?>
                             <table class="table table-hover">
                                 <tr>
-                                    <th scope="col">Name</th>
+                                    <th scope="col"><?= __('Name'); ?></th>
 
-                                    <th scope="col">Source</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col"><?= __('Source'); ?></th>
+                                    <th scope="col"><?= __('Status'); ?></th>
                                 </tr>
                                <?php $im=1; foreach($crm_contacts as $crmleads){ if($im ==5){ break;
 } ?>
@@ -104,9 +104,9 @@
                                     <td  class="p-2">
                                         <div class="align-middle">
                                             <?php if($crmleads['image']) { ?>
-                                                <img src="uploads/all/<?php echo $crmleads['image']; ?>"  class="img-radius img-50 align-top m-r-15" alt="Attachment Preview">
+                                                <img src="uploads/all/<?php echo $crmleads['image']; ?>"  class="img-radius img-50 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <?php } else { ?>
-                                                <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($crmleads['display_name']); ?></span>
+                                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($crmleads['display_name']); ?></span>
                                             <?php } ?>
                                             <div class="d-inline-block width73">
                                                 <button type="button" !" class="leadsidebar text-primary" onclick="leadPageCall('CONTACT','<?php echo $crmleads['id']; ?>')"><h6><?php echo $crmleads['display_name']; ?></h6></button>
@@ -239,7 +239,7 @@
                             <tr>
                                  <td class="w-b-w-s">
                                      <div class="align-middle">
-                                            <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-3 f-12 text-center"><i class="<?php echo $crm_activity_types[$crmld['lead_type']]['icon']; ?> f-18"></i></span>
+                                            <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-3 f-12 text-center"><i class="<?php echo $crm_activity_types[$crmld['lead_type']]['icon']; ?> f-18"></i></span>
                                             <div class="d-inline-block width73">
                                                 <button type="button" !" class="leadsidebar text-primary" onclick="leadPageCall('<?php echo $pagecalltype; ?>','<?php echo $crmld['transaction_id']; ?>','<?php echo $crmld['id']; ?>')"><p class="mb-0"><?php echo $meg; ?></p></button>
                                                 <a href="#!" class="text-reset" onclick="leadPageCall('<?php echo $pagecalltype; ?>','<?php echo $crmld['transaction_id']; ?>','<?php echo $crmld['id']; ?>')"><p class="mb-0"><?php echo $datetime; ?></p></a>
@@ -254,7 +254,7 @@
                 </table>
                 <?php }else{ ?>
                     <div class="card-px text-center ">
-                        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti ti-alert text-warning"></i> No Pending Tasks</p>
+                        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti ti-alert text-warning"></i> <?= __('No Pending Tasks'); ?></p>
                         <div class="text-center px-4">
                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                         </div>
@@ -268,21 +268,21 @@
 <div class="col-lg-12">
     <div class="card">
   <div class="card-header">
-    <h5>Feasibilities</h5>
+    <h5><?= __('Feasibilities'); ?></h5>
   </div>
   <div class="card-body custom-scroll" style="min-height: 400px; max-height: 400px;">
     <ul class="nav md-tabs infisuite_tab mb-3" id="alertTabs">
       <li class="nav-item" role="presentation">
-        <a class="nav-link f-w-600 f-12  active" id="expired-tab" data-bs-toggle="tab" href="#expired" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Expired <span class="form-label label label-xs label-danger m-l-10"><?php echo count((array)$expired); ?></span></a>
+        <a class="nav-link f-w-600 f-12  active" id="expired-tab" data-bs-toggle="tab" href="#expired" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Expired'); ?> <span class="form-label label label-xs label-danger m-l-10"><?php echo count((array)$expired); ?></span></a>
       </li>
       <li class="nav-item" role="presentation">
-        <a class="nav-link f-w-600 f-12" id="past-due-tab" data-bs-toggle="tab" href="#past-due" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">15-Days <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$days15); ?></span></a>
+        <a class="nav-link f-w-600 f-12" id="past-due-tab" data-bs-toggle="tab" href="#past-due" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('15-Days'); ?> <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$days15); ?></span></a>
       </li>
       <li class="nav-item" role="presentation">
-        <a class="nav-link f-w-600 f-12" id="pending-returns-tab" data-bs-toggle="tab" href="#pending-returns" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">30-Days <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$days30); ?></span></a>
+        <a class="nav-link f-w-600 f-12" id="pending-returns-tab" data-bs-toggle="tab" href="#pending-returns" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('30-Days'); ?> <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$days30); ?></span></a>
       </li>
       <li class="nav-item" role="presentation">
-        <a class="nav-link f-w-600 f-12" id="days-returns-tab" data-bs-toggle="tab" href="#days-returns" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">45-Days <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$days45); ?></span></a>
+        <a class="nav-link f-w-600 f-12" id="days-returns-tab" data-bs-toggle="tab" href="#days-returns" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('45-Days'); ?> <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$days45); ?></span></a>
       </li>
     </ul>
 
@@ -294,9 +294,9 @@
           <table class="table table-bordered table-sm">
             <thead>
               <tr>
-                <th scope="col">Feasibility Title</th>
-                <th scope="col">Close Date</th>
-                <th scope="col">Status</th>
+                <th scope="col"><?= __('Feasibility Title'); ?></th>
+                <th scope="col"><?= __('Close Date'); ?></th>
+                <th scope="col"><?= __('Status'); ?></th>
               </tr>
             </thead>
             <tbody>
@@ -315,7 +315,7 @@
           <tr>
             <td colspan="3">
               <div class="text-center ">
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Records'); ?></p>
                 <div class="text-center px-4">
                   <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>
@@ -330,9 +330,9 @@
           <table class="table table-bordered table-sm">
             <thead>
               <tr>
-                <th scope="col">Feasibility Title</th>
-                <th scope="col">Close Date</th>
-                <th scope="col">Status</th>
+                <th scope="col"><?= __('Feasibility Title'); ?></th>
+                <th scope="col"><?= __('Close Date'); ?></th>
+                <th scope="col"><?= __('Status'); ?></th>
               </tr>
             </thead>
             <tbody>
@@ -351,7 +351,7 @@
           <tr>
             <td colspan="3">
               <div class="text-center ">
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Records'); ?></p>
                 <div class="text-center px-4">
                   <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>
@@ -368,9 +368,9 @@
           <table class="table table-bordered table-sm">
             <thead>
               <tr>
-                <th scope="col">Feasibility Title</th>
-                <th scope="col">Close Date</th>
-                <th scope="col">Status</th>
+                <th scope="col"><?= __('Feasibility Title'); ?></th>
+                <th scope="col"><?= __('Close Date'); ?></th>
+                <th scope="col"><?= __('Status'); ?></th>
               </tr>
             </thead>
             <tbody>
@@ -389,7 +389,7 @@
           <tr>
             <td colspan="3">
               <div class="text-center ">
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Records'); ?></p>
                 <div class="text-center px-4">
                   <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>
@@ -403,9 +403,9 @@
           <table class="table table-bordered table-sm">
             <thead>
               <tr>
-                <th scope="col">Feasibility Title</th>
-                <th scope="col">Close Date</th>
-                <th scope="col">Status</th>
+                <th scope="col"><?= __('Feasibility Title'); ?></th>
+                <th scope="col"><?= __('Close Date'); ?></th>
+                <th scope="col"><?= __('Status'); ?></th>
               </tr>
             </thead>
             <tbody>
@@ -425,7 +425,7 @@
           <tr>
             <td colspan="3">
               <div class="text-center ">
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Records'); ?></p>
                 <div class="text-center px-4">
                   <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>
