@@ -106,16 +106,16 @@ $progress_var =  gettableStatusArray($table_name);
         <div class="col-lg-4">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="mb-0">Total CSRs</h5>
+                    <h5 class="mb-0"><?= __('Total CSRs'); ?></h5>
                 </div>
                 <div class="card-body">
                     <div class="row mt-2">
                         <div class="col-xl-6 col-md-6">
                             <div class="card ticket-card">
                                 <div class="card-body">
-                                    <p class="m-b-30 bg-c-red lbl-card"><i class="fas fa-file-archive"></i> Total</p>
+                                    <p class="m-b-30 bg-c-red lbl-card"><i class="fas fa-file-archive"></i> <?= __('Total'); ?></p>
                                     <div class="text-center">
-                                        <h2 class="m-t-5 m-b-0 d-inline-block text-c-red cursor-pointer csr-click" data-title="Total" data-count="<?= $totalCount ?>"data-type="total" > <?php echo $totalCount; ?>
+                                        <h2 class="m-t-5 m-b-0 d-inline-block text-c-red cursor-pointer csr-click" data-title="<?= htmlspecialchars(__('Total'), ENT_QUOTES, 'UTF-8'); ?>" data-count="<?= $totalCount ?>"data-type="total" > <?php echo $totalCount; ?>
                                         </h2>
                                         <p class="m-b-0 f-w-600 m-t-10"><?php echo customeummarmonyformate($totalValue); ?></p>
 
@@ -126,9 +126,9 @@ $progress_var =  gettableStatusArray($table_name);
                         <div class="col-xl-6 col-md-6">
                             <div class="card ticket-card" >
                                 <div class="card-body">
-                                    <p class="m-b-5 bg-c-blue lbl-card"><i class="fas fa-file-archive"></i> Active</p>
+                                    <p class="m-b-5 bg-c-blue lbl-card"><i class="fas fa-file-archive"></i> <?= __('Active'); ?></p>
                                     <div class="text-center">
-                                        <h2 class="m-t-20 m-b-0 d-inline-block text-c-blue cursor-pointer csr-click"data-title="Active"
+                                        <h2 class="m-t-20 m-b-0 d-inline-block text-c-blue cursor-pointer csr-click"data-title="<?= htmlspecialchars(__('Active'), ENT_QUOTES, 'UTF-8'); ?>"
                                         data-count="<?= $activeCount ?>"
                                         data-type="active">
                                             <?php echo $activeCount; ?>
@@ -141,10 +141,10 @@ $progress_var =  gettableStatusArray($table_name);
                         <div class="col-xl-6 col-md-6">
                             <div class="card ticket-card" >
                                 <div class="card-body">
-                                    <p class="m-b-5 bg-c-purple lbl-card"><i class="fas fa-file-archive"></i> Approval In Progress</p>
+                                    <p class="m-b-5 bg-c-purple lbl-card"><i class="fas fa-file-archive"></i> <?= __('Approval In Progress'); ?></p>
                                     <div class="text-center">
                                         <h2 class="m-b-0 d-inline-block text-c-purple cursor-pointer csr-click"
-                                        data-title="Approval In Progress"
+                                        data-title="<?= htmlspecialchars(__('Approval In Progress'), ENT_QUOTES, 'UTF-8'); ?>"
                                         data-count="<?= $progressCount ?>"
                                         data-type="progress">
                                             <?php echo $progressCount; ?>
@@ -157,10 +157,10 @@ $progress_var =  gettableStatusArray($table_name);
                         <div class="col-xl-6 col-md-6">
                             <div class="card ticket-card" >
                                 <div class="card-body">
-                                    <p class="m-b-5 bg-c-lite-green lbl-card"><i class="fas fa-file-archive"></i> Approved</p>
+                                    <p class="m-b-5 bg-c-lite-green lbl-card"><i class="fas fa-file-archive"></i> <?= __('Approved'); ?></p>
                                     <div class="text-center">
                                         <h2 class="m-t-20 m-b-0 d-inline-block text-c-lite-green cursor-pointer csr-click"
-                                        data-title="Approved"
+                                        data-title="<?= htmlspecialchars(__('Approved'), ENT_QUOTES, 'UTF-8'); ?>"
                                         data-count="<?= $approvedCount ?>"
                                         data-type="approved">
                                             <?php echo $approvedCount; ?>
@@ -179,9 +179,9 @@ $progress_var =  gettableStatusArray($table_name);
                         <div class="card-body">
                             <div class="row align-items-center m-b-30">
                                 <div class="col">
-                                    <h6 class="m-b-5 text-white">Work In Progress CSRs</h6>
+                                    <h6 class="m-b-5 text-white"><?= __('Work In Progress CSRs'); ?></h6>
                                     <h3 class="m-b-0 f-w-700 text-white d-inline-block text-c-yellow cursor-pointer csr-click"
-                                    data-title="Work In Progress"
+                                    data-title="<?= htmlspecialchars(__('Work In Progress'), ENT_QUOTES, 'UTF-8'); ?>"
                                     data-count="<?= $trackingCount ?>"
                                     data-type="tracking">
                                         <?php echo $trackingCount; ?>
@@ -197,9 +197,9 @@ $progress_var =  gettableStatusArray($table_name);
                         <div class="card-body">
                             <div class="row align-items-center m-b-30">
                                 <div class="col">
-                                    <h6 class="m-b-5 text-white">Completed CSRs</h6>
+                                    <h6 class="m-b-5 text-white"><?= __('Completed CSRs'); ?></h6>
                                     <h3 class="m-b-0 f-w-700 text-white d-inline-block text-c-green cursor-pointer csr-click"
-                                    data-title="Completed"
+                                    data-title="<?= htmlspecialchars(__('Completed'), ENT_QUOTES, 'UTF-8'); ?>"
                                     data-count="<?= $completedCount ?>"
                                     data-type="completed">
                                     <?php echo $completedCount; ?>
@@ -215,17 +215,17 @@ $progress_var =  gettableStatusArray($table_name);
         <div class="col-lg-4">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="mb-0">Current Year CSRs</h5>
+                    <h5 class="mb-0"><?= __('Current Year CSRs'); ?></h5>
                 </div>
                 <div class="card-body">
                     <div class="row mt-2">
                         <div class="col-xl-6 col-md-6">
                             <div class="card ticket-card" >
                                 <div class="card-body">
-                                    <p class="m-b-5 bg-c-red lbl-card"><i class="fas fa-file-archive"></i> Total</p>
+                                    <p class="m-b-5 bg-c-red lbl-card"><i class="fas fa-file-archive"></i> <?= __('Total'); ?></p>
                                     <div class="text-center">
                                         <h2 class="m-t-20 m-b-0 d-inline-block text-c-red cursor-pointer csr-click"
-                                            data-title="Total"
+                                            data-title="<?= htmlspecialchars(__('Total'), ENT_QUOTES, 'UTF-8'); ?>"
                                             data-count="<?= $currentYeartotalCount ?>"
                                             data-type="total"
                                             data-year="<?php echo $currentYear; ?>">
@@ -239,10 +239,10 @@ $progress_var =  gettableStatusArray($table_name);
                         <div class="col-xl-6 col-md-6">
                             <div class="card ticket-card" >
                                 <div class="card-body">
-                                    <p class="m-b-5 bg-c-blue lbl-card"><i class="fas fa-file-archive"></i> Active</p>
+                                    <p class="m-b-5 bg-c-blue lbl-card"><i class="fas fa-file-archive"></i> <?= __('Active'); ?></p>
                                     <div class="text-center">
                                         <h2 class="m-t-20 m-b-0 d-inline-block text-c-blue cursor-pointer csr-click"
-                                            data-title="Active"
+                                            data-title="<?= htmlspecialchars(__('Active'), ENT_QUOTES, 'UTF-8'); ?>"
                                             data-count="<?= $currentYearactiveCount ?>"
                                             data-type="active"
                                             data-year="<?php echo $currentYear; ?>">
@@ -257,10 +257,10 @@ $progress_var =  gettableStatusArray($table_name);
                         <div class="col-xl-6 col-md-6">
                             <div class="card ticket-card" >
                                 <div class="card-body">
-                                    <p class="m-b-5 bg-c-purple lbl-card"><i class="fas fa-file-archive"></i> Approval In Progress</p>
+                                    <p class="m-b-5 bg-c-purple lbl-card"><i class="fas fa-file-archive"></i> <?= __('Approval In Progress'); ?></p>
                                     <div class="text-center">
                                         <h2 class="m-b-0 d-inline-block text-c-purple cursor-pointer csr-click"
-                                        data-title="Approval In Progress"
+                                        data-title="<?= htmlspecialchars(__('Approval In Progress'), ENT_QUOTES, 'UTF-8'); ?>"
                                         data-count="<?= $currentYearprogressCount ?>"
                                         data-type="progress"
                                         data-year="<?php echo $currentYear; ?>">
@@ -275,10 +275,10 @@ $progress_var =  gettableStatusArray($table_name);
                         <div class="col-xl-6 col-md-6">
                             <div class="card ticket-card" >
                                 <div class="card-body">
-                                    <p class="m-b-5 bg-c-lite-green lbl-card"><i class="fas fa-file-archive"></i> Approved</p>
+                                    <p class="m-b-5 bg-c-lite-green lbl-card"><i class="fas fa-file-archive"></i> <?= __('Approved'); ?></p>
                                     <div class="text-center">
                                         <h2 class="m-t-20 m-b-0 d-inline-block text-c-lite-green cursor-pointer csr-click"
-                                        data-title="Approved"
+                                        data-title="<?= htmlspecialchars(__('Approved'), ENT_QUOTES, 'UTF-8'); ?>"
                                         data-count="<?= $currentYearapprovedCount ?>"
                                         data-type="approved"
                                         data-year="<?php echo $currentYear; ?>">
@@ -298,9 +298,9 @@ $progress_var =  gettableStatusArray($table_name);
                         <div class="card-body">
                             <div class="row align-items-center m-b-30">
                                 <div class="col">
-                                    <h6 class="m-b-5 text-white">Work In Progress CSRs</h6>
+                                    <h6 class="m-b-5 text-white"><?= __('Work In Progress CSRs'); ?></h6>
                                     <h3 class="m-b-0 f-w-700 text-white d-inline-block text-c-yellow cursor-pointer csr-click"
-                                    data-title="Work In Progress"
+                                    data-title="<?= htmlspecialchars(__('Work In Progress'), ENT_QUOTES, 'UTF-8'); ?>"
                                     data-count="<?= $currentYeartrackingCount ?>"
                                     data-type="tracking"
                                     data-year="<?php echo $currentYear; ?>">
@@ -318,9 +318,9 @@ $progress_var =  gettableStatusArray($table_name);
                         <div class="card-body">
                             <div class="row align-items-center m-b-30">
                                 <div class="col">
-                                    <h6 class="m-b-5 text-white">Completed CSRs</h6>
+                                    <h6 class="m-b-5 text-white"><?= __('Completed CSRs'); ?></h6>
                                     <h3 class="m-b-0 f-w-700 text-white d-inline-block text-c-green cursor-pointer csr-click"
-                                    data-title="Completed"
+                                    data-title="<?= htmlspecialchars(__('Completed'), ENT_QUOTES, 'UTF-8'); ?>"
                                     data-count="<?= $currentYearcompletedCount ?>"
                                     data-type="completed"
                                     data-year="<?php echo $currentYear; ?>">
@@ -338,7 +338,7 @@ $progress_var =  gettableStatusArray($table_name);
 
             <div class="card new-cust-card">
                 <div class="card-header">
-                    <h5>CSR USERS</h5>
+                    <h5><?= __('CSR USERS'); ?></h5>
                 </div>
                 <ul class="nav nav-tabs md-tabs csr-users-tabs">
                     <?php
@@ -376,7 +376,7 @@ $progress_var =  gettableStatusArray($table_name);
                                     }
                             ?>
                             <div class="align-middle m-b-25">
-                                <img src="uploads/all/<?php echo $user_image; ?>" alt="User" class="img-radius img-40 align-top m-r-15">
+                                <img src="uploads/all/<?php echo $user_image; ?>" alt="<?= htmlspecialchars(__('User'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-15">
                                 <div class="d-inline-block">
                                     <a href="#!">
                                         <h6 class="f-12 f-w-600"><?php echo $row['display_name']; ?></h6>
@@ -390,7 +390,7 @@ $progress_var =  gettableStatusArray($table_name);
                                 }
                             } else {
                                 echo '<div class="text-center ">
-                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Members</p>
+                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> '.__('No Members').'</p>
                                         <div class="text-center px-4">
                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" >
                                         </div>
@@ -411,10 +411,10 @@ $progress_var =  gettableStatusArray($table_name);
         <div class="col-xl-12 col-md-12">
             <div class="card table-card pb-5">
                 <div class="card-header">
-                    <h5>Recent CSRs</h5>
+                    <h5><?= __('Recent CSRs'); ?></h5>
                     <div class="card-header-right">
                         <div class="input-group input-group-button mb-0">
-                            <input type="text" name="searcing_recent"  id="searcing_recent" class="form-control form-control-sm width1 p-2 fill" placeholder="Search" data-bs-original-title="Search" aria-label="Search">
+                            <input type="text" name="searcing_recent"  id="searcing_recent" class="form-control form-control-sm width1 p-2 fill" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
                             <span class="input-group-text addon-style m-0">
                                 <span class=""><span class="fa fa-search text-white"></span></span>
                             </span>
@@ -426,13 +426,13 @@ $progress_var =  gettableStatusArray($table_name);
                         <table class="table table-hover m-b-0">
                             <thead>
                                 <tr>
-                                    <th scope="col">Sr. No</th>
-                                    <th scope="col">Creator</th>
-                                    <th scope="col">Project Name</th>
-                                    <th scope="col">Start Date</th>
-                                    <th scope="col">End Date</th>
-                                    <th scope="col" class='text-center'>Cost</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col"><?= __('Sr. No'); ?></th>
+                                    <th scope="col"><?= __('Creator'); ?></th>
+                                    <th scope="col"><?= __('Project Name'); ?></th>
+                                    <th scope="col"><?= __('Start Date'); ?></th>
+                                    <th scope="col"><?= __('End Date'); ?></th>
+                                    <th scope="col" class='text-center'><?= __('Cost'); ?></th>
+                                    <th scope="col"><?= __('Status'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -449,9 +449,9 @@ $progress_var =  gettableStatusArray($table_name);
                                             <td> <?php echo $i++; ?> </td>
                                             <td>
                                                 <?php if ($_SESSION['user_image'][$value['created_by']] != "") { ?>
-                                                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$value['created_by']]; ?>" class="img-radius img-40 align-top" alt="User Profile">
+                                                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$value['created_by']]; ?>" class="img-radius img-40 align-top" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 <?php } else { ?>
-                                                    <span alt="user" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$value['created_by']]); ?></span>
+                                                    <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$value['created_by']]); ?></span>
                                                 <?php } ?>
                                                 <span class='mt-2 ml-2'> <?php echo $_SESSION['users'][$value['created_by']]; ?> </span>
                                             </td>
@@ -478,7 +478,7 @@ $progress_var =  gettableStatusArray($table_name);
                                                     if ($value['current_status'] == 0) {
                                                         echo "Active";
                                                     } elseif ($value['current_status'] > 0 && $value['current_status'] < 199) {
-                                                        echo "In Progress";
+                                                        echo __('In Progress');
                                                     } elseif ($value['current_status'] == 199 && $value['tracking_status'] == 0) {
                                                         echo "Tracking";
                                                     } elseif ($value['current_status'] == 199 && $value['tracking_status'] == 1) {
@@ -496,7 +496,7 @@ $progress_var =  gettableStatusArray($table_name);
                                 <?php }
                                 } else {
                                     echo '<tr> <td colspan="6" class="text-center">
-                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>
+                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> '.__('No Records').'</p>
                                         <div class="text-center px-4">
                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" >
                                         </div>
@@ -527,7 +527,7 @@ $progress_var =  gettableStatusArray($table_name);
         <div class="col-xl-4 col-md-6">
             <div class="card table-card">
                 <div class="card-header">
-                    <h5>Active CSRs</h5>
+                    <h5><?= __('Active CSRs'); ?></h5>
                     <span class="form-label label label-sm label-primary "> <?php echo $activeCount; ?> </span>
                     <div class="card-header-right">
                         <span class="form-label label label-sm label-primary m-l-10">
@@ -547,9 +547,9 @@ $progress_var =  gettableStatusArray($table_name);
                                             <th scope="col">
                                                 <?php if ($_SESSION['user_image'][$value['created_by']] != "") { ?>
                                                 <div class="align-middle">
-                                                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$value['created_by']]; ?>" class="img-radius img-40 align-top" alt="User Profile">
+                                                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$value['created_by']]; ?>" class="img-radius img-40 align-top" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 <?php } else { ?>
-                                                    <span alt="user" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$value['created_by']]); ?></span>
+                                                    <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$value['created_by']]); ?></span>
                                                 <?php } ?>
                                                     <div class="d-inline-block m-l-5">
                                                         <span class='d-block mb-0'> <?php echo $_SESSION['users'][$value['created_by']]; ?> </span>
@@ -580,7 +580,7 @@ $progress_var =  gettableStatusArray($table_name);
                                         <td colspan="4">
                                             <div class="text-center">
                                                 <p class="text-muted f-16 fw-bold m-b-30">
-                                                    <i class="fa fa-warning"></i> No Records
+                                                    <i class="fa fa-warning"></i> <?= __('No Records'); ?>
                                                 </p>
                                                 <div class="text-center px-4">
                                                     <img class="mw-100 mh-300px" alt=""
@@ -601,7 +601,7 @@ $progress_var =  gettableStatusArray($table_name);
         <div class="col-xl-4 col-md-6">
             <div class="card table-card">
                 <div class="card-header">
-                    <h5>Approval In Progress CSRs</h5>
+                    <h5><?= __('Approval In Progress CSRs'); ?></h5>
                     <span class="form-label label label-sm bg-c-purple"> <?php echo $progressCount; ?> </span>
                     <div class="card-header-right">
                         <span class="form-label label label-sm bg-c-purple m-l-10">
@@ -621,9 +621,9 @@ $progress_var =  gettableStatusArray($table_name);
                                     <th scope="col">
                                         <?php if ($_SESSION['user_image'][$csr_data[$row]['created_by']] != "") { ?>
                                         <div class="align-middle">
-                                            <img src="uploads/all/<?php echo $_SESSION['user_image'][$csr_data[$row]['created_by']]; ?>" class="img-radius img-40 align-top" alt="User Profile">
+                                            <img src="uploads/all/<?php echo $_SESSION['user_image'][$csr_data[$row]['created_by']]; ?>" class="img-radius img-40 align-top" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <?php } else { ?>
-                                            <span alt="user" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$csr_data[$row]['created_by']]); ?></span>
+                                            <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$csr_data[$row]['created_by']]); ?></span>
                                         <?php } ?>
                                             <div class="d-inline-block m-l-5">
                                                 <span class='d-block mb-0'> <?php echo $_SESSION['users'][$csr_data[$row]['created_by']]; ?> </span>
@@ -651,7 +651,7 @@ $progress_var =  gettableStatusArray($table_name);
                                 <td colspan="4">
                                     <div class="text-center">
                                         <p class="text-muted f-16 fw-bold m-b-30">
-                                            <i class="fa fa-warning"></i> No Records
+                                            <i class="fa fa-warning"></i> <?= __('No Records'); ?>
                                         </p>
                                         <div class="text-center px-4">
                                             <img class="mw-100 mh-300px" alt=""
@@ -670,7 +670,7 @@ $progress_var =  gettableStatusArray($table_name);
         <div class="col-xl-4 col-md-6">
             <div class="card table-card">
                 <div class="card-header">
-                    <h5>Approved CSRs</h5>
+                    <h5><?= __('Approved CSRs'); ?></h5>
                     <span class="form-label label label-sm label-success "> <?php echo $approvedCount; ?> </span>
                     <div class="card-header-right">
                         <span class="form-label label label-sm label-success m-l-10">
@@ -690,9 +690,9 @@ $progress_var =  gettableStatusArray($table_name);
                                     <th scope="col">
                                         <?php if ($_SESSION['user_image'][$csr_data[$row]['created_by']] != "") { ?>
                                         <div class="align-middle">
-                                            <img src="uploads/all/<?php echo $_SESSION['user_image'][$csr_data[$row]['created_by']]; ?>" class="img-radius img-40 align-top" alt="User Profile">
+                                            <img src="uploads/all/<?php echo $_SESSION['user_image'][$csr_data[$row]['created_by']]; ?>" class="img-radius img-40 align-top" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <?php } else { ?>
-                                            <span alt="user" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$csr_data[$row]['created_by']]); ?></span>
+                                            <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$csr_data[$row]['created_by']]); ?></span>
                                         <?php } ?>
                                             <div class="d-inline-block m-l-5">
                                                 <span class='d-block mb-0'> <?php echo $_SESSION['users'][$csr_data[$row]['created_by']]; ?> </span>
@@ -720,7 +720,7 @@ $progress_var =  gettableStatusArray($table_name);
                                 <td colspan="4">
                                     <div class="text-center">
                                         <p class="text-muted f-16 fw-bold m-b-30">
-                                            <i class="fa fa-warning"></i> No Records
+                                            <i class="fa fa-warning"></i> <?= __('No Records'); ?>
                                         </p>
                                         <div class="text-center px-4">
                                             <img class="mw-100 mh-300px" alt=""
@@ -739,7 +739,7 @@ $progress_var =  gettableStatusArray($table_name);
         <div class="col-xl-4 col-md-6">
             <div class="card table-card">
                 <div class="card-header">
-                    <h5>Work In Progress CSRs</h5>
+                    <h5><?= __('Work In Progress CSRs'); ?></h5>
                     <span class="form-label label label-sm label-danger "> <?php echo $trackingCount; ?> </span>
                     <div class="card-header-right">
                         <span class="form-label label label-sm label-danger m-l-10">
@@ -759,9 +759,9 @@ $progress_var =  gettableStatusArray($table_name);
                                     <th scope="col">
                                         <?php if ($_SESSION['user_image'][$csr_data[$row]['created_by']] != "") { ?>
                                         <div class="align-middle">
-                                            <img src="uploads/all/<?php echo $_SESSION['user_image'][$csr_data[$row]['created_by']]; ?>" class="img-radius img-40 align-top" alt="User Profile">
+                                            <img src="uploads/all/<?php echo $_SESSION['user_image'][$csr_data[$row]['created_by']]; ?>" class="img-radius img-40 align-top" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <?php } else { ?>
-                                            <span alt="user" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$csr_data[$row]['created_by']]); ?></span>
+                                            <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$csr_data[$row]['created_by']]); ?></span>
                                         <?php } ?>
                                             <div class="d-inline-block m-l-5">
                                                 <span class='d-block mb-0'> <?php echo $_SESSION['users'][$csr_data[$row]['created_by']]; ?> </span>
@@ -792,7 +792,7 @@ $progress_var =  gettableStatusArray($table_name);
                                 <td colspan="4">
                                     <div class="text-center">
                                         <p class="text-muted f-16 fw-bold m-b-30">
-                                            <i class="fa fa-warning"></i> No Records
+                                            <i class="fa fa-warning"></i> <?= __('No Records'); ?>
                                         </p>
                                         <div class="text-center px-4">
                                             <img class="mw-100 mh-300px" alt=""
@@ -811,7 +811,7 @@ $progress_var =  gettableStatusArray($table_name);
         <div class="col-xl-4 col-md-6">
             <div class="card table-card">
                 <div class="card-header">
-                    <h5>Completed CSRs</h5>
+                    <h5><?= __('Completed CSRs'); ?></h5>
                     <span class="form-label label label-sm label-primary "> <?php echo $completedCount; ?> </span>
                     <div class="card-header-right">
                         <span class="form-label label label-sm label-primary m-l-10">
@@ -831,9 +831,9 @@ $progress_var =  gettableStatusArray($table_name);
                                     <th scope="col">
                                         <?php if ($_SESSION['user_image'][$csr_data[$row]['created_by']] != "") { ?>
                                         <div class="align-middle">
-                                            <img src="uploads/all/<?php echo $_SESSION['user_image'][$csr_data[$row]['created_by']]; ?>" class="img-radius img-40 align-top" alt="User Profile">
+                                            <img src="uploads/all/<?php echo $_SESSION['user_image'][$csr_data[$row]['created_by']]; ?>" class="img-radius img-40 align-top" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <?php } else { ?>
-                                            <span alt="user" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$csr_data[$row]['created_by']]); ?></span>
+                                            <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$csr_data[$row]['created_by']]); ?></span>
                                         <?php } ?>
                                             <div class="d-inline-block m-l-5">
                                                 <span class='d-block mb-0'> <?php echo $_SESSION['users'][$csr_data[$row]['created_by']]; ?> </span>
@@ -863,7 +863,7 @@ $progress_var =  gettableStatusArray($table_name);
                                 <td colspan="4">
                                     <div class="text-center">
                                         <p class="text-muted f-16 fw-bold m-b-30">
-                                            <i class="fa fa-warning"></i> No Records
+                                            <i class="fa fa-warning"></i> <?= __('No Records'); ?>
                                         </p>
                                         <div class="text-center px-4">
                                             <img class="mw-100 mh-300px" alt=""
@@ -882,7 +882,7 @@ $progress_var =  gettableStatusArray($table_name);
         <div class="col-xl-4 col-md-6">
             <div class="card table-card">
                 <div class="card-header">
-                    <h5>Total CSRs</h5>
+                    <h5><?= __('Total CSRs'); ?></h5>
                     <span class="form-label label label-sm label-success "> <?php echo $totalCount; ?> </span>
                     <div class="card-header-right"><span class="form-label label label-sm label-success m-l-10"> <?php echo customeummarmonyformate($totalValue); ?> </span></div>
 
@@ -899,9 +899,9 @@ $progress_var =  gettableStatusArray($table_name);
                                     <th scope="col">
                                         <?php if ($_SESSION['user_image'][$row['created_by']] != "") { ?>
                                         <div class="align-middle">
-                                            <img src="uploads/all/<?php echo $_SESSION['user_image'][$row['created_by']]; ?>" class="img-radius img-40 align-top" alt="User Profile">
+                                            <img src="uploads/all/<?php echo $_SESSION['user_image'][$row['created_by']]; ?>" class="img-radius img-40 align-top" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <?php } else { ?>
-                                            <span alt="user" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
+                                            <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
                                         <?php } ?>
                                             <div class="d-inline-block m-l-5">
                                                 <span class='d-block mb-0'> <?php echo $_SESSION['users'][$row['created_by']]; ?> </span>
@@ -929,7 +929,7 @@ $progress_var =  gettableStatusArray($table_name);
                                 <td colspan="4">
                                     <div class="text-center">
                                         <p class="text-muted f-16 fw-bold m-b-30">
-                                            <i class="fa fa-warning"></i> No Records
+                                            <i class="fa fa-warning"></i> <?= __('No Records'); ?>
                                         </p>
                                         <div class="text-center px-4">
                                             <img class="mw-100 mh-300px" alt=""
@@ -949,24 +949,24 @@ $progress_var =  gettableStatusArray($table_name);
         <div class="col-xl-12 col-md-6">
             <div class="card table-card">
                 <div class="card-header">
-                    <h5>Fund Flow For Work In Progress CSRs</h5>
+                    <h5><?= __('Fund Flow For Work In Progress CSRs'); ?></h5>
                 </div>
                 <div class="card-block custom-scroll custom-scroll-400" >
                     <div class="table-responsive">
                         <table class="table table-hover m-b-0">
                             <thead>
                                 <tr>
-                                    <th scope="col">Sr. No</th>
-                                    <th scope="col">Creator</th>
-                                    <th scope="col">Project Name</th>
-                                    <th scope="col">1-30 Days</th>
-                                    <th scope="col">31-60 Days</th>
-                                    <th scope="col">61-90 Days</th>
-                                    <th scope="col">91-120 Days</th>
-                                    <th scope="col">121-150 Days</th>
-                                    <th scope="col">151-180 Days</th>
-                                    <th scope="col">180+ Days</th>
-                                    <th scope="col">Total</th>
+                                    <th scope="col"><?= __('Sr. No'); ?></th>
+                                    <th scope="col"><?= __('Creator'); ?></th>
+                                    <th scope="col"><?= __('Project Name'); ?></th>
+                                    <th scope="col"><?= __('1-30 Days'); ?></th>
+                                    <th scope="col"><?= __('31-60 Days'); ?></th>
+                                    <th scope="col"><?= __('61-90 Days'); ?></th>
+                                    <th scope="col"><?= __('91-120 Days'); ?></th>
+                                    <th scope="col"><?= __('121-150 Days'); ?></th>
+                                    <th scope="col"><?= __('151-180 Days'); ?></th>
+                                    <th scope="col"><?= __('180+ Days'); ?></th>
+                                    <th scope="col"><?= __('Total'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -978,9 +978,9 @@ $progress_var =  gettableStatusArray($table_name);
                                         <tr>
                                             <td><?php echo $i++; ?></td>
                                             <td><?php if ($_SESSION['user_image'][$csr_data[$row]['created_by']] != "") { ?>
-                                            <img src="uploads/all/<?php echo $_SESSION['user_image'][$csr_data[$row]['created_by']]; ?>" class="img-radius img-40 align-top" alt="User Profile">
+                                            <img src="uploads/all/<?php echo $_SESSION['user_image'][$csr_data[$row]['created_by']]; ?>" class="img-radius img-40 align-top" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <?php } else { ?>
-                                            <span alt="user" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$csr_data[$row]['created_by']]); ?></span>
+                                            <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$csr_data[$row]['created_by']]); ?></span>
                                         <?php } ?>
                                         <span class='mt-2 ml-2'> <?php echo $_SESSION['users'][$csr_data[$row]['created_by']]; ?> </span>
                                         </td>
@@ -1040,7 +1040,7 @@ $progress_var =  gettableStatusArray($table_name);
                                         <td colspan="10">
                                             <div class="text-center">
                                                 <p class="text-muted f-16 fw-bold m-b-30">
-                                                    <i class="fa fa-warning"></i> No Records
+                                                    <i class="fa fa-warning"></i> <?= __('No Records'); ?>
                                                 </p>
                                                 <div class="text-center px-4">
                                                     <img class="mw-100 mh-300px" alt=""
@@ -1053,7 +1053,7 @@ $progress_var =  gettableStatusArray($table_name);
                             </tbody>
                             <tfooter>
                                 <tr>
-                                    <td colspan='3' class="text-center">Total</td>
+                                    <td colspan='3' class="text-center"><?= __('Total'); ?></td>
                                     <?php
                                     foreach ($column_totals as $value) {
                                         echo "<td class='text-end'>" . customeummarmonyformate($value) . "</td>";
@@ -1071,17 +1071,17 @@ $progress_var =  gettableStatusArray($table_name);
         <div class="col-xl-6 col-md-6">
             <div class="card table-card">
                 <div class="card-header">
-                    <h5>Fund Release</h5>
+                    <h5><?= __('Fund Release'); ?></h5>
                 </div>
                 <div class="card-block custom-scroll custom-scroll-400" >
                     <div class="table-responsive">
                         <table class="table table-hover m-b-0">
                             <thead>
                                 <tr>
-                                    <th scope="col">Sr. No</th>
-                                    <th scope="col">Creator</th>
-                                    <th scope="col">Project Name</th>
-                                    <th scope="col" class="text-end">Total</th>
+                                    <th scope="col"><?= __('Sr. No'); ?></th>
+                                    <th scope="col"><?= __('Creator'); ?></th>
+                                    <th scope="col"><?= __('Project Name'); ?></th>
+                                    <th scope="col" class="text-end"><?= __('Total'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -1094,9 +1094,9 @@ $progress_var =  gettableStatusArray($table_name);
                                         <tr>
                                             <td><?php echo $i++; ?></td>
                                             <td><?php if ($_SESSION['user_image'][$csr_data[$row]['created_by']] != "") { ?>
-                                            <img src="uploads/all/<?php echo $_SESSION['user_image'][$csr_data[$row]['created_by']]; ?>" class="img-radius img-40 align-top" alt="User Profile">
+                                            <img src="uploads/all/<?php echo $_SESSION['user_image'][$csr_data[$row]['created_by']]; ?>" class="img-radius img-40 align-top" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <?php } else { ?>
-                                            <span alt="user" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$csr_data[$row]['created_by']]); ?></span>
+                                            <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$csr_data[$row]['created_by']]); ?></span>
                                         <?php } ?>
                                         <span class='mt-2 ml-2'> <?php echo $_SESSION['users'][$csr_data[$row]['created_by']]; ?> </span>
                                         </td>
@@ -1119,7 +1119,7 @@ $progress_var =  gettableStatusArray($table_name);
                                         <td colspan="4">
                                             <div class="text-center">
                                                 <p class="text-muted f-16 fw-bold m-b-30">
-                                                    <i class="fa fa-warning"></i> No Records
+                                                    <i class="fa fa-warning"></i> <?= __('No Records'); ?>
                                                 </p>
                                                 <div class="text-center px-4">
                                                     <img class="mw-100 mh-300px" alt=""
@@ -1132,7 +1132,7 @@ $progress_var =  gettableStatusArray($table_name);
                             </tbody>
                             <tfooter>
                                 <tr>
-                                    <td colspan='3' class="text-center">Total</td>
+                                    <td colspan='3' class="text-center"><?= __('Total'); ?></td>
                                     <?php
 
                                         echo "<td class='text-end'>" . customeummarmonyformate($total_budget) . "</td>";
