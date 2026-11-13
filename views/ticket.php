@@ -1,91 +1,91 @@
 <div class="card table-card">
                                             <div class="card-header">
-                                                <h5>Tickets</h5>
+                                                <h5><?= __('Tickets'); ?></h5>
                                                 <div class="card-header-right">
-                                                    <button type="button" class="btn btn-primary waves-effect" data-bs-toggle="modal" data-bs-target="#large-Modal"><i class="ti-plus text-white"></i> Large</button>
+                                                    <button type="button" class="btn btn-primary waves-effect" data-bs-toggle="modal" data-bs-target="#large-Modal"><i class="ti-plus text-white"></i> <?= __('Large'); ?></button>
                                                     <div class="modal fade" id="large-Modal" tabindex="-1" style="z-index: 1050; display: none;" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h4 class="modal-title">Add Ticket</h4>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    <h4 class="modal-title"><?= __('Add Ticket'); ?></h4>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <div class="row">
                                                                         <div class="col-lg-6">
-                                                                            <span class="form-label col-form-label">Ticket Subject</span>
-                                                                            <input aria-label="Input field" type="text" class="form-control">
+                                                                            <span class="form-label col-form-label"><?= __('Ticket Subject'); ?></span>
+                                                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control">
                                                                         </div>
                                                                         <div class="col-lg-6">
-                                                                            <span class="form-label col-form-label">Ticket ID</span>
-                                                                            <input aria-label="Input field" type="text" class="form-control">
+                                                                            <span class="form-label col-form-label"><?= __('Ticket ID'); ?></span>
+                                                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control">
                                                                         </div>
                                                                         <div class="col-lg-6">
-                                                                            <span class="form-label col-form-label">Assign Staff</span>
-                                                                            <select aria-label="Select option" class="form-control fill" style="Border:1px solid #cccccc">
-                                                                                <option>- Select -</option>
-                                                                                <option>Naresh</option>
-                                                                                <option>Pradeep</option>
-                                                                                <option>Ravi</option>
+                                                                            <span class="form-label col-form-label"><?= __('Assign Staff'); ?></span>
+                                                                            <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control fill" style="Border:1px solid #cccccc">
+                                                                                <option>- <?= __('Select'); ?> -</option>
+                                                                                <option><?= __('Naresh'); ?></option>
+                                                                                <option><?= __('Pradeep'); ?></option>
+                                                                                <option><?= __('Ravi'); ?></option>
                                                                             </select>
                                                                         </div>
                                                                         <div class="col-lg-6">
-                                                                            <span class="form-label col-form-label">Client</span>
-                                                                            <select aria-label="Select option" class="form-control fill" style="Border:1px solid #cccccc">
-                                                                                <option>- Select -</option>
-                                                                                <option>Bean</option>
-                                                                                <option>Bean</option>
-                                                                                <option>Bean</option>
+                                                                            <span class="form-label col-form-label"><?= __('Client'); ?></span>
+                                                                            <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control fill" style="Border:1px solid #cccccc">
+                                                                                <option>- <?= __('Select'); ?> -</option>
+                                                                                <option><?= __('Bean'); ?></option>
+                                                                                <option><?= __('Bean'); ?></option>
+                                                                                <option><?= __('Bean'); ?></option>
                                                                             </select>
                                                                         </div>
                                                                         <div class="col-lg-6">
-                                                                            <span class="form-label col-form-label">Priority</span>
-                                                                            <select aria-label="Select option" class="form-control fill" style="Border:1px solid #cccccc">
-                                                                                <option>- Select -</option>
-                                                                                <option>High</option>
-                                                                                <option>Medium</option>
-                                                                                <option>Low</option>
+                                                                            <span class="form-label col-form-label"><?= __('Priority'); ?></span>
+                                                                            <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control fill" style="Border:1px solid #cccccc">
+                                                                                <option>- <?= __('Select'); ?> -</option>
+                                                                                <option><?= __('High'); ?></option>
+                                                                                <option><?= __('Medium'); ?></option>
+                                                                                <option><?= __('Low'); ?></option>
                                                                             </select>
                                                                         </div>
                                                                         <div class="col-lg-6">
-                                                                            <span class="form-label col-form-label">CC</span>
-                                                                            <input aria-label="Input field" type="text" class="form-control">
+                                                                            <span class="form-label col-form-label"><?= __('CC'); ?></span>
+                                                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control">
                                                                         </div>
                                                                         <div class="col-lg-6">
-                                                                            <span class="form-label col-form-label">Assign</span>
-                                                                            <input aria-label="Input field" type="text" class="form-control">
+                                                                            <span class="form-label col-form-label"><?= __('Assign'); ?></span>
+                                                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control">
                                                                         </div>
                                                                         <div class="col-lg-6">
-                                                                            <span class="form-label col-form-label d-block">Ticket Assignee</span>
-                                                                            <img src="../files/assets/images/avatar-4.jpg" alt="user" class="img-radius img-30 align-middle">
+                                                                            <span class="form-label col-form-label d-block"><?= __('Ticket Assignee'); ?></span>
+                                                                            <img src="../files/assets/images/avatar-4.jpg" alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-30 align-middle">
                                                                         </div>
                                                                         <div class="col-lg-6">
-                                                                            <span class="form-label col-form-label">Add Followers</span>
-                                                                            <input aria-label="Input field" type="text" class="form-control">
+                                                                            <span class="form-label col-form-label"><?= __('Add Followers'); ?></span>
+                                                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control">
                                                                         </div>
                                                                         <div class="col-lg-6">
-                                                                            <span class="form-label col-form-label d-block">Ticket Followers</span>
-                                                                            <img src="../files/assets/images/avatar-4.jpg" alt="user" class="img-radius img-30 align-middle">
-                                                                            <img src="../files/assets/images/avatar-4.jpg" alt="user" class="img-radius img-30 align-middle">
-                                                                            <img src="../files/assets/images/avatar-4.jpg" alt="user" class="img-radius img-30 align-middle">
+                                                                            <span class="form-label col-form-label d-block"><?= __('Ticket Followers'); ?></span>
+                                                                            <img src="../files/assets/images/avatar-4.jpg" alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-30 align-middle">
+                                                                            <img src="../files/assets/images/avatar-4.jpg" alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-30 align-middle">
+                                                                            <img src="../files/assets/images/avatar-4.jpg" alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-30 align-middle">
                                                                             <span class="d-inline-block f-w-600 f-24">+2</span>
                                                                         </div>
                                                                         <div class="col-lg-12">
-                                                                            <span class="form-label col-form-label d-block">Description</span>
-                                                                            <textarea aria-label="Text area" class="form-control"></textarea>
+                                                                            <span class="form-label col-form-label d-block"><?= __('Description'); ?></span>
+                                                                            <textarea aria-label="<?= htmlspecialchars(__('Text area'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"></textarea>
                                                                         </div>
                                                                         <div class="col-lg-12">
-                                                                            <span class="form-label col-form-label d-block">Upload Files</span>
-                                                                            <input aria-label="File upload" type="file" class="form-control">
+                                                                            <span class="form-label col-form-label d-block"><?= __('Upload Files'); ?></span>
+                                                                            <input aria-label="<?= htmlspecialchars(__('File upload'), ENT_QUOTES, 'UTF-8'); ?>" type="file" class="form-control">
                                                                         </div>
                                                                         <div class="col-lg-12 mt-3">
-                                                                            <button type="button" class="btn btn-success waves-effect waves-light float-right">Submit</button>
+                                                                            <button type="button" class="btn btn-success waves-effect waves-light float-right"><?= __('Submit'); ?></button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-                                                                    <button type="button" class="btn btn-primary waves-effect waves-light ">Save changes</button>
+                                                                    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
+                                                                    <button type="button" class="btn btn-primary waves-effect waves-light "><?= __('Save changes'); ?></button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -99,7 +99,7 @@
                                                             <div class="align-items-center m-b-30">
 
                                                                 <div class="col p-l-0">
-                                                                    <h6 class="m-b-5">New Tickets</h6>
+                                                                    <h6 class="m-b-5"><?= __('New Tickets'); ?></h6>
 
                                                                 </div>
                                                             </div>
@@ -123,7 +123,7 @@
                                                             <div class="align-items-center m-b-30">
 
                                                                 <div class="col p-l-0">
-                                                                    <h6 class="m-b-5">Solved Tickets</h6>
+                                                                    <h6 class="m-b-5"><?= __('Solved Tickets'); ?></h6>
 
                                                                 </div>
                                                             </div>
@@ -147,7 +147,7 @@
                                                             <div class="align-items-center m-b-30">
 
                                                                 <div class="col p-l-0">
-                                                                    <h6 class="m-b-5">Open Tickets</h6>
+                                                                    <h6 class="m-b-5"><?= __('Open Tickets'); ?></h6>
 
                                                                 </div>
                                                             </div>
@@ -171,7 +171,7 @@
                                                             <div class="align-items-center m-b-30">
 
                                                                 <div class="col p-l-0">
-                                                                    <h6 class="m-b-5">Pending Tickets</h6>
+                                                                    <h6 class="m-b-5"><?= __('Pending Tickets'); ?></h6>
 
                                                                 </div>
                                                             </div>
@@ -192,38 +192,38 @@
                                             </div>
                                             <div class="row card-body pt-0 mt-0">
                                                 <div class="col-lg-2">
-                                                    <span class="form-label col-form-label">Employee Name</span>
-                                                    <input aria-label="Input field" type="text" class="form-control">
+                                                    <span class="form-label col-form-label"><?= __('Employee Name'); ?></span>
+                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control">
                                                 </div>
                                                 <div class="col-lg-2">
-                                                    <span class="form-label col-form-label">Status</span>
-                                                    <select aria-label="Select option" class="form-control" style="Border:1px solid #cccccc">
-                                                        <option>- Select -</option>
-                                                        <option>Pending</option>
-                                                        <option>Approved</option>
-                                                        <option>Returned</option>
+                                                    <span class="form-label col-form-label"><?= __('Status'); ?></span>
+                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" style="Border:1px solid #cccccc">
+                                                        <option>- <?= __('Select'); ?> -</option>
+                                                        <option><?= __('Pending'); ?></option>
+                                                        <option><?= __('Approved'); ?></option>
+                                                        <option><?= __('Returned'); ?></option>
                                                     </select>
                                                 </div>
                                                 <div class="col-lg-2">
-                                                    <span class="form-label col-form-label">Priority</span>
-                                                    <select aria-label="Select option" class="form-control" style="Border:1px solid #cccccc">
-                                                        <option>- Select -</option>
-                                                        <option>High</option>
-                                                        <option>Low</option>
-                                                        <option>Medium</option>
+                                                    <span class="form-label col-form-label"><?= __('Priority'); ?></span>
+                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" style="Border:1px solid #cccccc">
+                                                        <option>- <?= __('Select'); ?> -</option>
+                                                        <option><?= __('High'); ?></option>
+                                                        <option><?= __('Low'); ?></option>
+                                                        <option><?= __('Medium'); ?></option>
                                                     </select>
                                                 </div>
                                                 <div class="col-lg-2">
-                                                    <span class="form-label col-form-label">From</span>
-                                                    <input aria-label="Select date" type="date" class="form-control">
+                                                    <span class="form-label col-form-label"><?= __('From'); ?></span>
+                                                    <input aria-label="<?= htmlspecialchars(__('Select date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control">
                                                 </div>
                                                 <div class="col-lg-2">
-                                                    <span class="form-label col-form-label">To</span>
-                                                    <input aria-label="Select date" type="date" class="form-control">
+                                                    <span class="form-label col-form-label"><?= __('To'); ?></span>
+                                                    <input aria-label="<?= htmlspecialchars(__('Select date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control">
                                                 </div>
                                                 <div class="col-lg-2">
                                                     <span class="form-label col-form-label"></span>
-                                                    <button class="btn waves-effect waves-light hor-grd btn-grd-success d-block w-100 m-t-10">Search</button>
+                                                    <button class="btn waves-effect waves-light hor-grd btn-grd-success d-block w-100 m-t-10"><?= __('Search'); ?></button>
                                                 </div>
                                             </div>
 
@@ -232,58 +232,58 @@
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">#</th>
-                                                            <th scope="col">Ticket ID</th>
-                                                            <th scope="col">Ticket Subject</th>
-                                                            <th scope="col">Assigned Staff</th>
-                                                            <th scope="col">Created Date</th>
-                                                            <th scope="col">Last Reply</th>
-                                                            <th scope="col">Priority</th>
-                                                            <th scope="col">Status</th>
-                                                            <th scope="col">Actions</th>
+                                                            <th scope="col"><?= __('Ticket ID'); ?></th>
+                                                            <th scope="col"><?= __('Ticket Subject'); ?></th>
+                                                            <th scope="col"><?= __('Assigned Staff'); ?></th>
+                                                            <th scope="col"><?= __('Created Date'); ?></th>
+                                                            <th scope="col"><?= __('Last Reply'); ?></th>
+                                                            <th scope="col"><?= __('Priority'); ?></th>
+                                                            <th scope="col"><?= __('Status'); ?></th>
+                                                            <th scope="col"><?= __('Actions'); ?></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <tr>
                                                             <th scope="col">1</th>
-                                                            <td><span class="text-primary">#TKT-0001</span></td>
-                                                            <td>Internet Issue</td>
+                                                            <td><span class="text-primary"><?= __('#TKT-0001'); ?></span></td>
+                                                            <td><?= __('Internet Issue'); ?></td>
                                                             <td>
                                                                 <div class="d-inline-block align-middle">
-                                                                    <img src="../files/assets/images/avatar-4.jpg" alt="user" class="img-radius img-30 align-middle m-r-15">
+                                                                    <img src="../files/assets/images/avatar-4.jpg" alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-30 align-middle m-r-15">
                                                                     <div class="d-inline-block">
-                                                                        <select aria-label="Select option" class="form-select js-example-basic-single col-sm-12">
+                                                                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single col-sm-12">
                                                                             <optgroup label="Developer">
-                                                                                <option value="AL">Alabama</option>
-                                                                                <option value="WY">Wyoming</option>
+                                                                                <option value="AL"><?= __('Alabama'); ?></option>
+                                                                                <option value="WY"><?= __('Wyoming'); ?></option>
                                                                             </optgroup>
                                                                             <optgroup label="Designer">
-                                                                                <option value="WY">Peter</option>
-                                                                                <option value="WY">Hanry Die</option>
-                                                                                <option value="WY">John Doe</option>
+                                                                                <option value="WY"><?= __('Peter'); ?></option>
+                                                                                <option value="WY"><?= __('Hanry Die'); ?></option>
+                                                                                <option value="WY"><?= __('John Doe'); ?></option>
                                                                             </optgroup>
                                                                         </select>
                                                                     </div>
                                                                 </div>
                                                             </td>
-                                                            <td>5 Jan 2019 07:21 AM</td>
-                                                            <td>5 Jan 2019 11.12 AM</td>
+                                                            <td><?= __('5 Jan 2019 07:21 AM'); ?></td>
+                                                            <td><?= __('5 Jan 2019 11.12 AM'); ?></td>
                                                             <td>
                                                                  <div class="dropdown-success dropdown open">
-                                                                    <button class="btn btn-success dropdown-toggle waves-effect waves-light btn-round" type="button" id="dropdown-priority-1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">High</button>
+                                                                    <button class="btn btn-success dropdown-toggle waves-effect waves-light btn-round" type="button" id="dropdown-priority-1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><?= __('High'); ?></button>
                                                                     <div class="dropdown-menu" aria-labelledby="dropdown-priority-1" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#">High</a>
-                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#">Medium</a>
-                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#">Low</a>
+                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#"><?= __('High'); ?></a>
+                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#"><?= __('Medium'); ?></a>
+                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#"><?= __('Low'); ?></a>
                                                                     </div>
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="dropdown-success dropdown open">
-                                                                    <button class="btn btn-success dropdown-toggle waves-effect waves-light btn-round" type="button" id="dropdown-status-1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Opened</button>
+                                                                    <button class="btn btn-success dropdown-toggle waves-effect waves-light btn-round" type="button" id="dropdown-status-1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><?= __('Opened'); ?></button>
                                                                     <div class="dropdown-menu" aria-labelledby="dropdown-status-1" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#">Reopened</a>
-                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#">On Hold</a>
-                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#">Closed</a>
+                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#"><?= __('Reopened'); ?></a>
+                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#"><?= __('On Hold'); ?></a>
+                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#"><?= __('Closed'); ?></a>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -291,53 +291,53 @@
                                                                 <div class="dropdown-success dropdown open">
                                                                     <button class="btn btn-success dropdown-toggle waves-effect waves-light btn-round" type="button" id="dropdown-action-1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></button>
                                                                     <div class="dropdown-menu" aria-labelledby="dropdown-action-1" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#">Edit</a>
-                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#">Delete</a>
+                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#"><?= __('Edit'); ?></a>
+                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#"><?= __('Delete'); ?></a>
                                                                     </div>
                                                                 </div>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <th scope="col">2</th>
-                                                            <td><span class="text-primary">#TKT-0001</span></td>
-                                                            <td>Internet Issue</td>
+                                                            <td><span class="text-primary"><?= __('#TKT-0001'); ?></span></td>
+                                                            <td><?= __('Internet Issue'); ?></td>
                                                             <td>
                                                                 <div class="d-inline-block align-middle">
-                                                                    <img src="../files/assets/images/avatar-4.jpg" alt="user" class="img-radius img-30 align-middle m-r-15">
+                                                                    <img src="../files/assets/images/avatar-4.jpg" alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-30 align-middle m-r-15">
                                                                     <div class="d-inline-block">
-                                                                        <select aria-label="Select option" class="form-select js-example-basic-single col-sm-12">
+                                                                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single col-sm-12">
                                                                             <optgroup label="Developer">
-                                                                                <option value="AL">Alabama</option>
-                                                                                <option value="WY">Wyoming</option>
+                                                                                <option value="AL"><?= __('Alabama'); ?></option>
+                                                                                <option value="WY"><?= __('Wyoming'); ?></option>
                                                                             </optgroup>
                                                                             <optgroup label="Designer">
-                                                                                <option value="WY">Peter</option>
-                                                                                <option value="WY">Hanry Die</option>
-                                                                                <option value="WY">John Doe</option>
+                                                                                <option value="WY"><?= __('Peter'); ?></option>
+                                                                                <option value="WY"><?= __('Hanry Die'); ?></option>
+                                                                                <option value="WY"><?= __('John Doe'); ?></option>
                                                                             </optgroup>
                                                                         </select>
                                                                     </div>
                                                                 </div>
                                                             </td>
-                                                            <td>5 Jan 2019 07:21 AM</td>
-                                                            <td>5 Jan 2019 11.12 AM</td>
+                                                            <td><?= __('5 Jan 2019 07:21 AM'); ?></td>
+                                                            <td><?= __('5 Jan 2019 11.12 AM'); ?></td>
                                                             <td>
                                                                 <div class="dropdown-success dropdown open">
-                                                                    <button class="btn btn-success dropdown-toggle waves-effect waves-light btn-round" type="button" id="dropdown-priority-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">High</button>
+                                                                    <button class="btn btn-success dropdown-toggle waves-effect waves-light btn-round" type="button" id="dropdown-priority-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><?= __('High'); ?></button>
                                                                     <div class="dropdown-menu" aria-labelledby="dropdown-priority-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#">High</a>
-                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#">Medium</a>
-                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#">Low</a>
+                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#"><?= __('High'); ?></a>
+                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#"><?= __('Medium'); ?></a>
+                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#"><?= __('Low'); ?></a>
                                                                     </div>
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="dropdown-success dropdown open">
-                                                                    <button class="btn btn-success dropdown-toggle waves-effect waves-light btn-round" type="button" id="dropdown-status-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Opened</button>
+                                                                    <button class="btn btn-success dropdown-toggle waves-effect waves-light btn-round" type="button" id="dropdown-status-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><?= __('Opened'); ?></button>
                                                                     <div class="dropdown-menu" aria-labelledby="dropdown-status-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#">Reopened</a>
-                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#">On Hold</a>
-                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#">Closed</a>
+                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#"><?= __('Reopened'); ?></a>
+                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#"><?= __('On Hold'); ?></a>
+                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#"><?= __('Closed'); ?></a>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -345,8 +345,8 @@
                                                                 <div class="dropdown-success dropdown open">
                                                                     <button class="btn btn-success dropdown-toggle waves-effect waves-light btn-round" type="button" id="dropdown-action-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></button>
                                                                     <div class="dropdown-menu" aria-labelledby="dropdown-action-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#">Edit</a>
-                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#">Delete</a>
+                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#"><?= __('Edit'); ?></a>
+                                                                        <a class="dropdown-item waves-light waves-effect d-block" href="#"><?= __('Delete'); ?></a>
                                                                     </div>
                                                                 </div>
                                                             </td>
