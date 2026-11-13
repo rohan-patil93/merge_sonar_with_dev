@@ -50,8 +50,8 @@ $count = count($list);
 <link rel="stylesheet" href="assets/css/visitors_bucket_modal.css">
 
 <div class="modal-header py-2">
-    <h6 class="modal-title"><?= $title ?> · <?= $count ?> record<?= $count === 1 ? '' : 's' ?></h6>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h6 class="modal-title"><?= $title ?> · <?= $count ?> <?= __('record'); ?><?= $count === 1 ? '' : 's' ?></h6>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 
 <div class="modal-body p-0">
@@ -60,12 +60,12 @@ $count = count($list);
             <thead class="table-light">
                 <tr>
                     <th scope="col" class="th-w-56">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Visitor ID</th>
-                    <th scope="col">Whom to Meet</th>
-                    <th scope="col">In Date Time</th>
-                    <th scope="col">Out Date Time</th>
+                    <th scope="col"><?= __('Name'); ?></th>
+                    <th scope="col"><?= __('Type'); ?></th>
+                    <th scope="col"><?= __('Visitor ID'); ?></th>
+                    <th scope="col"><?= __('Whom to Meet'); ?></th>
+                    <th scope="col"><?= __('In Date Time'); ?></th>
+                    <th scope="col"><?= __('Out Date Time'); ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -73,7 +73,7 @@ $count = count($list);
                     <tr>
                         <td colspan="7">
                             <div class="text-center p-4">
-                                <p class="text-muted fw-bold mb-3"><i class="fa fa-warning me-1"></i>No Records</p>
+                                <p class="text-muted fw-bold mb-3"><i class="fa fa-warning me-1"></i><?= __('No Records'); ?></p>
                                 <img class="img-fluid empty-img-300" alt="" src="assets/images/work.png" >
                             </div>
                         </td>
@@ -150,7 +150,7 @@ $count = count($list);
 
                                         <span class="rounded-circle-pop">
                                             <?php $visitor_img_src = !empty($v['image_path']) ? 'uploads/visitors/' . htmlspecialchars($v['image_path']) : 'uploads/all/no-image.jpg'; ?>
-                                            <img class="rounded-circle in me-2 avatar-40" src="<?= $visitor_img_src ?>" alt="Visitor">
+                                            <img class="rounded-circle in me-2 avatar-40" src="<?= $visitor_img_src ?>" alt="<?= htmlspecialchars(__('Visitor'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <div class="idcard-caption"><?php echo $visit_id; ?> </div>
                                         </span>
                                     </span>
@@ -182,7 +182,7 @@ $count = count($list);
                                        data-url="index.php?option=VISITOR_OUT_VIEW&type=<?php echo $v['visit_type']; ?>&gate_id=<?php echo $_SESSION['gate_id'] ?? 1; ?>&Rid=<?= deocdeId('id:' . $v['id']) ?>"
                                        data-target="_blank"
                                        rel="noopener">
-                                       Check out
+                                       <?= __('Check out'); ?>
                                     </a>
 
                                 <?php endif; ?>
@@ -199,6 +199,6 @@ $count = count($list);
 
 <div class="modal-footer py-2">
     <small class="text-muted">
-        Period: <?= $period ?> · Type: <?= $type ?> · Bucket: <?= $bucket ?>
+        <?= __('Period'); ?>: <?= $period ?> <?= __('· Type'); ?>: <?= $type ?> <?= __('· Bucket'); ?>: <?= $bucket ?>
     </small>
 </div>
