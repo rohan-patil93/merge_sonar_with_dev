@@ -3,14 +3,14 @@
 </div>
 <div class="row">
 <div class="col-lg-6 col-xs-12 form-group m-b-10">
-    <span>From Date <span class="text-danger">*</span></span>
-      <input aria-label="From Date" class="form-control startdatepicker_1  rangedatepicker" data-id="1" type="text" name="from_date" value="<?php echo $from; ?>"  <?php  if( $role['current_status'] == 0 ||  $role['current_status'] == 1) { ?> readonly     <?php
-} ?> required /><div class="d-none text-danger" id="<?php echo 'from_date_err'; ?>"> Please Enter From Date </div>
+    <span><?= __('From Date'); ?> <span class="text-danger">*</span></span>
+      <input aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control startdatepicker_1  rangedatepicker" data-id="1" type="text" name="from_date" value="<?php echo $from; ?>"  <?php  if( $role['current_status'] == 0 ||  $role['current_status'] == 1) { ?> readonly     <?php
+} ?> required /><div class="d-none text-danger" id="<?php echo 'from_date_err'; ?>"> <?= __('Please Enter From Date'); ?> </div>
 </div>
 <div class="col-lg-6 col-xs-12 form-group" >
-    <span>To Date <span class="text-danger">*</span></span>
-    <input aria-label="To Date" class="form-control enddatepicker_1" type="text"  name="to_date" value="<?php echo $to; ?>"  <?php if( $role['current_status'] == 1) { ?> readonly id="" <?php
-} ?> /><div class="d-none text-danger" id="<?php echo 'to_date_err'; ?>"> Please Enter To Date </div>
+    <span><?= __('To Date'); ?> <span class="text-danger">*</span></span>
+    <input aria-label="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control enddatepicker_1" type="text"  name="to_date" value="<?php echo $to; ?>"  <?php if( $role['current_status'] == 1) { ?> readonly id="" <?php
+} ?> /><div class="d-none text-danger" id="<?php echo 'to_date_err'; ?>"> <?= __('Please Enter To Date'); ?> </div>
 </div>
 
 
@@ -25,16 +25,16 @@
             <input type="hidden" name="submit" value="Update" />
             <button id="kt_llogin_signup_submit" <?php if($status_res == '1'){ ?> disabled="disabled" <?php
 } ?> class="btn btn-primary mr-2 btn_mobile" >
-                <i class="la la-check"></i>Update</button>
+                <i class="la la-check"></i><?= __('Update'); ?></button>
 
             <?php } else{ ?>
             <div class="col-lg-9">
                 <input type="hidden" name="submit" value="Add" />
-                <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10 btn_mobile" name="submit_value_exit" value="exit"><i class="la la-check"></i>Save & Exit</button>
+                <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10 btn_mobile" name="submit_value_exit" value="exit"><i class="la la-check"></i><?= htmlspecialchars(__('Save & Exit'), ENT_QUOTES, 'UTF-8'); ?></button>
                 <?php if($_POST['option'] ==""){ ?>
-                <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10 btn_mobile" name="submit_value" value="continue"><i class="la la-check-circle"></i>Save & Continue</button>
+                <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10 btn_mobile" name="submit_value" value="continue"><i class="la la-check-circle"></i><?= htmlspecialchars(__('Save & Continue'), ENT_QUOTES, 'UTF-8'); ?></button>
                 <?php } ?>
-                <button type="reset" class="btn btn-light-primary font-weight-bolder mr-2 btn_mobile"><i class="la la-close"></i>Cancel</button>
+                <button type="reset" class="btn btn-light-primary font-weight-bolder mr-2 btn_mobile"><i class="la la-close"></i><?= __('Cancel'); ?></button>
                 <?php } ?>
             </div>
 
