@@ -14,18 +14,18 @@ $data = json_decode($response, true);
 
 <div class="card">
   <div class="card-header">
-    <h5>Pending BOM Returns (Feasibility Closed)</h5>
+    <h5><?= __('Pending BOM Returns (Feasibility Closed)'); ?></h5>
   </div>
   <div class="card-body custom-scroll" style="min-height: 400px; max-height: 400px;">
     <table class="table ">
       <thead>
         <tr>
 
-          <th scope="col">Feasibility Title</th>
-          <th scope="col">Item Name</th>
-          <th scope="col">Planned Return By</th>
-          <th scope="col">Actual Return By</th>
-          <th scope="col">Action</th>
+          <th scope="col"><?= __('Feasibility Title'); ?></th>
+          <th scope="col"><?= __('Item Name'); ?></th>
+          <th scope="col"><?= __('Planned Return By'); ?></th>
+          <th scope="col"><?= __('Actual Return By'); ?></th>
+          <th scope="col"><?= __('Action'); ?></th>
         </tr>
       </thead>
       <tbody>
@@ -41,13 +41,13 @@ $data = json_decode($response, true);
 
               <td><?php echo htmlspecialchars($row['item_name']); ?></td>
               <td>
-                <input aria-label="Input field" type="text" class="form-control" value="<?php echo htmlspecialchars($row['planned_return_by'] != "" ? fromdate($row['planned_return_by']) : ""); ?>" readonly />
+                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="<?php echo htmlspecialchars($row['planned_return_by'] != "" ? fromdate($row['planned_return_by']) : ""); ?>" readonly />
               </td>
               <td>
-                <input aria-label="Input field" type="text" class="form-control datepicker" id="return_<?php echo $row['bom_id']; ?>" value="<?php echo htmlspecialchars($row['actual_return_by'] != "" ? fromdate($row['actual_return_by']) : ""); ?>" />
+                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" id="return_<?php echo $row['bom_id']; ?>" value="<?php echo htmlspecialchars($row['actual_return_by'] != "" ? fromdate($row['actual_return_by']) : ""); ?>" />
               </td>
               <td>
-                <button class="btn btn-sm btn-primary" onclick="updateReturnDate(<?php echo $row['bom_id']; ?>)">Update</button>
+                <button class="btn btn-sm btn-primary" onclick="updateReturnDate(<?php echo $row['bom_id']; ?>)"><?= __('Update'); ?></button>
               </td>
             </tr>
           <?php }
@@ -55,7 +55,7 @@ $data = json_decode($response, true);
           <tr>
             <td colspan="5">
               <div class="text-center ">
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Records'); ?></p>
                 <div class="text-center px-4">
                   <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>
@@ -90,20 +90,20 @@ $data = json_decode($response, true);
         try {
           const res = JSON.parse(response);
           if (res.status === 'sucess') {
-            swal("<?php echo ucwords($_SESSION['config']['name']); ?>", "Return date updated successfully.", "success");
+            swal("<?php echo ucwords($_SESSION['config']['name']); ?>", <?php echo json_encode(__('Return date updated successfully.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, "success");
             location.reload(); // or update table dynamically
           } else {
-            swal("<?php echo ucwords($_SESSION['config']['name']); ?>", "Update failed: " + res.message, "danger");
+            swal("<?php echo ucwords($_SESSION['config']['name']); ?>", <?php echo json_encode(__('Update failed').': ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?> + res.message, "danger");
           }
         } catch (e) {
           console.error("Invalid JSON:", response);
           const appName = "<?php echo ucwords($_SESSION['config']['name']); ?>";
           swal({
             title: appName,
-            text: "Something went wrong while updating. " + response,
+            text: <?php echo json_encode(__('Something went wrong while updating.').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?> + response,
             type: "error",
             confirmButtonClass: "btn-danger",
-            confirmButtonText: "OK"
+            confirmButtonText: <?php echo json_encode(__('OK'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>
           });
         }
       },
@@ -115,7 +115,7 @@ $data = json_decode($response, true);
           text: "An error occurred while Saving data.\n\nStatus: " + status + "\nError: " + error,
           type: "error",
           confirmButtonClass: "btn-danger",
-          confirmButtonText: "OK"
+          confirmButtonText: <?php echo json_encode(__('OK'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>
         });
       }
     });
