@@ -92,25 +92,25 @@ input.qtyminus { width:25px; height:25px;}
                 <li class="nav-item col-lg-3 col-4">
                     <a class="nav-link active position-relative" data-bs-toggle="tab" href="#courier" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                        <i class="ti-package f-30 text-info p-l-15"></i>
-                        <span class="text-info f-18 f-w-700">Courier</span>
+                        <span class="text-info f-18 f-w-700"><?= __('Courier'); ?></span>
                     </a>
                 </li>
                 <li class="nav-item col-lg-3 col-4">
                     <a class="nav-link position-relative" data-bs-toggle="tab" href="#stationery" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                         <i class="ti-ruler-pencil f-30 text-info p-l-15"></i>
-                        <span class="text-info f-18 f-w-700">Stationery</span>
+                        <span class="text-info f-18 f-w-700"><?= __('Stationery'); ?></span>
                     </a>
                 </li>
                 <li class="nav-item col-lg-3 col-4">
                     <a class="nav-link position-relative" data-bs-toggle="tab" href="#transport" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                         <i class="ti-car f-30 text-info p-l-15"></i>
-                        <span class="text-info f-18 f-w-700">Transport</span>
+                        <span class="text-info f-18 f-w-700"><?= __('Transport'); ?></span>
                     </a>
                 </li>
                 <li class="nav-item col-lg-3 col-4">
                     <a class="nav-link position-relative" data-bs-toggle="tab" href="#food" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                         <i class="ti-hand-open f-30 text-info p-l-15"></i>
-                        <span class="text-info f-18 f-w-700">Food</span>
+                        <span class="text-info f-18 f-w-700"><?= __('Food'); ?></span>
                     </a>
                 </li>
             </ul>
@@ -124,8 +124,8 @@ input.qtyminus { width:25px; height:25px;}
                             <div class="card-body text-center courier_popup">
                                 <div class="text-facebook m-b-20"><i class="ti-back-left"></i></div>
                                 <h3 class="text-facebook f-w-700">250</h3>
-                                <p>Likes</p>
-                                <p class="m-b-0 m-t-15"><i class="fas fa-caret-up m-r-10 f-18 text-c-green"></i>223 from last 7 days</p>
+                                <p><?= __('Likes'); ?></p>
+                                <p class="m-b-0 m-t-15"><i class="fas fa-caret-up m-r-10 f-18 text-c-green"></i><?= __('223 from last 7 days'); ?></p>
                                 <button type="button" class="btn btn-primary waves-effect c_btn" onclick="recicedcourier()">
                                     <span class="ti-plus"></span>
                                 </button>
@@ -137,8 +137,8 @@ input.qtyminus { width:25px; height:25px;}
                             <div class="card-body text-center courier_popup">
                                 <div class="text-facebook m-b-20"><i class="ti-back-right"></i></div>
                                 <h3 class="text-facebook f-w-700">350</h3>
-                                <p>Likes</p>
-                                <p class="m-b-0 m-t-15"><i class="fas fa-caret-up m-r-10 f-18 text-c-green"></i>223 from last 7 days</p>
+                                <p><?= __('Likes'); ?></p>
+                                <p class="m-b-0 m-t-15"><i class="fas fa-caret-up m-r-10 f-18 text-c-green"></i><?= __('223 from last 7 days'); ?></p>
                                 <button type="button" class="btn btn-primary waves-effect c_btn" onclick="sendcourier()">
                                     <span class="ti-plus"></span>
                                 </button>
@@ -147,26 +147,26 @@ input.qtyminus { width:25px; height:25px;}
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content align-left">
                                         <div class="modal-header">
-                                            <h4 class="modal-title">Courier in</h4>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <h4 class="modal-title"><?= __('Courier in'); ?></h4>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
                                         </div>
                                         <div class="modal-body">
                                             <div class="form-group">
-                                                <span>Date</span>
-                                                <input aria-label="Select date" type="date" name="" class="form-control">
+                                                <span><?= __('Date'); ?></span>
+                                                <input aria-label="<?= htmlspecialchars(__('Select date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" name="" class="form-control">
                                             </div>
                                             <div class="form-group">
-                                                <span>Courier Number</span>
-                                                <input aria-label="Input field" type="text" name="" class="form-control">
+                                                <span><?= __('Courier Number'); ?></span>
+                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" class="form-control">
                                             </div>
                                             <div class="form-group">
-                                                <span>Moblie No.</span>
-                                                <input aria-label="Input field" type="tel" name="" class="form-control">
+                                                <span><?= __('Moblie No.'); ?></span>
+                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="tel" name="" class="form-control">
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary waves-effect waves-light ">Save</button>
+                                            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
+                                            <button type="button" class="btn btn-primary waves-effect waves-light "><?= __('Save'); ?></button>
                                         </div>
                                     </div>
                                 </div>
@@ -178,25 +178,25 @@ input.qtyminus { width:25px; height:25px;}
                             <div class="card-body text-center">
                                 <div class="text-facebook m-b-20"><i class="ti-timer"></i></div>
                                 <h3 class="text-facebook f-w-700">450</h3>
-                                <p>Likes</p>
-                                <p class="m-b-0 m-t-15"><i class="fas fa-caret-up m-r-10 f-18 text-c-green"></i>223 from last 7 days</p>
+                                <p><?= __('Likes'); ?></p>
+                                <p class="m-b-0 m-t-15"><i class="fas fa-caret-up m-r-10 f-18 text-c-green"></i><?= __('223 from last 7 days'); ?></p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="card mt-4">
                     <div class="card-header">
-                        <h5>Latest Products</h5>
+                        <h5><?= __('Latest Products'); ?></h5>
                         <div class="card-header-right">
                             <ul class="nav nav-tabs md-tabs m-r-20 border-0">
                                 <li class="nav-item p-l-10 p-r-10">
-                                    <a class="nav-link p-2 active" data-bs-toggle="tab" href="#month" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Month</a>
+                                    <a class="nav-link p-2 active" data-bs-toggle="tab" href="#month" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Month'); ?></a>
                                 </li>
                                 <li class="nav-item p-l-10 p-r-10">
-                                    <a class="nav-link p-2" data-bs-toggle="tab" href="#week" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Week</a>
+                                    <a class="nav-link p-2" data-bs-toggle="tab" href="#week" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Week'); ?></a>
                                 </li>
                                 <li class="nav-item p-l-10 p-r-10">
-                                    <a class="nav-link p-2" data-bs-toggle="tab" href="#day" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Day</a>
+                                    <a class="nav-link p-2" data-bs-toggle="tab" href="#day" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Day'); ?></a>
                                 </li>
                             </ul>
                         </div>
@@ -208,17 +208,17 @@ input.qtyminus { width:25px; height:25px;}
                                     <tbody>
                                     <tr>
                                         <th scope="row" style="width: 10%;">
-                                            <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="User-Profile-">
+                                            <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </th>
                                         <th scope="col">
-                                            <a class="d-block text-dark f-w-600 f-14" href="">Bestseller Theme</a>
-                                            <span class="text-muted f-14 f-w-600">Best Customers</span>
+                                            <a class="d-block text-dark f-w-600 f-14" href=""><?= __('Bestseller Theme'); ?></a>
+                                            <span class="text-muted f-14 f-w-600"><?= __('Best Customers'); ?></span>
                                         </th>
                                         <th scope="col">
-                                            <span class="text-muted f-14 f-w-600">ReactJS, Ruby</span>
+                                            <span class="text-muted f-14 f-w-600"><?= __('ReactJS, Ruby'); ?></span>
                                         </th>
                                         <th scope="col">
-                                            <span class="form-label label label-success">In Progress</span>
+                                            <span class="form-label label label-success"><?= __('In Progress'); ?></span>
                                         </th>
                                         <th scope="col">
                                             <button class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
@@ -226,35 +226,17 @@ input.qtyminus { width:25px; height:25px;}
                                     </tr>
                                     <tr>
                                         <td scope="row" style="width: 10%;">
-                                            <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="User-Profile-">
+                                            <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
-                                            <a class="d-block text-dark f-w-600 f-14" href="">Bestseller Theme</a>
-                                            <span class="text-muted f-14 f-w-600">Best Customers</span>
+                                            <a class="d-block text-dark f-w-600 f-14" href=""><?= __('Bestseller Theme'); ?></a>
+                                            <span class="text-muted f-14 f-w-600"><?= __('Best Customers'); ?></span>
                                         </td>
                                         <td>
-                                            <span class="text-muted f-14 f-w-600">ReactJS, Ruby</span>
+                                            <span class="text-muted f-14 f-w-600"><?= __('ReactJS, Ruby'); ?></span>
                                         </td>
                                         <td>
-                                            <span class="form-label label label-danger">Rejected</span>
-                                        </td>
-                                        <td>
-                                            <button class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row" style="width: 10%;">
-                                            <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="User-Profile-">
-                                        </td>
-                                        <td>
-                                            <a class="d-block text-dark f-w-600 f-14" href="">Bestseller Theme</a>
-                                            <span class="text-muted f-14 f-w-600">Best Customers</span>
-                                        </td>
-                                        <td>
-                                            <span class="text-muted f-14 f-w-600">ReactJS, Ruby</span>
-                                        </td>
-                                        <td>
-                                            <span class="form-label label label-success">In Progress</span>
+                                            <span class="form-label label label-danger"><?= __('Rejected'); ?></span>
                                         </td>
                                         <td>
                                             <button class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
@@ -262,17 +244,35 @@ input.qtyminus { width:25px; height:25px;}
                                     </tr>
                                     <tr>
                                         <td scope="row" style="width: 10%;">
-                                            <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="User-Profile-">
+                                            <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
-                                            <a class="d-block text-dark f-w-600 f-14" href="">Bestseller Theme</a>
-                                            <span class="text-muted f-14 f-w-600">Best Customers</span>
+                                            <a class="d-block text-dark f-w-600 f-14" href=""><?= __('Bestseller Theme'); ?></a>
+                                            <span class="text-muted f-14 f-w-600"><?= __('Best Customers'); ?></span>
                                         </td>
                                         <td>
-                                            <span class="text-muted f-14 f-w-600">ReactJS, Ruby</span>
+                                            <span class="text-muted f-14 f-w-600"><?= __('ReactJS, Ruby'); ?></span>
                                         </td>
                                         <td>
-                                            <span class="form-label label label-danger">Rejected</span>
+                                            <span class="form-label label label-success"><?= __('In Progress'); ?></span>
+                                        </td>
+                                        <td>
+                                            <button class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row" style="width: 10%;">
+                                            <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
+                                        </td>
+                                        <td>
+                                            <a class="d-block text-dark f-w-600 f-14" href=""><?= __('Bestseller Theme'); ?></a>
+                                            <span class="text-muted f-14 f-w-600"><?= __('Best Customers'); ?></span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted f-14 f-w-600"><?= __('ReactJS, Ruby'); ?></span>
+                                        </td>
+                                        <td>
+                                            <span class="form-label label label-danger"><?= __('Rejected'); ?></span>
                                         </td>
                                         <td>
                                             <button class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
@@ -288,17 +288,17 @@ input.qtyminus { width:25px; height:25px;}
                                     <tbody>
                                     <tr>
                                         <th scope="row" style="width: 10%;">
-                                            <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="User-Profile-">
+                                            <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </th>
                                         <th scope="col">
-                                            <a class="d-block text-dark f-w-600 f-14" href="">Bestseller Theme 2</a>
-                                            <span class="text-muted f-14 f-w-600">Best Customers</span>
+                                            <a class="d-block text-dark f-w-600 f-14" href=""><?= __('Bestseller Theme 2'); ?></a>
+                                            <span class="text-muted f-14 f-w-600"><?= __('Best Customers'); ?></span>
                                         </th>
                                         <th scope="col">
-                                            <span class="text-muted f-14 f-w-600">ReactJS, Ruby</span>
+                                            <span class="text-muted f-14 f-w-600"><?= __('ReactJS, Ruby'); ?></span>
                                         </th>
                                         <th scope="col">
-                                            <span class="form-label label label-success">In Progress</span>
+                                            <span class="form-label label label-success"><?= __('In Progress'); ?></span>
                                         </th>
                                         <th scope="col">
                                             <button class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
@@ -306,35 +306,17 @@ input.qtyminus { width:25px; height:25px;}
                                     </tr>
                                     <tr>
                                         <td scope="row" style="width: 10%;">
-                                            <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="User-Profile-">
+                                            <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
-                                            <a class="d-block text-dark f-w-600 f-14" href="">Bestseller Theme</a>
-                                            <span class="text-muted f-14 f-w-600">Best Customers</span>
+                                            <a class="d-block text-dark f-w-600 f-14" href=""><?= __('Bestseller Theme'); ?></a>
+                                            <span class="text-muted f-14 f-w-600"><?= __('Best Customers'); ?></span>
                                         </td>
                                         <td>
-                                            <span class="text-muted f-14 f-w-600">ReactJS, Ruby</span>
+                                            <span class="text-muted f-14 f-w-600"><?= __('ReactJS, Ruby'); ?></span>
                                         </td>
                                         <td>
-                                            <span class="form-label label label-danger">Rejected</span>
-                                        </td>
-                                        <td>
-                                            <button class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row" style="width: 10%;">
-                                            <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="User-Profile-">
-                                        </td>
-                                        <td>
-                                            <a class="d-block text-dark f-w-600 f-14" href="">Bestseller Theme</a>
-                                            <span class="text-muted f-14 f-w-600">Best Customers</span>
-                                        </td>
-                                        <td>
-                                            <span class="text-muted f-14 f-w-600">ReactJS, Ruby</span>
-                                        </td>
-                                        <td>
-                                            <span class="form-label label label-success">In Progress</span>
+                                            <span class="form-label label label-danger"><?= __('Rejected'); ?></span>
                                         </td>
                                         <td>
                                             <button class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
@@ -342,17 +324,35 @@ input.qtyminus { width:25px; height:25px;}
                                     </tr>
                                     <tr>
                                         <td scope="row" style="width: 10%;">
-                                            <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="User-Profile-">
+                                            <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
-                                            <a class="d-block text-dark f-w-600 f-14" href="">Bestseller Theme</a>
-                                            <span class="text-muted f-14 f-w-600">Best Customers</span>
+                                            <a class="d-block text-dark f-w-600 f-14" href=""><?= __('Bestseller Theme'); ?></a>
+                                            <span class="text-muted f-14 f-w-600"><?= __('Best Customers'); ?></span>
                                         </td>
                                         <td>
-                                            <span class="text-muted f-14 f-w-600">ReactJS, Ruby</span>
+                                            <span class="text-muted f-14 f-w-600"><?= __('ReactJS, Ruby'); ?></span>
                                         </td>
                                         <td>
-                                            <span class="form-label label label-danger">Rejected</span>
+                                            <span class="form-label label label-success"><?= __('In Progress'); ?></span>
+                                        </td>
+                                        <td>
+                                            <button class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row" style="width: 10%;">
+                                            <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
+                                        </td>
+                                        <td>
+                                            <a class="d-block text-dark f-w-600 f-14" href=""><?= __('Bestseller Theme'); ?></a>
+                                            <span class="text-muted f-14 f-w-600"><?= __('Best Customers'); ?></span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted f-14 f-w-600"><?= __('ReactJS, Ruby'); ?></span>
+                                        </td>
+                                        <td>
+                                            <span class="form-label label label-danger"><?= __('Rejected'); ?></span>
                                         </td>
                                         <td>
                                             <button class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
@@ -368,17 +368,17 @@ input.qtyminus { width:25px; height:25px;}
                                     <tbody>
                                     <tr>
                                         <th scope="row" style="width: 10%;">
-                                            <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="User-Profile-">
+                                            <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </th>
                                         <th scope="col">
-                                            <a class="d-block text-dark f-w-600 f-14" href="">Bestseller Theme 3</a>
-                                            <span class="text-muted f-14 f-w-600">Best Customers</span>
+                                            <a class="d-block text-dark f-w-600 f-14" href=""><?= __('Bestseller Theme 3'); ?></a>
+                                            <span class="text-muted f-14 f-w-600"><?= __('Best Customers'); ?></span>
                                         </th>
                                         <th scope="col">
-                                            <span class="text-muted f-14 f-w-600">ReactJS, Ruby</span>
+                                            <span class="text-muted f-14 f-w-600"><?= __('ReactJS, Ruby'); ?></span>
                                         </th>
                                         <th scope="col">
-                                            <span class="form-label label label-success">In Progress</span>
+                                            <span class="form-label label label-success"><?= __('In Progress'); ?></span>
                                         </th>
                                         <th scope="col">
                                             <button class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
@@ -386,35 +386,17 @@ input.qtyminus { width:25px; height:25px;}
                                     </tr>
                                     <tr>
                                         <td scope="row" style="width: 10%;">
-                                            <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="User-Profile-">
+                                            <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
-                                            <a class="d-block text-dark f-w-600 f-14" href="">Bestseller Theme</a>
-                                            <span class="text-muted f-14 f-w-600">Best Customers</span>
+                                            <a class="d-block text-dark f-w-600 f-14" href=""><?= __('Bestseller Theme'); ?></a>
+                                            <span class="text-muted f-14 f-w-600"><?= __('Best Customers'); ?></span>
                                         </td>
                                         <td>
-                                            <span class="text-muted f-14 f-w-600">ReactJS, Ruby</span>
+                                            <span class="text-muted f-14 f-w-600"><?= __('ReactJS, Ruby'); ?></span>
                                         </td>
                                         <td>
-                                            <span class="form-label label label-danger">Rejected</span>
-                                        </td>
-                                        <td>
-                                            <button class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row" style="width: 10%;">
-                                            <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="User-Profile-">
-                                        </td>
-                                        <td>
-                                            <a class="d-block text-dark f-w-600 f-14" href="">Bestseller Theme</a>
-                                            <span class="text-muted f-14 f-w-600">Best Customers</span>
-                                        </td>
-                                        <td>
-                                            <span class="text-muted f-14 f-w-600">ReactJS, Ruby</span>
-                                        </td>
-                                        <td>
-                                            <span class="form-label label label-success">In Progress</span>
+                                            <span class="form-label label label-danger"><?= __('Rejected'); ?></span>
                                         </td>
                                         <td>
                                             <button class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
@@ -422,17 +404,35 @@ input.qtyminus { width:25px; height:25px;}
                                     </tr>
                                     <tr>
                                         <td scope="row" style="width: 10%;">
-                                            <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="User-Profile-">
+                                            <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
-                                            <a class="d-block text-dark f-w-600 f-14" href="">Bestseller Theme</a>
-                                            <span class="text-muted f-14 f-w-600">Best Customers</span>
+                                            <a class="d-block text-dark f-w-600 f-14" href=""><?= __('Bestseller Theme'); ?></a>
+                                            <span class="text-muted f-14 f-w-600"><?= __('Best Customers'); ?></span>
                                         </td>
                                         <td>
-                                            <span class="text-muted f-14 f-w-600">ReactJS, Ruby</span>
+                                            <span class="text-muted f-14 f-w-600"><?= __('ReactJS, Ruby'); ?></span>
                                         </td>
                                         <td>
-                                            <span class="form-label label label-danger">Rejected</span>
+                                            <span class="form-label label label-success"><?= __('In Progress'); ?></span>
+                                        </td>
+                                        <td>
+                                            <button class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row" style="width: 10%;">
+                                            <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
+                                        </td>
+                                        <td>
+                                            <a class="d-block text-dark f-w-600 f-14" href=""><?= __('Bestseller Theme'); ?></a>
+                                            <span class="text-muted f-14 f-w-600"><?= __('Best Customers'); ?></span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted f-14 f-w-600"><?= __('ReactJS, Ruby'); ?></span>
+                                        </td>
+                                        <td>
+                                            <span class="form-label label label-danger"><?= __('Rejected'); ?></span>
                                         </td>
                                         <td>
                                             <button class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
@@ -449,7 +449,7 @@ input.qtyminus { width:25px; height:25px;}
                 <div class="row">
                     <div class="col-lg-12">
                         <button type="button" class="btn waves-effect waves-light btn-primary float-right m-l-5"data-bs-toggle="modal" data-bs-target="#create-product-modal">
-                            <span class="ti-plus m-r-5"></span>Create
+                            <span class="ti-plus m-r-5"></span><?= __('Create'); ?>
                         </button>
                         <button type="button" class="btn waves-effect waves-light btn-primary float-right "data-bs-toggle="modal" data-bs-target="#create-product-modal">
                             <span class="ti-shopping-cart m-r-5"></span>&nbsp; (<span id="cartval"><?php echo $data['cart_count']; ?></span>)
@@ -458,30 +458,30 @@ input.qtyminus { width:25px; height:25px;}
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content align-left">
                                     <div class="modal-header">
-                                        <h4 class="modal-title">Sell new product</h4>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h4 class="modal-title"><?= __('Sell new product'); ?></h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="form-group">
-                                            <span>Product Name</span>
-                                            <input aria-label="Please Enter Your Product Name" placeholder="Please Enter Your Product Name" type="text" name="" class="form-control">
+                                            <span><?= __('Product Name'); ?></span>
+                                            <input aria-label="<?= htmlspecialchars(__('Please Enter Your Product Name'), ENT_QUOTES, 'UTF-8'); ?>" placeholder="<?= htmlspecialchars(__('Please Enter Your Product Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <span>Quantity</span>
-                                            <input aria-label="Please Enter Your Quantity" id="phone-2a" placeholder="Please Enter Your Quantity" name="phone" type="number" class="form-control phone fill">
+                                            <span><?= __('Quantity'); ?></span>
+                                            <input aria-label="<?= htmlspecialchars(__('Please Enter Your Quantity'), ENT_QUOTES, 'UTF-8'); ?>" id="phone-2a" placeholder="<?= htmlspecialchars(__('Please Enter Your Quantity'), ENT_QUOTES, 'UTF-8'); ?>" name="phone" type="number" class="form-control phone fill">
                                         </div>
                                         <div class="form-group">
-                                            <span>Price</span>
-                                            <input aria-label="Phone" id="phone-2a_2" name="phone" type="number" class="form-control phone fill">
+                                            <span><?= __('Price'); ?></span>
+                                            <input aria-label="<?= htmlspecialchars(__('Phone'), ENT_QUOTES, 'UTF-8'); ?>" id="phone-2a_2" name="phone" type="number" class="form-control phone fill">
                                         </div>
                                         <div class="form-group">
-                                            <span>Description</span>
-                                            <textarea aria-label="Please describe your product" class="form-control" placeholder="Please describe your product"></textarea>
+                                            <span><?= __('Description'); ?></span>
+                                            <textarea aria-label="<?= htmlspecialchars(__('Please describe your product'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" placeholder="<?= htmlspecialchars(__('Please describe your product'), ENT_QUOTES, 'UTF-8'); ?>"></textarea>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary waves-effect waves-light ">Save</button>
+                                        <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
+                                        <button type="button" class="btn btn-primary waves-effect waves-light "><?= __('Save'); ?></button>
                                     </div>
                                 </div>
                             </div>
@@ -511,7 +511,7 @@ input.qtyminus { width:25px; height:25px;}
                                                 <i class="ti-minus"></i>
                                               </button>
                                           </b>
-                                          <input aria-label="Quantity" type="text" id="quantity_1" name="quantity" class="form-control input-number" value="10" min="1" max="100">
+                                          <input aria-label="<?= htmlspecialchars(__('Quantity'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="quantity_1" name="quantity" class="form-control input-number" value="10" min="1" max="100">
                                           <b class="input-group-btn position-static">
                                               <button type="button" class="quantity-right-plus btn btn-success btn-number p-2" data-type="plus" data-field="">
                                                   <i class="ti-plus"></i>
@@ -528,61 +528,61 @@ input.qtyminus { width:25px; height:25px;}
                 </div>
             </div>
             <div class="tab-pane" id="transport" role="tabpanel">
-                <p class="m-0">3. This is Photoshop's version of Lorem IpThis is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean mas Cum sociis natoque penatibus et magnis dis.....</p>
+                <p class="m-0"><?= __('3. This is Photoshop\'s version of Lorem IpThis is Photoshop\'s version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean mas Cum sociis natoque penatibus et magnis dis.....'); ?></p>
             </div>
             <div class="tab-pane" id="food" role="tabpanel">
-                <p class="m-0">3. This is Photoshop's version of Lorem IpThis is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean mas Cum sociis natoque penatibus et magnis dis.....</p>
+                <p class="m-0"><?= __('3. This is Photoshop\'s version of Lorem IpThis is Photoshop\'s version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean mas Cum sociis natoque penatibus et magnis dis.....'); ?></p>
             </div>
         </div>
     </div>
     <div class="col-lg-4">
         <div class="" style="background: #B0DC00 url(../assets/images/city.png);
             width:100%;height:250px;background-repeat:no-repeat;background-position:100% 50px;background-size: 500px auto;border-radius: 15px;">
-            <h3 class="f-w-600 pt-5 f-30 m-l-50">We are working<br />to boost lovely mood</h3>
-            <button class="btn btn-inverse waves-effect waves-light m-l-50 mt-4">Create a Store</button>
+            <h3 class="f-w-600 pt-5 f-30 m-l-50"><?= __('We are working'); ?><br /><?= __('to boost lovely mood'); ?></h3>
+            <button class="btn btn-inverse waves-effect waves-light m-l-50 mt-4"><?= __('Create a Store'); ?></button>
         </div>
         <div class="card mt-4">
             <div class="card-header">
-                <h5>Courier</h5>
+                <h5><?= __('Courier'); ?></h5>
             </div>
             <div class="card-body">
                 <div class="row align-items-center">
-                    <div class="col-lg-12"><h3 class="f-16 f-w-600 mb-0 m-l-5">IN</h3></div>
+                    <div class="col-lg-12"><h3 class="f-16 f-w-600 mb-0 m-l-5"><?= __('IN'); ?></h3></div>
                     <div class="col-lg-2 p-2">
                         <img src="uploads/all/file_1689092069_64ad7fe56a8f4.jpg" class="img-radius img-50 m-l-10" alt="">
                     </div>
                     <div class="col-lg-7 p-2">
-                        <h4 class="f-14 m-0 f-w-600">Bestseller Theme</h4>
-                        <span class="f-12">Best Customers</span>
+                        <h4 class="f-14 m-0 f-w-600"><?= __('Bestseller Theme'); ?></h4>
+                        <span class="f-12"><?= __('Best Customers'); ?></span>
                     </div>
                     <div class="col-lg-3 p-2">
-                        <span class="form-label label label-success">In Progress</span>
+                        <span class="form-label label label-success"><?= __('In Progress'); ?></span>
                     </div>
                 </div>
                 <div class="row align-items-center mt-3">
-                    <div class="col-lg-12"><h3 class="f-16 f-w-600 m-l-5 mb-0">OUT</h3></div>
+                    <div class="col-lg-12"><h3 class="f-16 f-w-600 m-l-5 mb-0"><?= __('OUT'); ?></h3></div>
                     <div class="col-lg-2 p-2">
                         <img src="uploads/all/file_1689092069_64ad7fe56a8f4.jpg" class="img-radius img-50 m-l-10" alt="">
                     </div>
                     <div class="col-lg-7 p-2">
-                        <h4 class="f-14 m-0 f-w-600">Bestseller Theme</h4>
-                        <span class="f-12">Best Customers</span>
+                        <h4 class="f-14 m-0 f-w-600"><?= __('Bestseller Theme'); ?></h4>
+                        <span class="f-12"><?= __('Best Customers'); ?></span>
                     </div>
                     <div class="col-lg-3 p-2">
-                        <span class="form-label label label-success">In Progress</span>
+                        <span class="form-label label label-success"><?= __('In Progress'); ?></span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="card mt-4">
             <div class="card-header">
-                <h5>Stationery</h5>
+                <h5><?= __('Stationery'); ?></h5>
             </div>
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col-lg-8 p-2">
-                        <h4 class="f-14 mb-0 f-w-600 m-l-10">A4 SIZE PAPER</h4>
-                        <span class="f-12 m-l-10">A4 size and photocopier paper</span>
+                        <h4 class="f-14 mb-0 f-w-600 m-l-10"><?= __('A4 SIZE PAPER'); ?></h4>
+                        <span class="f-12 m-l-10"><?= __('A4 size and photocopier paper'); ?></span>
                     </div>
                     <div class="col-lg-4 p-2">
                         <div class="text-right m-b-10 m-r-5 quantity-sec">
@@ -592,7 +592,7 @@ input.qtyminus { width:25px; height:25px;}
                                         <i class="ti-minus"></i>
                                     </button>
                                 </b>
-                                <input aria-label="Quantity" type="text" id="quantity_2" name="quantity" class="form-control input-number" value="10" min="1" max="100">
+                                <input aria-label="<?= htmlspecialchars(__('Quantity'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="quantity_2" name="quantity" class="form-control input-number" value="10" min="1" max="100">
                                 <b class="input-group-btn position-static">
                                     <button type="button" class="quantity-right-plus btn btn-success btn-number p-2" data-type="plus" data-field="">
                                         <i class="ti-plus"></i>
@@ -604,8 +604,8 @@ input.qtyminus { width:25px; height:25px;}
                 </div>
                 <div class="row align-items-center mt-3">
                     <div class="col-lg-8 p-2">
-                        <h4 class="f-14 mb-0 f-w-600 m-l-10">PEN</h4>
-                        <span class="f-12 m-l-10">Pen</span>
+                        <h4 class="f-14 mb-0 f-w-600 m-l-10"><?= __('PEN'); ?></h4>
+                        <span class="f-12 m-l-10"><?= __('Pen'); ?></span>
                     </div>
                     <div class="col-lg-4 p-2">
                         <div class="text-right m-b-10 m-r-5 quantity-sec">
@@ -615,7 +615,7 @@ input.qtyminus { width:25px; height:25px;}
                                         <i class="ti-minus"></i>
                                     </button>
                                 </b>
-                                <input aria-label="Quantity" type="text" id="quantity_3" name="quantity" class="form-control input-number" value="10" min="1" max="100">
+                                <input aria-label="<?= htmlspecialchars(__('Quantity'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="quantity_3" name="quantity" class="form-control input-number" value="10" min="1" max="100">
                                 <b class="input-group-btn position-static">
                                     <button type="button" class="quantity-right-plus btn btn-success btn-number p-2" data-type="plus" data-field="">
                                         <i class="ti-plus"></i>
