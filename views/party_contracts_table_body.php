@@ -16,7 +16,7 @@ if (!function_exists('party_contracts_render_rows')) {
                 if ($isAmc) {
                     $nextVisit = !empty($row['next_visit']) ? fromDate($row['next_visit']) : '—';
                     $overdueCnt = (int) ($row['overdue_count'] ?? 0);
-                    $overdue = $overdueCnt > 0 ? '<span class="badge bg-danger">' . $overdueCnt . ' overdue</span>' : '0';
+                    $overdue = $overdueCnt > 0 ? '<span class="badge bg-danger">' . $overdueCnt . ' '.__('overdue').'</span>' : '0';
                     $lastCompleted = !empty($row['last_completed']) ? fromDate($row['last_completed']) : '—';
                     $pending = (int) ($row['pending_count'] ?? 0);
                 }
@@ -36,14 +36,14 @@ if (!function_exists('party_contracts_render_rows')) {
                     <td><?php echo !empty($row['end_date']) ? fromDate($row['end_date']) : '-'; ?></td>
                     <td><?php echo htmlspecialchars(contractCurrentStatusLabel($row['current_status'] ?? 0, $row['cancel_status'] ?? 'N')); ?></td>
                     <td>
-                        <a href="index.php?option=COM_INSERT_CONTRACTS&Rid=<?php echo $contractRid; ?>" title="Open Contract" class="m-r-10">
+                        <a href="index.php?option=COM_INSERT_CONTRACTS&Rid=<?php echo $contractRid; ?>" title="<?= htmlspecialchars(__('Open Contract'), ENT_QUOTES, 'UTF-8'); ?>" class="m-r-10">
                             <i class="ti-pencil text-primary f-16"></i>
                         </a>
                         <?php if ($isAmc) { ?>
-                        <a href="index.php?option=COM_VIEW_CONTRACT_AMC_SCHEDULES&contract_id=<?php echo (int) $row['id']; ?>" title="View Schedules" class="m-r-10">
+                        <a href="index.php?option=COM_VIEW_CONTRACT_AMC_SCHEDULES&contract_id=<?php echo (int) $row['id']; ?>" title="<?= htmlspecialchars(__('View Schedules'), ENT_QUOTES, 'UTF-8'); ?>" class="m-r-10">
                             <i class="ti-calendar text-info f-16"></i>
                         </a>
-                        <a href="index.php?option=COM_ASSIGN_CONTRACT_AMC_TECHNICIANS&contract_id=<?php echo (int) $row['id']; ?>" title="Manage Default Technicians">
+                        <a href="index.php?option=COM_ASSIGN_CONTRACT_AMC_TECHNICIANS&contract_id=<?php echo (int) $row['id']; ?>" title="<?= htmlspecialchars(__('Manage Default Technicians'), ENT_QUOTES, 'UTF-8'); ?>">
                             <i class="ti-user text-primary f-16"></i>
                         </a>
                         <?php } ?>
@@ -54,7 +54,7 @@ if (!function_exists('party_contracts_render_rows')) {
         } else {
             ?>
             <tr>
-                <td colspan="12" class="text-center text-muted">No contracts found.</td>
+                <td colspan="12" class="text-center text-muted"><?= __('No contracts found.'); ?></td>
             </tr>
             <?php
         }
