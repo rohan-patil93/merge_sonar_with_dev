@@ -1,7 +1,7 @@
 <div class="card card-custom gutter-b draggable" role="region" style="">
                                 <div class="card-header">
                                     <div class="card-title">
-                                        <h3 class="card-label">Upcoming Holidays</h3>
+                                        <h3 class="card-label"><?= __('Upcoming Holidays'); ?></h3>
                                     </div>
                                     <div class="card-toolbar">
                                         <a href="#" class="btn btn-icon btn-sm btn-hover-light-primary draggable-handle">
@@ -17,16 +17,16 @@
                                             <div class="card-toolbar">
                                                 <ul class="nav nav-pills nav-pills-sm nav-dark-75">
                                                     <li class="nav-item">
-                                                        <a class="nav-link py-2 px-4 font-weight-bolder active" data-toggle="tab" href="#kt_tab_pane_21" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Today</a>
+                                                        <a class="nav-link py-2 px-4 font-weight-bolder active" data-toggle="tab" href="#kt_tab_pane_21" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Today'); ?></a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link py-2 px-4 font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_3" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Week</a>
+                                                        <a class="nav-link py-2 px-4 font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_3" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Week'); ?></a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link py-2 px-4 font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_4" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Month</a>
+                                                        <a class="nav-link py-2 px-4 font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_4" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Month'); ?></a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link py-2 px-4 font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_5" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Year</a>
+                                                        <a class="nav-link py-2 px-4 font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_5" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Year'); ?></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -48,8 +48,8 @@
                                                                 <tr>
 
                                                                     <th scope="col" class="pl-0">
-                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">The School Art Leads</a>
-                                                                        <span class="text-muted font-weight-bold d-block">By Ellie Cole</span>
+                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= __('The School Art Leads'); ?></a>
+                                                                        <span class="text-muted font-weight-bold d-block"><?= __('By Ellie Cole'); ?></span>
                                                                     </th>
 
                                                                     <th scope="col" class="text-left">
@@ -57,7 +57,7 @@
                                                                             03-Sep-20
                                                                         </span>
                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                            Monday
+                                                                            <?= __('Monday'); ?>
                                                                         </span>
                                                                     </th>
 
@@ -65,8 +65,8 @@
                                                                 <tr>
 
                                                                     <td class="pl-0">
-                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Napoleon Days</a>
-                                                                        <span class="text-muted font-weight-bold d-block">By Luke Owen</span>
+                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= __('Napoleon Days'); ?></a>
+                                                                        <span class="text-muted font-weight-bold d-block"><?= __('By Luke Owen'); ?></span>
                                                                     </td>
 
                                                                     <td class="text-left">
@@ -74,7 +74,7 @@
                                                                             03-Sep-20
                                                                         </span>
                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                            Monday
+                                                                            <?= __('Monday'); ?>
                                                                         </span>
                                                                     </td>
 
@@ -82,8 +82,8 @@
                                                                 <tr>
 
                                                                     <td class="pl-0">
-                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Who Knows Geography</a>
-                                                                        <span class="text-muted font-weight-bold d-block">By Zoey Dylan</span>
+                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= __('Who Knows Geography'); ?></a>
+                                                                        <span class="text-muted font-weight-bold d-block"><?= __('By Zoey Dylan'); ?></span>
                                                                     </td>
 
                                                                     <td class="text-left">
@@ -91,7 +91,7 @@
                                                                             03-Sep-20
                                                                         </span>
                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                            Time
+                                                                            <?= __('Time'); ?>
                                                                         </span>
                                                                     </td>
 
@@ -99,8 +99,8 @@
                                                                 <tr>
 
                                                                     <td class="pl-0">
-                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Maths Championship</a>
-                                                                        <span class="text-muted font-weight-bold d-block">By Tom Gere</span>
+                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= __('Maths Championship'); ?></a>
+                                                                        <span class="text-muted font-weight-bold d-block"><?= __('By Tom Gere'); ?></span>
                                                                     </td>
 
                                                                     <td class="text-left">
@@ -108,15 +108,15 @@
                                                                             25-Oct-20
                                                                         </span>
                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                            Monday
+                                                                            <?= __('Monday'); ?>
                                                                         </span>
                                                                     </td>
 
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="pl-0">
-                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">School Music Festival</a>
-                                                                        <span class="text-muted font-weight-bold d-block">By Rose Liam</span>
+                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= __('School Music Festival'); ?></a>
+                                                                        <span class="text-muted font-weight-bold d-block"><?= __('By Rose Liam'); ?></span>
                                                                     </td>
 
                                                                     <td class="text-left">
@@ -124,7 +124,7 @@
                                                                             03-Sep-20
                                                                         </span>
                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                            Monday
+                                                                            <?= __('Monday'); ?>
                                                                         </span>
                                                                     </td>
 
@@ -146,8 +146,8 @@
                                                                 <tr>
 
                                                                     <th scope="col" class="pl-0">
-                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">The School Art Leads</a>
-                                                                        <span class="text-muted font-weight-bold d-block">By Ellie Cole</span>
+                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= __('The School Art Leads'); ?></a>
+                                                                        <span class="text-muted font-weight-bold d-block"><?= __('By Ellie Cole'); ?></span>
                                                                     </th>
 
                                                                     <th scope="col" class="text-left">
@@ -155,7 +155,7 @@
                                                                             03-Sep-20
                                                                         </span>
                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                            Monday
+                                                                            <?= __('Monday'); ?>
                                                                         </span>
                                                                     </th>
 
@@ -163,8 +163,8 @@
                                                                 <tr>
 
                                                                     <td class="pl-0">
-                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Napoleon Days</a>
-                                                                        <span class="text-muted font-weight-bold d-block">By Luke Owen</span>
+                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= __('Napoleon Days'); ?></a>
+                                                                        <span class="text-muted font-weight-bold d-block"><?= __('By Luke Owen'); ?></span>
                                                                     </td>
 
                                                                     <td class="text-left">
@@ -172,7 +172,7 @@
                                                                             03-Sep-20
                                                                         </span>
                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                            Monday
+                                                                            <?= __('Monday'); ?>
                                                                         </span>
                                                                     </td>
 
@@ -180,8 +180,8 @@
                                                                 <tr>
 
                                                                     <td class="pl-0">
-                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Who Knows Geography</a>
-                                                                        <span class="text-muted font-weight-bold d-block">By Zoey Dylan</span>
+                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= __('Who Knows Geography'); ?></a>
+                                                                        <span class="text-muted font-weight-bold d-block"><?= __('By Zoey Dylan'); ?></span>
                                                                     </td>
 
                                                                     <td class="text-left">
@@ -189,7 +189,7 @@
                                                                             03-Sep-20
                                                                         </span>
                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                            Time
+                                                                            <?= __('Time'); ?>
                                                                         </span>
                                                                     </td>
 
@@ -197,8 +197,8 @@
                                                                 <tr>
 
                                                                     <td class="pl-0">
-                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Maths Championship</a>
-                                                                        <span class="text-muted font-weight-bold d-block">By Tom Gere</span>
+                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= __('Maths Championship'); ?></a>
+                                                                        <span class="text-muted font-weight-bold d-block"><?= __('By Tom Gere'); ?></span>
                                                                     </td>
 
                                                                     <td class="text-left">
@@ -206,15 +206,15 @@
                                                                             25-Oct-20
                                                                         </span>
                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                            Monday
+                                                                            <?= __('Monday'); ?>
                                                                         </span>
                                                                     </td>
 
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="pl-0">
-                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">School Music Festival</a>
-                                                                        <span class="text-muted font-weight-bold d-block">By Rose Liam</span>
+                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= __('School Music Festival'); ?></a>
+                                                                        <span class="text-muted font-weight-bold d-block"><?= __('By Rose Liam'); ?></span>
                                                                     </td>
 
                                                                     <td class="text-left">
@@ -222,7 +222,7 @@
                                                                             03-Sep-20
                                                                         </span>
                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                            Monday
+                                                                            <?= __('Monday'); ?>
                                                                         </span>
                                                                     </td>
 
@@ -247,8 +247,8 @@
                                                                 <tr>
 
                                                                     <th scope="col" class="pl-0">
-                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">School Music Festival</a>
-                                                                        <span class="text-muted font-weight-bold d-block">By Rose Liam</span>
+                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= __('School Music Festival'); ?></a>
+                                                                        <span class="text-muted font-weight-bold d-block"><?= __('By Rose Liam'); ?></span>
                                                                     </th>
 
                                                                     <th scope="col" class="text-left">
@@ -256,7 +256,7 @@
                                                                             03-Sep-20
                                                                         </span>
                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                            Monday
+                                                                            <?= __('Monday'); ?>
                                                                         </span>
                                                                     </th>
 
@@ -264,8 +264,8 @@
                                                                 <tr>
 
                                                                     <td class="pl-0">
-                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Maths Championship</a>
-                                                                        <span class="text-muted font-weight-bold d-block">By Tom Gere</span>
+                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= __('Maths Championship'); ?></a>
+                                                                        <span class="text-muted font-weight-bold d-block"><?= __('By Tom Gere'); ?></span>
                                                                     </td>
 
                                                                     <td class="text-left">
@@ -273,7 +273,7 @@
                                                                             25-Oct-20
                                                                         </span>
                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                            Monday
+                                                                            <?= __('Monday'); ?>
                                                                         </span>
                                                                     </td>
 
@@ -281,8 +281,8 @@
                                                                 <tr>
 
                                                                     <td class="pl-0">
-                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Who Knows Geography</a>
-                                                                        <span class="text-muted font-weight-bold d-block">By Zoey Dylan</span>
+                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= __('Who Knows Geography'); ?></a>
+                                                                        <span class="text-muted font-weight-bold d-block"><?= __('By Zoey Dylan'); ?></span>
                                                                     </td>
 
                                                                     <td class="text-left">
@@ -290,7 +290,7 @@
                                                                             03-Sep-20
                                                                         </span>
                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                            Monday
+                                                                            <?= __('Monday'); ?>
                                                                         </span>
                                                                     </td>
 
@@ -298,8 +298,8 @@
                                                                 <tr>
 
                                                                     <td class="pl-0">
-                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Napoleon Days</a>
-                                                                        <span class="text-muted font-weight-bold d-block">By Luke Owen</span>
+                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= __('Napoleon Days'); ?></a>
+                                                                        <span class="text-muted font-weight-bold d-block"><?= __('By Luke Owen'); ?></span>
                                                                     </td>
 
                                                                     <td class="text-left">
@@ -307,7 +307,7 @@
                                                                             03-Sep-20
                                                                         </span>
                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                            Monday
+                                                                            <?= __('Monday'); ?>
                                                                         </span>
                                                                     </td>
 
@@ -315,8 +315,8 @@
                                                                 <tr>
 
                                                                     <td class="pl-0">
-                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">The School Art Leads</a>
-                                                                        <span class="text-muted font-weight-bold d-block">By Ellie Cole</span>
+                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= __('The School Art Leads'); ?></a>
+                                                                        <span class="text-muted font-weight-bold d-block"><?= __('By Ellie Cole'); ?></span>
                                                                     </td>
 
                                                                     <td class="text-left">
@@ -324,7 +324,7 @@
                                                                             03-Sep-20
                                                                         </span>
                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                            Monday
+                                                                            <?= __('Monday'); ?>
                                                                         </span>
                                                                     </td>
 
@@ -347,8 +347,8 @@
                                                                 <tr>
 
                                                                     <th scope="col" class="pl-0">
-                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">The School Art Leads 2</a>
-                                                                        <span class="text-muted font-weight-bold d-block">By Ellie Cole</span>
+                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= __('The School Art Leads 2'); ?></a>
+                                                                        <span class="text-muted font-weight-bold d-block"><?= __('By Ellie Cole'); ?></span>
                                                                     </th>
 
                                                                     <th scope="col" class="text-left">
@@ -356,7 +356,7 @@
                                                                             03-Sep-20
                                                                         </span>
                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                            Monday
+                                                                            <?= __('Monday'); ?>
                                                                         </span>
                                                                     </th>
 
@@ -364,8 +364,8 @@
                                                                 <tr>
 
                                                                     <td class="pl-0">
-                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Napoleon Days</a>
-                                                                        <span class="text-muted font-weight-bold d-block">By Luke Owen</span>
+                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= __('Napoleon Days'); ?></a>
+                                                                        <span class="text-muted font-weight-bold d-block"><?= __('By Luke Owen'); ?></span>
                                                                     </td>
 
                                                                     <td class="text-left">
@@ -373,7 +373,7 @@
                                                                             03-Sep-20
                                                                         </span>
                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                            Monday
+                                                                            <?= __('Monday'); ?>
                                                                         </span>
                                                                     </td>
 
@@ -381,8 +381,8 @@
                                                                 <tr>
 
                                                                     <td class="pl-0">
-                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Who Knows Geography</a>
-                                                                        <span class="text-muted font-weight-bold d-block">By Zoey Dylan</span>
+                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= __('Who Knows Geography'); ?></a>
+                                                                        <span class="text-muted font-weight-bold d-block"><?= __('By Zoey Dylan'); ?></span>
                                                                     </td>
 
                                                                     <td class="text-left">
@@ -390,7 +390,7 @@
                                                                             03-Sep-20
                                                                         </span>
                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                            Time
+                                                                            <?= __('Time'); ?>
                                                                         </span>
                                                                     </td>
 
@@ -398,8 +398,8 @@
                                                                 <tr>
 
                                                                     <td class="pl-0">
-                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Maths Championship</a>
-                                                                        <span class="text-muted font-weight-bold d-block">By Tom Gere</span>
+                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= __('Maths Championship'); ?></a>
+                                                                        <span class="text-muted font-weight-bold d-block"><?= __('By Tom Gere'); ?></span>
                                                                     </td>
 
                                                                     <td class="text-left">
@@ -407,15 +407,15 @@
                                                                             25-Oct-20
                                                                         </span>
                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                            Monday
+                                                                            <?= __('Monday'); ?>
                                                                         </span>
                                                                     </td>
 
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="pl-0">
-                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">School Music Festival</a>
-                                                                        <span class="text-muted font-weight-bold d-block">By Rose Liam</span>
+                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= __('School Music Festival'); ?></a>
+                                                                        <span class="text-muted font-weight-bold d-block"><?= __('By Rose Liam'); ?></span>
                                                                     </td>
 
                                                                     <td class="text-left">
@@ -423,7 +423,7 @@
                                                                             03-Sep-20
                                                                         </span>
                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                            Monday
+                                                                            <?= __('Monday'); ?>
                                                                         </span>
                                                                     </td>
 
