@@ -42,7 +42,7 @@ $sections = array(
 
                 <h2 class="m-b-0"><?php echo $todayVisits; ?></h2>
 
-                <p class="m-b-0 m-t-5 f-12">Today's Visits</p>
+                <p class="m-b-0 m-t-5 f-12"><?= __('Today\'s Visits'); ?></p>
 
             </div></div>
 
@@ -54,7 +54,7 @@ $sections = array(
 
                 <h2 class="m-b-0"><?php echo $next7; ?></h2>
 
-                <p class="m-b-0 m-t-5 f-12">Next 7 Days</p>
+                <p class="m-b-0 m-t-5 f-12"><?= __('Next 7 Days'); ?></p>
 
             </div></div>
 
@@ -66,7 +66,7 @@ $sections = array(
 
                 <h2 class="m-b-0"><?php echo $overdue; ?></h2>
 
-                <p class="m-b-0 m-t-5 f-12">Overdue</p>
+                <p class="m-b-0 m-t-5 f-12"><?= __('Overdue'); ?></p>
 
             </div></div>
 
@@ -78,7 +78,7 @@ $sections = array(
 
                 <h2 class="m-b-0"><?php echo $inProgress; ?></h2>
 
-                <p class="m-b-0 m-t-5 f-12">In Progress</p>
+                <p class="m-b-0 m-t-5 f-12"><?= __('In Progress'); ?></p>
 
             </div></div>
 
@@ -90,7 +90,7 @@ $sections = array(
 
                 <h2 class="m-b-0"><?php echo $completedToday; ?></h2>
 
-                <p class="m-b-0 m-t-5 f-12">Completed Today</p>
+                <p class="m-b-0 m-t-5 f-12"><?= __('Completed Today'); ?></p>
 
             </div></div>
 
@@ -122,15 +122,15 @@ $sections = array(
 
                                     <tr>
 
-                                        <th scope="col">Contract</th>
+                                        <th scope="col"><?= __('Contract'); ?></th>
 
-                                        <th scope="col">Transaction No</th>
+                                        <th scope="col"><?= __('Transaction No'); ?></th>
 
-                                        <th scope="col">Planned</th>
+                                        <th scope="col"><?= __('Planned'); ?></th>
 
-                                        <th scope="col">Status</th>
+                                        <th scope="col"><?= __('Status'); ?></th>
 
-                                        <th scope="col">Action</th>
+                                        <th scope="col"><?= __('Action'); ?></th>
 
                                     </tr>
 
@@ -165,10 +165,10 @@ $sections = array(
                                                 <td><?php echo $statusLabel; ?></td>
 
                                                 <td>
-                                                    <a href="index.php?option=COM_VIEW_CONTRACT_AMC_SCHEDULES&contract_id=<?php echo (int) ($row['contract_id'] ?? 0); ?>" title="View Schedules" class="m-r-10">
+                                                    <a href="index.php?option=COM_VIEW_CONTRACT_AMC_SCHEDULES&contract_id=<?php echo (int) ($row['contract_id'] ?? 0); ?>" title="<?= htmlspecialchars(__('View Schedules'), ENT_QUOTES, 'UTF-8'); ?>" class="m-r-10">
                                                         <i class="ti-eye text-info f-16"></i>
                                                     </a>
-                                                    <a href="index.php?option=COM_ASSIGN_CONTRACT_AMC_TECHNICIANS&contract_id=<?php echo (int) ($row['contract_id'] ?? 0); ?>" title="Manage Default Technicians">
+                                                    <a href="index.php?option=COM_ASSIGN_CONTRACT_AMC_TECHNICIANS&contract_id=<?php echo (int) ($row['contract_id'] ?? 0); ?>" title="<?= htmlspecialchars(__('Manage Default Technicians'), ENT_QUOTES, 'UTF-8'); ?>">
                                                         <i class="ti-user text-primary f-16"></i>
                                                     </a>
                                                 </td>
