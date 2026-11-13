@@ -9,8 +9,8 @@
      $company_subscription_plan_licenses = $subscriptusers['company_subscription_plan_licenses'];
 ?>
 <div class="modal-header">
-    <h5 class="modal-title">Subscription History</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title"><?= __('Subscription History'); ?></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body">
     <?php if(count((array)$company_subscription_plan_licenses) !='0'){ ?>
@@ -18,10 +18,10 @@
     <thead>
         <tr>
             <th scope="col"><span class="d-block">#</span></th>
-            <th scope="col"><span class="d-block">Request Date</span></th>
-            <th scope="col"><span class="d-block">User</span></th>
-            <th scope="col"><span class="d-block">Amount</span></th>
-            <th scope="col"><span class="d-block">Payment</span></th>
+            <th scope="col"><span class="d-block"><?= __('Request Date'); ?></span></th>
+            <th scope="col"><span class="d-block"><?= __('User'); ?></span></th>
+            <th scope="col"><span class="d-block"><?= __('Amount'); ?></span></th>
+            <th scope="col"><span class="d-block"><?= __('Payment'); ?></span></th>
         </tr>
     </thead>
     <tbody>
@@ -40,7 +40,7 @@
 <?php }else{ ?>
 
 <div class="card-px text-center py-20 m-t-30">
-    <p class="text-muted f-16 fw-bold m-b-30"><i class='ti-alert text-warning'></i> No Subscription </p>
+    <p class="text-muted f-16 fw-bold m-b-30"><i class='ti-alert text-warning'></i> <?= __('No Subscription'); ?> </p>
     <div class="text-center px-4">
       <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
     </div>
