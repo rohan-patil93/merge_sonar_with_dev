@@ -142,18 +142,18 @@ if ($hasExportData) {
 <div class="page-body">
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
-            <h5 class="mb-0">Vendor AMC Tracker</h5>
+            <h5 class="mb-0"><?= __('Vendor AMC Tracker'); ?></h5>
             <?php if ($hasExportData) { ?>
-            <a href="custom_view_download.php?page=VendorAmcTracker&format=csv" target="_blank" class="btn btn-primary waves-effect waves-light">CSV</a>
+            <a href="custom_view_download.php?page=VendorAmcTracker&format=csv" target="_blank" class="btn btn-primary waves-effect waves-light"><?= __('CSV'); ?></a>
             <?php } ?>
         </div>
         <div class="card-body">
             <form method="get" id="vendorAmcTrackerForm" class="row g-3 mb-3">
                 <input type="hidden" name="option" value="COM_VIEW_VENDOR_AMC_TRACKER_REPORT">
                 <div class="col-lg-3">
-                    <span>Vendor <span class="text-danger">*</span></span>
-                    <select aria-label="Vendor" class="form-select js-example-basic-single select2" style="width:100%" name="vendor_id" id="vat_vendor_id">
-                        <option value="">Select Vendor</option>
+                    <span><?= __('Vendor'); ?> <span class="text-danger">*</span></span>
+                    <select aria-label="<?= htmlspecialchars(__('Vendor'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single select2" style="width:100%" name="vendor_id" id="vat_vendor_id">
+                        <option value=""><?= __('Select Vendor'); ?></option>
                         <?php if (count((array)($filters['vendors'] ?? array())) > 0) {
                             foreach ($filters['vendors'] as $vendor) { ?>
                         <option value="<?php echo (int) ($vendor['id'] ?? 0); ?>" <?php echo ($selectedVendorId == (string) ($vendor['id'] ?? '')) ? 'selected' : ''; ?>><?php echo htmlspecialchars($vendor['name'] ?? '', ENT_QUOTES, 'UTF-8'); ?></option>
@@ -163,9 +163,9 @@ if ($hasExportData) {
                     <div id="vat_vendor_err" class="text-danger small d-none"></div>
                 </div>
                 <div class="col-lg-3">
-                    <span>Asset Category</span>
-                    <select aria-label="Category" class="form-select js-example-basic-single select2" style="width:100%" name="category_id" id="vat_category_id">
-                        <option value="">All</option>
+                    <span><?= __('Asset Category'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Category'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single select2" style="width:100%" name="category_id" id="vat_category_id">
+                        <option value=""><?= __('All'); ?></option>
                         <?php if (count((array)($filters['categories'] ?? array())) > 0) {
                             foreach ($filters['categories'] as $cat) { ?>
                         <option value="<?php echo (int) ($cat['id'] ?? 0); ?>" <?php echo ($selectedCategoryId == (string) ($cat['id'] ?? '')) ? 'selected' : ''; ?>><?php echo htmlspecialchars($cat['name'] ?? '', ENT_QUOTES, 'UTF-8'); ?></option>
@@ -174,9 +174,9 @@ if ($hasExportData) {
                     </select>
                 </div>
                 <div class="col-lg-2">
-                    <span>Year (Apr–Mar)</span>
-                    <select aria-label="Year" class="form-select js-example-basic-single select2" style="width:100%" name="year" id="vat_year">
-                        <option value="">All</option>
+                    <span><?= __('Year (Apr–Mar)'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Year'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single select2" style="width:100%" name="year" id="vat_year">
+                        <option value=""><?= __('All'); ?></option>
                         <?php if (count((array)$yearOptions) > 0) {
                             foreach ($yearOptions as $yr) { ?>
                         <option value="<?php echo (int) $yr; ?>" <?php echo ($selectedYear == (string) $yr) ? 'selected' : ''; ?>><?php echo (int) $yr; ?> – <?php echo (int) $yr + 1; ?></option>
@@ -186,7 +186,7 @@ if ($hasExportData) {
                 </div>
                 <div class="col-lg-2 d-flex align-items-end">
                     <button type="submit" class="btn btn-primary w-100">
-                        <i class="icofont icofont-search"></i> Search
+                        <i class="icofont icofont-search"></i> <?= __('Search'); ?>
                     </button>
                 </div>
             </form>
@@ -196,13 +196,13 @@ if ($hasExportData) {
     <?php if (!$hasSearched) { ?>
     <div class="card">
         <div class="card-body text-center text-muted py-4">
-            <p class="f-16 fw-bold m-b-10"><i class="icofont icofont-search"></i> Select vendor and click Search to load the report.</p>
+            <p class="f-16 fw-bold m-b-10"><i class="icofont icofont-search"></i> <?= __('Select vendor and click Search to load the report.'); ?></p>
         </div>
     </div>
     <?php } elseif (count((array)$categories) == 0) { ?>
     <div class="card">
         <div class="card-body text-center text-danger">
-            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No records found for the selected filters.</p>
+            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No records found for the selected filters.'); ?></p>
             <div class="text-center px-4">
                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
             </div>
@@ -229,11 +229,11 @@ if ($hasExportData) {
                 <h6 class="fw-bold mb-2"><?php echo htmlspecialchars($blockTitle, ENT_QUOTES, 'UTF-8'); ?></h6>
                 <?php if ($vendorName != '' || $contractNo != '') { ?>
                 <p class="text-muted small mb-2">
-                    <?php if ($vendorName != '') { ?>Vendor: <?php echo htmlspecialchars($vendorName, ENT_QUOTES, 'UTF-8'); ?><?php
+                    <?php if ($vendorName != '') { ?><?= __('Vendor'); ?>: <?php echo htmlspecialchars($vendorName, ENT_QUOTES, 'UTF-8'); ?><?php
 } ?>
                     <?php if ($vendorName != '' && $contractNo != '') { ?> | <?php
 } ?>
-                    <?php if ($contractNo != '') { ?>Contract: <?php echo htmlspecialchars($contractNo, ENT_QUOTES, 'UTF-8'); ?><?php
+                    <?php if ($contractNo != '') { ?><?= __('Contract'); ?>: <?php echo htmlspecialchars($contractNo, ENT_QUOTES, 'UTF-8'); ?><?php
 } ?>
                 </p>
                 <?php } ?>
@@ -241,9 +241,9 @@ if ($hasExportData) {
                     <table class="table table-bordered table-hover table-sm mb-0">
                         <thead class="bg-primary text-white">
                             <tr>
-                                <th scope="col" rowspan="2" class="align-middle">SI NO</th>
-                                <th scope="col" rowspan="2" class="align-middle">Equipment Name</th>
-                                <th scope="col" rowspan="2" class="align-middle">Frequency</th>
+                                <th scope="col" rowspan="2" class="align-middle"><?= __('SI NO'); ?></th>
+                                <th scope="col" rowspan="2" class="align-middle"><?= __('Equipment Name'); ?></th>
+                                <th scope="col" rowspan="2" class="align-middle"><?= __('Frequency'); ?></th>
                                 <?php if (count((array)$monthOrder) > 0) {
                                     foreach ($monthOrder as $mk) { ?>
                                 <th scope="col" colspan="2" class="text-center"><?php echo htmlspecialchars($monthLabels[$mk] ?? $mk, ENT_QUOTES, 'UTF-8'); ?></th>
@@ -253,8 +253,8 @@ if ($hasExportData) {
                             <tr>
                                 <?php if (count((array)$monthOrder) > 0) {
                                     foreach ($monthOrder as $mk) { ?>
-                                <th scope="col" class="text-center">Plan</th>
-                                <th scope="col" class="text-center">Actual</th>
+                                <th scope="col" class="text-center"><?= __('Plan'); ?></th>
+                                <th scope="col" class="text-center"><?= __('Actual'); ?></th>
                                 <?php }
                                 } ?>
                             </tr>
@@ -307,7 +307,7 @@ $("#vendorAmcTrackerForm").submit(function(e) {
     var vendorId = $("#vat_vendor_id").val();
     $("#vat_vendor_err").addClass("d-none");
     if (!vendorId) {
-        $("#vat_vendor_err").text("Please select Vendor").removeClass("d-none");
+        $("#vat_vendor_err").text(<?php echo json_encode(__('Please select Vendor'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).removeClass("d-none");
         e.preventDefault();
     }
 });
