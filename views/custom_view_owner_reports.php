@@ -30,13 +30,13 @@ $property_owner_detail_areas = $result['property_owner_detail_areas'];
 		<form method="post">
 		<div class="card-header  row">
 	        <div class="col-lg-8">
-	            <h5>Owner Reports</h5>
+	            <h5><?= __('Owner Reports'); ?></h5>
 	        </div>
 	        <div class="col-lg-2">
 	            <div class="form-group w-full table-card-header">
-	                <label class="form-label ">Owner List<span class="text-danger">*</span></label>
+	                <label class="form-label "><?= __('Owner List'); ?><span class="text-danger">*</span></label>
 					<select name="property_owner_id" class="form-control form-select js-example-basic-single" >
-						<option value="">Select Any One </option>
+						<option value=""><?= __('Select Any One'); ?> </option>
 						<?php foreach($property_owners_all as $po){ ?>
 							<option value="<?php echo $po['id']; ?>" <?php echo $po['id'] == $_POST['property_owner_id']?"selected":""; ?>><?php echo $po['owner_name']; ?></option>
 						<?php } ?>
@@ -44,10 +44,10 @@ $property_owner_detail_areas = $result['property_owner_detail_areas'];
 	            </div>
 	        </div>
 	        <div class="col-lg-1">
-	             <button type="submit" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-t-30" name="searchfilter"> Search</button>
+	             <button type="submit" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-t-30" name="searchfilter"> <?= __('Search'); ?></button>
 	        </div>
 	        <div class="col-lg-1">
-	         	<a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i>Back</a>  
+	         	<a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i><?= __('Back'); ?></a>  
 	         </div>
 	    </div>
 	</form>
@@ -86,12 +86,12 @@ $property_owner_detail_areas = $result['property_owner_detail_areas'];
 				<tr> 
 					<th></th>	
 					<th>#</th>		
-					<th>Owner Name</th>	
-					<th>Address</th>					
-					<th>GST No</th>	
-					<th>Bank Nam</th>	
-					<th>Bank Account No</th>
-					<th>No. Property</th>	
+					<th><?= __('Owner Name'); ?></th>	
+					<th><?= __('Address'); ?></th>					
+					<th><?= __('GST No'); ?></th>	
+					<th><?= __('Bank Nam'); ?></th>	
+					<th><?= __('Bank Account No'); ?></th>
+					<th><?= __('No. Property'); ?></th>	
 					<th></th>
 				</tr>
 				<?php $parenttb = 1; foreach($property_owners as $po){ 
@@ -109,7 +109,7 @@ $property_owner_detail_areas = $result['property_owner_detail_areas'];
 						<td><?php echo emptytextdashShow($po['bank_account_no']); ?></td>
 						<td><label class="form-label label label-md label-primary"><?php echo count((array)$property_owner_details[$po['id']]); ?></label></td>
 						<td>
-						 	<a href="index?option=COM_INSERT_PROPERTY_OWNERS&Rid=<?php echo deocdeId('id:'.$po['id']); ?>" target="_blank"><button type="button" class="cursor-pointer float-left btn btn-primary"> View </button></a>
+						 	<a href="index?option=COM_INSERT_PROPERTY_OWNERS&Rid=<?php echo deocdeId('id:'.$po['id']); ?>" target="_blank"><button type="button" class="cursor-pointer float-left btn btn-primary"> <?= __('View'); ?> </button></a>
 						</td>
 					</tr>
 
@@ -121,11 +121,11 @@ $property_owner_detail_areas = $result['property_owner_detail_areas'];
 									<tr> 
 										<th></th>	
 										<th>#</th>	
-										<th>Property Name</th>	
-										<th>Property Address</th>					
-										<th>Property Type</th>	
-										<th>Property Sub Type</th>	
-										<th>No. Area</th>
+										<th><?= __('Property Name'); ?></th>	
+										<th><?= __('Property Address'); ?></th>					
+										<th><?= __('Property Type'); ?></th>	
+										<th><?= __('Property Sub Type'); ?></th>	
+										<th><?= __('No. Area'); ?></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -154,10 +154,10 @@ $property_owner_detail_areas = $result['property_owner_detail_areas'];
 												<tr> 
 													<th></th>	
 													<th>#</th>	
-													<th>Area Name</th>	
-													<th class="text-right">Area</th>					
-													<th class="text-right">Per Sq. Ft. Rate</th>	
-													<th>Status</th>
+													<th><?= __('Area Name'); ?></th>	
+													<th class="text-right"><?= __('Area'); ?></th>					
+													<th class="text-right"><?= __('Per Sq. Ft. Rate'); ?></th>	
+													<th><?= __('Status'); ?></th>
 												</tr>
 											</thead>
 											<tbody>
@@ -189,7 +189,7 @@ $property_owner_detail_areas = $result['property_owner_detail_areas'];
 			</table>
 		<?php  }else{ ?>
               <div class="card-px text-center ">
-                  <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Owner Reports</p>   
+                  <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Owner Reports'); ?></p>   
                   <div class="text-center px-4">
                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                   </div>   
