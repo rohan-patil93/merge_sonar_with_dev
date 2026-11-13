@@ -23,8 +23,8 @@ $data = json_decode($userdataa,1);
       }
 </script>
 <div class="modal-header">
-    <h5 class="modal-title">Add Project to User</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title"><?= __('Add Project to User'); ?></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body">
     <form id="assetsinsertform" method="post" >
@@ -32,9 +32,9 @@ $data = json_decode($userdataa,1);
         <div class="row ">
             <div class="col-lg-12 row">
                 <div class="form-group col-lg-12 w-full">
-                    <span>Project</span>
-                    <select aria-label="Project" class="form-select js-example-basic-single " name="project_id" id="project_id">
-                        <option value="">Select Any One</option>
+                    <span><?= __('Project'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Project'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single " name="project_id" id="project_id">
+                        <option value=""><?= __('Select Any One'); ?></option>
                         <?php foreach ((array)$data['projects'] as $project) { ?>
                             <option value="<?php echo $project['id']; ?>" <?php if(in_array($project['id'],(array)$data['exist_projects'])){ echo  "disabled";
 } ?> ><?php echo ucwords($project['project_name']); ?></option>
@@ -42,9 +42,9 @@ $data = json_decode($userdataa,1);
                     </select>
                 </div>
                 <div class="form-group col-lg-12 w-full">
-                    <span>Roles</span>
-                    <select aria-label="Role" class="form-select js-example-basic-single " name="role_id" id="role_id">
-                        <option value="">Select Any One</option>
+                    <span><?= __('Roles'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Role'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single " name="role_id" id="role_id">
+                        <option value=""><?= __('Select Any One'); ?></option>
                         <?php foreach ($data['roles'] as $roles) {
                             if($roles['id']!=1){
                          ?>
@@ -58,8 +58,8 @@ $data = json_decode($userdataa,1);
     </form>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitform()">Submit</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
+    <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitform()"><?= __('Submit'); ?></button>
 </div>
 <script type="text/javascript">
   $(".js-example-basic-single").select2();
