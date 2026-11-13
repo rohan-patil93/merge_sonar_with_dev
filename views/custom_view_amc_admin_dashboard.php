@@ -30,7 +30,7 @@ $amccomreq['3']['cnt'] =$details['complaints_closed']!="" ? $details['complaints
 <?php if($error_message !=''){ ?>
     <div class="alert alert-danger background-danger alert-dismissible">
         <strong><?php echo $error_message; ?></strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
     </div>
 <?php } ?>
 <div class="row">
@@ -39,7 +39,7 @@ $amccomreq['3']['cnt'] =$details['complaints_closed']!="" ? $details['complaints
             <div class="card-body">
                 <div class="text-center">
                     <h2 class="m-b-0 d-inline-block "><?php echo $details['stationery_items_count'] !=""?$details['stationery_items_count']:0; ?></h2>
-                    <p class="m-b-0 m-t-5">Stationery Total Items</p>
+                    <p class="m-b-0 m-t-5"><?= __('Stationery Total Items'); ?></p>
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@ $amccomreq['3']['cnt'] =$details['complaints_closed']!="" ? $details['complaints
             <div class="card-body">
                 <div class="text-center">
                     <h2 class="m-b-0 d-inline-block "><?php echo $details['stationery_low_stock_count'] !=""?$details['stationery_low_stock_count']:0; ?></h2>
-                    <p class="m-b-0 m-t-5">Stationery Under Minmum Qty </p>
+                    <p class="m-b-0 m-t-5"><?= __('Stationery Under Minmum Qty'); ?> </p>
                 </div>
             </div>
         </div>
@@ -55,7 +55,7 @@ $amccomreq['3']['cnt'] =$details['complaints_closed']!="" ? $details['complaints
             <div class="card-body">
                 <div class="text-center">
                     <h2 class="m-b-0 d-inline-block "><?php echo $details['stationery_grn_count']!=""?$details['stationery_grn_count']:0; ?></h2>
-                     <p class="m-b-0 m-t-5">Stationery GRN Qty </p>
+                     <p class="m-b-0 m-t-5"><?= __('Stationery GRN Qty'); ?> </p>
                 </div>
             </div>
         </div>
@@ -63,7 +63,7 @@ $amccomreq['3']['cnt'] =$details['complaints_closed']!="" ? $details['complaints
             <div class="card-body">
                 <div class="text-center">
                     <h2 class="m-b-0 d-inline-block "><?php echo $details['stationery_request_total']!=""?$details['stationery_request_total']:0; ?></h2>
-                     <p class="m-b-0 m-t-5">Stationery Requests </p>
+                     <p class="m-b-0 m-t-5"><?= __('Stationery Requests'); ?> </p>
                 </div>
             </div>
         </div>
@@ -71,7 +71,7 @@ $amccomreq['3']['cnt'] =$details['complaints_closed']!="" ? $details['complaints
     <div class="col-lg-4">
         <div class="card">
             <div class="card-header">
-                <h5>Stationery Requests</h5>
+                <h5><?= __('Stationery Requests'); ?></h5>
             </div>
             <div class="card-block">
                 <input type="hidden" id="ams_strq_json" value='<?php echo json_encode($amcstnreq); ?>'>
@@ -82,7 +82,7 @@ $amccomreq['3']['cnt'] =$details['complaints_closed']!="" ? $details['complaints
     <div class="col-lg-4">
         <div class="card">
             <div class="card-header">
-                <h5>Complaints </h5>
+                <h5><?= __('Complaints'); ?> </h5>
             </div>
             <div class="card-block">
                 <input type="hidden" id="amc_comp_json" value='<?php echo json_encode($amccomreq); ?>'>
@@ -95,7 +95,7 @@ $amccomreq['3']['cnt'] =$details['complaints_closed']!="" ? $details['complaints
             <div class="card-body">
                 <div class="text-center">
                     <h2 class="m-b-0 d-inline-block "><?php echo $details['products_count'] !=""?$details['products_count']:0; ?></h2>
-                    <p class="m-b-0 m-t-5">Total AMC Products</p>
+                    <p class="m-b-0 m-t-5"><?= __('Total AMC Products'); ?></p>
                 </div>
             </div>
         </div>
@@ -103,7 +103,7 @@ $amccomreq['3']['cnt'] =$details['complaints_closed']!="" ? $details['complaints
             <div class="card-body">
                 <div class="text-center">
                     <h2 class="m-b-0 d-inline-block "><?php echo $details['services_count']!=""?$details['services_count']:0; ?></h2>
-                    <p class="m-b-0 m-t-5">Total  Services </p>
+                    <p class="m-b-0 m-t-5"><?= __('Total Services'); ?> </p>
                 </div>
             </div>
         </div>
@@ -111,7 +111,7 @@ $amccomreq['3']['cnt'] =$details['complaints_closed']!="" ? $details['complaints
             <div class="card-body">
                 <div class="text-center">
                     <h2 class="m-b-0 d-inline-block "><?php echo $details['service_companies_count']!=""?$details['service_companies_count']:0; ?></h2>
-                    <p class="m-b-0 m-t-5">Total AMC Service Companies</p>
+                    <p class="m-b-0 m-t-5"><?= __('Total AMC Service Companies'); ?></p>
                 </div>
             </div>
         </div>
@@ -119,7 +119,7 @@ $amccomreq['3']['cnt'] =$details['complaints_closed']!="" ? $details['complaints
             <div class="card-body">
                 <div class="text-center">
                     <h2 class="m-b-0 d-inline-block "><?php echo $details['customers_count']!=""?$details['customers_count']:0; ?></h2>
-                    <p class="m-b-0 m-t-5">Total AMC  Customers</p>
+                    <p class="m-b-0 m-t-5"><?= __('Total AMC Customers'); ?></p>
                 </div>
             </div>
         </div>
@@ -141,7 +141,7 @@ $amccomreq['3']['cnt'] =$details['complaints_closed']!="" ? $details['complaints
             <div class="card-body">
                 <div class="text-center">
                     <h2 class="m-b-0 d-inline-block "><?php echo $details['amc_registration_total'] !=""?$details['amc_registration_total']:0; ?></h2>
-                    <p class="m-b-0 m-t-5">Total AMC Registrations</p>
+                    <p class="m-b-0 m-t-5"><?= __('Total AMC Registrations'); ?></p>
                 </div>
             </div>
         </div>
@@ -149,7 +149,7 @@ $amccomreq['3']['cnt'] =$details['complaints_closed']!="" ? $details['complaints
             <div class="card-body">
                 <div class="text-center">
                     <h2 class="m-b-0 d-inline-block "><?php echo $details['amc_registration_schedule']!=""?$details['amc_registration_schedule']:0; ?></h2>
-                    <p class="m-b-0 m-t-5">Total Registration Scheduled </p>
+                    <p class="m-b-0 m-t-5"><?= __('Total Registration Scheduled'); ?> </p>
                 </div>
             </div>
         </div>
@@ -157,7 +157,7 @@ $amccomreq['3']['cnt'] =$details['complaints_closed']!="" ? $details['complaints
             <div class="card-body">
                 <div class="text-center">
                     <h2 class="m-b-0 d-inline-block "><?php echo $details['amc_registration_pending']!=""?$details['amc_registration_pending']:0; ?></h2>
-                    <p class="m-b-0 m-t-5">Pending Registration Schedules</p>
+                    <p class="m-b-0 m-t-5"><?= __('Pending Registration Schedules'); ?></p>
                 </div>
             </div>
         </div>
@@ -165,7 +165,7 @@ $amccomreq['3']['cnt'] =$details['complaints_closed']!="" ? $details['complaints
             <div class="card-body">
                 <div class="text-center">
                     <h2 class="m-b-0 d-inline-block "><?php echo $details['amc_registration_closed']!=""?$details['amc_registration_closed']:0; ?></h2>
-                    <p class="m-b-0 m-t-5">Schedule Registration Closed</p>
+                    <p class="m-b-0 m-t-5"><?= __('Schedule Registration Closed'); ?></p>
                 </div>
             </div>
         </div>
@@ -173,7 +173,7 @@ $amccomreq['3']['cnt'] =$details['complaints_closed']!="" ? $details['complaints
             <div class="card-body">
                 <div class="text-center">
                     <h2 class="m-b-0 d-inline-block "><?php echo $details['amc_registration_running']!=""?$details['amc_registration_running']:0; ?></h2>
-                    <p class="m-b-0 m-t-5">Running AMC Registrations</p>
+                    <p class="m-b-0 m-t-5"><?= __('Running AMC Registrations'); ?></p>
                 </div>
             </div>
         </div>
