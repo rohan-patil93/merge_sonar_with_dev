@@ -89,7 +89,7 @@
     <div class="col-lg-12">
         <div class="text-right">
             <a href="index.php?option=COM_VIEW_OFFICE_MANAGEMENT" class="btn btn-primary m-b-10">
-                View Details  aaaa
+                <?= __('View Details aaaa'); ?>
             </a>
         </div>
     </div>
@@ -97,15 +97,15 @@
     <div class="col-lg-6">
         <div class="card new-cust-card">
             <div class="card-header">
-                <h5>In Couriers dd</h5>
+                <h5><?= __('In Couriers dd'); ?></h5>
                 <div class="card-header-right" style="top:0px;right: 0px" >
                     <ul class="nav nav-tabs md-tabs infisuite_tab font-weight-bold" style="border:0px;top:0px;right: 0px">
                         <li class="nav-item p-l-10 p-r-10">
-                            <a class="nav-link active" data-bs-toggle="tab" href="#month" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Pending</a>
+                            <a class="nav-link active" data-bs-toggle="tab" href="#month" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Pending'); ?></a>
 
                         </li>
                         <li class="nav-item p-l-10 p-r-10">
-                            <a class="nav-link" data-bs-toggle="tab" href="#week" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Approved</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#week" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Approved'); ?></a>
 
                         </li>
                     </ul>
@@ -138,7 +138,7 @@
                         <?php }
                             if($checka ==0){?>
                                 <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> No Couriers</p>
+                                    <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                                     </div>
@@ -172,7 +172,7 @@
                         <?php }
                             if($checkb ==0){?>
                                 <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> No Couriers</p>
+                                    <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                                     </div>
@@ -187,15 +187,15 @@
     <div class="col-lg-6">
         <div class="card new-cust-card">
             <div class="card-header">
-                <h5>Out Couriers</h5>
+                <h5><?= __('Out Couriers'); ?></h5>
                 <div class="card-header-right" style="top:0px;right: 0px" >
                     <ul class="nav nav-tabs md-tabs infisuite_tab font-weight-bold" style="border:0px;top:0px;right: 0px;">
                         <li class="nav-item p-l-10 p-r-10">
-                            <a class="nav-link active" data-bs-toggle="tab" href="#OOmonth" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Pending</a>
+                            <a class="nav-link active" data-bs-toggle="tab" href="#OOmonth" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Pending'); ?></a>
 
                         </li>
                         <li class="nav-item p-l-10 p-r-10">
-                            <a class="nav-link" data-bs-toggle="tab" href="#OOweek" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Approved</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#OOweek" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Approved'); ?></a>
 
                         </li>
                     </ul>
@@ -228,7 +228,7 @@
                         <?php }
                             if($checka ==0){?>
                                 <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> No Couriers</p>
+                                    <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                                     </div>
@@ -262,7 +262,7 @@
                         <?php }
                             if($checkb ==0){?>
                                 <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> No Couriers</p>
+                                    <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                                     </div>
@@ -277,15 +277,15 @@
     <div class="col-lg-6">
         <div class="card new-cust-card">
             <div class="card-header">
-                <h5>Stationery</h5>
+                <h5><?= __('Stationery'); ?></h5>
                 <div class="card-header-right" style="top:0px;right: 0px" >
                     <ul class="nav nav-tabs md-tabs infisuite_tab font-weight-bold" style="border:0px;top:0px;right: 0px;">
                         <li class="nav-item p-l-10 p-r-10">
-                            <a class="nav-link active" data-bs-toggle="tab" href="#stmonth" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Pending</a>
+                            <a class="nav-link active" data-bs-toggle="tab" href="#stmonth" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Pending'); ?></a>
 
                         </li>
                         <li class="nav-item p-l-10 p-r-10">
-                            <a class="nav-link" data-bs-toggle="tab" href="#stweek" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Approved</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#stweek" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Approved'); ?></a>
 
                         </li>
                     </ul>
@@ -318,7 +318,7 @@
                         <?php }
                             if($checka ==0){?>
                                 <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> No Couriers</p>
+                                    <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                                     </div>
@@ -352,7 +352,7 @@
                         <?php }
                             if($checkb ==0){?>
                                 <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> No Couriers</p>
+                                    <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                                     </div>
@@ -367,7 +367,7 @@
     <div class="col-lg-6">
         <div class="card new-cust-card">
             <div class="card-header">
-                <h5>Stationery Below Minmum Qty</h5>
+                <h5><?= __('Stationery Below Minmum Qty'); ?></h5>
             </div>
             <div class="tab-content card-block table-border-style custom-scroll" style="height: 280px;">
                 <div class="card-block">
@@ -382,15 +382,15 @@
                             </h6></a>
                             <span class="status active" style="margin-top:-15px;background-color:<?php echo $_SESSION['status'][$down['current_status']]['background_color']; ?>" ></span>
                             <p class="text-muted m-b-0">
-                                Available Qty: <span class="mt-16 f-w-600"><?php echo $down['available_qty']; ?></span>
-                                Minmum Qty: <span class="mt-16 f-w-600"><?php echo $down['minmum_qty']; ?> </span>
+                                <?= __('Available Qty'); ?>: <span class="mt-16 f-w-600"><?php echo $down['available_qty']; ?></span>
+                                <?= __('Minmum Qty'); ?>: <span class="mt-16 f-w-600"><?php echo $down['minmum_qty']; ?> </span>
                             </p>
                         </div>
                     </div>
                     <?php }
                         if($checkb ==0){?>
                             <div class="card-px text-center ">
-                                <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> No Couriers</p>
+                                <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>
                                 <div class="text-center px-4">
                                     <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                                 </div>
