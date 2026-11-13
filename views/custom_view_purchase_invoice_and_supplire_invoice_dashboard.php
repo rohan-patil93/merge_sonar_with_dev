@@ -42,7 +42,7 @@ if($invoice_detail['estimates'] !=""){
 function getEnquiryVendororCustomer(valu){
     if(valu.length >= 3){
         var searchvendorcustomertype = "vendors";
-        var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $('#search_result_employee').html(htmloader);
         $("#search_result_employee").show('slow');
         jQuery.ajax({
@@ -60,7 +60,7 @@ function getEnquiryVendororCustomer(valu){
 function getEnquiryVendororCustomer1(valu){
     if(valu.length >= 3){
         var searchvendorcustomertype = "customers";
-        var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $('#search_result_employee_1').html(htmloader);
         $("#search_result_employee_1").show('slow');
         jQuery.ajax({
@@ -100,7 +100,7 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=""){
                                 <i class="fa fa-user-plus bg-c-red"></i>
                             </div>
                             <div class="col p-l-5">
-                                <h3 class="f-w-700 text-c-black f-18 mb-1">Requisitions</h3>
+                                <h3 class="f-w-700 text-c-black f-18 mb-1"><?= __('Requisitions'); ?></h3>
                                 <p class="m-b-0 f-16"><?php echo $requisitions_detail[1] !=""?customeNumberFormate($requisitions_detail[1]):0; ?></p>
                             </div>
                         </div>
@@ -115,7 +115,7 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=""){
                                 <i class="fa fa-user-plus bg-c-red"></i>
                             </div>
                             <div class="col p-l-5">
-                                <h3 class="f-w-700 text-c-red f-18 mb-1">Quotations</h3>
+                                <h3 class="f-w-700 text-c-red f-18 mb-1"><?= __('Quotations'); ?></h3>
                                 <p class="m-b-0 f-16"><?php echo $quotations_detail[1] !=""?customeNumberFormate($quotations_detail[1]):0; ?></p>
                             </div>
                         </div>
@@ -130,7 +130,7 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=""){
                                 <i class="fa fa-user-plus bg-c-blue"></i>
                             </div>
                             <div class="col p-l-5">
-                                <h3 class="f-w-700 text-c-blue f-18 mb-1">Invoice Amount</h3>
+                                <h3 class="f-w-700 text-c-blue f-18 mb-1"><?= __('Invoice Amount'); ?></h3>
                                 <p class="m-b-0 f-16"><?php echo $purchase_invoices_detail[1] !=""?customeNumberFormate($purchase_invoices_detail[1]):0; ?></p>
                             </div>
                         </div>
@@ -145,7 +145,7 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=""){
                                 <i class="fa fa-user-plus bg-c-yellow"></i>
                             </div>
                             <div class="col p-l-5">
-                                <h3 class="f-w-700 text-c-yellow f-18 mb-1">Total Payments</h3>
+                                <h3 class="f-w-700 text-c-yellow f-18 mb-1"><?= __('Total Payments'); ?></h3>
                                 <p class="m-b-0 f-16"><?php echo $purchase_invoices_detail[2] !=""?customeNumberFormate($purchase_invoices_detail[1]-$purchase_invoices_detail[2]):0; ?></p>
                             </div>
                         </div>
@@ -157,7 +157,7 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=""){
             <div class="col-lg-12">
                 <div class="card mb-1 text-center bg-c-blue">
                     <div class="card-body">
-                        <h3 class="f-18 mb-0 text-white">Spend by Category</h3>
+                        <h3 class="f-18 mb-0 text-white"><?= __('Spend by Category'); ?></h3>
                     </div>
                 </div>
                 <div class="card">
@@ -165,7 +165,7 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=""){
                         <input type="hidden" name="chart_data_gender" id="chart_data_bill_vendor" value='<?php echo json_encode((array)$spend_by_vendor_category_graph); ?>' >
                         <?php if(0 =='1'){ ?>
                           <div class="card-px text-center py-20 m-t-30">
-                                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Data</p>
+                                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Data'); ?></p>
                                 <div class="text-center px-4">
                                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                 </div>
@@ -179,7 +179,7 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=""){
             <div class="col-lg-12">
                 <div class="card mb-1 text-center bg-c-green">
                     <div class="card-body">
-                        <h3 class="f-18 mb-0 text-white">Spend By Vendors  Top 5</h3>
+                        <h3 class="f-18 mb-0 text-white"><?= __('Spend By Vendors Top 5'); ?></h3>
                     </div>
                 </div>
                 <div class="card">
@@ -187,10 +187,10 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=""){
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <tr>
-                                    <th scope="col">Vendor</th>
-                                    <th scope="col" style="text-align: right;">Purchase Invoices</th>
-                                    <th scope="col" style="text-align: right;">Item Quantity</th>
-                                    <th scope="col" style="text-align: right;">Total Amount</th>
+                                    <th scope="col"><?= __('Vendor'); ?></th>
+                                    <th scope="col" style="text-align: right;"><?= __('Purchase Invoices'); ?></th>
+                                    <th scope="col" style="text-align: right;"><?= __('Item Quantity'); ?></th>
+                                    <th scope="col" style="text-align: right;"><?= __('Total Amount'); ?></th>
                                 </tr>
                                 <?php foreach($spend_by_vendors as $sbv){ ?>
                                 <tr>
@@ -208,13 +208,13 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=""){
             <div class="col-lg-12">
                 <div class="card mb-1 text-center bg-c-blue">
                     <div class="card-body">
-                        <h3 class="f-18 mb-0 text-white">Vendor Search</h3>
+                        <h3 class="f-18 mb-0 text-white"><?= __('Vendor Search'); ?></h3>
                     </div>
                 </div>
                 <div class="card-body" >
                     <div class="col-lg-12">
                         <div class="input-group input-group-button mb-0">
-                            <input type="text" class="form-control form-control-sm width1" placeholder="Enter Minimum 3 Characters" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search" onkeyup="getEnquiryVendororCustomer(this.value)">
+                            <input type="text" class="form-control form-control-sm width1" placeholder="<?= htmlspecialchars(__('Enter Minimum 3 Characters'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" onkeyup="getEnquiryVendororCustomer(this.value)">
                             <div class="input-group-text addon-style">
                                 <span class=""><i class="ti-search text-white mt-2"></i></span>
                             </div>
@@ -222,7 +222,7 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=""){
                     </div>
                     <div id="search_result_employee" class="mt-2 custom-scroll" style=" min-height: 350px; max-height: 350px;">
                         <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Vendor</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Vendor'); ?></p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                             </div>
@@ -243,7 +243,7 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=""){
                                 <i class="fa fa-user-plus bg-c-red"></i>
                             </div>
                             <div class="col p-l-5">
-                                <h3 class="f-w-700 text-c-black f-18 mb-1">Enquiry</h3>
+                                <h3 class="f-w-700 text-c-black f-18 mb-1"><?= __('Enquiry'); ?></h3>
                                 <p class="m-b-0 f-16"><?php echo $enquiries_detail[1] !=""?customeNumberFormate($enquiries_detail[1]):0; ?></p>
                             </div>
                         </div>
@@ -258,7 +258,7 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=""){
                                 <i class="fa fa-user-plus bg-c-red"></i>
                             </div>
                             <div class="col p-l-5">
-                                <h3 class="f-w-700 text-c-red f-18 mb-1">Estimates</h3>
+                                <h3 class="f-w-700 text-c-red f-18 mb-1"><?= __('Estimates'); ?></h3>
                                 <p class="m-b-0 f-16"><?php echo $estimates_detail[1] !=""?customeNumberFormate($estimates_detail[1]):0; ?></p>
                             </div>
                         </div>
@@ -273,7 +273,7 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=""){
                                 <i class="fa fa-user-plus bg-c-blue"></i>
                             </div>
                             <div class="col p-l-5">
-                                <h3 class="f-w-700 text-c-blue f-18 mb-1">Invoice Amount</h3>
+                                <h3 class="f-w-700 text-c-blue f-18 mb-1"><?= __('Invoice Amount'); ?></h3>
                                 <p class="m-b-0 f-16"><?php echo $sales_invoices_detail[1] !=""?customeNumberFormate($sales_invoices_detail[1]):0; ?></p>
                             </div>
                         </div>
@@ -288,7 +288,7 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=""){
                                 <i class="fa fa-user-plus bg-c-yellow"></i>
                             </div>
                             <div class="col p-l-5">
-                                <h3 class="f-w-700 text-c-yellow f-18 mb-1">Total Payments</h3>
+                                <h3 class="f-w-700 text-c-yellow f-18 mb-1"><?= __('Total Payments'); ?></h3>
                                 <p class="m-b-0 f-16"><?php echo $sales_invoices_detail[2] !=""?customeNumberFormate($sales_invoices_detail[1]-$sales_invoices_detail[2]):0; ?></p>
                             </div>
                         </div>
@@ -300,7 +300,7 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=""){
             <div class="col-lg-12">
                 <div class="card mb-1 text-center bg-c-blue">
                     <div class="card-body">
-                        <h3 class="f-18 mb-0 text-white">Sale By Category</h3>
+                        <h3 class="f-18 mb-0 text-white"><?= __('Sale By Category'); ?></h3>
                     </div>
                 </div>
                 <div class="card">
@@ -308,7 +308,7 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=""){
                         <input type="hidden" name="chart_data_gender" id="chart_data_bill_customer" value='<?php echo json_encode((array)$spend_by_customer_category_graph); ?>' >
                         <?php if(0 =='1'){ ?>
                           <div class="card-px text-center py-20 m-t-30">
-                                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Data</p>
+                                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Data'); ?></p>
                                 <div class="text-center px-4">
                                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                 </div>
@@ -322,7 +322,7 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=""){
             <div class="col-lg-12">
                 <div class="card mb-1 text-center bg-c-green">
                     <div class="card-body">
-                        <h3 class="f-18 mb-0 text-white">Sales by Customer Top 5</h3>
+                        <h3 class="f-18 mb-0 text-white"><?= __('Sales by Customer Top 5'); ?></h3>
                     </div>
                 </div>
                 <div class="card">
@@ -330,10 +330,10 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=""){
                         <div class="table-responsive">
                              <table class="table table-bordered">
                                 <tr>
-                                    <th scope="col">Customer</th>
-                                    <th scope="col" style="text-align: right;">Sale Invoices</th>
-                                    <th scope="col" style="text-align: right;">Item Quantity</th>
-                                    <th scope="col" style="text-align: right;">Total Amount</th>
+                                    <th scope="col"><?= __('Customer'); ?></th>
+                                    <th scope="col" style="text-align: right;"><?= __('Sale Invoices'); ?></th>
+                                    <th scope="col" style="text-align: right;"><?= __('Item Quantity'); ?></th>
+                                    <th scope="col" style="text-align: right;"><?= __('Total Amount'); ?></th>
                                 </tr>
                                 <?php foreach($spend_by_customers as $sbv){ ?>
                                 <tr>
@@ -351,13 +351,13 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=""){
             <div class="col-lg-12">
                 <div class="card mb-1 text-center bg-c-blue">
                     <div class="card-body">
-                        <h3 class="f-18 mb-0 text-white">Customer Search</h3>
+                        <h3 class="f-18 mb-0 text-white"><?= __('Customer Search'); ?></h3>
                     </div>
                 </div>
                 <div class="card-body" >
                       <div class="col-lg-12">
                         <div class="input-group input-group-button mb-0">
-                            <input type="text" class="form-control form-control-sm width1" placeholder="Enter Minimum 3 Characters" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search" onkeyup="getEnquiryVendororCustomer1(this.value)">
+                            <input type="text" class="form-control form-control-sm width1" placeholder="<?= htmlspecialchars(__('Enter Minimum 3 Characters'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" onkeyup="getEnquiryVendororCustomer1(this.value)">
                             <div class="input-group-text addon-style">
                                 <span class=""><i class="ti-search text-white mt-2"></i></span>
                             </div>
@@ -365,7 +365,7 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=""){
                     </div>
                     <div id="search_result_employee_1" class="mt-2 custom-scroll" style=" min-height: 350px; max-height: 350px;" >
                         <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Customer</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Customer'); ?></p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                             </div>
