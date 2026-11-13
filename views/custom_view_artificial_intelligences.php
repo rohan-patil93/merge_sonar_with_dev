@@ -4,16 +4,16 @@ include_once '../dbconfig.php';
 include_once '../comm.php';
 ?>
 <div class="modal-header">
-    <h5 class="modal-title">Dashboard Summary</h5>
-    <button type="button" class="btn-close btn_white"  data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title"><?= __('Dashboard Summary'); ?></h5>
+    <button type="button" class="btn-close btn_white"  data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body">
     <ul class="nav md-tabs infisuite_tab mb-2">
         <li class="nav-item">
-            <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#itemssummary" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Items Summary</a>
+            <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#itemssummary" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Items Summary'); ?></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#partysummary" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Dashboard Summary</a>
+            <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#partysummary" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Dashboard Summary'); ?></a>
         </li>
     </ul>
     <div class="tab-content tabs">
@@ -36,5 +36,5 @@ include_once '../comm.php';
     </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
 </div>
