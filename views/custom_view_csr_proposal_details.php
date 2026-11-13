@@ -55,7 +55,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                     ?>
                     <?php if (!empty($proposalRidParam) && isset($return['current_status']) && (int)$return['current_status'] == (int)$approvedStatus) { ?>
                         <a class="btn btn-primary waves-effect waves-light" href="index.php?option=COM_VIEW_CSR_TRACKING&Rid=<?php echo $proposalRidParam; ?>">
-                            <i class="fa fa-tasks m-r-5"></i> Tracking
+                            <i class="fa fa-tasks m-r-5"></i> <?= __('Tracking'); ?>
                         </a>
                     <?php } ?>
                 </div>
@@ -69,7 +69,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
            <table role="presentation" class="w-100 border-collapse">
 
                <tr>
-                   <td colspan="2" class="f-16 f-w-500 text-capitalize">GENERAL INSTRUCTIONS:</td>
+                   <td colspan="2" class="f-16 f-w-500 text-capitalize"><?= __('GENERAL INSTRUCTIONS'); ?>:</td>
                </tr>
                <?php
                $url = API . "?mode=getcsrsetting&method=get";
@@ -88,51 +88,51 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                <td colspan="2" class="f-14 f-w-600 text-capitalize"></td>
            </tr>
            <tr>
-               <td class="f-13 f-w-600 text-capitalize" style="width: 10%;">Date:</td>
+               <td class="f-13 f-w-600 text-capitalize" style="width: 10%;"><?= __('Date'); ?>:</td>
                <td class="f-13 f-w-600 text-capitalize text-start" style="width: 90%;"><?php echo fromDate($return['date']) ?? ''; ?></td>
            </tr>
            <tr>
-               <td class="f-13 f-w-600 text-capitalize" style="width: 10%;">Financial Year:</td>
+               <td class="f-13 f-w-600 text-capitalize" style="width: 10%;"><?= __('Financial Year'); ?>:</td>
                <td class="f-13 f-w-600 text-capitalize text-start" style="width: 90%;"><?php echo htmlspecialchars($return['financial_year']) ?? ''; ?></td>
            </tr>
            <tr>
-               <td class="f-13 f-w-600 text-capitalize" style="width: 10%;">Entity Name:</td>
+               <td class="f-13 f-w-600 text-capitalize" style="width: 10%;"><?= __('Entity Name'); ?>:</td>
                <td class="f-13 f-w-600 text-capitalize text-start" style="width: 90%;"><?php echo htmlspecialchars($return['institue_name']) ?? ''; ?></td>
            </tr>
             <tr>
-               <td class="f-13 f-w-600 text-capitalize" style="width: 10%;">Start Date:</td>
+               <td class="f-13 f-w-600 text-capitalize" style="width: 10%;"><?= __('Start Date'); ?>:</td>
                <td class="f-13 f-w-600 text-capitalize text-start" style="width: 90%;"><?php echo fromDate($return['project_start_date']) ?? ''; ?></td>
            </tr>
             <tr>
-               <td class="f-13 f-w-600 text-capitalize" style="width: 10%;">End Date:</td>
+               <td class="f-13 f-w-600 text-capitalize" style="width: 10%;"><?= __('End Date'); ?>:</td>
                <td class="f-13 f-w-600 text-capitalize text-start" style="width: 90%;"><?php echo fromDate($return['project_end_date']) ?? ''; ?></td>
            </tr>
            <tr>
-               <td class="f-13 f-w-600 text-capitalize" style="width: 10%;">Type Of Work:</td>
+               <td class="f-13 f-w-600 text-capitalize" style="width: 10%;"><?= __('Type Of Work'); ?>:</td>
                <td class="f-13 f-w-600 text-capitalize text-start" style="width: 90%;"><?php echo $csr_type_of_works[$return['type_of_work']]['type_of_work'] ?? ''; ?></td>
            </tr>
            <tr>
-               <td class="f-13 f-w-600 text-capitalize" style="width: 10%;">Type Of Project:</td>
+               <td class="f-13 f-w-600 text-capitalize" style="width: 10%;"><?= __('Type Of Project'); ?>:</td>
                <td class="f-13 f-w-600 text-capitalize text-start" style="width: 90%;"><?php echo $csr_type_of_projects[$return['type_of_project']]['genc_detail_name'] ?? ''; ?></td>
            </tr>
            <tr>
-               <td class="f-13 f-w-600 text-capitalize" style="width: 10%;">CSR Working Area:</td>
+               <td class="f-13 f-w-600 text-capitalize" style="width: 10%;"><?= __('CSR Working Area'); ?>:</td>
                <td class="f-13 f-w-600 text-capitalize text-start" style="width: 90%;"><?php echo $csr_areas[$return['working_area']]['csr_area'] ?? ''; ?></td>
            </tr>
            <tr>
-               <td class="f-13 f-w-600 text-capitalize" style="width: 10%;">Location:</td>
+               <td class="f-13 f-w-600 text-capitalize" style="width: 10%;"><?= __('Location'); ?>:</td>
                <td class="f-13 f-w-600 text-capitalize text-start" style="width: 90%;"><?php echo $locations[$return['csr_location']]['location_name'] ?? ''; ?></td>
            </tr>
 
            <tr>
-               <td class="f-13 f-w-600 text-capitalize" style="width: 10%;">Project Name:</td>
+               <td class="f-13 f-w-600 text-capitalize" style="width: 10%;"><?= __('Project Name'); ?>:</td>
                <td class="f-13 f-w-600 text-capitalize text-start" style="width: 90%;"><?php echo htmlspecialchars($return['subject']) ?? ''; ?></td>
            </tr>
            <tr>
                <td colspan="2" class="f-14 f-w-600 text-capitalize"></td>
            </tr>
            <tr>
-               <td colspan="2" class="f-14 f-w-600 text-capitalize">1.0 About the Organisation</td>
+               <td colspan="2" class="f-14 f-w-600 text-capitalize"><?= __('1.0 About the Organisation'); ?></td>
            </tr>
            <tr>
                <td colspan="2" class="f-13 f-w-500 text-capitalize"><?php echo htmlspecialchars($return['about_organisation']) ?? ''; ?></td>
@@ -141,7 +141,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                <td colspan="2" class="f-14 f-w-600 text-capitalize"></td>
            </tr>
            <tr>
-               <td colspan="2" class="f-14 f-w-600 text-capitalize">2.0 Background</td>
+               <td colspan="2" class="f-14 f-w-600 text-capitalize"><?= __('2.0 Background'); ?></td>
            </tr>
            <tr>
                <td colspan="2" class="f-13 f-w-500 text-capitalize"><?php echo htmlspecialchars($return['background']) ?? ''; ?></td>
@@ -150,7 +150,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                <td colspan="2" class="f-14 f-w-600 text-capitalize"></td>
            </tr>
            <tr>
-               <td colspan="2" class="f-14 f-w-600 text-capitalize">2.1 Thematic Area</td>
+               <td colspan="2" class="f-14 f-w-600 text-capitalize"><?= __('2.1 Thematic Area'); ?></td>
            </tr>
            <tr>
                <td colspan="2" class="f-13 f-w-500 text-capitalize"><?php echo htmlspecialchars($return['thematic_area']) ?? ''; ?></td>
@@ -159,60 +159,59 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                <td colspan="2" class="f-14 f-w-600 text-capitalize"></td>
            </tr>
            <tr>
-               <td class="f-13 text-capitalize text-start border">Thrust Area</td>
-               <td class="f-13 text-capitalize text-start border">Schedule VII item</td>
+               <td class="f-13 text-capitalize text-start border"><?= __('Thrust Area'); ?></td>
+               <td class="f-13 text-capitalize text-start border"><?= __('Schedule VII item'); ?></td>
            </tr>
 
            <tr>
-               <td class="f-13 text-capitalize text-start border">Education</td>
+               <td class="f-13 text-capitalize text-start border"><?= __('Education'); ?></td>
                <td class="f-13 text-capitalize text-start border">
                echo ($return['education'] ?? null) == 1 ? '✔' : '✘';
             ?>(ii) promotion of education including special education</td>
             </tr>
        <tr>
-           <td class="f-13 text-capitalize text-start border">Environment Sustainability</td>
+           <td class="f-13 text-capitalize text-start border"><?= __('Environment Sustainability'); ?></td>
            <td class="f-13 text-capitalize text-start border">
                <?php
                echo ($return['env_sustian'] ?? null) == 1 ? '✔' : '✘';
-           ?>(iv) Ensuring environmental sustainability</td>
+           ?><?= __('(iv) Ensuring environmental sustainability'); ?></td>
        </tr>
        <tr>
-           <td class="f-13 text-capitalize text-start border">Health/Hygiene</td>
+           <td class="f-13 text-capitalize text-start border"><?= __('Health/Hygiene'); ?></td>
            <td class="f-13 text-capitalize text-start border">
                <?php
                echo ($return['health'] ?? null) == 1 ? '✔' : '✘';
-           ?>(i) promoting healthcare including preventive healthcare and sanitation
+           ?><?= __('(i) promoting healthcare including preventive healthcare and sanitation'); ?>
        </td>
    </tr>
    <tr>
-       <td class="f-13 text-capitalize text-start border">Skill Development</td>
+       <td class="f-13 text-capitalize text-start border"><?= __('Skill Development'); ?></td>
        <td class="f-13 text-capitalize text-start border">
            <?php
            echo ($return['skill_development'] ?? null) == 1 ? '✔' : '✘';
-       ?>(ii) employment enhancing vocational skills and livelihood enhancement projects
+       ?><?= __('(ii) employment enhancing vocational skills and livelihood enhancement projects'); ?>
    </td>
 </tr>
 <tr>
-   <td class="f-13 text-capitalize text-start border">Community Development</td>
+   <td class="f-13 text-capitalize text-start border"><?= __('Community Development'); ?></td>
    <td class="f-13 text-capitalize text-start border">
        <?php
        echo ($return['comu_development'] ?? null) == 1 ? '✔' : '✘';
-   ?>(x) Rural development projects/ Multiple categories
+   ?><?= __('(x) Rural development projects/ Multiple categories'); ?>
 </td>
 </tr>
 <tr>
-   <td class="f-13 text-capitalize text-start border">Others or More than one of
-   the above (Please Specify)</td>
+   <td class="f-13 text-capitalize text-start border"><?= __('Others or More than one of the above (Please Specify)'); ?></td>
    <td class="f-13 text-capitalize text-start border"><?php echo htmlspecialchars($return['other_thrust_area']) ?? ''; ?></td>
 </tr>
 <tr>
-   <td colspan="2" class="f-13 f-w-600 text-capitalize text-start">Please specify the SDG/s in addition to the above.</td>
+   <td colspan="2" class="f-13 f-w-600 text-capitalize text-start"><?= __('Please specify the SDG/s in addition to the above.'); ?></td>
 </tr>
 <tr>
    <td colspan="2" class="f-14 f-w-600 text-capitalize"></td>
 </tr>
 <tr>
-   <td colspan="2" class="f-14 f-w-600 text-capitalize">3.0 Proposal</td>
+   <td colspan="2" class="f-14 f-w-600 text-capitalize"><?= __('3.0 Proposal'); ?></td>
 </tr>
 <tr>
    <td colspan="2" class="f-13 f-w-500 text-capitalize"><?php echo htmlspecialchars($return['SDGproposal']) ?? ''; ?></td>
@@ -221,7 +220,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
    <td colspan="2" class="f-14 f-w-600 text-capitalize"></td>
 </tr>
 <tr>
-   <td colspan="2" class="f-14 f-w-600 text-capitalize">3.1 Methodology</td>
+   <td colspan="2" class="f-14 f-w-600 text-capitalize"><?= __('3.1 Methodology'); ?></td>
 </tr>
 <tr>
    <td colspan="2" class="f-13 f-w-500 text-capitalize"><?php echo htmlspecialchars($return['methodology']) ?? ''; ?></td>
@@ -230,7 +229,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
    <td colspan="2" class="f-14 f-w-600 text-capitalize"></td>
 </tr>
 <tr>
-   <td colspan="2" class="f-14 f-w-600 text-capitalize">3.2 Target Group</td>
+   <td colspan="2" class="f-14 f-w-600 text-capitalize"><?= __('3.2 Target Group'); ?></td>
 </tr>
 <tr>
    <td colspan="2" class="f-13 f-w-500 text-capitalize"><?php echo htmlspecialchars($return['target_group']) ?? ''; ?></td>
@@ -239,7 +238,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
    <td colspan="2" class="f-14 f-w-600 text-capitalize"></td>
 </tr>
 <tr>
-   <td colspan="2" class="f-14 f-w-600 text-capitalize">3.3 Team for the project</td>
+   <td colspan="2" class="f-14 f-w-600 text-capitalize"><?= __('3.3 Team for the project'); ?></td>
 </tr>
 <tr>
    <td colspan="2" class="f-13 f-w-500 text-capitalize"><?php echo htmlspecialchars($return['team_project']) ?? ''; ?></td>
@@ -248,7 +247,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
    <td colspan="2" class="f-14 f-w-600 text-capitalize"></td>
 </tr>
 <tr>
-   <td colspan="2" class="f-14 f-w-600 text-capitalize">3.4 Monitoring Mechanism</td>
+   <td colspan="2" class="f-14 f-w-600 text-capitalize"><?= __('3.4 Monitoring Mechanism'); ?></td>
 </tr>
 <tr>
    <td colspan="2" class="f-13 f-w-500 text-capitalize"><?php echo htmlspecialchars($return['monitoring_mechanism']) ?? ''; ?></td>
@@ -257,7 +256,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
    <td colspan="2" class="f-14 f-w-600 text-capitalize"></td>
 </tr>
 <tr>
-   <td colspan="2" class="f-14 f-w-600 text-capitalize">4.1 Outcomes/Result expected</td>
+   <td colspan="2" class="f-14 f-w-600 text-capitalize"><?= __('4.1 Outcomes/Result expected'); ?></td>
 </tr>
 <tr>
    <td colspan="2" class="f-13 f-w-500 text-capitalize"><?php echo htmlspecialchars($return['outcomes_expected']) ?? ''; ?></td>
@@ -266,7 +265,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
    <td colspan="2" class="f-14 f-w-600 text-capitalize"></td>
 </tr>
 <tr>
-   <td colspan="2" class="f-14 f-w-600 text-capitalize">4.2 Execution Plan</td>
+   <td colspan="2" class="f-14 f-w-600 text-capitalize"><?= __('4.2 Execution Plan'); ?></td>
 </tr>
 <tr>
    <td colspan="2" class="f-13 f-w-500 text-capitalize"><?php echo htmlspecialchars($return['execution_plan']) ?? ''; ?></td>
@@ -275,7 +274,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
    <td colspan="2" class="f-14 f-w-600 text-capitalize"></td>
 </tr>
 <tr>
-   <td colspan="2" class="f-14 f-w-600 text-capitalize">4.3 Impact Assessment</td>
+   <td colspan="2" class="f-14 f-w-600 text-capitalize"><?= __('4.3 Impact Assessment'); ?></td>
 </tr>
 <tr>
    <td colspan="2" class="f-13 f-w-500 text-capitalize"><?php echo htmlspecialchars($return['impact_assessment']) ?? ''; ?></td>
@@ -284,34 +283,34 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
    <td colspan="2" class="f-14 f-w-600 text-capitalize"></td>
 </tr>
 <tr>
-   <td colspan="2" class="f-14 f-w-600 text-capitalize">5.1 Financial Implications</td>
+   <td colspan="2" class="f-14 f-w-600 text-capitalize"><?= __('5.1 Financial Implications'); ?></td>
 </tr>
 <tr>
    <td colspan="2" class="f-13 f-w-500 text-capitalize"><?php echo htmlspecialchars($return['financial_implications']) ?? ''; ?></td>
 </tr>
 <tr>
-   <td colspan="2" class="f-13 f-w-500 text-capitalize"><span class="m-l-20">- Breakup for each line item should be given. Separate annexure to be provided if needed</span></td>
+   <td colspan="2" class="f-13 f-w-500 text-capitalize"><span class="m-l-20">- <?= __('Breakup for each line item should be given. Separate annexure to be provided if needed'); ?></span></td>
 </tr>
 <tr>
-   <td colspan="2" class="f-13 f-w-500 text-capitalize"><span class="m-l-20">- Any procurement items has to be supported with documents proving competitive rate in the market</span></td>
+   <td colspan="2" class="f-13 f-w-500 text-capitalize"><span class="m-l-20">- <?= __('Any procurement items has to be supported with documents proving competitive rate in the market'); ?></span></td>
 </tr>
 <tr>
     <td colspan="2" class="f-13 f-w-500 text-capitalize">
-        <span class="m-l-20">- List down items covered under Administrative expenses.</span>
+        <span class="m-l-20">- <?= __('List down items covered under Administrative expenses.'); ?></span>
     </td>
 </tr>
 <tr>
    <td colspan="2">
        <table class="w-100 border-collapse">
            <tr style="background-color: #eeeeee;">
-               <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 10%;">Sr. No</th>
-               <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 15%;">Details</th>
-               <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 15%;">Per unit cost (A)</th>
-               <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 10%;">Total Number of Units (B)</th>
-               <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 15%;">Total Budget for 1 month/year (C=AXB)</th>
-               <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 10%;">No. of months/years</th>
-               <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 15%;">Budget for Months/Years (D=CX No. Of Months/Years)</th>
-               <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 10%;">Remarks (Justification of cost element)</th>
+               <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 10%;"><?= __('Sr. No'); ?></th>
+               <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 15%;"><?= __('Details'); ?></th>
+               <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 15%;"><?= __('Per unit cost (A)'); ?></th>
+               <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 10%;"><?= __('Total Number of Units (B)'); ?></th>
+               <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 15%;"><?= __('Total Budget for 1 month/year (C=AXB)'); ?></th>
+               <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 10%;"><?= __('No. of months/years'); ?></th>
+               <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 15%;"><?= __('Budget for Months/Years (D=CX No. Of Months/Years)'); ?></th>
+               <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 10%;"><?= __('Remarks (Justification of cost element)'); ?></th>
            </tr>
            <?php
            if (!empty($return['groups_data'])) {
@@ -363,7 +362,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                                    ?>
                                    <tr style="background-color: #eeeeee;">
                                        <td class="f-13 f-w-600 text-capitalize text-start border"></td>
-                                       <td class="f-13 f-w-600 text-capitalize text-center border">Sub Total <?php echo $groupId ?? '-'; ?></td>
+                                       <td class="f-13 f-w-600 text-capitalize text-center border"><?= __('Sub Total'); ?> <?php echo $groupId ?? '-'; ?></td>
                                        <td class="f-13 f-w-600 text-capitalize text-center border"></td>
                                        <td class="f-13 f-w-600 text-capitalize text-center border"></td>
                                        <td class="text_align_right f-13 f-w-600 text-capitalize border"><?php echo !empty($subtotal[$groupId])?  customeummarmonyformate($subtotal[$groupId] ) : '0'; ?></td>
@@ -391,7 +390,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
 
                        <tr style="background-color: #eeeeee;">
                            <td class="f-13 f-w-600 text-capitalize text-start border"></td>
-                           <td class="f-13 f-w-600 text-capitalize text-center border">GRAND TOTAL</td>
+                           <td class="f-13 f-w-600 text-capitalize text-center border"><?= __('GRAND TOTAL'); ?></td>
                            <td class="f-13 f-w-600 text-capitalize text-center border"></td>
                            <td class="f-13 f-w-600 text-capitalize text-center border"></td>
                            <td class="text_align_right f-13 f-w-600 text-capitalize border"><?php echo customeummarmonyformate($return['budget_grand_total']) ?? ''; ?></td>
@@ -407,7 +406,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                <td colspan="2" class="f-14 f-w-600 text-capitalize"></td>
            </tr>
            <tr>
-               <td colspan="2" class="f-14 f-w-600 text-capitalize">5.2 Tentative payment schedule</td>
+               <td colspan="2" class="f-14 f-w-600 text-capitalize"><?= __('5.2 Tentative payment schedule'); ?></td>
            </tr>
            <tr>
                <td colspan="2" class="f-13 f-w-500 text-capitalize"><?php echo htmlspecialchars($return['payment_schedule']) ?? ''; ?></td>
@@ -416,11 +415,11 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                <td colspan="2">
                    <table class="w-100 border-collapse">
                        <tr style="background-color: #eeeeee;">
-                           <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;">Sr. No</th>
-                           <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;">Description</th>
-                           <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;">% of Total Project Budget</th>
-                           <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;">Amount in Rs</th>
-                           <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;">Deliverables to be achieved</th>
+                           <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;"><?= __('Sr. No'); ?></th>
+                           <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;"><?= __('Description'); ?></th>
+                           <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;"><?= __('% of Total Project Budget'); ?></th>
+                           <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;"><?= __('Amount in Rs'); ?></th>
+                           <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;"><?= __('Deliverables to be achieved'); ?></th>
                        </tr>
                        <?php
                        if (!empty($return['tentative_payment_schedule'])) {
@@ -445,7 +444,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
 
                     <tr>
                        <td class="f-13 f-w-600 text-capitalize text-start border"></td>
-                       <td class="f-13 f-w-600 text-capitalize border text-start">Grand Total</td>
+                       <td class="f-13 f-w-600 text-capitalize border text-start"><?= __('Grand Total'); ?></td>
                        <td class="f-13 f-w-500 text-capitalize border">-</td>
                        <td class="text_align_right f-13 f-w-500 text-capitalize border"><?php echo customeummarmonyformate($return['payment_grand_total']) ?? ''; ?></td>
                        <td class="text_align_right f-13 f-w-600 text-capitalize border text-start"><?php echo htmlspecialchars($return['payment_grand_total_in_words']) ?? ''; ?></td>
@@ -457,7 +456,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
            <td colspan="2" class="f-14 f-w-600 text-capitalize"></td>
        </tr>
        <tr>
-           <td colspan="2" class="f-14 f-w-600 text-capitalize">6.0 Sustainability Plan</td>
+           <td colspan="2" class="f-14 f-w-600 text-capitalize"><?= __('6.0 Sustainability Plan'); ?></td>
        </tr>
        <tr>
            <td colspan="2" class="f-13 f-w-500 text-capitalize"><?php echo htmlspecialchars($return['sustainability_plan']) ?? ''; ?></td>
@@ -466,7 +465,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
            <td colspan="2" class="f-14 f-w-600 text-capitalize"></td>
        </tr>
        <tr>
-           <td colspan="2" class="f-14 f-w-600 text-capitalize">7.0 Conclusion</td>
+           <td colspan="2" class="f-14 f-w-600 text-capitalize"><?= __('7.0 Conclusion'); ?></td>
        </tr>
        <tr>
            <td colspan="2" class="f-13 f-w-500 text-capitalize"><?php echo htmlspecialchars($return['conclusion']) ?? ''; ?></td>
@@ -475,39 +474,39 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
            <td colspan="2" class="f-14 f-w-600 text-capitalize"></td>
        </tr>
        <tr>
-           <td colspan="2" class="f-14 f-w-600 text-capitalize">8.0 Enclosures</td>
+           <td colspan="2" class="f-14 f-w-600 text-capitalize"><?= __('8.0 Enclosures'); ?></td>
        </tr>
        <tr>
            <td colspan="2" class="f-13 f-w-500 text-capitalize">
-               <p class="m-t-5 m-l-20">1. Form A:- CHECKLIST FOR SUBMISSION OF DOCUMENTS
+               <p class="m-t-5 m-l-20"><?= __('1. Form A:- CHECKLIST FOR SUBMISSION OF DOCUMENTS'); ?>
                    <?php echo ($return['form_a'] ?? null) == 1 ? ' Yes' : ' No'; ?>
                    <?php if (!empty($return['form_a_file'])): ?>
                     <a target="_blank" href="uploads/csr/<?php echo htmlspecialchars($return['form_a_file']); ?>"  class="mb-2" download>
                         <i class="ti-cloud-down f-15rem f-w-600"></i></a>
                 <?php endif; ?>
                 </p>
-                <p class="m-t-5 m-l-20">2. Form B :- CHECKLIST FOR INFRASTRUCTURE PROJECTS
+                <p class="m-t-5 m-l-20"><?= __('2. Form B :- CHECKLIST FOR INFRASTRUCTURE PROJECTS'); ?>
                    <?php echo ($return['form_b'] ?? null) == 1 ? ' Yes' : ' No'; ?>
                    <?php if (!empty($return['form_b_file'])): ?>
                     <a target="_blank" href="uploads/csr/<?php echo htmlspecialchars($return['form_b_file']); ?>"  class="mb-2" download>
                         <i class="ti-cloud-down f-15rem f-w-600"></i></a>
                 <?php endif; ?>
                 </p>
-                <p class="m-t-5 m-l-20">3. Form C :- CHECKLIST FOR SUBMISSION OF PROPOSAL
+                <p class="m-t-5 m-l-20"><?= __('3. Form C :- CHECKLIST FOR SUBMISSION OF PROPOSAL'); ?>
                    <?php echo ($return['form_c'] ?? null) == 1 ? ' Yes' : ' No'; ?>
                    <?php if (!empty($return['form_c_file'])): ?>
                     <a target="_blank" href="uploads/csr/<?php echo htmlspecialchars($return['form_c_file']); ?>"  class="mb-2" download>
                         <i class="ti-cloud-down f-15rem f-w-600"></i></a>
                 <?php endif; ?>
                 </p>
-                <p class="m-t-5 m-l-20">4. Form D :- SUMMARY SHEET FOR THE PROPOSAL
+                <p class="m-t-5 m-l-20"><?= __('4. Form D :- SUMMARY SHEET FOR THE PROPOSAL'); ?>
                     <?php echo ($return['form_d'] ?? null) == 1 ? ' Yes' : ' No'; ?>
                     <?php if (!empty($return['form_d_file'])): ?>
                         <a target="_blank" href="uploads/csr/<?php echo htmlspecialchars($return['form_d_file']); ?>"  class="mb-2" download>
                             <i class="ti-cloud-down f-15rem f-w-600"></i></a>
                     <?php endif; ?>
                     </p>
-                <p class="m-t-5 m-l-20">5. Form E :- TRACK RECORD OF PROJECTS
+                <p class="m-t-5 m-l-20"><?= __('5. Form E :- TRACK RECORD OF PROJECTS'); ?>
                     <?php echo ($return['form_e'] ?? null) == 1 ? ' Yes' : ' No'; ?>
                     <?php if (!empty($return['form_e_file'])): ?>
                         <a target="_blank"  href="uploads/csr/<?php echo htmlspecialchars($return['form_e_file']); ?>"  class="mb-2" download>
@@ -521,30 +520,30 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                <td colspan="2" class="f-14 f-w-600 text-capitalize"></td>
            </tr>
            <tr>
-               <td colspan="2" class="f-13 f-w-600 text-capitalize text-center">Kindly ensure the Organisation Seal/Stamp & Sign on each page</td>
+               <td colspan="2" class="f-13 f-w-600 text-capitalize text-center"><?= htmlspecialchars(__('Kindly ensure the Organisation Seal/Stamp & Sign on each page'), ENT_QUOTES, 'UTF-8'); ?></td>
            </tr>
            <tr>
                <td colspan="2" class="f-14 f-w-600 text-capitalize"></td>
            </tr>
            <?php   if (isset($return['form_a']) && $return['form_a'] == 1) { ?>
                <tr>
-                   <td colspan="2" class="f-14 f-w-600 text-capitalize">Form A</td>
+                   <td colspan="2" class="f-14 f-w-600 text-capitalize"><?= __('Form A'); ?></td>
                </tr>
                <tr>
                    <td colspan="2">
                        <table class="w-100 border-collapse">
                            <tr>
-                               <td colspan="4" class="f-13 f-w-600 text-capitalize text-center border">CHECKLIST FOR SUBMISSION OF DOCUMENTS</td>
+                               <td colspan="4" class="f-13 f-w-600 text-capitalize text-center border"><?= __('CHECKLIST FOR SUBMISSION OF DOCUMENTS'); ?></td>
                            </tr>
                            <tr style="background-color: #eeeeee;">
-                               <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 10%;">Sr. No</th>
-                               <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 30%;">Description of documents</th>
-                               <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 30%;">Attached (Yes / No)</th>
-                               <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 30%;">Remark</th>
+                               <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 10%;"><?= __('Sr. No'); ?></th>
+                               <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 30%;"><?= __('Description of documents'); ?></th>
+                               <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 30%;"><?= __('Attached (Yes / No)'); ?></th>
+                               <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 30%;"><?= __('Remark'); ?></th>
                            </tr>
                            <tr>
                                <td class="f-13 f-w-600 text-capitalize text-start border">1*</td>
-                               <td class="f-13 f-w-500 text-capitalize border">Trust deed</td>
+                               <td class="f-13 f-w-500 text-capitalize border"><?= __('Trust deed'); ?></td>
                                <td class="f-13 f-w-500 text-capitalize border">
                                    <?php echo ($return['trust_deed'] ?? null) == 1 ? 'Yes' : 'No'; ?>
                                    <?php if (!empty($return['trust_deed_file'])){ ?>
@@ -556,7 +555,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                            </tr>
                            <tr>
                                <td class="f-13 f-w-600 text-capitalize text-start border">2*</td>
-                               <td class="f-13 f-w-500 text-capitalize border">Certificate of incorporation/Registration certificate</td>
+                               <td class="f-13 f-w-500 text-capitalize border"><?= __('Certificate of incorporation/Registration certificate'); ?></td>
                                <td class="f-13 f-w-500 text-capitalize border">
                                    <?php echo ($return['incorporation'] ?? null) == 1 ? 'Yes' : 'No'; ?>
                                    <?php if (!empty($return['incorporation_file'])): ?>
@@ -567,7 +566,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                            </tr>
                            <tr>
                                <td class="f-13 f-w-600 text-capitalize text-start border">3*</td>
-                               <td class="f-13 f-w-500 text-capitalize border">CSR 1 Registration certificate</td>
+                               <td class="f-13 f-w-500 text-capitalize border"><?= __('CSR 1 Registration certificate'); ?></td>
                                <td class="f-13 f-w-500 text-capitalize border">
                                    <?php echo ($return['csr1'] ?? null) == 1 ? 'Yes' : 'No'; ?>
                                    <?php if (!empty($return['csr1_file'])): ?>
@@ -579,7 +578,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                            </tr>
                            <tr>
                                <td class="f-13 f-w-600 text-capitalize text-start border">4*</td>
-                               <td class="f-13 f-w-500 text-capitalize border">Form 12 A</td>
+                               <td class="f-13 f-w-500 text-capitalize border"><?= __('Form 12 A'); ?></td>
                                <td class="f-13 f-w-500 text-capitalize border">
                                    <?php echo ($return['form12a'] ?? null) == 1 ? 'Yes' : 'No'; ?>
                                    <?php if (!empty($return['form12a_file'])): ?>
@@ -591,7 +590,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                            </tr>
                            <tr>
                                <td class="f-13 f-w-600 text-capitalize text-start border">5*</td>
-                               <td class="f-13 f-w-500 text-capitalize border">Form 80 G</td>
+                               <td class="f-13 f-w-500 text-capitalize border"><?= __('Form 80 G'); ?></td>
                                <td class="f-13 f-w-500 text-capitalize border">
                                    <?php echo ($return['form80g'] ?? null) == 1 ? 'Yes' : 'No'; ?>
                                    <?php if (!empty($return['form80g_file'])): ?>
@@ -603,7 +602,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                            </tr>
                            <tr>
                                <td class="f-13 f-w-600 text-capitalize text-start border">6*</td>
-                               <td class="f-13 f-w-500 text-capitalize border">35 AC registration if any</td>
+                               <td class="f-13 f-w-500 text-capitalize border"><?= __('35 AC registration if any'); ?></td>
                                <td class="f-13 f-w-500 text-capitalize border">
                                    <?php echo ($return['form35ac'] ?? null) == 1 ? 'Yes' : 'No'; ?>
                                    <?php if (!empty($return['form35ac_file'])): ?>
@@ -615,7 +614,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                            </tr>
                            <tr>
                                <td class="f-13 f-w-600 text-capitalize text-start border">7*</td>
-                               <td class="f-13 f-w-500 text-capitalize border">PAN card</td>
+                               <td class="f-13 f-w-500 text-capitalize border"><?= __('PAN card'); ?></td>
                                <td class="f-13 f-w-500 text-capitalize border">
                                    <?php echo ($return['pan'] ?? null) == 1 ? 'Yes' : 'No'; ?>
                                    <?php if (!empty($return['pan_file'])): ?>
@@ -627,7 +626,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                            </tr>
                            <tr>
                                <td class="f-13 f-w-600 text-capitalize text-start border">8*</td>
-                               <td class="f-13 f-w-500 text-capitalize border">Last 3 financial years audited statements & ITR proof</td>
+                               <td class="f-13 f-w-500 text-capitalize border"><?= htmlspecialchars(__('Last 3 financial years audited statements & ITR proof'), ENT_QUOTES, 'UTF-8'); ?></td>
                                <td class="f-13 f-w-500 text-capitalize border">
                                    <?php echo ($return['financial_statements'] ?? null) == 1 ? 'Yes' : 'No'; ?>
                                    <?php if (!empty($return['financial_statements_file'])): ?>
@@ -638,7 +637,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                            </tr>
                            <tr>
                                <td class="f-13 f-w-600 text-capitalize text-start border">9*</td>
-                               <td class="f-13 f-w-500 text-capitalize border">Detailed proposal as per format given</td>
+                               <td class="f-13 f-w-500 text-capitalize border"><?= __('Detailed proposal as per format given'); ?></td>
                                <td class="f-13 f-w-500 text-capitalize border">
                                    <?php echo ($return['proposal'] ?? null) == 1 ? 'Yes' : 'No'; ?>
                                    <?php if (!empty($return['proposal_file'])): ?>
@@ -650,7 +649,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                            </tr>
                            <tr>
                                <td class="f-13 f-w-600 text-capitalize text-start border">10</td>
-                               <td class="f-13 f-w-500 text-capitalize border">FCRA approval</td>
+                               <td class="f-13 f-w-500 text-capitalize border"><?= __('FCRA approval'); ?></td>
                                <td class="f-13 f-w-500 text-capitalize border">
                                    <?php echo ($return['fcra'] ?? null) == 1 ? 'Yes' : 'No'; ?>
                                    <?php if (!empty($return['fcra_file'])): ?>
@@ -662,7 +661,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                            </tr>
                            <tr>
                                <td class="f-13 f-w-600 text-capitalize text-start border">11</td>
-                               <td class="f-13 f-w-500 text-capitalize border">TDS exemption certificate if applicable</td>
+                               <td class="f-13 f-w-500 text-capitalize border"><?= __('TDS exemption certificate if applicable'); ?></td>
                                <td class="f-13 f-w-500 text-capitalize border">
                                    <?php echo ($return['tds_exemption'] ?? null) == 1 ? 'Yes' : 'No'; ?>
                                    <?php if (!empty($return['tds_exemption_file'])): ?>
@@ -673,7 +672,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                            </tr>
                            <tr>
                                <td class="f-13 f-w-600 text-capitalize text-start border">12</td>
-                               <td class="f-13 f-w-500 text-capitalize border">GST Registration certificate if applicable</td>
+                               <td class="f-13 f-w-500 text-capitalize border"><?= __('GST Registration certificate if applicable'); ?></td>
                                <td class="f-13 f-w-500 text-capitalize border">
                                    <?php echo ($return['gst'] ?? null) == 1 ? 'Yes' : 'No'; ?>
                                    <?php if (!empty($return['gst_file'])): ?>
@@ -685,7 +684,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                            </tr>
                            <tr>
                                <td class="f-13 f-w-600 text-capitalize text-start border">13*</td>
-                               <td class="f-13 f-w-500 text-capitalize border">2 Reference letters of past or present supporters for CSR project</td>
+                               <td class="f-13 f-w-500 text-capitalize border"><?= __('2 Reference letters of past or present supporters for CSR project'); ?></td>
                                <td class="f-13 f-w-500 text-capitalize border">
                                    <?php echo ($return['reference'] ?? null) == 1 ? 'Yes' : 'No'; ?>
                                    <?php if (!empty($return['reference_file'])): ?>
@@ -699,19 +698,19 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                    </td>
                </tr>
                <tr>
-                   <td colspan="2" class="f-13 f-w-600 text-capitalize text-center">*Sr. Nos. are mandatory documents</td>
+                   <td colspan="2" class="f-13 f-w-600 text-capitalize text-center">*<?= __('Sr. Nos. are mandatory documents'); ?></td>
                </tr>
                <tr>
                    <td colspan="2" class="f-14 f-w-600 text-capitalize"></td>
                </tr>
                <tr>
-                   <td colspan="2" class="f-13 f-w-600 text-capitalize text-center">Additional Information in respect of Audited Accounts as mentioned in Serial No. 8 of Form-A of the Proposal Format for submission of CSR Proposals.</td>
+                   <td colspan="2" class="f-13 f-w-600 text-capitalize text-center"><?= __('Additional Information in respect of Audited Accounts as mentioned in Serial No. 8 of Form-A of the Proposal Format for submission of CSR Proposals.'); ?></td>
                </tr>
                <tr>
-                   <td colspan="2" class="f-13 f-w-600 text-capitalize text-center">1. Please give the sources of income for each of the last 3 Financial Years for which audited accounts have been submitted with the application.</td>
+                   <td colspan="2" class="f-13 f-w-600 text-capitalize text-center"><?= __('1. Please give the sources of income for each of the last 3 Financial Years for which audited accounts have been submitted with the application.'); ?></td>
                </tr>
                <tr>
-                   <td colspan="2" class="f-13 f-w-600 text-capitalize text-end">Rs.</td>
+                   <td colspan="2" class="f-13 f-w-600 text-capitalize text-end"><?= __('Rs.'); ?></td>
                </tr>
                <tr>
                    <?php
@@ -721,11 +720,11 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                     <td colspan="2">
                        <table class="w-100 border-collapse">
                            <tr style="background-color: #eeeeee;">
-                               <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 10%;">Sr. No</th>
-                               <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 30%;">Sources of Funds</th>
+                               <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 10%;"><?= __('Sr. No'); ?></th>
+                               <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 30%;"><?= __('Sources of Funds'); ?></th>
 
                                <?php foreach ($years as $year): ?>
-                                   <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;">FY (<?= $year ?> in Rs.)</th>
+                                   <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;"><?= __('FY ('); ?><?= $year ?> <?= __('in Rs.)'); ?></th>
                                <?php endforeach; ?>
                            </tr>
                            <?php
@@ -755,7 +754,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
 
                         <tr>
                            <td class="f-13 f-w-600 text-capitalize text-start border"></td>
-                           <td class="f-13 f-w-600 text-capitalize border text-end">Total</td>
+                           <td class="f-13 f-w-600 text-capitalize border text-end"><?= __('Total'); ?></td>
                            <td class="text_align_right f-13 f-w-500 text-capitalize border"><?php echo !empty($return['total_fy1']) ? customeummarmonyformate($return['total_fy1']) : '0'; ?></td>
                            <td class="text_align_right f-13 f-w-500 text-capitalize border"><?php echo !empty($return['total_fy2']) ? customeummarmonyformate($return['total_fy2']) : '0'; ?></td>
                            <td class="text_align_right f-13 f-w-500 text-capitalize border"><?php echo !empty($return['total_fy3']) ? customeummarmonyformate($return['total_fy3']) : '0'; ?></td>
@@ -767,21 +766,21 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                                            <td colspan="2" class="f-14 f-w-600 text-capitalize"></td>
                                        </tr>
                                        <tr>
-                                           <td colspan="2" class="f-13 f-w-600 text-capitalize text-center">2. Provide details of income, expenditure, assets and liabilities during the last 3 Financial Years for which audited accounts are being submitted along with the application.</td>
+                                           <td colspan="2" class="f-13 f-w-600 text-capitalize text-center"><?= __('2. Provide details of income, expenditure, assets and liabilities during the last 3 Financial Years for which audited accounts are being submitted along with the application.'); ?></td>
                                        </tr>
                                        <tr>
-                                           <td class="f-13 f-w-600 text-capitalize text-center">Total Income:</td>
-                                           <td class="f-13 f-w-600 text-capitalize text-end">Rs.</td>
+                                           <td class="f-13 f-w-600 text-capitalize text-center"><?= __('Total Income'); ?>:</td>
+                                           <td class="f-13 f-w-600 text-capitalize text-end"><?= __('Rs.'); ?></td>
                                        </tr>
                                        <tr>
                                            <td colspan="2">
                                                <table class="w-100 border-collapse">
                                                    <tr style="background-color: #eeeeee;">
                                                        <?php foreach ($years as $year): ?>
-                                                           <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;">FY (<?= $year ?> in Rs.)</th>
+                                                           <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;"><?= __('FY ('); ?><?= $year ?> <?= __('in Rs.)'); ?></th>
                                                        <?php endforeach; ?>
-                                                       <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;">Major Reasons for variation</th>
-                                                       <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;">Major Reasons for variation</th>
+                                                       <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;"><?= __('Major Reasons for variation'); ?></th>
+                                                       <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;"><?= __('Major Reasons for variation'); ?></th>
                                                    </tr>
                                                    <?php
 
@@ -818,18 +817,18 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                                        <td colspan="2" class="f-14 f-w-600 text-capitalize"></td>
                                    </tr>
                                    <tr>
-                                       <td class="f-13 f-w-600 text-capitalize text-center">Total Expenditure:</td>
-                                       <td class="f-13 f-w-600 text-capitalize text-end">Rs.</td>
+                                       <td class="f-13 f-w-600 text-capitalize text-center"><?= __('Total Expenditure'); ?>:</td>
+                                       <td class="f-13 f-w-600 text-capitalize text-end"><?= __('Rs.'); ?></td>
                                    </tr>
                                    <tr>
                                        <td colspan="2">
                                            <table class="w-100 border-collapse">
                                                <tr style="background-color: #eeeeee;">
                                                    <?php foreach ($years as $year): ?>
-                                                       <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;">FY (<?= $year ?> in Rs.)</th>
+                                                       <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;"><?= __('FY ('); ?><?= $year ?> <?= __('in Rs.)'); ?></th>
                                                    <?php endforeach; ?>
-                                                   <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;">Major Reasons for variation</th>
-                                                   <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;">Major Reasons for variation</th>
+                                                   <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;"><?= __('Major Reasons for variation'); ?></th>
+                                                   <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;"><?= __('Major Reasons for variation'); ?></th>
                                                </tr>
                                                <?php
                                                if ($return['expenditure_data']) {
@@ -864,18 +863,18 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                                    <td colspan="2" class="f-14 f-w-600 text-capitalize"></td>
                                </tr>
                                <tr>
-                                   <td class="f-13 f-w-600 text-capitalize text-center">Total Assets:</td>
-                                   <td class="f-13 f-w-600 text-capitalize text-end">Rs.</td>
+                                   <td class="f-13 f-w-600 text-capitalize text-center"><?= __('Total Assets'); ?>:</td>
+                                   <td class="f-13 f-w-600 text-capitalize text-end"><?= __('Rs.'); ?></td>
                                </tr>
                                <tr>
                                    <td colspan="2">
                                        <table class="w-100 border-collapse">
                                            <tr style="background-color: #eeeeee;">
                                                <?php foreach ($years as $year): ?>
-                                                   <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;">FY (<?= $year ?> in Rs.)</th>
+                                                   <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;"><?= __('FY ('); ?><?= $year ?> <?= __('in Rs.)'); ?></th>
                                                <?php endforeach; ?>
-                                               <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;">Major Reasons for variation</th>
-                                               <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;">Major Reasons for variation</th>
+                                               <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;"><?= __('Major Reasons for variation'); ?></th>
+                                               <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;"><?= __('Major Reasons for variation'); ?></th>
                                            </tr>
                                            <?php
                                                         // Decode JSON data into a PHP associative array
@@ -911,18 +910,18 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                                <td colspan="2" class="f-14 f-w-600 text-capitalize"></td>
                             </tr>
                             <tr>
-                               <td class="f-13 f-w-600 text-capitalize text-center">Total Liabilities:</td>
-                               <td class="f-13 f-w-600 text-capitalize text-end">Rs.</td>
+                               <td class="f-13 f-w-600 text-capitalize text-center"><?= __('Total Liabilities'); ?>:</td>
+                               <td class="f-13 f-w-600 text-capitalize text-end"><?= __('Rs.'); ?></td>
                             </tr>
                             <tr>
                                <td colspan="2">
                                    <table class="w-100 border-collapse">
                                        <tr style="background-color: #eeeeee;">
                                            <?php foreach ($years as $year): ?>
-                                               <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;">FY (<?= $year ?> in Rs.)</th>
+                                               <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;"><?= __('FY ('); ?><?= $year ?> <?= __('in Rs.)'); ?></th>
                                            <?php endforeach; ?>
-                                           <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;">Major Reasons for variation</th>
-                                           <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;">Major Reasons for variation</th>
+                                           <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;"><?= __('Major Reasons for variation'); ?></th>
+                                           <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;"><?= __('Major Reasons for variation'); ?></th>
                                        </tr>
                                        <?php
                                                         // Decode JSON data into a PHP associative array
@@ -961,29 +960,29 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
     <?php } ?>
 <?php if (isset($return['form_b']) && $return['form_b'] == 1) { ?>
    <tr>
-       <td colspan="2" class="f-14 f-w-600 text-capitalize">Form B</td>
+       <td colspan="2" class="f-14 f-w-600 text-capitalize"><?= __('Form B'); ?></td>
    </tr>
    <tr>
        <td colspan="2">
            <table class="w-100 border-collapse">
                <tr>
-                   <td colspan="4" class="f-13 f-w-600 text-capitalize text-center border">CHECKLIST FOR INFRASTRUCTURE PROJECTS</td>
+                   <td colspan="4" class="f-13 f-w-600 text-capitalize text-center border"><?= __('CHECKLIST FOR INFRASTRUCTURE PROJECTS'); ?></td>
                </tr>
                <tr style="background-color: #eeeeee;">
-                   <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 10%;">Sr. No</th>
-                   <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 30%;">Items</th>
-                   <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 30%;">Attached (Yes / No)</th>
-                   <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 30%;">Remark</th>
+                   <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 10%;"><?= __('Sr. No'); ?></th>
+                   <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 30%;"><?= __('Items'); ?></th>
+                   <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 30%;"><?= __('Attached (Yes / No)'); ?></th>
+                   <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 30%;"><?= __('Remark'); ?></th>
                </tr>
                <tr>
                    <th scope="col" class="f-13 f-w-600 text-capitalize text-start border">A</th>
-                   <td class="f-13 f-w-600 text-capitalize border">LAND RELATED</td>
+                   <td class="f-13 f-w-600 text-capitalize border"><?= __('LAND RELATED'); ?></td>
                    <td class="f-13 f-w-500 text-capitalize border"></td>
                    <td class="f-13 f-w-500 text-capitalize border"></td>
                </tr>
                <tr>
                    <th scope="col" class="f-13 f-w-500 text-capitalize text-start border">1</th>
-                   <td class="f-13 f-w-500 text-capitalize border">Land Ownership document</td>
+                   <td class="f-13 f-w-500 text-capitalize border"><?= __('Land Ownership document'); ?></td>
                    <td class="f-13 f-w-500 text-capitalize border">
                        <?php echo ($return['land_ownership'] ?? null) == 1 ? 'Yes' : 'No'; ?>
                        <?php if (!empty($return['land_ownership_file'])): ?>
@@ -994,7 +993,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                </tr>
                <tr>
                    <th scope="col" class="f-13 f-w-500 text-capitalize text-start border">2</th>
-                   <td class="f-13 f-w-500 text-capitalize border">Property Card (Commercial/ Vastu/Wetland)</td>
+                   <td class="f-13 f-w-500 text-capitalize border"><?= __('Property Card (Commercial/ Vastu/Wetland)'); ?></td>
                    <td class="f-13 f-w-500 text-capitalize border">
                        <?php echo ($return['property_card'] ?? null) == 1 ? 'Yes' : 'No'; ?>
                        <?php if (!empty($return['property_card_file'])): ?>
@@ -1005,15 +1004,15 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                </tr>
                <tr>
                    <th scope="col" class="f-13 f-w-600 text-capitalize text-start border">B</th>
-                   <td class="f-13 f-w-600 text-capitalize border">ESTIMATES & APROVALS</td>
+                   <td class="f-13 f-w-600 text-capitalize border"><?= htmlspecialchars(__('ESTIMATES & APROVALS'), ENT_QUOTES, 'UTF-8'); ?></td>
                    <td class="f-13 f-w-500 text-capitalize border"></td>
                    <td class="f-13 f-w-500 text-capitalize border"></td>
                </tr>
                <tr>
                    <th scope="col" class="f-3 f-w-500 text-capitalize text-start border">1</th>
                    <td class="f-13 f-w-500 text-capitalize border">
-                       <p class="m-0">Drawings- Site Plan, Building Plan, Elevation, foundation / structural details. All drawings needs to be signed & stamped by Licensed Engineer/ Architect & Client.</p>
-                       <p class="m-t-0">License no. / Registration no. of Architect/Engineer needs to be mentioned.</p>
+                       <p class="m-0"><?= htmlspecialchars(__('Drawings- Site Plan, Building Plan, Elevation, foundation / structural details. All drawings needs to be signed & stamped by Licensed Engineer/ Architect & Client.'), ENT_QUOTES, 'UTF-8'); ?></p>
+                       <p class="m-t-0"><?= __('License no. / Registration no. of Architect/Engineer needs to be mentioned.'); ?></p>
                    </td>
                    <td class="f-13 f-w-500 text-capitalize border">
                        <?php echo ($return['drawings'] ?? null) == 1 ? 'Yes' : 'No'; ?>
@@ -1025,7 +1024,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                </tr>
                <tr>
                    <th scope="col" class="f-3 f-w-500 text-capitalize text-start border">2</th>
-                   <td class="f-13 f-w-500 text-capitalize border">Drawings sanctioned by Govt. Authorities</td>
+                   <td class="f-13 f-w-500 text-capitalize border"><?= __('Drawings sanctioned by Govt. Authorities'); ?></td>
                    <td class="f-13 f-w-500 text-capitalize border">
                        <?php echo ($return['govt_drawings'] ?? null) == 1 ? 'Yes' : 'No'; ?>
                        <?php if (!empty($return['govt_drawings_file'])): ?>
@@ -1037,10 +1036,10 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                <tr>
                    <th scope="col" class="f-3 f-w-500 text-capitalize text-start border">3</th>
                    <td class="f-13 f-w-500 text-capitalize border">
-                       <p class="m-0">Basis of Estimate -</p>
-                       <p class="m-t-0">For schedule items - Preferably to be made from latest CPWD/ DSR /State Govt published rate along with GST if any.</p>
-                       <p class="m-t-0">Brought out items- Preferably to be made from Quotations of supplier / rate charts of Manufacturers. Estimated needs to be vetted by Govt. Engineer/ Retd. CPWD/ Retd State Govt. Engineer</p>
-                       <p class="m-t-0">Estimate also to be signed & stamped by licensed Engineer & Client</p>
+                       <p class="m-0"><?= __('Basis of Estimate'); ?> -</p>
+                       <p class="m-t-0"><?= __('For schedule items - Preferably to be made from latest CPWD/ DSR /State Govt published rate along with GST if any.'); ?></p>
+                       <p class="m-t-0"><?= __('Brought out items- Preferably to be made from Quotations of supplier / rate charts of Manufacturers. Estimated needs to be vetted by Govt. Engineer/ Retd. CPWD/ Retd State Govt. Engineer'); ?></p>
+                       <p class="m-t-0"><?= htmlspecialchars(__('Estimate also to be signed & stamped by licensed Engineer & Client'), ENT_QUOTES, 'UTF-8'); ?></p>
                    </td>
                    <td class="f-13 f-w-500 text-capitalize border">
                        <?php echo ($return['basis_estimate'] ?? null) == 1 ? 'Yes' : 'No'; ?>
@@ -1052,7 +1051,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                </tr>
                <tr>
                    <th scope="col" class="f-3 f-w-500 text-capitalize text-start border">4</th>
-                   <td class="f-13 f-w-500 text-capitalize border">Stability certificate needs to be attached issued by licensed engineer in case of expansion of existing building.</td>
+                   <td class="f-13 f-w-500 text-capitalize border"><?= __('Stability certificate needs to be attached issued by licensed engineer in case of expansion of existing building.'); ?></td>
                    <td class="f-13 f-w-500 text-capitalize border">
                        <?php echo ($return['stability_certificate'] ?? null) == 1 ? 'Yes' : 'No'; ?>
                        <?php if (!empty($return['stability_certificate_file'])): ?>
@@ -1063,13 +1062,13 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                </tr>
                <tr>
                    <th scope="col" class="f-13 f-w-600 text-capitalize text-start border">C</th>
-                   <td class="f-13 f-w-500 text-capitalize border">EXECUTION WORKS</td>
+                   <td class="f-13 f-w-500 text-capitalize border"><?= __('EXECUTION WORKS'); ?></td>
                    <td class="f-13 f-w-500 text-capitalize border"></td>
                    <td class="f-13 f-w-500 text-capitalize border"></td>
                </tr>
                <tr>
                    <th scope="col" class="f-3 f-w-500 text-capitalize text-start border">1</th>
-                   <td class="f-13 f-w-500 text-capitalize border">Execution Plan (Mention in briefly, separate annexure can be attached)</td>
+                   <td class="f-13 f-w-500 text-capitalize border"><?= __('Execution Plan (Mention in briefly, separate annexure can be attached)'); ?></td>
                    <td class="f-13 f-w-500 text-capitalize border">
                        <?php echo ($return['execution_works_plan'] ?? null) == 1 ? 'Yes' : 'No'; ?>
                        <?php if (!empty($return['execution_works_plan_file'])): ?>
@@ -1087,119 +1086,119 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
 <?php } ?>
 <?php if (isset($return['form_c']) && $return['form_c'] == 1) { ?>
    <tr>
-       <td colspan="2" class="f-14 f-w-600 text-capitalize">Form C</td>
+       <td colspan="2" class="f-14 f-w-600 text-capitalize"><?= __('Form C'); ?></td>
    </tr>
    <tr>
        <td colspan="2">
            <table class="w-100 border-collapse">
                <tr>
-                   <td colspan="4" class="f-13 f-w-600 text-capitalize text-center border">CHECKLIST FOR SUBMISSION OF PROPOSAL</td>
+                   <td colspan="4" class="f-13 f-w-600 text-capitalize text-center border"><?= __('CHECKLIST FOR SUBMISSION OF PROPOSAL'); ?></td>
                </tr>
                <tr style="background-color: #eeeeee;">
-                   <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 10%;">Sr. No</th>
-                   <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 45%;">Points</th>
-                   <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 45%;">Details</th>
+                   <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 10%;"><?= __('Sr. No'); ?></th>
+                   <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 45%;"><?= __('Points'); ?></th>
+                   <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 45%;"><?= __('Details'); ?></th>
                </tr>
                <tr>
                    <th scope="col" class="f-3 f-w-500 text-capitalize text-start border">1</th>
-                   <td class="f-13 f-w-500 text-capitalize border">Address of registered office of the Organisation (in India)</td>
+                   <td class="f-13 f-w-500 text-capitalize border"><?= __('Address of registered office of the Organisation (in India)'); ?></td>
                    <td class="f-13 f-w-500 text-capitalize border"><?php echo htmlspecialchars($return['address_registered_office']) ?? ''; ?></td>
                </tr>
                <tr>
                    <th scope="col" class="f-3 f-w-500 text-capitalize text-start border">2</th>
-                   <td class="f-13 f-w-500 text-capitalize border">Any branches of the Organisation? Kindly mention</td>
+                   <td class="f-13 f-w-500 text-capitalize border"><?= __('Any branches of the Organisation? Kindly mention'); ?></td>
                    <td class="f-13 f-w-500 text-capitalize border"><?php echo htmlspecialchars($return['branches_organisation']) ?? ''; ?></td>
                </tr>
                <tr>
                    <th scope="col" class="f-3 f-w-500 text-capitalize text-start border">3</th>
-                   <td class="f-13 f-w-500 text-capitalize border">Registered as a trust/society/ section 8 company or Other</td>
+                   <td class="f-13 f-w-500 text-capitalize border"><?= __('Registered as a trust/society/ section 8 company or Other'); ?></td>
                    <td class="f-13 f-w-500 text-capitalize border"><?php echo htmlspecialchars($return['registered_as']) ?? ''; ?></td>
                </tr>
                <tr>
                    <th scope="col" class="f-3 f-w-500 text-capitalize text-start border">4</th>
-                   <td class="f-13 f-w-500 text-capitalize border">How long has the Organisation been in existence in years?</td>
+                   <td class="f-13 f-w-500 text-capitalize border"><?= __('How long has the Organisation been in existence in years?'); ?></td>
                    <td class="f-13 f-w-500 text-capitalize border"><?php echo htmlspecialchars($return['years_of_existence']) ?? ''; ?></td>
                </tr>
                <tr>
                    <th scope="col" class="f-3 f-w-500 text-capitalize text-start border">5</th>
                    <td class="f-13 f-w-500 text-capitalize border">
-                       Which is the Organisation’s geographical area of work?
+                       <?= __('Which is the Organisation’s geographical area of work?'); ?>
                    </td>
                    <td class="f-13 f-w-500 text-capitalize border"><?php echo htmlspecialchars($return['geographical_area_of_work']) ?? ''; ?></td>
                </tr>
                <tr>
                    <th scope="col" class="f-3 f-w-500 text-capitalize text-start border">6</th>
                    <td class="f-13 f-w-500 text-capitalize border">
-                       <p class="m-0">What is/are your Organisation's expertise area/s?</p>
-                       <p class="m-t-0">a. Skill Development</p>
-                       <p class="m-t-0">b. Health & Hygiene</p>
-                       <p class="m-t-0">c. Education</p>
-                       <p class="m-t-0">d. Community Development</p>
-                       <p class="m-t-0">e. Environment Sustainability</p>
-                       <p class="m-t-0">f. Other/Multiple (Kindly mention)</p>
+                       <p class="m-0"><?= __('What is/are your Organisation\'s expertise area/s?'); ?></p>
+                       <p class="m-t-0"><?= __('a. Skill Development'); ?></p>
+                       <p class="m-t-0"><?= htmlspecialchars(__('b. Health & Hygiene'), ENT_QUOTES, 'UTF-8'); ?></p>
+                       <p class="m-t-0"><?= __('c. Education'); ?></p>
+                       <p class="m-t-0"><?= __('d. Community Development'); ?></p>
+                       <p class="m-t-0"><?= __('e. Environment Sustainability'); ?></p>
+                       <p class="m-t-0"><?= __('f. Other/Multiple (Kindly mention)'); ?></p>
                    </td>
                    <td class="f-13 f-w-500 text-capitalize border"><?php echo htmlspecialchars($return['expertise_areas']) ?? ''; ?></td>
                </tr>
                <tr>
                    <th scope="col" class="f-3 f-w-500 text-capitalize text-start border">7</th>
                    <td class="f-13 f-w-500 text-capitalize border">
-                       Names of Board Members/Trustees and CEO.
+                       <?= __('Names of Board Members/Trustees and CEO.'); ?>
                    </td>
                    <td class="f-13 f-w-500 text-capitalize border"><?php echo htmlspecialchars($return['board_members']) ?? ''; ?></td>
                </tr>
                <tr>
                    <th scope="col" class="f-3 f-w-500 text-capitalize text-start border">8</th>
                    <td class="f-13 f-w-500 text-capitalize border">
-                       Are any of the trustees/board members affiliated to any political / religious Organization?
+                       <?= __('Are any of the trustees/board members affiliated to any political / religious Organization?'); ?>
                    </td>
                    <td class="f-13 f-w-500 text-capitalize border"><?php echo htmlspecialchars($return['affiliated_political_religious']) ?? ''; ?></td>
                </tr>
                <tr>
                    <th scope="col" class="f-3 f-w-500 text-capitalize text-start border">9</th>
                    <td class="f-13 f-w-500 text-capitalize border">
-                       What are the sources of funding of the Organisation?
+                       <?= __('What are the sources of funding of the Organisation?'); ?>
                    </td>
                    <td class="f-13 f-w-500 text-capitalize border"><?php echo htmlspecialchars($return['sources_of_funding']) ?? ''; ?></td>
                </tr>
                <tr>
                    <th scope="col" class="f-3 f-w-500 text-capitalize text-start border">10</th>
                    <td class="f-13 f-w-500 text-capitalize border">
-                       Has the Organisation received any awards/recognition for its work? Kindly mention
+                       <?= __('Has the Organisation received any awards/recognition for its work? Kindly mention'); ?>
                    </td>
                    <td class="f-13 f-w-500 text-capitalize border"><?php echo htmlspecialchars($return['awards_recognition']) ?? ''; ?></td>
                </tr>
                <tr>
                    <th scope="col" class="f-3 f-w-500 text-capitalize text-start border">11</th>
                    <td class="f-13 f-w-500 text-capitalize border">
-                       Does it receive funds / implement programs for the government? If yes-details
+                       <?= __('Does it receive funds / implement programs for the government? If yes-details'); ?>
                    </td>
                    <td class="f-13 f-w-500 text-capitalize border"><?php echo htmlspecialchars($return['government_funds_programs']) ?? ''; ?></td>
                </tr>
                <tr>
                    <th scope="col" class="f-3 f-w-500 text-capitalize text-start border">12</th>
                    <td class="f-13 f-w-500 text-capitalize border">
-                       Has the Organisation been successful in handing over projects/making projects sustainable? Give example
+                       <?= __('Has the Organisation been successful in handing over projects/making projects sustainable? Give example'); ?>
                    </td>
                    <td class="f-13 f-w-500 text-capitalize border"><?php echo htmlspecialchars($return['projects_sustainability']) ?? ''; ?></td>
                </tr>
                <tr>
                    <th scope="col" class="f-3 f-w-500 text-capitalize text-start border">13</th>
                    <td class="f-13 f-w-500 text-capitalize border">
-                       Has the Organisation been blacklisted by government/PSU or any corporate? If yes, reasons for it
+                       <?= __('Has the Organisation been blacklisted by government/PSU or any corporate? If yes, reasons for it'); ?>
                    </td>
                    <td class="f-13 f-w-500 text-capitalize border"><?php echo htmlspecialchars($return['blacklisted_details']) ?? ''; ?></td>
                </tr>
                <tr>
                    <th scope="col" class="f-3 f-w-500 text-capitalize text-start border">14</th>
                    <td class="f-13 f-w-500 text-capitalize border">
-                       Is the Organisation empanelled by any reputed institute or agency? If yes, give details
+                       <?= __('Is the Organisation empanelled by any reputed institute or agency? If yes, give details'); ?>
                    </td>
                    <td class="f-13 f-w-500 text-capitalize border"><?php echo htmlspecialchars($return['empanelled_details']) ?? ''; ?></td>
                </tr>
                <tr>
                    <th scope="col" class="f-3 f-w-500 text-capitalize text-start border">15</th>
                    <td class="f-13 f-w-500 text-capitalize border">
-                       Is the Organisation associated with any other corporate for implementing CSR projects? Mention names
+                       <?= __('Is the Organisation associated with any other corporate for implementing CSR projects? Mention names'); ?>
                    </td>
                    <td class="f-13 f-w-500 text-capitalize border"><?php echo htmlspecialchars($return['associated_csr_projects']) ?? ''; ?></td>
                </tr>
@@ -1207,7 +1206,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                <tr>
                    <th scope="col" class="f-3 f-w-500 text-capitalize text-start border">16</th>
                    <td class="f-13 f-w-500 text-capitalize border">
-                       Strength of staff (number of full time employees)
+                       <?= __('Strength of staff (number of full time employees)'); ?>
                    </td>
                    <td class="f-13 f-w-500 text-capitalize border"><?php echo htmlspecialchars($return['staff_strength']) ?? ''; ?></td>
                </tr>
@@ -1215,7 +1214,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                <tr>
                    <th scope="col" class="f-3 f-w-500 text-capitalize text-start border">17</th>
                    <td class="f-13 f-w-500 text-capitalize border">
-                       Please provide two references of past funders of your projects (Email id/ Contact Person with Designation/ Contact Number)
+                       <?= __('Please provide two references of past funders of your projects (Email id/ Contact Person with Designation/ Contact Number)'); ?>
                    </td>
                    <td class="f-13 f-w-500 text-capitalize border"><?php echo htmlspecialchars($return['references_past_funders']) ?? ''; ?></td>
                </tr>
@@ -1229,127 +1228,127 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
 <?php  }  ?>
 <?php if (isset($return['form_d']) && $return['form_d'] == 1) { ?>
    <tr>
-       <td colspan="2" class="f-14 f-w-600 text-capitalize">Form D</td>
+       <td colspan="2" class="f-14 f-w-600 text-capitalize"><?= __('Form D'); ?></td>
    </tr>
    <tr>
        <td colspan="2">
            <table class="w-100 border-collapse">
                <tr>
 
-                   <td colspan="4" class="f-13 f-w-600 text-capitalize text-center border" style="width: 100%;">Summary Sheet for the Proposal</td>
+                   <td colspan="4" class="f-13 f-w-600 text-capitalize text-center border" style="width: 100%;"><?= __('Summary Sheet for the Proposal'); ?></td>
                </tr>
                <tr style="background-color: #eeeeee;">
-                <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 10%;">Sr. No</th>
-                   <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;">Title of the project</th>
+                <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 10%;"><?= __('Sr. No'); ?></th>
+                   <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 20%;"><?= __('Title of the project'); ?></th>
                    <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 70%;"><?php echo htmlspecialchars($return['title_of_project']) ?? ''; ?></th>
                </tr>
                <tr style="background-color: #eeeeee;">
                 <td class="f-3 f-w-500 text-capitalize text-start border">1</td>
-                   <td class="f-3 f-w-500 text-capitalize text-start border">Project Description</td>
+                   <td class="f-3 f-w-500 text-capitalize text-start border"><?= __('Project Description'); ?></td>
                    <td class="f-3 f-w-500 text-capitalize text-start border"><?php echo htmlspecialchars($return['formd_project_description']) ?? ''; ?></td>
                </tr>
                <tr style="background-color: #eeeeee;">
                 <td class="f-3 f-w-500 text-capitalize text-start border">2</td>
                    <td class="f-3 f-w-500 text-capitalize text-start border">
-                   Name of Executing Organisation</td>
+                   <?= __('Name of Executing Organisation'); ?></td>
                    <td class="f-3 f-w-500 text-capitalize text-start border">
                        <?php echo htmlspecialchars($return['executing_organisation']) ?? ''; ?></td>
                    </tr>
                    <tr style="background-color: #eeeeee;">
                     <td class="f-3 f-w-500 text-capitalize text-start border">3</td>
                        <td class="f-3 f-w-500 text-capitalize text-start border">
-                       Address of Organisation (Registered address & address of branch from which proposal is given)</td>
+                       <?= htmlspecialchars(__('Address of Organisation (Registered address & address of branch from which proposal is given)'), ENT_QUOTES, 'UTF-8'); ?></td>
                        <td class="f-3 f-w-500 text-capitalize text-start border">
                            <?php echo htmlspecialchars($return['organisation_address']) ?? ''; ?></td>
                        </tr>
                        <tr style="background-color: #eeeeee;">
                         <td class="f-3 f-w-500 text-capitalize text-start border">4</td>
                            <td class="f-3 f-w-500 text-capitalize text-start border">
-                           Contact Person</td>
+                           <?= __('Contact Person'); ?></td>
                            <td class="f-3 f-w-500 text-capitalize text-start border">
                                <?php echo htmlspecialchars($return['contact_person']) ?? ''; ?></td>
                            </tr>
                            <tr style="background-color: #eeeeee;">
                             <td class="f-3 f-w-500 text-capitalize text-start border">5</td>
                                <td class="f-3 f-w-500 text-capitalize text-start border">
-                               Contact Number & email address</td>
+                               <?= htmlspecialchars(__('Contact Number & email address'), ENT_QUOTES, 'UTF-8'); ?></td>
                                <td class="f-3 f-w-500 text-capitalize text-start border">
                                    <?php echo htmlspecialchars($return['contact_details']) ?? ''; ?></td>
                                </tr>
                                <tr style="background-color: #eeeeee;">
                                 <td class="f-3 f-w-500 text-capitalize text-start border">6</td>
                                    <td class="f-3 f-w-500 text-capitalize text-start border">
-                                   Experience of the Organisation</td>
+                                   <?= __('Experience of the Organisation'); ?></td>
                                    <td class="f-3 f-w-500 text-capitalize text-start border"><?php echo htmlspecialchars($return['organisation_experience']) ?? ''; ?>
                                </td>
                            </tr>
                            <tr style="background-color: #eeeeee;">
                             <td class="f-3 f-w-500 text-capitalize text-start border">7</td>
                                <td class="f-3 f-w-500 text-capitalize text-start border">
-                               Place of execution of project</td>
+                               <?= __('Place of execution of project'); ?></td>
                                <td class="f-3 f-w-500 text-capitalize text-start border">
                                    <?php echo htmlspecialchars($return['execution_place']) ?? ''; ?></td>
                                </tr>
                                <tr style="background-color: #eeeeee;">
                                 <td class="f-3 f-w-500 text-capitalize text-start border">8</td>
                                    <td class="f-3 f-w-500 text-capitalize text-start border">
-                                   Reason for choice of place</td>
+                                   <?= __('Reason for choice of place'); ?></td>
                                    <td class="f-3 f-w-500 text-capitalize text-start border">
                                        <?php echo htmlspecialchars($return['place_reason']) ?? ''; ?></td>
                                    </tr>
                                    <tr style="background-color: #eeeeee;">
                                     <td class="f-3 f-w-500 text-capitalize text-start border">9</td>
                                        <td class="f-3 f-w-500 text-capitalize text-start border">
-                                       Tenure of the project</td>
+                                       <?= __('Tenure of the project'); ?></td>
                                        <td class="f-3 f-w-500 text-capitalize text-start border">
                                            <?php echo htmlspecialchars($return['project_tenure']) ?? ''; ?></td>
                                        </tr>
                                        <tr style="background-color: #eeeeee;">
                                         <td class="f-3 f-w-500 text-capitalize text-start border">10</td>
                                            <td class="f-3 f-w-500 text-capitalize text-start border">
-                                           Cost of the project (enclose a detailed budget)</td>
+                                           <?= __('Cost of the project (enclose a detailed budget)'); ?></td>
                                            <td class="f-3 f-w-500 text-capitalize text-start border">
                                                <?php echo htmlspecialchars($return['project_cost']) ?? ''; ?></td>
                                            </tr>
                                            <tr style="background-color: #eeeeee;">
                                             <td class="f-3 f-w-500 text-capitalize text-start border">11</td>
                                                <td class="f-3 f-w-500 text-capitalize text-start border">
-                                               Funds requested from Infisuite</td>
+                                               <?= __('Funds requested from Infisuite'); ?></td>
                                                <td class="f-3 f-w-500 text-capitalize text-start border">
                                                    <?php echo htmlspecialchars($return['funds_infisuite']) ?? ''; ?></td>
                                                </tr>
                                                <tr style="background-color: #eeeeee;">
                                                 <td class="f-3 f-w-500 text-capitalize text-start border">12</td>
                                                    <td class="f-3 f-w-500 text-capitalize text-start border">
-                                                   Funds requested from any other sources if any</td>
+                                                   <?= __('Funds requested from any other sources if any'); ?></td>
                                                    <td class="f-3 f-w-500 text-capitalize text-start border">
                                                        <?php echo htmlspecialchars($return['funds_other_sources']) ?? ''; ?></td>
                                                    </tr>
                                                    <tr style="background-color: #eeeeee;">
                                                     <td class="f-3 f-w-500 text-capitalize text-start border">13</td>
                                                        <td class="f-3 f-w-500 text-capitalize text-start border">
-                                                       Objective of the project</td>
+                                                       <?= __('Objective of the project'); ?></td>
                                                        <td class="f-3 f-w-500 text-capitalize text-start border">
                                                            <?php echo htmlspecialchars($return['project_objective']) ?? ''; ?></td>
                                                        </tr>
                                                        <tr style="background-color: #eeeeee;">
                                                         <td class="f-3 f-w-500 text-capitalize text-start border">14</td>
                                                            <td class="f-3 f-w-500 text-capitalize text-start border">
-                                                           Reason of Organisation preferring Infisuite to be part of this project</td>
+                                                           <?= __('Reason of Organisation preferring Infisuite to be part of this project'); ?></td>
                                                            <td class="f-3 f-w-500 text-capitalize text-start border"><?php echo htmlspecialchars($return['reason_infisuite']) ?? ''; ?>
                                                        </td>
                                                    </tr>
                                                    <tr style="background-color: #eeeeee;">
                                                     <td class="f-3 f-w-500 text-capitalize text-start border">15</td>
                                                        <td class="f-3 f-w-500 text-capitalize text-start border">
-                                                       Benefits/Outcomes expected from the project</td>
+                                                       <?= __('Benefits/Outcomes expected from the project'); ?></td>
                                                        <td class="f-3 f-w-500 text-capitalize text-start border">
                                                            <?php echo htmlspecialchars($return['project_benefits']) ?? ''; ?></td>
                                                        </tr>
                                                        <tr style="background-color: #eeeeee;">
                                                         <td class="f-3 f-w-500 text-capitalize text-start border">16</td>
                                                            <td class="f-3 f-w-500 text-capitalize text-start border">
-                                                           Quantitative (Mention as per parameter suitable, but make sure to mention number of beneficiaries)</td>
+                                                           <?= __('Quantitative (Mention as per parameter suitable, but make sure to mention number of beneficiaries)'); ?></td>
                                                            <td class="f-3 f-w-500 text-capitalize text-start border">
                                                                <p class="m-0"><?php echo htmlspecialchars($return['quantitative_1']) ?? ''; ?></p>
                                                                <p class="m-t-0"><?php echo htmlspecialchars($return['quantitative_2']) ?? ''; ?></p>
@@ -1361,7 +1360,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                                                        <tr style="background-color: #eeeeee;">
                                                         <td class="f-3 f-w-500 text-capitalize text-start border">17</td>
                                                            <td class="f-3 f-w-500 text-capitalize text-start border">
-                                                           Qualitative (parameters which are difficult to capture in numbers)</td>
+                                                           <?= __('Qualitative (parameters which are difficult to capture in numbers)'); ?></td>
                                                            <td class="f-3 f-w-500 text-capitalize text-start border">
                                                                <p class="m-0"><?php echo htmlspecialchars($return['qualitative_1']) ?? ''; ?></p>
                                                                <p class="m-t-0"><?php echo htmlspecialchars($return['qualitative_2']) ?? ''; ?></p>
@@ -1371,21 +1370,21 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                                                        <tr style="background-color: #eeeeee;">
                                                         <td class="f-3 f-w-500 text-capitalize text-start border">18</td>
                                                            <td class="f-3 f-w-500 text-capitalize text-start border">
-                                                           Requirement of any approval from local bodies/government/municipality or any statutory body</td>
+                                                           <?= __('Requirement of any approval from local bodies/government/municipality or any statutory body'); ?></td>
                                                            <td class="f-3 f-w-500 text-capitalize text-start border"><?php echo htmlspecialchars($return['approval_requirement']) ?? ''; ?>
                                                        </td>
                                                    </tr>
                                                    <tr style="background-color: #eeeeee;">
                                                     <td class="f-3 f-w-500 text-capitalize text-start border">19</td>
                                                        <td class="f-3 f-w-500 text-capitalize text-start border">
-                                                       Whether similar projects executed earlier?</td>
+                                                       <?= __('Whether similar projects executed earlier?'); ?></td>
                                                        <td class="f-3 f-w-500 text-capitalize text-start border"><?php echo htmlspecialchars($return['similar_projects']) ?? ''; ?>
                                                    </td>
                                                </tr>
                                                <tr style="background-color: #eeeeee;">
                                                 <td class="f-3 f-w-500 text-capitalize text-start border">20</td>
                                                    <td class="f-3 f-w-500 text-capitalize text-start border">
-                                                   In case the proposal is approved, the organisation is okay to open separate bank account for BPCL? (Yes/No)</td>
+                                                   <?= __('In case the proposal is approved, the organisation is okay to open separate bank account for BPCL? (Yes/No)'); ?></td>
                                                    <td class="f-3 f-w-500 text-capitalize text-start border">
                                                        <?php echo htmlspecialchars($return['bank_account_infisuite']) ?? ''; ?>
                                                    </td>
@@ -1393,7 +1392,7 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                                                <tr style="background-color: #eeeeee;">
                                                 <td class="f-3 f-w-500 text-capitalize text-start border">21</td>
                                                    <td class="f-3 f-w-500 text-capitalize text-start border">
-                                                   Information given above is true and we can provide the documentary proof of it in case of enquiry</td>
+                                                   <?= __('Information given above is true and we can provide the documentary proof of it in case of enquiry'); ?></td>
                                                    <td class="f-3 f-w-500 text-capitalize text-start border">
                                                    <?php echo ($return['information_true'] ?? null) == 1 ? ' Yes' : ' No'; ?>
                                                     <?php if (!empty($return['information_true_file'])): ?>
@@ -1410,26 +1409,26 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                            <?php } ?>
                            <?php if (isset($return['form_e']) && $return['form_e'] == 1) { ?>
                                <tr>
-                                   <td colspan="2" class="f-14 f-w-600 text-capitalize">Form E</td>
+                                   <td colspan="2" class="f-14 f-w-600 text-capitalize"><?= __('Form E'); ?></td>
                                </tr>
                                <tr>
-                                   <td colspan="2" class="f-14 f-w-600 text-capitalize text-center text-underline">Track Record of Projects</td>
+                                   <td colspan="2" class="f-14 f-w-600 text-capitalize text-center text-underline"><?= __('Track Record of Projects'); ?></td>
                                </tr>
                                <tr>
-                                   <td colspan="2" class="f-14 f-w-500 text-capitalize text-center">(Kindly mention projects undertaken in the last 3 years. If an organisation is existing for 3 years, track record from inception till date is required)</td>
+                                   <td colspan="2" class="f-14 f-w-500 text-capitalize text-center"><?= __('(Kindly mention projects undertaken in the last 3 years. If an organisation is existing for 3 years, track record from inception till date is required)'); ?></td>
                                </tr>
                                <tr>
                                    <td colspan="2">
                                        <table class="w-100 border-collapse">
                                            <tr style="background-color: #eeeeee;">
-                                               <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 9%;">Sr.No.</th>
-                                               <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 13%;">Project Description</th>
-                                               <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 13%;">Focus Area</th>
-                                               <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 13%;">Location</th>
-                                               <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 13%;">Period (To - From)</th>
-                                               <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 13%;">Value in INR Lakhs</th>
-                                               <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 13%;">Number of Beneficiaries</th>
-                                               <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 13%;">Partner Name (Funding Agency)</th>
+                                               <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 9%;"><?= __('Sr.No.'); ?></th>
+                                               <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 13%;"><?= __('Project Description'); ?></th>
+                                               <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 13%;"><?= __('Focus Area'); ?></th>
+                                               <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 13%;"><?= __('Location'); ?></th>
+                                               <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 13%;"><?= __('Period (To - From)'); ?></th>
+                                               <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 13%;"><?= __('Value in INR Lakhs'); ?></th>
+                                               <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 13%;"><?= __('Number of Beneficiaries'); ?></th>
+                                               <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 13%;"><?= __('Partner Name (Funding Agency)'); ?></th>
                                            </tr>
                                            <?php
 
@@ -1474,18 +1473,18 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                            <td colspan="2" class="f-14 f-w-600 text-capitalize"></td>
                        </tr>
                        <tr>
-                           <td colspan="2" class="f-14 f-w-600 text-capitalize text-center text-underline">Project Tracking</td>
+                           <td colspan="2" class="f-14 f-w-600 text-capitalize text-center text-underline"><?= __('Project Tracking'); ?></td>
                        </tr>
                        <tr>
                            <td colspan="2">
                                <table class="w-100 border-collapse">
                                    <tr style="background-color: #eeeeee;">
-                                       <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 9%;">Sr.No.</th>
-                                       <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 13%;">Tracking Name</th>
-                                       <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 13%;">Description</th>
-                                       <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 13%;">Start Date</th>
-                                       <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 13%;">End Date</th>
-                                       <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 13%;">Budget</th>
+                                       <th scope="col" class="f-13 f-w-600 text-capitalize text-start border" style="width: 9%;"><?= __('Sr.No.'); ?></th>
+                                       <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 13%;"><?= __('Tracking Name'); ?></th>
+                                       <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 13%;"><?= __('Description'); ?></th>
+                                       <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 13%;"><?= __('Start Date'); ?></th>
+                                       <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 13%;"><?= __('End Date'); ?></th>
+                                       <th scope="col" class="f-13 f-w-600 text-capitalize text-center border" style="width: 13%;"><?= __('Budget'); ?></th>
 
                                    </tr>
                                    <?php
@@ -1527,27 +1526,27 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                        <td colspan="2" class="f-14 f-w-600 text-capitalize"></td>
                    </tr>
                    <tr>
-                       <td colspan="2" class="f-14 f-w-600 text-capitalize text-center">Declaration</td>
+                       <td colspan="2" class="f-14 f-w-600 text-capitalize text-center"><?= __('Declaration'); ?></td>
                    </tr>
 
                    <tr>
                        <td colspan="2" class="f-14 f-w-500 text-capitalize">
-                           Signature: <?php echo htmlspecialchars($return['signature']) ?? ''; ?>
+                           <?= __('Signature'); ?>: <?php echo htmlspecialchars($return['signature']) ?? ''; ?>
                        </td>
                    </tr>
                    <tr>
                        <td colspan="2" class="f-14 f-w-500 text-capitalize">
-                           Name: <?php echo htmlspecialchars($return['name']) ?? ''; ?>
+                           <?= __('Name'); ?>: <?php echo htmlspecialchars($return['name']) ?? ''; ?>
                        </td>
                    </tr>
                    <tr>
                        <td colspan="2" class="f-14 f-w-500 text-capitalize">
-                           Designation : <?php echo htmlspecialchars($return['designation']) ?? ''; ?>
+                           <?= __('Designation'); ?> : <?php echo htmlspecialchars($return['designation']) ?? ''; ?>
                        </td>
                    </tr>
                    <tr>
                        <td colspan="2" class="f-14 f-w-500 text-capitalize">
-                           Seal of the Organisation :
+                           <?= __('Seal of the Organisation'); ?> :
                            <?php if (!empty($return['organisation_seal'])): ?>
                         <a  target="_blank"  href="uploads/csr/<?php echo htmlspecialchars($return['organisation_seal']); ?>"  class="mb-2" download><i class="ti-cloud-down f-15rem f-w-60"></i></a>
                     <?php endif; ?>
@@ -1560,35 +1559,35 @@ $proposalRidParam = !empty($return['id']) ? deocdeId('id:' . $return['id']) : ''
                <table>
                    <tr>
                        <th scope="col" colspan="2" class="f-14 f-w-500 text-capitalize">
-                           <input aria-label="Declaration Checkbox" type="checkbox" id="declaration-checkbox" >
-                           I / We hereby declare and certify that all the information given in the application form and in the documents submitted are true and correct to the best of my knowledge.
+                           <input aria-label="<?= htmlspecialchars(__('Declaration Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" id="declaration-checkbox" >
+                           <?= __('I / We hereby declare and certify that all the information given in the application form and in the documents submitted are true and correct to the best of my knowledge.'); ?>
                        </th>
                    </tr>
                    <tr>
                        <td colspan="2" class="f-14 f-w-500 text-capitalize">
-                           <input aria-label="Misrepresentation Checkbox" type="checkbox" id="misrepresentation-checkbox" >
-                           I / We acknowledge that in case of misrepresentation of information or furnishing of false information, my application is liable to be rejected and /or approved project is liable to be terminated by BPCL at any stage.
+                           <input aria-label="<?= htmlspecialchars(__('Misrepresentation Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" id="misrepresentation-checkbox" >
+                           <?= __('I / We acknowledge that in case of misrepresentation of information or furnishing of false information, my application is liable to be rejected and /or approved project is liable to be terminated by BPCL at any stage.'); ?>
                        </td>
                    </tr>
                    <tr>
                        <td colspan="2" class="f-14 f-w-500 text-capitalize">
-                           <input aria-label="Blacklist Checkbox" type="checkbox" id="blacklist-checkbox" >
-                           I / We further declare and certify that our organisation / company / group of companies has / have not been blacklisted or been put on the holiday list by any of the Public Sector Undertakings in India or Statutory authority or Government.
+                           <input aria-label="<?= htmlspecialchars(__('Blacklist Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" id="blacklist-checkbox" >
+                           <?= __('I / We further declare and certify that our organisation / company / group of companies has / have not been blacklisted or been put on the holiday list by any of the Public Sector Undertakings in India or Statutory authority or Government.'); ?>
                        </td>
                    </tr>
                </table>
                <div class="row">
 
                <p class="text-danger f-14 f-w-500 m-t-10">
-               Note: Please ensure all the above declarations are checked before submitting the application.
+               <?= __('Note: Please ensure all the above declarations are checked before submitting the application.'); ?>
                 </p>
                </div>
                <div class="row">
                    <div class="col-lg-6 mt-5">
-                       <button type="button" class="btn btn-primary waves-effect waves-light m-r-30 mt-3" id="editBtn">Edit</button>
+                       <button type="button" class="btn btn-primary waves-effect waves-light m-r-30 mt-3" id="editBtn"><?= __('Edit'); ?></button>
                    </div>
                    <div class="col-lg-6 mt-5">
-                       <button id="submit-button" class="btn btn-primary mt-3 float-end" type="button" data-record-id="<?php echo $last_rec_id ?>" disabled>Submit</button>
+                       <button id="submit-button" class="btn btn-primary mt-3 float-end" type="button" data-record-id="<?php echo $last_rec_id ?>" disabled><?= __('Submit'); ?></button>
                    </div>
                </div>
            <?php } ?>
