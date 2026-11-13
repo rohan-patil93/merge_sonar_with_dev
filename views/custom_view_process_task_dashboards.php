@@ -74,17 +74,17 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                 <div class="flex-shrink-0 m-r-30 m-l-25 mt-lg-0 mt-3">
                     <?php if($_SESSION['user']['user_photo']!=""){ ?>
                     <div class="symbol symbol-50 symbol-lg-120">
-                      <img src="../uploads/all/<?php echo $_SESSION['user']['user_photo']; ?>" class="img-120 " alt="Details" onerror="this.src='uploads/all/no-image.jpg';"/>
+                      <img src="../uploads/all/<?php echo $_SESSION['user']['user_photo']; ?>" class="img-120 " alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';"/>
                     </div>
 
                   <?php }else{ ?>
                     <div class="symbol symbol-50 symbol-lg-120">
-                      <img src="../uploads/all/<?php echo $_SESSION['employee']['gender'].".png"; ?>" class="img-120 " alt="Details" onerror="this.src='uploads/all/no-image.jpg';"/>
+                      <img src="../uploads/all/<?php echo $_SESSION['employee']['gender'].".png"; ?>" class="img-120 " alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';"/>
                     </div>
                   <?php } ?>
                     <div class="d-flex align-items-center w-100px w-sm-120px flex-column mt-3 ">
                         <div class="d-flex justify-content-between w-100 mt-auto mb-2">
-                          <span class="f-12 f-w-600">Task Proc </span>
+                          <span class="f-12 f-w-600"><?= __('Task Proc'); ?> </span>
                           <span class="f-12 f-w-600"><?php echo $totaltaskper; ?>%</span>
                         </div>
                         <div class="col-md-12">
@@ -122,7 +122,7 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                             <div class="card-body text-center p-0">
                                 <div class="text-facebook m-b-5"><i class="ti-user f-24 text-mute"></i></div>
                                 <h3 class="text-facebook f-w-700"><?php echo count((array)$onboard_employees)+count((array)$unallocatetaskemployee); ?></h3>
-                                <p>Total Process</p>
+                                <p><?= __('Total Process'); ?></p>
                             </div>
                         </div>
                     </div>
@@ -131,7 +131,7 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                             <div class="card-body text-center p-0">
                                 <div class="text-facebook m-b-5"><i class="ti-user f-24 text-mute"></i></div>
                                 <h3 class="text-facebook f-w-700"><?php echo $monthlycnt[$currentmonth]!=""?$monthlycnt[$currentmonth]:"0"; ?></h3>
-                                <p>Current Month</p>
+                                <p><?= __('Current Month'); ?></p>
                             </div>
                         </div>
                     </div>
@@ -140,7 +140,7 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                             <div class="card-body text-center p-0">
                                 <div class="text-facebook m-b-5"><i class="ti-user f-24 text-mute"></i></div>
                                 <h3 class="text-facebook f-w-700"><?php echo $monthlycnt[$previousmonth]!=""?$monthlycnt[$previousmonth]:"0"; ?></h3>
-                                <p>Previous Month</p>
+                                <p><?= __('Previous Month'); ?></p>
                             </div>
                         </div>
                     </div>
@@ -149,7 +149,7 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                             <div class="card-body text-center p-0">
                                 <div class="text-facebook m-b-5"><i class="ti-user f-24 text-mute"></i></div>
                                 <h3 class="text-facebook f-w-700"><?php echo $monthlycnt[$nextmonth]!=""?$monthlycnt[$nextmonth]:"0"; ?></h3>
-                                <p>Next Month</p>
+                                <p><?= __('Next Month'); ?></p>
                             </div>
                         </div>
                     </div>
@@ -159,42 +159,42 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                         <div class="s-caption  text-primary"><i class="ti-list f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo $totaltask; ?></h5>
-                            <p class="m-b-0 f-12">Total Task</p>
+                            <p class="m-b-0 f-12"><?= __('Total Task'); ?></p>
                         </div>
                     </div>
                     <div class="col-2 b-l-default text-center">
                         <div class="s-caption  text-danger"><i class="ti-time f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo $totalyettostartcnttask; ?></h5>
-                            <p class="m-b-0 f-12">Yet To Start</p>
+                            <p class="m-b-0 f-12"><?= __('Yet To Start'); ?></p>
                         </div>
                     </div>
                     <div class="col-2 b-l-default text-center">
                         <div class="s-caption  text-info"><i class="ti-timer f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo $totalinprogresstask; ?></h5>
-                            <p class="m-b-0  f-12">In Progress</p>
+                            <p class="m-b-0  f-12"><?= __('In Progress'); ?></p>
                         </div>
                     </div>
                     <div class="col-2 b-l-default text-center">
                         <div class="s-caption  text-info"><i class="ti-write f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo $totalreviewpendingtask; ?></h5>
-                            <p class="m-b-0 f-12">Review</p>
+                            <p class="m-b-0 f-12"><?= __('Review'); ?></p>
                         </div>
                     </div>
                     <div class="col-2 b-l-default text-center">
                         <div class="s-caption  text-success"><i class="ti-check-box f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo $totalapprovedtask; ?></h5>
-                            <p class="m-b-0 f-12">Completed</p>
+                            <p class="m-b-0 f-12"><?= __('Completed'); ?></p>
                         </div>
                     </div>
                     <div class="col-2 b-l-default text-center">
                         <div class="s-caption  text-danger"><i class="ti-pulse f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0 text-danger"><?php echo $totaldelayedcnttask; ?></h5>
-                            <p class="m-b-0 f-12 text-danger">Delayed Task</p>
+                            <p class="m-b-0 f-12 text-danger"><?= __('Delayed Task'); ?></p>
                         </div>
                     </div>
                 </div>
@@ -205,8 +205,8 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
 <div class="row mb-3">
     <div class="col-lg-9"></div>
     <div class="col-lg-3 text-right">
-        <a class="btn btn-primary waves-effect waves-light" href="index?option=COM_INSERT_EMPLOYEES"><i class="ti-plus"></i> Add Employee</a>
-        <a class="btn btn-primary waves-effect waves-light" href="index?option=COM_LIST_PROCESS_TASK_SETTINGS"><i class="ti-plus"></i> Task</a>
+        <a class="btn btn-primary waves-effect waves-light" href="index?option=COM_INSERT_EMPLOYEES"><i class="ti-plus"></i> <?= __('Add Employee'); ?></a>
+        <a class="btn btn-primary waves-effect waves-light" href="index?option=COM_LIST_PROCESS_TASK_SETTINGS"><i class="ti-plus"></i> <?= __('Task'); ?></a>
     </div>
 </div>
 
@@ -217,32 +217,32 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                 <div class="col-lg-8">
                     <ul class="nav md-tabs infisuite_tab mt-2 mb-2">
                         <li class="nav-item">
-                            <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#onboardning" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Onboarding<span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$onboard_employees);?></span></a>
+                            <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#onboardning" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Onboarding'); ?><span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$onboard_employees);?></span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#tasktab" role="tab"  onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Task<span class="form-label label label-xs label-danger m-l-10"><?php echo count((array)$onboard_employees);?></span></a>
+                            <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#tasktab" role="tab"  onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Task'); ?><span class="form-label label label-xs label-danger m-l-10"><?php echo count((array)$onboard_employees);?></span></a>
                         </li>
                          <li class="nav-item">
-                            <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#unallocatedtask" role="tab"  onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Unallocated Task<span class="form-label label label-xs label-danger m-l-10"><?php echo count((array)$unallocatetaskemployee);?></span></a>
+                            <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#unallocatedtask" role="tab"  onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Unallocated Task'); ?><span class="form-label label label-xs label-danger m-l-10"><?php echo count((array)$unallocatetaskemployee);?></span></a>
                         </li>
                     </ul>
                 </div>
                 <div class="col-lg-4 p-2">
-                    <select aria-label="Select option" class="form-select js-example-basic-signle" onchange="changeMonth(this.value)">
-                        <option value="all">All</option>
-                        <option value="pm">Previous Month</option>
-                        <option value="cm">Current Month</option>
-                        <option value="nm">Next Month</option>
+                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-signle" onchange="changeMonth(this.value)">
+                        <option value="all"><?= __('All'); ?></option>
+                        <option value="pm"><?= __('Previous Month'); ?></option>
+                        <option value="cm"><?= __('Current Month'); ?></option>
+                        <option value="nm"><?= __('Next Month'); ?></option>
                     </select>
                 </div>
             </div>
             <div class="tab-content tabs">
                 <div class="tab-pane card-body p-0" id="tasktab" role="tabpanel">
                     <div class="card-header  ">
-                        <h5>Employees Task&nbsp;<span class="form-label label label-md label-warning float-right"><?php echo count((array)$onboard_employees); ?> </span></h5>
+                        <h5><?= __('Employees Task'); ?>&nbsp;<span class="form-label label label-md label-warning float-right"><?php echo count((array)$onboard_employees); ?> </span></h5>
                         <div class="card-header-right table-card-header ">
                             <div class="input-group input-group-button mb-0">
-                                <input type="text" id="dynamicfilterhideshow" data-id="categoryfilter" data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
+                                <input type="text" id="dynamicfilterhideshow" data-id="categoryfilter" data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
                                 <span class="input-group-text addon-style">
                                     <span class=""><span class="ti-search text-white mt-2"></span></span>
                                 </span>
@@ -253,15 +253,15 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                          <?php if(count((array)($onboard_employees)) != 0){ ?>
                         <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
                             <thead>
-                                <tr><th scope="col">Emp Code</th>
-                                    <th scope="col">OnBoarding</th>
-                                    <th scope="col">Task</th>
-                                    <th scope="col">Yet To Start</th>
-                                    <th scope="col">Inprogress</th>
-                                    <th scope="col">Review</th>
-                                    <th scope="col">Completed</th>
-                                    <th scope="col" class="text-danger">Delayed</th>
-                                    <th scope="col">Progress</th>
+                                <tr><th scope="col"><?= __('Emp Code'); ?></th>
+                                    <th scope="col"><?= __('OnBoarding'); ?></th>
+                                    <th scope="col"><?= __('Task'); ?></th>
+                                    <th scope="col"><?= __('Yet To Start'); ?></th>
+                                    <th scope="col"><?= __('Inprogress'); ?></th>
+                                    <th scope="col"><?= __('Review'); ?></th>
+                                    <th scope="col"><?= __('Completed'); ?></th>
+                                    <th scope="col" class="text-danger"><?= __('Delayed'); ?></th>
+                                    <th scope="col"><?= __('Progress'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -285,9 +285,9 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
 
                                         <div class="align-middle">
                                             <?php if($onboard_emp['image'] !=""){?>
-                                                <img src="uploads/all/<?php echo $onboard_emp['image']; ?>"  class="img-radius img-40 align-top m-r-15" alt="Attachment Preview" onerror="this.src='uploads/all/no-image.jpg';">
+                                                <img src="uploads/all/<?php echo $onboard_emp['image']; ?>"  class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';">
                                             <?php } else { ?>
-                                                <span  alt="user" class="img-radius img-40 align-top m-r-10 custom_txt_round pt-1 f-12 text-center"><?php echo initials($onboard_emp['display_name']); ?></span>
+                                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-10 custom_txt_round pt-1 f-12 text-center"><?php echo initials($onboard_emp['display_name']); ?></span>
                                             <?php } ?>
                                             <div class="d-inline-block width73 text-primary">
                                                 <h6 class="mb-0"><?php echo $onboard_emp['display_name']; ?></h6>
@@ -310,7 +310,7 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                                         ?>
                                         <div class="row align-items-center m-b-15">
                                             <div class="col-auto">
-                                                <p class="m-b-0">Approved</p>
+                                                <p class="m-b-0"><?= __('Approved'); ?></p>
                                             </div>
                                             <div class="col text-end">
                                                 <p class="m-b-0 text-c-green"><?php echo $complettaskper; ?>%</p>
@@ -326,7 +326,7 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                         </table>
                                <?php  }else{ ?>
      <div class="card-px text-center py-20 mt-2">
-      <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> No Task </p>
+      <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> <?= __('No Task'); ?> </p>
       <div class="text-center px-4">
         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
       </div>
@@ -336,10 +336,10 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                 </div>
                 <div class="tab-pane card-body active p-0" id="onboardning" role="tabpanel">
                     <div class="card-header">
-                        <h5>Employees</h5>
+                        <h5><?= __('Employees'); ?></h5>
                         <div class="card-header-right table-card-header ">
                             <div class="input-group input-group-button mb-0">
-                                <input type="text" id="dynamicfilterhideshow_2" data-id="categoryfilter_2" data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
+                                <input type="text" id="dynamicfilterhideshow_2" data-id="categoryfilter_2" data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
                                 <span class="input-group-text addon-style">
                                     <span class=""><span class="ti-search text-white mt-2"></span></span>
                                 </span>
@@ -350,9 +350,9 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                            <?php if(count((array)($onboard_employees)) != 0){ ?>
                         <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter_2">
                             <thead>
-                                <tr><th scope="col">Emp Code</th>
-                                    <th scope="col">OnBoarding</th>
-                                    <th scope="col">Status</th>
+                                <tr><th scope="col"><?= __('Emp Code'); ?></th>
+                                    <th scope="col"><?= __('OnBoarding'); ?></th>
+                                    <th scope="col"><?= __('Status'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -374,9 +374,9 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                                     <td><a href="index.php?option=COM_VIEW_ONBOARDING_EMPLOYEE_DASHBOARDS&Rid=<?php echo $empiddecode; ?>" target="_blank">
                                          <div class="align-middle">
                                             <?php if($onboard_emp['image'] !=""){?>
-                                                <img src="uploads/all/<?php echo $onboard_emp['image']; ?>"  class="img-radius img-40 align-top m-r-15" alt="Attachment Preview" onerror="this.src='uploads/all/no-image.jpg';">
+                                                <img src="uploads/all/<?php echo $onboard_emp['image']; ?>"  class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';">
                                             <?php } else { ?>
-                                                <span  alt="user" class="img-radius img-40 align-top m-r-10 custom_txt_round pt-1 f-12 text-center"><?php echo initials($onboard_emp['display_name']); ?></span>
+                                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-10 custom_txt_round pt-1 f-12 text-center"><?php echo initials($onboard_emp['display_name']); ?></span>
                                             <?php } ?>
                                             <div class="d-inline-block width73 text-primary">
                                                 <h6 class="mb-0"><?php echo $onboard_emp['display_name']; ?></h6>
@@ -388,9 +388,9 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                                     <td><?php echo fromDate($onboard_emp['joining_date']); ?></td>
                                     <td>
                                     <?php if($taskresult['total_task_cnt'] <= $taskresult['approve_cnt']){ ?>
-                                        <span class="form-label label label-xs label-success m-l-10">Completed</span>
+                                        <span class="form-label label label-xs label-success m-l-10"><?= __('Completed'); ?></span>
                                     <?php  }else{ ?>
-                                        <span class="form-label label label-xs label-danger m-l-10">Pendding</span>
+                                        <span class="form-label label label-xs label-danger m-l-10"><?= __('Pendding'); ?></span>
                                     <?php  }
                                          ?>
                                     </td>
@@ -401,7 +401,7 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                         </table>
                         <?php  }else{ ?>
      <div class="card-px text-center py-20 mt-2">
-      <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> No Task </p>
+      <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> <?= __('No Task'); ?> </p>
       <div class="text-center px-4">
         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
       </div>
@@ -411,10 +411,10 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                 </div>
                 <div class="tab-pane card-body p-0" id="unallocatedtask" role="tabpanel">
                     <div class="card-header">
-                        <h5>Unallocated Task</h5>
+                        <h5><?= __('Unallocated Task'); ?></h5>
                         <div class="card-header-right table-card-header ">
                             <div class="input-group input-group-button mb-0">
-                                <input type="text" id="dynamicfilterhideshow_3" data-id="categoryfilter_3" data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
+                                <input type="text" id="dynamicfilterhideshow_3" data-id="categoryfilter_3" data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
                                 <span class="input-group-text addon-style">
                                     <span class=""><span class="ti-search text-white mt-2"></span></span>
                                 </span>
@@ -425,9 +425,9 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                           <?php if(count((array)($unallocatetaskemployee)) != 0){ ?>
                         <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter_3">
                             <thead>
-                                <tr><th scope="col">Emp Code</th>
-                                    <th scope="col">OnBoarding</th>
-                                    <th scope="col">Action</th>
+                                <tr><th scope="col"><?= __('Emp Code'); ?></th>
+                                    <th scope="col"><?= __('OnBoarding'); ?></th>
+                                    <th scope="col"><?= __('Action'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -440,9 +440,9 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                                      <td><a href="index.php?option=COM_VIEW_ONBOARDING_EMPLOYEE_DASHBOARDS&Rid=<?php echo $empiddecode; ?>" target="_blank">
                                          <div class="align-middle">
                                             <?php if($onboard_emp['image'] !=""){?>
-                                                <img src="uploads/all/<?php echo $onboard_emp['image']; ?>"  class="img-radius img-40 align-top m-r-15" alt="Attachment Preview" onerror="this.src='uploads/all/no-image.jpg';">
+                                                <img src="uploads/all/<?php echo $onboard_emp['image']; ?>"  class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';">
                                             <?php } else { ?>
-                                                <span  alt="user" class="img-radius img-40 align-top m-r-10 custom_txt_round pt-1 f-12 text-center"><?php echo initials($onboard_emp['display_name']); ?></span>
+                                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-10 custom_txt_round pt-1 f-12 text-center"><?php echo initials($onboard_emp['display_name']); ?></span>
                                             <?php } ?>
                                             <div class="d-inline-block width73 text-primary">
                                                 <h6 class="mb-0"><?php echo $onboard_emp['display_name']; ?></h6>
@@ -453,14 +453,14 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                                      </td>
                                     <td><?php echo fromDate($onboard_emp['joining_date']); ?></td>
                                     <td>
-                                        <button class="btn btn-primary waves-effect waves-light" onclick="assignTaskEmployee('<?php echo $onboard_emp['id']; ?>')"><i class="ti-plus"></i> Assign Task</button></td>
+                                        <button class="btn btn-primary waves-effect waves-light" onclick="assignTaskEmployee('<?php echo $onboard_emp['id']; ?>')"><i class="ti-plus"></i> <?= __('Assign Task'); ?></button></td>
                                 </tr>
                             <?php } ?>
                             </tbody>
                         </table>
                         <?php  }else{ ?>
                              <div class="card-px text-center py-20 mt-2">
-                              <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> No Task </p>
+                              <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> <?= __('No Task'); ?> </p>
                               <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                               </div>
@@ -476,10 +476,10 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header  ">
-                    <h5>Review Pending  &nbsp;<span class="form-label label label-md label-warning float-right"><?php echo count((array)$reviewpendinguser); ?> </span></h5>
+                    <h5><?= __('Review Pending'); ?>  &nbsp;<span class="form-label label label-md label-warning float-right"><?php echo count((array)$reviewpendinguser); ?> </span></h5>
                     <div class="card-header-right table-card-header ">
                         <div class="input-group input-group-button mb-0">
-                            <input type="text" id="dynamicfilterhideshow_4" data-id="categoryfilter_4" data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
+                            <input type="text" id="dynamicfilterhideshow_4" data-id="categoryfilter_4" data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
                             <span class="input-group-text addon-style">
                                 <span class=""><span class="ti-search text-white mt-2"></span></span>
                             </span>
@@ -490,9 +490,9 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                     <?php if(count((array)($reviewpendinguser)) != 0){ ?>
                     <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter_4">
                         <thead>
-                            <tr><th scope="col">Emp Code</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">OnBoarding Date</th>
+                            <tr><th scope="col"><?= __('Emp Code'); ?></th>
+                                <th scope="col"><?= __('Name'); ?></th>
+                                <th scope="col"><?= __('OnBoarding Date'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -503,9 +503,9 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                             <tr>
                                 <td><a href="index.php?option=COM_VIEW_ONBOARDING_EMPLOYEE_DASHBOARDS&Rid=<?php echo $empiddecode; ?>" target="_blank"><div class="align-middle">
                                             <?php if($onboardinguseridres['image'] !=""){?>
-                                                <img src="uploads/all/<?php echo $onboardinguseridres['image']; ?>"  class="img-radius img-40 align-top m-r-15" alt="User Profile" onerror="this.src='uploads/all/no-image.jpg';">
+                                                <img src="uploads/all/<?php echo $onboardinguseridres['image']; ?>"  class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';">
                                             <?php } else { ?>
-                                                <span  alt="user" class="img-radius img-40 align-top m-r-10 custom_txt_round pt-1 f-12 text-center"><?php echo initials($onboardinguseridres['display_name']); ?></span>
+                                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-10 custom_txt_round pt-1 f-12 text-center"><?php echo initials($onboardinguseridres['display_name']); ?></span>
                                             <?php } ?>
                                             <div class="d-inline-block width73 text-primary">
                                                 <h6 class="mb-0"><?php echo $onboardinguseridres['display_name']; ?></h6>
@@ -522,7 +522,7 @@ $totaltaskper = $totaltask !=0?round(($totalapprovedtask/$totaltask)*100):"0";
                     </table>
                     <?php  }else{ ?>
      <div class="card-px text-center py-20 mt-2">
-      <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> No Task </p>
+      <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> <?= __('No Task'); ?> </p>
       <div class="text-center px-4">
         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
       </div>
