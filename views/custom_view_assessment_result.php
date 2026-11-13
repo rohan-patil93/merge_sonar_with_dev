@@ -155,11 +155,11 @@ function submitassessment(){
 
   Swal.fire({
     title: "",
-    text: "Time is Expired And Please Submit",
+    text: <?php echo json_encode(__('Time is Expired And Please Submit'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
     buttonsStyling: false,
-    confirmButtonText: "<i class='la la-thumbs-up'></i>OK",
+    confirmButtonText: "<i class='la la-thumbs-up'></i><?= htmlspecialchars(__('OK'), ENT_QUOTES, 'UTF-8'); ?>",
     showCancelButton: false,
-    cancelButtonText: "<i class='la la-thumbs-down'></i> No I will do it later",
+    cancelButtonText: "<i class='la la-thumbs-down'></i> <?= htmlspecialchars(__('No I will do it later'), ENT_QUOTES, 'UTF-8'); ?>",
     customClass: {
      confirmButton: "btn btn-success",
      cancelButton: "btn btn-default"
@@ -183,12 +183,12 @@ function submitassessment(){
 
 
         <div class="card-header mb-3">
-                        <h5> <?php echo "Responses"; ?></h5>
+                        <h5> <?php echo __("Responses"); ?></h5>
                         <div class="card-header-right">
 
                       <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                                 <i class="icofont icofont-reply"></i>
-                                Back
+                                <?= __('Back'); ?>
                             </a>
                         </div>
                     </div>
@@ -237,7 +237,7 @@ function submitassessment(){
                         }
                         ?>
                         <b> <div class="<?php echo $option_cat;?>-group required">
-                          <input aria-label="Input field" type="<?php echo $option_cat;?>" value="<?php echo $option;?>" name="response_option<?php echo $questionid?>[]" readonly <?php echo in_array($option,$selectedoption )==1 ?  'Checked': '';?> disabled>
+                          <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="<?php echo $option_cat;?>" value="<?php echo $option;?>" name="response_option<?php echo $questionid?>[]" readonly <?php echo in_array($option,$selectedoption )==1 ?  'Checked': '';?> disabled>
                           <label for="q1"><?php echo $option; ?> </label> </div>
                         </b>
                       <?php }
@@ -245,7 +245,7 @@ function submitassessment(){
                     elseif($display_questions[$questionid]['options_display_type']=='FT'){
                      $selectedoption =json_decode($answer[$questionid],1)[0];
                      ?>
-                     <textarea aria-label="Text area" id="response_option<?php echo $questionid;?>" readonly  class="form-control mt-10 col-md-10" placeholder=""><?php echo $selectedoption;?></textarea>
+                     <textarea aria-label="<?= htmlspecialchars(__('Text area'), ENT_QUOTES, 'UTF-8'); ?>" id="response_option<?php echo $questionid;?>" readonly  class="form-control mt-10 col-md-10" placeholder=""><?php echo $selectedoption;?></textarea>
                      <?php
                    }
 
@@ -256,7 +256,7 @@ function submitassessment(){
                   <?php  }else { ?>
                    <h5 class="f-14"> <i class="flaticon2-cross text-danger"></i>
                  <?php  } ?>
-                 Correct Answer: <?php echo $correct_answer; ?></h5>
+                 <?= __('Correct Answer'); ?>: <?php echo $correct_answer; ?></h5>
                  </div>
                </div>
              <?php } ?>
