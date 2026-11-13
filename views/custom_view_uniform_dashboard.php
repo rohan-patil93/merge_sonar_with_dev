@@ -41,14 +41,14 @@ $count_approved = count($approved);
 
 <!-- COUNT CARDS -->
 <div class="text-end">
-    <a class="btn btn-primary" href="index.php?option=COM_VIEW_UNIFORM_MASTER">+ Request Uniform</a>
+    <a class="btn btn-primary" href="index.php?option=COM_VIEW_UNIFORM_MASTER">+ <?= __('Request Uniform'); ?></a>
 </div>
 <div class="row mt-2">
 
     <div class="col-md-3">
         <div class="card bg-primary">
             <div class="card-body text-center">
-                <h5 class="text-white">All Requests</h5>
+                <h5 class="text-white"><?= __('All Requests'); ?></h5>
                 <h2><?= $count_all ?></h2>
             </div>
         </div>
@@ -57,7 +57,7 @@ $count_approved = count($approved);
     <div class="col-md-3">
         <div class="card bg-info">
             <div class="card-body text-center">
-                <h5 class="text-white">Active</h5>
+                <h5 class="text-white"><?= __('Active'); ?></h5>
                 <h2><?= $count_active ?></h2>
             </div>
         </div>
@@ -66,7 +66,7 @@ $count_approved = count($approved);
     <div class="col-md-3">
         <div class="card bg-warning">
             <div class="card-body text-center">
-                <h5 class="text-white">Pending</h5>
+                <h5 class="text-white"><?= __('Pending'); ?></h5>
                 <h2><?= $count_pending ?></h2>
             </div>
         </div>
@@ -75,7 +75,7 @@ $count_approved = count($approved);
     <div class="col-md-3">
         <div class="card bg-success">
             <div class="card-body text-center">
-                <h5 class="text-white">Approved</h5>
+                <h5 class="text-white"><?= __('Approved'); ?></h5>
                 <h2><?= $count_approved ?></h2>
             </div>
         </div>
@@ -89,9 +89,9 @@ $count_approved = count($approved);
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
-                <h5>All Requests</h5><span class="form-label label label-sm label-success "> <?php echo $count_all; ?> </span>
+                <h5><?= __('All Requests'); ?></h5><span class="form-label label label-sm label-success "> <?php echo $count_all; ?> </span>
                 <div class="card-header-right">
-                    <input aria-label="Search..." type="text" class="form-control mb-2 search-box" placeholder="Search..." data-target="tbl-all">
+                    <input aria-label="<?= htmlspecialchars(__('Search...'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control mb-2 search-box" placeholder="<?= htmlspecialchars(__('Search...'), ENT_QUOTES, 'UTF-8'); ?>" data-target="tbl-all">
 
                 </div>
             </div>
@@ -101,12 +101,12 @@ $count_approved = count($approved);
                     <table class="table table-hover" id="tbl-all">
                         <thead>
                         <tr class="bg-light">
-                            <th scope="col">Request No</th>
-                            <th scope="col">Employee</th>
-                            <th scope="col">Location</th>
-                            <th scope="col">Request Date</th>
-                            <th scope="col">Require Date</th>
-                            <th scope="col">Status</th>
+                            <th scope="col"><?= __('Request No'); ?></th>
+                            <th scope="col"><?= __('Employee'); ?></th>
+                            <th scope="col"><?= __('Location'); ?></th>
+                            <th scope="col"><?= __('Request Date'); ?></th>
+                            <th scope="col"><?= __('Require Date'); ?></th>
+                            <th scope="col"><?= __('Status'); ?></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -130,11 +130,11 @@ $count_approved = count($approved);
 
                                 <td>
                                     <?php if ($r['current_status'] == 0) { ?>
-                                        <span class="badge bg-primary">Active</span>
+                                        <span class="badge bg-primary"><?= __('Active'); ?></span>
                                     <?php } elseif ($r['current_status'] == 199) { ?>
-                                        <span class="badge bg-success">Approved</span>
+                                        <span class="badge bg-success"><?= __('Approved'); ?></span>
                                     <?php } elseif ($r['current_status'] > 0 && $r['current_status'] < 199) { ?>
-                                        <span class="badge bg-warning">Pending</span>
+                                        <span class="badge bg-warning"><?= __('Pending'); ?></span>
                                     <?php } else { ?>
                                         <span class="badge bg-secondary"><?= $r['current_status'] ?></span>
                                     <?php } ?>
@@ -156,11 +156,11 @@ $count_approved = count($approved);
                                 <td colspan="6">
                                     <div class="text-center">
                                         <p class="text-muted f-16 fw-bold m-b-30">
-                                            <i class="fa fa-warning"></i> No Records
+                                            <i class="fa fa-warning"></i> <?= __('No Records'); ?>
                                         </p>
                                         <div class="px-4">
                                             <img class="mw-100 mh-300px" src="assets/images/work.png"
-                                                style="max-height:300px;" alt="Preview">
+                                                style="max-height:300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                         </div>
                                     </div>
                                 </td>
@@ -178,9 +178,9 @@ $count_approved = count($approved);
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
-                <h5>Active Requests</h5><span class="form-label label label-sm label-success "> <?php echo $count_active; ?> </span>
+                <h5><?= __('Active Requests'); ?></h5><span class="form-label label label-sm label-success "> <?php echo $count_active; ?> </span>
                 <div class="card-header-right">
-                    <input aria-label="Search..." type="text" class="form-control mb-2 search-box" placeholder="Search..." data-target="tbl-active">
+                    <input aria-label="<?= htmlspecialchars(__('Search...'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control mb-2 search-box" placeholder="<?= htmlspecialchars(__('Search...'), ENT_QUOTES, 'UTF-8'); ?>" data-target="tbl-active">
                 </div>
             </div>
 
@@ -188,12 +188,12 @@ $count_approved = count($approved);
                 <div class="table-responsive">
                     <table class="table table-hover" id="tbl-active">
                         <tr class="bg-light">
-                            <th scope="col">Request No</th>
-                            <th scope="col">Employee</th>
-                            <th scope="col">Location</th>
-                            <th scope="col">Request Date</th>
-                            <th scope="col">Require Date</th>
-                            <th scope="col">Status</th>
+                            <th scope="col"><?= __('Request No'); ?></th>
+                            <th scope="col"><?= __('Employee'); ?></th>
+                            <th scope="col"><?= __('Location'); ?></th>
+                            <th scope="col"><?= __('Request Date'); ?></th>
+                            <th scope="col"><?= __('Require Date'); ?></th>
+                            <th scope="col"><?= __('Status'); ?></th>
                         </tr>
 
                         <?php if (!empty($active)) {
@@ -212,7 +212,7 @@ $count_approved = count($approved);
                                 <td><?= $r['location_name'] ?></td>
                                 <td><?= $r['request_date'] ?></td>
                                 <td><?= $r['require_date'] ?></td>
-                                <td><span class="badge bg-primary">Active</span></td>
+                                <td><span class="badge bg-primary"><?= __('Active'); ?></span></td>
                             </tr>
 
                             <tr id="items-row-active-<?= $r['id'] ?>"
@@ -229,11 +229,11 @@ $count_approved = count($approved);
                                 <td colspan="6">
                                     <div class="text-center">
                                         <p class="text-muted f-16 fw-bold m-b-30">
-                                            <i class="fa fa-warning"></i> No Records
+                                            <i class="fa fa-warning"></i> <?= __('No Records'); ?>
                                         </p>
                                         <div class="px-4">
                                             <img class="mw-100 mh-300px" src="assets/images/work.png"
-                                                style="max-height:300px;" alt="Preview">
+                                                style="max-height:300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                         </div>
                                     </div>
                                 </td>
@@ -254,9 +254,9 @@ $count_approved = count($approved);
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
-                <h5>Pending Requests</h5><span class="form-label label label-sm label-success "> <?php echo $count_pending; ?> </span>
+                <h5><?= __('Pending Requests'); ?></h5><span class="form-label label label-sm label-success "> <?php echo $count_pending; ?> </span>
                 <div class="card-header-right">
-                    <input aria-label="Search..." type="text" class="form-control mb-2 search-box" placeholder="Search..." data-target="tbl-pending">
+                    <input aria-label="<?= htmlspecialchars(__('Search...'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control mb-2 search-box" placeholder="<?= htmlspecialchars(__('Search...'), ENT_QUOTES, 'UTF-8'); ?>" data-target="tbl-pending">
                 </div>
             </div>
 
@@ -264,12 +264,12 @@ $count_approved = count($approved);
                 <div class="table-responsive">
                     <table class="table table-hover"  id="tbl-pending">
                         <tr class="bg-light">
-                            <th scope="col">Request No</th>
-                            <th scope="col">Employee</th>
-                            <th scope="col">Location</th>
-                            <th scope="col">Request Date</th>
-                            <th scope="col">Require Date</th>
-                            <th scope="col">Status</th>
+                            <th scope="col"><?= __('Request No'); ?></th>
+                            <th scope="col"><?= __('Employee'); ?></th>
+                            <th scope="col"><?= __('Location'); ?></th>
+                            <th scope="col"><?= __('Request Date'); ?></th>
+                            <th scope="col"><?= __('Require Date'); ?></th>
+                            <th scope="col"><?= __('Status'); ?></th>
                         </tr>
 
                         <?php if (!empty($pending)) {
@@ -288,7 +288,7 @@ $count_approved = count($approved);
                                 <td><?= $r['location_name'] ?></td>
                                 <td><?= $r['request_date'] ?></td>
                                 <td><?= $r['require_date'] ?></td>
-                                <td><span class="badge bg-warning">Pending</span></td>
+                                <td><span class="badge bg-warning"><?= __('Pending'); ?></span></td>
                             </tr>
 
                             <tr id="items-row-pending-<?= $r['id'] ?>"
@@ -305,11 +305,11 @@ $count_approved = count($approved);
                                 <td colspan="6">
                                     <div class="text-center">
                                         <p class="text-muted f-16 fw-bold m-b-30">
-                                            <i class="fa fa-warning"></i> No Records
+                                            <i class="fa fa-warning"></i> <?= __('No Records'); ?>
                                         </p>
                                         <div class="px-4">
                                             <img class="mw-100 mh-300px" src="assets/images/work.png"
-                                                style="max-height:300px;" alt="Preview">
+                                                style="max-height:300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                         </div>
                                     </div>
                                 </td>
@@ -327,9 +327,9 @@ $count_approved = count($approved);
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
-                <h5>Approved Requests</h5><span class="form-label label label-sm label-success "> <?php echo $count_approved; ?> </span>
+                <h5><?= __('Approved Requests'); ?></h5><span class="form-label label label-sm label-success "> <?php echo $count_approved; ?> </span>
                 <div class="card-header-right">
-                    <input aria-label="Search..." type="text" class="form-control mb-2 search-box" placeholder="Search..." data-target="tbl-approved">
+                    <input aria-label="<?= htmlspecialchars(__('Search...'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control mb-2 search-box" placeholder="<?= htmlspecialchars(__('Search...'), ENT_QUOTES, 'UTF-8'); ?>" data-target="tbl-approved">
                 </div>
             </div>
 
@@ -337,12 +337,12 @@ $count_approved = count($approved);
                 <div class="table-responsive">
                     <table class="table table-hover" id="tbl-approved">
                         <tr class="bg-light">
-                            <th scope="col">Request No</th>
-                            <th scope="col">Employee</th>
-                            <th scope="col">Location</th>
-                            <th scope="col">Request Date</th>
-                            <th scope="col">Require Date</th>
-                            <th scope="col">Status</th>
+                            <th scope="col"><?= __('Request No'); ?></th>
+                            <th scope="col"><?= __('Employee'); ?></th>
+                            <th scope="col"><?= __('Location'); ?></th>
+                            <th scope="col"><?= __('Request Date'); ?></th>
+                            <th scope="col"><?= __('Require Date'); ?></th>
+                            <th scope="col"><?= __('Status'); ?></th>
                         </tr>
 
                         <?php if (!empty($approved)) {
@@ -361,7 +361,7 @@ $count_approved = count($approved);
                                 <td><?= $r['location_name'] ?></td>
                                 <td><?= $r['request_date'] ?></td>
                                 <td><?= $r['require_date'] ?></td>
-                                <td><span class="badge bg-success">Approved</span></td>
+                                <td><span class="badge bg-success"><?= __('Approved'); ?></span></td>
                             </tr>
 
                             <tr id="items-row-approved-<?= $r['id'] ?>"
@@ -378,11 +378,11 @@ $count_approved = count($approved);
                                 <td colspan="6">
                                     <div class="text-center">
                                         <p class="text-muted f-16 fw-bold m-b-30">
-                                            <i class="fa fa-warning"></i> No Records
+                                            <i class="fa fa-warning"></i> <?= __('No Records'); ?>
                                         </p>
                                         <div class="px-4">
                                             <img class="mw-100 mh-300px" src="assets/images/work.png"
-                                                style="max-height:300px;" alt="Preview">
+                                                style="max-height:300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                         </div>
                                     </div>
                                 </td>
@@ -429,11 +429,11 @@ $(document).on("click", ".req-toggle", function() {
                 <table class="table table table-hover table-sm">
                     <thead class="bg-light">
                         <tr>
-                            <th scope="col">Item</th>
-                            <th scope="col">Color</th>
-                            <th scope="col">Size</th>
-                            <th scope="col">Uniform Type</th>
-                            <th scope="col">Qty</th>
+                            <th scope="col"><?= htmlspecialchars(__('Item'), ENT_QUOTES, 'UTF-8'); ?></th>
+                            <th scope="col"><?= htmlspecialchars(__('Color'), ENT_QUOTES, 'UTF-8'); ?></th>
+                            <th scope="col"><?= htmlspecialchars(__('Size'), ENT_QUOTES, 'UTF-8'); ?></th>
+                            <th scope="col"><?= htmlspecialchars(__('Uniform Type'), ENT_QUOTES, 'UTF-8'); ?></th>
+                            <th scope="col"><?= htmlspecialchars(__('Qty'), ENT_QUOTES, 'UTF-8'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -454,7 +454,7 @@ $(document).on("click", ".req-toggle", function() {
             } else {
                 html += `
                     <tr>
-                        <td colspan="5" class="text-center text-muted">No Items Found</td>
+                        <td colspan="5" class="text-center text-muted"><?= htmlspecialchars(__('No Items Found'), ENT_QUOTES, 'UTF-8'); ?></td>
                     </tr>
                 `;
             }
