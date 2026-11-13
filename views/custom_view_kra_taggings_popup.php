@@ -18,8 +18,8 @@ $kralist = $result['appraisal_key_result_areas'];
 $kpilist = $result['appraisal_key_performance_indicators'];
 ?>
 <div class="modal-header ">
-  <h5 class="modal-title"> View Target </h5>
-  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <h5 class="modal-title"> <?= __('View Target'); ?> </h5>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
   <div class="modal-body" >
     <div class="">
@@ -34,16 +34,16 @@ $kpilist = $result['appraisal_key_performance_indicators'];
                   <div class="card-body">
                     <div class="row mb-2">
                       <div class="col-lg-4 f-w-700">
-                        KRI Name
+                        <?= __('KRI Name'); ?>
                       </div>
                       <div class="col-lg-3 f-w-700">
-                        Frequency
+                        <?= __('Frequency'); ?>
                       </div>
                       <div class="col-lg-3 f-w-700 text-right">
-                        Weightage
+                        <?= __('Weightage'); ?>
                       </div>
                       <div class="col-lg-2 f-w-700 text-right">
-                        Taraget
+                        <?= __('Taraget'); ?>
                       </div>
                   </div>
                  <?php foreach($ogoalval as $kpilit){ ?>
@@ -72,5 +72,5 @@ $kpilist = $result['appraisal_key_performance_indicators'];
         </div>
       </div>
 <div class="modal-footer mt-5" >
-  <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Cancel</button>
+  <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Cancel'); ?></button>
 </div>
