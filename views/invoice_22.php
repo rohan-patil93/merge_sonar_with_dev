@@ -161,11 +161,11 @@ function emptyCheck($valu){
                         <img src="uploads/all/file_1704095913_659270a975d4a.png" style="width:100px; height: 34px;">
                     </td>
                     <td class="p-2 f-12 border-0">
-                        <b class="f-40">Invoice</b>
+                        <b class="f-40"><?= __('Invoice'); ?></b>
                         <table>
                             <tr>
                                 <th scope="col" class="f-12 p-0">
-                                    Invoice#:      
+                                    <?= __('Invoice#'); ?>:      
                                 </th>
                                 <th scope="col" class="f-12 p-0">
                                     &nbsp 57989            
@@ -173,10 +173,10 @@ function emptyCheck($valu){
                             </tr>
                             <tr>
                                 <th scope="col" class="f-12 p-0">
-                                    Date:            
+                                    <?= __('Date'); ?>:            
                                 </th>
                                 <th scope="col" class="f-12 p-0">
-                                    &nbsp 04 June 2024            
+                                    &nbsp <?= __('04 June 2024'); ?>            
                                 </th>
                             </tr>
                         </table>
@@ -184,26 +184,26 @@ function emptyCheck($valu){
                 </tr>
                 <tr>
                     <td class="p-2 f-12 border-0 pt-4 pb-4">
-                        <span>Bill To</span>
-                        <b class="f-w-600 d-block">Jonathan Deo</b>
-                        <p class="m-0 f-12">812, Block 5, MH2 BUILDING, HYD, <br />500009</p>
+                        <span><?= __('Bill To'); ?></span>
+                        <b class="f-w-600 d-block"><?= __('Jonathan Deo'); ?></b>
+                        <p class="m-0 f-12"><?= __('812, Block 5, MH2 BUILDING, HYD,'); ?> <br />500009</p>
                     </td>
                     <td class="p-2 f-12 border-0 pt-4 pb-4">
-                        <p class="m-0 f-12">Total Due</p>
+                        <p class="m-0 f-12"><?= __('Total Due'); ?></p>
                         <p class="m-0 f-w-600 f-14">USD: $1400</p>
                     </td>
                 </tr>
           
                 <tr style="border-bottom: 1px solid #000000;">
-                    <th scope="col" class="f-12">ITEM DESCRIPTION</th>
-                    <th scope="col" class="f-12 text-center">PRICE</th>
-                    <th scope="col" class="f-12 text-cneter">QTY</th>
-                    <th scope="col" class="f-12 text-end">TOTAL</th>
+                    <th scope="col" class="f-12"><?= __('ITEM DESCRIPTION'); ?></th>
+                    <th scope="col" class="f-12 text-center"><?= __('PRICE'); ?></th>
+                    <th scope="col" class="f-12 text-cneter"><?= __('QTY'); ?></th>
+                    <th scope="col" class="f-12 text-end"><?= __('TOTAL'); ?></th>
                 </tr>
                 <tr>
                     <td class="f-12" style="border-right: 1px solid #000000;">
-                        <b class="f-w-600 m-0">Web Design</b>
-                        <p class="m-0 f-12">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <b class="f-w-600 m-0"><?= __('Web Design'); ?></b>
+                        <p class="m-0 f-12"><?= __('Lorem Ipsum is simply dummy text of the printing and typesetting industry.'); ?></p>
                     </td>
                     <th scope="col" class="f-12 text-center" align="center" style="border-right: 1px solid #000000;">
                         $150.00
@@ -217,8 +217,8 @@ function emptyCheck($valu){
                 </tr>
                 <tr>
                     <td class="f-12" style="border-right: 1px solid #000000;">
-                        <b class="f-w-600 m-0">Wedding Photography</b>
-                        <p class="m-0 f-12">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <b class="f-w-600 m-0"><?= __('Wedding Photography'); ?></b>
+                        <p class="m-0 f-12"><?= __('Lorem Ipsum is simply dummy text of the printing and typesetting industry.'); ?></p>
                     </td>
                     <th scope="col" class="f-12 text-center" align="right" style="border-right: 1px solid #000000;">
                         $150.00
@@ -232,8 +232,8 @@ function emptyCheck($valu){
                 </tr>
                 <tr>
                     <td class="f-12" style="border-right: 1px solid #000000;">
-                        <b class="f-w-600 m-0">Web Development</b>
-                        <p class="m-0 f-12">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <b class="f-w-600 m-0"><?= __('Web Development'); ?></b>
+                        <p class="m-0 f-12"><?= __('Lorem Ipsum is simply dummy text of the printing and typesetting industry.'); ?></p>
                     </td>
                     <th scope="col" class="f-12 text-center" align="right" style="border-right: 1px solid #000000;">
                         $150.00
@@ -262,9 +262,9 @@ function emptyCheck($valu){
                 <tr>
                     <td class="border-0"></td>
                     <td class="f-12 border-0" colspan="" align="left">
-                        <b class="f-w-600">Sub Total</b>
-                        <b class="d-block">Tax Vet 10%</b>
-                        <b class="d-block">Discount 10%</b>
+                        <b class="f-w-600"><?= __('Sub Total'); ?></b>
+                        <b class="d-block"><?= __('Tax Vet 10%'); ?></b>
+                        <b class="d-block"><?= __('Discount 10%'); ?></b>
                     </td>
                     <td class="f-12 border-0" colspan="2" align="right">
                         <b class="f-w-600">$450.00</b>
@@ -274,18 +274,18 @@ function emptyCheck($valu){
                 </tr>
                 <tr>
                     <td class="border-0 f-12">
-                        <b class="f-w-600 d-block">Payment Method</b>
+                        <b class="f-w-600 d-block"><?= __('Payment Method'); ?></b>
                         <p class="m-0 f-12">
-                            <b class="f-w-600">Payment: </b>
-                            <b>Lorem Ipsum is simply dummy text of</b>
+                            <b class="f-w-600"><?= __('Payment'); ?>: </b>
+                            <b><?= __('Lorem Ipsum is simply dummy text of'); ?></b>
                         </p>
                         <p class="m-0 f-12">
-                            <b class="f-w-600">Paypal: </b>
-                            <b>Lorem Ipsum is simply dummy text of</b>
+                            <b class="f-w-600"><?= __('Paypal'); ?>: </b>
+                            <b><?= __('Lorem Ipsum is simply dummy text of'); ?></b>
                         </p>
                     </td>
                     <td class="f-12" colspan="" align="left" style="border-top:1px solid #000000; border-bottom: 0; vertical-align: top;">
-                        <b class="f-w-600">Grand Total</b>
+                        <b class="f-w-600"><?= __('Grand Total'); ?></b>
                     </td>
                     <td class="f-12" colspan="2" align="right" style="border-top:1px solid #000000; border-bottom: 0; vertical-align: top;">
                         <b class="f-w-600">$670.00</b>
@@ -293,31 +293,31 @@ function emptyCheck($valu){
                 </tr>
                 <tr>
                     <td class="f-12 border-0 pt-3" colspan="2" align="">
-                        <b class="f-w-600">Contact</b>
+                        <b class="f-w-600"><?= __('Contact'); ?></b>
                         <p class="m-0 f-12">
-                            812, Block 5, MH2 BUILDING, HYD,500009
+                            <?= __('812, Block 5, MH2 BUILDING, HYD,500009'); ?>
                         </p>
                         <b class="f-w-600">xyz@gmail.com</b>
                     </td>
                     <td class="f-12 border-0" colspan="2" align="">
-                        <b class="d-block" style="font-family: cursive; font-style: oblique; font-size: 14px;">Mark Willams</b>
-                        <b class="f-w-600">Mark Willams</b>
+                        <b class="d-block" style="font-family: cursive; font-style: oblique; font-size: 14px;"><?= __('Mark Willams'); ?></b>
+                        <b class="f-w-600"><?= __('Mark Willams'); ?></b>
                         <p class="m-0 f-12">
-                            Manager
+                            <?= __('Manager'); ?>
                         </p>
                     </td>
                 </tr>
                 <tr>
                     <td class="f-12 pt-3 pb-3 border-0" colspan="4" align="">
-                        <b class="f-w-600">Term & Condition</b>
-                        <b class="d-block">Lorem Ipsum is simply dummy text of</b>
+                        <b class="f-w-600"><?= htmlspecialchars(__('Term & Condition'), ENT_QUOTES, 'UTF-8'); ?></b>
+                        <b class="d-block"><?= __('Lorem Ipsum is simply dummy text of'); ?></b>
                     </td>
                 </tr>
             </table>
         
     </div> 
     <div class="card-body">
-        <button type="button" class="btn btn-primary font-weight-bolder mr-3 mr-sm-14 my-1" onclick="printDiv('printableArea')" >Print Payslip</button>
+        <button type="button" class="btn btn-primary font-weight-bolder mr-3 mr-sm-14 my-1" onclick="printDiv('printableArea')" ><?= __('Print Payslip'); ?></button>
     </div>
 </div> 
 
