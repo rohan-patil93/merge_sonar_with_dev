@@ -114,7 +114,7 @@ function selectcheck(){
     $("#astcnt").text(cnt);
 }
 function assetFilter(){
-    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $('.assetstable').html(htmloader);
     var ownership = (document.getElementById('ownership'))? $('input[name="ownership"]:checked').val(): '';
     var allocation_status = (document.getElementById('allocation_status'))? $('input[name="allocation_status"]:checked').val(): '';
@@ -185,7 +185,7 @@ function AddAssets(asset_id=""){
                 type: "error",
                 showCancelButton: false,
                 confirmButtonClass: "btn-primary",
-                confirmButtonText: "Ok",
+                confirmButtonText: <?php echo json_encode(__('Ok'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                 closeOnConfirm: true
             });
             return false;
@@ -229,7 +229,7 @@ function AddAssets(asset_id=""){
                 type: "error",
                 showCancelButton: false,
                 confirmButtonClass: "btn-primary",
-                confirmButtonText: "Ok",
+                confirmButtonText: <?php echo json_encode(__('Ok'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                 closeOnConfirm: true
             });
             return false;
@@ -258,7 +258,7 @@ function AddAssets(asset_id=""){
                 type: "error",
                 showCancelButton: false,
                 confirmButtonClass: "btn-primary",
-                confirmButtonText: "Ok",
+                confirmButtonText: <?php echo json_encode(__('Ok'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                 closeOnConfirm: true
             });
             return false;
@@ -302,7 +302,7 @@ function AddAssets(asset_id=""){
                 type: "error",
                 showCancelButton: false,
                 confirmButtonClass: "btn-primary",
-                confirmButtonText: "Ok",
+                confirmButtonText: <?php echo json_encode(__('Ok'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                 closeOnConfirm: true
             });
             return false;
@@ -346,7 +346,7 @@ function AddAssets(asset_id=""){
                 type: "error",
                 showCancelButton: false,
                 confirmButtonClass: "btn-primary",
-                confirmButtonText: "Ok",
+                confirmButtonText: <?php echo json_encode(__('Ok'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                 closeOnConfirm: true
             });
             return false;
@@ -375,7 +375,7 @@ function AddAssets(asset_id=""){
                 type: "error",
                 showCancelButton: false,
                 confirmButtonClass: "btn-primary",
-                confirmButtonText: "Ok",
+                confirmButtonText: <?php echo json_encode(__('Ok'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                 closeOnConfirm: true
             });
             return false;
@@ -423,7 +423,7 @@ function AddAssets(asset_id=""){
                 type: "error",
                 showCancelButton: false,
                 confirmButtonClass: "btn-primary",
-                confirmButtonText: "Ok",
+                confirmButtonText: <?php echo json_encode(__('Ok'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                 closeOnConfirm: true
             });
             return false;
@@ -512,7 +512,7 @@ function AddAssets(asset_id=""){
 <?php if($error_message !=''){ ?>
     <div class="alert alert-danger background-danger alert-dismissible">
         <strong><?php echo $error_message; ?></strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
     </div>
 <?php } ?>
 <div class="row mb-4">
@@ -521,7 +521,7 @@ function AddAssets(asset_id=""){
             <div class="card-body">
                 <div class="text-center">
                     <h2 class="m-b-0 d-inline-block text-c-red"><?php echo $user_asset_cnt['overduecnt'] !=""?$user_asset_cnt['overduecnt']:0; ?></h2>
-                    <p class="m-b-0 m-t-5">Asset Overdue</p>
+                    <p class="m-b-0 m-t-5"><?= __('Asset Overdue'); ?></p>
                 </div>
             </div>
         </div>
@@ -529,7 +529,7 @@ function AddAssets(asset_id=""){
             <div class="card-body">
                 <div class="text-center">
                     <h2 class="m-b-0 d-inline-block text-c-red"><?php echo $user_asset_cnt['duesooncnt'] !=""?$user_asset_cnt['duesooncnt']:0; ?></h2>
-                    <p class="m-b-0 m-t-5">Asset Due Soon</p>
+                    <p class="m-b-0 m-t-5"><?= __('Asset Due Soon'); ?></p>
                 </div>
             </div>
         </div>
@@ -537,7 +537,7 @@ function AddAssets(asset_id=""){
             <div class="card-body">
                 <div class="text-center">
                     <h2 class="m-b-0 d-inline-block text-c-red"><?php echo $asset_cnt['warranty_expiry_cnt']!=""?$asset_cnt['warranty_expiry_cnt']:0; ?></h2>
-                     <p class="m-b-0 m-t-5">Warrenty Expiry Soon</p>
+                     <p class="m-b-0 m-t-5"><?= __('Warrenty Expiry Soon'); ?></p>
                 </div>
             </div>
         </div>
@@ -545,7 +545,7 @@ function AddAssets(asset_id=""){
     <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-tab-20">
         <div class="card mb-0">
             <div class="card-header">
-                <h5>Assets Status</h5>
+                <h5><?= __('Assets Status'); ?></h5>
             </div>
             <div class="card-block">
                 <input type="hidden" id="asset_status_json" value='<?php echo json_encode($assetstatuscntwithname); ?>'>
@@ -556,7 +556,7 @@ function AddAssets(asset_id=""){
     <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-mob-20">
         <div class="card mb-0">
             <div class="card-header">
-                <h5>Assets Condition</h5>
+                <h5><?= __('Assets Condition'); ?></h5>
             </div>
             <div class="card-block">
                 <input type="hidden" id="asset_condition_json" value='<?php echo json_encode($assetconditioncntwithname); ?>'>
@@ -569,7 +569,7 @@ function AddAssets(asset_id=""){
             <div class="card-body">
                 <div class="text-center">
                     <h2 class="m-b-0 d-inline-block text-c-red"><?php echo $asset_cnt['end_of_life'] !=""?$asset_cnt['end_of_life']:0; ?></h2>
-                    <p class="m-b-0 m-t-5">End Of Life</p>
+                    <p class="m-b-0 m-t-5"><?= __('End Of Life'); ?></p>
                 </div>
             </div>
         </div>
@@ -577,22 +577,22 @@ function AddAssets(asset_id=""){
             <div class="card-body">
                 <div class="text-center">
                     <h2 class="m-b-0 d-inline-block text-c-red"><?php echo $asset_cnt['unallocatedcnt']!=""?$asset_cnt['unallocatedcnt']:0; ?></h2>
-                    <p class="m-b-0 m-t-5">Asset Un-Allocat</p>
+                    <p class="m-b-0 m-t-5"><?= __('Asset Un-Allocat'); ?></p>
                 </div>
             </div>
         </div>
-        <button type="button" class="btn btn-primary waves-effect waves-light col-lg-12 f-12" onclick="AddAssets()"><i class="fa fa-plus"></i> Add Assets</button>
-        <button  type="button" class="btn btn-success waves-effect waves-light col-lg-12 f-12" onclick="verifyAssets()"><i class="fa fa-plus"></i> Verify Assets</button>
+        <button type="button" class="btn btn-primary waves-effect waves-light col-lg-12 f-12" onclick="AddAssets()"><i class="fa fa-plus"></i> <?= __('Add Assets'); ?></button>
+        <button  type="button" class="btn btn-success waves-effect waves-light col-lg-12 f-12" onclick="verifyAssets()"><i class="fa fa-plus"></i> <?= __('Verify Assets'); ?></button>
 
-        <a href="index?option=COM_VIEW_ASSET_VERIFICATIONS" type="button" class="btn btn-primary waves-effect waves-light col-lg-12 f-12" target="_blank"> <i class="ti-link"></i> Verification List</a>
+        <a href="index?option=COM_VIEW_ASSET_VERIFICATIONS" type="button" class="btn btn-primary waves-effect waves-light col-lg-12 f-12" target="_blank"> <i class="ti-link"></i> <?= __('Verification List'); ?></a>
     </div>
 </div>
 <div class="text-right">
-     <button type="button" class="btn btn-success waves-effect waves-light btn-sm mb-mob-10" onclick="alloteAssets()">Allot Assets</button>
+     <button type="button" class="btn btn-success waves-effect waves-light btn-sm mb-mob-10" onclick="alloteAssets()"><?= __('Allot Assets'); ?></button>
 
-    <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mb-mob-10" onclick="assetDiscrdOrSell()"><i class="fa fa-frown-o"></i> Discard</button>
-    <button type="button" class="btn btn-danger waves-effect waves-light btn-sm mb-mob-10" onclick="momentAssets()"><i class="fa fa-file"></i> History</button>
-    <button  type="button" class="btn btn-inverse waves-effect waves-light btn-sm mb-mob-10" onclick="updateMultipleAssets()">Update</button>
+    <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mb-mob-10" onclick="assetDiscrdOrSell()"><i class="fa fa-frown-o"></i> <?= __('Discard'); ?></button>
+    <button type="button" class="btn btn-danger waves-effect waves-light btn-sm mb-mob-10" onclick="momentAssets()"><i class="fa fa-file"></i> <?= __('History'); ?></button>
+    <button  type="button" class="btn btn-inverse waves-effect waves-light btn-sm mb-mob-10" onclick="updateMultipleAssets()"><?= __('Update'); ?></button>
 
 
 </div>
@@ -602,45 +602,45 @@ function AddAssets(asset_id=""){
             <div class="card-body">
                 <div class="row mt-3">
                     <div class="form-group col-lg-6 w-full">
-                        <span class="form-label">Category</span>
-                        <select aria-label="Category"  class="form-select js-example-basic-single " name="category" id="category" onchange="assetFilter()">
-                            <option value="">All</option>
+                        <span class="form-label"><?= __('Category'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Category'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-select js-example-basic-single " name="category" id="category" onchange="assetFilter()">
+                            <option value=""><?= __('All'); ?></option>
                             <?php foreach ($assetcategory as $assetcategor) { ?>
                                 <option value="<?php echo $assetcategor['id']; ?>"><?php echo ucwords($assetcategor['category_description']); ?></option>
                             <?php } ?>
                         </select>
                     </div>
                     <div class="form-group col-lg-6 w-full">
-                        <span class="form-label">Assets location</span>
-                        <select aria-label="Location"  class="form-select js-example-basic-single " name="location" id="location" onchange="assetFilter()">
-                            <option value="">All</option>
+                        <span class="form-label"><?= __('Assets location'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Location'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-select js-example-basic-single " name="location" id="location" onchange="assetFilter()">
+                            <option value=""><?= __('All'); ?></option>
                             <?php foreach ($locations as $location) { ?>
                                 <option location value="<?php echo $location['id']; ?>"><?php echo ucwords($location['location_name']); ?></option>
                             <?php } ?>
                         </select>
                     </div>
                     <div class="form-group col-lg-6 w-full">
-                        <span class="form-label">Status</span>
-                        <select aria-label="Status"  class="form-select js-example-basic-single " name="status" id="status" onchange="assetFilter()">
-                            <option value="">All</option>
+                        <span class="form-label"><?= __('Status'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Status'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-select js-example-basic-single " name="status" id="status" onchange="assetFilter()">
+                            <option value=""><?= __('All'); ?></option>
                             <?php foreach ($asset_status as $ass_statu) { ?>
                                 <option value="<?php echo $ass_statu['id']; ?>"><?php echo ucwords($ass_statu['name']); ?></option>
                             <?php } ?>
                         </select>
                     </div>
                     <div class="form-group col-lg-6 w-full">
-                        <span class="form-label">Condition</span>
-                        <select aria-label="Candition"  class="form-select js-example-basic-single " name="candition" id="candition" onchange="assetFilter()">
-                            <option value="">All</option>
+                        <span class="form-label"><?= __('Condition'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Candition'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-select js-example-basic-single " name="candition" id="candition" onchange="assetFilter()">
+                            <option value=""><?= __('All'); ?></option>
                             <?php foreach ($ass_condition as $ass_conditio) { ?>
                             <option  value="<?php echo $ass_conditio['id']; ?>"><?php echo ucwords($ass_conditio['condition_name']); ?></option>
                             <?php } ?>
                         </select>
                     </div>
                     <div class="form-group col-lg-12 w-full">
-                        <span class="form-label">User</span>
-                        <select aria-label="Asset Owner"  class="form-select js-example-basic-single " name="asset_owner"  id="asset_owner"  onchange="assetFilter()">
-                        <option value="">All</option>
+                        <span class="form-label"><?= __('User'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Asset Owner'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-select js-example-basic-single " name="asset_owner"  id="asset_owner"  onchange="assetFilter()">
+                        <option value=""><?= __('All'); ?></option>
                         <?php foreach ($application_users as $user) { ?>
                             <option value="<?php echo $user['id']; ?>"><?php echo ucwords($user['display_name']); ?></option>
                         <?php } ?>
@@ -651,48 +651,48 @@ function AddAssets(asset_id=""){
                     <div class="col-lg-12">
                         <div class="selector f-12">
                             <div class="selection selected">
-                                <input aria-label="Ownership" type="radio" name="ownership" id="ownership" value="" checked onclick="assetFilter()" onkeydown="">
-                                <label for="radio_1">All &nbsp;<span class="form-label label label-primary label-sm"><?php echo $assetlistcnt['all_cnt']; ?></span></label>
+                                <input aria-label="<?= htmlspecialchars(__('Ownership'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="ownership" id="ownership" value="" checked onclick="assetFilter()" onkeydown="">
+                                <label for="radio_1"><?= __('All'); ?> &nbsp;<span class="form-label label label-primary label-sm"><?php echo $assetlistcnt['all_cnt']; ?></span></label>
                             </div>
                             <div class="selection">
-                                <input aria-label="Ownership" type="radio" name="ownership" value="S"  onclick="assetFilter()" onkeydown="">
-                                <label for="radio_2">Self &nbsp;<span class="form-label label label-primary label-sm"><?php echo $assetlistcnt['self_cnt']; ?></span></label>
+                                <input aria-label="<?= htmlspecialchars(__('Ownership'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="ownership" value="S"  onclick="assetFilter()" onkeydown="">
+                                <label for="radio_2"><?= __('Self'); ?> &nbsp;<span class="form-label label label-primary label-sm"><?php echo $assetlistcnt['self_cnt']; ?></span></label>
                             </div>
                             <div class="selection ">
-                                <input aria-label="Ownership" type="radio" name="ownership"  value="P" onclick="assetFilter()" onkeydown="">
-                                <span >Partner &nbsp;<span class="form-label label label-primary label-sm"><?php echo $assetlistcnt['Partner_cnt']; ?></span></span>
+                                <input aria-label="<?= htmlspecialchars(__('Ownership'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="ownership"  value="P" onclick="assetFilter()" onkeydown="">
+                                <span ><?= __('Partner'); ?> &nbsp;<span class="form-label label label-primary label-sm"><?php echo $assetlistcnt['Partner_cnt']; ?></span></span>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-12 mt-3">
                         <div class="selector  f-12">
                             <div class="selection selected">
-                                <input aria-label="Allocation Status" type="radio" name="allocation_status" id="allocation_status" value="" checked onclick="assetFilter()" onkeydown="">
-                                <span >All &nbsp;<span class="form-label label label-primary label-sm"><?php echo $assetlistcnt['all_cnt']; ?></span></span>
+                                <input aria-label="<?= htmlspecialchars(__('Allocation Status'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="allocation_status" id="allocation_status" value="" checked onclick="assetFilter()" onkeydown="">
+                                <span ><?= __('All'); ?> &nbsp;<span class="form-label label label-primary label-sm"><?php echo $assetlistcnt['all_cnt']; ?></span></span>
                             </div>
                             <div class="selection">
-                                <input aria-label="Allocation Status" type="radio" name="allocation_status" value="Y" onclick="assetFilter()" onkeydown="">
-                                <span >Allocated &nbsp;<span class="form-label label label-primary label-sm"><?php echo $assetlistcnt['allocated_cnt']; ?></span></span>
+                                <input aria-label="<?= htmlspecialchars(__('Allocation Status'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="allocation_status" value="Y" onclick="assetFilter()" onkeydown="">
+                                <span ><?= __('Allocated'); ?> &nbsp;<span class="form-label label label-primary label-sm"><?php echo $assetlistcnt['allocated_cnt']; ?></span></span>
                             </div>
                             <div class="selection ">
-                                <input aria-label="Allocation Status" type="radio" name="allocation_status" value="N" onclick="assetFilter()" onkeydown="">
-                                <span >Un-Alloc &nbsp;<span class="form-label label label-primary label-sm"><?php echo $assetlistcnt['unallocated_cnt']; ?></span></span>
+                                <input aria-label="<?= htmlspecialchars(__('Allocation Status'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="allocation_status" value="N" onclick="assetFilter()" onkeydown="">
+                                <span ><?= __('Un-Alloc'); ?> &nbsp;<span class="form-label label label-primary label-sm"><?php echo $assetlistcnt['unallocated_cnt']; ?></span></span>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-12 mt-3">
                         <div class="selector  f-12">
                             <div class="selection selected">
-                                <input aria-label="Parent Asset" type="radio" name="parent_asset"  id="parent_asset" value="" checked onclick="assetFilter()" onkeydown="">
-                                <span >All &nbsp;<span class="form-label label label-primary label-sm"><?php echo $assetlistcnt['all_cnt']; ?></span></span>
+                                <input aria-label="<?= htmlspecialchars(__('Parent Asset'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="parent_asset"  id="parent_asset" value="" checked onclick="assetFilter()" onkeydown="">
+                                <span ><?= __('All'); ?> &nbsp;<span class="form-label label label-primary label-sm"><?php echo $assetlistcnt['all_cnt']; ?></span></span>
                             </div>
                             <div class="selection">
-                                <input aria-label="Parent Asset" type="radio" name="parent_asset" value="N" onclick="assetFilter()" onkeydown="">
-                                <span >Linked  &nbsp;<span class="form-label label label-primary label-sm"><?php echo $assetlistcnt['parent_asset_cnt']; ?></span></span>
+                                <input aria-label="<?= htmlspecialchars(__('Parent Asset'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="parent_asset" value="N" onclick="assetFilter()" onkeydown="">
+                                <span ><?= __('Linked'); ?>  &nbsp;<span class="form-label label label-primary label-sm"><?php echo $assetlistcnt['parent_asset_cnt']; ?></span></span>
                             </div>
                             <div class="selection">
-                                <input aria-label="Parent Asset" type="radio" name="parent_asset" value="Y" onclick="assetFilter()" onkeydown="">
-                                <span >Un Linked  &nbsp;<span class="form-label label label-primary label-sm"><?php echo $assetlistcnt['not_parent_asset_cnt']; ?></span></span>
+                                <input aria-label="<?= htmlspecialchars(__('Parent Asset'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="parent_asset" value="Y" onclick="assetFilter()" onkeydown="">
+                                <span ><?= __('Un Linked'); ?>  &nbsp;<span class="form-label label label-primary label-sm"><?php echo $assetlistcnt['not_parent_asset_cnt']; ?></span></span>
                             </div>
                         </div>
                     </div>
