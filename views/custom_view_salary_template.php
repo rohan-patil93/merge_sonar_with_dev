@@ -38,12 +38,12 @@
             <div class="card">
 
                 <div class="card-header table-card-header">
-                    <h5><?php echo "Salary Template";  ?></h5>
+                    <h5><?php echo __("Salary Template");  ?></h5>
                     <div class="card-header-right table-card-header ">
 
                      <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
               <i class="icofont icofont-reply"></i>
-              Back
+              <?= __('Back'); ?>
             </a>
             </div>
         <div class="card-body">
@@ -53,14 +53,14 @@
                     <div  class="col-lg-12" style="page-break-before: always;">
                         <table style="border: 1px solid #000;width: 100%;padding: 5px; margin: 20px 0px; margin-left: auto; margin-right: auto;" role="presentation">
                             <tr style="height: 50px;border: 1px solid #000;">
-                                <td style="border:1px solid #000;padding: 5px;"><b>Name</b></td>
+                                <td style="border:1px solid #000;padding: 5px;"><b><?= __('Name'); ?></b></td>
                                 <td  style="border:1px solid #000;padding: 5px;"colspan="2">&nbsp;<?php echo  $empdata[$salarydata['employee_id']]; ?></td>
                             </tr>
 
                             <tr style="border: 1px solid #000;">
-                                <td style="border:1px solid #000;padding: 5px;"><b>COMPENSATION DETAILS</b>             </td>
-                                <td style="text-align: center;border:1px solid #000;padding: 5px;"><b>MONTHLY</b>       </td>
-                                <td style="text-align: center;border:1px solid #000;padding: 5px;"><b>YEARLY</b>    </td>
+                                <td style="border:1px solid #000;padding: 5px;"><b><?= __('COMPENSATION DETAILS'); ?></b>             </td>
+                                <td style="text-align: center;border:1px solid #000;padding: 5px;"><b><?= __('MONTHLY'); ?></b>       </td>
+                                <td style="text-align: center;border:1px solid #000;padding: 5px;"><b><?= __('YEARLY'); ?></b>    </td>
                             </tr>
                             <?php $nm=0; foreach ($salarytmpdata as  $stvalue) { ?>
                                 <?php if($stvalue['component_cat_id'] !=$nm ){ $nm =$stvalue['component_cat_id'];  ?>
@@ -78,7 +78,7 @@
                         <?php } ?>
 
                         <tr style="border: 1px solid #000;" >
-                            <td colspan="3" style="border:1px solid #000;padding: 5px;">&nbsp;  Notes: </br>
+                            <td colspan="3" style="border:1px solid #000;padding: 5px;">&nbsp;  <?= __('Notes'); ?>: </br>
                                 <p style="padding: 0px 5%;"><?php echo  $salarydata['note']; ?></p>
                             </td>
 
