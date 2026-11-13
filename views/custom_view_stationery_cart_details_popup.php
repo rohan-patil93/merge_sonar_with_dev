@@ -35,8 +35,8 @@ $old_requests = $data['old_requests'];
     }
 </script>
 <div class="modal-header">
-    <h5 class="modal-title">Stationery Details (<?php echo $_POST['request_no']; ?>) </h5>
-    <button type="button" class="btn-close btn_white" data-bs-dismiss="modal"  aria-label="Close"></button>
+    <h5 class="modal-title"><?= __('Stationery Details ('); ?><?php echo $_POST['request_no']; ?>) </h5>
+    <button type="button" class="btn-close btn_white" data-bs-dismiss="modal"  aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body m-l-25 m-r-25">
     <div class="col-lg-12 row ">
@@ -44,14 +44,14 @@ $old_requests = $data['old_requests'];
 
             <?php if($_SESSION['st_show_type']!=1){ ?>
                 <div class="col-lg-12 row">
-                <div class="col-lg-6 f-w-600 mt-2">Transaction No :</div>
+                <div class="col-lg-6 f-w-600 mt-2"><?= __('Transaction No'); ?> :</div>
                 <div class="col-lg-6 mt-2 text-muted"><?php echo $_POST['request_no']; ?></div>
-                <div class="col-lg-6 f-w-600 mt-2">Employee :</div>
+                <div class="col-lg-6 f-w-600 mt-2"><?= __('Employee'); ?> :</div>
                 <div class="col-lg-6 mt-2 text-muted"><?php echo $stationery_requests['display_name']; ?></div>
 
-                <div class="col-lg-6 f-w-600 mt-2">Date of Issue :</div>
+                <div class="col-lg-6 f-w-600 mt-2"><?= __('Date of Issue'); ?> :</div>
                 <div class="col-lg-6 mt-2 text-muted"><?php echo displayDate($stationery_requests['require_date']); ?></div>
-                <div class="col-lg-12  f-w-600 mt-2">Request Comment :</div>
+                <div class="col-lg-12  f-w-600 mt-2"><?= __('Request Comment'); ?> :</div>
                 <div class="col-lg-12 mt-1 text-muted  "><?php echo $stationery_requests['request_comment']; ?></div>
                 </div>
             <?php } ?>
@@ -60,10 +60,10 @@ $old_requests = $data['old_requests'];
                 <thead>
                     <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Item Name</th>
-                    <th scope="col">Qty</th>
+                    <th scope="col"><?= __('Item Name'); ?></th>
+                    <th scope="col"><?= __('Qty'); ?></th>
                     <?php if($_SESSION['admin_type']==1 && $stationery_requests['current_status'] != ST_APPROVED ){ ?>
-                    <th scope="col"> Available Qty</th>
+                    <th scope="col"> <?= __('Available Qty'); ?></th>
                     <?php } ?>
                 </tr>
                 </thead>
@@ -90,42 +90,42 @@ $old_requests = $data['old_requests'];
         <div class="col-lg-6">
             <div class="col-lg-12 row">
                 <?php if($_SESSION['st_show_type']==1){ ?>
-                <div class="col-lg-6  f-w-600 mt-2">Building :</div>
+                <div class="col-lg-6  f-w-600 mt-2"><?= __('Building'); ?> :</div>
                 <div class="col-lg-6  mt-1 text-muted "><?php echo $stationery_requests['building_name']; ?></div>
-                <div class="col-lg-6 f-w-600 mt-2">Floor :</div>
+                <div class="col-lg-6 f-w-600 mt-2"><?= __('Floor'); ?> :</div>
                 <div class="col-lg-6 mt-2 text-muted"><?php echo $stationery_requests['floor_name']; ?></div>
-                <div class="col-lg-6 f-w-600 mt-2">Space :</div>
+                <div class="col-lg-6 f-w-600 mt-2"><?= __('Space'); ?> :</div>
                 <div class="col-lg-6 mt-2 text-muted"><?php echo $stationery_requests['cabin_name']; ?></div>
 
-                <div class="col-lg-6  f-w-600 mt-2">Deliver Type :</div>
+                <div class="col-lg-6  f-w-600 mt-2"><?= __('Deliver Type'); ?> :</div>
                 <div class="col-lg-6  mt-1 text-muted "><?php echo $data['deliver_types'][$stationery_requests['deliver_type']]; ?></div>
-                <div class="col-lg-6 f-w-600 mt-2">Request Date :</div>
+                <div class="col-lg-6 f-w-600 mt-2"><?= __('Request Date'); ?> :</div>
                 <div class="col-lg-6 mt-2 text-muted"><?php echo displayDate($stationery_requests['request_date']); ?></div>
-                <div class="col-lg-6 f-w-600 mt-2">Required Date :</div>
+                <div class="col-lg-6 f-w-600 mt-2"><?= __('Required Date'); ?> :</div>
                 <div class="col-lg-6 mt-2 text-muted"><?php echo displayDate($stationery_requests['require_date']); ?></div>
-                <div class="col-lg-12  f-w-600 mt-2">Request Comment :</div>
+                <div class="col-lg-12  f-w-600 mt-2"><?= __('Request Comment'); ?> :</div>
                 <div class="col-lg-12 mt-1 text-muted  "><?php echo $stationery_requests['request_comment']; ?></div>
-                <div class="col-lg-12  f-w-600 mt-2">Status</div>
+                <div class="col-lg-12  f-w-600 mt-2"><?= __('Status'); ?></div>
                 <div class="col-lg-12 mt-1">
                     <div class="radio radio-outline  mt-1">
                         <?php foreach ($data['status'] as $selectkey => $selectvalue) {
                             if(($_SESSION['admin_type']==1) || ($_SESSION['admin_type']!=1  && $stationery_requests['current_status'] ==101) ){
                          ?>
-                        <label class="radio radio-inline"> <input aria-label="Radio option" type="radio"  <?php if($selectkey == $stationery_requests['current_status']){ ?> checked <?php
+                        <label class="radio radio-inline"> <input aria-label="<?= htmlspecialchars(__('Radio option'), ENT_QUOTES, 'UTF-8'); ?>" type="radio"  <?php if($selectkey == $stationery_requests['current_status']){ ?> checked <?php
 } ?> name="current_status" value='<?php echo $selectkey; ?>' id="radioid<?php echo $selectkey; ?>">    <span></span><?php echo $selectvalue; ?> </label>
                         <?php $sch++; ?>
                         <?php } ?>
                         <?php } ?>
                     </div>
                 </div>
-                <div class="col-lg-12  f-w-600 mt-2"> Comment</div>
+                <div class="col-lg-12  f-w-600 mt-2"> <?= __('Comment'); ?></div>
                 <div class="col-lg-12 mt-1">
-                    <textarea aria-label="Comment" class="form-control" name="comment" id="comment"></textarea>
+                    <textarea aria-label="<?= htmlspecialchars(__('Comment'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="comment" id="comment"></textarea>
                 </div>
                 <?php if(($_SESSION['admin_type']==1 && $stationery_requests['current_status']==10)  ){ ?>
                 <div class="col-lg-12  f-w-600 mt-2">
                     <div class="col-lg-12 text-right">
-                        <button type="button" class="btn btn-primary" onclick="savestationerypopnew(<?php echo $stationery_requests['id']; ?>)" > Save </button>
+                        <button type="button" class="btn btn-primary" onclick="savestationerypopnew(<?php echo $stationery_requests['id']; ?>)" > <?= __('Save'); ?> </button>
                     </div>
                 </div>
                 <?php } ?>
@@ -135,10 +135,10 @@ $old_requests = $data['old_requests'];
                     <thead>
                         <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Request No</th>
-                        <th scope="col">Delivery Type</th>
-                        <th scope="col">Request Date</th>
-                        <th scope="col">Require Date</th>
+                        <th scope="col"><?= __('Request No'); ?></th>
+                        <th scope="col"><?= __('Delivery Type'); ?></th>
+                        <th scope="col"><?= __('Request Date'); ?></th>
+                        <th scope="col"><?= __('Require Date'); ?></th>
                     </tr>
                     </thead>
                     <tbody class="custom-scroll" style="height: 300px!important;">
@@ -159,7 +159,7 @@ $old_requests = $data['old_requests'];
                     <td colspan="5">
                         <div class="card-px text-center py-20 m-t-30">
                             <p class="text-muted f-16 fw-bold m-b-30">
-                                <i class="ti-alert text-warning"></i> No Old Requests
+                                <i class="ti-alert text-warning"></i> <?= __('No Old Requests'); ?>
                             </p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 200px!important;">
