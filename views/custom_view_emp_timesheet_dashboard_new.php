@@ -64,9 +64,9 @@ $total_count = $requestData['total_head'];
 
                                         <div class="circle_gradiant" style="--p1: 0deg; --p2_color: #ff5370;--p1_color: #2ed8b6;">
                                             <?php if($emp_data['image']!=""){ ?>
-                                               <img src="uploads/all<?php echo $emp_data['image']; ?>" class="percentag-img-radius img-90" alt="Details" style="border-radius: 50%;border: 8px solid #ffffff;height: 90px;">
+                                               <img src="uploads/all<?php echo $emp_data['image']; ?>" class="percentag-img-radius img-90" alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>" style="border-radius: 50%;border: 8px solid #ffffff;height: 90px;">
                                                <?php }else{ ?>
-                                                <span class="percentag-img-radius img-90 f-w-600 custom_name f-24" alt="User">
+                                                <span class="percentag-img-radius img-90 f-w-600 custom_name f-24" alt="<?= htmlspecialchars(__('User'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <?php echo initials($emp_data['display_name']); ?>
                                                 </span>
                                                 <?php } ?>
@@ -78,7 +78,7 @@ $total_count = $requestData['total_head'];
                                 </div>
                             <span class="fs-6 text-primary text-hover-primary fw-bold mb-0" style="font-size: 16px !important;"><?php echo ucwords($emp_data['display_name']) ?></span>
                                 <div class="fw-semibold text-muted mb-6">
-                                    Employee Code : <?php if($emp_data['emp_code']!=""){    echo ucwords($emp_data['emp_code']);
+                                    <?= __('Employee Code'); ?> : <?php if($emp_data['emp_code']!=""){    echo ucwords($emp_data['emp_code']);
 }else{ echo "-";
 }  ?>
                                 </div>
@@ -93,7 +93,7 @@ $total_count = $requestData['total_head'];
                                             echo $requestData['hr_dis_data']['previous_month'] !=0 ?round($requestData['hr_dis_data']['previous_month']/8)." Days" : "-";
                                          ?>
                                         </div>
-                                        <div class="fw-semibold text-gray-500">Previous Month</div>
+                                        <div class="fw-semibold text-gray-500"><?= __('Previous Month'); ?></div>
                                     </div>
                                     <div class="border border-gray-300 border-dashed rounded min-w-80px py-3 px-4 mx-2 mb-3">
                                         <div class="fs-6 fw-bold text-gray-700">
@@ -101,7 +101,7 @@ $total_count = $requestData['total_head'];
                                                 echo $requestData['hr_dis_data']['current_month'] !=0 ?round($requestData['hr_dis_data']['current_month']/8)." Days" : "-";
                                             ?>
                                         </div>
-                                        <div class="fw-semibold text-gray-500">This Month</div>
+                                        <div class="fw-semibold text-gray-500"><?= __('This Month'); ?></div>
                                     </div>
                                 </div>
                              </div>
@@ -111,21 +111,21 @@ $total_count = $requestData['total_head'];
                 <input type="hidden" id="thismonthnkey" value="">
                 <div class="card ticket-card mb-3">
                     <div class="card-body">
-                        <p class="m-b-10 bg-c-blue lbl-card"><i class="fa fa-group m-r-10"></i>Total Head Count </p>
+                        <p class="m-b-10 bg-c-blue lbl-card"><i class="fa fa-group m-r-10"></i><?= __('Total Head Count'); ?> </p>
                         <div class="text-center">
                             <h2 class="m-b-0 d-inline-block text-c-blue"><?php echo $total_count; ?></h2>
                             <div class="d-flex flex-center flex-wrap mt-3">
                                 <div class="border border-gray-300 border-dashed rounded min-w-80px py-3 px-3 mx-2 mb-3 text-start" style="width:130px;">
                                     <span class="fs-6 fw-bold text-gray-700"><?php echo $head_data['0']!="" ? $head_data['0'] : "-" ; ?></span>
-                                    <div class="fw-semibold text-gray-500">Billable</div>
+                                    <div class="fw-semibold text-gray-500"><?= __('Billable'); ?></div>
                                 </div>
                                 <div class="border border-gray-300 border-dashed rounded min-w-80px py-3 px-3 mx-2 mb-3 text-start" style="width:130px;">
                                     <span class="fs-6 fw-bold text-gray-700"><?php echo $head_data['2']!="" ? $head_data['2'] : "-" ; ?> </span>
-                                    <div class="fw-semibold text-gray-500">Non-Billable</div>
+                                    <div class="fw-semibold text-gray-500"><?= __('Non-Billable'); ?></div>
                                 </div>
                                 <div class="border border-gray-300 border-dashed rounded min-w-80px py-3 px-3 mx-2 mb-3 text-start" style="width:130px; min-height: 78px;">
                                     <span class="fs-6 fw-bold text-gray-700"><?php echo $head_data['1']!="" ? $head_data['1'] : "-" ; ?> </span>
-                                    <div class="fw-semibold text-gray-500">Milestone</div>
+                                    <div class="fw-semibold text-gray-500"><?= __('Milestone'); ?></div>
                                 </div>
                             </div>
                         </div>
@@ -137,7 +137,7 @@ $total_count = $requestData['total_head'];
                             <div class="card-body">
                                 <div class="row align-items-center">
                                     <div class="col">
-                                        <h7 class="m-b-5 text-white">Last Month Vendors</h7>
+                                        <h7 class="m-b-5 text-white"><?= __('Last Month Vendors'); ?></h7>
                                         <h3 class="m-b-0 f-w-700 text-white f-32 mt-3">3</h3>
                                     </div>
                                     <div class="col-auto">
@@ -152,7 +152,7 @@ $total_count = $requestData['total_head'];
                             <div class="card-body">
                                 <div class="row align-items-center">
                                     <div class="col">
-                                        <h7 class="m-b-5 text-white">This Month Vendors</h7>
+                                        <h7 class="m-b-5 text-white"><?= __('This Month Vendors'); ?></h7>
                                         <h3 class="m-b-0 f-w-700 text-white f-32 mt-3">3</h3>
                                     </div>
                                     <div class="col-auto">
@@ -169,7 +169,7 @@ $total_count = $requestData['total_head'];
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h6 class="m-b-5 text-white f-14">Approved Days-Year</h6>
+                                <h6 class="m-b-5 text-white f-14"><?= __('Approved Days-Year'); ?></h6>
                                 <h3 class="m-b-0 f-w-700 text-white f-24 mt-3">
                                     <?php echo $requestData['year_details']['app_hr'] !="" ? round($requestData['year_details']['app_hr']/8): "-"; ?>
 
@@ -187,7 +187,7 @@ $total_count = $requestData['total_head'];
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h6 class="m-b-5 text-white f-14">Un Approved Days-Year</h6>
+                                <h6 class="m-b-5 text-white f-14"><?= __('Un Approved Days-Year'); ?></h6>
                                 <h3 class="m-b-0 f-w-700 text-white mt-3 f-24"><?php echo $requestData['year_details']['unapp_hr'] !="" ? round($requestData['year_details']['unapp_hr']/8): "-"; ?> </h3>
                             </div>
                             <div class="col-auto">
@@ -202,7 +202,7 @@ $total_count = $requestData['total_head'];
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h6 class="m-b-5 text-white f-14">Yet to Submit-Year</h6>
+                                <h6 class="m-b-5 text-white f-14"><?= __('Yet to Submit-Year'); ?></h6>
                                 <h3 class="m-b-0 f-w-700 text-white mt-3 f-24">
                                     <?php echo $requestData['year_details']['billable_hrs']/8; ?>
                                 </h3>
@@ -219,7 +219,7 @@ $total_count = $requestData['total_head'];
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h6 class="m-b-5 text-white f-14">Approved Days-Month</h6>
+                                <h6 class="m-b-5 text-white f-14"><?= __('Approved Days-Month'); ?></h6>
                                 <h3 class="m-b-0 f-w-700 text-white f-24 mt-3"><?php echo $requestData['month_details']['app_hr'] !="" ? round($requestData['month_details']['app_hr']/8): "-"; ?> </h3>
                             </div>
                             <div class="col-auto">
@@ -234,7 +234,7 @@ $total_count = $requestData['total_head'];
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h6 class="m-b-5 text-white f-14">Un Approved Days-Month</h6>
+                                <h6 class="m-b-5 text-white f-14"><?= __('Un Approved Days-Month'); ?></h6>
                                 <h3 class="m-b-0 f-w-700 text-white mt-3 f-24"><?php echo $requestData['month_details']['unapp_hr'] !="" ? round($requestData['month_details']['unapp_hr']/8): "-"; ?>  </h3>
                             </div>
                             <div class="col-auto">
@@ -249,7 +249,7 @@ $total_count = $requestData['total_head'];
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h6 class="m-b-5 text-white f-14">Yet to Submit-Month</h6>
+                                <h6 class="m-b-5 text-white f-14"><?= __('Yet to Submit-Month'); ?></h6>
                                 <h3 class="m-b-0 f-w-700 text-white mt-3 f-24"><?php echo ($requestData['total_head']*21)-($requestData['month_details']['billable_hrs']/8); ?>  </h3>
                             </div>
                             <div class="col-auto">
