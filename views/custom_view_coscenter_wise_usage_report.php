@@ -58,21 +58,21 @@
                         <div class="card card-custom " id="kt_page_sticky_card">
                             <div class="card-header">
                                 <div class="card-title col-lg-9">
-                                    <h3 class="card-label col-lg-3">&nbsp;CostCenter Wise Usage</h3>
-                                    From  <div class="col-lg-3">
-                                            <input aria-label="From Date" class="form-control" type="month" name="from_date" value="<?php echo $from_cur_year."-".$from_cur_month?>"  id="att_month_year" />
+                                    <h3 class="card-label col-lg-3">&nbsp;<?= __('CostCenter Wise Usage'); ?></h3>
+                                    <?= __('From'); ?>  <div class="col-lg-3">
+                                            <input aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="month" name="from_date" value="<?php echo $from_cur_year."-".$from_cur_month?>"  id="att_month_year" />
                                             <input type="hidden" name="filtertbl_rowid" id="filtertbl_rowid" value="<?php echo $filtertbl_rowid;?>" >
                                     </div>
 
-                                    To  <div class="col-lg-3">
-                                          <input aria-label="To Date" class="form-control" type="month" name="to_date" value="<?php echo $to_cur_year."-".$to_cur_month?>"  id="att_month_year_2" />
+                                    <?= __('To'); ?>  <div class="col-lg-3">
+                                          <input aria-label="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="month" name="to_date" value="<?php echo $to_cur_year."-".$to_cur_month?>"  id="att_month_year_2" />
                                     </div>
                                     <div class="col-lg-3">
-                                        <button type="button" class="btn btn-outline-secondary" onclick="showpopup();"><i class="flaticon2-hourglass-1"></i>Filter</button>
+                                        <button type="button" class="btn btn-outline-secondary" onclick="showpopup();"><i class="flaticon2-hourglass-1"></i><?= __('Filter'); ?></button>
                                     </div>
                                     <div class="col-lg-2">
                                         <input type="hidden" id="filterby" name="filterby">
-                                        <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"  name="applyform" value="apply">Apply</button>
+                                        <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"  name="applyform" value="apply"><?= __('Apply'); ?></button>
                                     </div>
                                 </div>
                             </div>
@@ -106,13 +106,13 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Employee Name </th>
-                                <th scope="col">Vertical Name </th>
-                                <th scope="col">Vendor Name </th>
-                                <th scope="col">Job Title </th>
-                                <th scope="col">Budget </th>
-                                <th scope="col">Utilized </th>
-                                <th scope="col">Percentage </th>
+                                <th scope="col"><?= __('Employee Name'); ?> </th>
+                                <th scope="col"><?= __('Vertical Name'); ?> </th>
+                                <th scope="col"><?= __('Vendor Name'); ?> </th>
+                                <th scope="col"><?= __('Job Title'); ?> </th>
+                                <th scope="col"><?= __('Budget'); ?> </th>
+                                <th scope="col"><?= __('Utilized'); ?> </th>
+                                <th scope="col"><?= __('Percentage'); ?> </th>
                             </tr>
                         </thead>
                         <tbody>
