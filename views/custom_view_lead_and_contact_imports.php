@@ -44,11 +44,11 @@ $files = $return['crm_import_files'] ?? [];
 ?>
 <div class="card">
     <div class="card-header">
-        <h4>Leads/Contacts List</h4>
+        <h4><?= __('Leads/Contacts List'); ?></h4>
         <div class="card-header-right">
             <a href="javascript:history.go(-1)" class="btn btn-light-primary waves-effect waves-light  m-r-50">
                 <i class="icofont icofont-reply mr-1"></i>
-                Back
+                <?= __('Back'); ?>
             </a>
         </div>
     </div>
@@ -63,14 +63,14 @@ $files = $return['crm_import_files'] ?? [];
                 <table class="table table-hover">
                     <thead class="f-14" style="background-color: #eeeeee;">
                         <tr>
-                            <th scope="col">Sr.No</th>
-                            <th scope="col">Display Name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Phone</th>
-                            <th scope="col">Office Phone</th>
-                            <th scope="col">Address</th>
-                            <th scope="col">Company Name</th>
-                            <th scope="col">Duplicate</th>
+                            <th scope="col"><?= __('Sr.No'); ?></th>
+                            <th scope="col"><?= __('Display Name'); ?></th>
+                            <th scope="col"><?= __('Email'); ?></th>
+                            <th scope="col"><?= __('Phone'); ?></th>
+                            <th scope="col"><?= __('Office Phone'); ?></th>
+                            <th scope="col"><?= __('Address'); ?></th>
+                            <th scope="col"><?= __('Company Name'); ?></th>
+                            <th scope="col"><?= __('Duplicate'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -87,12 +87,12 @@ $files = $return['crm_import_files'] ?? [];
                                     <td>" . htmlspecialchars($row['office_phone']) . "</td>
                                     <td>" . htmlspecialchars($row['address']) . "</td>
                                     <td>" . htmlspecialchars($row['company_name']) . "</td>
-                                    <td>" . ($row['is_duplicate'] ? '<span class="badge bg-danger">Yes</span>' : '<span class="badge bg-success">No</span>') . "</td>
+                                    <td>" . ($row['is_duplicate'] ? '<span class="badge bg-danger">'.__('Yes').'</span>' : '<span class="badge bg-success">'.__('No').'</span>') . "</td>
                                 </tr>";
                                 $i++;
                             }
                         } else {
-                            echo "<tr><td colspan='8' class='text-center'>No Data Available</td></tr>";
+                            echo "<tr><td colspan='8' class='text-center'>".__('No Data Available')."</td></tr>";
                         }
                         ?>
                     </tbody>
@@ -100,7 +100,7 @@ $files = $return['crm_import_files'] ?? [];
             </div>
 
             <div class="text-right mt-3">
-                <button type="submit" class="btn btn-success">Submit</button>
+                <button type="submit" class="btn btn-success"><?= __('Submit'); ?></button>
             </div>
         </form>
     </div>
