@@ -24,7 +24,7 @@
                                 </a>
                                 <div class="right-icon-control">
                                     <div class="input-group input-group-button">
-                                        <input aria-label="Search Friend" type="text" id="search-friends" name="footer-email" class="form-control" placeholder="Search Friend">
+                                        <input aria-label="<?= htmlspecialchars(__('Search Friend'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="search-friends" name="footer-email" class="form-control" placeholder="<?= htmlspecialchars(__('Search Friend'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <button class="btn btn-primary waves-effect waves-light" type="button">
                                             <i class="feather icon-search"></i>
                                         </button>
@@ -34,47 +34,47 @@
                             <div class="main-friend-list">
                                 <div class="media userlist-box waves-effect waves-light" data-id="1" data-status="online" data-username="Josephin Doe">
                                     <a class="media-left" href="#!">
-                                                <img class="media-object img-radius img-radius" src="../files/assets/images/avatar-3.jpg" alt="Generic placeholder">
+                                                <img class="media-object img-radius img-radius" src="../files/assets/images/avatar-3.jpg" alt="<?= htmlspecialchars(__('Generic placeholder'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 <div class="live-status bg-success"></div>
                                             </a>
                                     <div class="media-body">
-                                        <div class="chat-header">Josephin Doe</div>
+                                        <div class="chat-header"><?= __('Josephin Doe'); ?></div>
                                     </div>
                                 </div>
                                 <div class="media userlist-box waves-effect waves-light" data-id="2" data-status="online" data-username="Lary Doe">
                                     <a class="media-left" href="#!">
-                                                <img class="media-object img-radius" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder">
+                                                <img class="media-object img-radius" src="../files/assets/images/avatar-2.jpg" alt="<?= htmlspecialchars(__('Generic placeholder'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 <div class="live-status bg-success"></div>
                                             </a>
                                     <div class="media-body">
-                                        <div class="f-13 chat-header">Lary Doe</div>
+                                        <div class="f-13 chat-header"><?= __('Lary Doe'); ?></div>
                                     </div>
                                 </div>
                                 <div class="media userlist-box waves-effect waves-light" data-id="3" data-status="online" data-username="Alice">
                                     <a class="media-left" href="#!">
-                                                <img class="media-object img-radius" src="../files/assets/images/avatar-4.jpg" alt="Generic placeholder">
+                                                <img class="media-object img-radius" src="../files/assets/images/avatar-4.jpg" alt="<?= htmlspecialchars(__('Generic placeholder'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 <div class="live-status bg-success"></div>
                                             </a>
                                     <div class="media-body">
-                                        <div class="f-13 chat-header">Alice</div>
+                                        <div class="f-13 chat-header"><?= __('Alice'); ?></div>
                                     </div>
                                 </div>
                                 <div class="media userlist-box waves-effect waves-light" data-id="4" data-status="offline" data-username="Alia">
                                     <a class="media-left" href="#!">
-                                                <img class="media-object img-radius" src="../files/assets/images/avatar-3.jpg" alt="Generic placeholder">
+                                                <img class="media-object img-radius" src="../files/assets/images/avatar-3.jpg" alt="<?= htmlspecialchars(__('Generic placeholder'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 <div class="live-status bg-default"></div>
                                             </a>
                                     <div class="media-body">
-                                        <div class="f-13 chat-header">Alia<small class="d-block text-muted">10 min ago</small></div>
+                                        <div class="f-13 chat-header"><?= __('Alia'); ?><small class="d-block text-muted"><?= __('10 min ago'); ?></small></div>
                                     </div>
                                 </div>
                                 <div class="media userlist-box waves-effect waves-light" data-id="5" data-status="offline" data-username="Suzen">
                                     <a class="media-left" href="#!">
-                                                <img class="media-object img-radius" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder">
+                                                <img class="media-object img-radius" src="../files/assets/images/avatar-2.jpg" alt="<?= htmlspecialchars(__('Generic placeholder'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 <div class="live-status bg-default"></div>
                                             </a>
                                     <div class="media-body">
-                                        <div class="f-13 chat-header">Suzen<small class="d-block text-muted">15 min ago</small></div>
+                                        <div class="f-13 chat-header"><?= __('Suzen'); ?><small class="d-block text-muted"><?= __('15 min ago'); ?></small></div>
                                     </div>
                                 </div>
                             </div>
@@ -88,19 +88,19 @@
             <div class="showChat_inner">
                 <div class="d-flex chat-inner-header">
                     <a class="back_chatBox">
-                        <i class="feather icon-x"></i> Josephin Doe
+                        <i class="feather icon-x"></i> <?= __('Josephin Doe'); ?>
                     </a>
                 </div>
                 <div class="main-friend-chat">
                     <div class="d-flex chat-messages">
                         <a class="media-left photo-table" href="#!">
                             <div class="flex-shrink-0">
-                                <img class="media-object img-radius img-radius m-t-5" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder">
+                                <img class="media-object img-radius img-radius m-t-5" src="../files/assets/images/avatar-2.jpg" alt="<?= htmlspecialchars(__('Generic placeholder'), ENT_QUOTES, 'UTF-8'); ?>">
                             </div>
                         </a>
                         <div class="flex-grow-1 chat-menu-content">
                             <div class="">
-                                <p class="chat-cont">I'm just looking around. Will you tell me something about yourself?</p>
+                                <p class="chat-cont"><?= __('I\'m just looking around. Will you tell me something about yourself?'); ?></p>
                             </div>
                             <p class="chat-time">8:20 a.m.</p>
                         </div>
@@ -108,7 +108,7 @@
                     <div class="d-flex chat-messages">
                         <div class="flex-grow-1 chat-menu-reply">
                             <div class="">
-                                <p class="chat-cont">Ohh! very nice</p>
+                                <p class="chat-cont"><?= __('Ohh! very nice'); ?></p>
                             </div>
                             <p class="chat-time">8:22 a.m.</p>
                         </div>
@@ -116,12 +116,12 @@
                     <div class="d-flex chat-messages">
                         <a class="media-left photo-table" href="#!">
                             <div class="flex-shrink-0">
-                                <img class="media-object img-radius img-radius m-t-5" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder">
+                                <img class="media-object img-radius img-radius m-t-5" src="../files/assets/images/avatar-2.jpg" alt="<?= htmlspecialchars(__('Generic placeholder'), ENT_QUOTES, 'UTF-8'); ?>">
                             </div>
                         </a>
                         <div class="media-body chat-menu-content">
                             <div class="">
-                                <p class="chat-cont">can you come with me?</p>
+                                <p class="chat-cont"><?= __('can you come with me?'); ?></p>
                             </div>
                             <p class="chat-time">8:20 a.m.</p>
                         </div>
@@ -130,7 +130,7 @@
                 <div class="chat-reply-box">
                     <div class="right-icon-control">
                         <div class="input-group input-group-button">
-                            <input aria-label="Write hear . ." type="text" class="form-control" placeholder="Write hear . . ">
+                            <input aria-label="<?= htmlspecialchars(__('Write hear . .'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="<?= htmlspecialchars(__('Write hear . .'), ENT_QUOTES, 'UTF-8'); ?> ">
                             <button class="btn btn-primary waves-effect waves-light" type="button">
                                 <i class="feather icon-message-circle"></i>
                             </button>
@@ -155,61 +155,61 @@
                                             <div class="card-body">
                                                 <div class="accordion-block color-accordion-block">
                                                     <div class="color-accordion" id="color-accordion">
-                                                        <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">Employee Basic Information
-                                                            <p class="f-w-400">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                                        <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?= __('Employee Basic Information'); ?>
+                                                            <p class="f-w-400"><?= __('Lorem Ipsum is simply dummy text of the printing and typesetting industry.'); ?></p>
                                                         </a>
                                                         <div class="accordion-desc">
                                                             <div class="form-group row">
                                                                 <div class="col-lg-4">
-                                                                   <span>Name</span>
-                                                                   <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                   <span><?= __('Name'); ?></span>
+                                                                   <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                 </div>
                                                                 <div class="col-lg-4">
-                                                                   <span>Emp ID</span>
-                                                                   <input aria-label="DGT-009" type="text" class="form-control" placeholder="DGT-009">
+                                                                   <span><?= __('Emp ID'); ?></span>
+                                                                   <input aria-label="<?= htmlspecialchars(__('DGT-009'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="<?= htmlspecialchars(__('DGT-009'), ENT_QUOTES, 'UTF-8'); ?>">
                                                                 </div>
                                                                 <div class="col-lg-4">
-                                                                   <span>RO's Name</span>
-                                                                   <input aria-label="Input field" type="text" class="form-control" placeholder="">
-                                                                </div>
-                                                             </div>
-                                                             <div class="form-group row">
-                                                                <div class="col-lg-4">
-                                                                   <span>Department</span>
-                                                                   <input aria-label="Input field" type="text" class="form-control" placeholder="">
-                                                                </div>
-                                                                <div class="col-lg-4">
-                                                                   <span>Date of Join</span>
-                                                                   <input aria-label="Input field" type="text" class="form-control" placeholder="">
-                                                                </div>
-                                                                <div class="col-lg-4">
-                                                                   <span>RO Designation:</span>
-                                                                   <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                   <span><?= __('RO\'s Name'); ?></span>
+                                                                   <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                 </div>
                                                              </div>
                                                              <div class="form-group row">
                                                                 <div class="col-lg-4">
-                                                                   <span>Designation</span>
-                                                                   <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                   <span><?= __('Department'); ?></span>
+                                                                   <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                 </div>
                                                                 <div class="col-lg-4">
-                                                                   <span>Date of Confirmation</span>
-                                                                   <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                   <span><?= __('Date of Join'); ?></span>
+                                                                   <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                   <span><?= __('RO Designation'); ?>:</span>
+                                                                   <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                 </div>
                                                              </div>
                                                              <div class="form-group row">
                                                                 <div class="col-lg-4">
-                                                                   <span>Qualification:</span>
-                                                                   <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                   <span><?= __('Designation'); ?></span>
+                                                                   <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                 </div>
                                                                 <div class="col-lg-4">
-                                                                   <span>Previous years of Exp</span>
-                                                                   <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                   <span><?= __('Date of Confirmation'); ?></span>
+                                                                   <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
+                                                                </div>
+                                                             </div>
+                                                             <div class="form-group row">
+                                                                <div class="col-lg-4">
+                                                                   <span><?= __('Qualification'); ?>:</span>
+                                                                   <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                   <span><?= __('Previous years of Exp'); ?></span>
+                                                                   <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                 </div>
                                                              </div>
                                                         </div>
-                                                        <a class="accordion-msg bg-dark-primary b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">Professional Excellence
-                                                            <p class="f-w-400">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                                        <a class="accordion-msg bg-dark-primary b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?= __('Professional Excellence'); ?>
+                                                            <p class="f-w-400"><?= __('Lorem Ipsum is simply dummy text of the printing and typesetting industry.'); ?></p>
                                                         </a>
                                                         <div class="accordion-desc">
                                                             <div class="table-responsive">
@@ -217,20 +217,20 @@
                                                                     <thead>
                                                                        <tr>
                                                                           <th scope="col">#</th>
-                                                                          <th scope="col">Key Result Area</th>
-                                                                          <th scope="col">Key Performance Indicators</th>
-                                                                          <th scope="col">Weightage</th>
-                                                                          <th scope="col">Percentage achieved<br />(self Score)</th>
-                                                                          <th scope="col">Points Scored<br />(self)</th>
-                                                                          <th scope="col">Percentage achieved<br />(RO's Score)</th>
-                                                                          <th scope="col">Points Scored<br />(RO)</th>
+                                                                          <th scope="col"><?= __('Key Result Area'); ?></th>
+                                                                          <th scope="col"><?= __('Key Performance Indicators'); ?></th>
+                                                                          <th scope="col"><?= __('Weightage'); ?></th>
+                                                                          <th scope="col"><?= __('Percentage achieved'); ?><br /><?= __('(self Score)'); ?></th>
+                                                                          <th scope="col"><?= __('Points Scored'); ?><br /><?= __('(self)'); ?></th>
+                                                                          <th scope="col"><?= __('Percentage achieved'); ?><br /><?= __('(RO\'s Score)'); ?></th>
+                                                                          <th scope="col"><?= __('Points Scored'); ?><br /><?= __('(RO)'); ?></th>
                                                                        </tr>
                                                                     </thead>
                                                                     <tbody>
                                                                        <tr>
                                                                           <th scope="col" rowspan="2">1</th>
-                                                                          <td rowspan="2">Production</td>
-                                                                          <td>Quality</td>
+                                                                          <td rowspan="2"><?= __('Production'); ?></td>
+                                                                          <td><?= __('Quality'); ?></td>
                                                                           <td>
                                                                              <div class="">
                                                                                 <input aria-label="30" type="text" class="form-control" disabled="disabled" placeholder="30">
@@ -238,27 +238,27 @@
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                        </tr>
                                                                        <tr>
-                                                                          <td>TAT (turn around time)</td>
+                                                                          <td><?= __('TAT (turn around time)'); ?></td>
                                                                           <td>
                                                                              <div class="">
                                                                                 <input aria-label="30" type="text" class="form-control" disabled="disabled" placeholder="30">
@@ -266,29 +266,29 @@
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                        </tr>
                                                                        <tr>
                                                                           <td>2</td>
-                                                                          <td>Process Improvement</td>
-                                                                          <td>PMS,New Ideas</td>
+                                                                          <td><?= __('Process Improvement'); ?></td>
+                                                                          <td><?= __('PMS,New Ideas'); ?></td>
                                                                           <td>
                                                                              <div class="">
                                                                                 <input aria-label="10" type="text" class="form-control" disabled="disabled" placeholder="10">
@@ -296,29 +296,29 @@
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                        </tr>
                                                                        <tr>
                                                                           <td>3</td>
-                                                                          <td>Team Management</td>
-                                                                          <td>Team Productivity,dynaics,attendance,attrition</td>
+                                                                          <td><?= __('Team Management'); ?></td>
+                                                                          <td><?= __('Team Productivity,dynaics,attendance,attrition'); ?></td>
                                                                           <td>
                                                                              <div class="">
                                                                                 <input aria-label="5" type="text" class="form-control" disabled="disabled" placeholder="5">
@@ -326,29 +326,29 @@
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                        </tr>
                                                                        <tr>
                                                                           <td>4</td>
-                                                                          <td>Knowledge Sharing</td>
-                                                                          <td>Sharing the knowledge for team productivity</td>
+                                                                          <td><?= __('Knowledge Sharing'); ?></td>
+                                                                          <td><?= __('Sharing the knowledge for team productivity'); ?></td>
                                                                           <td>
                                                                              <div class="">
                                                                                 <input aria-label="5" type="text" class="form-control" disabled="disabled" placeholder="5">
@@ -356,29 +356,29 @@
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                        </tr>
                                                                        <tr>
                                                                           <td>5</td>
-                                                                          <td>Reporting and Communication</td>
-                                                                          <td>Emails/Calls/Reports and Other Communication</td>
+                                                                          <td><?= __('Reporting and Communication'); ?></td>
+                                                                          <td><?= __('Emails/Calls/Reports and Other Communication'); ?></td>
                                                                           <td>
                                                                              <div class="">
                                                                                 <input aria-label="5" type="text" class="form-control" disabled="disabled" placeholder="5">
@@ -386,27 +386,27 @@
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                        </tr>
                                                                        <tr>
-                                                                          <th scope="col" colspan="3" class="text-center">Total</th>
+                                                                          <th scope="col" colspan="3" class="text-center"><?= __('Total'); ?></th>
                                                                           <td>
                                                                              <div class="">
                                                                                 <input aria-label="85" type="text" class="form-control" disabled="disabled" placeholder="85">
@@ -414,22 +414,22 @@
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                        </tr>
@@ -437,8 +437,8 @@
                                                                  </table>
                                                             </div>
                                                         </div>
-                                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">Personal Excellence
-                                                            <p class="f-w-400">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?= __('Personal Excellence'); ?>
+                                                            <p class="f-w-400"><?= __('Lorem Ipsum is simply dummy text of the printing and typesetting industry.'); ?></p>
                                                         </a>
                                                         <div class="accordion-desc">
                                                             <div class="table-responsive">
@@ -446,20 +446,20 @@
                                                                     <thead>
                                                                        <tr>
                                                                           <th scope="col">#</th>
-                                                                          <th scope="col">Personal Attributes</th>
-                                                                          <th scope="col">Key Indicators</th>
-                                                                          <th scope="col">Weightage</th>
-                                                                          <th scope="col">Percentage achieved<br />(self Score)</th>
-                                                                          <th scope="col">Points Scored<br />(self)</th>
-                                                                          <th scope="col">Percentage achieved<br />(RO's Score)</th>
-                                                                          <th scope="col">Points Scored<br />(RO)</th>
+                                                                          <th scope="col"><?= __('Personal Attributes'); ?></th>
+                                                                          <th scope="col"><?= __('Key Indicators'); ?></th>
+                                                                          <th scope="col"><?= __('Weightage'); ?></th>
+                                                                          <th scope="col"><?= __('Percentage achieved'); ?><br /><?= __('(self Score)'); ?></th>
+                                                                          <th scope="col"><?= __('Points Scored'); ?><br /><?= __('(self)'); ?></th>
+                                                                          <th scope="col"><?= __('Percentage achieved'); ?><br /><?= __('(RO\'s Score)'); ?></th>
+                                                                          <th scope="col"><?= __('Points Scored'); ?><br /><?= __('(RO)'); ?></th>
                                                                        </tr>
                                                                     </thead>
                                                                     <tbody>
                                                                        <tr>
                                                                           <th scope="col" rowspan="2">1</th>
-                                                                          <td rowspan="2">Attendance</td>
-                                                                          <td>Planned or Unplanned Leaves</td>
+                                                                          <td rowspan="2"><?= __('Attendance'); ?></td>
+                                                                          <td><?= __('Planned or Unplanned Leaves'); ?></td>
                                                                           <td>
                                                                              <div class="">
                                                                                 <input aria-label="2" type="text" class="form-control" disabled="disabled" placeholder="2">
@@ -467,27 +467,27 @@
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                        </tr>
                                                                        <tr>
-                                                                          <td>Time Consciousness</td>
+                                                                          <td><?= __('Time Consciousness'); ?></td>
                                                                           <td>
                                                                              <div class="">
                                                                                 <input aria-label="2" type="text" class="form-control" disabled="disabled" placeholder="2">
@@ -495,29 +495,29 @@
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                        </tr>
                                                                        <tr>
                                                                           <th scope="col" rowspan="2">2</th>
-                                                                          <td rowspan="2">Attitude &amp; Behavior</td>
-                                                                          <td>Team Collaboration</td>
+                                                                          <td rowspan="2"><?= htmlspecialchars(__('Attitude & Behavior'), ENT_QUOTES, 'UTF-8'); ?></td>
+                                                                          <td><?= __('Team Collaboration'); ?></td>
                                                                           <td>
                                                                              <div class="">
                                                                                 <input aria-label="2" type="text" class="form-control" disabled="disabled" placeholder="2">
@@ -525,27 +525,27 @@
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                        </tr>
                                                                        <tr>
-                                                                          <td>Professionalism &amp; Responsiveness</td>
+                                                                          <td><?= htmlspecialchars(__('Professionalism & Responsiveness'), ENT_QUOTES, 'UTF-8'); ?></td>
                                                                           <td>
                                                                              <div class="">
                                                                                 <input aria-label="2" type="text" class="form-control" disabled="disabled" placeholder="2">
@@ -553,29 +553,29 @@
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                        </tr>
                                                                        <tr>
                                                                           <td>3</td>
-                                                                          <td>Policy &amp; Procedures</td>
-                                                                          <td>Adherence to policies and procedures</td>
+                                                                          <td><?= htmlspecialchars(__('Policy & Procedures'), ENT_QUOTES, 'UTF-8'); ?></td>
+                                                                          <td><?= __('Adherence to policies and procedures'); ?></td>
                                                                           <td>
                                                                              <div class="">
                                                                                 <input aria-label="2" type="text" class="form-control" disabled="disabled" placeholder="2">
@@ -583,29 +583,29 @@
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                        </tr>
                                                                        <tr>
                                                                           <td>4</td>
-                                                                          <td>Initiatives</td>
-                                                                          <td>Special Efforts, Suggestions,Ideas,etc.</td>
+                                                                          <td><?= __('Initiatives'); ?></td>
+                                                                          <td><?= __('Special Efforts, Suggestions,Ideas,etc.'); ?></td>
                                                                           <td>
                                                                              <div class="">
                                                                                 <input aria-label="2" type="text" class="form-control" disabled="disabled" placeholder="2">
@@ -613,29 +613,29 @@
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                        </tr>
                                                                        <tr>
                                                                           <td>5</td>
-                                                                          <td>Continuous Skill Improvement</td>
-                                                                          <td>Preparedness to move to next level &amp; Training utilization</td>
+                                                                          <td><?= __('Continuous Skill Improvement'); ?></td>
+                                                                          <td><?= htmlspecialchars(__('Preparedness to move to next level & Training utilization'), ENT_QUOTES, 'UTF-8'); ?></td>
                                                                           <td>
                                                                              <div class="">
                                                                                 <input aria-label="2" type="text" class="form-control" disabled="disabled" placeholder="2">
@@ -643,27 +643,27 @@
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                        </tr>
                                                                        <tr>
-                                                                          <th scope="col" colspan="3" class="text-center">Total</th>
+                                                                          <th scope="col" colspan="3" class="text-center"><?= __('Total'); ?></th>
                                                                           <td>
                                                                              <div class="">
                                                                                 <input aria-label="15" type="text" class="form-control" disabled="disabled" placeholder="15">
@@ -671,27 +671,27 @@
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                           <td>
                                                                              <div class="">
-                                                                                <input aria-label="Input field" type="text" class="form-control" disabled="disabled" placeholder="0">
+                                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" disabled="disabled" placeholder="0">
                                                                              </div>
                                                                           </td>
                                                                        </tr>
                                                                        <tr>
-                                                                          <th scope="col" colspan="3" class="text-center">Total Percentage(%)</th>
+                                                                          <th scope="col" colspan="3" class="text-center"><?= __('Total Percentage(%)'); ?></th>
                                                                           <td colspan="5">
                                                                              <div class="">
                                                                                 <input aria-label="15" type="text" class="form-control" disabled="disabled" placeholder="15">
@@ -701,12 +701,12 @@
                                                                        <tr>
                                                                           <td colspan="8" class="text-center">
                                                                              <div class="grade-span">
-                                                                                <h4>Grade</h4>
-                                                                                <span class="label label-lg label-success label-inline"><b>Below 65 Poor</b></span>
-                                                                                <span class="label label-lg label-danger label-inline"><b>65-74 Average</b></span>
-                                                                                <span class="label label-lg label-info label-inline"><b>75-84 Satisfactory</b></span>
-                                                                                <span class="label label-lg label-primary label-inline"><b>85-92 Good</b></span>
-                                                                                <span class="label label-lg label-danger label-inline"><b>Above 92 Excellent</b></span>
+                                                                                <h4><?= __('Grade'); ?></h4>
+                                                                                <span class="label label-lg label-success label-inline"><b><?= __('Below 65 Poor'); ?></b></span>
+                                                                                <span class="label label-lg label-danger label-inline"><b><?= __('65-74 Average'); ?></b></span>
+                                                                                <span class="label label-lg label-info label-inline"><b><?= __('75-84 Satisfactory'); ?></b></span>
+                                                                                <span class="label label-lg label-primary label-inline"><b><?= __('85-92 Good'); ?></b></span>
+                                                                                <span class="label label-lg label-danger label-inline"><b><?= __('Above 92 Excellent'); ?></b></span>
                                                                              </div>
                                                                           </td>
                                                                        </tr>
@@ -714,8 +714,8 @@
                                                                  </table>
                                                             </div>
                                                         </div>
-                                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">Special Initiatives, Achievements, contributions if any
-                                                            <p class="f-w-400">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?= __('Special Initiatives, Achievements, contributions if any'); ?>
+                                                            <p class="f-w-400"><?= __('Lorem Ipsum is simply dummy text of the printing and typesetting industry.'); ?></p>
                                                         </a>
                                                         <div class="accordion-desc">
                                                             <div class="table-responsive">
@@ -723,9 +723,9 @@
                                                                     <thead>
                                                                        <tr>
                                                                           <th scope="col">#</th>
-                                                                          <th scope="col">By Self</th>
-                                                                          <th scope="col">RO's Comment</th>
-                                                                          <th scope="col">HOD's Comment</th>
+                                                                          <th scope="col"><?= __('By Self'); ?></th>
+                                                                          <th scope="col"><?= __('RO\'s Comment'); ?></th>
+                                                                          <th scope="col"><?= __('HOD\'s Comment'); ?></th>
                                                                        </tr>
                                                                     </thead>
                                                                     <tbody data-repeater-list="">
@@ -733,34 +733,34 @@
                                                                             <th scope="col">1</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <a href="" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-light-danger btn-primary">
-                                                                                    <i class="fa fa-trash"></i>Delete
+                                                                                    <i class="fa fa-trash"></i><?= __('Delete'); ?>
                                                                                 </a>
                                                                             </td>
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>
                                                                 <a href="" data-repeater-create="" class="btn btn-sm font-weight-bolder btn-light-primary btn-primary">
-                                                                    <i class="fa fa-plus"></i>Add
+                                                                    <i class="fa fa-plus"></i><?= __('Add'); ?>
                                                                 </a>
                                                             </div>
                                                         </div>
-                                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">Comments on the role
-                                                            <p class="f-w-400">alterations if any requirred like addition/deletion of responsibilities</p>
+                                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?= __('Comments on the role'); ?>
+                                                            <p class="f-w-400"><?= __('alterations if any requirred like addition/deletion of responsibilities'); ?></p>
                                                         </a>
                                                         <div class="accordion-desc">
                                                             <div class="table-responsive">
@@ -768,9 +768,9 @@
                                                                     <thead>
                                                                         <tr>
                                                                             <th scope="col">#</th>
-                                                                            <th scope="col">By Self</th>
-                                                                            <th scope="col">RO's Comment</th>
-                                                                            <th scope="col">HOD's Comment</th>
+                                                                            <th scope="col"><?= __('By Self'); ?></th>
+                                                                            <th scope="col"><?= __('RO\'s Comment'); ?></th>
+                                                                            <th scope="col"><?= __('HOD\'s Comment'); ?></th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -778,17 +778,17 @@
                                                                             <th scope="col">1</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -796,17 +796,17 @@
                                                                             <th scope="col">2</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 <div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -814,17 +814,17 @@
                                                                             <th scope="col">3</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -832,17 +832,17 @@
                                                                             <th scope="col">4</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -850,24 +850,24 @@
                                                                             <th scope="col">5</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td colspan="4">
                                                                                 <button class="btn btn-primary">
-                                                                                    <i class="fa fa-plus"></i>Add More
+                                                                                    <i class="fa fa-plus"></i><?= __('Add More'); ?>
                                                                                 </button>
                                                                             </td>
                                                                         </tr>
@@ -875,8 +875,8 @@
                                                                 </table>
                                                             </div>
                                                         </div>
-                                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">Comments on the role
-                                                            <p class="f-w-400">alterations if any requirred like addition/deletion of responsibilities</p>
+                                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?= __('Comments on the role'); ?>
+                                                            <p class="f-w-400"><?= __('alterations if any requirred like addition/deletion of responsibilities'); ?></p>
                                                         </a>
                                                         <div class="accordion-desc">
                                                             <div class="table-responsive">
@@ -884,8 +884,8 @@
                                                                     <thead>
                                                                         <tr>
                                                                             <th scope="col">#</th>
-                                                                            <th scope="col">Strengths</th>
-                                                                            <th scope="col">Area's for Improvement</th>
+                                                                            <th scope="col"><?= __('Strengths'); ?></th>
+                                                                            <th scope="col"><?= __('Area\'s for Improvement'); ?></th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -893,12 +893,12 @@
                                                                             <th scope="col">1</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -906,12 +906,12 @@
                                                                             <th scope="col">2</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -919,12 +919,12 @@
                                                                             <th scope="col">3</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -932,12 +932,12 @@
                                                                             <th scope="col">4</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -945,69 +945,12 @@
                                                                             <th scope="col">5</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">Appraisee's Strengths and Areas for Improvement perceived by the Reporting officer
-                                                            <p class="f-w-400">Lorem ipsum dollar</p>
-                                                        </a>
-                                                        <div class="accordion-desc">
-                                                            <div class="table-responsive">
-                                                                <table class="table table-bordered">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th scope="col">#</th>
-                                                                            <th scope="col">Strengths</th>
-                                                                            <th scope="col">Area's for Improvement</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <th scope="col">1</th>
-                                                                            <td>
-                                                                                <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th scope="col">2</th>
-                                                                            <td>
-                                                                                <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th scope="col">3</th>
-                                                                            <td>
-                                                                                <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -1015,8 +958,8 @@
                                                                 </table>
                                                             </div>
                                                         </div>
-                                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">Personal Goals
-                                                            <p class="f-w-400">Lorem ipsum dollar</p>
+                                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?= __('Appraisee\'s Strengths and Areas for Improvement perceived by the Reporting officer'); ?>
+                                                            <p class="f-w-400"><?= __('Lorem ipsum dollar'); ?></p>
                                                         </a>
                                                         <div class="accordion-desc">
                                                             <div class="table-responsive">
@@ -1024,8 +967,8 @@
                                                                     <thead>
                                                                         <tr>
                                                                             <th scope="col">#</th>
-                                                                            <th scope="col">Goal Achieved during last year</th>
-                                                                            <th scope="col">Goal set for current year</th>
+                                                                            <th scope="col"><?= __('Strengths'); ?></th>
+                                                                            <th scope="col"><?= __('Area\'s for Improvement'); ?></th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -1033,12 +976,12 @@
                                                                             <th scope="col">1</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -1046,12 +989,12 @@
                                                                             <th scope="col">2</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -1059,12 +1002,12 @@
                                                                             <th scope="col">3</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -1072,8 +1015,8 @@
                                                                 </table>
                                                             </div>
                                                         </div>
-                                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">Personal Updates
-                                                            <p class="f-w-400">Lorem ipsum dollar</p>
+                                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?= __('Personal Goals'); ?>
+                                                            <p class="f-w-400"><?= __('Lorem ipsum dollar'); ?></p>
                                                         </a>
                                                         <div class="accordion-desc">
                                                             <div class="table-responsive">
@@ -1081,160 +1024,217 @@
                                                                     <thead>
                                                                         <tr>
                                                                             <th scope="col">#</th>
-                                                                            <th scope="col">Last Year</th>
-                                                                            <th scope="col">Yes/No</th>
-                                                                            <th scope="col">Details</th>
-                                                                            <th scope="col">Current Year</th>
-                                                                            <th scope="col">Yes/No</th>
-                                                                            <th scope="col">Details</th>
+                                                                            <th scope="col"><?= __('Goal Achieved during last year'); ?></th>
+                                                                            <th scope="col"><?= __('Goal set for current year'); ?></th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
                                                                         <tr>
                                                                             <th scope="col">1</th>
                                                                             <td>
-                                                                                Married/Engaged?
-                                                                            </td>
-                                                                            <td>
                                                                                 <div class="">
-                                                                                    <select aria-label="Select option" class="form-control">
-                                                                                        <option>Select</option>
-                                                                                        <option>Yes</option>
-                                                                                        <option>No</option>
-                                                                                    </select>
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                Marriage Plans
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="">
-                                                                                    <select aria-label="Select option" class="form-control">
-                                                                                        <option>Select</option>
-                                                                                        <option>Yes</option>
-                                                                                        <option>No</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th scope="col">2</th>
                                                                             <td>
-                                                                                 Higher Studies/Certifications?
-                                                                            </td>
-                                                                            <td>
                                                                                 <div class="">
-                                                                                    <select aria-label="Select option" class="form-control">
-                                                                                        <option>Select</option>
-                                                                                        <option>Yes</option>
-                                                                                        <option>No</option>
-                                                                                    </select>
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                Plans For Higher Study
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="">
-                                                                                    <select aria-label="Select option" class="form-control">
-                                                                                        <option>Select</option>
-                                                                                        <option>Yes</option>
-                                                                                        <option>No</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th scope="col">3</th>
                                                                             <td>
-                                                                                Health Issues?
+                                                                                <div class="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
+                                                                                </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <select aria-label="Select option" class="form-control">
-                                                                                        <option>Select</option>
-                                                                                        <option>Yes</option>
-                                                                                        <option>No</option>
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?= __('Personal Updates'); ?>
+                                                            <p class="f-w-400"><?= __('Lorem ipsum dollar'); ?></p>
+                                                        </a>
+                                                        <div class="accordion-desc">
+                                                            <div class="table-responsive">
+                                                                <table class="table table-bordered">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th scope="col">#</th>
+                                                                            <th scope="col"><?= __('Last Year'); ?></th>
+                                                                            <th scope="col"><?= __('Yes/No'); ?></th>
+                                                                            <th scope="col"><?= __('Details'); ?></th>
+                                                                            <th scope="col"><?= __('Current Year'); ?></th>
+                                                                            <th scope="col"><?= __('Yes/No'); ?></th>
+                                                                            <th scope="col"><?= __('Details'); ?></th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <th scope="col">1</th>
+                                                                            <td>
+                                                                                <?= __('Married/Engaged?'); ?>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="">
+                                                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control">
+                                                                                        <option><?= __('Select'); ?></option>
+                                                                                        <option><?= __('Yes'); ?></option>
+                                                                                        <option><?= __('No'); ?></option>
                                                                                     </select>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
-                                                                                Certification Plans
+                                                                                <?= __('Marriage Plans'); ?>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <select aria-label="Select option" class="form-control">
-                                                                                        <option>Select</option>
-                                                                                        <option>Yes</option>
-                                                                                        <option>No</option>
+                                                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control">
+                                                                                        <option><?= __('Select'); ?></option>
+                                                                                        <option><?= __('Yes'); ?></option>
+                                                                                        <option><?= __('No'); ?></option>
                                                                                     </select>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="col">2</th>
+                                                                            <td>
+                                                                                 <?= __('Higher Studies/Certifications?'); ?>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="">
+                                                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control">
+                                                                                        <option><?= __('Select'); ?></option>
+                                                                                        <option><?= __('Yes'); ?></option>
+                                                                                        <option><?= __('No'); ?></option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <?= __('Plans For Higher Study'); ?>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="">
+                                                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control">
+                                                                                        <option><?= __('Select'); ?></option>
+                                                                                        <option><?= __('Yes'); ?></option>
+                                                                                        <option><?= __('No'); ?></option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="col">3</th>
+                                                                            <td>
+                                                                                <?= __('Health Issues?'); ?>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="">
+                                                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control">
+                                                                                        <option><?= __('Select'); ?></option>
+                                                                                        <option><?= __('Yes'); ?></option>
+                                                                                        <option><?= __('No'); ?></option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <?= __('Certification Plans'); ?>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="">
+                                                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control">
+                                                                                        <option><?= __('Select'); ?></option>
+                                                                                        <option><?= __('Yes'); ?></option>
+                                                                                        <option><?= __('No'); ?></option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th scope="col">4</th>
                                                                             <td>
-                                                                                Others
+                                                                                <?= __('Others'); ?>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <select aria-label="Select option" class="form-control">
-                                                                                        <option>Select</option>
-                                                                                        <option>Yes</option>
-                                                                                        <option>No</option>
+                                                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control">
+                                                                                        <option><?= __('Select'); ?></option>
+                                                                                        <option><?= __('Yes'); ?></option>
+                                                                                        <option><?= __('No'); ?></option>
                                                                                     </select>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
-                                                                                Others
+                                                                                <?= __('Others'); ?>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <select aria-label="Select option" class="form-control">
-                                                                                        <option>Select</option>
-                                                                                        <option>Yes</option>
-                                                                                        <option>No</option>
+                                                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control">
+                                                                                        <option><?= __('Select'); ?></option>
+                                                                                        <option><?= __('Yes'); ?></option>
+                                                                                        <option><?= __('No'); ?></option>
                                                                                     </select>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -1242,8 +1242,8 @@
                                                                 </table>
                                                             </div>
                                                         </div>
-                                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">Professional Goals Achieved for last year
-                                                            <p class="f-w-400">Lorem ipsum dollar</p>
+                                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?= __('Professional Goals Achieved for last year'); ?>
+                                                            <p class="f-w-400"><?= __('Lorem ipsum dollar'); ?></p>
                                                         </a>
                                                         <div class="accordion-desc">
                                                             <div class="table-responsive">
@@ -1251,9 +1251,9 @@
                                                                     <thead>
                                                                         <tr>
                                                                             <th scope="col">#</th>
-                                                                            <th scope="col">By Self</th>
-                                                                            <th scope="col">RO's Comment</th>
-                                                                            <th scope="col">HOD's Comment</th>
+                                                                            <th scope="col"><?= __('By Self'); ?></th>
+                                                                            <th scope="col"><?= __('RO\'s Comment'); ?></th>
+                                                                            <th scope="col"><?= __('HOD\'s Comment'); ?></th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -1261,17 +1261,17 @@
                                                                             <th scope="col">1</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -1279,17 +1279,17 @@
                                                                             <th scope="col">2</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -1297,17 +1297,17 @@
                                                                             <th scope="col">3</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -1315,17 +1315,17 @@
                                                                             <th scope="col">4</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -1333,31 +1333,31 @@
                                                                             <th scope="col">5</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td colspan="4">
-                                                                                <button class="btn btn-primary"><i class="fa fa-plus"></i>Add More</button>
+                                                                                <button class="btn btn-primary"><i class="fa fa-plus"></i><?= __('Add More'); ?></button>
                                                                             </td>
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>
                                                             </div>
                                                         </div>
-                                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">Professional Goals for the forthcoming year
-                                                            <p class="f-w-400">Lorem ipsum dollar</p>
+                                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?= __('Professional Goals for the forthcoming year'); ?>
+                                                            <p class="f-w-400"><?= __('Lorem ipsum dollar'); ?></p>
                                                         </a>
                                                         <div class="accordion-desc">
                                                             <div class="table-responsive">
@@ -1365,9 +1365,9 @@
                                                                     <thead>
                                                                         <tr>
                                                                             <th scope="col">#</th>
-                                                                            <th scope="col">By Self</th>
-                                                                            <th scope="col">RO's Comment</th>
-                                                                            <th scope="col">HOD's Comment</th>
+                                                                            <th scope="col"><?= __('By Self'); ?></th>
+                                                                            <th scope="col"><?= __('RO\'s Comment'); ?></th>
+                                                                            <th scope="col"><?= __('HOD\'s Comment'); ?></th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -1375,17 +1375,17 @@
                                                                             <th scope="col">1</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -1393,17 +1393,17 @@
                                                                             <th scope="col">2</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -1411,17 +1411,17 @@
                                                                             <th scope="col">3</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -1429,17 +1429,17 @@
                                                                             <th scope="col">4</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -1447,24 +1447,24 @@
                                                                             <th scope="col">5</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td colspan="4">
                                                                                 <button class="btn btn-primary">
-                                                                                    <i class="fa fa-plus"></i>Add More
+                                                                                    <i class="fa fa-plus"></i><?= __('Add More'); ?>
                                                                                 </button>
                                                                             </td>
                                                                         </tr>
@@ -1472,8 +1472,8 @@
                                                                 </table>
                                                             </div>
                                                         </div>
-                                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">Training Requirements
-                                                            <p class="f-w-400">if any to achieve the Performance Standard Targets completely</p>
+                                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?= __('Training Requirements'); ?>
+                                                            <p class="f-w-400"><?= __('if any to achieve the Performance Standard Targets completely'); ?></p>
                                                         </a>
                                                         <div class="accordion-desc">
                                                             <div class="table-responsive">
@@ -1481,9 +1481,9 @@
                                                                     <thead>
                                                                         <tr>
                                                                             <th scope="col">#</th>
-                                                                            <th scope="col">By Self</th>
-                                                                            <th scope="col">RO's Comment</th>
-                                                                            <th scope="col">HOD's Comment</th>
+                                                                            <th scope="col"><?= __('By Self'); ?></th>
+                                                                            <th scope="col"><?= __('RO\'s Comment'); ?></th>
+                                                                            <th scope="col"><?= __('HOD\'s Comment'); ?></th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -1491,17 +1491,17 @@
                                                                             <th scope="col">1</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -1509,17 +1509,17 @@
                                                                             <th scope="col">2</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -1527,17 +1527,17 @@
                                                                             <th scope="col">3</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -1545,17 +1545,17 @@
                                                                             <th scope="col">4</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -1563,24 +1563,24 @@
                                                                             <th scope="col">5</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td colspan="4">
                                                                                 <button class="btn btn-primary">
-                                                                                    <i class="fa fa-plus"></i>Add More
+                                                                                    <i class="fa fa-plus"></i><?= __('Add More'); ?>
                                                                                 </button>
                                                                             </td>
                                                                         </tr>
@@ -1588,8 +1588,8 @@
                                                                 </table>
                                                             </div>
                                                         </div>
-                                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">Any other general comments, observations, suggestions etc.
-                                                            <p class="f-w-400">Lorem ipsum dollar</p>
+                                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?= __('Any other general comments, observations, suggestions etc.'); ?>
+                                                            <p class="f-w-400"><?= __('Lorem ipsum dollar'); ?></p>
                                                         </a>
                                                         <div class="accordion-desc">
                                                             <div class="table-responsive">
@@ -1597,9 +1597,9 @@
                                                                     <thead>
                                                                         <tr>
                                                                             <th scope="col">#</th>
-                                                                            <th scope="col">Self</th>
-                                                                            <th scope="col">RO</th>
-                                                                            <th scope="col">HOD</th>
+                                                                            <th scope="col"><?= __('Self'); ?></th>
+                                                                            <th scope="col"><?= __('RO'); ?></th>
+                                                                            <th scope="col"><?= __('HOD'); ?></th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -1607,17 +1607,17 @@
                                                                             <th scope="col">1</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -1625,17 +1625,17 @@
                                                                             <th scope="col">2</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -1643,17 +1643,17 @@
                                                                             <th scope="col">3</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -1661,17 +1661,17 @@
                                                                             <th scope="col">4</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -1679,24 +1679,24 @@
                                                                             <th scope="col">5</th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td colspan="4">
                                                                                 <button class="btn btn-primary">
-                                                                                    <i class="fa fa-plus"></i>Add More
+                                                                                    <i class="fa fa-plus"></i><?= __('Add More'); ?>
                                                                                 </button>
                                                                             </td>
                                                                        </tr>
@@ -1704,8 +1704,8 @@
                                                                 </table>
                                                             </div>
                                                         </div>
-                                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">For RO's Use Only
-                                                            <p class="f-w-400">Lorem ipsum dollar</p>
+                                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?= __('For RO\'s Use Only'); ?>
+                                                            <p class="f-w-400"><?= __('Lorem ipsum dollar'); ?></p>
                                                         </a>
                                                         <div class="accordion-desc">
                                                             <div class="table-responsive">
@@ -1713,103 +1713,103 @@
                                                                     <thead>
                                                                         <tr>
                                                                             <th scope="col"></th>
-                                                                            <th scope="col">Yes/No</th>
-                                                                            <th scope="col">If Yes - Details</th>
+                                                                            <th scope="col"><?= __('Yes/No'); ?></th>
+                                                                            <th scope="col"><?= __('If Yes - Details'); ?></th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
                                                                         <tr>
                                                                             <th scope="col">
-                                                                                The Team member has Work related Issues
+                                                                                <?= __('The Team member has Work related Issues'); ?>
                                                                             </th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <select aria-label="Select option" class="form-control border">
-                                                                                        <option>Select</option>
-                                                                                        <option>Yes</option>
-                                                                                        <option>No</option>
+                                                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control border">
+                                                                                        <option><?= __('Select'); ?></option>
+                                                                                        <option><?= __('Yes'); ?></option>
+                                                                                        <option><?= __('No'); ?></option>
                                                                                     </select>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th scope="col">
-                                                                                The Team member has Work related Issues
+                                                                                <?= __('The Team member has Work related Issues'); ?>
                                                                             </th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <select aria-label="Select option" class="form-control border">
-                                                                                        <option>Select</option>
-                                                                                        <option>Yes</option>
-                                                                                        <option>No</option>
+                                                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control border">
+                                                                                        <option><?= __('Select'); ?></option>
+                                                                                        <option><?= __('Yes'); ?></option>
+                                                                                        <option><?= __('No'); ?></option>
                                                                                     </select>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th scope="col">
-                                                                                The Team member has Work related Issues
+                                                                                <?= __('The Team member has Work related Issues'); ?>
                                                                             </th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <select aria-label="Select option" class="form-control border">
-                                                                                        <option>Select</option>
-                                                                                        <option>Yes</option>
-                                                                                        <option>No</option>
+                                                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control border">
+                                                                                        <option><?= __('Select'); ?></option>
+                                                                                        <option><?= __('Yes'); ?></option>
+                                                                                        <option><?= __('No'); ?></option>
                                                                                     </select>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th scope="col">
-                                                                                The Team member has Work related Issues
+                                                                                <?= __('The Team member has Work related Issues'); ?>
                                                                             </th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <select aria-label="Select option" class="form-control border">
-                                                                                        <option>Select</option>
-                                                                                        <option>Yes</option>
-                                                                                        <option>No</option>
+                                                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control border">
+                                                                                        <option><?= __('Select'); ?></option>
+                                                                                        <option><?= __('Yes'); ?></option>
+                                                                                        <option><?= __('No'); ?></option>
                                                                                     </select>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th scope="col">
-                                                                                The Team member has Work related Issues
+                                                                                <?= __('The Team member has Work related Issues'); ?>
                                                                             </th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <select aria-label="Select option" class="form-control border">
-                                                                                        <option>Select</option>
-                                                                                        <option>Yes</option>
-                                                                                        <option>No</option>
+                                                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control border">
+                                                                                        <option><?= __('Select'); ?></option>
+                                                                                        <option><?= __('Yes'); ?></option>
+                                                                                        <option><?= __('No'); ?></option>
                                                                                     </select>
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -1817,118 +1817,118 @@
                                                                 </table>
                                                             </div>
                                                         </div>
-                                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">For HRD's Use Only
-                                                            <p class="f-w-400">Lorem ipsum dollar</p>
+                                                        <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?= __('For HRD\'s Use Only'); ?>
+                                                            <p class="f-w-400"><?= __('Lorem ipsum dollar'); ?></p>
                                                         </a>
                                                         <div class="accordion-desc">
                                                             <div class="table-responsive">
                                                                 <table class="table table-bordered">
                                                                     <thead>
                                                                         <tr>
-                                                                            <th scope="col">Overall Parameters</th>
-                                                                            <th scope="col">Available Points</th>
-                                                                            <th scope="col">Points Scored</th>
-                                                                            <th scope="col">RO's Comment</th>
+                                                                            <th scope="col"><?= __('Overall Parameters'); ?></th>
+                                                                            <th scope="col"><?= __('Available Points'); ?></th>
+                                                                            <th scope="col"><?= __('Points Scored'); ?></th>
+                                                                            <th scope="col"><?= __('RO\'s Comment'); ?></th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
                                                                         <tr>
                                                                             <th scope="col">
-                                                                                KRAs Target Achievement Points (will be considered from the overall score specified in this document by the Reporting officer)
+                                                                                <?= __('KRAs Target Achievement Points (will be considered from the overall score specified in this document by the Reporting officer)'); ?>
                                                                             </th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th scope="col">
-                                                                                Professional Skills Scores(RO's Points furnished in the skill &amp; attitude assessment sheet will be considered)
+                                                                                <?= htmlspecialchars(__('Professional Skills Scores(RO\'s Points furnished in the skill & attitude assessment sheet will be considered)'), ENT_QUOTES, 'UTF-8'); ?>
                                                                             </th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th scope="col">
-                                                                                Personal Skills Scores(RO's Points furnished in the skill &amp; attitude assessment sheet will be considered)
+                                                                                <?= htmlspecialchars(__('Personal Skills Scores(RO\'s Points furnished in the skill & attitude assessment sheet will be considered)'), ENT_QUOTES, 'UTF-8'); ?>
                                                                             </th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th scope="col">
-                                                                                Special Achievements Score (HOD to furnish)
+                                                                                <?= __('Special Achievements Score (HOD to furnish)'); ?>
                                                                             </th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th scope="col">
-                                                                                Overall Total Score
+                                                                                <?= __('Overall Total Score'); ?>
                                                                             </th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -1940,89 +1940,89 @@
                                                                     <thead>
                                                                         <tr>
                                                                             <th scope="col"></th>
-                                                                            <th scope="col">Name</th>
-                                                                            <th scope="col">Signature</th>
-                                                                            <th scope="col">Date</th>
+                                                                            <th scope="col"><?= __('Name'); ?></th>
+                                                                            <th scope="col"><?= __('Signature'); ?></th>
+                                                                            <th scope="col"><?= __('Date'); ?></th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
                                                                         <tr>
                                                                             <th scope="col">
-                                                                                Employee
+                                                                                <?= __('Employee'); ?>
                                                                             </th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th scope="col">
-                                                                                Reporting Officer
+                                                                                <?= __('Reporting Officer'); ?>
                                                                             </th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th scope="col">
-                                                                                HOD
+                                                                                <?= __('HOD'); ?>
                                                                             </th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th scope="col">
-                                                                                HRD
+                                                                                <?= __('HRD'); ?>
                                                                             </th>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="">
-                                                                                    <input aria-label="Input field" type="text" class="form-control" placeholder="">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="">
                                                                                 </div>
                                                                             </td>
                                                                        </tr>
