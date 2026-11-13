@@ -61,7 +61,7 @@ $result = json_decode($apires,1);
   </script>
   <script type="text/javascript">
   function changeCurrenciesconverterates(val){
-    $('#listdata').html('<div style="display: block;  margin-left: auto;  margin-right: auto;  width: 40%;"><img src="assets/images/spiner/spiner2.gif" style="width: 300px;" alt="Preview"></div>');
+    $('#listdata').html('<div style="display: block;  margin-left: auto;  margin-right: auto;  width: 40%;"><img src="assets/images/spiner/spiner2.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>');
     jQuery.ajax({
       url: "views/custom_view_job_vendor_exp_rate_ajax.php",
       data:'ajaxpagecall=Y&cc_id='+val+'&fromdate='+$('#fromdate').val()+'&todate='+$('#todate').val()+'&vendor_id='+$('#vendor_id').val()+'&job_title_id='+$('#job_title_id').val(),
@@ -77,7 +77,7 @@ $result = json_decode($apires,1);
 </script>
 <div class="card">
   <div class="card-header">
-    <h5 class="f-30">Vendor  Rate Card Heatmap</h5>
+    <h5 class="f-30"><?= __('Vendor Rate Card Heatmap'); ?></h5>
     <div class="card-header-right">
 
     </div>
@@ -90,24 +90,24 @@ $result = json_decode($apires,1);
           <div class="col-lg-2">
             <div class="form-group">
 
-              <span class="form-label mb-0">Form date</span>
+              <span class="form-label mb-0"><?= __('Form date'); ?></span>
 
-              <input aria-label="Fromdate" class="form-control datepicker  p-t-10 p-b-10" id="fromdate" name="fromdate" type="text" <?php if($fromdate!=""){ ?>  value="<?php echo fromDate($fromdate); ?>" <?php
-} ?> placeholder="From Date" >
+              <input aria-label="<?= htmlspecialchars(__('Fromdate'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control datepicker  p-t-10 p-b-10" id="fromdate" name="fromdate" type="text" <?php if($fromdate!=""){ ?>  value="<?php echo fromDate($fromdate); ?>" <?php
+} ?> placeholder="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>" >
             </div>
           </div>
 
           <div class="col-lg-2">
             <div class="form-group">
-              <span class="form-label mb-0"> To Date</span>
-              <input aria-label="Todate" class="form-control datepicker p-t-10 p-b-10" id="todate"  <?php if($todate!=""){ ?>  value="<?php echo fromDate($todate); ?>" <?php
-} ?> name="todate" type="text" placeholder="To Date">
+              <span class="form-label mb-0"> <?= __('To Date'); ?></span>
+              <input aria-label="<?= htmlspecialchars(__('Todate'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control datepicker p-t-10 p-b-10" id="todate"  <?php if($todate!=""){ ?>  value="<?php echo fromDate($todate); ?>" <?php
+} ?> name="todate" type="text" placeholder="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>">
             </div>
           </div>
           <div class="col-lg-2">
-           <span class="form-label mb-0">Vendors </span>
-           <select aria-label="Vendor" class=" form-select js-example-basic-single" name="vendor_id" id="vendor_id">
-            <option value="0"> Select Vendor</option>
+           <span class="form-label mb-0"><?= __('Vendors'); ?> </span>
+           <select aria-label="<?= htmlspecialchars(__('Vendor'), ENT_QUOTES, 'UTF-8'); ?>" class=" form-select js-example-basic-single" name="vendor_id" id="vendor_id">
+            <option value="0"> <?= __('Select Vendor'); ?></option>
             <?php foreach($result['vendor'] as $keyven=>$ven){ ?>
               <option <?php if($vendor_id == $keyven){ echo "selected";
 } ?> value="<?php echo $keyven; ?>"> <?php echo $ven; ?></option>
@@ -115,9 +115,9 @@ $result = json_decode($apires,1);
           </select>
         </div>
         <div class="col-lg-2">
-         <span class="form-label mb-0"> Job Titles</span>
-         <select aria-label="Job Title" class="form-select js-example-basic-single " name="job_title_id" id="job_title_id">
-          <option value="0"> Select Job Title</option>
+         <span class="form-label mb-0"> <?= __('Job Titles'); ?></span>
+         <select aria-label="<?= htmlspecialchars(__('Job Title'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single " name="job_title_id" id="job_title_id">
+          <option value="0"> <?= __('Select Job Title'); ?></option>
           <?php foreach($result['job_title'] as $keyjob=>$jobtitle){
             if($keyjob){
               ?>
@@ -129,7 +129,7 @@ $result = json_decode($apires,1);
         </div>
         <div class="col-lg-2 mt-1">
           <button type="submit" name="applyform" value="apply" class="btn btn-info waves-effect waves-light input-group-text mt-3 btn-md">
-            Apply
+            <?= __('Apply'); ?>
           </button>
           <input type="hidden" name="submit" value="applyform">
         </div>
@@ -140,17 +140,17 @@ $result = json_decode($apires,1);
       <div class="col-lg-3">
         <div class="col bg-light-primary ">
           <span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
-            <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="Theme-Logo" />
+            <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="<?= htmlspecialchars(__('Theme-Logo'), ENT_QUOTES, 'UTF-8'); ?>" />
           </span>
           <span class="text-dark-75 font-weight-bolder font-size-h3"><?php echo $_SESSION['config']['name']; ?></span>
         </div>
       </div>
       <div class="col-lg-6">
-        <h4 class="card-label text-center f-w-700">Vendor Rate Card Heatmap</br><small class="f-10">Name : <?php echo $_SESSION['display_name']; ?> &nbsp;  Date & Time : <?php echo date("d-m-Y H:i:s"); ?></small> </h4>
+        <h4 class="card-label text-center f-w-700"><?= __('Vendor Rate Card Heatmap'); ?></br><small class="f-10"><?= __('Name'); ?> : <?php echo $_SESSION['display_name']; ?> &nbsp;  <?= htmlspecialchars(__('Date & Time'), ENT_QUOTES, 'UTF-8'); ?> : <?php echo date("d-m-Y H:i:s"); ?></small> </h4>
       </div>
       <div class="col-lg-3 heat-drop">
         <div class="float-left ">
-          <select aria-label="Select option" class="js-example-basic-single <?php echo $cc_id; ?>"  onchange="changeCurrenciesconverterates(this.value)" name="cc_id" id="cc_id">
+          <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single <?php echo $cc_id; ?>"  onchange="changeCurrenciesconverterates(this.value)" name="cc_id" id="cc_id">
             <?php foreach($result['cu_data'] as $cudata){ ?>
               <option <?php if($cc_id == $cudata['cu_id'] ){ echo "selected";
 } ?>  value="<?php echo $cudata['cu_id']; ?>"><?php echo $cudata['currency_short_code']; ?></option>
@@ -158,7 +158,7 @@ $result = json_decode($apires,1);
           </select>
         </div>
         <div>
-          <a href="custom_view_download.php?page=Job_Title_Wise_Vendor_Rates" class=" btn-primary float-right" target="_blank"> Download </a>
+          <a href="custom_view_download.php?page=Job_Title_Wise_Vendor_Rates" class=" btn-primary float-right" target="_blank"> <?= __('Download'); ?> </a>
         </div>
       </div>
     </div>
