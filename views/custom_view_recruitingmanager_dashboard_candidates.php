@@ -79,7 +79,7 @@ function SynchCandidateFolder(){
 	var data_name = '<?php echo $_SESSION['DB_NAME']; ?>';
 	var user_id = '<?php echo $_SESSION['userid']; ?>';
 
-	$("#ai_synch_candidate_folder").text("Please Wait........");
+	$("#ai_synch_candidate_folder").text(<?php echo json_encode(__('Please Wait........'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
     $("#ai_synch_candidate_folder").addClass("disabled");
     $.ajax({
         url: "apis/recruitstac_folder_uploaded_files_with_ai.php",
@@ -102,7 +102,7 @@ function SynchCandidateFolder(){
 	<div class="col-lg-7">
 		<div class="card ">
 			<div class="card-header">
-				<h5>Candidates</h5>
+				<h5><?= __('Candidates'); ?></h5>
 			</div>
 			<div class="card-body">
 				<div class="row ">
@@ -111,7 +111,7 @@ function SynchCandidateFolder(){
 							<div class="card-body" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="getCandidateList('<?php echo $candidate_dashboard['total_candidate_ids']; ?>')">
 								<div class="row align-items-center">
 									<div class="col">
-										<h7 class="m-b-5 text-white">Total Candidate</h7>
+										<h7 class="m-b-5 text-white"><?= __('Total Candidate'); ?></h7>
 										<h3 class="m-b-0 f-w-700 text-white f-22 mt-3"><?php echo $candidate_dashboard['total_candidates']; ?></h3>
 									</div>
 									<div class="col-auto">
@@ -120,14 +120,14 @@ function SynchCandidateFolder(){
 								</div>
 							</div>
 						</div>
-						<button type="button" class="btn btn-success btn-sm  mt-2" onclick="AddCandidate()"> <i class="icofont icofont-plus icon-white"></i> Candidate </button>
+						<button type="button" class="btn btn-success btn-sm  mt-2" onclick="AddCandidate()"> <i class="icofont icofont-plus icon-white"></i> <?= __('Candidate'); ?> </button>
 					</div>
 					<div class="col-lg-4">
 						<div class="card prod-p-card card-success mb-0">
 							<div class="card-body" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="getCandidateList('<?php echo $candidate_dashboard['linked_candidate_ids']; ?>')">
 								<div class="row align-items-center">
 									<div class="col">
-										<h7 class="m-b-5 text-white">Linked Job Postings</h7>
+										<h7 class="m-b-5 text-white"><?= __('Linked Job Postings'); ?></h7>
 										<h3 class="m-b-0 f-w-700 text-white f-22 mt-3"><?php echo $candidate_dashboard['linked_candidates']; ?></h3>
 									</div>
 									<div class="col-auto">
@@ -136,14 +136,14 @@ function SynchCandidateFolder(){
 								</div>
 							</div>
 						</div>
-						<a href="index.php?option=COM_LIST_CANDIDATES" class="btn btn-warning btn-sm  mt-2"> <i class="ti ti-timer icon-white"></i>History</a>
+						<a href="index.php?option=COM_LIST_CANDIDATES" class="btn btn-warning btn-sm  mt-2"> <i class="ti ti-timer icon-white"></i><?= __('History'); ?></a>
 					</div>
 					<div class="col-lg-4">
 						<div class="card prod-p-card card-danger mb-0">
 							<div class="card-body" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="getCandidateList('<?php echo $candidate_dashboard['unlinked_candidate_ids']; ?>')">
 								<div class="row align-items-center">
 									<div class="col">
-										<h7 class="m-b-5 text-white">Un-link Job Posting</h7>
+										<h7 class="m-b-5 text-white"><?= __('Un-link Job Posting'); ?></h7>
 										<h3 class="m-b-0 f-w-700 text-white f-22 mt-3"><?php echo $candidate_dashboard['unlinked_candidates']; ?></h3>
 									</div>
 									<div class="col-auto">
@@ -152,7 +152,7 @@ function SynchCandidateFolder(){
 								</div>
 							</div>
 						</div>
-						<button type="button" class="btn btn-success btn-sm mt-2" onclick="SynchCandidateFolder()"> <i class="icofont icofont-plus icon-white"></i> <span id="ai_synch_candidate_folder">Synch Resume Fld</span></button>
+						<button type="button" class="btn btn-success btn-sm mt-2" onclick="SynchCandidateFolder()"> <i class="icofont icofont-plus icon-white"></i> <span id="ai_synch_candidate_folder"><?= __('Synch Resume Fld'); ?></span></button>
 					</div>
 	            </div>
 	        </div>
@@ -161,11 +161,11 @@ function SynchCandidateFolder(){
 	<div class="col-lg-5">
 		<div class="card sale-card mb-2 ">
 			<div class="card-header">
-				<h5>Candidates</h5>
+				<h5><?= __('Candidates'); ?></h5>
 				<div class="card-header-right table-card-header ">
 				<div class="input-group input-icon-right input-group-button datepickershow_hr_detailT" style=""> 
-              		<input class="form-control width1" type="file" id="resumes_files" name="resumes_files[]" accept="image/*" multiple aria-label="Resume files">
-                	<span class="input-group-text addon-style" role="button" tabindex="0" aria-label="Upload resumes" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="submitResumeFiles()">
+              		<input class="form-control width1" type="file" id="resumes_files" name="resumes_files[]" accept="image/*" multiple aria-label="<?= htmlspecialchars(__('Resume files'), ENT_QUOTES, 'UTF-8'); ?>">
+                	<span class="input-group-text addon-style" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Upload resumes'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="submitResumeFiles()">
                     	<i class="ti-upload"></i>
                   	</span>
                 </div>
@@ -183,7 +183,7 @@ function SynchCandidateFolder(){
 				    });
 				?>
 				<table>
-<thead style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;"><tr><th scope="col">File</th><th scope="col">Modified</th></tr></thead>
+<thead style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;"><tr><th scope="col"><?= __('File'); ?></th><th scope="col"><?= __('Modified'); ?></th></tr></thead>
 				<?php
 				$im=1;
 				foreach ($files as $file) {
@@ -206,13 +206,13 @@ function SynchCandidateFolder(){
 				} else { 
 				?>
 				<div class="card-block text-center">
-				    <p><i class="fa-alert text-danger"></i> Folder Not Created Please Create</p>
+				    <p><i class="fa-alert text-danger"></i> <?= __('Folder Not Created Please Create'); ?></p>
 				    <img class="img-fluid" src="assets/images/122.png" alt="" />
 
 				    <div class="row mt-2">
 				        <div class="col-lg-12 p-0">
 				            <button type="button" class="btn btn-warning" onclick="createFolder('100')">
-				                <i class="ti ti-timer icon-white"></i> Folder
+				                <i class="ti ti-timer icon-white"></i> <?= __('Folder'); ?>
 				            </button>
 				        </div>
 				    </div>
@@ -227,7 +227,7 @@ function SynchCandidateFolder(){
 	<div class="col-lg-12">
 		<div class="card ">
 			<div class="card-header">
-				<h5>AI Generated Candidates</h5>
+				<h5><?= __('AI Generated Candidates'); ?></h5>
 			</div>
 			<div class="card-body">
 				<div class="row mt-4">
@@ -235,42 +235,42 @@ function SynchCandidateFolder(){
                         <div class="s-caption  text-primary"><i class="ti-list f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo $candidate_dashboard['total_candidates']; ?></h5>
-                            <p class="m-b-0 f-12">Total</p>
+                            <p class="m-b-0 f-12"><?= __('Total'); ?></p>
                         </div>
                     </div>
                     <div class="col-2 b-l-default text-center cursor-pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="getCandidateList('<?php echo $candidate_dashboard['screening_started_ids']; ?>')">
                         <div class="s-caption  text-danger"><i class="ti-time f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo $candidate_dashboard['screening_started']; ?></h5>
-                            <p class="m-b-0 f-12">Screening Started</p>
+                            <p class="m-b-0 f-12"><?= __('Screening Started'); ?></p>
                         </div>
                     </div>
                     <div class="col-2 b-l-default text-center cursor-pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="getCandidateList('<?php echo $candidate_dashboard['screening_not_started_ids']; ?>')">
                         <div class="s-caption  text-info"><i class="ti-timer f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo $candidate_dashboard['screening_not_started']; ?></h5>
-                            <p class="m-b-0  f-12">Screening Not Started</p>
+                            <p class="m-b-0  f-12"><?= __('Screening Not Started'); ?></p>
                         </div>
                     </div>
                     <div class="col-2 b-l-default text-center cursor-pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="getCandidateList('<?php echo $candidate_dashboard['proceed_candidate_ids']; ?>')">
                         <div class="s-caption  text-info"><i class="ti-write f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo $candidate_dashboard['proceed_count']; ?></h5>
-                            <p class="m-b-0 f-12">AI Approved</p>
+                            <p class="m-b-0 f-12"><?= __('AI Approved'); ?></p>
                         </div>
                     </div>
                     <div class="col-2 b-l-default text-center cursor-pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="getCandidateList('<?php echo $candidate_dashboard['reject_candidate_ids']; ?>')">
                         <div class="s-caption  text-success"><i class="ti-check-box f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo $candidate_dashboard['reject_count']; ?></h5>
-                            <p class="m-b-0 f-12">AI Rejected</p>
+                            <p class="m-b-0 f-12"><?= __('AI Rejected'); ?></p>
                         </div>
                     </div>
                      <div class="col-2 b-l-default text-center cursor-pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="getCandidateList('<?php echo $candidate_dashboard['hold_candidate_ids']; ?>')">
                         <div class="s-caption  text-success"><i class="ti-check-box f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo $candidate_dashboard['hold_count']; ?></h5>
-                            <p class="m-b-0 f-12">Decision Pending</p>
+                            <p class="m-b-0 f-12"><?= __('Decision Pending'); ?></p>
                         </div>
                     </div>
                 </div>
@@ -282,11 +282,11 @@ function SynchCandidateFolder(){
 	<div class="col-lg-3">
 		<div class="card mb-2">
 			<div class="card-header">
-				<h5>Today Added Candidated <span class="label label-xs label-primary text-white m-l-10" style="background-color:  !important"><?php echo count((array)$candidate_dashboard_today['created_today']); ?></span></h5>
+				<h5><?= __('Today Added Candidated'); ?> <span class="label label-xs label-primary text-white m-l-10" style="background-color:  !important"><?php echo count((array)$candidate_dashboard_today['created_today']); ?></span></h5>
 			</div>
 			<div class="card-body">
 				<div class="input-group input-group-button mt-2">
-		            <input type="text" id="dynamicfilterhideshow_candidate" data-id="candidatefilter" data-type="div" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search"> 
+		            <input type="text" id="dynamicfilterhideshow_candidate" data-id="candidatefilter" data-type="div" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>"> 
 		            <span class="input-group-text addon-style">
 		                <span class=""><span class="ti-search text-white mt-2"></span></span>
 		            </span>
@@ -296,7 +296,7 @@ function SynchCandidateFolder(){
 							foreach($candidate_dashboard_today['created_today'] as $canres){
 					?>
 					<div class="align-middle p-1" id="candidatefilter">
-	              		<span  alt="user image" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" data-toggle="tooltip" title="" data-original-title="<?php echo $canres['display_name']; ?>"><?php echo initials($canres['display_name']); ?></span>
+	              		<span  alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" data-toggle="tooltip" title="" data-original-title="<?php echo $canres['display_name']; ?>"><?php echo initials($canres['display_name']); ?></span>
 	              		<div class="d-inline-block width73">
 	              			<a href="index.php?option=COM_INSERT_CANDIDATE&Rid=<?php echo deocdeId("id:".$canres['id']); ?>" class="text-capitalize text-primary" onclick="getBasicInfoPopUp(<?php echo $canres['id']; ?>)" ><h6 class="mb-1"><?php echo $canres['display_name']; ?></h6></a>
 	              			<p class="text-muted m-b-0"><?php echo $canres['email_id']!="" ? $canres['email_id'] : "&nbsp;"; ?></p>
@@ -306,7 +306,7 @@ function SynchCandidateFolder(){
 					<?php } ?>
 					<?php }else{ ?>
 					<div class="card-px text-center ">
-						<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Candidates </p>   
+						<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Candidates'); ?> </p>   
 						<div class="text-center px-4">
 							<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
 						</div>   
@@ -320,12 +320,12 @@ function SynchCandidateFolder(){
 	<div class="col-lg-3">
 		<div class="card mb-2">
 			<div class="card-header">
-				<h5>Today Screening Started<span class="label label-xs label-primary text-white m-l-10" style="background-color:  !important"><?php echo COUNT((array)$candidate_dashboard_today['screening_start_today']); ?></span>
+				<h5><?= __('Today Screening Started'); ?><span class="label label-xs label-primary text-white m-l-10" style="background-color:  !important"><?php echo COUNT((array)$candidate_dashboard_today['screening_start_today']); ?></span>
 				</h5>
 			</div>
 			<div class="card-body">
 				<div class="input-group input-group-button mt-2">
-		            <input type="text" id="dynamicfilterhideshow_candidate1" data-id="candidatefilter1" data-type="div" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search"> 
+		            <input type="text" id="dynamicfilterhideshow_candidate1" data-id="candidatefilter1" data-type="div" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>"> 
 		            <span class="input-group-text addon-style">
 		                <span class=""><span class="ti-search text-white mt-2"></span></span>
 		            </span>
@@ -335,7 +335,7 @@ function SynchCandidateFolder(){
 						foreach($candidate_dashboard_today['screening_start_today'] as $canres){
 				?>
 				<div class="align-middle p-1" id="candidatefilter1">
-              		<span  alt="user image" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" data-toggle="tooltip" title="" data-original-title="<?php echo $canres['display_name']; ?>"><?php echo initials($canres['display_name']); ?></span>
+              		<span  alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" data-toggle="tooltip" title="" data-original-title="<?php echo $canres['display_name']; ?>"><?php echo initials($canres['display_name']); ?></span>
               		<div class="d-inline-block width73">
               			<a href="index.php?option=COM_INSERT_CANDIDATE&Rid=<?php echo deocdeId("id:".$canres['id']); ?>" class="text-capitalize text-primary" onclick="getBasicInfoPopUp(<?php echo $canres['id']; ?>)" ><h6 class="mb-1"><?php echo $canres['display_name']; ?></h6></a>
               			<p class="text-muted m-b-0"><?php echo $canres['email_id']!="" ? $canres['email_id'] : "&nbsp;"; ?></p>
@@ -346,7 +346,7 @@ function SynchCandidateFolder(){
 				<?php } ?>
 				<?php }else{ ?>
 				<div class="card-px text-center ">
-					<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Candidates </p>   
+					<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Candidates'); ?> </p>   
 					<div class="text-center px-4">
 						<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
 					</div>   
@@ -359,12 +359,12 @@ function SynchCandidateFolder(){
 	<div class="col-lg-3">
 		<div class="card mb-2">
 			<div class="card-header">
-				<h5>Today Screening Completed<span class="label label-xs label-primary text-white m-l-10" style="background-color:  !important"><?php echo COUNT((array)$candidate_dashboard_today['screening_end_today']); ?></span>
+				<h5><?= __('Today Screening Completed'); ?><span class="label label-xs label-primary text-white m-l-10" style="background-color:  !important"><?php echo COUNT((array)$candidate_dashboard_today['screening_end_today']); ?></span>
 				</h5>
 			</div>
 			<div class="card-body">
 				<div class="input-group input-group-button mt-2">
-		            <input type="text" id="dynamicfilterhideshow_candidate2" data-id="candidatefilter2" data-type="div" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search"> 
+		            <input type="text" id="dynamicfilterhideshow_candidate2" data-id="candidatefilter2" data-type="div" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>"> 
 		            <span class="input-group-text addon-style">
 		                <span class=""><span class="ti-search text-white mt-2"></span></span>
 		            </span>
@@ -374,7 +374,7 @@ function SynchCandidateFolder(){
 						foreach($candidate_dashboard_today['screening_end_today'] as $canres){
 				?>
 				<div class="align-middle p-1" id="candidatefilter2">
-              		<span  alt="user image" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" data-toggle="tooltip" title="" data-original-title="<?php echo $canres['display_name']; ?>"><?php echo initials($canres['display_name']); ?></span>
+              		<span  alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" data-toggle="tooltip" title="" data-original-title="<?php echo $canres['display_name']; ?>"><?php echo initials($canres['display_name']); ?></span>
               		<div class="d-inline-block width73">
               			<a href="index.php?option=COM_INSERT_CANDIDATE&Rid=<?php echo deocdeId("id:".$canres['id']); ?>" class=" text-capitalize text-primary" onclick="getBasicInfoPopUp(<?php echo $canres['id']; ?>)" ><h6 class="mb-1"><?php echo $canres['display_name']; ?></h6></a>
               			<p class="text-muted m-b-0"><?php echo $canres['email_id']!="" ? $canres['email_id'] : "&nbsp;"; ?></p>
@@ -385,7 +385,7 @@ function SynchCandidateFolder(){
 				<?php } ?>
 				<?php }else{ ?>
 				<div class="card-px text-center ">
-					<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Candidates </p>   
+					<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Candidates'); ?> </p>   
 					<div class="text-center px-4">
 						<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
 					</div>   
@@ -398,12 +398,12 @@ function SynchCandidateFolder(){
 	<div class="col-lg-3">
 		<div class="card mb-2">
 			<div class="card-header">
-				<h5>Today AI Approved<span class="label label-xs label-primary text-white m-l-10" style="background-color:  !important"><?php echo COUNT((array)$candidate_dashboard_today['ai_shortlisted_today']); ?></span>
+				<h5><?= __('Today AI Approved'); ?><span class="label label-xs label-primary text-white m-l-10" style="background-color:  !important"><?php echo COUNT((array)$candidate_dashboard_today['ai_shortlisted_today']); ?></span>
 				</h5>
 			</div>
 			<div class="card-body ">
 				<div class="input-group input-group-button mt-2">
-		            <input type="text" id="dynamicfilterhideshow_candidate3" data-id="candidatefilter3" data-type="div" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search"> 
+		            <input type="text" id="dynamicfilterhideshow_candidate3" data-id="candidatefilter3" data-type="div" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>"> 
 		            <span class="input-group-text addon-style">
 		                <span class=""><span class="ti-search text-white mt-2"></span></span>
 		            </span>
@@ -413,7 +413,7 @@ function SynchCandidateFolder(){
 						foreach($candidate_dashboard_today['ai_shortlisted_today'] as $canres){
 				?>
 				<div class="align-middle p-1" id="candidatefilter3">
-              		<span  alt="user image" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" data-toggle="tooltip" title="" data-original-title="<?php echo $canres['display_name']; ?>"><?php echo initials($canres['display_name']); ?></span>
+              		<span  alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" data-toggle="tooltip" title="" data-original-title="<?php echo $canres['display_name']; ?>"><?php echo initials($canres['display_name']); ?></span>
               		<div class="d-inline-block width73">
               			<a href="index.php?option=COM_INSERT_CANDIDATE&Rid=<?php echo deocdeId("id:".$canres['id']); ?>" class="text-capitalize text-primary" onclick="getBasicInfoPopUp(<?php echo $canres['id']; ?>)" ><h6 class="mb-1"><?php echo $canres['display_name']; ?></h6></a>
               			<p class="text-muted m-b-0"><?php echo $canres['email_id']!="" ? $canres['email_id'] : "&nbsp;"; ?></p>
@@ -424,7 +424,7 @@ function SynchCandidateFolder(){
 				<?php } ?>
 				<?php }else{ ?>
 				<div class="card-px text-center ">
-					<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Candidates </p>   
+					<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Candidates'); ?> </p>   
 					<div class="text-center px-4">
 						<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
 					</div>   
