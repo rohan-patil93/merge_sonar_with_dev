@@ -126,9 +126,9 @@ function numberToLakh($num){
     <div class="col-lg-9" ></div>
     <?php if(count((array)$displaylocations)>0){ ?>
     <div class="col-lg-3 m-b-30 text-end text-custom-left">
-        <select aria-label="Locationvalueget" class="form-select js-example-basic-single" id="locationvalueget" onchange="changeLocation()">
+        <select aria-label="<?= htmlspecialchars(__('Locationvalueget'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="locationvalueget" onchange="changeLocation()">
             <option <?php if($loc==0){ echo "SELECTED";
-}  ?>  value="0">ALL</option>
+}  ?>  value="0"><?= __('ALL'); ?></option>
                 <?php foreach((array)$displaylocations as $locat){ ?>
 
             <option <?php if($loc==$locat['id']){ echo "SELECTED";
@@ -153,9 +153,9 @@ function numberToLakh($num){
 
                                         <div class="circle_gradiant" style="--p1: 0deg; --p2_color: #ff5370;--p1_color: #2ed8b6;">
                                             <?php if($emp_data['image']!=""){ ?>
-                                               <img src="uploads/all<?php echo $emp_data['image']; ?>" class="percentag-img-radius img-90" alt="Details" style="border-radius: 50%;border: 8px solid #ffffff;height: 90px;">
+                                               <img src="uploads/all<?php echo $emp_data['image']; ?>" class="percentag-img-radius img-90" alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>" style="border-radius: 50%;border: 8px solid #ffffff;height: 90px;">
                                                <?php }else{ ?>
-                                                <span class="percentag-img-radius img-90 f-w-600 custom_name f-24" alt="User">
+                                                <span class="percentag-img-radius img-90 f-w-600 custom_name f-24" alt="<?= htmlspecialchars(__('User'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <?php echo initials($emp_data['display_name']); ?>
                                                 </span>
                                                 <?php } ?>
@@ -167,7 +167,7 @@ function numberToLakh($num){
                                 </div>
                             <span class="fs-6 text-primary text-hover-primary fw-bold mb-0" style="font-size: 16px !important;"><?php echo ucwords($emp_data['display_name']) ?></span>
                                 <div class="fw-semibold text-muted mb-6">
-                                    Employee Code : <?php if($emp_data['emp_code']!=""){    echo ucwords($emp_data['emp_code']);
+                                    <?= __('Employee Code'); ?> : <?php if($emp_data['emp_code']!=""){    echo ucwords($emp_data['emp_code']);
 }else{ echo "-";
 }  ?>
                                 </div>
@@ -183,7 +183,7 @@ function numberToLakh($num){
                                                     echo $emp_count_dashboard['hr_dis_data']['previous_month'] !=0 ?round($emp_count_dashboard['hr_dis_data']['previous_month']/8)." Days" : "-";
                                                      ?>
                                                 </div>
-                                                <div class="fw-semibold text-gray-500 mt-1">Last Month</div>
+                                                <div class="fw-semibold text-gray-500 mt-1"><?= __('Last Month'); ?></div>
                                             </div>
                                     </div>
                                     <div class="col-lg-6 p-1">
@@ -193,7 +193,7 @@ function numberToLakh($num){
                                                     echo $emp_count_dashboard['hr_dis_data']['current_month'] !=0 ?round($emp_count_dashboard['hr_dis_data']['current_month']/8)." Days" : "-";
                                                 ?>
                                                 </div>
-                                                <div class="fw-semibold text-gray-500 mt-1">This Month</div>
+                                                <div class="fw-semibold text-gray-500 mt-1"><?= __('This Month'); ?></div>
                                         </div>
                                        </div>
                                 </div>
@@ -207,7 +207,7 @@ function numberToLakh($num){
                                           <span class="fs-7 fw-bold text-gray-700"><?php if($emp_data['reporting_manager']!=""){ echo ucwords($emp_data['reporting_manager']);
 }else{ echo "-";
 }  ?> </span>
-                                              <div class="fw-semibold text-gray-500">Reports to</div>
+                                              <div class="fw-semibold text-gray-500"><?= __('Reports to'); ?></div>
                                           </div>
                                   </div>
                              </div>
@@ -221,33 +221,33 @@ function numberToLakh($num){
                         <div class="card-body p-2">
                             <div class="border border-gray-300 border-dashed rounded w-100 py-3 px-3">
                                   <span class="fs-7 fw-bold text-gray-700"><?php echo $type_billable['0']; ?> </span>
-                                      <div class="fw-semibold text-gray-500">Billable</div>
+                                      <div class="fw-semibold text-gray-500"><?= __('Billable'); ?></div>
                                   </div>
                         </div>
                     </div>
                     <input type="hidden" id="thismonthnkey" value="<?php echo $thismonthkey; ?>">
                     <div class="card ticket-card mb-3">
                         <div class="card-body">
-                            <p class="m-b-10 bg-c-blue lbl-card"><i class="fa fa-group m-r-10"></i>Total Head Count </p>
+                            <p class="m-b-10 bg-c-blue lbl-card"><i class="fa fa-group m-r-10"></i><?= __('Total Head Count'); ?> </p>
                             <div class="text-center">
                                 <h2 class="m-b-0 d-inline-block text-c-blue"><?php echo customNanAndEmptyValidation($emp_count_dashboard['total_emp']); ?></h2>
                                 <div class="row mt-3">
                                     <div class="col-lg-4 p-1">
                                               <div class="border border-gray-300 border-dashed rounded w-100 py-3 px-3">
                                               <span class="fs-7 fw-bold text-gray-700"><?php echo $type_billable['0']; ?> </span>
-                                                  <div class="fw-semibold text-gray-500">Billable</div>
+                                                  <div class="fw-semibold text-gray-500"><?= __('Billable'); ?></div>
                                               </div>
                                       </div>
                                       <div class="col-lg-4 p-1">
                                               <div class="border border-gray-300 border-dashed rounded w-100 py-3 px-3" style="">
                                               <span class="fs-7 fw-bold text-gray-700"><?php echo $type_billable['1']!="" ? $type_billable['1'] : 0; ?> </span>
-                                              <div class="fw-semibold text-gray-500">Non-Billable</div>
+                                              <div class="fw-semibold text-gray-500"><?= __('Non-Billable'); ?></div>
                                               </div>
                                       </div>
                                       <div class="col-lg-4 p-1">
                                               <div class="border border-gray-300 border-dashed rounded min-w-80px py-3 px-3" style="">
                                               <span class="fs-7 fw-bold text-gray-700"><?php echo $type_billable['2']!="" ? $type_billable['2']:0; ?> </span>
-                                              <div class="fw-semibold text-gray-500">Milestone</div>
+                                              <div class="fw-semibold text-gray-500"><?= __('Milestone'); ?></div>
                                               </div>
                                       </div>
                                   </div>
@@ -260,7 +260,7 @@ function numberToLakh($num){
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col p-1">
-                                            <h6 class="m-b-5 text-white f-14">Last Month Vendors</h6>
+                                            <h6 class="m-b-5 text-white f-14"><?= __('Last Month Vendors'); ?></h6>
                                             <h3 class="m-b-0 f-w-700 text-white f-22 mt-3"><?php echo customNanAndEmptyValidation($emp_count_dashboard['total_ven']); ?></h3>
                                         </div>
                                         <div class="col-auto p-1">
@@ -275,7 +275,7 @@ function numberToLakh($num){
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col p-1">
-                                            <h6 class="m-b-5 text-white f-14">This Month Vendors</h6>
+                                            <h6 class="m-b-5 text-white f-14"><?= __('This Month Vendors'); ?></h6>
                                             <h3 class="m-b-0 f-w-700 text-white f-22 mt-3"><?php echo customNanAndEmptyValidation($emp_count_dashboard['total_ven']); ?></h3>
                                         </div>
                                         <div class="col-auto p-1">
@@ -294,7 +294,7 @@ function numberToLakh($num){
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h7 class="m-b-5 text-white">Year to Month</h7>
+                                    <h7 class="m-b-5 text-white"><?= __('Year to Month'); ?></h7>
                                     <h3 class="m-b-0 f-w-700 text-white f-22 mt-3">
                                         <?php echo $emp_count_dashboard['hr_dis_data']['previous_month_bill'] !=0 ?round($emp_count_dashboard['hr_dis_data']['previous_month_bill']/100000,2)."L" : "-"; ?>
                                              </h3>
@@ -311,7 +311,7 @@ function numberToLakh($num){
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h7 class="m-b-5 text-white">Last Month Billing</h7>
+                                    <h7 class="m-b-5 text-white"><?= __('Last Month Billing'); ?></h7>
                                     <h3 class="m-b-0 f-w-700 text-white mt-3 f-22"><?php
                                             echo $emp_count_dashboard['hr_dis_data']['current_month_bill'] !=0 ?round($emp_count_dashboard['hr_dis_data']['current_month_bill']/100000,2)."L" : "-";
                                         ?> </h3>
@@ -328,7 +328,7 @@ function numberToLakh($num){
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h7 class="m-b-5 text-white">This Month Billing</h7>
+                                    <h7 class="m-b-5 text-white"><?= __('This Month Billing'); ?></h7>
                                     <h3 class="m-b-0 f-w-700 text-white mt-3 f-22"><?php
                                             echo $emp_count_dashboard['hr_dis_data']['current_month_bill'] !=0 ?round($emp_count_dashboard['hr_dis_data']['current_month_bill']/100000,2)."L" : "-";
                                         ?> </h3>
@@ -358,16 +358,16 @@ function numberToLakh($num){
                 <input type="hidden" id="actualdata" value="2486420|2839351|2020241|668362|750437|691841|617500">
 
                 <div class="card-header">
-                    <h5>Overall Budget Utilization</h5>
+                    <h5><?= __('Overall Budget Utilization'); ?></h5>
 
                     <div class="card-header-right">
-                        <span class="badge badge-inverse-primary bg-white"> <i class="fa fa-calendar-check-o text-primary"></i>  Financial Year <?php echo date('Y-M',strtotime($startyearmonth))." To ".date('Y-M',strtotime($endyearmonth)); ?></span>
+                        <span class="badge badge-inverse-primary bg-white"> <i class="fa fa-calendar-check-o text-primary"></i>  <?= __('Financial Year'); ?> <?php echo date('Y-M',strtotime($startyearmonth))." To ".date('Y-M',strtotime($endyearmonth)); ?></span>
                     </div>
                 </div>
                 <?php $countvaluempty = $estimationdata==""?1:0;   ?>
                 <div class="card-block">
                     <?php if($countvaluempty != "1"){
-                        echo "<h4 class='p-40 text-center'><i class='fa fa-warning'></i> Budget Utilization Data Not Available</h4>";
+                        echo "<h4 class='p-40 text-center'><i class='fa fa-warning'></i> ".__('Budget Utilization Data Not Available')."</h4>";
                     }else{ ?>
                         <div id="deal-analytic-chart-new" class="chart-shadow" style="height:300px"></div>
                     <?php } ?>
@@ -377,7 +377,7 @@ function numberToLakh($num){
         <div class="col-md-12 col-xl-4">
             <div class="card sale-card">
                 <div class="card-header">
-                    <h5>Total Utilization</h5>
+                    <h5><?= __('Total Utilization'); ?></h5>
                 </div>
                 <input type="hidden" id="hid_budget" value="2900000">
                 <input type="hidden" id="hid_utilization" value="2600000">
@@ -394,20 +394,20 @@ function numberToLakh($num){
             </div>
           </div>
 
-                    <h6 class="m-t-40">This Year's Budget</h6>
+                    <h6 class="m-t-40"><?= __('This Year\'s Budget'); ?></h6>
                     <h3 class="f-w-700 m-b-40"><?php echo numberToLakh(convert_Rupee_Nomber(customNanAndEmptyValidation(round($budgetthisyear)))); ?></h3>
 
                     <div class="row">
                         <div class="col-4">
-                            <p class="m-b-5">Year</p>
+                            <p class="m-b-5"><?= __('Year'); ?></p>
                             <h3 class="f-w-700 text-c-yellow f-14"><?php echo   numberToLakh(convert_Rupee_Nomber(customNanAndEmptyValidation(round($utilizationthisyear))) ); ?></h3>
                         </div>
                         <div class="col-4">
-                            <p class="m-b-5">Quater</p>
+                            <p class="m-b-5"><?= __('Quater'); ?></p>
                             <h3 class="f-w-700 text-c-yellow f-14"><?php echo numberToLakh(convert_Rupee_Nomber(customNanAndEmptyValidation(round($utilizationsixmonth))) ); ?></h3>
                         </div>
                         <div class="col-4">
-                            <p class="m-b-5">Month</p>
+                            <p class="m-b-5"><?= __('Month'); ?></p>
                             <h3 class="f-w-700 text-c-yellow f-14"><?php echo numberToLakh(convert_Rupee_Nomber(customNanAndEmptyValidation(round($utilizationsmonth))) ); ?></h3>
                         </div>
                     </div>
