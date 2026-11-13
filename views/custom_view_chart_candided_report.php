@@ -6,25 +6,25 @@
             <div class="card-header">
                 <div class="card-title">
 
-        <h3 class="card-label col-lg-3">&nbsp;<?php  echo "Candided Report";  ?> </h3>
+        <h3 class="card-label col-lg-3">&nbsp;<?php  echo __("Candided Report");  ?> </h3>
 
-From
+<?= __('From'); ?>
 <div class="col-lg-3">
-    <input aria-label="Select date" class="form-control form_date" type="date" value="<?php echo isset($_POST['from'])?$_POST['from']:date('Y')."-01-01"; ?>" name="from" id="example-date-input-from">
+    <input aria-label="<?= htmlspecialchars(__('Select date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form_date" type="date" value="<?php echo isset($_POST['from'])?$_POST['from']:date('Y')."-01-01"; ?>" name="from" id="example-date-input-from">
 </div>
-To
+<?= __('To'); ?>
 <div class="col-lg-3">
-    <input aria-label="Select date" class="form-control to_date" type="date" value="<?php echo isset($_POST['to'])?$_POST['to']:date('Y-m-d'); ?>" name="to" id="example-date-input-to">
+    <input aria-label="<?= htmlspecialchars(__('Select date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control to_date" type="date" value="<?php echo isset($_POST['to'])?$_POST['to']:date('Y-m-d'); ?>" name="to" id="example-date-input-to">
 </div>
 <div class="col-lg-2">
-    <button type="submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"  name="applyform" value="apply">Apply</button>
+    <button type="submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"  name="applyform" value="apply"><?= __('Apply'); ?></button>
 </div>
 
                 </div>
                 <div class="card-toolbar">
 
                 <a href="javascript:history.go(-1)" class="btn btn-light-primary font-weight-bolder mr-2">
-                    <i class="ki ki-long-arrow-back icon-xs"></i>Back
+                    <i class="ki ki-long-arrow-back icon-xs"></i><?= __('Back'); ?>
                 </a>
                 </div>
             </div>
@@ -57,7 +57,7 @@ To
                                                     <div class="row align-items-center">
                                                         <div class="col-md-4 my-2 my-md-0">
                                                             <div class="input-icon">
-                                                                <input aria-label="Search..." type="text" class="form-control" placeholder="Search..." id="kt_datatable_search_query" />
+                                                                <input aria-label="<?= htmlspecialchars(__('Search...'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="<?= htmlspecialchars(__('Search...'), ENT_QUOTES, 'UTF-8'); ?>" id="kt_datatable_search_query" />
                                                                 <span>
                                                                     <i class="flaticon2-search-1 text-muted"></i>
                                                                 </span>
@@ -71,11 +71,11 @@ To
     <table class="table table-separate table-head-custom table-checkable" id="kt_datatable1">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col" title="Field #1">#</th>
-                                                    <th scope="col" title="Field #2">Candided Code</th>
-                                                    <th scope="col" title="Field #3">Name</th>
-                                                    <th scope="col" title="Field #4">Contact</th>
-                                                    <th scope="col" title="Field #5">Status</th>
+                                                    <th scope="col" title="<?= htmlspecialchars(__('Field #1'), ENT_QUOTES, 'UTF-8'); ?>">#</th>
+                                                    <th scope="col" title="<?= htmlspecialchars(__('Field #2'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('Candided Code'); ?></th>
+                                                    <th scope="col" title="<?= htmlspecialchars(__('Field #3'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('Name'); ?></th>
+                                                    <th scope="col" title="<?= htmlspecialchars(__('Field #4'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('Contact'); ?></th>
+                                                    <th scope="col" title="<?= htmlspecialchars(__('Field #5'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('Status'); ?></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
