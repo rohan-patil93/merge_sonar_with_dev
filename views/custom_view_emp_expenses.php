@@ -119,45 +119,45 @@ foreach($all_expense_categories as $expcat){
             <div class="col-lg-4">
                 <div class="col bg-light-primary ">
                     <span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
-                        <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="Theme-Logo" />
+                        <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="<?= htmlspecialchars(__('Theme-Logo'), ENT_QUOTES, 'UTF-8'); ?>" />
                     </span>
                     <span class="text-dark-75 font-weight-bolder font-size-h3"><?php echo ucwords($_SESSION['config']['name']); ?></span>
                 </div>
             </div>
             <div class="col-lg-4">
-                <h4 class="card-label text-center f-w-700">Expense Report <small class="f-10 d-block">Name : <?php echo $_SESSION['display_name']; ?> &nbsp;  Date & Time : <?php echo date("d-m-Y H:i:s"); ?></small>
+                <h4 class="card-label text-center f-w-700"><?= __('Expense Report'); ?> <small class="f-10 d-block"><?= __('Name'); ?> : <?php echo $_SESSION['display_name']; ?> &nbsp;  <?= htmlspecialchars(__('Date & Time'), ENT_QUOTES, 'UTF-8'); ?> : <?php echo date("d-m-Y H:i:s"); ?></small>
                 </h4>
             </div>
         </div>
         <table style="width:100%;border-collapse:collapse;">
             <tr>
                 <th scope="col" colspan="6"></th>
-                <th scope="col" colspan="3" style="text-align: right; font-size: 13px;">Name: <?php echo $expenses_user_details['display_name']; ?></th>
-                <th scope="col" colspan="3" style="text-align: right; font-size: 13px;">Manager: <?php echo $_SESSION['users'][$expenses_user_details['reports_to']]; ?></th>
+                <th scope="col" colspan="3" style="text-align: right; font-size: 13px;"><?= __('Name'); ?>: <?php echo $expenses_user_details['display_name']; ?></th>
+                <th scope="col" colspan="3" style="text-align: right; font-size: 13px;"><?= __('Manager'); ?>: <?php echo $_SESSION['users'][$expenses_user_details['reports_to']]; ?></th>
             </tr>
             <tr>
                 <th scope="col" colspan="6"></th>
-                <th scope="col" colspan="3" style="text-align: right; font-size: 13px;">Trip Budget: <?php echo customeNumberFormate($trips['budget_amount']); ?></th>
-                <th scope="col" colspan="3" style="text-align: right; font-size: 13px;">Total Expense: <?php echo customeNumberFormate($emp_expenses['total_amount']); ?></th>
+                <th scope="col" colspan="3" style="text-align: right; font-size: 13px;"><?= __('Trip Budget'); ?>: <?php echo customeNumberFormate($trips['budget_amount']); ?></th>
+                <th scope="col" colspan="3" style="text-align: right; font-size: 13px;"><?= __('Total Expense'); ?>: <?php echo customeNumberFormate($emp_expenses['total_amount']); ?></th>
             </tr>
 
 
             <tr>
-                <th scope="col" style="font-size: 13px; border: 1px solid #eeeeee;">Request Number</th>
-                <th scope="col" style="font-size: 13px; border: 1px solid #eeeeee;" style="font-size: 13px; border: 1px solid #eeeeee;">Event Name</th>
-                <th scope="col" style="font-size: 13px; border: 1px solid #eeeeee;">Place</th>
-                <th scope="col" style="font-size: 13px; border: 1px solid #eeeeee;">Date</th>
-                <th scope="col" style="font-size: 13px; border: 1px solid #eeeeee;">Budget</th>
-                <th scope="col" style="font-size: 13px; border: 1px solid #eeeeee;">Expense</th>
-                <th scope="col" style="font-size: 13px; border: 1px solid #eeeeee;">Exp Date</th>
+                <th scope="col" style="font-size: 13px; border: 1px solid #eeeeee;"><?= __('Request Number'); ?></th>
+                <th scope="col" style="font-size: 13px; border: 1px solid #eeeeee;" style="font-size: 13px; border: 1px solid #eeeeee;"><?= __('Event Name'); ?></th>
+                <th scope="col" style="font-size: 13px; border: 1px solid #eeeeee;"><?= __('Place'); ?></th>
+                <th scope="col" style="font-size: 13px; border: 1px solid #eeeeee;"><?= __('Date'); ?></th>
+                <th scope="col" style="font-size: 13px; border: 1px solid #eeeeee;"><?= __('Budget'); ?></th>
+                <th scope="col" style="font-size: 13px; border: 1px solid #eeeeee;"><?= __('Expense'); ?></th>
+                <th scope="col" style="font-size: 13px; border: 1px solid #eeeeee;"><?= __('Exp Date'); ?></th>
 
 
                 <?php foreach($expense_categories_list as $epcat){ ?>
                     <th scope="col" style="font-size: 13px; border: 1px solid #eeeeee;"><?php echo $epcat['parent']['category_name']; ?></th>
                 <?php } ?>
 
-                <th scope="col" style="font-size: 13px; border: 1px solid #eeeeee;">Transport</th>
-                <th scope="col" style="font-size: 13px; border: 1px solid #eeeeee;">Others</th>
+                <th scope="col" style="font-size: 13px; border: 1px solid #eeeeee;"><?= __('Transport'); ?></th>
+                <th scope="col" style="font-size: 13px; border: 1px solid #eeeeee;"><?= __('Others'); ?></th>
             </tr>
             <tr>
                 <td style="font-size: 13px; border: 1px solid #eeeeee;"><?php echo $trips_select['transaction_no']." (".fromDate($trips_select['transaction_date']).")"; ?></td>
@@ -297,7 +297,7 @@ foreach($all_expense_categories as $expcat){
         <?php } ?>
 
             <tr>
-                <th scope="col" colspan = "7" style="font-size: 13px; border: 1px solid #eeeeee;">Total</th>
+                <th scope="col" colspan = "7" style="font-size: 13px; border: 1px solid #eeeeee;"><?= __('Total'); ?></th>
                 <?php foreach($expense_categories_list as $parentkeyid=>$epcat){ ?>
                 <th scope="col" style="text-align: right; "><?php echo customeNumberFormate($total_rowexpense[$parentkeyid]); ?></th>
                 <?php } ?>
@@ -308,4 +308,4 @@ foreach($all_expense_categories as $expcat){
     </div>
 </div>
 </div>
-    <button type="button" class="btn btn-primary font-weight-bolder mr-3 mr-sm-14 col-lg-1 my-1" style="margin-top: 20px;" onclick="printDiv('printableArea')" >Print</button>
+    <button type="button" class="btn btn-primary font-weight-bolder mr-3 mr-sm-14 col-lg-1 my-1" style="margin-top: 20px;" onclick="printDiv('printableArea')" ><?= __('Print'); ?></button>
