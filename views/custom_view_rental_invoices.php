@@ -233,15 +233,15 @@ function emptyCheck($valu){
 			<h1 style="font-size:30px;color: #000000;margin: 30px 0 50px 0;text-align: left;text-transform: uppercase;">
 				<?php 
 				if($transaction_table == "utility_rental_invoices"){
-					echo "Reimbursement Bill";
+					echo __('Reimbursement Bill');
 				}elseif($transaction_table == "credit_notes"){
-					echo "Credit Notes";
+					echo __('Credit Notes');
 				}elseif($transaction_table == "utility_amc_rental_invoices"){
-					echo "AMC Invoice";
+					echo __('AMC Invoice');
 				}elseif($transaction_table == "debit_notes"){
-					echo "Debit Notes";
+					echo __('Debit Notes');
 				}else{
-					echo "Tax Invoice";
+					echo __('Tax Invoice');
 				}
 				?>
 			<div class="" style="float: right;margin-right: 15px;">
@@ -251,44 +251,44 @@ function emptyCheck($valu){
 	        <div class="" style="width:49%;display: inline-block;vertical-align: middle;">
 	            <table style="width: 100%;">
 	                <tr>
-	                    <th style="padding-top: 5px;text-align: left;font-size: 12px;">Invoice Number:</th>
+	                    <th style="padding-top: 5px;text-align: left;font-size: 12px;"><?= __('Invoice Number'); ?>:</th>
 	                    <td style="padding-top: 5px;text-align: left;font-size: 12px;"><?php echo $transaction['transaction_number']; ?></td>
 	                </tr>
 	                <tr>
-	                    <th style="padding-top: 5px;text-align: left;font-size: 12px;">Invoice Date:</th>
+	                    <th style="padding-top: 5px;text-align: left;font-size: 12px;"><?= __('Invoice Date'); ?>:</th>
 	                    <td style="padding-top: 5px;text-align: left;font-size: 12px;"><?php echo date("d M Y",strtotime($transaction['transaction_date'])); ?></td>
 	                </tr>
 	                <tr>
-	                    <th style="padding-top: 5px;text-align: left;font-size: 12px;">Due Date:</th>
+	                    <th style="padding-top: 5px;text-align: left;font-size: 12px;"><?= __('Due Date'); ?>:</th>
 	                    <td style="padding-top: 5px;text-align: left;font-size: 12px;"><?php echo date("d M Y",strtotime($transaction['due_date'])); ?></td>
 	                </tr>
 	                <tr>
-	                    <th style="padding-top: 5px;text-align: left;font-size: 12px;">Contact Person:</th>
+	                    <th style="padding-top: 5px;text-align: left;font-size: 12px;"><?= __('Contact Person'); ?>:</th>
 	                    <td style="padding-top: 5px;text-align: left;font-size: 12px;"><?php echo $owner_additional_details['owner_name']!=""?$owner_additional_details['owner_name']:"-"; ?></td>
 	                </tr>
 	                <tr>
-	                    <th style="padding-top: 5px;text-align: left;font-size: 12px;">Email ID:</th>
+	                    <th style="padding-top: 5px;text-align: left;font-size: 12px;"><?= __('Email ID'); ?>:</th>
 	                    <td style="padding-top: 5px;text-align: left;font-size: 12px;"><?php echo $owner_additional_details['email_id']!=""?$owner_additional_details['email_id']:"-"; ?></td>
 	                </tr>
 	                <tr>
-	                    <th style="padding-top: 5px;text-align: left;font-size: 12px;">Phone Number:</th>
+	                    <th style="padding-top: 5px;text-align: left;font-size: 12px;"><?= __('Phone Number'); ?>:</th>
 	                    <td style="padding-top: 5px;text-align: left;font-size: 12px;"><?php echo $owner_additional_details['contact_no']!=""?$owner_additional_details['contact_no']:$bill_by['user_mobile']; ?></td>
 	                </tr>
 	            </table>
 	        </div> 
 	        <div class="" style="width:50%;display: inline-block;vertical-align: middle;">
 	            <div class="" style="background:#eeeeee;border:1px solid #cccccc;border-radius: 10px;padding: 10px; margin-right:10px;margin-left: 5px;">
-		            <span style="color: #333333;font-size: 12px;font-weight: 500;">Billed by:</span>
+		            <span style="color: #333333;font-size: 12px;font-weight: 500;"><?= __('Billed by'); ?>:</span>
 		            <p style="font-size: 12px;margin:5px 0 0 0;"><?php echo $owner_additional_details['owner_company_name']!=""?$owner_additional_details['owner_company_name']:$config['name']; ?></p>
 		            <p style="font-size: 12px;color:#333333;margin:5px 0 0 0;white-space:initial;min-height: 30px;"><?php echo emptyCheck($owner_additional_details['address']!=""?$owner_additional_details['address']:$config['contact_address']); ?></p>
 		            <table style="width: 100%;">
 		                <tr>
-		                    <th style="padding-top: 5px;font-size: 12px;text-align: left;">GSTIN:</th>
+		                    <th style="padding-top: 5px;font-size: 12px;text-align: left;"><?= __('GSTIN'); ?>:</th>
 		                    <td style="padding-top: 5px;text-align: right;font-size: 12px;"><?php //echo emptyCheck($owner_additional_details['gst_no']!=""?$owner_additional_details['gst_no']:$config['gst_number']); 
 		                   echo $owner_additional_details['gst_no']!=""?$owner_additional_details['gst_no']:"-"; ?></td>
 		                </tr>
 		                <tr>
-		                    <th style="font-size: 12px;text-align: left;">PAN:</th>
+		                    <th style="font-size: 12px;text-align: left;"><?= __('PAN'); ?>:</th>
 		                    <td style="text-align: right;font-size: 12px;"><?php echo $owner_additional_details['pan_no']!=""?$owner_additional_details['pan_no']:"-"; ?></td>
 		                </tr>
 	            	</table>
@@ -298,16 +298,16 @@ function emptyCheck($valu){
 	        	<tr>
 			        <td class="" style="width:50%;">
 			        	<div class="" style="background:#eeeeee;border:1px solid #cccccc;border-radius: 10px;padding: 10px; margin-right:10px;">
-				            <span style="color: #333333;font-size: 12px;font-weight: 500;">Billed to</span>
+				            <span style="color: #333333;font-size: 12px;font-weight: 500;"><?= __('Billed to'); ?></span>
 				            <p style="font-size: 12px;margin:5px 0 0 0;"><?php echo $transaction['party_name']; ?></p>
 				            <p style="font-size: 12px;color:#333333;margin:5px 0 0 0;white-space:initial;min-height: 30px;"><?php echo $transaction['party_address']; ?></p>
 				            <table style="width: 100%;">
 				                <tr>
-				                    <th style="padding-top: 5px;font-size: 12px;text-align: left;">GSTIN :</th>
+				                    <th style="padding-top: 5px;font-size: 12px;text-align: left;"><?= __('GSTIN'); ?> :</th>
 				                    <td style="padding-top: 5px;text-align: right;font-size: 12px;"><?php echo emptyCheck($party_additional_details['gstin']); ?></td>
 				                </tr>
 				                <tr>
-				                    <th style="font-size: 12px;text-align: left;">PAN:</th>
+				                    <th style="font-size: 12px;text-align: left;"><?= __('PAN'); ?>:</th>
 				                    <td style="text-align: right;font-size: 12px;"><?php echo emptyCheck($party_additional_details['pan_no']); ?></td>
 				                </tr>
 			            	</table>
@@ -315,16 +315,16 @@ function emptyCheck($valu){
 			        </td>
 			        <td class="" style="width:50%;">
 			        	<div class="" style="background:#eeeeee;border:1px solid #cccccc;border-radius: 10px;padding: 10px; margin-right:10px;">
-				            <span style="color: #333333;font-size: 12px;font-weight: 500;">Shipped to</span>
+				            <span style="color: #333333;font-size: 12px;font-weight: 500;"><?= __('Shipped to'); ?></span>
 				            <p style="font-size: 12px;margin:5px 0 0 0;"><?php echo $transaction['party_name']; ?></p>
 				            <p style="font-size: 12px;color:#333333;margin:5px 0 0 0;white-space:initial;min-height: 30px;"><?php echo emptyCheck($transaction['party_ship_adderss']); ?></p> 
 				            <table style="width: 100%;">
 				                <tr>
-				                    <th style="padding-top: 5px;font-size: 12px;text-align: left;">GSTIN:</th>
+				                    <th style="padding-top: 5px;font-size: 12px;text-align: left;"><?= __('GSTIN'); ?>:</th>
 				                    <td style="padding-top: 5px;text-align: right;font-size: 12px;"><?php echo emptyCheck($party_additional_details['gstin']); ?></td>
 				                </tr>
 				                <tr>
-				                    <th style="font-size: 12px;text-align: left;">PAN:</th>
+				                    <th style="font-size: 12px;text-align: left;"><?= __('PAN'); ?>:</th>
 				                    <td style="text-align: right;font-size: 12px;"><?php echo emptyCheck($party_additional_details['pan_no']); ?></td>
 				                </tr>
 				            </table>
@@ -346,9 +346,9 @@ function emptyCheck($valu){
 						}
 	        			?>
 	        		<tr style="background: #eeeeee;">
-		                <th style="padding:5px;text-align: left;font-size: 12px;">Particular</th>
-		                <th style="padding:5px;text-align: left;font-size: 12px;">Note</th>
-						<th style="padding:5px;text-align: right;font-size: 12px;">Total</th>
+		                <th style="padding:5px;text-align: left;font-size: 12px;"><?= __('Particular'); ?></th>
+		                <th style="padding:5px;text-align: left;font-size: 12px;"><?= __('Note'); ?></th>
+						<th style="padding:5px;text-align: right;font-size: 12px;"><?= __('Total'); ?></th>
 		            </tr>
 		            <?php foreach($childary as $parentkey=>$valu){  
 		            		if(isset($valu['CHILD'])){
@@ -389,13 +389,13 @@ function emptyCheck($valu){
 
 	        	<?php } }else{ ?>
 	            <tr style="background: #eeeeee;">
-	                <th style="padding:5px;text-align: left;font-size: 12px;">Particular</th>
-	                <th style="padding:5px;text-align: left;font-size: 12px;">Note</th>
-					<th style="padding:5px;font-size: 12px;">HSN/SAC</th>
-	                <th style="padding:5px;font-size: 12px;">Qty</th> 
-	                <th style="padding:5px;font-size: 12px;">UOM</th> 
-	                <th style="padding:5px;text-align: right;font-size: 12px;">Rate</th>
-	              	<th style="padding:5px;text-align: right;font-size: 12px;">Total</th>
+	                <th style="padding:5px;text-align: left;font-size: 12px;"><?= __('Particular'); ?></th>
+	                <th style="padding:5px;text-align: left;font-size: 12px;"><?= __('Note'); ?></th>
+					<th style="padding:5px;font-size: 12px;"><?= __('HSN/SAC'); ?></th>
+	                <th style="padding:5px;font-size: 12px;"><?= __('Qty'); ?></th> 
+	                <th style="padding:5px;font-size: 12px;"><?= __('UOM'); ?></th> 
+	                <th style="padding:5px;text-align: right;font-size: 12px;"><?= __('Rate'); ?></th>
+	              	<th style="padding:5px;text-align: right;font-size: 12px;"><?= __('Total'); ?></th>
 	            </tr>
 	            <?php foreach($transaction_items as $ta){ ?>
 	            <tr style="border: 1px solid #cccccc;">
@@ -415,26 +415,26 @@ function emptyCheck($valu){
 	        	<tr>
 			        <td style="width:60%;vertical-align: top;">
 			            <div class="" style="background:#eeeeee;border:1px solid #cccccc;border-radius: 10px;padding: 10px; margin-right:10px;">
-		                    <h3 style="font-size: 12px;color:#333333;margin: 0;">Bank Detail</h3>
+		                    <h3 style="font-size: 12px;color:#333333;margin: 0;"><?= __('Bank Detail'); ?></h3>
 		                    <table style="width: 100%; margin:10px 0 0 0;">
 		                        <tr>
-		                            <th style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;">Bank Name:</th>
+		                            <th style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;"><?= __('Bank Name'); ?>:</th>
 		                            <td style="padding-top: 5px;text-align: left;font-size: 12px;width: 50%;"><?php echo emptyCheck($owner_additional_details['bank_id']!=""?$banks[$owner_additional_details['bank_id']]:$banks[$bank_accounts['bank_name']]); ?></td>
 		                        </tr>
 		                        <tr>
-		                            <th style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;">Account Holder:</th>
+		                            <th style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;"><?= __('Account Holder'); ?>:</th>
 		                            <td style="padding-top: 5px;text-align: left;font-size: 12px;width: 50%;"><?php echo emptyCheck($owner_additional_details['owner_company_name']!=""?$owner_additional_details['owner_company_name']:$bank_accounts['bank_contact_person']); ?></td>
 		                        </tr>
 		                        <tr>
-		                            <th style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;">Account Number:</th>
+		                            <th style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;"><?= __('Account Number'); ?>:</th>
 		                            <td style="padding-top: 5px;text-align: left;font-size: 12px;width: 50%;"><?php echo emptyCheck($owner_additional_details['bank_account_no']!=""?$owner_additional_details['bank_account_no']:$bank_accounts['bank_account_number']); ?></td>
 		                        </tr>
 		                        <tr>
-		                            <th style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;">IFSC Number:</th>
+		                            <th style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;"><?= __('IFSC Number'); ?>:</th>
 		                            <td style="padding-top: 5px;text-align: left;font-size: 12px;width: 50%;"><?php echo emptyCheck($owner_additional_details['ifsc_code']!=""?$owner_additional_details['ifsc_code']:$bank_accounts['ifsc_code']); ?></td>
 		                        </tr>
 		                        <tr>
-		                            <th style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;">Account Type:</th>
+		                            <th style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;"><?= __('Account Type'); ?>:</th>
 		                            <td style="padding-top: 5px;text-align: left;font-size: 12px;width: 50%;">
 		                            	<?php  echo $owner_additional_details['account_type']!=""?$account_types[$owner_additional_details['account_type']]:$account_types[$bank_accounts['account_type']]; ?>
 		                            	
@@ -447,7 +447,7 @@ function emptyCheck($valu){
 			            <table style="width: 100%; margin:10px 0 0 0;">
 			            	<?php //if($transaction['ref_bill_type'] != "U"){ ?>
 			                <tr>
-			                    <th style="padding-top: 5px;font-size: 12px;text-align: left;">Sub Total</th>
+			                    <th style="padding-top: 5px;font-size: 12px;text-align: left;"><?= __('Sub Total'); ?></th>
 			                    <td style="padding-top: 5px;padding-bottom: 5px;text-align:right;font-size: 12px;"><?php echo currencyFormat($transaction['amount'],$config); ?></td>
 			                </tr>
                             <?php  if(count((array)$distax)){
@@ -455,7 +455,7 @@ function emptyCheck($valu){
                                     <?php 
                                         if($transaction['originator_state_id'] == $transaction['supplier_state_id']){ ?>
                                     <tr>
-                                        <td style="padding-top: 5px;font-size: 12px;text-align: left;">  CGST  @ <?php echo $ktax['percentage']/2; ?>%                
+                                        <td style="padding-top: 5px;font-size: 12px;text-align: left;">  <?= __('CGST @'); ?> <?php echo $ktax['percentage']/2; ?>%                
                                         </td>
                                         <td style="padding-top: 5px;text-align: right;font-size: 12px;"> 
                                             <span id="dis_taxRateid"><?php echo currencyFormat($ktax['tax_amount']/2,$config); ?></span> 
@@ -463,7 +463,7 @@ function emptyCheck($valu){
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="padding-top: 5px;font-size: 12px;text-align: left;">  SGST @ <?php echo $ktax['percentage']/2; ?>%               
+                                        <td style="padding-top: 5px;font-size: 12px;text-align: left;">  <?= __('SGST @'); ?> <?php echo $ktax['percentage']/2; ?>%               
                                         </td>
                                         <td style="padding-top: 5px;text-align: right;font-size: 12px;"> 
                                             <span id="dis_taxRateid"><?php echo currencyFormat($ktax['tax_amount']/2,$config); ?></span> 
@@ -472,7 +472,7 @@ function emptyCheck($valu){
                                     </tr>
                                 <?php } else{  ?> 
                                     <tr>
-                                        <td style="padding-top: 5px;font-size: 12px;text-align: left;">  IGST @ <?php echo currencyFormat($ktax['percentage'],$config); ?>% on <?php echo currencyFormat($ktax['amount'],$config); ?>         
+                                        <td style="padding-top: 5px;font-size: 12px;text-align: left;">  <?= __('IGST @'); ?> <?php echo currencyFormat($ktax['percentage'],$config); ?><?= __('% on'); ?> <?php echo currencyFormat($ktax['amount'],$config); ?>         
                                         </td>
                                         <td style="padding-top: 5px;text-align: right;font-size: 12px;">  
                                             <span id="dis_taxRateid"><?php echo currencyFormat($ktax['tax_amount'],$config); ?></span>
@@ -482,20 +482,20 @@ function emptyCheck($valu){
                                 <?php }?>
                             <?php } //}  ?>
 			                <tr>
-			                    <th style="padding-top: 5px;font-size: 12px;text-align: left;">Round Off</th>
+			                    <th style="padding-top: 5px;font-size: 12px;text-align: left;"><?= __('Round Off'); ?></th>
 			                    <td style="padding-top: 5px;text-align: right;font-size: 12px;"><?php 
 			                    echo $transaction['rounding_off'];
 			                    //echo round(round($transaction['total_amount'])-$transaction['total_amount'],2); ?></td>
 			                </tr>
 			                   <?php } ?>
 			                <tr style="border-top:1px solid #444444;border-bottom: 1px solid #444444;">
-			                    <th style="padding-top: 5px;text-align: left;border-top:1px solid #cccccc;font-weight: 500;"><span style="font-size: 21px;">Grand Total</span> </th>
+			                    <th style="padding-top: 5px;text-align: left;border-top:1px solid #cccccc;font-weight: 500;"><span style="font-size: 21px;"><?= __('Grand Total'); ?></span> </th>
 			                    <th style="padding-top: 5px;text-align: right;border-top:1px solid #cccccc;font-weight: 500"><span style="font-size:21px;"><?php echo currencyFormat(round($transaction['total_amount']),$config); ?></span> </th>
 			                </tr>
 
 			            </table>
 			            <div style="margin-top: 10px;vertical-align: top;">
-			            	<span style="font-size: 12px; color: #333333;font-weight: 600;">Invoice total in words</span>
+			            	<span style="font-size: 12px; color: #333333;font-weight: 600;"><?= __('Invoice total in words'); ?></span>
 				            <p style="font-size: 12px; color: #333333; margin-top: 10px;white-space:initial;"><?php echo numberToWordFormate(round($transaction['total_amount']));?> </p>
 				        </div>
 			        </td>
@@ -503,15 +503,15 @@ function emptyCheck($valu){
 			    <tr>
 			    	<td style="width:60%;vertical-align: top;">
 			            <div class="" style="display: block; box-sizing:border-box;background:#eeeeee;border:1px solid #cccccc;border-radius: 10px;padding: 10px; margin-right: 10px; margin-top:10px;">
-			                    <h3 style="font-size: 12px;color:#333333;margin: 0;font-weight:bold;">Additional Notes</h3>
+			                    <h3 style="font-size: 12px;color:#333333;margin: 0;font-weight:bold;"><?= __('Additional Notes'); ?></h3>
 			                    <p style="font-size:12px;color:#333333;"><?php echo emptyCheck($transaction['printing_notes']); ?></p>
 			            </div>
 			    	</td>
 			    	<td style="width:40%;">
 			    		<div style="vertical-align: top;">
-			            	<span style="font-size: 12px;color:#333333;display: block;text-align: center;font-weight: 500;">For <?php echo $owner_additional_details['owner_company_name']!=""?ucwords($owner_additional_details['owner_company_name']):ucwords($config['name']); ?></span>
+			            	<span style="font-size: 12px;color:#333333;display: block;text-align: center;font-weight: 500;"><?= __('For'); ?> <?php echo $owner_additional_details['owner_company_name']!=""?ucwords($owner_additional_details['owner_company_name']):ucwords($config['name']); ?></span>
 				            <p style="background: #eeeeee;height:45px;margin-bottom: 0px;margin-top: 0;"></p>
-				            <span style="font-size: 12px;color:#333333;display: block;text-align: center;font-weight: 500;">Authorised Signature</span>
+				            <span style="font-size: 12px;color:#333333;display: block;text-align: center;font-weight: 500;"><?= __('Authorised Signature'); ?></span>
 			            </div>
 			    	</td>
 			    </tr>
@@ -521,10 +521,10 @@ function emptyCheck($valu){
 	</div>
 	<div class="invoice-btn-section clearfix d-print-none">
         <button class="btn waves-effect waves-light btn-grd-success" onclick="printDiv('printDiv');">
-            <i class="fa fa-print"></i> &nbsp Print Invoice
+            <i class="fa fa-print"></i> &nbsp <?= __('Print Invoice'); ?>
         </button>
         <button class="btn waves-effect waves-light btn-grd-info"  onclick="convertHTMLToPDF();">
-            <i class="fa fa-download"></i> &nbsp Download Invoice
+            <i class="fa fa-download"></i> &nbsp <?= __('Download Invoice'); ?>
         </button>
     </div>
 </body>
