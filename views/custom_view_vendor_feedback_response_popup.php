@@ -70,9 +70,9 @@ $feedback_setup_details = $data['feedback_setup_details'];
 </script>
 <div class="modal-header">
   <h5 class="modal-title">
-    <?php echo "Vendor Feedback"; ?>
+    <?php echo __("Vendor Feedback"); ?>
   </h5>
-  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body mb-3" >
   <div class="row col-lg-12">
@@ -96,31 +96,31 @@ $feedback_setup_details = $data['feedback_setup_details'];
 } ?> >
             <div class="row col-lg-12">
               <div class="col-lg-3">
-                <span class="f-16">Vendor Review Name:</span>
+                <span class="f-16"><?= __('Vendor Review Name'); ?>:</span>
               </div>
               <div class="col-lg-9">
                 <span class="text-muted f-14"><?php echo $feedback_setup_details[$response['vendor_feedback_setup_id']]['feedback_name']; ?></span>
               </div>
               <div class="col-lg-3">
-                <span class="f-16">Feedback By:</span>
+                <span class="f-16"><?= __('Feedback By'); ?>:</span>
               </div>
               <div class="col-lg-3">
                 <span class="text-muted f-14"><?php  echo $data['user']['display_name']; ?></span>
               </div>
               <div class="col-lg-3">
-                <span class="f-16">Date:</span>
+                <span class="f-16"><?= __('Date'); ?>:</span>
               </div>
               <div class="col-lg-3">
                 <span class="text-muted f-14"><?php echo fromDate($response['response_start_date']); ?></span>
               </div>
                <div class="col-lg-3">
-                <span class="f-16">Vendor Name:</span>
+                <span class="f-16"><?= __('Vendor Name'); ?>:</span>
               </div>
               <div class="col-lg-3">
                 <span class="text-muted f-14"><?php echo $data['vendor']['display_name']; ?></span>
               </div>
               <div class="col-lg-3">
-                <span class="f-16">Ratting:</span>
+                <span class="f-16"><?= __('Ratting'); ?>:</span>
               </div>
               <div class="col-lg-3">
                 <div class="rating f-12 text-warning mt-2 d-inline-block">
@@ -161,7 +161,7 @@ $feedback_setup_details = $data['feedback_setup_details'];
                       ?>
                           <b>
                             <div class="<?php echo $option_cat;?>-group required float-left ml-2">
-                            <input aria-label="Input field" type="<?php echo $option_cat;?>" value="<?php echo $option;?>" name="response_option[<?php echo $response['fd_id']."_".$quid; ?>]"  <?php  if (in_array($option,(array)$res)){ echo 'Checked';
+                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="<?php echo $option_cat;?>" value="<?php echo $option;?>" name="response_option[<?php echo $response['fd_id']."_".$quid; ?>]"  <?php  if (in_array($option,(array)$res)){ echo 'Checked';
 } ?> >
                            <label class="f-w-500" for="q1"><?php echo $option; ?> </label>
                             </div>
@@ -178,7 +178,7 @@ $feedback_setup_details = $data['feedback_setup_details'];
                       </div>
 
                     <?php }elseif($val['options_display_type']==4){ ?>
-                      <textarea aria-label="Text area" id="response_option<?php echo $questionid;?>" class="form-control mb-2" readonly><?php echo $res; ?></textarea>
+                      <textarea aria-label="<?= htmlspecialchars(__('Text area'), ENT_QUOTES, 'UTF-8'); ?>" id="response_option<?php echo $questionid;?>" class="form-control mb-2" readonly><?php echo $res; ?></textarea>
                     <?php } ?>
                   </div>
               <?php $value_id++;
