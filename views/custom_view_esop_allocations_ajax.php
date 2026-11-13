@@ -21,7 +21,7 @@ if(isset($_POST['esop_id']) && $_POST['esop_id'] !=""){
     <div class="col-xl-3 col-md-6">
         <div class="card ticket-card">
             <div class="card-body">
-                <p class="m-b-10 bg-c-green lbl-card"><i class="fas fa-folder-open"></i>  Total ESOP Allocations</p>
+                <p class="m-b-10 bg-c-green lbl-card"><i class="fas fa-folder-open"></i>  <?= __('Total ESOP Allocations'); ?></p>
                 <div class="text-center">
                     <h3 class="m-b-0 d-inline-block text-c-green"><?php echo $esop_allocations_cnt['cnt']; ?></h3>
                 </div>
@@ -31,7 +31,7 @@ if(isset($_POST['esop_id']) && $_POST['esop_id'] !=""){
     <div class="col-xl-3 col-md-6">
         <div class="card ticket-card">
             <div class="card-body">
-                <p class="m-b-10 bg-c-blue lbl-card"><i class="fas fa-folder-open"></i>  Total Shares</p>
+                <p class="m-b-10 bg-c-blue lbl-card"><i class="fas fa-folder-open"></i>  <?= __('Total Shares'); ?></p>
                 <div class="text-center">
                     <h3 class="m-b-0 d-inline-block text-c-blue"><?php echo $esop_allocations_cnt['total_share']; ?></h3>
                 </div>
@@ -41,7 +41,7 @@ if(isset($_POST['esop_id']) && $_POST['esop_id'] !=""){
     <div class="col-xl-3 col-md-6">
         <div class="card ticket-card">
             <div class="card-body">
-                <p class="m-b-10 bg-c-yellow lbl-card"><i class="fas fa-folder-open"></i> Allocation Shares</p>
+                <p class="m-b-10 bg-c-yellow lbl-card"><i class="fas fa-folder-open"></i> <?= __('Allocation Shares'); ?></p>
                 <div class="text-center">
                     <h3 class="m-b-0 d-inline-block text-c-yellow"><?php echo $esop_allocations_cnt['total_allocated_shares']; ?></h3>
                 </div>
@@ -51,7 +51,7 @@ if(isset($_POST['esop_id']) && $_POST['esop_id'] !=""){
     <div class="col-xl-3 col-md-6">
         <div class="card ticket-card">
             <div class="card-body">
-                <p class="m-b-10 bg-c-red lbl-card"><i class="fas fa-folder-open"></i>  Un-allocation Shares</p>
+                <p class="m-b-10 bg-c-red lbl-card"><i class="fas fa-folder-open"></i>  <?= __('Un-allocation Shares'); ?></p>
                 <div class="text-center">
                     <h3 class="m-b-0 d-inline-block text-c-red"><?php echo $esop_allocations_cnt['total_unallocated_shares']; ?></h3>
                 </div>
@@ -63,7 +63,7 @@ if(isset($_POST['esop_id']) && $_POST['esop_id'] !=""){
     <div class="col-xl-5">
         <div class="card social-res-card">
             <div class="card-header">
-                <h5>Buckets</h5>
+                <h5><?= __('Buckets'); ?></h5>
             </div>
             <div class="card-body">
                 <div class="card-block accordion-block color-accordion-block">
@@ -80,7 +80,7 @@ if(isset($_POST['esop_id']) && $_POST['esop_id'] !=""){
                                 <div class="row">
                                     <div class="col-lg-8">
                                         <p class="m-b-0 f-w-700"><?php echo $epb['bucket_name']; ?> </p>
-                                        <h7><?php echo $epb['options_granted']; ?> <span class="f-12">(Allocated Shares - <?php echo $epb['allocated_shares']; ?>)</span></h7>
+                                        <h7><?php echo $epb['options_granted']; ?> <span class="f-12"><?= __('(Allocated Shares'); ?> - <?php echo $epb['allocated_shares']; ?>)</span></h7>
                                     </div>
                                     <div class="col-lg-4">
                                         <p class="text-right mb-0">
@@ -93,18 +93,18 @@ if(isset($_POST['esop_id']) && $_POST['esop_id'] !=""){
                                 </a>
                                 <div class="accordion-desc p-0">
                                     <div class="card-header">
-                                        <h5>Vesting Schedule</h5>
+                                        <h5><?= __('Vesting Schedule'); ?></h5>
                                     </div>
                                     <div class="card-body">
                                         <div class="row f-w-700 mb-2">
                                             <div class="col-lg-5">
-                                                <span>Allocation Date</span>
+                                                <span><?= __('Allocation Date'); ?></span>
                                             </div>
                                             <div class="col-lg-3 text-right">
-                                                <span>Per(%)</span>
+                                                <span><?= __('Per(%)'); ?></span>
                                             </div>
                                             <div class="col-lg-4">
-                                                <span>Till Date</span>
+                                                <span><?= __('Till Date'); ?></span>
                                             </div>
                                         </div>
                                         <?php foreach($vestingschedule as $vp){ ?>
@@ -131,26 +131,26 @@ if(isset($_POST['esop_id']) && $_POST['esop_id'] !=""){
         <div class="col-xl-7">
             <div class="card social-res-card">
                 <div class="card-header">
-                    <h5>ESOP Allocation</h5>
+                    <h5><?= __('ESOP Allocation'); ?></h5>
                 </div>
                 <div class="card-body">
                 <?php if(count((array)$esop_allocations) != 0){ ?>
                     <div class="row mb-3 f-w-700">
                         <div class="col-lg-4">
-                            <span>Employee</span>
+                            <span><?= __('Employee'); ?></span>
                         </div>
                         <div class="col-lg-2">
-                            <span>Bucket</span>
+                            <span><?= __('Bucket'); ?></span>
                         </div>
                         <div class="col-lg-2 text-right p-0">
-                            <span>Total</span>
+                            <span><?= __('Total'); ?></span>
                         </div>
                         <div class="col-lg-2 text-right p-0">
-                            Allocate
+                            <?= __('Allocate'); ?>
 
                         </div>
                         <div class="col-lg-2 text-right p-0">
-                            Un-Allocate
+                            <?= __('Un-Allocate'); ?>
 
                         </div>
                     </div>
@@ -160,9 +160,9 @@ if(isset($_POST['esop_id']) && $_POST['esop_id'] !=""){
                                 <div class="form-group col-lg-4">
                                     <div class="align-middle">
                                         <?php if($ea['image'] !="") {?>
-                                            <img src="uploads/all/<?php echo $ea['image']; ?>"   class="img-radius img-30 align-top m-r-15" alt="Attachment Preview">
+                                            <img src="uploads/all/<?php echo $ea['image']; ?>"   class="img-radius img-30 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <?php } else { ?>
-                                            <span  alt="user" class="img-radius align-top m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($ea['display_name']); ?></span>
+                                            <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($ea['display_name']); ?></span>
                                         <?php } ?>
                                         <div class="d-inline-block width73">
                                             <span class="f-12 text-capitalize"><?php echo $ea['display_name']; ?></span>
@@ -186,7 +186,7 @@ if(isset($_POST['esop_id']) && $_POST['esop_id'] !=""){
                         <?php } ?>
                     <?php }else{ ?>
                     <div class="card-px text-center ">
-                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No ESOP Allocations</p>
+                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No ESOP Allocations'); ?></p>
                         <div class="text-center px-4">
                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                         </div>
