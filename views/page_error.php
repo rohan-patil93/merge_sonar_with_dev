@@ -115,11 +115,11 @@ input[type="text"] {
 </style>
 <div id="container" class="container containerbody">
         <ul id="scene" class="scene">
-            <li class="layer" data-depth="1.00"><img class="img-xyz" src="assets/images/404/404-01.png" alt="Preview"></li>
-            <li class="layer" data-depth="0.60"><img class="img-xyz" src="assets/images/404/shadows-01.png" alt="Preview"></li>
-            <li class="layer" data-depth="0.20"><img class="img-xyz" src="assets/images/404/monster-01.png" alt="Preview"></li>
-            <li class="layer" data-depth="0.40"><img class="img-xyz" src="assets/images/404/text-01.png" alt="Preview"></li>
-            <li class="layer" data-depth="0.10"><img class="img-xyz" src="assets/images/404/monster-eyes-01.png" alt="Preview"></li>
+            <li class="layer" data-depth="1.00"><img class="img-xyz" src="assets/images/404/404-01.png" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></li>
+            <li class="layer" data-depth="0.60"><img class="img-xyz" src="assets/images/404/shadows-01.png" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></li>
+            <li class="layer" data-depth="0.20"><img class="img-xyz" src="assets/images/404/monster-01.png" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></li>
+            <li class="layer" data-depth="0.40"><img class="img-xyz" src="assets/images/404/text-01.png" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></li>
+            <li class="layer" data-depth="0.10"><img class="img-xyz" src="assets/images/404/monster-eyes-01.png" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></li>
         </ul>
 
     </div>
