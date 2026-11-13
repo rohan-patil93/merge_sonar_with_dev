@@ -36,15 +36,15 @@ if ($_GET['Rid']) {
 
     <div class="card proj-progress-card">
         <div class="card-header">
-            <h5>Complaint Response View</h5>
+            <h5><?= __('Complaint Response View'); ?></h5>
 
             <div class="card-header-right">
                 <a href="index.php?option=COM_LIST_COMPLAINTS" class="btn btn-success mb-2 desktop-view">
 
-                Complaints List</a>
+                <?= __('Complaints List'); ?></a>
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
                     <i class="icofont icofont-reply"></i>
-                    Back
+                    <?= __('Back'); ?>
                 </a>
             </div>
         </div>
@@ -53,7 +53,7 @@ if ($_GET['Rid']) {
               <div class="card-body">
                 <ul class="nav md-tabs infisuite_tab mt-2 ml-2">
                     <li class="nav-item">
-                        <a class="nav-link active" data-bs-toggle="tab" href="#tab0" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Complaint Details</a>
+                        <a class="nav-link active" data-bs-toggle="tab" href="#tab0" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Complaint Details'); ?></a>
                     </li>
                     <?php for($i=1; $i <= $rcount; $i++) {
                         echo '<li class="nav-item">
@@ -68,15 +68,15 @@ if ($_GET['Rid']) {
                         <div class="table-responsive">
                             <table class="table">
                                 <tr>
-                                    <th scope="col">Complaint Name</th>
+                                    <th scope="col"><?= __('Complaint Name'); ?></th>
                                     <td><?php echo $return['complaint_name'] ?></td>
                                 </tr>
                                 <tr>
-                                    <th scope="col">Complaint Type</th>
+                                    <th scope="col"><?= __('Complaint Type'); ?></th>
                                     <td><?php echo $return['complaint_type'] ?></td>
                                 </tr>
                                 <tr>
-                                    <th scope="col">Complaint Priority</th>
+                                    <th scope="col"><?= __('Complaint Priority'); ?></th>
                                     <td style="font-weight: 900; font-size: 1rem;<?php
                                     if($return['complaint_priority']=='L'){
                                         echo 'color: green;';
@@ -98,52 +98,52 @@ if ($_GET['Rid']) {
                             </td>
                         </tr>
                         <tr>
-                            <th scope="col">Date</th>
+                            <th scope="col"><?= __('Date'); ?></th>
                             <td><?php
                             echo !empty($return['transaction_date'])?fromDate($return['transaction_date']): ''; ?></td>
                         </tr>
                         <?php if(isset($return['item_name']) && $return['item_name'] !='' ): ?>
                             <tr>
-                                <th scope="col">Item</th>
+                                <th scope="col"><?= __('Item'); ?></th>
                                 <td><?php echo $return['item_name'] ?></td>
                             </tr>
                         <?php endif; ?>
                         <?php if(isset($return['asset_code']) && $return['asset_code'] !='' ): ?>
                             <tr>
-                                <th scope="col">Asset</th>
+                                <th scope="col"><?= __('Asset'); ?></th>
                                 <td><?php echo $return['asset_code']."-".$return['asset_description'] ?></td>
                             </tr>
                         <?php endif; ?>
                         <?php if(isset($return['building_name']) && $return['building_name'] !='' ): ?>
                             <tr>
-                                <th scope="col">Building</th>
+                                <th scope="col"><?= __('Building'); ?></th>
                                 <td><?php echo $return['building_name'] ?></td>
                             </tr>
                             <tr>
-                                <th scope="col">Building Floor</th>
+                                <th scope="col"><?= __('Building Floor'); ?></th>
                                 <td><?php echo $return['floor_name'] ?></td>
                             </tr>
                             <tr>
-                                <th scope="col">Building Floor Space</th>
+                                <th scope="col"><?= __('Building Floor Space'); ?></th>
                                 <td><?php echo $return['cabin_name'] ?></td>
                             </tr>
                         <?php endif; ?>
 
 
                             <tr>
-                                <th scope="col">Status</th>
+                                <th scope="col"><?= __('Status'); ?></th>
                                 <td><span class="form-label label label-lg  label-primary label-inline f-w-900 " style="background-color:<?php echo $return['background_color']; ?> ; color:<?php echo $return['color']; ?> ;"><?php echo $return['name']; ?></span> </td>
                             </tr>
                             <tr>
-                                <th scope="col">Complaint User</th>
+                                <th scope="col"><?= __('Complaint User'); ?></th>
                                 <td><?php echo $return['display_name'] ?? '' ?></td>
                             </tr>
                             <tr>
-                                <th scope="col">Created Time</th>
+                                <th scope="col"><?= __('Created Time'); ?></th>
                                 <td><?php echo  $return['created_date'] ?? '' ?></td>
                             </tr>
                             <tr>
-                                <th scope="col">Images</th>
+                                <th scope="col"><?= __('Images'); ?></th>
                                 <td>
                                     <?php foreach ($img_result as $row) {
                                         echo '<a href="uploads/all/' . $row['file_name'] . '" target="_blank" class="mx-2">
@@ -162,15 +162,15 @@ if ($_GET['Rid']) {
                         <div class="table-responsive">
                             <table class="table">
                                 <tr>
-                                    <th scope="col">Response User</th>
+                                    <th scope="col"><?= __('Response User'); ?></th>
                                     <td><?php echo $row['display_name']; ?></td>
                                 </tr>
                                 <tr>
-                                    <th scope="col">Response Date</th>
+                                    <th scope="col"><?= __('Response Date'); ?></th>
                                     <td><?php echo $row['transaction_date']; ?></td>
                                 </tr>
                                 <tr>
-                                    <th scope="col">Respone Comments</th>
+                                    <th scope="col"><?= __('Respone Comments'); ?></th>
                                     <td><?php echo $row['remarks']; ?></td>
                                 </tr>
                                 <?php
@@ -185,7 +185,7 @@ if ($_GET['Rid']) {
                                  ?>
 
                                 <tr>
-                                    <th scope="col">Response Images</th>
+                                    <th scope="col"><?= __('Response Images'); ?></th>
                                     <td>
                                         <?php foreach ($res_img_result as $row) {
                                     echo '<a href="uploads/all/' . $row['file_name'] . '" target="_blank" class="mx-2">
