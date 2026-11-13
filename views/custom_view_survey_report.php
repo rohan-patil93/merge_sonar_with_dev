@@ -14,13 +14,13 @@ $maxoptions = isset($surveyData['maxoptions']) ? (int)$surveyData['maxoptions'] 
 				<tr>
 					<th scope="col"></th>
 					<th scope="col"> </th>
-					<td class="text-primary text-center font-size-h5" colspan="<?php echo $maxoptions; ?>">Option  </td>
+					<td class="text-primary text-center font-size-h5" colspan="<?php echo $maxoptions; ?>"><?= __('Option'); ?>  </td>
 				</tr>
 			</thead>
 			<thead>
 				<tr>
 					<th scope="col" class="font-size-h5">#</th>
-					<th scope="col" width="30%" class="font-size-h5">Questions </th>
+					<th scope="col" width="30%" class="font-size-h5"><?= __('Questions'); ?> </th>
 					<?php for($op_count=1; $op_count<=$maxoptions; $op_count++) { ?>
 					<th scope="col" class="font-size-h5"><?php echo $op_count; ?> </th>
 					<?php } ?>
@@ -43,18 +43,18 @@ $maxoptions = isset($surveyData['maxoptions']) ? (int)$surveyData['maxoptions'] 
 
 				<tr>
 					<td></td>
-					<td><span class="text-success">Number of Responded </span></td>
+					<td><span class="text-success"><?= __('Number of Responded'); ?> </span></td>
 					<?php if(count((array)$surveyData['option'][$qkey]['answer']) > 0){
 						foreach($surveyData['option'][$qkey]['answer'] as $optionans) { 
 						?>
-					<td> <span class="font-weight-bolder label label-xl label-success "  data-toggle="tooltip" title="Number Of Responded" style="vertical-align: middle;"><?php echo $optionans; ?> </span> </td>
+					<td> <span class="font-weight-bolder label label-xl label-success "  data-toggle="tooltip" title="<?= htmlspecialchars(__('Number Of Responded'), ENT_QUOTES, 'UTF-8'); ?>" style="vertical-align: middle;"><?php echo $optionans; ?> </span> </td>
 					<?php }
 					} ?>
 				</tr>
 				<?php }
 				}else{ ?>
 				<tr>
-					<td colspan="<?php echo $maxoptions + 2; ?>" class="text-center text-muted">No report data available</td>
+					<td colspan="<?php echo $maxoptions + 2; ?>" class="text-center text-muted"><?= __('No report data available'); ?></td>
 				</tr>
 				<?php } ?>
 				</tbody>
