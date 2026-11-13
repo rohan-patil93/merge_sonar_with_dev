@@ -2,7 +2,7 @@
                                             <div class="kt-portlet">
                                                 <div class="kt-portlet__head">
                                                     <div class="kt-portlet__head-label">
-                                                        <h3 class="kt-portlet__head-title">Account Information <small>change your account settings</small></h3>
+                                                        <h3 class="kt-portlet__head-title"><?= __('Account Information'); ?> <small><?= __('change your account settings'); ?></small></h3>
                                                     </div>
                                                     <div class="kt-portlet__head-toolbar">
                                                         <div class="kt-portlet__head-wrapper">
@@ -13,36 +13,36 @@
                                                                 <div class="dropdown-menu dropdown-menu-right">
                                                                     <ul class="kt-nav">
                                                                         <li class="kt-nav__section kt-nav__section--first">
-                                                                            <span class="kt-nav__section-text">Export Tools</span>
+                                                                            <span class="kt-nav__section-text"><?= __('Export Tools'); ?></span>
                                                                         </li>
                                                                         <li class="kt-nav__item">
                                                                             <a href="#" class="kt-nav__link">
                                                                                 <i class="kt-nav__link-icon la la-print"></i>
-                                                                                <span class="kt-nav__link-text">Print</span>
+                                                                                <span class="kt-nav__link-text"><?= __('Print'); ?></span>
                                                                             </a>
                                                                         </li>
                                                                         <li class="kt-nav__item">
                                                                             <a href="#" class="kt-nav__link">
                                                                                 <i class="kt-nav__link-icon la la-copy"></i>
-                                                                                <span class="kt-nav__link-text">Copy</span>
+                                                                                <span class="kt-nav__link-text"><?= __('Copy'); ?></span>
                                                                             </a>
                                                                         </li>
                                                                         <li class="kt-nav__item">
                                                                             <a href="#" class="kt-nav__link">
                                                                                 <i class="kt-nav__link-icon la la-file-excel-o"></i>
-                                                                                <span class="kt-nav__link-text">Excel</span>
+                                                                                <span class="kt-nav__link-text"><?= __('Excel'); ?></span>
                                                                             </a>
                                                                         </li>
                                                                         <li class="kt-nav__item">
                                                                             <a href="#" class="kt-nav__link">
                                                                                 <i class="kt-nav__link-icon la la-file-text-o"></i>
-                                                                                <span class="kt-nav__link-text">CSV</span>
+                                                                                <span class="kt-nav__link-text"><?= __('CSV'); ?></span>
                                                                             </a>
                                                                         </li>
                                                                         <li class="kt-nav__item">
                                                                             <a href="#" class="kt-nav__link">
                                                                                 <i class="kt-nav__link-icon la la-file-pdf-o"></i>
-                                                                                <span class="kt-nav__link-text">PDF</span>
+                                                                                <span class="kt-nav__link-text"><?= __('PDF'); ?></span>
                                                                             </a>
                                                                         </li>
                                                                     </ul>
@@ -58,86 +58,86 @@
                                                                 <div class="row">
                                                                     <span class="col-xl-3"></span>
                                                                     <div class="col-lg-9 col-xl-6">
-                                                                        <h3 class="kt-section__title kt-section__title-sm">Account:</h3>
+                                                                        <h3 class="kt-section__title kt-section__title-sm"><?= __('Account'); ?>:</h3>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
-                                                                    <span class="col-xl-3 col-lg-3 col-form-label">Username</span>
+                                                                    <span class="col-xl-3 col-lg-3 col-form-label"><?= __('Username'); ?></span>
                                                                     <div class="col-lg-9 col-xl-6">
                                                                         <div class="kt-spinner kt-spinner--sm kt-spinner--success kt-spinner--right kt-spinner--input">
-                                                                            <input aria-label="Input field" class="form-control" type="text" value="nick84">
+                                                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" value="nick84">
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
-                                                                    <span class="col-xl-3 col-lg-3 col-form-label">Email Address</span>
+                                                                    <span class="col-xl-3 col-lg-3 col-form-label"><?= __('Email Address'); ?></span>
                                                                     <div class="col-lg-9 col-xl-6">
                                                                         <div class="input-group">
                                                                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-at"></i></span></div>
-                                                                            <input aria-label="Email" type="text" class="form-control" value="nick.watson@loop.com" placeholder="Email" aria-describedby="basic-addon1">
+                                                                            <input aria-label="<?= htmlspecialchars(__('Email'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="nick.watson@loop.com" placeholder="<?= htmlspecialchars(__('Email'), ENT_QUOTES, 'UTF-8'); ?>" aria-describedby="basic-addon1">
                                                                         </div>
-                                                                        <span class="form-text text-muted">Email will not be publicly displayed. <a href="#" class="kt-link">Learn more</a>.</span>
+                                                                        <span class="form-text text-muted"><?= __('Email will not be publicly displayed.'); ?> <a href="#" class="kt-link"><?= __('Learn more'); ?></a>.</span>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
-                                                                    <span class="col-xl-3 col-lg-3 col-form-label">Language</span>
+                                                                    <span class="col-xl-3 col-lg-3 col-form-label"><?= __('Language'); ?></span>
                                                                     <div class="col-lg-9 col-xl-6">
-                                                                        <select aria-label="Select option" class="form-control">
-                                                                            <option>Select Language...</option>
-                                                                            <option value="id">Bahasa Indonesia - Indonesian</option>
-                                                                            <option value="msa">Bahasa Melayu - Malay</option>
-                                                                            <option value="ca">Català - Catalan</option>
-                                                                            <option value="cs">Čeština - Czech</option>
-                                                                            <option value="da">Dansk - Danish</option>
-                                                                            <option value="de">Deutsch - German</option>
-                                                                            <option value="en" selected="">English</option>
-                                                                            <option value="en-gb">English UK - British English</option>
-                                                                            <option value="es">Español - Spanish</option>
-                                                                            <option value="eu">Euskara - Basque (beta)</option>
-                                                                            <option value="fil">Filipino</option>
-                                                                            <option value="fr">Français - French</option>
-                                                                            <option value="ga">Gaeilge - Irish (beta)</option>
-                                                                            <option value="gl">Galego - Galician (beta)</option>
-                                                                            <option value="hr">Hrvatski - Croatian</option>
-                                                                            <option value="it">Italiano - Italian</option>
-                                                                            <option value="hu">Magyar - Hungarian</option>
-                                                                            <option value="nl">Nederlands - Dutch</option>
-                                                                            <option value="no">Norsk - Norwegian</option>
-                                                                            <option value="pl">Polski - Polish</option>
-                                                                            <option value="pt">Português - Portuguese</option>
-                                                                            <option value="ro">Română - Romanian</option>
-                                                                            <option value="sk">Slovenčina - Slovak</option>
-                                                                            <option value="fi">Suomi - Finnish</option>
-                                                                            <option value="sv">Svenska - Swedish</option>
-                                                                            <option value="vi">Tiếng Việt - Vietnamese</option>
-                                                                            <option value="tr">Türkçe - Turkish</option>
-                                                                            <option value="el">Ελληνικά - Greek</option>
-                                                                            <option value="bg">Български език - Bulgarian</option>
-                                                                            <option value="ru">Русский - Russian</option>
-                                                                            <option value="sr">Српски - Serbian</option>
-                                                                            <option value="uk">Українська мова - Ukrainian</option>
-                                                                            <option value="he">עִבְרִית - Hebrew</option>
-                                                                            <option value="ur">اردو - Urdu (beta)</option>
-                                                                            <option value="ar">العربية - Arabic</option>
-                                                                            <option value="fa">فارسی - Persian</option>
-                                                                            <option value="mr">मराठी - Marathi</option>
-                                                                            <option value="hi">हिन्दी - Hindi</option>
-                                                                            <option value="bn">বাংলা - Bangla</option>
-                                                                            <option value="gu">ગુજરાતી - Gujarati</option>
-                                                                            <option value="ta">தமிழ் - Tamil</option>
-                                                                            <option value="kn">ಕನ್ನಡ - Kannada</option>
-                                                                            <option value="th">ภาษาไทย - Thai</option>
-                                                                            <option value="ko">한국어 - Korean</option>
-                                                                            <option value="ja">日本語 - Japanese</option>
-                                                                            <option value="zh-cn">简体中文 - Simplified Chinese</option>
-                                                                            <option value="zh-tw">繁體中文 - Traditional Chinese</option>
+                                                                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control">
+                                                                            <option><?= __('Select Language...'); ?></option>
+                                                                            <option value="id"><?= __('Bahasa Indonesia - Indonesian'); ?></option>
+                                                                            <option value="msa"><?= __('Bahasa Melayu - Malay'); ?></option>
+                                                                            <option value="ca"><?= __('Català - Catalan'); ?></option>
+                                                                            <option value="cs"><?= __('Čeština - Czech'); ?></option>
+                                                                            <option value="da"><?= __('Dansk - Danish'); ?></option>
+                                                                            <option value="de"><?= __('Deutsch - German'); ?></option>
+                                                                            <option value="en" selected=""><?= __('English'); ?></option>
+                                                                            <option value="en-gb"><?= __('English UK - British English'); ?></option>
+                                                                            <option value="es"><?= __('Español - Spanish'); ?></option>
+                                                                            <option value="eu"><?= __('Euskara - Basque (beta)'); ?></option>
+                                                                            <option value="fil"><?= __('Filipino'); ?></option>
+                                                                            <option value="fr"><?= __('Français - French'); ?></option>
+                                                                            <option value="ga"><?= __('Gaeilge - Irish (beta)'); ?></option>
+                                                                            <option value="gl"><?= __('Galego - Galician (beta)'); ?></option>
+                                                                            <option value="hr"><?= __('Hrvatski - Croatian'); ?></option>
+                                                                            <option value="it"><?= __('Italiano - Italian'); ?></option>
+                                                                            <option value="hu"><?= __('Magyar - Hungarian'); ?></option>
+                                                                            <option value="nl"><?= __('Nederlands - Dutch'); ?></option>
+                                                                            <option value="no"><?= __('Norsk - Norwegian'); ?></option>
+                                                                            <option value="pl"><?= __('Polski - Polish'); ?></option>
+                                                                            <option value="pt"><?= __('Português - Portuguese'); ?></option>
+                                                                            <option value="ro"><?= __('Română - Romanian'); ?></option>
+                                                                            <option value="sk"><?= __('Slovenčina - Slovak'); ?></option>
+                                                                            <option value="fi"><?= __('Suomi - Finnish'); ?></option>
+                                                                            <option value="sv"><?= __('Svenska - Swedish'); ?></option>
+                                                                            <option value="vi"><?= __('Tiếng Việt - Vietnamese'); ?></option>
+                                                                            <option value="tr"><?= __('Türkçe - Turkish'); ?></option>
+                                                                            <option value="el"><?= __('Ελληνικά - Greek'); ?></option>
+                                                                            <option value="bg"><?= __('Български език - Bulgarian'); ?></option>
+                                                                            <option value="ru"><?= __('Русский - Russian'); ?></option>
+                                                                            <option value="sr"><?= __('Српски - Serbian'); ?></option>
+                                                                            <option value="uk"><?= __('Українська мова - Ukrainian'); ?></option>
+                                                                            <option value="he"><?= __('עִבְרִית - Hebrew'); ?></option>
+                                                                            <option value="ur"><?= __('اردو - Urdu (beta)'); ?></option>
+                                                                            <option value="ar"><?= __('العربية - Arabic'); ?></option>
+                                                                            <option value="fa"><?= __('فارسی - Persian'); ?></option>
+                                                                            <option value="mr"><?= __('मराठी - Marathi'); ?></option>
+                                                                            <option value="hi"><?= __('हिन्दी - Hindi'); ?></option>
+                                                                            <option value="bn"><?= __('বাংলা - Bangla'); ?></option>
+                                                                            <option value="gu"><?= __('ગુજરાતી - Gujarati'); ?></option>
+                                                                            <option value="ta"><?= __('தமிழ் - Tamil'); ?></option>
+                                                                            <option value="kn"><?= __('ಕನ್ನಡ - Kannada'); ?></option>
+                                                                            <option value="th"><?= __('ภาษาไทย - Thai'); ?></option>
+                                                                            <option value="ko"><?= __('한국어 - Korean'); ?></option>
+                                                                            <option value="ja"><?= __('日本語 - Japanese'); ?></option>
+                                                                            <option value="zh-cn"><?= __('简体中文 - Simplified Chinese'); ?></option>
+                                                                            <option value="zh-tw"><?= __('繁體中文 - Traditional Chinese'); ?></option>
                                                                         </select>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
-                                                                    <span class="col-xl-3 col-lg-3 col-form-label">Time Zone</span>
+                                                                    <span class="col-xl-3 col-lg-3 col-form-label"><?= __('Time Zone'); ?></span>
                                                                     <div class="col-lg-9 col-xl-6">
-                                                                        <select aria-label="Select option" class="form-control">
+                                                                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control">
                                                                             <option data-offset="-39600" value="International Date Line West">(GMT-11:00) International Date Line West</option>
                                                                             <option data-offset="-39600" value="Midway Island">(GMT-11:00) Midway Island</option>
                                                                             <option data-offset="-39600" value="Samoa">(GMT-11:00) Samoa</option>
@@ -285,19 +285,19 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group form-group-last row">
-                                                                    <span class="col-xl-3 col-lg-3 col-form-label">Communication</span>
+                                                                    <span class="col-xl-3 col-lg-3 col-form-label"><?= __('Communication'); ?></span>
                                                                     <div class="col-lg-9 col-xl-6">
                                                                         <div class="kt-checkbox-inline">
                                                                             <label class="kt-checkbox">
-                                                                                <input aria-label="Checkbox" type="checkbox" checked=""> Email
+                                                                                <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" checked=""> <?= __('Email'); ?>
                                                                                 <span></span>
                                                                             </label>
                                                                             <label class="kt-checkbox">
-                                                                                <input aria-label="Checkbox" type="checkbox" checked=""> SMS
+                                                                                <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" checked=""> <?= __('SMS'); ?>
                                                                                 <span></span>
                                                                             </label>
                                                                             <label class="kt-checkbox">
-                                                                                <input aria-label="Checkbox" type="checkbox"> Phone
+                                                                                <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox"> <?= __('Phone'); ?>
                                                                                 <span></span>
                                                                             </label>
                                                                         </div>
@@ -311,8 +311,8 @@
                                                                 <div class="col-lg-3 col-xl-3">
                                                                 </div>
                                                                 <div class="col-lg-9 col-xl-9">
-                                                                    <button type="reset" class="btn btn-success">Submit</button>&nbsp;
-                                                                    <button type="reset" class="btn btn-secondary">Cancel</button>
+                                                                    <button type="reset" class="btn btn-success"><?= __('Submit'); ?></button>&nbsp;
+                                                                    <button type="reset" class="btn btn-secondary"><?= __('Cancel'); ?></button>
                                                                 </div>
                                                             </div>
                                                         </div>
