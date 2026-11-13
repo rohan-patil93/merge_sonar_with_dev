@@ -2,7 +2,7 @@
                             <div class="card card-custom gutter-b draggable" role="region" style="">
                                 <div class="card-header">
                                     <div class="card-title">
-                                        <h3 class="card-label">Apporvals</h3>
+                                        <h3 class="card-label"><?= __('Apporvals'); ?></h3>
                                     </div>
                                     <div class="card-toolbar">
                                         <a href="#" class="btn btn-icon btn-sm btn-hover-light-primary draggable-handle">
@@ -19,16 +19,16 @@
                                                 <div class="card-toolbar">
                                                     <ul class="nav nav-pills nav-pills-sm nav-dark-75">
                                                         <li class="nav-item">
-                                                            <a class="nav-link py-2 px-4 font-weight-bolder active" data-toggle="tab" href="#kt_tab_pane_16" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Today</a>
+                                                            <a class="nav-link py-2 px-4 font-weight-bolder active" data-toggle="tab" href="#kt_tab_pane_16" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Today'); ?></a>
                                                         </li>
                                                         <li class="nav-item">
-                                                            <a class="nav-link py-2 px-4 font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_9" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Week</a>
+                                                            <a class="nav-link py-2 px-4 font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_9" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Week'); ?></a>
                                                         </li>
                                                         <li class="nav-item">
-                                                            <a class="nav-link py-2 px-4 font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_10" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Month</a>
+                                                            <a class="nav-link py-2 px-4 font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_10" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Month'); ?></a>
                                                         </li>
                                                         <li class="nav-item">
-                                                            <a class="nav-link py-2 px-4 font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_11" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Year</a>
+                                                            <a class="nav-link py-2 px-4 font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_11" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Year'); ?></a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -55,13 +55,13 @@
                                                                                         <span class="symbol-label font-size-h4 font-weight-bold">H</span>
                                                                                     </div>
                                                                                     <div class="ml-4">
-                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0">Hayes Boule</div>
+                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0"><?= __('Hayes Boule'); ?></div>
                                                                                         <a href="#" class="text-muted font-weight-bold text-hover-primary">hboule0@hp.com</a>
                                                                                         <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
                                                                                             03-Sep-20
                                                                                         </span>
                                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                                            Developer
+                                                                                            <?= __('Developer'); ?>
                                                                                         </span>
                                                                                     </div>
                                                                                 </div>
@@ -69,10 +69,10 @@
                                                                         </th>
                                                                         <th scope="col">
                                                                             <div class="btn-group">
-                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Primary</button>
+                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('Primary'); ?></button>
                                                                                 <div class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
-                                                                                    <a class="dropdown-item" href="#">Apporve</a>
-                                                                                    <a class="dropdown-item" href="#">Rejection</a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Apporve'); ?></a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Rejection'); ?></a>
                                                                                 </div>
                                                                             </div>
                                                                         </th>
@@ -85,13 +85,13 @@
                                                                                         <span class="symbol-label font-size-h4 font-weight-bold">H</span>
                                                                                     </div>
                                                                                     <div class="ml-4">
-                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0">Hayes Boule</div>
+                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0"><?= __('Hayes Boule'); ?></div>
                                                                                         <a href="#" class="text-muted font-weight-bold text-hover-primary">hboule0@hp.com</a>
                                                                                         <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
                                                                                             03-Sep-20
                                                                                         </span>
                                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                                            Developer
+                                                                                            <?= __('Developer'); ?>
                                                                                         </span>
                                                                                     </div>
                                                                                 </div>
@@ -99,10 +99,10 @@
                                                                         </td>
                                                                         <td>
                                                                             <div class="btn-group">
-                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Primary</button>
+                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('Primary'); ?></button>
                                                                                 <div class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
-                                                                                    <a class="dropdown-item" href="#">Apporve</a>
-                                                                                    <a class="dropdown-item" href="#">Rejection</a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Apporve'); ?></a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Rejection'); ?></a>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -115,13 +115,13 @@
                                                                                         <span class="symbol-label font-size-h4 font-weight-bold">H</span>
                                                                                     </div>
                                                                                     <div class="ml-4">
-                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0">Hayes Boule</div>
+                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0"><?= __('Hayes Boule'); ?></div>
                                                                                         <a href="#" class="text-muted font-weight-bold text-hover-primary">hboule0@hp.com</a>
                                                                                         <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
                                                                                             03-Sep-20
                                                                                         </span>
                                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                                            Developer
+                                                                                            <?= __('Developer'); ?>
                                                                                         </span>
                                                                                     </div>
                                                                                 </div>
@@ -129,10 +129,10 @@
                                                                         </td>
                                                                         <td>
                                                                             <div class="btn-group">
-                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Primary</button>
+                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('Primary'); ?></button>
                                                                                 <div class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
-                                                                                    <a class="dropdown-item" href="#">Apporve</a>
-                                                                                    <a class="dropdown-item" href="#">Rejection</a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Apporve'); ?></a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Rejection'); ?></a>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -161,13 +161,13 @@
                                                                                         <span class="symbol-label font-size-h4 font-weight-bold">H</span>
                                                                                     </div>
                                                                                     <div class="ml-4">
-                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0">Hayes Boule</div>
+                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0"><?= __('Hayes Boule'); ?></div>
                                                                                         <a href="#" class="text-muted font-weight-bold text-hover-primary">hboule0@hp.com</a>
                                                                                         <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
                                                                                             03-Sep-20
                                                                                         </span>
                                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                                            Developer
+                                                                                            <?= __('Developer'); ?>
                                                                                         </span>
                                                                                     </div>
                                                                                 </div>
@@ -175,10 +175,10 @@
                                                                         </th>
                                                                         <th scope="col">
                                                                             <div class="btn-group">
-                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Primary</button>
+                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('Primary'); ?></button>
                                                                                 <div class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
-                                                                                    <a class="dropdown-item" href="#">Apporve</a>
-                                                                                    <a class="dropdown-item" href="#">Rejection</a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Apporve'); ?></a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Rejection'); ?></a>
                                                                                 </div>
                                                                             </div>
                                                                         </th>
@@ -191,13 +191,13 @@
                                                                                         <span class="symbol-label font-size-h4 font-weight-bold">H</span>
                                                                                     </div>
                                                                                     <div class="ml-4">
-                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0">Hayes Boule</div>
+                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0"><?= __('Hayes Boule'); ?></div>
                                                                                         <a href="#" class="text-muted font-weight-bold text-hover-primary">hboule0@hp.com</a>
                                                                                         <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
                                                                                             03-Sep-20
                                                                                         </span>
                                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                                            Developer
+                                                                                            <?= __('Developer'); ?>
                                                                                         </span>
                                                                                     </div>
                                                                                 </div>
@@ -205,10 +205,10 @@
                                                                         </td>
                                                                         <td>
                                                                             <div class="btn-group">
-                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Primary</button>
+                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('Primary'); ?></button>
                                                                                 <div class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
-                                                                                    <a class="dropdown-item" href="#">Apporve</a>
-                                                                                    <a class="dropdown-item" href="#">Rejection</a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Apporve'); ?></a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Rejection'); ?></a>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -221,13 +221,13 @@
                                                                                         <span class="symbol-label font-size-h4 font-weight-bold">H</span>
                                                                                     </div>
                                                                                     <div class="ml-4">
-                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0">Hayes Boule</div>
+                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0"><?= __('Hayes Boule'); ?></div>
                                                                                         <a href="#" class="text-muted font-weight-bold text-hover-primary">hboule0@hp.com</a>
                                                                                         <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
                                                                                             03-Sep-20
                                                                                         </span>
                                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                                            Developer
+                                                                                            <?= __('Developer'); ?>
                                                                                         </span>
                                                                                     </div>
                                                                                 </div>
@@ -235,10 +235,10 @@
                                                                         </td>
                                                                         <td>
                                                                             <div class="btn-group">
-                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Primary</button>
+                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('Primary'); ?></button>
                                                                                 <div class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
-                                                                                    <a class="dropdown-item" href="#">Apporve</a>
-                                                                                    <a class="dropdown-item" href="#">Rejection</a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Apporve'); ?></a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Rejection'); ?></a>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -269,13 +269,13 @@
                                                                                         <span class="symbol-label font-size-h4 font-weight-bold">H</span>
                                                                                     </div>
                                                                                     <div class="ml-4">
-                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0">Hayes Boule</div>
+                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0"><?= __('Hayes Boule'); ?></div>
                                                                                         <a href="#" class="text-muted font-weight-bold text-hover-primary">hboule0@hp.com</a>
                                                                                         <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
                                                                                             03-Sep-20
                                                                                         </span>
                                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                                            Developer
+                                                                                            <?= __('Developer'); ?>
                                                                                         </span>
                                                                                     </div>
                                                                                 </div>
@@ -283,10 +283,10 @@
                                                                         </th>
                                                                         <th scope="col">
                                                                             <div class="btn-group">
-                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Primary</button>
+                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('Primary'); ?></button>
                                                                                 <div class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
-                                                                                    <a class="dropdown-item" href="#">Apporve</a>
-                                                                                    <a class="dropdown-item" href="#">Rejection</a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Apporve'); ?></a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Rejection'); ?></a>
                                                                                 </div>
                                                                             </div>
                                                                         </th>
@@ -299,13 +299,13 @@
                                                                                         <span class="symbol-label font-size-h4 font-weight-bold">H</span>
                                                                                     </div>
                                                                                     <div class="ml-4">
-                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0">Hayes Boule</div>
+                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0"><?= __('Hayes Boule'); ?></div>
                                                                                         <a href="#" class="text-muted font-weight-bold text-hover-primary">hboule0@hp.com</a>
                                                                                         <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
                                                                                             03-Sep-20
                                                                                         </span>
                                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                                            Developer
+                                                                                            <?= __('Developer'); ?>
                                                                                         </span>
                                                                                     </div>
                                                                                 </div>
@@ -313,10 +313,10 @@
                                                                         </td>
                                                                         <td>
                                                                             <div class="btn-group">
-                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Primary</button>
+                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('Primary'); ?></button>
                                                                                 <div class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
-                                                                                    <a class="dropdown-item" href="#">Apporve</a>
-                                                                                    <a class="dropdown-item" href="#">Rejection</a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Apporve'); ?></a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Rejection'); ?></a>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -329,13 +329,13 @@
                                                                                         <span class="symbol-label font-size-h4 font-weight-bold">H</span>
                                                                                     </div>
                                                                                     <div class="ml-4">
-                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0">Hayes Boule</div>
+                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0"><?= __('Hayes Boule'); ?></div>
                                                                                         <a href="#" class="text-muted font-weight-bold text-hover-primary">hboule0@hp.com</a>
                                                                                         <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
                                                                                             03-Sep-20
                                                                                         </span>
                                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                                            Developer
+                                                                                            <?= __('Developer'); ?>
                                                                                         </span>
                                                                                     </div>
                                                                                 </div>
@@ -343,10 +343,10 @@
                                                                         </td>
                                                                         <td>
                                                                             <div class="btn-group">
-                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Primary</button>
+                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('Primary'); ?></button>
                                                                                 <div class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
-                                                                                    <a class="dropdown-item" href="#">Apporve</a>
-                                                                                    <a class="dropdown-item" href="#">Rejection</a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Apporve'); ?></a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Rejection'); ?></a>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -359,13 +359,13 @@
                                                                                         <span class="symbol-label font-size-h4 font-weight-bold">H</span>
                                                                                     </div>
                                                                                     <div class="ml-4">
-                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0">Hayes Boule</div>
+                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0"><?= __('Hayes Boule'); ?></div>
                                                                                         <a href="#" class="text-muted font-weight-bold text-hover-primary">hboule0@hp.com</a>
                                                                                         <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
                                                                                             03-Sep-20
                                                                                         </span>
                                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                                            Developer
+                                                                                            <?= __('Developer'); ?>
                                                                                         </span>
                                                                                     </div>
                                                                                 </div>
@@ -373,10 +373,10 @@
                                                                         </td>
                                                                         <td>
                                                                             <div class="btn-group">
-                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Primary</button>
+                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('Primary'); ?></button>
                                                                                 <div class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
-                                                                                    <a class="dropdown-item" href="#">Apporve</a>
-                                                                                    <a class="dropdown-item" href="#">Rejection</a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Apporve'); ?></a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Rejection'); ?></a>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -389,13 +389,13 @@
                                                                                         <span class="symbol-label font-size-h4 font-weight-bold">H</span>
                                                                                     </div>
                                                                                     <div class="ml-4">
-                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0">Hayes Boule</div>
+                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0"><?= __('Hayes Boule'); ?></div>
                                                                                         <a href="#" class="text-muted font-weight-bold text-hover-primary">hboule0@hp.com</a>
                                                                                         <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
                                                                                             03-Sep-20
                                                                                         </span>
                                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                                            Developer
+                                                                                            <?= __('Developer'); ?>
                                                                                         </span>
                                                                                     </div>
                                                                                 </div>
@@ -403,10 +403,10 @@
                                                                         </td>
                                                                         <td>
                                                                             <div class="btn-group">
-                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Primary</button>
+                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('Primary'); ?></button>
                                                                                 <div class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
-                                                                                    <a class="dropdown-item" href="#">Apporve</a>
-                                                                                    <a class="dropdown-item" href="#">Rejection</a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Apporve'); ?></a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Rejection'); ?></a>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -434,13 +434,13 @@
                                                                                         <span class="symbol-label font-size-h4 font-weight-bold">H</span>
                                                                                     </div>
                                                                                     <div class="ml-4">
-                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0">Hayes Boule</div>
+                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0"><?= __('Hayes Boule'); ?></div>
                                                                                         <a href="#" class="text-muted font-weight-bold text-hover-primary">hboule0@hp.com</a>
                                                                                         <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
                                                                                             03-Sep-20
                                                                                         </span>
                                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                                            Developer
+                                                                                            <?= __('Developer'); ?>
                                                                                         </span>
                                                                                     </div>
                                                                                 </div>
@@ -448,10 +448,10 @@
                                                                         </th>
                                                                         <th scope="col">
                                                                             <div class="btn-group">
-                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Primary</button>
+                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('Primary'); ?></button>
                                                                                 <div class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
-                                                                                    <a class="dropdown-item" href="#">Apporve</a>
-                                                                                    <a class="dropdown-item" href="#">Rejection</a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Apporve'); ?></a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Rejection'); ?></a>
                                                                                 </div>
                                                                             </div>
                                                                         </th>
@@ -464,13 +464,13 @@
                                                                                         <span class="symbol-label font-size-h4 font-weight-bold">H</span>
                                                                                     </div>
                                                                                     <div class="ml-4">
-                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0">Hayes Boule</div>
+                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0"><?= __('Hayes Boule'); ?></div>
                                                                                         <a href="#" class="text-muted font-weight-bold text-hover-primary">hboule0@hp.com</a>
                                                                                         <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
                                                                                             03-Sep-20
                                                                                         </span>
                                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                                            Developer
+                                                                                            <?= __('Developer'); ?>
                                                                                         </span>
                                                                                     </div>
                                                                                 </div>
@@ -478,10 +478,10 @@
                                                                         </td>
                                                                         <td>
                                                                             <div class="btn-group">
-                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Primary</button>
+                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('Primary'); ?></button>
                                                                                 <div class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
-                                                                                    <a class="dropdown-item" href="#">Apporve</a>
-                                                                                    <a class="dropdown-item" href="#">Rejection</a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Apporve'); ?></a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Rejection'); ?></a>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -494,13 +494,13 @@
                                                                                         <span class="symbol-label font-size-h4 font-weight-bold">H</span>
                                                                                     </div>
                                                                                     <div class="ml-4">
-                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0">Hayes Boule</div>
+                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0"><?= __('Hayes Boule'); ?></div>
                                                                                         <a href="#" class="text-muted font-weight-bold text-hover-primary">hboule0@hp.com</a>
                                                                                         <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
                                                                                             03-Sep-20
                                                                                         </span>
                                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                                            Developer
+                                                                                            <?= __('Developer'); ?>
                                                                                         </span>
                                                                                     </div>
                                                                                 </div>
@@ -508,10 +508,10 @@
                                                                         </td>
                                                                         <td>
                                                                             <div class="btn-group">
-                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Primary</button>
+                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('Primary'); ?></button>
                                                                                 <div class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
-                                                                                    <a class="dropdown-item" href="#">Apporve</a>
-                                                                                    <a class="dropdown-item" href="#">Rejection</a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Apporve'); ?></a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Rejection'); ?></a>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -524,13 +524,13 @@
                                                                                         <span class="symbol-label font-size-h4 font-weight-bold">H</span>
                                                                                     </div>
                                                                                     <div class="ml-4">
-                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0">Hayes Boule</div>
+                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0"><?= __('Hayes Boule'); ?></div>
                                                                                         <a href="#" class="text-muted font-weight-bold text-hover-primary">hboule0@hp.com</a>
                                                                                         <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
                                                                                             03-Sep-20
                                                                                         </span>
                                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                                            Developer
+                                                                                            <?= __('Developer'); ?>
                                                                                         </span>
                                                                                     </div>
                                                                                 </div>
@@ -538,10 +538,10 @@
                                                                         </td>
                                                                         <td>
                                                                             <div class="btn-group">
-                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Primary</button>
+                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('Primary'); ?></button>
                                                                                 <div class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
-                                                                                    <a class="dropdown-item" href="#">Apporve</a>
-                                                                                    <a class="dropdown-item" href="#">Rejection</a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Apporve'); ?></a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Rejection'); ?></a>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -554,13 +554,13 @@
                                                                                         <span class="symbol-label font-size-h4 font-weight-bold">H</span>
                                                                                     </div>
                                                                                     <div class="ml-4">
-                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0">Hayes Boule</div>
+                                                                                        <div class="text-dark-75 font-weight-bolder font-size-lg mb-0"><?= __('Hayes Boule'); ?></div>
                                                                                         <a href="#" class="text-muted font-weight-bold text-hover-primary">hboule0@hp.com</a>
                                                                                         <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
                                                                                             03-Sep-20
                                                                                         </span>
                                                                                         <span class="text-muted font-weight-bold d-block font-size-sm">
-                                                                                            Developer
+                                                                                            <?= __('Developer'); ?>
                                                                                         </span>
                                                                                     </div>
                                                                                 </div>
@@ -568,10 +568,10 @@
                                                                         </td>
                                                                         <td>
                                                                             <div class="btn-group">
-                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Primary</button>
+                                                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('Primary'); ?></button>
                                                                                 <div class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
-                                                                                    <a class="dropdown-item" href="#">Apporve</a>
-                                                                                    <a class="dropdown-item" href="#">Rejection</a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Apporve'); ?></a>
+                                                                                    <a class="dropdown-item" href="#"><?= __('Rejection'); ?></a>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
