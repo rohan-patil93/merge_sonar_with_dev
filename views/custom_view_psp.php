@@ -24,10 +24,10 @@ $total_amount = $otal_equity_shares_amount =$total_preference_shares_amount =$to
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header ">
-                    <h5>Valuation Report </h5>
+                    <h5><?= __('Valuation Report'); ?> </h5>
                     <div class="card-header-right table-card-header reimbursementsyear">
-                            <select aria-label="Reimbursementsyear" class ="form-control js-example-basic-single" id="reimbursementsyear" onchange="getValuationDetails(this.value)">
-                                <option value="">Select Any One</option>
+                            <select aria-label="<?= htmlspecialchars(__('Reimbursementsyear'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-control js-example-basic-single" id="reimbursementsyear" onchange="getValuationDetails(this.value)">
+                                <option value=""><?= __('Select Any One'); ?></option>
                               <?php foreach ($companyvallist as $valuation) {
                                     $rrid = deocdeId('id:'.$valuation['id']);
                                ?>
@@ -45,34 +45,34 @@ $total_amount = $otal_equity_shares_amount =$total_preference_shares_amount =$to
                 <div class="table-responsive custom-nowrap">
                     <table class="table table-bordered table-hover">
                         <tr>
-                            <th scope="col">Investor</th>
-                            <th scope="col" colspan="4" class="text-center">Diluted and can't be diluted tab</th>
-                            <th scope="col" colspan="2" class="text-center">Issued Share</th>
-                            <th scope="col" colspan="3" class="text-center">% Age</th>
+                            <th scope="col"><?= __('Investor'); ?></th>
+                            <th scope="col" colspan="4" class="text-center"><?= __('Diluted and can\'t be diluted tab'); ?></th>
+                            <th scope="col" colspan="2" class="text-center"><?= __('Issued Share'); ?></th>
+                            <th scope="col" colspan="3" class="text-center"><?= __('% Age'); ?></th>
                         </tr>
                         <tr>
                             <td></td>
-                            <th scope="col" class="f-14 text-right">Could be diluted</th>
-                            <th scope="col" class="f-14 text-right">can't be diluted</th>
-                            <th scope="col" class="f-14 text-right">can't be diluted<br />% age on total</th>
-                            <th scope="col" class="f-14 text-right">Total</th>
-                            <th scope="col" class="f-14 text-right">No. of Equity<br />Shares</th>
-                            <th scope="col" class="f-14 text-right">No. of Preference<br />Shares</th>
-                            <th scope="col" class="f-14 text-right">Equity Shares</th>
-                            <th scope="col" class="f-14 text-right">Preference(%)</th>
-                            <th scope="col" class="f-14 text-right">Total(%)</th>
+                            <th scope="col" class="f-14 text-right"><?= __('Could be diluted'); ?></th>
+                            <th scope="col" class="f-14 text-right"><?= __('can\'t be diluted'); ?></th>
+                            <th scope="col" class="f-14 text-right"><?= __('can\'t be diluted'); ?><br /><?= __('% age on total'); ?></th>
+                            <th scope="col" class="f-14 text-right"><?= __('Total'); ?></th>
+                            <th scope="col" class="f-14 text-right"><?= __('No. of Equity'); ?><br /><?= __('Shares'); ?></th>
+                            <th scope="col" class="f-14 text-right"><?= __('No. of Preference'); ?><br /><?= __('Shares'); ?></th>
+                            <th scope="col" class="f-14 text-right"><?= __('Equity Shares'); ?></th>
+                            <th scope="col" class="f-14 text-right"><?= __('Preference(%)'); ?></th>
+                            <th scope="col" class="f-14 text-right"><?= __('Total(%)'); ?></th>
                         </tr>
                         <tr>
-                            <th scope="col">Valuation Details</th>
+                            <th scope="col"><?= __('Valuation Details'); ?></th>
                             <td colspan="9" >
-                                <span class="f-w-600">Name - </span><span class="m-r-10"><?php echo $company_valuations['valuation_name']; ?></span>
-                                <span class="f-w-600">Date - </span>
+                                <span class="f-w-600"><?= __('Name'); ?> - </span><span class="m-r-10"><?php echo $company_valuations['valuation_name']; ?></span>
+                                <span class="f-w-600"><?= __('Date'); ?> - </span>
                                 <span class="m-r-10"><?php echo $company_valuations['valuation_date'] !=""?date('M d-Y',strtotime($company_valuations['valuation_date'])):"-";?></span>
-                                <span class="f-w-600">Valuation - </span><span class="m-r-10"><?php echo customeummarmonyformateifine($company_valuations['company_value']); ?></span>
+                                <span class="f-w-600"><?= __('Valuation'); ?> - </span><span class="m-r-10"><?php echo customeummarmonyformateifine($company_valuations['company_value']); ?></span>
 
-                                <span class="f-w-600">Total Shares - </span><span class="m-r-10"><?php echo $company_valuations['total_share_qty']; ?></span>
+                                <span class="f-w-600"><?= __('Total Shares'); ?> - </span><span class="m-r-10"><?php echo $company_valuations['total_share_qty']; ?></span>
 
-                                <span class="f-w-600">Per Share Value - </span><span class="m-r-10"><?php echo customeummarmonyformateifine($company_valuations['per_share_value']); ?></span>
+                                <span class="f-w-600"><?= __('Per Share Value'); ?> - </span><span class="m-r-10"><?php echo customeummarmonyformateifine($company_valuations['per_share_value']); ?></span>
 
                             </td>
                         </tr>
@@ -114,7 +114,7 @@ $total_amount = $otal_equity_shares_amount =$total_preference_shares_amount =$to
                         <?php } ?>
 
                          <tr>
-                            <th scope="col">Total</th>
+                            <th scope="col"><?= __('Total'); ?></th>
                             <th scope="col" class="text-right"><?php echo $total_old_shares_qty;?></th>
                             <th scope="col" class="text-right"><?php echo $total_new_shares_qty; ?></th>
 
@@ -133,7 +133,7 @@ $total_amount = $otal_equity_shares_amount =$total_preference_shares_amount =$to
                 </div>
                 <?php }else{ ?>
                     <div class="card-px text-center ">
-                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> Please Select Company Valuation</p>
+                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('Please Select Company Valuation'); ?></p>
                         <div class="text-center px-4">
                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                         </div>
