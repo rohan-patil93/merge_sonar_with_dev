@@ -144,12 +144,12 @@ $_SESSION['download_data'] = array();
 <div class="csr-obl-dashboard page-body">
   <div class="row align-items-center csr-obl-header">
     <div class="col-lg-6 col-md-12">
-      <h3 class="csr-obl-title mb-1">CSR Obligation Tracking Report</h3>
-      <p class="csr-obl-subtitle mb-0">Year-on-Year Spending Against CSR Obligation</p>
+      <h3 class="csr-obl-title mb-1"><?= __('CSR Obligation Tracking Report'); ?></h3>
+      <p class="csr-obl-subtitle mb-0"><?= __('Year-on-Year Spending Against CSR Obligation'); ?></p>
     </div>
     <div class="col-lg-6 col-md-12 text-end">
       <a class="btn btn-outline-success btn-sm csr-obl-csv-btn" href="custom_view_download.php?page=CSRObligationDashboard&format=csv" target="_blank">
-        <i class="fa fa-download"></i> CSV
+        <i class="fa fa-download"></i> <?= __('CSV'); ?>
       </a>
     </div>
   </div>
@@ -158,7 +158,7 @@ $_SESSION['download_data'] = array();
     <input type="hidden" name="option" value="<?php echo csrOblDashText($pageOption); ?>">
     <div class="row">
       <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
-        <label class="form-label mb-1 f-w-600" for="csrOblYearFrom">From</label>
+        <label class="form-label mb-1 f-w-600" for="csrOblYearFrom"><?= __('From'); ?></label>
         <select name="year_from" id="csrOblYearFrom" class="form-control js-example-basic-single csr-obl-fy-select">
           <?php if (count((array)$financialYears) > 0) { ?>
             <?php foreach ($financialYears as $fyRow) { ?>
@@ -174,7 +174,7 @@ $_SESSION['download_data'] = array();
         </select>
       </div>
       <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
-        <label class="form-label mb-1 f-w-600" for="csrOblYearTo">To</label>
+        <label class="form-label mb-1 f-w-600" for="csrOblYearTo"><?= __('To'); ?></label>
         <select name="year_to" id="csrOblYearTo" class="form-control js-example-basic-single csr-obl-fy-select">
           <?php if (count((array)$financialYears) > 0) { ?>
             <?php foreach ($financialYears as $fyRow) { ?>
@@ -190,9 +190,9 @@ $_SESSION['download_data'] = array();
         </select>
       </div>
       <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
-        <label class="form-label mb-1 f-w-600" for="csrOblLocation">Location</label>
+        <label class="form-label mb-1 f-w-600" for="csrOblLocation"><?= __('Location'); ?></label>
         <select name="location_id" id="csrOblLocation" class="form-control js-example-basic-single">
-          <option value="">All</option>
+          <option value=""><?= __('All'); ?></option>
           <?php if (count((array)$locations) > 0) { ?>
             <?php foreach ($locations as $loc) { ?>
               <?php
@@ -207,9 +207,9 @@ $_SESSION['download_data'] = array();
         </select>
       </div>
       <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
-        <label class="form-label mb-1 f-w-600" for="csrOblEntity">Entity</label>
+        <label class="form-label mb-1 f-w-600" for="csrOblEntity"><?= __('Entity'); ?></label>
         <select name="entity_code" id="csrOblEntity" class="form-control js-example-basic-single">
-          <option value="">All</option>
+          <option value=""><?= __('All'); ?></option>
           <?php if (count((array)$entityNames) > 0) { ?>
             <?php foreach ($entityNames as $ent) { ?>
               <?php
@@ -224,7 +224,7 @@ $_SESSION['download_data'] = array();
       </div>
       <div class="col-lg-2 col-md-4 col-sm-6 mb-2 d-flex align-items-end">
         <button type="submit" class="btn btn-primary btn-sm" id="csrOblFilterBtn">
-          <i class="fa fa-filter"></i> Filter
+          <i class="fa fa-filter"></i> <?= __('Filter'); ?>
         </button>
       </div>
     </div>
@@ -234,7 +234,7 @@ $_SESSION['download_data'] = array();
     <div class="col-xl-3 col-md-6">
       <div class="card csr-obl-kpi">
         <div class="card-body">
-          <span class="csr-obl-kpi-label text-c-green">Overall Utilization</span>
+          <span class="csr-obl-kpi-label text-c-green"><?= __('Overall Utilization'); ?></span>
           <h4 class="csr-obl-kpi-value text-c-green text-right"><?php echo csrOblDashText(csrOblDashPct($overallUtilization)); ?></h4>
         </div>
       </div>
@@ -242,7 +242,7 @@ $_SESSION['download_data'] = array();
     <div class="col-xl-3 col-md-6">
       <div class="card csr-obl-kpi">
         <div class="card-body">
-          <span class="csr-obl-kpi-label">(A) Total CSR Obligation</span>
+          <span class="csr-obl-kpi-label"><?= __('(A) Total CSR Obligation'); ?></span>
           <h4 class="csr-obl-kpi-value  text-right"><?php echo csrOblDashText(csrOblDashMoney($totalObligation)); ?></h4>
         </div>
       </div>
@@ -250,7 +250,7 @@ $_SESSION['download_data'] = array();
     <div class="col-xl-3 col-md-6">
       <div class="card csr-obl-kpi">
         <div class="card-body">
-          <span class="csr-obl-kpi-label">(b) Amount Spent</span>
+          <span class="csr-obl-kpi-label"><?= __('(b) Amount Spent'); ?></span>
           <h4 class="csr-obl-kpi-value text-right"><?php echo csrOblDashText(csrOblDashMoney($totalSpent)); ?></h4>
         </div>
       </div>
@@ -258,7 +258,7 @@ $_SESSION['download_data'] = array();
     <div class="col-xl-3 col-md-6">
       <div class="card csr-obl-kpi">
         <div class="card-body">
-          <span class="csr-obl-kpi-label">Total Spent in %</span>
+          <span class="csr-obl-kpi-label"><?= __('Total Spent in %'); ?></span>
           <h4 class="csr-obl-kpi-value text-c-green text-right"><?php echo csrOblDashText(csrOblDashPct($overallUtilization)); ?></h4>
         </div>
       </div>
@@ -269,27 +269,27 @@ $_SESSION['download_data'] = array();
     <div class="col-12">
       <div class="card">
         <div class="card-body">
-          <h5 class="f-w-600 mb-3">CSR Obligation Tracking</h5>
+          <h5 class="f-w-600 mb-3"><?= __('CSR Obligation Tracking'); ?></h5>
           <div class="table-responsive">
             <table class="table table-bordered table-sm csr-obl-table mb-0" id="csrOblProjectTable">
               <thead>
                 <tr>
-                  <th scope="col">Project Name</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Entity</th>
-                  <th scope="col">Location</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Total Amount</th>
+                  <th scope="col"><?= __('Project Name'); ?></th>
+                  <th scope="col"><?= __('Type'); ?></th>
+                  <th scope="col"><?= __('Entity'); ?></th>
+                  <th scope="col"><?= __('Location'); ?></th>
+                  <th scope="col"><?= __('Status'); ?></th>
+                  <th scope="col"><?= __('Total Amount'); ?></th>
                   <?php if (count((array)$fyRange) > 0) { ?>
                     <?php foreach ($fyRange as $fyCode) { ?>
-                      <th scope="col">FY <?php echo csrOblDashText($fyCode); ?></th>
+                      <th scope="col"><?= __('FY'); ?> <?php echo csrOblDashText($fyCode); ?></th>
                     <?php } ?>
                   <?php } ?>
                 </tr>
               </thead>
               <tbody>
                 <tr class="csr-obl-summary-row">
-                  <td colspan="5"><strong>(B) Year on Year CSR Obligation</strong></td>
+                  <td colspan="5"><strong><?= __('(B) Year on Year CSR Obligation'); ?></strong></td>
                   <td><strong><?php echo csrOblDashText(csrOblDashMoney($totalObligation)); ?></strong></td>
                   <?php if (count((array)$yoyObligation) > 0) { ?>
                     <?php foreach ($yoyObligation as $amt) { ?>
@@ -300,7 +300,7 @@ $_SESSION['download_data'] = array();
                 <?php $csvdata[] = csrOblDashCsvBaseRow('(B) Year on Year CSR Obligation', $totalObligation, $fyRange, $yoyObligation, false); ?>
 
                 <tr class="csr-obl-summary-row">
-                  <td colspan="5"><strong>(D) Total Spent in INR</strong></td>
+                  <td colspan="5"><strong><?= __('(D) Total Spent in INR'); ?></strong></td>
                   <td><strong><?php echo csrOblDashText(csrOblDashMoney($totalSpent)); ?></strong></td>
                   <?php if (count((array)$yoySpent) > 0) { ?>
                     <?php foreach ($yoySpent as $amt) { ?>
@@ -311,7 +311,7 @@ $_SESSION['download_data'] = array();
                 <?php $csvdata[] = csrOblDashCsvBaseRow('(D) Total Spent in INR', $totalSpent, $fyRange, $yoySpent, false); ?>
 
                 <tr class="csr-obl-summary-row csr-obl-pct-row">
-                  <td colspan="5"><strong>Year on Year Spent in %</strong></td>
+                  <td colspan="5"><strong><?= __('Year on Year Spent in %'); ?></strong></td>
                   <td><strong><?php echo csrOblDashText(csrOblDashPct($overallUtilization)); ?></strong></td>
                   <?php if (count((array)$yoySpentPct) > 0) { ?>
                     <?php foreach ($yoySpentPct as $pct) { ?>
@@ -385,7 +385,7 @@ $_SESSION['download_data'] = array();
                       <?php } ?>
                     <?php } ?>
                     <tr class="csr-obl-category-row">
-                      <td colspan="5"><strong><?php echo csrOblDashText($group['category']); ?> Total</strong></td>
+                      <td colspan="5"><strong><?php echo csrOblDashText($group['category']); ?> <?= __('Total'); ?></strong></td>
                       <td><strong><?php echo csrOblDashText(csrOblDashMoney($group['total'])); ?></strong></td>
                       <?php
                         $csvTotalRow = array(
@@ -411,7 +411,7 @@ $_SESSION['download_data'] = array();
                   <?php } ?>
 
                   <tr class="csr-obl-grand-total">
-                    <td colspan="5"><strong>Grand Total</strong></td>
+                    <td colspan="5"><strong><?= __('Grand Total'); ?></strong></td>
                     <td><strong><?php echo csrOblDashText(csrOblDashMoney($grandTotal)); ?></strong></td>
                     <?php if (count((array)$grandYears) > 0) { ?>
                       <?php foreach ($grandYears as $yearAmt) { ?>
@@ -422,7 +422,7 @@ $_SESSION['download_data'] = array();
                   <?php $csvdata[] = csrOblDashCsvBaseRow('Grand Total', $grandTotal, $fyRange, $grandYears, false); ?>
                 <?php } else { ?>
                   <tr>
-                    <td colspan="<?php echo (int)$colCount; ?>" class="text-center">No Records</td>
+                    <td colspan="<?php echo (int)$colCount; ?>" class="text-center"><?= __('No Records'); ?></td>
                   </tr>
                   <?php
                     $emptyCsv = array(
@@ -443,7 +443,7 @@ $_SESSION['download_data'] = array();
                 <?php } ?>
 
                 <tr class="csr-obl-summary-row">
-                  <td colspan="5"><strong>(E) Total Un-Spent in INR</strong></td>
+                  <td colspan="5"><strong><?= __('(E) Total Un-Spent in INR'); ?></strong></td>
                   <td class="<?php echo $finalUnspent < 0 ? 'text-danger' : ''; ?>">
                     <strong><?php echo csrOblDashText(csrOblDashMoney($finalUnspent)); ?></strong>
                   </td>
@@ -458,7 +458,7 @@ $_SESSION['download_data'] = array();
                 <?php $csvdata[] = csrOblDashCsvBaseRow('(E) Total Un-Spent in INR', $finalUnspent, $fyRange, $yoyUnspent, false); ?>
 
                 <tr class="csr-obl-summary-row csr-obl-pct-row">
-                  <td colspan="5"><strong>Year on Year Un-Spent in %</strong></td>
+                  <td colspan="5"><strong><?= __('Year on Year Un-Spent in %'); ?></strong></td>
                   <td><strong><?php echo csrOblDashText(csrOblDashPct($totalUnspentPct)); ?></strong></td>
                   <?php if (count((array)$yoyUnspentPct) > 0) { ?>
                     <?php foreach ($yoyUnspentPct as $pct) { ?>
@@ -481,7 +481,7 @@ $_SESSION['download_data'] = array();
     <div class="col-xl-4 col-md-6">
       <div class="card csr-obl-kpi">
         <div class="card-body">
-          <span class="csr-obl-kpi-label">(C) Final Unspent Amount / Final Obligation Balance</span>
+          <span class="csr-obl-kpi-label"><?= __('(C) Final Unspent Amount / Final Obligation Balance'); ?></span>
           <h4 class="csr-obl-kpi-value text-right <?php echo $finalUnspent < 0 ? 'text-danger' : 'text-c-green'; ?>">
             <?php echo csrOblDashText(csrOblDashMoney($finalUnspent)); ?>
           </h4>
@@ -491,7 +491,7 @@ $_SESSION['download_data'] = array();
     <div class="col-xl-4 col-md-6">
       <div class="card csr-obl-kpi">
         <div class="card-body">
-          <span class="csr-obl-kpi-label">Total Unspent in %</span>
+          <span class="csr-obl-kpi-label"><?= __('Total Unspent in %'); ?></span>
           <h4 class="csr-obl-kpi-value  text-right text-c-green"><?php echo csrOblDashText(csrOblDashPct($totalUnspentPct)); ?></h4>
         </div>
       </div>
@@ -499,14 +499,14 @@ $_SESSION['download_data'] = array();
     <div class="col-xl-4 col-md-12">
       <div class="card csr-obl-kpi">
         <div class="card-body">
-          <span class="csr-obl-kpi-label">Location-wise Spending</span>
+          <span class="csr-obl-kpi-label"><?= __('Location-wise Spending'); ?></span>
           <div class="table-responsive mt-2">
             <table class="table table-sm table-bordered mb-0 csr-obl-mini-table">
               <thead>
                 <tr>
-                  <th scope="col">Location</th>
-                  <th scope="col">Amount</th>
-                  <th scope="col">Status</th>
+                  <th scope="col"><?= __('Location'); ?></th>
+                  <th scope="col"><?= __('Amount'); ?></th>
+                  <th scope="col"><?= __('Status'); ?></th>
                 </tr>
               </thead>
               <tbody>
@@ -528,7 +528,7 @@ $_SESSION['download_data'] = array();
                   <?php } ?>
                 <?php } else { ?>
                   <tr>
-                    <td colspan="3" class="text-center">No Records</td>
+                    <td colspan="3" class="text-center"><?= __('No Records'); ?></td>
                   </tr>
                 <?php } ?>
               </tbody>
