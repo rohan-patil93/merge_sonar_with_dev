@@ -192,7 +192,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 		<div class="p-l-10 p-r-10 col-lg-6">
 		    <div class="alert alert-info alert-dismissible">
 		        <strong class="f-16"><i class="ti-alert "></i></strong> <a href="index.php?option=<?php echo $transactiontableary[$eatfield]['option']; ?>" class="text-primary"><?php echo ucwords($_SESSION['error_message'][$transactiontableary[$eatfield]['application_messages']]); ?></a>
-		        <button type="button" class="btn-close text-danger" data-bs-dismiss="alert" aria-label="Close"></button>
+		        <button type="button" class="btn-close text-danger" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 		    </div>
 		</div>
 	<?php } } ?>
@@ -200,10 +200,10 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 
 <ul class="nav md-tabs infisuite_tab mb-2">
 	<li class="nav-item">
-		<a class="nav-link f-w-600 f-12 <?php echo (!isset($_GET['TAB']) || $_GET['TAB'] =="JP")?"active":"";?>" data-bs-toggle="tab" href="#jobposting-tab" role="tab" aria-selected="true" onclick=" updateUrlParameter('TAB','JP')">Job Postings </a>
+		<a class="nav-link f-w-600 f-12 <?php echo (!isset($_GET['TAB']) || $_GET['TAB'] =="JP")?"active":"";?>" data-bs-toggle="tab" href="#jobposting-tab" role="tab" aria-selected="true" onclick=" updateUrlParameter('TAB','JP')"><?= __('Job Postings'); ?> </a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link f-w-600 f-12 <?php echo ($_GET['TAB'] =="Cand")?"active":"";?>" onclick=" updateUrlParameter('TAB','Cand')" data-bs-toggle="tab" href="#Candidates-tab" role="tab" aria-selected="true">Candidates </a>
+		<a class="nav-link f-w-600 f-12 <?php echo ($_GET['TAB'] =="Cand")?"active":"";?>" onclick=" updateUrlParameter('TAB','Cand')" data-bs-toggle="tab" href="#Candidates-tab" role="tab" aria-selected="true"><?= __('Candidates'); ?> </a>
 	</li>	
 </ul>
 
@@ -217,7 +217,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 				<a href="index.php?option=COM_LIST_JOB_POSTING_CANDIDATES&JOBACT=-1">
 					<div class="card ticket-card">
 						<div class="card-body">
-							<p class="m-b-30 bg-c-blue lbl-card"><i class="ti-briefcase"></i>&nbsp;&nbsp;Total Jobs</p>
+							<p class="m-b-30 bg-c-blue lbl-card"><i class="ti-briefcase"></i>&nbsp;&nbsp;<?= __('Total Jobs'); ?></p>
 							<div class="text-center">
 								<h2 class="m-b-0 d-inline-block text-c-red"><?php echo customNanAndEmptyValidation($result['total_jobs']); ?></h2>
 							<!-- 	<p class="m-b-0 m-t-15"><i class="fas fa-caret-down m-r-10 f-18 text-c-red"></i>From Previous Month</p>
@@ -230,7 +230,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 				<a href="index.php?option=COM_LIST_JOB_POSTING_CANDIDATES&JOBACT=0">
 					<div class="card ticket-card">
 						<div class="card-body">
-							<p class="m-b-30 bg-c-green lbl-card"><i class="ti-briefcase"></i>&nbsp;&nbsp;Open Jobs</p>
+							<p class="m-b-30 bg-c-green lbl-card"><i class="ti-briefcase"></i>&nbsp;&nbsp;<?= __('Open Jobs'); ?></p>
 							<div class="text-center">
 								<h2 class="m-b-0 d-inline-block text-c-red"><?php echo customNanAndEmptyValidation($result['open_jobs']); ?></h2>
 							</div>
@@ -242,7 +242,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 				<a href="index.php?option=COM_LIST_JOB_POSTING_CANDIDATES&JOBACT=1">
 					<div class="card ticket-card">
 						<div class="card-body">
-							<p class="m-b-30 bg-c-red lbl-card"><i class="ti-briefcase"></i>&nbsp;&nbsp;Close Jobs</p>
+							<p class="m-b-30 bg-c-red lbl-card"><i class="ti-briefcase"></i>&nbsp;&nbsp;<?= __('Close Jobs'); ?></p>
 							<div class="text-center">
 								<h2 class="m-b-0 d-inline-block text-c-red"><?php echo customNanAndEmptyValidation($result['close_jobs']); ?></h2>
 							<!-- 	<p class="m-b-0 m-t-15"><i class="fas fa-caret-down m-r-10 f-18 text-c-red"></i>From Previous Month</p>
@@ -255,7 +255,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 				<a href="index.php?option=COM_LIST_JOB_POSTING_CANDIDATES&JOBACT=2">
 					<div class="card ticket-card">
 						<div class="card-body">
-							<p class="m-b-30 bg-c-yellow lbl-card"><i class="ti-briefcase"></i>&nbsp;&nbsp;Hold Jobs</p>
+							<p class="m-b-30 bg-c-yellow lbl-card"><i class="ti-briefcase"></i>&nbsp;&nbsp;<?= __('Hold Jobs'); ?></p>
 							<div class="text-center">
 								<h2 class="m-b-0 d-inline-block text-c-red"><?php echo customNanAndEmptyValidation($result['hold_jobs']); ?></h2>
 							<!-- 	<p class="m-b-0 m-t-15"><i class="fas fa-caret-down m-r-10 f-18 text-c-red"></i>From Previous Month</p>
@@ -271,23 +271,23 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 					<div class="col-lg-3">
 						<div class="card sale-card mb-2">
 							<div class="card-header">
-								<h5>Job Posting</h5>
+								<h5><?= __('Job Posting'); ?></h5>
 							</div>
 							<div class="card-block text-center">
 								<img class="img-fluid" src="assets/images/122.png" alt="">
 								<div class="row mt-2">
 									<div class="col-lg-6 p-0">
-										<a href="index.php?option=COM_INSERT_JOB_POSTINGS" class="btn btn-success "> <i class="icofont icofont-plus icon-white"></i> Job </a>
+										<a href="index.php?option=COM_INSERT_JOB_POSTINGS" class="btn btn-success "> <i class="icofont icofont-plus icon-white"></i> <?= __('Job'); ?> </a>
 									</div>
 									<div class="col-lg-6 p-0">
-										<a href="index.php?option=COM_LIST_JOB_POSTING_CANDIDATES" class="btn btn-warning "> <i class="ti ti-timer icon-white"></i>History</a>
+										<a href="index.php?option=COM_LIST_JOB_POSTING_CANDIDATES" class="btn btn-warning "> <i class="ti ti-timer icon-white"></i><?= __('History'); ?></a>
 									</div>	
 								</div>
 							</div>
 						</div>
 						<div class="card sale-card mb-2">
 							<div class="card-header">
-								<h5>Holidays</h5>
+								<h5><?= __('Holidays'); ?></h5>
 							</div>
 							<div class="card-block custom-scroll" style=" height: 300px;">
 							<?php 
@@ -305,14 +305,14 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 										</div>
 									</div>
 								<?php } }else{ 
-									echo "<h4><i class='fa fa-warning'></i> No Holidays Available</h4>";
+									echo "<h4><i class='fa fa-warning'></i> ".__('No Holidays Available')."</h4>";
 								} ?>
 							</div>
 						</div>
 						<div class="card sale-card mb-2">
 							<div class="card-header">
-								<h5> <i class="ti-thumb-up"></i> Interview</h5>
-								<a href="#!"  onclick="viewAllRecord('COM_LIST_VIEW_ALL_DASH_BOARD','ACTIVE')" class=" b-b-primary text-primary float-right">View all</a>
+								<h5> <i class="ti-thumb-up"></i> <?= __('Interview'); ?></h5>
+								<a href="#!"  onclick="viewAllRecord('COM_LIST_VIEW_ALL_DASH_BOARD','ACTIVE')" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
 							</div>
 							<div class="card-block custom-scroll" style=" height: 300px;">
 								<?php if(count((array)$approved_job_candidate_interview_schedules) !=0){ ?>
@@ -332,7 +332,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 								</table>
 							<?php  }else{  ?>
 									<div class="card-px text-center py-20 m-t-30">
-										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Schedule Interview </p>   
+										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Schedule Interview'); ?> </p>   
 										<div class="text-center px-4">
 											<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
 										</div>   
@@ -342,8 +342,8 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 						</div>
 						<div class="card sale-card mb-2">
 							<div class="card-header">
-								<h5>Interview</h5>
-								<a href="#!"  onclick="viewAllRecord('COM_LIST_VIEW_ALL_DASH_BOARD','ACTIVE')" class=" b-b-primary text-primary float-right">View all</a>
+								<h5><?= __('Interview'); ?></h5>
+								<a href="#!"  onclick="viewAllRecord('COM_LIST_VIEW_ALL_DASH_BOARD','ACTIVE')" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
 							</div>
 							<div class="card-block custom-scroll" style=" height: 300px;">
 								<?php if(count((array)$job_candidate_interview_schedules) !=0){ ?>
@@ -363,7 +363,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 								</table>
 							<?php  }else{  ?>
 									<div class="card-px text-center py-20 m-t-30">
-										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Schedule Interview </p>   
+										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Schedule Interview'); ?> </p>   
 										<div class="text-center px-4">
 											<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
 										</div>   
@@ -400,20 +400,20 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 
 															<th scope="col" class="text-center" ></th>
 
-															<th scope="col" class="text-center p-0"  colspan="2" >ShortListed</th>
-															<th scope="col" class="text-center p-0" colspan="4" >LoI</th>
+															<th scope="col" class="text-center p-0"  colspan="2" ><?= __('ShortListed'); ?></th>
+															<th scope="col" class="text-center p-0" colspan="4" ><?= __('LoI'); ?></th>
 														</tr>
 														<tr >
-															<th scope="col">Job Name</th>
-															<th scope="col" class="text-center" >No. Res.</th>
+															<th scope="col"><?= __('Job Name'); ?></th>
+															<th scope="col" class="text-center" ><?= __('No. Res.'); ?></th>
 
-															<th scope="col" class="text-center" >Applied</th>
-															<th scope="col" class="text-center"><span class="label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_HMSHORTLISTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="RM ShotListed">RM</span></th>
-															<th scope="col" class="text-center"><span class="label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_RMSHORTLISTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="HM ShortListed">HM</span></th>
-															<th scope="col" class="text-center"><span class="label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_LOIREQUESTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Requested">Req</span></th>
-															<th scope="col" class="text-center"><span class="label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_LOIGENERATED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Generated">Gen</span></th>
-															<th scope="col" class="text-center"><span class="label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_LOIACCEPTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Accepted">Acc</span></th>
-															<th scope="col" class="text-center"><span class="label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_LOIREJECTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Rejected">Rej</span></th>
+															<th scope="col" class="text-center" ><?= __('Applied'); ?></th>
+															<th scope="col" class="text-center"><span class="label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_HMSHORTLISTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('RM ShotListed'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('RM'); ?></span></th>
+															<th scope="col" class="text-center"><span class="label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_RMSHORTLISTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('HM ShortListed'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('HM'); ?></span></th>
+															<th scope="col" class="text-center"><span class="label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_LOIREQUESTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('LoI Requested'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('Req'); ?></span></th>
+															<th scope="col" class="text-center"><span class="label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_LOIGENERATED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('LoI Generated'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('Gen'); ?></span></th>
+															<th scope="col" class="text-center"><span class="label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_LOIACCEPTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('LoI Accepted'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('Acc'); ?></span></th>
+															<th scope="col" class="text-center"><span class="label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_LOIREJECTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('LoI Rejected'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('Rej'); ?></span></th>
 														</tr>
 											
 										</thead>
@@ -428,22 +428,22 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 														</a>
 													</td>
 
-												<td class="text-center cursor-pointer" ><span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="No Of Resources"><?php echo $jobpostingcandidate['no_of_resources']; ?></span></td>
+												<td class="text-center cursor-pointer" ><span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('No Of Resources'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $jobpostingcandidate['no_of_resources']; ?></span></td>
 
-												<td class="text-center text-primary cursor-pointer" onclick="getJobPostingApplyCandidate('<?php echo $jobpostingcandidate['id']; ?>','All')"><span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Applied Candidates"><?php echo $jobpostingcandidate['apply_total']; ?></span></td>
-												<td class="text-center text-primary cursor-pointer" onclick="getJobPostingApplyCandidate('<?php echo $jobpostingcandidate['id']; ?>','current_status','<?php echo ST_RMSHORTLISTED; ?>')"><span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="RM ShortListed"><?php echo $jobpostingcandidate['rm_shortlisted']; ?></span></td>
-												<td class="text-center text-primary cursor-pointer" onclick="getJobPostingApplyCandidate('<?php echo $jobpostingcandidate['id']; ?>','current_status','<?php echo ST_HMSHORTLISTED; ?>')"><span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="HM ShortListed"><?php echo $jobpostingcandidate['hm_shortlisted']; ?></span></td>
-												<td class="text-center text-primary cursor-pointer" onclick="getJobPostingApplyCandidate('<?php echo $jobpostingcandidate['id']; ?>','current_status','<?php echo ST_LOIREQUESTED; ?>')"><span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Requested"><?php echo $jobpostingcandidate['loi_requested']; ?></span></td>
-												<td class="text-center text-primary cursor-pointer" onclick="getJobPostingApplyCandidate('<?php echo $jobpostingcandidate['id']; ?>','current_status','<?php echo ST_LOIGENERATED; ?>')"><span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Generated"><?php echo $jobpostingcandidate['loi_generated']; ?></span></td>
-												<td class="text-center text-primary cursor-pointer"   onclick="getJobPostingApplyCandidate('<?php echo $jobpostingcandidate['id']; ?>','current_status','<?php echo ST_LOIACCEPTED; ?>')"><span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Accepted"><?php echo $jobpostingcandidate['loi_accepted']; ?></span></td>
-												<td class="text-center text-primary cursor-pointer" onclick="getJobPostingApplyCandidate('<?php echo $jobpostingcandidate['id']; ?>','current_status','<?php echo ST_LOIREJECTED; ?>')"><span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Rejected"><?php echo $jobpostingcandidate['loi_rejected']; ?></span></td>
+												<td class="text-center text-primary cursor-pointer" onclick="getJobPostingApplyCandidate('<?php echo $jobpostingcandidate['id']; ?>','All')"><span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Applied Candidates'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $jobpostingcandidate['apply_total']; ?></span></td>
+												<td class="text-center text-primary cursor-pointer" onclick="getJobPostingApplyCandidate('<?php echo $jobpostingcandidate['id']; ?>','current_status','<?php echo ST_RMSHORTLISTED; ?>')"><span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('RM ShortListed'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $jobpostingcandidate['rm_shortlisted']; ?></span></td>
+												<td class="text-center text-primary cursor-pointer" onclick="getJobPostingApplyCandidate('<?php echo $jobpostingcandidate['id']; ?>','current_status','<?php echo ST_HMSHORTLISTED; ?>')"><span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('HM ShortListed'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $jobpostingcandidate['hm_shortlisted']; ?></span></td>
+												<td class="text-center text-primary cursor-pointer" onclick="getJobPostingApplyCandidate('<?php echo $jobpostingcandidate['id']; ?>','current_status','<?php echo ST_LOIREQUESTED; ?>')"><span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('LoI Requested'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $jobpostingcandidate['loi_requested']; ?></span></td>
+												<td class="text-center text-primary cursor-pointer" onclick="getJobPostingApplyCandidate('<?php echo $jobpostingcandidate['id']; ?>','current_status','<?php echo ST_LOIGENERATED; ?>')"><span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('LoI Generated'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $jobpostingcandidate['loi_generated']; ?></span></td>
+												<td class="text-center text-primary cursor-pointer"   onclick="getJobPostingApplyCandidate('<?php echo $jobpostingcandidate['id']; ?>','current_status','<?php echo ST_LOIACCEPTED; ?>')"><span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('LoI Accepted'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $jobpostingcandidate['loi_accepted']; ?></span></td>
+												<td class="text-center text-primary cursor-pointer" onclick="getJobPostingApplyCandidate('<?php echo $jobpostingcandidate['id']; ?>','current_status','<?php echo ST_LOIREJECTED; ?>')"><span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('LoI Rejected'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $jobpostingcandidate['loi_rejected']; ?></span></td>
 											</tr>
 										<?php } ?>
 									</body>
 								</table>
 							<?php }else{  ?>
 								<div class="card-px text-center py-20 m-t-30">
-									<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Jobs Posting </p>   
+									<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Jobs Posting'); ?> </p>   
 									<div class="text-center px-4">
 										<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
 									</div>   
@@ -461,41 +461,41 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 							<div class="col-lg-12">
 								<ul class="nav md-tabs infisuite_tab">
 									<li class="nav-item  m-1">
-										<a class="nav-link f-w-600 f-12 active" style="padding: 0.5rem 0.5rem !important; " data-bs-toggle="tab" href="#apshort" role="tab" aria-selected="true">Applied <span class="label label-xs label-success m-l-5"><?php echo count((array)$tabdata['apshort']); ?></span></a>
+										<a class="nav-link f-w-600 f-12 active" style="padding: 0.5rem 0.5rem !important; " data-bs-toggle="tab" href="#apshort" role="tab" aria-selected="true"><?= __('Applied'); ?> <span class="label label-xs label-success m-l-5"><?php echo count((array)$tabdata['apshort']); ?></span></a>
 										<div class="slide"></div>
 									</li>
-									<li class="nav-item  m-1" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="RM ShortListed">
-										<a class="nav-link  f-w-600 f-12" style="padding: 0.5rem 0.5rem !important; " data-bs-toggle="tab" href="#rhshort" role="tab" aria-selected="true">RM
+									<li class="nav-item  m-1" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('RM ShortListed'), ENT_QUOTES, 'UTF-8'); ?>">
+										<a class="nav-link  f-w-600 f-12" style="padding: 0.5rem 0.5rem !important; " data-bs-toggle="tab" href="#rhshort" role="tab" aria-selected="true"><?= __('RM'); ?>
 											<span class="label label-xs label-success m-l-5" style="background-color: <?php echo strval($stausresult[ST_RMSHORTLISTED]['background_color']);?> !important"><?php echo count((array)$tabdata['rhshort']); ?></span>
 										</a>
 										<div class="slide"></div>
 									</li>
-									<li class="nav-item  m-1" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="HM ShortListed">
-										<a class="nav-link f-w-600 f-12" style="padding: 0.5rem 0.5rem !important; " data-bs-toggle="tab" href="#hmshort" role="tab" aria-selected="false">HM
+									<li class="nav-item  m-1" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('HM ShortListed'), ENT_QUOTES, 'UTF-8'); ?>">
+										<a class="nav-link f-w-600 f-12" style="padding: 0.5rem 0.5rem !important; " data-bs-toggle="tab" href="#hmshort" role="tab" aria-selected="false"><?= __('HM'); ?>
 											<span class="label label-xs label-success m-l-5" style="background-color: <?php echo strval($stausresult[ST_HMSHORTLISTED]['background_color']);?> !important"><?php echo count((array)$tabdata['hmshort']); ?></span>
 										</a>
 										<div class="slide"></div>
 									</li>
-									<li class="nav-item  m-1" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Requested">
-										<a class="nav-link f-w-600 f-12" style="padding: 0.5rem 0.5rem !important; " data-bs-toggle="tab" href="#lorshort" role="tab" aria-selected="false">LoI Req
+									<li class="nav-item  m-1" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('LoI Requested'), ENT_QUOTES, 'UTF-8'); ?>">
+										<a class="nav-link f-w-600 f-12" style="padding: 0.5rem 0.5rem !important; " data-bs-toggle="tab" href="#lorshort" role="tab" aria-selected="false"><?= __('LoI Req'); ?>
 											<span class="label label-xs label-success m-l-5" style="background-color: <?php echo strval($stausresult[ST_LOIREQUESTED]['background_color']);?> !important"><?php echo count((array)$tabdata['lorshort']); ?></span>
 										</a>
 										<div class="slide"></div>
 									</li>
-									<li class="nav-item  m-1" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Generated">
-										<a class="nav-link f-w-600 f-12" style="padding: 0.5rem 0.5rem !important; " data-bs-toggle="tab" href="#logshort" role="tab" aria-selected="false" >LoI Gen
+									<li class="nav-item  m-1" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('LoI Generated'), ENT_QUOTES, 'UTF-8'); ?>">
+										<a class="nav-link f-w-600 f-12" style="padding: 0.5rem 0.5rem !important; " data-bs-toggle="tab" href="#logshort" role="tab" aria-selected="false" ><?= __('LoI Gen'); ?>
 											<span class="label label-xs label-success m-l-5" style="background-color: <?php echo strval($stausresult[ST_LOIGENERATED]['background_color']);?> !important"><?php echo count((array)$tabdata['logshort']); ?></span>
 										</a>
 										<div class="slide"></div>
 									</li>
-									<li class="nav-item  m-1" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Accepted">
-										<a class="nav-link f-w-600 f-12" style="padding: 0.5rem 0.5rem !important; " data-bs-toggle="tab" href="#loashort" role="tab" aria-selected="false">LoI Acc
+									<li class="nav-item  m-1" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('LoI Accepted'), ENT_QUOTES, 'UTF-8'); ?>">
+										<a class="nav-link f-w-600 f-12" style="padding: 0.5rem 0.5rem !important; " data-bs-toggle="tab" href="#loashort" role="tab" aria-selected="false"><?= __('LoI Acc'); ?>
 											<span class="label label-xs label-success m-l-5" style="background-color: <?php echo strval($stausresult[ST_LOIACCEPTED]['background_color']);?> !important"><?php echo count((array)$tabdata['loashort']); ?></span>
 										</a>
 										<div class="slide"></div>
 									</li>
-									<li class="nav-item m-1" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="LoI Rejected">
-										<a class="nav-link f-w-600 f-12" style="padding: 0.5rem 0.5rem !important; " data-bs-toggle="tab" href="#loashort" role="tab" aria-selected="false">LoI Rej
+									<li class="nav-item m-1" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('LoI Rejected'), ENT_QUOTES, 'UTF-8'); ?>">
+										<a class="nav-link f-w-600 f-12" style="padding: 0.5rem 0.5rem !important; " data-bs-toggle="tab" href="#loashort" role="tab" aria-selected="false"><?= __('LoI Rej'); ?>
 											<span class="label label-xs label-success m-l-5" style="background-color: <?php echo strval($stausresult[ST_LOIREJECTED]['background_color']);?> !important"><?php echo count((array)$tabdata['loarejetced']); ?></span>
 										</a>
 										<div class="slide"></div>
@@ -509,12 +509,12 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 												<table class="table table-hover m-b-0 " style="font-size:13px;">
 													<thead>
                                                             <tr>
-															<th scope="col">Candidate </th>
-															<th scope="col">job Title</th>
-															<th scope="col">Applied On</th>
-															<th scope="col">Required By</th>
-															<th scope="col">Status</th>
-															<th scope="col">Action</th>
+															<th scope="col"><?= __('Candidate'); ?> </th>
+															<th scope="col"><?= __('job Title'); ?></th>
+															<th scope="col"><?= __('Applied On'); ?></th>
+															<th scope="col"><?= __('Required By'); ?></th>
+															<th scope="col"><?= __('Status'); ?></th>
+															<th scope="col"><?= __('Action'); ?></th>
 														</tr>
                                                         </thead>
 													<tbody>
@@ -541,7 +541,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 																<tr>
 																	<td colspan="5">
 																		<div class="card-px text-center ">
-																			<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Candidates Applied </p>   
+																			<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Candidates Applied'); ?> </p>   
 																			<div class="text-center px-4">
 																				<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
 																			</div>   
@@ -569,11 +569,11 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 									<div class="col-lg-6">
 										<ul class="nav md-tabs infisuite_tab">
 											<li class="nav-item">
-												<a class="nav-link f-w-600 active" data-bs-toggle="tab" href="#current-quater" role="tab" aria-selected="true">Current Quater</a>
+												<a class="nav-link f-w-600 active" data-bs-toggle="tab" href="#current-quater" role="tab" aria-selected="true"><?= __('Current Quater'); ?></a>
 												<div class="slide"></div>
 											</li>
 											<li class="nav-item">
-												<a class="nav-link f-w-600" data-bs-toggle="tab" href="#previous-quater" role="tab" aria-selected="false">Previous Quater</a>
+												<a class="nav-link f-w-600" data-bs-toggle="tab" href="#previous-quater" role="tab" aria-selected="false"><?= __('Previous Quater'); ?></a>
 												<div class="slide"></div>
 											</li>
 										</ul>
@@ -623,7 +623,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 											<div class="col-lg-7">
 												<input type="hidden" id="chart_data_2" class="chertvalues" data-id="chart_Donut0" value="Un-Published:<?php echo $donutchartary[ST_ACTIVE]; ?>||Published:<?php echo $donutchartary[ST_INPROGRESS]; ?>||Hold:<?php echo $donutchartary[ST_HOLD]; ?>||Closed:<?php echo $donutchartary[ST_COMPLETE]; ?>">
 												<div class="card-header">
-													<h5>Job Posting Chart</h5>
+													<h5><?= __('Job Posting Chart'); ?></h5>
 												</div>
 
 												<div id="chart_Donut_2" style="width: 100%; height: 300px;"></div>
@@ -674,7 +674,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 												<div class="col-lg-7">
 													<input type="hidden" id="chart_data_1" class="chertvalues" data-id="chart_Donut0" value="Un-Published:<?php echo $donutchartary[ST_ACTIVE]; ?>||Published:<?php echo $donutchartary[ST_INPROGRESS]; ?>||Hold:<?php echo $donutchartary[ST_HOLD]; ?>||Closed:<?php echo $donutchartary[ST_COMPLETE]; ?>">
 													<div class="card-header">
-														<h5>Job Posting Chart</h5>
+														<h5><?= __('Job Posting Chart'); ?></h5>
 													</div>
 
 													<div id="chart_Donut_1" style="width: 100%; height: 300px;"></div>
@@ -691,12 +691,12 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 						<?php if($_SESSION['role_ids'][0]==HIRINGMANAGER_ROLE){ ?>
 							<div class="card mb-2">
 								<div class="card-header">
-									<h5>Active Jobs 
+									<h5><?= __('Active Jobs'); ?> 
 										<span class="label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[$job_postings['0']['current_status']]['background_color']);?> !important" ><?php echo $result['job_postings_count']; ?></span>
 									</h5>
 									<?php // if($result['job_postings_count']>3){ ?>
 										<!-- <a href="index.php?option=COM_LIST_VIEW_ALL_DASH_BOARD&TYPE=ACTIVE" class=" b-b-primary text-primary float-right">View all</a> -->
-										<a href="#!"  onclick="viewAllRecord('COM_LIST_VIEW_ALL_DASH_BOARD','ACTIVE')" class=" b-b-primary text-primary float-right">View all</a>
+										<a href="#!"  onclick="viewAllRecord('COM_LIST_VIEW_ALL_DASH_BOARD','ACTIVE')" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
 
 										<!-- <a href="#" class=" b-b-primary text-primary float-right">View all</a> -->
 										<?php // } ?>
@@ -728,7 +728,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 												</div>
 											<?php } }else{?>
 												<div class="card-px text-center ">
-													<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Jobs Posting </p>   
+													<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Jobs Posting'); ?> </p>   
 													<div class="text-center px-4">
 														<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
 													</div>   
@@ -744,7 +744,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 										<span class="label label-xs label-success m-l-10"style="background-color: <?php echo strval($stausresult[$result['job_post_status']['data']['0']['current_status']]['background_color']);?> !important" ><?php echo $result['job_post_status']['count']; ?></span>
 
 									</h5>
-									<a href="#!"  onclick="viewAllRecord('COM_LIST_VIEW_ALL_DASH_BOARD','YET')" class=" b-b-primary text-primary float-right">View all</a>
+									<a href="#!"  onclick="viewAllRecord('COM_LIST_VIEW_ALL_DASH_BOARD','YET')" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
 								</div>
 								<div class="card-body">
 									<?php if(count((array)$result['job_post_status']['data'])>0){
@@ -775,7 +775,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 													<div class="btn-group">
 														<span  class="btn "  type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="ti-target"></i> </span>
 														<div class="dropdown-menu">
-															<a href="#!" class="dropdown-item waves-effect waves-light" onclick="publishdatapopup(<?php echo $jobpostings['id']; ?>)" name="status" id="status" value="">Publish</a>
+															<a href="#!" class="dropdown-item waves-effect waves-light" onclick="publishdatapopup(<?php echo $jobpostings['id']; ?>)" name="status" id="status" value=""><?= __('Publish'); ?></a>
 														</div>
 													</div>
 
@@ -785,7 +785,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 										</div>
 									<?php } }else{?>
 										<div class="card-px text-center ">
-											<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Jobs Posting </p>   
+											<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Jobs Posting'); ?> </p>   
 											<div class="text-center px-4">
 												<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
 											</div>   
@@ -799,7 +799,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 									<h5><?php echo $result['recent_publish']['name']; ?>
 									<span class="label label-xs label-success m-l-10"style="background-color: <?php echo strval($stausresult[$result['recent_publish']['data']['0']['current_status']]['background_color']);?> !important" ><?php echo $result['recent_publish']['count']; ?></span>
 								</h5>
-								<a href="#!"  onclick="viewAllRecord('COM_LIST_VIEW_ALL_DASH_BOARD','PUBLISH')" class=" b-b-primary text-primary float-right">View all</a>
+								<a href="#!"  onclick="viewAllRecord('COM_LIST_VIEW_ALL_DASH_BOARD','PUBLISH')" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
 							</div>
 							<div class="card-body">
 								<?php  if(count((array)$result['recent_publish']['data'])>0){
@@ -829,7 +829,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 												<div class="btn-group">
 													<span  class="btn "  type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="ti-target"></i> </span>
 													<div class="dropdown-menu">
-														<a href="#!" class="dropdown-item waves-effect waves-light" onclick="publishdatapopup(<?php echo $jobpostings['id']; ?>)" name="status" id="status" value="">Publish</a>
+														<a href="#!" class="dropdown-item waves-effect waves-light" onclick="publishdatapopup(<?php echo $jobpostings['id']; ?>)" name="status" id="status" value=""><?= __('Publish'); ?></a>
 													</div>
 												</div>
 
@@ -838,7 +838,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 									</div>
 								<?php }  }else{?>
 									<div class="card-px text-center ">
-										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Jobs Posting </p>   
+										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Jobs Posting'); ?> </p>   
 										<div class="text-center px-4">
 											<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
 										</div>   
@@ -852,7 +852,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 								<h5><?php echo $result['recent_unpublish']['name']; ?>
 								<span class="label label-xs label-success m-l-10"style="background-color: <?php echo strval($stausresult[$result['recent_unpublish']['data']['0']['current_status']]['background_color']);?> !important" ><?php echo $result['recent_unpublish']['count']; ?></span>
 							</h5>
-							<a href="#!"  onclick="viewAllRecord('COM_LIST_VIEW_ALL_DASH_BOARD','UNPUBLISH')" class=" b-b-primary text-primary float-right">View all</a>
+							<a href="#!"  onclick="viewAllRecord('COM_LIST_VIEW_ALL_DASH_BOARD','UNPUBLISH')" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
 						</div>
 						<div class="card-body">
 							<?php if(count((array)$result['recent_unpublish']['data'])>0){
@@ -881,7 +881,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 								</div>
 							<?php } }else{?>
 								<div class="card-px text-center ">
-									<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Jobs Posting </p>   
+									<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Jobs Posting'); ?> </p>   
 									<div class="text-center px-4">
 										<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
 									</div>   
