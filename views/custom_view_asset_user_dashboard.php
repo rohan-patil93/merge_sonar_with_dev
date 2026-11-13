@@ -16,7 +16,7 @@ $dashboard_cnt = $details['dashboard_cnt'];
 ?>
 <script type="text/javascript">
     function getAssetPage(pagetype){
-        var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $('#assetstable').html(htmloader);
         $.ajax({
             url: "views/custom_view_asset_user_dashboard_ajax.php",
@@ -114,11 +114,11 @@ $dashboard_cnt = $details['dashboard_cnt'];
     <div class="col-lg-3">
         <div class="card">
             <div class="card-header">
-                <h5>Filter</h5>
+                <h5><?= __('Filter'); ?></h5>
 
             </div>
             <div class="card-body">
-                <button type="button" class="btn btn-primary waves-effect waves-light col-lg-12" onclick="getAssetRequest()"><i class="fa fa-plus"></i> Asset Request</button>
+                <button type="button" class="btn btn-primary waves-effect waves-light col-lg-12" onclick="getAssetRequest()"><i class="fa fa-plus"></i> <?= __('Asset Request'); ?></button>
             </div>
         </div>
     </div>
@@ -126,19 +126,19 @@ $dashboard_cnt = $details['dashboard_cnt'];
         <ul class="nav md-tabs infisuite_tab mt-2 mb-2">
             <li class="nav-item">
                 <button type="button" class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" role="tab" aria-selected="true" onclick="getAssetPage('SELF_ASSETS')">
-                    Self Assets <span class="form-label label label-xs label-success m-l-10"><?php echo $dashboard_cnt['self_asset_cnt']; ?></span></button>
+                    <?= __('Self Assets'); ?> <span class="form-label label label-xs label-success m-l-10"><?php echo $dashboard_cnt['self_asset_cnt']; ?></span></button>
             </li>
             <li class="nav-item">
-                <button type="button" class="nav-link f-w-600 f-12" data-bs-toggle="tab" role="tab" aria-selected="true" onclick="getAssetPage('ASSETS_REQUEST')">Assets Request <span class="form-label label label-xs label-primary m-l-10"> <?php echo $dashboard_cnt['asset_requests_cnt']; ?></span></button>
+                <button type="button" class="nav-link f-w-600 f-12" data-bs-toggle="tab" role="tab" aria-selected="true" onclick="getAssetPage('ASSETS_REQUEST')"><?= __('Assets Request'); ?> <span class="form-label label label-xs label-primary m-l-10"> <?php echo $dashboard_cnt['asset_requests_cnt']; ?></span></button>
             </li>
             <li class="nav-item">
-                <button type="button" class="nav-link f-w-600 f-12" data-bs-toggle="tab" role="tab" aria-selected="true" onclick="getAssetPage('REQUEST_INPROCESS')">Request In-Process<span class="form-label label label-xs label-primary m-l-10">  <?php echo $dashboard_cnt['asset_request_transfers_cnt']; ?></span></button>
+                <button type="button" class="nav-link f-w-600 f-12" data-bs-toggle="tab" role="tab" aria-selected="true" onclick="getAssetPage('REQUEST_INPROCESS')"><?= __('Request In-Process'); ?><span class="form-label label label-xs label-primary m-l-10">  <?php echo $dashboard_cnt['asset_request_transfers_cnt']; ?></span></button>
             </li>
             <li class="nav-item">
-                <button type="button" class="nav-link f-w-600 f-12" data-bs-toggle="tab" role="tab" aria-selected="true" onclick="getAssetPage('ASSET_RETURNS')">Return Assets <span class="form-label label label-xs label-danger m-l-10">-</span></button>
+                <button type="button" class="nav-link f-w-600 f-12" data-bs-toggle="tab" role="tab" aria-selected="true" onclick="getAssetPage('ASSET_RETURNS')"><?= __('Return Assets'); ?> <span class="form-label label label-xs label-danger m-l-10">-</span></button>
             </li>
             <li class="nav-item">
-                <button type="button" class="nav-link f-w-600 f-12  disabled" data-bs-toggle="tab" role="tab" aria-selected="true" onclick="getAssetPage('QUERIES')">Queries <span class="form-label label label-xs label-warning m-l-10">-</span></button>
+                <button type="button" class="nav-link f-w-600 f-12  disabled" data-bs-toggle="tab" role="tab" aria-selected="true" onclick="getAssetPage('QUERIES')"><?= __('Queries'); ?> <span class="form-label label label-xs label-warning m-l-10">-</span></button>
             </li>
         </ul>
         <div id="assetstable">
