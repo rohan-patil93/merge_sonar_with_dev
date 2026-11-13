@@ -37,7 +37,7 @@ $profilereadiness = array("Basic Info"=>array('first_name','middle_name','last_n
 ?>
 <script type="text/javascript">
     function editUserDetails(transactiontype=""){
-    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $('#ajaxuserdetail').html(htmloader);
     var rid = '<?php echo $rid; ?>';
     jQuery.ajax({
@@ -49,7 +49,7 @@ $profilereadiness = array("Basic Info"=>array('first_name','middle_name','last_n
             $(".js-example-basic-single").select2();
             $('[data-bs-toggle="tooltip"]').tooltip();
             if(transactiontype !=""){
-                $("#chnagebtndiv").html('<button class="btn btn-danger" onclick="editUserDetails()"><i class="ti-close text-white"></i> Cancel</button>');
+                $("#chnagebtndiv").html('<button class="btn btn-danger" onclick="editUserDetails()"><i class="ti-close text-white"></i> <?= htmlspecialchars(__('Cancel'), ENT_QUOTES, 'UTF-8'); ?></button>');
             }else{
                 $("#chnagebtndiv").html('');
             }
@@ -156,8 +156,8 @@ function removeRoleModule(module_role_id){
         type: "warning",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
-        confirmButtonText: "Yes",
-        cancelButtonText: "No",
+        confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+        cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
         closeOnConfirm: true,
         closeOnCancel: true
     },
@@ -205,9 +205,9 @@ function removeRoleModule(module_role_id){
             <div class="col-lg-4">
                 <div class="image-input image-input-empty image-input-outline" id="kt_image_5" >
                     <form method="post" id="profile_pic_file" enctype="multipart/form-data" class="position-relative">
-                        <label class="btn-hover-text-primary position-absolute  text-white" data-action="remove" data-bs-toggle="tooltip" title="Edit Profile Pic" style="left: -3px; top: -2px;">
+                        <label class="btn-hover-text-primary position-absolute  text-white" data-action="remove" data-bs-toggle="tooltip" title="<?= htmlspecialchars(__('Edit Profile Pic'), ENT_QUOTES, 'UTF-8'); ?>" style="left: -3px; top: -2px;">
                             <span><i class="ti-pencil-altj"></i></span>
-                            <input aria-label="Profile Pic File" type="file" name="profile_pic_file" accept=".png, .jpg, .jpeg"  onchange="updateProfilePic()" />
+                            <input aria-label="<?= htmlspecialchars(__('Profile Pic File'), ENT_QUOTES, 'UTF-8'); ?>" type="file" name="profile_pic_file" accept=".png, .jpg, .jpeg"  onchange="updateProfilePic()" />
                         </label>
                         <?php if($audetail['user_photo']!=""){ ?>
                             <img src="<?php echo "uploads/all/".$audetail['user_photo']; ?>" class="img-radius img-90" alt="">
@@ -218,10 +218,10 @@ function removeRoleModule(module_role_id){
                         <?php } ?>
                          <span id="verified_btn">
                               <?php if($audetail['user_activated'] == 'Y' && $audetail['is_active'] == '0'){ ?>
-                             <button type="button" class="btn waves-effect waves-light btn-success pt-1 pb-1 m-l-20" >        <i class="ti-check m-r-5"></i> Active
+                             <button type="button" class="btn waves-effect waves-light btn-success pt-1 pb-1 m-l-20" >        <i class="ti-check m-r-5"></i> <?= __('Active'); ?>
                              </button>
                          <?php }else{ ?>
-                              <button type="button" class="btn waves-effect waves-light btn-warning pt-1 pb-1 m-l-20" ><i class="ti-alert m-r-5"></i> In-Active
+                              <button type="button" class="btn waves-effect waves-light btn-warning pt-1 pb-1 m-l-20" ><i class="ti-alert m-r-5"></i> <?= __('In-Active'); ?>
                              </button>
                              <?php  } ?>
                          </span>
@@ -241,10 +241,10 @@ if($audetail['user_mobile']!=""){  ?>
                         <?php }  ?>
                     <div class="font-weight-bold text-dark-50 mt-1 f-14">
                         <?php if($audetail['reports_to']!=""){  ?>
-                            <b class="f-w-600">Report Manager : </b><?php echo emptytextdashShow($_SESSION['users'][$audetail['reports_to']]); ?>&nbsp;
+                            <b class="f-w-600"><?= __('Report Manager'); ?> : </b><?php echo emptytextdashShow($_SESSION['users'][$audetail['reports_to']]); ?>&nbsp;
                         <?php }
 if($audetail['company']!=""){  ?>
-                            <b class="f-w-600">company : </b><?php echo $audetail['company']; ?>&nbsp;
+                            <b class="f-w-600"><?= __('company'); ?> : </b><?php echo $audetail['company']; ?>&nbsp;
                         <?php }  ?>
                     </div>
                 </div>
@@ -254,28 +254,28 @@ if($audetail['company']!=""){  ?>
                     <div class="col-3 text-center">
                         <div class="s-caption  text-primary"><i class="ti ti-user f-20"></i></div>
                         <div class="s-cont d-inline-block">
-                            <span class="f-w-700 m-b-0">HR Connect</span>
+                            <span class="f-w-700 m-b-0"><?= __('HR Connect'); ?></span>
                             <p class="m-b-0 f-10"><?php echo emptytextdashShow($_SESSION['users'][$audetail['hr_connect']]); ?></p>
                         </div>
                     </div>
                     <div class="col-3 b-l-default text-center">
                         <div class="s-caption  text-danger"><i class="ti ti-user f-20"></i></div>
                         <div class="s-cont d-inline-block">
-                            <span class="f-w-700 m-b-0">Finance</span>
+                            <span class="f-w-700 m-b-0"><?= __('Finance'); ?></span>
                             <p class="m-b-0 f-10"><?php echo emptytextdashShow($_SESSION['users'][$audetail['finance_connect']]); ?></p>
                         </div>
                     </div>
                     <div class="col-3 b-l-default text-center">
                         <div class="s-caption  text-info"><i class="ti ti-user f-20"></i></div>
                         <div class="s-cont d-inline-block">
-                            <span class="f-w-700 m-b-0">Admin</span>
+                            <span class="f-w-700 m-b-0"><?= __('Admin'); ?></span>
                             <p class="m-b-0 f-10"><?php echo emptytextdashShow($_SESSION['users'][$audetail['admin_connect']]); ?></p>
                         </div>
                     </div>
                     <div class="col-3 b-l-default text-center">
                         <div class="s-caption  text-success"><i class=" ti ti-user f-20"></i></div>
                         <div class="s-cont d-inline-block">
-                            <span class="f-w-700 m-b-0">Project</span>
+                            <span class="f-w-700 m-b-0"><?= __('Project'); ?></span>
                             <p class="m-b-0 f-10"> <?php echo emptytextdashShow($_SESSION['users'][$audetail['project_connect']]); ?></p>
                         </div>
                     </div>
@@ -284,28 +284,28 @@ if($audetail['company']!=""){  ?>
                     <div class="col-3 text-center">
                         <div class="s-caption"><i class="ti ti-user f-20"></i></div>
                         <div class="s-cont d-inline-block">
-                            <span class="f-w-700 m-b-0">Location</span>
+                            <span class="f-w-700 m-b-0"><?= __('Location'); ?></span>
                             <p class="m-b-0 f-10 "><?php echo emptytextdashShow($_SESSION['users'][$audetail['location_connect']]); ?> </p>
                         </div>
                     </div>
                     <div class="col-3 b-l-default text-center">
                         <div class="s-caption"><i class="ti ti-user f-20"></i></div>
                         <div class="s-cont d-inline-block">
-                            <span class="f-w-700 m-b-0">ESOP</span>
+                            <span class="f-w-700 m-b-0"><?= __('ESOP'); ?></span>
                             <p class="m-b-0 f-10 "><?php echo emptytextdashShow($_SESSION['users'][$audetail['esop_connect']]); ?> </p>
                         </div>
                     </div>
                     <div class="col-3 b-l-default text-center">
                         <div class="s-caption  text-info"><i class="ti ti-user f-20"></i></div>
                         <div class="s-cont d-inline-block">
-                            <span class="f-w-700 m-b-0">Legal</span>
+                            <span class="f-w-700 m-b-0"><?= __('Legal'); ?></span>
                             <p class="m-b-0  f-10"><?php echo emptytextdashShow($_SESSION['users'][$audetail['legal_connect']]); ?></p>
                         </div>
                     </div>
                     <div class="col-3 b-l-default text-center">
                         <div class="s-caption  text-info"><i class="ti ti-user f-20"></i></div>
                         <div class="s-cont d-inline-block">
-                            <span class="f-w-700 m-b-0">Approval Manager</span>
+                            <span class="f-w-700 m-b-0"><?= __('Approval Manager'); ?></span>
                             <p class="m-b-0  f-10"><?php echo emptytextdashShow($_SESSION['users'][$audetail['approval_manager']]); ?></p>
                         </div>
                     </div>
@@ -321,28 +321,28 @@ if($audetail['company']!=""){  ?>
             <div class="col-lg-8">
                 <ul class="nav md-tabs infisuite_tab mt-2 ml-2">
                     <li class="nav-item">
-                        <a class="nav-link active" data-bs-toggle="tab" href="#overview_tab" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Overview</a>
+                        <a class="nav-link active" data-bs-toggle="tab" href="#overview_tab" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Overview'); ?></a>
                         <div class="slide"></div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#notification_tab" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Notification</a>
+                        <a class="nav-link" data-bs-toggle="tab" href="#notification_tab" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Notification'); ?></a>
                         <div class="slide"></div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#approval_transactions" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Approval Transactions</a>
+                        <a class="nav-link" data-bs-toggle="tab" href="#approval_transactions" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Approval Transactions'); ?></a>
                         <div class="slide"></div>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#user_activity" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">User Activity</a>
+                        <a class="nav-link" data-bs-toggle="tab" href="#user_activity" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('User Activity'); ?></a>
                         <div class="slide"></div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#reset_password_tab" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Reset Password</a>
+                        <a class="nav-link" data-bs-toggle="tab" href="#reset_password_tab" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Reset Password'); ?></a>
                         <div class="slide"></div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#mobile_otp_tab" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Mobile OTP</a>
+                        <a class="nav-link" data-bs-toggle="tab" href="#mobile_otp_tab" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Mobile OTP'); ?></a>
                         <div class="slide"></div>
                     </li>
 
@@ -350,7 +350,7 @@ if($audetail['company']!=""){  ?>
             </div>
             <div class="col-lg-4 text-right">
                 <?php if($_SESSION['admin_type'] ==1){ ?>
-                    <a href="index?option=COM_LIST_APPLICATION_USER_INVITATIONS" class="btn btn-primary waves-effect waves-light <?php echo getPagePermision('COM_LIST_APPLICATION_USER_INVITATIONS','','LIST')['class']; ?>" <?php echo getPagePermision('COM_LIST_APPLICATION_USER_INVITATIONS','','LIST')['tooltip']; ?>><i class="ti ti-user"></i> Invite User</a>
+                    <a href="index?option=COM_LIST_APPLICATION_USER_INVITATIONS" class="btn btn-primary waves-effect waves-light <?php echo getPagePermision('COM_LIST_APPLICATION_USER_INVITATIONS','','LIST')['class']; ?>" <?php echo getPagePermision('COM_LIST_APPLICATION_USER_INVITATIONS','','LIST')['tooltip']; ?>><i class="ti ti-user"></i> <?= __('Invite User'); ?></a>
                 <?php } ?>
             </div>
         </div>
@@ -363,7 +363,7 @@ if($audetail['company']!=""){  ?>
             <div class="col-lg-4">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Action Notification</h5>
+                        <h5><?= __('Action Notification'); ?></h5>
                         <div class="card-header-right">
                         </div>
                     </div>
@@ -373,7 +373,7 @@ if($audetail['company']!=""){  ?>
                               <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Notification</th>
+                                    <th scope="col"><?= __('Notification'); ?></th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -399,7 +399,7 @@ if($audetail['company']!=""){  ?>
                     <?php }else{  ?>
                         <div class="card-body">
                             <div class="card-px text-center ">
-                                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Action  Notification</p>
+                                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Action Notification'); ?></p>
                                 <div class="text-center px-4">
                                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                 </div>
@@ -412,7 +412,7 @@ if($audetail['company']!=""){  ?>
             <div class="col-lg-4">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Information Notification</h5>
+                        <h5><?= __('Information Notification'); ?></h5>
                         <div class="card-header-right">
                         </div>
                     </div>
@@ -422,7 +422,7 @@ if($audetail['company']!=""){  ?>
                               <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Notification</th>
+                                    <th scope="col"><?= __('Notification'); ?></th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -440,7 +440,7 @@ if($audetail['company']!=""){  ?>
                     <?php }else{  ?>
                         <div class="card-body">
                             <div class="card-px text-center ">
-                                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Notification</p>
+                                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Notification'); ?></p>
                                 <div class="text-center px-4">
                                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                 </div>
@@ -453,7 +453,7 @@ if($audetail['company']!=""){  ?>
             <div class="col-lg-4">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Read Action</h5>
+                        <h5><?= __('Read Action'); ?></h5>
                         <div class="card-header-right">
                         </div>
                     </div>
@@ -463,7 +463,7 @@ if($audetail['company']!=""){  ?>
                               <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Notification</th>
+                                    <th scope="col"><?= __('Notification'); ?></th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -481,7 +481,7 @@ if($audetail['company']!=""){  ?>
                     <?php }else{  ?>
                         <div class="card-body">
                             <div class="card-px text-center ">
-                                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Read Notification</p>
+                                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Read Notification'); ?></p>
                                 <div class="text-center px-4">
                                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                 </div>
@@ -505,7 +505,7 @@ if($audetail['company']!=""){  ?>
             <div class="col-lg-3">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Profile completion</h5>
+                        <h5><?= __('Profile completion'); ?></h5>
                         <div class="card-header-right">
                         </div>
                     </div>
@@ -529,7 +529,7 @@ if($audetail['company']!=""){  ?>
                                         <th scope="col" style="text-align: right;">
                                             <div class="d-flex align-items-center w-100px w-sm-120px flex-column ">
                                                 <div class="d-flex justify-content-between w-100 mt-auto mb-2">
-                                                    <span class="f-12 f-w-600">Profile </span>
+                                                    <span class="f-12 f-w-600"><?= __('Profile'); ?> </span>
                                                     <span class="f-12 f-w-600"><?php echo round($percentage); ?>%</span>
                                                 </div>
                                                 <div class="col-md-12">
@@ -549,7 +549,7 @@ if($audetail['company']!=""){  ?>
             <div class="col-lg-9">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Overview</h5>
+                        <h5><?= __('Overview'); ?></h5>
                         <div class="card-header-right" id="chnagebtndiv">
                         </div>
                     </div>
