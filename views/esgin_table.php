@@ -55,13 +55,13 @@
         count++;
         var htmlRows = '';
         htmlRows += '<tr>';
-        htmlRows += '<td><div class="checkbox-fade fade-in-primary "><label class="form-label"> <input aria-label="Checkbox" type="checkbox" class="itemRow"><span class="cr"> <i class="cr-icon icofont icofont-ui-check txt-primary"></i> </span></label></div></td>';
-          htmlRows += '<td id="other_'+count+'"><div><select aria-label="Product Code[]" class="form-select js-data-example-ajax-multiselectss'+count+' col-lg-4 selectitemorservice"  name= "productCode[]" id="productCode_'+count+'"  onchange="itemChangejob(this.value,'+count+')" data-tablename="vendors"  data-fieldsname="display_name" > <option value="0"> Select Any Vendor </option><?php foreach($itemres as $item){ ?> <option value="<?php echo $item ['id']; ?>"> <?php echo $item ['display_name']; ?> </option> <?php
+        htmlRows += '<td><div class="checkbox-fade fade-in-primary "><label class="form-label"> <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="itemRow"><span class="cr"> <i class="cr-icon icofont icofont-ui-check txt-primary"></i> </span></label></div></td>';
+          htmlRows += '<td id="other_'+count+'"><div><select aria-label="Product Code[]" class="form-select js-data-example-ajax-multiselectss'+count+' col-lg-4 selectitemorservice"  name= "productCode[]" id="productCode_'+count+'"  onchange="itemChangejob(this.value,'+count+')" data-tablename="vendors"  data-fieldsname="display_name" > <option value="0"> <?= htmlspecialchars(__('Select Any Vendor'), ENT_QUOTES, 'UTF-8'); ?> </option><?php foreach($itemres as $item){ ?> <option value="<?php echo $item ['id']; ?>"> <?php echo $item ['display_name']; ?> </option> <?php
 } ?></select>  </div> <input type="hidden" name="item_name[]" id="item_name_'+count+'" class="form-control"> <input type="hidden" name="purchase_account[]" id="purchase_account_'+count+'" class="form-control" value=""><input type="hidden" name="purchase_account_aval[]" id="purchase_account_aval_'+count+'" class="form-control" value=""></td>';
         htmlRows += '<td><textarea aria-label="Product Name[]" name="productName[]" id="productName_'+count+'" class="form-control minw-160"></textarea><div class=" float-left mr-3" style="width:40%; float:left;">';
 
-        htmlRows += '<td><input aria-label="Quantity[]" type="text" name="quantity[]" id="quantity_'+count+'" onblur="quantityCheckold(this.id)"  class="form-control quantity amount minw-100"  autocomplete="off"><div style="display: none;color: red;" id="quantity_err_'+count+'"> Enter QTY</div></td>';
-        htmlRows += '<td><input aria-label="Price[]" type="text" name="price[]" id="price_'+count+'" class="form-control price amount minw-140" autocomplete="off"><div style="display: none;color: red;" id="price_err_'+count+'"> Enter Rate</div></td>';
+        htmlRows += '<td><input aria-label="Quantity[]" type="text" name="quantity[]" id="quantity_'+count+'" onblur="quantityCheckold(this.id)"  class="form-control quantity amount minw-100"  autocomplete="off"><div style="display: none;color: red;" id="quantity_err_'+count+'"> <?= htmlspecialchars(__('Enter QTY'), ENT_QUOTES, 'UTF-8'); ?></div></td>';
+        htmlRows += '<td><input aria-label="Price[]" type="text" name="price[]" id="price_'+count+'" class="form-control price amount minw-140" autocomplete="off"><div style="display: none;color: red;" id="price_err_'+count+'"> <?= htmlspecialchars(__('Enter Rate'), ENT_QUOTES, 'UTF-8'); ?></div></td>';
 
         htmlRows += '<td><div> <div width: 100%;"><input type="hidden" name="dis_ptax_amount[]" value="" readonly class="form-control price amount" id="dis_ptax_amount_'+count+'"><input type="hidden" name="pdiscount_amount[]" value="" readonly class="form-control price amount" id="pdiscount_amount_'+count+'"><input type="hidden" readonly name="p_amount[]" id="p_amount_'+count+'" class="form-control price amount"><input type="hidden" readonly name="ptax_amount[]" id="ptax_amount_'+count+'" class="form-control price amount"><input type="hidden" readonly name="amount[]" id="amount_'+count+'" class="form-control price amount">  <input aria-label="Dis Amount[]" type="text" name="dis_amount[]" readonly id="dis_amount_'+count+'" class="form-control amount minw-140" value="" autocomplete="off"></div>';
 
@@ -141,18 +141,18 @@
     <th scope="col" class="thheader" style="width: 1%;">
         <div class="checkbox-fade fade-in-primary">
             <label class="kt-checkbox">
-                <input aria-label="Check All" id="checkAll"  type="checkbox">
+                <input aria-label="<?= htmlspecialchars(__('Check All'), ENT_QUOTES, 'UTF-8'); ?>" id="checkAll"  type="checkbox">
                 <span class="cr">
               <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
             </span>
             </label>
         </div>
     </th>
-    <th scope="col" class="" style="width: 16%;">Vendor(s) <span class="requried"></span></th>
-    <th scope="col" class="thheader" style="width: 20%;">Description</th>
-    <th scope="col" class="thheader" style="width: 6%;"># Resources </th>
-    <th scope="col" class="thheader" style="width: 8%;">Base Rate </th>
-    <th scope="col" class="thheader" style="width: 10%;">Amount</th>
+    <th scope="col" class="" style="width: 16%;"><?= __('Vendor(s)'); ?> <span class="requried"></span></th>
+    <th scope="col" class="thheader" style="width: 20%;"><?= __('Description'); ?></th>
+    <th scope="col" class="thheader" style="width: 6%;"><?= __('# Resources'); ?> </th>
+    <th scope="col" class="thheader" style="width: 8%;"><?= __('Base Rate'); ?> </th>
+    <th scope="col" class="thheader" style="width: 10%;"><?= __('Amount'); ?></th>
     <?php if(isset($_GET['Rid'])){ ?>
     <th scope="col" class="thheader" style="width: 2%;"></th>
     <?php } ?>
@@ -163,7 +163,7 @@
     <td>
         <div class="checkbox-fade fade-in-primary ">
           <label class="form-label">
-            <input aria-label="Checkbox" type="checkbox" class="itemRow">
+            <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="itemRow">
             <span class="cr">
               <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
             </span>
@@ -175,8 +175,8 @@
         <div>
             <?php if($tab2['item_id'] >= 0){  $min = array();?>
 
-             <select aria-label="Product Code[]" class="form-select js-data-example-ajax-multiselect selectitemorservice col-lg-4"  data-tablename="vendors"  data-fieldsname="display_name" name= "productCode[]"  id="productCode_<?php echo $i; ?>" onchange="itemChangejob(this.value,<?php echo $i; ?>)">
-         <option value="0"> Select Any Vendor  </option>
+             <select aria-label="<?= htmlspecialchars(__('Product Code'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-select js-data-example-ajax-multiselect selectitemorservice col-lg-4"  data-tablename="vendors"  data-fieldsname="display_name" name= "productCode[]"  id="productCode_<?php echo $i; ?>" onchange="itemChangejob(this.value,<?php echo $i; ?>)">
+         <option value="0"> <?= __('Select Any Vendor'); ?>  </option>
         <?php $like_item_check = 0; foreach ((array)$itemres as $item){    ?>
          <option <?php if($tab2['item_id']== $item['id']){  echo "selected";
 } ?> value ='<?php echo $item['id']; ?>'> <?php echo $item['display_name']; ?>
@@ -188,25 +188,25 @@
         <input type="hidden" name="purchase_account[]" class="form-control" value="<?php echo $tab2['purchase_account']; ?>">
         <input type="hidden" name="purchase_account_aval[]" class="form-control" value="<?php echo (array)$response_code[$tab2['purchase_account']]['a']; ?>">
     <?php }else { ?>
-        <input aria-label="Item Name[]" type="text" name="item_name[]" id="item_name_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['item_name']; ?>" autocomplete="off">
+        <input aria-label="<?= htmlspecialchars(__('Item Name'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="item_name[]" id="item_name_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['item_name']; ?>" autocomplete="off">
         <input type="hidden" name="productCode[]" class="form-control" value="<?php echo $tab2['productCode']; ?>">
     <?php } ?>
     </td>
     <td>
-        <textarea aria-label="Product Name[]"  name="productName[]" id="productName_<?php echo $i; ?>" class="form-control minw-160" autocomplete="off"><?php echo $tab2['description']; ?></textarea>
+        <textarea aria-label="<?= htmlspecialchars(__('Product Name'), ENT_QUOTES, 'UTF-8'); ?>[]"  name="productName[]" id="productName_<?php echo $i; ?>" class="form-control minw-160" autocomplete="off"><?php echo $tab2['description']; ?></textarea>
 
 
     </td>
 
     <td>
-        <input aria-label="Quantity[]" type="text" name="quantity[]" id="quantity_<?php echo $i; ?>"  onblur="quantityCheckold(this.id)"  class="form-control amount minw-100" value="<?php echo $tab2['quantity']; ?>"  autocomplete="off">
+        <input aria-label="<?= htmlspecialchars(__('Quantity'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="quantity[]" id="quantity_<?php echo $i; ?>"  onblur="quantityCheckold(this.id)"  class="form-control amount minw-100" value="<?php echo $tab2['quantity']; ?>"  autocomplete="off">
         <input type="hidden" name="quantity_old[]" id="quantity_old_<?php echo $i; ?>"  class="form-control amount " value="<?php echo $tab2['quantity']; ?>">
-        <div style="display: none;color: red;" id="<?php echo 'quantity_err_'.$i; ?>"> Enter QTY</div>
+        <div style="display: none;color: red;" id="<?php echo 'quantity_err_'.$i; ?>"> <?= __('Enter QTY'); ?></div>
     </td>
     <td>
-        <input aria-label="Price[]" type="text" name="price[]" id="price_<?php echo $i; ?>" class="form-control price amount minw-140" value="<?php echo number_format($tab2['item_price'],2, '.', ''); ?>" autocomplete="off" >
+        <input aria-label="<?= htmlspecialchars(__('Price'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="price[]" id="price_<?php echo $i; ?>" class="form-control price amount minw-140" value="<?php echo number_format($tab2['item_price'],2, '.', ''); ?>" autocomplete="off" >
 
-        <div style="display: none;color: red;" id="<?php echo 'price_err_'.$i; ?>"> Enter Rate</div>
+        <div style="display: none;color: red;" id="<?php echo 'price_err_'.$i; ?>"> <?= __('Enter Rate'); ?></div>
     </td>
 
     <td>
@@ -216,7 +216,7 @@
         <input type="hidden" name="pdiscount_amount[]" value="<?php echo customeummarmonyformate($tab2['tax_amount']); ?>" readonly class="form-control price amount" id="pdiscount_amount_<?php echo $i; ?>">
         <input type="hidden" name="ptax_amount[]" value="<?php echo $tab2['tax_amount']; ?>" readonly class="form-control price amount" id="ptax_amount_<?php echo $i; ?>">
          <input type="hidden" name="p_amount[]" value="<?php echo $tab2['amount']; ?>" readonly class="form-control price amount" id="p_amount_<?php echo $i; ?>">
-        <input aria-label="Dis Amount[]" type="text" name="dis_amount[]" readonly <?php echo $sty; ?> id="dis_amount_<?php echo $i; ?>" class="form-control amount minw-140" value="<?php echo customeummarmonyformate($tab2['total_amount']); ?>" autocomplete="off">
+        <input aria-label="<?= htmlspecialchars(__('Dis Amount'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="dis_amount[]" readonly <?php echo $sty; ?> id="dis_amount_<?php echo $i; ?>" class="form-control amount minw-140" value="<?php echo customeummarmonyformate($tab2['total_amount']); ?>" autocomplete="off">
         <input type="hidden" name="amount[]" readonly id="amount_<?php echo $i; ?>" class="form-control amount" value="<?php echo $tab2['total_amount']; ?>">
     </div>
 
@@ -224,7 +224,7 @@
 </td>
 <?php if(isset($_GET['Rid'])){ ?>
     <td>
-     <div class="btn btn-icon btn-primary btn-circle mr-2" onclick="assignemployeeitemlist(<?php echo $rid; ?>,'<?php echo $tab2['id']; ?>')" data-container="body" data-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Allocate Resources" aria-label="Allocate Resources" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-user"></i></div>
+     <div class="btn btn-icon btn-primary btn-circle mr-2" onclick="assignemployeeitemlist(<?php echo $rid; ?>,'<?php echo $tab2['id']; ?>')" data-container="body" data-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Allocate Resources'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Allocate Resources'), ENT_QUOTES, 'UTF-8'); ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-user"></i></div>
 
 </td>
 <?php }  ?>
