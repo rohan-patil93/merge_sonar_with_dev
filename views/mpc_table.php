@@ -103,18 +103,18 @@ if(count((array)$uomlist)==0){
             count++;
             var htmlRows = '';
             htmlRows += '<tr>';
-            htmlRows += '<td><div class="checkbox-fade fade-in-primary "><label class="form-label"> <input aria-label="Checkbox" type="checkbox" class="itemRow"><span class="cr"> <i class="cr-icon icofont icofont-ui-check txt-primary"></i> </span></label></div></td>';
+            htmlRows += '<td><div class="checkbox-fade fade-in-primary "><label class="form-label"> <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="itemRow"><span class="cr"> <i class="cr-icon icofont icofont-ui-check txt-primary"></i> </span></label></div></td>';
 
-            htmlRows +=  '<td id="other_'+count+'"><select aria-label="Product Code[]" class="form-control form-select js-example-basic-single"  onchange="itemChangejob(this.value,'+count+',this)"  name= "productCode[]" id="productCode__2"+count+'"> <option value="0"> Select Any Prodcut </option> <?php foreach($vrcdetailrespons as $vrcdetailrespone){$selected = ""; if($tab2['item_id']== $vrcdetailrespone['item_id']){ $selected = "selected";
+            htmlRows +=  '<td id="other_'+count+'"><select aria-label="Product Code[]" class="form-control form-select js-example-basic-single"  onchange="itemChangejob(this.value,'+count+',this)"  name= "productCode[]" id="productCode__2"+count+'"> <option value="0"> <?= htmlspecialchars(__('Select Any Prodcut'), ENT_QUOTES, 'UTF-8'); ?> </option> <?php foreach($vrcdetailrespons as $vrcdetailrespone){$selected = ""; if($tab2['item_id']== $vrcdetailrespone['item_id']){ $selected = "selected";
 }?> <option value="<?php echo $vrcdetailrespone['item_id']; ?>" <?php echo $selected;  ?> ><?php echo $vrcdetailrespone['job_title']." (".$vrcdetailrespone['transaction_number']." - ".$vrcdetailrespone['min_exp']." To ".$vrcdetailrespone['max_exp'].")"; ?></option> <?php
-} ?> </select>  <div class="row"><div class="col-lg-6"><div class="input-group input-group-button mt-2"><input type="text" name="min_exp[]" id="min_exp_'+count+'"  class="form-control form-control-sm width1" value="" placeholder="Min Exp" data-bs-toggle="tooltip" data-placement="bottom" title="Minmum Experience" >  <span class="input-group-text addon-style"> <span class="">Years</span></span></div></div><div class="col-lg-6"><div class="input-group input-group-button mt-2">  <input type="text" name="max_exp[]" id="max_exp_'+count+'" class="form-control form-control-sm width1" value="" placeholder="Max Exp" data-bs-toggle="tooltip" data-placement="bottom" title="Maxmum Experience">  <span class="input-group-text addon-style"><span class="">Years</span></span></div></div></div>        </td>';
+} ?> </select>  <div class="row"><div class="col-lg-6"><div class="input-group input-group-button mt-2"><input type="text" name="min_exp[]" id="min_exp_'+count+'"  class="form-control form-control-sm width1" value="" placeholder="Min Exp" data-bs-toggle="tooltip" data-placement="bottom" title="Minmum Experience" >  <span class="input-group-text addon-style"> <span class=""><?= htmlspecialchars(__('Years'), ENT_QUOTES, 'UTF-8'); ?></span></span></div></div><div class="col-lg-6"><div class="input-group input-group-button mt-2">  <input type="text" name="max_exp[]" id="max_exp_'+count+'" class="form-control form-control-sm width1" value="" placeholder="Max Exp" data-bs-toggle="tooltip" data-placement="bottom" title="Maxmum Experience">  <span class="input-group-text addon-style"><span class="">Years</span></span></div></div></div>        </td>';
 
-            htmlRows += '<td><select aria-label="Uom[]" class="form-control form-select js-example-basic-single"   name= "uom[]" id="uom_'+count+'"><option value="0"> Select Any UOM  </option><?php foreach ($uomlist as $uom) {  ?> <option   <?php if($tab2['uom'] == $uom['genc_detail_code']){ ?>selected <?php
-} ?>  value ="<?php echo $uom['genc_detail_code']; ?>" > <?php echo $uom['genc_detail_name']; ?> </option> <?php
-} ?></select><div style="display: none;color: red;" id="uom_err_'+count+'"> Enter UOM</div><div class="checkbox-fade fade-in-primary  mt-3 float-left"> <label class="form-label"><input aria-label="Allow Overtime[" type="checkbox"  name="allow_overtime['+count+']"><span class="cr"> <i class="cr-icon icofont icofont-ui-check txt-primary"></i> </span> <span>&nbsp;Overtime </span></label></div></td> ';
-            htmlRows += '<td><input aria-label="Quantity[]" type="text" name="quantity[]" id="quantity_'+count+'" onblur="quantityCheckold(this.id)"  class="form-control quantity amount minw-100"  autocomplete="off"><div style="display: none;color: red;" id="quantity_err_'+count+'"> Enter QTY</div><input type="text" name="billable[]" id="billable_'+count+'"  value="100" class="form-control price amount minw-100" autocomplete="off" data-bs-toggle="tooltip" data-placement="bottom" title="Bilable Percentage"> </td>';
+            htmlRows += '<td><select aria-label="Uom[]" class="form-control form-select js-example-basic-single"   name= "uom[]" id="uom_'+count+'"><option value="0"> <?= htmlspecialchars(__('Select Any UOM'), ENT_QUOTES, 'UTF-8'); ?>  </option><?php foreach ($uomlist as $uom) {  ?> <option   <?php if($tab2['uom'] == $uom['genc_detail_code']){ ?>selected <?php
+} ?>  value ="<?php echo $uom['genc_detail_code']; ?>" > <?php echo __($uom['genc_detail_name']); ?> </option> <?php
+} ?></select><div style="display: none;color: red;" id="uom_err_'+count+'"> <?= htmlspecialchars(__('Enter UOM'), ENT_QUOTES, 'UTF-8'); ?></div><div class="checkbox-fade fade-in-primary  mt-3 float-left"> <label class="form-label"><input aria-label="Allow Overtime[" type="checkbox"  name="allow_overtime['+count+']"><span class="cr"> <i class="cr-icon icofont icofont-ui-check txt-primary"></i> </span> <span>&nbsp;<?= htmlspecialchars(__('Overtime'), ENT_QUOTES, 'UTF-8'); ?> </span></label></div></td> ';
+            htmlRows += '<td><input aria-label="Quantity[]" type="text" name="quantity[]" id="quantity_'+count+'" onblur="quantityCheckold(this.id)"  class="form-control quantity amount minw-100"  autocomplete="off"><div style="display: none;color: red;" id="quantity_err_'+count+'"> <?= htmlspecialchars(__('Enter QTY'), ENT_QUOTES, 'UTF-8'); ?></div><input type="text" name="billable[]" id="billable_'+count+'"  value="100" class="form-control price amount minw-100" autocomplete="off" data-bs-toggle="tooltip" data-placement="bottom" title="Bilable Percentage"> </td>';
 
-            htmlRows += '<td><input aria-label="Price[]" type="text" name="price[]" id="price_'+count+'" class="form-control price amount minw-140" autocomplete="off"><div style="display: none;color: red;" id="price_err_'+count+'"> Enter Rate</div> </td>';
+            htmlRows += '<td><input aria-label="Price[]" type="text" name="price[]" id="price_'+count+'" class="form-control price amount minw-140" autocomplete="off"><div style="display: none;color: red;" id="price_err_'+count+'"> <?= htmlspecialchars(__('Enter Rate'), ENT_QUOTES, 'UTF-8'); ?></div> </td>';
 
             htmlRows += '<td><input type="hidden" name="dis_ptax_amount[]" value="" readonly class="form-control price amount" id="dis_ptax_amount_'+count+'"><input type="hidden" name="pdiscount_amount[]" value="" readonly class="form-control price amount" id="pdiscount_amount_'+count+'"><input type="hidden" readonly name="p_amount[]" id="p_amount_'+count+'" class="form-control price amount"><input type="hidden" readonly name="ptax_amount[]" id="ptax_amount_'+count+'" class="form-control price amount"><input type="hidden" readonly name="amount[]" id="amount_'+count+'" class="form-control price amount">  <input aria-label="Dis Amount[]" type="text" name="dis_amount[]" readonly id="dis_amount_'+count+'" class="form-control amount minw-140" value="" autocomplete="off"> <input type="text" name="ref_rate[]" id="ref_rate_'+count+'"  class="form-control form-control-sm price amount mt-2 minw-140" readonly   value="" data-bs-toggle="tooltip" data-placement="bottom" title="Vendor Rate Card"><input type="hidden" name="item_name[]" id="item_name__2"+count+'" class="form-control"> <input type="hidden" name="purchase_account[]" id="purchase_account_'+count+'" class="form-control" value=""><input type="hidden" name="purchase_account_aval[]" id="purchase_account_aval_'+count+'" class="form-control" value=""></td>';
 
@@ -156,22 +156,22 @@ function assignemployeelistnew(workorder_id,workorder_detail_id,vrc_id,item_id,i
             <th scope="col" class="thheader" style="width: 1%;">
                <div class="checkbox-fade fade-in-primary">
                 <label class="kt-checkbox">
-                    <input aria-label="Check All" id="checkAll"  type="checkbox">
+                    <input aria-label="<?= htmlspecialchars(__('Check All'), ENT_QUOTES, 'UTF-8'); ?>" id="checkAll"  type="checkbox">
                     <span class="cr">
                       <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                   </span>
               </label>
           </div>
       </th>
-      <th scope="col" class="" style="width: 30%;">job Title </th>
+      <th scope="col" class="" style="width: 30%;"><?= __('job Title'); ?> </th>
 
-      <th scope="col" class="thheader" style="width: 5%;">Units</th>
+      <th scope="col" class="thheader" style="width: 5%;"><?= __('Units'); ?></th>
 
-      <th scope="col" class="thheader" style="width: 5%;">Vacancy</th>
-      <th scope="col" class="thheader" style="width: 20%;">Base Rate  </th>
+      <th scope="col" class="thheader" style="width: 5%;"><?= __('Vacancy'); ?></th>
+      <th scope="col" class="thheader" style="width: 20%;"><?= __('Base Rate'); ?>  </th>
 
-      <th scope="col" class="thheader" style="width: 20%;">Amount</th>
-      <th scope="col" class="thheader" style="width: 15%;">Effective date</th>
+      <th scope="col" class="thheader" style="width: 20%;"><?= __('Amount'); ?></th>
+      <th scope="col" class="thheader" style="width: 15%;"><?= __('Effective date'); ?></th>
       <th scope="col" class="thheader" style="width: 5%;"></th>
   </tr>
   <?php if(count((array)$table2)>0){ $i=1;
@@ -185,7 +185,7 @@ function assignemployeelistnew(workorder_id,workorder_detail_id,vrc_id,item_id,i
         <td style="width: 1%;">
             <div class="checkbox-fade fade-in-primary ml-2">
                 <label class="form-label">
-                    <input aria-label="Checkbox" type="checkbox" class="itemRow">
+                    <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="itemRow">
                     <span class="cr">
                       <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                     </span>
@@ -194,8 +194,8 @@ function assignemployeelistnew(workorder_id,workorder_detail_id,vrc_id,item_id,i
         </td>
         <td id='other_<?php echo $i; ?>'>
             <?php if($tab2['item_id'] >= 0){  $min = array();?>
-               <select aria-label="Product Code[]" class="form-control form-select js-example-basic-single"  name= "productCode[]"  id="productCode_<?php echo $i; ?>" onchange="itemChangejob(this.value,<?php echo $i; ?>,this)" >
-                <option value="0"> Select Any Item  </option>
+               <select aria-label="<?= htmlspecialchars(__('Product Code'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control form-select js-example-basic-single"  name= "productCode[]"  id="productCode_<?php echo $i; ?>" onchange="itemChangejob(this.value,<?php echo $i; ?>,this)" >
+                <option value="0"> <?= __('Select Any Item'); ?>  </option>
                 <?php foreach($vrcdetailrespons as $vrcdetailrespone){
                     $selected = "";
                     if($tab2['item_id']== $vrcdetailrespone['item_id']&& $vrcdetailrespone['min_exp'] == $tab2['min_exp'] && $vrcdetailrespone['max_exp'] == $tab2['max_exp']){
@@ -209,14 +209,14 @@ function assignemployeelistnew(workorder_id,workorder_detail_id,vrc_id,item_id,i
             <div class="row">
                 <div class="col-lg-6">
                   <div class="input-group input-group-button mt-2 ">
-                    <input aria-label="Min Exp[]" type="text" name="min_exp[]" id="min_exp_<?php echo $i; ?>"  class="form-control  width1" readonly value="<?php echo $tab2['min_exp']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="Minmum Experience" placeholder="Min Exp">
+                    <input aria-label="<?= htmlspecialchars(__('Min Exp'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="min_exp[]" id="min_exp_<?php echo $i; ?>"  class="form-control  width1" readonly value="<?php echo $tab2['min_exp']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Minmum Experience'), ENT_QUOTES, 'UTF-8'); ?>" placeholder="<?= htmlspecialchars(__('Min Exp'), ENT_QUOTES, 'UTF-8'); ?>">
                     <span class="input-group-text addon-style">
-                        <span class="">Years</span>
+                        <span class=""><?= __('Years'); ?></span>
                     </span></div>
                 </div><div class="col-lg-6">
                   <div class="input-group input-group-button mt-2 ">
-                   <input aria-label="Max Exp[]" type="text" name="max_exp[]" id="max_exp_<?php echo $i; ?>" class="form-control form-control-sm width1 " readonly value="<?php echo $tab2['max_exp']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="Maxmum Experience" placeholder="Max Exp">  <span class="input-group-text addon-style">
-                    <span class="">Years</span>
+                   <input aria-label="<?= htmlspecialchars(__('Max Exp'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="max_exp[]" id="max_exp_<?php echo $i; ?>" class="form-control form-control-sm width1 " readonly value="<?php echo $tab2['max_exp']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Maxmum Experience'), ENT_QUOTES, 'UTF-8'); ?>" placeholder="<?= htmlspecialchars(__('Max Exp'), ENT_QUOTES, 'UTF-8'); ?>">  <span class="input-group-text addon-style">
+                    <span class=""><?= __('Years'); ?></span>
                 </span> </div>
             </div></div>
 
@@ -224,35 +224,35 @@ function assignemployeelistnew(workorder_id,workorder_detail_id,vrc_id,item_id,i
             <input type="hidden" name="purchase_account[]" class="form-control" value="<?php echo $tab2['purchase_account']; ?>">
             <input type="hidden" name="purchase_account_aval[]" class="form-control" value="<?php echo $response_code[$tab2['purchase_account']]['a']; ?>">
         <?php }else { ?>
-            <input aria-label="Item Name[]" type="text" name="item_name[]" id="item_name_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['item_name']; ?>" autocomplete="off">
+            <input aria-label="<?= htmlspecialchars(__('Item Name'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="item_name[]" id="item_name_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['item_name']; ?>" autocomplete="off">
             <input type="hidden" name="productCode[]" class="form-control" value="<?php echo $i; ?>">
         <?php } ?>
 
     </td>
     <td >
-        <select aria-label="Uom[]" class="form-control form-select js-example-basic-single "   name="uom[]"  id="uom_<?php echo $i; ?>">
-            <option value="0"> Select Any UOM  </option>
+        <select aria-label="<?= htmlspecialchars(__('Uom'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control form-select js-example-basic-single "   name="uom[]"  id="uom_<?php echo $i; ?>">
+            <option value="0"> <?= __('Select Any UOM'); ?>  </option>
             <?php foreach ($uomlist as $uom){  ?>
              <option   <?php if($tab2['uom'] == $uom['genc_detail_code']){ ?> selected <?php
-} ?>  value ="<?php echo $uom['genc_detail_code']; ?>" > <?php echo $uom['genc_detail_name']; ?> </option>
+} ?>  value ="<?php echo $uom['genc_detail_code']; ?>" > <?php echo __($uom['genc_detail_name']); ?> </option>
          <?php } ?>
      </select>
-     <div style="display: none;color: red;" id="<?php echo 'uom_err_'.$i;  ?>"> Enter UOM</div>
+     <div style="display: none;color: red;" id="<?php echo 'uom_err_'.$i;  ?>"> <?= __('Enter UOM'); ?></div>
      <div class="checkbox-fade fade-in-primary  mt-3 float-left ">
          <label class="form-label">
-           <input aria-label="Checkbox" type="checkbox" <?php if($tab2['allow_overtime']=='0'){ echo "checked";
+           <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" <?php if($tab2['allow_overtime']=='0'){ echo "checked";
 } ?> name="allow_overtime[<?php echo $i; ?>]">
            <span class="cr">
              <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
          </span>
-         <span>&nbsp;Overtime </span>
+         <span>&nbsp;<?= __('Overtime'); ?> </span>
      </label>
         </div>
     </td>
     <td >
-     <input aria-label="Quantity[]" type="text" name="quantity[]" id="quantity_<?php echo $i; ?>"   class="form-control amount minw-100" value="<?php echo $tab2['quantity']; ?>"  autocomplete="off">
+     <input aria-label="<?= htmlspecialchars(__('Quantity'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="quantity[]" id="quantity_<?php echo $i; ?>"   class="form-control amount minw-100" value="<?php echo $tab2['quantity']; ?>"  autocomplete="off">
     <input type="hidden" name="quantity_old[]" id="quantity_old_<?php echo $i; ?>"  class="form-control amount" value="<?php echo $tab2['quantity']; ?>">
-    <div style="display: none;color: red;" id="<?php echo 'quantity_err_'.$i; ?>"> Enter QTY</div>
+    <div style="display: none;color: red;" id="<?php echo 'quantity_err_'.$i; ?>"> <?= __('Enter QTY'); ?></div>
 
     <input aria-label="Billable[]" type="text" name="billable[]" id="billable__2"+count+'"   value="<?php echo $tab2['billable']!="" ? $tab2['billable'] : 100 ?>" class="form-control price amount mt-2 minw-100" autocomplete="off" data-bs-toggle="tooltip" data-placement="bottom" title="Bilable Percentage">
 
