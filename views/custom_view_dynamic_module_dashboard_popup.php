@@ -97,9 +97,9 @@ if($allpermision['permission_update'] == '1'){$edit_permissionbtn = "disabled";
 <input type="hidden" name="job_posting_id" id="job_posting_id" value="<?php echo $jobpost; ?>">
 <div class="modal-header">
     <h5 class="modal-title">
-        <?php echo ucwords(str_replace("_"," ",($_POST['transaction_table']))); ?> List
+        <?php echo ucwords(str_replace("_"," ",($_POST['transaction_table']))); ?> <?= __('List'); ?>
     </h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body">
 
@@ -107,7 +107,7 @@ if($allpermision['permission_update'] == '1'){$edit_permissionbtn = "disabled";
             <div class="col-lg-8">&nbsp;</div>
             <div class="col-lg-4 " >
                 <div class="input-group input-group-button mb-0" >
-                    <input aria-label="Search" type="text" id="dynamicfilterhideshow" data-id='categoryfilter_popup' class="form-control form-control-sm width1"  placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="Search">
+                    <input aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="dynamicfilterhideshow" data-id='categoryfilter_popup' class="form-control form-control-sm width1"  placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
                     <span class="input-group-text addon-style">
                         <span class=""><i class="ti-search"></i></span>
                     </span>
@@ -122,12 +122,12 @@ if($allpermision['permission_update'] == '1'){$edit_permissionbtn = "disabled";
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Transaction No.</th>
-                            <th scope="col">Originator</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Party Name</th>
-                            <th scope="col" class="text-right">Amount</th>
-                            <th scope="col">Status</th>
+                            <th scope="col"><?= __('Transaction No.'); ?></th>
+                            <th scope="col"><?= __('Originator'); ?></th>
+                            <th scope="col"><?= __('Date'); ?></th>
+                            <th scope="col"><?= __('Party Name'); ?></th>
+                            <th scope="col" class="text-right"><?= __('Amount'); ?></th>
+                            <th scope="col"><?= __('Status'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -151,7 +151,7 @@ if($allpermision['permission_update'] == '1'){$edit_permissionbtn = "disabled";
                         <tr>
                             <td colspan="8">
                                 <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No  <?php echo ucwords(str_replace("_"," ",($_POST['transaction_table']))); ?></p>
+                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No'); ?>  <?php echo ucwords(str_replace("_"," ",($_POST['transaction_table']))); ?></p>
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                     </div>
@@ -166,5 +166,5 @@ if($allpermision['permission_update'] == '1'){$edit_permissionbtn = "disabled";
 
 
         <div class="modal-footer">
-            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
         </div>
