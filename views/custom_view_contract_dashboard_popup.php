@@ -27,18 +27,18 @@ function isExpired($dateString)
 }
 ?>
 <div class="modal-header">
-    <h4 class="modal-title">Contracts</h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h4 class="modal-title"><?= __('Contracts'); ?></h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body">
     <div class="table-responsive mt-3">
         <table class="table table-bordered" id="contractTable">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Contract</th>
-                <th scope="col">Start Date</th>
-                <th scope="col">End Date</th>
-                <th scope="col">Contract ID</th>
+                <th scope="col"><?= __('Contract'); ?></th>
+                <th scope="col"><?= __('Start Date'); ?></th>
+                <th scope="col"><?= __('End Date'); ?></th>
+                <th scope="col"><?= __('Contract ID'); ?></th>
             </tr>
 
             <?php if (!empty($showcontracts)): ?>
@@ -63,7 +63,7 @@ function isExpired($dateString)
                         <td>
                             <?= fromDate($contract['end_date']) ?>
                             <?php if ($expired): ?>
-                                <span class="form-label label label-danger">Expired</span>
+                                <span class="form-label label label-danger"><?= __('Expired'); ?></span>
                             <?php endif; ?>
                         </td>
                         <td><?= htmlspecialchars($contract['transaction_no'] ?? 'Not Provided') ?></td>
@@ -71,12 +71,12 @@ function isExpired($dateString)
                 <?php endforeach; ?>
             <?php else: ?>
                 <tr>
-                    <td colspan="8" class="text-center">No contracts found</td>
+                    <td colspan="8" class="text-center"><?= __('No contracts found'); ?></td>
                 </tr>
             <?php endif; ?>
         </table>
     </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
 </div>
