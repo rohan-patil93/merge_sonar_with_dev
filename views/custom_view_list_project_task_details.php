@@ -26,8 +26,8 @@ $atchlabel = $data['attach_labels'];
 }
 </style>
 <div class="modal-header">
-  <h5 class="modal-title"> Task Details</h5>
-  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <h5 class="modal-title"> <?= __('Task Details'); ?></h5>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body">
   <div class="modal-body task-popup">
@@ -48,7 +48,7 @@ $atchlabel = $data['attach_labels'];
         <p class="mb-2 mt-2"><?php echo $pts['task_name']; ?></p>
         <div class="align-items-center">
           <?php if($pts['allow_watch']==0){ ?>
-            <i class="ti-eye m-r-5 text-muted" data-bs-toggle="tooltip" data-placement="bottom" title="You are watching this card"></i>
+            <i class="ti-eye m-r-5 text-muted" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('You are watching this card'), ENT_QUOTES, 'UTF-8'); ?>"></i>
           <?php } ?>
           <?php if($pts['planned_finish']!=""){ ?>
             <span class=" p-1  d-inline-block f-10 m-r-5">
@@ -56,10 +56,10 @@ $atchlabel = $data['attach_labels'];
             </span>
           <?php } ?>
           <?php if($pts['description']!=""){ ?>
-            <i class="ti-align-left m-r-5 f-12" data-bs-toggle="tooltip" data-placement="bottom" title="This card has a description."></i>
+            <i class="ti-align-left m-r-5 f-12" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('This card has a description.'), ENT_QUOTES, 'UTF-8'); ?>"></i>
           <?php } ?>
           <?php if(!empty($data['checklist'][$pts['id']])){ ?>
-            <i class="ti-check-box f-12" data-bs-toggle="tooltip" data-placement="bottom" title="Check items"> <?php echo $data['checklist'][$pts['id']]['comp']."/".$data['checklist'][$pts['id']]['entotal']; ?></i>
+            <i class="ti-check-box f-12" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Check items'), ENT_QUOTES, 'UTF-8'); ?>"> <?php echo $data['checklist'][$pts['id']]['comp']."/".$data['checklist'][$pts['id']]['entotal']; ?></i>
           <?php } ?>
 
         </div>
@@ -67,7 +67,7 @@ $atchlabel = $data['attach_labels'];
     </div>
     <?php } ?>
     <?php } else { ?>
-       <h6 class="text-center mt-3"> No Data</h6>
+       <h6 class="text-center mt-3"> <?= __('No Data'); ?></h6>
         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
     <?php } ?>
     </div>
