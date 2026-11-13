@@ -38,31 +38,31 @@ $statuses = $jobreport['statuses'];
                     <div class="card-header h-auto border">
                         <!--begin::Toolbar-->
                         <div class="card-toolbar">
-                            <h6 class="m-10"> Job Report By </h6>
+                            <h6 class="m-10"> <?= __('Job Report By'); ?> </h6>
                             <ul class="nav nav-pills nav-pills-sm nav-dark-75">
                                 <li class="nav-item">
                                     <a class="nav-link py-2 px-4 active" data-toggle="tab" href="#kt_charts_widget_2_chart_tab_1" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                                        <span class="nav-text font-size-sm">Status</span>
+                                        <span class="nav-text font-size-sm"><?= __('Status'); ?></span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_charts_widget_2_chart_tab_2" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                                        <span class="nav-text font-size-sm">Job Title</span>
+                                        <span class="nav-text font-size-sm"><?= __('Job Title'); ?></span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_charts_widget_2_chart_tab_3" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                                        <span class="nav-text font-size-sm">Location</span>
+                                        <span class="nav-text font-size-sm"><?= __('Location'); ?></span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_charts_widget_2_chart_tab_4" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                                        <span class="nav-text font-size-sm">Department</span>
+                                        <span class="nav-text font-size-sm"><?= __('Department'); ?></span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_charts_widget_2_chart_tab_5" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                                        <span class="nav-text font-size-sm">Hiring Manager</span>
+                                        <span class="nav-text font-size-sm"><?= __('Hiring Manager'); ?></span>
                                     </a>
                                 </li>
 
@@ -152,11 +152,11 @@ $statuses = $jobreport['statuses'];
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Job Title </th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Location</th>
-                            <th scope="col">Department </th>
-                            <th scope="col">Hiring Manager </th>
+                            <th scope="col"><?= __('Job Title'); ?> </th>
+                            <th scope="col"><?= __('Status'); ?></th>
+                            <th scope="col"><?= __('Location'); ?></th>
+                            <th scope="col"><?= __('Department'); ?> </th>
+                            <th scope="col"><?= __('Hiring Manager'); ?> </th>
                         </tr>
                     </thead>
                     <tbody>
