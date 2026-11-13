@@ -17,15 +17,15 @@ foreach($gen_codes as $gen_code){
 ?>
 <div class="modal-header card-header">
 
-    <h5 class="text-white">Average Experience Rates Detailes</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="text-white"><?= __('Average Experience Rates Detailes'); ?></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 
 </div>
 
 <div class="modal-body p-r-50 p-l-50">
     <div class="card mt-2">
       <div class="card-header">
-        <h5 class="f-30">Employees</h5>
+        <h5 class="f-30"><?= __('Employees'); ?></h5>
         <div class="card-header-right">
 
         </div>
@@ -34,14 +34,14 @@ foreach($gen_codes as $gen_code){
         <table class=" table table-bordered">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Vendor</th>
-                <th scope="col">Job Tittle</th>
-                <th scope="col"> UOM </th>
+                <th scope="col"><?= __('Vendor'); ?></th>
+                <th scope="col"><?= __('Job Tittle'); ?></th>
+                <th scope="col"> <?= __('UOM'); ?> </th>
 
-                <th scope="col" class="text-right">Mini Exp</th>
-                <th scope="col" class="text-right">Max Exp</th>
-                <th scope="col" class="text-right">Unit Price</th>
-                <th scope="col" class="text-right">Price</th>
+                <th scope="col" class="text-right"><?= __('Mini Exp'); ?></th>
+                <th scope="col" class="text-right"><?= __('Max Exp'); ?></th>
+                <th scope="col" class="text-right"><?= __('Unit Price'); ?></th>
+                <th scope="col" class="text-right"><?= __('Price'); ?></th>
             </tr>
             <?php $k=1; if(count((array)$data)>0){ foreach($data as $emp){ ?>
             <tr>
@@ -58,7 +58,7 @@ foreach($gen_codes as $gen_code){
 }
 }else{?>
                 <tr>
-                    <td colspan="7"> No data Found</td>
+                    <td colspan="7"> <?= __('No data Found'); ?></td>
                 </tr>
             <?php } ?>
         </table>
