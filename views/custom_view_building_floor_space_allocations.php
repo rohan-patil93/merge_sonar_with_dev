@@ -42,7 +42,7 @@ $seating_pools  =$result['seating_pools'];
   function toCubicleSpaceAllocateEmployeePopup(bfs_id){
     closeToAllocateEmployee();
     $(".to_allocate_employee_popup_"+bfs_id).show();
-    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $(".to_allocate_employee_popup_"+bfs_id).html(htmloader);
     jQuery.ajax({
         url: "views/custom_view_equipment_allocation_ajax.php",
@@ -72,8 +72,8 @@ $seating_pools  =$result['seating_pools'];
 
 </script>
 <div class="modal-header">
-    <h4 class="modal-title">Cubicle Spaces</h4>
-    <button type="button" class="btn-close btn_white" data-bs-dismiss="modal" aria-label="Close" onclick="closeViewCubicleSpace()"> </button>
+    <h4 class="modal-title"><?= __('Cubicle Spaces'); ?></h4>
+    <button type="button" class="btn-close btn_white" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>" onclick="closeViewCubicleSpace()"> </button>
 </div>
 <div class="modal-body m-l-50 m-r-50">
   <?php
@@ -93,37 +93,37 @@ $seating_pools  =$result['seating_pools'];
   ?>
    <div class="row">
         <div class="col-xl-4 col-md-6 text-center">
-            <h5>Building Name</h5>
+            <h5><?= __('Building Name'); ?></h5>
             <h6 class="f-w-700 mb-0 mt-2"><?php echo $buildings['building_name']; ?></h6>
             <p><i class="ti-location-pin"></i> <?php echo $buildings['building_address']; ?></p>
         </div>
         <div class="col-xl-3 col-md-6 text-center">
-            <h5>Floor Name</h5>
+            <h5><?= __('Floor Name'); ?></h5>
             <h6 class="m-b-30 f-w-700 mt-2"><?php echo $building_floors['floor_name']; ?></h6>
         </div>
         <div class="col-lg-5 text-right">
           <div class="d-inline-block m-l-10">
               <span class="form-label label label-lg label-info"><?php echo $labspacedcnt; ?></span>
-              <span class="f-12">Lab Space</span>
+              <span class="f-12"><?= __('Lab Space'); ?></span>
             </div>
           <div class="d-inline-block m-l-10">
               <span class="form-label label label-lg label-warning"><?php echo $reservecnt; ?></span>
-              <span class="f-12">Reserved</span>
+              <span class="f-12"><?= __('Reserved'); ?></span>
             </div>
             <div class="d-inline-block m-l-10">
               <span class="form-label label label-lg label-primary text-dark" style="background-color: #e4e4e4"><?php echo $empallocatedcnt; ?></span>
-              <span class="f-12 " >Allocated</span>
+              <span class="f-12 " ><?= __('Allocated'); ?></span>
             </div>
             <div class="d-inline-block m-l-10 m-l-20">
                 <span class="form-label label label-lg text-dark" style="border: 1px black solid;"><?php echo $notallocatedcnt; ?></span>
-              <span class="f-12">Free</span>
+              <span class="f-12"><?= __('Free'); ?></span>
             </div>
         </div>
   </div>
   <div class="row">
     <div class="row mt-5">
       <div id="floor_cabin">
-          <img id="disable_crop_floor_image" src="uploads/building_floors/<?php echo $building_floors['floor_image']; ?>" alt="Attachment Preview">
+          <img id="disable_crop_floor_image" src="uploads/building_floors/<?php echo $building_floors['floor_image']; ?>" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
 <?php
             $cabincnt = 0;
             foreach($building_floor_spaces as $ealloc){
@@ -149,12 +149,12 @@ $seating_pools  =$result['seating_pools'];
                     <div onclick="toCubicleSpaceAllocateEmployeePopup('<?php echo $ealloc['id']; ?>')" class="cubicle_line_space" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                       <?php if($allocationdetail['emp_id'] !=""){ ?>
                         <?php if($employees[$allocationdetail['emp_id']]['image'] !="") { ?>
-                            <img src="uploads/all/<?php echo $employees[$allocationdetail['emp_id']]['image']; ?>" class="img-radius img-30 align-top" alt="Attachment Preview">
+                            <img src="uploads/all/<?php echo $employees[$allocationdetail['emp_id']]['image']; ?>" class="img-radius img-30 align-top" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                         <?php } else { ?>
-                            <span  alt="user" class=" align-top f-12 text-center" ><?php echo initials($employees[$allocationdetail['emp_id']]['display_name']); ?></span>
+                            <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class=" align-top f-12 text-center" ><?php echo initials($employees[$allocationdetail['emp_id']]['display_name']); ?></span>
                       <?php }  ?>
                       <?php }elseif($allocationdetail['reserve_pool_id'] !="") { ?>
-                        <span  alt="user" class="align-top f-12 text-center text-white" ><?php echo initials($seating_pools[$allocationdetail['reserve_pool_id']]['pool_name']); ?></span>
+                        <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="align-top f-12 text-center text-white" ><?php echo initials($seating_pools[$allocationdetail['reserve_pool_id']]['pool_name']); ?></span>
                       <?php  }else{ ?>
                             <i class="ti-location-pin"></i>
                       <?php } ?>
@@ -174,5 +174,5 @@ $seating_pools  =$result['seating_pools'];
 <div class="modal-footer">
     <input type="hidden" id="space_allocation_popup" value="Y">
     <input type="hidden" id="space_allocation_popup_building_floor_id" value="<?php echo $rid; ?>">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal" >Close</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal" ><?= __('Close'); ?></button>
 </div>
