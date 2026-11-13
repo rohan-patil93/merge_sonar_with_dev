@@ -136,17 +136,17 @@ $ITEM_SETS = [
         <ul class="nav-tabs-custom">
             <li>
                 <a class="nav-link <?php echo $tab == 'ALL' ? 'active' : ''; ?>" data-bs-toggle="tab" href="#ALL" role="tab" onclick="changeDashboardTab('ALL')" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                    All <span class="badge-tab"><?php echo $all_count; ?></span>
+                    <?= __('All'); ?> <span class="badge-tab"><?php echo $all_count; ?></span>
                 </a>
             </li>
             <li>
                 <a class="nav-link <?php echo $tab == 'PENDING' ? 'active' : ''; ?>" data-bs-toggle="tab" href="#PENDING" role="tab" onclick="changeDashboardTab('PENDING')" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                    In Premises <span class="badge-tab"><?php echo $in_count; ?></span>
+                    <?= __('In Premises'); ?> <span class="badge-tab"><?php echo $in_count; ?></span>
                 </a>
             </li>
             <li>
                 <a class="nav-link <?php echo $tab == 'COMPLETED' ? 'active' : ''; ?>" data-bs-toggle="tab" href="#COMPLETED" role="tab" onclick="changeDashboardTab('COMPLETED')" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                    Exited <span class="badge-tab"><?php echo $out_count; ?></span>
+                    <?= __('Exited'); ?> <span class="badge-tab"><?php echo $out_count; ?></span>
                 </a>
             </li>
         </ul>
@@ -158,7 +158,7 @@ $ITEM_SETS = [
     <!-- ================= ALL VISITORS TAB ================= -->
     <div class="tab-pane <?php echo $tab == 'ALL' ? 'active' : ''; ?>" id="ALL" role="tabpanel">
         <div class="search-filter-panel">
-            <input aria-label="Search name, email, phone, ID card..." type="text" id="visitors_q" placeholder="Search name, email, phone, ID card..." value="<?php echo htmlspecialchars($q); ?>">
+            <input aria-label="<?= htmlspecialchars(__('Search name, email, phone, ID card...'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="visitors_q" placeholder="<?= htmlspecialchars(__('Search name, email, phone, ID card...'), ENT_QUOTES, 'UTF-8'); ?>" value="<?php echo htmlspecialchars($q); ?>">
             <input type="hidden" id="visitors_limit" value="<?php echo (int)$limit; ?>">
             <button type="button" class="btn btn-sm btn-primary getvisitorsdata"
                     data-period_key="<?= strtoupper($day_type); ?>"
@@ -173,7 +173,7 @@ $ITEM_SETS = [
                         data-location_id="<?php echo $location_id; ?>"
                         data-offset="0" data-limit="visitors_limit" data-q="" data-tab="ALL"
                         style="padding:6px 12px; border-radius:6px;">
-                    Reset
+                    <?= __('Reset'); ?>
                 </button>
             <?php } ?>
         </div>
@@ -182,12 +182,12 @@ $ITEM_SETS = [
             <table class="dashboard-table">
                 <thead>
                     <tr>
-                        <th scope="col" style="width:30%;">Visitor details</th>
-                        <th scope="col" style="width:12%;">Visit Type</th>
-                        <th scope="col" style="width:15%;">Belongings</th>
-                        <th scope="col" style="width:20%;">Whom to Meet</th>
-                        <th scope="col" style="width:12%;">In Time</th>
-                        <th scope="col" style="width:11%;">Out Time</th>
+                        <th scope="col" style="width:30%;"><?= __('Visitor details'); ?></th>
+                        <th scope="col" style="width:12%;"><?= __('Visit Type'); ?></th>
+                        <th scope="col" style="width:15%;"><?= __('Belongings'); ?></th>
+                        <th scope="col" style="width:20%;"><?= __('Whom to Meet'); ?></th>
+                        <th scope="col" style="width:12%;"><?= __('In Time'); ?></th>
+                        <th scope="col" style="width:11%;"><?= __('Out Time'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -258,7 +258,7 @@ $ITEM_SETS = [
                                 <td>
                                     <div class="avatar-wrapper">
                                         <?php if (!empty($v['image_path'])) { ?>
-                                            <img src="uploads/visitors/<?= htmlspecialchars($v['image_path']) ?>" class="round-avatar-img" alt="User Profile">
+                                            <img src="uploads/visitors/<?= htmlspecialchars($v['image_path']) ?>" class="round-avatar-img" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <?php } else { ?>
                                             <span class="round-avatar-initials"><?= initials($displayName) ?></span>
                                         <?php } ?>
@@ -295,13 +295,13 @@ $ITEM_SETS = [
                                     <?php if (!empty($v['out_datetime']) || $current_status === 199) { ?>
                                         <span class="text-muted"><?= date('d-M-Y h:i A', strtotime($v['out_datetime'])) ?></span>
                                     <?php } elseif ($current_status === 10) { ?>
-                                        <span class="badge bg-warning text-dark py-1 px-2" style="font-size: 11px; border-radius: 6px; font-weight: 600;"><i class="fa fa-clock me-1"></i> Awaiting Approval</span>
+                                        <span class="badge bg-warning text-dark py-1 px-2" style="font-size: 11px; border-radius: 6px; font-weight: 600;"><i class="fa fa-clock me-1"></i> <?= __('Awaiting Approval'); ?></span>
                                     <?php } else {
                                         $searchTerm = $v['visitor_idcard_no'] ?? ($v['employee_code'] ?? ($v['phone'] ?? $displayName));
                                         ?>
                                         <a href="javascript:void(0);" class="checkout-btn js-checkout"
                                            data-url="index.php?option=custom_insert_visitor_logs&active_tab=checkout&search_term=<?= urlencode($searchTerm) ?>&visitor_log_id=<?= $v['id'] ?>&from_dashboard=1">
-                                            <i class="fa fa-sign-out"></i> Out
+                                            <i class="fa fa-sign-out"></i> <?= __('Out'); ?>
                                         </a>
                                     <?php } ?>
                                 </td>
@@ -311,7 +311,7 @@ $ITEM_SETS = [
                         <tr>
                             <td colspan="6" class="text-center py-5 text-muted">
                                 <i class="fa fa-info-circle mb-2" style="font-size:20px;"></i>
-                                <p class="m-0">No records found for the selection criteria.</p>
+                                <p class="m-0"><?= __('No records found for the selection criteria.'); ?></p>
                             </td>
                         </tr>
                     <?php } ?>
@@ -322,17 +322,17 @@ $ITEM_SETS = [
         <!-- Pagination Footer -->
         <div class="table-footer-pagination">
             <div class="small text-muted">
-                Showing <strong><?php echo $show_from; ?></strong> to <strong><?php echo $show_to; ?></strong> of <strong><?php echo $all_count; ?></strong> entries
+                <?= __('Showing'); ?> <strong><?php echo $show_from; ?></strong> <?= __('to'); ?> <strong><?php echo $show_to; ?></strong> <?= __('of'); ?> <strong><?php echo $all_count; ?></strong> <?= __('entries'); ?>
             </div>
 
             <div style="display:flex; align-items:center; gap:8px;">
-                <select aria-label="Select option" class="form-select form-select-sm w-auto getvisitorsdata"
+                <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select form-select-sm w-auto getvisitorsdata"
                         data-period_key="<?= strtoupper($day_type); ?>"
                         data-location_id="<?php echo $location_id; ?>"
                         data-offset="0" data-q="<?php echo $q; ?>" data-tab="ALL"
                         style="padding: 4px 8px; font-size:12px; border-radius:4px;">
                     <?php foreach ([10, 20, 30, 50] as $opt) { ?>
-                        <option value="<?php echo $opt; ?>" <?php echo $limit == $opt ? 'selected' : ''; ?>><?php echo $opt; ?> / page</option>
+                        <option value="<?php echo $opt; ?>" <?php echo $limit == $opt ? 'selected' : ''; ?>><?php echo $opt; ?> <?= __('/ page'); ?></option>
                     <?php } ?>
                 </select>
 
@@ -342,14 +342,14 @@ $ITEM_SETS = [
                             data-location_id="<?php echo $location_id; ?>"
                             data-offset="<?php echo $prev_offset; ?>"
                             data-limit="<?php echo $limit; ?>" data-q="<?php echo $q; ?>" data-tab="ALL"
-                            <?php echo $offset <= 0 ? 'disabled' : ''; ?>>Prev</button>
+                            <?php echo $offset <= 0 ? 'disabled' : ''; ?>><?= __('Prev'); ?></button>
 
                     <button type="button" class="btn btn-outline-secondary getvisitorsdata"
                             data-period_key="<?= strtoupper($day_type); ?>"
                             data-location_id="<?php echo $location_id; ?>"
                             data-offset="<?php echo $next_offset; ?>"
                             data-limit="<?php echo $limit; ?>" data-q="<?php echo $q; ?>" data-tab="ALL"
-                            <?php echo !$has_next ? 'disabled' : ''; ?>>Next</button>
+                            <?php echo !$has_next ? 'disabled' : ''; ?>><?= __('Next'); ?></button>
                 </div>
             </div>
         </div>
@@ -358,7 +358,7 @@ $ITEM_SETS = [
     <!-- ================= PENDING TAB ================= -->
     <div class="tab-pane <?php echo $tab == 'PENDING' ? 'active' : ''; ?>" id="PENDING" role="tabpanel">
         <div class="search-filter-panel">
-            <input aria-label="Search in Premises..." type="text" id="visitors_q_pending" placeholder="Search in Premises..." value="<?php echo htmlspecialchars($q); ?>">
+            <input aria-label="<?= htmlspecialchars(__('Search in Premises...'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="visitors_q_pending" placeholder="<?= htmlspecialchars(__('Search in Premises...'), ENT_QUOTES, 'UTF-8'); ?>" value="<?php echo htmlspecialchars($q); ?>">
             <button type="button" class="btn btn-sm btn-primary getvisitorsdata"
                     data-period_key="<?= strtoupper($day_type); ?>"
                     data-location_id="<?php echo $location_id; ?>"
@@ -372,12 +372,12 @@ $ITEM_SETS = [
             <table class="dashboard-table">
                 <thead>
                     <tr>
-                        <th scope="col" style="width:30%;">Visitor details</th>
-                        <th scope="col" style="width:12%;">Visit Type</th>
-                        <th scope="col" style="width:15%;">Belongings</th>
-                        <th scope="col" style="width:20%;">Whom to Meet</th>
-                        <th scope="col" style="width:12%;">In Time</th>
-                        <th scope="col" style="width:11%;">Action</th>
+                        <th scope="col" style="width:30%;"><?= __('Visitor details'); ?></th>
+                        <th scope="col" style="width:12%;"><?= __('Visit Type'); ?></th>
+                        <th scope="col" style="width:15%;"><?= __('Belongings'); ?></th>
+                        <th scope="col" style="width:20%;"><?= __('Whom to Meet'); ?></th>
+                        <th scope="col" style="width:12%;"><?= __('In Time'); ?></th>
+                        <th scope="col" style="width:11%;"><?= __('Action'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -438,7 +438,7 @@ $ITEM_SETS = [
                                 <td>
                                     <div class="avatar-wrapper">
                                         <?php if (!empty($v['image_path'])) { ?>
-                                            <img src="uploads/visitors/<?= htmlspecialchars($v['image_path']) ?>" class="round-avatar-img" alt="User Profile">
+                                            <img src="uploads/visitors/<?= htmlspecialchars($v['image_path']) ?>" class="round-avatar-img" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <?php } else { ?>
                                             <span class="round-avatar-initials"><?= initials($displayName) ?></span>
                                         <?php } ?>
@@ -474,14 +474,14 @@ $ITEM_SETS = [
                                     ?>
                                     <a href="javascript:void(0);" class="checkout-btn js-checkout"
                                        data-url="index.php?option=custom_insert_visitor_logs&active_tab=checkout&search_term=<?= urlencode($searchTerm) ?>&visitor_log_id=<?= $v['id'] ?>&from_dashboard=1">
-                                        <i class="fa fa-sign-out"></i> Out
+                                        <i class="fa fa-sign-out"></i> <?= __('Out'); ?>
                                     </a>
                                 </td>
                             </tr>
                         <?php }
                     } else { ?>
                         <tr>
-                            <td colspan="6" class="text-center py-5 text-muted">No visitors currently inside.</td>
+                            <td colspan="6" class="text-center py-5 text-muted"><?= __('No visitors currently inside.'); ?></td>
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -491,7 +491,7 @@ $ITEM_SETS = [
         <!-- Pagination Pending Footer -->
         <div class="table-footer-pagination">
             <div class="small text-muted">
-                Showing <strong><?php echo $show_from_p; ?></strong> to <strong><?php echo $show_to_p; ?></strong> of <strong><?php echo $in_count; ?></strong> in premises
+                <?= __('Showing'); ?> <strong><?php echo $show_from_p; ?></strong> <?= __('to'); ?> <strong><?php echo $show_to_p; ?></strong> <?= __('of'); ?> <strong><?php echo $in_count; ?></strong> <?= __('in premises'); ?>
             </div>
 
             <div style="display:flex; align-items:center; gap:8px;">
@@ -501,14 +501,14 @@ $ITEM_SETS = [
                             data-location_id="<?php echo $location_id; ?>"
                             data-offset="<?php echo $prev_offset; ?>"
                             data-limit="<?php echo $limit; ?>" data-q="<?php echo $q; ?>" data-tab="PENDING"
-                            <?php echo $offset <= 0 ? 'disabled' : ''; ?>>Prev</button>
+                            <?php echo $offset <= 0 ? 'disabled' : ''; ?>><?= __('Prev'); ?></button>
 
                     <button type="button" class="btn btn-outline-secondary getvisitorsdata"
                             data-period_key="<?= strtoupper($day_type); ?>"
                             data-location_id="<?php echo $location_id; ?>"
                             data-offset="<?php echo $next_offset; ?>"
                             data-limit="<?php echo $limit; ?>" data-q="<?php echo $q; ?>" data-tab="PENDING"
-                            <?php echo !$has_next_p ? 'disabled' : ''; ?>>Next</button>
+                            <?php echo !$has_next_p ? 'disabled' : ''; ?>><?= __('Next'); ?></button>
                 </div>
             </div>
         </div>
@@ -517,7 +517,7 @@ $ITEM_SETS = [
     <!-- ================= COMPLETED TAB ================= -->
     <div class="tab-pane <?php echo $tab == 'COMPLETED' ? 'active' : ''; ?>" id="COMPLETED" role="tabpanel">
         <div class="search-filter-panel">
-            <input aria-label="Search completed logs..." type="text" id="visitors_q_completed" placeholder="Search completed logs..." value="<?php echo htmlspecialchars($q); ?>">
+            <input aria-label="<?= htmlspecialchars(__('Search completed logs...'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="visitors_q_completed" placeholder="<?= htmlspecialchars(__('Search completed logs...'), ENT_QUOTES, 'UTF-8'); ?>" value="<?php echo htmlspecialchars($q); ?>">
             <button type="button" class="btn btn-sm btn-primary getvisitorsdata"
                     data-period_key="<?= strtoupper($day_type); ?>"
                     data-location_id="<?php echo $location_id; ?>"
@@ -531,12 +531,12 @@ $ITEM_SETS = [
             <table class="dashboard-table">
                 <thead>
                     <tr>
-                        <th scope="col" style="width:30%;">Visitor details</th>
-                        <th scope="col" style="width:12%;">Visit Type</th>
-                        <th scope="col" style="width:15%;">Belongings</th>
-                        <th scope="col" style="width:20%;">Whom to Meet</th>
-                        <th scope="col" style="width:12%;">In Time</th>
-                        <th scope="col" style="width:11%;">Out Time</th>
+                        <th scope="col" style="width:30%;"><?= __('Visitor details'); ?></th>
+                        <th scope="col" style="width:12%;"><?= __('Visit Type'); ?></th>
+                        <th scope="col" style="width:15%;"><?= __('Belongings'); ?></th>
+                        <th scope="col" style="width:20%;"><?= __('Whom to Meet'); ?></th>
+                        <th scope="col" style="width:12%;"><?= __('In Time'); ?></th>
+                        <th scope="col" style="width:11%;"><?= __('Out Time'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -597,7 +597,7 @@ $ITEM_SETS = [
                                 <td>
                                     <div class="avatar-wrapper">
                                         <?php if (!empty($v['image_path'])) { ?>
-                                            <img src="uploads/visitors/<?= htmlspecialchars($v['image_path']) ?>" class="round-avatar-img" alt="User Profile">
+                                            <img src="uploads/visitors/<?= htmlspecialchars($v['image_path']) ?>" class="round-avatar-img" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <?php } else { ?>
                                             <span class="round-avatar-initials"><?= initials($displayName) ?></span>
                                         <?php } ?>
@@ -632,7 +632,7 @@ $ITEM_SETS = [
                         <?php }
                     } else { ?>
                         <tr>
-                            <td colspan="6" class="text-center py-5 text-muted">No completed exit records.</td>
+                            <td colspan="6" class="text-center py-5 text-muted"><?= __('No completed exit records.'); ?></td>
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -642,7 +642,7 @@ $ITEM_SETS = [
         <!-- Pagination Completed Footer -->
         <div class="table-footer-pagination">
             <div class="small text-muted">
-                Showing <strong><?php echo $show_from_c; ?></strong> to <strong><?php echo $show_to_c; ?></strong> of <strong><?php echo $out_count; ?></strong> exited logs
+                <?= __('Showing'); ?> <strong><?php echo $show_from_c; ?></strong> <?= __('to'); ?> <strong><?php echo $show_to_c; ?></strong> <?= __('of'); ?> <strong><?php echo $out_count; ?></strong> <?= __('exited logs'); ?>
             </div>
 
             <div style="display:flex; align-items:center; gap:8px;">
@@ -652,14 +652,14 @@ $ITEM_SETS = [
                             data-location_id="<?php echo $location_id; ?>"
                             data-offset="<?php echo $prev_offset; ?>"
                             data-limit="<?php echo $limit; ?>" data-q="<?php echo $q; ?>" data-tab="COMPLETED"
-                            <?php echo $offset <= 0 ? 'disabled' : ''; ?>>Prev</button>
+                            <?php echo $offset <= 0 ? 'disabled' : ''; ?>><?= __('Prev'); ?></button>
 
                     <button type="button" class="btn btn-outline-secondary getvisitorsdata"
                             data-period_key="<?= strtoupper($day_type); ?>"
                             data-location_id="<?php echo $location_id; ?>"
                             data-offset="<?php echo $next_offset; ?>"
                             data-limit="<?php echo $limit; ?>" data-q="<?php echo $q; ?>" data-tab="COMPLETED"
-                            <?php echo !$has_next_c ? 'disabled' : ''; ?>>Next</button>
+                            <?php echo !$has_next_c ? 'disabled' : ''; ?>><?= __('Next'); ?></button>
                 </div>
             </div>
         </div>
