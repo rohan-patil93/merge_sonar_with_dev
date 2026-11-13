@@ -34,28 +34,28 @@ if(isset($_POST['sid'])){
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Location</th>
-                <th scope="col">Item</th>
-                <th scope="col">Attributes</th>
-                <th scope="col">UOM</th>
-                <th scope="col">Physical Qty</th>
+                <th scope="col"><?= __('Location'); ?></th>
+                <th scope="col"><?= __('Item'); ?></th>
+                <th scope="col"><?= __('Attributes'); ?></th>
+                <th scope="col"><?= __('UOM'); ?></th>
+                <th scope="col"><?= __('Physical Qty'); ?></th>
                 <?php if($stocktakes['status'] == '2' || $stocktakes['status'] == '3'){ ?>
-                    <th scope="col">System Qty</th>
-                    <th scope="col">Variance</th>
+                    <th scope="col"><?= __('System Qty'); ?></th>
+                    <th scope="col"><?= __('Variance'); ?></th>
                     <?php if($stocktakes['status'] == '2'){?>
                         <th scope="col"><div class="checkbox-fade fade-in-primary">
                             <label class="checkbox checkbox-success">
-                                <input aria-label="Ectall Checks" type="checkbox" id="selectall_checks" class="itemRow" onclick="selectallcheck()" onkeydown="">
+                                <input aria-label="<?= htmlspecialchars(__('Ectall Checks'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" id="selectall_checks" class="itemRow" onclick="selectallcheck()" onkeydown="">
                                 <span class="cr">
                                     <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                 </span>
-                            </label> All
+                            </label> <?= __('All'); ?>
                         </div></th>
                     <?php } ?>
                 <?php } ?>
                 <?php if($stocktakes['status'] == '3'){ ?>
-                    <th scope="col">Now System Qty</th>
-                    <th scope="col">Action</th>
+                    <th scope="col"><?= __('Now System Qty'); ?></th>
+                    <th scope="col"><?= __('Action'); ?></th>
                 <?php } ?>
 
             </tr>
@@ -124,7 +124,7 @@ if(isset($_POST['sid'])){
                         <input type="hidden" name="submited" value="count_complete">
 
                         <div class="input-group input-group-button mb-0" style="width: 100px;">
-                            <input aria-label="Count Qty[]" type="text" class="form-control width1 text-right" name="count_qty[]" id="count_qty_<?php echo $in; ?>" value="<?php echo $stockitemdetail['count_qty']; ?>" <?php echo $reedonly; ?>>
+                            <input aria-label="<?= htmlspecialchars(__('Count Qty'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" class="form-control width1 text-right" name="count_qty[]" id="count_qty_<?php echo $in; ?>" value="<?php echo $stockitemdetail['count_qty']; ?>" <?php echo $reedonly; ?>>
 
                             <button type="button" class="input-group-text addon-style" onclick="uompopup('<?php echo $itemlist['id']; ?>','<?php echo $itemlist['purchase_uom']; ?>','<?php echo $itemlist['code']; ?>','<?php echo $itemlist['location_id']; ?>','<?php echo $in; ?>')" <?php echo $rextboxdis; ?>>
                                 <span class=""><i class="fas fa-caret-down f-18 "></i></span>
@@ -153,7 +153,7 @@ if(isset($_POST['sid'])){
                         <td class="text-center">
                             <div class="checkbox-fade fade-in-primary" >
                                 <label class="checkbox checkbox-success">
-                                    <input aria-label="Checkbox" type="checkbox" class="itemRow checkbox2" name="substoktakecheck[<?php echo $in; ?>]"  value="0">
+                                    <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="itemRow checkbox2" name="substoktakecheck[<?php echo $in; ?>]"  value="0">
                                     <span class="cr">
                                         <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                     </span>
