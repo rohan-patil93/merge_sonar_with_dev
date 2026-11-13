@@ -13,26 +13,26 @@ $paheadersres  = $result['performance_appraisal_headers'];
 ?>
 <div class="card">
     <div class="card-header">
-        <h5>Preview Appraisal</h5>
+        <h5><?= __('Preview Appraisal'); ?></h5>
         <div class="card-header-right"></div>
     </div>
     <div class="card-body">
         <ul class="nav md-tabs infisuite_tab ml-2 mb-2">
             <li class="nav-item">
-                <a class="nav-link active" data-bs-toggle="tab" href="#preview_employee" role="tab" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Employee</a>
+                <a class="nav-link active" data-bs-toggle="tab" href="#preview_employee" role="tab" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Employee'); ?></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#preview_ro" role="tab" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">RO</a>
+                <a class="nav-link" data-bs-toggle="tab" href="#preview_ro" role="tab" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('RO'); ?></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#preview_hod" role="tab" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">HOD</a>
+                <a class="nav-link" data-bs-toggle="tab" href="#preview_hod" role="tab" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('HOD'); ?></a>
             </li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="preview_employee" role="tabpanel">
                 <div class="accordion-block color-accordion-block m-t-5">
                     <div class="color-accordion" id="color-accordion">
-                        <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">Professional Excellence</a>
+                        <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?= __('Professional Excellence'); ?></a>
                         <div class="accordion-desc">
                             <div class="row">
                                 <div class="col-lg-12 col-xl-4">
@@ -40,15 +40,15 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                         <table class="table m-0">
                                             <tbody>
                                                 <tr>
-                                                    <th scope="row">Name</th>
+                                                    <th scope="row"><?= __('Name'); ?></th>
                                                     <td>-</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">Department</th>
+                                                    <th scope="row"><?= __('Department'); ?></th>
                                                     <td>-</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">Designation</th>
+                                                    <th scope="row"><?= __('Designation'); ?></th>
                                                     <td>-</td>
                                                 </tr>
                                             </tbody>
@@ -61,15 +61,15 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                             <tbody>
 
                                                 <tr>
-                                                    <th scope="row">Emp ID</th>
+                                                    <th scope="row"><?= __('Emp ID'); ?></th>
                                                     <td>-</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">Date of Join</th>
+                                                    <th scope="row"><?= __('Date of Join'); ?></th>
                                                     <td>-</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">Qualification:</th>
+                                                    <th scope="row"><?= __('Qualification'); ?>:</th>
                                                     <td class="address-basic">-</td>
                                                 </tr>
                                             </tbody>
@@ -81,11 +81,11 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                         <table class="table m-0">
                                             <tbody>
                                                 <tr>
-                                                    <th scope="row">RO's Name</th>
+                                                    <th scope="row"><?= __('RO\'s Name'); ?></th>
                                                     <td>-</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">RO Designation:</th>
+                                                    <th scope="row"><?= __('RO Designation'); ?>:</th>
                                                     <td>-</td>
                                                 </tr>
                                             </tbody>
@@ -94,18 +94,18 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                 </div>
                             </div>
                         </div>
-                        <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">Professional Excellence</a>
+                        <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?= __('Professional Excellence'); ?></a>
                         <div class="accordion-desc">
                             <div class="table-responsive">
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Key Result Area</th>
-                                            <th scope="col">Key Performance Indicators</th>
-                                            <th scope="col">Weightage</th>
-                                            <th scope="col">Target / Achieved (self Score)</th>
-                                            <th scope="col">Points Scored<br />(self)</th>
+                                            <th scope="col"><?= __('Key Result Area'); ?></th>
+                                            <th scope="col"><?= __('Key Performance Indicators'); ?></th>
+                                            <th scope="col"><?= __('Weightage'); ?></th>
+                                            <th scope="col"><?= __('Target / Achieved (self Score)'); ?></th>
+                                            <th scope="col"><?= __('Points Scored'); ?><br /><?= __('(self)'); ?></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -115,48 +115,48 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                 <td><?php echo $akra[$akpi['key_reslut_id']]['area_name']; ?></td>
                                                 <td><?php echo $akpi['indicator_name']; ?></td>
                                                 <td>
-                                                    <input aria-label="Input field" type="text" class="form-control"  value="<?php echo $akpi['weightage']; ?>" readonly>
+                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  value="<?php echo $akpi['weightage']; ?>" readonly>
                                                 </td>
                                                 <td>
                                                     <div class="row">
                                                         <div class="col-lg-6">
-                                                            <input aria-label="Input field" type="text" class="form-control"  value="-" readonly>
+                                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  value="-" readonly>
                                                         </div>
                                                         <div class="col-lg-6">
-                                                            <input aria-label="Input field" type="text" class="form-control"  value="-" >
+                                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  value="-" >
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td><input aria-label="Input field" type="text" class="form-control"  value="0" ></td>
+                                                <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  value="0" ></td>
                                             </tr>
                                             <?php $mk++;
 } ?>
                                             <tr>
-                                                <th scope="col" colspan="4" class="text-center">Total</th>
+                                                <th scope="col" colspan="4" class="text-center"><?= __('Total'); ?></th>
                                                 <td>
                                                     <div class="row">
                                                         <div class="col-lg-6">
-                                                            <input aria-label="Input field" type="text" class="form-control" value="0" readonly="">
+                                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="0" readonly="">
                                                         </div>
                                                         <div class="col-lg-6">
-                                                            <input aria-label="Input field" type="text" class="form-control" value="0" readonly>
+                                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="0" readonly>
                                                         </div>
                                                     </div>
 
                                                 </td>
                                                 <td>
                                                     <div class="">
-                                                        <input aria-label="Input field" type="text" class="form-control" value="0"  readonly>
+                                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="0"  readonly>
                                                     </div>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th scope="col" colspan="3" class="text-center">Total Percentage(%)</th>
+                                                <th scope="col" colspan="3" class="text-center"><?= __('Total Percentage(%)'); ?></th>
                                                 <td colspan="2">
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <div class="input-group input-group-button">
-                                                                <input aria-label="Employee Total" type="text" class="form-control width1" id="finalkra_total_employee" readonly="" data-bs-toggle="tooltip" data-placement="bottom" title="Employee Total" value="0" >
+                                                                <input aria-label="<?= htmlspecialchars(__('Employee Total'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control width1" id="finalkra_total_employee" readonly="" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Employee Total'), ENT_QUOTES, 'UTF-8'); ?>" value="0" >
                                                                 <span class="input-group-text addon-style">
                                                                     <span class=""><i class="fa fa-user"></i></span>
                                                                 </span>
@@ -165,7 +165,7 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <div class="input-group input-group-button">
-                                                                <input aria-label="Manager Total" type="text" class="form-control width1" id="finalkra_total_manager" readonly="" data-bs-toggle="tooltip" data-placement="bottom" title="Manager Total" value="0" >
+                                                                <input aria-label="<?= htmlspecialchars(__('Manager Total'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control width1" id="finalkra_total_manager" readonly="" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Manager Total'), ENT_QUOTES, 'UTF-8'); ?>" value="0" >
                                                                 <span class="input-group-text addon-style">
                                                                     <span class=""><i class="fa fa-user-secret"></i></span>
                                                                 </span>
@@ -178,15 +178,15 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                     </table>
                                 </div>
                             </div>
-                            <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">Performance Appraisal Questions</a>
+                            <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?= __('Performance Appraisal Questions'); ?></a>
                             <div class="accordion-desc">
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th scope="col" style="width: 5%;">#</th>
-                                            <th scope="col" class="w-b-w-s" style="width: 30%;">Question</th>
-                                            <th scope="col" style="width: 5%;">Attch</th>
-                                            <th scope="col" style="width: 20%;">Ratting / Answer Employee</th>
+                                            <th scope="col" class="w-b-w-s" style="width: 30%;"><?= __('Question'); ?></th>
+                                            <th scope="col" style="width: 5%;"><?= __('Attch'); ?></th>
+                                            <th scope="col" style="width: 20%;"><?= __('Ratting / Answer Employee'); ?></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -201,9 +201,9 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                     <th scope="col">
                                                         <div class="row">
                                                             <div class="image-input col-lg-3" style="display: inherit; margin-top: -2px;">
-                                                                <label class="btn-hover-text-primary" data-action="change" data-toggle="tooltip" title="" data-original-title="Upload" >
-                                                                    <i class="ti-cloud-up text-primary f-18 f-w-800" data-toggle="tooltip" title="Upload"></i>
-                                                                    <input aria-label="File upload" type="file" name="attchments[<?php echo $paq['id']; ?>]" />
+                                                                <label class="btn-hover-text-primary" data-action="change" data-toggle="tooltip" title="" data-original-title="<?= htmlspecialchars(__('Upload'), ENT_QUOTES, 'UTF-8'); ?>" >
+                                                                    <i class="ti-cloud-up text-primary f-18 f-w-800" data-toggle="tooltip" title="<?= htmlspecialchars(__('Upload'), ENT_QUOTES, 'UTF-8'); ?>"></i>
+                                                                    <input aria-label="<?= htmlspecialchars(__('File upload'), ENT_QUOTES, 'UTF-8'); ?>" type="file" name="attchments[<?php echo $paq['id']; ?>]" />
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -213,7 +213,7 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                         if(in_array('EMP', $display_answer)){  ?>
                                                             <div class="row">
                                                                 <div class="col-lg-3 p-1">
-                                                                    <select aria-label="Select option" class="form-control js-example-basic-single">
+                                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single">
                                                                         <?php for($im=1;$im<=10;$im++){?>
                                                                             <option value="<?php echo $im; ?>"><?php echo $im; ?></option>
                                                                         <?php } ?>
@@ -225,20 +225,20 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                                         <?php foreach($question_options as $qo){ ?>
                                                                             <div class="checkbox-fade fade-in-primary mr-5">
                                                                                 <label class="form-label">
-                                                                                    <input aria-label="Checkbox" type="checkbox">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox">
                                                                                     <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span><span><?php echo $qo; ?></span>
                                                                                 </label>
                                                                             </div>
                                                                         <?php } ?>
                                                                     <?php }elseif($paq['answer_type'] == 'O'){?>
-                                                                        <select aria-label="Select option" class="form-control js-example-basic-single">
-                                                                            <option value="">Select Any One</option>
+                                                                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single">
+                                                                            <option value=""><?= __('Select Any One'); ?></option>
                                                                             <?php foreach($question_options as $qo){ ?>
                                                                                 <option value="<?php echo $qo; ?>"><?php echo $qo; ?></option>
                                                                             <?php } ?>
                                                                         </select>
                                                                     <?php }else{ ?>
-                                                                        <textarea aria-label="Text area" class="form-control"></textarea>
+                                                                        <textarea aria-label="<?= htmlspecialchars(__('Text area'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"></textarea>
                                                                     <?php } ?>
                                                                 </div>
                                                             <?php } ?>
@@ -271,7 +271,7 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                     <th scope="col"><?php echo $sub_headerres['field_name']; ?></th>
                                                 <?php }
                                                 if($paheaders['sub_header_addmore'] == '0'){ ?>
-                                                    <th scope="col">Action</th>
+                                                    <th scope="col"><?= __('Action'); ?></th>
                                                 <?php }  ?>
                                             </tr>
                                         </thead>
@@ -286,13 +286,13 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                         <td>
                                                             <div class="">
                                                                 <?php if($sub_headerres['type']=="S" && $sub_headerres[$loginuser_type] == "Y"){ ?>
-                                                                    <select aria-label="Select option" class="form-control form-select js-example-basic-single" name="<?php echo $fieldname; ?>">
-                                                                        <option value="Yes" >Yes</option>
-                                                                        <option value="No" >No</option>
-                                                                        <option value="Dont_know" >i don't know</option>
+                                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" name="<?php echo $fieldname; ?>">
+                                                                        <option value="Yes" ><?= __('Yes'); ?></option>
+                                                                        <option value="No" ><?= __('No'); ?></option>
+                                                                        <option value="Dont_know" ><?= __('i don\'t know'); ?></option>
                                                                     </select>
                                                                 <?php }else{ ?>
-                                                                    <input aria-label="Input field" type="text" class="form-control" <?php echo $sub_headerres[$loginuser_type] == "N"?"readonly":""; ?>>
+                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" <?php echo $sub_headerres[$loginuser_type] == "N"?"readonly":""; ?>>
                                                                 <?php } ?>
 
                                                             </div>
@@ -311,7 +311,7 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                             </table>
                                             <?php if($paheaders['sub_header_addmore'] == '0'){ ?>
                                                 <button type="button" class="btn btn-sm font-weight-bolder btn-light-primary btn-primary mt-2" onclick="addMoreRow('<?php echo $paheaders['id']; ?>')">
-                                                    <i class="fa fa-plus"></i>Add
+                                                    <i class="fa fa-plus"></i><?= __('Add'); ?>
                                                 </button>
                                             <?php } ?>
                                         </div>
@@ -326,7 +326,7 @@ $paheadersres  = $result['performance_appraisal_headers'];
                 <div class="tab-pane" id="preview_ro" role="tabpanel">
                     <div class="accordion-block color-accordion-block m-t-5">
                     <div class="color-accordion" id="color-accordion-ro">
-                        <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">Professional Excellence</a>
+                        <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?= __('Professional Excellence'); ?></a>
                         <div class="accordion-desc">
                             <div class="row">
                                 <div class="col-lg-12 col-xl-4">
@@ -334,15 +334,15 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                         <table class="table m-0">
                                             <tbody>
                                                 <tr>
-                                                    <th scope="row">Name</th>
+                                                    <th scope="row"><?= __('Name'); ?></th>
                                                     <td>-</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">Department</th>
+                                                    <th scope="row"><?= __('Department'); ?></th>
                                                     <td>-</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">Designation</th>
+                                                    <th scope="row"><?= __('Designation'); ?></th>
                                                     <td>-</td>
                                                 </tr>
                                             </tbody>
@@ -355,15 +355,15 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                             <tbody>
 
                                                 <tr>
-                                                    <th scope="row">Emp ID</th>
+                                                    <th scope="row"><?= __('Emp ID'); ?></th>
                                                     <td>-</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">Date of Join</th>
+                                                    <th scope="row"><?= __('Date of Join'); ?></th>
                                                     <td>-</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">Qualification:</th>
+                                                    <th scope="row"><?= __('Qualification'); ?>:</th>
                                                     <td class="address-basic">-</td>
                                                 </tr>
                                             </tbody>
@@ -375,11 +375,11 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                         <table class="table m-0">
                                             <tbody>
                                                 <tr>
-                                                    <th scope="row">RO's Name</th>
+                                                    <th scope="row"><?= __('RO\'s Name'); ?></th>
                                                     <td>-</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">RO Designation:</th>
+                                                    <th scope="row"><?= __('RO Designation'); ?>:</th>
                                                     <td>-</td>
                                                 </tr>
                                             </tbody>
@@ -388,20 +388,20 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                 </div>
                             </div>
                         </div>
-                        <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">Professional Excellence</a>
+                        <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?= __('Professional Excellence'); ?></a>
                         <div class="accordion-desc">
                             <div class="table-responsive">
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Key Result Area</th>
-                                            <th scope="col">Key Performance Indicators</th>
-                                            <th scope="col">Weightage</th>
-                                            <th scope="col">Target / Achieved (self Score)</th>
-                                            <th scope="col">Points Scored<br />(self)</th>
-                                            <th scope="col">Percentage achieved<br />(RO's Score)</th>
-                                            <th scope="col">Points Scored<br />(RO)</th>
+                                            <th scope="col"><?= __('Key Result Area'); ?></th>
+                                            <th scope="col"><?= __('Key Performance Indicators'); ?></th>
+                                            <th scope="col"><?= __('Weightage'); ?></th>
+                                            <th scope="col"><?= __('Target / Achieved (self Score)'); ?></th>
+                                            <th scope="col"><?= __('Points Scored'); ?><br /><?= __('(self)'); ?></th>
+                                            <th scope="col"><?= __('Percentage achieved'); ?><br /><?= __('(RO\'s Score)'); ?></th>
+                                            <th scope="col"><?= __('Points Scored'); ?><br /><?= __('(RO)'); ?></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -411,50 +411,50 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                 <td><?php echo $akra[$akpi['key_reslut_id']]['area_name']; ?></td>
                                                 <td><?php echo $akpi['indicator_name']; ?></td>
                                                 <td>
-                                                    <input aria-label="Input field" type="text" class="form-control"  value="<?php echo $akpi['weightage']; ?>" readonly>
+                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  value="<?php echo $akpi['weightage']; ?>" readonly>
                                                 </td>
                                                 <td>
                                                     <div class="row">
                                                         <div class="col-lg-6">
-                                                            <input aria-label="Input field" type="text" class="form-control"  value="-" readonly>
+                                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  value="-" readonly>
                                                         </div>
                                                         <div class="col-lg-6">
-                                                            <input aria-label="Input field" type="text" class="form-control"  value="-" readonly>
+                                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  value="-" readonly>
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td><input aria-label="Input field" type="text" class="form-control"  value="0"  readonly></td>
-                                                <td><input aria-label="Input field" type="text" class="form-control"  value="0"  ></td>
-                                                <td><input aria-label="Input field" type="text" class="form-control"  value="0"  readonly></td>
+                                                <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  value="0"  readonly></td>
+                                                <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  value="0"  ></td>
+                                                <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  value="0"  readonly></td>
                                             </tr>
                                             <?php $mk++;
 } ?>
                                             <tr>
-                                                <th scope="col" colspan="4" class="text-center">Total</th>
+                                                <th scope="col" colspan="4" class="text-center"><?= __('Total'); ?></th>
                                                 <td>
                                                     <div class="row">
                                                         <div class="col-lg-6">
-                                                            <input aria-label="Input field" type="text" class="form-control" value="0" readonly="">
+                                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="0" readonly="">
                                                         </div>
                                                         <div class="col-lg-6">
-                                                            <input aria-label="Input field" type="text" class="form-control" value="0" readonly>
+                                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="0" readonly>
                                                         </div>
                                                     </div>
 
                                                 </td>
                                                 <td>
                                                     <div class="">
-                                                        <input aria-label="Input field" type="text" class="form-control" value="0"  readonly>
+                                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="0"  readonly>
                                                     </div>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th scope="col" colspan="3" class="text-center">Total Percentage(%)</th>
+                                                <th scope="col" colspan="3" class="text-center"><?= __('Total Percentage(%)'); ?></th>
                                                 <td colspan="2">
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <div class="input-group input-group-button">
-                                                                <input aria-label="Employee Total" type="text" class="form-control width1" id="finalkra_total_employee_2" readonly="" data-bs-toggle="tooltip" data-placement="bottom" title="Employee Total" value="0" >
+                                                                <input aria-label="<?= htmlspecialchars(__('Employee Total'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control width1" id="finalkra_total_employee_2" readonly="" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Employee Total'), ENT_QUOTES, 'UTF-8'); ?>" value="0" >
                                                                 <span class="input-group-text addon-style">
                                                                     <span class=""><i class="fa fa-user"></i></span>
                                                                 </span>
@@ -463,7 +463,7 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <div class="input-group input-group-button">
-                                                                <input aria-label="Manager Total" type="text" class="form-control width1" id="finalkra_total_manager_2" readonly="" data-bs-toggle="tooltip" data-placement="bottom" title="Manager Total" value="0" >
+                                                                <input aria-label="<?= htmlspecialchars(__('Manager Total'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control width1" id="finalkra_total_manager_2" readonly="" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Manager Total'), ENT_QUOTES, 'UTF-8'); ?>" value="0" >
                                                                 <span class="input-group-text addon-style">
                                                                     <span class=""><i class="fa fa-user-secret"></i></span>
                                                                 </span>
@@ -476,16 +476,16 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                     </table>
                                 </div>
                             </div>
-                            <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">Performance Appraisal Questions</a>
+                            <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?= __('Performance Appraisal Questions'); ?></a>
                             <div class="accordion-desc">
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th scope="col" style="width: 5%;">#</th>
-                                            <th scope="col" class="w-b-w-s" style="width: 30%;">Question</th>
-                                            <th scope="col" style="width: 5%;">Attch</th>
-                                            <th scope="col" style="width: 20%;">Ratting / Answer Employee</th>
-                                            <th scope="col" style="width: 20%;">Ratting / Answer RO</th>
+                                            <th scope="col" class="w-b-w-s" style="width: 30%;"><?= __('Question'); ?></th>
+                                            <th scope="col" style="width: 5%;"><?= __('Attch'); ?></th>
+                                            <th scope="col" style="width: 20%;"><?= __('Ratting / Answer Employee'); ?></th>
+                                            <th scope="col" style="width: 20%;"><?= __('Ratting / Answer RO'); ?></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -500,9 +500,9 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                     <th scope="col">
                                                         <div class="row">
                                                             <div class="image-input col-lg-3" style="display: inherit; margin-top: -2px;">
-                                                                <label class="btn-hover-text-primary" data-action="change" data-toggle="tooltip" title="" data-original-title="Upload" >
-                                                                    <i class="ti-cloud-up text-primary f-18 f-w-800" data-toggle="tooltip" title="Upload"></i>
-                                                                    <input aria-label="File upload" type="file" name="attchments[<?php echo $paq['id']; ?>]" />
+                                                                <label class="btn-hover-text-primary" data-action="change" data-toggle="tooltip" title="" data-original-title="<?= htmlspecialchars(__('Upload'), ENT_QUOTES, 'UTF-8'); ?>" >
+                                                                    <i class="ti-cloud-up text-primary f-18 f-w-800" data-toggle="tooltip" title="<?= htmlspecialchars(__('Upload'), ENT_QUOTES, 'UTF-8'); ?>"></i>
+                                                                    <input aria-label="<?= htmlspecialchars(__('File upload'), ENT_QUOTES, 'UTF-8'); ?>" type="file" name="attchments[<?php echo $paq['id']; ?>]" />
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -512,7 +512,7 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                         if(in_array('EMP', $display_answer)){  ?>
                                                             <div class="row">
                                                                 <div class="col-lg-3 p-1">
-                                                                    <select aria-label="Select option" class="form-control js-example-basic-single">
+                                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single">
                                                                         <?php for($im=1;$im<=10;$im++){?>
                                                                             <option value="<?php echo $im; ?>"><?php echo $im; ?></option>
                                                                         <?php } ?>
@@ -524,20 +524,20 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                                         <?php foreach($question_options as $qo){ ?>
                                                                             <div class="checkbox-fade fade-in-primary mr-5">
                                                                                 <label class="form-label">
-                                                                                    <input aria-label="Checkbox" type="checkbox">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox">
                                                                                     <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span><span><?php echo $qo; ?></span>
                                                                                 </label>
                                                                             </div>
                                                                         <?php } ?>
                                                                     <?php }elseif($paq['answer_type'] == 'O'){?>
-                                                                        <select aria-label="Select option" class="form-control js-example-basic-single">
-                                                                            <option value="">Select Any One</option>
+                                                                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single">
+                                                                            <option value=""><?= __('Select Any One'); ?></option>
                                                                             <?php foreach($question_options as $qo){ ?>
                                                                                 <option value="<?php echo $qo; ?>"><?php echo $qo; ?></option>
                                                                             <?php } ?>
                                                                         </select>
                                                                     <?php }else{ ?>
-                                                                        <textarea aria-label="Text area" class="form-control"></textarea>
+                                                                        <textarea aria-label="<?= htmlspecialchars(__('Text area'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"></textarea>
                                                                     <?php } ?>
                                                                 </div>
                                                             <?php } ?>
@@ -548,7 +548,7 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                         if(in_array('RO', $display_answer)){  ?>
                                                             <div class="row">
                                                                 <div class="col-lg-3 p-1">
-                                                                    <select aria-label="Select option" class="form-control js-example-basic-single">
+                                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single">
                                                                         <?php for($im=1;$im<=10;$im++){?>
                                                                             <option value="<?php echo $im; ?>"><?php echo $im; ?></option>
                                                                         <?php } ?>
@@ -560,20 +560,20 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                                         <?php foreach($question_options as $qo){ ?>
                                                                             <div class="checkbox-fade fade-in-primary mr-5">
                                                                                 <label class="form-label">
-                                                                                    <input aria-label="Checkbox" type="checkbox">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox">
                                                                                     <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span><span><?php echo $qo; ?></span>
                                                                                 </label>
                                                                             </div>
                                                                         <?php } ?>
                                                                     <?php }elseif($paq['answer_type'] == 'O'){?>
-                                                                        <select aria-label="Select option" class="form-control js-example-basic-single">
-                                                                            <option value="">Select Any One</option>
+                                                                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single">
+                                                                            <option value=""><?= __('Select Any One'); ?></option>
                                                                             <?php foreach($question_options as $qo){ ?>
                                                                                 <option value="<?php echo $qo; ?>"><?php echo $qo; ?></option>
                                                                             <?php } ?>
                                                                         </select>
                                                                     <?php }else{ ?>
-                                                                        <textarea aria-label="Text area" class="form-control"></textarea>
+                                                                        <textarea aria-label="<?= htmlspecialchars(__('Text area'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"></textarea>
                                                                     <?php } ?>
                                                                 </div>
                                                             <?php } ?>
@@ -606,7 +606,7 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                     <th scope="col"><?php echo $sub_headerres['field_name']; ?></th>
                                                 <?php }
                                                 if($paheaders['sub_header_addmore'] == '0'){ ?>
-                                                    <th scope="col">Action</th>
+                                                    <th scope="col"><?= __('Action'); ?></th>
                                                 <?php }  ?>
                                             </tr>
                                         </thead>
@@ -621,13 +621,13 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                         <td>
                                                             <div class="">
                                                                 <?php if($sub_headerres['type']=="S" && $sub_headerres[$loginuser_type] == "Y"){ ?>
-                                                                    <select aria-label="Select option" class="form-control form-select js-example-basic-single" name="<?php echo $fieldname; ?>">
-                                                                        <option value="Yes" >Yes</option>
-                                                                        <option value="No" >No</option>
-                                                                        <option value="Dont_know" >i don't know</option>
+                                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" name="<?php echo $fieldname; ?>">
+                                                                        <option value="Yes" ><?= __('Yes'); ?></option>
+                                                                        <option value="No" ><?= __('No'); ?></option>
+                                                                        <option value="Dont_know" ><?= __('i don\'t know'); ?></option>
                                                                     </select>
                                                                 <?php }else{ ?>
-                                                                    <input aria-label="Input field" type="text" class="form-control" <?php echo $sub_headerres[$loginuser_type] == "N"?"readonly":""; ?>>
+                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" <?php echo $sub_headerres[$loginuser_type] == "N"?"readonly":""; ?>>
                                                                 <?php } ?>
 
                                                             </div>
@@ -646,7 +646,7 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                             </table>
                                             <?php if($paheaders['sub_header_addmore'] == '0'){ ?>
                                                 <button type="button" class="btn btn-sm font-weight-bolder btn-light-primary btn-primary mt-2" onclick="addMoreRow('<?php echo $paheaders['id']; ?>')">
-                                                    <i class="fa fa-plus"></i>Add
+                                                    <i class="fa fa-plus"></i><?= __('Add'); ?>
                                                 </button>
                                             <?php } ?>
                                         </div>
@@ -660,7 +660,7 @@ $paheadersres  = $result['performance_appraisal_headers'];
                 <div class="tab-pane" id="preview_hod" role="tabpanel">
                     <div class="accordion-block color-accordion-block m-t-5">
                     <div class="color-accordion" id="color-accordion-hod">
-                        <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">Professional Excellence</a>
+                        <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?= __('Professional Excellence'); ?></a>
                         <div class="accordion-desc">
                             <div class="row">
                                 <div class="col-lg-12 col-xl-4">
@@ -668,15 +668,15 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                         <table class="table m-0">
                                             <tbody>
                                                 <tr>
-                                                    <th scope="row">Name</th>
+                                                    <th scope="row"><?= __('Name'); ?></th>
                                                     <td>-</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">Department</th>
+                                                    <th scope="row"><?= __('Department'); ?></th>
                                                     <td>-</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">Designation</th>
+                                                    <th scope="row"><?= __('Designation'); ?></th>
                                                     <td>-</td>
                                                 </tr>
                                             </tbody>
@@ -689,15 +689,15 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                             <tbody>
 
                                                 <tr>
-                                                    <th scope="row">Emp ID</th>
+                                                    <th scope="row"><?= __('Emp ID'); ?></th>
                                                     <td>-</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">Date of Join</th>
+                                                    <th scope="row"><?= __('Date of Join'); ?></th>
                                                     <td>-</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">Qualification:</th>
+                                                    <th scope="row"><?= __('Qualification'); ?>:</th>
                                                     <td class="address-basic">-</td>
                                                 </tr>
                                             </tbody>
@@ -709,11 +709,11 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                         <table class="table m-0">
                                             <tbody>
                                                 <tr>
-                                                    <th scope="row">RO's Name</th>
+                                                    <th scope="row"><?= __('RO\'s Name'); ?></th>
                                                     <td>-</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">RO Designation:</th>
+                                                    <th scope="row"><?= __('RO Designation'); ?>:</th>
                                                     <td>-</td>
                                                 </tr>
                                             </tbody>
@@ -722,20 +722,20 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                 </div>
                             </div>
                         </div>
-                        <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">Professional Excellence</a>
+                        <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?= __('Professional Excellence'); ?></a>
                         <div class="accordion-desc">
                             <div class="table-responsive">
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Key Result Area</th>
-                                            <th scope="col">Key Performance Indicators</th>
-                                            <th scope="col">Weightage</th>
-                                            <th scope="col">Target / Achieved (self Score)</th>
-                                            <th scope="col">Points Scored<br />(self)</th>
-                                            <th scope="col">Percentage achieved<br />(RO's Score)</th>
-                                            <th scope="col">Points Scored<br />(RO)</th>
+                                            <th scope="col"><?= __('Key Result Area'); ?></th>
+                                            <th scope="col"><?= __('Key Performance Indicators'); ?></th>
+                                            <th scope="col"><?= __('Weightage'); ?></th>
+                                            <th scope="col"><?= __('Target / Achieved (self Score)'); ?></th>
+                                            <th scope="col"><?= __('Points Scored'); ?><br /><?= __('(self)'); ?></th>
+                                            <th scope="col"><?= __('Percentage achieved'); ?><br /><?= __('(RO\'s Score)'); ?></th>
+                                            <th scope="col"><?= __('Points Scored'); ?><br /><?= __('(RO)'); ?></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -745,50 +745,50 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                 <td><?php echo $akra[$akpi['key_reslut_id']]['area_name']; ?></td>
                                                 <td><?php echo $akpi['indicator_name']; ?></td>
                                                 <td>
-                                                    <input aria-label="Input field" type="text" class="form-control"  value="<?php echo $akpi['weightage']; ?>" readonly>
+                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  value="<?php echo $akpi['weightage']; ?>" readonly>
                                                 </td>
                                                 <td>
                                                     <div class="row">
                                                         <div class="col-lg-6">
-                                                            <input aria-label="Input field" type="text" class="form-control"  value="-" readonly>
+                                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  value="-" readonly>
                                                         </div>
                                                         <div class="col-lg-6">
-                                                            <input aria-label="Input field" type="text" class="form-control"  value="-" readonly>
+                                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  value="-" readonly>
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td><input aria-label="Input field" type="text" class="form-control"  value="0"  readonly></td>
-                                                <td><input aria-label="Input field" type="text" class="form-control"  value="0"  readonly></td>
-                                                <td><input aria-label="Input field" type="text" class="form-control"  value="0"  readonly></td>
+                                                <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  value="0"  readonly></td>
+                                                <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  value="0"  readonly></td>
+                                                <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  value="0"  readonly></td>
                                             </tr>
                                             <?php $mk++;
 } ?>
                                             <tr>
-                                                <th scope="col" colspan="4" class="text-center">Total</th>
+                                                <th scope="col" colspan="4" class="text-center"><?= __('Total'); ?></th>
                                                 <td>
                                                     <div class="row">
                                                         <div class="col-lg-6">
-                                                            <input aria-label="Input field" type="text" class="form-control" value="0" readonly="">
+                                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="0" readonly="">
                                                         </div>
                                                         <div class="col-lg-6">
-                                                            <input aria-label="Input field" type="text" class="form-control" value="0" readonly>
+                                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="0" readonly>
                                                         </div>
                                                     </div>
 
                                                 </td>
                                                 <td>
                                                     <div class="">
-                                                        <input aria-label="Input field" type="text" class="form-control" value="0"  readonly>
+                                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="0"  readonly>
                                                     </div>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th scope="col" colspan="3" class="text-center">Total Percentage(%)</th>
+                                                <th scope="col" colspan="3" class="text-center"><?= __('Total Percentage(%)'); ?></th>
                                                 <td colspan="2">
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <div class="input-group input-group-button">
-                                                                <input aria-label="Employee Total" type="text" class="form-control width1" id="finalkra_total_employee_3" readonly="" data-bs-toggle="tooltip" data-placement="bottom" title="Employee Total" value="0" >
+                                                                <input aria-label="<?= htmlspecialchars(__('Employee Total'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control width1" id="finalkra_total_employee_3" readonly="" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Employee Total'), ENT_QUOTES, 'UTF-8'); ?>" value="0" >
                                                                 <span class="input-group-text addon-style">
                                                                     <span class=""><i class="fa fa-user"></i></span>
                                                                 </span>
@@ -797,7 +797,7 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <div class="input-group input-group-button">
-                                                                <input aria-label="Manager Total" type="text" class="form-control width1" id="finalkra_total_manager_3" readonly="" data-bs-toggle="tooltip" data-placement="bottom" title="Manager Total" value="0" >
+                                                                <input aria-label="<?= htmlspecialchars(__('Manager Total'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control width1" id="finalkra_total_manager_3" readonly="" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Manager Total'), ENT_QUOTES, 'UTF-8'); ?>" value="0" >
                                                                 <span class="input-group-text addon-style">
                                                                     <span class=""><i class="fa fa-user-secret"></i></span>
                                                                 </span>
@@ -810,17 +810,17 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                     </table>
                                 </div>
                             </div>
-                            <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">Performance Appraisal Questions</a>
+                            <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?= __('Performance Appraisal Questions'); ?></a>
                             <div class="accordion-desc">
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th scope="col" style="width: 5%;">#</th>
-                                            <th scope="col" class="w-b-w-s" style="width: 30%;">Question</th>
-                                            <th scope="col" style="width: 5%;">Attch</th>
-                                            <th scope="col" style="width: 20%;">Ratting / Answer Employee</th>
-                                            <th scope="col" style="width: 20%;">Ratting / Answer RO</th>
-                                            <th scope="col" style="width: 20%;">Ratting / Answer HOD</th>
+                                            <th scope="col" class="w-b-w-s" style="width: 30%;"><?= __('Question'); ?></th>
+                                            <th scope="col" style="width: 5%;"><?= __('Attch'); ?></th>
+                                            <th scope="col" style="width: 20%;"><?= __('Ratting / Answer Employee'); ?></th>
+                                            <th scope="col" style="width: 20%;"><?= __('Ratting / Answer RO'); ?></th>
+                                            <th scope="col" style="width: 20%;"><?= __('Ratting / Answer HOD'); ?></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -835,9 +835,9 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                     <th scope="col">
                                                         <div class="row">
                                                             <div class="image-input col-lg-3" style="display: inherit; margin-top: -2px;">
-                                                                <label class="btn-hover-text-primary" data-action="change" data-toggle="tooltip" title="" data-original-title="Upload" >
-                                                                    <i class="ti-cloud-up text-primary f-18 f-w-800" data-toggle="tooltip" title="Upload"></i>
-                                                                    <input aria-label="File upload" type="file" name="attchments[<?php echo $paq['id']; ?>]" />
+                                                                <label class="btn-hover-text-primary" data-action="change" data-toggle="tooltip" title="" data-original-title="<?= htmlspecialchars(__('Upload'), ENT_QUOTES, 'UTF-8'); ?>" >
+                                                                    <i class="ti-cloud-up text-primary f-18 f-w-800" data-toggle="tooltip" title="<?= htmlspecialchars(__('Upload'), ENT_QUOTES, 'UTF-8'); ?>"></i>
+                                                                    <input aria-label="<?= htmlspecialchars(__('File upload'), ENT_QUOTES, 'UTF-8'); ?>" type="file" name="attchments[<?php echo $paq['id']; ?>]" />
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -847,7 +847,7 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                         if(in_array('EMP', $display_answer)){  ?>
                                                             <div class="row">
                                                                 <div class="col-lg-3 p-1">
-                                                                    <select aria-label="Select option" class="form-control js-example-basic-single">
+                                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single">
                                                                         <?php for($im=1;$im<=10;$im++){?>
                                                                             <option value="<?php echo $im; ?>"><?php echo $im; ?></option>
                                                                         <?php } ?>
@@ -859,20 +859,20 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                                         <?php foreach($question_options as $qo){ ?>
                                                                             <div class="checkbox-fade fade-in-primary mr-5">
                                                                                 <label class="form-label">
-                                                                                    <input aria-label="Checkbox" type="checkbox">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox">
                                                                                     <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span><span><?php echo $qo; ?></span>
                                                                                 </label>
                                                                             </div>
                                                                         <?php } ?>
                                                                     <?php }elseif($paq['answer_type'] == 'O'){?>
-                                                                        <select aria-label="Select option" class="form-control js-example-basic-single">
-                                                                            <option value="">Select Any One</option>
+                                                                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single">
+                                                                            <option value=""><?= __('Select Any One'); ?></option>
                                                                             <?php foreach($question_options as $qo){ ?>
                                                                                 <option value="<?php echo $qo; ?>"><?php echo $qo; ?></option>
                                                                             <?php } ?>
                                                                         </select>
                                                                     <?php }else{ ?>
-                                                                        <textarea aria-label="Text area" class="form-control"></textarea>
+                                                                        <textarea aria-label="<?= htmlspecialchars(__('Text area'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"></textarea>
                                                                     <?php } ?>
                                                                 </div>
                                                             <?php } ?>
@@ -883,7 +883,7 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                         if(in_array('RO', $display_answer)){  ?>
                                                             <div class="row">
                                                                 <div class="col-lg-3 p-1">
-                                                                    <select aria-label="Select option" class="form-control js-example-basic-single">
+                                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single">
                                                                         <?php for($im=1;$im<=10;$im++){?>
                                                                             <option value="<?php echo $im; ?>"><?php echo $im; ?></option>
                                                                         <?php } ?>
@@ -895,20 +895,20 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                                         <?php foreach($question_options as $qo){ ?>
                                                                             <div class="checkbox-fade fade-in-primary mr-5">
                                                                                 <label class="form-label">
-                                                                                    <input aria-label="Checkbox" type="checkbox">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox">
                                                                                     <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span><span><?php echo $qo; ?></span>
                                                                                 </label>
                                                                             </div>
                                                                         <?php } ?>
                                                                     <?php }elseif($paq['answer_type'] == 'O'){?>
-                                                                        <select aria-label="Select option" class="form-control js-example-basic-single">
-                                                                            <option value="">Select Any One</option>
+                                                                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single">
+                                                                            <option value=""><?= __('Select Any One'); ?></option>
                                                                             <?php foreach($question_options as $qo){ ?>
                                                                                 <option value="<?php echo $qo; ?>"><?php echo $qo; ?></option>
                                                                             <?php } ?>
                                                                         </select>
                                                                     <?php }else{ ?>
-                                                                        <textarea aria-label="Text area" class="form-control"></textarea>
+                                                                        <textarea aria-label="<?= htmlspecialchars(__('Text area'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"></textarea>
                                                                     <?php } ?>
                                                                 </div>
                                                             <?php } ?>
@@ -919,7 +919,7 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                         if(in_array('HOD', $display_answer)){  ?>
                                                             <div class="row">
                                                                 <div class="col-lg-3 p-1">
-                                                                    <select aria-label="Select option" class="form-control js-example-basic-single">
+                                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single">
                                                                         <?php for($im=1;$im<=10;$im++){?>
                                                                             <option value="<?php echo $im; ?>"><?php echo $im; ?></option>
                                                                         <?php } ?>
@@ -931,20 +931,20 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                                         <?php foreach($question_options as $qo){ ?>
                                                                             <div class="checkbox-fade fade-in-primary mr-5">
                                                                                 <label class="form-label">
-                                                                                    <input aria-label="Checkbox" type="checkbox">
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox">
                                                                                     <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span><span><?php echo $qo; ?></span>
                                                                                 </label>
                                                                             </div>
                                                                         <?php } ?>
                                                                     <?php }elseif($paq['answer_type'] == 'O'){?>
-                                                                        <select aria-label="Select option" class="form-control js-example-basic-single">
-                                                                            <option value="">Select Any One</option>
+                                                                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single">
+                                                                            <option value=""><?= __('Select Any One'); ?></option>
                                                                             <?php foreach($question_options as $qo){ ?>
                                                                                 <option value="<?php echo $qo; ?>"><?php echo $qo; ?></option>
                                                                             <?php } ?>
                                                                         </select>
                                                                     <?php }else{ ?>
-                                                                        <textarea aria-label="Text area" class="form-control"></textarea>
+                                                                        <textarea aria-label="<?= htmlspecialchars(__('Text area'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"></textarea>
                                                                     <?php } ?>
                                                                 </div>
                                                             <?php } ?>
@@ -977,7 +977,7 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                     <th scope="col"><?php echo $sub_headerres['field_name']; ?></th>
                                                 <?php }
                                                 if($paheaders['sub_header_addmore'] == '0'){ ?>
-                                                    <th scope="col">Action</th>
+                                                    <th scope="col"><?= __('Action'); ?></th>
                                                 <?php }  ?>
                                             </tr>
                                         </thead>
@@ -992,13 +992,13 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                                         <td>
                                                             <div class="">
                                                                 <?php if($sub_headerres['type']=="S" && $sub_headerres[$loginuser_type] == "Y"){ ?>
-                                                                    <select aria-label="Select option" class="form-control form-select js-example-basic-single" name="<?php echo $fieldname; ?>">
-                                                                        <option value="Yes" >Yes</option>
-                                                                        <option value="No" >No</option>
-                                                                        <option value="Dont_know" >i don't know</option>
+                                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" name="<?php echo $fieldname; ?>">
+                                                                        <option value="Yes" ><?= __('Yes'); ?></option>
+                                                                        <option value="No" ><?= __('No'); ?></option>
+                                                                        <option value="Dont_know" ><?= __('i don\'t know'); ?></option>
                                                                     </select>
                                                                 <?php }else{ ?>
-                                                                    <input aria-label="Input field" type="text" class="form-control" <?php echo $sub_headerres[$loginuser_type] == "N"?"readonly":""; ?>>
+                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" <?php echo $sub_headerres[$loginuser_type] == "N"?"readonly":""; ?>>
                                                                 <?php } ?>
 
                                                             </div>
@@ -1017,7 +1017,7 @@ $paheadersres  = $result['performance_appraisal_headers'];
                                             </table>
                                             <?php if($paheaders['sub_header_addmore'] == '0'){ ?>
                                                 <button type="button" class="btn btn-sm font-weight-bolder btn-light-primary btn-primary mt-2" onclick="addMoreRow('<?php echo $paheaders['id']; ?>')">
-                                                    <i class="fa fa-plus"></i>Add
+                                                    <i class="fa fa-plus"></i><?= __('Add'); ?>
                                                 </button>
                                             <?php } ?>
                                         </div>
@@ -1034,30 +1034,30 @@ $paheadersres  = $result['performance_appraisal_headers'];
                 <div class="col-lg-4">
                     <div class="card">
                         <div class="card-header">
-                            <h5>Employee Comment</h5>
+                            <h5><?= __('Employee Comment'); ?></h5>
                         </div>
                         <div class="card-body">
-                            <textarea aria-label="Text area" class="form-control" rows="4" cols="50"></textarea>
+                            <textarea aria-label="<?= htmlspecialchars(__('Text area'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" rows="4" cols="50"></textarea>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="card">
                         <div class="card-header">
-                            <h5>RO Comment</h5>
+                            <h5><?= __('RO Comment'); ?></h5>
                         </div>
                         <div class="card-body">
-                            <textarea aria-label="Text area" class="form-control" rows="8" cols="50"></textarea>
+                            <textarea aria-label="<?= htmlspecialchars(__('Text area'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" rows="8" cols="50"></textarea>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="card">
                         <div class="card-header">
-                            <h5>HOD Comment</h5>
+                            <h5><?= __('HOD Comment'); ?></h5>
                         </div>
                         <div class="card-body">
-                            <textarea aria-label="Text area" class="form-control" rows="40" cols="50"></textarea>
+                            <textarea aria-label="<?= htmlspecialchars(__('Text area'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" rows="40" cols="50"></textarea>
                         </div>
                     </div>
                 </div>
