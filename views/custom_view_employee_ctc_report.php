@@ -92,21 +92,21 @@ if(!function_exists('render_employee_ctc_table')){
             <table class="table table-bordered custom-table-border display nowrap " style="width: 100%;">
             <thead>
                 <tr>
-                    <th scope="col">S.No.</th>
-                    <th scope="col">Employee Code</th>
-                    <th scope="col">Employee Name</th>
-                    <th scope="col">DOJ</th>
-                    <th scope="col">Location </th>
-                    <th scope="col">Department</th>
-                    <th scope="col">Designation</th>
-                    <th scope="col">Job Title</th>
-                    <th scope="col">PAN No.</th>
-                    <th scope="col">UAN No.</th>
-                    <th scope="col">Bank Name</th>
-                    <th scope="col">IFSC Code</th>
-                    <th scope="col">Bank Ac</th>
-                    <th scope="col">Working Days</th>
-                    <th scope="col">Payable Days</th>
+                    <th scope="col"><?= __('S.No.'); ?></th>
+                    <th scope="col"><?= __('Employee Code'); ?></th>
+                    <th scope="col"><?= __('Employee Name'); ?></th>
+                    <th scope="col"><?= __('DOJ'); ?></th>
+                    <th scope="col"><?= __('Location'); ?> </th>
+                    <th scope="col"><?= __('Department'); ?></th>
+                    <th scope="col"><?= __('Designation'); ?></th>
+                    <th scope="col"><?= __('Job Title'); ?></th>
+                    <th scope="col"><?= __('PAN No.'); ?></th>
+                    <th scope="col"><?= __('UAN No.'); ?></th>
+                    <th scope="col"><?= __('Bank Name'); ?></th>
+                    <th scope="col"><?= __('IFSC Code'); ?></th>
+                    <th scope="col"><?= __('Bank Ac'); ?></th>
+                    <th scope="col"><?= __('Working Days'); ?></th>
+                    <th scope="col"><?= __('Payable Days'); ?></th>
                     <?php foreach((array)$unique as $aaarray ){ if(!in_array($aaarray,(array)$viewlist)){ ?>
                         <th scope="col"><?php echo $aaarray; ?></th>
                     <?php } ?>
@@ -159,7 +159,7 @@ if(!function_exists('render_employee_ctc_table')){
                     <?php $i++;
 } ?>
                 <?php }else{ ?>
-                    <tr><td colspan="16" class="text-center"><h4 class="mt-4"><i class="fa fa-warning"></i> No Employee CTC Details</h4></td></tr>
+                    <tr><td colspan="16" class="text-center"><h4 class="mt-4"><i class="fa fa-warning"></i> <?= __('No Employee CTC Details'); ?></h4></td></tr>
                 <?php } ?>
             </tbody>
         </table>
@@ -178,22 +178,22 @@ if(!function_exists('render_employee_ctc_table')){
                         <div class="col-lg-3 col-md-3 col-sm-12 col-12 mb-3">
                             <div class="col bg-light-primary ">
                                 <span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
-                                    <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="Theme-Logo" />
+                                    <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="<?= htmlspecialchars(__('Theme-Logo'), ENT_QUOTES, 'UTF-8'); ?>" />
                                 </span>
                                 <span class="text-dark-75 font-weight-bolder font-size-h3"><?php echo $company_name; ?></span>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-9 col-sm-12 col-12">
-                            <h4 class="card-label text-center f-w-700">Employee's CTC Details <?php echo date("M Y",strtotime($pay_month_year)); ?>
-                                <small class="f-10 d-block">Name : <?php echo $_SESSION['display_name']; ?> &nbsp;  Date & Time : <?php echo date("d-m-Y H:i:s"); ?></small>
+                            <h4 class="card-label text-center f-w-700"><?= __('Employee\'s CTC Details'); ?> <?php echo date("M Y",strtotime($pay_month_year)); ?>
+                                <small class="f-10 d-block"><?= __('Name'); ?> : <?php echo $_SESSION['display_name']; ?> &nbsp;  <?= htmlspecialchars(__('Date & Time'), ENT_QUOTES, 'UTF-8'); ?> : <?php echo date("d-m-Y H:i:s"); ?></small>
                             </h4>
                         </div>
                         <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                             <form method="post" action="#">
                                 <div class="input-group input-group-button">
-                                    <input aria-label="Pay Month Year" type="month" name="pay_month_year" value="<?php echo $pay_year."-".$pay_month?>"  id="example-month-input"  class="form-control form-control-sm width1" style="font-size: 18px;height: 48px !important;padding: 10px 15px;">
+                                    <input aria-label="<?= htmlspecialchars(__('Pay Month Year'), ENT_QUOTES, 'UTF-8'); ?>" type="month" name="pay_month_year" value="<?php echo $pay_year."-".$pay_month?>"  id="example-month-input"  class="form-control form-control-sm width1" style="font-size: 18px;height: 48px !important;padding: 10px 15px;">
                                     <button type="submit" name="get_ecr_summary" class="btn btn-info waves-effect waves-light input-group-text mt-0">
-                                        Submit
+                                        <?= __('Submit'); ?>
                                     </button>
                                 </div>
                             </form>
@@ -206,7 +206,7 @@ if(!function_exists('render_employee_ctc_table')){
                         <?php if(count((array)$pay_area_ids) > 0){ ?>
                         <ul class="nav nav-tabs mb-3">
                             <li class="nav-item">
-                                <a class="nav-link active" data-bs-toggle="tab" href="#ctc-tab-all" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">All</a>
+                                <a class="nav-link active" data-bs-toggle="tab" href="#ctc-tab-all" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('All'); ?></a>
                             </li>
                             <?php foreach((array)$pay_area_ids as $pay_area_id){ ?>
                                 <li class="nav-item">
