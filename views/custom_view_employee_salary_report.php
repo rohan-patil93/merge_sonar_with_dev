@@ -17,13 +17,13 @@ $data = $result['data'];
                             <div class="col-lg-3">
                             <div class="col bg-light-primary ">
                                 <span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
-                                    <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="Theme-Logo" />
+                                    <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="<?= htmlspecialchars(__('Theme-Logo'), ENT_QUOTES, 'UTF-8'); ?>" />
                                 </span>
                                 <span class="text-dark-75 font-weight-bolder font-size-h3"><?php echo $company_name; ?></span>
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <h4 class="card-label text-center f-w-700">Employee's Salary Details </br><small class="f-10">Name : <?php echo $_SESSION['display_name']; ?> &nbsp;  Date & Time : <?php echo date("d-m-Y H:i:s"); ?></small></h4>
+                            <h4 class="card-label text-center f-w-700"><?= __('Employee\'s Salary Details'); ?> </br><small class="f-10"><?= __('Name'); ?> : <?php echo $_SESSION['display_name']; ?> &nbsp;  <?= htmlspecialchars(__('Date & Time'), ENT_QUOTES, 'UTF-8'); ?> : <?php echo date("d-m-Y H:i:s"); ?></small></h4>
 
                         </div>
 
@@ -35,11 +35,11 @@ $data = $result['data'];
                     <table id="basic-btn" class="table table-striped table-bordered nowrap">
                         <thead>
                             <tr>
-                                <th scope="col"> SL NO </th>
-                                <th scope="col">Employee Code</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Data of Joining</th>
-                                <th scope="col">Data of Leaving</th>
+                                <th scope="col"> <?= __('SL NO'); ?> </th>
+                                <th scope="col"><?= __('Employee Code'); ?></th>
+                                <th scope="col"><?= __('Name'); ?></th>
+                                <th scope="col"><?= __('Data of Joining'); ?></th>
+                                <th scope="col"><?= __('Data of Leaving'); ?></th>
                                 <?php
                                     foreach($viewlist  as $er ){?>
                                     <th scope="col"><?php echo $ern[$er]; ?></th>
