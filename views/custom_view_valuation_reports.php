@@ -13,7 +13,7 @@ foreach($company_valuation_distributions as $cvd){
 ?>
 <div class="card">
     <div class="card-header table-card-header">
-      <h5>Valuation Overview</h5>
+      <h5><?= __('Valuation Overview'); ?></h5>
       <div class="card-header-right table-card-header ">
       </div>
   </div>
@@ -42,7 +42,7 @@ foreach($company_valuation_distributions as $cvd){
                             <th scope="col" style="text-align: right;">&nbsp;<br /></th>
                         </tr>
                         <tr style="background-color: #eeeeee;">
-                            <th scope="col">Total Ownership</th>
+                            <th scope="col"><?= __('Total Ownership'); ?></th>
                             <th scope="col">&nbsp;</th>
                             <th scope="col">&nbsp;</th>
                         </tr>
@@ -87,14 +87,14 @@ foreach($distribution as $distribution1){
                                     <th scope="col" class="border-bottom align-center" style="text-align: center;" colspan="3"><?php echo date("Y",strtotime($cv['valuation_date']));?></th>
                                 </tr>
                                 <tr style="text-align: center;">
-                                    <th scope="col" class="align-center">Value<br /><?php echo customeummarmonyformateifine($cv['company_value']); ?></th>
-                                    <th scope="col" class="align-center">Shares<br /><?php echo round($cv['total_share_qty']); ?></th>
-                                    <th scope="col" class="align-center">Shr. Price<br /><?php echo customeummarmonyformateifine($cv['per_share_value']); ?></th>
+                                    <th scope="col" class="align-center"><?= __('Value'); ?><br /><?php echo customeummarmonyformateifine($cv['company_value']); ?></th>
+                                    <th scope="col" class="align-center"><?= __('Shares'); ?><br /><?php echo round($cv['total_share_qty']); ?></th>
+                                    <th scope="col" class="align-center"><?= __('Shr. Price'); ?><br /><?php echo customeummarmonyformateifine($cv['per_share_value']); ?></th>
                                 </tr>
                                 <tr style="text-align: center;">
-                                    <th scope="col" class="align-center">Grand Total</th>
-                                    <th scope="col" class="align-center">Option</th>
-                                    <th scope="col" class="align-center">Equity<br />(%)</th>
+                                    <th scope="col" class="align-center"><?= __('Grand Total'); ?></th>
+                                    <th scope="col" class="align-center"><?= __('Option'); ?></th>
+                                    <th scope="col" class="align-center"><?= __('Equity'); ?><br />(%)</th>
                                 </tr>
                                 <tr style="background-color: #eeeeee; text-align: center;">
                                     <th scope="col">&nbsp &nbsp</th>
