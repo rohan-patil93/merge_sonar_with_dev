@@ -17,8 +17,8 @@ if (!empty($formData['contact_persons'])) {
 ?>
 <?php if ($contract_services_contact_section == 'services') { ?>
                         <div class="col-md-12" style="<?= $fieldDisplay['contract_services_id']['style'] ?>">
-                            <label for="unified_contract_services_multiselect" class="form-label d-block">Services <?= $fieldDisplay['contract_services_id']['star'] ?></label>
-                            <select name="contract_services_id[]" multiple class="form-control js-example-basic-multiple" id="unified_contract_services_multiselect" <?= $fieldDisplay['contract_services_id']['required'] ?> <?= $amc_renew_disabled ?? '' ?> aria-label="Contract Services Id">
+                            <label for="unified_contract_services_multiselect" class="form-label d-block"><?= __('Services '.$fieldDisplay['contract_services_id']['star']) ?></label>
+                            <select name="contract_services_id[]" multiple class="form-control js-example-basic-multiple" id="unified_contract_services_multiselect" <?= $fieldDisplay['contract_services_id']['required'] ?> <?= $amc_renew_disabled ?? '' ?> aria-label="<?= __('Contract Services Id') ?>">
                                 <?php if (count((array)$contract_services) > 0) {
                                     foreach ($contract_services as $conservRow) {
                                         $conserv = is_array($conservRow) ? $conservRow : json_decode(json_encode($conservRow), true);
@@ -32,7 +32,7 @@ if (!empty($formData['contact_persons'])) {
                                                 }
                                             }
                                         } ?>
-                                        <option value="<?= htmlspecialchars($serviceId) ?>" <?= $isSelected ? 'selected' : '' ?>><?= htmlspecialchars($conserv['service_name'] ?? '') ?></option>
+                                        <option value="<?= htmlspecialchars($serviceId) ?>" <?= $isSelected ? 'selected' : '' ?>><?= htmlspecialchars(__($conserv['service_name'] ?? '')) ?></option>
                                     <?php }
                                 } ?>
                             </select>
@@ -45,16 +45,16 @@ if (!empty($formData['contact_persons'])) {
                                     $conpers = is_array($conpers) ? $conpers : json_decode(json_encode($conpers), true); ?>
                             <div class="row g-2 unified-contact-person-row mb-0" id="contact_persons_remove_<?php echo $mk; ?>">
                                 <div class="col-lg-4">
-                                    <input type="text" name="contact_persons[name][]" value="<?php echo htmlspecialchars($conpers['name'] ?? ''); ?>" class="form-control" placeholder="Contact Person Name" aria-label="Contact Person Name">
+                                    <input type="text" name="contact_persons[name][]" value="<?php echo htmlspecialchars($conpers['name'] ?? ''); ?>" class="form-control" placeholder="<?= __('Contact Person Name') ?>" aria-label="<?= __('Contact Person Name') ?>">
                                 </div>
                                 <div class="col-lg-4">
-                                    <input type="email" name="contact_persons[email][]" value="<?php echo htmlspecialchars($conpers['email'] ?? ''); ?>" class="form-control" placeholder="Contact Person Email" aria-label="Contact Person Email">
+                                    <input type="email" name="contact_persons[email][]" value="<?php echo htmlspecialchars($conpers['email'] ?? ''); ?>" class="form-control" placeholder="<?= __('Contact Person Email') ?>" aria-label="<?= __('Contact Person Email') ?>">
                                 </div>
                                 <div class="col-lg-3">
-                                    <input type="tel" name="contact_persons[number][]" value="<?php echo htmlspecialchars($conpers['number'] ?? ''); ?>" class="form-control" placeholder="Contact Person Number" aria-label="Contact Person Number">
+                                    <input type="tel" name="contact_persons[number][]" value="<?php echo htmlspecialchars($conpers['number'] ?? ''); ?>" class="form-control" placeholder="<?= __('Contact Person Number') ?>" aria-label="<?= __('Contact Person Number') ?>">
                                 </div>
                                 <div class="col-lg-1 d-flex align-items-center">
-                                    <button type="button" class="btn btn-link p-0 unified-remove-contact-person text-danger" data-target-id="contact_persons_remove_<?php echo $mk; ?>" title="Click to Remove">
+                                    <button type="button" class="btn btn-link p-0 unified-remove-contact-person text-danger" data-target-id="contact_persons_remove_<?php echo $mk; ?>" title="<?= __('Click to Remove') ?>">
                                         <i class="ti-trash"></i>
                                     </button>
                                 </div>
@@ -65,7 +65,7 @@ if (!empty($formData['contact_persons'])) {
                         </div>
                         <div class="col-md-12">
                             <button type="button" class="btn btn-sm btn-outline-primary" id="unified-add-contact-person-btn">
-                                <i class="fa fa-plus-circle me-1"></i> Add More Contact Person
+                                <i class="fa fa-plus-circle me-1"></i> <?= __('Add More Contact Person') ?>
                             </button>
                         </div>
 <?php } ?>
