@@ -16,7 +16,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule'];
         $("#resultdivid").removeClass("col-lg-12");
         $("#listdivid").addClass("col-lg-2");
         $("#resultdivid").addClass("col-lg-10");
-        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $("#resultdivid").html(loader);
         $.ajax({
             url: "views/custom_insert_transaction_activity_schedules.php",
@@ -42,7 +42,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule'];
                     </div>
                     <div class="col-md-4">
                         <div class="input-group input-group-button mb-0">
-                            <input type="text" id="dynamicfilterhideshow" data-id="categoryfilter" data-type="tr" class="form-control form-control-sm width1" placeholder="Enter Name" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Enter Name" aria-label="Enter Name">
+                            <input type="text" id="dynamicfilterhideshow" data-id="categoryfilter" data-type="tr" class="form-control form-control-sm width1" placeholder="<?= htmlspecialchars(__('Enter Name'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Enter Name'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Enter Name'), ENT_QUOTES, 'UTF-8'); ?>">
                             <span class="input-group-text addon-style">
                                 <span class=""><span class="ti-search text-white mt-2"></span></span>
                             </span>
@@ -53,13 +53,13 @@ $transaction_activity_schedule = $result['transaction_activity_schedule'];
                     <table class="table table-hover m-b-0" style="font-size:13px;" >
                         <thead>
                             <tr><th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col" class="text-right">Total Task</th>
-                                <th scope="col" class="text-right">Yet To Start</th>
-                                <th scope="col" class="text-right">Review Pending</th>
-                                <th scope="col" class="text-right">In-Progress</th>
-                                <th scope="col" class="text-right">Approved</th>
-                                <th scope="col">Progress</th>
+                                <th scope="col"><?= __('Name'); ?></th>
+                                <th scope="col" class="text-right"><?= __('Total Task'); ?></th>
+                                <th scope="col" class="text-right"><?= __('Yet To Start'); ?></th>
+                                <th scope="col" class="text-right"><?= __('Review Pending'); ?></th>
+                                <th scope="col" class="text-right"><?= __('In-Progress'); ?></th>
+                                <th scope="col" class="text-right"><?= __('Approved'); ?></th>
+                                <th scope="col"><?= __('Progress'); ?></th>
                             </tr>
                         </thead>
                         <tbody id="categoryfilter">
@@ -80,7 +80,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule'];
                                     ?>
                                     <div class="row align-items-center m-b-5">
                                         <div class="col-auto">
-                                            <p class="m-b-0">Completion</p>
+                                            <p class="m-b-0"><?= __('Completion'); ?></p>
                                         </div>
                                         <div class="col text-end">
                                             <p class="m-b-0 text-c-green"><?php echo round($complettaskper); ?>%</p>
