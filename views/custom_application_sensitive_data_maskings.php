@@ -254,28 +254,28 @@ if ($isPolicyActive) {
                         <div class="card-body mt-2">
                             <div class="row g-3">
                                 <div class="col-md-4">
-                                    <label class="form-label fw-bold">Policy Name *</label>
-                                    <input type="text" class="form-control" name="policy_name" 
+                                    <label for="fld_policy_name" class="form-label fw-bold">Policy Name *</label>
+                                    <input id="fld_policy_name" type="text" class="form-control" name="policy_name" 
                                            value="<?php echo htmlspecialchars($currentPolicy['policy_name'] ?: 'Corporate Sensitive Data Policy'); ?>" 
                                            required <?php echo !$isAdmin ? 'disabled' : ''; ?>>
                                     <input type="hidden" class="form-control" name="is_active" value="0">
                                     
                                 </div>
                                 <div class="col-md-2">
-                                    <label class="form-label fw-bold">From Date</label>
+                                    <label for="from_date" class="form-label fw-bold">From Date</label>
                                     <input type="date" class="form-control" name="from_date" id="from_date" 
                                            value="<?php echo htmlspecialchars($currentPolicy['from_date'] ?? date('Y-01-01')); ?>" 
                                            <?php echo !$isAdmin ? 'disabled' : ''; ?>>
                                 </div>
                                 <div class="col-md-2">
-                                    <label class="form-label fw-bold">To Date</label>
+                                    <label for="to_date" class="form-label fw-bold">To Date</label>
                                     <input type="date" class="form-control" name="to_date" id="to_date" 
                                            value="<?php echo htmlspecialchars($currentPolicy['to_date'] ?? date('Y-12-31', strtotime('+4 years'))); ?>" 
                                            <?php echo !$isAdmin ? 'disabled' : ''; ?>>
                                 </div>
                                 <div class="col-md-4 mt-2">
-                                    <label class="form-label fw-bold">Policy Description / Business Notes</label>
-                                    <textarea class="form-control" name="description" rows="2" placeholder="Explain the data protection compliance objectives..." <?php echo !$isAdmin ? 'disabled' : ''; ?>><?php echo htmlspecialchars($currentPolicy['description'] ?? 'Automated masking policy for sensitive personal and financial identifiers.'); ?></textarea>
+                                    <label for="fld_description" class="form-label fw-bold">Policy Description / Business Notes</label>
+                                    <textarea id="fld_description" class="form-control" name="description" rows="2" placeholder="Explain the data protection compliance objectives..." <?php echo !$isAdmin ? 'disabled' : ''; ?>><?php echo htmlspecialchars($currentPolicy['description'] ?? 'Automated masking policy for sensitive personal and financial identifiers.'); ?></textarea>
                                 </div>
                             </div>
                         </div>
@@ -458,17 +458,17 @@ if ($isPolicyActive) {
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <input type="number" min="0" max="10" class="form-control form-control-sm font-monospace rule-show-first" 
+                                                            <input aria-label="Show start characters" type="number" min="0" max="10" class="form-control form-control-sm font-monospace rule-show-first" 
                                                                    name="custom_type_show_first[]" value="<?php echo htmlspecialchars($cFirst); ?>"
                                                                    oninput="updateRowPreview('<?php echo $cKey; ?>')">
                                                         </td>
                                                         <td>
-                                                            <input type="number" min="0" max="10" class="form-control form-control-sm font-monospace rule-show-last" 
+                                                            <input aria-label="Show end characters" type="number" min="0" max="10" class="form-control form-control-sm font-monospace rule-show-last" 
                                                                    name="custom_type_show_last[]" value="<?php echo htmlspecialchars($cLast); ?>"
                                                                    oninput="updateRowPreview('<?php echo $cKey; ?>')">
                                                         </td>
                                                         <td>
-                                                            <select class="form-select form-select-sm font-monospace rule-mask-char js-example-basic-single"
+                                                            <select aria-label="Mask character" class="form-select form-select-sm font-monospace rule-mask-char js-example-basic-single"
                                                                     name="custom_type_mask_char[]"
                                                                     onchange="updateRowPreview('<?php echo $cKey; ?>')">
                                                                 <option value="*" <?php echo $cChar === '*' ? 'selected' : ''; ?>>*</option>
@@ -530,7 +530,7 @@ if ($isPolicyActive) {
                             </p>
                             <div class="row g-3 align-items-end">
                                 <div class="col-md-3">
-                                    <label class="form-label small fw-bold">Select Data Type</label>
+                                    <label for="test_data_type" class="form-label small fw-bold">Select Data Type</label>
                                     <select class="form-select" id="test_data_type" onchange="runSimulator()">
                                         <?php foreach ($supportedTypes as $typeKey => $meta): ?>
                                             <option value="<?php echo htmlspecialchars($typeKey); ?>"><?php echo htmlspecialchars($meta['name']); ?> (<?php echo htmlspecialchars($typeKey); ?>)</option>
@@ -538,11 +538,11 @@ if ($isPolicyActive) {
                                     </select>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label small fw-bold">Test Value (Try Different Lengths)</label>
+                                    <label for="test_input_value" class="form-label small fw-bold">Test Value (Try Different Lengths)</label>
                                     <input type="text" class="form-control font-monospace" id="test_input_value" value="rohan@gmail.com" oninput="runSimulator()" placeholder="Enter test value...">
                                 </div>
                                 <div class="col-md-5">
-                                    <label class="form-label small fw-bold">Masked Output (Dynamic Character-Count)</label>
+                                    <span class="form-label small fw-bold d-inline-block">Masked Output (Dynamic Character-Count)</span>
                                     <div class="form-control font-monospace bg-light text-primary fw-bold" id="test_output_value" style="font-size: 1.05rem;">
                                         r****@gmail.com
                                     </div>
@@ -567,21 +567,21 @@ if ($isPolicyActive) {
             </div>
             <div class="modal-body">
                 <div class="mb-3">
-                    <label class="form-label fw-bold">Field Name / Label <span class="text-danger">*</span></label>
+                    <label for="custom_field_label" class="form-label fw-bold">Field Name / Label <span class="text-danger">*</span></label>
                     <input type="text" class="form-control" id="custom_field_label" placeholder="e.g. Salary, SSN, Driving License">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label fw-bold">Field Key Identifier <span class="text-danger">*</span></label>
+                    <label for="custom_field_key" class="form-label fw-bold">Field Key Identifier <span class="text-danger">*</span></label>
                     <input type="text" class="form-control font-monospace" id="custom_field_key" placeholder="e.g. salary, ssn, driving_license">
                     <small class="text-muted">Unique lowercase identifier used in code calls</small>
                 </div>
                 <div class="row g-2">
                     <div class="col-6 mb-3">
-                        <label class="form-label fw-bold">Show Start Chars</label>
+                        <label for="custom_field_show_first" class="form-label fw-bold">Show Start Chars</label>
                         <input type="number" min="0" max="10" class="form-control font-monospace" id="custom_field_show_first" value="2">
                     </div>
                     <div class="col-6 mb-3">
-                        <label class="form-label fw-bold">Show End Chars</label>
+                        <label for="custom_field_show_last" class="form-label fw-bold">Show End Chars</label>
                         <input type="number" min="0" max="10" class="form-control font-monospace" id="custom_field_show_last" value="2">
                     </div>
                 </div>
