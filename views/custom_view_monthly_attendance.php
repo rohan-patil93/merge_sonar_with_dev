@@ -159,14 +159,14 @@
 
 <div class="card card-custom" id="viewalldatedataonce">
     <div class="card-header table-card-header">
-        <h5>  My Attendances</h5>
+        <h5>  <?= __('My Attendances'); ?></h5>
     </div>
      <div class="card-body">
         <div class="row">
             <div class="col-lg-4 col-md-12">
                 <div class="card latest-update-card">
                     <div class="card-header">
-                        <h5>Calendar</h5>
+                        <h5><?= __('Calendar'); ?></h5>
                     </div>
                     <div class="card-block custom-scroll   mt-5 m-l-20 " >
                         <?php   $no_week = date('w', strtotime(date('Y')."-".date('m')."-01"));
@@ -235,14 +235,14 @@
             <div class="col-lg-5 col-md-12">
                 <div class="card latest-update-card">
                     <div class="card-header">
-                        <h5>Attendance Info<span class="form-label badge bg-primary p-2 m-l-5"><i class='ti-user'></i> <?php echo $emp_data['display_name'];?> </span></h5>
+                        <h5><?= __('Attendance Info'); ?><span class="form-label badge bg-primary p-2 m-l-5"><i class='ti-user'></i> <?php echo $emp_data['display_name'];?> </span></h5>
                     </div>
                     <div class="card-block mt-4">
                         <div class="card proj-progress-card p-3">
                             <div class="row">
-                                <h6>Punch In At</h6>
+                                <h6><?= __('Punch In At'); ?></h6>
                                 <h5 class="m-b-30 f-w-700"><?php if($atten['clock_in']!=''){ echo date('d M Y h:i:A',strtotime($atten['attendace_date'].' '.$atten['clock_in']));
-}else{ echo 'Punch In Time Missing';
+}else{ echo __('Punch In Time Missing');
 } ?></h5>
                             </div>
                         </div>
@@ -252,22 +252,22 @@
                         </div>
                         <div class="card proj-progress-card p-3 mt-4">
                             <div class="row">
-                                <h6>Punch Out At</h6>
+                                <h6><?= __('Punch Out At'); ?></h6>
                                 <h5 class="m-b-30 f-w-700"><?php if($atten['clock_out']!=''){ echo date('d M Y h:i:A',strtotime($atten['attendace_date'].' '.$atten['clock_out']));
-}else{ echo 'Punch Out Time Missing';
+}else{ echo __('Punch Out Time Missing');
 }?></h5>
                             </div>
                         </div>
                         <div class="row">
                             <div class="card proj-progress-card p-3 col-lg-6">
                                 <div class="row">
-                                    <h6>Brack</h6>
-                                    <h5 class="m-b-30 f-w-700"><?php echo $breackhrs; ?> Hrs</h5>
+                                    <h6><?= __('Brack'); ?></h6>
+                                    <h5 class="m-b-30 f-w-700"><?php echo $breackhrs; ?> <?= __('Hrs'); ?></h5>
                                 </div>
                             </div>
                             <div class="card proj-progress-card p-3 col-lg-6">
                                 <div class="row">
-                                    <h6>OverTime</h6>
+                                    <h6><?= __('OverTime'); ?></h6>
                                     <h5 class="m-b-30 f-w-700">
                                         <?php
                                         if(strtotime($workinghrs) > strtotime($minworkinghrs)){
@@ -291,7 +291,7 @@
             <div class="col-lg-3 col-md-12">
                     <div class="card latest-update-card">
                         <div class="card-header">
-                            <h5>Activity</h5>
+                            <h5><?= __('Activity'); ?></h5>
                         </div>
                         <div class="card-block custom-scroll" style="height:500px;">
                             <div class="">
@@ -304,7 +304,7 @@
                                                 <i class="ti-shift-right bg-c-green update-icon"></i>
                                             </div>
                                             <div class="col p-l-5">
-                                                <a href="#!"><h6>Punch In At</h6></a>
+                                                <a href="#!"><h6><?= __('Punch In At'); ?></h6></a>
                                                 <p class="text-muted m-b-0"><?php echo $attendresult['clock_in']; ?></p>
                                             </div>
                                         </div>
@@ -313,7 +313,7 @@
                                                 <i class="ti-shift-left f-w-600 bg-c-green update-icon"></i>
                                             </div>
                                             <div class="col p-l-5">
-                                                <a href="#!"><h6>Punch out At</h6></a>
+                                                <a href="#!"><h6><?= __('Punch out At'); ?></h6></a>
                                                 <p class="text-muted m-b-0"><?php echo $attendresult['clock_out']==""?"--:--:--":$attendresult['clock_out']; ?></p>
                                             </div>
                                         </div>
@@ -321,7 +321,7 @@
                                     } echo '</div>';
 }else{ ?>
                                         <div class="new-task">
-                                            <h4 class="p-10 text-center"><i class="fa fa-warning"></i> No Activity Available</h4>
+                                            <h4 class="p-10 text-center"><i class="fa fa-warning"></i> <?= __('No Activity Available'); ?></h4>
                                         </div>
                                     <?php   }   ?>
                                 </div>
