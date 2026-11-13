@@ -20,7 +20,7 @@ $statuse = ViewStatusData();
 ?>
     <div class="card">
         <div class="card-header">
-            <h5>Asset Requests</h5>
+            <h5><?= __('Asset Requests'); ?></h5>
         </div>
         <div class="card-body">
             <div class="custom-scroll" style="height: 500px;">
@@ -29,14 +29,14 @@ $statuse = ViewStatusData();
                 <table  class="table table-hover m-b-0" style="font-size:13px;">
                     <thead>
                         <tr>
-                            <th scope="col">Category</th>
-                            <th scope="col">Location</th>
-                            <th scope="col">Delivery Type</th>
-                            <th scope="col">Delivery Address</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Request Date</th>
-                            <th scope="col">Approval User</th>
-                            <th scope="col">Status</th>
+                            <th scope="col"><?= __('Category'); ?></th>
+                            <th scope="col"><?= __('Location'); ?></th>
+                            <th scope="col"><?= __('Delivery Type'); ?></th>
+                            <th scope="col"><?= __('Delivery Address'); ?></th>
+                            <th scope="col"><?= __('Quantity'); ?></th>
+                            <th scope="col"><?= __('Request Date'); ?></th>
+                            <th scope="col"><?= __('Approval User'); ?></th>
+                            <th scope="col"><?= __('Status'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -58,7 +58,7 @@ $statuse = ViewStatusData();
                 </table>
                 <?php }else{ ?>
                 <div class="card-px text-center ">
-                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Assets</p>
+                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Assets'); ?></p>
                     <div class="text-center px-4">
                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                     </div>
@@ -75,7 +75,7 @@ $statuse = ViewStatusData();
  ?>
 <div class="card">
     <div class="card-header">
-        <h5>Request In-Process</h5>
+        <h5><?= __('Request In-Process'); ?></h5>
     </div>
     <div class="card-body">
         <div class="custom-scroll" style="height: 500px;">
@@ -84,15 +84,15 @@ $statuse = ViewStatusData();
             <table  class="table table-hover m-b-0" style="font-size:13px;">
                 <thead>
                     <tr>
-                        <th scope="col">Request Datetime</th>
-                        <th scope="col">Code</th>
-                        <th scope="col">Asset</th>
-                        <th scope="col">Transfer Date</th>
+                        <th scope="col"><?= __('Request Datetime'); ?></th>
+                        <th scope="col"><?= __('Code'); ?></th>
+                        <th scope="col"><?= __('Asset'); ?></th>
+                        <th scope="col"><?= __('Transfer Date'); ?></th>
 
-                        <th scope="col">Delivery Type</th>
-                        <th scope="col">Accept/Reject Date</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Action</th>
+                        <th scope="col"><?= __('Delivery Type'); ?></th>
+                        <th scope="col"><?= __('Accept/Reject Date'); ?></th>
+                        <th scope="col"><?= __('Status'); ?></th>
+                        <th scope="col"><?= __('Action'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -111,7 +111,7 @@ $statuse = ViewStatusData();
                     </td>
                     <td class="p-2">
                         <?php if($auasset['current_status'] == 0){ ?>
-                        <i class="ti ti-eye" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Return Request" onclick="assetRequestTransfersAcceptOrReject('<?php echo $auasset['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                        <i class="ti ti-eye" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Return Request'), ENT_QUOTES, 'UTF-8'); ?>" onclick="assetRequestTransfersAcceptOrReject('<?php echo $auasset['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
                     <?php }else{ echo "-";
 } ?>
                     </td>
@@ -121,7 +121,7 @@ $statuse = ViewStatusData();
             </table>
             <?php }else{ ?>
             <div class="card-px text-center ">
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Assets</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Assets'); ?></p>
                 <div class="text-center px-4">
                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>
@@ -139,7 +139,7 @@ $statuse = ViewStatusData();
 
 <div class="card">
     <div class="card-header">
-        <h5>Asset Return</h5>
+        <h5><?= __('Asset Return'); ?></h5>
     </div>
     <div class="card-body">
         <div class="custom-scroll" style="height: 500px;">
@@ -148,12 +148,12 @@ $statuse = ViewStatusData();
             <table  class="table table-hover m-b-0" style="font-size:13px;">
                 <thead>
                     <tr>
-                        <th scope="col">Code</th>
-                        <th scope="col">Asset</th>
-                        <th scope="col">Request Datetime</th>
-                        <th scope="col">Return Remark</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Action</th>
+                        <th scope="col"><?= __('Code'); ?></th>
+                        <th scope="col"><?= __('Asset'); ?></th>
+                        <th scope="col"><?= __('Request Datetime'); ?></th>
+                        <th scope="col"><?= __('Return Remark'); ?></th>
+                        <th scope="col"><?= __('Status'); ?></th>
+                        <th scope="col"><?= __('Action'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -173,7 +173,7 @@ $statuse = ViewStatusData();
             </table>
             <?php }else{ ?>
             <div class="card-px text-center ">
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Assets</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Assets'); ?></p>
                 <div class="text-center px-4">
                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>
@@ -193,7 +193,7 @@ $statuse = ViewStatusData();
 
 <div class="card">
     <div class="card-header">
-        <h5>Self Assets</h5>
+        <h5><?= __('Self Assets'); ?></h5>
     </div>
     <div class="card-body">
         <div class="custom-scroll" style="height: 500px;">
@@ -202,13 +202,13 @@ $statuse = ViewStatusData();
             <table  class="table table-hover m-b-0" style="font-size:13px;">
                 <thead>
                     <tr>
-                        <th scope="col">Code</th>
-                        <th scope="col">Asset</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Start Date</th>
-                        <th scope="col">Stop Date</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Action</th>
+                        <th scope="col"><?= __('Code'); ?></th>
+                        <th scope="col"><?= __('Asset'); ?></th>
+                        <th scope="col"><?= __('Category'); ?></th>
+                        <th scope="col"><?= __('Start Date'); ?></th>
+                        <th scope="col"><?= __('Stop Date'); ?></th>
+                        <th scope="col"><?= __('Status'); ?></th>
+                        <th scope="col"><?= __('Action'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -235,7 +235,7 @@ $statuse = ViewStatusData();
             </table>
             <?php }else{ ?>
             <div class="card-px text-center ">
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Assets</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Assets'); ?></p>
                 <div class="text-center px-4">
                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>
