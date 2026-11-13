@@ -120,7 +120,7 @@ foreach($status_progress as $sp) {
   function insertEmployeePopUp(emp_id=""){
 
         $('#kt_modal_dynamic_popup').modal("show");
-        var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $('#dynamic_popup1').html(htmloader);
 
         jQuery.ajax({
@@ -173,10 +173,10 @@ foreach($status_progress as $sp) {
             "hideBulletsCount": 50,
             "lineThickness": 3,
             "lineColor": "#2ed8b6",
-            "title": "Claims",
+            "title": <?php echo json_encode(__('Claims'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             "useLineColorForBulletBorder": true,
             "valueField": "market1",
-            "balloonText": "[[title]]<br /><b style='font-size: 130%'>[[value]]</b>"
+            "balloonText": "<?= htmlspecialchars(__('[[title]]'), ENT_QUOTES, 'UTF-8'); ?><br /><b style='font-size: 130%'><?= htmlspecialchars(__('[[value]]'), ENT_QUOTES, 'UTF-8'); ?></b>"
         }, {
             "id": "g2",
             "valueAxis": "v2",
@@ -187,10 +187,10 @@ foreach($status_progress as $sp) {
             "hideBulletsCount": 50,
             "lineThickness": 3,
             "lineColor": "#e95753",
-            "title": "Paid",
+            "title": <?php echo json_encode(__('Paid'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             "useLineColorForBulletBorder": true,
             "valueField": "market2",
-            "balloonText": "[[title]]<br /><b style='font-size: 130%'>[[value]]</b>"
+            "balloonText": "<?= htmlspecialchars(__('[[title]]'), ENT_QUOTES, 'UTF-8'); ?><br /><b style='font-size: 130%'><?= htmlspecialchars(__('[[value]]'), ENT_QUOTES, 'UTF-8'); ?></b>"
         }],
         "chartCursor": {
             "pan": true,
@@ -224,14 +224,14 @@ foreach($status_progress as $sp) {
 <div class="banner">
   <img src="assets/images/student-courses/banner-1.jpg" class="" alt="">
   <div class="banner-text">
-    <h2>Start managing expenses and reimbursements with ease! </h2>
-    <p>Helps you in managing: Expenses And Reimbursements. Billing Module does this all through your modern Web Browser. Be assured to track your bills and payments from anywhere anytime.</p>
-    <a href="index" class="btn-white b-radius-5 text-uppercase f-w-600 cursor-pointer"> Claims</a>
+    <h2><?= __('Start managing expenses and reimbursements with ease!'); ?> </h2>
+    <p><?= __('Helps you in managing: Expenses And Reimbursements. Billing Module does this all through your modern Web Browser. Be assured to track your bills and payments from anywhere anytime.'); ?></p>
+    <a href="index" class="btn-white b-radius-5 text-uppercase f-w-600 cursor-pointer"> <?= __('Claims'); ?></a>
     <?php $_SESSION['payment_transaction_type'] = 'employees'; ?>
     <?php if(in_array(CLAIM_EXECUTIVE_ROLE,(array)$_SESSION['role_ids']) || $_SESSION['admin_type'] == 1){ ?>
-      <a class="btn-white b-radius-5 text-uppercase f-w-600 cursor-pointer" href="#!" onclick="insertEmployeePopUp()"> Add Employee</a>
+      <a class="btn-white b-radius-5 text-uppercase f-w-600 cursor-pointer" href="#!" onclick="insertEmployeePopUp()"> <?= __('Add Employee'); ?></a>
 
-       <a href="index.php?option=COM_LIST_PAYMENTS" class="btn-white b-radius-5 text-uppercase f-w-600 cursor-pointer">Make Payments</a>
+       <a href="index.php?option=COM_LIST_PAYMENTS" class="btn-white b-radius-5 text-uppercase f-w-600 cursor-pointer"><?= __('Make Payments'); ?></a>
    <?php } ?>
   </div>
 </div>
@@ -244,8 +244,8 @@ foreach($status_progress as $sp) {
             <i class="fa fa-user-plus f-20"></i>
           </div>
           <div class="flex">
-            <a href="#"><div class="card-title f-w-600 f-16"><?php echo $emp_expenses_cnt['total_cnt'] !=""?$emp_expenses_cnt['total_cnt']:0;?> BillS</div>
-              <p class="card-subtitle text-muted mt-1 f-12"> Total Number Of Bills</p>
+            <a href="#"><div class="card-title f-w-600 f-16"><?php echo $emp_expenses_cnt['total_cnt'] !=""?$emp_expenses_cnt['total_cnt']:0;?> <?= __('BillS'); ?></div>
+              <p class="card-subtitle text-muted mt-1 f-12"> <?= __('Total Number Of Bills'); ?></p>
             </a>
           </div>
         </div>
@@ -256,8 +256,8 @@ foreach($status_progress as $sp) {
           </div>
           <div class="flex">
              <a href="#">
-              <div class="card-title f-w-600 f-16"><?php echo $emp_expenses_cnt['total_approved_cnt'] !=""?$emp_expenses_cnt['total_approved_cnt']:0;?> BillS</div>
-              <p class="card-subtitle text-muted mt-1 f-12"> Total Number Of Bills Cleared</p>
+              <div class="card-title f-w-600 f-16"><?php echo $emp_expenses_cnt['total_approved_cnt'] !=""?$emp_expenses_cnt['total_approved_cnt']:0;?> <?= __('BillS'); ?></div>
+              <p class="card-subtitle text-muted mt-1 f-12"> <?= __('Total Number Of Bills Cleared'); ?></p>
             </a>
           </div>
         </div>
@@ -267,8 +267,8 @@ foreach($status_progress as $sp) {
           </div>
           <div class="flex">
            <a href="#">
-            <div class="card-title f-w-600 f-16"><?php echo $emp_expenses_cnt['inprocess_cnt'] !=""?$emp_expenses_cnt['inprocess_cnt']:0;?> BillS </div>
-            <p class="card-subtitle text-muted mt-1 f-12"> Total Number Of Bills Pendding</p>
+            <div class="card-title f-w-600 f-16"><?php echo $emp_expenses_cnt['inprocess_cnt'] !=""?$emp_expenses_cnt['inprocess_cnt']:0;?> <?= __('BillS'); ?> </div>
+            <p class="card-subtitle text-muted mt-1 f-12"> <?= __('Total Number Of Bills Pendding'); ?></p>
           </a>
         </div>
       </div>
@@ -280,9 +280,9 @@ foreach($status_progress as $sp) {
   <div class="col-md-12 col-xl-8">
     <div class="card sale-card">
       <div class="card-header">
-        <h5>Employee Bills/Payments</h5>
+        <h5><?= __('Employee Bills/Payments'); ?></h5>
         <div class="float-right">
-            <select aria-label="Reimbursementsyear" class ="form-control js-example-basic-single" id="reimbursementsyear" onchange="reimbursementsChart()">
+            <select aria-label="<?= htmlspecialchars(__('Reimbursementsyear'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-control js-example-basic-single" id="reimbursementsyear" onchange="reimbursementsChart()">
               <?php $startyear = date("Y"); for($mk=$startyear-10;$mk <= $startyear; $mk++){
                 ?>
                 <option  value="<?php echo  $mk; ?>" <?php echo date('Y')==$mk?"selected":"";?>>
@@ -302,7 +302,7 @@ foreach($status_progress as $sp) {
   <div class="col-md-12 col-xl-4">
     <div class="card sale-card">
       <div class="card-header">
-        <h5>Bills Till</h5>
+        <h5><?= __('Bills Till'); ?></h5>
       </div>
       <?php
         $tamount = $emp_expenses_cnt['total_amount'];
@@ -318,19 +318,19 @@ foreach($status_progress as $sp) {
             <span class="text-dark f-16 f-w-600 d-block"><?php echo $percengraf; ?>% </span>
           </div>
         </div>
-        <h6 class="m-t-40">Total Bills</h6>
+        <h6 class="m-t-40"><?= __('Total Bills'); ?></h6>
         <h3 class="f-w-700 m-b-40"><?php echo convert_Rupee_Number($tamount); ?></h3>
         <div class="row">
           <div class="col-4">
-            <p class="m-b-5">Total Employees</p>
+            <p class="m-b-5"><?= __('Total Employees'); ?></p>
             <h3 class="f-w-700 text-c-yellow"><?php echo $employees_cnt; ?></h3>
           </div>
           <div class="col-4">
-            <p class="m-b-5">Paid</p>
+            <p class="m-b-5"><?= __('Paid'); ?></p>
             <h3 class="f-w-700 text-c-yellow"><?php echo convert_Rupee_Number($paidamount); ?></h3>
           </div>
           <div class="col-4">
-            <p class="m-b-5">Un-Paid</p>
+            <p class="m-b-5"><?= __('Un-Paid'); ?></p>
             <h3 class="f-w-700 text-c-yellow"><?php echo convert_Rupee_Number($pending_amount); ?></h3>
           </div>
         </div>
@@ -340,13 +340,13 @@ foreach($status_progress as $sp) {
   <div>
 <ul class="nav md-tabs infisuite_tab mt-2 ml-2 mb-3">
   <li class="nav-item">
-    <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#expenseslist" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <i class="fa fa-check-circle f-20"></i> Expenses <span class="form-label label label-xs label-success m-l-10"><?php echo $expensescnt; ?></span></a>
+    <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#expenseslist" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <i class="fa fa-check-circle f-20"></i> <?= __('Expenses'); ?> <span class="form-label label label-xs label-success m-l-10"><?php echo $expensescnt; ?></span></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#paymentslist" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <i class="fa fa-shopping-basket f-20"></i> Payments <span class="form-label label label-xs label-success m-l-10"><?php echo $selfpaymentscnt; ?></span></a>
+    <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#paymentslist" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <i class="fa fa-shopping-basket f-20"></i> <?= __('Payments'); ?> <span class="form-label label label-xs label-success m-l-10"><?php echo $selfpaymentscnt; ?></span></a>
   </li>
    <li class="nav-item">
-    <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#approvalpayments" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <i class="fa fa-shopping-basket f-20"></i> Approvals <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$transactionapprovallogs['pending']); ?></span></a>
+    <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#approvalpayments" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <i class="fa fa-shopping-basket f-20"></i> <?= __('Approvals'); ?> <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$transactionapprovallogs['pending']); ?></span></a>
   </li>
 </ul>
 <div class="tab-content tabs">
@@ -355,7 +355,7 @@ foreach($status_progress as $sp) {
         <div class="col-lg-4">
           <div class="card table-card">
             <div class="card-header">
-              <h5>In Process</h5>
+              <h5><?= __('In Process'); ?></h5>
             </div>
             <div class="card-body custom-scroll" style="max-height: 400px; min-height: 400px;">
                 <div class="card-block table-responsive">
@@ -363,9 +363,9 @@ foreach($status_progress as $sp) {
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Bill Number</th>
-                        <th scope="col">Date</th>
-                        <th scope="col" class="text-right">Amount</th>
+                        <th scope="col"><?= __('Bill Number'); ?></th>
+                        <th scope="col"><?= __('Date'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Amount'); ?></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -383,14 +383,14 @@ foreach($status_progress as $sp) {
                     <?php $mq++;
 }
 }else{
-                          echo "<tr><td colspan='4' class='text-center'><h4 ><i class='fa fa-warning'></i> No Bills </h4></td></tr>";
+                          echo "<tr><td colspan='4' class='text-center'><h4 ><i class='fa fa-warning'></i> ".__('No Bills')." </h4></td></tr>";
                         } ?>
                       </tbody>
                     </table>
                 </div>
             </div>
             <div class="mt-3 p-3">
-                  <span class="text-warning float-left">Total</span>
+                  <span class="text-warning float-left"><?= __('Total'); ?></span>
                   <span class="text-warning float-right f-w-700"><?php echo customeummarmonyformateifine($totalamt); ?></span>
             </div>
           </div>
@@ -398,7 +398,7 @@ foreach($status_progress as $sp) {
         <div class="col-lg-4">
           <div class="card table-card">
             <div class="card-header">
-              <h5>Approved</h5>
+              <h5><?= __('Approved'); ?></h5>
             </div>
             <div class="card-body custom-scroll" style="max-height: 400px; min-height: 400px;">
                 <div class="card-block table-responsive" >
@@ -406,9 +406,9 @@ foreach($status_progress as $sp) {
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Bill Number</th>
-                        <th scope="col">Date</th>
-                        <th scope="col" class="text-right">Amount</th>
+                        <th scope="col"><?= __('Bill Number'); ?></th>
+                        <th scope="col"><?= __('Date'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Amount'); ?></th>
                       </tr>
                     </thead>
                    <tbody>
@@ -426,14 +426,14 @@ foreach($status_progress as $sp) {
                     <?php $mq++;
 }
 }else{
-                          echo "<tr><td colspan='4' class='text-center'><h4 ><i class='fa fa-warning'></i> No Bills </h4></td></tr>";
+                          echo "<tr><td colspan='4' class='text-center'><h4 ><i class='fa fa-warning'></i> ".__('No Bills')." </h4></td></tr>";
                         } ?>
                       </tbody>
                     </table>
                 </div>
             </div>
             <div class="mt-3 p-3">
-                  <span class="text-warning float-left">Total</span>
+                  <span class="text-warning float-left"><?= __('Total'); ?></span>
                   <span class="text-warning float-right f-w-700"><?php echo customeummarmonyformateifine($totalamt); ?></span>
             </div>
           </div>
@@ -442,7 +442,7 @@ foreach($status_progress as $sp) {
         <div class="col-lg-4">
           <div class="card table-card">
             <div class="card-header">
-              <h5>Pending Payments</h5>
+              <h5><?= __('Pending Payments'); ?></h5>
 
             </div>
             <div class="card-body custom-scroll" style="max-height: 400px; min-height: 400px;">
@@ -451,9 +451,9 @@ foreach($status_progress as $sp) {
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Bill Number</th>
-                        <th scope="col">Date</th>
-                        <th scope="col" class="text-right">Pending Amount</th>
+                        <th scope="col"><?= __('Bill Number'); ?></th>
+                        <th scope="col"><?= __('Date'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Pending Amount'); ?></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -471,14 +471,14 @@ foreach($status_progress as $sp) {
                     <?php $mq++;
 }
 }else{
-                          echo "<tr><td colspan='4' class='text-center'><h4 ><i class='fa fa-warning'></i> No Bills </h4></td></tr>";
+                          echo "<tr><td colspan='4' class='text-center'><h4 ><i class='fa fa-warning'></i> ".__('No Bills')." </h4></td></tr>";
                         } ?>
                       </tbody>
                     </table>
                 </div>
             </div>
             <div class="mt-3 p-3">
-                  <span class="text-warning float-left">Total</span>
+                  <span class="text-warning float-left"><?= __('Total'); ?></span>
                   <span class="text-warning float-right f-w-700"><?php echo customeummarmonyformateifine($totalamt); ?></span>
             </div>
           </div>
@@ -492,7 +492,7 @@ foreach($status_progress as $sp) {
                     <div class="col-lg-4">
           <div class="card table-card">
             <div class="card-header">
-              <h5>Yet To Submit</h5>
+              <h5><?= __('Yet To Submit'); ?></h5>
             </div>
             <div class="card-body custom-scroll" style="max-height: 400px; min-height: 400px;">
                 <div class="card-block table-responsive" >
@@ -500,9 +500,9 @@ foreach($status_progress as $sp) {
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Bill Number</th>
-                        <th scope="col">Date</th>
-                        <th scope="col" class="text-right">Amount</th>
+                        <th scope="col"><?= __('Bill Number'); ?></th>
+                        <th scope="col"><?= __('Date'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Amount'); ?></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -519,14 +519,14 @@ foreach($status_progress as $sp) {
                     <?php $mq++;
 }
 }else{
-                          echo "<tr><td colspan='4' class='text-center'><h4 ><i class='fa fa-warning'></i> No Bills </h4></td></tr>";
+                          echo "<tr><td colspan='4' class='text-center'><h4 ><i class='fa fa-warning'></i> ".__('No Bills')." </h4></td></tr>";
                         } ?>
                       </tbody>
                     </table>
                 </div>
             </div>
             <div class="mt-3 p-3">
-                  <span class="text-warning float-left">Total</span>
+                  <span class="text-warning float-left"><?= __('Total'); ?></span>
                   <span class="text-warning float-right f-w-700"><?php echo customeummarmonyformateifine($totalamt); ?></span>
             </div>
           </div>
@@ -534,7 +534,7 @@ foreach($status_progress as $sp) {
         <div class="col-lg-4">
           <div class="card table-card">
             <div class="card-header">
-              <h5>In Process</h5>
+              <h5><?= __('In Process'); ?></h5>
             </div>
             <div class="card-body custom-scroll" style="max-height: 400px; min-height: 400px;">
                 <div class="card-block table-responsive" >
@@ -542,9 +542,9 @@ foreach($status_progress as $sp) {
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Bill Number</th>
-                        <th scope="col">Date</th>
-                        <th scope="col" class="text-right">Amount</th>
+                        <th scope="col"><?= __('Bill Number'); ?></th>
+                        <th scope="col"><?= __('Date'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Amount'); ?></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -561,14 +561,14 @@ foreach($status_progress as $sp) {
                     <?php $mq++;
 }
 }else{
-                          echo "<tr><td colspan='4' class='text-center'><h4 ><i class='fa fa-warning'></i> No Bills </h4></td></tr>";
+                          echo "<tr><td colspan='4' class='text-center'><h4 ><i class='fa fa-warning'></i> ".__('No Bills')." </h4></td></tr>";
                         } ?>
                       </tbody>
                     </table>
                 </div>
             </div>
             <div class="mt-3 p-3">
-                  <span class="text-warning float-left">Total</span>
+                  <span class="text-warning float-left"><?= __('Total'); ?></span>
                   <span class="text-warning float-right f-w-700"><?php echo customeummarmonyformateifine($totalamt); ?></span>
             </div>
           </div>
@@ -576,7 +576,7 @@ foreach($status_progress as $sp) {
         <div class="col-lg-4">
           <div class="card table-card">
             <div class="card-header">
-              <h5>Approved</h5>
+              <h5><?= __('Approved'); ?></h5>
             </div>
             <div class="card-body custom-scroll" style="max-height: 400px; min-height: 400px;">
                 <div class="card-block table-responsive" >
@@ -584,9 +584,9 @@ foreach($status_progress as $sp) {
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Bill Number</th>
-                        <th scope="col">Date</th>
-                        <th scope="col" class="text-right">Amount</th>
+                        <th scope="col"><?= __('Bill Number'); ?></th>
+                        <th scope="col"><?= __('Date'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Amount'); ?></th>
                       </tr>
                     </thead>
                    <tbody>
@@ -603,14 +603,14 @@ foreach($status_progress as $sp) {
                     <?php $mq++;
 }
 }else{
-                          echo "<tr><td colspan='4' class='text-center'><h4 ><i class='fa fa-warning'></i> No Bills </h4></td></tr>";
+                          echo "<tr><td colspan='4' class='text-center'><h4 ><i class='fa fa-warning'></i> ".__('No Bills')." </h4></td></tr>";
                         } ?>
                       </tbody>
                     </table>
                 </div>
             </div>
             <div class="mt-3 p-3">
-                  <span class="text-warning float-left">Total</span>
+                  <span class="text-warning float-left"><?= __('Total'); ?></span>
                   <span class="text-warning float-right f-w-700"><?php echo customeummarmonyformateifine($totalamt); ?></span>
             </div>
           </div>
@@ -623,7 +623,7 @@ foreach($status_progress as $sp) {
         <div class="col-lg-6">
           <div class="card table-card">
             <div class="card-header">
-              <h5>Approval Pending</h5>
+              <h5><?= __('Approval Pending'); ?></h5>
             </div>
             <div class="card-body custom-scroll" style="max-height: 400px; min-height: 400px;">
                 <div class="card-block table-responsive" >
@@ -631,10 +631,10 @@ foreach($status_progress as $sp) {
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Payment Number</th>
-                        <th scope="col">Request Date</th>
-                        <th scope="col">Transaction Date</th>
-                        <th scope="col" class="text-right">Price</th>
+                        <th scope="col"><?= __('Payment Number'); ?></th>
+                        <th scope="col"><?= __('Request Date'); ?></th>
+                        <th scope="col"><?= __('Transaction Date'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Price'); ?></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -651,14 +651,14 @@ foreach($status_progress as $sp) {
                     <?php $mq++;
 }
 }else{
-                          echo "<tr><td colspan='7' class='text-center'><h4 ><i class='fa fa-warning'></i> No Approval Pending</h4></td></tr>";
+                          echo "<tr><td colspan='7' class='text-center'><h4 ><i class='fa fa-warning'></i> ".__('No Approval Pending')."</h4></td></tr>";
                         } ?>
                       </tbody>
                     </table>
                 </div>
             </div>
             <div class="mt-3 p-3">
-                  <span class="text-warning float-left">Total</span>
+                  <span class="text-warning float-left"><?= __('Total'); ?></span>
                   <span class="text-warning float-right f-w-700"><?php echo customeummarmonyformateifine($totalamt); ?></span>
             </div>
           </div>
@@ -666,7 +666,7 @@ foreach($status_progress as $sp) {
         <div class="col-lg-6">
           <div class="card table-card">
             <div class="card-header">
-              <h5>Approved</h5>
+              <h5><?= __('Approved'); ?></h5>
             </div>
             <div class="card-body custom-scroll" style="max-height: 400px; min-height: 400px;">
                 <div class="card-block table-responsive" >
@@ -674,10 +674,10 @@ foreach($status_progress as $sp) {
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Payment Number</th>
-                        <th scope="col">Response Date</th>
-                        <th scope="col">Transaction Date</th>
-                        <th scope="col" class="text-right">Price</th>
+                        <th scope="col"><?= __('Payment Number'); ?></th>
+                        <th scope="col"><?= __('Response Date'); ?></th>
+                        <th scope="col"><?= __('Transaction Date'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Price'); ?></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -696,14 +696,14 @@ foreach($status_progress as $sp) {
                     <?php $mq++;
 }
 }else{
-                          echo "<tr><td colspan='7' class='text-center'><h4 ><i class='fa fa-warning'></i> No Approved</h4></td></tr>";
+                          echo "<tr><td colspan='7' class='text-center'><h4 ><i class='fa fa-warning'></i> ".__('No Approved')."</h4></td></tr>";
                         } ?>
                       </tbody>
                     </table>
                 </div>
             </div>
             <div class="mt-3 p-3">
-                  <span class="text-warning float-left">Total</span>
+                  <span class="text-warning float-left"><?= __('Total'); ?></span>
                   <span class="text-warning float-right f-w-700"><?php echo customeummarmonyformateifine($totalamt); ?></span>
             </div>
           </div>
@@ -719,7 +719,7 @@ foreach($status_progress as $sp) {
          <div class="card social-card custom_hover_card" style="min-height: 365px;">
           <div class="card-body text-center">
            <div class="text-facebook m-b-20"><i class="ti-announcement "></i></div>
-           <h3 class="text-facebook f-w-700">Announcements</h3>
+           <h3 class="text-facebook f-w-700"><?= __('Announcements'); ?></h3>
            <?php
            $anouncement =  API."?mode=togetlatestannouncement";
            $anouncement_list = callAPI($anouncement);
@@ -733,7 +733,7 @@ foreach($status_progress as $sp) {
      <div class="col-lg-6 col-xl-6 col-sm-6 col-12">
           <div class="card sale-card mb-2">
           <div class="card-header">
-            <h5>Holidays </h5>
+            <h5><?= __('Holidays'); ?> </h5>
             <div class="card-header-right table-card-header ">
               <span class="text-dark f-w-600"><?php echo date('Y');?></span>
             </div>
@@ -754,7 +754,7 @@ foreach($status_progress as $sp) {
                 </div>
               <?php } ?>
               <?php } else {
-                echo "<h4><i class='fa fa-warning'></i> No Holidays Available</h4>";
+                echo "<h4><i class='fa fa-warning'></i> ".__('No Holidays Available')."</h4>";
               } ?>
             </div>
 
