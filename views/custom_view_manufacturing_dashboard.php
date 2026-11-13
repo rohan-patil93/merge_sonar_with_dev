@@ -30,24 +30,24 @@ $chartjson = json_encode($chartData,1);
     <div class="card-header bg-primary">
       <div class="row">
         <div class="col-lg-6">
-          <h3 class="mb-0 f-w-600">Infisuite Manufacturing Dashboard</h3>
+          <h3 class="mb-0 f-w-600"><?= __('Infisuite Manufacturing Dashboard'); ?></h3>
         </div>
         <div class="col-lg-2">
           <div class="form-group mb-0">
-            <select aria-label="Select option" class="form-control border">
-              <option>Plant A</option>
-              <option>Plant B</option>
+            <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control border">
+              <option><?= __('Plant A'); ?></option>
+              <option><?= __('Plant B'); ?></option>
             </select>
           </div>
         </div>
         <div class="col-lg-2">
           <div class="form-group mb-0">
-            <input aria-label="Select date" type="date" class="form-control">
+            <input aria-label="<?= htmlspecialchars(__('Select date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control">
           </div>
         </div>
         <div class="col-lg-2">
           <div class="form-group mb-0">
-            <input aria-label="Select date" type="date" class="form-control">
+            <input aria-label="<?= htmlspecialchars(__('Select date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control">
           </div>
         </div>
       </div>
@@ -62,7 +62,7 @@ $chartjson = json_encode($chartData,1);
               <div class="row align-items-center">
                 <div class="col">
                   <h3 class="f-w-700 text-c-blue">2,960</h3>
-                  <p class="m-b-0">Total Units</p>
+                  <p class="m-b-0"><?= __('Total Units'); ?></p>
                 </div>
 
               </div>
@@ -75,7 +75,7 @@ $chartjson = json_encode($chartData,1);
               <div class="row align-items-center">
                 <div class="col">
                   <h3 class="f-w-700 text-c-green">92%</h3>
-                  <p class="m-b-0">Efficiency</p>
+                  <p class="m-b-0"><?= __('Efficiency'); ?></p>
                 </div>
 
               </div>
@@ -88,7 +88,7 @@ $chartjson = json_encode($chartData,1);
               <div class="row align-items-center">
                 <div class="col">
                   <h3 class="f-w-700 text-c-yellow">87%</h3>
-                  <p class="m-b-0">OEE</p>
+                  <p class="m-b-0"><?= __('OEE'); ?></p>
                 </div>
 
               </div>
@@ -101,7 +101,7 @@ $chartjson = json_encode($chartData,1);
               <div class="row align-items-center">
                 <div class="col">
                   <h3 class="f-w-700 text-c-red">5.6h</h3>
-                  <p class="m-b-0">Downtime</p>
+                  <p class="m-b-0"><?= __('Downtime'); ?></p>
                 </div>
 
               </div>
@@ -114,7 +114,7 @@ $chartjson = json_encode($chartData,1);
               <div class="row align-items-center">
                 <div class="col">
                   <h3 class="f-w-700 text-c-black">2.1%</h3>
-                  <p class="m-b-0">Rejection</p>
+                  <p class="m-b-0"><?= __('Rejection'); ?></p>
                 </div>
 
               </div>
@@ -126,14 +126,14 @@ $chartjson = json_encode($chartData,1);
     <div class="col-lg-6">
       <div class="card">
         <div class="card-header">
-          <h5 class="text-danger"><i class="fa fa-bell m-r-10"></i>Alerts</h5>
+          <h5 class="text-danger"><i class="fa fa-bell m-r-10"></i><?= __('Alerts'); ?></h5>
         </div>
         <div class="card-block list-tag">
           <ul>
-            <li><i class="icofont icofont-double-right text-success m-r-10"></i>WO-205 delayed 1 day</li>
-            <li><i class="icofont icofont-double-right text-success m-r-10"></i>M-07 under maintenance</li>
-            <li><i class="icofont icofont-double-right text-success m-r-10"></i>Quality deviation in Batch B-313</li>
-            <li><i class="icofont icofont-double-right text-success m-r-10"></i>Steel rods below reorder level</li>
+            <li><i class="icofont icofont-double-right text-success m-r-10"></i><?= __('WO-205 delayed 1 day'); ?></li>
+            <li><i class="icofont icofont-double-right text-success m-r-10"></i><?= __('M-07 under maintenance'); ?></li>
+            <li><i class="icofont icofont-double-right text-success m-r-10"></i><?= __('Quality deviation in Batch B-313'); ?></li>
+            <li><i class="icofont icofont-double-right text-success m-r-10"></i><?= __('Steel rods below reorder level'); ?></li>
           </ul>
         </div>
       </div>
@@ -143,15 +143,15 @@ $chartjson = json_encode($chartData,1);
     <div class="col-lg-8">
       <div class="card">
         <div class="card-header">
-          <h5>Production Trend</h5>
+          <h5><?= __('Production Trend'); ?></h5>
           <div class="card-header-right ml-5">
             <div class="legend-item">
               <span class="dot dot-one"></span>
-              <span class="f-w-600" >Request</span>
+              <span class="f-w-600" ><?= __('Request'); ?></span>
             </div>
             <div class="legend-item">
               <span class="dot dot-two"></span>
-              <span class="f-w-600" >Produced</span>
+              <span class="f-w-600" ><?= __('Produced'); ?></span>
             </div>
           </div>
         </div>
@@ -163,7 +163,7 @@ $chartjson = json_encode($chartData,1);
     <div class="col-lg-4">
       <div class="card">
         <div class="card-header">
-          <h5>Quality Defects</h5>
+          <h5><?= __('Quality Defects'); ?></h5>
         </div>
         <div class="card-block p-0 mt-3">
           <div id="piechart" class="nvd-chart"></div>
@@ -173,18 +173,18 @@ $chartjson = json_encode($chartData,1);
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header">
-          <h5>Work Orders</h5>
+          <h5><?= __('Work Orders'); ?></h5>
         </div>
         <div class="card-body">
           <div class="table-responsive mt-3">
             <table class="table table-bordered table-sm" id="workOrdersTable">
               <tr style="background-color: #eeeeee;">
-                <th scope="col">Order No</th>
-                <th scope="col">Product</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Produced</th>
-                <th scope="col">Status</th>
-                <th scope="col">ETA</th>
+                <th scope="col"><?= __('Order No'); ?></th>
+                <th scope="col"><?= __('Product'); ?></th>
+                <th scope="col"><?= __('Quantity'); ?></th>
+                <th scope="col"><?= __('Produced'); ?></th>
+                <th scope="col"><?= __('Status'); ?></th>
+                <th scope="col"><?= __('ETA'); ?></th>
               </tr>
 
               <?php foreach ($result['work_orders'] as $wo): ?>
@@ -222,7 +222,7 @@ $chartjson = json_encode($chartData,1);
     <div class="col-lg-8">
       <div class="card">
         <div class="card-header">
-          <h5>Machine & Line Status</h5>
+          <h5><?= htmlspecialchars(__('Machine & Line Status'), ENT_QUOTES, 'UTF-8'); ?></h5>
         </div>
         <div class="card-block mt-3">
           <div class="row">
@@ -231,12 +231,12 @@ $chartjson = json_encode($chartData,1);
                 <div class="card-body">
                   <div class="row align-items-center m-b-30">
                     <div class="col">
-                      <h6 class="m-b-5">M-01 (A1)</h6>
-                      <h3 class="m-b-0 f-w-700">Running</h3>
+                      <h6 class="m-b-5"><?= __('M-01 (A1)'); ?></h6>
+                      <h3 class="m-b-0 f-w-700"><?= __('Running'); ?></h3>
                     </div>
 
                   </div>
-                  <p class="m-b-0 f-w-600">Utilization: 96%</p>
+                  <p class="m-b-0 f-w-600"><?= __('Utilization: 96%'); ?></p>
                 </div>
               </div>
             </div>
@@ -245,12 +245,12 @@ $chartjson = json_encode($chartData,1);
                 <div class="card-body">
                   <div class="row align-items-center m-b-30">
                     <div class="col">
-                      <h6 class="m-b-5">M-02 (A2)</h6>
-                      <h3 class="m-b-0 f-w-700">Running</h3>
+                      <h6 class="m-b-5"><?= __('M-02 (A2)'); ?></h6>
+                      <h3 class="m-b-0 f-w-700"><?= __('Running'); ?></h3>
                     </div>
 
                   </div>
-                  <p class="m-b-0 f-w-600">Utilization: 89%</p>
+                  <p class="m-b-0 f-w-600"><?= __('Utilization: 89%'); ?></p>
                 </div>
               </div>
             </div>
@@ -259,12 +259,12 @@ $chartjson = json_encode($chartData,1);
                 <div class="card-body">
                   <div class="row align-items-center m-b-30">
                     <div class="col">
-                      <h6 class="m-b-5">M-03 (B1)</h6>
-                      <h3 class="m-b-0 f-w-700">Maintenance</h3>
+                      <h6 class="m-b-5"><?= __('M-03 (B1)'); ?></h6>
+                      <h3 class="m-b-0 f-w-700"><?= __('Maintenance'); ?></h3>
                     </div>
 
                   </div>
-                  <p class="m-b-0 f-w-600">Utilization: 0%</p>
+                  <p class="m-b-0 f-w-600"><?= __('Utilization: 0%'); ?></p>
                 </div>
               </div>
             </div>
@@ -273,12 +273,12 @@ $chartjson = json_encode($chartData,1);
                 <div class="card-body">
                   <div class="row align-items-center m-b-30">
                     <div class="col">
-                      <h6 class="m-b-5">M-04 (C1)</h6>
-                      <h3 class="m-b-0 f-w-700">Idle</h3>
+                      <h6 class="m-b-5"><?= __('M-04 (C1)'); ?></h6>
+                      <h3 class="m-b-0 f-w-700"><?= __('Idle'); ?></h3>
                     </div>
 
                   </div>
-                  <p class="m-b-0 f-w-600">Utilization: 58%</p>
+                  <p class="m-b-0 f-w-600"><?= __('Utilization: 58%'); ?></p>
                 </div>
               </div>
             </div>
@@ -289,26 +289,26 @@ $chartjson = json_encode($chartData,1);
     <div class="col-lg-4">
       <div class="card">
         <div class="card-header">
-          <h5>Material & Inventory</h5>
+          <h5><?= htmlspecialchars(__('Material & Inventory'), ENT_QUOTES, 'UTF-8'); ?></h5>
         </div>
         <div class="card-block">
           <div class="table-responsive">
             <table class="table table-bordered table-sm">
               <tr>
                 <td><?= $summary['raw']['type']; ?></td>
-                <th scope="col" class="text-end"><?= number_format($summary['raw']['total']); ?> Units</th>
+                <th scope="col" class="text-end"><?= number_format($summary['raw']['total']); ?> <?= __('Units'); ?></th>
               </tr>
               <tr>
                 <td><?= $summary['wip']['type']; ?></td>
-                <th scope="col" class="text-end"><?= number_format($summary['wip']['total']); ?> Units</th>
+                <th scope="col" class="text-end"><?= number_format($summary['wip']['total']); ?> <?= __('Units'); ?></th>
               </tr>
               <tr>
                 <td><?= $summary['fg']['type']; ?></td>
-                <th scope="col" class="text-end"><?= number_format($summary['fg']['total']); ?> Units</th>
+                <th scope="col" class="text-end"><?= number_format($summary['fg']['total']); ?> <?= __('Units'); ?></th>
               </tr>
               <tr>
-                <td class="text-danger">Shortages</td>
-                <th scope="col" class="text-danger text-end"><?= $shortages; ?> Items</th>
+                <td class="text-danger"><?= __('Shortages'); ?></td>
+                <th scope="col" class="text-danger text-end"><?= $shortages; ?> <?= __('Items'); ?></th>
               </tr>
             </table>
           </div>
@@ -318,7 +318,7 @@ $chartjson = json_encode($chartData,1);
     <div class="col-lg-6">
       <div class="card">
         <div class="card-header">
-          <h5>Downtime Causes</h5>
+          <h5><?= __('Downtime Causes'); ?></h5>
         </div>
         <div class="card-block">
           <div class="ct-chart-horizontal ct-perfect-fourth"></div>
@@ -328,25 +328,25 @@ $chartjson = json_encode($chartData,1);
     <div class="col-lg-6">
       <div class="card">
         <div class="card-header">
-          <h5>Workforce Summary</h5>
+          <h5><?= __('Workforce Summary'); ?></h5>
         </div>
         <div class="card-block">
           <div class="table-responsive mt-4">
             <table class="table table-bordered">
               <tr>
-                <td>Total Workforce</td>
+                <td><?= __('Total Workforce'); ?></td>
                 <th scope="col" class="text-end">152</th>
               </tr>
               <tr>
-                <td>Attendance</td>
+                <td><?= __('Attendance'); ?></td>
                 <th scope="col" class="text-end">145 / 152</th>
               </tr>
               <tr>
-                <td>Shift Efficiency</td>
+                <td><?= __('Shift Efficiency'); ?></td>
                 <th scope="col" class="text-end">90%</th>
               </tr>
               <tr>
-                <td class="text-danger">Absent</td>
+                <td class="text-danger"><?= __('Absent'); ?></td>
                 <th scope="col" class="text-danger text-end">3</th>
               </tr>
             </table>
@@ -361,17 +361,17 @@ $chartjson = json_encode($chartData,1);
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Work Order Details</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h4 class="modal-title"><?= __('Work Order Details'); ?></h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
       </div>
       <div class="modal-body">
-        <h5 class="text-primary">WO-201 - Pump Shaft</h5>
+        <h5 class="text-primary"><?= __('WO-201 - Pump Shaft'); ?></h5>
         <div class="table-responsive mt-4">
           <table class="table  table-sm">
             <tr>
-              <th scope="col">Line:</th>
+              <th scope="col"><?= __('Line'); ?>:</th>
               <td>A1</td>
-              <th scope="col">Planned Qty:</th>
+              <th scope="col"><?= __('Planned Qty'); ?>:</th>
               <td>500</td>
             </tr>
           </table>
@@ -379,34 +379,34 @@ $chartjson = json_encode($chartData,1);
         <div class="card-block list-tag">
           <div class="row">
             <div class="col-lg-6">
-              <h5 class="f-w-600 mb-3 mt-3">Material Consumption</h5>
+              <h5 class="f-w-600 mb-3 mt-3"><?= __('Material Consumption'); ?></h5>
               <ul class="">
                 <li><i class="icofont icofont-double-right text-success"></i>
-                  Steel Rod - 44 kg used</li>
+                  <?= __('Steel Rod - 44 kg used'); ?></li>
                 <li><i class="icofont icofont-double-right text-success"></i>
-                  Copper Coil - 11 kg used</li>
+                  <?= __('Copper Coil - 11 kg used'); ?></li>
                 <li><i class="icofont icofont-double-right text-success"></i>
-                  Bearing Oil - 34 kg used</li>
+                  <?= __('Bearing Oil - 34 kg used'); ?></li>
                 <li><i class="icofont icofont-double-right text-success"></i>
-                  Washer Set - 47 kg used</li>
+                  <?= __('Washer Set - 47 kg used'); ?></li>
               </ul>
             </div>
             <div class="col-lg-6">
-              <h5 class="f-w-600 mb-3 mt-3">Quality Summary</h5>
+              <h5 class="f-w-600 mb-3 mt-3"><?= __('Quality Summary'); ?></h5>
               <ul>
                 <li><i class="icofont icofont-double-right text-success"></i>
-                  Surface Scratch: 3 defects</li>
+                  <?= __('Surface Scratch: 3 defects'); ?></li>
                 <li><i class="icofont icofont-double-right text-success"></i>
-                  Dimension Error: 1 defects</li>
+                  <?= __('Dimension Error: 1 defects'); ?></li>
                 <li><i class="icofont icofont-double-right text-success"></i>
-                  Others: 4 defects</li>
+                  <?= __('Others: 4 defects'); ?></li>
               </ul>
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
 
       </div>
     </div>
@@ -441,7 +441,7 @@ $chartjson = json_encode($chartData,1);
         — Quantity ${m.request_qty} ${m.uom})
       </li>
     `).join("")
-          : '<li>No materials listed</li>';
+          : '<li><?= htmlspecialchars(__('No materials listed'), ENT_QUOTES, 'UTF-8'); ?></li>';
         document.querySelector("#order-number .col-lg-6:first-child ul").innerHTML = matList;
         let operations = [];
         try { operations = JSON.parse(wo.operations); } catch (e) { operations = []; }
@@ -454,7 +454,7 @@ $chartjson = json_encode($chartData,1);
         — ${o.operation_time} mins, manpower: ${o.operation_manpower}
       </li>
     `).join("")
-          : '<li>No operations recorded</li>';
+          : '<li><?= htmlspecialchars(__('No operations recorded'), ENT_QUOTES, 'UTF-8'); ?></li>';
 
         document.querySelector("#order-number .col-lg-6:last-child ul").innerHTML = opList;
       });
