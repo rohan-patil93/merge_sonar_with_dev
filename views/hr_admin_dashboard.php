@@ -103,13 +103,13 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
         function useractivethedashboard(emp_id,name){
             console.log('Testtttt');
             swal({
-                title: "Are you sure?",
-                text: "To create a user for this employee "+name,
+                title: <?php echo json_encode(__('Are you sure?'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                text: <?php echo json_encode(__('To create a user for this employee').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+name,
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#2ed8b6",
-                confirmButtonText: "Yes, please",
-                cancelButtonText: "No, cancel !",
+                confirmButtonText: <?php echo json_encode(__('Yes, please'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                cancelButtonText: <?php echo json_encode(__('No, cancel !'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                 closeOnConfirm: false,
                 closeOnCancel: true
             },
@@ -123,8 +123,8 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                         type: "POST",
                         success:function(data){
 
-                            $("#useractive_"+emp_id).html(' <i class="fa fa-user-plus float-right text-success" data-bs-toggle="tooltip" data-placement="top" title="" data-bs-original-title="User activated" ></i>');
-                            swal("Yes", "User created successfully", "success");
+                            $("#useractive_"+emp_id).html(' <i class="fa fa-user-plus float-right text-success" data-bs-toggle="tooltip" data-placement="top" title="" data-bs-original-title="<?= htmlspecialchars(__('User activated'), ENT_QUOTES, 'UTF-8'); ?>" ></i>');
+                            swal(<?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, <?php echo json_encode(__('User created successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, "success");
                         }
                     });
 
@@ -135,13 +135,13 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
         }
         function userdeactive(emp_id,name){
             swal({
-                title: "Are you sure?",
-                text: "To deactivate a user for this employee "+name,
+                title: <?php echo json_encode(__('Are you sure?'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                text: <?php echo json_encode(__('To deactivate a user for this employee').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+name,
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#2ed8b6",
-                confirmButtonText: "Yes, please",
-                cancelButtonText: "No, cancel !",
+                confirmButtonText: <?php echo json_encode(__('Yes, please'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                cancelButtonText: <?php echo json_encode(__('No, cancel !'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                 closeOnConfirm: false,
                 closeOnCancel: true
             },
@@ -155,8 +155,8 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                         type: "POST",
                         success:function(data){
 
-                            $("#deactive_"+emp_id).html(' <i class="fa fa-user-times float-right text-success" data-bs-toggle="tooltip" data-placement="top" title="" data-bs-original-title="User Deactivated" ></i>');
-                            swal("Yes", "User is deactivated successfully", "success");
+                            $("#deactive_"+emp_id).html(' <i class="fa fa-user-times float-right text-success" data-bs-toggle="tooltip" data-placement="top" title="" data-bs-original-title="<?= htmlspecialchars(__('User Deactivated'), ENT_QUOTES, 'UTF-8'); ?>" ></i>');
+                            swal(<?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, <?php echo json_encode(__('User is deactivated successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, "success");
 
                         }
                     });
@@ -169,7 +169,7 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
     </script>
     <div class="p-2">
 
-        <button class="artificial_intelligence_btn bg-primary border-0" onclick="getArtificialIntelligence('HR_ADMIN_DASHBOARD')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Dashboard Summary With AI">
+        <button class="artificial_intelligence_btn bg-primary border-0" onclick="getArtificialIntelligence('HR_ADMIN_DASHBOARD')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Dashboard Summary With AI'), ENT_QUOTES, 'UTF-8'); ?>">
             <i class="ti-info spin-infinite"></i>
         </button>
     </div>
@@ -179,17 +179,17 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                     <div class="card social-card">
 
                         <?php if($todayatten['Todayday']!=""){  ?>
-                            <div class="ribbon ribbon-top-right"><span class="color-danger">Holiday</span></div>
+                            <div class="ribbon ribbon-top-right"><span class="color-danger"><?= __('Holiday'); ?></span></div>
                             <?php }else{ ?>
-                                <div class="ribbon ribbon-top-right"><span class="color-success">Working</span></div>
+                                <div class="ribbon ribbon-top-right"><span class="color-success"><?= __('Working'); ?></span></div>
                                 <?php } ?>
                                     <div class="card-body text-center">
                                         <div class="text-linkedin m-b-20"><i class="fa fa-users"></i></div>
                                         <h3 class="text-linkedin f-w-700"><?php echo customNanAndEmptyValidation($todayatten['total_emp']); ?></h3>
-                                        <p>Total Employees</p>
+                                        <p><?= __('Total Employees'); ?></p>
                                         <input type="hidden" id="view_total_emp" value="<?php echo urlencode(json_encode($todayatten['total_emp_ids'])); ?>">
                                         <p class="m-b-0 m-t-15">
-                                            <button class="badge badge-inverse-primary bg-white" onclick="moreemployees('view_total_emp')">View
+                                            <button class="badge badge-inverse-primary bg-white" onclick="moreemployees('view_total_emp')"><?= __('View'); ?>
                                             </button>
                                         </p>
                                     </div>
@@ -203,10 +203,10 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                         <div class="card-body text-center">
                             <div class="text-facebook m-b-20"><i class="fa fa-clock"></i></div>
                             <h3 class="text-facebook f-w-700"><?php echo customNanAndEmptyValidation($todayatten['present']); ?></h3>
-                            <p>Presents</p>
+                            <p><?= __('Presents'); ?></p>
                             <input type="hidden" id="view_present_emp" value="<?php echo urlencode(json_encode($todayatten['present_ids'])); ?>">
                             <p class="m-b-0 m-t-15">
-                                <button class="badge badge-inverse-info bg-white" onclick="moreemployees('view_present_emp')">View
+                                <button class="badge badge-inverse-info bg-white" onclick="moreemployees('view_present_emp')"><?= __('View'); ?>
                                 </button>
                             </p>
                         </div>
@@ -219,10 +219,10 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                         <div class="card-body text-center">
                             <div class="text-danger m-b-20"><i class="fa fa-clock"></i></div>
                             <h3 class="text-danger f-w-700"><?php echo customNanAndEmptyValidation($todayatten['absent']); ?></h3>
-                            <p>Absents</p>
+                            <p><?= __('Absents'); ?></p>
                             <input type="hidden" id="view_absent_emp" value="<?php echo urlencode(json_encode($todayatten['absent_ids'])); ?>">
                             <p class="m-b-0 m-t-15">
-                                <button class="badge badge-inverse-danger bg-white" onclick="moreemployees('view_absent_emp')">View
+                                <button class="badge badge-inverse-danger bg-white" onclick="moreemployees('view_absent_emp')"><?= __('View'); ?>
                                 </button>
                             </p>
                         </div>
@@ -235,10 +235,10 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                         <div class="card-body text-center">
                             <div class="text-linkedin m-b-20"><i class="fa fa-plane text-success"></i></div>
                             <h3 class="text-success f-w-700"><?php echo customNanAndEmptyValidation($todayatten['planned_leave']); ?></h3>
-                            <p>Planned Leaves</p>
+                            <p><?= __('Planned Leaves'); ?></p>
                             <input type="hidden" id="view_planned_leave_emp" value="<?php echo urlencode(json_encode($todayatten['planned_leave_ids'])); ?>">
                             <p class="m-b-0 m-t-15">
-                                <button class="badge badge-inverse-success bg-white" onclick="moreemployees('view_planned_leave_emp')">View
+                                <button class="badge badge-inverse-success bg-white" onclick="moreemployees('view_planned_leave_emp')"><?= __('View'); ?>
                                 </button>
                             </p>
                         </div>
@@ -261,20 +261,20 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                         <div class="card-header">
 
                             <div id="month_display1">
-                                <h5 class="card-label">Month Wise - Employees </h5> </div>
+                                <h5 class="card-label"><?= __('Month Wise - Employees'); ?> </h5> </div>
                             <div style="display: none;" id="month_display2">
-                                <h3 class="card-label">Month Wise - Salaries </h3>
+                                <h3 class="card-label"><?= __('Month Wise - Salaries'); ?> </h3>
                             </div>
                             <div class="card-header-right">
-                                <div class="badge badge-inverse-primary font-weight-bolder Active cursor-pointer" onclick="changegraph('2')" id="count_btn" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">Count</div>
-                                <div onclick="changegraph('1')" class="badge badge-inverse-primary font-weight-bolder cursor-pointer" id="salary_btn" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">Salaries</div>
+                                <div class="badge badge-inverse-primary font-weight-bolder Active cursor-pointer" onclick="changegraph('2')" id="count_btn" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?= __('Count'); ?></div>
+                                <div onclick="changegraph('1')" class="badge badge-inverse-primary font-weight-bolder cursor-pointer" id="salary_btn" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?= __('Salaries'); ?></div>
 
                             </div>
                         </div>
 
                         <div class="card-block" id="emp_active">
                             <?php if($countvaluempty == "1"){
-                             echo "<h4 class='p-40 text-center'><i class='fa fa-warning'></i>Month Wise - Employees Not Available</h4>";
+                             echo "<h4 class='p-40 text-center'><i class='fa fa-warning'></i>".__('Month Wise - Employees Not Available')."</h4>";
 
                             }else{?>
                             <div id="deal-analytic-chart-dashboard4" class="chart-shadow" style="height:325px"></div>
@@ -282,7 +282,7 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                         </div>
                         <div class="card-block" id="ain_renve" style="display:none">
                             <?php if($countvaluempty == "1"){
-                              echo "<h4 class='p-40 text-center'><i class='fa fa-warning'></i>Month Salaries - Employees Not Available</h4>";
+                              echo "<h4 class='p-40 text-center'><i class='fa fa-warning'></i>".__('Month Salaries - Employees Not Available')."</h4>";
                             }else{ ?>
                             <div id="salaray-chart-dashboard4" class="chart-shadow" style="height:325px"></div>
                             <?php } ?>
@@ -292,7 +292,7 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                 <div class="col-lg-4 col-md-12">
                     <div class="card sale-card">
                         <div class="card-header">
-                            <h5>Full time Employee Ratio</h5>
+                            <h5><?= __('Full time Employee Ratio'); ?></h5>
                         </div>
                         <?php
                             $regularemp = 0;
@@ -319,16 +319,16 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                                             </div>
                                     </div>
 
-                                    <h6 class="m-t-40">Total Employees</h6>
+                                    <h6 class="m-t-40"><?= __('Total Employees'); ?></h6>
                                     <h3 class="f-w-700 m-b-40"><i class="fa fa-group"></i> <?php echo customNanAndEmptyValidation($newemp['em_count']); ?></h3>
                                     <div class="row">
                                         <div class="col-6">
-                                            <p class="m-b-5 f-12">Regular</p>
+                                            <p class="m-b-5 f-12"><?= __('Regular'); ?></p>
                                             <input type="hidden" id="view_regular_emp" value="<?php echo urlencode(json_encode($todayatten['regular_emp_ids'])); ?>">
                                             <button type="button" class="btn p-0 border-0 bg-transparent text-warning h3 f-w-700 close" onclick="moreemployees('view_regular_emp')"><?php echo customNanAndEmptyValidation($newemp['regular']); ?></button>
                                         </div>
                                         <div class="col-6">
-                                            <p class="m-b-5 f-12">Contract</p>
+                                            <p class="m-b-5 f-12"><?= __('Contract'); ?></p>
                                             <input type="hidden" id="view_contact_emp" value="<?php echo urlencode(json_encode($todayatten['contract_emp_ids'])); ?>">
                                             <button type="button" class="btn p-0 border-0 bg-transparent text-danger h3 f-w-700 close" onclick="moreemployees('view_contact_emp')"><?php echo customNanAndEmptyValidation($newemp['contact']); ?></button>
                                         </div>
@@ -344,7 +344,7 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card sale-card ">
                         <div class="card-header dontcopy">
-                            <h5>MGR vs EMP</h5>
+                            <h5><?= __('MGR vs EMP'); ?></h5>
                         </div>
                             <div class="card-block text-center">
                                 <?php
@@ -369,14 +369,14 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                                             <div class="s-caption text-primary"><i class="fa fa-female f-20"></i></div>
                                             <div class="s-cont d-inline-block">
                                                 <h5 class="f-w-700 m-b-0"><?php echo customNanAndEmptyValidation($daterangenemp['manger_count']); ?></h5>
-                                                <p class="m-b-0">Managers</p>
+                                                <p class="m-b-0"><?= __('Managers'); ?></p>
                                             </div>
                                         </div>
                                         <div class="col-6 b-l-default">
                                             <div class="s-caption text-danger "><i class="fa fa-users  "></i></div>
                                             <div class="s-cont d-inline-block">
                                                 <h5 class="f-w-700 m-b-0"><?php echo customNanAndEmptyValidation($daterangenemp['em_count']); ?></h5>
-                                                <p class="m-b-0">Employees</p>
+                                                <p class="m-b-0"><?= __('Employees'); ?></p>
                                             </div>
                                         </div>
                                     </div>
@@ -386,7 +386,7 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card sale-card ">
                         <div class="card-header">
-                            <h5>By Gender</h5>
+                            <h5><?= __('By Gender'); ?></h5>
                         </div>
 
 
@@ -407,14 +407,14 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                                         <div class="s-caption  text-primary"><i class="fa fa-female f-20"></i></div>
                                         <div class="s-cont d-inline-block">
                                             <h5 class="f-w-700 m-b-0"><?php echo customNanAndEmptyValidation($daterangenemp['female']); ?></h5>
-                                            <p class="m-b-0">Female</p>
+                                            <p class="m-b-0"><?= __('Female'); ?></p>
                                         </div>
                                     </div>
                                     <div class="col-6 b-l-default">
                                         <div class="s-caption  text-danger"><i class="fa fa-male f-20"></i></div>
                                         <div class="s-cont d-inline-block">
                                             <h5 class="f-w-700 m-b-0"><?php echo customNanAndEmptyValidation($daterangenemp['male']); ?></h5>
-                                            <p class="m-b-0">male</p>
+                                            <p class="m-b-0"><?= __('male'); ?></p>
                                         </div>
                                     </div>
                                 </div>
@@ -425,7 +425,7 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card sale-card ">
                         <div class="card-header">
-                            <h5>Absenteeism Rate </h5>
+                            <h5><?= __('Absenteeism Rate'); ?> </h5>
                         </div>
                         <div class="card-block text-center">
 
@@ -459,14 +459,14 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                                         <div class="s-caption "><i class="fa fa-thumbs-up text-primary "></i></div>
                                         <div class="s-cont d-inline-block">
                                             <h5 class="f-w-700 m-b-0"><?php echo customNanAndEmptyValidation($pressents); ?></h5>
-                                            <p class="m-b-0">Presents</p>
+                                            <p class="m-b-0"><?= __('Presents'); ?></p>
                                         </div>
                                     </div>
                                     <div class="col-6 b-l-default">
                                         <div class="s-caption "> <i class="fa fa-thumbs-down  text-danger"></i></div>
                                         <div class="s-cont d-inline-block">
                                             <h5 class="f-w-700 m-b-0"><?php echo customNanAndEmptyValidation($Absents); ?></h5>
-                                            <p class="m-b-0">Absents</p>
+                                            <p class="m-b-0"><?= __('Absents'); ?></p>
                                         </div>
                                     </div>
                                 </div>
@@ -477,7 +477,7 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card sale-card ">
                         <div class="card-header">
-                            <h5>Joining vs Exit</h5>
+                            <h5><?= __('Joining vs Exit'); ?></h5>
                         </div>
                         <?php
                             $Joining = customNanAndEmptyValidation($data['joining']);
@@ -500,14 +500,14 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                                         <div class="s-caption "><i class="fa fa-user text-primary"></i></div>
                                         <div class="s-cont d-inline-block">
                                             <h5 class="f-w-700 m-b-0"><?php echo customNanAndEmptyValidation($Joining); ?></h5>
-                                            <p class="m-b-0">Joining</p>
+                                            <p class="m-b-0"><?= __('Joining'); ?></p>
                                         </div>
                                     </div>
                                     <div class="col-6 b-l-default">
                                         <div class="s-caption"><i class="fa fa-user-times text-danger"></i></div>
                                         <div class="s-cont d-inline-block">
                                             <h5 class="f-w-700 m-b-0"><?php echo $Relieving; ?></h5>
-                                            <p class="m-b-0">Relieving</p>
+                                            <p class="m-b-0"><?= __('Relieving'); ?></p>
                                         </div>
                                     </div>
                                 </div>
@@ -520,12 +520,12 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                 <div class="col-lg-3 col-md-6 col-sm-12 col-12">
                     <div class="card new-cust-card custom_hover_card">
                         <div class="card-header">
-                            <h5>New Employees </h5>
+                            <h5><?= __('New Employees'); ?> </h5>
                             <span class="form-label label label-success">
                                 <?php echo count($data['join_emp_data']); ?>
                             </span>
                             <div class="card-header-right">
-                                <small> Last 3 Months </small>
+                                <small> <?= __('Last 3 Months'); ?> </small>
                             </div>
                         </div>
                         <div class="card-body custom-scroll" style=" height: 470px;">
@@ -542,9 +542,9 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                             ?>
                             <div class="align-middle m-b-25">
                                 <?php if($joins['image']!=""){ ?>
-                                <img src="uploads/all/<?php echo $joins['image']; ?>" class="img-radius img-40 align-top m-r-15" alt="Attachment Preview">
+                                <img src="uploads/all/<?php echo $joins['image']; ?>" class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                 <?php }else{ ?>
-                                <span alt="user" class="img-radius img-40 align-top m-r-10 custom_txt_round p-1 f-12 text-center"><?php echo initials($joins['display_name']); ?></span>
+                                <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-10 custom_txt_round p-1 f-12 text-center"><?php echo initials($joins['display_name']); ?></span>
                                 <?php } ?>
                                 <div class="d-inline-block width73">
                                     <a href="#!" class="text-primary text-capitalize" onclick="getBasicInfoPopUp(<?php echo $joins['id'];?>)">
@@ -554,14 +554,14 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
 } ?> class="fa fa-user-plus float-right text-<?php echo $iccolor; ?>" data-bs-toggle="tooltip" data-placement="top" title="" data-bs-original-title="<?php echo $sidetittle; ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
                                         </div>
                                     </a>
-                                    <p class="text-muted m-b-0 f-12"> Joining Date
+                                    <p class="text-muted m-b-0 f-12"> <?= __('Joining Date'); ?>
                                         <?php echo date('dS M Y',strtotime($joins['joining_date'])); ?>
                                     </p>
                                 </div>
                             </div>
                             <?php }
                             }else{ ?>
-                            <p class="text-muted f-16 fw-bold m-b-30 text-center"><i class="fa fa-warning"></i> No Records</p>
+                            <p class="text-muted f-16 fw-bold m-b-30 text-center"><i class="fa fa-warning"></i> <?= __('No Records'); ?></p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                             </div>
@@ -574,12 +574,12 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                 <div class="col-lg-3 col-md-6 col-sm-12 col-12">
                     <div class="card new-cust-card custom_hover_card">
                         <div class="card-header">
-                            <h5>Resigned Employees </h5>
+                            <h5><?= __('Resigned Employees'); ?> </h5>
                             <span class="form-label label label-success">
                                 <?php echo count($data['resign_emp_data']); ?>
                             </span>
                             <div class="card-header-right">
-                                <small> Last 3 Months </small>
+                                <small> <?= __('Last 3 Months'); ?> </small>
                             </div>
                         </div>
                         <div class="card-body custom-scroll" style=" height: 470px;">
@@ -597,9 +597,9 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                                 ?>
                             <div class="align-middle m-b-25">
                                 <?php if($joins['image']!=""){ ?>
-                                <img src="uploads/all/<?php echo $joins['image']; ?>" class="img-radius img-40 align-top m-r-15" alt="Attachment Preview">
+                                <img src="uploads/all/<?php echo $joins['image']; ?>" class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                 <?php }else{ ?>
-                                <span alt="user" class="img-radius img-40 align-top m-r-10 custom_txt_round p-1 f-12 text-center"><?php echo initials($joins['display_name']); ?></span>
+                                <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-10 custom_txt_round p-1 f-12 text-center"><?php echo initials($joins['display_name']); ?></span>
                                 <?php } ?>
                                 <div class="d-inline-block width73">
                                     <a href="#!" class="text-primary text-capitalize" onclick="getBasicInfoPopUp(<?php echo $joins['id'];?>)">
@@ -611,7 +611,7 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                                             </i>
                                         </div>
                                     </a>
-                                    <p class="text-muted m-b-0 f-12"> Joining Date
+                                    <p class="text-muted m-b-0 f-12"> <?= __('Joining Date'); ?>
                                     <?php echo date('dS M Y',strtotime($joins['date_of_leaving'])); ?>
                                 </p>
                                 </div>
@@ -620,7 +620,7 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
 
                         <?php }
                             }else{ ?>
-                            <p class="text-muted f-16 fw-bold m-b-30 text-center"><i class="fa fa-warning"></i> No Records</p>
+                            <p class="text-muted f-16 fw-bold m-b-30 text-center"><i class="fa fa-warning"></i> <?= __('No Records'); ?></p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                             </div>
@@ -634,17 +634,17 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                 <div class="col-lg-6 col-md-12 col-sm-12 col-12">
                     <div class="card table-card">
                         <div class="card-header">
-                            <h5>Reviews</h5>
+                            <h5><?= __('Reviews'); ?></h5>
                         </div>
                         <div class="card-body custom-scroll" style="height: 470px;">
                             <ul class="nav  md-tabs infisuite_tab mt-2 p-2">
                                 <li class="nav-item">
-                                    <a class="nav-link active" data-bs-toggle="tab" href="#home7pending" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-hourglass-2"></i>  Pending  <span class="form-label badge bg-danger mb-0"><?php echo count((array)$reviewdata['pending']); ?></span></a>
+                                    <a class="nav-link active" data-bs-toggle="tab" href="#home7pending" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-hourglass-2"></i>  <?= __('Pending'); ?>  <span class="form-label badge bg-danger mb-0"><?php echo count((array)$reviewdata['pending']); ?></span></a>
 
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" data-bs-toggle="tab" href="#profile7approve" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-thumbs-up"></i> Approve  <span class="form-label badge bg-warning ml-2 mb-0"><?php echo count((array)$reviewdata['approve']); ?></span></a>
+                                    <a class="nav-link" data-bs-toggle="tab" href="#profile7approve" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-thumbs-up"></i> <?= __('Approve'); ?>  <span class="form-label badge bg-warning ml-2 mb-0"><?php echo count((array)$reviewdata['approve']); ?></span></a>
 
                                 </li>
                             </ul>
@@ -655,7 +655,7 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                                             <thead>
                                                 <tr>
                                                     <th scope="col">#</th>
-                                                    <th scope="col">Description</th>
+                                                    <th scope="col"><?= __('Description'); ?></th>
 
 
                                                 </tr>
@@ -707,7 +707,7 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                                                     <?php  $k++;
 }
 } else{
-                                                        echo "<tr><td colspan='3'><h4 class='p-40 text-center'><i class='fa fa-warning'></i> No Reviews Available</h4></td></tr>";
+                                                        echo "<tr><td colspan='3'><h4 class='p-40 text-center'><i class='fa fa-warning'></i> ".__('No Reviews Available')."</h4></td></tr>";
                                                      } ?>
                                             </tbody>
                                         </table>
@@ -719,7 +719,7 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                                             <thead>
                                                 <tr>
                                                     <th scope="col">#</th>
-                                                    <th scope="col">Description</th>
+                                                    <th scope="col"><?= __('Description'); ?></th>
 
 
                                                 </tr>
@@ -771,7 +771,7 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                                                     <?php  $k++;
 }
 } else{
-                                                       echo "<tr><td colspan='3'><h4 class='p-40 text-center'><i class='fa fa-warning'></i> No Reviews Available</h4></td></tr>";
+                                                       echo "<tr><td colspan='3'><h4 class='p-40 text-center'><i class='fa fa-warning'></i> ".__('No Reviews Available')."</h4></td></tr>";
                                                     } ?>
                                             </tbody>
                                         </table>
@@ -787,21 +787,21 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                 <div class="col-lg-6 col-md-12 col-sm-12 col-12">
                     <div class="card table-card">
                         <div class="card-header">
-                            <h5>Employee Resignation - Asset Handover</h5>
+                            <h5><?= __('Employee Resignation - Asset Handover'); ?></h5>
                         </div>
                         <div class="card-body custom-scroll" style="height: 600px;">
                             <ul class="nav  md-tabs infisuite_tab mt-2 p-2">
                                 <li class="nav-item">
-                                    <a class="nav-link active" data-bs-toggle="tab" href="#hnhome7pending" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> Pending  <span class="form-label badge bg-danger mb-0"><?php echo count((array)$reviewdata['reg_emp_data']); ?></span></a>
+                                    <a class="nav-link active" data-bs-toggle="tab" href="#hnhome7pending" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?= __('Pending'); ?>  <span class="form-label badge bg-danger mb-0"><?php echo count((array)$reviewdata['reg_emp_data']); ?></span></a>
 
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" data-bs-toggle="tab" href="#hnprofile7approve" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> Handover  <span class="form-label badge bg-success ml-2 mb-0"><?php echo count((array)$reviewdata['reg_emp_com_data']); ?></span></a>
+                                    <a class="nav-link" data-bs-toggle="tab" href="#hnprofile7approve" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?= __('Handover'); ?>  <span class="form-label badge bg-success ml-2 mb-0"><?php echo count((array)$reviewdata['reg_emp_com_data']); ?></span></a>
 
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" data-bs-toggle="tab" href="#hand7approve" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> With Out Resign - Handover  <span class="form-label badge bg-warning ml-2 mb-0"><?php echo count((array)$reviewdata['reg_emp_wo_data']); ?></span></a>
+                                    <a class="nav-link" data-bs-toggle="tab" href="#hand7approve" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?= __('With Out Resign - Handover'); ?>  <span class="form-label badge bg-warning ml-2 mb-0"><?php echo count((array)$reviewdata['reg_emp_wo_data']); ?></span></a>
 
                                 </li>
                             </ul>
@@ -814,9 +814,9 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                                     ?>
                                     <div class="align-middle m-b-25">
                                         <?php if($display_photo) {?>
-                                        <img src="uploads/all/<?php echo $display_photo; ?>" class="img-radius img-40 align-top m-r-15" alt="User Profile">
+                                        <img src="uploads/all/<?php echo $display_photo; ?>" class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <?php } else { ?>
-                                        <span alt="user" class="img-radius img-40 align-top m-r-10 custom_txt_round p-2 f-10 text-center"><?php echo initials($display_name); ?></span>
+                                        <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-10 custom_txt_round p-2 f-10 text-center"><?php echo initials($display_name); ?></span>
                                         <?php } ?>
                                         <div class="d-inline-block width73">
                                             <a href="#!" class=" text-capitalize">
@@ -835,9 +835,9 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                                         ?>
                                         <div class="align-middle m-b-25">
                                             <?php if($display_photo) {?>
-                                            <img src="uploads/all/<?php echo $display_photo; ?>" class="img-radius img-40 align-top m-r-15" alt="User Profile">
+                                            <img src="uploads/all/<?php echo $display_photo; ?>" class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <?php } else { ?>
-                                            <span alt="user" class="img-radius img-40 align-top m-r-10 custom_txt_round p-2 f-10 text-center"><?php echo initials($display_name); ?></span>
+                                            <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-10 custom_txt_round p-2 f-10 text-center"><?php echo initials($display_name); ?></span>
                                             <?php } ?>
                                             <div class="d-inline-block width73">
                                                 <a href="#!" class=" text-capitalize">
@@ -856,9 +856,9 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                                     ?>
                                     <div class="align-middle m-b-25">
                                         <?php if($display_photo) {?>
-                                        <img src="uploads/all/<?php echo $display_photo; ?>" class="img-radius img-40 align-top m-r-15" alt="User Profile">
+                                        <img src="uploads/all/<?php echo $display_photo; ?>" class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <?php } else { ?>
-                                        <span alt="user" class="img-radius img-40 align-top m-r-10 custom_txt_round p-2 f-10 text-center"><?php echo initials($display_name); ?></span>
+                                        <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-10 custom_txt_round p-2 f-10 text-center"><?php echo initials($display_name); ?></span>
                                         <?php } ?>
                                         <div class="d-inline-block width73">
                                             <a href="#!" class=" text-capitalize">
@@ -876,7 +876,7 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                 <div class="col-lg-6 col-md-12 col-sm-12 col-12">
                     <div class="card table-card">
                         <div class="card-header">
-                            <h5>Employee Miss Punch <span class="label label-primary f-12"><?php echo count((array)$emp_miss_punch_list) ?? 0  ?></span></h5>
+                            <h5><?= __('Employee Miss Punch'); ?> <span class="label label-primary f-12"><?php echo count((array)$emp_miss_punch_list) ?? 0  ?></span></h5>
                         </div>
                         <div class="card-body custom-scroll" style="height: 600px;">
                             <div class="table-responsive">
@@ -884,10 +884,10 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Employee</th>
-                                            <th scope="col">Date</th>
-                                            <th scope="col">Clock In</th>
-                                            <th scope="col">Clock Out</th>
+                                            <th scope="col"><?= __('Employee'); ?></th>
+                                            <th scope="col"><?= __('Date'); ?></th>
+                                            <th scope="col"><?= __('Clock In'); ?></th>
+                                            <th scope="col"><?= __('Clock Out'); ?></th>
 
                                         </tr>
                                     </thead>
@@ -916,7 +916,7 @@ $emp_miss_punch_list = $reviewdata['emp_miss_punch_list'] ?? array();
                                         <?php } else { ?>
                                         <tr>
                                             <td colspan="6">
-                                                <p class="text-muted f-16 fw-bold m-b-30 text-center"><i class="fa fa-warning"></i> No Records</p>
+                                                <p class="text-muted f-16 fw-bold m-b-30 text-center"><i class="fa fa-warning"></i> <?= __('No Records'); ?></p>
                                                 <div class="text-center px-4">
                                                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                                 </div>
