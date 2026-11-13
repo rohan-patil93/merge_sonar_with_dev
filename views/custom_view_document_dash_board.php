@@ -11,7 +11,7 @@ include_once "new_from_submit.php";
 ?>
 <script type="text/javascript">
     function dynamicinsertpopupdash(option){
-        alert("insert");
+        alert(<?php echo json_encode(__('insert'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         jQuery.ajax({
             url: "views/new_from.php",
             data:'option='+option,
@@ -31,12 +31,12 @@ include_once "new_from_submit.php";
     <ul class="nav md-tabs" id="myTab1">
         <li class="nav-item">
             <a class="nav-link   active" data-bs-toggle="tab" href="#dashboard" role="tab"  onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-               Dash Board
+               <?= __('Dash Board'); ?>
             </a>
         </li>
         <li class="nav-item ">
             <a class="nav-link" data-bs-toggle="tab" href="#mydocuments" role="tab"  onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                My Documents
+                <?= __('My Documents'); ?>
             </a>
         </li>
     </ul>
@@ -48,7 +48,7 @@ include_once "new_from_submit.php";
                 <div class="col-lg-3">
                     <div class="card mb-2" >
                         <div class="card-header">
-                            <h5>Dcoumment categories <span class="label label-md label-info" style=""> <?php echo count((array)$details['categories']); ?> </span> </h5>
+                            <h5><?= __('Dcoumment categories'); ?> <span class="label label-md label-info" style=""> <?php echo count((array)$details['categories']); ?> </span> </h5>
                             <div class="card-header-right">
                                 <button type="button" onclick="dynamicinsertpopupdash('COM_INSERT_DOCUMENT_CATEGORIES')" class="label label-md label-primary border-0" style="padding:  5px; cursor: pointer;">
                                      <i class="ti ti-plus text-white"></i>
@@ -78,7 +78,7 @@ include_once "new_from_submit.php";
                                     </div>
                             <?php }
                             } else{ ?>
-                                <h6 class="text-center mt-3"> No Data</h6>
+                                <h6 class="text-center mt-3"> <?= __('No Data'); ?></h6>
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                             <?php } ?>
                         </div>
@@ -87,7 +87,7 @@ include_once "new_from_submit.php";
                 <div class="col-lg-6">
                     <div class="card mb-2" >
                         <div class="card-header">
-                            <h5 >Document Lists</h5>
+                            <h5 ><?= __('Document Lists'); ?></h5>
                             <div class="card-header-right">
                                 <button type="button" onclick="dynamicinsertpopupdash('COM_INSERT_DOCUMENT_LISTS')" class="label label-md label-primary border-0" style="padding:  5px; cursor: pointer;">
                                      <i class="ti ti-plus text-white"></i>
@@ -118,8 +118,8 @@ include_once "new_from_submit.php";
                                                 <table class="table table-hover table-sm">
                                                     <tr>
                                                         <th scope="col">#</th>
-                                                        <th scope="col">Document Name</th>
-                                                        <th scope="col">Create Date</th>
+                                                        <th scope="col"><?= __('Document Name'); ?></th>
+                                                        <th scope="col"><?= __('Create Date'); ?></th>
                                                         <th scope="col"></th>
                                                     </tr>
                                                     <?php $m=1;
@@ -146,7 +146,7 @@ include_once "new_from_submit.php";
                                                     } else{ ?>
                                                         <tr>
                                                             <td colspan="4" class="text-center">
-                                                                <h6 class="text-center mt-3"> No Data</h6>
+                                                                <h6 class="text-center mt-3"> <?= __('No Data'); ?></h6>
                                                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                                             </td>
                                                         </tr>
@@ -159,7 +159,7 @@ include_once "new_from_submit.php";
                                     <?php $i++;
 }
                                     }else{ ?>
-                                        <h6 class="text-center mt-3"> No Data</h6>
+                                        <h6 class="text-center mt-3"> <?= __('No Data'); ?></h6>
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                     <?php } ?>
                                 </div>
@@ -170,7 +170,7 @@ include_once "new_from_submit.php";
                 <div class="col-lg-3">
                     <div class="card mb-2" style="min-height:354px;">
                         <div class="card-header">
-                            <h5>Document summary</h5>
+                            <h5><?= __('Document summary'); ?></h5>
                         </div>
 
                         <div class="card-body custom-scrollw c-row">
@@ -198,10 +198,10 @@ include_once "new_from_submit.php";
                 <div class="col-lg-6">
                     <div class="card mb-2" >
                         <div class="card-header">
-                            <h5 >Document Lists</h5>
+                            <h5 ><?= __('Document Lists'); ?></h5>
                             <div class="card-header-right">
 
-                                <a target="_blank" href="index.php?option=COM_INSERT_EMP_ASSIGN_RELEASE_DOCUMENTS" title="Insert Details" class="label label-md label-primary" style="padding:  5px;">
+                                <a target="_blank" href="index.php?option=COM_INSERT_EMP_ASSIGN_RELEASE_DOCUMENTS" title="<?= htmlspecialchars(__('Insert Details'), ENT_QUOTES, 'UTF-8'); ?>" class="label label-md label-primary" style="padding:  5px;">
                                      <i class="ti ti-plus text-white"></i>
                                 </a>
                             </div>
@@ -211,11 +211,11 @@ include_once "new_from_submit.php";
                                 <thead>
                                     <tr>
                                       <th scope="col"> # </th>
-                                      <th scope="col"> Assessment Year </th>
-                                      <th scope="col"> Document Type </th>
-                                      <th scope="col"> Number of Employees </th>
-                                      <th scope="col"> Created Date  </th>
-                                      <th scope="col"> Action  </th>
+                                      <th scope="col"> <?= __('Assessment Year'); ?> </th>
+                                      <th scope="col"> <?= __('Document Type'); ?> </th>
+                                      <th scope="col"> <?= __('Number of Employees'); ?> </th>
+                                      <th scope="col"> <?= __('Created Date'); ?>  </th>
+                                      <th scope="col"> <?= __('Action'); ?>  </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -227,8 +227,8 @@ include_once "new_from_submit.php";
                                       <td><?php echo $row['cc']; ?></td>
                                       <td><?php echo fromDate($row['created_date']); ?></td>
                                       <td>
-                                        <a target="_blank" href="index.php?option=COM_INSERT_EMP_ASSIGN_RELEASE_DOCUMENTS&amp;assessment_year=<?php echo $row['assessment_year']; ?>&amp;list=<?php echo $row['document_list_id']; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Edit Details"><i class="fa fa-edit"></i></a>
-                                        <a target="_blank" href="index.php?option=COM_VIEW_EMP_ASSIGN_RELEASE_DOCUMENTS&amp;assessment_year=<?php echo $row['assessment_year']; ?>&amp;list=<?php echo $row['document_list_id']; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="View Details"><i class="fa fa-eye"></i></a>
+                                        <a target="_blank" href="index.php?option=COM_INSERT_EMP_ASSIGN_RELEASE_DOCUMENTS&amp;assessment_year=<?php echo $row['assessment_year']; ?>&amp;list=<?php echo $row['document_list_id']; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-edit"></i></a>
+                                        <a target="_blank" href="index.php?option=COM_VIEW_EMP_ASSIGN_RELEASE_DOCUMENTS&amp;assessment_year=<?php echo $row['assessment_year']; ?>&amp;list=<?php echo $row['document_list_id']; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="<?= htmlspecialchars(__('View Details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-eye"></i></a>
                                         </td>
                                     </tr>
                                     <?php $i++;
@@ -241,10 +241,10 @@ include_once "new_from_submit.php";
                 <div class="col-lg-6">
                     <div class="card mb-2" >
                         <div class="card-header">
-                            <h5 >Employee Tax Deposit Respect</h5>
+                            <h5 ><?= __('Employee Tax Deposit Respect'); ?></h5>
                             <div class="card-header-right">
 
-                                  <a target="_blank" href="index.php?option=COM_INSERT_EMP_TAX_DEPOSIT_RESPECT" title="Insert Details" class="label label-md label-primary" style="padding:  5px;">
+                                  <a target="_blank" href="index.php?option=COM_INSERT_EMP_TAX_DEPOSIT_RESPECT" title="<?= htmlspecialchars(__('Insert Details'), ENT_QUOTES, 'UTF-8'); ?>" class="label label-md label-primary" style="padding:  5px;">
                                      <i class="ti ti-plus text-white"></i>
                                 </a>
                             </div>
@@ -254,10 +254,10 @@ include_once "new_from_submit.php";
                                 <thead>
                                     <tr>
                                       <th scope="col"> # </th>
-                                      <th scope="col"> Employee </th>
-                                      <th scope="col"> Assessment Year </th>
-                                      <th scope="col"> Certificate No </th>
-                                      <th scope="col"> Certificate  Date  </th>
+                                      <th scope="col"> <?= __('Employee'); ?> </th>
+                                      <th scope="col"> <?= __('Assessment Year'); ?> </th>
+                                      <th scope="col"> <?= __('Certificate No'); ?> </th>
+                                      <th scope="col"> <?= __('Certificate Date'); ?>  </th>
                                       <th scope="col">  </th>
                                     </tr>
                                 </thead>
@@ -270,8 +270,8 @@ include_once "new_from_submit.php";
                                       <td><?php echo $row['certificate_no']; ?></td>
                                       <td><?php echo fromDate($row['certificate_date']); ?></td>
                                       <td>
-                                        <a target="_blank" href="index.php?option=COM_INSERT_EMP_ASSIGN_RELEASE_DOCUMENTS&amp;assessment_year=<?php echo $row['assessment_year']; ?>&amp;list=<?php echo $row['document_list_id']; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Edit Details"><i class="fa fa-edit"></i></a>
-                                        <a target="_blank" href="index.php?option=COM_VIEW_EMP_ASSIGN_RELEASE_DOCUMENTS&amp;assessment_year=<?php echo $row['assessment_year']; ?>&amp;list=<?php echo $row['document_list_id']; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="View Details"><i class="fa fa-eye"></i></a>
+                                        <a target="_blank" href="index.php?option=COM_INSERT_EMP_ASSIGN_RELEASE_DOCUMENTS&amp;assessment_year=<?php echo $row['assessment_year']; ?>&amp;list=<?php echo $row['document_list_id']; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-edit"></i></a>
+                                        <a target="_blank" href="index.php?option=COM_VIEW_EMP_ASSIGN_RELEASE_DOCUMENTS&amp;assessment_year=<?php echo $row['assessment_year']; ?>&amp;list=<?php echo $row['document_list_id']; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="<?= htmlspecialchars(__('View Details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-eye"></i></a>
                                         </td>
                                     </tr>
                                     <?php $i++;
