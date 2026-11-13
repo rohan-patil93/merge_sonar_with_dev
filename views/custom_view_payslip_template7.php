@@ -61,82 +61,82 @@ function customePayslipNumberFormate($number){
 
                 </th>
                 <th scope="col" colspan="2" style="text-align: right;padding: 5px !important;border: 1px solid #cccccc; ">
-                    <img src="uploads/all/<?php echo  $_SESSION['is_data']['pay_area_config'] == 1 ? $_SESSION['pay_area_config']['display_logo'] : $_REQUEST['config']['display_logo'];  ?>" style="width: 125px;" alt="Logo">
+                    <img src="uploads/all/<?php echo  $_SESSION['is_data']['pay_area_config'] == 1 ? $_SESSION['pay_area_config']['display_logo'] : $_REQUEST['config']['display_logo'];  ?>" style="width: 125px;" alt="<?= htmlspecialchars(__('Logo'), ENT_QUOTES, 'UTF-8'); ?>">
                 </th>
             </tr>
             <tr>
-                <th scope="col" style="text-align: center;padding: 5px !important;border: 1px solid #cccccc; " colspan="3" >Salary Slip</th>
+                <th scope="col" style="text-align: center;padding: 5px !important;border: 1px solid #cccccc; " colspan="3" ><?= __('Salary Slip'); ?></th>
                 <th scope="col" style="text-align: center;padding: 5px !important;border: 1px solid #cccccc; " colspan="3"  ><?php echo $payslip_data_list['month']." - ".$payslip_data_list['year'];?></th>
             </tr>
             <tr>
-                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left; width: 20%;" >Employee Name</th>
+                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left; width: 20%;" ><?= __('Employee Name'); ?></th>
                 <td style="padding: 5px !important;border: 1px solid #cccccc; text-align: left; width: 30%;"><?php echo $payslip_data_list['emp_name']; ?></td>
-                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left; width: 20%;">Date of Joning</th>
+                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left; width: 20%;"><?= __('Date of Joning'); ?></th>
                 <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: right; width: 30%;">
                     <?php echo date('F d, Y',strtotime($payslip_data_list['doj'])); ?>
                 </th>
             </tr>
             <tr>
-                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;">Employee Code</th>
+                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;"><?= __('Employee Code'); ?></th>
                 <td style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;">
                     <?php echo $payslip_data_list['emp_number']; ?>
                 </td>
-                <th scope="col"style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;">Total working days</th>
+                <th scope="col"style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;"><?= __('Total working days'); ?></th>
                 <th scope="col" class="text-end" style="padding: 5px !important;border: 1px solid #cccccc; ">
                     <?php echo $payslip_data_list['std']; ?>
                 </th>
             </tr>
             <tr>
-                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;">Designation</th>
+                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;"><?= __('Designation'); ?></th>
                 <td style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;">
                 <?php echo $payslip_data_list['designation']; ?>
                 </td>
-                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;">Working days Attended</th>
+                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;"><?= __('Working days Attended'); ?></th>
                 <th scope="col" class="text-end" style="padding: 5px !important;border: 1px solid #cccccc; ">
                     <?php echo $payslip_data_list['std']-$payslip_data_list['lop']; ?>
                 </th>
             </tr>
             <tr>
-                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;">PAN</th>
+                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;"><?= __('PAN'); ?></th>
                 <td style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;">
                     <?php echo $payslip_data_list['pan_number']; ?>
                 </td>
-                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;">LOP</th>
+                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;"><?= __('LOP'); ?></th>
                 <th scope="col" class="text-end" style="padding: 5px !important;border: 1px solid #cccccc; ">
                     <?php echo $payslip_data_list['lop']; ?>
                 </th>
             </tr>
             <tr>
-                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;">Bank Account Number</th>
+                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;"><?= __('Bank Account Number'); ?></th>
                 <td style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;">
                     <?php echo $payslip_data_list['bank_account_no']; ?>
                 </td>
 
-                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;">PF UAN</th>
+                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;"><?= __('PF UAN'); ?></th>
                 <th scope="col" class="text-end" style="padding: 5px !important;border: 1px solid #cccccc; ">
                     <?php echo $payslip_data_list['pf_uan']; ?>
                 </th>
             </tr>
             <tr>
-                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;">Bank Name</th>
+                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;"><?= __('Bank Name'); ?></th>
                 <td style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;">
                     <?php echo $payslip_data_list['bank']; ?>
                 </td>
-                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;">PF No</th>
+                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;"><?= __('PF No'); ?></th>
                 <th scope="col" class="text-end" style="padding: 5px !important;border: 1px solid #cccccc; ">
                     <?php echo $payslip_data_list['pf']; ?>
                 </th>
             </tr>
             <tr>
-                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;">Grade</th>
+                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;"><?= __('Grade'); ?></th>
                 <td style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;">
                     <?php echo $payslip_data_list['grade']; ?>
                 </td>
-                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;">Opted Under</th>
-                <th scope="col" class="text-end" style="padding: 5px !important;border: 1px solid #cccccc; ">New Scheme</th>
+                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;"><?= __('Opted Under'); ?></th>
+                <th scope="col" class="text-end" style="padding: 5px !important;border: 1px solid #cccccc; "><?= __('New Scheme'); ?></th>
             </tr>
             <tr>
-                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;">Location</th>
+                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;"><?= __('Location'); ?></th>
                 <td style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;">
                     <?php echo $payslip_data_list['location']; ?>
                 </td>
@@ -147,16 +147,16 @@ function customePayslipNumberFormate($number){
         </table>
         <table style="font-size: 13px; padding: 5px !important; border: 1px solid #cccccc;width: 100%;">
             <tr>
-                <th scope="col" style="text-align: center;padding: 5px !important;border: 1px solid #cccccc; width: 50%;" colspan="3" >Income</th>
-                <th scope="col" style="text-align: center;padding: 5px !important;border: 1px solid #cccccc; text-align: center; width: 50%;" colspan="3" >Deductions</th>
+                <th scope="col" style="text-align: center;padding: 5px !important;border: 1px solid #cccccc; width: 50%;" colspan="3" ><?= __('Income'); ?></th>
+                <th scope="col" style="text-align: center;padding: 5px !important;border: 1px solid #cccccc; text-align: center; width: 50%;" colspan="3" ><?= __('Deductions'); ?></th>
             </tr>
             <tr>
-                <th scope="col" style="text-align: center;padding: 5px !important;border: 1px solid #cccccc; width: 18%;">Particulars</th>
-                <th scope="col" style="text-align: center;padding: 5px !important;border: 1px solid #cccccc; width: 16%;">Amount</th>
-                <th scope="col" style="text-align: center;padding: 5px !important;border: 1px solid #cccccc; width: 16%;">Annual</th>
-                <th scope="col" style="text-align: center;padding: 5px !important;border: 1px solid #cccccc; width: 18%;">Particulars</th>
-                <th scope="col"style="text-align: center;padding: 5px !important;border: 1px solid #cccccc; width: 16%;">Amount</th>
-                <th scope="col" style="text-align: center;padding: 5px !important;border: 1px solid #cccccc; width: 16%;">Annual</th>
+                <th scope="col" style="text-align: center;padding: 5px !important;border: 1px solid #cccccc; width: 18%;"><?= __('Particulars'); ?></th>
+                <th scope="col" style="text-align: center;padding: 5px !important;border: 1px solid #cccccc; width: 16%;"><?= __('Amount'); ?></th>
+                <th scope="col" style="text-align: center;padding: 5px !important;border: 1px solid #cccccc; width: 16%;"><?= __('Annual'); ?></th>
+                <th scope="col" style="text-align: center;padding: 5px !important;border: 1px solid #cccccc; width: 18%;"><?= __('Particulars'); ?></th>
+                <th scope="col"style="text-align: center;padding: 5px !important;border: 1px solid #cccccc; width: 16%;"><?= __('Amount'); ?></th>
+                <th scope="col" style="text-align: center;padding: 5px !important;border: 1px solid #cccccc; width: 16%;"><?= __('Annual'); ?></th>
             </tr>
             <?php
                 $actual_count= count((array)$payslip_data_list['actual']);
@@ -194,14 +194,14 @@ function customePayslipNumberFormate($number){
             </tr>
             <?php } ?>
             <tr>
-                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;">Total</th>
+                <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;"><?= __('Total'); ?></th>
                 <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: right;">
                     <?php echo customePayslipNumberFormate($earnings); ?>
                 </th>
                 <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: right;">
                     <?php echo customePayslipNumberFormate($st_earnings*12); ?>
                 </th>
-                <th scope="col"style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;">Total</th>
+                <th scope="col"style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;"><?= __('Total'); ?></th>
                 <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: right;">
                     <?php echo customePayslipNumberFormate($dedaction); ?>
                 </th>
@@ -210,7 +210,7 @@ function customePayslipNumberFormate($number){
                 </th>
             </tr>
             <tr>
-                <th scope="col" colspan="4" style="background-color: #cccccc; text-align: center;">Net Salary</th>
+                <th scope="col" colspan="4" style="background-color: #cccccc; text-align: center;"><?= __('Net Salary'); ?></th>
                 <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: right;">
                     <?php echo customePayslipNumberFormate($earnings-$dedaction); ?>
                 </th>
@@ -223,8 +223,8 @@ function customePayslipNumberFormate($number){
                 <th scope="col" colspan="3" style="height: 60px; text-align: center;"></th>
             </tr>
             <tr>
-                <th scope="col" colspan="3" style="text-align: center;">Employee Signature</th>
-                <th scope="col" colspan="3" style="text-align: center;">Employer Signature</th>
+                <th scope="col" colspan="3" style="text-align: center;"><?= __('Employee Signature'); ?></th>
+                <th scope="col" colspan="3" style="text-align: center;"><?= __('Employer Signature'); ?></th>
             </tr>
         </table>
     </div>
