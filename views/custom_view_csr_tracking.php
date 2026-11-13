@@ -203,16 +203,16 @@ if(isset($_GET['ajax_page']) && $_GET['ajax_page'] == 'Y'){
      <div class="card-block">
        <div class="text-right mb-2">
          <button type="button" class="btn btn-primary waves-effect waves-light m-r-5 csr-open-tracking-popup" data-rid="<?php echo htmlspecialchars(deocdeId('id:' . $rid), ENT_QUOTES, 'UTF-8'); ?>" data-proposal-id="<?php echo (int)$rid; ?>">
-           <i class="fa fa-plus m-r-5"></i> Tracking
+           <i class="fa fa-plus m-r-5"></i> <?= __('Tracking'); ?>
          </button>
          <button type="button" class="btn btn-primary waves-effect waves-light m-r-5 csr-open-details-popup" data-rid="<?php echo htmlspecialchars(deocdeId('id:' . $rid), ENT_QUOTES, 'UTF-8'); ?>" data-proposal-id="<?php echo (int)$rid; ?>">
-           <i class="fa fa-calendar m-r-5"></i> Add Details
+           <i class="fa fa-calendar m-r-5"></i> <?= __('Add Details'); ?>
          </button>
          <a class="btn btn-primary waves-effect waves-light m-r-5" href="index.php?option=COM_INSERT_CSR_PROJECT_DOCUMENTS&Rid=<?php echo deocdeId('id:' . $rid); ?>">
-           <i class="fa fa-folder-open m-r-5"></i> Documents
+           <i class="fa fa-folder-open m-r-5"></i> <?= __('Documents'); ?>
          </a>
          <a class="btn btn-primary waves-effect waves-light" href="index.php?option=COM_VIEW_CSR_PROPOSAL_DETAILS&Rid=<?php echo deocdeId('id:' . $rid); ?>">
-           <i class="fa fa-file-text-o m-r-5"></i> Project View
+           <i class="fa fa-file-text-o m-r-5"></i> <?= __('Project View'); ?>
          </a>
        </div>
        <ul class="nav nav-tabs  tabs">
@@ -249,14 +249,14 @@ if(isset($_GET['ajax_page']) && $_GET['ajax_page'] == 'Y'){
                  <div class="col-lg-4 m-l-30">
                    <div class="image-input image-input-empty image-input-outline" id="kt_image_5">
                      <form method="post" id="profile_pic_file" enctype="multipart/form-data" class="position-relative">
-                       <label class="btn-hover-text-primary position-absolute  text-white profile-pic-edit" data-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="Edit Profile Pic">
+                       <label class="btn-hover-text-primary position-absolute  text-white profile-pic-edit" data-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="<?= htmlspecialchars(__('Edit Profile Pic'), ENT_QUOTES, 'UTF-8'); ?>">
                          <span><i class="ti-pencil-altj"></i></span>
-                         <input aria-label="Profile Pic File" type="file" name="profile_pic_file" accept=".png, .jpg, .jpeg"   class="profile-pic-input">
+                         <input aria-label="<?= htmlspecialchars(__('Profile Pic File'), ENT_QUOTES, 'UTF-8'); ?>" type="file" name="profile_pic_file" accept=".png, .jpg, .jpeg"   class="profile-pic-input">
                        </label>
                        <img src="./assets/images/faq_man.jpg" class="img-radius img-90" alt="">
                        <span id="verified_btn">
                          <button type="button" class="btn waves-effect waves-light btn-success pt-1 pb-1 m-l-20">
-                           <i class="ti-check m-r-5"></i> Active
+                           <i class="ti-check m-r-5"></i> <?= __('Active'); ?>
                          </button>
                        </span>
                      </form>
@@ -270,7 +270,7 @@ if(isset($_GET['ajax_page']) && $_GET['ajax_page'] == 'Y'){
 
 
                      <div class="font-weight-bold text-dark-50 mt-1 f-14">
-                       <b class="f-w-600">Project Requestor : </b><?php echo $proposal_return['name'] ?>&nbsp;
+                       <b class="f-w-600"><?= __('Project Requestor'); ?> : </b><?php echo $proposal_return['name'] ?>&nbsp;
                      </div>
                    </div>
                  </div>
@@ -332,12 +332,12 @@ if(isset($_GET['ajax_page']) && $_GET['ajax_page'] == 'Y'){
                         <button class="btn btn-danger waves-effect waves-light csr-status-btn <?php echo $holdCompleteButtonClass; ?>"
                                 data-id="<?php echo $tracking['id']; ?>"
                                 data-status="hold"
-                                data-rid="<?php echo $rid; ?>">Hold</button>
+                                data-rid="<?php echo $rid; ?>"><?= __('Hold'); ?></button>
 
                         <button class="btn btn-success waves-effect waves-light csr-status-btn <?php echo $holdCompleteButtonClass; ?>"
                                 data-id="<?php echo $tracking['id']; ?>"
                                 data-status="completed"
-                                data-rid="<?php echo $rid; ?>">Complete</button>
+                                data-rid="<?php echo $rid; ?>"><?= __('Complete'); ?></button>
 
                       </div>
                     </div>
@@ -354,7 +354,7 @@ if(isset($_GET['ajax_page']) && $_GET['ajax_page'] == 'Y'){
                           ?>
                         </div>
                         <?php if ($status == 'completed'): ?>
-                        <img src="assets/images/complete.png" alt="completed" class="csr-complete-img" >
+                        <img src="assets/images/complete.png" alt="<?= htmlspecialchars(__('completed'), ENT_QUOTES, 'UTF-8'); ?>" class="csr-complete-img" >
                         <?php endif; ?>
 
 
@@ -362,15 +362,15 @@ if(isset($_GET['ajax_page']) && $_GET['ajax_page'] == 'Y'){
                  <div class="card-body">
                    <div class="row">
                      <div class="col-lg-6">
-                       <p class="m-0 f-12 text-muted">Start </p>
+                       <p class="m-0 f-12 text-muted"><?= __('Start'); ?> </p>
                        <h4 class="f-14 f-w-600 m-0 mt-1"><?php echo fromDate($tracking['start_date']);  ?></h4>
                      </div>
                      <div class="col-lg-6">
-                       <p class="m-0 f-12 text-muted">End</p>
+                       <p class="m-0 f-12 text-muted"><?= __('End'); ?></p>
                        <h4 class="f-14 f-w-600 m-0 mt-1 csr-end-date" data-color="<?php echo $color; ?>"><?php echo fromDate($endDate);  ?></h4>
                      </div>
                      <div class="col-lg-6 mt-3">
-                       <p class="m-0 f-12 text-muted">Budget</p>
+                       <p class="m-0 f-12 text-muted"><?= __('Budget'); ?></p>
                        <h4 class="f-14 f-w-600 m-0 mt-1"><?php echo $tracking['tracking_budget'];  ?></h4>
                      </div>
 
@@ -386,15 +386,15 @@ if(isset($_GET['ajax_page']) && $_GET['ajax_page'] == 'Y'){
 
 <button class="btn btn-primary waves-effect waves-light csr-start-btn <?php echo $startButtonClass ?>"
         data-id="<?php echo $tracking['id']; ?>"
-        data-rid="<?php echo $rid; ?>">Start</button>
+        data-rid="<?php echo $rid; ?>"><?= __('Start'); ?></button>
 
 <button class="btn btn-success waves-effect waves-light csr-po-btn"
         data-id="<?php echo $tracking['id']; ?>"
-        data-rid="<?php echo $rid; ?>">PO Details</button>
+        data-rid="<?php echo $rid; ?>"><?= __('PO Details'); ?></button>
 
 <button class="btn btn-primary waves-effect waves-light csr-settlement-btn"
         data-id="<?php echo $tracking['id']; ?>"
-        data-rid="<?php echo $rid; ?>">Settlement</button>
+        data-rid="<?php echo $rid; ?>"><?= __('Settlement'); ?></button>
 
                  </div>
                </div>
