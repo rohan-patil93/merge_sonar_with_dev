@@ -9,7 +9,7 @@ include_once 'comm.php';
 
 $log_id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 if ($log_id <= 0) {
-    echo '<div class="alert alert-danger font-weight-bold"><i class="fa fa-exclamation-triangle"></i> Invalid visitor log ID.</div>';
+    echo '<div class="alert alert-danger font-weight-bold"><i class="fa fa-exclamation-triangle"></i> '.__('Invalid visitor log ID.').'</div>';
     exit;
 }
 
@@ -87,7 +87,7 @@ $display_email = $log->email ?: '—';
         <div class="d-flex flex-column flex-md-row align-items-center gap-3">
             <div class="detail-avatar">
                 <?php if (!empty($log->image_path)): ?>
-                    <img src="uploads/visitors/<?= htmlspecialchars($log->image_path) ?>" alt="Visitor"
+                    <img src="uploads/visitors/<?= htmlspecialchars($log->image_path) ?>" alt="<?= htmlspecialchars(__('Visitor'), ENT_QUOTES, 'UTF-8'); ?>"
                         style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,0.2);">
                 <?php else: ?>
                     <div
@@ -107,7 +107,7 @@ $display_email = $log->email ?: '—';
                     <i class="fa fa-envelope me-1"></i> <?= htmlspecialchars($display_email) ?>
                 </div>
                 <div class="mt-1 small">
-                    <span class="opacity-75">ID / Badge Code:</span> <strong
+                    <span class="opacity-75"><?= __('ID / Badge Code'); ?>:</span> <strong
                         class="text-warning"><?= htmlspecialchars($log->visitor_idcard_no ?: '—') ?></strong>
                 </div>
             </div>
@@ -122,50 +122,50 @@ $display_email = $log->email ?: '—';
                 style="border-radius: 10px; background: #ffffff; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
                 <div class="card-header bg-white py-3 border-0">
                     <h6 class="mb-0 text-dark font-weight-bold"><i class="fa fa-info-circle text-primary me-2"></i>
-                        Visit &amp; Purpose Info</h6>
+                        <?= htmlspecialchars(__('Visit & Purpose Info'), ENT_QUOTES, 'UTF-8'); ?></h6>
                 </div>
                 <div class="card-body pt-0">
                     <table class="table table-borderless table-sm small mb-0">
                         <tr>
-                            <th scope="col" class="text-muted" style="width: 40%;">Host Employee:</th>
+                            <th scope="col" class="text-muted" style="width: 40%;"><?= __('Host Employee'); ?>:</th>
                             <th scope="col" class="font-weight-bold text-dark"><?= htmlspecialchars($host_name) ?></th>
                         </tr>
                         <?php if ($visit_type === 'vendor_supplier'): ?>
                             <tr>
-                                <td class="text-muted">Vendor Company:</td>
+                                <td class="text-muted"><?= __('Vendor Company'); ?>:</td>
                                 <td class="font-weight-bold text-dark"><?= htmlspecialchars($vendor_name) ?></td>
                             </tr>
                             <tr>
-                                <td class="text-muted">Department:</td>
+                                <td class="text-muted"><?= __('Department'); ?>:</td>
                                 <td class="font-weight-bold text-dark"><?= htmlspecialchars($dept_name) ?></td>
                             </tr>
                         <?php endif; ?>
                         <tr>
-                            <td class="text-muted">Purpose of Visit:</td>
+                            <td class="text-muted"><?= __('Purpose of Visit'); ?>:</td>
                             <td class="font-weight-bold text-dark"><?= htmlspecialchars($log->purpose ?: '—') ?></td>
                         </tr>
                         <?php if (!empty($log->purpose_other)): ?>
                             <tr>
-                                <td class="text-muted">Purpose Details:</td>
+                                <td class="text-muted"><?= __('Purpose Details'); ?>:</td>
                                 <td class="font-weight-bold text-dark"><?= htmlspecialchars($log->purpose_other) ?></td>
                             </tr>
                         <?php endif; ?>
                         <tr>
-                            <td class="text-muted">Visiting Company:</td>
+                            <td class="text-muted"><?= __('Visiting Company'); ?>:</td>
                             <td class="font-weight-bold text-dark"><?= htmlspecialchars($log->company_name ?: '—') ?>
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-muted">Address:</td>
+                            <td class="text-muted"><?= __('Address'); ?>:</td>
                             <td class="font-weight-bold text-dark"><?= htmlspecialchars($log->address ?: '—') ?></td>
                         </tr>
                         <tr>
-                            <td class="text-muted">Gender:</td>
+                            <td class="text-muted"><?= __('Gender'); ?>:</td>
                             <td class="font-weight-bold text-dark"><?= htmlspecialchars(ucfirst($log->gender ?? '—')) ?>
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-muted">Expected Duration:</td>
+                            <td class="text-muted"><?= __('Expected Duration'); ?>:</td>
                             <td class="font-weight-bold text-dark">
                                 <?= htmlspecialchars($log->expected_duration ?: '—') ?></td>
                         </tr>
@@ -179,23 +179,21 @@ $display_email = $log->email ?: '—';
             <div class="card h-100 border-light"
                 style="border-radius: 10px; background: #ffffff; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
                 <div class="card-header bg-white py-3 border-0">
-                    <h6 class="mb-0 text-dark font-weight-bold"><i class="fa fa-sign-in-alt text-success me-2"></i> Gate
-                        Entry &amp; Exit History</h6>
+                    <h6 class="mb-0 text-dark font-weight-bold"><i class="fa fa-sign-in-alt text-success me-2"></i> <?= htmlspecialchars(__('Gate Entry & Exit History'), ENT_QUOTES, 'UTF-8'); ?></h6>
                 </div>
                 <div class="card-body pt-0">
                     <div class="d-flex flex-column gap-3">
                         <!-- Check In Block -->
                         <div class="p-2.5 rounded" style="background-color: #f0fdf4; border-left: 4px solid #10b981;">
                             <div class="d-flex justify-content-between align-items-center">
-                                <span class="text-xs font-weight-bold text-success text-uppercase">Check-In
-                                    Details</span>
+                                <span class="text-xs font-weight-bold text-success text-uppercase"><?= __('Check-In Details'); ?></span>
                                 <i class="fa fa-check-circle text-success"></i>
                             </div>
                             <div class="mt-1 small">
-                                <div><strong>Time:</strong> <span class="text-dark"><?= $in_time ?></span></div>
-                                <div><strong>Gate:</strong> <span
+                                <div><strong><?= __('Time'); ?>:</strong> <span class="text-dark"><?= $in_time ?></span></div>
+                                <div><strong><?= __('Gate'); ?>:</strong> <span
                                         class="text-dark"><?= htmlspecialchars($in_gate_name) ?></span></div>
-                                <div><strong>Guard:</strong> <span
+                                <div><strong><?= __('Guard'); ?>:</strong> <span
                                         class="text-dark"><?= htmlspecialchars($in_guard_name) ?></span></div>
                             </div>
                         </div>
@@ -204,15 +202,14 @@ $display_email = $log->email ?: '—';
                         <?php if (!empty($log->out_datetime) && $log->out_datetime !== '0000-00-00 00:00:00'): ?>
                             <div class="p-2.5 rounded" style="background-color: #fef2f2; border-left: 4px solid #ef4444;">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <span class="text-xs font-weight-bold text-danger text-uppercase">Check-Out
-                                        Details</span>
+                                    <span class="text-xs font-weight-bold text-danger text-uppercase"><?= __('Check-Out Details'); ?></span>
                                     <i class="fa fa-sign-out-alt text-danger"></i>
                                 </div>
                                 <div class="mt-1 small">
-                                    <div><strong>Time:</strong> <span class="text-dark"><?= $out_time ?></span></div>
-                                    <div><strong>Gate:</strong> <span
+                                    <div><strong><?= __('Time'); ?>:</strong> <span class="text-dark"><?= $out_time ?></span></div>
+                                    <div><strong><?= __('Gate'); ?>:</strong> <span
                                             class="text-dark"><?= htmlspecialchars($out_gate_name) ?></span></div>
-                                    <div><strong>Guard:</strong> <span
+                                    <div><strong><?= __('Guard'); ?>:</strong> <span
                                             class="text-dark"><?= htmlspecialchars($out_guard_name) ?></span></div>
                                 </div>
                             </div>
@@ -220,8 +217,7 @@ $display_email = $log->email ?: '—';
                             <div class="p-2.5 rounded text-center"
                                 style="background-color: #fffbeb; border: 1px dashed #f59e0b;">
                                 <div class="text-warning mb-1"><i class="fa fa-clock fa-spin"></i></div>
-                                <span class="text-xs font-weight-bold text-warning text-uppercase">Still Inside
-                                    Premises</span>
+                                <span class="text-xs font-weight-bold text-warning text-uppercase"><?= __('Still Inside Premises'); ?></span>
                             </div>
                         <?php endif; ?>
                     </div>
@@ -234,39 +230,38 @@ $display_email = $log->email ?: '—';
     <div class="card mb-4 border-light"
         style="border-radius: 10px; background: #ffffff; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
         <div class="card-header bg-white py-3 border-0">
-            <h6 class="mb-0 text-dark font-weight-bold"><i class="fa fa-truck text-info me-2"></i> Vehicle &amp;
-                Security Compliance</h6>
+            <h6 class="mb-0 text-dark font-weight-bold"><i class="fa fa-truck text-info me-2"></i> <?= htmlspecialchars(__('Vehicle & Security Compliance'), ENT_QUOTES, 'UTF-8'); ?></h6>
         </div>
         <div class="card-body pt-0">
             <div class="row text-center small">
                 <div class="col-6 col-md-3 mb-2">
                     <div class="p-2 bg-light rounded h-100">
-                        <div class="text-muted text-xs">Vehicle Type</div>
+                        <div class="text-muted text-xs"><?= __('Vehicle Type'); ?></div>
                         <strong
                             class="text-dark"><?= htmlspecialchars($log->vehicle_type ?: ($log->vendor_supplier_vehicle_type ?: 'None')) ?></strong>
                     </div>
                 </div>
                 <div class="col-6 col-md-3 mb-2">
                     <div class="p-2 bg-light rounded h-100">
-                        <div class="text-muted text-xs">Vehicle Number</div>
+                        <div class="text-muted text-xs"><?= __('Vehicle Number'); ?></div>
                         <strong
                             class="text-dark"><?= htmlspecialchars($log->vehicle_number ?: ($log->vendor_supplier_vehicle_number ?: '—')) ?></strong>
                     </div>
                 </div>
                 <div class="col-6 col-md-3 mb-2">
                     <div class="p-2 bg-light rounded h-100">
-                        <div class="text-muted text-xs">Package Count</div>
+                        <div class="text-muted text-xs"><?= __('Package Count'); ?></div>
                         <strong class="text-dark"><?= (int) ($log->package_count ?? 1) ?></strong>
                     </div>
                 </div>
                 <div class="col-6 col-md-3 mb-2">
                     <div class="p-2 bg-light rounded h-100">
-                        <div class="text-muted text-xs font-weight-bold">Security Cleared</div>
+                        <div class="text-muted text-xs font-weight-bold"><?= __('Security Cleared'); ?></div>
                         <div>
                             <?php if (($log->security_cleared ?? 0) == 1): ?>
-                                <span class="badge bg-success">Yes</span>
+                                <span class="badge bg-success"><?= __('Yes'); ?></span>
                             <?php else: ?>
-                                <span class="badge bg-secondary">No</span>
+                                <span class="badge bg-secondary"><?= __('No'); ?></span>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -274,18 +269,18 @@ $display_email = $log->email ?: '—';
                 <?php if ($visit_type === 'service'): ?>
                     <div class="col-6 col-md-3 mb-2">
                         <div class="p-2 bg-light rounded h-100">
-                            <div class="text-muted text-xs">Work Permit No</div>
+                            <div class="text-muted text-xs"><?= __('Work Permit No'); ?></div>
                             <strong class="text-dark"><?= htmlspecialchars($log->work_permit_no ?: '—') ?></strong>
                         </div>
                     </div>
                     <div class="col-6 col-md-3 mb-2">
                         <div class="p-2 bg-light rounded h-100">
-                            <div class="text-muted text-xs font-weight-bold">Safety Briefing</div>
+                            <div class="text-muted text-xs font-weight-bold"><?= __('Safety Briefing'); ?></div>
                             <div>
                                 <?php if (($log->safety_briefing ?? 0) == 1): ?>
-                                    <span class="badge bg-success">Yes</span>
+                                    <span class="badge bg-success"><?= __('Yes'); ?></span>
                                 <?php else: ?>
-                                    <span class="badge bg-secondary">No</span>
+                                    <span class="badge bg-secondary"><?= __('No'); ?></span>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -294,17 +289,17 @@ $display_email = $log->email ?: '—';
                 <?php if ($visit_type === 'vendor_supplier'): ?>
                     <div class="col-6 col-md-4 mb-2">
                         <div class="p-2 bg-light rounded h-100">
-                            <div class="text-muted text-xs">Vehicle Loading Window</div>
+                            <div class="text-muted text-xs"><?= __('Vehicle Loading Window'); ?></div>
                             <strong class="text-dark" style="font-size: 11px;">
                                 <?= $log->vendor_supplier_loading_start ? date('d/M h:i A', strtotime($log->vendor_supplier_loading_start)) : '—' ?>
-                                to
+                                <?= __('to'); ?>
                                 <?= $log->vendor_supplier_loading_end ? date('d/M h:i A', strtotime($log->vendor_supplier_loading_end)) : '—' ?>
                             </strong>
                         </div>
                     </div>
                     <div class="col-6 col-md-4 mb-2">
                         <div class="p-2 bg-light rounded h-100">
-                            <div class="text-muted text-xs">Vehicle Status</div>
+                            <div class="text-muted text-xs"><?= __('Vehicle Status'); ?></div>
                             <strong
                                 class="text-dark"><?= htmlspecialchars(str_replace('_', ' ', $log->vendor_supplier_vehicle_status ?? '—')) ?></strong>
                         </div>
@@ -318,8 +313,7 @@ $display_email = $log->email ?: '—';
     <div class="card border-light"
         style="border-radius: 10px; background: #ffffff; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
         <div class="card-header bg-white py-3 border-0">
-            <h6 class="mb-0 text-dark font-weight-bold"><i class="fa fa-boxes text-warning me-2"></i> Accompanying
-                Luggages / Material Items</h6>
+            <h6 class="mb-0 text-dark font-weight-bold"><i class="fa fa-boxes text-warning me-2"></i> <?= __('Accompanying Luggages / Material Items'); ?></h6>
         </div>
         <div class="card-body pt-0">
             <?php if ($luggages && !empty($luggages)): ?>
@@ -327,11 +321,11 @@ $display_email = $log->email ?: '—';
                     <table class="table table-hover table-sm small mb-0">
                         <thead class="bg-light">
                             <tr>
-                                <th scope="col">Item / Material Name</th>
-                                <th scope="col">Description / Serial</th>
-                                <th scope="col" class="text-right">Qty</th>
-                                <th scope="col">Brand / UOM</th>
-                                <th scope="col" class="text-center">Returnable</th>
+                                <th scope="col"><?= __('Item / Material Name'); ?></th>
+                                <th scope="col"><?= __('Description / Serial'); ?></th>
+                                <th scope="col" class="text-right"><?= __('Qty'); ?></th>
+                                <th scope="col"><?= __('Brand / UOM'); ?></th>
+                                <th scope="col" class="text-center"><?= __('Returnable'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -351,10 +345,9 @@ $display_email = $log->email ?: '—';
                                     </td>
                                     <td class="text-center">
                                         <?php if (($lug->returnable ?? 0) == 1): ?>
-                                            <span class="badge bg-light-warning text-warning">Yes
-                                                (<?= !empty($lug->return_date) ? date('d-M-Y', strtotime($lug->return_date)) : '—' ?>)</span>
+                                            <span class="badge bg-light-warning text-warning"><?= __('Yes ('); ?><?= !empty($lug->return_date) ? date('d-M-Y', strtotime($lug->return_date)) : '—' ?>)</span>
                                         <?php else: ?>
-                                            <span class="badge bg-light-secondary text-secondary">No</span>
+                                            <span class="badge bg-light-secondary text-secondary"><?= __('No'); ?></span>
                                         <?php endif; ?>
                                     </td>
                                 </tr>
@@ -364,7 +357,7 @@ $display_email = $log->email ?: '—';
                 </div>
             <?php else: ?>
                 <div class="text-center py-3 text-muted small">
-                    <i class="fa fa-box-open me-1"></i> No luggage or material items logged for this visit.
+                    <i class="fa fa-box-open me-1"></i> <?= __('No luggage or material items logged for this visit.'); ?>
                 </div>
             <?php endif; ?>
         </div>
