@@ -39,18 +39,18 @@ ksort($dis);
       <h3 class="card-title font-weight-bolder text-dark"><?php echo $title; ?></h3>
       <div class="card-toolbar">
          <div class="dropdown dropdown-inline">
-            <a href="#" class="btn btn-light-primary btn-sm font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select</a>
+            <a href="#" class="btn btn-light-primary btn-sm font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('Select'); ?></a>
             <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                <!--begin::Navigation-->
                <ul class="nav">
                    <li class="nav-item">
-                        <a class="nav-link py-2 px-4 font-weight-bolder active" data-toggle="tab" href="#kt_<?php echo $option; ?>_10" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Today</a>
+                        <a class="nav-link py-2 px-4 font-weight-bolder active" data-toggle="tab" href="#kt_<?php echo $option; ?>_10" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Today'); ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link py-2 px-4 font-weight-bolder" data-toggle="tab" href="#kt_<?php echo $option; ?>_11" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Week</a>
+                        <a class="nav-link py-2 px-4 font-weight-bolder" data-toggle="tab" href="#kt_<?php echo $option; ?>_11" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Week'); ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link py-2 px-4 font-weight-bolder" data-toggle="tab" href="#kt_<?php echo $option; ?>_12" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Month</a>
+                        <a class="nav-link py-2 px-4 font-weight-bolder" data-toggle="tab" href="#kt_<?php echo $option; ?>_12" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Month'); ?></a>
                     </li>
 
                </ul>
@@ -82,7 +82,7 @@ ksort($dis);
                </div>
                <!--end::Text-->
                <!--begin::Dropdown-->
-               <div class="dropdown dropdown-inline ml-2" data-toggle="tooltip" title="Quick actions" data-placement="left">
+               <div class="dropdown dropdown-inline ml-2" data-toggle="tooltip" title="<?= htmlspecialchars(__('Quick actions'), ENT_QUOTES, 'UTF-8'); ?>" data-placement="left">
                   <a href="#" class="btn btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                   <i class="ki ki-bold-more-hor"></i>
                   </a>
@@ -93,7 +93,7 @@ ksort($dis);
                         <li class="navi-item">
                            <a href="#" class="navi-link">
                            <span class="navi-text">
-                           <span class="label label-xl label-inline label-light-success">Customer</span>
+                           <span class="label label-xl label-inline label-light-success"><?= __('Customer'); ?></span>
                            </span>
                            </a>
                         </li>
@@ -133,7 +133,7 @@ ksort($dis);
                                                      </div>
                                                  </div>
                <!--begin::Dropdown-->
-               <div class="dropdown dropdown-inline ml-2" data-toggle="tooltip" title="Quick actions" data-placement="left">
+               <div class="dropdown dropdown-inline ml-2" data-toggle="tooltip" title="<?= htmlspecialchars(__('Quick actions'), ENT_QUOTES, 'UTF-8'); ?>" data-placement="left">
                   <a href="#" class="btn btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                   <i class="ki ki-bold-more-hor"></i>
                   </a>
@@ -144,7 +144,7 @@ ksort($dis);
                         <li class="navi-item">
                            <a href="#" class="navi-link">
                            <span class="navi-text">
-                           <span class="label label-xl label-inline label-light-success">Customer</span>
+                           <span class="label label-xl label-inline label-light-success"><?= __('Customer'); ?></span>
                            </span>
                            </a>
                         </li>
@@ -177,7 +177,7 @@ ksort($dis);
                </div>
                <!--end::Text-->
                <!--begin::Dropdown-->
-               <div class="dropdown dropdown-inline ml-2" data-toggle="tooltip" title="Quick actions" data-placement="left">
+               <div class="dropdown dropdown-inline ml-2" data-toggle="tooltip" title="<?= htmlspecialchars(__('Quick actions'), ENT_QUOTES, 'UTF-8'); ?>" data-placement="left">
                   <a href="#" class="btn btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                   <i class="ki ki-bold-more-hor"></i>
                   </a>
@@ -188,7 +188,7 @@ ksort($dis);
                         <li class="navi-item">
                            <a href="#" class="navi-link">
                            <span class="navi-text">
-                           <span class="label label-xl label-inline label-light-success">Customer</span>
+                           <span class="label label-xl label-inline label-light-success"><?= __('Customer'); ?></span>
                            </span>
                            </a>
                         </li>
