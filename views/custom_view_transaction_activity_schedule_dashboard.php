@@ -8,7 +8,7 @@ $transactions = $result['transactions'];
     function getTransactionActivitySchedulesDashboard(transaction_table){
         $(".spanicon").html('');
         $("#spanicon_"+transaction_table).html('<i class="fa fa-check-circle text-warning f-16"></i>');
-        var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $('#htmltransactiondiv').html(htmloader);
         jQuery.ajax({
             url: "views/custom_view_transaction_activity_schedule_dashboard_ajax.php",
