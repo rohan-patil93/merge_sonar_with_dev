@@ -32,11 +32,11 @@ $menus['2']['code']= 'YEAR';
 </script>
 <div class="card">
     <div class="card-header">
-        <h5>Salary Summary</h5>
+        <h5><?= __('Salary Summary'); ?></h5>
         <div class="card-header-right table-card-header">
-            <button type="submit" class="btn btn-primary waves-effect waves-light  mb-2 submitattendancess" onclick="donloadall()"   data-container="body" data-toggle="tooltip" data-placement="bottom" title=""> Download</button>
+            <button type="submit" class="btn btn-primary waves-effect waves-light  mb-2 submitattendancess" onclick="donloadall()"   data-container="body" data-toggle="tooltip" data-placement="bottom" title=""> <?= __('Download'); ?></button>
 
-            <button type="button" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i>Back</button>
+            <button type="button" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i><?= __('Back'); ?></button>
 
         </div>
     </div>
@@ -45,7 +45,7 @@ $menus['2']['code']= 'YEAR';
             <div class="col-lg-3">
               <nav class="all-employee m-b-10" style="margin-left: -12px;">
                 <ul>
-                  <li class="d-block border dropbtn"><a href="#">Filter</a>
+                  <li class="d-block border dropbtn"><a href="#"><?= __('Filter'); ?></a>
                     <ul>
                       <?php foreach((array)$menus as $mkey=>$menu){ ?>
                         <li><a href="#"><?php echo $menu['name']; ?> <i class="ti-angle-right float-end f-12 m-t-5"></i></a>
@@ -73,7 +73,7 @@ $menus['2']['code']= 'YEAR';
              <table class="table table-styling">
                  <thead>
                      <tr class="bg-primary">
-                        <th scope="col"> Particulars </th>
+                        <th scope="col"> <?= __('Particulars'); ?> </th>
                         <?php $head_data = array(); $download_data = array();
                             $download_data['0'][] = 'Particulars';
                             for($i=0; $i<12; $i++){ ?>
@@ -125,7 +125,7 @@ $menus['2']['code']= 'YEAR';
                         <?php }
                         ?>
                         <tr class="bg-info">
-                            <td>  TAG DIFF  </td>
+                            <td>  <?= __('TAG DIFF'); ?>  </td>
                         <?php  $download_data[$k][] = 'TAG DIFF';
                              foreach((array)$f_total as $ftotal){
                                 $download_data[$k][] = customeummarmonyformateround($ftotal);
@@ -152,7 +152,7 @@ $menus['2']['code']= 'YEAR';
                             </tr>
                         <?php } ?>
                          <tr class="bg-info">
-                            <td>   TOTAL GROSS  </td>
+                            <td>   <?= __('TOTAL GROSS'); ?>  </td>
                         <?php  $download_data[$k][] = 'TOTAL GROSS ';
 
                              foreach((array)$s_total as $ftotal){
@@ -183,7 +183,7 @@ $menus['2']['code']= 'YEAR';
                             </tr>
                         <?php } ?>
                         <tr class="bg-info">
-                            <td>  TOTAL DEDUCTIONS  </td>
+                            <td>  <?= __('TOTAL DEDUCTIONS'); ?>  </td>
                         <?php  $download_data[$k][] = ' TOTAL DEDUCTIONS ';
 
                              foreach((array)$t_total as $ftotal){
@@ -193,7 +193,7 @@ $menus['2']['code']= 'YEAR';
                         <?php   } $k++; ?>
                          </tr>
                          <tr class="bg-success">
-                            <td>  NET PAY </td>
+                            <td>  <?= __('NET PAY'); ?> </td>
                         <?php  $download_data[$k][] = 'NET PAY';
 
                              foreach((array)$t_total as $nkey=>$ftotal){
