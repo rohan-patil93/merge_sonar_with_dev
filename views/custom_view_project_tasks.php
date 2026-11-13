@@ -66,24 +66,24 @@ function formatPriority($priority)
 {
     switch ($priority) {
         case '1':
-            return '<span class="px-2 py-1 badge bg-success">Low</span>';
+            return '<span class="px-2 py-1 badge bg-success">'.__('Low').'</span>';
         case '2':
-            return '<span class="px-2 py-1 badge bg-warning">Medium</span>';
+            return '<span class="px-2 py-1 badge bg-warning">'.__('Medium').'</span>';
         case '3':
-            return '<span class="px-2 py-1 badge bg-danger">High</span>';
+            return '<span class="px-2 py-1 badge bg-danger">'.__('High').'</span>';
         default:
-            return '<span class="px-2 py-1 badge bg-secondary">Unknown</span>';
+            return '<span class="px-2 py-1 badge bg-secondary">'.__('Unknown').'</span>';
     }
 }
 function formatStatus($status)
 {
     switch ($status) {
         case '0':
-            return '<span class="badge bg-success">Active</span>';
+            return '<span class="badge bg-success">'.__('Active').'</span>';
         case '1':
-            return '<span class="badge bg-failed">In Active</span>';
+            return '<span class="badge bg-failed">'.__('In Active').'</span>';
         default:
-            return '<span class="badge bg-secondary">Status ' . $status . '</span>';
+            return '<span class="badge bg-secondary">'.__('Status').' ' . $status . '</span>';
     }
 }
 function hasRecentNotification($ticketId, $notifications)
@@ -137,7 +137,7 @@ foreach ($ticketHistories as $ticket) {
         <div class="col-xl-3 col-lg-6 col-md-6">
             <div class="card border-0 shadow-sm rounded-4 h-100">
                 <div class="card-body d-flex flex-column justify-content-center text-center p-4">
-                    <h6 class="text-uppercase fw-semibold text-primary">Open Tickets</h6>
+                    <h6 class="text-uppercase fw-semibold text-primary"><?= __('Open Tickets'); ?></h6>
                     <h2 class="fw-bold text-primary my-2"><?= $opentickets; ?></h2>
                     <div class="progress rounded-pill" style="height:6px;">
                         <div class="progress-bar bg-primary" role="progressbar"
@@ -153,7 +153,7 @@ foreach ($ticketHistories as $ticket) {
         <div class="col-xl-3 col-lg-6 col-md-6">
             <div class="card border-0 shadow-sm rounded-4 h-100">
                 <div class="card-body d-flex flex-column justify-content-center text-center p-4">
-                    <h6 class="text-uppercase fw-semibold text-warning ">In Progress</h6>
+                    <h6 class="text-uppercase fw-semibold text-warning "><?= __('In Progress'); ?></h6>
                     <h2 class="fw-bold text-warning my-2"><?= $inprogress; ?></h2>
                     <div class="progress rounded-pill" style="height:6px;">
                         <div class="progress-bar bg-warning" role="progressbar"
@@ -169,7 +169,7 @@ foreach ($ticketHistories as $ticket) {
         <div class="col-xl-3 col-lg-6 col-md-6">
             <div class="card border-0 shadow-sm rounded-4 h-100">
                 <div class="card-body d-flex flex-column justify-content-center text-center p-4">
-                    <h6 class="text-uppercase fw-semibold text-success ">Fixed Tickets</h6>
+                    <h6 class="text-uppercase fw-semibold text-success "><?= __('Fixed Tickets'); ?></h6>
                     <h2 class="fw-bold text-success my-2"><?= $fixedtickets; ?></h2>
                     <div class="progress rounded-pill" style="height:6px;">
                         <div class="progress-bar bg-success" role="progressbar"
@@ -185,7 +185,7 @@ foreach ($ticketHistories as $ticket) {
         <div class="col-xl-3 col-lg-6 col-md-6">
             <div class="card border-0 shadow-sm rounded-4 h-100">
                 <div class="card-body d-flex flex-column justify-content-center text-center p-4">
-                    <h6 class="text-uppercase fw-semibold text-danger">Closed Tickets</h6>
+                    <h6 class="text-uppercase fw-semibold text-danger"><?= __('Closed Tickets'); ?></h6>
                     <h2 class="fw-bold text-danger my-2"><?= $closetickets; ?></h2>
                     <div class="progress rounded-pill" style="height:6px;">
                         <div class="progress-bar bg-danger" role="progressbar"
@@ -203,7 +203,7 @@ foreach ($ticketHistories as $ticket) {
         <div class="col-md-4">
             <div class="card text-center border-0 shadow-sm rounded-4 bg-success">
                 <div class="card-body p-4">
-                    <h6 class="fw-semibold">Low Priority</h6>
+                    <h6 class="fw-semibold"><?= __('Low Priority'); ?></h6>
                     <div class="display-5 fw-bold"><?= $priorityCounts['1']; ?></div>
                 </div>
             </div>
@@ -211,7 +211,7 @@ foreach ($ticketHistories as $ticket) {
         <div class="col-md-4">
             <div class="card text-center border-0 shadow-sm rounded-4 bg-warning">
                 <div class="card-body p-4">
-                    <h6 class="fw-semibold">Medium Priority</h6>
+                    <h6 class="fw-semibold"><?= __('Medium Priority'); ?></h6>
                     <div class="display-5 fw-bold"><?= $priorityCounts['2']; ?></div>
                 </div>
             </div>
@@ -219,7 +219,7 @@ foreach ($ticketHistories as $ticket) {
         <div class="col-md-4">
             <div class="card text-center border-0 shadow-sm rounded-4 bg-danger">
                 <div class="card-body p-4">
-                    <h6 class="fw-semibold">High Priority</h6>
+                    <h6 class="fw-semibold"><?= __('High Priority'); ?></h6>
                     <div class="display-5 fw-bold"><?= $priorityCounts['3']; ?></div>
                 </div>
             </div>
@@ -232,19 +232,19 @@ foreach ($ticketHistories as $ticket) {
             <li class="nav-item" role="presentation">
                 <a class="nav-link active" id="cards-tab" data-bs-toggle="tab" href="#cardsView" role="tab"
                     aria-controls="cardsView" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                    <i class="ti-grid-3x3-gap"></i> Grid View
+                    <i class="ti-grid-3x3-gap"></i> <?= __('Grid View'); ?>
                 </a>
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="table-tab" data-bs-toggle="tab" href="#tableView" role="tab"
                     aria-controls="tableView" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                    <i class="ti-table"></i> Table View
+                    <i class="ti-table"></i> <?= __('Table View'); ?>
                 </a>
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="notifications-tab" data-bs-toggle="tab" href="#notificationsView" role="tab"
                     aria-controls="notificationsView" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                    <i class="ti-bell"></i> Notifications
+                    <i class="ti-bell"></i> <?= __('Notifications'); ?>
                     <span class="badge bg-danger ms-1"><?= $totalNotifications ?></span>
                 </a>
             </li>
@@ -253,35 +253,35 @@ foreach ($ticketHistories as $ticket) {
             <div class="tab-pane fade show active" id="cardsView" role="tabpanel" aria-labelledby="cards-tab">
                 <div class="card card-custom card-sticky">
                     <div class="card-header table-card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Ticket Management</h5>
+                        <h5 class="mb-0"><?= __('Ticket Management'); ?></h5>
                         <div class="card-header-right">
                             <button type="button" class="btn btn-primary waves-effect waves-light"
                                 onclick="openTicketModal()">
-                                <i class="icofont icofont-plus mr-1"></i> Add Ticket
+                                <i class="icofont icofont-plus mr-1"></i> <?= __('Add Ticket'); ?>
                             </button>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="row mb-3">
                             <div class="col-md-3">
-                                <select aria-label="Grid Status Filter" id="gridStatusFilter" class="form-select js-example-basic-single" onchange="filterGrid()">
-                                    <option value="">All Status</option>
+                                <select aria-label="<?= htmlspecialchars(__('Grid Status Filter'), ENT_QUOTES, 'UTF-8'); ?>" id="gridStatusFilter" class="form-select js-example-basic-single" onchange="filterGrid()">
+                                    <option value=""><?= __('All Status'); ?></option>
                                     <?php foreach ($nonEmptyStatuses as $sid => $s): ?>
                                         <option value="<?= $sid ?>"><?= htmlspecialchars($s['name']) ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <select aria-label="Grid Priority Filter" id="gridPriorityFilter" class="form-select js-example-basic-single" onchange="filterGrid()">
-                                    <option value="">All Priorities</option>
-                                    <option value="1">Low</option>
-                                    <option value="2">Medium</option>
-                                    <option value="3">High</option>
+                                <select aria-label="<?= htmlspecialchars(__('Grid Priority Filter'), ENT_QUOTES, 'UTF-8'); ?>" id="gridPriorityFilter" class="form-select js-example-basic-single" onchange="filterGrid()">
+                                    <option value=""><?= __('All Priorities'); ?></option>
+                                    <option value="1"><?= __('Low'); ?></option>
+                                    <option value="2"><?= __('Medium'); ?></option>
+                                    <option value="3"><?= __('High'); ?></option>
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <input aria-label="Search tickets..." type="search" id="gridSearch" class="form-control"
-                                    placeholder="Search tickets...">
+                                <input aria-label="<?= htmlspecialchars(__('Search tickets...'), ENT_QUOTES, 'UTF-8'); ?>" type="search" id="gridSearch" class="form-control"
+                                    placeholder="<?= htmlspecialchars(__('Search tickets...'), ENT_QUOTES, 'UTF-8'); ?>">
                             </div>
                         </div>
 
@@ -312,9 +312,9 @@ foreach ($ticketHistories as $ticket) {
                                                             <p class="mb-1 small text-muted"><i class="ti-hash"></i>
                                                                 <?= htmlspecialchars($ticket['ticket_id']); ?></p>
                                                             <p class="mb-1 small">
-                                                                <i class="ti-calendar"></i> Req:
+                                                                <i class="ti-calendar"></i> <?= __('Req'); ?>:
                                                                 <?= date('M d, Y', strtotime($ticket['request_date'])); ?><br>
-                                                                <i class="ti-clock-history"></i> Upd:
+                                                                <i class="ti-clock-history"></i> <?= __('Upd'); ?>:
                                                                 <?= $ticket['updated_date'] ? date('M d, Y', strtotime($ticket['updated_date'])) : 'N/A'; ?>
                                                             </p>
                                                             <div class="d-flex gap-1">
@@ -379,9 +379,9 @@ foreach ($ticketHistories as $ticket) {
                                                                     <hr class="dropdown-divider">
                                                                 </li>
                                                                 <li><a class="dropdown-item" href="#" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"
-                                                                        onclick="editTicket('<?= $ticketId ?>')">Edit</a></li>
+                                                                        onclick="editTicket('<?= $ticketId ?>')"><?= __('Edit'); ?></a></li>
                                                                 <li><a class="dropdown-item" href="<?= $url ?>"
-                                                                        target="_blank">View</a></li>
+                                                                        target="_blank"><?= __('View'); ?></a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -398,35 +398,35 @@ foreach ($ticketHistories as $ticket) {
             <div class="tab-pane fade" id="tableView" role="tabpanel" aria-labelledby="table-tab">
                 <div class="card card-custom card-sticky">
                     <div class="card-header table-card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Ticket Management</h5>
+                        <h5 class="mb-0"><?= __('Ticket Management'); ?></h5>
                         <div class="card-header-right">
                             <button type="button" class="btn btn-primary waves-effect waves-light"
                                 onclick="openTicketModal()">
-                                <i class="icofont icofont-plus mr-1"></i> Add Ticket
+                                <i class="icofont icofont-plus mr-1"></i> <?= __('Add Ticket'); ?>
                             </button>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="row mb-3">
                             <div class="col-md-3">
-                                <select aria-label="Table Status Filter" id="tableStatusFilter" class="form-select js-example-basic-single" onchange="filterTable()">
-                                    <option value="">All Status</option>
+                                <select aria-label="<?= htmlspecialchars(__('Table Status Filter'), ENT_QUOTES, 'UTF-8'); ?>" id="tableStatusFilter" class="form-select js-example-basic-single" onchange="filterTable()">
+                                    <option value=""><?= __('All Status'); ?></option>
                                     <?php foreach ($nonEmptyStatuses as $sid => $s): ?>
                                         <option value="<?= $sid ?>"><?= htmlspecialchars($s['name']) ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <select aria-label="Table Priority Filter" id="tablePriorityFilter" class="form-select js-example-basic-single" onchange="filterTable()">
-                                    <option value="">All Priorities</option>
-                                    <option value="1">Low</option>
-                                    <option value="2">Medium</option>
-                                    <option value="3">High</option>
+                                <select aria-label="<?= htmlspecialchars(__('Table Priority Filter'), ENT_QUOTES, 'UTF-8'); ?>" id="tablePriorityFilter" class="form-select js-example-basic-single" onchange="filterTable()">
+                                    <option value=""><?= __('All Priorities'); ?></option>
+                                    <option value="1"><?= __('Low'); ?></option>
+                                    <option value="2"><?= __('Medium'); ?></option>
+                                    <option value="3"><?= __('High'); ?></option>
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <input aria-label="Search tickets..." type="search" id="tableSearch" class="form-control"
-                                    placeholder="Search tickets...">
+                                <input aria-label="<?= htmlspecialchars(__('Search tickets...'), ENT_QUOTES, 'UTF-8'); ?>" type="search" id="tableSearch" class="form-control"
+                                    placeholder="<?= htmlspecialchars(__('Search tickets...'), ENT_QUOTES, 'UTF-8'); ?>">
                             </div>
                         </div>
 
@@ -434,13 +434,13 @@ foreach ($ticketHistories as $ticket) {
                             <table class="table table-bordered" id="ticketHistoryTable">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Ticket No.</th>
-                                        <th scope="col">Ticket Subject</th>
-                                        <th scope="col">Requested Date</th>
-                                        <th scope="col">Last Updated</th>
-                                        <th scope="col">Priority</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col"><?= __('Ticket No.'); ?></th>
+                                        <th scope="col"><?= __('Ticket Subject'); ?></th>
+                                        <th scope="col"><?= __('Requested Date'); ?></th>
+                                        <th scope="col"><?= __('Last Updated'); ?></th>
+                                        <th scope="col"><?= __('Priority'); ?></th>
+                                        <th scope="col"><?= __('Status'); ?></th>
+                                        <th scope="col"><?= __('Action'); ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -474,14 +474,14 @@ foreach ($ticketHistories as $ticket) {
                                                             <?= htmlspecialchars($currentStatus['name']); ?>
                                                         </span>
                                                     <?php } else { ?>
-                                                        <span class="badge bg-secondary">Unknown (<?= $currentStatusId ?>)</span>
+                                                        <span class="badge bg-secondary"><?= __('Unknown ('); ?><?= $currentStatusId ?>)</span>
                                                     <?php } ?>
                                                 </td>
                                                 <td>
                                                     <div class="dropdown">
                                                         <button class="btn btn-sm btn-primary dropdown-toggle" type="button"
                                                             data-bs-toggle="dropdown">
-                                                            <i class="ti-settings"></i> Actions
+                                                            <i class="ti-settings"></i> <?= __('Actions'); ?>
                                                         </button>
                                                         <div class="dropdown-menu">
                                                             <?php
@@ -527,8 +527,8 @@ foreach ($ticketHistories as $ticket) {
                                                             <?php endif; ?>
                                                             <div class="dropdown-divider"></div>
                                                             <a class="dropdown-item" href="#" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"
-                                                                onclick="editTicket('<?= $ticketId ?>')">Edit</a>
-                                                            <a class="dropdown-item" href="<?= $url ?>" target="_blank">View</a>
+                                                                onclick="editTicket('<?= $ticketId ?>')"><?= __('Edit'); ?></a>
+                                                            <a class="dropdown-item" href="<?= $url ?>" target="_blank"><?= __('View'); ?></a>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -539,8 +539,7 @@ foreach ($ticketHistories as $ticket) {
                                             <td colspan="7" class="text-center">
                                                 <div class="alert alert-info mb-0">
                                                     <i class="icofont icofont-info-circle"></i>
-                                                    No ticket histories found. Click "Add Ticket" to create your first
-                                                    ticket.
+                                                    <?= __('No ticket histories found. Click "Add Ticket" to create your first ticket.'); ?>
                                                 </div>
                                             </td>
                                         </tr>
@@ -556,7 +555,7 @@ foreach ($ticketHistories as $ticket) {
                     <div
                         class="card-header d-flex justify-content-between align-items-center bg-white rounded-top-4 px-4 py-3">
                         <h5 class="mb-0 fw-bold text-dark">
-                            <i class="ti-bell-fill text-warning me-2"></i> Notifications
+                            <i class="ti-bell-fill text-warning me-2"></i> <?= __('Notifications'); ?>
                         </h5>
                         <span class="badge bg-danger rounded-pill px-3 py-2 fs-6">
                             <?= $totalNotifications ?>
@@ -605,7 +604,7 @@ foreach ($ticketHistories as $ticket) {
                                                         <?= $priority ? formatPriority($priority) : '' ?>
                                                         <small class="text-secondary">
                                                             <i class="ti-calendar-event me-1"></i>
-                                                            <strong>Request:</strong>
+                                                            <strong><?= __('Request'); ?>:</strong>
                                                             <?= $requestDate ? date('M d, Y', strtotime($requestDate)) : 'N/A' ?>
                                                         </small>
                                                     </div>
@@ -617,7 +616,7 @@ foreach ($ticketHistories as $ticket) {
                             </div>
                         <?php else: ?>
                             <div class="alert alert-info mb-0 text-center p-4 rounded-4">
-                                <i class="ti-info-circle"></i> No notifications found.
+                                <i class="ti-info-circle"></i> <?= __('No notifications found.'); ?>
                             </div>
                         <?php endif; ?>
                     </div>
@@ -676,7 +675,7 @@ foreach ($ticketHistories as $ticket) {
     function editTicket(ticketId) {
         const ticket = ticketsData.find(t => t.id === ticketId);
         if (!ticket) {
-            alert("Ticket data not found.");
+            alert(<?php echo json_encode(__('Ticket data not found.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             return;
         }
         $('#popuprid').val(ticket.id);
@@ -686,14 +685,14 @@ foreach ($ticketHistories as $ticket) {
         $('#popupcreated_by').val(ticket.client_id);
         $('#popuppriority').val(ticket.priority);
         $('#popupdescription').val(ticket.description);
-        $('.modal-title').text('Edit Ticket');
-        $('#saveTicketBtn').text('Update Ticket');
+        $('.modal-title').text(<?php echo json_encode(__('Edit Ticket'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
+        $('#saveTicketBtn').text(<?php echo json_encode(__('Update Ticket'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         $('#kt_modal_add_ticket').modal('show');
     }
     $('#kt_modal_add_ticket').on('hidden.bs.modal', function () {
         $('#ticketForm')[0].reset();
-        $('.modal-title').text('Add Ticket');
-        $('#saveTicketBtn').text('Save');
+        $('.modal-title').text(<?php echo json_encode(__('Add Ticket'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
+        $('#saveTicketBtn').text(<?php echo json_encode(__('Save'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         $('#popuprid').val('');
     });
     function openTicketModal() {
@@ -707,10 +706,10 @@ foreach ($ticketHistories as $ticket) {
         var ticketSubject = document.getElementById('pouptask_name').value;
         if (!ticketSubject.trim()) {
             e.preventDefault();
-            alert('Please enter ticket subject');
+            alert(<?php echo json_encode(__('Please enter ticket subject'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             return false;
         }
-        document.getElementById('saveTicketBtn').innerHTML = '<div class="loading-spinner"></div> Saving...';
+        document.getElementById('saveTicketBtn').innerHTML = '<div class="loading-spinner"></div> <?= htmlspecialchars(__('Saving...'), ENT_QUOTES, 'UTF-8'); ?>';
         document.getElementById('saveTicketBtn').disabled = true;
     });
     function dynamicStatusUpdate(post_array, select_user_id = "", transaction_log_id = "", notilog = "", status = "") {
@@ -727,7 +726,7 @@ foreach ($ticketHistories as $ticket) {
                 if (result.error != "") {
                     Swal.fire({
                         icon: 'error',
-                        title: 'Oops',
+                        title: <?php echo json_encode(__('Oops'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                         text: '' + result.error + ''
                     }).then((result) => {
                         if (result.isConfirmed) {
