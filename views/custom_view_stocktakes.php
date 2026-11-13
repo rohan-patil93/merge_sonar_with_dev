@@ -73,8 +73,8 @@ function uompopup(item_id,uom_id,uom_name,location_id,id){
                 title: '<?php echo $_SESSION['error_message']['1007']; ?>',
                 showDenyButton: true,
                 showCancelButton: false,
-                confirmButtonText: 'Yes',
-                denyButtonText: 'No',
+                confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                denyButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             }).then((result) => {
                 if (result.isConfirmed) {
                     $('#status').val(valu);
@@ -86,8 +86,8 @@ function uompopup(item_id,uom_id,uom_name,location_id,id){
                 title: '<?php echo $_SESSION['error_message']['1008']; ?>',
                 showDenyButton: true,
                 showCancelButton: false,
-                confirmButtonText: 'Yes',
-                denyButtonText: 'NO',
+                confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                denyButtonText: <?php echo json_encode(__('NO'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             }).then((result) => {
                 if (result.isConfirmed) {
                     $('#status').val(valu);
@@ -118,8 +118,8 @@ function uompopup(item_id,uom_id,uom_name,location_id,id){
             title: '<?php echo $_SESSION['error_message']['1006']; ?>',
             showDenyButton: true,
             showCancelButton: false,
-            confirmButtonText: 'Yes',
-            denyButtonText: 'No',
+            confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            denyButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
         }).then((result) => {
             if(result.isConfirmed){
                 $.ajax({
@@ -139,8 +139,8 @@ function uompopup(item_id,uom_id,uom_name,location_id,id){
             title: '<?php echo $_SESSION['error_message']['1005']; ?>',
             showDenyButton: true,
             showCancelButton: false,
-            confirmButtonText: 'Yes',
-            denyButtonText: 'No',
+            confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            denyButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
         }).then((result) => {
             if(result.isConfirmed){
                 $.ajax({
@@ -232,12 +232,12 @@ function uompopup(item_id,uom_id,uom_name,location_id,id){
             <div class="col-lg-12">
                 <div class="card card-custom card-sticky" id="kt_page_sticky_card">
                     <div class="card-header mb-3">
-                        <h5> View Stocktakes</h5>
+                        <h5> <?= __('View Stocktakes'); ?></h5>
                         <div class="card-header-right">
 
                             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                                 <i class="icofont icofont-reply"></i>
-                                Back
+                                <?= __('Back'); ?>
                             </a>
                         </div>
                     </div>
@@ -245,23 +245,23 @@ function uompopup(item_id,uom_id,uom_name,location_id,id){
                         <div class="form-group row ml-20 mr-20">
                             <div class="col-lg-1"></div>
                             <div class="form-group col-lg-2 text-center">
-                                <span class="f-w-700">Name</span></br>
+                                <span class="f-w-700"><?= __('Name'); ?></span></br>
                                 <span><?php echo $stocktakes['name']; ?></span>
                             </div>
                             <div class="form-group col-lg-2 text-center">
-                                <span  class="f-w-700">User</span></br>
+                                <span  class="f-w-700"><?= __('User'); ?></span></br>
                                 <span><?php echo $_SESSION['users'][$stocktakes['user_id']]; ?></span>
                             </div>
                             <div class="form-group col-lg-2 text-center">
-                                <span  class="f-w-700">Planned Date</span></br>
+                                <span  class="f-w-700"><?= __('Planned Date'); ?></span></br>
                                 <span><?php echo $stocktakes['Planned_date']; ?></span>
                             </div>
                             <div class="form-group col-lg-2 text-center">
-                                <span  class="f-w-700">Status</span></br>
+                                <span  class="f-w-700"><?= __('Status'); ?></span></br>
                                 <span><?php echo $_SESSION['status'][$stocktakes['current_status']]['name']; ?></span>
                             </div>
                             <div class="form-group col-lg-2 text-center">
-                                <span  class="f-w-700">Completed Date</span></br>
+                                <span  class="f-w-700"><?= __('Completed Date'); ?></span></br>
                                 <span><?php echo $stocktakes['completed_date']!=""?$stocktakes['completed_date']:"-"; ?> </span>
                             </div>
                             <div class="col-lg-1"></div>
@@ -269,10 +269,10 @@ function uompopup(item_id,uom_id,uom_name,location_id,id){
                         <div class="form-group row ml-20 mr-20">
                             <?php if($stocktakes['status'] == '0'){ $cenetrspac = "3"; ?>
                             <div class="form-group col-lg-2 text-right">
-                                <a href="index.php?option=COM_INSERT_STOCKTAKES&Rid=<?php echo $_GET['Rid']; ?>" class="btn btn-primary waves-effect waves-light  col-lg-10"> <i class="icofont icofont-reply"></i> Back</a>
+                                <a href="index.php?option=COM_INSERT_STOCKTAKES&Rid=<?php echo $_GET['Rid']; ?>" class="btn btn-primary waves-effect waves-light  col-lg-10"> <i class="icofont icofont-reply"></i> <?= __('Back'); ?></a>
                             </div>
                             <div class="form-group col-lg-2 text-left">
-                                <button class="btn btn-danger waves-effect waves-light  col-lg-10" onclick="deletedrecord()"><i class="fa fa-trash-o"></i> Delete</button>
+                                <button class="btn btn-danger waves-effect waves-light  col-lg-10" onclick="deletedrecord()"><i class="fa fa-trash-o"></i> <?= __('Delete'); ?></button>
                             </div>
                         <?php }else{
                             $cenetrspac = "7";
@@ -282,23 +282,23 @@ function uompopup(item_id,uom_id,uom_name,location_id,id){
                             </div>
                             <div class="form-group col-lg-5 text-right">
                                 <?php if($stocktakes['status'] == '1'){ ?>
-                                    <button class="btn waves-effect waves-light btn-primary btn-square"  onclick="submitcount('1')"><i class="ti-control-play"></i> Save And Continue</button>
-                                    <button class="btn waves-effect waves-light btn-success btn-square" onclick="submitcount('2')"><i class="ti-control-play"></i> Submit Stocktake</button>
+                                    <button class="btn waves-effect waves-light btn-primary btn-square"  onclick="submitcount('1')"><i class="ti-control-play"></i> <?= __('Save And Continue'); ?></button>
+                                    <button class="btn waves-effect waves-light btn-success btn-square" onclick="submitcount('2')"><i class="ti-control-play"></i> <?= __('Submit Stocktake'); ?></button>
 
                                 <?php } ?>
                                 <?php if($stocktakes['status'] == '0'){ ?>
-                                    <button class="btn waves-effect waves-light btn-primary btn-square" onclick="startstocktakes('<?php echo $stocktakes['user_id']; ?>')"><i class="ti-control-play"></i> Start Stocktake</button>
+                                    <button class="btn waves-effect waves-light btn-primary btn-square" onclick="startstocktakes('<?php echo $stocktakes['user_id']; ?>')"><i class="ti-control-play"></i> <?= __('Start Stocktake'); ?></button>
                                 <?php } ?>
                                 <?php if($stocktakes['status'] == '2'){ ?>
-                                    <button class="btn waves-effect waves-light btn-primary btn-square" onclick="submitcount('3')"><i class="ti-control-play"></i> Complete Stocktake</button>
+                                    <button class="btn waves-effect waves-light btn-primary btn-square" onclick="submitcount('3')"><i class="ti-control-play"></i> <?= __('Complete Stocktake'); ?></button>
                                 <?php  } ?>
                             </div>
                         </div>
                         <form method="post">
                             <div class="form-group row m-l-20">
                                 <div class="form-group col-lg-4">
-                                    <span class="f-w-700">Location</span>
-                                    <select aria-label="Filter Location[]"  class="form-select js-example-basic-multiple" name="filter_location[]" id="filter_location" onchange="stocktakeFilter()" multiple>
+                                    <span class="f-w-700"><?= __('Location'); ?></span>
+                                    <select aria-label="<?= htmlspecialchars(__('Filter Location'), ENT_QUOTES, 'UTF-8'); ?>[]"  class="form-select js-example-basic-multiple" name="filter_location[]" id="filter_location" onchange="stocktakeFilter()" multiple>
                                 <?php foreach ($location_nameres as $location) { ?>
                                     <option <?php if(in_array($location['id'], (array)$_POST['filter_location'])){ ?> selected <?php
 } ?> value="<?php echo $location['id']; ?>"><?php echo ucwords($location['location_name']); ?></option>
@@ -311,31 +311,31 @@ function uompopup(item_id,uom_id,uom_name,location_id,id){
                                 <div class="form-radio mt-4">
                                     <div class="radio radio-inline" onclick="stocktakeFilter()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
                                         <label class="form-label">
-                                            <input aria-label="Filter Veriances" type="radio" name="filter_veriances" checked="checked" value="all">
-                                            <i class="helper"></i>Show All
+                                            <input aria-label="<?= htmlspecialchars(__('Filter Veriances'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="filter_veriances" checked="checked" value="all">
+                                            <i class="helper"></i><?= __('Show All'); ?>
                                         </label>
                                     </div>
                                     <div class="radio radio-inline" onclick="stocktakeFilter()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
                                         <label class="form-label">
-                                            <input aria-label="Filter Veriances" type="radio" name="filter_veriances" value="cls_add">
-                                            <i class="helper"></i>Positive Variance
+                                            <input aria-label="<?= htmlspecialchars(__('Filter Veriances'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="filter_veriances" value="cls_add">
+                                            <i class="helper"></i><?= __('Positive Variance'); ?>
                                         </label>
                                     </div>
                                     <div class="radio radio-inline" onclick="stocktakeFilter()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
                                         <label class="form-label">
-                                            <input aria-label="Filter Veriances" type="radio" name="filter_veriances" value="cls_sub">
-                                            <i class="helper"></i>Negative Variance
+                                            <input aria-label="<?= htmlspecialchars(__('Filter Veriances'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="filter_veriances" value="cls_sub">
+                                            <i class="helper"></i><?= __('Negative Variance'); ?>
                                         </label>
                                     </div>
                                     <div class="radio radio-inline" onclick="stocktakeFilter()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
                                         <label class="form-label">
-                                            <input aria-label="Filter Veriances" type="radio" name="filter_veriances" value="cls_zero">
-                                            <i class="helper"></i>No Variance
+                                            <input aria-label="<?= htmlspecialchars(__('Filter Veriances'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="filter_veriances" value="cls_zero">
+                                            <i class="helper"></i><?= __('No Variance'); ?>
                                         </label>
                                     </div>
                                 </div>
                             </div>
-                        <?php }else{ echo '<input aria-label="Filter Veriances" type="radio" name="filter_veriances" checked="checked" value="all" style="display:none" >';
+                        <?php }else{ echo '<input aria-label="'.htmlspecialchars(__('Filter Veriances'), ENT_QUOTES, 'UTF-8').'" type="radio" name="filter_veriances" checked="checked" value="all" style="display:none" >';
 } ?>
 
                     </div>
