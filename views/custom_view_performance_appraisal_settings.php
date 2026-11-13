@@ -53,8 +53,8 @@ function publichappraisal(id){
         type: "warning",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
-        confirmButtonText: "Yes",
-        cancelButtonText: "No",
+        confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+        cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
         closeOnConfirm: true,
         closeOnCancel: true
     },
@@ -97,32 +97,32 @@ function publichappraisal(id){
             <div class="col-lg-12">
                 <div class="card card-custom card-sticky" id="kt_page_sticky_card">
                     <div class="card-header">
-                        <h5>Performance Appraisal Setting</h5>
+                        <h5><?= __('Performance Appraisal Setting'); ?></h5>
                         <div class="card-header-right">
                             <?php if($apid !="" && $performance_setup_res['publish']=='N'){ ?>
-                                <button type="button"   class="btn btn-primary" onclick="publichappraisal('<?php echo $apid; ?>')">Publish</button>
+                                <button type="button"   class="btn btn-primary" onclick="publichappraisal('<?php echo $apid; ?>')"><?= __('Publish'); ?></button>
                             <?php } ?>
                             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                                 <i class="icofont icofont-reply"></i>
-                                Back
+                                <?= __('Back'); ?>
                             </a>
                         </div>
                     </div>
                     <div class="text-center" style="display: none;  margin-left: auto;  margin-right: auto;  width: 40%; " id="loader-show">
-                            <img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview">
+                            <img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                      </div>
                     <div class="card-body" id="loader-hide">
                         <div class="">
                             <div class="col-lg-12 col-xl-12">
                                 <ul class="nav md-tabs infisuite_tab">
                                     <li class="nav-item">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="#appraisal_setting" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> Appraisal Setting</a>
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#appraisal_setting" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?= __('Appraisal Setting'); ?></a>
                                         <div class="slide"></div>
                                     </li>
 
                                 <?php if($_GET['Rid'] !=""){ ?>
                                     <li class="nav-item">
-                                        <a class="nav-link " data-bs-toggle="tab" href="#modul_setting" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Modules </a>
+                                        <a class="nav-link " data-bs-toggle="tab" href="#modul_setting" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Modules'); ?> </a>
                                         <div class="slide"></div>
                                     </li>
                                     <?php foreach($performance_appraisal_se as $kyid=>$performance_appraiseting){?>
@@ -135,19 +135,19 @@ function publichappraisal(id){
 
 
                                     <li class="nav-item">
-                                        <a class="nav-link " data-bs-toggle="tab" href="#ques_for_emp" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Quest  EMP</a>
+                                        <a class="nav-link " data-bs-toggle="tab" href="#ques_for_emp" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Quest EMP'); ?></a>
                                         <div class="slide"></div>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link " data-bs-toggle="tab" href="#ques_for_ro" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Quest RO</a>
+                                        <a class="nav-link " data-bs-toggle="tab" href="#ques_for_ro" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Quest RO'); ?></a>
                                         <div class="slide"></div>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link " data-bs-toggle="tab" href="#ques_for_hod" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Quest HOD</a>
+                                        <a class="nav-link " data-bs-toggle="tab" href="#ques_for_hod" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Quest HOD'); ?></a>
                                         <div class="slide"></div>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link " data-bs-toggle="tab" href="#performanceappraisalheaders" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Appraisal Headers</a>
+                                        <a class="nav-link " data-bs-toggle="tab" href="#performanceappraisalheaders" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Appraisal Headers'); ?></a>
                                         <div class="slide"></div>
                                     </li>
                                     <?php
