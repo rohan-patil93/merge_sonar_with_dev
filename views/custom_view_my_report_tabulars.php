@@ -39,7 +39,7 @@ $header = $myreprtdata['header'];
 $header_list = json_decode($myreprtdata['header'],1);
 $headers[$header_list['orderhedding']] = $header_list['heddingdislay'] ==0 ? "<h3 class='card-label'>". $page_title."</h3>" : "";
 $headers[$header_list['orderlogo']] = $header_list['logodislay'] ==0 ? "<img src='uploads/all/".$_SESSION['config']['display_logo']."' style='width:100px;' alt='Logo'>": "";
-$headers[$header_list['addresorder']] = $header_list['addressdislay'] ==0 ? "<div class='row'><div class='col-lg-3'><span class='h6 text-black'> Report By</span></div> <div class='col-lg-1'>:</div><div class='col-lg-4'><span class='font-size-lg'>".$_SESSION['users'][$myreprtdata['created_by']]."</span></div></div> <div class='row'><div class='col-lg-3'><span class='h6 text-black'> Report Date:</span></div><div class='col-lg-1'>:</div><div class='col-lg-4'><span class='font-size-lg'> ".date("d-m-Y H:i:s")."</span></div></div>": "";
+$headers[$header_list['addresorder']] = $header_list['addressdislay'] ==0 ? "<div class='row'><div class='col-lg-3'><span class='h6 text-black'> ".__('Report By')."</span></div> <div class='col-lg-1'>:</div><div class='col-lg-4'><span class='font-size-lg'>".$_SESSION['users'][$myreprtdata['created_by']]."</span></div></div> <div class='row'><div class='col-lg-3'><span class='h6 text-black'> ".__('Report Date').":</span></div><div class='col-lg-1'>:</div><div class='col-lg-4'><span class='font-size-lg'> ".date("d-m-Y H:i:s")."</span></div></div>": "";
 $header_position[$header_list['orderhedding']] = $header_list['heddingposition'];
 $header_position[$header_list['orderlogo']] = $header_list['logoposition'];
 $header_position[$header_list['addresorder']] = $header_list['addressposition'];
@@ -139,7 +139,7 @@ $stausresult = ViewStatusData();
     function printDiv(divId) {
         var printContents = document.getElementById(divId).innerHTML;
         var originalContents = document.body.innerHTML;
-        document.body.innerHTML = "<html lang='en'><head><title>rohan patil</title></head><body><div>rohan new project</div>" + printContents + "</body>";
+        document.body.innerHTML = "<html lang='en'><head><title><?= htmlspecialchars(__('rohan patil'), ENT_QUOTES, 'UTF-8'); ?></title></head><body><div><?= htmlspecialchars(__('rohan new project'), ENT_QUOTES, 'UTF-8'); ?></div>" + printContents + "</body>";
         window.print();
         document.body.innerHTML = originalContents;
     }
@@ -148,11 +148,11 @@ $stausresult = ViewStatusData();
     <div class="container-fluid">
         <div class="card card-custom card-sticky" id="kt_page_sticky_card">
             <div class="card-header">
-                <h5>view report</h5>
+                <h5><?= __('view report'); ?></h5>
                 <div class="card-header-right">
                     <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                         <i class="icofont icofont-reply"></i>
-                        Back
+                        <?= __('Back'); ?>
                     </a>
                 </div>
             </div>
@@ -167,15 +167,15 @@ $stausresult = ViewStatusData();
                                 <?php if($filt['filter_type'] == 'text'){ ?>
                                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                                         <span><?php echo $filt['lable']; ?>:</span>
-                                        <input aria-label="Input field" type="text" class="form-control kt-inpu filterdynamic" data-lable="<?php echo $filt['lable']; ?>" data-type="<?php echo $filt['filter_type']; ?>" value="<?php echo $_POST[$name_field]; ?>" name="<?php echo $name_field; ?>"  data-col-index="4">
+                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control kt-inpu filterdynamic" data-lable="<?php echo $filt['lable']; ?>" data-type="<?php echo $filt['filter_type']; ?>" value="<?php echo $_POST[$name_field]; ?>" name="<?php echo $name_field; ?>"  data-col-index="4">
                                     </div>
                                 <?php }elseif($filt['filter_type']=='select') {
                                     $selectdata =$filt['listoption'];
                                     ?>
                                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                                         <span><?php echo $filt['lable']; ?>:</span>
-                                        <select aria-label="Select option" class="form-control kt-input form-select js-example-basic-single filterdynamic" name="<?php echo $name_field; ?>" data-col-index="2" data-lable="<?php echo $filt['lable']; ?>" data-type="<?php echo $filt['filter_type']; ?>">
-                                            <option  value=""><?php echo "ALL"; ?></option>
+                                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control kt-input form-select js-example-basic-single filterdynamic" name="<?php echo $name_field; ?>" data-col-index="2" data-lable="<?php echo $filt['lable']; ?>" data-type="<?php echo $filt['filter_type']; ?>">
+                                            <option  value=""><?php echo __("ALL"); ?></option>
                                             <?php foreach($selectdata as $selectkey=>$select){ ?>
                                                 <option <?php if($_POST[$name_field] == $selectkey){ ?> selected <?php
 } ?> value="<?php echo $selectkey; ?>"><?php echo $select; ?></option>
@@ -186,13 +186,13 @@ $stausresult = ViewStatusData();
                                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                                         <span><?php echo $filt['lable']; ?>:</span>
 
-                                        <input aria-label="Input field" type="text" class="form-control filterdynamic datepicker"  value="<?php echo $_POST[$name_field]; ?>"  name="<?php echo $name_field; ?>"  id="kt_datepicker_3<?php echo $dateid; ?>"  data-lable="<?php echo $filt['lable']; ?>" data-type="<?php echo $filt['filter_type']; ?>"/>
+                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control filterdynamic datepicker"  value="<?php echo $_POST[$name_field]; ?>"  name="<?php echo $name_field; ?>"  id="kt_datepicker_3<?php echo $dateid; ?>"  data-lable="<?php echo $filt['lable']; ?>" data-type="<?php echo $filt['filter_type']; ?>"/>
                                     </div>
                                     <?php $dateid++;
 }elseif($filt['filter_type']=='month' || $filt['filter_type']=='year' || $filt['filter_type'] == 'month_year'){ ?>
                                         <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                                             <span><?php echo $filt['lable']; ?>:</span>
-                                            <input aria-label="Input field" type="month" class="form-control filterdynamic"  value="<?php echo $_POST[$name_field]!=""?date('Y-m',strtotime($_POST[$name_field])):""; ?>"  name="<?php echo $name_field; ?>"   data-lable="<?php echo $filt['lable']; ?>" data-type="<?php echo $filt['filter_type']; ?>"/>
+                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="month" class="form-control filterdynamic"  value="<?php echo $_POST[$name_field]!=""?date('Y-m',strtotime($_POST[$name_field])):""; ?>"  name="<?php echo $name_field; ?>"   data-lable="<?php echo $filt['lable']; ?>" data-type="<?php echo $filt['filter_type']; ?>"/>
                                         </div>
                                     <?php } ?>
                                 <?php } ?>
@@ -203,7 +203,7 @@ $stausresult = ViewStatusData();
                                     <button class="btn btn-primary btn-brand--icon" id="kt_search" name="submit">
                                         <span>
                                             <i class="la la-search"></i>
-                                            <span>Search</span>
+                                            <span><?= __('Search'); ?></span>
                                         </span>
                                     </button>
 
@@ -283,7 +283,7 @@ $stausresult = ViewStatusData();
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td colspan="<?php echo  count((array)$dis); ?>"> Total</td>
+                                        <td colspan="<?php echo  count((array)$dis); ?>"> <?= __('Total'); ?></td>
                                         <?php foreach($columnvalueslist as $columnvalueslis){ ?>
                                             <th scope="col" class="text-right"><?php echo customeummarmonyformate($totalary[$columnvalueslis]); ?></th>
                                         <?php } ?>
