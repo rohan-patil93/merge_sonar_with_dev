@@ -19,7 +19,7 @@ $vendordashboardurl = API."?mode=getvendordashboard&transaction_table=".$pageenc
         $(".spanicon").html('');
         $("#dynamic_label").text(menu_label+" Invices");
         $("#spanicon_"+seq).html('<i class="fa fa-check-circle text-warning f-16"></i>');
-        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $("#htmlview").html(loader);
         jQuery.ajax({
             url: "views/custom_view_dashboard_vendors_ajax.php",
@@ -34,7 +34,7 @@ $vendordashboardurl = API."?mode=getvendordashboard&transaction_table=".$pageenc
     }
     function getTransactionInvoiceList(){
     var option =$("#transaction_option_name").val();
-    var loader = '<div class="text-center" id="loader-show_2"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+    var loader = '<div class="text-center" id="loader-show_2"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $("#htmlview").html(loader);
     jQuery.ajax({
         url: "views/custom_list_dynamic_transaction_invoices.php",
