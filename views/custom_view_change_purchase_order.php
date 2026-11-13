@@ -28,7 +28,7 @@ foreach($data as $dd){
 <?php if($_GET['ERR'] !=""){ ?>
  <div class="alert alert-custom alert-success shadow-lg fade show mb-5 ">
     <strong class="f-14"><?php echo $_SESSION['error_message'][$_GET['ERR']]; ?></strong>
-    <button type="button" class="btn-close float-right" data-bs-dismiss="alert" aria-label="Close"></button>
+    <button type="button" class="btn-close float-right" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <?php } ?>
 <div class="d-flex flex-column-fluid">
@@ -36,21 +36,21 @@ foreach($data as $dd){
         <div class="card card-custom card-sticky" id="kt_page_sticky_card">
             <div class="card-header">
                 <div class="card-title">
-                    <h5 class="card-label">&nbsp; Transation Number Update </h5>
+                    <h5 class="card-label">&nbsp; <?= __('Transation Number Update'); ?> </h5>
                 </div>
                 <div class="card-header-right table-card-header ">
                    <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-                     <i class="icofont icofont-reply"></i>  Back        </a>
+                     <i class="icofont icofont-reply"></i>  <?= __('Back'); ?>        </a>
                  </div>
              </div>
              <div class="card-body">
                 <form method="post" action="">
                 <div class="form-group row col-lg-12">
-                    <span class="col-lg-2 col-form-label text-lg-right">Transaction Number</span>
+                    <span class="col-lg-2 col-form-label text-lg-right"><?= __('Transaction Number'); ?></span>
 
                     <div class="col-lg-3">
-                        <select aria-label="Transaction" class="form-select js-example-basic-single" onchange="selecttrnno(this.value)" name="transaction_id" id="transaction_id">
-                            <option value="0" > Select Any one </option>
+                        <select aria-label="<?= htmlspecialchars(__('Transaction'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" onchange="selecttrnno(this.value)" name="transaction_id" id="transaction_id">
+                            <option value="0" > <?= __('Select Any one'); ?> </option>
                             <?php foreach($data as $dd){ ?>
                                 <option value="<?php echo $dd['id']; ?>" <?php if($_GET['RID']==$dd['id']){ echo "selected";
 } ?> ><?php echo $dd['transaction_number']; ?></option>
@@ -70,7 +70,7 @@ foreach($data as $dd){
 
             <div class="mt-4 text-start">
               <button name="save" value="SAVE" class="btn btn-primary btn-sm px-5">
-                <i class="fa fa-save me-2"></i> Save Changes
+                <i class="fa fa-save me-2"></i> <?= __('Save Changes'); ?>
               </button>
             </div>
           <?php } ?>
