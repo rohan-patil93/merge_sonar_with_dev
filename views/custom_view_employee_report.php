@@ -77,11 +77,11 @@ if ($employee_report_js_v === false) {
     <div class="card employee-report-card">
         <div class="card-header employee-report-header">
             <div>
-                <h5 class="mb-1">Employee Report</h5>
-                <p class="mb-0 text-muted">Apply optional filters and export the same results as CSV.</p>
+                <h5 class="mb-1"><?= __('Employee Report'); ?></h5>
+                <p class="mb-0 text-muted"><?= __('Apply optional filters and export the same results as CSV.'); ?></p>
             </div>
             <div class="employee-report-actions">
-                <a class="btn btn-outline-primary" href="custom_view_download.php?page=EmployeeReport&format=csv" target="_blank">Download CSV</a>
+                <a class="btn btn-outline-primary" href="custom_view_download.php?page=EmployeeReport&format=csv" target="_blank"><?= __('Download CSV'); ?></a>
             </div>
         </div>
 
@@ -91,9 +91,9 @@ if ($employee_report_js_v === false) {
 
                 <div class="row g-3">
                     <div class="col-lg-3 col-md-6">
-                        <span class="form-label">Employee</span>
-                        <select aria-label="Employee" name="employee_id" class="form-control js-employee-report-select">
-                            <option value="">All Employees</option>
+                        <span class="form-label"><?= __('Employee'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Employee'), ENT_QUOTES, 'UTF-8'); ?>" name="employee_id" class="form-control js-employee-report-select">
+                            <option value=""><?= __('All Employees'); ?></option>
                             <?php foreach ((array) $employees as $employee) {
                                 $emp_id = (string) ($employee['id'] ?? '');
                                 if ($emp_id === '') {
@@ -111,9 +111,9 @@ if ($employee_report_js_v === false) {
                     </div>
 
                     <div class="col-lg-3 col-md-6">
-                        <span class="form-label">Department</span>
-                        <select aria-label="Department" name="department_id" class="form-control js-employee-report-select">
-                            <option value="">All Departments</option>
+                        <span class="form-label"><?= __('Department'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Department'), ENT_QUOTES, 'UTF-8'); ?>" name="department_id" class="form-control js-employee-report-select">
+                            <option value=""><?= __('All Departments'); ?></option>
                             <?php foreach ((array) $departments as $department) {
                                 $department_id = (string) ($department['id'] ?? '');
                                 if ($department_id === '') {
@@ -128,9 +128,9 @@ if ($employee_report_js_v === false) {
                     </div>
 
                     <div class="col-lg-3 col-md-6">
-                        <span class="form-label">Designation</span>
-                        <select aria-label="Designation" name="designation_id" class="form-control js-employee-report-select">
-                            <option value="">All Designations</option>
+                        <span class="form-label"><?= __('Designation'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Designation'), ENT_QUOTES, 'UTF-8'); ?>" name="designation_id" class="form-control js-employee-report-select">
+                            <option value=""><?= __('All Designations'); ?></option>
                             <?php foreach ((array) $designations as $designation) {
                                 $designation_id = (string) ($designation['id'] ?? '');
                                 if ($designation_id === '') {
@@ -145,9 +145,9 @@ if ($employee_report_js_v === false) {
                     </div>
 
                     <div class="col-lg-3 col-md-6">
-                        <span class="form-label">Location</span>
-                        <select aria-label="Location" name="location_id" class="form-control js-employee-report-select">
-                            <option value="">All Locations</option>
+                        <span class="form-label"><?= __('Location'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Location'), ENT_QUOTES, 'UTF-8'); ?>" name="location_id" class="form-control js-employee-report-select">
+                            <option value=""><?= __('All Locations'); ?></option>
                             <?php foreach ((array) $locations as $location) {
                                 $location_id = (string) ($location['id'] ?? '');
                                 if ($location_id === '') {
@@ -162,9 +162,9 @@ if ($employee_report_js_v === false) {
                     </div>
 
                     <div class="col-lg-3 col-md-6">
-                        <span class="form-label">Employee Type</span>
-                        <select aria-label="Employee Type" name="employee_type" class="form-control js-employee-report-select">
-                            <option value="">All Types</option>
+                        <span class="form-label"><?= __('Employee Type'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Employee Type'), ENT_QUOTES, 'UTF-8'); ?>" name="employee_type" class="form-control js-employee-report-select">
+                            <option value=""><?= __('All Types'); ?></option>
                             <?php foreach ((array) $employee_type_map as $type_value => $type_label) {
                                 $type_value = (string) $type_value;
                                 ?>
@@ -176,40 +176,40 @@ if ($employee_report_js_v === false) {
                     </div>
 
                     <div class="col-lg-3 col-md-6">
-                        <span class="form-label">Active / Resigned</span>
-                        <select aria-label="Employee Status" name="employee_status" class="form-control js-employee-report-select">
-                            <option value="">All</option>
-                            <option value="active" <?php echo ($filters['employee_status'] === 'active') ? 'selected' : ''; ?>>Active</option>
-                            <option value="resigned" <?php echo ($filters['employee_status'] === 'resigned') ? 'selected' : ''; ?>>Resigned</option>
+                        <span class="form-label"><?= __('Active / Resigned'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Employee Status'), ENT_QUOTES, 'UTF-8'); ?>" name="employee_status" class="form-control js-employee-report-select">
+                            <option value=""><?= __('All'); ?></option>
+                            <option value="active" <?php echo ($filters['employee_status'] === 'active') ? 'selected' : ''; ?>><?= __('Active'); ?></option>
+                            <option value="resigned" <?php echo ($filters['employee_status'] === 'resigned') ? 'selected' : ''; ?>><?= __('Resigned'); ?></option>
                         </select>
                     </div>
 
                     <div class="col-lg-3 col-md-6">
-                        <span class="form-label">Join Date From</span>
-                        <input aria-label="Joining Date From" type="date" name="joining_date_from" value="<?php echo htmlspecialchars($filters['joining_date_from'], ENT_QUOTES, 'UTF-8'); ?>" class="form-control">
+                        <span class="form-label"><?= __('Join Date From'); ?></span>
+                        <input aria-label="<?= htmlspecialchars(__('Joining Date From'), ENT_QUOTES, 'UTF-8'); ?>" type="date" name="joining_date_from" value="<?php echo htmlspecialchars($filters['joining_date_from'], ENT_QUOTES, 'UTF-8'); ?>" class="form-control">
                     </div>
 
                     <div class="col-lg-3 col-md-6">
-                        <span class="form-label">Join Date To</span>
-                        <input aria-label="Joining Date To" type="date" name="joining_date_to" value="<?php echo htmlspecialchars($filters['joining_date_to'], ENT_QUOTES, 'UTF-8'); ?>" class="form-control">
+                        <span class="form-label"><?= __('Join Date To'); ?></span>
+                        <input aria-label="<?= htmlspecialchars(__('Joining Date To'), ENT_QUOTES, 'UTF-8'); ?>" type="date" name="joining_date_to" value="<?php echo htmlspecialchars($filters['joining_date_to'], ENT_QUOTES, 'UTF-8'); ?>" class="form-control">
                     </div>
 
                     <div class="col-lg-3 col-md-6">
-                        <span class="form-label">Relieving Date From</span>
-                        <input aria-label="Relieving Date From" type="date" name="relieving_date_from" value="<?php echo htmlspecialchars($filters['relieving_date_from'], ENT_QUOTES, 'UTF-8'); ?>" class="form-control">
+                        <span class="form-label"><?= __('Relieving Date From'); ?></span>
+                        <input aria-label="<?= htmlspecialchars(__('Relieving Date From'), ENT_QUOTES, 'UTF-8'); ?>" type="date" name="relieving_date_from" value="<?php echo htmlspecialchars($filters['relieving_date_from'], ENT_QUOTES, 'UTF-8'); ?>" class="form-control">
                     </div>
 
                     <div class="col-lg-3 col-md-6">
-                        <span class="form-label">Relieving Date To</span>
-                        <input aria-label="Relieving Date To" type="date" name="relieving_date_to" value="<?php echo htmlspecialchars($filters['relieving_date_to'], ENT_QUOTES, 'UTF-8'); ?>" class="form-control">
+                        <span class="form-label"><?= __('Relieving Date To'); ?></span>
+                        <input aria-label="<?= htmlspecialchars(__('Relieving Date To'), ENT_QUOTES, 'UTF-8'); ?>" type="date" name="relieving_date_to" value="<?php echo htmlspecialchars($filters['relieving_date_to'], ENT_QUOTES, 'UTF-8'); ?>" class="form-control">
                     </div>
                 </div>
 
                 <div id="employee-report-validation" class="alert alert-warning mt-3 mb-0 d-none"></div>
 
                 <div class="employee-report-form-actions mt-3">
-                    <button type="submit" class="btn btn-primary">Search</button>
-                    <a class="btn btn-light" data-action="reset-employee-report" href="index.php?option=COM_VIEW_EMPLOYEE_REPORT">Reset</a>
+                    <button type="submit" class="btn btn-primary"><?= __('Search'); ?></button>
+                    <a class="btn btn-light" data-action="reset-employee-report" href="index.php?option=COM_VIEW_EMPLOYEE_REPORT"><?= __('Reset'); ?></a>
                 </div>
             </form>
 
@@ -225,17 +225,17 @@ if ($employee_report_js_v === false) {
                 <table class="table table-striped table-hover employee-report-table">
                     <thead>
                         <tr>
-                            <th scope="col">S.No</th>
-                            <th scope="col">Emp Code</th>
-                            <th scope="col">Emp Display Name</th>
-                            <th scope="col">Phone</th>
-                            <th scope="col">Employee Type</th>
-                            <th scope="col">Department</th>
-                            <th scope="col">Designation</th>
-                            <th scope="col">Location</th>
-                            <th scope="col">Active/Resigned</th>
-                            <th scope="col">Joining Date</th>
-                            <th scope="col">Relieving Date</th>
+                            <th scope="col"><?= __('S.No'); ?></th>
+                            <th scope="col"><?= __('Emp Code'); ?></th>
+                            <th scope="col"><?= __('Emp Display Name'); ?></th>
+                            <th scope="col"><?= __('Phone'); ?></th>
+                            <th scope="col"><?= __('Employee Type'); ?></th>
+                            <th scope="col"><?= __('Department'); ?></th>
+                            <th scope="col"><?= __('Designation'); ?></th>
+                            <th scope="col"><?= __('Location'); ?></th>
+                            <th scope="col"><?= __('Active/Resigned'); ?></th>
+                            <th scope="col"><?= __('Joining Date'); ?></th>
+                            <th scope="col"><?= __('Relieving Date'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -281,7 +281,7 @@ if ($employee_report_js_v === false) {
                         } else {
                             ?>
                             <tr>
-                                <td colspan="11" class="text-center">No employee records found.</td>
+                                <td colspan="11" class="text-center"><?= __('No employee records found.'); ?></td>
                             </tr>
                             <?php
                         }
