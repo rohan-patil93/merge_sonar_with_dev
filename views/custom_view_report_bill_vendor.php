@@ -95,13 +95,13 @@ $_SESSION['apply_js']['standart_report_bill_vendor']=1;
                         <table class=" table table-hover m-b-0 m-t-5">
                             <thead>
                               <th scope="col"> <?php echo ucwords($part_table); ?> </th>
-                              <th scope="col" class="text-right">Total </th>
-                              <th scope="col" class="text-right">15 Days</th>
-                              <th scope="col" class="text-right">30 Days</th>
-                              <th scope="col" class="text-right">45 Days</th>
-                              <th scope="col" class="text-right">60 Days</th>
-                              <th scope="col" class="text-right">90 Days</th>
-                              <th scope="col" class="text-right"> > 90 Days</th>
+                              <th scope="col" class="text-right"><?= __('Total'); ?> </th>
+                              <th scope="col" class="text-right"><?= __('15 Days'); ?></th>
+                              <th scope="col" class="text-right"><?= __('30 Days'); ?></th>
+                              <th scope="col" class="text-right"><?= __('45 Days'); ?></th>
+                              <th scope="col" class="text-right"><?= __('60 Days'); ?></th>
+                              <th scope="col" class="text-right"><?= __('90 Days'); ?></th>
+                              <th scope="col" class="text-right"> <?= __('> 90 Days'); ?></th>
                           </thead>
                             <tbody>
                             <?php
@@ -134,7 +134,7 @@ $_SESSION['apply_js']['standart_report_bill_vendor']=1;
                     <input type="hidden" name="chart_data_gender" id="chart_data_bill_vendor" value="<?php echo implode("||",(array)$gdata); ?>" >
                     <?php if($fistdonut =='1'){ ?>
                       <div class="card-px text-center py-20 m-t-30">
-                          <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Data</p>
+                          <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Data'); ?></p>
                           <div class="text-center px-4">
                               <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                           </div>
