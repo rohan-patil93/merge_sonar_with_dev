@@ -191,8 +191,8 @@ function changestatus(val,tranid,allowitemid,table_name){
                 type: "success",
                 showCancelButton: false,
                 confirmButtonClass: "btn-danger",
-                confirmButtonText: "Ok",
-                cancelButtonText: "No",
+                confirmButtonText: <?php echo json_encode(__('Ok'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                 closeOnConfirm: true,
                 closeOnCancel: true
             },
@@ -283,9 +283,9 @@ if($totaldoc != 0 AND $totaldoc !=""){
                                 <?php 
                         $disname = $_SESSION['user']['display_name']!=""?$_SESSION['user']['display_name']:$_SESSION['display_name'];
                         if($_SESSION['user']['user_photo']!=""){ ?>
-                          <img src="<?php echo "uploads/all/".$_SESSION['user']['user_photo']; ?>" class="percentag-img-radius img-90" alt="User profile" style="border-radius: 50%;border: 8px solid #ffffff;" >
+                          <img src="<?php echo "uploads/all/".$_SESSION['user']['user_photo']; ?>" class="percentag-img-radius img-90" alt="<?= htmlspecialchars(__('User profile'), ENT_QUOTES, 'UTF-8'); ?>" style="border-radius: 50%;border: 8px solid #ffffff;" >
                        <?php }elseif($_SESSION['employee']['gender'] !=""){ ?>
-                                <img src="uploads/all/<?php echo $_SESSION['employee']['gender'].".png"; ?>" class="percentag-img-radius img-90" alt="User profile" style="border-radius: 50%;border: 8px solid #ffffff;" >
+                                <img src="uploads/all/<?php echo $_SESSION['employee']['gender'].".png"; ?>" class="percentag-img-radius img-90" alt="<?= htmlspecialchars(__('User profile'), ENT_QUOTES, 'UTF-8'); ?>" style="border-radius: 50%;border: 8px solid #ffffff;" >
                         <?php }else{ ?>
                           <span class="text-dark f-16 f-w-600 d-block" style="    background-color: white !important;"><?php echo initials($disname); ?></span>
                       <?php } ?>
@@ -298,7 +298,7 @@ if($totaldoc != 0 AND $totaldoc !=""){
                                     <h5 class="f-w-700 m-b-0  f-12"><?php 
                                     //echo number_format($totaldocsamt)."</br>";
                                     echo convert_Rupee_Number($totaldocsamt !=''?$totaldocsamt:"0"); ?></h5>
-                                    <p class="m-b-0 f-10">Total Value</p>
+                                    <p class="m-b-0 f-10"><?= __('Total Value'); ?></p>
                                 </div>
                             </div>
                             <div class="col-6 b-l-default">
@@ -307,7 +307,7 @@ if($totaldoc != 0 AND $totaldoc !=""){
                                     <h5 class="f-w-700 m-b-0 f-12"><?php 
                                     //echo number_format($approvedresamt)."</br>";
                                     echo convert_Rupee_Number($approvedresamt !=''?$approvedresamt:"0"); ?></h5>
-                                    <p class="m-b-0 f-10">Approved </p>
+                                    <p class="m-b-0 f-10"><?= __('Approved'); ?> </p>
                                 </div>
                             </div>
                         </div>
@@ -315,10 +315,10 @@ if($totaldoc != 0 AND $totaldoc !=""){
                 </div>
                 <div class="card sale-card mb-2">
                     <div class="card-header">
-                        <h5>Announcements</h5>
+                        <h5><?= __('Announcements'); ?></h5>
                     </div>
                     <div class="card-block text-center">
-                        <h2 class="text-facebook m-b-20" aria-label="Announcement"><i class="ti-announcement " aria-hidden="true"></i><span class="visually-hidden">Announcement</span></h2>
+                        <h2 class="text-facebook m-b-20" aria-label="<?= htmlspecialchars(__('Announcement'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-announcement " aria-hidden="true"></i><span class="visually-hidden"><?= __('Announcement'); ?></span></h2>
                         <div class="row mt-2">
                             <?php 
                             $anouncement =  API."?mode=togetlatestannouncement";
@@ -333,7 +333,7 @@ if($totaldoc != 0 AND $totaldoc !=""){
                 </div>
                 <div class="card sale-card mb-2">
                     <div class="card-header">
-                        <h5>Holidays </h5>
+                        <h5><?= __('Holidays'); ?> </h5>
                         <div class="card-header-right table-card-header ">
                             <span class="text-dark f-w-600"><?php echo date('Y');?></span>
                         </div>
@@ -354,13 +354,13 @@ if($totaldoc != 0 AND $totaldoc !=""){
                                     </div>
                                 </div>
                             <?php } }else{ 
-                                echo "<h4><i class='fa fa-warning'></i> No Holidays Available</h4>";
+                                echo "<h4><i class='fa fa-warning'></i> ".__('No Holidays Available')."</h4>";
                             } ?>
                         </div>
                     </div>
                     <div class="card mb-2" >
                         <div class="card-header table-card-header ">
-                            <h5>Search vendor/customer</h5>
+                            <h5><?= __('Search vendor/customer'); ?></h5>
                             <div class="card-header-right"></div>
                         </div>
                         <div class="card-body" >
@@ -368,14 +368,14 @@ if($totaldoc != 0 AND $totaldoc !=""){
                                 <div class="form-radio">
                                     <div class="radio radio-inline">
                                         <label class="form-label">
-                                        <input type="radio" name="searchvendorcustomertype" value="vendors" class="searchvendorcustomertype" checked="checked" aria-label="Searchvendorcustomertype">
-                                        <i class="helper"></i>Vendor
+                                        <input type="radio" name="searchvendorcustomertype" value="vendors" class="searchvendorcustomertype" checked="checked" aria-label="<?= htmlspecialchars(__('Searchvendorcustomertype'), ENT_QUOTES, 'UTF-8'); ?>">
+                                        <i class="helper"></i><?= __('Vendor'); ?>
                                         </label>
                                     </div>
                                     <div class="radio radio-inline">
                                         <label class="form-label">
-                                        <input type="radio" name="searchvendorcustomertype" value="customers" class="searchvendorcustomertype" aria-label="Searchvendorcustomertype">
-                                        <i class="helper"></i>Customer
+                                        <input type="radio" name="searchvendorcustomertype" value="customers" class="searchvendorcustomertype" aria-label="<?= htmlspecialchars(__('Searchvendorcustomertype'), ENT_QUOTES, 'UTF-8'); ?>">
+                                        <i class="helper"></i><?= __('Customer'); ?>
                                         </label>
                                     </div>
                                 </div>
@@ -383,7 +383,7 @@ if($totaldoc != 0 AND $totaldoc !=""){
 
                             <div class="col-lg-12">
                                 <div class="input-group input-group-button mb-0">
-                                    <input type="text" class="form-control form-control-sm width1" placeholder="Enter Minimum 3 Characters" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search" onkeyup="getEnquiryVendororCustomer(this.value)"> 
+                                    <input type="text" class="form-control form-control-sm width1" placeholder="<?= htmlspecialchars(__('Enter Minimum 3 Characters'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" onkeyup="getEnquiryVendororCustomer(this.value)"> 
                                     <div class="input-group-text addon-style">
                                         <span class=""><i class="ti-search text-white mt-2"></i></span>
                                     </div>
@@ -462,10 +462,10 @@ if($totaldoc != 0 AND $totaldoc !=""){
                             </li>
                             <?php if($table_name != "debit_notes" AND $table_name != "credit_notes" AND $table_name != "journal_vouchers" AND $table_name !="bank_vouchers" AND $table_name !="cash_vouchers"){ ?>
                             <li class="nav-item">
-                                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#itemlocation" role="tab" aria-selected="true">Locations<span class="label label-xs label-success m-l-10"><?php echo array_sum(array_map("count", $locationlist)); ?></span></a>
+                                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#itemlocation" role="tab" aria-selected="true"><?= __('Locations'); ?><span class="label label-xs label-success m-l-10"><?php echo array_sum(array_map("count", $locationlist)); ?></span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#costcenter" role="tab" aria-selected="true">Cost Centers<span class="label label-xs label-success m-l-10"><?php echo array_sum(array_map("count", $costcenterlist)); ?></span></a>
+                                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#costcenter" role="tab" aria-selected="true"><?= __('Cost Centers'); ?><span class="label label-xs label-success m-l-10"><?php echo array_sum(array_map("count", $costcenterlist)); ?></span></a>
                             </li>
                             <?php } ?>
                             <?php /** foreach($generatedocs as $trnstabkey=>$gdocs){ ?>
@@ -480,7 +480,7 @@ if($totaldoc != 0 AND $totaldoc !=""){
                                     <h5><?php echo $itemcatname; ?></h5>
                                     <div class="card-header-right table-card-header">
                       <div class="input-group input-group-button mb-0" >
-                                    <input type="text" id="dynamicfilterhideshow_category" data-id='categoryfilter' data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow"  placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="Search" aria-label="Search"> 
+                                    <input type="text" id="dynamicfilterhideshow_category" data-id='categoryfilter' data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow"  placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>"> 
                                     <span class="input-group-text addon-style">
                                         <span class=""><span class="ti-search text-white mt-2"></span></span>
                                     </span>
@@ -505,9 +505,9 @@ if($totaldoc != 0 AND $totaldoc !=""){
                                             $list = $categorydatalist[$item_categorie['id']]; ?>
                                             <a class="accordion-msg b-none waves-effect waves-light f-w-600 bg-gray"><span class="m-r-20"> 
                                                     <?php if($item_categorie['favourite_id'] ==""){ ?>
-                                                    <i class="ti ti-star" role="button" tabindex="0" aria-label="Add To Favourite" onclick="updateApplicationFavourites('<?php echo $result['item_table_name']; ?>','<?php echo $item_categorie['id']; ?>','F')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Add To Favourite"></i>
+                                                    <i class="ti ti-star" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Add To Favourite'), ENT_QUOTES, 'UTF-8'); ?>" onclick="updateApplicationFavourites('<?php echo $result['item_table_name']; ?>','<?php echo $item_categorie['id']; ?>','F')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Add To Favourite'), ENT_QUOTES, 'UTF-8'); ?>"></i>
                                                     <?php }else{ ?>
-                                                    <i class="fa fa-star text-danger" role="button" tabindex="0" aria-label="Remove From Favourite" onclick="updateApplicationFavourites('<?php echo $result['item_table_name']; ?>','<?php echo $item_categorie['id']; ?>','U')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Remove From Favourite"></i> 
+                                                    <i class="fa fa-star text-danger" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>" onclick="updateApplicationFavourites('<?php echo $result['item_table_name']; ?>','<?php echo $item_categorie['id']; ?>','U')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>"></i> 
                                                     <?php } ?>
                                                 </span>
                                                 <?php echo $item_categorie['category_description']; ?> <span class="label label-md label-warning float-right"><?php echo count((array)$list); ?> </span></a>
@@ -521,12 +521,12 @@ if($totaldoc != 0 AND $totaldoc !=""){
                                             </div>
                                                     <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
                                                         <thead>
-                                                            <th scope="col">Transaction No.</th>
-                                                            <th scope="col">Originator</th>
-                                                            <th scope="col">Date</th>
-                                                            <th scope="col">Party Name</th>
-                                                            <th scope="col" class="text-right">Amount</th>
-                                                            <th scope="col">Satus</th>
+                                                            <th scope="col"><?= __('Transaction No.'); ?></th>
+                                                            <th scope="col"><?= __('Originator'); ?></th>
+                                                            <th scope="col"><?= __('Date'); ?></th>
+                                                            <th scope="col"><?= __('Party Name'); ?></th>
+                                                            <th scope="col" class="text-right"><?= __('Amount'); ?></th>
+                                                            <th scope="col"><?= __('Satus'); ?></th>
                                                         </thead>
                                                         <tbody>
                                                             <?php foreach($list as $list){ ?>
@@ -565,7 +565,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                                     </table>
                                                 <?php }else{ ?>
                                                     <div class="card-px text-center ">
-                                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No <?php echo $_POST['menu_label']; ?></p>   
+                                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No'); ?> <?php echo $_POST['menu_label']; ?></p>   
                                                         <div class="text-center px-4">
                                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                                                         </div>   
@@ -576,7 +576,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                         <?php } ?>
                                         <?php  }else{ ?>
                                             <div class="card-px text-center ">
-                                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No <?php echo $itemcatname; ?></p>   
+                                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No'); ?> <?php echo $itemcatname; ?></p>   
                                                         <div class="text-center px-4">
                                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                                                         </div>   
@@ -587,10 +587,10 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                             </div>
                             <div class="tab-pane card-body p-0" id="itemlocation" role="tabpanel">
                                 <div class="card-header">
-                                    <h5>Locations</h5>
+                                    <h5><?= __('Locations'); ?></h5>
                                     <div class="card-header-right table-card-header">
                                         <div class="input-group input-group-button mb-0" >
-                                            <input type="text" id="dynamicfilterhideshow_location" data-id='locationfilter' data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow"  placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="Search" aria-label="Search"> 
+                                            <input type="text" id="dynamicfilterhideshow_location" data-id='locationfilter' data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow"  placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>"> 
                                             <span class="input-group-text addon-style">
                                                 <span class=""><span class="ti-search text-white mt-2"></span></span>
                                             </span>
@@ -614,9 +614,9 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                             $list = $locationlist[$item_categorie['id']]; ?>
                                             <a class="accordion-msg b-none waves-effect waves-light f-w-600 bg-gray"><span class="m-r-20"> 
                                                     <?php if($item_categorie['favourite_id'] ==""){ ?>
-                                                    <i class="ti ti-star" role="button" tabindex="0" aria-label="Add To Favourite" onclick="updateApplicationFavourites('locations','<?php echo $item_categorie['id']; ?>','F')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Add To Favourite"></i>
+                                                    <i class="ti ti-star" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Add To Favourite'), ENT_QUOTES, 'UTF-8'); ?>" onclick="updateApplicationFavourites('locations','<?php echo $item_categorie['id']; ?>','F')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Add To Favourite'), ENT_QUOTES, 'UTF-8'); ?>"></i>
                                                     <?php }else{ ?>
-                                                    <i class="fa fa-star text-danger" role="button" tabindex="0" aria-label="Remove From Favourite" onclick="updateApplicationFavourites('locations','<?php echo $item_categorie['id']; ?>','U')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Remove From Favourite"></i> 
+                                                    <i class="fa fa-star text-danger" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>" onclick="updateApplicationFavourites('locations','<?php echo $item_categorie['id']; ?>','U')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>"></i> 
                                                     <?php } ?>
                                                 </span>
                                                 <?php echo $item_categorie['location_name']; ?> <span class="label label-md label-warning float-right"><?php echo count((array)$list); ?> </span></a>
@@ -630,12 +630,12 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                             </div>
                                                     <table class="table table-hover m-b-0" style="font-size:13px;" id="locationfilter">
                                                         <thead>
-                                                            <th scope="col">Transaction No.</th>
-                                                            <th scope="col">Originator</th>
-                                                            <th scope="col">Date</th>
-                                                            <th scope="col">Party Name</th>
-                                                            <th scope="col" class="text-right">Amount</th>
-                                                            <th scope="col">Satus</th>
+                                                            <th scope="col"><?= __('Transaction No.'); ?></th>
+                                                            <th scope="col"><?= __('Originator'); ?></th>
+                                                            <th scope="col"><?= __('Date'); ?></th>
+                                                            <th scope="col"><?= __('Party Name'); ?></th>
+                                                            <th scope="col" class="text-right"><?= __('Amount'); ?></th>
+                                                            <th scope="col"><?= __('Satus'); ?></th>
                                                         </thead>
                                                         <tbody>
                                                             <?php foreach($list as $list){?>
@@ -671,7 +671,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                                     </table>
                                                 <?php }else{ ?>
                                                     <div class="card-px text-center ">
-                                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No <?php echo $_POST['menu_label']; ?></p>   
+                                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No'); ?> <?php echo $_POST['menu_label']; ?></p>   
                                                         <div class="text-center px-4">
                                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                                                         </div>   
@@ -685,10 +685,10 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                             </div>
                             <div class="tab-pane card-body p-0" id="costcenter" role="tabpanel">
                                 <div class="card-header">
-                                    <h5>Cost Centers</h5>
+                                    <h5><?= __('Cost Centers'); ?></h5>
                                     <div class="card-header-right table-card-header">
                                         <div class="input-group input-group-button mb-0" >
-                                            <input type="text" id="dynamicfilterhideshow_costcenter" data-id='costcenterfilter' data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow"  placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="Search" aria-label="Search"> 
+                                            <input type="text" id="dynamicfilterhideshow_costcenter" data-id='costcenterfilter' data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow"  placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>"> 
                                             <span class="input-group-text addon-style">
                                                 <span class=""><span class="ti-search text-white mt-2"></span></span>
                                             </span>
@@ -713,9 +713,9 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                             $list = $costcenterlist[$item_categorie['id']]; ?>
                                             <a class="accordion-msg b-none waves-effect waves-light f-w-600 bg-gray" ><span class="m-r-20"> 
                                                     <?php if($item_categorie['favourite_id'] ==""){ ?>
-                                                    <i class="ti ti-star" role="button" tabindex="0" aria-label="Add To Favourite" onclick="updateApplicationFavourites('cost_centers','<?php echo $item_categorie['id']; ?>','F')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Add To Favourite"></i>
+                                                    <i class="ti ti-star" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Add To Favourite'), ENT_QUOTES, 'UTF-8'); ?>" onclick="updateApplicationFavourites('cost_centers','<?php echo $item_categorie['id']; ?>','F')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Add To Favourite'), ENT_QUOTES, 'UTF-8'); ?>"></i>
                                                     <?php }else{ ?>
-                                                    <i class="fa fa-star text-danger" role="button" tabindex="0" aria-label="Remove From Favourite" onclick="updateApplicationFavourites('cost_centers','<?php echo $item_categorie['id']; ?>','U')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Remove From Favourite"></i> 
+                                                    <i class="fa fa-star text-danger" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>" onclick="updateApplicationFavourites('cost_centers','<?php echo $item_categorie['id']; ?>','U')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>"></i> 
                                                     <?php } ?>
                                                 </span>
                                                 <?php echo $item_categorie['cost_center_name']; ?> <span class="label label-md label-warning float-right"><?php echo count((array)$list); ?> </span></a>
@@ -728,12 +728,12 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                             </div>
                                                     <table class="table table-hover m-b-0" style="font-size:13px;" id="costcenterfilter">
                                                         <thead>
-                                                            <th scope="col">Transaction No.</th>
-                                                            <th scope="col">Originator</th>
-                                                            <th scope="col">Date</th>
-                                                            <th scope="col">Party Name</th>
-                                                            <th scope="col" class="text-right">Amount</th>
-                                                            <th scope="col">Satus</th>
+                                                            <th scope="col"><?= __('Transaction No.'); ?></th>
+                                                            <th scope="col"><?= __('Originator'); ?></th>
+                                                            <th scope="col"><?= __('Date'); ?></th>
+                                                            <th scope="col"><?= __('Party Name'); ?></th>
+                                                            <th scope="col" class="text-right"><?= __('Amount'); ?></th>
+                                                            <th scope="col"><?= __('Satus'); ?></th>
                                                         </thead>
                                                         <tbody>
                                                             <?php foreach($list as $list){?>
@@ -768,7 +768,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                                     </table>
                                                 <?php }else{ ?>
                                                     <div class="card-px text-center ">
-                                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No <?php echo $_POST['menu_label']; ?></p>   
+                                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No'); ?> <?php echo $_POST['menu_label']; ?></p>   
                                                         <div class="text-center px-4">
                                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                                                         </div>   
@@ -854,18 +854,18 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
 
 <div class="card mt-3">
     <div class="card-header">
-        <h5> Recently Updated</h5>
+        <h5> <?= __('Recently Updated'); ?></h5>
     </div>
     <div class="table-responsive p-2">
         <?php if(count((array)$result['latest_table_list']) != 0){ ?>
         <table class="table table-hover m-b-0" style="font-size:13px;" id="recently_updated_table">
                                                         <thead>
-                                                            <th scope="col">Transaction No.</th>
-                                                            <th scope="col">Originator</th>
-                                                            <th scope="col">Date</th>
-                                                            <th scope="col">Party Name</th>
-                                                            <th scope="col" class="text-right">Amount</th>
-                                                            <th scope="col">Satus</th>
+                                                            <th scope="col"><?= __('Transaction No.'); ?></th>
+                                                            <th scope="col"><?= __('Originator'); ?></th>
+                                                            <th scope="col"><?= __('Date'); ?></th>
+                                                            <th scope="col"><?= __('Party Name'); ?></th>
+                                                            <th scope="col" class="text-right"><?= __('Amount'); ?></th>
+                                                            <th scope="col"><?= __('Satus'); ?></th>
                                                         </thead>
                                                         <tbody>
                                                             <?php foreach($result['latest_table_list'] as $list){?>
@@ -900,7 +900,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                                     </table>
                                                     <?php  }else{ ?>
                         <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Update</p>   
+                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Update'); ?></p>   
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                                     </div>   
@@ -917,11 +917,11 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
         <div class="col-lg-3">
             <ul class="nav md-tabs infisuite_tab mt-2 mb-2">
                 <li class="nav-item">
-                    <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#selfcreated" role="tab" aria-selected="true">Self<span class="label label-xs label-success m-l-10"><?php echo $transactionlogcnt; ?></span></a>
+                    <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#selfcreated" role="tab" aria-selected="true"><?= __('Self'); ?><span class="label label-xs label-success m-l-10"><?php echo $transactionlogcnt; ?></span></a>
                 </li> 
 
                 <li class="nav-item">
-                    <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#selfaction" role="tab" aria-selected="true">Action<span class="label label-xs label-danger m-l-10"><?php echo $createtransactioncnt; ?></span>
+                    <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#selfaction" role="tab" aria-selected="true"><?= __('Action'); ?><span class="label label-xs label-danger m-l-10"><?php echo $createtransactioncnt; ?></span>
                     <span class="label label-xs label-success m-l-10"><?php echo $createtransactionapprovedcnt !=""?$createtransactionapprovedcnt:"0" ; ?></span>
                     <span class="label label-xs label-warning m-l-10"><?php echo count((array)$sendbacklog) !=""?count((array)$sendbacklog):"0" ; ?></span></a>
                 </li>
@@ -930,10 +930,10 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                 <div class="tab-pane card-body active p-0" id="selfcreated" role="tabpanel">
                     <div class="card mb-2">
                         <div class="card-header">
-                            <h5>Draft 
+                            <h5><?= __('Draft'); ?> 
                                 <span class="label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_DRAFT]['color']; ?>; background-color:<?php echo $statuse[ST_DRAFT]['background_color']; ?>;"><?php echo count((array)$draftres); ?></span>
                             </h5>
-                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>',<?php echo ST_DRAFT; ?>)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right">View all</a>
+                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>',<?php echo ST_DRAFT; ?>)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
                         </div>
                         <div class="card-body">
                             <?php //echo "<pre>"; print_r($draftres); echo "</pre>";
@@ -976,7 +976,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                             </div>
                         <?php $mm++; } }else{ ?>
                         <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Draft Records</p>   
+                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Draft Records'); ?></p>   
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                                     </div>   
@@ -986,10 +986,10 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                     </div>
                     <div class="card mb-2">
                         <div class="card-header">
-                            <h5>Active 
+                            <h5><?= __('Active'); ?> 
                                 <span class="label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_ACTIVE]['color']; ?>; background-color:<?php echo $statuse[ST_ACTIVE]['background_color']; ?>;"><?php echo count((array)$activeres); ?></span>
                             </h5>
-                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','<?php echo ST_ACTIVE; ?>')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right">View all</a>
+                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','<?php echo ST_ACTIVE; ?>')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
                         </div>
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$activeres) !=0){ foreach($activeres as $activeres1){ if($mm == 4){ break; } ?>
@@ -1030,7 +1030,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                             </div>
                         <?php $mm++; } }else{ ?>
                         <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Active Records</p>   
+                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Active Records'); ?></p>   
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                                     </div>   
@@ -1040,10 +1040,10 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                     </div>
                     <div class="card mb-2">
                         <div class="card-header">
-                            <h5>In Process 
+                            <h5><?= __('In Process'); ?> 
                                 <span class="label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_APPROVED1]['color']; ?>; background-color:<?php echo $statuse[ST_APPROVED1]['background_color']; ?>;"><?php echo count((array)$inprocessres); ?></span>
                             </h5>
-                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','inprocess')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right">View all</a>
+                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','inprocess')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
                         </div>
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$inprocessres) !=0){ foreach($inprocessres as $activeres1){ if($mm == 4){ break; } ?>
@@ -1086,7 +1086,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                             </div>
                         <?php $mm++; } }else{ ?>
                         <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No In-Process Records</p>   
+                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No In-Process Records'); ?></p>   
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                                     </div>   
@@ -1096,10 +1096,10 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                     </div>
                     <div class="card mb-2">
                         <div class="card-header">
-                            <h5>Approved 
+                            <h5><?= __('Approved'); ?> 
                                 <span class="label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_APPROVED]['color']; ?>; background-color:<?php echo $statuse[ST_APPROVED]['background_color']; ?>;"><?php echo count((array)$approvedres); ?></span>
                             </h5>
-                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','<?php echo ST_APPROVED; ?>')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right">View all</a>
+                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','<?php echo ST_APPROVED; ?>')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
                         </div>
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$approvedres) !=0){ foreach($approvedres as $activeres1){ if($mm == 4){ break; } ?>
@@ -1142,7 +1142,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                             </div>
                         <?php $mm++; } }else{ ?>
                         <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Approved Records</p>   
+                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Approved Records'); ?></p>   
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                                     </div>   
@@ -1154,10 +1154,10 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                 <div class="tab-pane card-body p-0" id="selfaction" role="tabpanel">
                     <div class="card mb-2">
                         <div class="card-header">
-                            <h5>Approval Pending 
+                            <h5><?= __('Approval Pending'); ?> 
                                 <span class="label label-xs label-danger m-l-10" ><?php echo count((array)$pendinglog); ?></span>
                             </h5>
-                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','APPROVEPENDING')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right">View all</a>
+                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','APPROVEPENDING')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
                         </div>
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$pendinglog) !=0){ foreach($pendinglog as $logdetails){ 
@@ -1185,7 +1185,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                             </div>
                         <?php $mm++; } }else{ ?>
                         <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Approval Pending</p>   
+                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Approval Pending'); ?></p>   
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                                     </div>   
@@ -1196,10 +1196,10 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                     
                     <div class="card mb-2">
                         <div class="card-header">
-                            <h5>Approved 
+                            <h5><?= __('Approved'); ?> 
                                 <span class="label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_APPROVED]['color']; ?>; background-color:<?php echo $statuse[ST_APPROVED]['background_color']; ?>;"><?php echo count((array)$aprovedlog); ?></span>
                             </h5>
-                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','APPROVELOG')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right">View all</a>
+                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','APPROVELOG')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
                         </div>
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$aprovedlog) !=0){ foreach($aprovedlog as $logdetails){ 
@@ -1227,7 +1227,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                             </div>
                         <?php $mm++; } }else{ ?>
                         <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Approved</p>   
+                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Approved'); ?></p>   
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                                     </div>   
@@ -1237,10 +1237,10 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                     </div>
                     <div class="card mb-2">
                         <div class="card-header">
-                            <h5>Send Back 
+                            <h5><?= __('Send Back'); ?> 
                                 <span class="label label-xs label-warning m-l-10" ><?php echo count((array)$sendbacklog); ?></span>
                             </h5>
-                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','SENDBACK')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right">View all</a>
+                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','SENDBACK')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
                         </div>
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$sendbacklog) !=0){ foreach($sendbacklog as $logdetails){ 
@@ -1268,7 +1268,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                             </div>
                         <?php $mm++; } }else{ ?>
                         <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Send back</p>   
+                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Send back'); ?></p>   
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                                     </div>   
@@ -1278,10 +1278,10 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                     </div>
                     <div class="card mb-2">
                         <div class="card-header">
-                            <h5>Rejected
+                            <h5><?= __('Rejected'); ?>
                                 <span class="label label-xs label-warning m-l-10" ><?php echo count((array)$rejectlog); ?></span>
                             </h5>
-                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','REJECTED')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right">View all</a>
+                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','REJECTED')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
                         </div>
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$rejectlog) !=0){ foreach($rejectlog as $logdetails){ 
@@ -1309,7 +1309,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                             </div>
                         <?php $mm++; } }else{ ?>
                         <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Rejected</p>   
+                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Rejected'); ?></p>   
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
                                     </div>   
