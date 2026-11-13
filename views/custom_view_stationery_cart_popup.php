@@ -24,8 +24,8 @@ $items = $data['item'];
     }
 </script>
 <div class="modal-header">
-    <h5 class="modal-title">Stationery Request </h5>
-    <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title"><?= __('Stationery Request'); ?> </h5>
+    <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body">
     <div>
@@ -33,8 +33,8 @@ $items = $data['item'];
             <thead>
                 <tr>
                 <th scope="col">#</th>
-                <th scope="col">Item Name</th>
-                <th scope="col">Qty</th>
+                <th scope="col"><?= __('Item Name'); ?></th>
+                <th scope="col"><?= __('Qty'); ?></th>
             </tr>
             </thead>
             <tbody>
@@ -52,7 +52,7 @@ $items = $data['item'];
                 <input type="hidden" name="total_qty" id="total_qty" value="<?php echo $total_qty; ?>">
                 <tr>
                     <td></td>
-                    <td class="text-right">Total Qty</td>
+                    <td class="text-right"><?= __('Total Qty'); ?></td>
                     <td class="text-right"><?php echo $total_qty; ?></td>
                 </tr>
             </tbody>
@@ -61,16 +61,16 @@ $items = $data['item'];
     <form class="kt-form " id="submitformadditionalservice" >
 
         <div class="form-group">
-            <span> Delivery  </span>
-            <select aria-label="Deliver Type"  name="deliver_type" id="deliver_type" class="form-select js-example-basic-single">
-                <option value="DD">Delivery To Desk</option>
-                <option value="HC">Hand Collect</option>
+            <span> <?= __('Delivery'); ?>  </span>
+            <select aria-label="<?= htmlspecialchars(__('Deliver Type'), ENT_QUOTES, 'UTF-8'); ?>"  name="deliver_type" id="deliver_type" class="form-select js-example-basic-single">
+                <option value="DD"><?= __('Delivery To Desk'); ?></option>
+                <option value="HC"><?= __('Hand Collect'); ?></option>
             </select>
         </div>
         <div class="modal-footer">
             <input type="hidden" name="courier_type" id="courier_type" value="2">
-            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary waves-effect waves-light " onclick="submitincourierfrom()">Request</button>
+            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
+            <button type="button" class="btn btn-primary waves-effect waves-light " onclick="submitincourierfrom()"><?= __('Request'); ?></button>
         </div>
     </form>
 </div>
