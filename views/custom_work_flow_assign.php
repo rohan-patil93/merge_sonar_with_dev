@@ -70,7 +70,7 @@ $final_data    = $return['final'] ?? array();
 <?php if ($error_message != '') { ?>
     <div class="alert alert-danger background-danger alert-dismissible">
         <strong><?php echo $error_message; ?></strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
     </div>
 <?php } ?>
 <form id="assignForm" method="POST">
@@ -83,8 +83,8 @@ $final_data    = $return['final'] ?? array();
         <div class="col-md-6 mb-3">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <b>ADMIN</b>
-                    <button type="button" class="btn btn-success btn-sm addRowBtn" data-section="admin"><i class="fa fa-plus"></i> Row</button>
+                    <b><?= __('ADMIN'); ?></b>
+                    <button type="button" class="btn btn-success btn-sm addRowBtn" data-section="admin"><i class="fa fa-plus"></i> <?= __('Row'); ?></button>
                 </div>
                 <div class="card-body">
                     <div class="rows-wrap" id="admin_wrap">
@@ -94,21 +94,21 @@ $final_data    = $return['final'] ?? array();
 
                                 <div class="row mb-3 align-items-end one-row">
                                     <div class="col-6">
-                                        <span>Location</span>
-                                        <select aria-label="Admin Location []" class="form-select js-example-basic-single loc" name="admin_location_id[]" required>
-                                            <option value="">Select Location</option>
+                                        <span><?= __('Location'); ?></span>
+                                        <select aria-label="<?= htmlspecialchars(__('Admin Location'), ENT_QUOTES, 'UTF-8'); ?> []" class="form-select js-example-basic-single loc" name="admin_location_id[]" required>
+                                            <option value=""><?= __('Select Location'); ?></option>
                                             <?php foreach ($locations as $loc) { ?>
                                                 <option value="<?php echo $loc['id']; ?>" <?php echo ($r['location_id'] == $loc['id']) ? 'selected' : ''; ?>>
                                                     <?php echo $loc['location_full_name']; ?>
                                                 </option>
                                             <?php } ?>
-                                            <option value="99" <?php echo ($r['location_id'] == '99') ? 'selected' : ''; ?>> ALL</option>
+                                            <option value="99" <?php echo ($r['location_id'] == '99') ? 'selected' : ''; ?>> <?= __('ALL'); ?></option>
                                         </select>
                                     </div>
                                     <div class="col-5">
-                                        <span>Employee</span>
-                                        <select aria-label="Admin Employee []" class="form-select js-example-basic-single emp" name="admin_employee_id[]" required>
-                                            <option value="<?php echo $r['employee_id']; ?>">Loading...</option>
+                                        <span><?= __('Employee'); ?></span>
+                                        <select aria-label="<?= htmlspecialchars(__('Admin Employee'), ENT_QUOTES, 'UTF-8'); ?> []" class="form-select js-example-basic-single emp" name="admin_employee_id[]" required>
+                                            <option value="<?php echo $r['employee_id']; ?>"><?= __('Loading...'); ?></option>
                                         </select>
                                     </div>
                                     <div class="col-1 text-end">
@@ -121,19 +121,19 @@ $final_data    = $return['final'] ?? array();
                                 <input type="hidden" name="admin_record_id[]" >
 
                                 <div class="col-6">
-                                    <span>Location</span>
-                                    <select aria-label="Admin Location []" class="form-select js-example-basic-single loc" name="admin_location_id[]" required>
-                                        <option value="">Select Location</option>
+                                    <span><?= __('Location'); ?></span>
+                                    <select aria-label="<?= htmlspecialchars(__('Admin Location'), ENT_QUOTES, 'UTF-8'); ?> []" class="form-select js-example-basic-single loc" name="admin_location_id[]" required>
+                                        <option value=""><?= __('Select Location'); ?></option>
                                         <?php foreach ($locations as $loc) { ?>
                                             <option value="<?php echo $loc['id']; ?>"><?php echo $loc['location_full_name']; ?></option>
                                         <?php } ?>
-                                        <option value="99" >ALL</option>
+                                        <option value="99" ><?= __('ALL'); ?></option>
                                     </select>
                                 </div>
                                 <div class="col-5">
-                                    <span>Employee</span>
-                                    <select aria-label="Admin Employee []" class="form-select js-example-basic-single emp" name="admin_employee_id[]" required>
-                                        <option value="">Select Employee</option>
+                                    <span><?= __('Employee'); ?></span>
+                                    <select aria-label="<?= htmlspecialchars(__('Admin Employee'), ENT_QUOTES, 'UTF-8'); ?> []" class="form-select js-example-basic-single emp" name="admin_employee_id[]" required>
+                                        <option value=""><?= __('Select Employee'); ?></option>
                                     </select>
                                 </div>
                                 <div class="col-1 text-end">
@@ -152,8 +152,8 @@ $final_data    = $return['final'] ?? array();
         <div class="col-md-6 mb-3">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <b>IT ADMIN</b>
-                    <button type="button" class="btn btn-success btn-sm addRowBtn" data-section="it_admin"><i class="fa fa-plus"></i> Row</button>
+                    <b><?= __('IT ADMIN'); ?></b>
+                    <button type="button" class="btn btn-success btn-sm addRowBtn" data-section="it_admin"><i class="fa fa-plus"></i> <?= __('Row'); ?></button>
                 </div>
                 <div class="card-body">
                     <div class="rows-wrap" id="it_admin_wrap">
@@ -162,21 +162,21 @@ $final_data    = $return['final'] ?? array();
                                 <input type="hidden" name="it_admin_record_id[]" value="<?php echo $r['id'] ?? ''; ?>">
                                 <div class="row mb-3 align-items-end one-row">
                                     <div class="col-6">
-                                        <span>Location</span>
-                                        <select aria-label="It Admin Location []" class="form-select js-example-basic-single loc" name="it_admin_location_id[]" required>
-                                            <option value="">Select Location</option>
+                                        <span><?= __('Location'); ?></span>
+                                        <select aria-label="<?= htmlspecialchars(__('It Admin Location'), ENT_QUOTES, 'UTF-8'); ?> []" class="form-select js-example-basic-single loc" name="it_admin_location_id[]" required>
+                                            <option value=""><?= __('Select Location'); ?></option>
                                             <?php foreach ($locations as $loc) { ?>
                                                 <option value="<?php echo $loc['id']; ?>" <?php echo ($r['location_id'] == $loc['id']) ? 'selected' : ''; ?>>
                                                     <?php echo $loc['location_full_name']; ?>
                                                 </option>
                                             <?php } ?>
-                                            <option value="99" <?php echo ($r['location_id'] == '99') ? 'selected' : ''; ?>>ALL</option>
+                                            <option value="99" <?php echo ($r['location_id'] == '99') ? 'selected' : ''; ?>><?= __('ALL'); ?></option>
                                         </select>
                                     </div>
                                     <div class="col-5">
-                                        <span>Employee</span>
-                                        <select aria-label="It Admin Employee []" class="form-select js-example-basic-single emp" name="it_admin_employee_id[]" required>
-                                            <option value="<?php echo $r['employee_id']; ?>">Loading...</option>
+                                        <span><?= __('Employee'); ?></span>
+                                        <select aria-label="<?= htmlspecialchars(__('It Admin Employee'), ENT_QUOTES, 'UTF-8'); ?> []" class="form-select js-example-basic-single emp" name="it_admin_employee_id[]" required>
+                                            <option value="<?php echo $r['employee_id']; ?>"><?= __('Loading...'); ?></option>
                                         </select>
                                     </div>
                                     <div class="col-1 text-end">
@@ -188,20 +188,20 @@ $final_data    = $return['final'] ?? array();
                             <input type="hidden" name="it_admin_record_id[]" >
                             <div class="row mb-3 align-items-end one-row">
                                 <div class="col-6">
-                                    <span>Location</span>
-                                    <select aria-label="It Admin Location []" class="form-select js-example-basic-single loc" name="it_admin_location_id[]" required>
-                                        <option value="">Select Location</option>
+                                    <span><?= __('Location'); ?></span>
+                                    <select aria-label="<?= htmlspecialchars(__('It Admin Location'), ENT_QUOTES, 'UTF-8'); ?> []" class="form-select js-example-basic-single loc" name="it_admin_location_id[]" required>
+                                        <option value=""><?= __('Select Location'); ?></option>
                                         <?php foreach ($locations as $loc) { ?>
                                             <option value="<?php echo $loc['id']; ?>"><?php echo $loc['location_full_name']; ?></option>
                                         <?php } ?>
-                                        <option value="99">ALL</option>
+                                        <option value="99"><?= __('ALL'); ?></option>
                                     </select>
 
                                 </div>
                                 <div class="col-5">
-                                    <span>Employee</span>
-                                    <select aria-label="It Admin Employee []" class="form-select js-example-basic-single emp" name="it_admin_employee_id[]" required>
-                                        <option value="">Select Employee</option>
+                                    <span><?= __('Employee'); ?></span>
+                                    <select aria-label="<?= htmlspecialchars(__('It Admin Employee'), ENT_QUOTES, 'UTF-8'); ?> []" class="form-select js-example-basic-single emp" name="it_admin_employee_id[]" required>
+                                        <option value=""><?= __('Select Employee'); ?></option>
                                     </select>
                                 </div>
                                 <div class="col-1 text-end">
@@ -220,8 +220,8 @@ $final_data    = $return['final'] ?? array();
         <div class="col-md-6 mb-3">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <b>IT TEAM</b>
-                    <button type="button" class="btn btn-success btn-sm addRowBtn" data-section="it_team"><i class="fa fa-plus"></i> Row</button>
+                    <b><?= __('IT TEAM'); ?></b>
+                    <button type="button" class="btn btn-success btn-sm addRowBtn" data-section="it_team"><i class="fa fa-plus"></i> <?= __('Row'); ?></button>
                 </div>
                 <div class="card-body">
                     <div class="rows-wrap" id="it_team_wrap">
@@ -230,21 +230,21 @@ $final_data    = $return['final'] ?? array();
                                 <input type="hidden" name="it_team_record_id[]" value="<?php echo $r['id'] ?? ''; ?>">
                                 <div class="row mb-3 align-items-end one-row">
                                     <div class="col-6">
-                                        <span>Location</span>
-                                        <select aria-label="It Team Location []" class="form-select js-example-basic-single loc" name="it_team_location_id[]" required>
-                                            <option value="">Select Location</option>
+                                        <span><?= __('Location'); ?></span>
+                                        <select aria-label="<?= htmlspecialchars(__('It Team Location'), ENT_QUOTES, 'UTF-8'); ?> []" class="form-select js-example-basic-single loc" name="it_team_location_id[]" required>
+                                            <option value=""><?= __('Select Location'); ?></option>
                                             <?php foreach ($locations as $loc) { ?>
                                                 <option value="<?php echo $loc['id']; ?>" <?php echo ($r['location_id'] == $loc['id']) ? 'selected' : ''; ?>>
                                                     <?php echo $loc['location_full_name']; ?>
                                                 </option>
                                             <?php } ?>
-                                            <option value="99" <?php echo ($r['location_id'] == '99') ? 'selected' : ''; ?>>ALL</option>
+                                            <option value="99" <?php echo ($r['location_id'] == '99') ? 'selected' : ''; ?>><?= __('ALL'); ?></option>
                                         </select>
                                     </div>
                                     <div class="col-5">
-                                        <span>Employee</span>
-                                        <select aria-label="It Team Employee []" class="form-select js-example-basic-single emp" name="it_team_employee_id[]" required>
-                                            <option value="<?php echo $r['employee_id']; ?>">Loading...</option>
+                                        <span><?= __('Employee'); ?></span>
+                                        <select aria-label="<?= htmlspecialchars(__('It Team Employee'), ENT_QUOTES, 'UTF-8'); ?> []" class="form-select js-example-basic-single emp" name="it_team_employee_id[]" required>
+                                            <option value="<?php echo $r['employee_id']; ?>"><?= __('Loading...'); ?></option>
                                         </select>
                                     </div>
                                     <div class="col-1 text-end">
@@ -256,19 +256,19 @@ $final_data    = $return['final'] ?? array();
                             <input type="hidden" name="it_team_record_id[]" >
                             <div class="row mb-3 align-items-end one-row">
                                 <div class="col-6">
-                                    <span>Location</span>
-                                    <select aria-label="It Team Location []" class="form-select js-example-basic-single loc" name="it_team_location_id[]" required>
-                                        <option value="">Select Location</option>
+                                    <span><?= __('Location'); ?></span>
+                                    <select aria-label="<?= htmlspecialchars(__('It Team Location'), ENT_QUOTES, 'UTF-8'); ?> []" class="form-select js-example-basic-single loc" name="it_team_location_id[]" required>
+                                        <option value=""><?= __('Select Location'); ?></option>
                                         <?php foreach ($locations as $loc) { ?>
                                             <option value="<?php echo $loc['id']; ?>"><?php echo $loc['location_full_name']; ?></option>
                                         <?php } ?>
-                                        <option value="99" >ALL</option>
+                                        <option value="99" ><?= __('ALL'); ?></option>
                                     </select>
                                 </div>
                                 <div class="col-5">
-                                    <span>Employee</span>
-                                    <select aria-label="It Team Employee []" class="form-select js-example-basic-single emp" name="it_team_employee_id[]" required>
-                                        <option value="">Select Employee</option>
+                                    <span><?= __('Employee'); ?></span>
+                                    <select aria-label="<?= htmlspecialchars(__('It Team Employee'), ENT_QUOTES, 'UTF-8'); ?> []" class="form-select js-example-basic-single emp" name="it_team_employee_id[]" required>
+                                        <option value=""><?= __('Select Employee'); ?></option>
                                     </select>
                                 </div>
                                 <div class="col-1 text-end">
@@ -287,8 +287,8 @@ $final_data    = $return['final'] ?? array();
         <div class="col-md-6 mb-3">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <b>FINAL SUBMISSION</b>
-                    <button type="button" class="btn btn-success btn-sm addRowBtn" data-section="final"><i class="fa fa-plus"></i> Row</button>
+                    <b><?= __('FINAL SUBMISSION'); ?></b>
+                    <button type="button" class="btn btn-success btn-sm addRowBtn" data-section="final"><i class="fa fa-plus"></i> <?= __('Row'); ?></button>
                 </div>
                 <div class="card-body">
                     <div class="rows-wrap" id="final_wrap">
@@ -297,21 +297,21 @@ $final_data    = $return['final'] ?? array();
                                 <input type="hidden" name="final_record_id[]" value="<?php echo $r['id'] ?? ''; ?>">
                                 <div class="row mb-3 align-items-end one-row">
                                     <div class="col-6">
-                                        <span>Location</span>
-                                        <select aria-label="Final Location []" class="form-select js-example-basic-single loc" name="final_location_id[]" required>
-                                            <option value="">Select Location</option>
+                                        <span><?= __('Location'); ?></span>
+                                        <select aria-label="<?= htmlspecialchars(__('Final Location'), ENT_QUOTES, 'UTF-8'); ?> []" class="form-select js-example-basic-single loc" name="final_location_id[]" required>
+                                            <option value=""><?= __('Select Location'); ?></option>
                                             <?php foreach ($locations as $loc) { ?>
                                                 <option value="<?php echo $loc['id']; ?>" <?php echo ($r['location_id'] == $loc['id']) ? 'selected' : ''; ?>>
                                                     <?php echo $loc['location_full_name']; ?>
                                                 </option>
                                             <?php } ?>
-                                            <option value="99" <?php echo ($r['location_id'] == '99') ? 'selected' : ''; ?>>ALL</option>
+                                            <option value="99" <?php echo ($r['location_id'] == '99') ? 'selected' : ''; ?>><?= __('ALL'); ?></option>
                                         </select>
                                     </div>
                                     <div class="col-5">
-                                        <span>Employee</span>
-                                        <select aria-label="Final Employee []" class="form-select js-example-basic-single emp" name="final_employee_id[]" required>
-                                            <option value="<?php echo $r['employee_id']; ?>">Loading...</option>
+                                        <span><?= __('Employee'); ?></span>
+                                        <select aria-label="<?= htmlspecialchars(__('Final Employee'), ENT_QUOTES, 'UTF-8'); ?> []" class="form-select js-example-basic-single emp" name="final_employee_id[]" required>
+                                            <option value="<?php echo $r['employee_id']; ?>"><?= __('Loading...'); ?></option>
                                         </select>
                                     </div>
                                     <div class="col-1 text-end">
@@ -323,19 +323,19 @@ $final_data    = $return['final'] ?? array();
                             <input type="hidden" name="final_record_id[]">
                             <div class="row mb-3 align-items-end one-row">
                                 <div class="col-6">
-                                    <span>Location</span>
-                                    <select aria-label="Final Location []" class="form-select js-example-basic-single loc" name="final_location_id[]" required>
-                                        <option value="">Select Location</option>
+                                    <span><?= __('Location'); ?></span>
+                                    <select aria-label="<?= htmlspecialchars(__('Final Location'), ENT_QUOTES, 'UTF-8'); ?> []" class="form-select js-example-basic-single loc" name="final_location_id[]" required>
+                                        <option value=""><?= __('Select Location'); ?></option>
                                         <?php foreach ($locations as $loc) { ?>
                                             <option value="<?php echo $loc['id']; ?>"><?php echo $loc['location_full_name']; ?></option>
                                         <?php } ?>
-                                        <option value="99">ALL</option>
+                                        <option value="99"><?= __('ALL'); ?></option>
                                     </select>
                                 </div>
                                 <div class="col-5">
-                                    <span>Employee</span>
-                                    <select aria-label="Final Employee []" class="form-select js-example-basic-single emp" name="final_employee_id[]" required>
-                                        <option value="">Select Employee</option>
+                                    <span><?= __('Employee'); ?></span>
+                                    <select aria-label="<?= htmlspecialchars(__('Final Employee'), ENT_QUOTES, 'UTF-8'); ?> []" class="form-select js-example-basic-single emp" name="final_employee_id[]" required>
+                                        <option value=""><?= __('Select Employee'); ?></option>
                                     </select>
                                 </div>
                                 <div class="col-1 text-end">
@@ -350,7 +350,7 @@ $final_data    = $return['final'] ?? array();
 
 
         <div class="col-12 text-left border-top">
-            <button type="button" id="saveAssign" class="btn btn-primary px-4">Save</button>
+            <button type="button" id="saveAssign" class="btn btn-primary px-4"><?= __('Save'); ?></button>
         </div>
     </div>
 </form>
@@ -362,7 +362,7 @@ $final_data    = $return['final'] ?? array();
             if ($wrap.find('.one-row').length > 1) {
                 $(this).closest('.one-row').remove();
             } else {
-                Swal.fire('Note', 'At least one row is required in this section.', 'info');
+                Swal.fire(<?php echo json_encode(__('Note'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, <?php echo json_encode(__('At least one row is required in this section.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, 'info');
             }
         });
         var rowCounters = {
@@ -415,7 +415,7 @@ $final_data    = $return['final'] ?? array();
             const $row = $(this).closest('.one-row');
             const $emp = $row.find('select.emp');
             if (!locId) {
-                $emp.html('<option value="">Select Employee</option>');
+                $emp.html('<option value=""><?= htmlspecialchars(__('Select Employee'), ENT_QUOTES, 'UTF-8'); ?></option>');
                 return;
             }
             $.ajax({
@@ -426,18 +426,18 @@ $final_data    = $return['final'] ?? array();
                     location_id: locId == '99' ? '' : locId
                 },
                 beforeSend: function() {
-                    $emp.html('<option>Loading...</option>');
+                    $emp.html('<option><?= htmlspecialchars(__('Loading...'), ENT_QUOTES, 'UTF-8'); ?></option>');
                 },
                 success: function(res) {
                     try {
                         const data = JSON.parse(res) || [];
-                        let opts = '<option value="">Select Employee</option>';
+                        let opts = '<option value=""><?= htmlspecialchars(__('Select Employee'), ENT_QUOTES, 'UTF-8'); ?></option>';
                         data.forEach(emp => {
                             opts += `<option value="${emp.id}">${emp.display_name} (${emp.emp_code||'-'})</option>`;
                         });
                         $emp.html(opts);
                     } catch (e) {
-                        $emp.html('<option>Error</option>');
+                        $emp.html('<option><?= htmlspecialchars(__('Error'), ENT_QUOTES, 'UTF-8'); ?></option>');
                     }
                 }
             });
@@ -458,7 +458,7 @@ $final_data    = $return['final'] ?? array();
                     success: function(res) {
                         try {
                             const data = JSON.parse(res) || [];
-                            let opts = '<option value="">Select Employee</option>';
+                            let opts = '<option value=""><?= htmlspecialchars(__('Select Employee'), ENT_QUOTES, 'UTF-8'); ?></option>';
                             data.forEach(emp => {
                                 opts += `<option value="${emp.id}" ${emp.id==selectedEmp?'selected':''}>
                         ${emp.display_name} (${emp.emp_code||'-'})
@@ -466,7 +466,7 @@ $final_data    = $return['final'] ?? array();
                             });
                             $emp.html(opts);
                         } catch (e) {
-                            $emp.html('<option>Error</option>');
+                            $emp.html('<option><?= htmlspecialchars(__('Error'), ENT_QUOTES, 'UTF-8'); ?></option>');
                         }
                     }
                 });
@@ -490,7 +490,7 @@ $final_data    = $return['final'] ?? array();
                 }
             });
             if (!valid) {
-                Swal.fire('Validation Error', message, 'warning');
+                Swal.fire(<?php echo json_encode(__('Validation Error'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, message, 'warning');
                 return false;
             }
             $('#assignForm').submit();
