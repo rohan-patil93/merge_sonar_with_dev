@@ -140,7 +140,7 @@
                <div class="card card-custom gutter-b draggable" role="region" style="">
                   <div class="card-header">
                      <div class="card-title">
-                        <h3 class="card-label">Announcements</h3>
+                        <h3 class="card-label"><?= __('Announcements'); ?></h3>
                      </div>
                      <div class="card-toolbar">
                         <a href="#" class="btn btn-icon btn-sm btn-hover-light-primary draggable-handle">
@@ -175,9 +175,9 @@
                <div class="card card-custom gutter-b draggable" role="region" style="">
                   <div class="card-header">
                      <div class="card-title">
-                        <h3 class="card-label">Reviews
-                        <span class="label label-lg label-danger font-weight-bold" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Over Due  "><?php echo count((array)$total_review_count['due']); ?></span>
-                        <span class="label label-lg label-warning font-weight-bold" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Due now"><?php echo count((array)$total_review_count['now']); ?></span>
+                        <h3 class="card-label"><?= __('Reviews'); ?>
+                        <span class="label label-lg label-danger font-weight-bold" data-container="body" data-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Over Due'), ENT_QUOTES, 'UTF-8'); ?>  "><?php echo count((array)$total_review_count['due']); ?></span>
+                        <span class="label label-lg label-warning font-weight-bold" data-container="body" data-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Due now'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo count((array)$total_review_count['now']); ?></span>
                          </h3>
                      </div>
                      <div class="card-toolbar">
@@ -238,7 +238,7 @@
                            </div>
                         </div>
                         <div class="alert-close">
-                           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                           <button type="button" class="close" data-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">
                            <span aria-hidden="true"><i class="ki ki-close"></i></span>
                            </button>
                         </div>
@@ -252,10 +252,10 @@
                <div class="card card-custom gutter-b draggable" role="region" style="">
                   <div class="card-header">
                      <div class="card-title">
-                        <h3 class="card-label">Tasks due in next 7 days
-                        <span class="label label-lg label-danger font-weight-bold" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Over Due  "><?php echo count((array)$count_task['due']); ?></span>
-                        <span class="label label-lg label-warning font-weight-bold" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Due now"><?php echo count((array)$count_task['now']); ?></span>
-                        <span class="label label-lg label-primary font-weight-bold " data-container="body" data-toggle="tooltip" data-placement="bottom" title="Not Yet Due"><?php echo count((array)$count_task['after']); ?></span>
+                        <h3 class="card-label"><?= __('Tasks due in next 7 days'); ?>
+                        <span class="label label-lg label-danger font-weight-bold" data-container="body" data-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Over Due'), ENT_QUOTES, 'UTF-8'); ?>  "><?php echo count((array)$count_task['due']); ?></span>
+                        <span class="label label-lg label-warning font-weight-bold" data-container="body" data-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Due now'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo count((array)$count_task['now']); ?></span>
+                        <span class="label label-lg label-primary font-weight-bold " data-container="body" data-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Not Yet Due'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo count((array)$count_task['after']); ?></span>
                         </h3>
                      </div>
                      <div class="card-toolbar">
@@ -313,7 +313,7 @@
                            </div>
                         </div>
                         <div class="alert-close">
-                           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                           <button type="button" class="close" data-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">
                            <span aria-hidden="true"><i class="ki ki-close"></i></span>
                            </button>
                         </div>
@@ -328,7 +328,7 @@
          <div class="card card-custom gutter-b draggable" role="region" style="">
             <div class="card-header">
                <div class="card-title">
-                  <h3 class="card-label">Holidays List <span class="label label-xl label-light-success label-rounded font-weight-bolder"><?php echo $total_holidays; ?></span></h3>
+                  <h3 class="card-label"><?= __('Holidays List'); ?> <span class="label label-xl label-light-success label-rounded font-weight-bolder"><?php echo $total_holidays; ?></span></h3>
                </div>
                <div class="card-toolbar">
                   <a href="" class="btn btn-icon btn-sm btn-hover-light-primary draggable-handle">
@@ -360,7 +360,7 @@
                      </div>
                   </div>
                   <div class="alert-close">
-                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                     <button type="button" class="close" data-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">
                      <span aria-hidden="true"><i class="ki ki-close"></i></span>
                      </button>
                   </div>
@@ -375,7 +375,7 @@
             <div class="card-header">
                <div class="card-title">
                   <h3 class="card-label">
-                     Birthdays & Anniversaries <span class="label label-xl label-light-success label-rounded font-weight-bolder"><?php echo $wishes_count; ?></span>
+                     <?= htmlspecialchars(__('Birthdays & Anniversaries'), ENT_QUOTES, 'UTF-8'); ?> <span class="label label-xl label-light-success label-rounded font-weight-bolder"><?php echo $wishes_count; ?></span>
                   </h3>
                </div>
                <div class="card-toolbar">
@@ -408,7 +408,7 @@
                         <!--begin::Symbol-->
                        <div class="symbol symbol-35 symbol-success mr-3" onclick="popupfeedmsg(<?php echo $sender_emp_id;?>,<?php echo $receiver_emp_id;?>,'<?php echo $msg_title;?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                  <?php if($display_photo) {?>
-                                 <img src="uploads/all/<?php echo $display_photo; ?>" alt="Details">
+                                 <img src="uploads/all/<?php echo $display_photo; ?>" alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>">
                                  <?php } else { ?>
                                  <span class="symbol-label symbol-success font-weight-bold"><?php echo initials($display_name); ?></span>
                                  <?php } ?>
@@ -423,7 +423,7 @@
                      </div>
                   </div>
                   <div class="alert-close">
-                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                     <button type="button" class="close" data-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">
                      <span aria-hidden="true"><i class="ki ki-close"></i></span>
                      </button>
                   </div>
@@ -451,7 +451,7 @@
                         <!--begin::Symbol-->
                        <div class="symbol symbol-35 symbol-success mr-3" onclick="popupfeedmsg(<?php echo $sender_emp_id;?>,<?php echo $receiver_emp_id;?>,'<?php echo $msg_title;?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                  <?php if($display_photo) {?>
-                                 <img src="uploads/all/<?php echo $display_photo; ?>" alt="Details">
+                                 <img src="uploads/all/<?php echo $display_photo; ?>" alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>">
                                  <?php } else { ?>
                                  <span class="symbol-label symbol-success font-weight-bold"><?php echo initials($display_name); ?></span>
                                  <?php } ?>
@@ -466,7 +466,7 @@
                      </div>
                   </div>
                   <div class="alert-close">
-                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                     <button type="button" class="close" data-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">
                      <span aria-hidden="true"><i class="ki ki-close"></i></span>
                      </button>
                   </div>
@@ -490,11 +490,11 @@
       <?php } ?>
    </div>
 </div>
-<div class="tab-pane fade" id="tab_forms_widget_2" role="tabpanel" aria-labelledby="tab_forms_widget_2">Tab tab_forms_widget_2 2</div>
-<div class="tab-pane fade" id="tab_forms_widget_3" role="tabpanel" aria-labelledby="tab_forms_widget_3">Tab tab_forms_widget_3 2</div>
-<div class="tab-pane fade" id="tab_forms_widget_4" role="tabpanel" aria-labelledby="tab_forms_widget_4">Tab tab_forms_widget_4 2</div>
-<div class="tab-pane fade" id="tab_forms_widget_5" role="tabpanel" aria-labelledby="tab_forms_widget_5">Tab tab_forms_widget_5 2</div>
-<div class="tab-pane fade" id="tab_forms_widget_6" role="tabpanel" aria-labelledby="tab_forms_widget_6">Tab forms_widget_tab_6 2</div>
+<div class="tab-pane fade" id="tab_forms_widget_2" role="tabpanel" aria-labelledby="tab_forms_widget_2"><?= __('Tab tab_forms_widget_2 2'); ?></div>
+<div class="tab-pane fade" id="tab_forms_widget_3" role="tabpanel" aria-labelledby="tab_forms_widget_3"><?= __('Tab tab_forms_widget_3 2'); ?></div>
+<div class="tab-pane fade" id="tab_forms_widget_4" role="tabpanel" aria-labelledby="tab_forms_widget_4"><?= __('Tab tab_forms_widget_4 2'); ?></div>
+<div class="tab-pane fade" id="tab_forms_widget_5" role="tabpanel" aria-labelledby="tab_forms_widget_5"><?= __('Tab tab_forms_widget_5 2'); ?></div>
+<div class="tab-pane fade" id="tab_forms_widget_6" role="tabpanel" aria-labelledby="tab_forms_widget_6"><?= __('Tab forms_widget_tab_6 2'); ?></div>
 </div>
 </div>
 <!--end::Container-->
