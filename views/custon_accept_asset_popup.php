@@ -30,8 +30,8 @@ function submitdetails(allocation_type){
 }
 </script>
 <div class="modal-header">
-    <h4 class="modal-title">Asset Allocation</h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h4 class="modal-title"><?= __('Asset Allocation'); ?></h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body j-pro">
     <div class="j-content">
@@ -45,21 +45,21 @@ function submitdetails(allocation_type){
     <div class="card p-2 mt-2">
         <div class="row">
             <div class="form-group col-lg-3">
-                <span>Received date</span>
-                <input aria-label="Received Date" type="text" class="form-control datepicker" id="received_date"  name="received_date" value="">
+                <span><?= __('Received date'); ?></span>
+                <input aria-label="<?= htmlspecialchars(__('Received Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" id="received_date"  name="received_date" value="">
             </div>
             <div class="form-group col-lg-9">
-                <span>Note</span>
-                <textarea aria-label="Received Note" type="text" class="form-control" id="received_note" rows="4" cols="50" name="received_note" ></textarea>
+                <span><?= __('Note'); ?></span>
+                <textarea aria-label="<?= htmlspecialchars(__('Received Note'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="received_note" rows="4" cols="50" name="received_note" ></textarea>
             </div>
         </div>
     </div>
     </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitdetails('1')">Accept</button>
-    <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitdetails('2')">Reject</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
+    <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitdetails('1')"><?= __('Accept'); ?></button>
+    <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitdetails('2')"><?= __('Reject'); ?></button>
 </div>
 
 <script src="assets/pages/data-table/extensions/responsive/js/responsive-custom.js"></script>
