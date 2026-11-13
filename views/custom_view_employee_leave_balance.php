@@ -9,19 +9,19 @@ $currentYear = date('Y');
 <div class="container-fluid py-4">
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center bg-light">
-            <h3 class="card-title mb-0">Leave Balance Management</h3>
+            <h3 class="card-title mb-0"><?= __('Leave Balance Management'); ?></h3>
         </div>
 
 
         <div class="card-body">
             <div class="row mb-4">
                 <div class="col-md-6">
-                    <label for="employee-dropdown" class="form-label"><strong>Employee</strong></label>
+                    <label for="employee-dropdown" class="form-label"><strong><?= __('Employee'); ?></strong></label>
                     <select id="employee-dropdown"
                             class="form-select form-control js-example-basic-single"
                             name="employee_id"
                             data-action="employee-changed">
-                        <option value="">-- Select Employee --</option>
+                        <option value="">-- <?= __('Select Employee'); ?> --</option>
                     </select>
                     <input type="hidden" id="company_id" value="<?php echo $_SESSION['company_id']; ?>">
                     <input type="hidden" id="user_id" value="<?php echo $_SESSION['userid']; ?>">
@@ -31,7 +31,7 @@ $currentYear = date('Y');
 
 
             <div id="balance-section" class="balance-section is-hidden">
-                <h5 class="mb-3"><strong>Leave Balance Summary - <?php echo $currentYear; ?></strong></h5>
+                <h5 class="mb-3"><strong><?= __('Leave Balance Summary'); ?> - <?php echo $currentYear; ?></strong></h5>
                 <div id="balance-content" class="row">
                     <!-- Balances will be loaded here -->
                 </div>
@@ -40,23 +40,23 @@ $currentYear = date('Y');
             <!-- Allocations Table Section -->
             <div id="allocation-section" class="allocation-section allocation-section-spacer is-hidden">
                 <div class="allocation-header">
-                    <h5 class="mb-0"><strong>Leave Allocations History - <?php echo $currentYear; ?></strong></h5>
+                    <h5 class="mb-0"><strong><?= __('Leave Allocations History'); ?> - <?php echo $currentYear; ?></strong></h5>
                     <button class="btn btn-primary btn-sm add-allocation-btn"
                             id="btn-add-allocation"
                             data-action="add-leave-allocation">
-                        <i class="fa fa-plus"></i> Add Leave Allocation
+                        <i class="fa fa-plus"></i> <?= __('Add Leave Allocation'); ?>
                     </button>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-sm table-hover table-striped" id="allocations-table">
                         <thead class="table-light">
                             <tr>
-                                <th scope="col">Leave Type</th>
-                                <th scope="col">Transaction Date</th>
-                                <th scope="col">Applicable Leaves</th>
-                                <th scope="col">Consumed Leaves</th>
-                                <th scope="col">Note</th>
-                                <th scope="col">Status</th>
+                                <th scope="col"><?= __('Leave Type'); ?></th>
+                                <th scope="col"><?= __('Transaction Date'); ?></th>
+                                <th scope="col"><?= __('Applicable Leaves'); ?></th>
+                                <th scope="col"><?= __('Consumed Leaves'); ?></th>
+                                <th scope="col"><?= __('Note'); ?></th>
+                                <th scope="col"><?= __('Status'); ?></th>
                             </tr>
                         </thead>
                         <tbody id="allocations-tbody">
@@ -68,7 +68,7 @@ $currentYear = date('Y');
 
             <!-- No Data Message -->
             <div id="no-data-message" class="alert alert-info is-hidden">
-                No leave data available for the selected employee.
+                <?= __('No leave data available for the selected employee.'); ?>
             </div>
         </div>
     </div>
@@ -79,24 +79,24 @@ $currentYear = date('Y');
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addAllocationModalLabel">Add Leave Allocation</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="addAllocationModalLabel"><?= __('Add Leave Allocation'); ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
             </div>
             <div class="modal-body">
                 <form id="leave-allocation-form">
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="leave_type_id" class="form-label">Leave Type <span class="text-danger">*</span></label>
+                            <label for="leave_type_id" class="form-label"><?= __('Leave Type'); ?> <span class="text-danger">*</span></label>
                             <select id="leave_type_id"
                                     class="form-select form-control js-example-basic-single"
                                     name="leave_type_id"
                                     required>
-                                <option value="">-- Select Leave Type --</option>
+                                <option value="">-- <?= __('Select Leave Type'); ?> --</option>
                             </select>
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label for="transaction_date" class="form-label">Transaction Date <span class="text-danger">*</span></label>
+                            <label for="transaction_date" class="form-label"><?= __('Transaction Date'); ?> <span class="text-danger">*</span></label>
                             <input type="date"
                                    id="transaction_date"
                                    class="form-control"
@@ -108,7 +108,7 @@ $currentYear = date('Y');
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="applicable_leaves" class="form-label">Applicable Leaves</label>
+                            <label for="applicable_leaves" class="form-label"><?= __('Applicable Leaves'); ?></label>
                             <input type="number"
                                    id="applicable_leaves"
                                    class="form-control text-right"
@@ -120,7 +120,7 @@ $currentYear = date('Y');
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label for="consumed_leaves" class="form-label">Consumed Leaves</label>
+                            <label for="consumed_leaves" class="form-label"><?= __('Consumed Leaves'); ?></label>
                             <input type="number"
                                    id="consumed_leaves"
                                    class="form-control text-right"
@@ -134,23 +134,23 @@ $currentYear = date('Y');
 
                     <div class="row mb-3">
                         <div class="col-md-12">
-                            <label for="note" class="form-label">Note</label>
+                            <label for="note" class="form-label"><?= __('Note'); ?></label>
                             <textarea id="note"
                                       class="form-control"
                                       name="note"
                                       rows="2"
-                                      placeholder="Optional notes..."></textarea>
+                                      placeholder="<?= htmlspecialchars(__('Optional notes...'), ENT_QUOTES, 'UTF-8'); ?>"></textarea>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal"><?= __('Cancel'); ?></button>
                 <button type="button"
                         class="btn btn-primary"
                         id="btn-save-allocation"
                         data-action="save-allocation">
-                    Save
+                    <?= __('Save'); ?>
                 </button>
             </div>
         </div>
