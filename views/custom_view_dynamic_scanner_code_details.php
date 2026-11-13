@@ -48,17 +48,17 @@ $selected_table_info = null;
 
 // Debug: Show POST data
 if (isset($_GET['debug'])) {
-    echo "<div class='alert alert-info'><strong>POST Data:</strong><pre>" . print_r($_POST, true) . "</pre></div>";
+    echo "<div class='alert alert-info'><strong>".__('POST Data').":</strong><pre>" . print_r($_POST, true) . "</pre></div>";
     if (isset($_POST['generated_image_data'])) {
-        echo "<div class='alert alert-warning'><strong>Image Data Length:</strong> " . strlen($_POST['generated_image_data']) . " characters</div>";
-        echo "<div class='alert alert-info'><strong>Image Data Preview:</strong> " . substr($_POST['generated_image_data'], 0, 100) . "...</div>";
+        echo "<div class='alert alert-warning'><strong>".__('Image Data Length').":</strong> " . strlen($_POST['generated_image_data']) . " ".__('characters')."</div>";
+        echo "<div class='alert alert-info'><strong>".__('Image Data Preview').":</strong> " . substr($_POST['generated_image_data'], 0, 100) . "...</div>";
     } else {
-        echo "<div class='alert alert-danger'><strong>No Image Data Found in POST</strong></div>";
+        echo "<div class='alert alert-danger'><strong>".__('No Image Data Found in POST')."</strong></div>";
     }
 
     $uploadDir = "uploads/scanner_codes/";
     echo "<div class='alert alert-info'>";
-    echo "<strong>Upload Directory Status:</strong><br>";
+    echo "<strong>".__('Upload Directory Status').":</strong><br>";
     echo "Directory exists: " . (is_dir($uploadDir) ? 'Yes' : 'No') . "<br>";
     echo "Directory writable: " . (is_writable($uploadDir) ? 'Yes' : 'No') . "<br>";
     echo "Full path: " . realpath($uploadDir) . "<br>";
@@ -76,14 +76,14 @@ if (isset($_POST['selected_process']) && $_POST['selected_process']) {
         <div class="col-lg-8">
             <div class="card shadow border-0">
                 <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0"><i class="ti-qrcode me-2 text-primary"></i>QR/Barcode Generator</h5>
+                    <h5 class="mb-0"><i class="ti-qrcode me-2 text-primary"></i><?= __('QR/Barcode Generator'); ?></h5>
                     <a href="javascript:history.go(-1)" class="btn btn-outline-primary btn-sm">
-                        <i class="icofont icofont-reply"></i> Back
+                        <i class="icofont icofont-reply"></i> <?= __('Back'); ?>
                     </a>
                 </div>
                 <div class="card-body p-4">
                     <div class="progress mb-4" style="height:25px;border-radius:50px;">
-                        <div class="progress-bar bg-primary text-white" id="formProgress" style="width:20%;border-radius:50px;">Step 1/5</div>
+                        <div class="progress-bar bg-primary text-white" id="formProgress" style="width:20%;border-radius:50px;"><?= __('Step 1/5'); ?></div>
                     </div>
 
                     <form id="qrForm" method="POST" enctype="multipart/form-data">
@@ -94,33 +94,33 @@ if (isset($_POST['selected_process']) && $_POST['selected_process']) {
 
                         <div class="step" id="step1">
                             <h5 class="fw-bold text-secondary mb-3">
-                                <i class="ti-qrcode me-2 text-primary"></i>Select Code Type
+                                <i class="ti-qrcode me-2 text-primary"></i><?= __('Select Code Type'); ?>
                             </h5>
                             <div class="row g-3">
                                 <div class="col-md-4">
                                     <div class="card border-2 code-type-card" data-type="qr">
                                         <div class="card-body text-center p-4">
-                                            <h6 class="fw-bold">QR Code</h6>
-                                            <p class="text-muted small">QR code for mobile scanning</p>
-                                            <input aria-label="Code Types[]" type="checkbox" name="code_types[]" value="qr" class="form-check-input d-none" id="qr_checkbox">
+                                            <h6 class="fw-bold"><?= __('QR Code'); ?></h6>
+                                            <p class="text-muted small"><?= __('QR code for mobile scanning'); ?></p>
+                                            <input aria-label="<?= htmlspecialchars(__('Code Types'), ENT_QUOTES, 'UTF-8'); ?>[]" type="checkbox" name="code_types[]" value="qr" class="form-check-input d-none" id="qr_checkbox">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="card border-2 code-type-card" data-type="barcode">
                                         <div class="card-body text-center p-4">
-                                            <h6 class="fw-bold">Barcode</h6>
-                                            <p class="text-muted small">Barcode for traditional scanning</p>
-                                            <input aria-label="Code Types[]" type="checkbox" name="code_types[]" value="barcode" class="form-check-input d-none" id="barcode_checkbox">
+                                            <h6 class="fw-bold"><?= __('Barcode'); ?></h6>
+                                            <p class="text-muted small"><?= __('Barcode for traditional scanning'); ?></p>
+                                            <input aria-label="<?= htmlspecialchars(__('Code Types'), ENT_QUOTES, 'UTF-8'); ?>[]" type="checkbox" name="code_types[]" value="barcode" class="form-check-input d-none" id="barcode_checkbox">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="card border-2 code-type-card" data-type="both">
                                         <div class="card-body text-center p-4">
-                                            <h6 class="fw-bold">Both</h6>
-                                            <p class="text-muted small">Generate both QR and Barcode</p>
-                                            <input aria-label="Code Types[]" type="checkbox" name="code_types[]" value="both" class="form-check-input d-none" id="both_checkbox">
+                                            <h6 class="fw-bold"><?= __('Both'); ?></h6>
+                                            <p class="text-muted small"><?= __('Generate both QR and Barcode'); ?></p>
+                                            <input aria-label="<?= htmlspecialchars(__('Code Types'), ENT_QUOTES, 'UTF-8'); ?>[]" type="checkbox" name="code_types[]" value="both" class="form-check-input d-none" id="both_checkbox">
                                         </div>
                                     </div>
                                 </div>
@@ -130,19 +130,19 @@ if (isset($_POST['selected_process']) && $_POST['selected_process']) {
 
                         <div class="step d-none" id="step2">
                             <h5 class="fw-bold text-secondary mb-3">
-                                <i class="ti-database me-2 text-primary"></i>Select Table and Process
+                                <i class="ti-database me-2 text-primary"></i><?= __('Select Table and Process'); ?>
                             </h5>
                             <div class="row g-3">
                                 <div class="col-md-6 w-full">
-                                    <span class="form-label">Application Table <span class="text-danger">*</span></span> </br>
-                                    <select aria-label="Ected Table" class="form-select js-example-basic-single required" name="selected_table" id="tableSelect" onchange="onTableSelect(this.value)">
-                                        <option value="">Select a table...</option>
+                                    <span class="form-label"><?= __('Application Table'); ?> <span class="text-danger">*</span></span> </br>
+                                    <select aria-label="<?= htmlspecialchars(__('Ected Table'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single required" name="selected_table" id="tableSelect" onchange="onTableSelect(this.value)">
+                                        <option value=""><?= __('Select a table...'); ?></option>
                                     </select>
                                 </div>
                                 <div class="col-md-6 w-full">
-                                    <span class="form-label">Choose Process <span class="text-danger">*</span></span> </br>
-                                    <select aria-label="Ected Process" class="form-select js-example-basic-single required" name="selected_process" id="processSelect" onchange="onProcessSelect(this.value)">
-                                        <option value="">Select a process...</option>
+                                    <span class="form-label"><?= __('Choose Process'); ?> <span class="text-danger">*</span></span> </br>
+                                    <select aria-label="<?= htmlspecialchars(__('Ected Process'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single required" name="selected_process" id="processSelect" onchange="onProcessSelect(this.value)">
+                                        <option value=""><?= __('Select a process...'); ?></option>
                                     </select>
                                 </div>
                             </div>
@@ -151,12 +151,12 @@ if (isset($_POST['selected_process']) && $_POST['selected_process']) {
                         <!-- STEP 3: Process Details -->
                         <div class="step d-none" id="step3">
                             <h5 class="fw-bold text-secondary mb-3">
-                                <i class="ti-database me-2 text-primary"></i>Process Details
+                                <i class="ti-database me-2 text-primary"></i><?= __('Process Details'); ?>
                             </h5>
                             <div id="processDetailsContainer">
                                 <div class="text-center p-4">
                                     <i class="fa fa-info-circle text-muted fa-2x mb-2"></i>
-                                    <p class="text-muted">Select a process to view details</p>
+                                    <p class="text-muted"><?= __('Select a process to view details'); ?></p>
                                 </div>
                             </div>
                         </div>
@@ -164,7 +164,7 @@ if (isset($_POST['selected_process']) && $_POST['selected_process']) {
 
                         <div class="step d-none" id="step4">
                             <h5 class="fw-bold text-secondary mb-3">
-                                <i class="ti-printer me-2 text-primary"></i>Print Settings
+                                <i class="ti-printer me-2 text-primary"></i><?= __('Print Settings'); ?>
                             </h5>
 
 
@@ -172,11 +172,11 @@ if (isset($_POST['selected_process']) && $_POST['selected_process']) {
                                 <div class="col-md-8">
                                     <div class="card">
                                         <div class="card-body">
-                                            <span class="form-label fw-bold">Print Size <span class="text-danger">*</span></span>
+                                            <span class="form-label fw-bold"><?= __('Print Size'); ?> <span class="text-danger">*</span></span>
                                             <div class="size-options">
                                                 <?php foreach ($print_sizes as $size_key => $size_label): ?>
                                                     <div class="form-check mb-2">
-                                                        <input aria-label="Print Size" class="form-check-input" type="radio" name="print_size"
+                                                        <input aria-label="<?= htmlspecialchars(__('Print Size'), ENT_QUOTES, 'UTF-8'); ?>" class="form-check-input" type="radio" name="print_size"
                                                                value="<?php echo $size_key; ?>" id="size_<?php echo $size_key; ?>">
                                                         <label class="form-check-label" for="size_<?php echo $size_key; ?>">
                                                             <?php echo $size_label; ?>
@@ -189,19 +189,19 @@ if (isset($_POST['selected_process']) && $_POST['selected_process']) {
                                             <div id="customSizeFields" class="mt-3 d-none">
                                                 <div class="row g-2">
                                                     <div class="col-6">
-                                                        <span class="form-label small">Width (mm)</span>
+                                                        <span class="form-label small"><?= __('Width (mm)'); ?></span>
                                                         <input aria-label="50" type="number" class="form-control form-control-sm"
                                                                name="custom_width" placeholder="50" min="20" max="200">
                                                     </div>
                                                     <div class="col-6">
-                                                        <span class="form-label small">Height (mm)</span>
+                                                        <span class="form-label small"><?= __('Height (mm)'); ?></span>
                                                         <input aria-label="50" type="number" class="form-control form-control-sm"
                                                                name="custom_height" placeholder="50" min="20" max="200">
                                                     </div>
                                                 </div>
                                                 <small class="text-muted mt-1 d-block">
                                                     <i class="fa fa-info-circle"></i>
-                                                    Recommended range: 20-200mm. Larger sizes may affect print quality.
+                                                    <?= __('Recommended range: 20-200mm. Larger sizes may affect print quality.'); ?>
                                                 </small>
                                             </div>
 
@@ -210,15 +210,15 @@ if (isset($_POST['selected_process']) && $_POST['selected_process']) {
                                                 <div class="row align-items-center">
                                                     <div class="col-md-8">
                                                         <h6 class="mb-1 text-primary">
-                                                            <i class="fa fa-ruler me-1"></i>Dynamic Size Preview
+                                                            <i class="fa fa-ruler me-1"></i><?= __('Dynamic Size Preview'); ?>
                                                         </h6>
                                                         <div id="sizeInfo" class="small text-muted">
-                                                            QR codes and barcodes will automatically scale based on your print size selection
+                                                            <?= __('QR codes and barcodes will automatically scale based on your print size selection'); ?>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4 text-center">
                                                         <div class="badge bg-info text-white px-3 py-2">
-                                                            <i class="fa fa-magic me-1"></i>Auto-Scale
+                                                            <i class="fa fa-magic me-1"></i><?= __('Auto-Scale'); ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -231,7 +231,7 @@ if (isset($_POST['selected_process']) && $_POST['selected_process']) {
 
                         <div class="step d-none" id="step5">
                             <h5 class="fw-bold text-secondary mb-3">
-                                <i class="ti-list me-2 text-primary"></i>Table Data
+                                <i class="ti-list me-2 text-primary"></i><?= __('Table Data'); ?>
                             </h5>
 
 
@@ -241,16 +241,16 @@ if (isset($_POST['selected_process']) && $_POST['selected_process']) {
                                         <div class="row align-items-center">
                                             <div class="col-md-6">
                                                 <h6 class="mb-0 text-primary">
-                                                    <i class="fa fa-tasks me-2"></i>Multi Download/Print
+                                                    <i class="fa fa-tasks me-2"></i><?= __('Multi Download/Print'); ?>
                                                 </h6>
-                                                <small class="text-muted">Select rows below to perform multi actions</small>
+                                                <small class="text-muted"><?= __('Select rows below to perform multi actions'); ?></small>
                                             </div>
                                             <div class="col-md-6 text-end">
                                                 <button type="button" class="btn btn-primary btn-sm me-2" onclick="bulkDownload()">
-                                                    <i class="fa fa-download me-1"></i>Download Selected (<span id="topSelectedCount">0</span>)
+                                                    <i class="fa fa-download me-1"></i><?= __('Download Selected ('); ?><span id="topSelectedCount">0</span>)
                                                 </button>
                                                 <button type="button" class="btn btn-info btn-sm" onclick="bulkPrint()">
-                                                    <i class="fa fa-print me-1"></i>Print Selected (<span id="topSelectedCountPrint">0</span>)
+                                                    <i class="fa fa-print me-1"></i><?= __('Print Selected ('); ?><span id="topSelectedCountPrint">0</span>)
                                                 </button>
                                             </div>
                                         </div>
@@ -261,7 +261,7 @@ if (isset($_POST['selected_process']) && $_POST['selected_process']) {
                             <div id="tableDataContainer">
                                 <div class="text-center p-4">
                                     <i class="fa fa-info-circle text-muted fa-2x mb-2"></i>
-                                    <p class="text-muted">Loading table data...</p>
+                                    <p class="text-muted"><?= __('Loading table data...'); ?></p>
                                 </div>
                             </div>
                         </div>
@@ -269,10 +269,10 @@ if (isset($_POST['selected_process']) && $_POST['selected_process']) {
 
                         <div class="d-flex justify-content-between pt-3">
                             <div class="d-flex w-100 gap-3">
-                                <button type="button" id="prevBtn" class="btn btn-outline-secondary step-btn d-none">Back</button>
-                                <button type="button" id="nextBtn" class="btn btn-primary step-btn">Next</button>
+                                <button type="button" id="prevBtn" class="btn btn-outline-secondary step-btn d-none"><?= __('Back'); ?></button>
+                                <button type="button" id="nextBtn" class="btn btn-primary step-btn"><?= __('Next'); ?></button>
                                 <button type="submit" name="submit_qr_generation" id="generateBtn" class="btn btn-success step-btn d-none" style="display:none" onclick="return validateFinalSubmission();">
-                                    <i class="fa fa-save me-1"></i>Save & Download
+                                    <i class="fa fa-save me-1"></i><?= htmlspecialchars(__('Save & Download'), ENT_QUOTES, 'UTF-8'); ?>
                                 </button>
                             </div>
                         </div>
@@ -285,9 +285,9 @@ if (isset($_POST['selected_process']) && $_POST['selected_process']) {
         <!-- Preview Column -->
         <div class="col-lg-4">
             <div class="card shadow border-0 h-100">
-                <div class="card-header bg-primary text-white fw-bold" id="previewHeader">Configuration Preview</div>
+                <div class="card-header bg-primary text-white fw-bold" id="previewHeader"><?= __('Configuration Preview'); ?></div>
                 <div class="card-body" id="previewCard">
-                    <p class="text-muted">Select options to see preview...</p>
+                    <p class="text-muted"><?= __('Select options to see preview...'); ?></p>
                 </div>
             </div>
         </div>
@@ -638,7 +638,7 @@ function generateQRCodeFallback(container, data, codeData) {
         // Add visual indicator that image is ready
         const indicator = document.createElement('div');
         indicator.className = 'alert alert-warning mt-2';
-        indicator.innerHTML = '<i class="fa fa-check"></i> Fallback image ready for saving';
+        indicator.innerHTML = '<i class="fa fa-check"></i> <?= htmlspecialchars(__('Fallback image ready for saving'), ENT_QUOTES, 'UTF-8'); ?>';
         container.appendChild(indicator);
 
     } catch (error) {
@@ -762,8 +762,8 @@ function validateStep(step) {
         if (codeTypes.length === 0) {
             Swal.fire({
                 icon: 'warning',
-                title: 'Code Type Required',
-                text: 'Please select at least one code type',
+                title: <?php echo json_encode(__('Code Type Required'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                text: <?php echo json_encode(__('Please select at least one code type'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                 confirmButtonColor: '#007bff'
             });
             return false;
@@ -779,8 +779,8 @@ function validateStep(step) {
             tableSelect.classList.add('is-invalid');
             Swal.fire({
                 icon: 'warning',
-                title: 'Table Required',
-                text: 'Please select a table',
+                title: <?php echo json_encode(__('Table Required'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                text: <?php echo json_encode(__('Please select a table'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                 confirmButtonColor: '#007bff'
             });
             return false;
@@ -790,8 +790,8 @@ function validateStep(step) {
             processSelect.classList.add('is-invalid');
             Swal.fire({
                 icon: 'warning',
-                title: 'Process Required',
-                text: 'Please select a process',
+                title: <?php echo json_encode(__('Process Required'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                text: <?php echo json_encode(__('Please select a process'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                 confirmButtonColor: '#007bff'
             });
             return false;
@@ -807,8 +807,8 @@ function validateStep(step) {
         if (!printSize) {
             Swal.fire({
                 icon: 'warning',
-                title: 'Print Size Required',
-                text: 'Please select a print size',
+                title: <?php echo json_encode(__('Print Size Required'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                text: <?php echo json_encode(__('Please select a print size'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                 confirmButtonColor: '#007bff'
             });
             return false;
@@ -820,8 +820,8 @@ function validateStep(step) {
             if (!width || !height) {
                 Swal.fire({
                     icon: 'warning',
-                    title: 'Custom Size Required',
-                    text: 'Please enter custom width and height',
+                    title: <?php echo json_encode(__('Custom Size Required'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                    text: <?php echo json_encode(__('Please enter custom width and height'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                     confirmButtonColor: '#007bff'
                 });
                 return false;
@@ -898,7 +898,7 @@ function onTableSelect(tableName) {
         loadProcessesForTable(tableName);
     } else {
         const processSelect = document.getElementById('processSelect');
-        processSelect.innerHTML = '<option value="">Select a process...</option>';
+        processSelect.innerHTML = '<option value=""><?= htmlspecialchars(__('Select a process...'), ENT_QUOTES, 'UTF-8'); ?></option>';
     }
     updatePreview();
 }
@@ -957,7 +957,7 @@ function loadAvailableTables() {
 // Populate table dropdown
 function populateTableDropdown() {
     const tableSelect = document.getElementById('tableSelect');
-    tableSelect.innerHTML = '<option value="">Select a table...</option>';
+    tableSelect.innerHTML = '<option value=""><?= htmlspecialchars(__('Select a table...'), ENT_QUOTES, 'UTF-8'); ?></option>';
 
     console.log('Populating table dropdown with:', availableTables);
 
@@ -973,7 +973,7 @@ function populateTableDropdown() {
 
 function loadProcessesForTable(tableName) {
     const processSelect = document.getElementById('processSelect');
-    processSelect.innerHTML = '<option value="">Select a process...</option>';
+    processSelect.innerHTML = '<option value=""><?= htmlspecialchars(__('Select a process...'), ENT_QUOTES, 'UTF-8'); ?></option>';
 
     console.log('Loading processes for table:', tableName);
     console.log('Available process data:', processData);
@@ -1014,17 +1014,17 @@ function loadTableData() {
     const container = document.getElementById('tableDataContainer');
 
     if (!tableSelect.value || !processSelect.value) {
-        container.innerHTML = '<div class="alert alert-warning">Please select table and process first</div>';
+        container.innerHTML = '<div class="alert alert-warning"><?= htmlspecialchars(__('Please select table and process first'), ENT_QUOTES, 'UTF-8'); ?></div>';
         return;
     }
 
     const processInfo = processData[processSelect.value];
     if (!processInfo) {
-        container.innerHTML = '<div class="alert alert-danger">Process information not found</div>';
+        container.innerHTML = '<div class="alert alert-danger"><?= htmlspecialchars(__('Process information not found'), ENT_QUOTES, 'UTF-8'); ?></div>';
         return;
     }
 
-    container.innerHTML = '<div class="text-center p-4"><i class="fa fa-spinner fa-spin fa-2x"></i><p class="mt-2">Loading table data...</p></div>';
+    container.innerHTML = '<div class="text-center p-4"><i class="fa fa-spinner fa-spin fa-2x"></i><p class="mt-2"><?= htmlspecialchars(__('Loading table data...'), ENT_QUOTES, 'UTF-8'); ?></p></div>';
 
     $.ajax({
         url: "ajax.php",
@@ -1052,7 +1052,7 @@ function loadTableData() {
                 } else if (Array.isArray(result)) {
                     displayTableData(result, processInfo.field_mappings);
                 } else {
-                    container.innerHTML = '<div class="alert alert-warning">No data found. Response structure: ' + JSON.stringify(Object.keys(result)) + '</div>';
+                    container.innerHTML = '<div class="alert alert-warning"><?= htmlspecialchars(__('No data found. Response structure'), ENT_QUOTES, 'UTF-8'); ?>: ' + JSON.stringify(Object.keys(result)) + '</div>';
                 }
             } catch (e) {
                 if (typeof response === 'string' && response.includes('details')) {
@@ -1069,12 +1069,12 @@ function loadTableData() {
                         console.error('Failed to extract JSON from mixed response:', e2);
                     }
                 }
-                container.innerHTML = '<div class="alert alert-danger">Invalid response from server. Check console for details.<br><small>Error: ' + e.message + '</small></div>';
+                container.innerHTML = '<div class="alert alert-danger"><?= htmlspecialchars(__('Invalid response from server. Check console for details.'), ENT_QUOTES, 'UTF-8'); ?><br><small><?= htmlspecialchars(__('Error'), ENT_QUOTES, 'UTF-8'); ?>: ' + e.message + '</small></div>';
             }
         },
         error: function(xhr, status, error) {
             console.error('AJAX Error loading table data:', error);
-            container.innerHTML = '<div class="alert alert-danger">Error loading table data: ' + error + '</div>';
+            container.innerHTML = '<div class="alert alert-danger"><?= htmlspecialchars(__('Error loading table data'), ENT_QUOTES, 'UTF-8'); ?>: ' + error + '</div>';
         }
     });
 }
@@ -1091,7 +1091,7 @@ function displayTableData(data, fieldMappings) {
     });
 
     if (!data || data.length === 0) {
-        container.innerHTML = '<div class="alert alert-info">No data found in this table</div>';
+        container.innerHTML = '<div class="alert alert-info"><?= htmlspecialchars(__('No data found in this table'), ENT_QUOTES, 'UTF-8'); ?></div>';
         return;
     }
 
@@ -1190,7 +1190,7 @@ function displayTableData(data, fieldMappings) {
     html += `<th scope="col">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="selectAllRows" onchange="toggleAllRows(this)">
-                    <label class="form-check-label" for="selectAllRows">All</label>
+                    <label class="form-check-label" for="selectAllRows"><?= htmlspecialchars(__('All'), ENT_QUOTES, 'UTF-8'); ?></label>
                 </div>
              </th>`;
 
@@ -1199,7 +1199,7 @@ function displayTableData(data, fieldMappings) {
     });
 
     html += `
-                                <th scope="col" style="width: 150px;">Scanner</th>
+                                <th scope="col" style="width: 150px;"><?= htmlspecialchars(__('Scanner'), ENT_QUOTES, 'UTF-8'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -1221,9 +1221,9 @@ function displayTableData(data, fieldMappings) {
             console.log(`Processing column ${col.key}:`, value, typeof value);
 
             if (value === null || value === undefined) {
-                value = '<span class="text-muted">N/A</span>';
+                value = '<span class="text-muted"><?= htmlspecialchars(__('N/A'), ENT_QUOTES, 'UTF-8'); ?></span>';
             } else if (value === '') {
-                value = '<span class="text-muted">Empty</span>';
+                value = '<span class="text-muted"><?= htmlspecialchars(__('Empty'), ENT_QUOTES, 'UTF-8'); ?></span>';
             } else {
                 const originalValue = value;
                 value = String(value);
@@ -1399,7 +1399,7 @@ function loadProcessDetails(processId) {
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <span class="fw-bold text-secondary mb-2">Field Mappings:</span>
+                            <span class="fw-bold text-secondary mb-2"><?= htmlspecialchars(__('Field Mappings'), ENT_QUOTES, 'UTF-8'); ?>:</span>
                             <div class="field-mappings">
         `;
 
@@ -1435,7 +1435,7 @@ function loadProcessDetails(processId) {
             html += `
                 <div class="alert alert-warning">
                     <i class="fa fa-exclamation-triangle me-2"></i>
-                    No field mappings configured for this process.
+                    <?= htmlspecialchars(__('No field mappings configured for this process.'), ENT_QUOTES, 'UTF-8'); ?>
                 </div>
             `;
         }
@@ -1460,7 +1460,7 @@ function loadProcessDetails(processId) {
         container.innerHTML = `
             <div class="alert alert-danger">
                 <i class="fa fa-exclamation-triangle me-2"></i>
-                Process information not found.
+                <?= htmlspecialchars(__('Process information not found.'), ENT_QUOTES, 'UTF-8'); ?>
             </div>
         `;
     }
@@ -1626,7 +1626,7 @@ function generateCodePreview(codeType, processId) {
         previewContainer.innerHTML = `
             <div class="placeholder-code">
                 <i class="ti-qrcode fa-3x text-muted"></i>
-                <p class="text-muted mt-2">Select print size to generate code</p>
+                <p class="text-muted mt-2"><?= htmlspecialchars(__('Select print size to generate code'), ENT_QUOTES, 'UTF-8'); ?></p>
             </div>
         `;
         return;
@@ -1916,7 +1916,7 @@ function generateCodePreview(codeType, processId) {
                         console.error('Canvas toDataURL error for barcode:', canvasError);
                         const indicator = document.createElement('div');
                         indicator.className = 'alert alert-warning mt-2';
-                        indicator.innerHTML = '<i class="fa fa-exclamation-triangle"></i> Barcode generated but image data could not be captured';
+                        indicator.innerHTML = '<i class="fa fa-exclamation-triangle"></i> <?= htmlspecialchars(__('Barcode generated but image data could not be captured'), ENT_QUOTES, 'UTF-8'); ?>';
                         previewContainer.appendChild(indicator);
                     }
 
@@ -1988,7 +1988,7 @@ function updatePreview() {
                  </div>`;
         if (processInfo && processInfo.field_mappings && processInfo.field_mappings.length > 0) {
             html += `<div class="list-group-item">
-                        <span class="fw-bold">📋 Field Mappings</span>
+                        <span class="fw-bold"><?= htmlspecialchars(__('📋 Field Mappings'), ENT_QUOTES, 'UTF-8'); ?></span>
                         <div class="mt-2">`;
 
             const sortedMappings = processInfo.field_mappings.sort((a, b) =>
@@ -2039,7 +2039,7 @@ function updatePreview() {
 
     html += '</div>';
 
-    document.getElementById('previewCard').innerHTML = hasData ? html : '<p class="text-muted">Select options to see preview...</p>';
+    document.getElementById('previewCard').innerHTML = hasData ? html : '<p class="text-muted"><?= htmlspecialchars(__('Select options to see preview...'), ENT_QUOTES, 'UTF-8'); ?></p>';
 }
 function downloadCode() {
     const codeType = document.querySelector('input[name="code_type"]:checked')?.value;
@@ -2049,8 +2049,8 @@ function downloadCode() {
     if (!codeType || !processId || !printSize || !generatedCodeData) {
         Swal.fire({
             icon: 'warning',
-            title: 'Incomplete Setup',
-            text: 'Please complete all steps before downloading',
+            title: <?php echo json_encode(__('Incomplete Setup'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            text: <?php echo json_encode(__('Please complete all steps before downloading'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             confirmButtonColor: '#007bff'
         });
         return;
@@ -2172,8 +2172,8 @@ document.getElementById('qrForm').addEventListener('submit', function(e) {
         downloadSavedImage();
         Swal.fire({
             icon: 'success',
-            title: 'Success!',
-            text: 'Code saved successfully and download started',
+            title: <?php echo json_encode(__('Success!'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            text: <?php echo json_encode(__('Code saved successfully and download started'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             confirmButtonColor: '#28a745',
             timer: 2000,
             timerProgressBar: true,
@@ -2192,8 +2192,8 @@ function validateFinalSubmission() {
     if (!generatedCodeData) {
         Swal.fire({
             icon: 'error',
-            title: 'Code Not Generated',
-            text: 'Please generate the code first by selecting all options',
+            title: <?php echo json_encode(__('Code Not Generated'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            text: <?php echo json_encode(__('Please generate the code first by selecting all options'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             confirmButtonColor: '#007bff'
         });
         return false;
@@ -2204,8 +2204,8 @@ function validateFinalSubmission() {
     if (!imageData) {
         Swal.fire({
             icon: 'error',
-            title: 'Image Data Missing',
-            text: 'No image data found. Please regenerate the code.',
+            title: <?php echo json_encode(__('Image Data Missing'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            text: <?php echo json_encode(__('No image data found. Please regenerate the code.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             confirmButtonColor: '#007bff'
         });
         return false;
@@ -2239,7 +2239,7 @@ function checkImageData() {
     if (imageData) {
         Swal.fire({
             icon: 'success',
-            title: 'Image Data Found!',
+            title: <?php echo json_encode(__('Image Data Found!'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             html: `
                 <div class="text-left">
                     <p><strong>Length:</strong> ${imageData.length} characters</p>
@@ -2254,8 +2254,8 @@ function checkImageData() {
     } else {
         Swal.fire({
             icon: 'error',
-            title: 'No Image Data Found',
-            text: 'Please regenerate the code to capture image data.',
+            title: <?php echo json_encode(__('No Image Data Found'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            text: <?php echo json_encode(__('Please regenerate the code to capture image data.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             confirmButtonColor: '#dc3545'
         });
     }
@@ -2265,8 +2265,8 @@ function generateRowQR(rowIndex) {
     if (!window.tableData || !window.tableData[rowIndex]) {
         Swal.fire({
             icon: 'error',
-            title: 'Row Not Found',
-            text: 'Unable to find row data. Please refresh the table.',
+            title: <?php echo json_encode(__('Row Not Found'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            text: <?php echo json_encode(__('Unable to find row data. Please refresh the table.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             confirmButtonColor: '#007bff'
         });
         return;
@@ -2295,8 +2295,8 @@ function generateRowBarcode(rowIndex) {
     if (!window.tableData || !window.tableData[rowIndex]) {
         Swal.fire({
             icon: 'error',
-            title: 'Row Not Found',
-            text: 'Unable to find row data. Please refresh the table.',
+            title: <?php echo json_encode(__('Row Not Found'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            text: <?php echo json_encode(__('Unable to find row data. Please refresh the table.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             confirmButtonColor: '#007bff'
         });
         return;
@@ -2316,8 +2316,8 @@ function generateRowBoth(rowIndex) {
     if (!window.tableData || !window.tableData[rowIndex]) {
         Swal.fire({
             icon: 'error',
-            title: 'Row Not Found',
-            text: 'Unable to find row data. Please refresh the table.',
+            title: <?php echo json_encode(__('Row Not Found'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            text: <?php echo json_encode(__('Unable to find row data. Please refresh the table.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             confirmButtonColor: '#007bff'
         });
         return;
@@ -2350,7 +2350,7 @@ function showScannerModal(title, data, type, rowData, barcodeData = null) {
                 <div class="col-lg-5">
                     <div class="card h-100">
                         <div class="card-header bg-primary text-white py-2">
-                            <h6 class="mb-0"><i class="fa fa-table me-2"></i>Row Data</h6>
+                            <h6 class="mb-0"><i class="fa fa-table me-2"></i><?= htmlspecialchars(__('Row Data'), ENT_QUOTES, 'UTF-8'); ?></h6>
                         </div>
                         <div class="card-body p-2" style="max-height: 400px; overflow-y: auto;">
                             <div class="table-responsive">
@@ -2555,7 +2555,7 @@ function generateQRInContainer(container, data) {
         }
     } catch (error) {
         console.error('QR generation error:', error);
-        container.innerHTML = '<div class="alert alert-danger">Error generating QR code</div>';
+        container.innerHTML = '<div class="alert alert-danger"><?= htmlspecialchars(__('Error generating QR code'), ENT_QUOTES, 'UTF-8'); ?></div>';
     }
 }
 
@@ -2633,7 +2633,7 @@ function generateBarcodeInContainer(container, data) {
         }
     } catch (error) {
         console.error('Barcode generation error:', error);
-        container.innerHTML = '<div class="alert alert-danger">Error generating barcode</div>';
+        container.innerHTML = '<div class="alert alert-danger"><?= htmlspecialchars(__('Error generating barcode'), ENT_QUOTES, 'UTF-8'); ?></div>';
     }
 }
 
@@ -2643,7 +2643,7 @@ function generateBothInContainer(container, qrData, barcodeData) {
             <div class="col-md-6">
                 <div class="card border-primary">
                     <div class="card-header bg-primary text-white text-center py-2">
-                        <h6 class="mb-0"><i class="fa fa-qrcode me-1"></i>QR Code</h6>
+                        <h6 class="mb-0"><i class="fa fa-qrcode me-1"></i><?= htmlspecialchars(__('QR Code'), ENT_QUOTES, 'UTF-8'); ?></h6>
                     </div>
                     <div class="card-body p-2">
                         <div id="qrContainer" class="text-center" style="min-height: 150px; display: flex; align-items: center; justify-content: center;"></div>
@@ -2653,7 +2653,7 @@ function generateBothInContainer(container, qrData, barcodeData) {
             <div class="col-md-6">
                 <div class="card border-success">
                     <div class="card-header bg-success text-white text-center py-2">
-                        <h6 class="mb-0"><i class="fa fa-barcode me-1"></i>Barcode</h6>
+                        <h6 class="mb-0"><i class="fa fa-barcode me-1"></i><?= htmlspecialchars(__('Barcode'), ENT_QUOTES, 'UTF-8'); ?></h6>
                     </div>
                     <div class="card-body p-2">
                         <div id="barcodeContainer" class="text-center" style="min-height: 150px; display: flex; align-items: center; justify-content: center;"></div>
@@ -2687,8 +2687,8 @@ function downloadGeneratedCode() {
     if (!window.generatedModalCode) {
         Swal.fire({
             icon: 'warning',
-            title: 'No Code Generated',
-            text: 'Please generate a code first.',
+            title: <?php echo json_encode(__('No Code Generated'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            text: <?php echo json_encode(__('Please generate a code first.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             confirmButtonColor: '#007bff'
         });
         return;
@@ -2732,8 +2732,8 @@ function downloadGeneratedCode() {
 
         Swal.fire({
             icon: 'success',
-            title: 'Download Started',
-            text: 'Both QR Code and Barcode downloads have started.',
+            title: <?php echo json_encode(__('Download Started'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            text: <?php echo json_encode(__('Both QR Code and Barcode downloads have started.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             timer: 2000,
             showConfirmButton: false
         });
@@ -2764,8 +2764,8 @@ function downloadGeneratedCode() {
             } else {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Download Failed',
-                    text: 'Unable to download the generated code.',
+                    title: <?php echo json_encode(__('Download Failed'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                    text: <?php echo json_encode(__('Unable to download the generated code.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                     confirmButtonColor: '#007bff'
                 });
             }
@@ -2777,8 +2777,8 @@ function printGeneratedCode() {
     if (!window.generatedModalCode) {
         Swal.fire({
             icon: 'warning',
-            title: 'No Code Generated',
-            text: 'Please generate a code first.',
+            title: <?php echo json_encode(__('No Code Generated'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            text: <?php echo json_encode(__('Please generate a code first.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             confirmButtonColor: '#007bff'
         });
         return;
@@ -2790,7 +2790,7 @@ function printGeneratedCode() {
     printWindow.document.write(`
         <html lang="en">
             <head>
-                <title>Print Scanner Code</title>
+                <title><?= htmlspecialchars(__('Print Scanner Code'), ENT_QUOTES, 'UTF-8'); ?></title>
                 <style>
                     body {
                         margin: 0;
@@ -2817,7 +2817,7 @@ function printGeneratedCode() {
                 </style>
             </head>
             <body>
-                <h2>Scanner Code Print</h2>
+                <h2><?= htmlspecialchars(__('Scanner Code Print'), ENT_QUOTES, 'UTF-8'); ?></h2>
     `);
 
     if (type === 'both') {
@@ -2927,16 +2927,16 @@ function fallbackCopyTextToClipboard(text) {
         document.execCommand('copy');
         Swal.fire({
             icon: 'success',
-            title: 'Copied!',
-            text: 'Code data copied to clipboard.',
+            title: <?php echo json_encode(__('Copied!'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            text: <?php echo json_encode(__('Code data copied to clipboard.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             timer: 1500,
             showConfirmButton: false
         });
     } catch (err) {
         Swal.fire({
             icon: 'error',
-            title: 'Copy Failed',
-            text: 'Unable to copy to clipboard. Please copy manually.',
+            title: <?php echo json_encode(__('Copy Failed'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            text: <?php echo json_encode(__('Unable to copy to clipboard. Please copy manually.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             confirmButtonColor: '#007bff'
         });
     }
@@ -2961,8 +2961,8 @@ function downloadGeneratedCodeWithQuantity() {
     if (!window.generatedModalCode || !window.currentModalData) {
         Swal.fire({
             icon: 'warning',
-            title: 'No Code Generated',
-            text: 'Please generate a code first.',
+            title: <?php echo json_encode(__('No Code Generated'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            text: <?php echo json_encode(__('Please generate a code first.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             confirmButtonColor: '#007bff'
         });
         return;
@@ -2975,8 +2975,8 @@ function downloadGeneratedCodeWithQuantity() {
     if (quantity < 1 || quantity > 100) {
         Swal.fire({
             icon: 'warning',
-            title: 'Invalid Quantity',
-            text: 'Please enter a quantity between 1 and 100.',
+            title: <?php echo json_encode(__('Invalid Quantity'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            text: <?php echo json_encode(__('Please enter a quantity between 1 and 100.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             confirmButtonColor: '#007bff'
         });
         return;
@@ -2984,7 +2984,7 @@ function downloadGeneratedCodeWithQuantity() {
 
     if (quantity > 1) {
         Swal.fire({
-            title: 'Generating Multiple Copies',
+            title: <?php echo json_encode(__('Generating Multiple Copies'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             html: `
                 <div class="progress mb-3">
                     <div class="progress-bar" role="progressbar" style="width: 0%" id="quantityDownloadProgress"></div>
@@ -3039,7 +3039,7 @@ function processQuantityDownload(quantity, type, data, barcodeData) {
     Promise.all(downloadPromises).then(() => {
         Swal.fire({
             icon: 'success',
-            title: 'Download Complete!',
+            title: <?php echo json_encode(__('Download Complete!'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             text: `Successfully generated ${quantity} copies for download.`,
             confirmButtonColor: '#28a745',
             timer: 3000,
@@ -3049,7 +3049,7 @@ function processQuantityDownload(quantity, type, data, barcodeData) {
         console.error('Error in quantity download:', error);
         Swal.fire({
             icon: 'warning',
-            title: 'Download Completed with Issues',
+            title: <?php echo json_encode(__('Download Completed with Issues'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             text: `Some downloads may have failed. Please check your downloads folder.`,
             confirmButtonColor: '#ffc107'
         });
@@ -3222,8 +3222,8 @@ function printWithDetailsOption(skipDialog = null) {
     if (!window.generatedModalCode || !window.currentModalData) {
         Swal.fire({
             icon: 'warning',
-            title: 'No Code Generated',
-            text: 'Please generate a code first.',
+            title: <?php echo json_encode(__('No Code Generated'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            text: <?php echo json_encode(__('Please generate a code first.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             confirmButtonColor: '#007bff'
         });
         return;
@@ -3236,8 +3236,8 @@ function printWithDetailsOption(skipDialog = null) {
     if (quantity < 1 || quantity > 100) {
         Swal.fire({
             icon: 'warning',
-            title: 'Invalid Quantity',
-            text: 'Please enter a quantity between 1 and 100.',
+            title: <?php echo json_encode(__('Invalid Quantity'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            text: <?php echo json_encode(__('Please enter a quantity between 1 and 100.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             confirmButtonColor: '#007bff'
         });
         return;
@@ -3263,7 +3263,7 @@ function printWithDetailsOption(skipDialog = null) {
     }
 
     Swal.fire({
-        title: 'Print Options',
+        title: <?php echo json_encode(__('Print Options'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
         html: `
             <div class="text-center mb-3">
                 <i class="fa fa-print fa-3x text-primary mb-3"></i>
@@ -3275,8 +3275,8 @@ function printWithDetailsOption(skipDialog = null) {
         showCancelButton: true,
         confirmButtonColor: '#007bff',
         cancelButtonColor: '#6c757d',
-        confirmButtonText: '<i class="fa fa-list me-1"></i> With Details',
-        cancelButtonText: '<i class="fa fa-qrcode me-1"></i> Codes Only',
+        confirmButtonText: '<i class="fa fa-list me-1"></i> <?= htmlspecialchars(__('With Details'), ENT_QUOTES, 'UTF-8'); ?>',
+        cancelButtonText: '<i class="fa fa-qrcode me-1"></i> <?= htmlspecialchars(__('Codes Only'), ENT_QUOTES, 'UTF-8'); ?>',
         reverseButtons: true,
         customClass: {
             confirmButton: 'btn btn-primary me-2',
@@ -3694,8 +3694,8 @@ function bulkDownload() {
     if (selectedRows.length === 0) {
         Swal.fire({
             icon: 'warning',
-            title: 'No Rows Selected',
-            text: 'Please select at least one row to download.',
+            title: <?php echo json_encode(__('No Rows Selected'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            text: <?php echo json_encode(__('Please select at least one row to download.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             confirmButtonColor: '#007bff'
         });
         return;
@@ -3711,7 +3711,7 @@ function bulkDownload() {
 
     // Show progress modal
     Swal.fire({
-        title: 'Generating Codes for Download',
+        title: <?php echo json_encode(__('Generating Codes for Download'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
         html: `
             <div class="alert alert-info mb-3">
                 <i class="fa fa-info-circle me-2"></i>
@@ -3775,7 +3775,7 @@ function processBulkDownload(selectedRows, processInfo, codeTypeValues) {
     Promise.all(downloadPromises).then(() => {
         Swal.fire({
             icon: 'success',
-            title: 'Download Complete!',
+            title: <?php echo json_encode(__('Download Complete!'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             text: `Successfully generated and downloaded codes for ${selectedRows.length} rows.`,
             confirmButtonColor: '#28a745'
         });
@@ -3954,8 +3954,8 @@ function bulkPrint() {
     if (selectedRows.length === 0) {
         Swal.fire({
             icon: 'warning',
-            title: 'No Rows Selected',
-            text: 'Please select at least one row to print.',
+            title: <?php echo json_encode(__('No Rows Selected'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            text: <?php echo json_encode(__('Please select at least one row to print.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             confirmButtonColor: '#007bff'
         });
         return;
@@ -3983,7 +3983,7 @@ function bulkPrint() {
     }
 
     Swal.fire({
-        title: 'Print Options',
+        title: <?php echo json_encode(__('Print Options'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
         html: `
             <div class="text-center mb-3">
                 <i class="fa fa-print fa-3x text-primary mb-3"></i>
@@ -3995,8 +3995,8 @@ function bulkPrint() {
         showCancelButton: true,
         confirmButtonColor: '#007bff',
         cancelButtonColor: '#6c757d',
-        confirmButtonText: '<i class="fa fa-list me-1"></i> With Details',
-        cancelButtonText: '<i class="fa fa-qrcode me-1"></i> Codes Only',
+        confirmButtonText: '<i class="fa fa-list me-1"></i> <?= htmlspecialchars(__('With Details'), ENT_QUOTES, 'UTF-8'); ?>',
+        cancelButtonText: '<i class="fa fa-qrcode me-1"></i> <?= htmlspecialchars(__('Codes Only'), ENT_QUOTES, 'UTF-8'); ?>',
         reverseButtons: true,
         customClass: {
             confirmButton: 'btn btn-primary me-2',
@@ -4007,7 +4007,7 @@ function bulkPrint() {
 
         // Show progress modal
         Swal.fire({
-            title: 'Generating Codes for Print',
+            title: <?php echo json_encode(__('Generating Codes for Print'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             html: `
                 <div class="alert alert-info mb-3">
                     <i class="fa fa-info-circle me-2"></i>
