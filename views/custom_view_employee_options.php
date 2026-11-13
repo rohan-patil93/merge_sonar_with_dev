@@ -186,7 +186,7 @@ table tr td, table tr th{
 
 </style>
 <div class="container-fluid">
-    <h1>Employee Stock Option Plan (ESOP) Model</h1>
+    <h1><?= __('Employee Stock Option Plan (ESOP) Model'); ?></h1>
     <div class="outer-wrapper">
         <div class="inner-wrapper">
             <div class="pseudo-item pseudo-item-1">
@@ -202,13 +202,13 @@ table tr td, table tr th{
                         </tr>
                         <tr>
                             <td></td>
-                            <th scope="col" style="text-align: right;">Salary</th>
-                            <th scope="col" style="text-align: right;">Options<br />Vultiplier</th>
+                            <th scope="col" style="text-align: right;"><?= __('Salary'); ?></th>
+                            <th scope="col" style="text-align: right;"><?= __('Options'); ?><br /><?= __('Vultiplier'); ?></th>
                         </tr>
                         <tr style="background-color: #eeeeee;">
-                            <th scope="col">Total<br />Non-Founder</th>
-                            <th scope="col">Employee</th>
-                            <th scope="col">Ownership</th>
+                            <th scope="col"><?= __('Total'); ?><br /><?= __('Non-Founder'); ?></th>
+                            <th scope="col"><?= __('Employee'); ?></th>
+                            <th scope="col"><?= __('Ownership'); ?></th>
                         </tr>
                     </table>
 
@@ -217,29 +217,29 @@ table tr td, table tr th{
                         <div class="card">
                             <div id="headingOne" class="font-weight-bold">
                                 <a href="#" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
-                                    aria-controls="collapseOne" class="border-bottom pb-5 mb-5 text-dark collapsible-link" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Founding Team
+                                    aria-controls="collapseOne" class="border-bottom pb-5 mb-5 text-dark collapsible-link" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Founding Team'); ?>
                                 </a>
                             </div>
                             <div id="collapseOne" aria-labelledby="headingOne" data-parent="#accordionExample" class="collapse show">
                                 <div class="card-body">
                                     <table class="table">
                                         <tr>
-                                            <th scope="col"><a href="">Pradeep Maitray</a></th>
+                                            <th scope="col"><a href=""><?= __('Pradeep Maitray'); ?></a></th>
                                             <td style="text-align: right;">40000rs.</td>
                                             <td style="text-align: right;">1.00x</td>
                                         </tr>
                                         <tr>
-                                            <th scope="col"><a href="">Mukesh Kumar</a></th>
+                                            <th scope="col"><a href=""><?= __('Mukesh Kumar'); ?></a></th>
                                             <td style="text-align: right;">50000rs.</td>
                                             <td style="text-align: right;">1.00x</td>
                                         </tr>
                                         <tr>
-                                            <th scope="col"><a href="">Rohan Patil</a></th>
+                                            <th scope="col"><a href=""><?= __('Rohan Patil'); ?></a></th>
                                             <td style="text-align: right;">50000rs.</td>
                                             <td style="text-align: right;">1.00x</td>
                                         </tr>
                                         <tr>
-                                            <th scope="col"><a href="">Ravishankar Tangudu</a></th>
+                                            <th scope="col"><a href=""><?= __('Ravishankar Tangudu'); ?></a></th>
                                             <td style="text-align: right;">50000rs.</td>
                                             <td style="text-align: right;">1.00x</td>
                                         </tr>
@@ -252,29 +252,29 @@ table tr td, table tr th{
                         <div class="card">
                             <div id="headingTwo" class="font-weight-bold">
                                 <a href="#" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
-                                    aria-controls="collapseTwo" class="border-bottom pb-5 mb-5 text-dark collapsible-link" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Year 1 Hires
+                                    aria-controls="collapseTwo" class="border-bottom pb-5 mb-5 text-dark collapsible-link" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Year 1 Hires'); ?>
                                 </a>
                             </div>
                             <div id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordionExample" class="collapse show">
                                 <div class="card-body">
                                     <table class="table">
                                         <tr>
-                                            <th scope="col"><a href="">Pradeep Maitray</a></th>
+                                            <th scope="col"><a href=""><?= __('Pradeep Maitray'); ?></a></th>
                                             <td style="text-align: right;">40000rs.</td>
                                             <td style="text-align: right;">1.00x</td>
                                         </tr>
                                         <tr>
-                                            <th scope="col"><a href="">Mukesh Kumar</a></th>
+                                            <th scope="col"><a href=""><?= __('Mukesh Kumar'); ?></a></th>
                                             <td style="text-align: right;">50000rs.</td>
                                             <td style="text-align: right;">1.00x</td>
                                         </tr>
                                         <tr>
-                                            <th scope="col"><a href="">Rohan Patil</a></th>
+                                            <th scope="col"><a href=""><?= __('Rohan Patil'); ?></a></th>
                                             <td style="text-align: right;">50000rs.</td>
                                             <td style="text-align: right;">1.00x</td>
                                         </tr>
                                         <tr>
-                                            <th scope="col"><a href="">Ravishankar Tangudu</a></th>
+                                            <th scope="col"><a href=""><?= __('Ravishankar Tangudu'); ?></a></th>
                                             <td style="text-align: right;">50000rs.</td>
                                             <td style="text-align: right;">1.00x</td>
                                         </tr>
@@ -287,29 +287,29 @@ table tr td, table tr th{
                         <div class="card">
                             <div id="headingThree" class="font-weight-bold">
                                 <a href="#" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false"
-                                    aria-controls="collapseThree" class="border-bottom pb-5 mb-5 text-dark collapsible-link" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Year 2 Hires
+                                    aria-controls="collapseThree" class="border-bottom pb-5 mb-5 text-dark collapsible-link" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Year 2 Hires'); ?>
                                 </a>
                             </div>
                             <div id="collapseThree" aria-labelledby="headingThree" data-parent="#accordionExample" class="collapse show">
                                 <div class="card-body">
                                     <table class="table">
                                         <tr>
-                                            <th scope="col"><a href="">Pradeep Maitray</a></th>
+                                            <th scope="col"><a href=""><?= __('Pradeep Maitray'); ?></a></th>
                                             <td style="text-align: right;">40000rs.</td>
                                             <td style="text-align: right;">1.00x</td>
                                         </tr>
                                         <tr>
-                                            <th scope="col"><a href="">Mukesh Kumar</a></th>
+                                            <th scope="col"><a href=""><?= __('Mukesh Kumar'); ?></a></th>
                                             <td style="text-align: right;">50000rs.</td>
                                             <td style="text-align: right;">1.00x</td>
                                         </tr>
                                         <tr>
-                                            <th scope="col"><a href="">Rohan Patil</a></th>
+                                            <th scope="col"><a href=""><?= __('Rohan Patil'); ?></a></th>
                                             <td style="text-align: right;">50000rs.</td>
                                             <td style="text-align: right;">1.00x</td>
                                         </tr>
                                         <tr>
-                                            <th scope="col"><a href="">Ravishankar Tangudu</a></th>
+                                            <th scope="col"><a href=""><?= __('Ravishankar Tangudu'); ?></a></th>
                                             <td style="text-align: right;">50000rs.</td>
                                             <td style="text-align: right;">1.00x</td>
                                         </tr>
@@ -322,29 +322,29 @@ table tr td, table tr th{
                         <div class="card">
                             <div id="headingFour" class="font-weight-bold">
                                 <a href="#" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false"
-                                    aria-controls="collapseFour" class="border-bottom pb-5 mb-5 text-dark collapsible-link" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Year 3 Hires
+                                    aria-controls="collapseFour" class="border-bottom pb-5 mb-5 text-dark collapsible-link" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Year 3 Hires'); ?>
                                 </a>
                             </div>
                             <div id="collapseFour" aria-labelledby="headingThree" data-parent="#accordionExample" class="collapse show">
                                 <div class="card-body">
                                     <table class="table">
                                         <tr>
-                                            <th scope="col"><a href="">Pradeep Maitray</a></th>
+                                            <th scope="col"><a href=""><?= __('Pradeep Maitray'); ?></a></th>
                                             <td style="text-align: right;">40000rs.</td>
                                             <td style="text-align: right;">1.00x</td>
                                         </tr>
                                         <tr>
-                                            <th scope="col"><a href="">Mukesh Kumar</a></th>
+                                            <th scope="col"><a href=""><?= __('Mukesh Kumar'); ?></a></th>
                                             <td style="text-align: right;">50000rs.</td>
                                             <td style="text-align: right;">1.00x</td>
                                         </tr>
                                         <tr>
-                                            <th scope="col"><a href="">Rohan Patil</a></th>
+                                            <th scope="col"><a href=""><?= __('Rohan Patil'); ?></a></th>
                                             <td style="text-align: right;">50000rs.</td>
                                             <td style="text-align: right;">1.00x</td>
                                         </tr>
                                         <tr>
-                                            <th scope="col"><a href="">Ravishankar Tangudu</a></th>
+                                            <th scope="col"><a href=""><?= __('Ravishankar Tangudu'); ?></a></th>
                                             <td style="text-align: right;">50000rs.</td>
                                             <td style="text-align: right;">1.00x</td>
                                         </tr>
@@ -360,17 +360,17 @@ table tr td, table tr th{
                 <div class="table-box">
                     <table class="table">
                         <tr>
-                            <th scope="col" class="border-bottom align-center" style="text-align: center;" colspan="3">Year 0</th>
+                            <th scope="col" class="border-bottom align-center" style="text-align: center;" colspan="3"><?= __('Year 0'); ?></th>
                         </tr>
                         <tr style="text-align: center;">
-                            <th scope="col" class="align-center">Value<br />NA</th>
-                            <th scope="col" class="align-center">Shares<br />10000</th>
-                            <th scope="col" class="align-center">Shr. Price<br />100</th>
+                            <th scope="col" class="align-center"><?= __('Value'); ?><br /><?= __('NA'); ?></th>
+                            <th scope="col" class="align-center"><?= __('Shares'); ?><br />10000</th>
+                            <th scope="col" class="align-center"><?= __('Shr. Price'); ?><br />100</th>
                         </tr>
                         <tr style="text-align: center;">
-                            <th scope="col" class="align-center">Grand Total</th>
-                            <th scope="col" class="align-center">Total</th>
-                            <th scope="col" class="align-center">Equity<br />(%)</th>
+                            <th scope="col" class="align-center"><?= __('Grand Total'); ?></th>
+                            <th scope="col" class="align-center"><?= __('Total'); ?></th>
+                            <th scope="col" class="align-center"><?= __('Equity'); ?><br />(%)</th>
                         </tr>
                         <tr style="background-color: #eeeeee; text-align: center;">
                             <th scope="col">&nbsp<br />&nbsp</th>
@@ -407,17 +407,17 @@ table tr td, table tr th{
                 <div class="table-box">
                     <table class="table">
                         <tr>
-                            <th scope="col" class="border-bottom align-center" style="text-align: center;" colspan="3">Year 1</th>
+                            <th scope="col" class="border-bottom align-center" style="text-align: center;" colspan="3"><?= __('Year 1'); ?></th>
                         </tr>
                         <tr style="text-align: center;">
-                            <th scope="col" class="align-center">Value<br />NA</th>
-                            <th scope="col" class="align-center">Shares<br />10000</th>
-                            <th scope="col" class="align-center">Shr. Price<br />100</th>
+                            <th scope="col" class="align-center"><?= __('Value'); ?><br /><?= __('NA'); ?></th>
+                            <th scope="col" class="align-center"><?= __('Shares'); ?><br />10000</th>
+                            <th scope="col" class="align-center"><?= __('Shr. Price'); ?><br />100</th>
                         </tr>
                         <tr style="text-align: center;">
-                            <th scope="col" class="align-center">Grand Total</th>
-                            <th scope="col" class="align-center">Total</th>
-                            <th scope="col" class="align-center">Equity<br />(%)</th>
+                            <th scope="col" class="align-center"><?= __('Grand Total'); ?></th>
+                            <th scope="col" class="align-center"><?= __('Total'); ?></th>
+                            <th scope="col" class="align-center"><?= __('Equity'); ?><br />(%)</th>
                         </tr>
                         <tr style="background-color: #eeeeee;">
                             <th scope="col">&nbsp<br />&nbsp</th>
@@ -477,138 +477,22 @@ table tr td, table tr th{
                 <div class="table-box">
                     <table class="table">
                         <tr>
-                            <th scope="col" class="border-bottom align-center" style="text-align: center;" colspan="3">Year 2</th>
+                            <th scope="col" class="border-bottom align-center" style="text-align: center;" colspan="3"><?= __('Year 2'); ?></th>
                         </tr>
                         <tr style="text-align: center;">
-                            <th scope="col" class="align-center">Value<br />NA</th>
-                            <th scope="col" class="align-center">Shares<br />10000</th>
-                            <th scope="col" class="align-center">Shr. Price<br />100</th>
+                            <th scope="col" class="align-center"><?= __('Value'); ?><br /><?= __('NA'); ?></th>
+                            <th scope="col" class="align-center"><?= __('Shares'); ?><br />10000</th>
+                            <th scope="col" class="align-center"><?= __('Shr. Price'); ?><br />100</th>
                         </tr>
                         <tr style="text-align: center;">
-                            <th scope="col" class="align-center">Grand Total</th>
-                            <th scope="col" class="align-center">Total</th>
-                            <th scope="col" class="align-center">Equity<br />(%)</th>
+                            <th scope="col" class="align-center"><?= __('Grand Total'); ?></th>
+                            <th scope="col" class="align-center"><?= __('Total'); ?></th>
+                            <th scope="col" class="align-center"><?= __('Equity'); ?><br />(%)</th>
                         </tr>
                         <tr style="background-color: #eeeeee;">
                             <th scope="col">&nbsp<br />&nbsp</th>
                             <th scope="col"></th>
                             <th scope="col" class="align-center align-middle">6.50%</th>
-                        </tr>
-                        <tr>
-                          <th scope="col" class="h5 font-weight-bold border-bottom" colspan="3">&nbsp</th>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                          <th scope="col" class="h5 font-weight-bold border-bottom" colspan="3">&nbsp</th>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                          <th scope="col" class="h5 font-weight-bold border-bottom" colspan="3">&nbsp</th>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div class="pseudo-item border">
-                <div class="table-box">
-                    <table class="table">
-                        <tr>
-                            <th scope="col" class="border-bottom align-center" style="text-align: center;" colspan="3">Year 3</th>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <th scope="col" class="align-center">Value<br />NA</th>
-                            <th scope="col" class="align-center">Shares<br />10000</th>
-                            <th scope="col" class="align-center">Shr. Price<br />100</th>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <th scope="col" class="align-center">Grand Total</th>
-                            <th scope="col" class="align-center">Total</th>
-                            <th scope="col" class="align-center">Equity<br />(%)</th>
-                        </tr>
-                        <tr style="background-color: #eeeeee;">
-                            <th scope="col">&nbsp<br />&nbsp</th>
-                            <th scope="col"></th>
-                            <th scope="col" class="align-center align-middle">6.50%</th>
-                        </tr>
-                        <tr>
-                          <th scope="col" class="h5 font-weight-bold border-bottom" colspan="3">&nbsp</th>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
                         </tr>
                         <tr>
                           <th scope="col" class="h5 font-weight-bold border-bottom" colspan="3">&nbsp</th>
@@ -686,45 +570,22 @@ table tr td, table tr th{
                 <div class="table-box">
                     <table class="table">
                         <tr>
-                            <th scope="col" class="border-bottom align-center" style="text-align: center;" colspan="3">Year 4</th>
+                            <th scope="col" class="border-bottom align-center" style="text-align: center;" colspan="3"><?= __('Year 3'); ?></th>
                         </tr>
                         <tr style="text-align: center;">
-                            <th scope="col" class="align-center">Value<br />NA</th>
-                            <th scope="col" class="align-center">Shares<br />10000</th>
-                            <th scope="col" class="align-center">Shr. Price<br />100</th>
+                            <th scope="col" class="align-center"><?= __('Value'); ?><br /><?= __('NA'); ?></th>
+                            <th scope="col" class="align-center"><?= __('Shares'); ?><br />10000</th>
+                            <th scope="col" class="align-center"><?= __('Shr. Price'); ?><br />100</th>
                         </tr>
                         <tr style="text-align: center;">
-                            <th scope="col" class="align-center">Grand Total</th>
-                            <th scope="col" class="align-center">Total</th>
-                            <th scope="col" class="align-center">Equity<br />(%)</th>
+                            <th scope="col" class="align-center"><?= __('Grand Total'); ?></th>
+                            <th scope="col" class="align-center"><?= __('Total'); ?></th>
+                            <th scope="col" class="align-center"><?= __('Equity'); ?><br />(%)</th>
                         </tr>
                         <tr style="background-color: #eeeeee;">
                             <th scope="col">&nbsp<br />&nbsp</th>
                             <th scope="col"></th>
                             <th scope="col" class="align-center align-middle">6.50%</th>
-                        </tr>
-                        <tr>
-                          <th scope="col" class="h5 font-weight-bold border-bottom" colspan="3">&nbsp</th>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
                         </tr>
                         <tr>
                           <th scope="col" class="h5 font-weight-bold border-bottom" colspan="3">&nbsp</th>
@@ -825,17 +686,156 @@ table tr td, table tr th{
                 <div class="table-box">
                     <table class="table">
                         <tr>
-                            <th scope="col" class="border-bottom align-center" style="text-align: center;" colspan="3">Year 5</th>
+                            <th scope="col" class="border-bottom align-center" style="text-align: center;" colspan="3"><?= __('Year 4'); ?></th>
                         </tr>
                         <tr style="text-align: center;">
-                            <th scope="col" class="align-center">Value<br />NA</th>
-                            <th scope="col" class="align-center">Shares<br />10000</th>
-                            <th scope="col" class="align-center">Shr. Price<br />100</th>
+                            <th scope="col" class="align-center"><?= __('Value'); ?><br /><?= __('NA'); ?></th>
+                            <th scope="col" class="align-center"><?= __('Shares'); ?><br />10000</th>
+                            <th scope="col" class="align-center"><?= __('Shr. Price'); ?><br />100</th>
                         </tr>
                         <tr style="text-align: center;">
-                            <th scope="col" class="align-center">Grand Total</th>
-                            <th scope="col" class="align-center">Total</th>
-                            <th scope="col" class="align-center">Equity<br />(%)</th>
+                            <th scope="col" class="align-center"><?= __('Grand Total'); ?></th>
+                            <th scope="col" class="align-center"><?= __('Total'); ?></th>
+                            <th scope="col" class="align-center"><?= __('Equity'); ?><br />(%)</th>
+                        </tr>
+                        <tr style="background-color: #eeeeee;">
+                            <th scope="col">&nbsp<br />&nbsp</th>
+                            <th scope="col"></th>
+                            <th scope="col" class="align-center align-middle">6.50%</th>
+                        </tr>
+                        <tr>
+                          <th scope="col" class="h5 font-weight-bold border-bottom" colspan="3">&nbsp</th>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                          <th scope="col" class="h5 font-weight-bold border-bottom" colspan="3">&nbsp</th>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                          <th scope="col" class="h5 font-weight-bold border-bottom" colspan="3">&nbsp</th>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                          <th scope="col" class="h5 font-weight-bold border-bottom" colspan="3">&nbsp</th>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                          <th scope="col" class="h5 font-weight-bold border-bottom" colspan="3">&nbsp</th>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="pseudo-item border">
+                <div class="table-box">
+                    <table class="table">
+                        <tr>
+                            <th scope="col" class="border-bottom align-center" style="text-align: center;" colspan="3"><?= __('Year 5'); ?></th>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <th scope="col" class="align-center"><?= __('Value'); ?><br /><?= __('NA'); ?></th>
+                            <th scope="col" class="align-center"><?= __('Shares'); ?><br />10000</th>
+                            <th scope="col" class="align-center"><?= __('Shr. Price'); ?><br />100</th>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <th scope="col" class="align-center"><?= __('Grand Total'); ?></th>
+                            <th scope="col" class="align-center"><?= __('Total'); ?></th>
+                            <th scope="col" class="align-center"><?= __('Equity'); ?><br />(%)</th>
                         </tr>
                         <tr style="background-color: #eeeeee;">
                             <th scope="col">&nbsp<br />&nbsp</th>
