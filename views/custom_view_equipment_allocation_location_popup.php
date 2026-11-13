@@ -60,62 +60,62 @@ if($_POST['eq_id'] !=""){
 
 ?>
 <div class="modal-header  ">
-    <h5 class="modal-title"> Equipments For Which Locations To Be Set</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="getBuildingDynamicPage('IEQ')"></button>
+    <h5 class="modal-title"> <?= __('Equipments For Which Locations To Be Set'); ?></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>" onclick="getBuildingDynamicPage('IEQ')"></button>
 </div>
 <div class="modal-body p-l-50 p-r-50 p-t-50">
     <div class="row">
         <div class="col-xl-3 col-md-3 text-center">
-            <h5>Equipment Name</h5>
+            <h5><?= __('Equipment Name'); ?></h5>
             <h6 class="f-w-700 mb-0 mt-2"><?php echo $equipments_list['equipment_name']; ?></h6>
             <input type="hidden" id="equipment_id_setlocation_popup" value="<?php echo $equipments_list['id']; ?>">
         </div>
         <div class="col-xl-3 col-md-3 text-center">
-            <h5>Equipment Category</h5>
+            <h5><?= __('Equipment Category'); ?></h5>
             <h6 class="f-w-700 mb-0 mt-2"><?php echo $equipments_list['category_name']; ?></h6>
             <input type="hidden" id="equipment_category_id_setlocation_popup" value="<?php echo $equipments_list['equipment_category_id']; ?>">
         </div>
         <div class="col-xl-3 col-md-3 text-center">
-            <h5>Equipment Type</h5>
+            <h5><?= __('Equipment Type'); ?></h5>
             <h6 class="f-w-700 mb-0 mt-2"><?php echo $equipments_list['equipment_types_name']; ?></h6>
             <input type="hidden" id="equipment_type_id_setlocation_popup" value="<?php echo $equipments_list['equipment_type_id']; ?>">
         </div>
         <div class="col-xl-3 col-md-3 text-center">
-            <h5>Employee Seating</h5>
+            <h5><?= __('Employee Seating'); ?></h5>
             <h6 class="f-w-700 mb-0 mt-2"><?php echo $equipments_list['employee_seating'] =="Y"?"Yes":"No"; ?></h6>
         </div>
     </div>
     <div class="row mt-5">
         <div class="col-lg-4 form-group  w-full">
-            <span class="form-label">Building <span class="requried">*</span></span>
+            <span class="form-label"><?= __('Building'); ?> <span class="requried">*</span></span>
              <span class="d-block error-message text-danger"></span>
-            <select aria-label="Building" class="js-example-basic-single requried_field" name="building_id" name="building_id_setlocation_popup" onchange="setLocatonBuilding(this.value)">
-                <option value="">Select Any One</option>
+            <select aria-label="<?= htmlspecialchars(__('Building'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single requried_field" name="building_id" name="building_id_setlocation_popup" onchange="setLocatonBuilding(this.value)">
+                <option value=""><?= __('Select Any One'); ?></option>
                 <?php foreach($buildings as $stytpe){ ?>
                 <option value="<?php echo $stytpe['id']; ?>" <?php echo $stytpe['id']==$_POST['building_id']?"selected":""; ?>><?php echo $stytpe['building_name']; ?></option>
                 <?php } ?>
             </select>
         </div>
         <div class="col-lg-4 form-group  w-full">
-            <span class="form-label">Building Floor <span class="requried">*</span></span>
+            <span class="form-label"><?= __('Building Floor'); ?> <span class="requried">*</span></span>
              <span class="d-block error-message text-danger"></span>
-             <select aria-label="Building Floor" class="js-example-basic-single requried_field" name="building_floor_id" id="building_floor_id_setlocation_popup" onchange="setLocatonBuildingFloors(this.value)">
-                <option value="">Select Any One</option>
+             <select aria-label="<?= htmlspecialchars(__('Building Floor'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single requried_field" name="building_floor_id" id="building_floor_id_setlocation_popup" onchange="setLocatonBuildingFloors(this.value)">
+                <option value=""><?= __('Select Any One'); ?></option>
             </select>
         </div>
         <div class="col-xl-4 col-md-4">
-            <span class="form-label">Building Floor Space <span class="requried">*</span></span>
+            <span class="form-label"><?= __('Building Floor Space'); ?> <span class="requried">*</span></span>
              <span class="d-block error-message text-danger"></span>
-            <select aria-label="Building Floor Space" class="js-example-basic-single requried_field" name="building_floor_space_id" id="building_floor_space_id_setlocation_popup">
-                <option value="">Select Any One</option>
+            <select aria-label="<?= htmlspecialchars(__('Building Floor Space'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single requried_field" name="building_floor_space_id" id="building_floor_space_id_setlocation_popup">
+                <option value=""><?= __('Select Any One'); ?></option>
             </select>
         </div>
 
     </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal" onclick="getBuildingDynamicPage('IEQ')">Close</button>
-    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="setInsertEquipmentAllocation()"> Set Allocat Equipments</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal" onclick="getBuildingDynamicPage('IEQ')"><?= __('Close'); ?></button>
+    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="setInsertEquipmentAllocation()"> <?= __('Set Allocat Equipments'); ?></button>
 </div>
 
 <?php }else{
@@ -129,65 +129,65 @@ if($_POST['eq_id'] !=""){
     ?>
 
 <div class="modal-header  ">
-    <h5 class="modal-title"> Employee For Which Locations To Be Set</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="getBuildingDynamicPage('IEM')"></button>
+    <h5 class="modal-title"> <?= __('Employee For Which Locations To Be Set'); ?></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>" onclick="getBuildingDynamicPage('IEM')"></button>
 </div>
 <div class="modal-body p-l-50 p-r-50 p-t-50">
     <div class="row">
         <div class="col-xl-3 col-md-3 text-center">
-            <h5>Emp Code</h5>
+            <h5><?= __('Emp Code'); ?></h5>
             <h6 class="f-w-700 mb-0 mt-2"><?php echo $employees_list['emp_code']; ?></h6>
             <input type="hidden" id="employee_id_setlocation_popup" value="<?php echo $employees_list['id']; ?>">
         </div>
         <div class="col-xl-3 col-md-3 text-center">
-            <h5>Employee Name</h5>
+            <h5><?= __('Employee Name'); ?></h5>
             <h6 class="f-w-700 mb-0 mt-2"><?php echo $employees_list['display_name']; ?></h6>
         </div>
 
         <div class="col-xl-3 col-md-3 text-center">
-            <h5>Email Id</h5>
+            <h5><?= __('Email Id'); ?></h5>
             <h6 class="f-w-700 mb-0 mt-2"><?php echo $employees_list['email_id']; ?></h6>
         </div>
         <div class="col-xl-3 col-md-3 text-center">
-            <h5>Photo</h5>
+            <h5><?= __('Photo'); ?></h5>
             <?php if($employees_list['image'] !="") { ?>
-                <img src="uploads/all/<?php echo $employees_list['image']; ?>"  class="img-radius img-50 align-top m-r-15" alt="Attachment Preview">
+                <img src="uploads/all/<?php echo $employees_list['image']; ?>"  class="img-radius img-50 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
             <?php } else { ?>
-                <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($employees_list['display_name']); ?></span>
+                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($employees_list['display_name']); ?></span>
             <?php } ?>
         </div>
     </div>
     <div class="row mt-5">
         <div class="col-lg-4 form-group  w-full">
-            <span class="form-label">Building <span class="requried">*</span></span>
+            <span class="form-label"><?= __('Building'); ?> <span class="requried">*</span></span>
              <span class="d-block error-message text-danger"></span>
-            <select aria-label="Building" class="js-example-basic-single requried_field" name="building_id" name="building_id_setlocation_popup" onchange="setLocatonBuilding(this.value)">
-                <option value="">Select Any One</option>
+            <select aria-label="<?= htmlspecialchars(__('Building'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single requried_field" name="building_id" name="building_id_setlocation_popup" onchange="setLocatonBuilding(this.value)">
+                <option value=""><?= __('Select Any One'); ?></option>
                 <?php foreach($buildings as $stytpe){ ?>
                 <option value="<?php echo $stytpe['id']; ?>" <?php echo $stytpe['id']==$_POST['building_id']?"selected":""; ?>><?php echo $stytpe['building_name']; ?></option>
                 <?php } ?>
             </select>
         </div>
         <div class="col-lg-4 form-group  w-full">
-            <span class="form-label">Building Floor <span class="requried">*</span></span>
+            <span class="form-label"><?= __('Building Floor'); ?> <span class="requried">*</span></span>
              <span class="d-block error-message text-danger"></span>
-             <select aria-label="Building Floor" class="js-example-basic-single requried_field" name="building_floor_id" id="building_floor_id_setlocation_popup_2" onchange="setLocatonBuildingFloors(this.value)">
-                <option value="">Select Any One</option>
+             <select aria-label="<?= htmlspecialchars(__('Building Floor'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single requried_field" name="building_floor_id" id="building_floor_id_setlocation_popup_2" onchange="setLocatonBuildingFloors(this.value)">
+                <option value=""><?= __('Select Any One'); ?></option>
             </select>
         </div>
         <div class="col-xl-4 col-md-4">
-            <span class="form-label">Building Floor Space <span class="requried">*</span></span>
+            <span class="form-label"><?= __('Building Floor Space'); ?> <span class="requried">*</span></span>
              <span class="d-block error-message text-danger"></span>
-            <select aria-label="Building Floor Space" class="js-example-basic-single requried_field" name="building_floor_space_id" id="building_floor_space_id_setlocation_popup_2">
-                <option value="">Select Any One</option>
+            <select aria-label="<?= htmlspecialchars(__('Building Floor Space'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single requried_field" name="building_floor_space_id" id="building_floor_space_id_setlocation_popup_2">
+                <option value=""><?= __('Select Any One'); ?></option>
             </select>
         </div>
 
     </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal" onclick="getBuildingDynamicPage('IEM')">Close</button>
-    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="setInsertEmployeeAllocation()"> Allocat Employee Seat</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal" onclick="getBuildingDynamicPage('IEM')"><?= __('Close'); ?></button>
+    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="setInsertEmployeeAllocation()"> <?= __('Allocat Employee Seat'); ?></button>
 </div>
 
 <?php } ?>
