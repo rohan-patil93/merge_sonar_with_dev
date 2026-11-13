@@ -22,7 +22,7 @@ include_once '../comm.php';
         $("#selectasset").text("");
     if($("#asset_id_popup").val() == ""){
 
-        $("#selectasset").text("Please Select Asset");
+        $("#selectasset").text(<?php echo json_encode(__('Please Select Asset'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         return false;
     }
      var dataArray = $("#assetsallocationform").serialize()
@@ -42,8 +42,8 @@ include_once '../comm.php';
 </script>
 
 <div class="modal-header">
-    <h4 class="modal-title">Asset Allocation</h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h4 class="modal-title"><?= __('Asset Allocation'); ?></h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body j-pro">
     <div class="j-content">
@@ -54,11 +54,11 @@ include_once '../comm.php';
             <tr>
                 <th scope="col">
                 </th>
-                <th scope="col">Asset Name</th>
-                <th scope="col">Start Date</th>
-                <th scope="col">End Date</th>
-                <th scope="col">Remarks</th>
-                <th scope="col">Status</th>
+                <th scope="col"><?= __('Asset Name'); ?></th>
+                <th scope="col"><?= __('Start Date'); ?></th>
+                <th scope="col"><?= __('End Date'); ?></th>
+                <th scope="col"><?= __('Remarks'); ?></th>
+                <th scope="col"><?= __('Status'); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -81,7 +81,7 @@ include_once '../comm.php';
 }
 }else{ ?>
                 <tr><td class="text-center" colspan="5">
-                    <h4 class="text-center"><i class='fa fa-warning'></i> No Asset Allocated</h4>
+                    <h4 class="text-center"><i class='fa fa-warning'></i> <?= __('No Asset Allocated'); ?></h4>
                     </td>
                 </tr>
         <?php    } ?>
@@ -95,9 +95,9 @@ include_once '../comm.php';
     <div class="card p-2 mt-2">
         <div class="row">
             <div class="form-group col-lg-4 select_emp " >
-                <span>Asset List<span class="requried">*</span></span>
-                <select aria-label="Asset" class="form-select js-example-basic-single " name="asset_id" id="asset_id_popup">
-                        <option value="">Select Any One</option>
+                <span><?= __('Asset List'); ?><span class="requried">*</span></span>
+                <select aria-label="<?= htmlspecialchars(__('Asset'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single " name="asset_id" id="asset_id_popup">
+                        <option value=""><?= __('Select Any One'); ?></option>
                 <?php foreach ($assetlist as $assetlistd){ ?>
                     <option  value="<?php echo $assetlistd['id']; ?>" ><?php echo ucwords($assetlistd['asset_description']); ?></option>
                 <?php } ?>
@@ -105,16 +105,16 @@ include_once '../comm.php';
                 <span id="selectasset" class="text-danger"></span>
             </div>
             <div class="form-group col-lg-4">
-                <span>Start date</span>
-                <input aria-label="Start Date" type="text" class="form-control datepicker" id="start_date"  name="start_date" value="<?php echo fromDate(); ?>">
+                <span><?= __('Start date'); ?></span>
+                <input aria-label="<?= htmlspecialchars(__('Start Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" id="start_date"  name="start_date" value="<?php echo fromDate(); ?>">
             </div>
             <div class="form-group col-lg-4">
-                <span>End date</span>
-                <input aria-label="End Date" type="text" class="form-control datepicker" id="end_date" name="end_date" >
+                <span><?= __('End date'); ?></span>
+                <input aria-label="<?= htmlspecialchars(__('End Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" id="end_date" name="end_date" >
             </div>
             <div class="form-group col-lg-12">
-                <span>Remarks</span>
-                <textarea aria-label="Remarks" type="text" class="form-control" id="remarks" rows="4" cols="50" name="remarks" ></textarea>
+                <span><?= __('Remarks'); ?></span>
+                <textarea aria-label="<?= htmlspecialchars(__('Remarks'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="remarks" rows="4" cols="50" name="remarks" ></textarea>
             </div>
         </div>
     </div>
@@ -124,8 +124,8 @@ include_once '../comm.php';
 </div>
 
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitAsset()">Submit</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
+    <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitAsset()"><?= __('Submit'); ?></button>
 </div>
 
 <script src="assets/pages/data-table/extensions/responsive/js/responsive-custom.js"></script>
