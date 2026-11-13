@@ -27,8 +27,8 @@ function getmSMENumber(){
 </script>
 <?php $notsendtoapprove = 0; ?>
 <div class="modal-header">
-    <h5 class="modal-title">Vendor details</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title"><?= __('Vendor details'); ?></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body">
     <div class="row">
@@ -76,7 +76,7 @@ function getmSMENumber(){
             <div class="">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Pending Tasks</h5>
+                        <h5><?= __('Pending Tasks'); ?></h5>
                         <div class="card-header-right">
                         </div>
                     </div>
@@ -92,7 +92,7 @@ function getmSMENumber(){
                         </table>
                         <?php }else{ ?>
                         <div class="card-px text-center py-20 mt-2">
-                            <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> No Pending Tasks </p>
+                            <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Pending Tasks'); ?> </p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                             </div>
@@ -106,9 +106,9 @@ function getmSMENumber(){
     </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
     <?php if($notsendtoapprove == 0){ ?>
-    <button type="button" class="btn btn-primary waves-effect waves-light" id="popsubmitforreview_btn" onclick="UpdateSendVerificationProfileStatus()">Submit For Review</button>
+    <button type="button" class="btn btn-primary waves-effect waves-light" id="popsubmitforreview_btn" onclick="UpdateSendVerificationProfileStatus()"><?= __('Submit For Review'); ?></button>
 <?php }else{ echo "<span class='text-danger'><i class='ti-alert'></i>".$_SESSION['error_message']['9176']."</span>";
 } ?>
 </div>
