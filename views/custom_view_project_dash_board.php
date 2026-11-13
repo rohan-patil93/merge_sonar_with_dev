@@ -306,10 +306,10 @@ function dashchange(val){
                                 <?php if(!in_array('TASKDA_USER',$_SESSION['role_ids'])){ ?>                    
                                 <ul class="nav md-tabs infisuite_tab">
                                     <li class="nav-item">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="#check1" role="tab" aria-selected="true" onclick="dashchange(1)" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Dashboard</a>
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#check1" role="tab" aria-selected="true" onclick="dashchange(1)" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Dashboard'); ?></a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#check2" role="tab" aria-selected="true" onclick="dashchange(2)" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Team</a>
+                                        <a class="nav-link" data-bs-toggle="tab" href="#check2" role="tab" aria-selected="true" onclick="dashchange(2)" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Team'); ?></a>
                                     </li>
                                 </ul>                    
                                 <?php } ?>
@@ -317,7 +317,7 @@ function dashchange(val){
                             <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="float-right">
                                     <div class="dropdown-primary dropdown btn-group dropdown-split-primary">
-                                        <button class="btn btn-success dropdown-toggle waves-light f-13 v-t-c custom-dropdown-icon" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true"  aria-expanded="true">View Tasks </button>
+                                        <button class="btn btn-success dropdown-toggle waves-light f-13 v-t-c custom-dropdown-icon" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true"  aria-expanded="true"><?= __('View Tasks'); ?> </button>
 
                                         <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                                             <?php if(count((array)$details['kanprojects'])>0){ foreach((array)$details['kanprojects'] as $kanprojects){ ?> 
@@ -326,7 +326,7 @@ function dashchange(val){
                                                 <?php } ?>
                                             <?php } else { ?>
                                             <a class="dropdown-item waves-light waves-effect" href="#"> 
-                                                <h6 class="text-center mt-3"> No Data</h6>
+                                                <h6 class="text-center mt-3"> <?= __('No Data'); ?></h6>
                                                 <img class="mw-100 mh-50px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                             </a>
                                             <?php } ?>
@@ -335,7 +335,7 @@ function dashchange(val){
                                     <?php if(in_array('ADMIN',$_SESSION['role_ids'])){ ?>
                                     <button class="btn btn-primary user-in">
                                         <i class="icofont icofont-plus icon-white"></i>
-                                        <a class="text-white" href="index.php?option=COM_LIST_APPLICATION_USER_INVITATIONS"> Invite User</a>
+                                        <a class="text-white" href="index.php?option=COM_LIST_APPLICATION_USER_INVITATIONS"> <?= __('Invite User'); ?></a>
                                     </button>
                                     <?php } ?>
                                 </div>
@@ -354,12 +354,12 @@ function dashchange(val){
                                                 <div class="card-body">
                                                     <div class="row align-items-center">
                                                         <div class="col close" onclick="location.href='index.php?option=COM_VIEW_PROJECT_TOP_DASH_BOARD_DETAILS&TAB=0';" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
-                                                            <h6 class="m-b-5 text-primary">Total Projects</h6>
+                                                            <h6 class="m-b-5 text-primary"><?= __('Total Projects'); ?></h6>
                                                             <h3 class="m-b-0 f-w-700 text-primary f-30 mt-3">
                                                                 <?php  $total = $top['total'];
                                                                 echo $total!="" ? $total: 0; ?>                        
                                                             </h3>
-                                                            <a href="" class="text-primary f-12 mt-3 d-block f-w-600">View Details</a>
+                                                            <a href="" class="text-primary f-12 mt-3 d-block f-w-600"><?= __('View Details'); ?></a>
                                                         </div>
                                                         <div class="col-auto">
                                                             <i class="fa fa-trophy text-c-blue f-18"></i>
@@ -373,11 +373,11 @@ function dashchange(val){
                                                 <div class="card-body">
                                                     <div class="row align-items-center">
                                                         <div class="col close" onclick="location.href='index.php?option=COM_VIEW_PROJECT_TOP_DASH_BOARD_DETAILS&TAB=1';" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
-                                                            <h6 class="m-b-5 text-success">Yet To Start Projects</h6>
+                                                            <h6 class="m-b-5 text-success"><?= __('Yet To Start Projects'); ?></h6>
                                                             <h3 class="m-b-0 f-w-700 text-success f-30 mt-3">
                                                                 <?php echo $top['0']!="" ? $top['0']: 0; ?>
                                                             </h3>
-                                                            <a href="" class="text-success f-12 mt-3 d-block f-w-600">View Details</a>
+                                                            <a href="" class="text-success f-12 mt-3 d-block f-w-600"><?= __('View Details'); ?></a>
                                                         </div>
                                                         <div class="col-auto">
                                                             <i class="fa fa-battery-empty text-c-green f-18"></i>
@@ -391,11 +391,11 @@ function dashchange(val){
                                                 <div class="card-body">
                                                     <div class="row align-items-center">
                                                         <div class="col close" onclick="location.href='index.php?option=COM_VIEW_PROJECT_TOP_DASH_BOARD_DETAILS&TAB=2';" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
-                                                            <h6 class="m-b-5 text-warning">Inprogress Projects</h6>
+                                                            <h6 class="m-b-5 text-warning"><?= __('Inprogress Projects'); ?></h6>
                                                             <h3 class="m-b-0 f-w-700 text-warning f-30 mt-3">
                                                                 <?php echo $top['total']-($top['4']+$top['0']); ?>
                                                             </h3>
-                                                            <a href="" class="text-warning f-12 mt-3 d-block f-w-600">View Details</a>
+                                                            <a href="" class="text-warning f-12 mt-3 d-block f-w-600"><?= __('View Details'); ?></a>
                                                         </div>
                                                         <div class="col-auto">
                                                             <i class="fa fa-battery-half text-c-yellow f-18"></i>
@@ -409,11 +409,11 @@ function dashchange(val){
                                                 <div class="card-body">
                                                     <div class="row align-items-center">
                                                         <div class="col close" onclick="location.href='index.php?option=COM_VIEW_PROJECT_TOP_DASH_BOARD_DETAILS&TAB=3';" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
-                                                            <h6 class="m-b-5 text-success">Completed Projects</h6>
+                                                            <h6 class="m-b-5 text-success"><?= __('Completed Projects'); ?></h6>
                                                             <h3 class="m-b-0 f-w-700 text-success f-30 mt-3">
                                                                 <?php echo $top['4']!="" ? $top['4'] :0; ?>
                                                             </h3>
-                                                            <a href="" class="text-success f-12 mt-3 d-block f-w-600">View Details</a>
+                                                            <a href="" class="text-success f-12 mt-3 d-block f-w-600"><?= __('View Details'); ?></a>
                                                         </div>
                                                         <div class="col-auto">
                                                             <i class="fa fa-battery-full text-c-green f-18"></i>
@@ -429,7 +429,7 @@ function dashchange(val){
                                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                                     <div class="card sale-card" style="min-height:354px;">
                                         <div class="card-header">
-                                            <h5>Work Spaces</h5>
+                                            <h5><?= __('Work Spaces'); ?></h5>
                                             <div class="card-header-right">
                                                 <span class="label label-md label-primary" style=""> <?php echo count((array)$details['workspace']); ?> </span>
                                             </div>
@@ -455,16 +455,16 @@ function dashchange(val){
                                                 </div>
                                             <?php } ?>
                                             <?php } else { ?> 
-                                                <h6 class="text-center mt-3"> No Data</h6>
+                                                <h6 class="text-center mt-3"> <?= __('No Data'); ?></h6>
                                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height:300px!important;">
                                             <?php } ?>
                                         </div>
                                         <div class="text-center">
                                             <button class="btn waves-effect waves-light hor-grd btn-grd-primary mb-4 mt-4 f-13 btn-sm" onclick="dynamicinsertworkspacepopup()">
-                                                <i class="icofont icofont-plus icon-white"></i> Work Space
+                                                <i class="icofont icofont-plus icon-white"></i> <?= __('Work Space'); ?>
                                             </button>
                                             <button class="btn waves-effect waves-light hor-grd btn-grd-success f-13 btn-sm" onclick="dynamicinsertprojectpopup()">
-                                                <i class="icofont icofont-plus icon-white"></i>  Project 
+                                                <i class="icofont icofont-plus icon-white"></i>  <?= __('Project'); ?> 
                                             </button>
                                         </div>
                                     </div>
@@ -472,7 +472,7 @@ function dashchange(val){
                                 <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                                     <div class="card sale-card" style="min-height:370px;">
                                         <div class="card-header">
-                                            <h5>Tasks</h5>
+                                            <h5><?= __('Tasks'); ?></h5>
                                             <div class="card-header-right">
                                                 <span class="label label-md label-primary" style=""><?php echo $cdaatotal; ?> </span>
                                             </div>
@@ -483,7 +483,7 @@ function dashchange(val){
                                         <input type="hidden" name="chart_project" id="chart_project" value="<?php echo implode("||",$cdaa); ?>" >
                                         <?php }else{ ?> 
                                             <div style="min-height:auto;">
-                                            <h6 class="text-center mt-3"> No Data</h6>
+                                            <h6 class="text-center mt-3"> <?= __('No Data'); ?></h6>
                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                             </div>
                                         <?php } ?>
@@ -492,7 +492,7 @@ function dashchange(val){
                                 <div class="col-lg-2 col-md-6 col-sm-6 col-12">
                                     <div class="card" style="min-height:370px;">
                                         <div class="card-header">
-                                            <h5>Project Tasks</h5>
+                                            <h5><?= __('Project Tasks'); ?></h5>
                                             <div class="card-header-right">
                                                 <span class="label label-md label-primary" style=""><?php echo $cdaatotal; ?></span>
                                             </div>
@@ -520,7 +520,7 @@ function dashchange(val){
                                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                                     <div class="card" style="min-height:370px;">
                                         <div class="card-header">
-                                            <h5>Yet To Start</h5>
+                                            <h5><?= __('Yet To Start'); ?></h5>
                                             <div class="card-header-right">
                                                 <span class="label label-md label-primary"> <?php echo count((array)$details['recentlycreated']); ?> 
                                                 </span>
@@ -538,7 +538,7 @@ function dashchange(val){
                                                    <div   class="row mt-3 pb-3 " style="border-bottom:1px dashed #cccccc;">
                                                         <div class="col-auto">
                                                             <?php if($rcent['project_logo']!=""){ ?> 
-                                                                <img  class="left-icon-width" src="uploads/all/<?php echo $rcent['project_logo']; ?>" alt='Logo'>
+                                                                <img  class="left-icon-width" src="uploads/all/<?php echo $rcent['project_logo']; ?>" alt='<?= htmlspecialchars(__('Logo'), ENT_QUOTES, 'UTF-8'); ?>'>
                                                             <?php }else{ ?> 
                                                                 <div class="p-2 bg-green-100 b-radius-10 text-center left-icon-width" style="background-color: <?php echo $_SESSION['status'][$rcent['current_status']]['background_color']; ?>">
                                                                     <i class="fa fa-trophy f-w-600 text-success m-t-5"></i>
@@ -559,7 +559,7 @@ function dashchange(val){
                                                             ?>
                                                             <?php if(in_array('TASKDA_PROJECT_MANAGER',(array)$_SESSION['role_ids'])){ ?> 
                                                                 <button type="button" onclick="projectchangestatus(<?php echo $rcent['id'].",3,'current_status','projects'"; ?>)" class="btn btn-sm  m-l-10 <?php echo $btnname; ?>" style="padding : 0px 10px;">
-                                                                    Start
+                                                                    <?= __('Start'); ?>
                                                                 </button>
                                                             <?php } ?>
                                                         </div>                          
@@ -567,7 +567,7 @@ function dashchange(val){
                                                     
                                                 <?php } 
                                             } else{ ?>
-                                                <h6 class="text-center mt-3"> No Data</h6>
+                                                <h6 class="text-center mt-3"> <?= __('No Data'); ?></h6>
                                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                             <?php } ?>
                                         </div>
@@ -576,7 +576,7 @@ function dashchange(val){
                                 <div class="col-lg-9 col-md-9 col-sm-12 col-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>Project Tasks</h5>
+                                            <h5><?= __('Project Tasks'); ?></h5>
                                         </div> 
                                         <div class="card-body">                                   
                                             <div id="allocatereturn">
@@ -602,10 +602,10 @@ function dashchange(val){
                                                                 <table class="table table-hover table-sm">
                                                                     <tr>
                                                                         <th scope="col">#</th>
-                                                                        <th scope="col">Owner</th>
-                                                                        <th scope="col">Task Name</th>
-                                                                        <th scope="col">Due Date</th>
-                                                                        <th scope="col">Status</th>
+                                                                        <th scope="col"><?= __('Owner'); ?></th>
+                                                                        <th scope="col"><?= __('Task Name'); ?></th>
+                                                                        <th scope="col"><?= __('Due Date'); ?></th>
+                                                                        <th scope="col"><?= __('Status'); ?></th>
                                                                         <th scope="col"></th>
                                                                     </tr>
                                                                     <?php $m=1; 
@@ -624,7 +624,7 @@ function dashchange(val){
                                                                                     <?php if($emp_ass['assigen_id']==""){ 
                                                                                         echo "-"; 
                                                                                     }elseif($emps[$emp_ass['assigen_id']]['image']!=""){?>
-                                                                                        <img class="user-name p-0 m-0" style="width:30px" src="/uploads/all/<?php echo $emps[$emp_ass['assigen_id']]['image']; ?>" alt="User Profile">
+                                                                                        <img class="user-name p-0 m-0" style="width:30px" src="/uploads/all/<?php echo $emps[$emp_ass['assigen_id']]['image']; ?>" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                                                                     <?php }else{ ?>
                                                                                         <span class="user-name p-0 mb-0"><?php echo initials($emps[$emp_ass['assigen_id']]['display_name']); ?></span>
 
@@ -649,7 +649,7 @@ function dashchange(val){
                                                                                 </td>
                                                                                 <td>
                                                                                     <?php if($duu == 'Y'){ ?>
-                                                                                    <i  data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Over Due"  class="ti-thumb-down text-danger f-16" to></i>
+                                                                                    <i  data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Over Due'), ENT_QUOTES, 'UTF-8'); ?>"  class="ti-thumb-down text-danger f-16" to></i>
                                                                                     <?php }?>
                                                                                 </td>
                                                                             </tr>
@@ -659,7 +659,7 @@ function dashchange(val){
                                                                     }else{ ?> 
                                                                             <tr>
                                                                                 <td colspan="6" class="text-center">
-                                                                                    <h6 class="text-center mt-3"> No Data</h6>
+                                                                                    <h6 class="text-center mt-3"> <?= __('No Data'); ?></h6>
                                                                                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                                                                 </td>
                                                                             </tr>
@@ -667,7 +667,7 @@ function dashchange(val){
                                                                     <?php if($m==1){ ?>
                                                                         <tr>
                                                                             <td colspan="6" class="text-center">
-                                                                                <h6 class="text-center mt-3"> No Data</h6>
+                                                                                <h6 class="text-center mt-3"> <?= __('No Data'); ?></h6>
                                                                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                                                             </td>
                                                                         </tr>
@@ -679,7 +679,7 @@ function dashchange(val){
                                                     <?php $i++;
 } 
                                                     }else{ ?>
-                                                        <h6 class="text-center mt-3"> No Data</h6>
+                                                        <h6 class="text-center mt-3"> <?= __('No Data'); ?></h6>
                                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                                     <?php } ?>
                                                 </div>
@@ -689,15 +689,15 @@ function dashchange(val){
                                     <?php if(!in_array('TASKDA_USER',$_SESSION['role_ids'])){ ?>
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>Users</h5>
+                                            <h5><?= __('Users'); ?></h5>
                                             <div  class="card-header-right ">
                                                 <ul class="nav md-tabs infisuite_tab">
                                                     <li class="nav-item">
                                                         <a class="nav-link pt-1 pb-1 <?php $i=1; if($i==1){ echo "active";
-} ?>" data-bs-toggle="tab" href="#unassign" role="tab" aria-selected="true"><?php echo "Unassigned"; ?></a>
+} ?>" data-bs-toggle="tab" href="#unassign" role="tab" aria-selected="true"><?php echo __("Unassigned"); ?></a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link pt-1 pb-1" data-bs-toggle="tab" href="#assign" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo "Assigned"; ?></a>
+                                                        <a class="nav-link pt-1 pb-1" data-bs-toggle="tab" href="#assign" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo __("Assigned"); ?></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -710,10 +710,10 @@ function dashchange(val){
                                                         <table class="table table-hover table-sm">
                                                             <tr>
                                                                 <th scope="col">#</th>
-                                                                <th scope="col">User </th>                                                
-                                                                <th scope="col">Projects</th>
-                                                                <th scope="col">Assign Projects</th>
-                                                                <th scope="col">Assign Tasks</th>
+                                                                <th scope="col"><?= __('User'); ?> </th>                                                
+                                                                <th scope="col"><?= __('Projects'); ?></th>
+                                                                <th scope="col"><?= __('Assign Projects'); ?></th>
+                                                                <th scope="col"><?= __('Assign Tasks'); ?></th>
                                                                 <td></td>
                                                             </tr>
                                                             <?php $m=1; 
@@ -725,7 +725,7 @@ function dashchange(val){
                                                                         </td>
                                                                         <td>
                                                                             <?php if($alluser['user_photo']!=""){?>
-                                                                                <img class="user-name p-0 m-0" style="width:30px" src="/uploads/all/<?php echo $alluser['user_photo']; ?>" alt="User Profile">
+                                                                                <img class="user-name p-0 m-0" style="width:30px" src="/uploads/all/<?php echo $alluser['user_photo']; ?>" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                                                             <?php }else{ ?>
                                                                                 <span class="user-name p-0 mb-0"><?php echo initials($alluser['display_name']); ?></span>
                                                                             <?php } ?>
@@ -745,17 +745,17 @@ function dashchange(val){
                                                                     </td>
                                                                     <td>
                                                                         <span class="label label-sm label-info m-0 cursor-pointer" onclick="addprojectassign(<?php echo $alluser['id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
-                                                                            Add Project Team 
+                                                                            <?= __('Add Project Team'); ?> 
                                                                         </span>
                                                                     </td>
                                                                     <td>
                                                                         <span class="label label-sm label-info m-0 cursor-pointer" onclick="addprojecttaskstouser(<?php echo $alluser['id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
-                                                                            Assign Task
+                                                                            <?= __('Assign Task'); ?>
                                                                         </span>
                                                                     </td>
                                                                     <td>
                                                                         <span class="label label-sm label-info m-0 cursor-pointer" onclick="usertaskhistory(<?php echo $alluser['id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
-                                                                            History
+                                                                            <?= __('History'); ?>
                                                                         </span>
                                                                     </td>
                                                                 </tr>
@@ -766,7 +766,7 @@ function dashchange(val){
                                                     </div>
                                                 <?php }else{ ?>
                                                     <div class="text-center mt-3">                    
-                                                        <h6 > No Data</h6>
+                                                        <h6 > <?= __('No Data'); ?></h6>
                                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                                     </div>
                                                 <?php } ?> 
@@ -777,10 +777,10 @@ function dashchange(val){
                                                         <table class="table table-hover table-sm">
                                                             <tr>
                                                                 <th scope="col">#</th>
-                                                                <th scope="col">User </th>
-                                                                <th scope="col">Projects</th>
-                                                                <th scope="col">Assign Projects</th>
-                                                                <th scope="col">Assign Tasks</th>
+                                                                <th scope="col"><?= __('User'); ?> </th>
+                                                                <th scope="col"><?= __('Projects'); ?></th>
+                                                                <th scope="col"><?= __('Assign Projects'); ?></th>
+                                                                <th scope="col"><?= __('Assign Tasks'); ?></th>
                                                                 <td></td>
                                                             </tr>
                                                             <?php $m=1; foreach($details['assign'] as $alluser){
@@ -791,7 +791,7 @@ function dashchange(val){
                                                                         </td>
                                                                         <td>
                                                                             <?php if($alluser['user_photo']!=""){?>
-                                                                                <img class="user-name p-0 m-0" style="width:30px" src="/uploads/all/<?php echo $alluser['user_photo']; ?>" alt="User Profile">
+                                                                                <img class="user-name p-0 m-0" style="width:30px" src="/uploads/all/<?php echo $alluser['user_photo']; ?>" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                                                             <?php }else{ ?>
                                                                                 <span class="user-name p-0 mb-0"><?php echo initials($alluser['display_name']); ?></span>
 
@@ -812,17 +812,17 @@ function dashchange(val){
                                                                     </td>
                                                                     <td>
                                                                         <span class="label label-sm label-info m-0 cursor-pointer" onclick="addprojectassign(<?php echo $alluser['id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
-                                                                            Add Project Team 
+                                                                            <?= __('Add Project Team'); ?> 
                                                                         </span>
                                                                     </td>
                                                                     <td>
                                                                         <span class="label label-sm label-info m-0 cursor-pointer" onclick="addprojecttaskstouser(<?php echo $alluser['id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
-                                                                            Assign Task
+                                                                            <?= __('Assign Task'); ?>
                                                                         </span>
                                                                     </td>
                                                                     <td>
                                                                         <span class="label label-sm label-info m-0 cursor-pointer" onclick="usertaskhistory(<?php echo $alluser['id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
-                                                                            History
+                                                                            <?= __('History'); ?>
                                                                         </span>
                                                                     </td>
                                                                 </tr>
@@ -833,7 +833,7 @@ function dashchange(val){
                                                     </div>
                                                 <?php }else{ ?>
                                                     <div class="text-center mt-3">                    
-                                                        <h6 > No Data</h6>
+                                                        <h6 > <?= __('No Data'); ?></h6>
                                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                                     </div>
 
@@ -846,7 +846,7 @@ function dashchange(val){
                                 <div class="col-lg-3 col-md-3 col-sm-12 col-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>In-Progress</h5>     
+                                            <h5><?= __('In-Progress'); ?></h5>     
                                             <div class="card-header-right">
                                                 <span class="label label-md label-primary" style=""> <?php echo count((array)$details['recentlyinprogress']); ?>  
                                                 </span>
@@ -863,7 +863,7 @@ function dashchange(val){
                                             <div class="row mt-3 pb-3 close" onclick="location.href='<?php echo $vieopt; ?>';"  style="border-bottom:1px dashed #cccccc;" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
                                                 <div class="col-auto">
                                                     <?php if($rcent['project_logo']!=""){ ?> 
-                                                        <img  class="img-50" src="uploads/all/<?php echo $rcent['project_logo']; ?>" alt='Logo'>
+                                                        <img  class="img-50" src="uploads/all/<?php echo $rcent['project_logo']; ?>" alt='<?= htmlspecialchars(__('Logo'), ENT_QUOTES, 'UTF-8'); ?>'>
                                                     <?php }else{ ?> 
                                                         <div class="p-2 bg-green-100 b-radius-10 text-center left-icon-width" style="background-color: <?php echo $_SESSION['status'][$rcent['current_status']]['background_color']; ?>">
                                                             <i class="fa fa-trophy f-w-600 text-success m-t-5"></i>
@@ -877,14 +877,14 @@ function dashchange(val){
                                             </div>
                                             <?php } 
                                             } else{ ?>
-                                            <h6 class="text-center mt-3">No Data</h6>
+                                            <h6 class="text-center mt-3"><?= __('No Data'); ?></h6>
                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                             <?php } ?>
                                         </div>
                                     </div>
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>Recently Completed</h5> 
+                                            <h5><?= __('Recently Completed'); ?></h5> 
                                             <div class="card-header-right">
                                                 <span class="label label-md label-primary" style=""><?php echo count((array)$details['recentlycompleted']); ?>  </span>
                                             </div>                                   
@@ -899,7 +899,7 @@ function dashchange(val){
                                                    <div class="row mt-1 pb-3 close" onclick="location.href='<?php echo $vieopt; ?>';"  style="border-bottom:1px dashed #cccccc;" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
                                                     <div class="col-lg-3">
                                                         <?php if($rcent['project_logo']!=""){ ?> 
-                                                            <img  class="img-50" src="uploads/all/<?php echo $rcent['project_logo']; ?>" alt='Logo'>
+                                                            <img  class="img-50" src="uploads/all/<?php echo $rcent['project_logo']; ?>" alt='<?= htmlspecialchars(__('Logo'), ENT_QUOTES, 'UTF-8'); ?>'>
                                                         <?php }else{ ?> 
                                                             <div class="p-2 bg-primary b-radius-10 text-center" style="background-color: <?php echo $_SESSION['status'][$rcent['current_status']]['background_color']; ?>">
                                                                 <i class="ti-calendar f-w-600"></i>
@@ -913,7 +913,7 @@ function dashchange(val){
                                                 </div>
                                             <?php }
                                             } else{ ?>
-                                            <h6 class="text-center mt-3"> No Data</h6>
+                                            <h6 class="text-center mt-3"> <?= __('No Data'); ?></h6>
                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                             <?php } ?>
                                         </div>
@@ -1029,7 +1029,7 @@ function dashchange(val){
                                                             <div class="m-b-10 m-t-20" style="text-align: -webkit-center;">
                                                                 <div class="circle_gradiant" style="--p1: <?php echo customNanAndEmptyValidation($percntagemngemp*3.6).'deg';?>; --p1_color: #2ed8b6;--p2_color: #dc3545;">
                                                                     <?php if($pemp['image']!=""){ ?>
-                                                                        <img src="uploads/all/<?php echo $pemp['image']; ?>" class="percentag-img-radius img-90" alt="Details" style="border-radius: 50%;border: 8px solid #ffffff;">
+                                                                        <img src="uploads/all/<?php echo $pemp['image']; ?>" class="percentag-img-radius img-90" alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>" style="border-radius: 50%;border: 8px solid #ffffff;">
                                                                     <?php }else{ ?>
                                                                         <span class="text-dark f-16 f-w-600 d-block" style="background-color: #ded1d1 !important;">
                                                                             <?php echo initials($pemp['display_name']); ?>                    
@@ -1040,7 +1040,7 @@ function dashchange(val){
                                                             <div class="row p-l-15 p-r-15 mb-2 text-muted">
                                                                 <div class="col-lg-6 mt-2 f-12" style="cursor: pointer;" onclick="listtaskdetails('<?php echo implode(",",(array)$due_array); ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">                    
                                                                     <div class="s-cont d-inline-block" style="width:90%" >                        
-                                                                        <span class="m-b-0" >Due</span>
+                                                                        <span class="m-b-0" ><?= __('Due'); ?></span>
                                                                         <span class="f-w-700 m-b-0 m-l-5 float-right">
                                                                             <?php echo $due; ?>
                                                                         </span>
@@ -1048,7 +1048,7 @@ function dashchange(val){
                                                                 </div>
                                                                 <div class="col-lg-6 mt-2 f-12" style="cursor: pointer;" onclick="listtaskdetails('<?php echo implode(",",$over_due_array); ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">                    
                                                                     <div class="s-cont d-inline-block" style="width:90%">                        
-                                                                        <span class="m-b-0" >Over Due</span>
+                                                                        <span class="m-b-0" ><?= __('Over Due'); ?></span>
                                                                         <span class="f-w-700 m-b-0 m-l-5 float-right"  style="color: #e74242;">
                                                                             <?php echo $over_due; ?>
                                                                         </span>
@@ -1118,7 +1118,7 @@ function dashchange(val){
                                                                 <?php }
                                                             } ?>
                                                             <?php  if($nodata==0){ ?>
-                                                                        <h6 class="text-center mt-3 ccew"> No Data</h6>
+                                                                        <h6 class="text-center mt-3 ccew"> <?= __('No Data'); ?></h6>
                                                                          <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                                                 <?php }
                                                         }  ?>
