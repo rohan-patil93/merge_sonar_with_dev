@@ -45,8 +45,8 @@ function printReport(divId) {
         <div class="row">
           <div class="col-lg-3">
                 <div class=" form-group">
-                    <label class="form-label"> Tenant</label>
-                    <select class="js-example-basic-single form-control"  name="customer_id">
+                    <label for="fld_customer_id" class="form-label"> Tenant</label>
+                    <select id="fld_customer_id" class="js-example-basic-single form-control"  name="customer_id">
                       <option value="">All Tenant</option>
                       <?php foreach($all_customers as $cust){ ?>
                         <option value="<?php echo $cust['id'];?>" <?php echo $_POST['customer_id'] == $cust['id']?"selected":""; ?>><?php echo $cust['display_name'];?></option>
@@ -56,14 +56,14 @@ function printReport(divId) {
             </div> 
           <div class="col-lg-2">
               <div class="form-group w-full">
-                  <label class="form-label ">Start Date<span class="text-danger">*</span></label>
-                  <input type="month" class="form-control" name="start_month"  value="<?php echo $start_month; ?>" >
+                  <label for="fld_start_month" class="form-label ">Start Date<span class="text-danger">*</span></label>
+                  <input id="fld_start_month" type="month" class="form-control" name="start_month"  value="<?php echo $start_month; ?>" >
               </div>
           </div>
           <div class="col-lg-2">
               <div class=" form-group">
-                  <label class="form-label"> End Date</label>
-                  <input type="month" class="form-control" name="end_month"  value="<?php echo $end_month; ?>" >
+                  <label for="fld_end_month" class="form-label"> End Date</label>
+                  <input id="fld_end_month" type="month" class="form-control" name="end_month"  value="<?php echo $end_month; ?>" >
               </div>
           </div>
           <div class="col-lg-1">
@@ -109,15 +109,15 @@ function printReport(divId) {
                       <th colspan="3" class="text-center">Total</th> 
                   </tr>
                   <tr> 
-                    <th class="text-right">Invoice</th>
-                    <th class="text-right ">Payment</th>
-                    <th class="text-right border-right-black">Due</th>
-                    <th class="text-right">Invoice</th>
-                    <th class="text-right ">Payment</th>
-                    <th class="text-right border-right-black">Due</th> 
-                    <th class="text-right">Invoice</th>
-                    <th class="text-right ">Payment</th>
-                    <th class="text-right">Due</th>
+                    <th scope="col" class="text-right">Invoice</th>
+                    <th scope="col" class="text-right ">Payment</th>
+                    <th scope="col" class="text-right border-right-black">Due</th>
+                    <th scope="col" class="text-right">Invoice</th>
+                    <th scope="col" class="text-right ">Payment</th>
+                    <th scope="col" class="text-right border-right-black">Due</th> 
+                    <th scope="col" class="text-right">Invoice</th>
+                    <th scope="col" class="text-right ">Payment</th>
+                    <th scope="col" class="text-right">Due</th>
                   </tr>
               </thead>
               <tbody>
@@ -167,15 +167,15 @@ function printReport(divId) {
                 ?>
                 <tr>
                   <th class="p-2 border-right-black" colspan="2">Opening Balance </th>
-                  <th class="p-2 text-right"><?php echo customeummarmonyformateifine($opening_balance['ob_rent']['total_amount']); ?></th>
-                  <th class="p-2 text-right "><?php echo customeummarmonyformateifine($payment_opening_balance['ob_rent']['total_paid']); ?></th>
-                  <th class="p-2 text-right border-right-black">-</th>
-                  <th class="p-2 text-right"><?php echo customeummarmonyformateifine($opening_balance['ob_utility']['total_amount']); ?></th>
-                  <th class="p-2 text-right"><?php echo customeummarmonyformateifine($payment_opening_balance['ob_utility']['total_paid']); ?></th>
-                  <th class="p-2 text-right border-right-black">-</th>
-                  <th class="p-2 text-right"><?php echo customeummarmonyformateifine($ob_row_total_inv); ?></th>
-                  <th class="p-2 text-right "><?php echo customeummarmonyformateifine($ob_row_total_payment); ?></th>
-                  <th class="p-2 text-right"><?php echo customeummarmonyformateifine($openingbaldue); ?></th>
+                  <td class="p-2 text-right fw-bold"><?php echo customeummarmonyformateifine($opening_balance['ob_rent']['total_amount']); ?></td>
+                  <td class="p-2 text-right  fw-bold"><?php echo customeummarmonyformateifine($payment_opening_balance['ob_rent']['total_paid']); ?></td>
+                  <td class="p-2 text-right border-right-black fw-bold">-</td>
+                  <td class="p-2 text-right fw-bold"><?php echo customeummarmonyformateifine($opening_balance['ob_utility']['total_amount']); ?></td>
+                  <td class="p-2 text-right fw-bold"><?php echo customeummarmonyformateifine($payment_opening_balance['ob_utility']['total_paid']); ?></td>
+                  <td class="p-2 text-right border-right-black fw-bold">-</td>
+                  <td class="p-2 text-right fw-bold"><?php echo customeummarmonyformateifine($ob_row_total_inv); ?></td>
+                  <td class="p-2 text-right  fw-bold"><?php echo customeummarmonyformateifine($ob_row_total_payment); ?></td>
+                  <td class="p-2 text-right fw-bold"><?php echo customeummarmonyformateifine($openingbaldue); ?></td>
                  </tr> 
 
                 <?php
@@ -220,25 +220,25 @@ function printReport(divId) {
                 <?php $i++; } ?>
                 <tr>
                   <th colspan="2" class="text-right border-right-black">Total</th>
-                  <th class="text-right"><?php echo customeummarmonyformateifine($column_rent_total); ?></th>
-                  <th class="text-right"><?php echo customeummarmonyformateifine($column_rent_payment_total); ?></th>
-                  <th class="text-right border-right-black">-</th>
-                  <th class="text-right"><?php echo customeummarmonyformateifine($column_utility_total); ?></th>
-                  <th class="text-right"><?php echo customeummarmonyformateifine($column_utility_payment_total); ?></th>
-                  <th class="text-right border-right-black">-</th>
-                  <th class="text-right"><?php echo customeummarmonyformateifine($column_rent_utility_total); ?></th>
-                  <th class="text-right"><?php echo customeummarmonyformateifine($column_rent_utility_payment_total); ?></th>
-                   <th class="text-right"><?php echo customeummarmonyformateifine($column_rent_utility_total-$column_rent_utility_payment_total); ?></th>
+                  <td class="text-right fw-bold"><?php echo customeummarmonyformateifine($column_rent_total); ?></td>
+                  <td class="text-right fw-bold"><?php echo customeummarmonyformateifine($column_rent_payment_total); ?></td>
+                  <td class="text-right border-right-black fw-bold">-</td>
+                  <td class="text-right fw-bold"><?php echo customeummarmonyformateifine($column_utility_total); ?></td>
+                  <td class="text-right fw-bold"><?php echo customeummarmonyformateifine($column_utility_payment_total); ?></td>
+                  <td class="text-right border-right-black fw-bold">-</td>
+                  <td class="text-right fw-bold"><?php echo customeummarmonyformateifine($column_rent_utility_total); ?></td>
+                  <td class="text-right fw-bold"><?php echo customeummarmonyformateifine($column_rent_utility_payment_total); ?></td>
+                   <td class="text-right fw-bold"><?php echo customeummarmonyformateifine($column_rent_utility_total-$column_rent_utility_payment_total); ?></td>
                 </tr>
                 <tr>                  
                   <th class="text-right" colspan="8">-</th>
-                  <th colspan="2" class="text-right">Total Credit Notes (-)</th>
-                  <th class="text-right text-danger"><?php echo customeummarmonyformateifine($credit_notes[$cust['id']][$ptd['id']]['total_amount']); ?></th>
+                  <th scope="row" colspan="2" class="text-right">Total Credit Notes (-)</th>
+                  <td class="text-right text-danger fw-bold"><?php echo customeummarmonyformateifine($credit_notes[$cust['id']][$ptd['id']]['total_amount']); ?></td>
                 </tr>
                 <tr>                  
                   <th class="text-right" colspan="8">-</th>
-                  <th colspan="2" class="text-right">Total Debit Notes (+)</th>
-                  <th class="text-right"><?php echo customeummarmonyformateifine($debit_notes[$cust['id']][$ptd['id']]['total_amount']); ?></th>
+                  <th scope="row" colspan="2" class="text-right">Total Debit Notes (+)</th>
+                  <td class="text-right fw-bold"><?php echo customeummarmonyformateifine($debit_notes[$cust['id']][$ptd['id']]['total_amount']); ?></td>
                 </tr>
                <!--  <tr>                  
                   <th class="text-right" colspan="6">-</th>
@@ -247,8 +247,8 @@ function printReport(divId) {
                 </tr> -->
                 <tr>
                   <th class="text-right" colspan="8">-</th>
-                  <th colspan="2" class="text-right">Final Due</th>
-                  <th class="text-right text-danger"><?php echo customeummarmonyformateifine(($column_rent_utility_total+$debit_notes[$cust['id']][$ptd['id']]['total_amount'])-($credit_notes[$cust['id']][$ptd['id']]['total_amount']+$column_rent_utility_payment_total)); ?></th>
+                  <th scope="row" colspan="2" class="text-right">Final Due</th>
+                  <td class="text-right text-danger fw-bold"><?php echo customeummarmonyformateifine(($column_rent_utility_total+$debit_notes[$cust['id']][$ptd['id']]['total_amount'])-($credit_notes[$cust['id']][$ptd['id']]['total_amount']+$column_rent_utility_payment_total)); ?></td>
                 </tr>
 
 
