@@ -180,7 +180,7 @@ $pre_othercurrentassets= accountingAmontFormat($totalcoa['10008000']['pre_start_
     function printDiv(divId) {
        var printContents = document.getElementById(divId).innerHTML;
        var originalContents = document.body.innerHTML;
-       document.body.innerHTML = "<html lang=\"en\"><head><title>Balance Sheet Report</title></head><body>" + printContents + "</body>";
+       document.body.innerHTML = "<html lang=\"en\"><head><title><?= htmlspecialchars(__('Balance Sheet Report'), ENT_QUOTES, 'UTF-8'); ?></title></head><body>" + printContents + "</body>";
        window.print();
        document.body.innerHTML = originalContents;
     }
@@ -236,58 +236,52 @@ $pre_othercurrentassets= accountingAmontFormat($totalcoa['10008000']['pre_start_
               <button type="button"
                 class="btn btn-primary dropdown-toggle dropdown-toggle-split waves-effect waves-light"
                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 20%;height: 40px;">
-                <span class="visually-hidden">Toggle primary</span>
+                <span class="visually-hidden"><?= __('Toggle primary'); ?></span>
               </button>
               <div class="dropdown-menu">
                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "TD" ? "active" : ""; ?> empty_active"
                   id="TD" href="#!"
-                  onclick="dynamicSelectDateRange('TD','Today','<?php echo fromDate(date("Y-m-d")); ?>','<?php echo fromDate(date("Y-m-d")); ?>')">Today</a>
+                  onclick="dynamicSelectDateRange('TD','Today','<?php echo fromDate(date("Y-m-d")); ?>','<?php echo fromDate(date("Y-m-d")); ?>')"><?= __('Today'); ?></a>
                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "TW" ? "active" : ""; ?> empty_active"
                   id="TW" href="#!"
-                  onclick="dynamicSelectDateRange('TW','This Week','<?php echo fromDate(date("Y-m-d", strtotime('monday this week'))); ?>','<?php echo fromDate(date("Y-m-d", strtotime('monday this sunday '))); ?>')">This
-                  Week</a>
+                  onclick="dynamicSelectDateRange('TW','This Week','<?php echo fromDate(date("Y-m-d", strtotime('monday this week'))); ?>','<?php echo fromDate(date("Y-m-d", strtotime('monday this sunday '))); ?>')"><?= __('This Week'); ?></a>
                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "TM" ? "active" : ""; ?> empty_active"
                   id="TM" href="#!"
-                  onclick="dynamicSelectDateRange('TM','This Month','<?php echo fromDate(date("Y-m-01")); ?>','<?php echo fromDate(date("Y-m-t")); ?>')">This
-                  Month</a>
+                  onclick="dynamicSelectDateRange('TM','This Month','<?php echo fromDate(date("Y-m-01")); ?>','<?php echo fromDate(date("Y-m-t")); ?>')"><?= __('This Month'); ?></a>
                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "TY" ? "active" : ""; ?> empty_active"
                   id="TY" href="#!"
-                  onclick="dynamicSelectDateRange('TY','This Year','<?php echo fromDate(date("Y-01-01")); ?>','<?php echo fromDate(date("Y-12-31")); ?>')">This
-                  Year</a>
+                  onclick="dynamicSelectDateRange('TY','This Year','<?php echo fromDate(date("Y-01-01")); ?>','<?php echo fromDate(date("Y-12-31")); ?>')"><?= __('This Year'); ?></a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "YD" ? "active" : ""; ?> empty_active"
                   id="YD" href="#!"
-                  onclick="dynamicSelectDateRange('YD','Yesterday','<?php echo fromDate(date('Y-m-d', strtotime("-1 days"))); ?>','<?php echo fromDate(date('Y-m-d', strtotime("-1 days"))); ?>')">Yesterday</a>
+                  onclick="dynamicSelectDateRange('YD','Yesterday','<?php echo fromDate(date('Y-m-d', strtotime("-1 days"))); ?>','<?php echo fromDate(date('Y-m-d', strtotime("-1 days"))); ?>')"><?= __('Yesterday'); ?></a>
                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "PW" ? "active" : ""; ?> empty_active"
                   id="PW" href="#!"
-                  onclick="dynamicSelectDateRange('PW','Previous Week','<?php echo fromDate(date('Y-m-d', strtotime("previous week monday"))); ?>','<?php echo fromDate(date('Y-m-d', strtotime("previous week sunday"))); ?>')">Previous
-                  Week</a>
+                  onclick="dynamicSelectDateRange('PW','Previous Week','<?php echo fromDate(date('Y-m-d', strtotime("previous week monday"))); ?>','<?php echo fromDate(date('Y-m-d', strtotime("previous week sunday"))); ?>')"><?= __('Previous Week'); ?></a>
                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "PM" ? "active" : ""; ?> empty_active"
                   id="PM" href="#!"
-                  onclick="dynamicSelectDateRange('PM','Previous Month','<?php echo fromDate(date("Y-m-01", strtotime('last month'))); ?>','<?php echo fromDate(date("Y-m-t", strtotime('last month'))); ?>')">Previous
-                  Month</a>
+                  onclick="dynamicSelectDateRange('PM','Previous Month','<?php echo fromDate(date("Y-m-01", strtotime('last month'))); ?>','<?php echo fromDate(date("Y-m-t", strtotime('last month'))); ?>')"><?= __('Previous Month'); ?></a>
                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "PY" ? "active" : ""; ?> empty_active"
                   id="PY" href="#!"
-                  onclick="dynamicSelectDateRange('PY','Previous Year','<?php echo fromDate(date("Y-01-01", strtotime('last year'))); ?>','<?php echo fromDate(date("Y-12-31", strtotime('last year'))); ?>')">Previous
-                  Year</a>
+                  onclick="dynamicSelectDateRange('PY','Previous Year','<?php echo fromDate(date("Y-01-01", strtotime('last year'))); ?>','<?php echo fromDate(date("Y-12-31", strtotime('last year'))); ?>')"><?= __('Previous Year'); ?></a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "CD" ? "active" : ""; ?> empty_active"
-                  id="CD" href="#!" onclick="dynamicSelectDateRange('CD','Custom Date')">Custom Date</a>
+                  id="CD" href="#!" onclick="dynamicSelectDateRange('CD','Custom Date')"><?= __('Custom Date'); ?></a>
               </div>
             </div>
             <div class="row mt-2" style="display: <?php echo $shortcode == 'CD' ? '' : 'none' ?>" id="custome_date">
               <div class="col-lg-6">
-                <input aria-label="From" type="text" class="form-control filterdynamic datepicker" name="from" id="from_date"
+                <input aria-label="<?= htmlspecialchars(__('From'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control filterdynamic datepicker" name="from" id="from_date"
                   value="<?php echo $from_date; ?>">
               </div>
               <div class="col-lg-6">
-                <input aria-label="To" type="text" class="form-control filterdynamic datepicker" name="to" id="to_date"
+                <input aria-label="<?= htmlspecialchars(__('To'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control filterdynamic datepicker" name="to" id="to_date"
                   value="<?php echo $to_date; ?>">
               </div>
             </div>
           </div>
             <div class="col-lg-1">
-                <button name="applyform" value="apply" class="btn btn-primary form-control" type="submit" ><i class="ti-search m-r-2"></i>View</button>
+                <button name="applyform" value="apply" class="btn btn-primary form-control" type="submit" ><i class="ti-search m-r-2"></i><?= __('View'); ?></button>
             </div>
         </div>
     </form>
@@ -300,102 +294,102 @@ $pre_othercurrentassets= accountingAmontFormat($totalcoa['10008000']['pre_start_
                 <div class="col-lg-4">
                     <div class="col bg-light-primary ">
                         <span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
-                            <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="Theme-Logo" />
+                            <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="<?= htmlspecialchars(__('Theme-Logo'), ENT_QUOTES, 'UTF-8'); ?>" />
                         </span>
                         <span class="text-dark-75 font-weight-bolder font-size-h3"><?php echo ucwords($_SESSION['config']['name']); ?></span>
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <h4 class="card-label text-center f-w-700">Balance Sheet <small class="f-10 d-block">Name : <?php echo $_SESSION['display_name']; ?> &nbsp;  Date & Time : <?php echo date("d-m-Y H:i:s"); ?></small>
-                        <small class="f-10 d-block">CIN : <?php echo $_SESSION['config']['cin_number'] !=""?$_SESSION['config']['cin_number']:"-"; ?></small>
+                    <h4 class="card-label text-center f-w-700"><?= __('Balance Sheet'); ?> <small class="f-10 d-block"><?= __('Name'); ?> : <?php echo $_SESSION['display_name']; ?> &nbsp;  <?= htmlspecialchars(__('Date & Time'), ENT_QUOTES, 'UTF-8'); ?> : <?php echo date("d-m-Y H:i:s"); ?></small>
+                        <small class="f-10 d-block"><?= __('CIN'); ?> : <?php echo $_SESSION['config']['cin_number'] !=""?$_SESSION['config']['cin_number']:"-"; ?></small>
                     </h4>
                 </div>
             </div>
             <table class="table table-hover table-bordered"  style="width: 100%; border-collapse: collapse;">
                 <tr>
-                    <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="3" >Balance Sheet as at
+                    <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="3" ><?= __('Balance Sheet as at'); ?>
                     </th>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: center;"><?php echo fromDate($balance_date); ?></th>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: center;"><?php echo fromDate($prev_balance_date); ?></th>
                 </tr>
                 <tr>
-                    <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="5">I. Equity and Liabilities</th>
+                    <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="5"><?= __('I. Equity and Liabilities'); ?></th>
                 </tr>
                 <tr>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="5">
-                        <span style=" margin-left: 10px;">(1) Shareholders funds</span>
+                        <span style=" margin-left: 10px;"><?= __('(1) Shareholders funds'); ?></span>
                     </th>
                 </tr>
                 <tr>
                     <td style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="3">
-                        <span style="margin-left: 10px;">(a) Share capital</span>
+                        <span style="margin-left: 10px;"><?= __('(a) Share capital'); ?></span>
                     </td>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $sharecapital; ?></th>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $pre_sharecapital; ?></th>
                 </tr>
                 <tr>
                     <td style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="3">
-                        <span style="margin-left:10px;">(b) Reserves and surplus</span>
+                        <span style="margin-left:10px;"><?= __('(b) Reserves and surplus'); ?></span>
                     </td>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $reservesandsurplus; ?></th>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $pre_reservesandsurplus; ?></th>
                 </tr>
                 <tr>
                     <td style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="3">
-                        <span style="margin-left:10px;">(c) Money received against share warrants</span></td>
+                        <span style="margin-left:10px;"><?= __('(c) Money received against share warrants'); ?></span></td>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $moneyreceivedagainstsharewarrants; ?></th>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $pre_moneyreceivedagainstsharewarrants; ?></th>
                 </tr>
                 <tr>
-                    <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="4">(2) Share application money pending allotment</th>
+                    <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="4"><?= __('(2) Share application money pending allotment'); ?></th>
                     <td style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: center;">-</td>
                 </tr>
                 <tr>
-                    <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="5">(3) Non-Current liabilities</th>
+                    <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="5"><?= __('(3) Non-Current liabilities'); ?></th>
                 </tr>
                 <tr>
                     <td style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="3">
-                        <span style="margin-left: 10px;">(a) Long-term borrowings</span>
+                        <span style="margin-left: 10px;"><?= __('(a) Long-term borrowings'); ?></span>
                     </td>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $longtermborrowings;?></th>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $pre_longtermborrowings;?></th>
                 </tr>
                 <tr>
                     <td style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="3">
-                        <span style="margin-left: 10px;">(b) Deferred tax liabilities (net)</span>
+                        <span style="margin-left: 10px;"><?= __('(b) Deferred tax liabilities (net)'); ?></span>
                     </td>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $deferredtaxliabilitiess;?></th>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $pre_deferredtaxliabilitiess;?></th>
                 </tr>
                 <tr>
                     <td style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="3">
-                        <span style="margin-left: 10px;">(c) Other long-term liabilities</span>
+                        <span style="margin-left: 10px;"><?= __('(c) Other long-term liabilities'); ?></span>
                     </td>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $otherlongtermliabilities;?></th>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $pre_otherlongtermliabilities;?></th>
                 </tr>
                 <tr>
                     <td style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="3">
-                        <span style="margin-left: 10px;">(d) Long-term provisions</span>
+                        <span style="margin-left: 10px;"><?= __('(d) Long-term provisions'); ?></span>
                     </td>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $longtermprovisions; ?></th>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $pre_longtermprovisions; ?></th>
                 </tr>
                 <tr>
-                    <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="5">(4) Current liabilities</th>
+                    <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="5"><?= __('(4) Current liabilities'); ?></th>
                 </tr>
                 <tr>
                     <td style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="3">
-                        <span style="margin-left: 10px;">(a) Short-term borrowings</span>
+                        <span style="margin-left: 10px;"><?= __('(a) Short-term borrowings'); ?></span>
                     </td>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $shorttermborrowings; ?></th>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $pre_shorttermborrowings; ?></th>
                 </tr>
                 <tr>
                     <td style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="3">
-                        <span style="margin-left: 10px;display: block;">(b) Trade payables</span>
-                        <span style="margin-left: 10px;display: block;">- Total outstanding dues of micro enterprises and small enterprises; and</span>
-                        <span style="margin-left: 10px;display: block;">- Total outstanding dues of creditors otherthan micro enterprises and small enterprises
+                        <span style="margin-left: 10px;display: block;"><?= __('(b) Trade payables'); ?></span>
+                        <span style="margin-left: 10px;display: block;">- <?= __('Total outstanding dues of micro enterprises and small enterprises; and'); ?></span>
+                        <span style="margin-left: 10px;display: block;">- <?= __('Total outstanding dues of creditors otherthan micro enterprises and small enterprises'); ?>
                         </span>
                     </td>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $tradepayables; ?></th>
@@ -403,32 +397,32 @@ $pre_othercurrentassets= accountingAmontFormat($totalcoa['10008000']['pre_start_
                 </tr>
                 <tr>
                     <td style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="3">
-                        <span style="margin-left: 10px;display: block;">(c) Other current liabilities</span>
+                        <span style="margin-left: 10px;display: block;"><?= __('(c) Other current liabilities'); ?></span>
                     </td>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $othercurrentliabilities; ?></th>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $pre_othercurrentliabilities; ?></th>
                 </tr>
                 <tr>
                     <td style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="3">
-                        <span style="margin-left: 10px;display: block;">(d) Short-term provisions</span>
+                        <span style="margin-left: 10px;display: block;"><?= __('(d) Short-term provisions'); ?></span>
                     </td>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $shorttermprovisions; ?></th>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $pre_shorttermprovisions; ?></th>
                 </tr>
                 <tr>
-                    <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="5">II. Assets</th>
+                    <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="5"><?= __('II. Assets'); ?></th>
                 </tr>
                 <tr>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="5">
-                        <span style="margin-left:10px;">(1) Non-current assets</span></th>
+                        <span style="margin-left:10px;"><?= __('(1) Non-current assets'); ?></span></th>
                 </tr>
                 <tr>
                     <td style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="3">
-                        <span style="margin-left: 10px;display: block;">(a) Property, plant & equipment and Intangible assets</span>
-                        <span style="margin-left: 15px;display: block;">(i) Property, plant & equipment</span>
-                        <span style="margin-left: 15px;display: block;">(ii) Intangible assets</span>
-                        <span style="margin-left: 15px;display: block;">(iii) Capital work-in-progress</span>
-                        <span style="margin-left: 15px;display: block;">(iv) Intangible assets under development</span>
+                        <span style="margin-left: 10px;display: block;"><?= htmlspecialchars(__('(a) Property, plant & equipment and Intangible assets'), ENT_QUOTES, 'UTF-8'); ?></span>
+                        <span style="margin-left: 15px;display: block;"><?= htmlspecialchars(__('(i) Property, plant & equipment'), ENT_QUOTES, 'UTF-8'); ?></span>
+                        <span style="margin-left: 15px;display: block;"><?= __('(ii) Intangible assets'); ?></span>
+                        <span style="margin-left: 15px;display: block;"><?= __('(iii) Capital work-in-progress'); ?></span>
+                        <span style="margin-left: 15px;display: block;"><?= __('(iv) Intangible assets under development'); ?></span>
                     </td>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: right;" >
                         <span style="display: block;">-</span>
@@ -447,74 +441,74 @@ $pre_othercurrentassets= accountingAmontFormat($totalcoa['10008000']['pre_start_
                 </tr>
                 <tr>
                     <td style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="3">
-                        <span style="margin-left: 10px;display: block;">(b) Non-current investments</span>
+                        <span style="margin-left: 10px;display: block;"><?= __('(b) Non-current investments'); ?></span>
                     </td>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $noncurrentinvestments; ?></th>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $pre_noncurrentinvestments; ?></th>
                 </tr>
                 <tr>
                     <td style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="3">
-                        <span style="margin-left: 10px;display: block;">(c) Deferred tax assets (net)</span>
+                        <span style="margin-left: 10px;display: block;"><?= __('(c) Deferred tax assets (net)'); ?></span>
                     </td>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $deferredtaxassets; ?></th>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $pre_deferredtaxassets; ?></th>
                 </tr>
                 <tr>
                     <td style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="3">
-                        <span style="margin-left: 10px;display: block;">(d) Long-term loans and advances</span>
+                        <span style="margin-left: 10px;display: block;"><?= __('(d) Long-term loans and advances'); ?></span>
                     </td>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $longtermloansandadvances; ?></th>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $pre_longtermloansandadvances; ?></th>
                 </tr>
                 <tr>
                     <td style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="3">
-                        <span style="margin-left: 10px;display: block;">(e) Other non-current assets</span>
+                        <span style="margin-left: 10px;display: block;"><?= __('(e) Other non-current assets'); ?></span>
                     </td>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $othernoncurrentassets; ?></th>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $pre_othernoncurrentassets; ?></th>
                 </tr>
                 <tr>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="5">
-                        <span style="margin-left:10px;">(2) Current assets</span></th>
+                        <span style="margin-left:10px;"><?= __('(2) Current assets'); ?></span></th>
                 </tr>
                 <tr>
                     <td style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="3">
-                        <span style="margin-left: 10px;display: block;">(a) Current investments</span>
+                        <span style="margin-left: 10px;display: block;"><?= __('(a) Current investments'); ?></span>
                     </td>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $currentinvestments; ?></th>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $pre_currentinvestments; ?></th>
                 </tr>
                 <tr>
                     <td style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="3">
-                        <span style="margin-left: 10px;display: block;">(b) Inventories</span>
+                        <span style="margin-left: 10px;display: block;"><?= __('(b) Inventories'); ?></span>
                     </td>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $inventories; ?></th>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $pre_inventories; ?></th>
                 </tr>
                 <tr>
                     <td style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="3">
-                        <span style="margin-left: 10px;display: block;">(a) Trade receivables</span>
+                        <span style="margin-left: 10px;display: block;"><?= __('(a) Trade receivables'); ?></span>
                     </td>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $tradereceivables; ?></th>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $pre_tradereceivables; ?></th>
                 </tr>
                 <tr>
                     <td style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="3">
-                        <span style="margin-left: 10px;display: block;">(b) Cash and bank balances</span>
+                        <span style="margin-left: 10px;display: block;"><?= __('(b) Cash and bank balances'); ?></span>
                     </td>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $cashandbankbalances; ?></th>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $pre_cashandbankbalances; ?></th>
                 </tr>
                 <tr>
                     <td style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="3">
-                        <span style="margin-left: 10px;display: block;">(c) Short-term loans and advances</span>
+                        <span style="margin-left: 10px;display: block;"><?= __('(c) Short-term loans and advances'); ?></span>
                     </td>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $shorttermloansandadvances; ?></th>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $pre_shorttermloansandadvances; ?></th>
                 </tr>
                 <tr>
                     <td style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: left;" colspan="3">
-                        <span style="margin-left: 10px;display: block;">(d) Other current assets</span>
+                        <span style="margin-left: 10px;display: block;"><?= __('(d) Other current assets'); ?></span>
                     </td>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $othercurrentassets; ?></th>
                     <th scope="col" style="font-size:13px; font-family: Tahoma; border: 1px solid #cccccc; padding: 5px; text-align: right; text-align: left;" ><?php echo $pre_othercurrentassets; ?></th>
@@ -526,10 +520,10 @@ $pre_othercurrentassets= accountingAmontFormat($totalcoa['10008000']['pre_start_
 
 <div class="invoice-btn-section clearfix d-print-none" style="margin-top:15px;">
     <button class="btn waves-effect waves-light btn-grd-success" onclick="printDiv('printableArea');">
-        <i class="fa fa-print"></i>  Print
+        <i class="fa fa-print"></i>  <?= __('Print'); ?>
     </button>
     <button class="btn waves-effect waves-light btn-grd-info"  onclick="convertHTMLToPDF();">
-        <i class="fa fa-download"></i>  Download
+        <i class="fa fa-download"></i>  <?= __('Download'); ?>
     </button>
 </div>
 <script>
