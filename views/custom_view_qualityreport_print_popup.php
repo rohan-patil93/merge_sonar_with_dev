@@ -41,16 +41,16 @@ $listgroup = $spfulljson['group'];
 
 ?>
 <div class="modal-header">
-    <h5 class="modal-title">Quality Check</h5>
+    <h5 class="modal-title"><?= __('Quality Check'); ?></h5>
 
     <button type="button"><i class="ti-printer f-18 text-success"></i> </button>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body p-5">
     <div class="page-body">
         <div class="card">
             <div class="card-header">
-                <h5>Simple Method - 1: Measuring Quality Performance in Defective Percentageqq</h5>
+                <h5><?= __('Simple Method - 1: Measuring Quality Performance in Defective Percentageqq'); ?></h5>
                 <div  class="card-header-right">
                     <div class="" onclick="printview()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
                         <i class="ti-printer f-18 text-success"></i>
@@ -66,35 +66,35 @@ $listgroup = $spfulljson['group'];
                     ?>
                     <table class="table table-hover table-sm">
                         <tr>
-                            <th scope="col" style="background:#cbebd5ba">Line/Scetion No.</th>
+                            <th scope="col" style="background:#cbebd5ba"><?= __('Line/Scetion No.'); ?></th>
                             <th scope="col"><?php echo $data['item']['item_name']; ?></th>
-                            <th scope="col" style="background:#cbebd5ba">Checker Name</th>
+                            <th scope="col" style="background:#cbebd5ba"><?= __('Checker Name'); ?></th>
                             <th scope="col">
                                 <?php echo ucwords($_SESSION['users'][$data['qc_head']['created_by']]); ?>
                             </th>
-                            <th scope="col" style="background:#cbebd5ba">Total Unit Checked</th>
+                            <th scope="col" style="background:#cbebd5ba"><?= __('Total Unit Checked'); ?></th>
                             <th scope="col"><?php echo $tunt; ?></th>
                         </tr>
                         <tr>
-                            <td style="background:#cbebd5ba">Style No.</td>
+                            <td style="background:#cbebd5ba"><?= __('Style No.'); ?></td>
                             <td>#<?php echo $data['item']['sku']; ?></td>
-                            <td style="background:#cbebd5ba">Date</td>
+                            <td style="background:#cbebd5ba"><?= __('Date'); ?></td>
                             <td><?php echo fromDate($data['qc_head']['created_date']); ?></td>
-                            <td style="background:#cbebd5ba">Total Defective Unit</td>
+                            <td style="background:#cbebd5ba"><?= __('Total Defective Unit'); ?></td>
                             <td><?php echo $dfunt; ?></td>
                         </tr>
                         <tr>
-                            <td style="background:#cbebd5ba">Transaction No </td>
+                            <td style="background:#cbebd5ba"><?= __('Transaction No'); ?> </td>
                             <td><?php echo $data['transaction_data']['transaction_number']; ?></td>
-                            <td style="background:#cbebd5ba">Transaction Date</td>
+                            <td style="background:#cbebd5ba"><?= __('Transaction Date'); ?></td>
                             <td><?php echo fromDate($data['transaction_data']['transaction_date']); ?></td>
-                            <td style="background:#cbebd5ba">% Defective</td>
+                            <td style="background:#cbebd5ba"><?= __('% Defective'); ?></td>
                             <td><?php echo $punt; ?></td>
                         </tr>
                         <tr>
-                            <td style="background:#cbebd5ba">Transaction Qty</td>
+                            <td style="background:#cbebd5ba"><?= __('Transaction Qty'); ?></td>
                             <td></td>
-                            <td style="background:#cbebd5ba">Qty checked</td>
+                            <td style="background:#cbebd5ba"><?= __('Qty checked'); ?></td>
                             <td></td>
                             <td style="background:#cbebd5ba"></td>
                             <td></td>
@@ -114,9 +114,9 @@ $listgroup = $spfulljson['group'];
                                 <table class="table table-hover table-sm">
                                     <tr>
                                         <th scope="col" style="width: 60%;"><?php echo $tabs['serial_no']; ?></th>
-                                        <th scope="col" style="width: 20%;">Result </th>
-                                        <th scope="col" style="width: 20%;">Interval</th>
-                                        <th scope="col" style="width: 20%;">Remarks</th>
+                                        <th scope="col" style="width: 20%;"><?= __('Result'); ?> </th>
+                                        <th scope="col" style="width: 20%;"><?= __('Interval'); ?></th>
+                                        <th scope="col" style="width: 20%;"><?= __('Remarks'); ?></th>
                                     </tr>
                                     <?php $m=1; foreach ($listgroup as $lisgroup) { ?>
                                         <tr style="background-color: #f5f6f7;">
@@ -182,9 +182,9 @@ $listgroup = $spfulljson['group'];
 } ?>
                         </div>
                         <div class="border mt-4 text-center b-radius-5 p-3">
-                                            <h4 class="f-w-600">Reviewed By -</h4>
-                                            <span class="d-inline-block">Quality<br />Control Manager</span>
-                                            <span class="d-inline-block m-l-40">Quality<br />Assurance Representative</span>
+                                            <h4 class="f-w-600"><?= __('Reviewed By'); ?> -</h4>
+                                            <span class="d-inline-block"><?= __('Quality'); ?><br /><?= __('Control Manager'); ?></span>
+                                            <span class="d-inline-block m-l-40"><?= __('Quality'); ?><br /><?= __('Assurance Representative'); ?></span>
                                         </div>
                     </div>
                 </div>
