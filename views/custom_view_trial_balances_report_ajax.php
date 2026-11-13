@@ -167,10 +167,10 @@ if(count((array)$getbredcrump) != 0){
     <tbody>
         <tr></tr>
         <tr>
-            <th scope="col" style="background-color: #cccccc; font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-transform: uppercase; text-align: left;">Account Code</th>
-            <th scope="col" style="background-color: #cccccc; font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px;text-transform: uppercase; text-align: left;">Description</th>
-            <th scope="col" style="background-color: #eeeeee; font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px;text-transform: uppercase; text-align: left;">Debit</th>
-            <th scope="col" style="background-color: #cccccc; font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px;text-transform: uppercase; text-align: left;">Credit</th>
+            <th scope="col" style="background-color: #cccccc; font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-transform: uppercase; text-align: left;"><?= __('Account Code'); ?></th>
+            <th scope="col" style="background-color: #cccccc; font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px;text-transform: uppercase; text-align: left;"><?= __('Description'); ?></th>
+            <th scope="col" style="background-color: #eeeeee; font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px;text-transform: uppercase; text-align: left;"><?= __('Debit'); ?></th>
+            <th scope="col" style="background-color: #cccccc; font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px;text-transform: uppercase; text-align: left;"><?= __('Credit'); ?></th>
         </tr>
         <?php
         $totaldebit = $totalcredit = 0;
@@ -217,7 +217,7 @@ if(count((array)$getbredcrump) != 0){
         </tr>
         <?php } ?>
         <tr>
-            <td style="font-size:14px; font-family:'Tahoma';  border:1px solid #eeeeee;padding: 5px;" colspan="2"><p class="text-right cursor-pointer mb-0 f-w-600" >Total </p></td>
+            <td style="font-size:14px; font-family:'Tahoma';  border:1px solid #eeeeee;padding: 5px;" colspan="2"><p class="text-right cursor-pointer mb-0 f-w-600" ><?= __('Total'); ?> </p></td>
             <td style="font-size:14px; font-family:'Tahoma';  border:1px solid #eeeeee;padding: 5px; text-align: right;" class="f-w-600 <?php echo ($totaldebit < 0)?"text-danger":""; ?>"><?php echo ($totaldebit!="" && $totaldebit!="0")?accountingAmontFormat($totaldebit):"-"; ?></td>
             <td style="font-size:14px; font-family:'Tahoma'; border:1px solid #eeeeee;padding: 5px; text-align: right;" class="f-w-600 <?php echo ($totalcredit < 0)?"text-danger":""; ?>"><?php echo ($totalcredit!="" && $totalcredit!="0")?accountingAmontFormat($totalcredit):"-"; ?></td>
         </tr>
