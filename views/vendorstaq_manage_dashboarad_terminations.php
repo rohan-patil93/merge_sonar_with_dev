@@ -19,7 +19,7 @@ if($_POST['ajaxpagecall'] == "Y"){
 ?>
 <script type="text/javascript">
     function selectanyonterminationsdate(val){
-        $('#listtermination').html('<div style="display: block;  margin-left: auto;  margin-right: auto;  width: 40%;"><img src="assets/images/spiner/spiner2.gif" style="width: 300px;" alt="Preview"></div>');
+        $('#listtermination').html('<div style="display: block;  margin-left: auto;  margin-right: auto;  width: 40%;"><img src="assets/images/spiner/spiner2.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>');
         jQuery.ajax({
             url: "views/vendorstaq_manage_dashboarad_terminations.php",
             data:'ajaxpagecall=Y&fromdate='+val,
@@ -37,13 +37,13 @@ if($_POST['ajaxpagecall'] == "Y"){
 
 <div class="card card-custom " id="kt_page_sticky_card">
     <div class="card-header table-card-header mb-2">
-        <h5><?php echo "Employee Terminations";  ?></h5>
+        <h5><?php echo __("Employee Terminations");  ?></h5>
         <div class="card-header-right table-card-header ">
 
             <input type="hidden" name="emp_id" value="<?php echo $empp_id; ?>">
 
             <div class="input-group input-group-button">
-                <input aria-label="Fromdate" type="month" name="fromdate" onchange="selectanyonterminationsdate(this.value)" value="<?php echo $from_cur_year."-".$from_cur_month?>" id="example-date-input-from"  class="form-control form-control-sm width1" style="font-size: 14px;height: 40px !important;padding: 10px 15px;">
+                <input aria-label="<?= htmlspecialchars(__('Fromdate'), ENT_QUOTES, 'UTF-8'); ?>" type="month" name="fromdate" onchange="selectanyonterminationsdate(this.value)" value="<?php echo $from_cur_year."-".$from_cur_month?>" id="example-date-input-from"  class="form-control form-control-sm width1" style="font-size: 14px;height: 40px !important;padding: 10px 15px;">
 
             </div>
 
@@ -54,9 +54,9 @@ if($_POST['ajaxpagecall'] == "Y"){
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Employee  </th>
-                <th scope="col">Reason</th>
-                <th scope="col">Leaving Date </th>
+                <th scope="col"><?= __('Employee'); ?>  </th>
+                <th scope="col"><?= __('Reason'); ?></th>
+                <th scope="col"><?= __('Leaving Date'); ?> </th>
             </tr>
         </thead>
         <tbody>
@@ -72,9 +72,9 @@ if($_POST['ajaxpagecall'] == "Y"){
                             <div class="align-middle">
                                 <?php if($loc['image']!=""){
                                     $loc_img_src = !empty($loc['image']) ? 'uploads/all/' . $loc['image'] : 'uploads/all/no-image.jpg'; ?>
-                                    <img src="<?php echo $loc_img_src; ?>" class="img-radius img-50 align-top m-r-15" alt="Attachment Preview">
+                                    <img src="<?php echo $loc_img_src; ?>" class="img-radius img-50 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                 <?php } else { ?>
-                                    <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($loc['display_name']); ?></span>
+                                    <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($loc['display_name']); ?></span>
                                 <?php } ?>
                                 <div class="d-inline-block width73">
                                     <h6><?php echo $loc['display_name']; ?></h6>
@@ -98,7 +98,7 @@ if($_POST['ajaxpagecall'] == "Y"){
             <tr>
                 <td colspan="4">
                     <div class="text-center mt-3">
-                               <h6 class="text-center mt-3"> No Data</h6>
+                               <h6 class="text-center mt-3"> <?= __('No Data'); ?></h6>
                                  <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                              </div>
                 </td>
@@ -108,7 +108,7 @@ if($_POST['ajaxpagecall'] == "Y"){
             <tr>
                 <td colspan="4">
                     <div class="text-center mt-3">
-                               <h6 class="text-center mt-3"> No Data</h6>
+                               <h6 class="text-center mt-3"> <?= __('No Data'); ?></h6>
                                  <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                              </div>
                 </td>
