@@ -100,7 +100,7 @@ $noinsertview = array('vendors');
     if(current_status !=''){
       $("#current_status").val(current_status);
     }
-    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $("#dyanmictableshow").html(htmloader);
 
     var postform = $("#custom_frm_submit").serialize();
@@ -156,7 +156,7 @@ $noinsertview = array('vendors');
   }
 
    function statuspopup(status,id){
-      alert("data"+status+"id:"+id);
+      alert(<?php echo json_encode(__('data'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+status+<?php echo json_encode(__('id').':', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+id);
      var table_name = document.getElementById('table_name').value;
       jQuery.ajax({
             url: "views/custom_insert_status_popup.php",
@@ -256,20 +256,20 @@ if($viewtime ==1 ){
                 <div class="form-radio ">
                       <div class="radio radio-inline">
                         <label class="form-label">
-                          <input aria-label="Status" type="radio" name="status" value="0"   onclick="dynamicFilterTable()" checked onkeydown="">
-                          <i class="helper"></i>Active
+                          <input aria-label="<?= htmlspecialchars(__('Status'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="status" value="0"   onclick="dynamicFilterTable()" checked onkeydown="">
+                          <i class="helper"></i><?= __('Active'); ?>
                         </label>
                       </div>
                       <div class="radio radio-inline">
                         <label class="form-label">
-                          <input aria-label="Status" type="radio" name="status" value="1"  onclick="dynamicFilterTable()" onkeydown="">
-                          <i class="helper"></i>Inactive
+                          <input aria-label="<?= htmlspecialchars(__('Status'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="status" value="1"  onclick="dynamicFilterTable()" onkeydown="">
+                          <i class="helper"></i><?= __('Inactive'); ?>
                         </label>
                       </div>
                       <div class="radio radio-inline">
                         <label class="form-label">
-                          <input aria-label="Status" type="radio"  name="status" value="-1" onclick="dynamicFilterTable()" onkeydown="">
-                          <i class="helper"></i>All
+                          <input aria-label="<?= htmlspecialchars(__('Status'), ENT_QUOTES, 'UTF-8'); ?>" type="radio"  name="status" value="-1" onclick="dynamicFilterTable()" onkeydown="">
+                          <i class="helper"></i><?= __('All'); ?>
                         </label>
                       </div>
                   </div>
@@ -304,21 +304,21 @@ if($viewtime ==1 ){
 
               <a target="_blank"  href="index.php?option=COM_INSERT_IMPORT_EXCEL_DATA"  class="btn btn-primary mb-2 desktop-view" <?php echo $permission_importbtn; ?>>
                 <i class="icofont icofont-cloud-upload icon-white"></i>
-                <?php echo "Import";  ?>
+                <?php echo __("Import");  ?>
               </a>
 
             <?php }else{ ?>
 
           <a target="_blank"  href="index.php?option=COM_INSERT_DYNAMIC_IMPORT&table=<?php echo $table; ?>"  class="btn btn-primary mb-2 desktop-view" <?php echo $permission_importbtn; ?>>
             <i class="icofont icofont-cloud-upload icon-white"></i>
-            <?php echo "Import";  ?>
+            <?php echo __("Import");  ?>
           </a>
         <?php } ?>
 
           <?php if($permission_download == '0' || $_SESSION['admin_type'] =='1'){ ?>
           <a  href="#!" onclick="exportDyanmicCsv()" class="btn btn-inverse mb-2 desktop-view" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
             <i class="ti-export icon-white"></i>
-            <?php echo "Export";  ?>
+            <?php echo __("Export");  ?>
           </a>
           <?php } ?>
 
@@ -375,22 +375,22 @@ if($viewtime ==1 ){
 
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
               <i class="icofont icofont-reply"></i>
-              Back
+              <?= __('Back'); ?>
             </a>
-            <button type="button" class="btn p-0 border-0 bg-transparent ti-settings f-18" data-bs-toggle="tooltip" data-placement="bottom" title="" onclick="showSelectExtraColumn('select_extra_column')" data-bs-original-title="Select Extra Column" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+            <button type="button" class="btn p-0 border-0 bg-transparent ti-settings f-18" data-bs-toggle="tooltip" data-placement="bottom" title="" onclick="showSelectExtraColumn('select_extra_column')" data-bs-original-title="<?= htmlspecialchars(__('Select Extra Column'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
               </div>
                 <div class="row" id="custom-popup">
                   <div class="custom-popup-open custom-popup-slide-query-contact_details text-start" style="left: 0px; top: 90px;" id="select_extra_column">
                         <div class="card">
                           <div class="card-header">
-                            <h5>Column</h5>
+                            <h5><?= __('Column'); ?></h5>
                             <div class="card-header-right">
-                              <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closeSelectExtraColumn()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Closed" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+                              <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closeSelectExtraColumn()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Closed'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
                             </div>
                           </div>
                           <div class="card-body">
                             <div class="form-group">
-                              <select aria-label="Displayattributesfilterfields[]" class="form-select js-example-basic-multiple-limit_custom" name="displayattributesfilterfields[]" multiple="multiple">
+                              <select aria-label="<?= htmlspecialchars(__('Displayattributesfilterfields'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-select js-example-basic-multiple-limit_custom" name="displayattributesfilterfields[]" multiple="multiple">
                                 <?php foreach($tablefiledslist as $keyvalue => $fieldvalue){
                                   $lock = "";
                                   if(in_array($keyvalue, (array)$defalut_fields)){
@@ -403,14 +403,14 @@ if($viewtime ==1 ){
                             </div>
                           </div>
                           <div class="card-footer pt-0">
-                            <button type="button" class="input-group-text addon-style cursor-pointer" onclick="goSelectExtraColumn()">Show</button>
+                            <button type="button" class="input-group-text addon-style cursor-pointer" onclick="goSelectExtraColumn()"><?= __('Show'); ?></button>
                           </div>
                         </div>
                       </div>
                   <div class="col-lg-1 mt-2">
-                    <span class="">Records</span>
+                    <span class=""><?= __('Records'); ?></span>
                     <div class="w-full">
-                      <select aria-label="Limit Select" class="form-select border js-example-basic-single" id="limit_select" name="limit_select" onchange="dynamicFilterTable()" >
+                      <select aria-label="<?= htmlspecialchars(__('Limit Select'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select border js-example-basic-single" id="limit_select" name="limit_select" onchange="dynamicFilterTable()" >
 
                           <option value="20">20</option>
                           <option value="30">30</option>
@@ -421,20 +421,20 @@ if($viewtime ==1 ){
                           <option value="80">80</option>
                           <option value="90">90</option>
                           <option value="100">100</option>
-                          <option value="0">All</option>
+                          <option value="0"><?= __('All'); ?></option>
                       </select>
                     </div>
                   </div>
                  <div class="col-lg-2 mt-2">
-                   <span class=""><span class="f-10 text-warning">(Min 3 Characters Required)</span></span>
-                    <input aria-label="Search" type="text" id="filter_text" class="form-control form-control-sm "  placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="Search" onkeyup="dynamicFilterTableText()">
+                   <span class=""><span class="f-10 text-warning"><?= __('(Min 3 Characters Required)'); ?></span></span>
+                    <input aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="filter_text" class="form-control form-control-sm "  placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" onkeyup="dynamicFilterTableText()">
                 </div>
                 <?php foreach($field as $fieldname=>$fieldvalue){ ?>
                   <div class="col-lg-2 mt-2">
                       <span class=""><?php echo $lists[$fieldname]['lable']; ?></span>
                       <div  class="w-full">
-                        <select aria-label="Select option" class="form-select border js-example-basic-single filter_dynamic_select" name="filter_dynamic_select[<?php echo $fieldname; ?>]"  onchange="dynamicFilterTable()" >
-                          <option value="">All</option>
+                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select border js-example-basic-single filter_dynamic_select" name="filter_dynamic_select[<?php echo $fieldname; ?>]"  onchange="dynamicFilterTable()" >
+                          <option value=""><?= __('All'); ?></option>
                           <?php foreach($fieldvalue as $keyfval=>$fval){ ?>
                             <option value="<?php echo $keyfval; ?>"><?php echo $fval; ?></option>
                           <?php } ?>
