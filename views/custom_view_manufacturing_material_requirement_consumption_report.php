@@ -29,31 +29,31 @@ function csv_safe($value)
 <div class="page-body">
     <div class="card">
         <div class="card-header bg-primary text-white">
-            <h4 class="mb-0">Material Requirement & Consumption Report</h4>
+            <h4 class="mb-0"><?= htmlspecialchars(__('Material Requirement & Consumption Report'), ENT_QUOTES, 'UTF-8'); ?></h4>
         </div>
         <div class="card-body">
             <form method="get" class="row g-2 mb-3"><input type="hidden" name="option" value="COM_VIEW_MANUFACTURING_MATERIAL_REQUIREMENT_CONSUMPTION_REPORT">
-                <div class="col-md-3"><input aria-label="From Date" type="date" name="from_date" value="<?php echo htmlspecialchars($fromDate); ?>" class="form-control"></div>
-                <div class="col-md-3"><input aria-label="To Date" type="date" name="to_date" value="<?php echo htmlspecialchars($toDate); ?>" class="form-control"></div>
-                <div class="col-md-3"><button class="btn btn-primary" type="submit"><i class="ti-filter"></i> Apply</button></div>
-                <div class="col-md-3 text-end"><a href="custom_view_download.php?page=ManufacturingMaterialRequirementConsumptionReport&format=csv" class="btn btn-success" target="_blank"><i class="ti-download"></i> Download CSV</a></div>
+                <div class="col-md-3"><input aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" name="from_date" value="<?php echo htmlspecialchars($fromDate); ?>" class="form-control"></div>
+                <div class="col-md-3"><input aria-label="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" name="to_date" value="<?php echo htmlspecialchars($toDate); ?>" class="form-control"></div>
+                <div class="col-md-3"><button class="btn btn-primary" type="submit"><i class="ti-filter"></i> <?= __('Apply'); ?></button></div>
+                <div class="col-md-3 text-end"><a href="custom_view_download.php?page=ManufacturingMaterialRequirementConsumptionReport&format=csv" class="btn btn-success" target="_blank"><i class="ti-download"></i> <?= __('Download CSV'); ?></a></div>
             </form>
             <div class="table-responsive manufacturing-report-scroll">
                 <table class="table table-bordered table-sm">
                     <tr style="background-color: #eeeeee;">
-                        <th scope="col">Production Notes</th>
-                        <th scope="col">Last Production Date</th>
-                        <th scope="col">WO No</th>
-                        <th scope="col">Product</th>
-                        <th scope="col">Material</th>
-                        <th scope="col">Required</th>
-                        <th scope="col">Stock Requested</th>
-                        <th scope="col">Stock Received</th>
-                        <th scope="col">Production Received</th>
-                        <th scope="col">Consumed</th>
-                        <th scope="col">Wastage</th>
-                        <th scope="col">Variance</th>
-                        <th scope="col">UOM</th>
+                        <th scope="col"><?= __('Production Notes'); ?></th>
+                        <th scope="col"><?= __('Last Production Date'); ?></th>
+                        <th scope="col"><?= __('WO No'); ?></th>
+                        <th scope="col"><?= __('Product'); ?></th>
+                        <th scope="col"><?= __('Material'); ?></th>
+                        <th scope="col"><?= __('Required'); ?></th>
+                        <th scope="col"><?= __('Stock Requested'); ?></th>
+                        <th scope="col"><?= __('Stock Received'); ?></th>
+                        <th scope="col"><?= __('Production Received'); ?></th>
+                        <th scope="col"><?= __('Consumed'); ?></th>
+                        <th scope="col"><?= __('Wastage'); ?></th>
+                        <th scope="col"><?= __('Variance'); ?></th>
+                        <th scope="col"><?= __('UOM'); ?></th>
                     </tr>
                     <?php foreach ($rows as $row) {
                         $csvdata[] = [
@@ -88,7 +88,7 @@ function csv_safe($value)
                             <td><?php echo htmlspecialchars($row['uom_name']); ?></td>
                         </tr><?php }
                             if (count((array)$rows) == 0) { ?><tr>
-                            <td colspan="13" class="text-center text-muted">No report data found.</td>
+                            <td colspan="13" class="text-center text-muted"><?= __('No report data found.'); ?></td>
                         </tr><?php } ?>
                     <?php $_SESSION['download_data'] = $csvdata; ?>
                 </table>
