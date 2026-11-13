@@ -89,16 +89,16 @@ if(isset($_POST['applyform'])) {
                     <div class="card card-custom " id="kt_page_sticky_card">
                         <div class="card-header">
                             <div class="card-title col-lg-6">
-                                <h3 class="card-label">Head Count</h3>
+                                <h3 class="card-label"><?= __('Head Count'); ?></h3>
                                 <div class="col-lg-4">
-                                    <input aria-label="Month Year Cal" class="form-control" type="month" name="month_year_cal" value="<?php echo $cur_year."-".$cur_month?>"  id="att_month_year" />
+                                    <input aria-label="<?= htmlspecialchars(__('Month Year Cal'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="month" name="month_year_cal" value="<?php echo $cur_year."-".$cur_month?>"  id="att_month_year" />
                                 </div>
                                 <div class="col-lg-2">
-                                    <button type="button" class="btn btn-outline-secondary" onclick="showpopup();"><i class="flaticon2-hourglass-1"></i>Filter</button>
+                                    <button type="button" class="btn btn-outline-secondary" onclick="showpopup();"><i class="flaticon2-hourglass-1"></i><?= __('Filter'); ?></button>
                                 </div>
                                 <div class="col-lg-2">
                                     <input type="hidden" id="filterby" name="filterby">
-                                    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"  name="applyform" value="apply">Apply</button>
+                                    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"  name="applyform" value="apply"><?= __('Apply'); ?></button>
                                 </div>
                             </div>
                         </div>
@@ -122,7 +122,7 @@ if(isset($_POST['applyform'])) {
                                     </div>
                                     <h2 class="card-label"> <?php echo $Total_Head_Count; ?> </h2>
                                 </div>
-                                <h3 class="card-label">&nbsp; Total Employees </h3>
+                                <h3 class="card-label">&nbsp; <?= __('Total Employees'); ?> </h3>
 
                                 <div class="d-flex mt-10">
                                     <span class="font-weight-bold mr-4"><?php echo $yearslist[0];?></span>
@@ -154,12 +154,12 @@ if(isset($_POST['applyform'])) {
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Name </th>
-                            <th scope="col">Hire Date </th>
-                            <th scope="col">Designation </th>
-                            <th scope="col">Department </th>
-                            <th scope="col">Location </th>
-                            <th scope="col">Employment Status </th>
+                            <th scope="col"><?= __('Name'); ?> </th>
+                            <th scope="col"><?= __('Hire Date'); ?> </th>
+                            <th scope="col"><?= __('Designation'); ?> </th>
+                            <th scope="col"><?= __('Department'); ?> </th>
+                            <th scope="col"><?= __('Location'); ?> </th>
+                            <th scope="col"><?= __('Employment Status'); ?> </th>
                         </tr>
                     </thead>
                     <tbody>
