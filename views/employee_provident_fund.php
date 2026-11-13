@@ -25,8 +25,8 @@ $esudata = json_decode($esudata,1);
 
 
 <div class="card-header">
-    <h5>Employee's Provident Fund(EPF)</h5>
-    <span>lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
+    <h5><?= __('Employee\'s Provident Fund(EPF)'); ?></h5>
+    <span><?= __('lorem ipsum dolor sit amet, consectetur adipisicing elit'); ?></span>
     <div class="card-header-right">
            <button type="button" onclick="dynamiceditpopup('COM_INSERT_EMP_PROVIDENT_FUNDS',<?php echo "'".deocdeId("id:".$esdata['id'])."'" ?>)" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"> <i class="fa fa-edit text-white"></i>   </button>
     </div>
@@ -38,33 +38,33 @@ $esudata = json_decode($esudata,1);
                                                 <div class="card-body">
                                                     <div class="col-md-6">
                                                         <hr>
-                                                        <span class="font-size-lg font-weight-bold text-muted">PF Number</span>
+                                                        <span class="font-size-lg font-weight-bold text-muted"><?= __('PF Number'); ?></span>
                                                         <span class="f-w-700 font-weight-bold float-right font-size-lg"><?php echo $esdata['epf_number']; ?></span>
                                                         <hr>
-                                                        <span class="font-size-lg font-weight-bold text-muted">Deductions Cycle</span>
+                                                        <span class="font-size-lg font-weight-bold text-muted"><?= __('Deductions Cycle'); ?></span>
                                                         <span class="f-w-700 font-weight-bold float-right "><?php echo $dcarray[$esdata['deduction_cycle']]; ?></span>
                                                         <hr>
-                                                        <span class="font-size-lg font-weight-bold text-muted ">Employee's Contribution</span>
-                                                        <span class="f-w-700 font-weight-bold float-right font-size-lg"><?php echo $esdata['employee_contribution']; ?>% of Gross Pay</span>
+                                                        <span class="font-size-lg font-weight-bold text-muted "><?= __('Employee\'s Contribution'); ?></span>
+                                                        <span class="f-w-700 font-weight-bold float-right font-size-lg"><?php echo $esdata['employee_contribution']; ?><?= __('% of Gross Pay'); ?></span>
                                                         <hr>
-                                                        <span class="font-size-lg font-weight-bold text-muted">Employer's Contribution</span>
-                                                        <span class="f-w-700 font-weight-bold float-right font-size-lg"><?php echo $esdata['employer_contribution']; ?>% of Gross Pay</span>
+                                                        <span class="font-size-lg font-weight-bold text-muted"><?= __('Employer\'s Contribution'); ?></span>
+                                                        <span class="f-w-700 font-weight-bold float-right font-size-lg"><?php echo $esdata['employer_contribution']; ?><?= __('% of Gross Pay'); ?></span>
                                                         <hr>
-                                                        <span class="font-size-lg font-weight-bold text-muted">Other Details</span>
-                                                        <span class="f-w-700 font-weight-bold float-right font-size-lg">Employer's contribution is <?php if($esdata['employer_contribution_in_ctc']!=0){ echo "not";
-} ?> included in the CTC</span>
+                                                        <span class="font-size-lg font-weight-bold text-muted"><?= __('Other Details'); ?></span>
+                                                        <span class="f-w-700 font-weight-bold float-right font-size-lg"><?= __('Employer\'s contribution is'); ?> <?php if($esdata['employer_contribution_in_ctc']!=0){ echo "not";
+} ?> <?= __('included in the CTC'); ?></span>
                                                         <hr>
-                                                        <span class="font-size-lg font-weight-bold text-muted ">Pro-rate Restricted PF Wage</span>
+                                                        <span class="font-size-lg font-weight-bold text-muted "><?= __('Pro-rate Restricted PF Wage'); ?></span>
                                                         <span class=" f-w-700 font-weight-bold float-right font-size-lg"><?php if($esdata['pro_rate_restricted']!=0){ echo "NO";
 }else{ echo "YES";
 } ?></span>
                                                         <hr>
-                                                        <span class="font-size-lg font-weight-bold text-muted">Allow Override</span>
+                                                        <span class="font-size-lg font-weight-bold text-muted"><?= __('Allow Override'); ?></span>
                                                         <span class="f-w-700 font-weight-bold float-right font-size-lg"><?php if($esdata['allow_override']!=0){ echo "NO";
 }else{ echo "YES";
 } ?></span>
                                                         <hr>
-                                                        <span class="font-size-lg font-weight-bold text-muted">Eraned PF Calucation</span>
+                                                        <span class="font-size-lg font-weight-bold text-muted"><?= __('Eraned PF Calucation'); ?></span>
                                                         <span class=" f-w-700 font-weight-bold float-right font-size-lg"><?php if($esdata['earned_pf_calculation']!=0){ echo "NO";
 }else{ echo "YES";
 } ?></span>
@@ -78,9 +78,9 @@ $esudata = json_decode($esudata,1);
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Sub Components</th>
-            <th scope="col">Employee's Contribution</th>
-            <th scope="col">Employer's Contribution</th>
+            <th scope="col"><?= __('Sub Components'); ?></th>
+            <th scope="col"><?= __('Employee\'s Contribution'); ?></th>
+            <th scope="col"><?= __('Employer\'s Contribution'); ?></th>
         </tr>
     </thead>
     <tbody>
