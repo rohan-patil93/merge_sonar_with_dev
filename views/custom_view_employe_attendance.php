@@ -35,18 +35,18 @@ $fields = array('maximum_hours_cap', 'full_day_hours', 'half_day_hours', 'break_
   <div class="container-fluid">
     <div class="card card-custom mb-5 ">
       <div class="card-header">
-        <h5>Work Attendance</h5>
+        <h5><?= __('Work Attendance'); ?></h5>
         <div class="card-header-right">
           <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
             <i class="icofont icofont-reply"></i>
-            Back
+            <?= __('Back'); ?>
           </a>
         </div>
       </div>
       <div class="card-body">
         <div class="row col-lg-12">
            <div class="col-lg-4 mt-3">
-            <span> Location : </span>
+            <span> <?= __('Location'); ?> : </span>
             </div>
             <div class="col-lg-2 mt-3">
             <span>
@@ -74,7 +74,7 @@ $fields = array('maximum_hours_cap', 'full_day_hours', 'half_day_hours', 'break_
           </div>
           <?php } ?>
           <div class="col-lg-4 mt-3">
-            <span> Working Days : </span>
+            <span> <?= __('Working Days'); ?> : </span>
             </div>
             <div class="col-lg-8 mt-3">
             <span>
@@ -86,11 +86,11 @@ $fields = array('maximum_hours_cap', 'full_day_hours', 'half_day_hours', 'break_
           <div>
             <div class="row col-lg-12 mt-3">
               <div class="col-lg-3">
-                <span>Shift:</span>
+                <span><?= __('Shift'); ?>:</span>
               </div>
               <div class="col-lg-3">
-                <select aria-label="Shift" class="js-example-basic-single" name="shift_id" id="shift_id">
-                  <option value="0">Select Any One </option>
+                <select aria-label="<?= htmlspecialchars(__('Shift'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="shift_id" id="shift_id">
+                  <option value="0"><?= __('Select Any One'); ?> </option>
                   <?php foreach((array)$attdetails['shifts'] as $sht){ ?>
                     <option value="<?php echo $sht['id']; ?>"><?php echo $sht['shift_name']; ?> </option>
                   <?php } ?>
@@ -103,11 +103,11 @@ $fields = array('maximum_hours_cap', 'full_day_hours', 'half_day_hours', 'break_
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Shift Setting Name </th>
-                    <th scope="col">Minimum </th>
-                    <th scope="col">Full Day </th>
-                    <th scope="col">Half Day </th>
-                    <th scope="col">Working Days </th>
+                    <th scope="col"><?= __('Shift Setting Name'); ?> </th>
+                    <th scope="col"><?= __('Minimum'); ?> </th>
+                    <th scope="col"><?= __('Full Day'); ?> </th>
+                    <th scope="col"><?= __('Half Day'); ?> </th>
+                    <th scope="col"><?= __('Working Days'); ?> </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -117,7 +117,7 @@ $fields = array('maximum_hours_cap', 'full_day_hours', 'half_day_hours', 'break_
                   <tr>
                     <td>
                       <label class="radio radio-inline">
-                        <input aria-label="Shift Setting Ids" type="radio"  id="shift_setting_ids" name="shift_setting_ids" value='<?php echo $shift['id']; ?>'> <span></span>
+                        <input aria-label="<?= htmlspecialchars(__('Shift Setting Ids'), ENT_QUOTES, 'UTF-8'); ?>" type="radio"  id="shift_setting_ids" name="shift_setting_ids" value='<?php echo $shift['id']; ?>'> <span></span>
                       </label>
                     </td>
                     <td><?php echo $shiftdata['name']; ?></td>
@@ -134,7 +134,7 @@ $fields = array('maximum_hours_cap', 'full_day_hours', 'half_day_hours', 'break_
       </div>
       <div class="text-right p-3">
         <button class="btn btn-primary" onclick="saveshiftemployee(<?php echo $shift['id']; ?>)" >
-          Save
+          <?= __('Save'); ?>
         </button>
       </div>
     </div>
