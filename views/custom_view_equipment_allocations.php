@@ -53,7 +53,7 @@ function getBuildingDetails(building_id=""){
     });
 }
 function getBuildingFoolSpaceDetails(building_floor_id=""){
-    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $('#dynamic_popup11').html(htmloader);
     jQuery.ajax({
         url: "views/custom_insert_building_floors.php",
@@ -77,7 +77,7 @@ function getBuildingDynamicPage(pagetype=""){
     if($("#form_"+pagetype).serialize()){
         formdata = $("#form_"+pagetype).serialize();
     }
-    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $('#htmlajaxpage').html(htmloader);
     if(pagetype !=""){
         $(".removeactivetab").removeClass('active');
@@ -211,7 +211,7 @@ function showEquipmentLogs(eq_id){
 }
 function insertEmployeePopUp(emp_id=""){
     $('#kt_modal_dynamic_popup').modal("show");
-    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $('#dynamic_popup1').html(htmloader);
 
     jQuery.ajax({
@@ -243,7 +243,7 @@ function getEquipemntsWithSeat(pagetype,building_id){
     }
     $(".emptycss_building_selectio").css("border-bottom","none");
     $("#building_selection_"+building_id).css("border-bottom","5px solid #b0dc00");
-    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $('.booking-seat').html(htmloader);
     updateUrlParameter('TAB2',pagetype);
     jQuery.ajax({
@@ -269,7 +269,7 @@ function getEquipemntsWithSeat(pagetype,building_id){
 function toAllocateEmployee(ea_id){
     $(".custom-popup-open").hide();
     $(".to_allocate_employee_"+ea_id).show();
-    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $(".to_allocate_employee_"+ea_id).html(htmloader);
     jQuery.ajax({
         url: "views/custom_view_equipment_allocation_ajax.php",
@@ -303,8 +303,8 @@ function allocateEmployeeSeat(equipment_allocation_id,emp_id=""){
         type: "warning",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
-        confirmButtonText: "Yes",
-        cancelButtonText: "No",
+        confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+        cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
         closeOnConfirm: true,
         closeOnCancel: true
     },
@@ -385,7 +385,7 @@ function toCubicleSpaceAllocateEmployee(bfs_id,event){
     popup.style.left = `${popupLeft}px`;
     popup.style.display = 'block';
 
-    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $(".to_allocate_employee_"+bfs_id).html(htmloader);
     jQuery.ajax({
         url: "views/custom_view_equipment_allocation_ajax.php",
@@ -426,8 +426,8 @@ function allocateEmployeecubicleSpace(building_floor_space_id,building_floor_spa
         type: "warning",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
-        confirmButtonText: "Yes",
-        cancelButtonText: "No",
+        confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+        cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
         closeOnConfirm: true,
         closeOnCancel: true
     },
@@ -473,7 +473,7 @@ function selectSpaceallocatedemployee(emp_id){
     }
 }
 function ShowBuildingFloorSpaceAllocations(building_floor_id,building_floor_space_allocation_id=""){
-    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $('#dynamic_popup11').html(htmloader);
     jQuery.ajax({
         url: "views/custom_view_building_floor_space_allocations.php",
@@ -495,7 +495,7 @@ function ShowBuildingFloorSpaceAllocations(building_floor_id,building_floor_spac
 }
 
 function getBuildingFoolSpaceDetailsNew(building_floor_id="",order_by=""){
-    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $('#dynamic_popup11').html(htmloader);
     jQuery.ajax({
         url: "views/custom_insert_building_floors_new.php",
@@ -512,7 +512,7 @@ function getBuildingFoolSpaceDetailsNew(building_floor_id="",order_by=""){
 }
 function getSearchEmployeeLocations(valu){
     if(valu.length >= 3){
-        var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $('#search_result_employee').html(htmloader);
         $("#search_result_employee").show('slow');
         jQuery.ajax({
@@ -556,7 +556,7 @@ function AddAssets(asset_id=""){
     }
 
 function ShowAssetsLocations(building_floor_id,asset_allocations_id=""){
-    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $('#dynamic_popup11').html(htmloader);
     jQuery.ajax({
         url: "views/custom_view_asset_allocations.php",
@@ -636,12 +636,12 @@ function insertAssetallocationlist(building_floor_id,building_floor_space_id,ass
 function approvedSpaceAllocations(building_floor_space_allocation_id){
     swal({
         title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-        text: "Are you sure you want to allocate this cubicle space",
+        text: <?php echo json_encode(__('Are you sure you want to allocate this cubicle space'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
         type: "warning",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
-        confirmButtonText: "Yes",
-        cancelButtonText: "No",
+        confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+        cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
         closeOnConfirm: true,
         closeOnCancel: true
     },
@@ -667,23 +667,23 @@ function approvedSpaceAllocations(building_floor_space_allocation_id){
     <div class="card-body">
         <ul class="nav md-tabs nav-bold nav-tabs-line nav-line-tabs-3x border-transparent fs-5 fw-bolder flex-nowrap responsive-tab My_Informarion_Tab infisuite_tab">
             <li class="nav-item">
-                <a class="nav-link <?php echo ($_REQUEST['TAB1'] =="HOME" || $_REQUEST['TAB1'] =="")?"active":""; ?> removeactivetab tab_HOME" data-bs-toggle="tab" href="#homes" role="tab" aria-selected="true" onclick="getBuildingDynamicPage('HOME')">Home</a>
+                <a class="nav-link <?php echo ($_REQUEST['TAB1'] =="HOME" || $_REQUEST['TAB1'] =="")?"active":""; ?> removeactivetab tab_HOME" data-bs-toggle="tab" href="#homes" role="tab" aria-selected="true" onclick="getBuildingDynamicPage('HOME')"><?= __('Home'); ?></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php echo ($_REQUEST['TAB1'] =="B")?"active":""; ?> removeactivetab tab_B" data-bs-toggle="tab" href="#itemcategory" role="tab" aria-selected="true" onclick="getBuildingDynamicPage('B')">Buildings</a>
+                <a class="nav-link <?php echo ($_REQUEST['TAB1'] =="B")?"active":""; ?> removeactivetab tab_B" data-bs-toggle="tab" href="#itemcategory" role="tab" aria-selected="true" onclick="getBuildingDynamicPage('B')"><?= __('Buildings'); ?></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php echo ($_REQUEST['TAB1']=="BSEM")?"active":""; ?> removeactivetab tab_BSEM" data-bs-toggle="tab" href="#costcenter" role="tab" aria-selected="true" onclick="getBuildingDynamicPage('BSEM')">Employees</a>
+                <a class="nav-link <?php echo ($_REQUEST['TAB1']=="BSEM")?"active":""; ?> removeactivetab tab_BSEM" data-bs-toggle="tab" href="#costcenter" role="tab" aria-selected="true" onclick="getBuildingDynamicPage('BSEM')"><?= __('Employees'); ?></a>
             </li>
             <?php if($_SESSION['working_role_short_code'] != SPACE_LOCATION_ADMIN_ROLE){ ?>
             <li class="nav-item">
-                <a class="nav-link <?php echo ($_REQUEST['TAB1']=="REPORT")?"active":""; ?> removeactivetab tab_REPORT" data-bs-toggle="tab" href="#costcenter" role="tab" aria-selected="true" onclick="getBuildingDynamicPage('REPORT')">Report</a>
+                <a class="nav-link <?php echo ($_REQUEST['TAB1']=="REPORT")?"active":""; ?> removeactivetab tab_REPORT" data-bs-toggle="tab" href="#costcenter" role="tab" aria-selected="true" onclick="getBuildingDynamicPage('REPORT')"><?= __('Report'); ?></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php echo ($_REQUEST['TAB1']=="DETAILREPORT")?"active":""; ?> removeactivetab tab_DETAILREPORT" data-bs-toggle="tab" href="#costcenter" role="tab" aria-selected="true" onclick="getBuildingDynamicPage('DETAILREPORT')">Detail Report</a>
+                <a class="nav-link <?php echo ($_REQUEST['TAB1']=="DETAILREPORT")?"active":""; ?> removeactivetab tab_DETAILREPORT" data-bs-toggle="tab" href="#costcenter" role="tab" aria-selected="true" onclick="getBuildingDynamicPage('DETAILREPORT')"><?= __('Detail Report'); ?></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php echo ($_REQUEST['TAB1']=="ASSETS")?"active":""; ?> removeactivetab tab_ASSETS" data-bs-toggle="tab" href="#costcenter" role="tab" aria-selected="true" onclick="getBuildingDynamicPage('ASSETS')">Assets</a>
+                <a class="nav-link <?php echo ($_REQUEST['TAB1']=="ASSETS")?"active":""; ?> removeactivetab tab_ASSETS" data-bs-toggle="tab" href="#costcenter" role="tab" aria-selected="true" onclick="getBuildingDynamicPage('ASSETS')"><?= __('Assets'); ?></a>
             </li>
         <?php } ?>
 
