@@ -40,22 +40,22 @@ function valueemtpydash($val){
                         <div class="col-lg-3 col-md-3 col-sm-12 col-12 mb-3">
                             <div class="col bg-light-primary ">
                                 <span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
-                                    <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="Theme-Logo" />
+                                    <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="<?= htmlspecialchars(__('Theme-Logo'), ENT_QUOTES, 'UTF-8'); ?>" />
                                 </span>
                                 <span class="text-dark-75 font-weight-bolder font-size-h3"><?php echo $company_name; ?></span>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-9 col-sm-12 col-12">
-                            <h4 class="card-label text-center f-w-700">Contractor Employee's Salary Details <?php echo date("M Y",strtotime($pay_month_year)); ?>
-                                <small class="f-10 d-block">Name : <?php echo $_SESSION['display_name']; ?> &nbsp;  Date & Time : <?php echo date("d-m-Y H:i:s"); ?></small>
+                            <h4 class="card-label text-center f-w-700"><?= __('Contractor Employee\'s Salary Details'); ?> <?php echo date("M Y",strtotime($pay_month_year)); ?>
+                                <small class="f-10 d-block"><?= __('Name'); ?> : <?php echo $_SESSION['display_name']; ?> &nbsp;  <?= htmlspecialchars(__('Date & Time'), ENT_QUOTES, 'UTF-8'); ?> : <?php echo date("d-m-Y H:i:s"); ?></small>
                             </h4>
                         </div>
                         <div class="col-lg-3 col-md-12 col-sm-12 col-12">
                             <form method="post" action="#">
                                 <div class="input-group input-group-button">
-                                    <input aria-label="Pay Month Year" type="month" name="pay_month_year" value="<?php echo $pay_year."-".$pay_month?>"  id="example-month-input"  class="form-control form-control-sm width1" style="font-size: 18px;height: 48px !important;padding: 10px 15px;">
+                                    <input aria-label="<?= htmlspecialchars(__('Pay Month Year'), ENT_QUOTES, 'UTF-8'); ?>" type="month" name="pay_month_year" value="<?php echo $pay_year."-".$pay_month?>"  id="example-month-input"  class="form-control form-control-sm width1" style="font-size: 18px;height: 48px !important;padding: 10px 15px;">
                                     <button type="submit" name="get_ecr_summary" class="btn btn-info waves-effect waves-light input-group-text mt-0">
-                                        Submit
+                                        <?= __('Submit'); ?>
                                     </button>
                                 </div>
                             </form>
@@ -68,18 +68,18 @@ function valueemtpydash($val){
                     <table id="basic-btn" class="table table-striped table-bordered nowrap">
                         <thead>
                             <tr>
-                                <th scope="col"> SL NO </th>
-                                <th scope="col">Employee Code</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Data of Joining</th>
-                                <th scope="col">GST</th>
-                                <th scope="col">Monthly</th>
-                                <th scope="col">One Time</th>
-                                <th scope="col">Total</th>
-                                <th scope="col">GST</th>
-                                <th scope="col">Total Inv Amount</th>
-                                <th scope="col">TDS</th>
-                                <th scope="col">Net Payable</th>
+                                <th scope="col"> <?= __('SL NO'); ?> </th>
+                                <th scope="col"><?= __('Employee Code'); ?></th>
+                                <th scope="col"><?= __('Name'); ?></th>
+                                <th scope="col"><?= __('Data of Joining'); ?></th>
+                                <th scope="col"><?= __('GST'); ?></th>
+                                <th scope="col"><?= __('Monthly'); ?></th>
+                                <th scope="col"><?= __('One Time'); ?></th>
+                                <th scope="col"><?= __('Total'); ?></th>
+                                <th scope="col"><?= __('GST'); ?></th>
+                                <th scope="col"><?= __('Total Inv Amount'); ?></th>
+                                <th scope="col"><?= __('TDS'); ?></th>
+                                <th scope="col"><?= __('Net Payable'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
