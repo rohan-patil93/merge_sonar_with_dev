@@ -10,14 +10,14 @@ $candidates = $result['candidates'];
 ?>
 <div class="modal-header">
 	<h5 class="modal-title">
-		Candidates
+		<?= __('Candidates'); ?>
 	</h5>
-	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body" > 
 	<div class="card">
 		<div class="input-group input-group-button mb-0">
-            <input type="text" id="dynamicfilterhideshow" data-id="categoryfilter" data-type="tr" class="form-control form-control-sm width1" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search"> 
+            <input type="text" id="dynamicfilterhideshow" data-id="categoryfilter" data-type="tr" class="form-control form-control-sm width1" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>"> 
             <span class="input-group-text addon-style">
                 <label class=""><span class="ti-search text-white mt-2"></span></label>
             </span>
@@ -27,10 +27,10 @@ $candidates = $result['candidates'];
 				<thead>
 					<tr>
 						<th scope="col">#.</th>
-						<th scope="col">Candidate </th>
-						<th scope="col">Candidate Email</th>
-						<th scope="col">Phone No.</th>
-						<th scope="col">Skills</th>
+						<th scope="col"><?= __('Candidate'); ?> </th>
+						<th scope="col"><?= __('Candidate Email'); ?></th>
+						<th scope="col"><?= __('Phone No.'); ?></th>
+						<th scope="col"><?= __('Skills'); ?></th>
 					</tr>
 				</thead>
 				<tbody id="categoryfilter">
@@ -54,7 +54,7 @@ $candidates = $result['candidates'];
 							<tr>
 								<td colspan="4">
 									<div class="card-px text-center ">
-										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No  Candidates </p>   
+										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Candidates'); ?> </p>   
 										<div class="text-center px-4">
 											<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
 										</div>   
@@ -68,5 +68,5 @@ $candidates = $result['candidates'];
 				</div>
 				<!-- 	</div> -->
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>  
+					<button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>  
 				</div>
