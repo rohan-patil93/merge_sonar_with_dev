@@ -203,18 +203,18 @@ if ($selectedLocationId != '') {
 <div class="page-body">
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
-            <h5 class="mb-0">In-house PPM Report</h5>
+            <h5 class="mb-0"><?= __('In-house PPM Report'); ?></h5>
             <?php if ($hasSearched && count((array)$rows) > 0) { ?>
-            <a href="custom_view_download.php?page=PpmInhouseReport&format=csv" target="_blank" class="btn btn-primary waves-effect waves-light">CSV</a>
+            <a href="custom_view_download.php?page=PpmInhouseReport&format=csv" target="_blank" class="btn btn-primary waves-effect waves-light"><?= __('CSV'); ?></a>
             <?php } ?>
         </div>
         <div class="card-body">
             <form method="get" id="ppmInhouseReportForm" class="row g-3 mb-3">
                 <input type="hidden" name="option" value="COM_VIEW_PPM_INHOUSE_REPORT">
                 <div class="col-lg-2">
-                    <span>Year <span class="text-danger">*</span></span>
-                    <select aria-label="Year" class="form-select js-example-basic-single select2" style="width:100%" name="year" id="ppm_year">
-                        <option value="">Select Year</option>
+                    <span><?= __('Year'); ?> <span class="text-danger">*</span></span>
+                    <select aria-label="<?= htmlspecialchars(__('Year'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single select2" style="width:100%" name="year" id="ppm_year">
+                        <option value=""><?= __('Select Year'); ?></option>
                         <?php if (count((array)$yearOptions) > 0) {
                             foreach ($yearOptions as $yr) { ?>
                         <option value="<?php echo (int) $yr; ?>" <?php echo ($selectedYear == (string) $yr) ? 'selected' : ''; ?>><?php echo (int) $yr; ?></option>
@@ -224,9 +224,9 @@ if ($selectedLocationId != '') {
                     <div id="ppm_year_err" class="text-danger small d-none"></div>
                 </div>
                 <div class="col-lg-3">
-                    <span>Asset Category</span>
-                    <select aria-label="Category" class="form-select js-example-basic-single select2" style="width:100%" name="category_id" id="ppm_category_id">
-                        <option value="">All</option>
+                    <span><?= __('Asset Category'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Category'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single select2" style="width:100%" name="category_id" id="ppm_category_id">
+                        <option value=""><?= __('All'); ?></option>
                         <?php if (count((array)($filters['categories'] ?? array())) > 0) {
                             foreach ($filters['categories'] as $cat) { ?>
                         <option value="<?php echo (int) ($cat['id'] ?? 0); ?>" <?php echo ($selectedCategoryId == (string) ($cat['id'] ?? '')) ? 'selected' : ''; ?>><?php echo htmlspecialchars($cat['name'] ?? '', ENT_QUOTES, 'UTF-8'); ?></option>
@@ -235,9 +235,9 @@ if ($selectedLocationId != '') {
                     </select>
                 </div>
                 <div class="col-lg-3">
-                    <span>Location</span>
-                    <select aria-label="Location" class="form-select js-example-basic-single select2" style="width:100%" name="location_id" id="ppm_location_id">
-                        <option value="">All</option>
+                    <span><?= __('Location'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Location'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single select2" style="width:100%" name="location_id" id="ppm_location_id">
+                        <option value=""><?= __('All'); ?></option>
                         <?php if (count((array)($filters['locations'] ?? array())) > 0) {
                             foreach ($filters['locations'] as $loc) { ?>
                         <option value="<?php echo (int) ($loc['id'] ?? 0); ?>" <?php echo ($selectedLocationId == (string) ($loc['id'] ?? '')) ? 'selected' : ''; ?>><?php echo htmlspecialchars($loc['name'] ?? '', ENT_QUOTES, 'UTF-8'); ?></option>
@@ -247,7 +247,7 @@ if ($selectedLocationId != '') {
                 </div>
                 <div class="col-lg-2 d-flex align-items-end">
                     <button type="submit" class="btn btn-primary w-100">
-                        <i class="icofont icofont-search"></i> Search
+                        <i class="icofont icofont-search"></i> <?= __('Search'); ?>
                     </button>
                 </div>
             </form>
@@ -260,12 +260,12 @@ if ($selectedLocationId != '') {
                 <table class="table table-bordered table-hover table-sm">
                     <thead class="bg-primary text-white">
                         <tr>
-                            <th scope="col" rowspan="2" class="align-middle">S.No</th>
+                            <th scope="col" rowspan="2" class="align-middle"><?= __('S.No'); ?></th>
 
-                            <th scope="col" rowspan="2" class="align-middle">Asset Number</th>
-                            <th scope="col" rowspan="2" class="align-middle">Equipment Name</th>
-                            <th scope="col" rowspan="2" class="align-middle">Category</th>
-                            <th scope="col" rowspan="2" class="align-middle">Location</th>
+                            <th scope="col" rowspan="2" class="align-middle"><?= __('Asset Number'); ?></th>
+                            <th scope="col" rowspan="2" class="align-middle"><?= __('Equipment Name'); ?></th>
+                            <th scope="col" rowspan="2" class="align-middle"><?= __('Category'); ?></th>
+                            <th scope="col" rowspan="2" class="align-middle"><?= __('Location'); ?></th>
                             <?php if (count((array)$monthLabels) > 0) {
                                 foreach ($monthLabels as $ml) { ?>
                             <th scope="col" colspan="2" class="text-center"><?php echo $ml; ?></th>
@@ -275,8 +275,8 @@ if ($selectedLocationId != '') {
                         <tr>
                             <?php if (count((array)$monthLabels) > 0) {
                                 foreach ($monthLabels as $ml) { ?>
-                            <th scope="col" class="text-center"><?php echo $ml; ?> Planned</th>
-                            <th scope="col" class="text-center"><?php echo $ml; ?> Actual</th>
+                            <th scope="col" class="text-center"><?php echo $ml; ?> <?= __('Planned'); ?></th>
+                            <th scope="col" class="text-center"><?php echo $ml; ?> <?= __('Actual'); ?></th>
                             <?php }
                             } ?>
                         </tr>
@@ -285,7 +285,7 @@ if ($selectedLocationId != '') {
                         <?php if (!$hasSearched) { ?>
                         <tr>
                             <td colspan="<?php echo (int) $ppmReportColspan; ?>" class="text-center text-muted py-4">
-                                <p class="f-16 fw-bold m-b-10"><i class="icofont icofont-search"></i> Select year and click Search to load the report.</p>
+                                <p class="f-16 fw-bold m-b-10"><i class="icofont icofont-search"></i> <?= __('Select year and click Search to load the report.'); ?></p>
                             </td>
                         </tr>
                         <?php } elseif (count((array)$rowsByFrequency) > 0) {
@@ -310,7 +310,7 @@ if ($selectedLocationId != '') {
                             <td colspan="<?php echo (int) $ppmReportColspan; ?>" class="fw-bold text-primary py-2">
                                 <i class="icofont icofont-chart-histogram"></i>
                                 <?php echo htmlspecialchars($freqLabel, ENT_QUOTES, 'UTF-8'); ?>
-                                <span class="text-muted fw-normal">(<?php echo (int) $freqCount; ?> asset<?php echo $freqCount == 1 ? '' : 's'; ?>)</span>
+                                <span class="text-muted fw-normal">(<?php echo (int) $freqCount; ?> <?= __('asset'); ?><?php echo $freqCount == 1 ? '' : 's'; ?>)</span>
                             </td>
                         </tr>
                         <?php
@@ -365,7 +365,7 @@ if ($selectedLocationId != '') {
                                 }
                         ?>
                         <tr class="table-light fw-semibold">
-                            <td colspan="6" class="text-end"><?php echo htmlspecialchars($freqLabel, ENT_QUOTES, 'UTF-8'); ?> subtotal</td>
+                            <td colspan="6" class="text-end"><?php echo htmlspecialchars($freqLabel, ENT_QUOTES, 'UTF-8'); ?> <?= __('subtotal'); ?></td>
                             <?php if (count((array)$monthLabels) > 0) {
                                 foreach ($monthLabels as $mk => $ml) { ?>
                             <td class="text-center"><?php echo (int) ($sectionTotals[$mk]['planned'] ?? 0); ?></td>
@@ -402,7 +402,7 @@ if ($selectedLocationId != '') {
                         } else { ?>
                         <tr>
                             <td colspan="<?php echo (int) $ppmReportColspan; ?>" class="text-center text-danger">
-                                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No records found for the selected filters.</p>
+                                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No records found for the selected filters.'); ?></p>
                                 <div class="text-center px-4">
                                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                 </div>
@@ -413,7 +413,7 @@ if ($selectedLocationId != '') {
                     <?php if ($hasSearched && count((array)$rowsByFrequency) > 0) { ?>
                     <tfoot>
                         <tr class="fw-bold table-light">
-                            <td colspan="5" class="text-end">Grand Total</td>
+                            <td colspan="5" class="text-end"><?= __('Grand Total'); ?></td>
                             <?php if (count((array)$monthLabels) > 0) {
                                 foreach ($monthLabels as $mk => $ml) { ?>
                             <td class="text-center"><?php echo (int) ($monthTotals[$mk]['planned'] ?? 0); ?></td>
@@ -441,7 +441,7 @@ $("#ppmInhouseReportForm").submit(function(e) {
     var year = $("#ppm_year").val();
     $("#ppm_year_err").addClass("d-none");
     if (!year) {
-        $("#ppm_year_err").text("Please select Year").removeClass("d-none");
+        $("#ppm_year_err").text(<?php echo json_encode(__('Please select Year'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).removeClass("d-none");
         e.preventDefault();
     }
 });
