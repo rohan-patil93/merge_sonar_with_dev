@@ -3,7 +3,7 @@
         <div class="card card-custom gutter-b">
             <div class="card-header">
                 <div class="card-title">
-                    <h3 class="card-label">Accounts - Receivable</h3>
+                    <h3 class="card-label"><?= __('Accounts - Receivable'); ?></h3>
                 </div>
             </div>
             <div class="row">
@@ -13,15 +13,15 @@
                     <div class="card card-custom  card-stretch gutter-b">
                         <div class="card-body my-4">
                             <a href="#" class="card-title font-weight-bolder text-dark font-size-h6 mb-4 text-hover-state-dark d-block">
-                                Total Receivable
+                                <?= __('Total Receivable'); ?>
                                 <span class="float-right">₹<?php echo "17,800"; ?></span>
                             </a>
                             <a href="#" class="card-title font-weight-bolder text-dark font-size-h6 mb-4 text-hover-state-dark d-block">
-                                Balance
+                                <?= __('Balance'); ?>
                                 <span class="float-right">₹<?php echo "1,800"; ?></span>
                             </a>
                             <a href="#" class="card-title font-weight-bolder text-dark font-size-h6 mb-4 text-hover-state-dark d-block">
-                                Overdue Balance
+                                <?= __('Overdue Balance'); ?>
                                 <span class="float-right">₹<?php echo "2180"; ?></span>
                             </a>
                         </div>
@@ -39,7 +39,7 @@
         <div class="card card-custom gutter-b">
             <div class="card-header">
                 <div class="card-title">
-                    <h3 class="card-label">Accounts - Payable</h3>
+                    <h3 class="card-label"><?= __('Accounts - Payable'); ?></h3>
                 </div>
             </div>
             <div class="row">
@@ -48,15 +48,15 @@
                     <div class="card card-custom  card-stretch gutter-b">
                         <div class="card-body my-4">
                             <a href="#" class="card-title font-weight-bolder text-dark font-size-h6 mb-4 text-hover-state-dark d-block">
-                                Total Paybale
+                                <?= __('Total Paybale'); ?>
                                 <span class="float-right">₹<?php echo "17,800"; ?></span>
                             </a>
                             <a href="#" class="card-title font-weight-bolder text-dark font-size-h6 mb-4 text-hover-state-dark d-block">
-                                Balance
+                                <?= __('Balance'); ?>
                                 <span class="float-right">₹<?php echo "1,800"; ?></span>
                             </a>
                             <a href="#" class="card-title font-weight-bolder text-dark font-size-h6 mb-4 text-hover-state-dark d-block">
-                                Overdue Balance
+                                <?= __('Overdue Balance'); ?>
                                 <span class="float-right">₹<?php echo "2180"; ?></span>
                             </a>
                         </div>
@@ -78,7 +78,7 @@
         <div class="card card-custom gutter-b">
             <div class="card-header">
                 <div class="card-title">
-                    <h3 class="card-label">Aging - Receivable</h3>
+                    <h3 class="card-label"><?= __('Aging - Receivable'); ?></h3>
                 </div>
             </div>
             <div class="card-body">
@@ -92,7 +92,7 @@
         <div class="card card-custom gutter-b">
             <div class="card-header">
                 <div class="card-title">
-                    <h3 class="card-label">Receiable Overdue</h3>
+                    <h3 class="card-label"><?= __('Receiable Overdue'); ?></h3>
                 </div>
             </div>
             <div class="card-body">
@@ -107,7 +107,7 @@
         <div class="card card-custom gutter-b">
             <div class="card-header">
                 <div class="card-title">
-                    <h3 class="card-label">Payable - Overdue</h3>
+                    <h3 class="card-label"><?= __('Payable - Overdue'); ?></h3>
                 </div>
             </div>
             <div class="card-body">
@@ -122,7 +122,7 @@
         <div class="card card-custom gutter-b">
             <div class="card-header">
                 <div class="card-title">
-                    <h3 class="card-label">Aging - Payable</h3>
+                    <h3 class="card-label"><?= __('Aging - Payable'); ?></h3>
                 </div>
             </div>
             <div class="card-body">
@@ -139,7 +139,7 @@
         <div class="card card-custom gutter-b">
             <div class="card-header">
                 <div class="card-title">
-                    <h3 class="card-label">Balance by clients -91-120</h3>
+                    <h3 class="card-label"><?= __('Balance by clients -91-120'); ?></h3>
                 </div>
             </div>
             <div class="card-body">
@@ -153,7 +153,7 @@
         <div class="card card-custom gutter-b">
             <div class="card-header">
                 <div class="card-title">
-                    <h3 class="card-label">Cash Flow</h3>
+                    <h3 class="card-label"><?= __('Cash Flow'); ?></h3>
                 </div>
             </div>
             <div class="card-body">
@@ -168,7 +168,7 @@
         <div class="card card-custom gutter-b">
             <div class="card-header">
                 <div class="card-title">
-                    <h3 class="card-label">Balance by vendors -91 -120</h3>
+                    <h3 class="card-label"><?= __('Balance by vendors -91 -120'); ?></h3>
                 </div>
             </div>
             <div class="card-body">
@@ -186,7 +186,7 @@
         <div class="card card-custom gutter-b">
             <div class="card-header">
                 <div class="card-title">
-                    <h3 class="card-label">Clients Balance & Overdue</h3>
+                    <h3 class="card-label"><?= htmlspecialchars(__('Clients Balance & Overdue'), ENT_QUOTES, 'UTF-8'); ?></h3>
                 </div>
             </div>
             <div class="card-body">
@@ -200,7 +200,7 @@
         <div class="card card-custom gutter-b">
             <div class="card-header">
                 <div class="card-title">
-                    <h3 class="card-label">Liability vs Equity Ratio as of Dec</h3>
+                    <h3 class="card-label"><?= __('Liability vs Equity Ratio as of Dec'); ?></h3>
                 </div>
             </div>
             <div class="row">
@@ -213,15 +213,15 @@
                     <div class="card card-custom  card-stretch gutter-b">
                         <div class="card-body my-4">
                             <a href="#" class="card-title font-weight-bolder text-dark font-size-h6 mb-4 text-hover-state-dark d-block">
-                                Liability
+                                <?= __('Liability'); ?>
                                 <span class="float-right">₹<?php echo "17,800"; ?></span>
                             </a>
                             <a href="#" class="card-title font-weight-bolder text-dark font-size-h6 mb-4 text-hover-state-dark d-block">
-                                Equity
+                                <?= __('Equity'); ?>
                                 <span class="float-right">₹<?php echo "1,800"; ?></span>
                             </a>
                             <a href="#" class="card-title font-weight-bolder text-dark font-size-h6 mb-4 text-hover-state-dark d-block">
-                                Ratio
+                                <?= __('Ratio'); ?>
                                 <span class="float-right">₹<?php echo "2180"; ?></span>
                             </a>
                         </div>
@@ -240,7 +240,7 @@
         <div class="card card-custom gutter-b">
             <div class="card-header">
                 <div class="card-title">
-                    <h3 class="card-label">Vendors balance & Overdue</h3>
+                    <h3 class="card-label"><?= htmlspecialchars(__('Vendors balance & Overdue'), ENT_QUOTES, 'UTF-8'); ?></h3>
                 </div>
             </div>
             <div class="card-body">
