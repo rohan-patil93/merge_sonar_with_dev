@@ -337,6 +337,7 @@ class rentalUserClass extends userClass{
 	}
 	function insertRentalInvoices($get){
 		global $callConfig;
+		$post = array(); $remainingdays = null;
 		$return['get']= $get;
 		//echo "<pre>";
 		$property_tenant_detailssql = "SELECT * FROM property_tenant_details WHERE company_id = '".$get['company_id']."' AND id = '".$get['rid']."'  AND is_active =0";
@@ -354,7 +355,7 @@ class rentalUserClass extends userClass{
 
 			$rent_escalation_after_month = $property_tenant_detailsres->rent_escalation_after_month;
 			$rent_escalation_percentage = $property_tenant_detailsres->rent_escalation_percentage;
-			if($rent_escalation_after_month !="" AND $rent_escalation_after_month !=""){
+			if($rent_escalation_after_month !=""){
 				$rent_escalation_after_every_month = range($rent_escalation_after_month, 5000, $rent_escalation_after_month);
 			}
 			$return['property_tenant_details'] = $property_tenant_detailsres;
@@ -512,7 +513,7 @@ class rentalUserClass extends userClass{
 					}
 					$perdayrante = $monthlyrant[$keyyy]/$totaldays;
 					$rent_tax = 0;
-					if($property_tenant_detailsres->tax_percentage !="" AND $property_tenant_detailsres->tax_percentage !=""){
+					if($property_tenant_detailsres->tax_percentage !=""){
 						$rent_tax = $monthlyrant[$keyyy]*($property_tenant_detailsres->tax_percentage/100);
 					}
 					$totalmonthly_tax += $rent_tax;
@@ -757,6 +758,7 @@ class rentalUserClass extends userClass{
 	}
 	function getRentalDashboardChart($get){
 		global $callConfig;
+		$condition = '';
 		// $exploderole = explode(',', $get['roleshortcode']);
 		// if($get['admin_type'] != 1){
 		// 	$condition = " AND emp_id = ".$get['emp_id'];
@@ -825,6 +827,7 @@ class rentalUserClass extends userClass{
 	}
 	function updatePropertyTenantBillings($get,$post){
 		global $callConfig;
+		$utility_gst_switch = '';
 		$return = array();
 		$return['post'] = $post;
 		$totalrent =$totaltax=$totaltaxwithrent =$utility_amount = $utility_tax =   0;
@@ -1005,6 +1008,7 @@ class rentalUserClass extends userClass{
 	}
 	function insertRentalInvoicesNew($get,$property_tenant_billings_id,$status=''){
 		global $callConfig;
+		$post = array();
 		$return = array();
 		$ptbsql = "SELECT id,property_tenant_detail_id,bill_detail,utility_details,month_start_date, rent_amount, rent_tax, rent_total_amount, utility_amount, total_amount, rent_due_date, rent_additional_notes, utility_transaction_date,utility_due_date,utility_additional_notes,rent_transaction_date, utility_tax, utility_amc_details, utility_amc_amount, utility_amc_tax, utility_amc_transaction_date, utility_amc_due_date, utility_amc_additional_notes FROM property_tenant_billings WHERE company_id = '".$get['company_id']."' AND id = '".$property_tenant_billings_id."' AND is_active = 0";      
 
@@ -1131,14 +1135,12 @@ class rentalUserClass extends userClass{
 					//$item_name = $poda['name']." (Area : ".$poda['property_area']." ".$unitom.", Rate : ".$poda['per_sq_ft_with_discount']." )";
 					$item_name = $poda['name'];
 					//$poda['remarks'] = $poda['remarks']." ".date("M Y",strtotime($ptbres->month_start_date));
-					$poda['remarks'] = $poda['remarks'];
 					$item_quantity = $poda['property_area'];
 					$item_price =$poda['per_sq_ft_with_discount'];
 					$rent_amount = ($poda['monthly_rent'] !="" AND $poda['monthly_rent'] !='0')?$poda['monthly_rent']:$poda['rent'];
 				}else{
 					$item_name = $poda['name'];
 					//$poda['remarks'] = $poda['remarks']." ".date("M Y",strtotime($ptbres->month_start_date));
-					$poda['remarks'] = $poda['remarks'];
 					$item_quantity = $poda['qty'] !=""?$poda['qty']:"1";
 					$item_price =$poda['rate'];
 					$rent_amount = $poda['rent'];
@@ -1577,6 +1579,7 @@ class rentalUserClass extends userClass{
 	}
 	function getOwnerReports($get){
 		global $callConfig;
+		$post = null;
 		$return['post']= $post;
 		$condition = "";
 		if($get['property_owner_id'] !=""){
@@ -1592,7 +1595,6 @@ class rentalUserClass extends userClass{
 
 		$property_owner_detailssql = "SELECT id, property_owner_id, property_name, property_type, property_sub_type, property_address FROM property_owner_details WHERE company_id = '".$get['company_id']."' AND is_active =0";
 		$property_owner_detailsres=$callConfig->getAllRows($property_owner_detailssql);
-		$return['property_owner_details'] = $property_owner_detailsres;
 		$property_owner_details =  array();
 		foreach($property_owner_detailsres as $pwd){
 			$property_owner_details[$pwd->property_owner_id][]= $pwd;
@@ -1642,7 +1644,6 @@ class rentalUserClass extends userClass{
 
 		$property_owner_detailssql = "SELECT id, property_name FROM property_owner_details WHERE company_id = '".$get['company_id']."' AND is_active =0";
 		$property_owner_detailsres=$callConfig->getAllRows($property_owner_detailssql);
-		$return['property_owner_details'] = $property_owner_detailsres;
 		$property_owner_details =  array();
 		foreach($property_owner_detailsres as $pwd){
 			$property_owner_details[$pwd->id]= $pwd->property_name;
@@ -1715,7 +1716,6 @@ class rentalUserClass extends userClass{
 
 		$property_owner_detailssql = "SELECT id, property_name FROM property_owner_details WHERE company_id = '".$get['company_id']."' AND is_active =0";
 		$property_owner_detailsres=$callConfig->getAllRows($property_owner_detailssql);
-		$return['property_owner_details'] = $property_owner_detailsres;
 		$property_owner_details =  array();
 		foreach($property_owner_detailsres as $pwd){
 			$property_owner_details[$pwd->id]= $pwd;
@@ -1731,7 +1731,6 @@ class rentalUserClass extends userClass{
 			$opening_balance_inv[$ri->parent_ref_id]['ob_rent']= $ri;
 		}
 		$ob_rental_invoicessql = "SELECT parent_ref_id, SUM(amount) as amount, SUM(tax_amount) as tax_amount, SUM(total_amount) as total_amount, SUM(pending_amount) as pending_amount FROM utility_rental_invoices WHERE company_id = '".$get['company_id']."' AND is_active =0 AND current_status = '".ST_APPROVED."' AND party_id IN(".$custids.")  AND cancel_invoice = 'N' AND transaction_date <= '".$previouslastdate."' GROUP BY parent_ref_id";
-		$return['ob_rental_invoicessql'] = $ob_rental_invoicessql;
 		$ob_rental_invoicesres=$callConfig->getAllRows($ob_rental_invoicessql);
 		foreach($ob_rental_invoicesres as $ri){
 			$opening_balance_inv[$ri->parent_ref_id]['ob_utility']= $ri;
@@ -2450,6 +2449,7 @@ class rentalUserClass extends userClass{
 
 	function toGetApplicationRentalOwnerSerialNumber($table_name,$owner_id,$trandate=""){
 		global $callConfig;
+		$get = array();
 		$transdate = $trandate !=""?$trandate:date('Y-m-d');
 		
 		$finyaer = date("m",strtotime($transdate)) >= 4 ? date("Y",strtotime($transdate)). '-' . (date("y",strtotime($transdate))+1) : (date("Y",strtotime($transdate)) - 1). '-' . date("y",strtotime($transdate));
@@ -2467,7 +2467,6 @@ class rentalUserClass extends userClass{
 			}
        }else{
             $query = "SELECT * FROM `application_rental_owner_serial_numbers` WHERE application_table_name = '".$table_name."' AND owner_id = '".$owner_id."' AND is_active =0";  
-            $return['query_2_res'] = $query;   
             $res = $callConfig->getRow($query);
             $return['query_2_res'] = $res;  
             if(isset($res->doc_no_length)){
@@ -2683,7 +2682,6 @@ class rentalUserClass extends userClass{
 
 		$property_owner_detailssql = "SELECT id, property_name FROM property_owner_details WHERE company_id = '".$get['company_id']."' AND is_active =0";
 		$property_owner_detailsres=$callConfig->getAllRows($property_owner_detailssql);
-		$return['property_owner_details'] = $property_owner_detailsres;
 		$property_owner_details =  array();
 		foreach($property_owner_detailsres as $pwd){
 			$property_owner_details[$pwd->id]= $pwd;
@@ -2699,7 +2697,6 @@ class rentalUserClass extends userClass{
 			$opening_balance_inv[$ri->parent_ref_id]['ob_rent']= $ri;
 		}
 		$ob_rental_invoicessql = "SELECT parent_ref_id, SUM(amount) as amount, SUM(tax_amount) as tax_amount, SUM(total_amount) as total_amount, SUM(pending_amount) as pending_amount FROM utility_rental_invoices WHERE company_id = '".$get['company_id']."' AND is_active =0 AND current_status = '".ST_APPROVED."' AND party_id IN(".$custids.")  AND cancel_invoice = 'N' AND transaction_date <= '".$previouslastdate."' GROUP BY parent_ref_id";
-		$return['ob_rental_invoicessql'] = $ob_rental_invoicessql;
 		$ob_rental_invoicesres=$callConfig->getAllRows($ob_rental_invoicessql);
 		foreach($ob_rental_invoicesres as $ri){
 			$opening_balance_inv[$ri->parent_ref_id]['ob_utility']= $ri;
