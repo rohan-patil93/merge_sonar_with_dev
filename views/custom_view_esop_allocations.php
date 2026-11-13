@@ -21,7 +21,7 @@
 ?>
 <script type="text/javascript">
     function getESOPAllocationDetails(esop_id){
-        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $("#ajaxesopplansdetails").html(loader);
         $('.allcrd').removeClass('card-green')
         $('.allcrd').removeClass('text-white')
@@ -43,7 +43,7 @@
     <div class="col-xl-3 col-md-6">
         <div class="card ticket-card">
             <div class="card-body">
-                <p class="m-b-10 bg-c-green lbl-card"><i class="fas fa-folder-open"></i>  Total ESOP Plans</p>
+                <p class="m-b-10 bg-c-green lbl-card"><i class="fas fa-folder-open"></i>  <?= __('Total ESOP Plans'); ?></p>
                 <div class="text-center">
                     <h3 class="m-b-0 d-inline-block text-c-green"><?php echo count((array)$esop_plans); ?></h3>
                 </div>
@@ -53,7 +53,7 @@
     <div class="col-xl-3 col-md-6">
         <div class="card ticket-card">
             <div class="card-body">
-                <p class="m-b-10 bg-c-blue lbl-card"><i class="fas fa-folder-open"></i>  Total Shares</p>
+                <p class="m-b-10 bg-c-blue lbl-card"><i class="fas fa-folder-open"></i>  <?= __('Total Shares'); ?></p>
                 <div class="text-center">
                     <h3 class="m-b-0 d-inline-block text-c-blue"><?php echo $totalshare; ?></h3>
                 </div>
@@ -63,7 +63,7 @@
     <div class="col-xl-3 col-md-6">
         <div class="card ticket-card">
             <div class="card-body">
-                <p class="m-b-10 bg-c-yellow lbl-card"><i class="fas fa-folder-open"></i> Allocation Shares</p>
+                <p class="m-b-10 bg-c-yellow lbl-card"><i class="fas fa-folder-open"></i> <?= __('Allocation Shares'); ?></p>
                 <div class="text-center">
                     <h3 class="m-b-0 d-inline-block text-c-yellow"><?php echo $allocatedshare; ?></h3>
                 </div>
@@ -73,7 +73,7 @@
     <div class="col-xl-3 col-md-6">
         <div class="card ticket-card">
             <div class="card-body">
-                <p class="m-b-10 bg-c-red lbl-card"><i class="fas fa-folder-open"></i>  Un-allocation Shares</p>
+                <p class="m-b-10 bg-c-red lbl-card"><i class="fas fa-folder-open"></i>  <?= __('Un-allocation Shares'); ?></p>
                 <div class="text-center">
                     <h3 class="m-b-0 d-inline-block text-c-red"><?php echo $totalshare - $allocatedshare; ?></h3>
                 </div>
@@ -86,7 +86,7 @@
     <div class="col-lg-3">
         <div class="card">
             <div class="card-header">
-                <h5>ESOP Plans</h5>
+                <h5><?= __('ESOP Plans'); ?></h5>
                 <div class="card-header-right table-card-header  m-r-50">
                 </div>
             </div>
@@ -102,8 +102,8 @@
 ?>
                 <div class="card  proj-progress-card allcrd cardid_<?php echo $esopplans['id']; ?> <?php echo $i=='0'?"card-green text-white":""; ?>" onclick="getESOPAllocationDetails('<?php echo $esopplans['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                     <div class="card-body ">
-                        <h6><?php echo $esopplans['plan_name']; ?> <span class="form-label label label-md label-primary float-end">Buckets : <?php echo $esop_plans_detail['total_bucket_cnt']; ?></span></h6>
-                        <h5 class="mt-3 mb-2 f-w-700"><?php echo $esopplans['share']; ?> <span class="f-12">(Allocated Shares - <?php echo $esop_plans_detail['allocated_shares']; ?>)</span><span class=" float-end"><?php echo $allocateper; ?>%</span></h5>
+                        <h6><?php echo $esopplans['plan_name']; ?> <span class="form-label label label-md label-primary float-end"><?= __('Buckets'); ?> : <?php echo $esop_plans_detail['total_bucket_cnt']; ?></span></h6>
+                        <h5 class="mt-3 mb-2 f-w-700"><?php echo $esopplans['share']; ?> <span class="f-12"><?= __('(Allocated Shares'); ?> - <?php echo $esop_plans_detail['allocated_shares']; ?>)</span><span class=" float-end"><?php echo $allocateper; ?>%</span></h5>
                         <div class="progress">
                             <div class="progress-bar bg-c-red" style="width:<?php echo $allocateper; ?>%"></div>
                         </div>
