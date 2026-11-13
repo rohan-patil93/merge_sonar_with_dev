@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Procurement Intelligence Dashboard</title>
+  <title><?= __('Procurement Intelligence Dashboard'); ?></title>
 
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
@@ -139,11 +139,11 @@
 
     <div class="d-flex justify-content-between align-items-center mb-4">
       <div>
-        <h1 class="h5 fw-bold text-dark mb-0">Procurement Intelligence Dashboard</h1>
-        <p class="text-muted small mb-0" style="font-size: 12px;">23 Apr 2026 • Last refreshed: 09:36 am</p>
+        <h1 class="h5 fw-bold text-dark mb-0"><?= __('Procurement Intelligence Dashboard'); ?></h1>
+        <p class="text-muted small mb-0" style="font-size: 12px;"><?= __('23 Apr 2026 • Last refreshed: 09:36 am'); ?></p>
       </div>
       <button class="btn btn-primary btn-sm px-3 py-1" style="border-radius: 6px; font-size: 14px;">
-        <i class="bi bi-arrow-clockwise me-1"></i> Refresh
+        <i class="bi bi-arrow-clockwise me-1"></i> <?= __('Refresh'); ?>
       </button>
     </div>
 
@@ -153,8 +153,8 @@
         <div class="tab-icon-wrapper"><i class="bi bi-bell fs-4"></i></div>
         <div>
           <span class="tab-main-count">10</span>
-          <span class="tab-title">Notification</span>
-          <span class="tab-sub-text">15 Action</span>
+          <span class="tab-title"><?= __('Notification'); ?></span>
+          <span class="tab-sub-text"><?= __('15 Action'); ?></span>
         </div>
       </a>
 
@@ -162,8 +162,8 @@
         <div class="tab-icon-wrapper"><i class="bi bi-clock text-primary fs-4"></i></div>
         <div>
           <span class="tab-main-count">5</span>
-          <span class="tab-title">Pending Approvals</span>
-          <span class="tab-sub-text text-danger fw-bold">4 Critical</span>
+          <span class="tab-title"><?= __('Pending Approvals'); ?></span>
+          <span class="tab-sub-text text-danger fw-bold"><?= __('4 Critical'); ?></span>
         </div>
       </a>
 
@@ -171,8 +171,8 @@
         <div class="tab-icon-wrapper"><i class="bi bi-clipboard-check text-primary fs-4"></i></div>
         <div>
           <span class="tab-main-count">3</span>
-          <span class="tab-title">Unread Tasks</span>
-          <span class="tab-sub-text text-danger fw-bold">3 Critical</span>
+          <span class="tab-title"><?= __('Unread Tasks'); ?></span>
+          <span class="tab-sub-text text-danger fw-bold"><?= __('3 Critical'); ?></span>
         </div>
       </a>
 
@@ -180,8 +180,8 @@
         <div class="tab-icon-wrapper"><i class="bi bi-headset text-primary fs-4"></i></div>
         <div>
           <span class="tab-main-count">25</span>
-          <span class="tab-title">Customer Issues</span>
-          <span class="tab-sub-text">0 Breach</span>
+          <span class="tab-title"><?= __('Customer Issues'); ?></span>
+          <span class="tab-sub-text"><?= __('0 Breach'); ?></span>
         </div>
       </a>
 
@@ -189,8 +189,8 @@
         <div class="tab-icon-wrapper"><i class="bi bi-star text-primary fs-4"></i></div>
         <div>
           <span class="tab-main-count">27</span>
-          <span class="tab-title">Customer Ratings</span>
-          <span class="tab-sub-text text-success">⭐ 4.8 Avg</span>
+          <span class="tab-title"><?= __('Customer Ratings'); ?></span>
+          <span class="tab-sub-text text-success"><?= __('⭐ 4.8 Avg'); ?></span>
         </div>
       </a>
 
@@ -201,8 +201,8 @@
       <div class="tab-pane fade show active" id="content-notification" role="tabpanel" aria-labelledby="tab-notification">
 
         <div class="d-flex align-items-center mb-4">
-          <h2 class="h6 fw-bold mb-0 text-dark me-2">Module 1 — Notifications</h2>
-          <span class="badge bg-light text-primary border border-primary px-2" style="font-size: 11px;">unread</span>
+          <h2 class="h6 fw-bold mb-0 text-dark me-2"><?= __('Module 1 — Notifications'); ?></h2>
+          <span class="badge bg-light text-primary border border-primary px-2" style="font-size: 11px;"><?= __('unread'); ?></span>
         </div>
 
         <div class="row g-3 mb-4">
@@ -214,7 +214,7 @@
               </div>
               <div>
                 <span class="fw-bold fs-4 d-block text-dark mb-0 lh-1">15</span>
-                <span class="text-uppercase text-muted fw-bold d-block" style="font-size: 10px; letter-spacing: 0.5px;">ACTION UNREAD</span>
+                <span class="text-uppercase text-muted fw-bold d-block" style="font-size: 10px; letter-spacing: 0.5px;"><?= __('ACTION UNREAD'); ?></span>
               </div>
             </div>
           </div>
@@ -226,7 +226,7 @@
               </div>
               <div>
                 <span class="fw-bold fs-4 d-block text-dark mb-0 lh-1">0</span>
-                <span class="text-uppercase text-muted fw-bold d-block" style="font-size: 10px; letter-spacing: 0.5px;">INFO UNREAD</span>
+                <span class="text-uppercase text-muted fw-bold d-block" style="font-size: 10px; letter-spacing: 0.5px;"><?= __('INFO UNREAD'); ?></span>
               </div>
             </div>
           </div>
@@ -238,7 +238,7 @@
               </div>
               <div>
                 <span class="fw-bold fs-4 d-block text-dark mb-0 lh-1">53</span>
-                <span class="text-uppercase text-muted fw-bold d-block" style="font-size: 10px; letter-spacing: 0.5px;">OLDEST (DAYS)</span>
+                <span class="text-uppercase text-muted fw-bold d-block" style="font-size: 10px; letter-spacing: 0.5px;"><?= __('OLDEST (DAYS)'); ?></span>
               </div>
             </div>
           </div>
@@ -250,7 +250,7 @@
               </div>
               <div>
                 <span class="fw-bold fs-4 d-block text-dark mb-0 lh-1">2</span>
-                <span class="text-uppercase text-muted fw-bold d-block" style="font-size: 10px; letter-spacing: 0.5px;">REPEATED</span>
+                <span class="text-uppercase text-muted fw-bold d-block" style="font-size: 10px; letter-spacing: 0.5px;"><?= __('REPEATED'); ?></span>
               </div>
             </div>
           </div>
@@ -259,36 +259,36 @@
 
         <div class="alert alert-light border p-3 rounded mb-4">
           <div class="d-flex align-items-center mb-2">
-            <span class="badge bg-danger text-white rounded-pill fw-bold text-center me-3" style="font-size: 10px; width: 68px;">CRITICAL</span>
-            <span class="text-dark fw-normal" style="font-size: 13px;">15 ACTION notification(s) unread for 3+ days</span>
+            <span class="badge bg-danger text-white rounded-pill fw-bold text-center me-3" style="font-size: 10px; width: 68px;"><?= __('CRITICAL'); ?></span>
+            <span class="text-dark fw-normal" style="font-size: 13px;"><?= __('15 ACTION notification(s) unread for 3+ days'); ?></span>
           </div>
           <div class="d-flex align-items-center mb-2">
-            <span class="badge bg-warning text-dark rounded-pill fw-bold text-center me-3" style="font-size: 10px; width: 68px;">WARNING</span>
-            <span class="text-dark fw-normal" style="font-size: 13px;">Oldest unread notification is 53 days old</span>
+            <span class="badge bg-warning text-dark rounded-pill fw-bold text-center me-3" style="font-size: 10px; width: 68px;"><?= __('WARNING'); ?></span>
+            <span class="text-dark fw-normal" style="font-size: 13px;"><?= __('Oldest unread notification is 53 days old'); ?></span>
           </div>
           <div class="d-flex align-items-center">
-            <span class="badge bg-warning text-dark rounded-pill fw-bold text-center me-3" style="font-size: 10px; width: 68px;">WARNING</span>
-            <span class="text-dark fw-normal" style="font-size: 13px;">2 repeated alert pattern(s) detected — same issue triggered multiple times</span>
+            <span class="badge bg-warning text-dark rounded-pill fw-bold text-center me-3" style="font-size: 10px; width: 68px;"><?= __('WARNING'); ?></span>
+            <span class="text-dark fw-normal" style="font-size: 13px;"><?= __('2 repeated alert pattern(s) detected — same issue triggered multiple times'); ?></span>
           </div>
         </div>
 
-        <h3 class="h6 fw-bold text-dark mb-3">Age of unread notifications</h3>
+        <h3 class="h6 fw-bold text-dark mb-3"><?= __('Age of unread notifications'); ?></h3>
         <div class="row g-3 mb-4 customer-issues">
           <div class="col-md-4">
             <div class="p-3 border rounded d-flex align-items-center justify-content-between purple-light">
-              <div class="d-flex align-items-center gap-2"><i class="bi bi-calendar-check text-success fs-5"></i><span class="text-dark" style="font-size: 14px;">Today</span></div>
+              <div class="d-flex align-items-center gap-2"><i class="bi bi-calendar-check text-success fs-5"></i><span class="text-dark" style="font-size: 14px;"><?= __('Today'); ?></span></div>
               <span class="fs-5 fw-bold text-dark">0</span>
             </div>
           </div>
           <div class="col-md-4">
             <div class="p-3 border rounded d-flex align-items-center justify-content-between blue-light">
-              <div class="d-flex align-items-center gap-2"><i class="bi bi-calendar-week text-primary fs-5"></i><span class="text-dark" style="font-size: 14px;">This Week</span></div>
+              <div class="d-flex align-items-center gap-2"><i class="bi bi-calendar-week text-primary fs-5"></i><span class="text-dark" style="font-size: 14px;"><?= __('This Week'); ?></span></div>
               <span class="fs-5 fw-bold text-dark">4</span>
             </div>
           </div>
           <div class="col-md-4">
             <div class="p-3 border rounded d-flex align-items-center justify-content-between green-light">
-              <div class="d-flex align-items-center gap-2"><i class="bi bi-calendar-month text-danger fs-5"></i><span class="text-dark" style="font-size: 14px;">This Month</span></div>
+              <div class="d-flex align-items-center gap-2"><i class="bi bi-calendar-month text-danger fs-5"></i><span class="text-dark" style="font-size: 14px;"><?= __('This Month'); ?></span></div>
               <span class="fs-5 fw-bold text-dark">1</span>
             </div>
           </div>
@@ -296,61 +296,61 @@
 
         <div class="row g-4 mb-4">
           <div class="col-12 col-lg-7">
-            <h3 class="h6 fw-bold text-dark mb-3">Action Items by Module (need your response)</h3>
+            <h3 class="h6 fw-bold text-dark mb-3"><?= __('Action Items by Module (need your response)'); ?></h3>
             <div class="table-responsive border rounded overflow-hidden">
               <table class="table table-hover align-middle mb-0">
                 <thead class="table-light text-muted" style="font-size: 12px;">
                   <tr>
-                    <th scope="col" class="py-3 px-3">ERP MODULE</th>
-                    <th scope="col" class="text-end py-3 px-3">ACTION COUNT</th>
+                    <th scope="col" class="py-3 px-3"><?= __('ERP MODULE'); ?></th>
+                    <th scope="col" class="text-end py-3 px-3"><?= __('ACTION COUNT'); ?></th>
                   </tr>
                 </thead>
                 <tbody style="font-size: 13px;">
-                  <tr><td class="px-3"><i class="bi bi-box-seam text-success me-2"></i> Goods Receipt Notes</td><td class="text-end fw-bold text-dark px-3">8</td></tr>
-                  <tr><td class="px-3"><i class="bi bi-person-fill text-primary me-2"></i> Employee Leaves</td><td class="text-end fw-bold text-dark px-3">1</td></tr>
-                  <tr><td class="px-3"><i class="bi bi-cart-fill text-info me-2"></i> Purchase Orders</td><td class="text-end fw-bold text-dark px-3">3</td></tr>
-                  <tr><td class="px-3"><i class="bi bi-file-earmark-text text-warning me-2"></i> Quotations</td><td class="text-end fw-bold text-dark px-3">3</td></tr>
+                  <tr><td class="px-3"><i class="bi bi-box-seam text-success me-2"></i> <?= __('Goods Receipt Notes'); ?></td><td class="text-end fw-bold text-dark px-3">8</td></tr>
+                  <tr><td class="px-3"><i class="bi bi-person-fill text-primary me-2"></i> <?= __('Employee Leaves'); ?></td><td class="text-end fw-bold text-dark px-3">1</td></tr>
+                  <tr><td class="px-3"><i class="bi bi-cart-fill text-info me-2"></i> <?= __('Purchase Orders'); ?></td><td class="text-end fw-bold text-dark px-3">3</td></tr>
+                  <tr><td class="px-3"><i class="bi bi-file-earmark-text text-warning me-2"></i> <?= __('Quotations'); ?></td><td class="text-end fw-bold text-dark px-3">3</td></tr>
                 </tbody>
               </table>
             </div>
           </div>
           <div class="col-12 col-lg-5">
-            <h3 class="h6 fw-bold text-dark mb-3">AI Recommendations</h3>
+            <h3 class="h6 fw-bold text-dark mb-3"><?= __('AI Recommendations'); ?></h3>
             <div class="ai-summary-box p-4 d-flex gap-3">
               <div class="text-primary"><i class="bi bi-stars fs-4"></i></div>
               <div>
-                <h4 class="h6 fw-bold text-primary mb-2">AI Summary</h4>
-                <p class="text-dark mb-2" style="font-size: 13px; line-height: 1.6;">There are 15 unread ACTION notifications requiring response, with the majority in goods_receipt_notes (8), followed by purchase_orders (3), quotations (3), and employee_leaves (1). Ten of these are older than 30 days, indicating significant backlog. A recurring issue is "Next Process Not Set," appearing 4 times each in goods_receipt_notes for codes -127004 and -PO-01073. To reduce delays, prioritize resolving the "Next Process Not Set" errors in goods_receipt_notes to clear the oldest and most frequent blockers.</p>
+                <h4 class="h6 fw-bold text-primary mb-2"><?= __('AI Summary'); ?></h4>
+                <p class="text-dark mb-2" style="font-size: 13px; line-height: 1.6;"><?= __('There are 15 unread ACTION notifications requiring response, with the majority in goods_receipt_notes (8), followed by purchase_orders (3), quotations (3), and employee_leaves (1). Ten of these are older than 30 days, indicating significant backlog. A recurring issue is "Next Process Not Set," appearing 4 times each in goods_receipt_notes for codes -127004 and -PO-01073. To reduce delays, prioritize resolving the "Next Process Not Set" errors in goods_receipt_notes to clear the oldest and most frequent blockers.'); ?></p>
                 <div class="p-2.5 bg-white border rounded text-dark fw-normal mt-2" style="font-size: 12px; padding: 10px;">
-                  💡 <strong>Priority Action:</strong> To reduce delays, prioritize resolving the "Next Process Not Set" errors.
+                  💡 <strong><?= __('Priority Action'); ?>:</strong> <?= __('To reduce delays, prioritize resolving the "Next Process Not Set" errors.'); ?>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <h3 class="h6 fw-bold text-dark mb-3">Top Repeated Alert Patterns</h3>
+        <h3 class="h6 fw-bold text-dark mb-3"><?= __('Top Repeated Alert Patterns'); ?></h3>
         <div class="table-responsive border rounded overflow-hidden mb-4">
           <table class="table align-middle mb-0" style="font-size: 13px;">
             <thead class="table-light text-muted" style="font-size: 12px;">
-              <tr><th scope="col" class="py-3 px-3">ERP REPEATED ALERTS</th><th scope="col" class="py-3 px-3">TIMES SEEN</th><th scope="col" class="py-3 px-3">SAMPLE MESSAGE</th></tr>
+              <tr><th scope="col" class="py-3 px-3"><?= __('ERP REPEATED ALERTS'); ?></th><th scope="col" class="py-3 px-3"><?= __('TIMES SEEN'); ?></th><th scope="col" class="py-3 px-3"><?= __('SAMPLE MESSAGE'); ?></th></tr>
             </thead>
             <tbody>
-              <tr><td class="px-3"><i class="bi bi-exclamation-triangle text-danger me-2"></i> Goods Receipt Notes</td><td class="px-3 fw-bold">4</td><td class="px-3 text-muted">Next Process Not Set -127004</td></tr>
-              <tr><td class="px-3"><i class="bi bi-exclamation-triangle text-danger me-2"></i> Goods Receipt Notes</td><td class="px-3 fw-bold">4</td><td class="px-3 text-muted">Next Process Not Set -PO-01073</td></tr>
+              <tr><td class="px-3"><i class="bi bi-exclamation-triangle text-danger me-2"></i> <?= __('Goods Receipt Notes'); ?></td><td class="px-3 fw-bold">4</td><td class="px-3 text-muted"><?= __('Next Process Not Set -127004'); ?></td></tr>
+              <tr><td class="px-3"><i class="bi bi-exclamation-triangle text-danger me-2"></i> <?= __('Goods Receipt Notes'); ?></td><td class="px-3 fw-bold">4</td><td class="px-3 text-muted"><?= __('Next Process Not Set -PO-01073'); ?></td></tr>
             </tbody>
           </table>
         </div>
 
-        <h3 class="h6 fw-bold text-dark mb-3">ERP Breakdown</h3>
+        <h3 class="h6 fw-bold text-dark mb-3"><?= __('ERP Breakdown'); ?></h3>
         <div class="p-3 border rounded bg-white">
           <div class="row align-items-center mb-3">
-            <div class="col-4 col-md-3" style="font-size: 13px;"><i class="bi bi-box-seam text-success me-2"></i> Goods Receipt Notes</div>
+            <div class="col-4 col-md-3" style="font-size: 13px;"><i class="bi bi-box-seam text-success me-2"></i> <?= __('Goods Receipt Notes'); ?></div>
             <div class="col-6 col-md-8"><div class="progress progress-sm bg-light"><div class="progress-bar bg-success" style="width: 80%;"></div></div></div>
             <div class="col-2 col-md-1 text-end fw-bold text-dark" style="font-size: 13px;">8</div>
           </div>
           <div class="row align-items-center mb-3">
-            <div class="col-4 col-md-3" style="font-size: 13px;"><i class="bi bi-cart-fill text-info me-2"></i> Purchase Orders</div>
+            <div class="col-4 col-md-3" style="font-size: 13px;"><i class="bi bi-cart-fill text-info me-2"></i> <?= __('Purchase Orders'); ?></div>
             <div class="col-6 col-md-8"><div class="progress progress-sm bg-light"><div class="progress-bar bg-info" style="width: 35%;"></div></div></div>
             <div class="col-2 col-md-1 text-end fw-bold text-dark" style="font-size: 13px;">3</div>
           </div>
@@ -361,32 +361,32 @@
       <div class="tab-pane fade" id="content-approvals" role="tabpanel" aria-labelledby="tab-approvals">
         <div class="p-5 text-center border rounded bg-light">
           <i class="bi bi-clock-history text-primary fs-1 mb-3 d-block"></i>
-          <h5 class="fw-bold text-dark">Module 2 — Pending Approvals</h5>
-          <p class="text-muted mb-0">Yahan aapka Pending Approvals module ka code layout parse hoga.</p>
+          <h5 class="fw-bold text-dark"><?= __('Module 2 — Pending Approvals'); ?></h5>
+          <p class="text-muted mb-0"><?= __('Yahan aapka Pending Approvals module ka code layout parse hoga.'); ?></p>
         </div>
       </div>
 
       <div class="tab-pane fade" id="content-tasks" role="tabpanel" aria-labelledby="tab-tasks">
         <div class="p-5 text-center border rounded bg-light">
           <i class="bi bi-clipboard-check text-primary fs-1 mb-3 d-block"></i>
-          <h5 class="fw-bold text-dark">Module 3 — Unread Tasks</h5>
-          <p class="text-muted mb-0">Yahan aapka Unread Tasks component configure kiya jayega.</p>
+          <h5 class="fw-bold text-dark"><?= __('Module 3 — Unread Tasks'); ?></h5>
+          <p class="text-muted mb-0"><?= __('Yahan aapka Unread Tasks component configure kiya jayega.'); ?></p>
         </div>
       </div>
 
       <div class="tab-pane fade" id="content-issues" role="tabpanel" aria-labelledby="tab-issues">
         <div class="p-5 text-center border rounded bg-light">
           <i class="bi bi-headset text-primary fs-1 mb-3 d-block"></i>
-          <h5 class="fw-bold text-dark">Module 4 — Customer Issues</h5>
-          <p class="text-muted mb-0">Customer ticket reporting pipeline.</p>
+          <h5 class="fw-bold text-dark"><?= __('Module 4 — Customer Issues'); ?></h5>
+          <p class="text-muted mb-0"><?= __('Customer ticket reporting pipeline.'); ?></p>
         </div>
       </div>
 
       <div class="tab-pane fade" id="content-ratings" role="tabpanel" aria-labelledby="tab-ratings">
         <div class="p-5 text-center border rounded bg-light">
           <i class="bi bi-star text-primary fs-1 mb-3 d-block"></i>
-          <h5 class="fw-bold text-dark">Module 5 — Customer Ratings</h5>
-          <p class="text-muted mb-0">System performance and feedback metrics summary panel.</p>
+          <h5 class="fw-bold text-dark"><?= __('Module 5 — Customer Ratings'); ?></h5>
+          <p class="text-muted mb-0"><?= __('System performance and feedback metrics summary panel.'); ?></p>
         </div>
       </div>
 
