@@ -6,14 +6,14 @@
                 <div class="col-lg-12">
                    <ul class="nav nav-tabs md-tabs infisuite_tab m-r-20 font-weight-bold" style="border:0px;">
                     <li class="nav-item p-l-10 p-r-10">
-                        <a class="nav-link active" data-bs-toggle="tab" href="#tssemyrequest" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Search Requests</a>
+                        <a class="nav-link active" data-bs-toggle="tab" href="#tssemyrequest" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Search Requests'); ?></a>
                     </li>
                     <li class="nav-item p-l-10 p-r-10">
-                        <a class="nav-link" data-bs-toggle="tab" href="#tsmyrequest" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">My Requests</a>
+                        <a class="nav-link" data-bs-toggle="tab" href="#tsmyrequest" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('My Requests'); ?></a>
                     </li>
                     <?php if($_SESSION['admin_type']==1){ ?>
                         <li class="nav-item p-l-10 p-r-10">
-                            <a class="nav-link" data-bs-toggle="tab" href="#tsaprequest" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">To Be Approved</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#tsaprequest" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('To Be Approved'); ?></a>
                         </li>
                     <?php } ?>
                 </ul>
@@ -23,18 +23,18 @@
             <div class="tab-pane active" id="tssemyrequest" role="tabpanel">
                 <div class="bus-bg m-b-10" style="background: url(../assets/images/bus.jpg); height:250px; background-size: 100%; background-repeat: no-repeat; position: relative;">
                     <div class="banner-txt">
-                        <h2 class="f-w-700 f-35">Get your bus online,<br>Easy &amp; Safely</h2>
+                        <h2 class="f-w-700 f-35"><?= __('Get your bus online,'); ?><br><?= htmlspecialchars(__('Easy & Safely'), ENT_QUOTES, 'UTF-8'); ?></h2>
                     </div>
                     <div class="booking-form">
-                        <h3 class="">Choose Your Bus</h3>
+                        <h3 class=""><?= __('Choose Your Bus'); ?></h3>
                         <div class="row mb-1 mt-4">
                             <div class="col-lg-6 m-b-10">
                                 <div class="input-group">
                                     <span class="input-group-text addon-style">
                                         <span class=""><i class="ti-location-arrow"></i></span>
                                     </span>
-                                    <select aria-label="Pickup" class="form-control fill border" fdprocessedid="n6szf" id="pickup" name="pickup">
-                                        <option value="">Pickup Point</option>
+                                    <select aria-label="<?= htmlspecialchars(__('Pickup'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control fill border" fdprocessedid="n6szf" id="pickup" name="pickup">
+                                        <option value=""><?= __('Pickup Point'); ?></option>
                                         <?php foreach($data['listschedlue'] as $listschedlue){ ?>
                                             <option value="<?php echo $listschedlue; ?>"><?php echo $listschedlue; ?></option>
                                         <?php } ?>
@@ -46,8 +46,8 @@
                                     <span class="input-group-text addon-style">
                                         <span class=""><i class="ti-location-pin"></i></span>
                                     </span>
-                                    <select aria-label="Droping" class="form-control border" fdprocessedid="ft4ukt" name="droping" id="droping">
-                                        <option value="">Dropping Point</option>
+                                    <select aria-label="<?= htmlspecialchars(__('Droping'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control border" fdprocessedid="ft4ukt" name="droping" id="droping">
+                                        <option value=""><?= __('Dropping Point'); ?></option>
                                         <?php foreach($data['listschedlue'] as $listschedlue){ ?>
                                             <option value="<?php echo $listschedlue; ?>"><?php echo $listschedlue; ?></option>
                                         <?php } ?>
@@ -59,11 +59,11 @@
                                     <span class="input-group-text addon-style">
                                         <span class=""><i class="ti-time"></i></span>
                                     </span>
-                                    <input aria-label="Pickdate" class="form-control" type="date" name="pickdate" id="pickdate">
+                                    <input aria-label="<?= htmlspecialchars(__('Pickdate'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="pickdate" id="pickdate">
                                 </div>
                             </div>
                             <div class="col-lg-6 m-b-10">
-                                <button class="btn btn-primary w-100 p-2" onclick="searchtransportbus()" fdprocessedid="s99pj">Find Bus</button>
+                                <button class="btn btn-primary w-100 p-2" onclick="searchtransportbus()" fdprocessedid="s99pj"><?= __('Find Bus'); ?></button>
                             </div>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                                 <div class="row mt-3">
                                     <div class="col-lg-3">
                                         <h4 class="f-w-700 "><?php echo $bus[$route['company_transport_id']]['vehicle_name']; ?></h4>
-                                        <p>Seat Layout <?php echo $bus[$route['company_transport_id']]['seat_layout']; ?></p>
+                                        <p><?= __('Seat Layout'); ?> <?php echo $bus[$route['company_transport_id']]['seat_layout']; ?></p>
                                         <span class="text-danger"><?php echo $bus[$route['company_transport_id']]['vehicle_type']; ?></span>
                                     </div>
                                     <div class="col-lg-5">
@@ -99,8 +99,8 @@
                                     </div>
                                     <div class="col-lg-4 text-right">
                                         <h4 class="f-w-700 f-22 text-success">&#8377 <?php echo $route['route_charges_monthly']; ?> </h4>
-                                        <p>Off Days: <span class="form-label label label-success"><?php echo implode(" , ",json_decode($route['off_days'],1)); ?></span></p>
-                                        <button class="btn btn-primary" onclick="viewlocation(<?php echo $route['id']; ?>)">Select Location</button>
+                                        <p><?= __('Off Days'); ?>: <span class="form-label label label-success"><?php echo implode(" , ",json_decode($route['off_days'],1)); ?></span></p>
+                                        <button class="btn btn-primary" onclick="viewlocation(<?php echo $route['id']; ?>)"><?= __('Select Location'); ?></button>
                                     </div>
                                 </div>
                             </div>
@@ -111,7 +111,7 @@
                                         <div class="col-lg-4 p-2"> <?php echo $transport_schedule['stop_name']; ?> </div>
                                         <div class="col-lg-2">
                                             <button onclick="viewrequest(<?php echo $transport_schedule['id']; ?>)" class="btn btn-info" style="font-size: 12px; padding: 5px;" >
-                                            Request </button>
+                                            <?= __('Request'); ?> </button>
                                         </div>
                                     <?php } ?>
                                 </div>
@@ -124,10 +124,10 @@
                 <div class="card-header-right text-right">
                     <ul class="nav nav-tabs md-tabs infisuite_tab m-r-20 font-weight-bold" style="border:0px;">
                         <li class="nav-item p-l-10 p-r-10">
-                            <a class="nav-link active" data-bs-toggle="tab" href="#stmyspending" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Pending</a>
+                            <a class="nav-link active" data-bs-toggle="tab" href="#stmyspending" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Pending'); ?></a>
                         </li>
                         <li class="nav-item p-l-10 p-r-10">
-                            <a class="nav-link" data-bs-toggle="tab" href="#stmysapproved" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Approved</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#stmysapproved" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Approved'); ?></a>
                         </li>
                     </ul>
                 </div>
@@ -226,10 +226,10 @@
                 <div class="card-header-right text-right">
                     <ul class="nav nav-tabs md-tabs infisuite_tab m-r-20 font-weight-bold" style="border:0px;">
                         <li class="nav-item p-l-10 p-r-10">
-                            <a class="nav-link active" data-bs-toggle="tab" href="#stapmyspending" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Pending</a>
+                            <a class="nav-link active" data-bs-toggle="tab" href="#stapmyspending" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Pending'); ?></a>
                         </li>
                         <li class="nav-item p-l-10 p-r-10">
-                            <a class="nav-link" data-bs-toggle="tab" href="#stapmysapproved" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Approved</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#stapmysapproved" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Approved'); ?></a>
                         </li>
                     </ul>
                 </div>
@@ -330,12 +330,12 @@
 <div class="col-lg-4"  id="side_view_3"   >
     <div class="" style="background: url(../assets/images/transport.jpg);
     width:100%;height:250px;background-repeat:no-repeat;background-size: 500px auto;border-radius: 15px;">
-    <h3 class="f-w-600 pt-5 f-25 text-white m-l-50 m-r-50">Ready to elevate your daily commute experience? Click the "Request Transport" button below</h3>
-    <button class="btn btn-warning waves-effect waves-light m-l-50 mt-4">Request Transport</button>
+    <h3 class="f-w-600 pt-5 f-25 text-white m-l-50 m-r-50"><?= __('Ready to elevate your daily commute experience? Click the "Request Transport" button below'); ?></h3>
+    <button class="btn btn-warning waves-effect waves-light m-l-50 mt-4"><?= __('Request Transport'); ?></button>
 </div>
 <div class="card mt-4">
     <div class="card-header">
-        <h5>Transports</h5>
+        <h5><?= __('Transports'); ?></h5>
     </div>
     <div class="card-body">
         <div class="row align-items-center">
@@ -355,7 +355,7 @@
              </div>
              <div class="col-lg-6 p-2">
                 <h4 class="f-14 m-0 f-w-600"><?php echo $bus[$sidein['company_transport_id']]['vehicle_name']; ?></h4>
-                <span class="f-12"> Pickup Point: <?php echo $sidein['pickup_point']." Transport Date".displayDate($sidein['transport_date']) ; ?> </span>
+                <span class="f-12"> <?= __('Pickup Point'); ?>: <?php echo $sidein['pickup_point']." Transport Date".displayDate($sidein['transport_date']) ; ?> </span>
             </div>
             <div class="col-lg-4 p-2">
                 <span class="form-label label label-<?php echo $stas; ?>" style="background-color:<?php echo $_SESSION['status'][$down['current_status']]['background_color']; ?>;color:<?php echo $_SESSION['status'][$down['current_status']]['color']; ?> "><?php echo $data['status']['employee_transport_requests'][$sidein['current_status']]; ?></span>
