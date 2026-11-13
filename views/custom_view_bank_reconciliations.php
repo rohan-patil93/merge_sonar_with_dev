@@ -34,11 +34,11 @@ $_SESSION['apply_js']['multiselest'] = "1";
 </style>
 <div class="card card-custom card-sticky" id="kt_page_sticky_card">
     <div class="card-header table-card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">Bank Reconciliation</h5>
+        <h5 class="mb-0"><?= __('Bank Reconciliation'); ?></h5>
         <div class="card-header-right">
             <a href="javascript:history.go(-1)" class="btn btn-light-primary waves-effect waves-light m-r-50">
                 <i class="icofont icofont-reply mr-1"></i>
-                Back
+                <?= __('Back'); ?>
             </a>
         </div>
     </div>
@@ -47,98 +47,98 @@ $_SESSION['apply_js']['multiselest'] = "1";
             <div class="col-lg-2">
                 <div class="card bg-info text-center p-3 filter-card active-card" data-status="all">
                     <h2>8</h2>
-                    <p class="mb-0 f-16">Total Transactions</p>
+                    <p class="mb-0 f-16"><?= __('Total Transactions'); ?></p>
                 </div>
             </div>
             <div class="col-lg-2">
                 <div class="card bg-primary text-center p-3 filter-card" data-status="match">
                     <h2>2</h2>
-                    <p class="mb-0 f-16">Matched</p>
+                    <p class="mb-0 f-16"><?= __('Matched'); ?></p>
                 </div>
             </div>
             <div class="col-lg-2">
                 <div class="card bg-dark text-center p-3 text-white filter-card" data-status="unmatched">
                     <h2>2</h2>
-                    <p class="mb-0 f-16">Unmatched</p>
+                    <p class="mb-0 f-16"><?= __('Unmatched'); ?></p>
                 </div>
             </div>
             <div class="col-lg-2">
                 <div class="card bg-warning text-center p-3 filter-card" data-status="partial">
                     <h2>2</h2>
-                    <p class="mb-0 f-16">Partial Matches</p>
+                    <p class="mb-0 f-16"><?= __('Partial Matches'); ?></p>
                 </div>
             </div>
             <div class="col-lg-2">
                 <div class="card bg-success text-center p-3 filter-card" data-status="suggestions">
                     <h2>2</h2>
-                    <p class="mb-0 f-16">Suggestions</p>
+                    <p class="mb-0 f-16"><?= __('Suggestions'); ?></p>
                 </div>
             </div>
         </div>
 
         <div class="row mt-3">
             <div class="col-md-6">
-                <h5 class="mb-2 f-w-600">ERP Ledger Entries</h5>
+                <h5 class="mb-2 f-w-600"><?= __('ERP Ledger Entries'); ?></h5>
                 <div class="table-responsive mt-2">
                     <table class="table table-sm table-bordered data-table">
                         <thead>
                             <tr style="background-color: #eeeeee;">
-                                <th scope="col">Date</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Debit</th>
-                                <th scope="col">Credit</th>
-                                <th scope="col">Status</th>
+                                <th scope="col"><?= __('Date'); ?></th>
+                                <th scope="col"><?= __('Description'); ?></th>
+                                <th scope="col"><?= __('Debit'); ?></th>
+                                <th scope="col"><?= __('Credit'); ?></th>
+                                <th scope="col"><?= __('Status'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>2025-10-01</td>
-                                <td>Invoice #1001</td>
+                                <td><?= __('Invoice #1001'); ?></td>
                                 <td>5000</td>
                                 <td></td>
-                                <td><span class="match f-12">Match</span></td>
+                                <td><span class="match f-12"><?= __('Match'); ?></span></td>
                             </tr>
                             <tr>
                                 <td>2025-10-01</td>
-                                <td>Invoice #1001</td>
+                                <td><?= __('Invoice #1001'); ?></td>
                                 <td>5000</td>
                                 <td></td>
-                                <td><span class="match f-12">Match</span></td>
+                                <td><span class="match f-12"><?= __('Match'); ?></span></td>
                             </tr>
                             <tr>
                                 <td>2025-10-02</td>
-                                <td>Payment to Vendor</td>
+                                <td><?= __('Payment to Vendor'); ?></td>
                                 <td></td>
                                 <td>2000</td>
-                                <td><span class="unmatched f-12">Unmatched</span></td>
+                                <td><span class="unmatched f-12"><?= __('Unmatched'); ?></span></td>
                             </tr>
                             <tr>
                                 <td>2025-10-03</td>
-                                <td>Bank Charges</td>
+                                <td><?= __('Bank Charges'); ?></td>
                                 <td></td>
                                 <td>50</td>
-                                <td><span class="partial f-12">Partial</span></td>
+                                <td><span class="partial f-12"><?= __('Partial'); ?></span></td>
                             </tr>
                             <tr>
                                 <td>2025-10-04</td>
-                                <td>Invoice #1002</td>
+                                <td><?= __('Invoice #1002'); ?></td>
                                 <td>7000</td>
                                 <td></td>
-                                <td><span class="match f-12">Match</span></td>
+                                <td><span class="match f-12"><?= __('Match'); ?></span></td>
                             </tr>
                             <tr>
                                 <td>2025-10-05</td>
-                                <td>Payment Refund</td>
+                                <td><?= __('Payment Refund'); ?></td>
                                 <td></td>
                                 <td>3000</td>
-                                <td><span class="unmatched f-12">Unmatched</span></td>
+                                <td><span class="unmatched f-12"><?= __('Unmatched'); ?></span></td>
                             </tr>
                             <tr>
                                 <td>2025-10-06</td>
-                                <td>Charges</td>
+                                <td><?= __('Charges'); ?></td>
                                 <td></td>
                                 <td>50</td>
-                                <td><span class="suggestions f-12">Suggestions</span></td>
+                                <td><span class="suggestions f-12"><?= __('Suggestions'); ?></span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -146,67 +146,67 @@ $_SESSION['apply_js']['multiselest'] = "1";
             </div>
 
             <div class="col-md-6">
-                <h5 class="mb-2 f-w-600">Bank Statement Entries</h5>
+                <h5 class="mb-2 f-w-600"><?= __('Bank Statement Entries'); ?></h5>
                 <div class="table-responsive mt-2">
                     <table class="table table-sm table-bordered data-table">
                         <thead>
                             <tr style="background-color: #eeeeee;">
-                                <th scope="col">Date</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Debit</th>
-                                <th scope="col">Credit</th>
-                                <th scope="col">Status</th>
+                                <th scope="col"><?= __('Date'); ?></th>
+                                <th scope="col"><?= __('Description'); ?></th>
+                                <th scope="col"><?= __('Debit'); ?></th>
+                                <th scope="col"><?= __('Credit'); ?></th>
+                                <th scope="col"><?= __('Status'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>2025-10-01</td>
-                                <td>Payment Received - INV1001</td>
+                                <td><?= __('Payment Received - INV1001'); ?></td>
                                 <td>5000</td>
                                 <td></td>
-                                <td><span class="match f-12">Match</span></td>
+                                <td><span class="match f-12"><?= __('Match'); ?></span></td>
                             </tr>
                             <tr>
                                 <td>2025-10-02</td>
-                                <td>ATM Withdrawal</td>
+                                <td><?= __('ATM Withdrawal'); ?></td>
                                 <td></td>
                                 <td>2000</td>
-                                <td><span class="unmatched f-12">Unmatched</span></td>
+                                <td><span class="unmatched f-12"><?= __('Unmatched'); ?></span></td>
                             </tr>
                             <tr>
                                 <td>2025-10-03</td>
-                                <td>Bank Charges</td>
+                                <td><?= __('Bank Charges'); ?></td>
                                 <td></td>
                                 <td>50</td>
-                                <td><span class="partial f-12">Partial</span></td>
+                                <td><span class="partial f-12"><?= __('Partial'); ?></span></td>
                             </tr>
                             <tr>
                                 <td>2025-10-03</td>
-                                <td>Bank Charges</td>
+                                <td><?= __('Bank Charges'); ?></td>
                                 <td></td>
                                 <td>50</td>
-                                <td><span class="partial f-12">Partial</span></td>
+                                <td><span class="partial f-12"><?= __('Partial'); ?></span></td>
                             </tr>
                             <tr>
                                 <td>2025-10-04</td>
-                                <td>Payment Received - INV1002</td>
+                                <td><?= __('Payment Received - INV1002'); ?></td>
                                 <td>7000</td>
                                 <td></td>
-                                <td><span class="match f-12">Match</span></td>
+                                <td><span class="match f-12"><?= __('Match'); ?></span></td>
                             </tr>
                             <tr>
                                 <td>2025-10-05</td>
-                                <td>ATM Deposit</td>
+                                <td><?= __('ATM Deposit'); ?></td>
                                 <td></td>
                                 <td>3000</td>
-                                <td><span class="unmatched f-12">Unmatched</span></td>
+                                <td><span class="unmatched f-12"><?= __('Unmatched'); ?></span></td>
                             </tr>
                             <tr>
                                 <td>2025-10-06</td>
-                                <td>Misc Suggestion</td>
+                                <td><?= __('Misc Suggestion'); ?></td>
                                 <td></td>
                                 <td>50</td>
-                                <td><span class="suggestions f-12">Suggestions</span></td>
+                                <td><span class="suggestions f-12"><?= __('Suggestions'); ?></span></td>
                             </tr>
                         </tbody>
                     </table>
