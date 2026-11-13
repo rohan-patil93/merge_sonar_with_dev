@@ -217,7 +217,7 @@ $dis_label = urlencode(json_encode($dis_label));
 
 
     function submitDynamicWorkflowPopUp(table_name,transaction_id,current_status,next_status){
-    var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+    var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $("#popup1").html(loader);
     $('#kt_modal_KTDatatable_remote').modal("show");
     jQuery.ajax({
@@ -234,12 +234,12 @@ $dis_label = urlencode(json_encode($dis_label));
 function submitDynamicWorkflow(table_name,transaction_id,current_status,next_status,old_status_name,new_status_name){
     swal({
         title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-        text: "Please note the status of the document will change to "+new_status_name,
+        text: <?php echo json_encode(__('Please note the status of the document will change to').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+new_status_name,
         type: "info",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
-        confirmButtonText: "Yes",
-        cancelButtonText: "No",
+        confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+        cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
         closeOnConfirm: false
     },
     function(){
@@ -265,12 +265,12 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                     });
                 }else{
                     swal({
-                        title: "Oops...",
+                        title: <?php echo json_encode(__('Oops...'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                         text: res.transaction_update.message,
                         type: "error",
                         showCancelButton: true,
                         showConfirmButton: false,
-                        cancelButtonText: "Ok",
+                        cancelButtonText: <?php echo json_encode(__('Ok'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                         confirmButtonClass: "btn-danger",
                         closeOnCancel: false
                     });
@@ -299,12 +299,12 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
      <div class="page-body">
         <div class="alert alert-light alert-dismissible">
             <strong><?php echo $content; ?></strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
         </div>
 <?php if($error_message !=''){ ?>
         <div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
-             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
         </div>
 <?php } ?>
     <div class="row">
@@ -314,12 +314,12 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
 } ?>
 
                 <div class="card-header table-card-header m-r-50">
-                      <h5><?php echo $title;  ?></h5><button type="button" class="btn p-0 border-0 bg-transparent ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="Go Tour" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+                      <h5><?php echo $title;  ?></h5><button type="button" class="btn p-0 border-0 bg-transparent ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Go Tour'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
                       <div class="card-header-right table-card-header ">
 
                      <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
               <i class="icofont icofont-reply"></i>
-              Back
+              <?= __('Back'); ?>
             </a>
              <?php echo $workflowsteps['workflow_btn']; ?>
 
@@ -355,7 +355,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                                             </div>
                                                             <div class="wizard-label">
                                                                 <h3 class="wizard-title"><?php echo $wizard_details[$wiz-1] !="" ? $wizard_details[$wiz-1]: "Setup".$wiz; ?></h3>
-                                                                <div class="wizard-desc">Setup Your Account Details</div>
+                                                                <div class="wizard-desc"><?= __('Setup Your Account Details'); ?></div>
                                                             </div>
                                                         </div>
                                                     </div>
