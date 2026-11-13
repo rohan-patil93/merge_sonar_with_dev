@@ -106,11 +106,11 @@ $item_id = $_GET['fid'] ==1 ? $item_id : $role['item_id'];
                                         <div class="kt-section__body">
 
                                             <div class="form-group row">
-                                                <span class="col-xl-3 col-lg-3 col-form-label">Specifications<span class="requried"></span></span>
+                                                <span class="col-xl-3 col-lg-3 col-form-label"><?= __('Specifications'); ?><span class="requried"></span></span>
                                                 <div class="col-lg-6">
                                                     <div class="kt-portlet">
                                                         <div class="kt-portlet__body">
-                                                            <select aria-label="Specifications[]" id="kt-dual-listbox-1" class="kt-dual-listbox" name="specifications[]" multiple>
+                                                            <select aria-label="<?= htmlspecialchars(__('Specifications'), ENT_QUOTES, 'UTF-8'); ?>[]" id="kt-dual-listbox-1" class="kt-dual-listbox" name="specifications[]" multiple>
                                                                 <?php $spc = explode(",",$role['specifications']);
                                                                     foreach ($attributesresponse as $key => $attribut) { ?>
                                                                     <option  <?php if(in_array( $attribut['id'], $spc)){ ?> selected <?php
@@ -126,11 +126,11 @@ $item_id = $_GET['fid'] ==1 ? $item_id : $role['item_id'];
                                             </div>
 
                                             <div class="form-group  row">
-                                                <span class="col-xl-3 col-lg-3 col-sm-12">Status</span>
+                                                <span class="col-xl-3 col-lg-3 col-sm-12"><?= __('Status'); ?></span>
                                                 <div class="col-lg-9 col-xl-6">
                                                     <?php foreach($stausresult as $key=>$radio){ ?>
                                                     <label class="kt-radio">
-                                                        <input aria-label="Radio option" type="radio" <?php if($role['Current_Status'] == $key){?> checked="checked" <?php
+                                                        <input aria-label="<?= htmlspecialchars(__('Radio option'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" <?php if($role['Current_Status'] == $key){?> checked="checked" <?php
 } ?> value="<?php echo $key; ?>"  name="Current_Status"> <?php echo $radio; ?>
                                                         <span></span>
                                                     </label>
@@ -144,12 +144,12 @@ $item_id = $_GET['fid'] ==1 ? $item_id : $role['item_id'];
                                                     <?php if(isset($_GET['Rid']) && $_GET['Rid'] !='' && $_GET['copy'] != '1' && $rid !=''){ ?>
                                                     <input type="hidden" name="hid" value="<?php echo $rid; ?>" />
                                                     <input type="hidden" name="submit" value="Update" />
-                                                    <button id="kt_llogin_signup_submit" class="btn btn-brand btn-elevate btn-pill btn-elevate-air">Upadate</button>
-                                                    <button type="reset" class="btn btn-warning btn-elevate btn-pill btn-elevate-air">Cancel</button>
+                                                    <button id="kt_llogin_signup_submit" class="btn btn-brand btn-elevate btn-pill btn-elevate-air"><?= __('Upadate'); ?></button>
+                                                    <button type="reset" class="btn btn-warning btn-elevate btn-pill btn-elevate-air"><?= __('Cancel'); ?></button>
                                                 <?php } else{ ?>
                                                     <input type="hidden" name="submit" id="submit" value="Add" />
-                                                    <button id="kt_llogin_signup_submit_2" class="btn btn-brand btn-elevate btn-pill btn-elevate-air">ADD</button>
-                                                    <button type="reset" class="btn btn-warning btn-elevate btn-pill btn-elevate-air">Cancel</button>
+                                                    <button id="kt_llogin_signup_submit_2" class="btn btn-brand btn-elevate btn-pill btn-elevate-air"><?= __('ADD'); ?></button>
+                                                    <button type="reset" class="btn btn-warning btn-elevate btn-pill btn-elevate-air"><?= __('Cancel'); ?></button>
                                                 <?php } ?>
                                                 </div>
                                             </div>
