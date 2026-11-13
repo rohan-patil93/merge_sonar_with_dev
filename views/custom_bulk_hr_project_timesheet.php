@@ -371,7 +371,7 @@ function cvppopup(title,subtitle,list){
 			<div class="col-lg-12">
 				<div class="card">					
 					<div class="card-header table-card-header">
-						<h5><?php echo "Bulk Time Sheet Approval";  ?></h5><i class="ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="Take A Tour"></i> 
+						<h5><?php echo "Bulk Time Sheet Approval";  ?></h5><i class="ti-info-alt f-20 text-primary" role="button" tabindex="0" aria-label="Take A Tour" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="Take A Tour"></i> 
 						<div class="card-header-right table-card-header ">
 
 							<a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
@@ -580,7 +580,7 @@ $total_vs_p = (($lmonth['billable_amount'] ?? 0) + ($lmonth['nonbillable_amount'
 
 									<div class="col-lg-4">
 										<div class="d-flex align-items-center">
-											<label class="mr-3 mb-0 d-none d-md-block">Manger:&nbsp;</label>
+											<label for="kt_datatable_search_status" class="mr-3 mb-0 d-none d-md-block">Manger:&nbsp;</label>
 											<select class="form-control form-select js-example-basic-single" id="kt_datatable_search_status"  name="reports_to">
 												<option value="0">All</option>
 
@@ -596,7 +596,7 @@ $total_vs_p = (($lmonth['billable_amount'] ?? 0) + ($lmonth['nonbillable_amount'
 									</div>
 									<div class="col-lg-4">
 										<div class="d-flex align-items-center">
-											<label class="mr-3 mb-0 d-none d-md-block">Vendor:&nbsp;</label>
+											<label for="kt_datatable_search_type" class="mr-3 mb-0 d-none d-md-block">Vendor:&nbsp;</label>
 											<select class="form-control form-select js-example-basic-single" id="kt_datatable_search_type" name="vendor">
 												<option value="0">All</option>
 												<?php foreach($vendor_list as $vkey=>$vlist){ ?>
@@ -633,7 +633,7 @@ $total_vs_p = (($lmonth['billable_amount'] ?? 0) + ($lmonth['nonbillable_amount'
 							<div class="btn-group" id="status_dropdown" style="display:none;" name="submit_for_fin_approval">
 									<button class="btn btn-primary dropdown-toggle font-size-sm" style="color: <?php echo "#".$stausresult[ST_APPROVED2]['color']; ?>;    background:  <?php echo "#".strval($stausresult[ST_APPROVED2]['background_color']); ?>; border-color: <?php echo "#".strval($stausresult[ST_APPROVED2]['background_color']); ?>;" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><?php echo $statu_progress[ST_APPROVED2]['name']; ?> </button>
 									<div class="dropdown-menu" id="dropdownlist_<?php echo $fid; ?>">
-											<div class="dropdown-item" onclick="updateprojecttimesheetsblukapprovehrwork(<?php echo ST_APPROVED3 ?>)" name="status" id="status" value="<?php echo ST_APPROVED3 ?>"><?php echo $statu_progress[ST_APPROVED3]['action_label']; ?>
+											<div class="dropdown-item" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="updateprojecttimesheetsblukapprovehrwork(<?php echo ST_APPROVED3 ?>)" name="status" id="status" value="<?php echo ST_APPROVED3 ?>"><?php echo $statu_progress[ST_APPROVED3]['action_label']; ?>
 											 </div>
 									</div>
 							</div>
@@ -643,9 +643,9 @@ $total_vs_p = (($lmonth['billable_amount'] ?? 0) + ($lmonth['nonbillable_amount'
 						<div class="col-lg-4">
 							<div class="radio-inline float-right infisuite_tab">
 								<?php $billist =""; if($_GET['PAY_YEAR']!=""){ $billist = "&PAY_YEAR=".$_GET['PAY_YEAR']."&PAY_MONTH=".$_GET['PAY_MONTH']; } ?>
-								<label class="radio nav-item" name="all_tab"><a href="index.php?option=COM_BULK_HR_PROJECT_TIMESHEET<?php echo $billist; ?>" class="btn btn-info waves-effect waves-light  <?php if($gtnvk==2){ echo 'active'; } ?>"><?php if($gtnvk==2){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?> <?php echo "All"; ?></a> </label> 
-								<label class="radio nav-item" name="billale_tab"><a href="index.php?option=COM_BULK_HR_PROJECT_TIMESHEET<?php echo $billist."&TNVAL=1"; ?>" class="btn btn-warning waves-effect waves-light <?php if($gtnvk==1){ echo 'active'; } ?>"><?php if($gtnvk==1){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?><?php echo "Billable"; ?></a> </label> 
-								<label class="radio nav-item" name="nonbillable_tab"><a href="index.php?option=COM_BULK_HR_PROJECT_TIMESHEET<?php echo $billist."&TNVAL=0"; ?>" class="btn btn-danger waves-effect waves-light <?php if($gtnvk==0){ echo 'active'; } ?>"><?php if($gtnvk==0){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?><?php echo "Non-billable"; ?></a> </label> 
+								<span class="radio nav-item d-inline-block" style="margin-bottom:5px" name="all_tab"><a href="index.php?option=COM_BULK_HR_PROJECT_TIMESHEET<?php echo $billist; ?>" class="btn btn-info waves-effect waves-light  <?php if($gtnvk==2){ echo 'active'; } ?>"><?php if($gtnvk==2){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?> <?php echo "All"; ?></a> </span> 
+								<span class="radio nav-item d-inline-block" style="margin-bottom:5px" name="billale_tab"><a href="index.php?option=COM_BULK_HR_PROJECT_TIMESHEET<?php echo $billist."&TNVAL=1"; ?>" class="btn btn-warning waves-effect waves-light <?php if($gtnvk==1){ echo 'active'; } ?>"><?php if($gtnvk==1){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?><?php echo "Billable"; ?></a> </span> 
+								<span class="radio nav-item d-inline-block" style="margin-bottom:5px" name="nonbillable_tab"><a href="index.php?option=COM_BULK_HR_PROJECT_TIMESHEET<?php echo $billist."&TNVAL=0"; ?>" class="btn btn-danger waves-effect waves-light <?php if($gtnvk==0){ echo 'active'; } ?>"><?php if($gtnvk==0){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?><?php echo "Non-billable"; ?></a> </span> 
 							</div>
 						</div>
 					</div>
@@ -682,7 +682,7 @@ $total_vs_p = (($lmonth['billable_amount'] ?? 0) + ($lmonth['nonbillable_amount'
 																				<input type="checkbox" checked id="" disabled class="">
 																				<span class="cr">
                                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
-                                        </span>
+                                        </span><span style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Select row</span>
 																			</label>
 																			</div>
 																		</th>
@@ -798,7 +798,7 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 																			<input type="checkbox" class="" checked name="" disabled value="<?php echo $sb['employee_id']; ?>">
 																			<span class="cr">
                                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
-                                        </span>
+                                        </span><span style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Select row</span>
 																			</label>
 																		</div>
 																	</td>
@@ -880,7 +880,7 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 																<input type="checkbox" id="select_all" class="itemRow" onclick="tocheckallboxeshrwork()">
 																<span class="cr">
                                          												 <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
-                                       												 </span>
+                                       												 </span><span style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Select all</span>
 															</label>
 																<input type="hidden" name="" id="val_select_all" value="0">
 															</div>
@@ -1013,7 +1013,7 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 															<input type="checkbox" onclick="tocheckdrodownhrwork()" class="itemRow checkbox1" name="checkbox1" value="<?php echo $sb['employee_id']; ?>">
 															<span class="cr">
                                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
-                                        </span>
+                                        </span><span style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Select row</span>
 															</label>
 														</div>
 													</td>

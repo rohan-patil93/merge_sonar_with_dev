@@ -383,7 +383,7 @@
 
             <?php  foreach($_SESSION['application_menu_TNR'] as $tnrmenuid=>$tnrmenu) { ?>
                 <li class="header-notification m-r-10"  data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo $tnrmenu['Label'];?>">
-                    <div class="dropdown-primary" onclick="location.href='index.php?option=<?php echo $tnrmenu['Page_Name'];?>';">
+                    <div class="dropdown-primary" role="button" tabindex="0" aria-label="<?php echo htmlspecialchars($tnrmenu['Label']); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=<?php echo $tnrmenu['Page_Name'];?>';">
                         <div class="" data-bs-toggle="dropdown" >
                             <i class="<?php echo $tnrmenu['Menu_Icon'];?>"></i>
                         </div>
@@ -393,7 +393,7 @@
 
              <?php /**if( in_array($_SESSION['work_module_setup_id'], array(MODUL_HR,MODUL_PAYROLL,MODUL_ATTENDANCE)) && ($_SESSION['admin_type'] == '1' || $_SESSION['pay_admin_emp'] > 0)){ ?>   
                 <li class="header-notification m-r-10"  data-bs-toggle="tooltip" data-placement="bottom" title="Work Attendance">
-                    <div class="dropdown-primary" onclick="location.href='index.php?option=COM_LIST_WORK_ATTENDANCES';">
+                    <div class="dropdown-primary" role="button" tabindex="0" aria-label="Work Attendance" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=COM_LIST_WORK_ATTENDANCES';">
                         <div class="" data-bs-toggle="dropdown" >
                             <i class="ti-notepad"></i>
                         </div>
@@ -408,7 +408,7 @@
 
         ?>   
                 <li class="header-notification m-r-10"  data-bs-toggle="tooltip" data-placement="bottom" title="Document Dashboard">
-                    <div class="dropdown-primary" onclick="location.href='index.php?option=<?php echo $vkv; ?>';">
+                    <div class="dropdown-primary" role="button" tabindex="0" aria-label="Document Dashboard" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=<?php echo $vkv; ?>';">
                         <div class="" data-bs-toggle="dropdown" >
                             <i class="ti-envelope"></i>
                         </div>
@@ -424,7 +424,7 @@
         </li>  -->
         <?php if(in_array(ADMIN_ROLE,(array)$_SESSION['role_ids'])){ ?>
         <li class="header-notification m-r-10" data-bs-toggle="tooltip" data-placement="bottom" title="Display Attributes">
-            <div class="dropdown-primary" onclick="location.href='index.php?option=COM_LIST_DISPLAY_ATTRIBUTES';">
+            <div class="dropdown-primary" role="button" tabindex="0" aria-label="Display Attributes" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=COM_LIST_DISPLAY_ATTRIBUTES';">
                 <div class="" data-bs-toggle="dropdown">
                     <i class="ti-tablet"></i>
                 </div>
@@ -455,7 +455,7 @@
         
         
         <li class="header-notification m-r-10" data-bs-toggle="tooltip" data-placement="bottom" title="Settings">
-            <div class="dropdown-primary" onclick="location.href='index.php?option=COM_LIST_APPLICATION_MENU_SETTINGS';">
+            <div class="dropdown-primary" role="button" tabindex="0" aria-label="Settings" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=COM_LIST_APPLICATION_MENU_SETTINGS';">
                 <div class="" data-bs-toggle="dropdown">
                     <i class="ti-settings" ></i>
                 </div>
@@ -464,7 +464,7 @@
     <?php } ?>
     <?php /**if(in_array(ADMIN_ROLE,(array)$_SESSION['role_ids']) || in_array( $_SESSION['module_setp'][$_SESSION['work_module_setup_id']]['role_admin_short_code'],(array)$_SESSION['module_code']) ){ ?>
     <li class="header-notification m-r-10" data-bs-toggle="tooltip" data-placement="bottom" title="Reports">
-            <div class="dropdown-primary" onclick="location.href='index.php?option=COM_LIST_MY_REPORTS';">
+            <div class="dropdown-primary" role="button" tabindex="0" aria-label="Reports" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=COM_LIST_MY_REPORTS';">
                 <div class="" data-bs-toggle="dropdown">
                     <!-- <i class="ti-stats-up" ></i> -->
                     <i class="ti-pie-chart" ></i> 
@@ -473,7 +473,7 @@
         </li>
     <?php } **/ /**?>
         <li class="header-notification  m-r-10"  data-bs-toggle="tooltip" data-placement="bottom" title="Inbox">
-            <div class="dropdown-primary" onclick="location.href='index.php?option=COM_LIST_INBOX';">
+            <div class="dropdown-primary" role="button" tabindex="0" aria-label="Inbox" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=COM_LIST_INBOX';">
                 <div class="" data-bs-toggle="dropdown" >
                     <i class="ti-email"></i>
                     <span class="badge bg-c-green customcount"><?php echo $inboxcount['index_cnt']; ?></span>
@@ -482,7 +482,7 @@
         </li> 
         <?php **/?>
          <li class="header-notification  m-r-10"  data-bs-toggle="tooltip" data-placement="bottom" title="Announcements">
-            <div class="dropdown-primary" onclick="location.href='index.php?option=COM_VIEW_ANNOUNCEMENTS';">
+            <div class="dropdown-primary" role="button" tabindex="0" aria-label="Announcements" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=COM_VIEW_ANNOUNCEMENTS';">
                 <div class="" data-bs-toggle="dropdown" >
                     <i class="ti-announcement"></i>
                 </div>
@@ -647,13 +647,13 @@
                         <?php /** ?><div class="toggle-button-cover mt-2">
                             <div class="button-cover">
                                 <div class="button b2" id="button-16">
-                                    <input type="checkbox" class="checkbox" id="admin_access_employee" onchange="changeAdminToEmployee()" <?php echo $_SESSION['admin_access_employee']=="Y"?"checked":"";?> / aria-label="Input">
+                                    <input type="checkbox" class="checkbox" id="admin_access_employee" onchange="changeAdminToEmployee()" <?php echo $_SESSION['admin_access_employee']=="Y"?"checked":"";?> aria-label="Input" />
                                     <div class="knobs"></div>
                                     <div class="layer"></div>
                                 </div>
                             </div>
                         </div> <?php **/ ?>
-                        <select id="working_role_short_code" onchange="chnageModuleWithRole()" aria-label="Select">
+                        <select id="working_role_short_code" onchange="chnageModuleWithRole()" aria-label="Working role">
                             <?php foreach($_SESSION['modulewithroledetails'][$_SESSION['work_module_setup_id']] as $mwithrole){ ?>
                             <option value="<?php echo $mwithrole['role_short_code']; ?>" <?php echo $mwithrole['role_short_code'] == $_SESSION['working_role_short_code']?"selected":""; ?>><?php echo $mwithrole['display_name']; ?></option>
                         <?php } ?>
@@ -710,7 +710,7 @@
                                  $style .= "box-shadow: 0px 0px 10px grey;";
                             } 
                             ?>
-                        <div class="col-lg-3 p-1 border" style="<?php echo $style;?> " <?php echo $modultitle; ?>  onclick="<?php echo $modulfunction;?>">
+                        <div class="col-lg-3 p-1 border" style="<?php echo $style;?> " <?php echo $modultitle; ?>  role="button" tabindex="0" <?php echo $modulfunction == "" ? 'aria-disabled="true"' : ''; ?> onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="<?php echo $modulfunction;?>">
                             <?php echo $icon; ?>
                             <img src="uploads/all/<?php echo $module_list['module_logo']; ?>" class="img-40" alt="" > 
                             <h5 class=" f-12"><?php echo $module_list['module_name']; ?></h5>

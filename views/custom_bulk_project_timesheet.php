@@ -682,15 +682,15 @@ if ($total_budget_hrs > 0) {
   						</h5>
   						<div class="radio-inline float-right infisuite_tab">
   							<?php $billist =""; if($_GET['PAY_YEAR']!=""){ $billist = "&PAY_YEAR=".$_GET['PAY_YEAR']."&PAY_MONTH=".$_GET['PAY_MONTH']; } ?>
-  							<label class="radio nav-item"><a href="index.php?option=COM_BULK_PROJECT_TIMESHEET<?php echo $billist; ?>" class="btn btn-info waves-effect waves-light  <?php if($gtnvk==2){ echo 'active'; } ?>">
+  							<span class="radio nav-item d-inline-block" style="margin-bottom:5px"><a href="index.php?option=COM_BULK_PROJECT_TIMESHEET<?php echo $billist; ?>" class="btn btn-info waves-effect waves-light  <?php if($gtnvk==2){ echo 'active'; } ?>">
   								<?php if($gtnvk==2){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?>
-								<?php echo "All"; ?></a> </label> 
-  							<label class="radio nav-item"><a href="index.php?option=COM_BULK_PROJECT_TIMESHEET<?php echo $billist."&TNVAL=1"; ?>" class="btn btn-success waves-effect waves-light <?php if($gtnvk==1){ echo 'active'; } ?>">
+								<?php echo "All"; ?></a> </span> 
+  							<span class="radio nav-item d-inline-block" style="margin-bottom:5px"><a href="index.php?option=COM_BULK_PROJECT_TIMESHEET<?php echo $billist."&TNVAL=1"; ?>" class="btn btn-success waves-effect waves-light <?php if($gtnvk==1){ echo 'active'; } ?>">
   								<?php if($gtnvk==1){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?>
-  								<?php echo "Billable"; ?></a> </label> 
-  							<label class="radio nav-item"><a href="index.php?option=COM_BULK_PROJECT_TIMESHEET<?php echo $billist."&TNVAL=0"; ?>" class="btn btn-disabled  waves-effect waves-light <?php if($gtnvk==0){ echo 'active'; } ?>" style="cursor: pointer;">
+  								<?php echo "Billable"; ?></a> </span> 
+  							<span class="radio nav-item d-inline-block" style="margin-bottom:5px"><a href="index.php?option=COM_BULK_PROJECT_TIMESHEET<?php echo $billist."&TNVAL=0"; ?>" class="btn btn-disabled  waves-effect waves-light <?php if($gtnvk==0){ echo 'active'; } ?>" style="cursor: pointer;">
   									<?php if($gtnvk==0){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?>
-  								<?php echo "Non-billable"; ?></a> </label> 
+  								<?php echo "Non-billable"; ?></a> </span> 
   						</div>
   					</div>
 
@@ -699,8 +699,8 @@ if ($total_budget_hrs > 0) {
 
 									<div class="col-lg-3">
 										<div class="d-flex align-items-center">
-											<label class="mr-3 mb-0 d-none d-md-block">Reporting Manager:&nbsp;</label>
-											<select class="form-control form-select js-example-basic-single" id="kt_datatable_search_typew" name="approval_manager" aria-label="Approval Manager">
+											<label for="kt_datatable_search_typew" class="mr-3 mb-0 d-none d-md-block">Reporting Manager:&nbsp;</label>
+											<select class="form-control form-select js-example-basic-single" id="kt_datatable_search_typew" name="approval_manager">
 												<option value="0">All</option>
 												<?php foreach((array)$approvemanager as $appkey=>$appm){ ?>
 													<option  <?php echo ($approval_manager==$appkey) ? 'selected' :""; ?> value="<?php echo $appkey; ?>"><?php echo $_SESSION['users'][$appm]; ?></option>
@@ -710,8 +710,8 @@ if ($total_budget_hrs > 0) {
 									</div>
 									<div class="col-lg-3">
 										<div class="d-flex align-items-center">
-											<label class="mr-3 mb-0 d-none d-md-block">Vendor:&nbsp;</label>
-											<select class="form-control form-select js-example-basic-single" id="kt_datatable_search_type" name="vendor" aria-label="Vendor">
+											<label for="kt_datatable_search_type" class="mr-3 mb-0 d-none d-md-block">Vendor:&nbsp;</label>
+											<select class="form-control form-select js-example-basic-single" id="kt_datatable_search_type" name="vendor">
 												<option value="0">All</option>
 												<?php foreach((array)$allvendors as $vkey =>$vlist){
 													if(in_array($vkey,$approvevendor)){ ?>
@@ -722,8 +722,8 @@ if ($total_budget_hrs > 0) {
 									</div>
 									<div class="col-lg-3">
 										<div class="d-flex align-items-center">
-											<label class="mr-3 mb-0 d-none d-md-block">Name:&nbsp;</label>
-											<input type="text" class="form-control " name="emp_name" value="<?php echo $emp_name=='0' ? '' : $emp_name; ?>" aria-label="Emp Name">
+											<label for="fld_emp_name" class="mr-3 mb-0 d-none d-md-block">Name:&nbsp;</label>
+											<input id="fld_emp_name" type="text" class="form-control " name="emp_name" value="<?php echo $emp_name=='0' ? '' : $emp_name; ?>">
 										</div>
 									</div>
 									
@@ -763,8 +763,8 @@ if ($total_budget_hrs > 0) {
 							<div class="btn-group" id="status_dropdown" style="display:none;">
 								<button class="btn btn-primary dropdown-toggle font-size-sm" style="color: <?php echo "#".$stausresult['10']['color']; ?>;    background:  <?php echo "#".strval($stausresult['10']['background_color']); ?>; border-color: <?php echo "#".strval($stausresult['10']['background_color']); ?>;" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><?php echo $statu_progress['10']['name']; ?> </button>
 								<div class="dropdown-menu" id="dropdownlist_<?php echo $fid; ?>">
-									<div class="dropdown-item cursor-pointer" onclick="statuspopup('101','2')" name="status" id="status" value="101"><?php echo $statu_progress['101']['action_label']; ?>  </div>
-									<div class="dropdown-item cursor-pointer" onclick="statuspopup('20','2')" name="status" id="status" value="20"><?php echo $statu_progress['20']['action_label']; ?>  </div>
+									<div class="dropdown-item cursor-pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="statuspopup('101','2')" name="status" id="status" value="101"><?php echo $statu_progress['101']['action_label']; ?>  </div>
+									<div class="dropdown-item cursor-pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="statuspopup('20','2')" name="status" id="status" value="20"><?php echo $statu_progress['20']['action_label']; ?>  </div>
 								</div>
 
 							</div>
@@ -798,7 +798,7 @@ if ($total_budget_hrs > 0) {
 																	<th scope="col" class=" min-w-50px text-center">
 																		<div class="checkbox-fade fade-in-primary">
 																			<label class="checkbox checkbox-success">
-																				<input type="checkbox" checked id="" disabled class="" aria-label="Input">
+																				<input type="checkbox" aria-label="Select all" checked id="" disabled class="">
 																				<span class="cr">
                                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                         </span>
@@ -906,7 +906,7 @@ if($sb['vrc_purchase_uom']=='PD'){
 	<?php if($sb['pt_status_id'] != "104"){ ?>	
 	<div class="checkbox-fade fade-in-primary">
 		<label class="checkbox checkbox-success">
-			<input type="checkbox" class="" checked name="" disabled value="<?php echo $sb['employee_id']; ?>" aria-label="Input">
+			<input type="checkbox" aria-label="Select row" class="" checked name="" disabled value="<?php echo $sb['employee_id']; ?>">
 			<span class="cr">
 			<i class="cr-icon icofont icofont-ui-check txt-primary"></i>
 			</span>
@@ -979,7 +979,7 @@ if($sb['vrc_purchase_uom']=='PD'){
 													<th scope="col" class=" min-w-50px text-center">
 														<div class="checkbox-fade fade-in-primary">
 															<label class="checkbox checkbox-success">
-																<input type="checkbox" id="select_all" class="itemRow" onclick="tocheckallboxes()" aria-label="Input">
+																<input type="checkbox" aria-label="Select all" id="select_all" class="itemRow" onclick="tocheckallboxes()">
 																<span class="cr">
                                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                         </span>
@@ -1088,7 +1088,7 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 												<td class="text-center pr-0">
 													<div class="checkbox-fade fade-in-primary">
 														<label class="checkbox checkbox-success">
-															<input type="checkbox" onclick="tocheckdrodown()" class="itemRow checkbox1" name="checkbox1" value="<?php echo $sb['employee_id']; ?>" aria-label="Checkbox1">
+															<input type="checkbox" aria-label="Select row" onclick="tocheckdrodown()" class="itemRow checkbox1" name="checkbox1" value="<?php echo $sb['employee_id']; ?>">
 															<span class="cr">
                                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                         </span>
@@ -1289,7 +1289,7 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 			<div class="col-lg-4 card social-card">
     <div class="card-body text-center">
         <h2 class="text-facebook m-b-20">
-		<i class="fa fa-group text-c-green f-30"></i>
+		<i class="fa fa-group text-c-green f-30" aria-hidden="true"></i><span style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Vendors</span>
 	</h2>
         <h3 class="text-facebook f-w-700"><?php echo count((array)$vendors); ?></h3>
         <p class="m-b-0 m-t-15">Vendors</p>
@@ -1298,7 +1298,7 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 <div class="col-lg-4 card social-card">
     <div class="card-body text-center">
         <h2 class="text-facebook m-b-20">
-		<i class="fa fa-mortar-board text-c-green f-30"></i>
+		<i class="fa fa-mortar-board text-c-green f-30" aria-hidden="true"></i><span style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Resources</span>
 	</h2>
 <?php $total_apv_p = (!empty($team_count_data['team']) && $team_count_data['team'] > 0) ? number_format(((count((array)$employees) / $team_count_data['team']) * 100), 2) : '0.00'; ?>
         <h3 class="text-facebook f-w-700"><?php echo $team_count_data['team']; ?></h3>
@@ -1309,7 +1309,7 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 <div class="col-lg-4 card social-card">
     <div class="card-body text-center">
         <h2 class="text-facebook m-b-20">
-		<i class="fa fa-bed text-c-green f-30"></i>
+		<i class="fa fa-bed text-c-green f-30" aria-hidden="true"></i><span style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Leaves</span>
 	</h2>
         <h3 class="text-facebook f-w-700"><?php echo $totalleaveallowvrc."/".$totalleaveadaysemployee; ?></h3>
         

@@ -8285,6 +8285,7 @@ class userClass{
 	}
 	function addletters($post,$type=''){
 		global $callConfig;
+		$fieldarray = array();
 		//echo "ravi";
 		//echo "<pre>"; print_r($post); exit;
 		$oldwhrs="id= '".$post['hid']."'";
@@ -8728,6 +8729,7 @@ function togetemployeeteamdata($data){
 	
 	function updateprojecttimesheetsbluk($get){
 		global $callConfig; 
+		$notarry = array();
 		$quer = "SELECT hr_buddy FROM `employee_buddies` WHERE `employee_id`=".$get['emp_id'];
 		$hrb = $callConfig->getRow($quer);
 		$query = "UPDATE project_timesheets SET hr_id=".$hrb->hr_buddy.",current_status=".$get['status']." WHERE emp_id IN (".$get['emp_ids'].") AND MONTH(timesheet_date)=MONTH('".$get['extra']."')" ;
@@ -9170,6 +9172,7 @@ function addorupdategoals($post,$get){
 }*/
 function addorupdatesalary($post, $urldata){
 	global $callConfig; 
+	$get = array();
 		//echo "<pre>";print_r($post); exit;
 	$whre="company_id= '".$post['company_id']."' and is_active=0";
 	$querys = $callConfig->selectQuery('earnings','*',$whre,'','','');
@@ -9504,6 +9507,7 @@ function addjobpostingapplicatantdata($post,$get){
 
 	function toinsertpayrnsummary($post, $get){
 		global $callConfig;
+		$user = (object)array('location_id'=>null);
 		//echo "<pre>";print_r($post); exit;
 		$whr1="company_id= '".$get['company_id']."' and is_active=0 and user_type!=4";
 		$query2 = $callConfig->selectQuery('application_users','*',$whr1,'','','');
@@ -17331,7 +17335,6 @@ function insertEmpHistries($data){
 			$process1['role_id']=$role_id;
 			$process1['role_short_code']=$role_short_code;
 			$process1['is_active']='0';
-			$process1['permission_delete']='0';
 			$process1['Current_Status']='0';
 			$process1['table_name']=$data['processtablename'][$key];
 			$process1['page_name']=$value;
@@ -18166,6 +18169,7 @@ function insertEmpHistries($data){
 
 	function getCharTofAccounTreeList($data){
 		global $callConfig;
+		$img = null;
 		$treelis = array();
 		$sql2 = "select  id,parent_account_code,account_name,account_code from chart_of_accounts where id='".$data['user_ids']."' and is_active = 0 and company_id = '".$data['company_id']."'";
 		$datas4 = $callConfig->getRow($sql2);	    
@@ -22296,6 +22300,7 @@ function getLeaveWithStatus($data){
 	}
 	function toinsertmonthlypayrnsummarybaseemployee($post, $emps, $version,$pay_area_id){
 		global $callConfig;
+		$all_incomtax = array();
 		//echo "Ravi <pre>"; print_r($post);  exit;
 		//--------------Payroll Dates Config Details------------//
 		$datess = $this->payrollfromtodates($post);
@@ -25353,6 +25358,7 @@ function inserttasks($post, $get){
 
     function getDynamicTableDetails($get){
     	global $callConfig;
+    	$table = '';
     	$returnres['get'] = $get;
     	$application_table = $get['application_table_name'];
     	$admin_access_employee = $get['admin_access_employee'];
@@ -32278,6 +32284,7 @@ function getDisplayAttributesNewVersion($get){
 
 	function insertpaymentstojv($transaction_id,$post,$transaction_table){
 		global $callConfig;	
+		$itemrow = array();
 		$transaction_table = $transaction_table != "" ? $transaction_table : "payments";
 		$whrs = "company_id= ".$post['company_id']." AND is_active = 0";
 		$query = $callConfig->selectQuery('config','*',$whrs,'','','');
@@ -35683,7 +35690,6 @@ $itemref[$vendorsres->account_code][] = $jvary;
 		$return = array();
 		$return['post'] = $post;	
 		$fielddata = json_encode($post['fieldgrpaccess']);
-		$return['post'] = $post;	
 		if(isset($post['Rid']) AND $post['Rid'] !=""){
 			$post_array= array("role_id"=>$post['role_short_code'],"field_list"=>$fielddata,"updated_by"=>$post['user_id'],"updated_date"=>date('Y-m-d H:i:s'));
 			$res=$callConfig->updateRecord('employees_display_fields',$post_array,'id',$post['Rid']);	
@@ -36228,6 +36234,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 	}
 	function insertVendorCustomerItems($post){
 		global $callConfig;
+		$transaction_id = '';
 		$return = array();
 		$transaction_table = $post['transaction_table'];
 		if($post['type'] == "REMOVE"){
@@ -37846,8 +37853,8 @@ function gerReferanceTableDetails($get){
 							$mainitem = $this->togetitemvalues($idata[0]);
 							$day_rate = $this->togetitemwadayrate($idata[0], $post['company_id']);	
 							$len = array('company_id' =>$post['company_id'] , 'location_id' =>1, 'transaction_warehouse_id' =>1, 'transaction_date'=>$system_start_date, 'item_id' =>$idata[0],'document_no'=>$idata[0],'document_type' =>'items','document_ref_no' =>'','in_qty' =>$idata[5],'in_value'=>0,'item_in_value' =>0,'reason_id'=>'','out_qty' =>0,'out_value' =>0,'sale_price'=>0,'sale_value'=>0,'item_wa_cost'=>$day_rate,'item_st_cost'=>$mainitem->purchase_price,'is_active'=>'0','current_status'=>'0','sales_qty'=>0,'purchase_qty'=>0);
-							$ddf = $this->invoiceUpdates('items',$len);
-							$returnaray['items_ledger'][] = $ddf;
+							$this->invoiceUpdates('items',$len);
+							$returnaray['items_ledger'][] = null;
 						}
 					}
 					$returnaray['array'] = $idata;
@@ -38183,6 +38190,7 @@ function gerReferanceTableDetails($get){
     }
     function toGetApplicationFinanceYearSerialNumbers($table_name,$trandate=""){
 		global $callConfig;
+		$get = array();
 		$transdate = $trandate !=""?$trandate:date('Y-m-d');
 		
 		$finyaer = date("m",strtotime($transdate)) >= 4 ? date("Y",strtotime($transdate)). '-' . (date("y",strtotime($transdate))+1) : (date("Y",strtotime($transdate)) - 1). '-' . date("y",strtotime($transdate));

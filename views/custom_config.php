@@ -136,18 +136,18 @@ $paydata = json_decode($paydata,1);
 							<div class="kt-form__section kt-form__section--first">
 								<div class="kt-wizard-v1__form">
 									<div class="form-group">
-										<label>Name</label>
-										<input type="text" class="form-control" name="name" placeholder="Name" value="<?php echo $data['name']; ?>" aria-label="Name">
+										<label for="fld_name">Name</label>
+										<input id="fld_name" type="text" class="form-control" name="name" placeholder="Name" value="<?php echo $data['name']; ?>">
 										<span class="form-text text-muted">Please enter your Name.</span>
 									</div>
 									<div class="form-group">
-										<label>Email</label>
-										<input type="text" class="form-control" name="admin_email" placeholder="Email" value="<?php echo $data['admin_email']; ?>" aria-label="Email">
+										<label for="fld_admin_email">Email</label>
+										<input id="fld_admin_email" type="text" class="form-control" name="admin_email" placeholder="Email" value="<?php echo $data['admin_email']; ?>">
 										<span class="form-text text-muted">Please enter your Email Address.</span>
 									</div>
 									<div class="form-group">
-										<label>Phone Number</label>
-										<input type="text" class="form-control" name="phone_number" placeholder="phone_number" value="<?php echo $data['phone_number']; ?>" aria-label="phone_number">
+										<label for="fld_phone_number">Phone Number</label>
+										<input id="fld_phone_number" type="text" class="form-control" name="phone_number" placeholder="phone_number" value="<?php echo $data['phone_number']; ?>">
 										<span class="form-text text-muted">Please enter your Phone Number.</span>
 									</div>
 								</div>
@@ -162,13 +162,13 @@ $paydata = json_decode($paydata,1);
 							<div class="kt-form__section kt-form__section--first">
 								<div class="kt-wizard-v1__form">
 									<div class="form-group">
-										<label>Contact Address</label>
-										<input type="text" class="form-control" name="contact_address" placeholder="Contact Address" value="<?php echo $data['contact_address']; ?>" aria-label="Contact Address">
+										<label for="fld_contact_address">Contact Address</label>
+										<input id="fld_contact_address" type="text" class="form-control" name="contact_address" placeholder="Contact Address" value="<?php echo $data['contact_address']; ?>">
 										<span class="form-text text-muted">Please enter your Contact Address.</span>
 									</div>
 									<div class="form-group">
-										<label>Billing Adderess</label>
-										<input type="text" class="form-control" name="billing_address" placeholder="Package Weight" value="<?php echo $data['billing_address']; ?>" aria-label="Package Weight">
+										<label for="fld_billing_address">Billing Adderess</label>
+										<input id="fld_billing_address" type="text" class="form-control" name="billing_address" placeholder="Package Weight" value="<?php echo $data['billing_address']; ?>">
 										<span class="form-text text-muted">Please enter your Billing Adderess.</span>
 									</div>
 								</div>
@@ -183,20 +183,20 @@ $paydata = json_decode($paydata,1);
 							<div class="kt-form__section kt-form__section--first">
 								<div class="kt-wizard-v1__form">
 									<div class="form-group">
-										<label>PAN Number</label>
-										<input type="text" class="form-control" name="pan_number" placeholder="Pan Number" value="<?php echo $data['pan_number']; ?>" aria-label="Pan Number">
+										<label for="fld_pan_number">PAN Number</label>
+										<input id="fld_pan_number" type="text" class="form-control" name="pan_number" placeholder="Pan Number" value="<?php echo $data['pan_number']; ?>">
 									</div>
 									<div class="form-group">
-										<label>TAN Number</label>
-										<input type="text" class="form-control" name="tax_number" placeholder="TAN Number"  value="<?php echo $data['tax_numberme']; ?>" aria-label="TAN Number">
+										<label for="fld_tax_number">TAN Number</label>
+										<input id="fld_tax_number" type="text" class="form-control" name="tax_number" placeholder="TAN Number"  value="<?php echo $data['tax_numberme']; ?>">
 									</div>
 									<div class="form-group">
-										<label>GST Number</label>
-										<input type="text" class="form-control" name="gst_number" placeholder="GST Number" value="<?php echo $data['gst_number']; ?>" aria-label="GST Number">
+										<label for="fld_gst_number">GST Number</label>
+										<input id="fld_gst_number" type="text" class="form-control" name="gst_number" placeholder="GST Number" value="<?php echo $data['gst_number']; ?>">
 									</div>
 									<div class="form-group">
-										<label>CIN Number</label>
-										<input type="text" class="form-control" name="cin_number" placeholder="CIN Number"  value="<?php echo $data['cin_number']; ?>" aria-label="CIN Number">
+										<label for="fld_cin_number">CIN Number</label>
+										<input id="fld_cin_number" type="text" class="form-control" name="cin_number" placeholder="CIN Number"  value="<?php echo $data['cin_number']; ?>">
 									</div>
 								</div>
 							</div>
@@ -210,12 +210,12 @@ $paydata = json_decode($paydata,1);
 							<div class="kt-form__section kt-form__section--first">
 								<div class="kt-wizard-v1__form">
 									<div class="form-group">
-										<label>Liscense Number</label>
-										<input type="text" class="form-control" name="liscense_number" placeholder="liscense number" value="<?php echo $data['liscense_number']; ?>" aria-label="liscense number">
+										<label for="fld_liscense_number">Liscense Number</label>
+										<input id="fld_liscense_number" type="text" class="form-control" name="liscense_number" placeholder="liscense number" value="<?php echo $data['liscense_number']; ?>">
 									</div>
 									<div class="form-group">
-										<label>Subscription Info</label>
-										<input type="text" class="form-control" name="subscription_info" placeholder="Subscription Info" value="<?php echo $data['subscription_info']; ?>" aria-label="Subscription Info">
+										<label for="fld_subscription_info">Subscription Info</label>
+										<input id="fld_subscription_info" type="text" class="form-control" name="subscription_info" placeholder="Subscription Info" value="<?php echo $data['subscription_info']; ?>">
 									</div>	
 								</div>
 							</div>
@@ -231,7 +231,7 @@ $paydata = json_decode($paydata,1);
 								<div class="kt-wizard-v1__form">
 									<div class="form-group">
 										<label for="time_zone">Time Zone </label>
-										<select class="form-control" id="time_zone"   name= "time_zone" aria-label="Time Zone">
+										<select class="form-control" id="time_zone"   name= "time_zone">
 														<?php foreach ($time_zones as $key=>$time_zone) {?>
 
 														<option <?php if($data['time_zone'] == $key){?> selected <?php } ?>  value = <?php echo $key; ?>  ><?php echo $time_zone; ?></option>
@@ -241,7 +241,7 @@ $paydata = json_decode($paydata,1);
 									<div class="form-group">
 										<label for="date_format">Date Format</label>
 										<!--  -->
-										<select class="form-control" id="date_format"   name= "date_format" aria-label="Date Format">
+										<select class="form-control" id="date_format"   name= "date_format">
 														<?php $date_array = array('DD-MM-YYYY', 'MM-DD-YYYY','YYYY-MM-DD');
 														foreach ($date_array as $formate) {?>
 
@@ -250,13 +250,13 @@ $paydata = json_decode($paydata,1);
 										</select>
 									</div>
 									<div class="form-group">
-										<label>Date Separator</label>
-										<input type="text" class="form-control" name="date_separator" placeholder="Date Separator" value="<?php echo $data['date_separator']; ?>" aria-label="Date Separator">
+										<label for="fld_date_separator">Date Separator</label>
+										<input id="fld_date_separator" type="text" class="form-control" name="date_separator" placeholder="Date Separator" value="<?php echo $data['date_separator']; ?>">
 									</div>
 									<div class="form-group">
 										<label for="percentage_position">Percentage Position</label>
 										
-										<select class="form-control" id="percentage_position"   name= "percentage_position" aria-label="Percentage Position">
+										<select class="form-control" id="percentage_position"   name= "percentage_position">
 											<option <?php if($data['percentage_position'] == 'R'){?> selected <?php } ?>  value = 'r'  > Right</option>
 											<option <?php if($data['percentage_position'] == 'L'){?> selected <?php } ?>  value = 'r'  > Left</option>
 										</select>
@@ -264,7 +264,7 @@ $paydata = json_decode($paydata,1);
 									<div class="form-group">
 										<label for="number_format">Decimal places</label>
 										
-										<select class="form-control" id="number_format"   name= "number_format" aria-label="Number Format">
+										<select class="form-control" id="number_format"   name= "number_format">
 											<?php for($i=1; $i<5; $i++){?>
 											<option <?php if($data['number_format'] == $i){?> selected <?php } ?>  value = <?php echo $i; ?>  > 
 												<?php echo substr('999.999999', 0,4+$i); ?></option>
@@ -274,7 +274,7 @@ $paydata = json_decode($paydata,1);
 									
 									<div class="form-group">
 										<label for="invoice_perfix">Invoice PreFix</label>
-										<select class="form-control" id="invoice_perfix"   name= "invoice_perfix" aria-label="Invoice Perfix">
+										<select class="form-control" id="invoice_perfix"   name= "invoice_perfix">
 														<?php foreach ($perfixresponse as $key=>$perfix) {?>
 
 														<option <?php if($data['invoice_perfix'] == $perfix['code']){?> selected <?php } ?>  value = <?php echo $perfix['code']; ?>  ><?php echo $perfix['code']; ?></option>
@@ -282,8 +282,8 @@ $paydata = json_decode($paydata,1);
 										</select>
 									</div>
 									<div class="form-group">
-										<label>Invoice PostFix</label>
-										<input type="text" class="form-control" name="invoice_postfix" placeholder="Invoice PostFix" value="<?php echo $data['invoice_postfix']; ?>" aria-label="Invoice PostFix">
+										<label for="fld_invoice_postfix">Invoice PostFix</label>
+										<input id="fld_invoice_postfix" type="text" class="form-control" name="invoice_postfix" placeholder="Invoice PostFix" value="<?php echo $data['invoice_postfix']; ?>">
 									</div>
 								</div>
 							</div>
@@ -297,9 +297,9 @@ $paydata = json_decode($paydata,1);
 							<div class="kt-form__section kt-form__section--first">
 								<div class="kt-wizard-v1__form">
 									<div class="form-group">
-										<label>Default Currency</label>
+										<label for="kt_select2_11">Default Currency</label>
 										<div class="col-lg-12">
-										<select class="form-control" id="kt_select2_11"   name= "default_currency_id" style="width: 100%" aria-label="Default Currency Id">
+										<select class="form-control" id="kt_select2_11"   name= "default_currency_id" style="width: 100%">
 														<?php foreach ($currencyres as $currenc) {?>
 
 														<option <?php if($data['default_currency_id'] == $currenc['id']){?> selected <?php } ?>  value = <?php echo $currenc['id']; ?>  >
@@ -317,7 +317,7 @@ $paydata = json_decode($paydata,1);
 													<?php $currency_formate  = array('99,99,99,99,999','99,999,999,999' );
 														foreach ($currency_formate as  $cu_formate) {  ?> 
 														<label class="kt-radio">
-															<input type="radio"  <?php if($data['currency_formate'] == $cu_formate){ ?>checked <?php } ?> name="currency_formate" value='<?php echo $cu_formate; ?>' aria-label="Currency Formate"><?php echo $cu_formate; ?>	
+															<input type="radio"  <?php if($data['currency_formate'] == $cu_formate){ ?>checked <?php } ?> name="currency_formate" value='<?php echo $cu_formate; ?>'><?php echo $cu_formate; ?>	
 															 <span></span>
 														</label>
 													<?php } ?>
@@ -326,7 +326,7 @@ $paydata = json_decode($paydata,1);
 									</div>
 									<div class="form-group">
 										<label for="default_language_id">Default Language</label>
-										<select class="form-control" id="default_language_id"   name= "default_language_id" aria-label="Default Language Id">
+										<select class="form-control" id="default_language_id"   name= "default_language_id">
 														<?php foreach ($languagedata as $lan) {?>
 
 														<option <?php if($data['default_language_id'] == $lan['genc_detail_code']){?> selected <?php } ?>  value = <?php echo $lan['genc_detail_code']; ?>  ><?php echo $lan['description']; ?></option>
@@ -336,7 +336,7 @@ $paydata = json_decode($paydata,1);
 									<div class="form-group">
 										<label for="default_tax_rate">Default Tax Rate</label>
 
-										<select class="form-control" id="default_tax_rate"   name= "default_tax_rate" aria-label="Default Tax Rate">
+										<select class="form-control" id="default_tax_rate"   name= "default_tax_rate">
 														<?php foreach ($taxres as $key=>$tax) {?>
 
 														<option <?php if($data['default_tax_rate'] == $tax['id']){?> selected <?php } ?>  value = <?php echo $tax['id']; ?>  ><?php echo $tax['name']; ?></option>
@@ -346,7 +346,7 @@ $paydata = json_decode($paydata,1);
 									</div>
 									<div class="form-group">
 										<label for="default_payment_mode">Default Payment Mode</label>
-										<select class="form-control" id="default_payment_mode"   name= "default_payment_mode" aria-label="Default Payment Mode">
+										<select class="form-control" id="default_payment_mode"   name= "default_payment_mode">
 														<?php foreach ($paydata as $lan) {?>
 
 														<option <?php if($data['default_payment_mode'] == $lan['genc_detail_code']){?> selected <?php } ?>  value = <?php echo $lan['genc_detail_code']; ?>  ><?php echo $lan['description']; ?></option>
@@ -354,8 +354,8 @@ $paydata = json_decode($paydata,1);
 										</select>
 									</div>	
 									<div class="form-group">
-										<label>Copy Rights</label>
-										<input type="text" class="form-control" name="copy_right" placeholder="Copy Rights" value="<?php echo $data['copy_right']; ?>" aria-label="Copy Rights">
+										<label for="fld_copy_right">Copy Rights</label>
+										<input id="fld_copy_right" type="text" class="form-control" name="copy_right" placeholder="Copy Rights" value="<?php echo $data['copy_right']; ?>">
 									</div>					
 								</div>
 							</div>

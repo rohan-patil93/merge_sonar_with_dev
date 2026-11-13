@@ -294,7 +294,7 @@ foreach ($tracking_inprogress_arr as $row) {
 														<?php } else { ?>
 															<span alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
 														<?php } ?>
-														<label class='mt-2 ml-2'> <?php echo $_SESSION['users'][$row['created_by']]; ?> </label>
+														<span class='mt-2 ml-2 d-inline-block fw-bold' style='margin-bottom:5px'> <?php echo $_SESSION['users'][$row['created_by']]; ?> </span>
 													</td>
 													<td>
 														<a class='text-primary m-r-5'
@@ -358,7 +358,7 @@ foreach ($tracking_inprogress_arr as $row) {
 														<?php } else { ?>
 															<span alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
 														<?php } ?>
-														<label class='mt-2 ml-2'> <?php echo $_SESSION['users'][$row['created_by']]; ?> </label>
+														<span class='mt-2 ml-2 d-inline-block fw-bold' style='margin-bottom:5px'> <?php echo $_SESSION['users'][$row['created_by']]; ?> </span>
 													</td>
 													<td><a class='text-primary m-r-5'
 															href='index.php?option=COM_VIEW_CSR_PROPOSAL_DETAILS&Rid=<?= deocdeId('id:' . $row['id']) ?>'
@@ -420,7 +420,7 @@ foreach ($tracking_inprogress_arr as $row) {
 														<?php } else { ?>
 															<span alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
 														<?php } ?>
-														<label class='mt-2 ml-2'> <?php echo $_SESSION['users'][$row['created_by']]; ?> </label>
+														<span class='mt-2 ml-2 d-inline-block fw-bold' style='margin-bottom:5px'> <?php echo $_SESSION['users'][$row['created_by']]; ?> </span>
 													</td>
 													<td><a class='text-primary m-r-5'
 															href='index.php?option=COM_VIEW_CSR_PROPOSAL_DETAILS&Rid=<?= deocdeId('id:' . $row['id']) ?>'
@@ -483,7 +483,7 @@ foreach ($tracking_inprogress_arr as $row) {
 														<?php } else { ?>
 															<span alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
 														<?php } ?>
-														<label class='mt-2 ml-2'> <?php echo $_SESSION['users'][$row['created_by']]; ?> </label>
+														<span class='mt-2 ml-2 d-inline-block fw-bold' style='margin-bottom:5px'> <?php echo $_SESSION['users'][$row['created_by']]; ?> </span>
 													</td>
 													<td><a class='text-primary m-r-5'
 															href='index.php?option=COM_VIEW_CSR_PROPOSAL_DETAILS&Rid=<?= deocdeId('id:' . $row['id']) ?>'
@@ -586,7 +586,7 @@ foreach ($tracking_inprogress_arr as $row) {
 														<?php } else { ?>
 															<span alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
 														<?php } ?>
-														<label class='mt-2 ml-2'> <?php echo $_SESSION['users'][$row['created_by']]; ?> </label>
+														<span class='mt-2 ml-2 d-inline-block fw-bold' style='margin-bottom:5px'> <?php echo $_SESSION['users'][$row['created_by']]; ?> </span>
 													</td>
 													<td><a class='text-primary m-r-5'
 															href='index.php?option=COM_VIEW_CSR_PROPOSAL_DETAILS&Rid=<?= deocdeId('id:' . $row['id']) ?>'
@@ -602,7 +602,7 @@ foreach ($tracking_inprogress_arr as $row) {
 													<td class='text-end'><?php echo customeummarmonyformate($row['total_budget_grand_total']) ?? 0; ?> </td>
 													<td class="text-center">
 														<a href="index.php?option=COM_VIEW_CSR_TRACKING&Rid=<?php echo deocdeId('id:' . $row['id']); ?> ">
-															<label class='form-label label <?php echo $labelClass; ?> cursor-pointer' > <?php echo  round($percentage); ?>% </label></a>
+															<span class='form-label label <?php echo $labelClass; ?> cursor-pointer d-inline-block' > <?php echo  round($percentage); ?>% </span></a>
 														<a class='ml-2' href='index.php?option=COM_VIEW_CSR_TRACKING&Rid=<?php echo deocdeId('id:' . $row['id']); ?>'>
 															<i class='ti-eye f-20 p-2 b-radius-5'></i>
 														</a>
@@ -661,7 +661,7 @@ foreach ($tracking_inprogress_arr as $row) {
 														<?php } else { ?>
 															<span alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
 														<?php } ?>
-														<label class='mt-2 ml-2'> <?php echo $_SESSION['users'][$row['created_by']]; ?> </label>
+														<span class='mt-2 ml-2 d-inline-block fw-bold' style='margin-bottom:5px'> <?php echo $_SESSION['users'][$row['created_by']]; ?> </span>
 													</td>
 													<td><a class='text-primary m-r-5'
 															href='index.php?option=COM_VIEW_CSR_PROPOSAL_DETAILS&Rid=<?= deocdeId('id:' . $row['id']) ?>'
@@ -677,7 +677,7 @@ foreach ($tracking_inprogress_arr as $row) {
 													<td class='text-end'><?php echo customeummarmonyformate($row['total_budget_grand_total']) ?? 0; ?> </td>
 													<td class="text-center">
 														<a href="index.php?option=COM_VIEW_CSR_TRACKING&Rid=<?php echo deocdeId('id:' . $row['id']); ?> ">
-															<label class='form-label label <?php echo $labelClass; ?> cursor-pointer' > <?php echo  round($percentage); ?>%</label></a>
+															<span class='form-label label <?php echo $labelClass; ?> cursor-pointer d-inline-block' > <?php echo  round($percentage); ?>%</span></a>
 														<a class='ml-2' href='index.php?option=COM_VIEW_CSR_TRACKING&Rid=<?php echo deocdeId('id:' . $row['id']); ?>'>
 															<i class='ti-eye f-20 p-2 b-radius-5'></i>
 														</a>
@@ -734,7 +734,7 @@ foreach ($tracking_inprogress_arr as $row) {
 														<?php } else { ?>
 															<span alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
 														<?php } ?>
-														<label class='mt-2 ml-2'> <?php echo $_SESSION['users'][$row['created_by']]; ?> </label>
+														<span class='mt-2 ml-2 d-inline-block fw-bold' style='margin-bottom:5px'> <?php echo $_SESSION['users'][$row['created_by']]; ?> </span>
 													</td>
 													<td><a class='text-primary m-r-5'
 															href='index.php?option=COM_VIEW_CSR_PROPOSAL_DETAILS&Rid=<?= deocdeId('id:' . $row['id']) ?>'
@@ -749,7 +749,7 @@ foreach ($tracking_inprogress_arr as $row) {
 													<td class='text-end'><?php echo customeummarmonyformate($row['total_budget_grand_total']) ?? 0; ?> </td>
 													<td>
 														<a href="index.php?option=COM_VIEW_CSR_TRACKING&Rid=<?php echo deocdeId('id:' . $row['id']); ?> ">
-															<label class='form-label label <?php echo $labelClass; ?> cursor-pointer'> <?php echo  round($percentage); ?>%</label></a>
+															<span class='form-label label <?php echo $labelClass; ?> cursor-pointer d-inline-block'> <?php echo  round($percentage); ?>%</span></a>
 														<a class='ml-2' href='index.php?option=COM_VIEW_CSR_TRACKING&Rid=<?php echo deocdeId('id:' . $row['id']); ?>'>
 															<i class='ti-eye f-20 p-2 b-radius-5'></i>
 														</a></td>

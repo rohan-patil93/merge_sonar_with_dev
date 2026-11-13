@@ -294,7 +294,7 @@ button.btn.btn-default.btn-lg:hover{ color: #ffffff; background-image: linear-gr
 #gift_product .owl-controls .owl-dot span { width: 7px; height: 7px;}
 #gift_product .owl-dots .owl-dot.active span{ background: #000000;}
 .text-seo h2{font-size: 20px; line-height: 1; text-align: left; font-weight: 600; text-transform: uppercase; color: #222529; margin: 20px 0 0 0;}
-.text-seo h1{font-size: 30px; text-align: left; font-weight: 500; text-transform: initial; color: #000000; margin: 20px 0 0;width: 100%; font-weight: 500;}    
+.text-seo h1{font-size: 30px; text-align: left; text-transform: initial; color: #000000; margin: 20px 0 0;width: 100%; font-weight: 500;}    
 .text-seo h3{font-size:18px; line-height:1; text-align:left; font-weight:600; color:#222529; margin:20px 0 0 0px; letter-spacing:-0.75px; width: 100%;}
 .content-part ul li{color: #222529 !important;}
 .content-part h4{color: #222529 !important; font-size: 16px; margin: 10px 0 0 0; font-weight: bold;}
@@ -343,7 +343,7 @@ strong.summary.title { background: #eeeeee; color: #000000; padding: 10px 0; fon
 button.action.apply.primary { background: #c21e56 !important; margin: 20px 0 0 0 !important; padding: 11px 10px !important;}
 button.action.cancel.primary{margin: 20px 0 0 0 !important;}
 button.action.apply.primary:hover{ background: #ffb9c4 !important;}
-.opc-wrapper .step-title { border-bottom: 1px solid #cccccc; background: #eeeeee; padding: 10px 10px; color: #000000; font-weight: 500; font-size: 16px; font-weight: 500; margin: 20px 0 20px 0; letter-spacing: 1px;}
+.opc-wrapper .step-title { border-bottom: 1px solid #cccccc; background: #eeeeee; padding: 10px 10px; color: #000000; font-size: 16px; font-weight: 500; margin: 20px 0 20px 0; letter-spacing: 1px;}
 button#top-cart-btn-checkout { border: none !important; outline: none; padding: 10px 0 !important;}
 .opc-block-summary .items-in-cart>.title:after{ right: 18px !important; top: 21px !important; font-size: 25px !important;}
 .catalog-category-view .page-title-wrapper{ display: block;}
@@ -496,7 +496,7 @@ div#unstitchedblousefabric:hover{ filter: grayscale(0%) !important; -webkit-filt
 div#unstitchedblousefabric input.radio.admin__control-radio.required.product-custom-option, div#unstitchedsalwarfabric input.unstitchedsalwarfabric.radio.admin__control-radio.required.product-custom-option, div#unstitchedlehengafabric input.unstitchedlehengafabric.radio.admin__control-radio.required.product-custom-option, div#standardlehenga input.standardlehenga.radio.admin__control-radio.required.product-custom-option, div#customlehengastitching input.customlehengastitching.radio.admin__control-radio.required.product-custom-option { display: none;}
 div#unstitchedblousefabric label.label.admin__field-label.Unstitched.Blouse.Fabric, div#unstitchedsalwarfabric label.label.admin__field-label.Unstitched.Salwar.Fabric, div#standardsalwar label.label.admin__field-label.Standard.Salwar, div#customsalwarstitching label.label.admin__field-label.Custom.Salwar.Stitching {font-size: 13.5px; padding: 50px 0 0 0; text-align: center; display: block; min-height: 20px;}
 div#unstitchedblousefabric:hover label.label.admin__field-label.Unstitched.Blouse.Fabric { color: #4A6FA5;}
-div#standardblouse, div#standardsalwar, div#standardlehenga{background-image: url(https://fabanza.com/media/wysiwyg/standard-blouse.png); margin-right: 2px; background-position: center; background-size: 50px; background-repeat: no-repeat; background-position: 50% 10%; 
+div#standardblouse, div#standardsalwar, div#standardlehenga{background-image: url(https://fabanza.com/media/wysiwyg/standard-blouse.png); margin-right: 2px; background-size: 50px; background-repeat: no-repeat; background-position: 50% 10%; 
   padding: 20px 0px 10px 0; filter: grayscale(1420%); -webkit-filter:grayscale(1420%); background-color: #eeeeee;}
 
 div#standardblouse label.label span.price-notice{display: none;}
@@ -506,7 +506,7 @@ div#standardblouse label.label.admin__field-label.Standard.Blouse {font-size:13.
 div#standardblouse:hover label.label.admin__field-label.Standard.Blouse{color: #4A6FA5;}
 div#standardblouse label.label.admin__field-label.Standard.Blouse span{font-size: 0; position: relative;}
 div#standardblouse label.label.admin__field-label.Standard.Blouse span:after { content: 'Standard Blouse Sizes'; font-size: 13px;}
-div#customblousestitching, div#customsalwarstitching, div#customlehengastitching{background-image: url(https://fabanza.com/media/wysiwyg/custom.png); background-repeat: no-repeat; background-position: center; background-size: 50px; background-repeat: no-repeat; background-position: 50% 10%; padding: 20px 0px 10px 0; filter: grayscale(1420%); -webkit-filter:grayscale(1420%);}
+div#customblousestitching, div#customsalwarstitching, div#customlehengastitching{background-image: url(https://fabanza.com/media/wysiwyg/custom.png); background-size: 50px; background-repeat: no-repeat; background-position: 50% 10%; padding: 20px 0px 10px 0; filter: grayscale(1420%); -webkit-filter:grayscale(1420%);}
 
 div#customblousestitching:hover{filter: grayscale(0%) !important; -webkit-filter:grayscale(0%) !important;}
 div#customblousestitching input.radio.admin__control-radio.required.product-custom-option, div#customsalwarstitching input.customsalwarstitching.radio.admin__control-radio.required.product-custom-option { display: none;}
@@ -514,12 +514,11 @@ div#customblousestitching label.label.admin__field-label.Custom.Blouse.Stitching
 div#customblousestitching:hover label.label.admin__field-label.Custom.Blouse.Stitching{color: #4A6FA5;}
 div#customblousestitching{border-right: 0;}
 label.label.admin__field-label.Custom.Blouse.Stitching { display: inline-grid;}
-div#tailoringservices:blouse{ background:  #d92027;}
 div#customblousestitching span.price-container.tax.weee, div#customblousestitching span.price-notice { display: none;}
 div#tailoringservicesblouse { margin: 0; padding: 0; display: none;} 
 #tailoringservicesblouse label.label, div#tailoringservicessalwar label.label, div#tailoringserviceslehenga label.label, div#tailoringservicessaree label.label{background: #000000; display: block; padding: 10px; margin: 0; color: #ffffff; text-transform: uppercase; font-weight: 600;}
 #tailoringservicesblouse label.label:after, div#tailoringservicessalwar label.label:after, div#tailoringserviceslehenga  label.label:after, div#tailoringservicessaree label.label:after{color: #ffffff;}
-#tailoringservicesblouse label.label.admin__field-label.Unstitched.Blouse.Fabric, #tailoringservicesblouse label.label.admin__field-label.Standard.Blouse, #tailoringservicesblouse label.label.admin__field-label.Custom.Blouse.Stitching, div#tailoringservicessalwar label.label.admin__field-label.Unstitched.Salwar.Fabric, div#tailoringservicessalwar label.label.admin__field-label.Standard.Salwar, div#tailoringservicessalwar label.label.admin__field-label.Custom.Salwar.Stitching, div#unstitchedblousefabric label.label.admin__field-label.Unstitched.Blouse.Fabric, div#standardblouse label.label.admin__field-label.Standard.Blouse, div#customblousestitching label.label.admin__field-label.Custom.Blouse.Stitching, div#unstitchedlehengafabric label.label.admin__field-label.Unstitched.Lehenga.Fabric, div#standardlehenga label.label.admin__field-label.Standard.Lehenga, div#customlehengastitching label.label.admin__field-label.Custom.Lehenga.Stitching {background:none;padding:0;color:#000000;font-size:12.5px;padding:50px 0 0 0;text-align:center;}
+#tailoringservicesblouse label.label.admin__field-label.Unstitched.Blouse.Fabric, #tailoringservicesblouse label.label.admin__field-label.Standard.Blouse, #tailoringservicesblouse label.label.admin__field-label.Custom.Blouse.Stitching, div#tailoringservicessalwar label.label.admin__field-label.Unstitched.Salwar.Fabric, div#tailoringservicessalwar label.label.admin__field-label.Standard.Salwar, div#tailoringservicessalwar label.label.admin__field-label.Custom.Salwar.Stitching, div#unstitchedblousefabric label.label.admin__field-label.Unstitched.Blouse.Fabric, div#standardblouse label.label.admin__field-label.Standard.Blouse, div#customblousestitching label.label.admin__field-label.Custom.Blouse.Stitching, div#unstitchedlehengafabric label.label.admin__field-label.Unstitched.Lehenga.Fabric, div#standardlehenga label.label.admin__field-label.Standard.Lehenga, div#customlehengastitching label.label.admin__field-label.Custom.Lehenga.Stitching {background:none;color:#000000;font-size:12.5px;padding:50px 0 0 0;text-align:center;}
 
 div#tailoringservicessalwar label.label.admin__field-label.Unstitched.Salwar.Fabric span {
     font-size: 0; position: relative; line-height: 16px; display: block;
@@ -1005,7 +1004,7 @@ nav.navigation.sw-megamenu ul li.ui-menu-item.level0.fullwidth:nth-child(8):hove
 .size-popup button.close.float-right { position: absolute; right: 0; top: 0; background: #000000; color: #ffffff; z-index: 9; padding: 0 15px !important;}
 .size-popup .modal-body { margin: 0px;  padding: 0;}
 button.btn.btn-primary.size-sec {margin: 20px 0 20px 0; text-align: left; background: none; box-shadow: none; border: 2px dashed #c21e56; 
-    color: #000000; padding: 0; position: relative; width: 100%; padding: 0px 10px; height: 42px !important;}
+    color: #000000; position: relative; width: 100%; padding: 0px 10px; height: 42px !important;}
 button.btn.btn-primary.size-sec:after {position:absolute;content:'';font-family:'FontAwesome', sans-serif;font-size:17px;right:10px;top:16px;width: 0; height: 0;
   border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 6px solid crimson; /* red arrow */}
 
@@ -1966,7 +1965,7 @@ ul.links li{
     .mobile-menu, .men-mobile-menu{display: block;}
     .mob-menu, .men-mob-menu { display: none;}
     ul.mobile-menu li.responsive-menu a:after {-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-size: 23px;
-      line-height: inherit; color: inherit; content: '\f807'; font-family: 'porto-icons', sans-serif; vertical-align: middle; display: inline-block;
+      line-height: inherit; content: '\f807'; font-family: 'porto-icons', sans-serif; vertical-align: middle; display: inline-block;
       font-weight: normal; overflow: hidden; speak: none; text-align: center; position: absolute; right: 15px; color: #d92027;}
 
     .breadcrumbs{ display: block; background-color: #ffffff;  color: #000000;}
@@ -2183,7 +2182,7 @@ ul.links li{
     .home-banners a span.btm-up { bottom: 50px;}
     .content-up { margin-top: 20px;}
     .shipping-mob .container { max-width: 100% !important; width: 100% !important; padding-left: 10px; padding-right: 10px;}
-    .field-tooltip .field-tooltip-content{left: auto !impor; right: 0; top: 30px;}
+    .field-tooltip .field-tooltip-content{right: 0; top: 30px;}
     .banner .col-lg-6.pt-3 { padding-top: 0.4rem !important}
     .border-right { border-right: none;}
     .shipping-mob{padding: 5px 0;}

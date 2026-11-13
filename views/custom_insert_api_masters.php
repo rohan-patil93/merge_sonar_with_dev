@@ -216,25 +216,25 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
         <form method="post" action="">
             <div class="row"> 
                 <div class="col-md-6 form-group">
-                    <label class="form-label">Service Provider</label>
-                    <input name="api_service_provider" type="text" class="form-control" id="api-service-provider" value="<?php echo $details['api_service_provider']; ?>" placeholder="" aria-label="Api Service Provider">
+                    <label for="api-service-provider" class="form-label">Service Provider</label>
+                    <input name="api_service_provider" type="text" class="form-control" id="api-service-provider" value="<?php echo $details['api_service_provider']; ?>" placeholder="">
                 </div>
                 <div class="col-md-6 form-group">
-                    <label class="form-label">API Name</label>
-                    <input name="api_name" type="text" class="form-control" id="api-name" placeholder="" value="<?php echo $details['api_name']; ?>" aria-label="Api Name">
+                    <label for="api-name" class="form-label">API Name</label>
+                    <input name="api_name" type="text" class="form-control" id="api-name" placeholder="" value="<?php echo $details['api_name']; ?>">
                 </div>
                 <div class="col-md-6 form-group">
-                    <label class="form-label">API Code</label>
-                    <input name="api_code" type="text" class="form-control" id="api_code" placeholder="" value="<?php echo $details['api_code']; ?>" onkeypress="if (event.keyCode === 32) return false;" onblur="buildDynamicUrl()" aria-label="Api Code">
+                    <label for="api_code" class="form-label">API Code</label>
+                    <input name="api_code" type="text" class="form-control" id="api_code" placeholder="" value="<?php echo $details['api_code']; ?>" onkeypress="if (event.keyCode === 32) return false;" onblur="buildDynamicUrl()">
                 </div>
                 <div class="col-md-6 form-group">
-                    <label class="form-label">Unique ID</label>
-                    <input name="unique_id" id="unique_id" type="text" class="form-control" placeholder="" value="<?php echo $details['unique_id']; ?>" aria-label="Unique Id">
+                    <label for="unique_id" class="form-label">Unique ID</label>
+                    <input name="unique_id" id="unique_id" type="text" class="form-control" placeholder="" value="<?php echo $details['unique_id']; ?>">
                 </div>
                 <div class="col-md-6 form-group">
-                    <label class="form-label">Method
+                    <label for="method" class="form-label">Method
                         Input</label>
-                    <select name="api_method" class="form-control js-example-basic-single" id="method" onchange="buildDynamicUrl()" aria-label="Api Method">
+                    <select name="api_method" class="form-control js-example-basic-single" id="method" onchange="buildDynamicUrl()">
                         <option value="GET" <?php echo $details['api_method'] == 'GET' ? 'selected' : ''; ?>>GET</option>
                         <option value="POST" <?php echo $details['api_method'] == 'POST' ? 'selected' : ''; ?>>POST</option>
                         <option value="PUT" <?php echo $details['api_method'] == 'PUT' ? 'selected' : ''; ?>>PUT</option>
@@ -242,31 +242,31 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                     </select>
                 </div>
                 <div class="col-md-6 form-group">
-                    <label class="form-label">Results Format</label>
-                    <select name="request_format" class="form-control js-example-basic-single" id="results-format" aria-label="Request Format">
+                    <label for="results-format" class="form-label">Results Format</label>
+                    <select name="request_format" class="form-control js-example-basic-single" id="results-format">
                         <option value="json" <?php echo $details['request_format'] == 'json' ? 'selected' : ''; ?>>JSON string</option>
                         <option value="xml" <?php echo $details['request_format'] == 'xml' ? 'selected' : ''; ?>>XML</option>
                         <option value="text" <?php echo $details['request_format'] == 'text' ? 'selected' : ''; ?>>Plain Text</option>
                     </select>
                 </div>
                 <div class="col-md-6 form-group">
-                    <label class="form-label">API Type</label>
-                    <select name="api_type" class="form-control js-example-basic-single" id="api_type" onchange="getAPIType()" aria-label="Api Type">
+                    <label for="api_type" class="form-label">API Type</label>
+                    <select name="api_type" class="form-control js-example-basic-single" id="api_type" onchange="getAPIType()">
                         <option value="S" <?php echo $details['api_type'] == 'S' ? 'selected' : ''; ?>>Send</option>
                         <option value="R" <?php echo $details['api_type'] == 'R' ? 'selected' : ''; ?>>Receive</option>
                     </select>
                 </div>
                 <div class="col-md-6 form-group">
-                    <label class="form-label">Base(Test) URL</label>
-                    <input name="testing_url" id="testing_url" type="text" class="form-control" placeholder="" value="<?php echo $details['testing_url']; ?>" aria-label="Testing Url">
+                    <label for="testing_url" class="form-label">Base(Test) URL</label>
+                    <input name="testing_url" id="testing_url" type="text" class="form-control" placeholder="" value="<?php echo $details['testing_url']; ?>">
                 </div>
                 <div class="col-md-6 form-group">
-                    <label class="form-label">Production URL</label>
-                    <input name="production_url" id="production_url" type="text" class="form-control" placeholder="" value="<?php echo $details['production_url']; ?>" aria-label="Production Url">
+                    <label for="production_url" class="form-label">Production URL</label>
+                    <input name="production_url" id="production_url" type="text" class="form-control" placeholder="" value="<?php echo $details['production_url']; ?>">
                 </div>
                 <div class="col-md-12 form-group">
-                    <label class="form-label">Endpoint</label>
-                    <input name="end_point" id="end_point" type="text" class="form-control" placeholder="" value="<?php echo $details['end_point']; ?>" readonly aria-label="End Point">
+                    <label for="end_point" class="form-label">Endpoint</label>
+                    <input name="end_point" id="end_point" type="text" class="form-control" placeholder="" value="<?php echo $details['end_point']; ?>" readonly>
                 </div>
             </div>
             <div class="row">
@@ -360,8 +360,8 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                         </div>
                         <div class="card-block">
                             <div class="form-group">
-                                <label class="form-label">Transaction</label>
-                                <select name="application_table" class="form-control js-example-basic-single" id="api_application_table"  onchange="getApplicationTable()" aria-label="Application Table">
+                                <label for="api_application_table" class="form-label">Transaction</label>
+                                <select name="application_table" class="form-control js-example-basic-single" id="api_application_table"  onchange="getApplicationTable()">
                                      <option value="" >Select Any One</option>
                                     <?php foreach($display_attributes as $datr){ ?>
                                         <option value="<?php echo $datr['application_table_name']; ?>" <?php echo $datr['application_table_name'] == $details['application_table']? 'selected' : ''; ?>> <?php echo ucwords(str_replace('_',' ',$datr['application_table_name'])); ?> </option>
@@ -369,15 +369,15 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Response Records</label>
-                                <select name="response_row_type" class="form-control js-example-basic-single" id="response_row_type" aria-label="Response Row Type">
+                                <label for="response_row_type" class="form-label">Response Records</label>
+                                <select name="response_row_type" class="form-control js-example-basic-single" id="response_row_type">
                                     <option value="" >Select Any One</option>
                                     <option value="M" <?php echo $details['response_row_type'] == 'M' ? 'selected' : ''; ?>>Multiple</option>
                                     <option value="S" <?php echo $details['response_row_type'] == 'S' ? 'selected' : ''; ?>>Single</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Response Mapping</label>
+                                <span class="form-label d-inline-block fw-bold">Response Mapping</span>
                                 <table id="responseDetails" width="100%" class="mt-0">
                                     <thead>
                                         <tr>

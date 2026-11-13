@@ -165,12 +165,12 @@ foreach ((array) $locdata as $locda) {
         foreach ((array) $table2 as $tab2) {
             $tab2['id'] = 0; ?>
             <div class="col-md-6 itemRow cardid<?php echo $i; ?>">
-                <div class="card  p-5 "><span class="deleteiconcustom text-danger  text-right f-22"
+                <div class="card  p-5 "><span class="deleteiconcustom text-danger  text-right f-22" role="button" tabindex="0" aria-label="Delete VRC Card" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"
                         onclick="deleteitem(<?php echo $i; ?>)" data-container="body" data-toggle="tooltip"
                         data-placement="bottom" title="Delete VRC Card"><i class="ti-trash"></i></span>
                     <div class="row">
                         <div class="col-md-5">
-                            <label>job Title</label>
+                            <label for="productCode_<?php echo $i; ?>">job Title</label>
                         </div>
                         <div class="col-md-7">
                             <select class="form-select js-data-example-ajax-multiselect selectitemorservice col-lg-4"
@@ -195,7 +195,7 @@ foreach ((array) $locdata as $locda) {
                     <hr>
                     <div class="row">
                         <div class="col-md-5">
-                            <label>Description</label>
+                            <label for="productName_<?php echo $i; ?>">Description</label>
                         </div>
                         <div class="col-md-7">
                             <input type="text" name="productName[]" id="productName_<?php echo $i; ?>"
@@ -207,7 +207,7 @@ foreach ((array) $locdata as $locda) {
                     <hr>
                     <div class="row">
                         <div class="col-md-5">
-                            <label>Min Experience</label>
+                            <label for="min_exp_<?php echo $i; ?>">Min Experience</label>
                         </div>
                         <div class="col-md-7">
                             <div class="input-group input-group-button ">
@@ -224,7 +224,7 @@ foreach ((array) $locdata as $locda) {
                     <hr>
                     <div class="row">
                         <div class="col-md-5">
-                            <label>Max Experience</label>
+                            <label for="max_exp_<?php echo $i; ?>">Max Experience</label>
                         </div>
                         <div class="col-md-7">
                             <div class="input-group input-group-button ">
@@ -241,7 +241,7 @@ foreach ((array) $locdata as $locda) {
                     <hr>
                     <div class="row">
                         <div class="col-md-5">
-                            <label>Monthly Leaves</label>
+                            <label for="min_leave_<?php echo $i; ?>">Monthly Leaves</label>
                         </div>
                         <div class="col-md-7">
                             <div class="input-group input-group-button">
@@ -258,7 +258,7 @@ foreach ((array) $locdata as $locda) {
                     <hr>
                     <div class="row">
                         <div class="col-md-5">
-                            <label>Unit *</label>
+                            <label for="uom_<?php echo $i; ?>">Unit *</label>
                         </div>
                         <div class="col-md-7">
                             <select class="form-control form-select js-example-basic-single" name="uom[]"
@@ -275,7 +275,7 @@ foreach ((array) $locdata as $locda) {
                     <hr>
                     <div class="row">
                         <div class="col-md-5">
-                            <label>Resources *</label>
+                            <label for="quantity_<?php echo $i; ?>">Resources *</label>
                         </div>
                         <div class="col-md-7">
                             <input type="text" name="quantity[]" id="quantity_<?php echo $i; ?>"
@@ -288,7 +288,7 @@ foreach ((array) $locdata as $locda) {
                     <hr>
                     <div class="row">
                         <div class="col-md-5">
-                            <label>Base Rate *</label>
+                            <label for="price_<?php echo $i; ?>">Base Rate *</label>
                         </div>
                         <div class="col-md-7">
                             <input type="text" name="price[]" id="price_<?php echo $i; ?>" class="form-control price amount"
@@ -300,7 +300,7 @@ foreach ((array) $locdata as $locda) {
                     <hr>
                     <div class="row">
                         <div class="col-md-5">
-                            <label>Amount</label>
+                            <label for="dis_amount_<?php echo $i; ?>">Amount</label>
                         </div>
                         <div class="col-md-7">
                             <input type="hidden" name="dis_ptax_amount[]"
@@ -324,7 +324,7 @@ foreach ((array) $locdata as $locda) {
                     <div class="row">
                         <div class="col-md-2 ">
                             <?php if ($_GET['Rid'] != "" AND isset($_GET['Rid'])) { ?>
-                                <div class="btn btn-icon btn-primary btn-circle mr-2"
+                                <div class="btn btn-icon btn-primary btn-circle mr-2" role="button" tabindex="0" aria-label="Per-diem" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"
                                     onclick="toopenpredim(<?php echo $i . "," . $tab2['id']; ?>)" data-container="body"
                                     data-toggle="tooltip" data-placement="bottom" title="Per-diem"><i
                                         class="fas fa-dollar-sign"></i></div>
