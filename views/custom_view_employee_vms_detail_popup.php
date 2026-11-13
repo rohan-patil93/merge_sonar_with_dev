@@ -10,9 +10,9 @@ $data = $listdata['emp_detail'];
 ?>
 <div class="modal-header card-header">
 
-    <h5 class="text-white">Employee Details</h5>
+    <h5 class="text-white"><?= __('Employee Details'); ?></h5>
 
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 
 </div>
 
@@ -37,17 +37,17 @@ $data = $listdata['emp_detail'];
     </div>
     <div class="card mt-4">
       <div class="card-header">
-        <h5 class="f-30">Work Order Details</h5>
+        <h5 class="f-30"><?= __('Work Order Details'); ?></h5>
        </div>
         <table class=" table table-bordered">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Vendor Rate Card </br> Transaction No</th>
-                <th scope="col"> Purchase Order</br> Transaction No</th>
-                <th scope="col">Effective </br> From</th>
-                <th scope="col">Effective </br> To</th>
-                <th scope="col" >Vendor Rate Card  Amount</th>
-                <th scope="col" > Purchase Order Amount</th>
+                <th scope="col"><?= __('Vendor Rate Card'); ?> </br> <?= __('Transaction No'); ?></th>
+                <th scope="col"> <?= __('Purchase Order'); ?></br> <?= __('Transaction No'); ?></th>
+                <th scope="col"><?= __('Effective'); ?> </br> <?= __('From'); ?></th>
+                <th scope="col"><?= __('Effective'); ?> </br> <?= __('To'); ?></th>
+                <th scope="col" ><?= __('Vendor Rate Card Amount'); ?></th>
+                <th scope="col" > <?= __('Purchase Order Amount'); ?></th>
                 <th scope="col"></th>
             </tr>
             <?php $k=1;
@@ -64,9 +64,9 @@ $data = $listdata['emp_detail'];
                 <td class="text-right"> <?php echo customeummarmonyformateround($ewo['mpc_amount']); ?></td>
                 <td>
                     <?php if(strtotime($ewo['effective_to_date']) < strtotime(date('Y-m-d'))  ){?>
-                        <span class="text-danger f-w-600"> Expired </span>
+                        <span class="text-danger f-w-600"> <?= __('Expired'); ?> </span>
                     <?php }else{ ?>
-                        <span class="text-success f-w-600"> Processing </span>
+                        <span class="text-success f-w-600"> <?= __('Processing'); ?> </span>
                      <?php }  ?>
 
                 </td>
@@ -76,7 +76,7 @@ $data = $listdata['emp_detail'];
 }
 }else{?>
                 <tr>
-                    <td colspan="8" class="text-center text-danger f-18 f-w-600"> No Records Found </td>
+                    <td colspan="8" class="text-center text-danger f-18 f-w-600"> <?= __('No Records Found'); ?> </td>
                 </tr>
             <?php } ?>
         </table>
@@ -84,15 +84,15 @@ $data = $listdata['emp_detail'];
     </div>
     <div class="card mt-2">
       <div class="card-header">
-        <h5 class="f-30">LN Details</h5>
+        <h5 class="f-30"><?= __('LN Details'); ?></h5>
        </div>
         <table class=" table table-bordered">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Transaction No</th>
-                <th scope="col">Effective From</th>
-                <th scope="col">Effective  To</th>
-                <th scope="col">Amount</th>
+                <th scope="col"><?= __('Transaction No'); ?></th>
+                <th scope="col"><?= __('Effective From'); ?></th>
+                <th scope="col"><?= __('Effective To'); ?></th>
+                <th scope="col"><?= __('Amount'); ?></th>
                 <th scope="col"></th>
             </tr>
             <?php $k=1;
@@ -108,9 +108,9 @@ $data = $listdata['emp_detail'];
                 <td class="text-right"> <?php echo customeummarmonyformateround($ewo['amount']); ?></td>
                 <td>
                     <?php if(strtotime($ewo['effective_to_date']) < strtotime(date('Y-m-d'))  ){?>
-                        <span class="text-danger f-w-600"> Expired </span>
+                        <span class="text-danger f-w-600"> <?= __('Expired'); ?> </span>
                     <?php }else{ ?>
-                        <span class="text-success f-w-600"> Processing </span>
+                        <span class="text-success f-w-600"> <?= __('Processing'); ?> </span>
                      <?php }  ?>
                 </td>
             </tr>
@@ -118,7 +118,7 @@ $data = $listdata['emp_detail'];
 }
 }else{?>
                 <tr>
-                    <td colspan="8" class="text-center text-danger f-18 f-w-600"> No Records Found </td>
+                    <td colspan="8" class="text-center text-danger f-18 f-w-600"> <?= __('No Records Found'); ?> </td>
                 </tr>
             <?php } ?>
         </table>
