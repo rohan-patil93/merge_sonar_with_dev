@@ -85,16 +85,16 @@ if ($_GET['Rid']) {
 <div class="page-body">
   <div class="card shadow-lg border-0 rounded-4">
     <div class="card-header bg-gradient-primary text-white d-flex justify-content-between align-items-center rounded-top-4">
-      <h4 class="mb-0"><i class="fa fa-tools-alt-2"></i> AMC Complaint View</h4>
+      <h4 class="mb-0"><i class="fa fa-tools-alt-2"></i> <?= __('AMC Complaint View'); ?></h4>
       <div>
         <a href="index.php?option=COM_INSERT_AMC_REPAIR_ORDER&complaint_id=<?php echo (int) ($return['id'] ?? $rid); ?>" class="btn btn-warning btn-sm fw-bold me-2">
-          <i class="fa fa-wrench"></i> Create Repair Order
+          <i class="fa fa-wrench"></i> <?= __('Create Repair Order'); ?>
         </a>
         <a href="index.php?option=COM_LIST_AMC_COMPLAINTS" class="btn btn-light btn-sm fw-bold me-2">
-          <i class="fa fa-list"></i> Complaints List
+          <i class="fa fa-list"></i> <?= __('Complaints List'); ?>
         </a>
         <a href="javascript:history.go(-1)" class="btn btn-outline-light btn-sm fw-bold">
-          <i class="fa fa-reply"></i> Back
+          <i class="fa fa-reply"></i> <?= __('Back'); ?>
         </a>
       </div>
     </div>
@@ -105,33 +105,33 @@ if ($_GET['Rid']) {
       <div class="row mb-4">
         <div class="col-12 mb-3">
           <h5 class="text-primary fw-bold mb-3 border-bottom pb-2">
-            <i class="fa fa-info-circle"></i> Complaint Details
+            <i class="fa fa-info-circle"></i> <?= __('Complaint Details'); ?>
           </h5>
         </div>
 
         <div class="col-md-6">
           <div class="detail-box">
-            <span class="label">AMC Contract:</span>
+            <span class="label"><?= __('AMC Contract'); ?>:</span>
             <span class="value"><?php echo htmlspecialchars($return['contract_name'] ?? '—', ENT_QUOTES, 'UTF-8'); ?></span>
           </div>
           <div class="detail-box">
-            <span class="label">ServiceNow Ref:</span>
+            <span class="label"><?= __('ServiceNow Ref'); ?>:</span>
             <span class="value"><?php echo htmlspecialchars($return['servicenow_ref'] ?? '—', ENT_QUOTES, 'UTF-8'); ?></span>
           </div>
           <div class="detail-box">
-            <span class="label">Vendor:</span>
+            <span class="label"><?= __('Vendor'); ?>:</span>
             <span class="value"><?php echo htmlspecialchars($return['vendor_name'] ?? '—', ENT_QUOTES, 'UTF-8'); ?></span>
           </div>
           <div class="detail-box">
-            <span class="label">Complaint Name:</span>
+            <span class="label"><?= __('Complaint Name'); ?>:</span>
             <span class="value"><?php echo $return['complaint_name']; ?></span>
           </div>
           <div class="detail-box">
-            <span class="label">Type:</span>
+            <span class="label"><?= __('Type'); ?>:</span>
             <span class="value text-muted"><?php echo $return['complaint_type']; ?></span>
           </div>
           <div class="detail-box">
-            <span class="label">Priority:</span>
+            <span class="label"><?= __('Priority'); ?>:</span>
             <span class="value">
               <?php
               $priority = $return['complaint_priority'];
@@ -145,15 +145,15 @@ if ($_GET['Rid']) {
 
         <div class="col-md-6">
           <div class="detail-box">
-            <span class="label">Date:</span>
+            <span class="label"><?= __('Date'); ?>:</span>
             <span class="value"><?php echo !empty($return['transaction_date']) ? fromDate($return['transaction_date']) : ''; ?></span>
           </div>
           <div class="detail-box">
-            <span class="label">Status:</span>
+            <span class="label"><?= __('Status'); ?>:</span>
             <span class="value"><span class="badge bg-primary fw-bold"><?php echo $return['name']; ?></span></span>
           </div>
           <div class="detail-box">
-            <span class="label">Complaint User:</span>
+            <span class="label"><?= __('Complaint User'); ?>:</span>
             <span class="value"><?php echo $return['display_name'] ?? ''; ?></span>
           </div>
         </div>
@@ -164,14 +164,14 @@ if ($_GET['Rid']) {
         <div class="row mb-4">
           <div class="col-12 mb-3">
             <h5 class="text-primary fw-bold mb-3 border-bottom pb-2">
-              <i class="fa fa-building"></i> Asset / Location Details
+              <i class="fa fa-building"></i> <?= __('Asset / Location Details'); ?>
             </h5>
           </div>
 
           <?php if (!empty($return['item_name'])) { ?>
             <div class="col-md-6">
               <div class="detail-box">
-                <span class="label">Item:</span>
+                <span class="label"><?= __('Item'); ?>:</span>
                 <span class="value"><?php echo $return['item_name']; ?></span>
               </div>
             </div>
@@ -180,7 +180,7 @@ if ($_GET['Rid']) {
           <?php if (!empty($return['asset_code'])) { ?>
             <div class="col-md-6">
               <div class="detail-box">
-                <span class="label">Asset:</span>
+                <span class="label"><?= __('Asset'); ?>:</span>
                 <span class="value"><?php echo $return['asset_code'] . ' - ' . $return['asset_description']; ?></span>
               </div>
             </div>
@@ -190,19 +190,19 @@ if ($_GET['Rid']) {
             <div class="row">
               <div class="col-md-4">
                 <div class="detail-box">
-                  <span class="label">Building:</span>
+                  <span class="label"><?= __('Building'); ?>:</span>
                   <span class="value"><?php echo $return['building_name']; ?></span>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="detail-box">
-                  <span class="label">Floor:</span>
+                  <span class="label"><?= __('Floor'); ?>:</span>
                   <span class="value"><?php echo $return['floor_name']; ?></span>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="detail-box">
-                  <span class="label">Space:</span>
+                  <span class="label"><?= __('Space'); ?>:</span>
                   <span class="value"><?php echo $return['cabin_name']; ?></span>
                 </div>
               </div>
@@ -215,12 +215,12 @@ if ($_GET['Rid']) {
       <div class="row mb-4">
         <div class="col-12 mb-3">
           <h5 class="text-primary fw-bold mb-3 border-bottom pb-2">
-            <i class="fa fa-clock"></i> Metadata
+            <i class="fa fa-clock"></i> <?= __('Metadata'); ?>
           </h5>
         </div>
         <div class="col-md-6">
           <div class="detail-box">
-            <span class="label">Created Time:</span>
+            <span class="label"><?= __('Created Time'); ?>:</span>
             <span class="value"><?php echo $return['created_date'] ?? ''; ?></span>
           </div>
         </div>
@@ -231,14 +231,14 @@ if ($_GET['Rid']) {
         <div class="row mb-3">
           <div class="col-12 mb-3">
             <h5 class="text-primary fw-bold mb-3 border-bottom pb-2">
-              <i class="fa fa-image"></i> Attached Images
+              <i class="fa fa-image"></i> <?= __('Attached Images'); ?>
             </h5>
           </div>
           <div class="col-12 d-flex flex-wrap gap-3">
             <?php foreach ($img_result as $row) { ?>
               <a href="uploads/all/<?php echo $row['file_name']; ?>" target="_blank" class="hover-zoom">
                 <img src="uploads/all/<?php echo $row['file_name']; ?>" class="rounded-3 border shadow-sm"
-                  style="width: 100px; height: 100px; object-fit: cover;" alt="Attachment Preview">
+                  style="width: 100px; height: 100px; object-fit: cover;" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
               </a>
             <?php } ?>
           </div>
@@ -252,7 +252,7 @@ if ($_GET['Rid']) {
   <div class="row mb-4">
     <div class="col-12 mb-3">
       <h5 class="text-primary fw-bold mb-3 border-bottom pb-2">
-        <i class="fa fa-comment"></i> Complaint Responses
+        <i class="fa fa-comment"></i> <?= __('Complaint Responses'); ?>
       </h5>
     </div>
 
@@ -275,7 +275,7 @@ if ($_GET['Rid']) {
                 <?php foreach ($result['complaint_responses_images_data'][$res['id']] as $img) { ?>
                   <a href="uploads/all/<?php echo $img['file_name']; ?>" target="_blank" class="hover-zoom">
                     <img src="uploads/all/<?php echo $img['file_name']; ?>" class="rounded border shadow-sm"
-                      style="width: 80px; height: 80px; object-fit: cover;" alt="Attachment Preview">
+                      style="width: 80px; height: 80px; object-fit: cover;" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                   </a>
                 <?php } ?>
               </div>
@@ -291,7 +291,7 @@ if ($_GET['Rid']) {
 
 <div class="text-end mb-3">
   <button type="button" class="btn btn-success fw-bold" data-bs-toggle="modal" data-bs-target="#addResponseModal">
-    <i class="fa fa-plus-circle"></i> Add Response
+    <i class="fa fa-plus-circle"></i> <?= __('Add Response'); ?>
   </button>
 </div>
 <?php } ?>
@@ -302,9 +302,9 @@ if ($_GET['Rid']) {
     <div class="modal-content rounded-4 border-0 shadow">
       <div class="modal-header bg-gradient-primary text-white">
         <h5 class="modal-title fw-bold" id="addResponseModalLabel">
-          <i class="fa fa-comment"></i> Add Complaint Response
+          <i class="fa fa-comment"></i> <?= __('Add Complaint Response'); ?>
         </h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
       </div>
 
       <form method="post" action="" enctype="multipart/form-data">
@@ -312,21 +312,21 @@ if ($_GET['Rid']) {
           <input type="hidden" name="complaint_id" value="<?php echo $rid; ?>">
 
           <div class="mb-3">
-            <span class="form-label fw-semibold">Comments / Remarks</span>
-            <textarea aria-label="Remarks" name="remarks" class="form-control" rows="4" required></textarea>
+            <span class="form-label fw-semibold"><?= __('Comments / Remarks'); ?></span>
+            <textarea aria-label="<?= htmlspecialchars(__('Remarks'), ENT_QUOTES, 'UTF-8'); ?>" name="remarks" class="form-control" rows="4" required></textarea>
           </div>
 
           <div class="mb-3">
-            <span class="form-label fw-semibold">Upload Images</span>
-            <input aria-label="Response Images[]" type="file" name="response_images[]" class="form-control" accept="image/*" multiple>
-            <small class="text-muted">You can select multiple images</small>
+            <span class="form-label fw-semibold"><?= __('Upload Images'); ?></span>
+            <input aria-label="<?= htmlspecialchars(__('Response Images'), ENT_QUOTES, 'UTF-8'); ?>[]" type="file" name="response_images[]" class="form-control" accept="image/*" multiple>
+            <small class="text-muted"><?= __('You can select multiple images'); ?></small>
           </div>
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal"><?= __('Cancel'); ?></button>
           <input type="hidden" name="save" value="SAVE">
-          <button type="submit" class="btn btn-primary fw-bold">Submit Response</button>
+          <button type="submit" class="btn btn-primary fw-bold"><?= __('Submit Response'); ?></button>
         </div>
       </form>
     </div>
