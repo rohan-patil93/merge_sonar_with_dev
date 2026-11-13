@@ -14,7 +14,7 @@ if($_POST['table'] == "emp_expenses"){
 ?>
 <div class="modal-header">
     <h4 class="modal-title"><?php echo $_POST['title']; ?></h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body">
     <div class="custom-scroll" style="height: 270px;">
@@ -23,12 +23,12 @@ if($_POST['table'] == "emp_expenses"){
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Reference No</th>
-                        <th scope="col">Reference date</th>
-                        <th scope="col">Expense Date</th>
-                        <th scope="col">Amount</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Action</th>
+                        <th scope="col"><?= __('Reference No'); ?></th>
+                        <th scope="col"><?= __('Reference date'); ?></th>
+                        <th scope="col"><?= __('Expense Date'); ?></th>
+                        <th scope="col"><?= __('Amount'); ?></th>
+                        <th scope="col"><?= __('Status'); ?></th>
+                        <th scope="col"><?= __('Action'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,7 +54,7 @@ if($_POST['table'] == "emp_expenses"){
                         <?php  $mq++;
 }
 }else{
-                            echo "<tr><td colspan='7' class='text-center'><h4 ><i class='fa fa-warning'></i> No Bills Created</h4></td></tr>";
+                            echo "<tr><td colspan='7' class='text-center'><h4 ><i class='fa fa-warning'></i> ".__('No Bills Created')."</h4></td></tr>";
                         } ?>
                     </tbody>
                 </table>
@@ -63,12 +63,12 @@ if($_POST['table'] == "emp_expenses"){
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Vendor</th>
-                            <th scope="col">Invoices Number</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Action</th>
+                            <th scope="col"><?= __('Vendor'); ?></th>
+                            <th scope="col"><?= __('Invoices Number'); ?></th>
+                            <th scope="col"><?= __('Date'); ?></th>
+                            <th scope="col"><?= __('Price'); ?></th>
+                            <th scope="col"><?= __('Status'); ?></th>
+                            <th scope="col"><?= __('Action'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -94,7 +94,7 @@ if($_POST['table'] == "emp_expenses"){
                             <?php  $mq++;
 }
 }else{
-                                echo "<tr><td colspan='7' class='text-center'><h4 ><i class='fa fa-warning'></i> No Bills Created</h4></td></tr>";
+                                echo "<tr><td colspan='7' class='text-center'><h4 ><i class='fa fa-warning'></i> ".__('No Bills Created')."</h4></td></tr>";
                             } ?>
                         </tbody>
                     </table>
