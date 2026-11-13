@@ -23,7 +23,7 @@ $stausresult = ViewStatusData();
 ?>
 <script type="text/javascript">
   function statuspopup(status,id){
-      alert("data"+status+"id:"+id);
+      alert(<?php echo json_encode(__('data'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+status+<?php echo json_encode(__('id').':', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+id);
      var table_name = document.getElementById('table_name').value;
       jQuery.ajax({
             url: "views/custom_insert_status_popup.php",
@@ -57,17 +57,17 @@ $stausresult = ViewStatusData();
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header table-card-header">
-                        <h5>Approval It Declartions </h5>
+                        <h5><?= __('Approval It Declartions'); ?> </h5>
                         <div class="card-header-right table-card-header ">
 
-                            <select aria-label="Assessment Year" name="assessment_year" id="assessment_year">
+                            <select aria-label="<?= htmlspecialchars(__('Assessment Year'), ENT_QUOTES, 'UTF-8'); ?>" name="assessment_year" id="assessment_year">
                                 <?php $year = date('Y');
                                 for ($i=$year-3; $i <$year+1; $i++) { ?>
                                     <option value="<?php echo $i."-".($i+1); ?>"><?php echo $i." - ".($i+1); ?></option>
                                 <?php } ?>
                             </select>
 
-                            <button type="button" class="btn waves-effect waves-light btn-inverse btn-outline-inverse"><i class="icofont icofont-reply"></i>Back</button>
+                            <button type="button" class="btn waves-effect waves-light btn-inverse btn-outline-inverse"><i class="icofont icofont-reply"></i><?= __('Back'); ?></button>
                         </div>
                     </div>
                     <div class="card-body">
@@ -86,12 +86,12 @@ $stausresult = ViewStatusData();
                                         <div class="card-body d-flex flex-column">
                                             <div class="d-flex align-items-center justify-content-between flex-grow-1">
                                                 <div class="mr-2">
-                                                    <h6><?php echo $display_tag; ?> Completion Rate</h6>
+                                                    <h6><?php echo $display_tag; ?> <?= __('Completion Rate'); ?></h6>
                                                 </div>
                                             </div>
                                             <div class="pt-8">
                                                 <div class="d-flex align-items-center justify-content-between mb-3">
-                                                    <div class="text-muted font-weight-bold mr-2">Average</div>
+                                                    <div class="text-muted font-weight-bold mr-2"><?= __('Average'); ?></div>
                                                     <div class="text-muted font-weight-bold"><?php echo $approvallistData['rate']; ?></div>
                                                 </div>
                                                 <div class="progress bg-light-warning progress-xs">
@@ -107,13 +107,13 @@ $stausresult = ViewStatusData();
                         <div class="row col-lg-12 m-t-20">
                             <ul class="nav  md-tabs infisuite_tab">
                           <li class="nav-item">
-                              <a class="nav-link active" data-bs-toggle="tab" href="#home1" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Approved</a>
+                              <a class="nav-link active" data-bs-toggle="tab" href="#home1" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Approved'); ?></a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" data-bs-toggle="tab" href="#profile1" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Approval Pending</a>
+                              <a class="nav-link" data-bs-toggle="tab" href="#profile1" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Approval Pending'); ?></a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" data-bs-toggle="tab" href="#messages1" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Yet to Submit</a>
+                              <a class="nav-link" data-bs-toggle="tab" href="#messages1" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Yet to Submit'); ?></a>
                           </li>
                       </ul>
                       <div class="tab-content tabs card-block">
@@ -123,12 +123,12 @@ $stausresult = ViewStatusData();
                                             <thead>
                                                 <tr>
                                                     <th scope="col">#</th>
-                                                    <th scope="col" >Name </th>
-                                                    <th scope="col">Taxable Income </th>
-                                                    <th scope="col">Potential Amount </th>
-                                                    <th scope="col">Declaration Tax </th>
-                                                    <th scope="col">Current Status </th>
-                                                    <th scope="col">View </th>
+                                                    <th scope="col" ><?= __('Name'); ?> </th>
+                                                    <th scope="col"><?= __('Taxable Income'); ?> </th>
+                                                    <th scope="col"><?= __('Potential Amount'); ?> </th>
+                                                    <th scope="col"><?= __('Declaration Tax'); ?> </th>
+                                                    <th scope="col"><?= __('Current Status'); ?> </th>
+                                                    <th scope="col"><?= __('View'); ?> </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -140,10 +140,10 @@ $stausresult = ViewStatusData();
                                                         <td class="text-right"> <?php echo $apdata['potential_amount']; ?> </td>
                                                         <td class="text-right"> <?php echo $apdata['declaration_tax']; ?> </td>
                                                         <td >
-                                                            <button type="button" class="btn btn-success"><?php echo "Approved"; ?></button>
+                                                            <button type="button" class="btn btn-success"><?php echo __("Approved"); ?></button>
                                                         </td>
                                                         <td>
-                                                            <a href="index.php?option=COM_INSERT_IT_DECLARATION&assessment_year=<?php echo $apdata['assessment_year']; ?>&version_no=<?php echo $apdata['version_no']; ?>&EMPID=<?php echo $apdata['emp_id'];  ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="View Details"><i class="fa fa-eye"></i></a>
+                                                            <a href="index.php?option=COM_INSERT_IT_DECLARATION&assessment_year=<?php echo $apdata['assessment_year']; ?>&version_no=<?php echo $apdata['version_no']; ?>&EMPID=<?php echo $apdata['emp_id'];  ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="<?= htmlspecialchars(__('View Details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-eye"></i></a>
                                                         </td>
                                                     </tr>
                                                 <?php $i++;
@@ -157,12 +157,12 @@ $stausresult = ViewStatusData();
                                             <thead>
                                                 <tr>
                                                     <th scope="col">#</th>
-                                                    <th scope="col" >Name </th>
-                                                    <th scope="col">Taxable Income </th>
-                                                    <th scope="col">Potential Amount </th>
-                                                    <th scope="col">Declaration Tax </th>
-                                                    <th scope="col">Current Status </th>
-                                                    <th scope="col">View </th>
+                                                    <th scope="col" ><?= __('Name'); ?> </th>
+                                                    <th scope="col"><?= __('Taxable Income'); ?> </th>
+                                                    <th scope="col"><?= __('Potential Amount'); ?> </th>
+                                                    <th scope="col"><?= __('Declaration Tax'); ?> </th>
+                                                    <th scope="col"><?= __('Current Status'); ?> </th>
+                                                    <th scope="col"><?= __('View'); ?> </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -181,7 +181,7 @@ $stausresult = ViewStatusData();
                                                   </div>
                                                         </td>
                                                         <td >
-                                                            <a href="index.php?option=COM_INSERT_IT_DECLARATION&assessment_year=<?php echo $apdata['assessment_year']; ?>&version_no=<?php echo $apdata['version_no']; ?>&EMPID=<?php echo $apdata['emp_id'];  ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="View Details"><i class="fa fa-eye"></i></a>
+                                                            <a href="index.php?option=COM_INSERT_IT_DECLARATION&assessment_year=<?php echo $apdata['assessment_year']; ?>&version_no=<?php echo $apdata['version_no']; ?>&EMPID=<?php echo $apdata['emp_id'];  ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="<?= htmlspecialchars(__('View Details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-eye"></i></a>
                                                         </td>
                                                     </tr>
                                                 <?php } ?>
@@ -194,10 +194,10 @@ $stausresult = ViewStatusData();
                                             <thead>
                                                 <tr>
                                                     <th scope="col">#</th>
-                                                    <th scope="col" >Name </th>
-                                                    <th scope="col">Code</th>
-                                                    <th scope="col">Email </th>
-                                                    <th scope="col">Current Status </th>
+                                                    <th scope="col" ><?= __('Name'); ?> </th>
+                                                    <th scope="col"><?= __('Code'); ?></th>
+                                                    <th scope="col"><?= __('Email'); ?> </th>
+                                                    <th scope="col"><?= __('Current Status'); ?> </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -209,7 +209,7 @@ $stausresult = ViewStatusData();
                                                         <td > <?php echo  $empd['emp_code']; ?> </td>
                                                         <td > <?php echo $empd['email_id']; ?> </td>
                                                         <td >
-                                                            <button type="button" class="btn btn-success"><?php echo "Yet To submit"; ?></button>
+                                                            <button type="button" class="btn btn-success"><?php echo __("Yet To submit"); ?></button>
                                                         </td>
                                                     </tr>
                                                 <?php } ?>
