@@ -61,17 +61,17 @@ if(count((array)$printfinalaray) !="0"){ ?>
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Floor Name</th>
-                    <th scope="col">Reserve Pool</th>
-                    <th scope="col">Employee  Code</th>
-                    <th scope="col">Employee Name</th>
-                    <th scope="col">Employee  Email Id</th>
-                    <th scope="col">Cubical Name</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Building Name</th>
-                    <th scope="col">Manager Email Id</th>
-                    <th scope="col">Manager Name</th>
+                    <th scope="col"><?= __('Floor Name'); ?></th>
+                    <th scope="col"><?= __('Reserve Pool'); ?></th>
+                    <th scope="col"><?= __('Employee Code'); ?></th>
+                    <th scope="col"><?= __('Employee Name'); ?></th>
+                    <th scope="col"><?= __('Employee Email Id'); ?></th>
+                    <th scope="col"><?= __('Cubical Name'); ?></th>
+                    <th scope="col"><?= __('Type'); ?></th>
+                    <th scope="col"><?= __('Status'); ?></th>
+                    <th scope="col"><?= __('Building Name'); ?></th>
+                    <th scope="col"><?= __('Manager Email Id'); ?></th>
+                    <th scope="col"><?= __('Manager Name'); ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -102,7 +102,7 @@ if(count((array)$printfinalaray) !="0"){ ?>
     $_SESSION['download_data'] = $sesssionprintfinalaray;
 }else{ ?>
         <div class="card-px text-center py-20 m-t-30">
-            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Spaces</p>
+            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Spaces'); ?></p>
             <div class="text-center px-4">
                 <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
             </div>
