@@ -17,11 +17,11 @@ $cctask = $result['tasks'];
             <div class="col-lg-12">
                 <div class="" id="kt_page_sticky_card">
                     <div class="card-header mb-3">
-                        <h5> Projects </h5>
+                        <h5> <?= __('Projects'); ?> </h5>
                         <div class="card-header-right">
                             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                                 <i class="icofont icofont-reply"></i>
-                                Back
+                                <?= __('Back'); ?>
                             </a>
                         </div>
                     </div>
@@ -88,18 +88,18 @@ $cctask = $result['tasks'];
                                                                 </div>
                                                                 <div class="card-block text-center">
                                                                     <div data-label="<?php echo $prencentage; ?>%" class="radial-bar radial-bar-<?php echo $prencentage; ?> radial-bar-lg radial-bar-danger">
-                                                                        <img src="uploads/all/<?php echo $uimg; ?>" alt="User">
+                                                                        <img src="uploads/all/<?php echo $uimg; ?>" alt="<?= htmlspecialchars(__('User'), ENT_QUOTES, 'UTF-8'); ?>">
                                                                     </div>
                                                                     <div class="row">
                                                                         <div class="col-6 ">
                                                                             <a  <?php if(in_array('ADMIN',$_SESSION['role_ids']) || $res['project_role_id'] != 2 ){ ?> href="index.php?option=COM_VIEW_PROJECT&RID=<?php echo  $res['id']; ?>"
                                                                             <?php }else{ ?>
                                                                                 style ="background-color: #CCCCCC;cursor: not-allowed;"
-                                                                                <?php } ?> class="btn btn-success  waves-effect waves-light  f-12">Over View
+                                                                                <?php } ?> class="btn btn-success  waves-effect waves-light  f-12"><?= __('Over View'); ?>
                                                                             </a>
                                                                         </div>
                                                                         <div class="col-6 b-l-default">
-                                                                            <a href="index.php?option=COM_VIEW_PROJECT_KANBAN&RID=<?php echo  $res['id']; ?>" class="btn btn-info waves-effect waves-light  f-12"> View Task</a>
+                                                                            <a href="index.php?option=COM_VIEW_PROJECT_KANBAN&RID=<?php echo  $res['id']; ?>" class="btn btn-info waves-effect waves-light  f-12"> <?= __('View Task'); ?></a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -109,7 +109,7 @@ $cctask = $result['tasks'];
                                                 <?php } ?>
                                             <?php }else{ ?>
                                                 <div class="card-px text-center py-20 m-t-30">
-                                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Data </p>
+                                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Data'); ?> </p>
                                                     <div class="text-center px-4">
                                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                                     </div>
@@ -118,7 +118,7 @@ $cctask = $result['tasks'];
                                         </div>
                                         <?php if($tcchk == 0){ ?>
                                             <div class="card-px text-center py-20 m-t-30">
-                                                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Projects </p>
+                                                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Projects'); ?> </p>
                                                 <div class="text-center px-4">
                                                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                                 </div>
