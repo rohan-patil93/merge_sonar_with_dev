@@ -32,13 +32,13 @@ $property_owner_details = $result['property_owner_details'];
         <form method="post">
         <div class="card-header  row">
             <div class="col-lg-8">
-                <h5>Tenant Reports</h5>
+                <h5><?= __('Tenant Reports'); ?></h5>
             </div>
             <div class="col-lg-2">
                 <div class="form-group w-full table-card-header">
-                    <span class="form-label ">Tenant List<span class="text-danger">*</span></span>
-                    <select aria-label="Customer" name="customer_id" class="form-control form-select js-example-basic-single" >
-                        <option value="">Select Any One </option>
+                    <span class="form-label "><?= __('Tenant List'); ?><span class="text-danger">*</span></span>
+                    <select aria-label="<?= htmlspecialchars(__('Customer'), ENT_QUOTES, 'UTF-8'); ?>" name="customer_id" class="form-control form-select js-example-basic-single" >
+                        <option value=""><?= __('Select Any One'); ?> </option>
                         <?php foreach($customers_all as $cust){ ?>
                             <option value="<?php echo $cust['id']; ?>"><?php echo $cust['display_name']; ?></option>
                         <?php } ?>
@@ -47,10 +47,10 @@ $property_owner_details = $result['property_owner_details'];
             </div>
 
             <div class="col-lg-1">
-                 <button type="submit" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-t-30" name="searchfilter"> Search</button>
+                 <button type="submit" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-t-30" name="searchfilter"> <?= __('Search'); ?></button>
             </div>
             <div class="col-lg-1">
-                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i>Back</a>
+                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i><?= __('Back'); ?></a>
              </div>
         </div>
     </form>
@@ -61,11 +61,11 @@ $property_owner_details = $result['property_owner_details'];
                 <tr>
                     <th scope="col"></th>
                     <th scope="col">#</th>
-                    <th scope="col">Tenant Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Contact</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">No. Property</th>
+                    <th scope="col"><?= __('Tenant Name'); ?></th>
+                    <th scope="col"><?= __('Email'); ?></th>
+                    <th scope="col"><?= __('Contact'); ?></th>
+                    <th scope="col"><?= __('Address'); ?></th>
+                    <th scope="col"><?= __('No. Property'); ?></th>
                 </tr>
                 <?php $parenttb = 1; foreach($customers as $po){ ?>
                     <tr class="main" onclick="openSubTable('<?php echo $parenttb; ?>','firstlevelchildcheck','firstlevelchildhideshow')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
@@ -91,12 +91,12 @@ $property_owner_details = $result['property_owner_details'];
                                     <tr>
                                         <th scope="col"></th>
                                         <th scope="col">#</th>
-                                        <th scope="col">Owner Name</th>
-                                        <th scope="col">Property Name</th>
-                                        <th scope="col">Start Date</th>
-                                        <th scope="col">End Date</th>
-                                        <th scope="col">Security Deposit</th>
-                                        <th scope="col">No. Area</th>
+                                        <th scope="col"><?= __('Owner Name'); ?></th>
+                                        <th scope="col"><?= __('Property Name'); ?></th>
+                                        <th scope="col"><?= __('Start Date'); ?></th>
+                                        <th scope="col"><?= __('End Date'); ?></th>
+                                        <th scope="col"><?= __('Security Deposit'); ?></th>
+                                        <th scope="col"><?= __('No. Area'); ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -127,12 +127,12 @@ $property_owner_details = $result['property_owner_details'];
                                                 <tr>
                                                     <th scope="col"></th>
                                                     <th scope="col">#</th>
-                                                    <th scope="col">Area Name</th>
-                                                    <th scope="col" class="text-right">Per Sq Ft Rate</th>
-                                                    <th scope="col" class="text-right">Per Sq Ft Discount</th>
-                                                    <th scope="col" class="text-right">rent</th>
-                                                    <th scope="col">Status</th>
-                                                    <th scope="col">Property Tenants</th>
+                                                    <th scope="col"><?= __('Area Name'); ?></th>
+                                                    <th scope="col" class="text-right"><?= __('Per Sq Ft Rate'); ?></th>
+                                                    <th scope="col" class="text-right"><?= __('Per Sq Ft Discount'); ?></th>
+                                                    <th scope="col" class="text-right"><?= __('rent'); ?></th>
+                                                    <th scope="col"><?= __('Status'); ?></th>
+                                                    <th scope="col"><?= __('Property Tenants'); ?></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -148,7 +148,7 @@ $property_owner_details = $result['property_owner_details'];
                                                     <td class="text-right"><?php echo customeummarmonyformateifine($poda['rent']); ?></td>
                                                     <td> - </td>
                                                     <td>
-                                                         <a href="index?option=COM_INSERT_PROPERTY_TENANT_DETAILS&Rid=<?php echo deocdeId('id:'.$pod['id']); ?>" target="_blank" class="cursor-pointer btn btn-info">View</a>
+                                                         <a href="index?option=COM_INSERT_PROPERTY_TENANT_DETAILS&Rid=<?php echo deocdeId('id:'.$pod['id']); ?>" target="_blank" class="cursor-pointer btn btn-info"><?= __('View'); ?></a>
                                                     </td>
                                                 </tr>
                                             <?php $parentchildtb_2++;
@@ -161,7 +161,7 @@ $property_owner_details = $result['property_owner_details'];
 } ?>
                                 </tbody>
                             </table>
-                        <?php }else{ echo "<p class='m-t-20 text-center text-danger'>No Data</p>";
+                        <?php }else{ echo "<p class='m-t-20 text-center text-danger'>".__('No Data')."</p>";
 }  ?>
                         </td>
                     </tr>
@@ -169,7 +169,7 @@ $property_owner_details = $result['property_owner_details'];
 }
 }else{ ?>
                         <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Tenants</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Tenants'); ?></p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                             </div>
