@@ -31,9 +31,9 @@ $modulelinklists = json_decode($modulelinkapi,1);
 <form method="post" enctype="multipart/form-data" id="formsubmit">
     <div class="card">
         <div class="card-header">
-            <h5>Additional Module Setup</h5>
+            <h5><?= __('Additional Module Setup'); ?></h5>
             <div class="card-header-right">
-                <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closeModuleSelection()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Closed" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+                <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closeModuleSelection()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Closed'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
             </div>
         </div>
         <div class="card-body">
@@ -48,7 +48,7 @@ $modulelinklists = json_decode($modulelinkapi,1);
                                     <label for="optionget<?php echo $allmodule['module_id']; ?>" class="text-center fixheght">
                                         <span class="text-facebook">
                                             <?php if($allmodule['module_logo'] !=""){?>
-                                                <img src='uploads/module/<?php echo $allmodule['module_logo']; ?>' class="img-60" style="height: auto;" alt="Logo">
+                                                <img src='uploads/module/<?php echo $allmodule['module_logo']; ?>' class="img-60" style="height: auto;" alt="<?= htmlspecialchars(__('Logo'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <?php }else{ ?>
 
                                             <?php  } ?>
