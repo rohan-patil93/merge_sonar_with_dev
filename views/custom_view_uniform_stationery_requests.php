@@ -69,10 +69,10 @@ $items  = $data['items'] ?? [];
     <!-- PAGE HEADER -->
     <div class="card">
         <div class="card-header">
-        <div class="view-title">Stationery Request Details</div>
+        <div class="view-title"><?= __('Stationery Request Details'); ?></div>
         <div class="card-header-right">
             <a href="index.php?option=COM_LIST_UNIFORM_STATIONERY_REQUESTS" class="btn btn-secondary btn-sm">
-            <i class="fa fa-arrow-left"></i> Back
+            <i class="fa fa-arrow-left"></i> <?= __('Back'); ?>
         </a>
         </div>
         </div>
@@ -82,43 +82,43 @@ $items  = $data['items'] ?? [];
     <!-- PARENT DETAILS -->
     <div class="card ">
         <div class="card-header">
-        <div class="section-title">Request Information</div>
+        <div class="section-title"><?= __('Request Information'); ?></div>
         </div>
         <div class="card-body">
         <div class="row">
             <div class="col-md-4 mb-2">
-                <div class="lbl">Request No</div>
+                <div class="lbl"><?= __('Request No'); ?></div>
                 <div><?= $parent['request_no'] ?></div>
             </div>
 
             <div class="col-md-4 mb-2">
-                <div class="lbl">Request Date</div>
+                <div class="lbl"><?= __('Request Date'); ?></div>
                 <div><?= fromDate($parent['request_date']) ?></div>
             </div>
 
             <div class="col-md-4 mb-2">
-                <div class="lbl">Required Date</div>
+                <div class="lbl"><?= __('Required Date'); ?></div>
                 <div><?= fromDate($parent['require_date']) ?></div>
             </div>
 
             <div class="col-md-4 mb-2">
-                <div class="lbl">Requested By</div>
+                <div class="lbl"><?= __('Requested By'); ?></div>
                 <div><?= $parent['employee_name'] ?></div>
             </div>
 
             <div class="col-md-4 mb-2">
-                <div class="lbl">Location</div>
+                <div class="lbl"><?= __('Location'); ?></div>
                 <div><?= $parent['location_name'] ?></div>
             </div>
 
             <div class="col-md-4 mb-2">
-                <div class="lbl">Status</div>
+                <div class="lbl"><?= __('Status'); ?></div>
                 <span class="badge badge-info p-2"><?= $parent['status_text'] ?></span>
             </div>
 
             <?php if (!empty($parent['request_comment'])) { ?>
             <div class="col-md-12 mt-3">
-                <div class="lbl">Remarks</div>
+                <div class="lbl"><?= __('Remarks'); ?></div>
                 <div><?= nl2br($parent['request_comment']) ?></div>
             </div>
             <?php } ?>
@@ -127,7 +127,7 @@ $items  = $data['items'] ?? [];
     </div>
     <div class="card ">
         <div class="card-header">
-        <div class="section-title">Requested Items</div>
+        <div class="section-title"><?= __('Requested Items'); ?></div>
         </div>
     <div class="card-body">
     <!-- ITEMS SECTION -->
@@ -140,19 +140,19 @@ $items  = $data['items'] ?? [];
                 <div class="item-title"><?= $it['item_name'] ?></div>
 
                 <div class="mt-2">
-                    <span class="badge-type">Type: <?= $it['uniform_type_name'] ?></span>
+                    <span class="badge-type"><?= __('Type'); ?>: <?= $it['uniform_type_name'] ?></span>
                 </div>
 
                 <div class="mt-2">
-                    <span class="badge-color">Color: <?= $it['color_name'] ?></span>
+                    <span class="badge-color"><?= __('Color'); ?>: <?= $it['color_name'] ?></span>
                 </div>
 
                 <div class="mt-2">
-                    <span class="badge-size">Size: <?= $it['size_name'] ?></span>
+                    <span class="badge-size"><?= __('Size'); ?>: <?= $it['size_name'] ?></span>
                 </div>
 
                 <div class="mt-3">
-                    <span class="badge-qty">Requested Qty: <?= $it['qty'] ?></span>
+                    <span class="badge-qty"><?= __('Requested Qty'); ?>: <?= $it['qty'] ?></span>
                 </div>
             </div>
         </div>
@@ -161,8 +161,8 @@ $items  = $data['items'] ?? [];
         <?php } else { ?>
 
         <div class="col-12 text-center text-muted">
-            <p class="mt-4">No items available for this request.</p>
-            <img src="assets/images/work.png" class="mw-100" style="max-height:250px;" alt="Preview">
+            <p class="mt-4"><?= __('No items available for this request.'); ?></p>
+            <img src="assets/images/work.png" class="mw-100" style="max-height:250px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
         </div>
 
         <?php } ?>
