@@ -22,7 +22,7 @@ $rid = $_GET['RID'];
 </script>
 <div class="card card-block email-card">
   <div class="card-header">
-    <h5>Document List</h5>
+    <h5><?= __('Document List'); ?></h5>
     <div class="card-header-right">
     </div>
   </div>
@@ -74,7 +74,7 @@ $rid = $_GET['RID'];
         <?php
         if($rid!=""){
           if($mainlist[$rid]['file']!=""){ ?>
-              <iframe src="uploads/all/<?php echo $mainlist[$rid]['file']; ?>" title="Document Preview"></iframe>
+              <iframe src="uploads/all/<?php echo $mainlist[$rid]['file']; ?>" title="<?= htmlspecialchars(__('Document Preview'), ENT_QUOTES, 'UTF-8'); ?>"></iframe>
           <?php }else{
             include_once $mainlist[$rid]['page'].".php";
           }
