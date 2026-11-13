@@ -120,9 +120,9 @@ $estimationdata = implode('|', (array)$maingra['bdget']);
     <?php if(count((array)$displaylocations)>0){ ?>
     <div class="row m-b-10 mt-3">
         <div class="col-lg-3">
-            <select aria-label="Locationvalueget" class="form-select js-example-basic-single" id="locationvalueget" onchange="changeLocation()">
+            <select aria-label="<?= htmlspecialchars(__('Locationvalueget'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="locationvalueget" onchange="changeLocation()">
                 <option <?php if($loc==0){ echo "SELECTED";
-}  ?>  value="0">ALL</option>
+}  ?>  value="0"><?= __('ALL'); ?></option>
                     <?php foreach((array)$displaylocations as $locat){ ?>
 
                 <option <?php if($loc==$locat['id']){ echo "SELECTED";
@@ -138,18 +138,18 @@ $estimationdata = implode('|', (array)$maingra['bdget']);
             <input type="hidden" id="thismonthnkey" value="<?php echo $thismonthkey; ?>">
             <div class="card ticket-card">
                 <div class="card-body">
-                    <p class="m-b-30 bg-c-blue lbl-card"><i class="fa fa-group m-r-10"></i>Total Head Count </p>
+                    <p class="m-b-30 bg-c-blue lbl-card"><i class="fa fa-group m-r-10"></i><?= __('Total Head Count'); ?> </p>
                     <div class="text-center button-list">
                         <h2 class="mb-4 d-block text-c-blue"> 122</h2>
 
                         <div>
-                        <button style="margin-right: 10px;font-size: 12px !important;" type="button" class="btn border waves-effect waves-light" data-bs-toggle="tooltip" data-placement="top" title="Billable">Billable
+                        <button style="margin-right: 10px;font-size: 12px !important;" type="button" class="btn border waves-effect waves-light" data-bs-toggle="tooltip" data-placement="top" title="<?= htmlspecialchars(__('Billable'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('Billable'); ?>
                                   <span class="badge bg-primary">80</span>
                               </button>
-                              <button style="margin-right: 10px;font-size: 12px !important;" type="button" class="btn border waves-effect waves-light" data-bs-toggle="tooltip" data-placement="top" title="Non-Billable">Non-Billable
+                              <button style="margin-right: 10px;font-size: 12px !important;" type="button" class="btn border waves-effect waves-light" data-bs-toggle="tooltip" data-placement="top" title="<?= htmlspecialchars(__('Non-Billable'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('Non-Billable'); ?>
                                   <span class="badge bg-success">30</span>
                               </button>
-                              <button style="margin-right: 10px;font-size: 12px !important;" type="button" class="btn border waves-effect waves-light" data-bs-toggle="tooltip" data-placement="top" title="Milestone">Milestone
+                              <button style="margin-right: 10px;font-size: 12px !important;" type="button" class="btn border waves-effect waves-light" data-bs-toggle="tooltip" data-placement="top" title="<?= htmlspecialchars(__('Milestone'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('Milestone'); ?>
                                   <span class="badge bg-warning">12</span>
                               </button>
               </div>
@@ -161,7 +161,7 @@ $estimationdata = implode('|', (array)$maingra['bdget']);
         <div class="col-xl-4 col-md-6 col-lg-6 col-md-6 col-sm-6 col-12">
             <div class="card ticket-card">
                 <div class="card-body">
-                    <p class="m-b-50 bg-c-green lbl-card"><i class="fa fa-group m-r-10"></i>Total Vendor Count</p>
+                    <p class="m-b-50 bg-c-green lbl-card"><i class="fa fa-group m-r-10"></i><?= __('Total Vendor Count'); ?></p>
                     <div class="text-center">
                         <h2 class="m-b-0 d-inline-block text-c-green"> 12</h2>
 
@@ -172,7 +172,7 @@ $estimationdata = implode('|', (array)$maingra['bdget']);
         <div class="col-xl-4 col-md-6 col-lg-6 col-md-6 col-sm-6 col-12">
             <div class="card ticket-card">
                 <div class="card-body">
-                    <p class="m-b-50 bg-c-red lbl-card"><i class="fa fa-group m-r-10"></i>This Month joinings / Separation </p>
+                    <p class="m-b-50 bg-c-red lbl-card"><i class="fa fa-group m-r-10"></i><?= __('This Month joinings / Separation'); ?> </p>
                     <div class="text-center">
                         <h2 class="m-b-0 d-inline-block text-c-red"><?php echo customNanAndEmptyValidation($emp_count_dashboard['this_month_join'])." / ".customNanAndEmptyValidation($emp_count_dashboard['this_month_leaving']); ?></h2>
 
@@ -190,16 +190,16 @@ $estimationdata = implode('|', (array)$maingra['bdget']);
                 <input type="hidden" id="estimationdata" value="<?php echo $estimationdata;?>">
                 <input type="hidden" id="actualdata" value="<?php echo $actualdata;?>">
                 <div class="card-header">
-                    <h5>Overall Budget Utilization</h5>
+                    <h5><?= __('Overall Budget Utilization'); ?></h5>
 
                     <div class="card-header-right">
-                        <span class="badge badge-inverse-primary bg-white"> <i class="fa fa-calendar-check-o text-primary"></i>  Financial Year <?php echo date('Y-M',strtotime($startyearmonth))." To ".date('Y-M',strtotime($endyearmonth)); ?></span>
+                        <span class="badge badge-inverse-primary bg-white"> <i class="fa fa-calendar-check-o text-primary"></i>  <?= __('Financial Year'); ?> <?php echo date('Y-M',strtotime($startyearmonth))." To ".date('Y-M',strtotime($endyearmonth)); ?></span>
                     </div>
                 </div>
                 <?php $countvaluempty = $estimationdata==""?1:0;   ?>
                 <div class="card-block">
                     <?php if($countvaluempty == "1"){
-                        echo "<h4 class='p-40 text-center'><i class='fa fa-warning'></i> Budget Utilization Data Not Available</h4>";
+                        echo "<h4 class='p-40 text-center'><i class='fa fa-warning'></i> ".__('Budget Utilization Data Not Available')."</h4>";
                     }else{ ?>
                         <div id="deal-analytic-chart" class="chart-shadow" style="height:300px"></div>
                     <?php } ?>
@@ -209,7 +209,7 @@ $estimationdata = implode('|', (array)$maingra['bdget']);
         <div class="col-md-12 col-xl-4">
             <div class="card sale-card">
                 <div class="card-header">
-                    <h5>Total Utilization</h5>
+                    <h5><?= __('Total Utilization'); ?></h5>
                 </div>
                 <input type="hidden" id="hid_budget" value="<?php echo round($budgetthisyear); ?>">
                 <input type="hidden" id="hid_utilization" value="<?php echo round($utilizationthisyear); ?>">
@@ -220,19 +220,19 @@ $estimationdata = implode('|', (array)$maingra['bdget']);
                             <?php echo convert_Rupee_Number(customNanAndEmptyValidation(round($utilizationthisyear))); ?>
                         </h3>
                     </div>
-                    <h6 class="m-t-40">This Year's Budget</h6>
+                    <h6 class="m-t-40"><?= __('This Year\'s Budget'); ?></h6>
                     <h3 class="f-w-700 m-b-40"><?php echo convert_Rupee_Number(customNanAndEmptyValidation(round($budgetthisyear))); ?></h3>
                     <div class="row">
                         <div class="col-4">
-                            <p class="m-b-5">Year</p>
+                            <p class="m-b-5"><?= __('Year'); ?></p>
                             <h3 class="f-w-700 text-c-yellow f-14"><?php echo convert_Rupee_Number(customNanAndEmptyValidation(round($utilizationthisyear))); ?></h3>
                         </div>
                         <div class="col-4">
-                            <p class="m-b-5">Quater</p>
+                            <p class="m-b-5"><?= __('Quater'); ?></p>
                             <h3 class="f-w-700 text-c-yellow f-14"><?php echo convert_Rupee_Number(customNanAndEmptyValidation(round($utilizationsixmonth))); ?></h3>
                         </div>
                         <div class="col-4">
-                            <p class="m-b-5">Month</p>
+                            <p class="m-b-5"><?= __('Month'); ?></p>
                             <h3 class="f-w-700 text-c-yellow f-14"><?php echo convert_Rupee_Number(customNanAndEmptyValidation(round($utilizationsmonth))); ?></h3>
                         </div>
                     </div>
@@ -243,7 +243,7 @@ $estimationdata = implode('|', (array)$maingra['bdget']);
             <div class="col-lg-6">
                 <div class="card bg-light">
                     <div class="card-header">
-                        <h5>Usage</h5>
+                        <h5><?= __('Usage'); ?></h5>
                     </div>
                     <div class="row p-4">
                         <div class="col-xl-6 col-md-6 col-lg-6 col-sm-6 col-12">
@@ -251,7 +251,7 @@ $estimationdata = implode('|', (array)$maingra['bdget']);
                             <input type="hidden" name="coscentervalue_priview_month" id="coscentervalue_priview_month" value="<?php echo implode(",",(array)$priviousmonthcostcenter['emp_count']); ?>">
                             <div class="card prod-bar-card">
                                 <div class="card-header">
-                                    <h5>CostCenter</h5>
+                                    <h5><?= __('CostCenter'); ?></h5>
                                 </div>
                                 <div class="card-block">
                                     <p><?php echo $thismonthyeardisplay." & ".$priviousmonthdisplay?></p>
@@ -279,7 +279,7 @@ $estimationdata = implode('|', (array)$maingra['bdget']);
                     <input type="hidden" name="vendor_priview_month" id="vendor_priview_month" value="<?php echo implode(",",(array)$priviousmonthvendoremployecount['usage_vendor']); ?>">
                     <div class="card prod-bar-card">
                         <div class="card-header">
-                            <h5>Vendor</h5>
+                            <h5><?= __('Vendor'); ?></h5>
                         </div>
                         <div class="card-block">
                             <p><?php echo $thismonthyeardisplay." & ".$priviousmonthdisplay?></p>
@@ -304,7 +304,7 @@ $estimationdata = implode('|', (array)$maingra['bdget']);
     <div class="col-lg-6">
     <div class="card bg-light">
         <div class="card-header">
-            <h5>Employee Count</h5>
+            <h5><?= __('Employee Count'); ?></h5>
         </div>
         <div class="row p-4">
             <div class="col-xl-6 col-md-6 col-lg-6 col-sm-6 col-12">
@@ -313,7 +313,7 @@ $estimationdata = implode('|', (array)$maingra['bdget']);
 
                 <div class="card prod-bar-card">
                     <div class="card-header">
-                        <h5>CostCenter</h5>
+                        <h5><?= __('CostCenter'); ?></h5>
                     </div>
                     <div class="card-block">
                         <p><?php echo $thismonthyeardisplay." & ".$priviousmonthdisplay?></p>
@@ -341,7 +341,7 @@ $estimationdata = implode('|', (array)$maingra['bdget']);
         <input type="hidden" name="coscentervalue_priview_month" id="vendorvalueemp_priview_month" value="<?php echo implode(",",(array)$priviousmonthvendoremployecount['emp_count']); ?>">
         <div class="card prod-bar-card">
             <div class="card-header">
-                <h5>Vendor</h5>
+                <h5><?= __('Vendor'); ?></h5>
             </div>
             <div class="card-block">
                 <p><?php echo $thismonthyeardisplay." & ".$priviousmonthdisplay; ?></p>
