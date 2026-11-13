@@ -16,15 +16,15 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
     <div class="card">
         <div class="card-header">
             <h5 class="">
-                User Time Logs
+                <?= __('User Time Logs'); ?>
             </h5>
             <div class="card-header-right">
                 <div class="dropdown-primary dropdown open">
                     <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
                     <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn"
                         data-dropdown-out="fadeOut">
-                        <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=User Time Logs" target="_blank">CSV</a>
+                        <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=User Time Logs" target="_blank"><?= __('CSV'); ?></a>
                     </div>
                 </div>
             </div>
@@ -34,9 +34,9 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
             <form method="post"  >
                 <div class="row ">
                     <div class="col-lg-4">
-                        <span class="form-label d-block d-block">User Name</span>
-                        <select aria-label="Application User" name="application_user_id" class="form-select js-example-basic-single" >
-                        <option value="">All Users</option>
+                        <span class="form-label d-block d-block"><?= __('User Name'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Application User'), ENT_QUOTES, 'UTF-8'); ?>" name="application_user_id" class="form-select js-example-basic-single" >
+                        <option value=""><?= __('All Users'); ?></option>
                         <?php
                             foreach ($application_users as $au){ ?>
                                 <option value="<?= $au['id'] ?>" <?php echo $_POST['application_user_id']==$au['id']?"selected":""; ?>><?= htmlspecialchars($au['display_name']); ?> </option>
@@ -44,13 +44,13 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
                      </select>
                     </div>
                     <div class="col-lg-4">
-                        <span class="form-label d-block d-block">Month</span>
-                        <input aria-label="Ect Month" type="month" class="form-control" name="select_month" value="<?php echo $select_month; ?>">
+                        <span class="form-label d-block d-block"><?= __('Month'); ?></span>
+                        <input aria-label="<?= htmlspecialchars(__('Ect Month'), ENT_QUOTES, 'UTF-8'); ?>" type="month" class="form-control" name="select_month" value="<?php echo $select_month; ?>">
                     </div>
                     <div class="col-lg-2">
                         <span class="form-label"> &nbsp; </span>
                         <button type="submit" name="applyform" value="apply" class="btn btn-info waves-effect waves-light input-group-text m-t-30">
-                            Apply
+                            <?= __('Apply'); ?>
                         </button>
                         <input type="hidden" name="submit" value="applyform">
                     </div>
@@ -66,7 +66,7 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
         <thead>
             <tr>
                 <th scope="col" rowspan="3">#</th>
-                <th scope="col" rowspan="3">User Name</th>
+                <th scope="col" rowspan="3"><?= __('User Name'); ?></th>
                 <th scope="col" rowspan="1" colspan="<?php echo count((array)$project_task_dates)*2; ?>" ></th>
             </tr>
             <tr>
@@ -76,8 +76,8 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
             </tr>
             <tr>
                 <?php foreach($project_task_dates as $ptd){ ?>
-                <th scope="col">Tasks</th>
-                <th scope="col">Total Time</th>
+                <th scope="col"><?= __('Tasks'); ?></th>
+                <th scope="col"><?= __('Total Time'); ?></th>
                 <?php } ?>
             </tr>
         </thead>
@@ -119,7 +119,7 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
 <?php }else{ ?>
 
     <div class="card-px text-center ">
-        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Stock</p>
+        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Stock'); ?></p>
         <div class="text-center px-4">
             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
         </div>
