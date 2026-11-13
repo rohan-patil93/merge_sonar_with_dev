@@ -18,7 +18,7 @@ $employees = $result['employees'];
     function DynamicPagerefrash(id=""){
       var employee_id = '<?php echo $employee_id; ?>';
       var option = $("#ajaxrefrashpagename").val();
-      var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+      var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $('#dynamicpageshow').html(htmloader);
     jQuery.ajax({
       url: "views/custom_inbox_page_redirection.php",
@@ -50,7 +50,7 @@ $employees = $result['employees'];
       if(subtabid !=""){
         $(".activesubtab_"+subtabid).addClass("active");
       }
-      var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+      var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $('#dynamicpageshow').html(htmloader);
       jQuery.ajax({
       url: "views/custom_inbox_page_redirection.php",
@@ -89,7 +89,7 @@ function getAjaxDynamicPage(option,divid,pagetype="",rid=""){
   var transaction_id = '<?php echo $employee_id; ?>';
   var currentUrl = window.location.href;
   var urlParts = currentUrl.split('?');
-    var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+    var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $("#"+divid).html(loader);
     $.ajax({
         url: "views/"+option+".php",
@@ -129,14 +129,14 @@ function UpdateSendVerificationProfileStatus(){
     type: "warning",
     showCancelButton: true,
     confirmButtonClass: "btn-danger",
-    confirmButtonText: "Submit",
-    cancelButtonText: "Cancel",
+    confirmButtonText: <?php echo json_encode(__('Submit'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+    cancelButtonText: <?php echo json_encode(__('Cancel'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
     closeOnConfirm: true,
     closeOnCancel: true
   },
   function(isConfirm) {
     if (isConfirm) {
-      $("#popsubmitforreview_btn").text("Please Wait........");
+      $("#popsubmitforreview_btn").text(<?php echo json_encode(__('Please Wait........'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
       $("#popsubmitforreview_btn").addClass("disabled");
       var finance_tax_year = $("#finance_tax_year").val();
       var transaction_table = 'employees';
@@ -168,12 +168,12 @@ function UpdateSendVerificationProfileStatus(){
                 <div class="flex-shrink-0 m-r-30 m-l-25 mt-lg-0 mt-3">
                   <?php if($employees['image']!=""){ ?>
                     <div class="symbol symbol-50 symbol-lg-120">
-                      <img src="../uploads/all/<?php echo $employees['image']; ?>" class="img-120 " alt="Details" onerror="this.src='uploads/all/no-image.jpg';"/>
+                      <img src="../uploads/all/<?php echo $employees['image']; ?>" class="img-120 " alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';"/>
                     </div>
 
                   <?php }else{ ?>
                     <div class="symbol symbol-50 symbol-lg-120">
-                      <img src="../uploads/all/<?php echo $employees['gender'].".png"; ?>" class="img-120 " alt="Details" onerror="this.src='uploads/all/no-image.jpg';"/>
+                      <img src="../uploads/all/<?php echo $employees['gender'].".png"; ?>" class="img-120 " alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';"/>
                     </div>
                   <?php } ?>
                   <div class="d-block mt-1" style="margin:-16px 0 0 0;">
@@ -190,7 +190,7 @@ function UpdateSendVerificationProfileStatus(){
                   <div class="d-flex align-items-center w-100px w-sm-120px flex-column mt-3 ">
 
                     <div class="d-flex justify-content-between w-100 mt-auto mb-2">
-                      <span class="f-12 f-w-600">Profile </span>
+                      <span class="f-12 f-w-600"><?= __('Profile'); ?> </span>
                       <span class="f-12 f-w-600"><?php echo customNanAndEmptyValidation($pp); ?>%</span>
                     </div>
                     <div class="col-md-12">
@@ -226,7 +226,7 @@ if($location['location_name']!=""){ ?>
                         </div>
 
                         <?php if($_SESSION['employee']['about_me']!=""){ ?>
-                          <span class="font-weight-bold text-dark-50 mt-3"><b>About Me : </b><?php echo  $_SESSION['employee']['about_me'];?></span>
+                          <span class="font-weight-bold text-dark-50 mt-3"><b><?= __('About Me'); ?> : </b><?php echo  $_SESSION['employee']['about_me'];?></span>
                         <?php } ?>
                       </div>
                       <input type="hidden" id="location_id" value="<?php echo $employees['location_id']; ?>">
@@ -243,7 +243,7 @@ if($location['location_name']!=""){ ?>
                   <div class=" col-sm-1  text-right">
                     <i class="ti-mobile f-16 text-primary"></i>
                   </div>
-                  <span class="col-sm-3  f-w-600">Phone Number</span>
+                  <span class="col-sm-3  f-w-600"><?= __('Phone Number'); ?></span>
                   <span class="col-sm-1">:</span>
                   <div class="col-sm-6">
                     <span ><?php echo $employees['phone']; ?></span>
@@ -255,7 +255,7 @@ if($employees['date_of_birth']!=""){?>
                   <div class="col-lg-1 col-md-1 col-sm-1 col-1 text-right">
                     <i class="ti-gift f-16 text-primary"></i>
                   </div>
-                  <span class="col-lg-3 col-md-3 col-sm-3 col-3 f-w-600">Birthday</span>
+                  <span class="col-lg-3 col-md-3 col-sm-3 col-3 f-w-600"><?= __('Birthday'); ?></span>
                   <span class="col-lg-1 col-md-1 col-sm-1 col-1">:</span>
                   <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                     <span ><?php echo fromDate($employees['date_of_birth']); ?></span>
@@ -267,7 +267,7 @@ if($employees['address']!=""){?>
                   <div class="col-lg-1 col-md-1 col-sm-1 col-1 text-right">
                     <i class="ti-home f-16 text-primary"></i>
                   </div>
-                  <span class="col-lg-3 col-md-3 col-sm-3 col-3 f-w-600">Address</span>
+                  <span class="col-lg-3 col-md-3 col-sm-3 col-3 f-w-600"><?= __('Address'); ?></span>
                   <span class="col-lg-1 col-md-1 col-sm-1 col-1">:</span>
                   <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                     <span ><?php echo $employees['address']; ?></span>
@@ -280,7 +280,7 @@ if($employees['gender']!=""){?>
 
                     <i class="fa fa-venus-mars f-16 text-primary"></i>
                   </div>
-                  <span class="col-lg-3 col-md-3 col-sm-3 col-3 f-w-600">Gender</span>
+                  <span class="col-lg-3 col-md-3 col-sm-3 col-3 f-w-600"><?= __('Gender'); ?></span>
                   <span class="col-lg-1 col-md-1 col-sm-1 col-1">:</span>
                   <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                     <span ><?php echo $employees['gender']=="F"?"Female":"Male"; ?></span>
@@ -292,7 +292,7 @@ if($employees['gender']!=""){?>
                   <div class="col-lg-1 col-md-1 col-sm-1 col-1 text-right">
                       <i class="ti-user text-primary f-16"></i>
                   </div>
-                  <span class="col-lg-3 col-md-3 col-sm-3 col-3 f-w-600">Reports To</span>
+                  <span class="col-lg-3 col-md-3 col-sm-3 col-3 f-w-600"><?= __('Reports To'); ?></span>
                   <span class="col-lg-1 col-md-1 col-sm-1 col-1">:</span>
                   <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                     <span ><?php echo $_SESSION['users'][$_SESSION['user']['reports_to']]; ?></span>
@@ -305,35 +305,35 @@ if($employees['gender']!=""){?>
                           <div class="s-caption  text-primary"><i class="ti-pin f-20"></i></div>
                           <div class="s-cont d-inline-block">
                               <h5 class="f-w-700 m-b-0"><?php echo customNanAndEmptyValidation($task_cnt['total_task_cnt']); ?></h5>
-                              <p class="m-b-0 f-12">Total Task</p>
+                              <p class="m-b-0 f-12"><?= __('Total Task'); ?></p>
                           </div>
                       </div>
                       <div class="col-2 b-l-default text-center">
                           <div class="s-caption  text-danger"><i class="ti-time f-20"></i></div>
                           <div class="s-cont d-inline-block">
                               <h5 class="f-w-700 m-b-0"><?php echo customNanAndEmptyValidation($task_cnt['yet_to_start_cnt']); ?></h5>
-                              <p class="m-b-0 f-12">Yet To Start</p>
+                              <p class="m-b-0 f-12"><?= __('Yet To Start'); ?></p>
                           </div>
                       </div>
                       <div class="col-2 b-l-default text-center">
                           <div class="s-caption  text-info"><i class="ti-timer f-20"></i></div>
                           <div class="s-cont d-inline-block">
                               <h5 class="f-w-700 m-b-0"><?php echo customNanAndEmptyValidation($task_cnt['inprogress_cnt']); ?></h5>
-                              <p class="m-b-0  f-12">In Progress</p>
+                              <p class="m-b-0  f-12"><?= __('In Progress'); ?></p>
                           </div>
                       </div>
                       <div class="col-2 b-l-default text-center">
                           <div class="s-caption  text-info"><i class="ti-write f-20"></i></div>
                           <div class="s-cont d-inline-block">
                               <h5 class="f-w-700 m-b-0"><?php echo customNanAndEmptyValidation($task_cnt['review_cnt']); ?></h5>
-                              <p class="m-b-0 f-12">Review</p>
+                              <p class="m-b-0 f-12"><?= __('Review'); ?></p>
                           </div>
                       </div>
                       <div class="col-2 b-l-default text-center">
                           <div class="s-caption  text-success"><i class="ti-check-box f-20"></i></div>
                           <div class="s-cont d-inline-block">
                               <h5 class="f-w-700 m-b-0"><?php echo customNanAndEmptyValidation($task_cnt['approve_cnt']); ?></h5>
-                              <p class="m-b-0 f-12">Completed</p>
+                              <p class="m-b-0 f-12"><?= __('Completed'); ?></p>
                           </div>
                       </div>
                   </div>
@@ -352,7 +352,7 @@ if($employees['gender']!=""){?>
             <ul class="nav md-tabs infisuite_tab mt-2 ml-2">
 
               <li class="nav-item">
-                <a class="nav-link active" data-bs-toggle="tab" href="#task_tab" role="tab" onclick="getAjaxDynamicPage('custom_insert_transaction_activity_schedules','task_tab')">Task</a>
+                <a class="nav-link active" data-bs-toggle="tab" href="#task_tab" role="tab" onclick="getAjaxDynamicPage('custom_insert_transaction_activity_schedules','task_tab')"><?= __('Task'); ?></a>
                 <div class="slide"></div>
               </li>
             </ul>
@@ -361,7 +361,7 @@ if($employees['gender']!=""){?>
 
           </div>
           <div class="col-lg-2">
-              <select aria-label="Finance Tax Year" class ="form-control form-control-lg form-select js-example-basic-single" id="finance_tax_year" onchange="getAjaxDynamicPage('custom_insert_transaction_activity_schedules','task_tab')">
+              <select aria-label="<?= htmlspecialchars(__('Finance Tax Year'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-control form-control-lg form-select js-example-basic-single" id="finance_tax_year" onchange="getAjaxDynamicPage('custom_insert_transaction_activity_schedules','task_tab')">
                   <?php for($i=date("Y")-10; $i <=date("Y"); $i++){ ?>
                       <option value="<?php echo $i; ?>" <?php echo ($i == $finance_tax_year)?"selected":""; ?>>
                       <?php echo "Apr ".$i." - Mar ".($i+1); ?>
