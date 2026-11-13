@@ -83,10 +83,10 @@ function buildSelfUrl($params, $option) {
 
 <div class="card employee-return-card">
     <div class="card-header">
-        <h5>Employee Exit Return Search</h5>
+        <h5><?= __('Employee Exit Return Search'); ?></h5>
         <div class="card-header-right">
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
-                <i class="icofont icofont-reply"></i> Back
+                <i class="icofont icofont-reply"></i> <?= __('Back'); ?>
             </a>
         </div>
     </div>
@@ -97,9 +97,9 @@ function buildSelfUrl($params, $option) {
                 <form id="employeeExitReturnFilterForm" class="row g-3 align-items-end" method="get" action="index.php">
                     <input type="hidden" name="option" value="<?php echo h($option); ?>">
                     <div class="form-group col-lg-4 col-md-6 col-12">
-                        <label for="return_employee_id">Employee</label>
+                        <label for="return_employee_id"><?= __('Employee'); ?></label>
                         <select class="form-select js-example-basic-single" name="employee_id" id="return_employee_id">
-                            <option value="">All Employees</option>
+                            <option value=""><?= __('All Employees'); ?></option>
                             <?php foreach ($employees as $emp): ?>
                                 <?php $empId = (int)($emp['id'] ?? 0); ?>
                                 <option value="<?php echo h($empId); ?>" <?php echo ($selectedEmployeeId === $empId) ? 'selected' : ''; ?>>
@@ -110,16 +110,16 @@ function buildSelfUrl($params, $option) {
                     </div>
 
                     <div class="form-group col-lg-3 col-md-6 col-12">
-                        <label for="return_out_date">Out Date</label>
+                        <label for="return_out_date"><?= __('Out Date'); ?></label>
                         <input type="date" class="form-control" name="out_date" id="return_out_date" value="<?php echo h($selectedOutDate); ?>">
                     </div>
 
                     <div class="form-group col-lg-5 col-12 employee-return-actions">
                         <button type="submit" class="btn btn-primary">
-                            <i class="fa-solid fa-magnifying-glass"></i> Search
+                            <i class="fa-solid fa-magnifying-glass"></i> <?= __('Search'); ?>
                         </button>
                         <a href="<?php echo h(buildSelfUrl([], $option)); ?>" class="btn btn-outline-secondary" id="employeeExitReturnResetBtn">
-                            <i class="fa-solid fa-rotate-left"></i> Reset
+                            <i class="fa-solid fa-rotate-left"></i> <?= __('Reset'); ?>
                         </a>
                     </div>
                 </form>
@@ -127,7 +127,7 @@ function buildSelfUrl($params, $option) {
 
             <div class="employee-return-summary" id="employeeExitReturnSummary">
                 <div class="employee-return-summary-card">
-                    <span class="summary-label">Active Taken Out Records</span>
+                    <span class="summary-label"><?= __('Active Taken Out Records'); ?></span>
                     <strong class="summary-value" id="employeeExitReturnCount"><?php echo h($activeOutCount); ?></strong>
                 </div>
                 <div class="employee-return-summary-note" id="employeeExitReturnSummaryNote"><?php echo h($summaryNote); ?></div>
@@ -147,18 +147,18 @@ function buildSelfUrl($params, $option) {
                 <table class="table table-bordered table-hover align-middle employee-return-table">
                     <thead>
                         <tr>
-                            <th scope="col">Employee Code</th>
-                            <th scope="col">Employee Name</th>
-                            <th scope="col">Out Date Time</th>
-                            <th scope="col">Out Gate No</th>
-                            <th scope="col">Out Gate Security</th>
-                            <th scope="col" class="text-center">Action</th>
+                            <th scope="col"><?= __('Employee Code'); ?></th>
+                            <th scope="col"><?= __('Employee Name'); ?></th>
+                            <th scope="col"><?= __('Out Date Time'); ?></th>
+                            <th scope="col"><?= __('Out Gate No'); ?></th>
+                            <th scope="col"><?= __('Out Gate Security'); ?></th>
+                            <th scope="col" class="text-center"><?= __('Action'); ?></th>
                         </tr>
                     </thead>
                     <tbody id="employeeExitReturnTableBody">
                         <?php if (count((array)$list) == 0){ ?>
                             <tr>
-                                <td colspan="6" class="text-center text-muted py-4">No active taken out records found.</td>
+                                <td colspan="6" class="text-center text-muted py-4"><?= __('No active taken out records found.'); ?></td>
                             </tr>
                         <?php } else { ?>
                             <?php foreach ($list as $row){ ?>
@@ -202,11 +202,11 @@ function buildSelfUrl($params, $option) {
                                                 <input type="hidden" name="company_id" value="<?php echo h($_SESSION['company_id'] ?? ''); ?>">
                                                 <input type="hidden" name="user_id" value="<?php echo h($_SESSION['userid'] ?? ''); ?>">
                                                 <div class="employee-return-items-panel">
-                                                    <div class="employee-return-items-title">Taken Out Items</div>
+                                                    <div class="employee-return-items-title"><?= __('Taken Out Items'); ?></div>
                                                     <div class="row g-2 mb-3">
                                                         <div class="col-md-4 col-12">
-                                                            <span class="form-label fw-semibold">Return Gate</span>
-                                                            <select aria-label="Return Gate No" class="form-select js-example-basic-single" name="return_gate_no" id="return_gate_no_<?php echo h($rowId); ?>" required>
+                                                            <span class="form-label fw-semibold"><?= __('Return Gate'); ?></span>
+                                                            <select aria-label="<?= htmlspecialchars(__('Return Gate No'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="return_gate_no" id="return_gate_no_<?php echo h($rowId); ?>" required>
                                                                 <?php foreach ($buildingGates as $gate) { ?>
                                                                     <option value="<?php echo h($gate->id ?? $gate['id'] ?? ''); ?>">
                                                                         <?php echo h($gate->name ?? $gate['name'] ?? ''); ?>
@@ -216,20 +216,20 @@ function buildSelfUrl($params, $option) {
                                                         </div>
                                                     </div>
                                                     <?php if (count((array)$items) == 0) { ?>
-                                                        <div class="employee-return-empty-items">No taken out items found for this record.</div>
+                                                        <div class="employee-return-empty-items"><?= __('No taken out items found for this record.'); ?></div>
                                                     <?php } else { ?>
                                                         <div class="table-responsive">
                                                             <table class="table table-sm table-striped mb-0 employee-return-items-table">
                                                                 <thead>
                                                                     <tr>
                                                                         <th scope="col">#</th>
-                                                                        <th scope="col">Item Name</th>
-                                                                        <th scope="col">Brand</th>
-                                                                        <th scope="col">Qty</th>
-                                                                        <th scope="col">Serial / Remarks</th>
-                                                                        <th scope="col">Returnable</th>
-                                                                        <th scope="col">Return Date</th>
-                                                                        <th scope="col">Return Remarks</th>
+                                                                        <th scope="col"><?= __('Item Name'); ?></th>
+                                                                        <th scope="col"><?= __('Brand'); ?></th>
+                                                                        <th scope="col"><?= __('Qty'); ?></th>
+                                                                        <th scope="col"><?= __('Serial / Remarks'); ?></th>
+                                                                        <th scope="col"><?= __('Returnable'); ?></th>
+                                                                        <th scope="col"><?= __('Return Date'); ?></th>
+                                                                        <th scope="col"><?= __('Return Remarks'); ?></th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -244,7 +244,7 @@ function buildSelfUrl($params, $option) {
                                                                             <td><?php echo ((int)($item['returnable'] ?? $item->returnable ?? 0) === 1) ? 'Yes' : 'No'; ?></td>
                                                                             <td><?php echo h($item['return_date'] ?? $item->return_date ?? '-'); ?></td>
                                                                             <td>
-                                                                                <textarea aria-label="Text area" class="form-control form-control-sm" name="item_remarks[<?php echo h($itemId); ?>]" rows="1" placeholder="Return remarks"></textarea>
+                                                                                <textarea aria-label="<?= htmlspecialchars(__('Text area'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-control-sm" name="item_remarks[<?php echo h($itemId); ?>]" rows="1" placeholder="<?= htmlspecialchars(__('Return remarks'), ENT_QUOTES, 'UTF-8'); ?>"></textarea>
                                                                                 <input type="hidden" name="item_ids[]" value="<?php echo h($itemId); ?>">
                                                                             </td>
                                                                         </tr>
@@ -255,14 +255,14 @@ function buildSelfUrl($params, $option) {
                                                     <?php } ?>
                                                     <div class="row g-2 mt-3 mb-3">
                                                         <div class="col-12">
-                                                            <span class="form-label fw-semibold">Overall Remarks</span>
-                                                            <textarea aria-label="Overall Remarks" class="form-control" name="overall_remarks" id="overall_remarks_<?php echo h($rowId); ?>" rows="3" placeholder="Enter return remarks for this record"></textarea>
+                                                            <span class="form-label fw-semibold"><?= __('Overall Remarks'); ?></span>
+                                                            <textarea aria-label="<?= htmlspecialchars(__('Overall Remarks'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="overall_remarks" id="overall_remarks_<?php echo h($rowId); ?>" rows="3" placeholder="<?= htmlspecialchars(__('Enter return remarks for this record'), ENT_QUOTES, 'UTF-8'); ?>"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="row g-2">
                                                         <div class="col-auto">
                                                             <button type="submit" name="submit" value="returnonly" class="btn btn-success btn-sm" id="return_submit_btn_<?php echo h($rowId); ?>">
-                                                                <i class="fa-solid fa-check"></i> Return
+                                                                <i class="fa-solid fa-check"></i> <?= __('Return'); ?>
                                                             </button>
                                                         </div>
                                                     </div>
