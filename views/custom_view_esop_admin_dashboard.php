@@ -97,7 +97,7 @@ function getNumberConvertName($val,$title){
         <div class="card-body">
           <div class="row align-items-center">
             <div class="col">
-              <h6 class="m-b-5 text-white">Last Valuation</h6>
+              <h6 class="m-b-5 text-white"><?= __('Last Valuation'); ?></h6>
               <h3 class="m-b-0 f-w-700 text-white f-18"><?php echo $last_company_valuations['valuation_date'] !=""?date('M d-Y',strtotime($last_company_valuations['valuation_date'])):"-";?></h3>
             </div>
             <div class="col-auto">
@@ -112,7 +112,7 @@ function getNumberConvertName($val,$title){
         <div class="card-body">
           <div class="row align-items-center">
             <div class="col">
-              <h6 class="m-b-5 text-white">Total Valuation</h6>
+              <h6 class="m-b-5 text-white"><?= __('Total Valuation'); ?></h6>
               <h3 class="m-b-0 f-w-700 text-white f-18"><?php echo convert_Rupee_Number($last_company_valuations['company_value']);?></h3>
             </div>
             <div class="col-auto">
@@ -127,7 +127,7 @@ function getNumberConvertName($val,$title){
         <div class="card-body">
           <div class="row align-items-center">
             <div class="col">
-              <h6 class="m-b-5 text-white">Total Shares</h6>
+              <h6 class="m-b-5 text-white"><?= __('Total Shares'); ?></h6>
               <h3 class="m-b-0 f-w-700 text-white f-18"><?php echo customNanAndEmptyValidation($last_company_valuations['total_share_qty']);?></h3>
             </div>
             <div class="col-auto">
@@ -142,7 +142,7 @@ function getNumberConvertName($val,$title){
         <div class="card-body">
           <div class="row align-items-center">
             <div class="col">
-              <h6 class="m-b-5 text-white">Share Price</h6>
+              <h6 class="m-b-5 text-white"><?= __('Share Price'); ?></h6>
               <h3 class="m-b-0 f-w-700 text-white f-18"><?php echo customNanAndEmptyValidation($last_company_valuations['per_share_value']);?></h3>
             </div>
             <div class="col-auto">
@@ -156,7 +156,7 @@ function getNumberConvertName($val,$title){
   <div class="col-lg-4">
     <div class="card">
       <div class="card-header">
-        <h5>Ownership</h5>
+        <h5><?= __('Ownership'); ?></h5>
       </div>
       <div class="card-block">
         <input type="hidden" id="ownership_encode" value='<?php echo json_encode($last_company_valuation_distributions_ary); ?>'>
@@ -169,7 +169,7 @@ function getNumberConvertName($val,$title){
         <div class="card-block p-2">
             <div class="row align-items-center">
                 <div class="col-8">
-                    <h6 class="m-b-0">Valuation Trend</h6>
+                    <h6 class="m-b-0"><?= __('Valuation Trend'); ?></h6>
                 </div>
                 <div class="col-4 text-end">
                     <i class="fas fa-bullhorn f-20"></i>
@@ -180,7 +180,7 @@ function getNumberConvertName($val,$title){
               <input type="hidden" id="valuation_trend_chart_type" value='<?php echo getNumberConvertName($valuationtrendmaxnumbernumber,'Valuation Trend'); ?>'>
               <input type="hidden" id="valuation_trend_chart_id" value='<?php echo json_encode($valuation_trend); ?>'>
              <div id="valuation_trend_chart" style="height:40px"></div>
-            <?php if(count((array)$valuation_trend) ==0){ echo "<div class='p-0'>No Trends</div>";
+            <?php if(count((array)$valuation_trend) ==0){ echo "<div class='p-0'>".__('No Trends')."</div>";
 } ?>
 
 
@@ -192,7 +192,7 @@ function getNumberConvertName($val,$title){
       <div class="card-block p-2">
         <div class="row align-items-center">
           <div class="col-8">
-            <h6 class="m-b-0">Share Price Trend</h6>
+            <h6 class="m-b-0"><?= __('Share Price Trend'); ?></h6>
           </div>
           <div class="col-4 text-end">
             <i class="fas fa-dollar-sign f-20"></i>
@@ -202,7 +202,7 @@ function getNumberConvertName($val,$title){
           <input type="hidden" id="share_price_trends_chart_type" value='<?php echo getNumberConvertName($sptdivnumber,'Share Price Trends'); ?>'>
          <input type="hidden" id="share_price_trends_chart_id" value='<?php echo json_encode($share_price_trend); ?>'>
           <div id="share_price_trends_chart" style="height:40px"></div>
-       <?php if(count((array)$share_price_trend) ==0){ echo "<div class='p-0'>No Trends</div>";
+       <?php if(count((array)$share_price_trend) ==0){ echo "<div class='p-0'>".__('No Trends')."</div>";
 } ?>
       </div>
       </div>
@@ -213,7 +213,7 @@ function getNumberConvertName($val,$title){
       <div class="card-block p-2">
         <div class="row align-items-center">
           <div class="col-8">
-            <h6 class="m-b-0">ESOP Trends</h6>
+            <h6 class="m-b-0"><?= __('ESOP Trends'); ?></h6>
           </div>
           <div class="col-4 text-end">
             <i class="fas fa-user f-20"></i>
@@ -223,7 +223,7 @@ function getNumberConvertName($val,$title){
          <input type="hidden" id="esop_trends_chart_id" value='<?php echo json_encode($esop_plans_trend); ?>'>
          <input type="hidden" id="esop_trends_chart_type" value='<?php echo getNumberConvertName($share_price_trends_chart_type,'ESOP Trends'); ?>'>
          <div id="esop_trends_chart" style="height:40px"></div>
-            <?php if(count((array)$esop_plans_trend) ==0){ echo "<div class='p-0'>No Trends</div>";
+            <?php if(count((array)$esop_plans_trend) ==0){ echo "<div class='p-0'>".__('No Trends')."</div>";
 } ?>
       </div>
       </div>
@@ -240,14 +240,14 @@ function getNumberConvertName($val,$title){
             <div class="s-caption  text-primary"><i class="ti-user f-20"></i></div>
             <div class="s-cont d-inline-block">
               <h5 class="f-w-700 m-b-0"><?php echo customNanAndEmptyValidation($total_users_with_type_cnt['founder_cnt']); ?></h5>
-              <p class="m-b-0 f-12">Founders</p>
+              <p class="m-b-0 f-12"><?= __('Founders'); ?></p>
             </div>
           </div>
           <div class="col-6 b-l-default text-center">
             <div class="s-caption  text-danger"><i class="ti-crown f-20"></i></div>
             <div class="s-cont d-inline-block">
               <h5 class="f-w-700 m-b-0"><?php echo customNanAndEmptyValidation($total_users_with_type_cnt['invester_cnt']); ?></h5>
-              <p class="m-b-0 f-12">Investers</p>
+              <p class="m-b-0 f-12"><?= __('Investers'); ?></p>
             </div>
           </div>
         </div>
@@ -260,14 +260,14 @@ function getNumberConvertName($val,$title){
             <div class="s-caption  text-info"><i class="ti-id-badge f-20"></i></div>
             <div class="s-cont d-inline-block">
               <h5 class="f-w-700 m-b-0"><?php echo customNanAndEmptyValidation($total_users_with_type_cnt['employee_cnt']); ?></h5>
-              <p class="m-b-0  f-12">Employees</p>
+              <p class="m-b-0  f-12"><?= __('Employees'); ?></p>
             </div>
           </div>
           <div class="col-6 b-l-default text-center">
             <div class="s-caption  text-info"><i class="ti-envelope f-20"></i></div>
             <div class="s-cont d-inline-block">
               <h5 class="f-w-700 m-b-0"><?php echo customNanAndEmptyValidation(count((array)$esop_plans)); ?></h5>
-              <p class="m-b-0  f-12">ESOP Plans</p>
+              <p class="m-b-0  f-12"><?= __('ESOP Plans'); ?></p>
             </div>
           </div>
         </div>
@@ -276,14 +276,14 @@ function getNumberConvertName($val,$title){
             <div class="s-caption  text-info"><i class="ti-check f-20"></i></div>
             <div class="s-cont d-inline-block">
               <h5 class="f-w-700 m-b-0"><?php echo customNanAndEmptyValidation($esop_allocations_cnt['approved_cnt']); ?></h5>
-              <p class="m-b-0  f-12">Vested</p>
+              <p class="m-b-0  f-12"><?= __('Vested'); ?></p>
             </div>
           </div>
           <div class="col-6 b-l-default text-center">
             <div class="s-caption  text-info"><i class="ti-timer f-20"></i></div>
             <div class="s-cont d-inline-block">
               <h5 class="f-w-700 m-b-0"><?php echo customNanAndEmptyValidation($esop_allocations_cnt['pendding_cnt']); ?></h5>
-              <p class="m-b-0  f-12">Pending</p>
+              <p class="m-b-0  f-12"><?= __('Pending'); ?></p>
             </div>
           </div>
         </div>
@@ -296,7 +296,7 @@ function getNumberConvertName($val,$title){
     <div class="col-lg-6">
     <div class="card">
       <div class="card-header">
-        <h5>Ownership Distribution</h5>
+        <h5><?= __('Ownership Distribution'); ?></h5>
         <div class="float-right">
         </div>
       </div>
@@ -309,9 +309,9 @@ function getNumberConvertName($val,$title){
   <div class="col-lg-6">
     <div class="card" style="height:400px">
       <div class="card-header">
-        <h5>Recent Valuations</h5>
+        <h5><?= __('Recent Valuations'); ?></h5>
         <div class="float-right">
-           <a href="index.php?option=COM_LIST_COMPANY_VALUATIONS" class=" b-b-primary text-primary">View all</a>
+           <a href="index.php?option=COM_LIST_COMPANY_VALUATIONS" class=" b-b-primary text-primary"><?= __('View all'); ?></a>
         </div>
       </div>
       <div class="card-block " >
@@ -320,12 +320,12 @@ function getNumberConvertName($val,$title){
         <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
           <thead>
             <tr>
-              <th scope="col">VAL. Name</th>
-              <th scope="col">VAL. Date</th>
-              <th scope="col" class="text-right">Company Value</th>
-              <th scope="col" class="text-right">New Shares</th>
-              <th scope="col" class="text-right">Total Shares</th>
-              <th scope="col" class="text-right">Share Price</th>
+              <th scope="col"><?= __('VAL. Name'); ?></th>
+              <th scope="col"><?= __('VAL. Date'); ?></th>
+              <th scope="col" class="text-right"><?= __('Company Value'); ?></th>
+              <th scope="col" class="text-right"><?= __('New Shares'); ?></th>
+              <th scope="col" class="text-right"><?= __('Total Shares'); ?></th>
+              <th scope="col" class="text-right"><?= __('Share Price'); ?></th>
             </tr>
           </thead>
           <tbody>
@@ -344,7 +344,7 @@ function getNumberConvertName($val,$title){
       </div>
          <?php }else{ ?>
               <div class="card-px text-center ">
-                  <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Valuations</p>
+                  <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Valuations'); ?></p>
                   <div class="text-center px-4">
                       <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 200px!important;">
                   </div>
@@ -359,9 +359,9 @@ function getNumberConvertName($val,$title){
   <div class="col-lg-6">
     <div class="card" style="height:450px">
       <div class="card-header">
-        <h5>ESOP Plans</h5>
+        <h5><?= __('ESOP Plans'); ?></h5>
         <div class="float-right">
-           <a href="index.php?option=COM_LIST_ESOP_PLANS" class=" b-b-primary text-primary">View all</a>
+           <a href="index.php?option=COM_LIST_ESOP_PLANS" class=" b-b-primary text-primary"><?= __('View all'); ?></a>
         </div>
       </div>
       <div class="card-block" >
@@ -369,10 +369,10 @@ function getNumberConvertName($val,$title){
         <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter_2">
           <thead>
             <tr>
-              <th scope="col">Plan Name</th>
-              <th scope="col">Date Of Grant</th>
-              <th scope="col" class="text-right">Company Value</th>
-              <th scope="col" class="text-right">Share</th>
+              <th scope="col"><?= __('Plan Name'); ?></th>
+              <th scope="col"><?= __('Date Of Grant'); ?></th>
+              <th scope="col" class="text-right"><?= __('Company Value'); ?></th>
+              <th scope="col" class="text-right"><?= __('Share'); ?></th>
             </tr>
           </thead>
           <tbody>
@@ -388,7 +388,7 @@ function getNumberConvertName($val,$title){
         </table>
          <?php }else{ ?>
               <div class="card-px text-center ">
-                  <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No ESOP Plans</p>
+                  <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No ESOP Plans'); ?></p>
                   <div class="text-center px-4">
                       <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                   </div>
@@ -400,9 +400,9 @@ function getNumberConvertName($val,$title){
   <div class="col-lg-6">
     <div class="card" style="height:450px">
       <div class="card-header">
-        <h5>ESOP Allocations</h5>
+        <h5><?= __('ESOP Allocations'); ?></h5>
         <div class="float-right">
-          <a href="index.php?option=COM_INSERT_ESOP_ALLOCATIONS" class=" b-b-primary text-primary">View all</a>
+          <a href="index.php?option=COM_INSERT_ESOP_ALLOCATIONS" class=" b-b-primary text-primary"><?= __('View all'); ?></a>
         </div>
       </div>
       <div class="card-block" >
@@ -410,10 +410,10 @@ function getNumberConvertName($val,$title){
           <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter_3">
           <thead>
             <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Emp Code</th>
-              <th scope="col" class="text-right">Joining Date</th>
-              <th scope="col" class="text-right">Option Granted</th>
+              <th scope="col"><?= __('Name'); ?></th>
+              <th scope="col"><?= __('Emp Code'); ?></th>
+              <th scope="col" class="text-right"><?= __('Joining Date'); ?></th>
+              <th scope="col" class="text-right"><?= __('Option Granted'); ?></th>
             </tr>
           </thead>
           <tbody>
@@ -429,7 +429,7 @@ function getNumberConvertName($val,$title){
         </table>
         <?php }else{ ?>
               <div class="card-px text-center ">
-                  <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No ESOP Allocations</p>
+                  <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No ESOP Allocations'); ?></p>
                   <div class="text-center px-4">
                       <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                   </div>
