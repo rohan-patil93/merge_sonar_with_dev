@@ -85,10 +85,10 @@ $change_words = array(0 => '', 1 => 'One', 2 => 'Two',
                 title: msg,
                 type: "danger",
                 buttonsStyling: true,
-                confirmButtonText: "OK, Close! ",
+                confirmButtonText: <?php echo json_encode(__('OK, Close!').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                 confirmButtonClass: "btn btn-danger",
                 showCancelButton: false,
-                cancelButtonText: " No, continue",
+                cancelButtonText: <?php echo json_encode(' '.__('No, continue'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                 cancelButtonClass: "btn btn-warning"
             });
         }
@@ -208,19 +208,19 @@ $change_words = array(0 => '', 1 => 'One', 2 => 'Two',
                             </div>
                         </div>
                         <div class="dropdown_dorp border d-inline-block position-relative">
-                            <div class="dropbtn text-start w-100">Board Members</div>
+                            <div class="dropbtn text-start w-100"><?= __('Board Members'); ?></div>
                             <div class="dropdown-content">
                                 <div class="border-checkbox-section p-2">
                                     <div class="border-checkbox-group border-checkbox-group-warning">
-                                        <input aria-label="Input field" class="border-checkbox"<?php if(in_array('99999',$laemp)){ echo "checked";
+                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="border-checkbox"<?php if(in_array('99999',$laemp)){ echo "checked";
 } ?> name="emps[]" type="checkbox" value="99999" id="all">
-                                        <label class="form-label border-checkbox-label mb-0" for="all">All</label>
+                                        <label class="form-label border-checkbox-label mb-0" for="all"><?= __('All'); ?></label>
                                     </div>
                                 </div>
                                 <?php foreach($project_teams as $team){ ?>
                                     <div class="border-checkbox-section p-2">
                                         <div class="border-checkbox-group border-checkbox-group-warning">
-                                            <input aria-label="Input field" class="border-checkbox" <?php if(in_array($team['id'],$laemp)){ echo "checked";
+                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="border-checkbox" <?php if(in_array($team['id'],$laemp)){ echo "checked";
 } ?> name="emps[]" type="checkbox" value="<?php echo $team['id']; ?>" id="<?php echo $team['display_name']; ?>">
                                             <label class="form-label border-checkbox-label mb-0" for="<?php echo $team['display_name']; ?>"><?php echo $team['display_name']; ?></label>
                                         </div>
@@ -229,92 +229,92 @@ $change_words = array(0 => '', 1 => 'One', 2 => 'Two',
                             </div>
                         </div>
                         <div class="m-l-10 d-inline-block position-relative mob-p-re">
-                            <div onclick="filterbtn()" id="filterbtn" class="filterbtn text-start w-100" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><span class="ti-filter m-r-10"></span> Filter</div>
+                            <div onclick="filterbtn()" id="filterbtn" class="filterbtn text-start w-100" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><span class="ti-filter m-r-10"></span> <?= __('Filter'); ?></div>
                             <div id="filter_dropdown" class="filter_dropdown p-3 custom-scroll" style="max-height: 500px;">
                                 <div class="">
                                     <div class="card-header p-1 mb-4">
-                                        <h5>Filter</h5>
+                                        <h5><?= __('Filter'); ?></h5>
                                         <div class="card-header-right filter-close" onclick="filterclose()" style="top:0;cursor:pointer;" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
                                             <span class="ti-close"></span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <span class="f-12 f-w-600">Dates</span>
-                                    <select aria-label="Filter Day" class="form-control border" style="-webkit-appearance: auto;" name="filter_day">
+                                    <span class="f-12 f-w-600"><?= __('Dates'); ?></span>
+                                    <select aria-label="<?= htmlspecialchars(__('Filter Day'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control border" style="-webkit-appearance: auto;" name="filter_day">
                                         <option <?php if($chckfilter['filter_day'] == '0' ){ echo "selected";
-} ?> value="0">ALL</option>
+} ?> value="0"><?= __('ALL'); ?></option>
                                         <option <?php if($chckfilter['filter_day'] == 'today' ){ echo "selected";
-} ?> value="today">Today</option>
+} ?> value="today"><?= __('Today'); ?></option>
                                         <option <?php if($chckfilter['filter_day'] == 'week' ){ echo "selected";
-} ?> value="week">Week</option>
+} ?> value="week"><?= __('Week'); ?></option>
                                         <option <?php if($chckfilter['filter_day'] == 'month' ){ echo "selected";
-} ?> value="month">Month</option>
+} ?> value="month"><?= __('Month'); ?></option>
                                         <option <?php if($chckfilter['filter_day'] == 'quater' ){ echo "selected";
-} ?> value="quater">Quater</option>
+} ?> value="quater"><?= __('Quater'); ?></option>
                                         <option <?php if($chckfilter['filter_day'] == 'half' ){ echo "selected";
-} ?> value="half">Half Yearly</option>
+} ?> value="half"><?= __('Half Yearly'); ?></option>
                                         <option <?php if($chckfilter['filter_day'] == 'yearly' ){ echo "selected";
-} ?> value="yearly">Yearly</option>
+} ?> value="yearly"><?= __('Yearly'); ?></option>
                                     </select>
                                 </div>
-                                <span class="f-12 f-w-600">Due Dates</span>
+                                <span class="f-12 f-w-600"><?= __('Due Dates'); ?></span>
                                 <div class="border-checkbox-section p-2">
                                     <div class="border-checkbox-group border-checkbox-group-warning">
-                                        <input aria-label="Input field"  <?php if($chckfilter['filter_due'] == '0' ){ echo "checked";
+                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>"  <?php if($chckfilter['filter_due'] == '0' ){ echo "checked";
 } ?> class="border-checkbox" name="filter_due" value="0" type="radio" id="All">
-                                        <label class="form-label border-checkbox-label mb-0 f-14" for="All">ALL</label>
+                                        <label class="form-label border-checkbox-label mb-0 f-14" for="All"><?= __('ALL'); ?></label>
                                     </div>
                                 </div>
                                 <div class="border-checkbox-section p-2">
                                     <div class="border-checkbox-group border-checkbox-group-warning">
-                                        <input aria-label="Input field" <?php if($chckfilter['filter_due'] == 'overdue' ){ echo "checked";
+                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" <?php if($chckfilter['filter_due'] == 'overdue' ){ echo "checked";
 } ?> class="border-checkbox" name="filter_due" value="overdue" type="radio" id="overdue">
-                                        <label class="form-label border-checkbox-label mb-0 f-14" for="overdue">Overdue</label>
+                                        <label class="form-label border-checkbox-label mb-0 f-14" for="overdue"><?= __('Overdue'); ?></label>
                                     </div>
                                 </div>
                                 <div class="border-checkbox-section p-2">
                                     <div class="border-checkbox-group border-checkbox-group-warning">
-                                        <input aria-label="Input field" <?php if($chckfilter['filter_due'] == 'nextday' ){ echo "checked";
+                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" <?php if($chckfilter['filter_due'] == 'nextday' ){ echo "checked";
 } ?> class="border-checkbox" name="filter_due" value="nextday" type="radio" id="nextday">
-                                        <label class="form-label border-checkbox-label mb-0 f-14" for="nextday">Due in the next day</label>
+                                        <label class="form-label border-checkbox-label mb-0 f-14" for="nextday"><?= __('Due in the next day'); ?></label>
                                     </div>
                                 </div>
                                 <div class="border-checkbox-section p-2">
                                     <div class="border-checkbox-group border-checkbox-group-warning">
-                                        <input aria-label="Input field" <?php if($chckfilter['filter_due'] == 'nextweek' ){ echo "checked";
+                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" <?php if($chckfilter['filter_due'] == 'nextweek' ){ echo "checked";
 } ?> class="border-checkbox" name="filter_due" value="nextweek" type="radio" id="nextweek">
-                                        <label class="form-label border-checkbox-label mb-0 f-14" for="nextweek">Due in the next week</label>
+                                        <label class="form-label border-checkbox-label mb-0 f-14" for="nextweek"><?= __('Due in the next week'); ?></label>
                                     </div>
                                 </div>
                                 <div class="border-checkbox-section p-2">
                                     <div class="border-checkbox-group border-checkbox-group-warning">
-                                        <input aria-label="Input field" <?php if($chckfilter['filter_due'] == 'nextmonth' ){ echo "checked";
+                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" <?php if($chckfilter['filter_due'] == 'nextmonth' ){ echo "checked";
 } ?> class="border-checkbox" name="filter_due" value="nextmonth" type="radio" id="nextmonth">
-                                        <label class="form-label border-checkbox-label mb-0 f-14" for="nextmonth">Due in the next month</label>
+                                        <label class="form-label border-checkbox-label mb-0 f-14" for="nextmonth"><?= __('Due in the next month'); ?></label>
                                     </div>
                                 </div>
                                 <div class="border-checkbox-section p-2">
                                     <div class="border-checkbox-group border-checkbox-group-warning">
-                                        <input aria-label="Input field" <?php if($chckfilter['filter_due'] == 'complete' ){ echo "checked";
+                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" <?php if($chckfilter['filter_due'] == 'complete' ){ echo "checked";
 } ?> class="border-checkbox" name="filter_due" value="complete" type="radio" id="complete">
-                                        <label class="form-label border-checkbox-label mb-0 f-14" for="complete">Marked as complete</label>
+                                        <label class="form-label border-checkbox-label mb-0 f-14" for="complete"><?= __('Marked as complete'); ?></label>
                                     </div>
                                 </div>
                                 <div class="border-checkbox-section p-2">
                                     <div class="border-checkbox-group border-checkbox-group-warning">
-                                        <input aria-label="Input field" <?php if($chckfilter['filter_due'] == 'noncomplete' ){ echo "checked";
+                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" <?php if($chckfilter['filter_due'] == 'noncomplete' ){ echo "checked";
 } ?> class="border-checkbox" name="filter_due" value="noncomplete" type="radio" id="n-complete">
-                                        <label class="form-label border-checkbox-label mb-0 f-14" for="n-complete">Not marked as complete</label>
+                                        <label class="form-label border-checkbox-label mb-0 f-14" for="n-complete"><?= __('Not marked as complete'); ?></label>
                                     </div>
                                 </div>
-                                <span class="f-12 f-w-600 mt-3">Projrect Phases</span>
+                                <span class="f-12 f-w-600 mt-3"><?= __('Projrect Phases'); ?></span>
                                 <?php
                                     if(count((array)$data['phases'])>0){
                                     foreach((array)$data['phases'] as $phases){ ?>
                                         <div class="border-checkbox-section p-2">
                                     <div class="border-checkbox-group border-checkbox-group-warning">
-                                        <input aria-label="Input field"  <?php if(in_array($phases['id'],(array)$chckfilter['filter_phases'])){ echo "checked";
+                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>"  <?php if(in_array($phases['id'],(array)$chckfilter['filter_phases'])){ echo "checked";
 } ?>   class="border-checkbox"  name="filter_phases[]" value="<?php  echo $phases['id']; ?>" type="checkbox" id="n-complete<?php  echo $phases['id']; ?>">
                                         <label class="form-label border-checkbox-label mb-0 f-14" for="n-complete<?php  echo $phases['id']; ?>"> <?php  echo $phases['project_phase_name']; ?></label>
                                     </div>
@@ -324,12 +324,12 @@ $change_words = array(0 => '', 1 => 'One', 2 => 'Two',
                                 <?php } ?>
                                 <?php } ?>
 
-                                <span class="f-12 f-w-600 mt-3">Labels</span>
+                                <span class="f-12 f-w-600 mt-3"><?= __('Labels'); ?></span>
                                 <?php
                                     if(count((array)$data['project_label'])>0){
                                     foreach((array)$data['project_label'] as $project_label){ ?>
                                     <div class="form-group mt-3 mb-0 label-design">
-                                        <input aria-label="Input field"  <?php if(in_array($project_label['id'],(array)$chckfilter['filter_lable'])){ echo "checked";
+                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>"  <?php if(in_array($project_label['id'],(array)$chckfilter['filter_lable'])){ echo "checked";
 } ?>  class="mt-2" type="checkbox" name="filter_lable[]" value="<?php  echo $project_label['id']; ?>" id="check1">
                                         <label for="check1" class="label-check w-75" style="background:<?php  echo $project_label['label_code']; ?>;">
                                             <?php  echo $project_label['label_name']; ?>
@@ -340,7 +340,7 @@ $change_words = array(0 => '', 1 => 'One', 2 => 'Two',
                             </div>
                         </div>
                         <input type="hidden" name="submit" value="search" >
-                        <button type="submit" class="m-l-10 btn btn-primary mob-mrgn"> Search </button>
+                        <button type="submit" class="m-l-10 btn btn-primary mob-mrgn"> <?= __('Search'); ?> </button>
                     </div>
                 </div>
             </form>
@@ -356,7 +356,7 @@ $change_words = array(0 => '', 1 => 'One', 2 => 'Two',
                     <div class="card status card-body pb-0 mb-0 prs-1" id="row_<?php echo $progress['status']; ?>">
                         <div class="card-header p-0">
                             <div class="f-18">
-                                <input aria-label="Input field" class="task_1" type="text" placeholder="<?php echo $task['task_name']; ?>" name="task_name" value="<?php echo $progress['name']; ?>" onblur="statusprogressname('name', <?php echo $progress['id']; ?> ,this.value)" >
+                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="task_1" type="text" placeholder="<?php echo $task['task_name']; ?>" name="task_name" value="<?php echo $progress['name']; ?>" onblur="statusprogressname('name', <?php echo $progress['id']; ?> ,this.value)" >
                             </div>
                             <?php if($progress['status'] ==199){ ?>
                                 <div class="card-header-right" style="top:0px;">
@@ -382,7 +382,7 @@ $change_words = array(0 => '', 1 => 'One', 2 => 'Two',
                                     </div>
                                     <div class="col-lg-12" id="cll_<?php echo $cl; ?>" style="display: none;">
                                         <?php foreach((array)$colors as $color){ ?>
-                                            <span class="lcolor f-10" style="background-color: <?php echo $color; ?> !important">Label 1</span>
+                                            <span class="lcolor f-10" style="background-color: <?php echo $color; ?> !important"><?= __('Label 1'); ?></span>
                                         <?php } ?>
                                     </div>
                                     <p class="mb-2 mt-2"><?php echo $pts['task_name']; ?></p>
@@ -392,7 +392,7 @@ $change_words = array(0 => '', 1 => 'One', 2 => 'Two',
 
                                     <div class="align-items-center  mb-3">
                                         <?php if($pts['allow_watch']==0){ ?>
-                                            <i class="ti-eye m-r-5 text-muted" data-bs-toggle="tooltip" data-placement="bottom" title="You are watching this card"></i>
+                                            <i class="ti-eye m-r-5 text-muted" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('You are watching this card'), ENT_QUOTES, 'UTF-8'); ?>"></i>
                                         <?php } ?>
                                         <?php if(count( (array)$data['projec_task_dependencies'][$pts['id']])>0){
                                                 foreach((array)$data['projec_task_dependencies'][$pts['id']] as $ttdp){
@@ -411,14 +411,14 @@ $change_words = array(0 => '', 1 => 'One', 2 => 'Two',
                                             </span>
                                         <?php } ?>
                                         <?php if($pts['description']!=""){ ?>
-                                            <i class="ti-align-left m-r-5 f-12" data-bs-toggle="tooltip" data-placement="bottom" title="This card has a description."></i>
+                                            <i class="ti-align-left m-r-5 f-12" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('This card has a description.'), ENT_QUOTES, 'UTF-8'); ?>"></i>
                                         <?php } ?>
                                         <?php if(count((array)$data['checklist'][$pts['id']])>0){ ?>
-                                            <i class="ti-check-box f-12" data-bs-toggle="tooltip" data-placement="bottom" title="Check items"> <?php echo $data['checklist'][$pts['id']]['comp']."/".$data['checklist'][$pts['id']]['entotal']; ?></i>
+                                            <i class="ti-check-box f-12" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Check items'), ENT_QUOTES, 'UTF-8'); ?>"> <?php echo $data['checklist'][$pts['id']]['comp']."/".$data['checklist'][$pts['id']]['entotal']; ?></i>
                                         <?php } ?>
                                         <?php if($pts['assigen_id']!=""){ ?>
                                            <?php if($data['emps'][$pts['assigen_id']]['image']!=""){ ?>
-                                                <img class="float-end user-name p-0 m-0" style="/*width:20px*/" src="/uploads/all/<?php echo $data['emps'][$pts['assigen_id']]['image']; ?>" alt="User Profile">
+                                                <img class="float-end user-name p-0 m-0" style="/*width:20px*/" src="/uploads/all/<?php echo $data['emps'][$pts['assigen_id']]['image']; ?>" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <?php }else{ ?>
                                                 <span class="float-end user-name"><?php echo initials($data['emps'][$pts['assigen_id']]['display_name']); ?></span>
                                             <?php } ?>
@@ -433,30 +433,30 @@ $change_words = array(0 => '', 1 => 'One', 2 => 'Two',
                         <div class="card-body pt-0 pb-0 mt-2">
                             <div class="todo pt-3 pb-3 mb-3  m-l-0 col-lg-12 row" id="addcard_<?php echo $progress['status']; ?>" style="display: none;">
                                 <div class="col-lg-12">
-                                    <textarea aria-label="Text area" class="form-control" id="taskname_<?php echo $progress['status']; ?>" placeholder="Task Name"></textarea>
+                                    <textarea aria-label="<?= htmlspecialchars(__('Text area'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="taskname_<?php echo $progress['status']; ?>" placeholder="<?= htmlspecialchars(__('Task Name'), ENT_QUOTES, 'UTF-8'); ?>"></textarea>
                                 </div>
                                 <div class="col-lg-12 w-full mt-2">
-                                    <select aria-label="Select option" class="form-control js-example-basic-single" id="assigne_<?php echo $progress['status']; ?>">
-                                        <option value=""> Select Task Owner</option>
+                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" id="assigne_<?php echo $progress['status']; ?>">
+                                        <option value=""> <?= __('Select Task Owner'); ?></option>
                                         <?php foreach($project_teams as $team){ ?>
                                             <option value="<?php echo $team['id']; ?>"> <?php echo $team['display_name']; ?> </option>
                                         <?php } ?>
                                     </select>
                                 </div>
                                 <div class="col-lg-12 w-full mt-2">
-                                    <select aria-label="Select option" class="form-control js-example-basic-single" id="phase_<?php echo $progress['status']; ?>">
-                                        <option value=""> Select Project Phases</option>
+                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" id="phase_<?php echo $progress['status']; ?>">
+                                        <option value=""> <?= __('Select Project Phases'); ?></option>
                                         <?php foreach($data['phases'] as $phases){ ?>
                                             <option value="<?php echo $phases['id']; ?>"> <?php echo $phases['project_phase_name']; ?> </option>
                                         <?php } ?>
                                     </select>
                                 </div>
                                 <div class="col-lg-12 text-right mt-2">
-                                    <button class="btn btn-primary" type="button" onclick="submitaddcard(<?php echo $progress['status'].",".$project_id; ?>)"> Save </button>
+                                    <button class="btn btn-primary" type="button" onclick="submitaddcard(<?php echo $progress['status'].",".$project_id; ?>)"> <?= __('Save'); ?> </button>
                                 </div>
                             </div>
                             <div class="text-primary p-2 float-right" onclick="addcard(<?php echo $progress['status']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
-                                <i class="ti-plus "></i> &nbsp; Add a Card
+                                <i class="ti-plus "></i> &nbsp; <?= __('Add a Card'); ?>
                             </div>
                         </div>
                     </div>
@@ -467,27 +467,27 @@ $change_words = array(0 => '', 1 => 'One', 2 => 'Two',
                 <div class="todo pt-3 pb-3 mb-3  m-l-0 col-lg-12 row" id="addlist" style="display: none;">
                     <div class="close mb-1" onclick="closelist()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="ti-close float-end"> </i></div>
                     <div class="col-lg-12">
-                        <input aria-label="Enter List Name" class="form-control" id="listname" placeholder="Enter List Name">
+                        <input aria-label="<?= htmlspecialchars(__('Enter List Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="listname" placeholder="<?= htmlspecialchars(__('Enter List Name'), ENT_QUOTES, 'UTF-8'); ?>">
                     </div>
                     <div class="col-lg-12 w-full mt-2">
-                        <select aria-label="Add Possition" class="form-control js-example-basic-single" id="add_possition">
-                            <option value=""> Select Display Possition</option>
+                        <select aria-label="<?= htmlspecialchars(__('Add Possition'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" id="add_possition">
+                            <option value=""> <?= __('Select Display Possition'); ?></option>
                             <?php for($m=1; $m<11; $m++){ ?>
                                 <option value="<?php echo $m*9; ?>"> <?php echo $m; ?> </option>
                             <?php } ?>
                         </select>
                     </div>
                     <div class="col-lg-12 text-right mt-2">
-                        <button class="btn btn-primary cursor-pointer" type="button" onclick="submitaddlist(<?php echo $project_id; ?>)"> Save </button>
+                        <button class="btn btn-primary cursor-pointer" type="button" onclick="submitaddlist(<?php echo $project_id; ?>)"> <?= __('Save'); ?> </button>
                     </div>
                 </div>
                 <div class="text-primary p-2 float-right" onclick="addlist()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
-                   <i class="ti-plus "></i> &nbsp; Add another list
+                   <i class="ti-plus "></i> &nbsp; <?= __('Add another list'); ?>
                </div>
             </div>
             <div class="card">
                 <div class="card-header">
-                    <h5>Task Progress</h5>
+                    <h5><?= __('Task Progress'); ?></h5>
                 </div>
                 <div class="card-body">
                     <?php if(count((array)$statusprogress)>0){ foreach((array)$statusprogress as $progress){
@@ -507,7 +507,7 @@ $change_words = array(0 => '', 1 => 'One', 2 => 'Two',
             </div>
             <div class="card">
             <div class="card-header">
-                <h5>Team</h5>
+                <h5><?= __('Team'); ?></h5>
             </div>
             <div class="card-body">
                 <div class="mt-2">
