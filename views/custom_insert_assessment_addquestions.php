@@ -19,13 +19,13 @@ else{
 		i++;
 		var quetype= document.getElementById('settype').value;
 		if(quetype==1){
-			var appenddiv = '<label class="radio radio-primary"><input type="radio"  name="singlechoicestatus" id="singlechoice'+i+'" aria-label="Singlechoicestatus"><span></span></label>';
+			var appenddiv = '<label class="radio radio-primary" for="singlechoice'+i+'"><input type="radio"  name="singlechoicestatus" id="singlechoice'+i+'" aria-label="Singlechoicestatus"><span></span></label>';
 			
 		}else{
-			var appenddiv = '<label class="checkbox checkbox-primary"><input type="checkbox" name="multiplechoicestatus" id="multiplechoice'+i+'" aria-label="Multiplechoicestatus"><span></span></label>';
+			var appenddiv = '<label class="checkbox checkbox-primary" for="multiplechoice'+i+'"><input type="checkbox" name="multiplechoicestatus" id="multiplechoice'+i+'" aria-label="Multiplechoicestatus"><span></span></label>';
 		}
 
-		$("#optionrow").append('<div class="form-group row" id="s1rowid'+i+'"><div class="col-lg-1 mt-2">'+appenddiv+'</div><div class="col-lg-8">  <div class="input-group input-icon-right"> <input type="text" class="form-control display-inline"  name="assessment_question_option[]" placeholder="Option" aria-label="Option"><div class="input-group-append "><span class="input-group-text bg-primary width1"><span><i class="fa fa-trash" onclick="deloptionrows(\'s1rowid'+i+'\')"></i></span></span></div></div></div></div>');
+		$("#optionrow").append('<div class="form-group row" id="s1rowid'+i+'"><div class="col-lg-1 mt-2">'+appenddiv+'</div><div class="col-lg-8">  <div class="input-group input-icon-right"> <input type="text" class="form-control display-inline"  name="assessment_question_option[]" placeholder="Option" aria-label="Option"><div class="input-group-append "><span class="input-group-text bg-primary width1"><span><i class="fa fa-trash" role="button" tabindex="0" aria-label="Delete option" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();this.click();}" onclick="deloptionrows(\'s1rowid'+i+'\')"></i></span></span></div></div></div></div>');
 	}
 	function deloptionrows(rowid) {
 		$('#'+rowid).remove();
@@ -103,11 +103,11 @@ else{
 	<div class="custom-icon p-4">
 		<div class="form-group text-left row">
 			<div class="col-lg-8">
-				<label>Question Text: <span class="text-danger">*</span></label>
+				<label for="assessment_question">Question Text: <span class="text-danger">*</span></label>
 				<textarea id="assessment_question" name="assessment_question" class="form-control" placeholder="" aria-label="Assessment Question"> </textarea>
 			</div>
 			<div class="col-lg-4">
-				<label>Marks <span class="text-danger">*</span></label>
+				<label for="markfieldvalue">Marks <span class="text-danger">*</span></label>
 				<input type="text" class="form-control" id="markfieldvalue" name="marks"  placeholder="Enter Marks" aria-label="Enter Marks">
 			</div>
 		</div>
@@ -118,12 +118,12 @@ else{
 			<div id="optionrow">
 				<div class="form-group row" id="s1rowid1">
 					<div class="col-lg-1 mt-2">	<?php if($_GET['type']== $typeofquestion['1'] ) { ?>
-						<label class="radio radio-primary">
+						<label class="radio radio-primary" for="singlechoice1">
 							<input type="radio" name="singlechoicestatus"  id="singlechoice1" aria-label="Singlechoicestatus">
 							<span></span>
 						</label>
 					<?php } else { ?>
-						<label class="checkbox checkbox-primary">
+						<label class="checkbox checkbox-primary" for="multiplechoice1">
 							<input type="checkbox"  name="multiplechoicestatus" id="multiplechoice1" aria-label="Multiplechoicestatus">
 							<span></span>
 						</label>
@@ -133,19 +133,19 @@ else{
 					<div class="input-group input-icon-right">
 					<input type="text" class="form-control  display-inline width1" name="assessment_question_option[]"  placeholder="Option" aria-label="Option">
 					<span class="input-group-text addon-style">
-    <span class=""><i class="fa fa-trash" onclick="deloptionrows('s1rowid1')"></i>	</span>
+    <span class=""><i class="fa fa-trash" role="button" tabindex="0" aria-label="Delete option" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="deloptionrows('s1rowid1')"></i>	</span>
 </span></div>
 				</div>
 			</div>
 			<div class="form-group row" id="s1rowid2">
 				<div class="col-lg-1 mt-2"> <?php if($_GET['type']== $typeofquestion['1'] ) { ?>
-					<label class="radio radio-primary">
+					<label class="radio radio-primary" for="singlechoice2">
 						<input type="radio"  name="singlechoicestatus"  id="singlechoice2" aria-label="Singlechoicestatus">
 						<span></span>
 
 					</label>
 				<?php } else { ?>
-					<label class="checkbox checkbox-primary">
+					<label class="checkbox checkbox-primary" for="multiplechoice2">
 						<input type="checkbox"  name="multiplechoicestatus" id="multiplechoice2" aria-label="Multiplechoicestatus">
 						<span></span>
 					</label>
@@ -156,7 +156,7 @@ else{
 				<input type="text" class="form-control  display-inline width1" name="assessment_question_option[]"   placeholder="Option" aria-label="Option">
 				
 						<span class="input-group-text addon-style">
-    <span class=""><i class="fa fa-trash" onclick="deloptionrows('s1rowid1')"></i>	</span>
+    <span class=""><i class="fa fa-trash" role="button" tabindex="0" aria-label="Delete option" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="deloptionrows('s1rowid2')"></i>	</span>
 </span>
 				
 				</div>

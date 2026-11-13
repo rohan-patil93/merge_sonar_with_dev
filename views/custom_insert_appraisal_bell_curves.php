@@ -78,7 +78,7 @@ $slabsval = json_decode($appraisal_bell_curves['slabs'],1);
 		<h5>Performance Bell Curves </h5>
 		<div class="card-header-right table-card-header m-r-50">
 			<a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-				<i class="icofont icofont-reply"></i>
+				<i class="icofont icofont-reply" aria-hidden="true"></i>
 				Back
 			</a>
 		</div>
@@ -87,30 +87,31 @@ $slabsval = json_decode($appraisal_bell_curves['slabs'],1);
 		<form method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="form-group col-lg-4">
-                    <label class="form-label">Bell Curve Name<span class="text-danger">*</span></label>
-                    <input type="text" name="bell_curve_name" class="form-control" value="<?php echo $appraisal_bell_curves['bell_curve_name']; ?>" required aria-label="Bell Curve Name">
+                    <label class="form-label" for="bell_curve_name">Bell Curve Name<span class="text-danger">*</span></label>
+                    <input type="text" name="bell_curve_name" id="bell_curve_name" class="form-control" value="<?php echo $appraisal_bell_curves['bell_curve_name']; ?>" required aria-label="Bell Curve Name">
                 </div>
                 <div class="form-group col-lg-8">
                 	<div class="row">
 		                <div class=" col-lg-6">
-		                	 <label>Slab Name<span class="text-danger">*</span></label>
+		                	 <span class="fw-bold font-weight-bold">Slab Name<span class="text-danger">*</span></span>
 		                </div>
 		                 <div class="col-lg-6 text-right">
-		                	 <label>Percentage (%)<span class="text-danger">*</span></label>
+		                	 <span class="fw-bold font-weight-bold">Percentage (%)<span class="text-danger">*</span></span>
 		                </div>
 		            </div>
                 	<?php $sum = 0; foreach($appraisal_rating_slabs as $aprslab){ 
                 		$slab11 = $slabsval[$aprslab['id']]; 
                 		$sum += $slab11['percentage'];
+                		$slab_id = $aprslab['id'];
                 		?>
                 	<div class="row">
                 		<div class="form-group col-lg-6">
-                			<input type="hidden" name="slabs[<?php echo $aprslab['id']; ?>][appraisal_rating_slab_id]" value="<?php echo $aprslab['id']; ?>">
-		                    <input type="text" class="form-control" value="<?php echo $aprslab['slabs_name']; ?>" style="background-color:<?php echo $aprslab['background_color']; ?>; color: <?php echo $aprslab['font_color']; ?> " readonly aria-label="Input">
+                			<input type="hidden" name="slabs[<?php echo $slab_id; ?>][appraisal_rating_slab_id]" value="<?php echo $slab_id; ?>">
+		                    <input type="text" class="form-control" id="slab_name_<?php echo $slab_id; ?>" value="<?php echo $aprslab['slabs_name']; ?>" style="background-color:<?php echo $aprslab['background_color']; ?>; color: <?php echo $aprslab['font_color']; ?> " readonly aria-label="<?php echo htmlspecialchars($aprslab['slabs_name']); ?>">
 			            </div>
 			            <div class="form-group col-lg-6">
 			            	<div class="input-group input-group-button"> 
-		                    	<input type="number" name="slabs[<?php echo $aprslab['id']; ?>][percentage]" class="form-control bell_curve_sum text-right width1" value="<?php echo $slab11['percentage']; ?>" onblur="getTotalBellCurve()" required aria-label="Input">
+		                    	<input type="number" id="slab_percentage_<?php echo $slab_id; ?>" name="slabs[<?php echo $slab_id; ?>][percentage]" class="form-control bell_curve_sum text-right width1" value="<?php echo $slab11['percentage']; ?>" onblur="getTotalBellCurve()" required aria-label="Percentage for <?php echo htmlspecialchars($aprslab['slabs_name']); ?>">
 			                    <span class="input-group-text addon-style">
 								    <span class="">%</span>
 								</span>
@@ -120,7 +121,7 @@ $slabsval = json_decode($appraisal_bell_curves['slabs'],1);
 			    <?php } ?>
 			    <div class="row">
 		                <div class="form-group col-lg-6 text-right">
-		                	 <label class="form-label">Total<span class="text-danger">*</span></label>
+		                	 <span class="form-label fw-bold font-weight-bold">Total<span class="text-danger">*</span></span>
 		                </div>
 		                <div class="form-group col-lg-6 text-right">
 		                	<span class="form-label " id="bell_curve_sum_text"><?php echo $sum; ?>%</span>
@@ -129,7 +130,7 @@ $slabsval = json_decode($appraisal_bell_curves['slabs'],1);
                  </div>
             </div>
             <input type="hidden" name="rid" value="<?php echo $rid; ?>">
-            <button type="submit" class="btn btn-primary waves-effect waves-light mt-5" id="bell_curve_btn" name="submitbellcurves" <?php echo $sum ==100?"":"disabled";?>><i class="fa fa-check m-r-10"></i> <?php echo $rid ==""?"Submit":"Update"; ?></button>   
+            <button type="submit" class="btn btn-primary waves-effect waves-light mt-5" id="bell_curve_btn" name="submitbellcurves" <?php echo $sum ==100?"":"disabled";?>><i class="fa fa-check m-r-10" aria-hidden="true"></i> <?php echo $rid ==""?"Submit":"Update"; ?></button>   
         </form>
 	</div>
 

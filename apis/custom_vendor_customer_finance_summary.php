@@ -28,6 +28,9 @@ if ($_GET['refresh'] == "Y") {
     ),
   ));
   $response23 = curl_exec($curl);
+  $decores = json_decode($response23, 1);
+  $transaction_table = '';
+  $transaction_id = 0;
   $returnresult = array('company_id' => $itsum_company_id, 'application_table' => $transaction_table, 'transaction_id' => $transaction_id, 'api_master_id' => 48, 'api_url' => '', 'api_request_parameters' => $sendpostreq, 'request_date_time' => date("Y-m-d H:i:s"), 'api_response_details' => urlencode(json_encode($decores)), 'response_date_time' => date("Y-m-d H:i:s"), 'is_active' => '0', 'current_status' => '0', 'created_date' => date("Y-m-d H:i:s"), 'created_by' => $itsum_user_id, 'response_status' => 200);
   $inserturl = $apiurl . "?mode=adddata&table=api_hits&method=post&company_id=" . $itsum_company_id . "&data_name=" . $itsum_data_name . "&userid=" . $itsum_user_id;
   $ch = curl_init();
@@ -38,6 +41,7 @@ if ($_GET['refresh'] == "Y") {
   $insertresponse = curl_exec($ch);
   $decore11 = json_decode($insertresponse, 1);
 } else {
+  $data1 = array();
   //$data1["where"] = array('api_master_id'=>48,'created_by'=>$itsum_user_id);
   $data1["where"] = array('id' => 554, 'created_by' => $itsum_user_id);
   $data1["field"] = "id,request_date_time,api_response_details";
@@ -326,10 +330,7 @@ $financeshowtabmodule = array(4);
                     </td>
                   </tr>
                 <?php }
-              } else { ?>
-
-
-              <?php } ?>
+              } ?>
             </tbody>
           </table>
         </div>
@@ -347,7 +348,7 @@ $financeshowtabmodule = array(4);
             <h6 class="f-14">Record Completeness </h6>
             <div class="progress progress-xs">
               <div class="progress-bar progress-bar-danger" role="progressbar" style="width: 25%;" aria-valuenow="25"
-                aria-valuemin="0" aria-valuemax="100"></div>
+                aria-valuemin="0" aria-valuemax="100" aria-label="Customer Record Completeness"></div>
             </div>
           </div>
           <div class="card-wrapper mt-4">
@@ -431,7 +432,7 @@ $financeshowtabmodule = array(4);
             <h6 class="f-14">Record Completeness </h6>
             <div class="progress progress-xs">
               <div class="progress-bar progress-bar-danger" role="progressbar" style="width: 25%;" aria-valuenow="25"
-                aria-valuemin="0" aria-valuemax="100"></div>
+                aria-valuemin="0" aria-valuemax="100" aria-label="Vendor Record Completeness"></div>
             </div>
           </div>
           <div class="card-wrapper mt-4">
@@ -608,7 +609,7 @@ $financeshowtabmodule = array(4);
                       <h6 class="f-14"><?php echo $ratingsred['total_paid']; ?>% Paid</h6>
                       <div class="progress progress-xs mb-1">
                         <div class="progress-bar progress-bar-danger" role="progressbar" style="width: 0%;"
-                          aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                          aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Vendor Payment Progress"></div>
                       </div>
                       <p class="f-10 m-0"><?php echo $ratingsred['total_paid']; ?> paid of
                         <?php echo $ratingsred['total_pending']; ?></p>
@@ -618,7 +619,7 @@ $financeshowtabmodule = array(4);
                   <td><?php echo COUNT((array) $ratingsred['invoices_detail']); ?></td>
                   <td class="text-danger"><?php echo $ratingsred['overdue_amount']; ?></td>
                   <td class="text-danger"><?php echo $ratingsred['pct_of_total']; ?>%</td>
-                  <td class="f-10 white-space-normal"><?php echo $ratingsred['recommended_action'] ?></td>
+                  <td class="f-10 white-space-normal"><?php echo $ratingsred['recommended_action']; ?></td>
                 </tr>
 
                 <tr bgcolor="#eeeeee">
@@ -800,7 +801,7 @@ $financeshowtabmodule = array(4);
                         <h6 class="f-14"><?php echo $ratingsres['total_paid']; ?>% collected</h6>
                         <div class="progress progress-xs mb-1">
                           <div class="progress-bar progress-bar-danger" role="progressbar" style="width: 0%;"
-                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Customer Collection Progress"></div>
                         </div>
                         <p class="f-10 m-0"><?php echo $ratingsres['total_paid']; ?> of
                           <?php echo $ratingsres['total_pending']; ?></p>
@@ -810,8 +811,8 @@ $financeshowtabmodule = array(4);
                     </td>
                     <td><?php echo $ratingsres['total_invoices']; ?></td>
                     <td class="text-danger"><?php echo $ratingsres['total_due']; ?></td>
-                    <td class="text-danger"><?php $ratingsres['pct_of_total']; ?>%</td>
-                    <td class="f-10"><?php $ratingsres['recommended_action']; ?></td>
+                    <td class="text-danger"><?php echo $ratingsres['pct_of_total']; ?>%</td>
+                    <td class="f-10"><?php echo $ratingsres['recommended_action']; ?></td>
                   </tr>
                   <tr bgcolor="#eeeeee">
                     <th scope="col" colspan="9">
@@ -826,7 +827,7 @@ $financeshowtabmodule = array(4);
                           <tr bgcolor="#f6f7f8">
                             <th scope="col" colspan="5" class="f-12 bg-info">
                               <i class="fa fa-file-text-o m-r-5"></i>
-                              <?php echo $invoices_detail['invoice_number'] . "  " . $invoices_detail['invoice_date']; ?>
+                              <?php echo $invoicesdetail['invoice_number'] . "  " . $invoicesdetail['invoice_date']; ?>
                             </th>
                           </tr>
                           <tr>
@@ -836,7 +837,7 @@ $financeshowtabmodule = array(4);
                             <th scope="col">STATUS</th>
                             <!-- <th scope="col">PAYMENTS RECEIVED</th> -->
                           </tr>
-                          <?php foreach ($invoicesdetail['terms'] as $terms) { ?>
+                          <?php foreach ($invoicesdetail['terms'] as $termsval) { ?>
                             <tr>
                               <td><?php echo $termsval['due_date']; ?></td>
                               <td><?php echo $termsval['due_amount']; ?></td>
@@ -872,7 +873,7 @@ $financeshowtabmodule = array(4);
                 <h6><?php echo $finance['health_status']; ?></h6>
                 <div class="progress progress-xs mb-1">
                   <div class="progress-bar progress-bar-success" role="progressbar" style="width: 50%;"
-                    aria-valuenow="50" aria-valuemin="50" aria-valuemax="100"></div>
+                    aria-valuenow="50" aria-valuemin="50" aria-valuemax="100" aria-label="Financial Health Score"></div>
                 </div>
               </div>
             </div>

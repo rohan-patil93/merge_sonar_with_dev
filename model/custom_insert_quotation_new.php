@@ -1565,17 +1565,17 @@ function viewApprovalAllUsers(id= ""){
                             
                            <div>
                                 <div style="float: left;width: 48%;padding: 1%;">
-                                    <label class="">Internal Note(s) </label>
-                                    <textarea style="height: 120px;" name="notes" class="form-control" aria-label="Notes"><?php echo $table1['notes']; ?></textarea>
+                                    <label for="notes" class="">Internal Note(s) </label>
+                                    <textarea style="height: 120px;" name="notes" id="notes" class="form-control" aria-label="Notes"><?php echo $table1['notes']; ?></textarea>
                                 </div>
                                 <div style="float: left;width: 48%;padding: 1%;">
-                                    <label class="">Printing Note(s) </label>
-                                    <textarea style="height: 120px;" name="printing_notes" class="form-control" aria-label="Printing Notes"><?php echo $table1['printing_notes']; ?></textarea>
+                                    <label for="printing_notes" class="">Printing Note(s) </label>
+                                    <textarea style="height: 120px;" name="printing_notes" id="printing_notes" class="form-control" aria-label="Printing Notes"><?php echo $table1['printing_notes']; ?></textarea>
                                 </div>
                             </div>
                             <?php if($small_sub == 0  ){ ?>
                             <div style="margin-top: 10px;clear:both;">
-                                <label class="">Comment(s)</label>
+                                <label for="comments" class="">Comment(s)</label>
                                 <textarea style="height: 120px;" name="comments" class="form-control" id="comments" aria-label="Comments"><?php echo $comments; ?></textarea>
                             </div>
                             <div class="btn-group" style="margin-top: 10px;float: right;">
@@ -1604,11 +1604,11 @@ function viewApprovalAllUsers(id= ""){
                                     <span>Discount </span>
                                     <div class="radio radio-inline m-0">
                                         <label class="d-inline-block m-l-5">
-                                            <input type="radio"  name="discount_type" id="disType" onclick="calculateTotal()" value="A" <?php echo $table1['discount_type'] == 'A'?"checked":""; ?> aria-label="Discount Type">
+                                            <input type="radio"  name="discount_type" id="disType" onclick="calculateTotal()" onkeydown="if(event.key==='Enter'||event.key===' '){calculateTotal();}" value="A" <?php echo $table1['discount_type'] == 'A'?"checked":""; ?> aria-label="Discount Type">
                                             <i class="helper"></i><?php echo $_SESSION['config']['currency_symbol']; ?>
                                         </label>
                                         <label class="m-l-10 d-inline-block">
-                                            <input type="radio" name="discount_type" id="disType" onclick="calculateTotal()" value="P" <?php echo ($table1['discount_type'] == 'P' OR $table1['discount_type'] =="")?"checked":""; ?> aria-label="Discount Type">
+                                            <input type="radio" name="discount_type" id="disType" onclick="calculateTotal()" onkeydown="if(event.key==='Enter'||event.key===' '){calculateTotal();}" value="P" <?php echo ($table1['discount_type'] == 'P' OR $table1['discount_type'] =="")?"checked":""; ?> aria-label="Discount Type">
                                             <i class="helper"></i> %
                                         </label>
                                     </div>

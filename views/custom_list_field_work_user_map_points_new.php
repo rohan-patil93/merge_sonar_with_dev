@@ -14,8 +14,7 @@ if ($_SESSION['working_role_short_code'] == 'FIELD_MANAGER') {
 $url = API . "?mode=getApplicationUsersData&method=get&admin_type=" . $admin_type;
 $result = callAPI($url);
 $result = json_decode($result, 1);
-$application_users = array();
-$application_users = $result['application_users'];
+$application_users = $result['application_users'] ?? array();
 ?>
 
 <link rel="stylesheet" href="assets/css/custom_list_field_work_user_map_points_new.css">
@@ -39,7 +38,7 @@ $application_users = $result['application_users'];
                 Live Map View
             </a>
             <a href="javascript:history.go(-1)" class="fwdp-btn desktop-view">
-                <i class="icofont icofont-reply"></i> Back
+                <i class="icofont icofont-reply" aria-hidden="true"></i> Back
             </a>
         </div>
     </div>
@@ -47,13 +46,13 @@ $application_users = $result['application_users'];
     <div class="fwdp-card">
         <div class="row g-3">
             <div class="form-group col-lg-5">
-                <label class="fwdp-label">User <span class="text-danger">*</span></label>
+                <label for="user_id" class="fwdp-label">User <span class="text-danger">*</span></label>
                 <select class="form-select js-example-basic-multiple" id="user_id" name="user_id[]" multiple="multiple" aria-label="User Id">
                     <option value="0">Select Any one</option>
-                    <?php if (count((array)$application_users) > 0) {
+                    <?php if (!empty($application_users)) {
                         foreach ($application_users as $row) { ?>
-                            <option value="<?php echo $row['id']; ?>">
-                                <?php echo $row['display_name']; ?>
+                            <option value="<?php echo htmlspecialchars((string)($row['id'] ?? ''), ENT_QUOTES); ?>">
+                                <?php echo htmlspecialchars((string)($row['display_name'] ?? ''), ENT_QUOTES); ?>
                             </option>
                         <?php }
                     } ?>
@@ -62,18 +61,18 @@ $application_users = $result['application_users'];
             </div>
 
             <div class="col-lg-3 col-xs-4 form-group">
-                <label class="fwdp-label">From Date <span class="text-danger">*</span></label>
+                <label for="from_date" class="fwdp-label">From Date <span class="text-danger">*</span></label>
                 <input class="form-control" type="date" name="from_date" id="from_date" value="" aria-label="From Date">
                 <div class="d-none text-danger" id="from_date_err"></div>
             </div>
             <div class="col-lg-3 col-xs-4 form-group">
-                <label class="fwdp-label">To Date <span class="text-danger">*</span></label>
+                <label for="to_date" class="fwdp-label">To Date <span class="text-danger">*</span></label>
                 <input class="form-control" type="date" name="to_date" id="to_date" value="" aria-label="To Date">
                 <div class="d-none text-danger" id="to_date_err"></div>
             </div>
 
             <div class="col-lg-1 col-xs-4 form-group">
-                <label class="fwdp-label">&nbsp;</label>
+                <label for="getDataButton" class="fwdp-label" aria-label="Search"><span class="visually-hidden">Search</span>&nbsp;</label>
                 <button type="button" class="fwdp-btn fwdp-btn-primary form-control" id="getDataButton">Search</button>
             </div>
         </div>
@@ -122,12 +121,12 @@ $application_users = $result['application_users'];
                     <div id="fwdpMapDistance" class="fwdp-map-distance" style="display:none;"></div>
                 </div>
                 <div class="fwdp-map-selected">
-                    <label class="fwdp-label">Route Summary</label>
+                    <span class="fwdp-label">Route Summary</span>
                     <p id="fwdpSelectedAddress">Select a row and open the map to view visit points.</p>
                     <div id="fwdpRouteSummary" class="fwdp-route-summary" style="display:none;"></div>
                     <div id="fwdpNavActions" class="fwdp-nav-actions" style="display:none;">
                         <a id="fwdpOpenGoogleNav" href="#" target="_blank" rel="noopener noreferrer" class="fwdp-btn fwdp-btn-primary">
-                            <i class="fas fa-directions"></i> Open in Google Maps
+                            <i class="fas fa-directions" aria-hidden="true"></i> Open in Google Maps
                         </a>
                     </div>
                 </div>

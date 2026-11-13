@@ -670,20 +670,20 @@ function addslabrows(){
                           <div class="mb-10 form-text text-muted">Tell us a bit about your organisation.</div>
                           <div class="form-group row">
                             <div class="form-group col-lg-8">
-                              <label for="fld_company_name" class="form-label block">Organisation Name <span class="requried">*</span></label>
+                              <label class="form-label block">Organisation Name <span class="requried">*</span></label>
                               <div class="input-group input-icon-right">
-                               <input id="fld_company_name" type="text" class="form-control required" name="company_name" placeholder="<?php echo $placeholder['org_name'];?>">
+                               <input type="text" class="form-control required" name="company_name" placeholder="<?php echo $placeholder['org_name'];?>" title="Company Name" aria-label="Company Name">
                              </div>
                            </div>
                            <div class="form-group col-lg-4">
-                             <span class="ml-5 d-inline-block fw-bold" style="margin-bottom:5px">Logo</span>
+                             <label class="ml-5">Logo</label>
                              <div class="col-lg-9 col-xl-6">
                               <div class="profile-pic">
                                 <label class="-label" for="display_logo">
 
                                   <span> <i class="fa fa-camera"></i> &nbsp; Change Image</span>
                                 </label>
-                                <input  type="file" name="display_logo" id="display_logo" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
+                                <input  type="file" name="display_logo" id="display_logo" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/ title="Display Logo" aria-label="Display Logo">
                                 <input type="hidden" name="logo_remove" >
 
                                 <img src="<?php echo $bimage ; ?>" id="outputdisplay_logo" width="200"  onerror="this.src='uploads/all/no-image.jpg';" alt="" />
@@ -692,15 +692,15 @@ function addslabrows(){
                             <span class="form-text text-muted"><?php //echo $helptext['logo'];?> </span>
                           </div> 
                           <div class="form-group col-lg-6">
-                            <label for="fld_location">Location</label>
+                            <label>Location</label>
                             <div class="input-group input-icon-right">
-                              <input id="fld_location" type="text"  class="form-control " name="location" placeholder="<?php echo $placeholder['location'];?>">
+                              <input type="text"  class="form-control " name="location" placeholder="<?php echo $placeholder['location'];?>" title="Location" aria-label="Location">
                             </div>                                                   
                           </div>
                           <div class="form-group col-lg-6">
-                            <label for="fld_industry">Industry</label>
+                            <label>Industry</label>
                             <div class="input-group input-icon-right">
-                              <select id="fld_industry" class="form-select js-example-basic-single"  name="industry">
+                              <select class="form-select js-example-basic-single"  name="industry" title="Industry" aria-label="Industry">
                                 <option value="">Select Any One </option>
                                 <?php foreach($industrylist as $valueindustry) { ?>
                                   <option value="<?php echo $valueindustry['id'];?>"><?php echo $valueindustry['industries']; ?></option>
@@ -709,28 +709,28 @@ function addslabrows(){
                             </div>
                           </div>
                           <div class="form-group col-lg-6">
-                            <label for="fld_phone_number">Phone <span class="requried">*</span></label>
+                            <label>Phone <span class="requried">*</span></label>
                             <div class="input-group input-icon-right">
-                             <input id="fld_phone_number" type="text"  name="phone_number" class="form-control required" placeholder="<?php echo $placeholder['phone'];?>">
+                             <input type="text"  name="phone_number" class="form-control required" placeholder="<?php echo $placeholder['phone'];?>" title="Phone Number" aria-label="Phone Number">
                            </div>
                          </div>
                          <div class="form-group col-lg-6">
-                          <label for="fld_admin_email">Email <span class="requried">*</span></label>
+                          <label>Email <span class="requried">*</span></label>
                           <div class="input-group input-icon-right">
-                            <input id="fld_admin_email" type="text"  name="admin_email" class="form-control required" placeholder="<?php echo $placeholder['email'];?>">
+                            <input type="text"  name="admin_email" class="form-control required" placeholder="<?php echo $placeholder['email'];?>" title="Admin Email" aria-label="Admin Email">
                           </div>
                         </div>
                         <div class="form-group col-lg-12">
-                          <label for="fld_address">Address</label>
-                          <textarea id="fld_address" type="text" class="form-control"  name="address"></textarea>
+                          <label>Address</label>
+                          <textarea type="text" class="form-control"  name="address" title="Address" aria-label="Address"></textarea>
                         </div>
                         <div class="form-group col-lg-6">
-                          <label for="kt_select2_country">Country</label>
+                          <label>Country</label>
                           <input type="hidden" name="country" id="selectedcountry">
                           <input type="hidden" name="state" id="selectedstate">
                           <input type="hidden" name="city" id="selectedcity">
                           <div class="input-group input-icon-right">
-                            <select class="form-select form-control js-example-basic-single" id="kt_select2_country" onchange="selectedcategory(this.value,'kt_select2_51','states','country_id')">
+                            <select class="form-select form-control js-example-basic-single" id="kt_select2_country" onchange="selectedcategory(this.value,'kt_select2_51','states','country_id')" title="Select" aria-label="Select">
                               <option value="">Select Any One</option>
                               <?php foreach($countrieslist as $countryvalue) { ?>
                                 <option value="<?php echo $countryvalue['id'].'|'.$countryvalue['country_name'];?>"><?php echo $countryvalue['country_name']; ?></option>
@@ -739,31 +739,31 @@ function addslabrows(){
                           </div>
                         </div>
                         <div class="form-group col-lg-6">
-                          <label for="kt_select2_51">State</label>
+                          <label>State</label>
                           <div class="input-group input-icon-right">
-                            <select class="form-select js-example-basic-single" class="form-control" id="kt_select2_51" onchange="selectedcategory(this.value,'kt_select2_33','cities','state_id')">
+                            <select class="form-select js-example-basic-single" class="form-control" id="kt_select2_51" onchange="selectedcategory(this.value,'kt_select2_33','cities','state_id')" title="Select" aria-label="Select">
                               <option value="">Select Any One</option>
                             </select>
                           </div>
                         </div>
                         <div class="form-group col-lg-6">
-                          <label for="kt_select2_33">City</label>
+                          <label>City</label>
                           <div class="input-group input-icon-right">
-                            <select class="form-select js-example-basic-single" class="form-control" id="kt_select2_33" onchange="selectedcategory(this.value,'','city','')">
+                            <select class="form-select js-example-basic-single" class="form-control" id="kt_select2_33" onchange="selectedcategory(this.value,'','city','')" title="Select" aria-label="Select">
                               <option value="">Select Any One</option>
                             </select>
                           </div>
                         </div>
                         <div class="form-group col-lg-6">
-                          <label for="fld_pincode">Pincode <span class="requried">*</span></label>
+                          <label>Pincode <span class="requried">*</span></label>
                           <div class="input-group input-icon-right">
-                            <input id="fld_pincode" type="text" class="form-control required"  name="pincode" placeholder="<?php echo $placeholder['pincode'];?>">
+                            <input type="text" class="form-control required"  name="pincode" placeholder="<?php echo $placeholder['pincode'];?>" title="Pincode" aria-label="Pincode">
                           </div>
                         </div>
                         <!-- <div class="form-group col-lg-4">
-                          <label for="fld_date_format">Date Format</label>
+                          <label>Date Format</label>
                           <div class="input-group input-icon-right">
-                            <select id="fld_date_format" class="form-select js-example-basic-single"  name="date_format">
+                            <select class="form-select js-example-basic-single"  name="date_format" title="Date Format" aria-label="Date Format">
                               <option value="">Select Any One </option>
                               <?php foreach($dateformatlist as $valuedates) { ?>
                                 <option value="<?php echo $valuedates;?>"><?php echo $valuedates; ?></option>
@@ -772,9 +772,9 @@ function addslabrows(){
                           </div>
                         </div>
                         <div class="form-group col-lg-4">
-                          <label for="fld_date_format_2">Date Format</label>
+                          <label>Date Format</label>
                           <div class="input-group input-icon-right">
-                            <select id="fld_date_format_2" class="form-select js-example-basic-single"  name="date_format">
+                            <select class="form-select js-example-basic-single"  name="date_format" title="Date Format" aria-label="Date Format">
                               <option value="">Select Any One </option>
                               <?php foreach($dateformatlist as $valuedates) { ?>
                                 <option value="<?php echo $valuedates;?>"><?php echo $valuedates; ?></option>
@@ -783,8 +783,8 @@ function addslabrows(){
                           </div>
                         </div> -->
                         <!-- <div class="form-group col-lg-4">
-                          <label for="fld_default_kpi_weekly_task_day">Default KPI Weekly Task Day</label>
-                          <select id="fld_default_kpi_weekly_task_day" class="form-select js-example-basic-single"  name="default_kpi_weekly_task_day">
+                          <label>Default KPI Weekly Task Day</label>
+                          <select class="form-select js-example-basic-single"  name="default_kpi_weekly_task_day" title="Default Kpi Weekly Task Day" aria-label="Default Kpi Weekly Task Day">
                             <option value="">Select Any One</option>
                             <option value="Mon">Mon</option>
                             <option value="Tue">Tue</option>
@@ -796,8 +796,8 @@ function addslabrows(){
                           </select>
                         </div>
                         <div class="form-group col-lg-4">
-                          <label for="fld_default_kpi_monthly_task_day">Default KPI Monthly Task Day</label>
-                          <select id="fld_default_kpi_monthly_task_day"  class="form-select js-example-basic-single selectlist "  name="default_kpi_monthly_task_day">
+                          <label>Default KPI Monthly Task Day</label>
+                          <select  class="form-select js-example-basic-single selectlist "  name="default_kpi_monthly_task_day" title="Default Kpi Monthly Task Day" aria-label="Default Kpi Monthly Task Day">
                             <?php for($i=1; $i<=31; $i++) { ?>
                               <option value="<?php echo $i;?>">&nbsp;&nbsp;<?php echo $i; ?>&nbsp;&nbsp;</option>
                             <?php } ?>                                                 
@@ -809,9 +809,9 @@ function addslabrows(){
                         <div class="pb-5" data-wizard-type="step-content">
                           <div class="form-group row">
                             <div class="form-group col-lg-6 w-full">
-                              <label for="fld_date_separator">Date Sapertor</label>
+                              <label>Date Sapertor</label>
                               <div class="input-group input-icon-right">
-                                <select id="fld_date_separator" class="form-select js-example-basic-single"  name="date_separator">
+                                <select class="form-select js-example-basic-single"  name="date_separator" title="Date Separator" aria-label="Date Separator">
                                   <?php foreach($datesparatelist as $sapertor) { ?>
                                     <option value="<?php echo $sapertor;?>"><?php echo $sapertor; ?></option>
                                   <?php } ?>
@@ -819,9 +819,9 @@ function addslabrows(){
                               </div>
                             </div>
                             <div class="form-group col-lg-6 w-full">
-                              <label for="fld_date_format_3">Date Format</label>
+                              <label>Date Format</label>
                               <div class="input-group input-icon-right">
-                                <select id="fld_date_format_3" class="form-select js-example-basic-single" class="form-control"  name="date_format">
+                                <select class="form-select js-example-basic-single" class="form-control"  name="date_format" title="Date Format" aria-label="Date Format">
                                   
                                   <?php foreach($dateformatlist as $valuedates) { ?>
                                     <option value="<?php echo $valuedates;?>"><?php echo $valuedates; ?></option>
@@ -831,9 +831,9 @@ function addslabrows(){
                             </div>
                             
                             <div class="form-group col-lg-6 w-full">
-                              <label for="timezoneid">Time Zone</label>
+                              <label>Time Zone</label>
                               <div class="input-group input-icon-right">
-                                <select class="form-select js-example-basic-single" id="timezoneid" name="time_zone">
+                                <select class="form-select js-example-basic-single" id="timezoneid" name="time_zone" title="Time Zone" aria-label="Time Zone">
                                   <option value="">Select Any One </option>
                                   <?php 
                                     foreach($countrieslist as $tzlist1){
@@ -847,9 +847,9 @@ function addslabrows(){
                               </div>
                             </div>
                             <div class="form-group col-lg-6 w-full">
-                              <label for="currency">Currency</label>
+                              <label>Currency</label>
                               <div class="input-group input-icon-right">
-                                <select class="form-select js-example-basic-single" id="currency" class="form-control"  name="date_format">
+                                <select class="form-select js-example-basic-single" id="currency" class="form-control"  name="date_format" title="Date Format" aria-label="Date Format">
                                   
                                   <?php foreach($currencies as $currencie) { ?>
                                     <option id="currency_<?php echo $currencie['country_id'];?>" value="<?php echo $currencie['id'];?>"><?php echo $currencie['currency_name']; ?></option>
@@ -858,7 +858,7 @@ function addslabrows(){
                               </div>
                             </div>
                             <div class="form-group col-lg-6 w-full">
-                               <span class="d-inline-block fw-bold" style="margin-bottom:5px">To Add Currency Convetor</span>
+                               <label>To Add Currency Convetor</label>
                                <div>
                                <button type="button" onclick="curreniceconvetor()" class="btn btn-primary">Convetor</button>
                                </div>
@@ -871,8 +871,8 @@ function addslabrows(){
                         <div class="pb-5" data-wizard-type="step-content">
                           <div class="form-group row">
                             <div class="form-group col-lg-12">
-                              <label for="fld_working_days__">Select days you worked in a calendar week.</label>
-                              <select id="fld_working_days__" class="selectlist form-select js-example-basic-multiple"  name="working_days[]" multiple="multiple">
+                              <label>Select days you worked in a calendar week.</label>
+                              <select class="selectlist form-select js-example-basic-multiple"  name="working_days[]" multiple="multiple" title="Working Days" aria-label="Working Days">
                                 <option value="Mon" selected>Mon</option>
                                 <option value="Tue" selected>Tue</option>
                                 <option value="Wed" selected>Wed</option>
@@ -885,19 +885,19 @@ function addslabrows(){
                             <div class="form-group col-lg-4">
                               <label for="kt_timepicker_minimum_hours">Minimum Working Hours In A Day <span class="requried">*</span></label>
                               <div class="input-group input-icon-right">
-                                <input type="time" class="form-control"  id="kt_timepicker_minimum_hours"  name="minimum_hours_required" placeholder="0:00:00">
+                                <input type="time" class="form-control"  id="kt_timepicker_minimum_hours"  name="minimum_hours_required" placeholder="0:00:00" title="0:00:00" aria-label="0:00:00">
                               </div>
                             </div>
                             <div class="form-group col-lg-4">
                              <label for="kt_timepicker_half_day_hours">Half Day Working Hours</label>
                              <div class="input-group input-icon-right">
-                              <input type="time" class="form-control" id="kt_timepicker_half_day_hours"  name="half_day_hours" placeholder="0:00:00">
+                              <input type="time" class="form-control" id="kt_timepicker_half_day_hours"  name="half_day_hours" placeholder="0:00:00" title="0:00:00" aria-label="0:00:00">
                             </div>
                           </div>
                           <div class="form-group col-lg-4">
                             <label for="kt_timepicker_grace_period">Grace Period</label>
                             <div class="input-group input-icon-right">
-                              <input type="time" class="form-control"  id="kt_timepicker_grace_period"  name="grace_perieod" placeholder="0:00:00">
+                              <input type="time" class="form-control"  id="kt_timepicker_grace_period"  name="grace_perieod" placeholder="0:00:00" title="0:00:00" aria-label="0:00:00">
                             </div>
                           </div>
                          </div>
@@ -908,9 +908,9 @@ function addslabrows(){
                         <div class="pb-5" data-wizard-type="step-content">
                           <div class="form-group row">
                             <div class="form-group col-lg-6">
-                              <label for="fld_working_days___2">Default Timesheet Date</label>
+                              <label>Default Timesheet Date</label>
                               <div class="input-group input-icon-right">
-                              <select id="fld_working_days___2" class="selectlist form-select js-example-basic-single w-full"  name="working_days[]">
+                              <select class="selectlist form-select js-example-basic-single w-full"  name="working_days[]" title="Working Days" aria-label="Working Days">
                                 <?php for($i=1; $i<32; $i++){ ?>
                                   <option><?php echo $i; ?></option>
                                 <?php } ?>
@@ -926,9 +926,9 @@ function addslabrows(){
                         <div class="pb-5" data-wizard-type="step-content">
                           <div class="form-group row">
                             <div class="form-group col-lg-6">
-                          <label for="fld_default_kpi_weekly_task_day_2">Default KPI Weekly Task Day</label>
+                          <label>Default KPI Weekly Task Day</label>
                           <div class="input-group input-icon-right">
-                          <select id="fld_default_kpi_weekly_task_day_2" class="form-select js-example-basic-single w-full"  name="default_kpi_weekly_task_day">
+                          <select class="form-select js-example-basic-single w-full"  name="default_kpi_weekly_task_day" title="Default Kpi Weekly Task Day" aria-label="Default Kpi Weekly Task Day">
                             <option value="">Select Any One</option>
                             <option value="Mon">Mon</option>
                             <option value="Tue">Tue</option>
@@ -941,9 +941,9 @@ function addslabrows(){
                         </div>
                         </div>
                         <div class="form-group col-lg-6">
-                          <label for="fld_default_kpi_monthly_task_day_2">Default KPI Monthly Task Day</label>
+                          <label>Default KPI Monthly Task Day</label>
                           <div class="input-group input-icon-right">
-                          <select id="fld_default_kpi_monthly_task_day_2"  class="form-select js-example-basic-single selectlist w-full"  name="default_kpi_monthly_task_day">
+                          <select  class="form-select js-example-basic-single selectlist w-full"  name="default_kpi_monthly_task_day" title="Default Kpi Monthly Task Day" aria-label="Default Kpi Monthly Task Day">
                             <?php for($i=1; $i<=31; $i++) { ?>
                               <option value="<?php echo $i;?>">&nbsp;&nbsp;<?php echo $i; ?>&nbsp;&nbsp;</option>
                             <?php } ?>                                                 
@@ -959,8 +959,8 @@ function addslabrows(){
                         <div class="pb-5" data-wizard-type="step-content">
                           <div class="form-group row">
                             <div class="form-group col-lg-4">
-                          <label for="fld_default_kpi_weekly_task_day_3">Default KPI Weekly Task Day</label>
-                          <select id="fld_default_kpi_weekly_task_day_3" class="form-select js-example-basic-single"  name="default_kpi_weekly_task_day">
+                          <label>Default KPI Weekly Task Day</label>
+                          <select class="form-select js-example-basic-single"  name="default_kpi_weekly_task_day" title="Default Kpi Weekly Task Day" aria-label="Default Kpi Weekly Task Day">
                             <option value="">Select Any One</option>
                             <option value="Mon">Mon</option>
                             <option value="Tue">Tue</option>
@@ -972,8 +972,8 @@ function addslabrows(){
                           </select>
                         </div>
                         <div class="form-group col-lg-4">
-                          <label for="fld_default_kpi_monthly_task_day_3">Default KPI Monthly Task Day</label>
-                          <select id="fld_default_kpi_monthly_task_day_3"  class="form-select js-example-basic-single selectlist "  name="default_kpi_monthly_task_day">
+                          <label>Default KPI Monthly Task Day</label>
+                          <select  class="form-select js-example-basic-single selectlist "  name="default_kpi_monthly_task_day" title="Default Kpi Monthly Task Day" aria-label="Default Kpi Monthly Task Day">
                             <?php for($i=1; $i<=31; $i++) { ?>
                               <option value="<?php echo $i;?>">&nbsp;&nbsp;<?php echo $i; ?>&nbsp;&nbsp;</option>
                             <?php } ?>                                                 
@@ -990,33 +990,33 @@ function addslabrows(){
                           <div class="mb-10 form-text text-muted">There tax details will be displayed in your emplyee's Form 16.</div>
                             <div class="form-group row">
                               <div class="form-group col-lg-6">
-                               <label for="fld_license_number">License Number<span class="requried">*</span></label>
+                               <label>License Number<span class="requried">*</span></label>
                                <div class="input-group input-icon-right">
-                                <input id="fld_license_number" type="text" class="form-control required"  name="license_number" placeholder="<?php echo $placeholder['licensenumber'];?>">
+                                <input type="text" class="form-control required"  name="license_number" placeholder="<?php echo $placeholder['licensenumber'];?>" title="License Number" aria-label="License Number">
                               </div>
                             </div>
                             <div class="form-group col-lg-6">
-                              <label for="fld_pan_number">PAN Number<span class="requried">*</span></label>
+                              <label>PAN Number<span class="requried">*</span></label>
                               <div class="input-group input-icon-right">
-                                <input id="fld_pan_number" type="text" class="form-control required"  name="pan_number" placeholder="<?php echo $placeholder['pan'];?>">
+                                <input type="text" class="form-control required"  name="pan_number" placeholder="<?php echo $placeholder['pan'];?>" title="Pan Number" aria-label="Pan Number">
                               </div>
                             </div>
                             <div class="form-group col-lg-6">
-                              <label for="fld_tan_number">TAN Number</label>
+                              <label>TAN Number</label>
                               <div class="input-group input-icon-right">
-                                <input id="fld_tan_number" type="text" class="form-control"  name="tan_number" placeholder="<?php echo $placeholder['tan'];?>">
+                                <input type="text" class="form-control"  name="tan_number" placeholder="<?php echo $placeholder['tan'];?>" title="Tan Number" aria-label="Tan Number">
                               </div>
                             </div>
                             <div class="form-group col-lg-6">
-                              <label for="fld_gst_number">GST Number<span class="requried">*</span></label>
+                              <label>GST Number<span class="requried">*</span></label>
                               <div class="input-group input-icon-right">
-                                <input id="fld_gst_number" type="text" class="form-control required"  name="gst_number" placeholder="<?php echo $placeholder['gst'];?>">
+                                <input type="text" class="form-control required"  name="gst_number" placeholder="<?php echo $placeholder['gst'];?>" title="Gst Number" aria-label="Gst Number">
                               </div>
                             </div>
                             <div class="form-group col-lg-6">
-                              <label for="fld_cin_number">CIN Number</label>
+                              <label>CIN Number</label>
                               <div class="input-group input-icon-right">
-                                <input id="fld_cin_number" type="text" class="form-control"  name="cin_number" placeholder="<?php echo $placeholder['cin'];?>">
+                                <input type="text" class="form-control"  name="cin_number" placeholder="<?php echo $placeholder['cin'];?>" title="Cin Number" aria-label="Cin Number">
                               </div>
                             </div>
                          </div>
@@ -1030,9 +1030,9 @@ function addslabrows(){
                 <!--begin::Select-->
                 <div class="row mt-2">
                   <div class="form-group col-lg-12">
-                    <label for="fld_working_days___3">Select days you worked in a calendar week.</label>
+                    <label>Select days you worked in a calendar week.</label>
 
-                    <select id="fld_working_days___3" class="selectlist form-select js-example-basic-multiple"  name="working_days[]" multiple="multiple">
+                    <select class="selectlist form-select js-example-basic-multiple"  name="working_days[]" multiple="multiple" title="Working Days" aria-label="Working Days">
                       <option value="Mon" selected>Mon</option>
                       <option value="Tue" selected>Tue</option>
                       <option value="Wed" selected>Wed</option>
@@ -1045,24 +1045,24 @@ function addslabrows(){
                   <div class="form-group col-lg-4">
                     <label for="kt_timepicker_pay_minimum_hours">Minimum Working Hours In A Day <span class="requried">*</span></label>
                     <div class="input-group input-icon-right">
-                      <input type="time" class="form-control"  id="kt_timepicker_pay_minimum_hours"  name="minimum_hours_required" placeholder="0:00:00">
+                      <input type="time" class="form-control"  id="kt_timepicker_pay_minimum_hours"  name="minimum_hours_required" placeholder="0:00:00" title="0:00:00" aria-label="0:00:00">
                     </div>
                   </div>
                   <div class="form-group col-lg-4">
                    <label for="kt_timepicker_pay_half_day_hours">Half Day Working Hours</label>
                      <div class="input-group input-icon-right">
-                      <input type="time" class="form-control" id="kt_timepicker_pay_half_day_hours"  name="half_day_hours" placeholder="0:00:00">
+                      <input type="time" class="form-control" id="kt_timepicker_pay_half_day_hours"  name="half_day_hours" placeholder="0:00:00" title="0:00:00" aria-label="0:00:00">
                     </div>
                   </div>
                   <div class="form-group col-lg-4">
                     <label for="kt_timepicker_pay_grace_period">Grace Period</label>
                     <div class="input-group input-icon-right">
-                      <input type="time" class="form-control"  id="kt_timepicker_pay_grace_period"  name="grace_perieod" placeholder="0:00:00">
+                      <input type="time" class="form-control"  id="kt_timepicker_pay_grace_period"  name="grace_perieod" placeholder="0:00:00" title="0:00:00" aria-label="0:00:00">
                     </div>
                   </div>
 
             <div class="col-lg-12 row">
-              <span class="d-inline-block fw-bold" style="margin-bottom:5px">Pay your employees on</span>
+              <label>Pay your employees on</label>
               <div class="form-radio  mb-2 col-lg-5">
                 <div class="radio radio-inline">
                   <label class="form-label">
@@ -1115,29 +1115,29 @@ function addslabrows(){
 
                      <div class="form-group row">
                       <div class="form-group col-lg-6">
-                        <label for="fld_epf_number">EPF Number</label>
+                        <label>EPF Number</label>
                         <div class="input-group input-icon-right">
-                          <input id="fld_epf_number" type="text" class="form-control"  name="epf_number" placeholder="<?php echo $placeholder['epf'];?>">
+                          <input type="text" class="form-control"  name="epf_number" placeholder="<?php echo $placeholder['epf'];?>" title="Epf Number" aria-label="Epf Number">
                         </div>
                       </div>
                       <div class="form-group col-lg-6">
-                        <label for="fld_epf_deduction_cycle">Deduction Cycle</label>
-                        <select id="fld_epf_deduction_cycle"  class="form-control form-select js-example-basic-single" name="epf_deduction_cycle">
+                        <label>Deduction Cycle</label>
+                        <select  class="form-control form-select js-example-basic-single" name="epf_deduction_cycle" title="Epf Deduction Cycle" aria-label="Epf Deduction Cycle">
                          <?php foreach ($deduction_cycle as $ckey=>$cycle)  { ?>
                            <option value="<?php echo $ckey; ?>"><?php echo $cycle ?></option>
                          <?php } ?>
                        </select>
                      </div>
                      <div class="form-group col-lg-6">
-                      <label for="fld_epf_employee_contribution">Employee Contribution (%):</label>
+                      <label>Employee Contribution (%):</label>
                       <div class="input-group input-icon-right">
-                        <input id="fld_epf_employee_contribution" type="text" class="form-control"  name="epf_employee_contribution" placeholder="<?php echo $placeholder['epfempc'];?>">
+                        <input type="text" class="form-control"  name="epf_employee_contribution" placeholder="<?php echo $placeholder['epfempc'];?>" title="Epf Employee Contribution" aria-label="Epf Employee Contribution">
                       </div>
                     </div>
                     <div class="form-group col-lg-6">
-                      <label for="fld_epf_employer_contribution">Employer Contribution (%):</label>
+                      <label>Employer Contribution (%):</label>
                       <div class="input-group input-icon-right">
-                        <input id="fld_epf_employer_contribution" type="text" class="form-control" placeholder="<?php echo $placeholder['epfemprc'];?>"  name="epf_employer_contribution">
+                        <input type="text" class="form-control" placeholder="<?php echo $placeholder['epfemprc'];?>"  name="epf_employer_contribution" title="Epf Employer Contribution" aria-label="Epf Employer Contribution">
                       </div>
                     </div> 
                     <div class="form-group col-lg-12"> 
@@ -1187,30 +1187,30 @@ function addslabrows(){
            <div class="card-body">
             <div class="form-group row">
               <div class="form-group col-lg-6">
-                <label for="fld_esi_no">ESI Number</label>
+                <label>ESI Number</label>
                 <div class="input-group input-icon-right">
-                  <input id="fld_esi_no" type="text" class="form-control" placeholder="<?php echo $placeholder['esi'];?>" name="esi_no">
+                  <input type="text" class="form-control" placeholder="<?php echo $placeholder['esi'];?>" name="esi_no" title="Esi No" aria-label="Esi No">
 
                 </div>
               </div>
               <div class="form-group col-lg-6">
-                <label for="fld_esi_deduction_cycle">Deduction Cycle</label>
-                <select id="fld_esi_deduction_cycle"  class="form-select js-example-basic-single" name="esi_deduction_cycle">
+                <label>Deduction Cycle</label>
+                <select  class="form-select js-example-basic-single" name="esi_deduction_cycle" title="Esi Deduction Cycle" aria-label="Esi Deduction Cycle">
                  <?php foreach ($deduction_cycle as $ckey=>$cycle)  { ?>
                    <option value="<?php echo $ckey; ?>"><?php echo $cycle ?></option>
                  <?php } ?>
                </select>
              </div>
              <div class="form-group col-lg-6">
-              <label for="fld_esi_employee_contribution">Employee Contribution (%):</label>
+              <label>Employee Contribution (%):</label>
               <div class="input-group input-icon-right">
-                <input id="fld_esi_employee_contribution" type="text" class="form-control"  name="esi_employee_contribution" placeholder="<?php echo $placeholder['esiempc'];?>">
+                <input type="text" class="form-control"  name="esi_employee_contribution" placeholder="<?php echo $placeholder['esiempc'];?>" title="Esi Employee Contribution" aria-label="Esi Employee Contribution">
               </div>
             </div>
             <div class="form-group col-lg-6">
-              <label for="fld_esi_employer_contribution">Employer Contribution (%):</label>
+              <label>Employer Contribution (%):</label>
               <div class="input-group input-icon-right">
-                <input id="fld_esi_employer_contribution" type="text" class="form-control"  placeholder="<?php echo $placeholder['esiemprc'];?>" name="esi_employer_contribution">
+                <input type="text" class="form-control"  placeholder="<?php echo $placeholder['esiemprc'];?>" name="esi_employer_contribution" title="Esi Employer Contribution" aria-label="Esi Employer Contribution">
 
               </div>
             </div> 
@@ -1253,31 +1253,31 @@ function addslabrows(){
       <div class="card-body">
         <div class="form-group row">
           <div class="form-group col-lg-6">
-            <label for="fld_pt_number">PT Number</label>
+            <label>PT Number</label>
             <div class="input-group input-icon-right">
-              <input id="fld_pt_number" type="text" class="form-control"  name="pt_number" placeholder="<?php echo $placeholder['pt'];?>">
+              <input type="text" class="form-control"  name="pt_number" placeholder="<?php echo $placeholder['pt'];?>" title="Pt Number" aria-label="Pt Number">
 
             </div>
           </div>
           <div class="form-group col-lg-6">
-            <label for="fld_work_location_id">Work Location</label>
+            <label>Work Location</label>
             <div class="input-group input-icon-right">
-              <input id="fld_work_location_id" type="text" class="form-control"  placeholder="<?php echo $placeholder['ptloc'];?>" name="work_location_id">
+              <input type="text" class="form-control"  placeholder="<?php echo $placeholder['ptloc'];?>" name="work_location_id" title="Work Location Id" aria-label="Work Location Id">
             </div>
           </div>
 
           <div class="form-group col-lg-6">
             <input type="hidden" name="pt_state_id" id="pt_state_id">
-            <label for="fld_pt_state_id">State</label>
-            <select id="fld_pt_state_id"  class="form-select js-example-basic-single" name="pt_state_id">
+            <label>State</label>
+            <select  class="form-select js-example-basic-single" name="pt_state_id" title="Pt State Id" aria-label="Pt State Id">
              <?php foreach ($statelist as $statevalue)  { ?>
                <option value="<?php echo $statevalue['id']; ?>"><?php echo $statevalue['state_name']; ?></option>
              <?php } ?>
            </select>
          </div>
          <div class="form-group col-lg-6">
-           <div> <label for="fld_pt_deduction_cycle">Deduction Cycle</label></div>
-           <select id="fld_pt_deduction_cycle"  class="form-select js-example-basic-single" name="pt_deduction_cycle">
+           <div> <label>Deduction Cycle</label></div>
+           <select  class="form-select js-example-basic-single" name="pt_deduction_cycle" title="Pt Deduction Cycle" aria-label="Pt Deduction Cycle">
              <?php foreach ($deduction_cycle as $ckey=>$cycle)  { ?>
                <option value="<?php echo $ckey; ?>"><?php echo $cycle ?></option>
              <?php } ?>
@@ -1350,8 +1350,8 @@ function addslabrows(){
    <div class="card-body">
     <div class="form-group row">
       <div class="form-group col-lg-6">
-        <div> <label for="fld_lwf_state_id">State</label> </div>
-        <select id="fld_lwf_state_id" class="form-select js-example-basic-single" name="lwf_state_id">
+        <div> <label>State</label> </div>
+        <select class="form-select js-example-basic-single" name="lwf_state_id" title="Lwf State Id" aria-label="Lwf State Id">
           <option> Select Any One State</option>
           <?php foreach ($statelist as $statevalue)  { ?>
            <option value="<?php echo $statevalue['id']; ?>"><?php echo $statevalue['state_name']; ?></option>
@@ -1359,18 +1359,18 @@ function addslabrows(){
        </select>
      </div>
      <div class="form-group col-lg-6">
-      <div><label for="fld_lwf_deduction_cycle">Deduction Cycle</label> </div>
-      <select id="fld_lwf_deduction_cycle"  class="form-control form-select js-example-basic-single" name="lwf_deduction_cycle">
+      <div><label>Deduction Cycle</label> </div>
+      <select  class="form-control form-select js-example-basic-single" name="lwf_deduction_cycle" title="Lwf Deduction Cycle" aria-label="Lwf Deduction Cycle">
        <?php foreach ($deduction_cycle as $ckey=>$cycle)  { ?>
          <option value="<?php echo $ckey; ?>"><?php echo $cycle ?></option>
        <?php } ?>
      </select>
    </div>
    <div class="form-group col-lg-6">
-     <label for="fld_lwf_employer_contribution">Employer Contribution Amount:</label>
+     <label>Employer Contribution Amount:</label>
      <div class="input-group input-group-button "> 
       <button class="btn btn-info" type="button" onclick="deloptionrows('s1rowid1')">RS.</button>
-      <input id="fld_lwf_employer_contribution" type="text" class="form-control width1"  name="lwf_employer_contribution" placeholder="<?php echo $placeholder['lwfrs'];?>">
+      <input type="text" class="form-control width1"  name="lwf_employer_contribution" placeholder="<?php echo $placeholder['lwfrs'];?>" title="Lwf Employer Contribution" aria-label="Lwf Employer Contribution">
     </div>
 
   </div>
@@ -1631,25 +1631,25 @@ function addslabrows(){
        <span class="form-text text-muted"><?php echo $helptext['compcat'];?> </span>
      </div>
      <div class="form-group col-lg-6">
-       <label for="pop_name">Component Name</label>
+       <label>Component Name</label>
        <div class="input-group input-icon-right">
-        <input type="text" class="form-control" id="pop_name" placeholder="<?php echo $placeholder['compname'];?>" name="pop_name">
+        <input type="text" class="form-control" id="pop_name" placeholder="<?php echo $placeholder['compname'];?>" name="pop_name" title="Pop Name" aria-label="Pop Name">
       </div>
     </div>
     <span class="form-text text-muted"><?php echo $helptext['compname'];?> </span>
   </div>
   <div class="row">
     <div class="form-group col-lg-6">
-     <label for="pop_code">Component Type</label>
+     <label>Component Type</label>
      <div class="input-group input-icon-right">
-      <input type="text" class="form-control" id="pop_code" placeholder="<?php echo $placeholder['comptype'];?>" name="pop_code">
+      <input type="text" class="form-control" id="pop_code" placeholder="<?php echo $placeholder['comptype'];?>" name="pop_code" title="Pop Code" aria-label="Pop Code">
     </div>
     <span class="form-text text-muted"><?php echo $helptext['comptype'];?> </span>
   </div>
   <div class="form-group col-lg-6">
-   <label for="pop_payslip_name">Name in Payslip</label>
+   <label>Name in Payslip</label>
    <div class="input-group input-icon-right">
-    <input type="text" class="form-control" id="pop_payslip_name" placeholder="<?php echo $placeholder['compdisplay'];?>" name="pop_payslip_name">
+    <input type="text" class="form-control" id="pop_payslip_name" placeholder="<?php echo $placeholder['compdisplay'];?>" name="pop_payslip_name" title="Pop Payslip Name" aria-label="Pop Payslip Name">
   </div>
   <span class="form-text text-muted"><?php echo $helptext['compdisplay'];?> </span>
 </div>
@@ -1704,10 +1704,10 @@ function addslabrows(){
 </div>
 <div class="row">
  <div class="col-lg-6 form-group">
-   <label for="pop_calculation_number">Calculation Value</label>
+   <label>Calculation Value</label>
    <div class="input-group input-group-button"> 
      <button class="btn btn-info" type="button" >Rs.</button>
-     <input type="text"  id="pop_calculation_number" placeholder="<?php echo $placeholder['compamt'];?>" class="form-control text-right width1"> 
+     <input type="text"  id="pop_calculation_number" placeholder="<?php echo $placeholder['compamt'];?>" class="form-control text-right width1" title="Input" aria-label="Input"> 
 
    </div>
  </div>
@@ -1731,33 +1731,33 @@ function addslabrows(){
  <input type="hidden" id="updaterowid" value="">
  <div class="row">
   <div class="form-group col-lg-6">
-   <label for="reimpop_name">Component Name</label>
+   <label>Component Name</label>
    <div class="input-group input-icon-right">
-    <input type="text" class="form-control" id="reimpop_name" placeholder="<?php echo $placeholder['rcompname'];?>" name="reimpop_name">
+    <input type="text" class="form-control" id="reimpop_name" placeholder="<?php echo $placeholder['rcompname'];?>" name="reimpop_name" title="Reimpop Name" aria-label="Reimpop Name">
 
   </div>
 
 </div>
 <div class="form-group col-lg-6">
- <label for="reimpop_code">Component Type</label>
+ <label>Component Type</label>
  <div class="input-group input-icon-right">
-  <input type="text" class="form-control" id="reimpop_code" placeholder="<?php echo $placeholder['rcomptype'];?>" name="reimpop_code">
+  <input type="text" class="form-control" id="reimpop_code" placeholder="<?php echo $placeholder['rcomptype'];?>" name="reimpop_code" title="Reimpop Code" aria-label="Reimpop Code">
 
 </div>
 </div>
 <div class="form-group col-lg-6">
- <label for="reimpop_payslip_name">Name in Payslip</label>
+ <label>Name in Payslip</label>
  <div class="input-group input-icon-right">
-  <input type="text" class="form-control" id="reimpop_payslip_name" placeholder="<?php echo $placeholder['rcompdisplay'];?>" name="reimpop_payslip_name">
+  <input type="text" class="form-control" id="reimpop_payslip_name" placeholder="<?php echo $placeholder['rcompdisplay'];?>" name="reimpop_payslip_name" title="Reimpop Payslip Name" aria-label="Reimpop Payslip Name">
 
 </div>
 </div>
 <div class="form-group col-lg-6">
- <label for="reimpop_calculation_number">Enter Amount</label>
+ <label>Enter Amount</label>
 
  <div class="input-group input-group-button"> 
    <button class="btn btn-info" type="button" >Rs.</button>
-   <input type="text"  id="reimpop_calculation_number" placeholder="<?php echo $placeholder['compamt'];?>" name="reimpop_calculation_number" class="form-control text-right width1"> 
+   <input type="text"  id="reimpop_calculation_number" placeholder="<?php echo $placeholder['compamt'];?>" name="reimpop_calculation_number" class="form-control text-right width1" title="Reimpop Calculation Number" aria-label="Reimpop Calculation Number"> 
 
  </div>
  <span class="form-text text-muted"><?php echo $helptext['compamt'];?> </span>

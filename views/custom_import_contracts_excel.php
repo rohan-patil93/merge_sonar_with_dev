@@ -9,7 +9,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
 		<h5>Contract Excel Upload</h5>
 		<div class="card-header-right table-card-header">
 			<a href="index.php?option=COM_LIST_CONTRACTS" class="btn waves-effect waves-light mb-2 desktop-view">
-				<i class="icofont icofont-reply"></i> Back to List
+				<i class="icofont icofont-reply" aria-hidden="true"></i> Back to List
 			</a>
 		</div>
 	</div>
@@ -22,7 +22,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
 					</div>
 					<div class="cc-wizard-header-actions">
 						<button type="button" class="btn btn-primary btn-sm" id="cex-download-template-btn">
-							<i class="fa fa-download"></i> Download Template
+							<i class="fa fa-download" aria-hidden="true"></i> Download Template
 						</button>
 					</div>
 				</div>
@@ -60,7 +60,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
 							</a>
 						</div>
 						<div class="cc-sidebar-box help-box">
-							<h6><i class="icofont icofont-question-circle"></i> Need Help?</h6>
+							<h6><i class="icofont icofont-question-circle" aria-hidden="true"></i> Need Help?</h6>
 							<p class="mb-0">Copy values from Ref_* sheets. Use billing_cycle for auto schedule, or milestones sheet for custom amounts. AMC needs Locations + Assets.</p>
 						</div>
 					</aside>
@@ -68,27 +68,28 @@ $_SESSION['apply_js']['multiselest'] = 1;
 					<div class="cc-wizard-main">
 						<div class="cc-section cex-step-panel" id="cex-step-1" data-cex-step="0">
 							<div class="cc-section-header">
-								<h6><span class="cc-section-num">1</span><i class="icofont icofont-file-excel"></i> Download Template</h6>
+								<h6><span class="cc-section-num">1</span><i class="icofont icofont-file-excel" aria-hidden="true"></i> Download Template</h6>
 							</div>
 							<div class="alert alert-info mb-3">
 								Download the workbook with <strong>Contracts</strong>, <strong>Locations</strong>, <strong>Assets</strong>, <strong>Milestones</strong>, and live <strong>Ref_*</strong> sheets. Fill data sheets only; copy dropdown values from Ref sheets.
 							</div>
 							<button type="button" class="btn btn-primary" id="cex-download-template-btn-2">
-								<i class="fa fa-download"></i> Download Template
+								<i class="fa fa-download" aria-hidden="true"></i> Download Template
 							</button>
 						</div>
 
 						<div class="cc-section cex-step-panel d-none" id="cex-step-2" data-cex-step="1">
 							<div class="cc-section-header">
-								<h6><span class="cc-section-num">2</span><i class="icofont icofont-upload-alt"></i> Upload File</h6>
+								<h6><span class="cc-section-num">2</span><i class="icofont icofont-upload-alt" aria-hidden="true"></i> Upload File</h6>
 							</div>
+							<label for="cex-excel-file" class="form-label d-block mb-2">Upload Excel File (.xlsx) <span class="text-danger">*</span></label>
 							<div class="cex-upload-zone" id="cex-upload-zone">
-								<i class="icofont icofont-cloud-upload"></i>
+								<i class="icofont icofont-cloud-upload" aria-hidden="true"></i>
 								<p class="mb-1">Click to upload or drag and drop</p>
 								<small class="text-muted">Accepted: .xlsx only</small>
 								<div class="cex-upload-filename text-primary mt-2" id="cex-upload-filename"></div>
 							</div>
-							<input type="file" id="cex-excel-file" class="d-none" accept=".xlsx">
+							<input type="file" id="cex-excel-file" name="cex_excel_file" class="d-none" accept=".xlsx" aria-label="Upload Excel File (.xlsx)">
 							<div class="mt-3">
 								<button type="button" class="btn btn-primary" id="cex-validate-btn" disabled>
 									Validate &amp; Preview
@@ -98,7 +99,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
 
 						<div class="cc-section cex-step-panel d-none" id="cex-step-3" data-cex-step="2">
 							<div class="cc-section-header">
-								<h6><span class="cc-section-num">3</span><i class="icofont icofont-eye"></i> Preview &amp; Validate</h6>
+								<h6><span class="cc-section-num">3</span><i class="icofont icofont-eye" aria-hidden="true"></i> Preview &amp; Validate</h6>
 							</div>
 							<div class="row g-2 mb-3" id="cex-preview-stats"></div>
 							<div id="cex-preview-alerts"></div>
@@ -111,19 +112,89 @@ $_SESSION['apply_js']['multiselest'] = 1;
 							</ul>
 							<div class="tab-content">
 								<div class="tab-pane active" id="cex-tab-contracts">
-									<div class="table-responsive"><table class="table table-sm table-bordered" id="cex-table-contracts"><thead></thead><tbody></tbody></table></div>
+									<div class="table-responsive">
+										<table class="table table-sm table-bordered" id="cex-table-contracts">
+											<thead>
+												<tr>
+													<th scope="col">import_ref</th>
+													<th scope="col">contract_type</th>
+													<th scope="col">contract_name</th>
+													<th scope="col">party_type</th>
+													<th scope="col">department_name</th>
+													<th scope="col">payment_plan</th>
+													<th scope="col">billing_cycle</th>
+													<th scope="col">contract_amount</th>
+													<th scope="col">ok</th>
+													<th scope="col">error</th>
+												</tr>
+											</thead>
+											<tbody></tbody>
+										</table>
+									</div>
 								</div>
 								<div class="tab-pane fade" id="cex-tab-locations">
-									<div class="table-responsive"><table class="table table-sm table-bordered" id="cex-table-locations"><thead></thead><tbody></tbody></table></div>
+									<div class="table-responsive">
+										<table class="table table-sm table-bordered" id="cex-table-locations">
+											<thead>
+												<tr>
+													<th scope="col">import_ref</th>
+													<th scope="col">location_name</th>
+													<th scope="col">service_start_date</th>
+													<th scope="col">service_end_date</th>
+													<th scope="col">ok</th>
+													<th scope="col">error</th>
+												</tr>
+											</thead>
+											<tbody></tbody>
+										</table>
+									</div>
 								</div>
 								<div class="tab-pane fade" id="cex-tab-assets">
-									<div class="table-responsive"><table class="table table-sm table-bordered" id="cex-table-assets"><thead></thead><tbody></tbody></table></div>
+									<div class="table-responsive">
+										<table class="table table-sm table-bordered" id="cex-table-assets">
+											<thead>
+												<tr>
+													<th scope="col">import_ref</th>
+													<th scope="col">location_name</th>
+													<th scope="col">asset_code</th>
+													<th scope="col">service_frequency</th>
+													<th scope="col">visits_per_interval</th>
+													<th scope="col">ok</th>
+													<th scope="col">error</th>
+												</tr>
+											</thead>
+											<tbody></tbody>
+										</table>
+									</div>
 								</div>
 								<div class="tab-pane fade" id="cex-tab-milestones">
-									<div class="table-responsive"><table class="table table-sm table-bordered" id="cex-table-milestones"><thead></thead><tbody></tbody></table></div>
+									<div class="table-responsive">
+										<table class="table table-sm table-bordered" id="cex-table-milestones">
+											<thead>
+												<tr>
+													<th scope="col">import_ref</th>
+													<th scope="col">milestone_name</th>
+													<th scope="col">milestone_date</th>
+													<th scope="col">milestone_amount</th>
+													<th scope="col">ok</th>
+													<th scope="col">error</th>
+												</tr>
+											</thead>
+											<tbody></tbody>
+										</table>
+									</div>
 								</div>
 								<div class="tab-pane fade" id="cex-tab-errors">
-									<div class="table-responsive"><table class="table table-sm table-bordered" id="cex-table-errors"><thead><tr><th scope="col">Message</th></tr></thead><tbody></tbody></table></div>
+									<div class="table-responsive">
+										<table class="table table-sm table-bordered" id="cex-table-errors">
+											<thead>
+												<tr>
+													<th scope="col">Message</th>
+												</tr>
+											</thead>
+											<tbody></tbody>
+										</table>
+									</div>
 								</div>
 							</div>
 							<div class="cc-wizard-footer d-flex gap-2 mt-3">
@@ -136,7 +207,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
 
 						<div class="cc-section cex-step-panel d-none" id="cex-step-4" data-cex-step="3">
 							<div class="cc-section-header">
-								<h6><span class="cc-section-num">4</span><i class="icofont icofont-check-circled"></i> Import Result</h6>
+								<h6><span class="cc-section-num">4</span><i class="icofont icofont-check-circled" aria-hidden="true"></i> Import Result</h6>
 							</div>
 							<div class="row g-2 mb-3" id="cex-result-stats"></div>
 							<div class="table-responsive">
@@ -158,7 +229,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
 							</div>
 							<div class="mt-3 d-none" id="cex-audit-panel">
 								<div class="cc-section-header">
-									<h6><i class="icofont icofont-history"></i> Audit Batch (source of truth)</h6>
+									<h6><i class="icofont icofont-history" aria-hidden="true"></i> Audit Batch (source of truth)</h6>
 								</div>
 								<div id="cex-audit-content" class="small"></div>
 							</div>

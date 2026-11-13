@@ -260,9 +260,9 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=''){
                     <div class="card-header pb-mob">
                         <h5><?php echo $_POST['menu_label']; ?></h5>
                         <div class="card-header-right custom-right-header">
-                            <a href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Add <?php echo $_POST['menu_label']; ?>" <?php echo $insert_permissionbtn; ?>> <i class="icofont icofont-plus icon-dark"></i> </a>
-                            <a href="index.php?option=<?php echo $optiondetails['list_page_name']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $_POST['menu_label']; ?> List "<?php echo $permission_listbtn; ?>> <i class="ti ti-timer icon-dark"></i></a>
-                            <a href="#!" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $_POST['menu_label']; ?> Details "<?php echo $permission_listbtn; ?> onclick="getTransactionInvoiceList()"> <i class="ti-eye icon-dark"></i></a>
+                            <a href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Add <?php echo $_POST['menu_label']; ?>" aria-label="Add <?php echo $_POST['menu_label']; ?>" <?php echo $insert_permissionbtn; ?>> <i class="icofont icofont-plus icon-dark"></i> </a>
+                            <a href="index.php?option=<?php echo $optiondetails['list_page_name']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $_POST['menu_label']; ?> List " aria-label="<?php echo $_POST['menu_label']; ?> List"<?php echo $permission_listbtn; ?>> <i class="ti ti-timer icon-dark"></i></a>
+                            <a href="#!" role="button" aria-label="<?php echo $_POST['menu_label']; ?> Details" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $_POST['menu_label']; ?> Details "<?php echo $permission_listbtn; ?> onclick="getTransactionInvoiceList()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"> <i class="ti-eye icon-dark"></i></a>
                         </div>
                     </div>
                     <div class="card-block text-center">
@@ -283,9 +283,9 @@ if($totaldoc != 0 AND $totaldoc !=""){
                                 <?php 
                         $disname = $_SESSION['user']['display_name']!=""?$_SESSION['user']['display_name']:$_SESSION['display_name'];
                         if($_SESSION['user']['user_photo']!=""){ ?>
-                          <img src="<?php echo "uploads/all/".$_SESSION['user']['user_photo']; ?>" class="percentag-img-radius img-90" alt="image" style="border-radius: 50%;border: 8px solid #ffffff;" >
+                          <img src="<?php echo "uploads/all/".$_SESSION['user']['user_photo']; ?>" class="percentag-img-radius img-90" alt="User profile" style="border-radius: 50%;border: 8px solid #ffffff;" >
                        <?php }elseif($_SESSION['employee']['gender'] !=""){ ?>
-                                <img src="uploads/all/<?php echo $_SESSION['employee']['gender'].".png"; ?>" class="percentag-img-radius img-90" alt="image" style="border-radius: 50%;border: 8px solid #ffffff;" >
+                                <img src="uploads/all/<?php echo $_SESSION['employee']['gender'].".png"; ?>" class="percentag-img-radius img-90" alt="User profile" style="border-radius: 50%;border: 8px solid #ffffff;" >
                         <?php }else{ ?>
                           <span class="text-dark f-16 f-w-600 d-block" style="    background-color: white !important;"><?php echo initials($disname); ?></span>
                       <?php } ?>
@@ -318,7 +318,7 @@ if($totaldoc != 0 AND $totaldoc !=""){
                         <h5>Announcements</h5>
                     </div>
                     <div class="card-block text-center">
-                        <h2 class="text-facebook m-b-20"><i class="ti-announcement "></i></h2>
+                        <h2 class="text-facebook m-b-20" aria-label="Announcement"><i class="ti-announcement " aria-hidden="true"></i><span class="visually-hidden">Announcement</span></h2>
                         <div class="row mt-2">
                             <?php 
                             $anouncement =  API."?mode=togetlatestannouncement";
@@ -348,7 +348,7 @@ if($totaldoc != 0 AND $totaldoc !=""){
                                 $Notification_DateTime = date('d M',strtotime($holiday['holiday_date']));
                                 ?>
                                 <div class="align-middle m-b-10" style="border-bottom:1px dashed #cccccc;">
-                                    <!-- <span  alt="user image" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($Notification_Message); ?></span> -->
+                                    <!-- <span class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($Notification_Message); ?></span> -->
                                     <div class="">
                                         <p class="text-muted m-b-5 f-12"><?php echo $Notification_Message; ?>  <span class="float-right"><?php echo $Notification_DateTime; ?></span></p>
                                     </div>
@@ -406,12 +406,12 @@ if($totaldoc != 0 AND $totaldoc !=""){
                         </li>
                         <?php  foreach($generatedocs as $trnstabkey=>$gdocs){ ?>
                             <li class="nav-item">
-                                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#tabsopen" role="tab" aria-selected="true" onclick="openApprovedPage('<?php echo $trnstabkey; ?>','<?php echo $table_name; ?>')" ><?php echo "Approved ".ucwords(str_replace('_',' ',$trnstabkey)); ?>
+                                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#tabsopen" role="tab" aria-selected="true" onclick="openApprovedPage('<?php echo $trnstabkey; ?>','<?php echo $table_name; ?>')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"><?php echo "Approved ".ucwords(str_replace('_',' ',$trnstabkey)); ?>
                                 <!-- <span class="label label-xs label-success m-l-10"><?php echo count((array)$gdocs);?></span>-->
 </a>                            </li>
                         <?php } ?>
                         <!-- <li class="nav-item float-right">
-                            <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#schedules_tab" role="tab" aria-selected="true" onclick="getSchedulesOrders()">Schedules</a>
+                            <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#schedules_tab" role="tab" aria-selected="true" onclick="getSchedulesOrders()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">Schedules</a>
                         </li> -->
                         <?php  /** if($table_name == 'work_orders'){ ?>
                         <li class="nav-item">
@@ -505,9 +505,9 @@ if($totaldoc != 0 AND $totaldoc !=""){
                                             $list = $categorydatalist[$item_categorie['id']]; ?>
                                             <a class="accordion-msg b-none waves-effect waves-light f-w-600 bg-gray"><span class="m-r-20"> 
                                                     <?php if($item_categorie['favourite_id'] ==""){ ?>
-                                                    <i class="ti ti-star" onclick="updateApplicationFavourites('<?php echo $result['item_table_name']; ?>','<?php echo $item_categorie['id']; ?>','F')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Add To Favourite"></i>
+                                                    <i class="ti ti-star" role="button" tabindex="0" aria-label="Add To Favourite" onclick="updateApplicationFavourites('<?php echo $result['item_table_name']; ?>','<?php echo $item_categorie['id']; ?>','F')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Add To Favourite"></i>
                                                     <?php }else{ ?>
-                                                    <i class="fa fa-star text-danger" onclick="updateApplicationFavourites('<?php echo $result['item_table_name']; ?>','<?php echo $item_categorie['id']; ?>','U')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Remove From Favourite"></i> 
+                                                    <i class="fa fa-star text-danger" role="button" tabindex="0" aria-label="Remove From Favourite" onclick="updateApplicationFavourites('<?php echo $result['item_table_name']; ?>','<?php echo $item_categorie['id']; ?>','U')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Remove From Favourite"></i> 
                                                     <?php } ?>
                                                 </span>
                                                 <?php echo $item_categorie['category_description']; ?> <span class="label label-md label-warning float-right"><?php echo count((array)$list); ?> </span></a>
@@ -614,9 +614,9 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                             $list = $locationlist[$item_categorie['id']]; ?>
                                             <a class="accordion-msg b-none waves-effect waves-light f-w-600 bg-gray"><span class="m-r-20"> 
                                                     <?php if($item_categorie['favourite_id'] ==""){ ?>
-                                                    <i class="ti ti-star" onclick="updateApplicationFavourites('locations','<?php echo $item_categorie['id']; ?>','F')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Add To Favourite"></i>
+                                                    <i class="ti ti-star" role="button" tabindex="0" aria-label="Add To Favourite" onclick="updateApplicationFavourites('locations','<?php echo $item_categorie['id']; ?>','F')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Add To Favourite"></i>
                                                     <?php }else{ ?>
-                                                    <i class="fa fa-star text-danger" onclick="updateApplicationFavourites('locations','<?php echo $item_categorie['id']; ?>','U')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Remove From Favourite"></i> 
+                                                    <i class="fa fa-star text-danger" role="button" tabindex="0" aria-label="Remove From Favourite" onclick="updateApplicationFavourites('locations','<?php echo $item_categorie['id']; ?>','U')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Remove From Favourite"></i> 
                                                     <?php } ?>
                                                 </span>
                                                 <?php echo $item_categorie['location_name']; ?> <span class="label label-md label-warning float-right"><?php echo count((array)$list); ?> </span></a>
@@ -713,9 +713,9 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                             $list = $costcenterlist[$item_categorie['id']]; ?>
                                             <a class="accordion-msg b-none waves-effect waves-light f-w-600 bg-gray" ><span class="m-r-20"> 
                                                     <?php if($item_categorie['favourite_id'] ==""){ ?>
-                                                    <i class="ti ti-star" onclick="updateApplicationFavourites('cost_centers','<?php echo $item_categorie['id']; ?>','F')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Add To Favourite"></i>
+                                                    <i class="ti ti-star" role="button" tabindex="0" aria-label="Add To Favourite" onclick="updateApplicationFavourites('cost_centers','<?php echo $item_categorie['id']; ?>','F')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Add To Favourite"></i>
                                                     <?php }else{ ?>
-                                                    <i class="fa fa-star text-danger" onclick="updateApplicationFavourites('cost_centers','<?php echo $item_categorie['id']; ?>','U')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Remove From Favourite"></i> 
+                                                    <i class="fa fa-star text-danger" role="button" tabindex="0" aria-label="Remove From Favourite" onclick="updateApplicationFavourites('cost_centers','<?php echo $item_categorie['id']; ?>','U')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Remove From Favourite"></i> 
                                                     <?php } ?>
                                                 </span>
                                                 <?php echo $item_categorie['cost_center_name']; ?> <span class="label label-md label-warning float-right"><?php echo count((array)$list); ?> </span></a>
@@ -933,7 +933,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                             <h5>Draft 
                                 <span class="label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_DRAFT]['color']; ?>; background-color:<?php echo $statuse[ST_DRAFT]['background_color']; ?>;"><?php echo count((array)$draftres); ?></span>
                             </h5>
-                            <a href="#!"  onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>',<?php echo ST_DRAFT; ?>)" class=" b-b-primary text-primary float-right">View all</a>
+                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>',<?php echo ST_DRAFT; ?>)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right">View all</a>
                         </div>
                         <div class="card-body">
                             <?php //echo "<pre>"; print_r($draftres); echo "</pre>";
@@ -947,7 +947,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                   <?php if($_SESSION['user_image'][$activeres1['originator']]!=""){?>
                     <img src="uploads/all/<?php echo $_SESSION['user_image'][$activeres1['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';" alt="" >
                   <?php }else{ ?>
-                    <span  alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$activeres1['originator']]); ?></span>
+                    <span class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$activeres1['originator']]); ?></span>
                   <?php } ?>
                 </div>  
                                 <!--    </div> -->
@@ -989,7 +989,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                             <h5>Active 
                                 <span class="label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_ACTIVE]['color']; ?>; background-color:<?php echo $statuse[ST_ACTIVE]['background_color']; ?>;"><?php echo count((array)$activeres); ?></span>
                             </h5>
-                            <a href="#!"  onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','<?php echo ST_ACTIVE; ?>')" class=" b-b-primary text-primary float-right">View all</a>
+                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','<?php echo ST_ACTIVE; ?>')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right">View all</a>
                         </div>
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$activeres) !=0){ foreach($activeres as $activeres1){ if($mm == 4){ break; } ?>
@@ -1002,7 +1002,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                   <?php if($_SESSION['user_image'][$activeres1['originator']]!=""){?>
                     <img src="uploads/all/<?php echo $_SESSION['user_image'][$activeres1['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';" alt="" >
                   <?php }else{ ?>
-                    <span  alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$activeres1['originator']]); ?></span>
+                    <span class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$activeres1['originator']]); ?></span>
                   <?php } ?>
                 </div>  
                                 </div>
@@ -1043,7 +1043,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                             <h5>In Process 
                                 <span class="label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_APPROVED1]['color']; ?>; background-color:<?php echo $statuse[ST_APPROVED1]['background_color']; ?>;"><?php echo count((array)$inprocessres); ?></span>
                             </h5>
-                            <a href="#!"  onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','inprocess')" class=" b-b-primary text-primary float-right">View all</a>
+                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','inprocess')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right">View all</a>
                         </div>
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$inprocessres) !=0){ foreach($inprocessres as $activeres1){ if($mm == 4){ break; } ?>
@@ -1056,7 +1056,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                   <?php if($_SESSION['user_image'][$activeres1['originator']]!=""){?>
                     <img src="uploads/all/<?php echo $_SESSION['user_image'][$activeres1['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';" alt="" >
                   <?php }else{ ?>
-                    <span  alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$activeres1['originator']]); ?></span>
+                    <span class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$activeres1['originator']]); ?></span>
                   <?php } ?>
                 </div>  
                                 </div>
@@ -1099,7 +1099,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                             <h5>Approved 
                                 <span class="label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_APPROVED]['color']; ?>; background-color:<?php echo $statuse[ST_APPROVED]['background_color']; ?>;"><?php echo count((array)$approvedres); ?></span>
                             </h5>
-                            <a href="#!"  onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','<?php echo ST_APPROVED; ?>')" class=" b-b-primary text-primary float-right">View all</a>
+                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','<?php echo ST_APPROVED; ?>')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right">View all</a>
                         </div>
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$approvedres) !=0){ foreach($approvedres as $activeres1){ if($mm == 4){ break; } ?>
@@ -1112,7 +1112,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                   <?php if($_SESSION['user_image'][$activeres1['originator']]!=""){?>
                     <img src="uploads/all/<?php echo $_SESSION['user_image'][$activeres1['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';" alt="" >
                   <?php }else{ ?>
-                    <span  alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$activeres1['originator']]); ?></span>
+                    <span class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$activeres1['originator']]); ?></span>
                   <?php } ?>
                 </div>  
                                 </div>
@@ -1157,7 +1157,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                             <h5>Approval Pending 
                                 <span class="label label-xs label-danger m-l-10" ><?php echo count((array)$pendinglog); ?></span>
                             </h5>
-                            <a href="#!"  onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','APPROVEPENDING')" class=" b-b-primary text-primary float-right">View all</a>
+                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','APPROVEPENDING')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right">View all</a>
                         </div>
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$pendinglog) !=0){ foreach($pendinglog as $logdetails){ 
@@ -1172,7 +1172,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                   <?php if($_SESSION['user_image'][$logdetails['originator']]!=""){?>
                     <img src="uploads/all/<?php echo $_SESSION['user_image'][$logdetails['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';" alt="" >
                   <?php }else{ ?>
-                    <span  alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$logdetails['originator']]); ?></span>
+                    <span class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$logdetails['originator']]); ?></span>
                   <?php } ?>
                 </div>  
                                 </div>
@@ -1199,7 +1199,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                             <h5>Approved 
                                 <span class="label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_APPROVED]['color']; ?>; background-color:<?php echo $statuse[ST_APPROVED]['background_color']; ?>;"><?php echo count((array)$aprovedlog); ?></span>
                             </h5>
-                            <a href="#!"  onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','APPROVELOG')" class=" b-b-primary text-primary float-right">View all</a>
+                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','APPROVELOG')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right">View all</a>
                         </div>
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$aprovedlog) !=0){ foreach($aprovedlog as $logdetails){ 
@@ -1214,7 +1214,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                   <?php if($_SESSION['user_image'][$logdetails['originator']]!=""){?>
                     <img src="uploads/all/<?php echo $_SESSION['user_image'][$logdetails['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';" alt="" >
                   <?php }else{ ?>
-                    <span  alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$logdetails['originator']]); ?></span>
+                    <span class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$logdetails['originator']]); ?></span>
                   <?php } ?>
                 </div>  
                                 </div>
@@ -1240,7 +1240,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                             <h5>Send Back 
                                 <span class="label label-xs label-warning m-l-10" ><?php echo count((array)$sendbacklog); ?></span>
                             </h5>
-                            <a href="#!"  onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','SENDBACK')" class=" b-b-primary text-primary float-right">View all</a>
+                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','SENDBACK')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right">View all</a>
                         </div>
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$sendbacklog) !=0){ foreach($sendbacklog as $logdetails){ 
@@ -1255,7 +1255,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                   <?php if($_SESSION['user_image'][$logdetails['originator']]!=""){?>
                     <img src="uploads/all/<?php echo $_SESSION['user_image'][$logdetails['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';" alt="" >
                   <?php }else{ ?>
-                    <span  alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$logdetails['originator']]); ?></span>
+                    <span class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$logdetails['originator']]); ?></span>
                   <?php } ?>
                 </div>  
                                 </div>
@@ -1281,7 +1281,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                             <h5>Rejected
                                 <span class="label label-xs label-warning m-l-10" ><?php echo count((array)$rejectlog); ?></span>
                             </h5>
-                            <a href="#!"  onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','REJECTED')" class=" b-b-primary text-primary float-right">View all</a>
+                            <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','REJECTED')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right">View all</a>
                         </div>
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$rejectlog) !=0){ foreach($rejectlog as $logdetails){ 
@@ -1296,7 +1296,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                   <?php if($_SESSION['user_image'][$logdetails['originator']]!=""){?>
                     <img src="uploads/all/<?php echo $_SESSION['user_image'][$logdetails['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';" alt="" >
                   <?php }else{ ?>
-                    <span  alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$logdetails['originator']]); ?></span>
+                    <span class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$logdetails['originator']]); ?></span>
                   <?php } ?>
                 </div>  
                                 </div>

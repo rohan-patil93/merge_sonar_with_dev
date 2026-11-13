@@ -83,8 +83,8 @@ if ($item_id != "") {
     <form class="kt-form" id="submitformeditstationeryitem">
         <div class="row">
             <div class="form-group w-full col-md-6">
-                <label>Location <span class="text-danger">*</span></label>
-                <select class="form-select js-example-basic-single" name="location_id" id="edit_location_id" aria-label="Location Id">
+                <label for="edit_location_id">Location <span class="text-danger">*</span></label>
+                <select class="form-select js-example-basic-single" name="location_id" id="edit_location_id" aria-label="Location">
                     <option value="">Select Location</option>
                     <?php if (count((array)$loc_data) > 0) {
                         foreach ((array)$loc_data as $loc) { ?>
@@ -94,8 +94,8 @@ if ($item_id != "") {
                 </select>
             </div>
             <div class="form-group w-full col-md-6">
-                <label>Category <span class="text-danger">*</span></label>
-                <select class="form-select js-example-basic-single" name="category_id" id="edit_category_id" aria-label="Category Id">
+                <label for="edit_category_id">Category <span class="text-danger">*</span></label>
+                <select class="form-select js-example-basic-single" name="category_id" id="edit_category_id" aria-label="Category">
                     <option value="">Select Category</option>
                     <?php if (count((array)$cat_data) > 0) {
                         foreach ((array)$cat_data as $cat) { ?>
@@ -106,20 +106,20 @@ if ($item_id != "") {
             </div>
         </div>
         <div class="form-group">
-            <label>Product Name <span class="text-danger">*</span></label>
-            <input placeholder="Please Enter Your Product Name" type="text" name="item_name" id="edit_item_name" class="form-control" value="<?php echo $item_details['item_name']; ?>" aria-label="Please Enter Your Product Name">
+            <label for="edit_item_name">Product Name <span class="text-danger">*</span></label>
+            <input placeholder="Please Enter Your Product Name" type="text" name="item_name" id="edit_item_name" class="form-control" value="<?php echo $item_details['item_name']; ?>" aria-label="Product Name">
         </div>
         <div class="form-group">
-            <label>Quantity <span class="text-danger">*</span></label>
-            <input placeholder="Please Enter Your Quantity" name="available_qty" id="edit_available_qty" type="text" class="form-control text-right fill" value="<?php echo $item_details['available_qty']; ?>" readonly disabled aria-label="Please Enter Your Quantity">
+            <label for="edit_available_qty">Quantity <span class="text-danger">*</span></label>
+            <input placeholder="Please Enter Your Quantity" name="available_qty" id="edit_available_qty" type="text" class="form-control text-right fill" value="<?php echo $item_details['available_qty']; ?>" readonly disabled aria-label="Quantity">
         </div>
         <div class="form-group">
-            <label>Price</label>
-            <input name="cost" id="edit_cost" type="text" class="form-control text-right fill" value="<?php echo $item_details['cost']; ?>" aria-label="Cost">
+            <label for="edit_cost">Price</label>
+            <input name="cost" id="edit_cost" type="text" class="form-control text-right fill" value="<?php echo $item_details['cost']; ?>" aria-label="Price">
         </div>
         <div class="form-group">
-            <label>Description</label>
-            <textarea class="form-control" name="description" id="edit_description" placeholder="Please describe your product" aria-label="Please describe your product"><?php echo $item_details['description']; ?></textarea>
+            <label for="edit_description">Description</label>
+            <textarea class="form-control" name="description" id="edit_description" placeholder="Please describe your product" aria-label="Description"><?php echo $item_details['description']; ?></textarea>
         </div>
         <div class="modal-footer">
             <input type="hidden" name="id" id="edit_id" value="<?php echo $item_details['id']; ?>">

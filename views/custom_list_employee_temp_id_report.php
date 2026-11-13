@@ -27,15 +27,15 @@ $today = date('Y-m-d');
 		<div class="card-body p-4">
 			<div class="row">
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>From Date <span class="text-danger">*</span></label>
+					<label for="from_date">From Date <span class="text-danger">*</span></label>
 					<input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo $today; ?>" aria-label="From Date">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>To Date <span class="text-danger">*</span></label>
+					<label for="to_date">To Date <span class="text-danger">*</span></label>
 					<input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo $today; ?>" aria-label="To Date">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>Location</label>
+					<label for="location_id">Location</label>
 					<select class="form-control js-example-basic-single" id="location_id" name="location_id" style="width:100%" aria-label="Location Id">
 						<option value="">All Locations</option>
 						<?php if(count((array)$locations) > 0){
@@ -49,7 +49,7 @@ $today = date('Y-m-d');
 					</select>
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>Employee</label>
+					<label for="employee_id">Employee</label>
 					<select class="form-control js-example-basic-single" id="employee_id" name="employee_id" style="width:100%" aria-label="Employee Id">
 						<option value="">All Employees</option>
 						<?php if(count((array)$employees) > 0){
@@ -68,7 +68,7 @@ $today = date('Y-m-d');
 					</select>
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>Temp Reason</label>
+					<label for="temp_reason">Temp Reason</label>
 					<select class="form-control js-example-basic-single" id="temp_reason" name="temp_reason" style="width:100%" aria-label="Temp Reason">
 						<option value="">All</option>
 						<option value="forgot">Forgot</option>
@@ -77,7 +77,7 @@ $today = date('Y-m-d');
 					</select>
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>Card Return</label>
+					<label for="card_return">Card Return</label>
 					<select class="form-control js-example-basic-single" id="card_return" name="card_return" style="width:100%" aria-label="Card Return">
 						<option value="">All</option>
 						<option value="not_returned">Not Returned</option>
@@ -85,7 +85,7 @@ $today = date('Y-m-d');
 					</select>
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>&nbsp;</label>
+					<label for="getEmployeeTempIdReportBtn" aria-label="Search">&nbsp;</label>
 					<button type="button" class="btn btn-primary form-control" id="getEmployeeTempIdReportBtn">Search</button>
 				</div>
 			</div>

@@ -15,8 +15,7 @@ if ($_SESSION['working_role_short_code'] == 'FIELD_MANAGER') {
 $url = API . "?mode=getApplicationUsersData&method=get&admin_type=" . $admin_type;
 $result = callAPI($url);
 $result = json_decode($result, 1);
-$application_users = array();
-$application_users = $result['application_users'];
+$application_users = $result['application_users'] ?? array();
 $from_date = date('Y-m-01');
 $to_date = date('Y-m-d');
 ?>
@@ -42,13 +41,13 @@ $to_date = date('Y-m-d');
         </div>
         <div class="fwdp-header-actions">
             <a href="index.php?option=<?= $fwdpInsertOption ?>" class="fwdp-btn fwdp-btn-primary desktop-view">
-                <i class="icofont icofont-plus"></i> User Work Daily Plans
+                <i class="icofont icofont-plus" aria-hidden="true"></i> User Work Daily Plans
             </a>
             <a href="index.php?option=COM_LIST_FIELD_WORK_USER_MAP_POINTS_NEW" class="fwdp-btn fwdp-btn-outline desktop-view">
-                <i class="fas fa-map"></i> Map Points
+                <i class="fas fa-map" aria-hidden="true"></i> Map Points
             </a>
             <a href="javascript:history.go(-1)" class="fwdp-btn desktop-view">
-                <i class="icofont icofont-reply"></i> Back
+                <i class="icofont icofont-reply" aria-hidden="true"></i> Back
             </a>
         </div>
     </div>
@@ -58,13 +57,13 @@ $to_date = date('Y-m-d');
             <?php if ($admin_type != '3') {
                 if ($admin_type != '2') { ?>
                     <div class="form-group col-lg-6">
-                        <label class="fwdp-label">Manager</label>
+                        <label for="manager_id" class="fwdp-label">Manager</label>
                         <select class="form-select js-example-basic-single" id="manager_id" name="manager_id[]" multiple="multiple" aria-label="Manager Id">
                             <option value="0">Select Any one</option>
                             <?php if (count((array)$application_users) > 0) {
                                 foreach ($application_users as $row) { ?>
                                     <option value="<?php echo $row['id']; ?>">
-                                        <?php echo $row['display_name']; ?>
+                                        <?php echo htmlspecialchars($row['display_name'] ?? '', ENT_QUOTES); ?>
                                     </option>
                                 <?php }
                             } ?>
@@ -74,7 +73,7 @@ $to_date = date('Y-m-d');
                 <?php } ?>
 
                 <div class="form-group col-lg-6">
-                    <label class="fwdp-label">User</label>
+                    <label for="user_id" class="fwdp-label">User</label>
                     <select class="form-select js-example-basic-single" id="user_id" name="user_id[]" multiple="multiple" aria-label="User Id">
                         <option value="0">Select Any one</option>
                     </select>
@@ -85,17 +84,17 @@ $to_date = date('Y-m-d');
             <?php } ?>
 
             <div class="col-lg-4 col-xs-6 form-group">
-                <label class="fwdp-label">From Date <span class="text-danger">*</span></label>
+                <label for="from_date" class="fwdp-label">From Date <span class="text-danger">*</span></label>
                 <input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo $from_date; ?>" aria-label="From Date">
                 <div class="d-none text-danger" id="from_date_err"></div>
             </div>
             <div class="col-lg-4 col-xs-4 form-group">
-                <label class="fwdp-label">To Date <span class="text-danger">*</span></label>
+                <label for="to_date" class="fwdp-label">To Date <span class="text-danger">*</span></label>
                 <input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo $to_date; ?>" aria-label="To Date">
                 <div class="d-none text-danger" id="to_date_err"></div>
             </div>
             <div class="col-lg-4 col-xs-6 form-group">
-                <label class="fwdp-label">&nbsp;</label>
+                <label for="getDataButton" class="fwdp-label" aria-label="Search"><span class="visually-hidden">Search</span>&nbsp;</label>
                 <button type="button" class="fwdp-btn fwdp-btn-primary form-control" id="getDataButton">Search</button>
             </div>
         </div>

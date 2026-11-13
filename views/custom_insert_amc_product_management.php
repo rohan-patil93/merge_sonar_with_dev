@@ -99,36 +99,36 @@ if ($rid != '') {
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-lg-6 text-end">
-                                            <label for="fld_product_name" class="form-label">Product/Item Name</label>
+                                            <label class="form-label">Product/Item Name</label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <input id="fld_product_name" name="product_name" value="<?php echo $pm_details['product_name'] ?? ""; ?>" class="form-control" type="text" placeholder="Enter Product Name">
+                                                <input name="product_name" value="<?php echo $pm_details['product_name'] ?? ""; ?>" class="form-control" type="text" placeholder="Enter Product Name" aria-label="Enter Product Name">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label for="fld_product_description" class="form-label">Product Description</label>
+                                            <label class="form-label">Product Description</label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <textarea id="fld_product_description" name="product_description" class="form-control" placeholder="Product Description"> <?php echo $pm_details['product_description'] ?? ""; ?> </textarea>
+                                                <textarea name="product_description" class="form-control" placeholder="Product Description" aria-label="Product Description"> <?php echo $pm_details['product_description'] ?? ""; ?> </textarea>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label for="fld_product_part_no" class="form-label">Product Part No/Short Code</label>
+                                            <label class="form-label">Product Part No/Short Code</label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <input id="fld_product_part_no" name="product_part_no" value="<?php echo $pm_details['product_part_no'] ?? ""; ?>" class="form-control" type="text" placeholder="Enter Product Short Code">
+                                                <input name="product_part_no" value="<?php echo $pm_details['product_part_no'] ?? ""; ?>" class="form-control" type="text" placeholder="Enter Product Short Code" aria-label="Enter Product Short Code">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label for="fld_hsn_code" class="form-label">HSN/SAC Code</label>
+                                            <label class="form-label">HSN/SAC Code</label>
                                         </div>
 
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <select id="fld_hsn_code" name="hsn_code" class="form-control js-example-basic-single">
+                                                <select name="hsn_code" class="form-control js-example-basic-single" aria-label="Hsn Code">
                                                     <option value="0">--Select--</option>
                                                     <?php foreach ($ts_details as $ts): ?>
                                                         <option value="<?php echo $ts['id']; ?>" <?php echo $pm_details['hsn_code'] == $ts['id'] ? 'selected' : ''; ?>>
@@ -142,35 +142,35 @@ if ($rid != '') {
 
 
                                         <div class="col-lg-6 text-end">
-                                            <label for="fld_purchase_price" class="form-label">Purchase Price</label>
+                                            <label class="form-label">Purchase Price</label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <input id="fld_purchase_price" name="purchase_price" value="<?php echo $pm_details['purchase_price'] ?? ""; ?>" class="form-control" type="number" placeholder="Enter Purchase Price">
+                                                <input name="purchase_price" value="<?php echo $pm_details['purchase_price'] ?? ""; ?>" class="form-control" type="number" placeholder="Enter Purchase Price" aria-label="Enter Purchase Price">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label for="fld_sale_price" class="form-label">Sale Price</label>
+                                            <label class="form-label">Sale Price</label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <input id="fld_sale_price" name="sale_price" value="<?php echo $pm_details['sale_price'] ?? ""; ?>" class="form-control" type="number" placeholder="Enter Sale Price">
+                                                <input name="sale_price" value="<?php echo $pm_details['sale_price'] ?? ""; ?>" class="form-control" type="number" placeholder="Enter Sale Price" aria-label="Enter Sale Price">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label for="fld_mrp" class="form-label">MRP</label>
+                                            <label class="form-label">MRP</label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <input id="fld_mrp" name="mrp" value="<?php echo $pm_details['mrp'] ?? ""; ?>" class="form-control" type="number" placeholder="Enter MRP">
+                                                <input name="mrp" value="<?php echo $pm_details['mrp'] ?? ""; ?>" class="form-control" type="number" placeholder="Enter MRP" aria-label="Enter MRP">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label for="fld_primary_unit" class="form-label">Primary Unit</label>
+                                            <label class="form-label">Primary Unit</label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <select id="fld_primary_unit" name="primary_unit" class="form-control js-example-basic-single">
+                                                <select name="primary_unit" class="form-control js-example-basic-single" aria-label="Primary Unit">
                                                     <option value="0">--Select--</option>
                                                     <?php foreach ($units as $row): ?>
                                                         <option value="<?php echo $row['genc_detail_code']; ?>" <?php echo $pm_details['primary_unit'] == $row['genc_detail_code'] ? 'selected' : ''; ?>>
@@ -182,11 +182,11 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label for="fld_alternative_unit" class="form-label">Alternative Unit</label>
+                                            <label class="form-label">Alternative Unit</label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <select id="fld_alternative_unit" name="alternative_unit" class="form-control js-example-basic-single">
+                                                <select name="alternative_unit" class="form-control js-example-basic-single" aria-label="Alternative Unit">
                                                     <option value="0">--Select--</option>
                                                     <?php foreach ($units as $row): ?>
                                                         <option value="<?php echo $row['genc_detail_code']; ?>" <?php echo $pm_details['alternative_unit'] == $row['genc_detail_code'] ? 'selected' : ''; ?>>
@@ -197,11 +197,11 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label for="fld_convertion_factor" class="form-label">Convertion Factor</label>
+                                            <label class="form-label">Convertion Factor</label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <input id="fld_convertion_factor" name="convertion_factor" value="<?php echo $pm_details['convertion_factor'] ?? ""; ?>" type="number" class="form-control" type="text" placeholder="1">
+                                                <input name="convertion_factor" value="<?php echo $pm_details['convertion_factor'] ?? ""; ?>" type="number" class="form-control" type="text" placeholder="1" aria-label="1">
                                             </div>
                                         </div>
                                     </div>
@@ -231,11 +231,11 @@ if ($rid != '') {
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-lg-6 text-end">
-                                            <label for="fld_manage_stock" class="form-label">Manage Stock</label>
+                                            <label class="form-label">Manage Stock</label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <select id="fld_manage_stock" name="manage_stock" class="form-control js-example-basic-single">
+                                                <select name="manage_stock" class="form-control js-example-basic-single" aria-label="Manage Stock">
                                                     <option value="0">--Select--</option>
                                                     <?php foreach ($manage_stock as $row): ?>
                                                         <option value="<?php echo $row['genc_detail_code']; ?>" <?php echo $pm_details['manage_stock'] == $row['genc_detail_code'] ? 'selected' : ''; ?>>
@@ -246,11 +246,11 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label for="fld_item_type" class="form-label">Item Type</label>
+                                            <label class="form-label">Item Type</label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <select id="fld_item_type" name="item_type" class="form-control js-example-basic-single">
+                                                <select name="item_type" class="form-control js-example-basic-single" aria-label="Item Type">
                                                     <option value="0">--Select--</option>
                                                     <?php foreach ($item_type as $row): ?>
                                                         <option value="<?php echo $row['genc_detail_code']; ?>" <?php echo $pm_details['item_type'] == $row['genc_detail_code'] ? 'selected' : ''; ?>>
@@ -261,11 +261,11 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label for="building" class="form-label">Building</label>
+                                            <label class="form-label">Building</label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <select name="building" id='building' class="form-control js-example-basic-single" onchange="buildingUpdate(this)" data-selected-floor="<?php echo $pm_details['building_floor']; ?>" data-selected-space="<?php echo $pm_details['building_floor_space']; ?>">
+                                                <select name="building" id='building' class="form-control js-example-basic-single" onchange="buildingUpdate(this)" data-selected-floor="<?php echo $pm_details['building_floor']; ?>" data-selected-space="<?php echo $pm_details['building_floor_space']; ?>" aria-label="Building">
                                                     <option value="0">--Select--</option>
                                                     <?php foreach ($buildings as $row): ?>
                                                         <option value="<?php echo $row['id']; ?>" <?php echo $pm_details['building'] == $row['id'] ? 'selected' : ''; ?>>
@@ -276,97 +276,97 @@ if ($rid != '') {
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label for="building_floor" class="form-label">Building Floor</label>
+                                            <label class="form-label">Building Floor</label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <select name="building_floor" id='building_floor' class="form-control js-example-basic-single" onchange="buildingUpdate(this)">
+                                                <select name="building_floor" id='building_floor' class="form-control js-example-basic-single" onchange="buildingUpdate(this)" aria-label="Building Floor">
                                                     <option value="0">--Select--</option>
 
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label for="building_floor_space" class="form-label">Building Floor Space</label>
+                                            <label class="form-label">Building Floor Space</label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <select name="building_floor_space" id='building_floor_space' class="form-control js-example-basic-single">
+                                                <select name="building_floor_space" id='building_floor_space' class="form-control js-example-basic-single" aria-label="Building Floor Space">
                                                     <option value="0">--Select--</option>
 
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label for="fld_image" class="form-label">Product Image</label>
+                                            <label class="form-label">Product Image</label>
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
-                                                <input id="fld_image" name="image" value="<?php echo $pm_details['image'] ?? ""; ?>" class="form-control" type="file" name="">
+                                                <input name="image" value="<?php echo $pm_details['image'] ?? ""; ?>" class="form-control" type="file" name="" aria-label="Image">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label for="fld_min_sale_price" class="form-label">Min Sale Price</label>
+                                            <label class="form-label">Min Sale Price</label>
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
-                                                <input id="fld_min_sale_price" name="min_sale_price" value="<?php echo $pm_details['min_sale_price'] ?? ""; ?>" class="form-control" type="number" placeholder="Min Sale Price">
+                                                <input name="min_sale_price" value="<?php echo $pm_details['min_sale_price'] ?? ""; ?>" class="form-control" type="number" placeholder="Min Sale Price" aria-label="Min Sale Price">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label for="fld_bar_code" class="form-label">Bar Code</label>
+                                            <label class="form-label">Bar Code</label>
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
-                                                <input id="fld_bar_code" name="bar_code" value="<?php echo $pm_details['bar_code'] ?? ""; ?>" class="form-control" type="text" placeholder="Enter Bar Code">
+                                                <input name="bar_code" value="<?php echo $pm_details['bar_code'] ?? ""; ?>" class="form-control" type="text" placeholder="Enter Bar Code" aria-label="Enter Bar Code">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label for="fld_openning_stock_pack" class="form-label">Openning Stock Pack</label>
+                                            <label class="form-label">Openning Stock Pack</label>
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
-                                                <input id="fld_openning_stock_pack" name="openning_stock_pack" value="<?php echo $pm_details['openning_stock_pack'] ?? ""; ?>" class="form-control" type="number" placeholder="0">
+                                                <input name="openning_stock_pack" value="<?php echo $pm_details['openning_stock_pack'] ?? ""; ?>" class="form-control" type="number" placeholder="0" aria-label="Openning Stock Pack">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label for="fld_openning_stock_loose" class="form-label">Openning Stock Loose</label>
+                                            <label class="form-label">Openning Stock Loose</label>
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
-                                                <input id="fld_openning_stock_loose" name="openning_stock_loose" value="<?php echo $pm_details['openning_stock_loose'] ?? ""; ?>" class="form-control" type="number" placeholder="0">
+                                                <input name="openning_stock_loose" value="<?php echo $pm_details['openning_stock_loose'] ?? ""; ?>" class="form-control" type="number" placeholder="0" aria-label="Openning Stock Loose">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label for="fld_openning_stock_value" class="form-label">Openning Stock Value</label>
+                                            <label class="form-label">Openning Stock Value</label>
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
-                                                <input id="fld_openning_stock_value" name="openning_stock_value" value="<?php echo $pm_details['openning_stock_value'] ?? ""; ?>" class="form-control" type="number" placeholder="0">
+                                                <input name="openning_stock_value" value="<?php echo $pm_details['openning_stock_value'] ?? ""; ?>" class="form-control" type="number" placeholder="0" aria-label="Openning Stock Value">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label for="fld_batch" class="form-label">Batch</label>
+                                            <label class="form-label">Batch</label>
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
-                                                <input id="fld_batch" name="batch" value="<?php echo $pm_details['batch'] ?? ""; ?>" class="form-control" type="text" placeholder="Batch">
+                                                <input name="batch" value="<?php echo $pm_details['batch'] ?? ""; ?>" class="form-control" type="text" placeholder="Batch" aria-label="Batch">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label for="mfg_date" class="form-label">Mfg. Date</label>
+                                            <label class="form-label">Mfg. Date</label>
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
-                                                <input name="mfg_date" id="mfg_date" value="<?php echo fromDate($pm_details['mfg_date']);""; ?>" class="form-control datepicker" type="text" placeholder="10-10-2024" onchange="setMinExpDate()">
+                                                <input name="mfg_date" id="mfg_date" value="<?php echo fromDate($pm_details['mfg_date']);""; ?>" class="form-control datepicker" type="text" placeholder="10-10-2024" onchange="setMinExpDate()" aria-label="10-10-2024">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
-                                            <label for="exp_date" class="form-label">Exp. Date</label>
+                                            <label class="form-label">Exp. Date</label>
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
-                                                <input name="exp_date" id="exp_date" value="<?php echo fromDate($pm_details['exp_date']); ?>" class="form-control datepicker" type="text" placeholder="10-10-2024">
+                                                <input name="exp_date" id="exp_date" value="<?php echo fromDate($pm_details['exp_date']); ?>" class="form-control datepicker" type="text" placeholder="10-10-2024" aria-label="10-10-2024">
                                             </div>
                                         </div>
 

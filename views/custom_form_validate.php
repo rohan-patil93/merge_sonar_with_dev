@@ -216,26 +216,26 @@ $_SESSION['apply_js']['from-validation'] = "1";
 		<div class="card-body">
 			<input type="hidden" name="" value="goods_receipt_notes " id="ajax_table_name">
 			 <div class="form-group row"> 
-				<label id="label_transaction_number" class="col-lg-2 col-form-label text-lg-right ">Transaction Number</label>
+				<label id="label_transaction_number" for="transaction_number" class="col-lg-2 col-form-label text-lg-right ">Transaction Number</label>
 				<div class="col-lg-3 " style="">
 					<input class="form-control" type="text" readonly="" autocomplete="off" value="" id="transaction_number" name="transaction_number" aria-label="Transaction Number">
 					<span class="messages"></span>
 				</div>
 		<div class="col-lg-1"></div>  
-				<label id="label_transaction_date" class="col-lg-2 col-form-label text-lg-right ">Transaction Date&nbsp;<span class="text-danger">*</span></label>
+				<label id="label_transaction_date" for="transaction_date" class="col-lg-2 col-form-label text-lg-right ">Transaction Date&nbsp;<span class="text-danger">*</span></label>
 				<div class="col-lg-3" style="">
 					<div class="">
-						<input class="form-control datepicker hasDatepicker" type="text" value="29-08-2023" dateformat="d M y" id="transaction_date" name="transaction_date"  required="" aria-label="Transaction Date"><button type="button" class="ui-datepicker-trigger"><i class="ti-calendar text-dark f-20 f-w-800 m-r-10"></i></button>
+						<input class="form-control datepicker hasDatepicker" type="text" value="29-08-2023" dateformat="d M y" id="transaction_date" name="transaction_date"  required="" aria-label="Transaction Date"><button type="button" class="ui-datepicker-trigger" aria-label="Choose Transaction Date"><i class="ti-calendar text-dark f-20 f-w-800 m-r-10" aria-hidden="true"></i></button>
 				</div>
 				<span class="messages"></span>
 			</div>
 		</div> 
 		<div class="form-group row"> 
-			<label id="label_party_id" class="col-lg-2 col-form-label text-lg-right ">Party&nbsp;<span class="text-danger">*</span></label>
+			<label id="label_party_id" for="party_id" class="col-lg-2 col-form-label text-lg-right ">Party&nbsp;<span class="text-danger">*</span></label>
 			<div class="col-lg-3 " style="">
 				<div class="w-full refkey_party_id form-validation-class">
 					
-					<select class="form-select js-example-basic-single" onchange="selectchange('party_id',this.value,'vendors')" name="party_id" id="party_id" aria-label="Party Id">
+					<select class="form-select js-example-basic-single" onchange="selectchange('party_id',this.value,'vendors')" name="party_id" id="party_id" aria-label="Party">
 						<option value="" data-select2-id="2"> Select Any one </option>
 						<option value="4">Infisuite Hospitals</option>
 						<option value="1">Infisuite Hotel</option>
@@ -249,10 +249,10 @@ $_SESSION['apply_js']['from-validation'] = "1";
 				
 			</div>
 			<div class="col-lg-1"></div>  
-			<label id="label_ref_id" class="col-lg-2 col-form-label text-lg-right ">Reference Number&nbsp;<span class="text-danger">*</span></label>
+			<label id="label_ref_id" for="ref_id" class="col-lg-2 col-form-label text-lg-right ">Reference Number&nbsp;<span class="text-danger">*</span></label>
 			<div class="col-lg-3 form-validation-class" style="">
 				<div class="w-full refkey_ref_id">
-					<select class="form-select js-example-basic-single select2-hidden-accessible" onchange="selectchange('ref_id',this.value,'purchase_orders')" name="ref_id" id="ref_id" aria-label="Ref Id">
+					<select class="form-select js-example-basic-single select2-hidden-accessible" onchange="selectchange('ref_id',this.value,'purchase_orders')" name="ref_id" id="ref_id" aria-label="Reference Number">
 						<option value="" data-select2-id="4"> Select Any one </option>
 						<option value="1">PO00003</option>
 						<option value="2">PO00004</option>
@@ -270,8 +270,8 @@ $_SESSION['apply_js']['from-validation'] = "1";
 			<div class="col-sm-2"></div>
 			<div class="col-sm-10">
 				<button type="submit" class="btn btn-primary m-b-0">Submit</button>
-				<button id="btndisableck12" class="btn btn-primary mr-2"   name="submit_value" value="exit" <?php echo $disable; ?>><i class="la la-check" ></i>Save & exit</button>
-                                    <button  class="btn btn-primary mr-2 " id="btndisableck1"  name="submit_value" value="continue" <?php echo $disable; ?>><i class="la la-check-circle" ></i>Save & continue</button>
+				<button id="btndisableck12" class="btn btn-primary mr-2"   name="submit_value" value="exit" <?php echo $disable; ?>><i class="la la-check" aria-hidden="true"></i>Save & exit</button>
+                                    <button  class="btn btn-primary mr-2 " id="btndisableck1"  name="submit_value" value="continue" <?php echo $disable; ?>><i class="la la-check-circle" aria-hidden="true"></i>Save & continue</button>
 			</div>
 		</div>
 

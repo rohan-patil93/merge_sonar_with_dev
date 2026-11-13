@@ -30,7 +30,6 @@ $listUrl = API . "?mode=getdocumentmanagementlist&method=get"
     . "&document_name=" . urlencode($documentName);
 $listResponse = callAPI($listUrl);
 $listData = json_decode($listResponse, true);
-// print_r($listData); // Debugging line to check the API response
 $listData = is_array($listData) ? $listData : array();
 
 $documentTypes = $listData['document_types'] ?? array();
@@ -49,10 +48,10 @@ $successMessage = isset($_GET['msg']) ? trim((string)$_GET['msg']) : '';
             <h5>Document Management</h5>
             <div class="card-header-right">
                 <a href="index.php?option=<?php echo dmListText($insertOption); ?>" class="btn btn-success waves-effect waves-light mb-2 desktop-view">
-                    <i class="icofont icofont-plus"></i> Add
+                    <i class="icofont icofont-plus" aria-hidden="true"></i> Add
                 </a>
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
-                    <i class="icofont icofont-reply"></i> Back
+                    <i class="icofont icofont-reply" aria-hidden="true"></i> Back
                 </a>
             </div>
         </div>
@@ -61,8 +60,8 @@ $successMessage = isset($_GET['msg']) ? trim((string)$_GET['msg']) : '';
                 <input type="hidden" name="option" value="<?php echo dmListText($listOption); ?>">
                 <div class="row">
                     <div class="col-lg-3 col-md-6 form-group">
-                        <label>Document Type</label>
-                        <select name="document_type_id" class="form-control js-example-basic-single">
+                        <label for="document_type_id">Document Type</label>
+                        <select name="document_type_id" id="document_type_id" class="form-control js-example-basic-single" aria-label="Document Type">
                             <option value="">All Types</option>
                             <?php if (count((array)$documentTypes) > 0) {
                                 foreach ($documentTypes as $typeRow) {
@@ -78,12 +77,12 @@ $successMessage = isset($_GET['msg']) ? trim((string)$_GET['msg']) : '';
                         </select>
                     </div>
                     <div class="col-lg-3 col-md-6 form-group">
-                        <label>Document Name</label>
-                        <input type="text" name="document_name" class="form-control" value="<?php echo dmListText($documentName); ?>" placeholder="Search document name">
+                        <label for="document_name">Document Name</label>
+                        <input type="text" name="document_name" id="document_name" class="form-control" value="<?php echo dmListText($documentName); ?>" placeholder="Search document name" aria-label="Document Name">
                     </div>
                     <div class="col-lg-3 col-md-6 form-group">
-                        <label>&nbsp;</label>
-                        <button type="submit" class="btn btn-primary form-control">Search</button>
+                        <label for="searchBtn" aria-label="Search">&nbsp;</label>
+                        <button type="submit" id="searchBtn" class="btn btn-primary form-control">Search</button>
                     </div>
                 </div>
             </form>
@@ -173,19 +172,21 @@ $successMessage = isset($_GET['msg']) ? trim((string)$_GET['msg']) : '';
     </div>
 </div>
 
-<!-- <?php if ($successMessage != '') { ?>
+<?php if ($successMessage != '') { ?>
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
-            tostarnotify(
-                'top',
-                'right',
-                'fa fa-thumbs-up',
-                'form-label label label-success',
-                'animated flipInX',
-                'animated flipOutX',
-                <?php echo json_encode($successMessage); ?>,
-                ''
-            );
+            if (typeof tostarnotify === 'function') {
+                tostarnotify(
+                    'top',
+                    'right',
+                    'fa fa-thumbs-up',
+                    'form-label label label-success',
+                    'animated flipInX',
+                    'animated flipOutX',
+                    <?php echo json_encode($successMessage); ?>,
+                    ''
+                );
+            }
         });
     </script>
-<?php } ?> -->
+<?php } ?>

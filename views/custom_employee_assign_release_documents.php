@@ -1,23 +1,23 @@
 <?php
 $_SESSION['apply_js']['multiselest'] = 1;
 
+$employee_id = 0;
+$assessment_year = '';
+
 // Fetch employees
-//print_r($_POST);
-if((isset($_POST['search'])) ){
+if ((isset($_POST['search']))) {
     $employee_id = $_REQUEST['employee_id'] ?? 0;
     $assessment_year       = $_REQUEST['assessment_year'] ?? '';
     header("location:index?option=COM_EMPLOYEE_ASSIGN_RELEASE_DOCUMENTS&employee_id=".$employee_id."&assessment_year=".$assessment_year ); exit;
 }
-if(isset($_GET['employee_id']) && isset($_GET['assessment_year']) ){
+if (isset($_GET['employee_id']) && isset($_GET['assessment_year'])) {
     $employee_id = $_REQUEST['employee_id'] ?? 0;
     $assessment_year = $_REQUEST['assessment_year'] ?? '';
 }
 
-
 $url = API . "?mode=togetemployeesassementyear&method=get";
 $result = callAPI($url);
 $result = json_decode($result, true);
-//echo "<pre>"; print_r($result); echo "<pre>";
 $employees = $result['emp_data'] ?? array();
 $assessment_years = $result['assessment_years'] ?? array();
 ?>
@@ -31,34 +31,46 @@ $assessment_years = $result['assessment_years'] ?? array();
             <div class="row">
                 <!-- Employee -->
                 <div class="form-group col-md-4">
-                    <label>Employee <span style="color:red;">*</span></label>
-                    <select class="form-select js-example-basic-single" name="employee_id" id="employee_id">
+                    <label for="employee_id">Employee <span class="text-danger">*</span></label>
+                    <select class="form-select js-example-basic-single" name="employee_id" id="employee_id" aria-label="Employee">
                         <option value="0">Select Employee</option>
-                        <?php foreach ($employees as $row): ?>
-                            <option <?php if( $row['id'] == $employee_id){ echo "selected" ;} ?> value="<?= $row['id']; ?>">
-                                <?= $row['display_name'].' ('. $row['emp_code'].')'; ?>
+                        <?php if (!empty($employees) && is_array($employees)) {
+                            foreach ($employees as $row) {
+                                $empId = is_array($row) ? ($row['id'] ?? '') : ($row->id ?? '');
+                                $empCode = is_array($row) ? ($row['emp_code'] ?? '') : ($row->emp_code ?? '');
+                                $displayName = is_array($row) ? ($row['display_name'] ?? '') : ($row->display_name ?? '');
+                                $selected = ((string)$empId === (string)$employee_id) ? 'selected="selected"' : '';
+                        ?>
+                            <option <?php echo $selected; ?> value="<?php echo htmlspecialchars((string)$empId, ENT_QUOTES); ?>">
+                                <?php echo htmlspecialchars($displayName . ' (' . $empCode . ')', ENT_QUOTES); ?>
                             </option>
-                        <?php endforeach; ?>
+                        <?php }
+                        } ?>
                     </select>
                 </div>
 
                 <!-- Month -->
                 <div class="form-group col-md-3">
-                    <label>Assessment Year <span style="color:red;">*</span></label>
-                    <select class="form-select js-example-basic-single" name="assessment_year" id="assessment_year">
+                    <label for="assessment_year">Assessment Year <span class="text-danger">*</span></label>
+                    <select class="form-select js-example-basic-single" name="assessment_year" id="assessment_year" aria-label="Assessment Year">
                         <option value="0">Select Assessment Year</option>
-                        <?php foreach ($assessment_years as $assessmentyear): ?>
-                            <option <?php if( $assessment_year == $assessmentyear){ echo "selected" ;} ?> value="<?= $assessmentyear; ?>">
-                                <?= $assessmentyear; ?>
+                        <?php if (!empty($assessment_years) && is_array($assessment_years)) {
+                            foreach ($assessment_years as $assessmentyear) {
+                                $ayVal = is_array($assessmentyear) ? ($assessmentyear['assessment_year'] ?? '') : (string)$assessmentyear;
+                                $selected = ((string)$assessment_year === (string)$ayVal) ? 'selected="selected"' : '';
+                        ?>
+                            <option <?php echo $selected; ?> value="<?php echo htmlspecialchars((string)$ayVal, ENT_QUOTES); ?>">
+                                <?php echo htmlspecialchars((string)$ayVal, ENT_QUOTES); ?>
                             </option>
-                        <?php endforeach; ?>
+                        <?php }
+                        } ?>
                     </select>
                 </div>
 
                 <!-- Search -->
                 <div class="form-group col-md-2">
-                    <label>&nbsp;</label>
-                    <button type="submit" class="btn btn-primary form-control" name="search" value="search">
+                    <label for="searchBtn" aria-label="Search">&nbsp;</label>
+                    <button type="submit" class="btn btn-primary form-control" name="search" id="searchBtn" value="search">
                         Search
                     </button>
                 </div>
@@ -71,7 +83,7 @@ $assessment_years = $result['assessment_years'] ?? array();
     </div>
     <div class="mt-4" id="TableContent">
         <?php
-    if(isset($_GET['employee_id']) && isset($_GET['assessment_year']) ){
+    if (isset($_GET['employee_id']) && isset($_GET['assessment_year'])) {
         include_once('custom_employee_assign_release_documents_table.php'); 
     }
     ?>
@@ -80,13 +92,6 @@ $assessment_years = $result['assessment_years'] ?? array();
 
 <script src="assets/bower_components/jquery/js/jquery.min.js"></script>
 <script>
-/*$(document).ready(function () {
-
-    $('#searchBtn').click(function () {
-        reloadAttendanceTable();
-    });
-
-});*/
 /**
  * Reload the attendance report table
  */
@@ -111,7 +116,7 @@ function reloadAttendanceTable() {
 
     var loader = `
         <div class="text-center">
-            <img src="assets/images/spiner/spiner3.gif" style="width:300px;">
+            <img src="assets/images/spiner/spiner3.gif" alt="Loading..." style="width:300px;">
         </div>
     `;
     $('#TableContent').html(loader);

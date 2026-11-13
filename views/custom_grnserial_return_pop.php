@@ -93,14 +93,14 @@ if($item_daata['tracking_type'] == 2){
 		var htmlRows = '';		
 		htmlRows += '<div class="row align-items-center sfitemRow" id="static_div_'+count+'" style="margin-top: 10px;">';
 		htmlRows += '<div class="col-lg-3">';
-		htmlRows += '<input type="text" class="form-control"  id="static_value_'+count+'"  value=""  name="type">';
+		htmlRows += '<input type="text" class="form-control" id="static_value_'+count+'" value="" name="type" aria-label="Lot Number '+count+'">';
 		htmlRows += '</div>';
 		htmlRows += '<div class="col-lg-3">';
-		htmlRows += '<input type="text"class="form-control"  id="qty_val_'+count+'"  value=""  name="type"> ';
+		htmlRows += '<input type="text" class="form-control" id="qty_val_'+count+'" value="" name="type" aria-label="Qty '+count+'">';
 		htmlRows += '</div>';
 		
 		htmlRows += '<div class="col-lg-3">';								
-		htmlRows += ' <input type="hidden" value="0" id="static_delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deleteRows(this.id)">Delete</button>';						
+		htmlRows += ' <input type="hidden" value="0" id="static_delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deleteRows(this.id)" aria-label="Delete row '+count+'">Delete</button>';						
 		htmlRows += '</div>';
 		htmlRows += '</div>';
 		$('#append_statick').append(htmlRows);
@@ -224,17 +224,18 @@ if($item_daata['tracking_type'] == 2){
 					<?php $i=1; foreach($res_data as $ser){ ?>
 						<div class="form-group row col-lg-12">
 							<div class="col-1" >
-								 <label class="kt-checkbox">
-								 	<input class="mt-3" id="cck_<?php echo $ser['id']; ?>" type="checkbox" <?php if($ser['check_return']==1){ echo "checked"; } ?>  onclick="updategrnretunsbyid(<?php echo $ser['id'].",'item_serial_nos'"; ?>)"> <span></span> 
+								 <label class="kt-checkbox" for="cck_<?php echo $ser['id']; ?>" aria-label="Select Serial Number <?php echo $i; ?>">
+								 	<span class="sr-only visually-hidden">Select Serial Number <?php echo $i; ?></span>
+								 	<input class="mt-3" id="cck_<?php echo $ser['id']; ?>" type="checkbox" <?php if($ser['check_return']==1){ echo "checked"; } ?>  onclick="updategrnretunsbyid(<?php echo $ser['id'].",'item_serial_nos'"; ?>)" onkeydown="if(event.key==='Enter'){this.click();}" aria-label="Select Serial Number <?php echo $i; ?>"> <span></span> 
 								 	<input type="hidden" name="" id="sl_<?php echo $ser['id']; ?>" value="<?php echo $ser['check_return']; ?>">
 								 </label>
 							</div>
 							<div class="col-3">
-								<label for="example-text-input" class="col-form-label">Serial Number <?php echo $i; ?></label>
+								<label for="serial_no_<?php echo $i; ?>" class="col-form-label">Serial Number <?php echo $i; ?></label>
 							</div>
 							
 							<div class="col-6">
-								<input type="text" class="form-control " readonly  id="serial_no_<?php echo $i; ?>" name="serial_no" value="<?php echo $ser['serial_no']; ?>">
+								<input type="text" class="form-control" readonly id="serial_no_<?php echo $i; ?>" name="serial_no" value="<?php echo $ser['serial_no']; ?>" aria-label="Serial Number <?php echo $i; ?>">
 							</div>
 			
 						</div>
@@ -244,27 +245,27 @@ if($item_daata['tracking_type'] == 2){
 				<div id='append_statick'>
 				<div class="row align-items-center" style="margin-top: 10px;">
 					<div class="col-lg-3">
-						<label><b>Lot Number</b></label>
+						<span class="fw-bold">Lot Number</span>
 					</div>
 					<div class="col-lg-3">
-						<label><b>Qty</b></label>
+						<span class="fw-bold">Qty</span>
 					</div>
 					<div class="col-lg-3">
-						<label><b></b></label>
+						<span></span>
 					</div>
 				</div>
 				<div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
 					<?php for($i=1; $i<count((array)$serialnos)+1; $i++){ ?>
 					<div class="row align-items-center sfitemRow" id="static_div_<?php echo $i; ?>" style="margin-top: 10px;">
 						<div class="col-lg-3">
-							<input type="text" class="form-control"  id="static_value_<?php echo $i; ?>"  value="<?php echo $serialnos[$i-1]['lot']; ?>"  name="type"> 
+							<input type="text" class="form-control" id="static_value_<?php echo $i; ?>" value="<?php echo $serialnos[$i-1]['lot']; ?>" name="type" aria-label="Lot Number <?php echo $i; ?>"> 
 						</div>
 						<div class="col-lg-3">
-							<input type="text"class="form-control"  id="qty_val_<?php echo $i; ?>"  value="<?php echo $serialnos[$i-1]['lot_value']; ?>"  name="type"> 
+							<input type="text" class="form-control" id="qty_val_<?php echo $i; ?>" value="<?php echo $serialnos[$i-1]['lot_value']; ?>" name="type" aria-label="Qty <?php echo $i; ?>"> 
 						</div>
 						<div class="col-lg-3">
 							<input type="hidden" value="0" id="static_delete_value_<?php echo $i; ?>" >
-							<button class="btn btn-warning" id="<?php echo $i; ?>" type="button" onclick="deleteRows(this.id)">Delete</button>
+							<button class="btn btn-warning" id="<?php echo $i; ?>" type="button" onclick="deleteRows(this.id)" aria-label="Delete row <?php echo $i; ?>">Delete</button>
 						</div>
 					</div>
 					<?php } ?>

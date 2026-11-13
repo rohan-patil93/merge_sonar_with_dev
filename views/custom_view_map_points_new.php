@@ -88,40 +88,40 @@ if (isset($_GET['error'])) {
                 <form id="fieldWorkDailyPlansForm" method="post">
                     <div class="row g-3">
                         <div class="col-12 form-group">
-                            <label class="fwdp-label">User <span class="text-danger">*</span></label>
+                            <label for="display_name" class="fwdp-label">User <span class="text-danger">*</span></label>
                             <input class="form-control" type="text" name="display_name" id="display_name" disabled / aria-label="Display Name">
                             <div class="d-none text-danger" id="user_id_err"></div>
                             <input class="form-control" type="hidden" name="user_id" id="user_id" />
                         </div>
                         <div class="col-12 form-group">
-                            <label class="fwdp-label">Date <span class="text-danger">*</span></label>
+                            <label for="plan_date" class="fwdp-label">Date <span class="text-danger">*</span></label>
                             <input class="form-control" type="date" name="plan_date" id="plan_date" / aria-label="Plan Date">
                             <div class="d-none text-danger" id="plan_date_err"></div>
                         </div>
                         <div class="col-12 form-group">
-                            <label class="fwdp-label">Location Name</label>
+                            <label for="plan_location" class="fwdp-label">Location Name</label>
                             <input class="form-control" type="text" name="plan_location" id="plan_location" aria-label="Plan Location">
                         </div>
                         <div class="col-12 form-group">
-                            <label class="fwdp-label">Contact person</label>
+                            <label for="contact_person" class="fwdp-label">Contact person</label>
                             <input class="form-control" type="text" name="contact_person" id="contact_person" aria-label="Contact Person">
                         </div>
                         <div class="col-12 form-group">
-                            <label class="fwdp-label">Phone No.</label>
+                            <label for="mobile" class="fwdp-label">Phone No.</label>
                             <input class="form-control" type="text" name="mobile" id="mobile" aria-label="Mobile">
                         </div>
                         <div class="col-12 form-group">
-                            <label class="fwdp-label">Latitude <span class="text-danger">*</span></label>
+                            <label for="plan_latitude" class="fwdp-label">Latitude <span class="text-danger">*</span></label>
                             <input class="form-control lat" type="text" name="plan_latitude" id="plan_latitude" readonly aria-label="Plan Latitude">
                             <div class="d-none text-danger" id="plan_latitude_err"></div>
                         </div>
                         <div class="col-12 form-group">
-                            <label class="fwdp-label">Longitude <span class="text-danger">*</span></label>
+                            <label for="plan_longitude" class="fwdp-label">Longitude <span class="text-danger">*</span></label>
                             <input class="form-control lng" type="text" name="plan_longitude" id="plan_longitude" readonly aria-label="Plan Longitude">
                             <div class="d-none text-danger" id="plan_longitude_err"></div>
                         </div>
                         <div class="col-12 form-group">
-                            <label class="fwdp-label">Address</label>
+                            <label for="plan_address" class="fwdp-label">Address</label>
                             <textarea class="form-control fwdp-address-field" name="plan_address" id="plan_address" rows="3" readonly aria-label="Plan Address"></textarea>
                         </div>
                         <div class="col-12">

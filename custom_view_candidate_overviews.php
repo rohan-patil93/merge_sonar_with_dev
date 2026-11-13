@@ -376,12 +376,12 @@ $due_date_period_list = $result['period_list'];
         <div class="card-header">
           <h5>About</h5>
           <div class="card-header-right">
-            <i class="ti-pencil" role="button" tabindex="0" aria-label="Edit" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"
+            <i class="ti-pencil"
               onclick="editFormShow('contact_detailsL','contact_detailsT','edit_contact_details','save_contact_details','Edit')"
               id="edit_contact_details" data-bs-toggle="tooltip" data-placement="bottom" title=""
               data-bs-original-title="Edit"></i>
 
-            <i class="ti-back-left" role="button" tabindex="0" aria-label="Cancel" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" id="save_contact_details_undo" data-placement="bottom"
+            <i class="ti-back-left" data-bs-toggle="tooltip" id="save_contact_details_undo" data-placement="bottom"
               title="" data-bs-original-title="Cancel"
               onclick="cancelChange('contact_detailsT','contact_detailsL','save_contact_details','edit_contact_details')"
               style="display: none"></i>
@@ -394,19 +394,19 @@ $due_date_period_list = $result['period_list'];
         <div class="card-block">
           <form id="contactdetailsfrom">
             <div class="mb-2 pb-2">
-              <label for="candidate_current_role" class="f-w-600 form-label">Job Role</label>
+              <label class="f-w-600 form-label">Job Role</label>
               <p class="f-14 mb-0 contact_detailsL">
                 <?php echo $candidates['candidate_current_role'] != "" ? $candidates['candidate_current_role'] : "N/A"; ?></p>
               <input class="form-control contact_detailsT" data-type="text" type="text" id="candidate_current_role"
                 name="candidate_current_role" value="<?php echo $candidates['candidate_current_role']; ?>"
-                style="display: none">
+                style="display: none" aria-label="Candidate Current Role">
             </div>
             <div class="mb-2 pb-2">
-              <label for="department_id" class="f-w-600 form-label">Department</label>
+              <label class="f-w-600 form-label">Department</label>
               <p class="f-14 mb-0 contact_detailsL">
                 <?php echo $candidates['department_id'] != "" ? $job_titles[$candidates['department_id']] : "N/A"; ?></p>
               <select class="form-select contact_detailsT" data-type="select" id="department_id" name="department_id"
-                style="display: none">
+                style="display: none" aria-label="Department Id">
                 <?php foreach ($departments as $key4 => $department) { ?>
                   <option <?php if ($key4 == $candidates['department_id']) { ?> selected <?php } ?>
                     value="<?php echo $key4; ?>"><?php echo $department; ?></option>
@@ -414,11 +414,11 @@ $due_date_period_list = $result['period_list'];
               </select>
             </div>
             <div class=" mb-2 pb-2">
-              <label for="job_tittle_id" class="f-w-600 form-label">Designation</label>
+              <label class="f-w-600 form-label">Designation</label>
               <p class="f-14 mb-0 contact_detailsL">
                 <?php echo $candidates['job_tittle_id'] != "" ? $job_titles[$candidates['job_tittle_id']] : "N/A"; ?></p>
               <select class="form-select  contact_detailsT" data-type="select" id="job_tittle_id" name="job_tittle_id"
-                style="display: none">
+                style="display: none" aria-label="Job Tittle Id">
                 <?php foreach ($job_titles as $key5 => $job_title) { ?>
                   <option <?php if ($key5 == $candidates['job_tittle_id']) { ?> selected <?php } ?>
                     value="<?php echo $key5; ?>"><?php echo $job_title; ?></option>
@@ -432,11 +432,11 @@ $due_date_period_list = $result['period_list'];
         <div class="card-header">
           <h5>Key Contacts</h5>
           <div class="card-header-right">
-            <i class="ti-pencil" role="button" tabindex="0" aria-label="Edit" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"
+            <i class="ti-pencil"
               onclick="editFormShow('personal_detailsL','personal_detailsT','edit_personal_details','save_personal_details','Edit')"
               id="edit_personal_details" data-bs-toggle="tooltip" data-placement="bottom" title=""
               data-bs-original-title="Edit"></i>
-            <i class="ti-back-left" role="button" tabindex="0" aria-label="Cancel" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" id="save_personal_details_undo" data-placement="bottom"
+            <i class="ti-back-left" data-bs-toggle="tooltip" id="save_personal_details_undo" data-placement="bottom"
               title="" data-bs-original-title="Cancel"
               onclick="cancelChange('personal_detailsT','personal_detailsL','save_personal_details','edit_personal_details')"
               style="display: none"></i>
@@ -451,17 +451,17 @@ $due_date_period_list = $result['period_list'];
         <div class="card-block">
           <form id="personaldetailsfrom">
             <div class="row mb-2 pb-2">
-              <span class="f-w-600 form-label d-inline-block">Manager</span>
+              <label class="f-w-600 form-label">Manager</label>
               <p class="f-14 mb-0">
                 <?php echo $job_posting_candidates['requested_by'] != "" ? $_SESSION['users'][$job_posting_candidates['requested_by']] : "N/A"; ?>
               </p>
             </div>
             <div class=" mb-2 pb-2">
-              <label for="hr_connect" class="f-w-600 form-label">HR Manager</label>
+              <label class="f-w-600 form-label">HR Manager</label>
               <p class="f-14 mb-0 personal_detailsL">
                 <?php echo $candidates['hr_connect'] != "" ? $_SESSION['users'][$candidates['hr_connect']] : "N/A"; ?></p>
               <select class="form-select  personal_detailsT" data-type="select" id="hr_connect" name="hr_connect"
-                style="display: none">
+                style="display: none" aria-label="Hr Connect">
                 <?php foreach ($applicationusers as $key7 => $displayname) { ?>
                   <option <?php if ($candidates['hr_connect'] == $key7) { ?> selected <?php } ?> value="<?php echo $key7; ?>">
                     <?php echo $displayname; ?></option>
@@ -469,7 +469,7 @@ $due_date_period_list = $result['period_list'];
               </select>
             </div>
             <div class="row mb-2 pb-2">
-              <span class="f-w-600 form-label d-inline-block">Recruiter</span>
+              <label class="f-w-600 form-label">Recruiter</label>
               <p class="f-14 mb-0">
                 <?php echo $job_posting_candidates['recruitment_manager'] != "" ? $_SESSION['users'][$job_posting_candidates['recruitment_manager']] : "N/A"; ?>
               </p>
@@ -524,7 +524,6 @@ $due_date_period_list = $result['period_list'];
                 <a class="accordion-msg b-none waves-effect waves-light f-w-700">Profile Readiness</a>
                 <div class="accordion-desc p-0">
                   <table class="table table-hover table-md">
-<thead style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;"><tr><th scope="col">Profile section</th><th scope="col">Completion</th></tr></thead>
                     <tbody>
                       <?php foreach ($profilereadiness as $keylabel => $profilereadines) {
                         $complete_field = $total_field = 0;
@@ -539,7 +538,7 @@ $due_date_period_list = $result['period_list'];
                         ?>
                         <tr>
                           <td>
-                            <h6 class="mb-0 f-14"><i class="ti-pencil" role="button" tabindex="0" aria-label="Edit" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"
+                            <h6 class="mb-0 f-14"><i class="ti-pencil"
                                 onclick="window.open('index.php?option=COM_INSERT_CANDIDATE&ETYPE=<?php echo str_replace(" ", "_", $keylabel); ?>&Rid=<?php echo $_GET['Rid']; ?>', '_blank');"></i>
                               <?php echo $keylabel; ?></h6>
                           </td>
@@ -554,7 +553,7 @@ $due_date_period_list = $result['period_list'];
                                   <div
                                     class="progress-bar progress-bar-<?php echo round($percentage) >= 50 ? "success" : "danger"; ?>"
                                     role="progressbar" style="width:  <?php echo round($percentage); ?>%;"
-                                    aria-valuenow="<?php echo round($percentage); ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                    aria-valuenow=" 55" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                               </div>
                             </div>
@@ -596,7 +595,6 @@ $due_date_period_list = $result['period_list'];
              <a class="accordion-msg b-none waves-effect waves-light f-w-700"><i class="fa fa-folder"></i> <?php echo ucwords(strtolower($parentdocuments['document_name'])); ?></a>
              <div class="accordion-desc p-0">
                <table class="table table-hover m-b-0 " style="font-size:13px;">
-<thead style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;"><tr><th scope="col">Document</th><th scope="col">Status</th><th scope="col">Actions</th></tr></thead>
                  <tbody>
                    <?php foreach ($vdata_details as $details){ 
                      $candidatedocument = $checkl[$details['id']];
@@ -629,7 +627,7 @@ $due_date_period_list = $result['period_list'];
                                 </a>
                        </td>
                        <td id="docssatusbtn_<?php echo $details['id']; ?>">
-                           <span class="form-label label label-md d-inline-block" style="color: <?php echo $statucolorname['color']; ?>;    background:  <?php echo $statucolorname['background_color']; ?>; border-color: <?php echo $statucolorname['background_color']; ?>;"><?php echo $candidatedocumentsstatusname[$candidatedocument['current_status']]; ?></span>
+                           <label class="form-label label label-md" style="color: <?php echo $statucolorname['color']; ?>;    background:  <?php echo $statucolorname['background_color']; ?>; border-color: <?php echo $statucolorname['background_color']; ?>;"><?php echo $candidatedocumentsstatusname[$candidatedocument['current_status']]; ?></label>
                            <span class="label label-md" style="color: <?php echo $statucolorname['color']; ?>;    background:  <?php echo $statucolorname['background_color']; ?>; border-color: <?php echo $statucolorname['background_color']; ?>;"><?php echo $candidatedocumentsstatusname[$candidatedocument['current_status']]; ?></span>
                        </td>
                        <td align="right">
@@ -644,7 +642,7 @@ $due_date_period_list = $result['period_list'];
                                <div class="image-input image-input-empty image-input-outline mr-10 mt-2" id="kt_image_5_old"  style=" height:0px; ">
                                   <label class="btn-hover-text-primary" data-action="change" data-toggle="tooltip" title="" data-original-title="Uploade File">
                                     <i class="ti-clip" style="font-size: 20px;"></i>
-                                    <input type="file" name="image_<?php echo $candidatedocument['id']; ?>" onchange="fileselected('<?php echo $candidatedocument['id'] ?>',this.value)"/>
+                                    <input type="file" name="image_<?php echo $candidatedocument['id']; ?>" onchange="fileselected('<?php echo $candidatedocument['id'] ?>',this.value)"/ aria-label="Input">
                                     <input type="hidden" name="hidimage_<?php echo $candidatedocument['id']; ?>" value="<?php echo $candidatedocument['document_shared']; ?>"/>
                                   </label>
 
@@ -667,12 +665,12 @@ $due_date_period_list = $result['period_list'];
                                <div class="card-header">
                                  <h5><?php echo ucwords($details['document_name']); ?> Request</h5>
                                  <div class="card-header-right">
-                                   <i class="ti-close" role="button" tabindex="0" aria-label="Close" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="closeSmallPopUp()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Close"></i>
+                                   <i class="ti-close" onclick="closeSmallPopUp()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Close"></i>
                                  </div>
                                </div>
                                <div class="card-body"> 
                                  <div class="form-group">
-                                   <span class="form-label d-inline-block">Joining Date : <?php echo fromDate($data['reporting_date']); ?></span>
+                                   <label class="form-label">Joining Date : <?php echo fromDate($data['reporting_date']); ?></label>
                                    <span class="form-label d-block">Joining Date : <?php echo fromDate($data['reporting_date']); ?></span>
                                  </div>
                                  <form id="docrequestform_<?php echo $details['id']; ?>">
@@ -683,7 +681,7 @@ $due_date_period_list = $result['period_list'];
                                  <div class="row">
                                    <div class="form-group col-lg-8 w-full">
                                      <label for="before_or_after_<?php echo $details['id']; ?>" class="form-label d-block">Due Date</label>
-                                      <select name="before_or_after" id="before_or_after_<?php echo $details['id']; ?>" style="width:150px;" class="form-control form-select js-example-basic-single">
+                                      <select name="before_or_after" id="before_or_after_<?php echo $details['id']; ?>" style="width:150px;" class="form-control form-select js-example-basic-single" aria-label="Before Or After">
                                          <option value="AT">Any Time</option>
                                          <?php foreach ($due_date_period_list as $due){  ?>
                                            <option value="<?php echo $due['genc_detail_code'];?>" ><?php echo $due['genc_detail_name']." Joining";?></option>
@@ -692,7 +690,7 @@ $due_date_period_list = $result['period_list'];
                                    </div>
                                    <div class="form-group col-lg-4">
                                      <label for="day_<?php echo $details['id']; ?>" class="form-label">Days</label>
-                                     <input type="text" name="day" id="day_<?php echo $details['id']; ?>" class="form-control" value="0" />
+                                     <input type="text" name="day" id="day_<?php echo $details['id']; ?>" class="form-control" value="0"/ aria-label="Day">
                                    </div>
                                  </div>
                                </form>
@@ -746,7 +744,6 @@ $due_date_period_list = $result['period_list'];
                           </a>
                           <div class="accordion-desc">
                             <table class="table table-hover">
-<thead style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;"><tr><th scope="col">Task</th><th scope="col">Status</th></tr></thead>
                               <tbody>
                                 <?php foreach ($transactionactivityschedule as $tas) { ?>
                                   <tr id="custom-popup-tas-<?php echo $tas['id']; ?>">
@@ -777,13 +774,12 @@ $due_date_period_list = $result['period_list'];
                                             <div class="card-header">
                                               <h5>Task</h5>
                                               <div class="card-header-right">
-                                                <i class="ti-close" role="button" tabindex="0" aria-label="Close" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="closeSmallPopUp()" data-bs-toggle="tooltip"
+                                                <i class="ti-close" onclick="closeSmallPopUp()" data-bs-toggle="tooltip"
                                                   data-placement="bottom" data-bs-original-title="Closed"></i>
                                               </div>
                                             </div>
                                             <div class="card-body">
                                               <table width="100%">
-<thead style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;"><tr><th scope="col">Details</th><th scope="col">Action</th></tr></thead>
                                                 <tbody>
 
                                                   <?php
@@ -804,7 +800,7 @@ $due_date_period_list = $result['period_list'];
                                                             <label
                                                               class="form-label check-task <?php echo $classcheck; ?> campliancecros_<?php echo $tas['id'] . "_" . $keyval; ?>">
                                                               <input type="checkbox" value="" <?php echo $checkboxcl; ?>
-                                                                class="checkcheckboxcopliance_<?php echo $tas['id'] . "_" . $keyval; ?>">
+                                                                class="checkcheckboxcopliance_<?php echo $tas['id'] . "_" . $keyval; ?>" aria-label="Input">
                                                               <span class="cr">
                                                                 <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                               </span>
@@ -930,7 +926,6 @@ $due_date_period_list = $result['period_list'];
              </a> 
              <div class="accordion-desc">
                <table class="table table-hover">
-<thead style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;"><tr><th scope="col">Task</th><th scope="col">Status</th></tr></thead>
                  <tbody>
                    <?php foreach($transactionactivityschedule11 as $tas){ 
                      ?>
@@ -968,7 +963,6 @@ $due_date_period_list = $result['period_list'];
                 <a class="accordion-msg b-none waves-effect waves-light f-w-700">Policies And Procedures</a>
                 <div class="accordion-desc">
                   <table class="table table-hover">
-<thead style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;"><tr><th scope="col">Document</th><th scope="col">Status</th><th scope="col">Actions</th></tr></thead>
                     <tbody>
                       <tr>
                         <td>
@@ -1207,7 +1201,7 @@ $due_date_period_list = $result['period_list'];
                                               <div class="image-input image-input-empty image-input-outline mr-10 mt-2" id="kt_image_5"  style=" height:0px; ">
                                                 <label class="btn-hover-text-primary mt-1 <?php //echo $value['document_shared']!=""?"mt-3":"mt-1"; ?>" data-action="change" data-toggle="tooltip" title="" data-original-title="Uploade File">
                                                   <i class="ti-clip" style="font-size: 20px;"></i>
-                                                  <input type="file" name="image_<?php echo $value['id']; ?>" onchange="fileselected('<?php echo $value['id'] ?>',this.value)"/>
+                                                  <input type="file" name="image_<?php echo $value['id']; ?>" onchange="fileselected('<?php echo $value['id'] ?>',this.value)"/ aria-label="Input">
                                                   <input type="hidden" name="hidimage_<?php echo $value['id']; ?>" value="<?php echo $value['document_shared']; ?>"/>
                                                 </label>
 
@@ -1219,8 +1213,8 @@ $due_date_period_list = $result['period_list'];
                                                <button class="label label-sm label-success" style="height: 18px; border-radius: 30px;"  type="button" data-content="<?php echo $value[$current_status]['name']; ?>"></button>
                                                <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                                                  <?php if($value['current_status'] == 0){ ?>
-                                                   <div class="dropdown-item <?php echo $value['current_status'] == ST_APPROVED?"active":""; ?>" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="statsonlychange(<?php echo $value['id'] ?>,<?php echo ST_APPROVED; ?>)"  name="status" id="status" value="<?php echo ST_APPROVED; ?>)">Approved</div>
-                                                   <div class="dropdown-item <?php echo $value['current_status'] == ST_REJECTED?"active":""; ?>" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="statsonlychange(<?php echo $value['id'] ?>,<?php echo ST_REJECTED; ?>)"  name="status" id="status" value="<?php echo ST_REJECTED; ?>)">Rejected</div>
+                                                   <div class="dropdown-item <?php echo $value['current_status'] == ST_APPROVED?"active":""; ?>" onclick="statsonlychange(<?php echo $value['id'] ?>,<?php echo ST_APPROVED; ?>)"  name="status" id="status" value="<?php echo ST_APPROVED; ?>)">Approved</div>
+                                                   <div class="dropdown-item <?php echo $value['current_status'] == ST_REJECTED?"active":""; ?>" onclick="statsonlychange(<?php echo $value['id'] ?>,<?php echo ST_REJECTED; ?>)"  name="status" id="status" value="<?php echo ST_REJECTED; ?>)">Rejected</div>
                                                  <?php } ?>
                                                </div>
                                              </div> 

@@ -48,7 +48,7 @@ $selectdata = $data['table_filed'];
 			<h5><?php echo "Api Filed Mapping";  ?></h5>
 			<div class="card-header-right table-card-header ">
 				<a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-					<i class="icofont icofont-reply"></i>
+					<i class="icofont icofont-reply" aria-hidden="true"></i>
 					Back
 				</a>
 		</div>
@@ -56,8 +56,8 @@ $selectdata = $data['table_filed'];
 	<div class="card-body">	
 		<div class="row">
 			<div class="col-lg-3">
-				<label  class="form-label">Transaction</label>
-				<select class="form-select js-example-basic-single" name="transaction_table"   id="transaction_table" onchange="gettTransactionIDRecords()">
+				<label class="form-label" for="transaction_table">Transaction</label>
+				<select class="form-select js-example-basic-single" name="transaction_table" id="transaction_table" onchange="gettTransactionIDRecords()" aria-label="Transaction">
              		<option value="">Select Any One</option>
                 	<?php foreach($all_api_masters as $dmt) {  ?>
                    <option value="<?php echo $dmt['id']; ?>"><?php echo $dmt['api_service_provider']." (".$dmt['api_name'].")";?></option>
@@ -65,24 +65,28 @@ $selectdata = $data['table_filed'];
               </select>
 			</div>
 			<div class="col-lg-2">
-				<span class="form-label d-block">&nbsp;</span>
+				<span class="form-label d-block" aria-hidden="true">&nbsp;</span>
 				<button class="btn btn-primary form-control" onclick="filterSubmitForm()" type="submit" >
-					<i class="ti-search m-r-2"></i>View
+					<i class="ti-search m-r-2" aria-hidden="true"></i>View
 				</button>
 			</div>
 		</div> 
 		<?php 
+		$idx = 0;
+		if (is_array($edidumpsdata) || is_object($edidumpsdata)) {
 		foreach ($edidumpsdata as $filed=>$edidumps) {
 		$edidump = $filed;
 		if($edidump!=""){
+			$idx++;
 			?>
 			<div class="form-group row col-lg-12 mt-4">
-				<label class="col-4">
-					<input class="form-control form-control-solid" type="text" value="<?php echo $edidump; ?>" />
-					<input class="form-control form-control-solid" type="hidden" name="filed[]" value="<?php echo $filed; ?>" />
+				<label class="col-4" for="api_field_<?php echo $idx; ?>" aria-label="API Field <?php echo htmlspecialchars($edidump); ?>">
+					<span class="visually-hidden">API Field <?php echo htmlspecialchars($edidump); ?></span>
+					<input class="form-control form-control-solid" type="text" id="api_field_<?php echo $idx; ?>" value="<?php echo htmlspecialchars($edidump); ?>" readonly aria-label="API Field <?php echo htmlspecialchars($edidump); ?>" />
+					<input class="form-control form-control-solid" type="hidden" name="filed[]" value="<?php echo htmlspecialchars($filed); ?>" />
 				</label>
 				<div class="col-4">
-					<select class="form-select js-example-basic-single" name="select[]">
+					<select class="form-select js-example-basic-single" name="select[]" id="select_field_<?php echo $idx; ?>" aria-label="Mapping for <?php echo htmlspecialchars($edidump); ?>">
 						<option value="0">Select Any one</option>
 						<?php foreach ($selectdata as  $fstt=>$select_list) { 
 							$select = strtolower(str_replace("_"," ",$select_list['Field']));
@@ -94,7 +98,7 @@ $selectdata = $data['table_filed'];
 						</select>
 					</div>
 				</div>
-			<?php } } ?>
+			<?php } } } ?>
 		</div>
 		<div class="card-footer">
 			<div class="row">

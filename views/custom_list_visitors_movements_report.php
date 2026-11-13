@@ -27,15 +27,15 @@ $today = date('Y-m-d');
 		<div class="card-body p-4">
 			<div class="row">
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>From Date <span class="text-danger">*</span></label>
+					<label for="from_date">From Date <span class="text-danger">*</span></label>
 					<input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo $today; ?>" aria-label="From Date">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>To Date <span class="text-danger">*</span></label>
+					<label for="to_date">To Date <span class="text-danger">*</span></label>
 					<input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo $today; ?>" aria-label="To Date">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>Location</label>
+					<label for="location_id">Location</label>
 					<select class="form-control js-example-basic-single" id="location_id" name="location_id" style="width:100%" aria-label="Location Id">
 						<option value="">All Locations</option>
 						<?php if(count((array)$locations) > 0){
@@ -49,7 +49,7 @@ $today = date('Y-m-d');
 					</select>
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>Whom to Meet</label>
+					<label for="whom_to_meet">Whom to Meet</label>
 					<select class="form-control js-example-basic-single" id="whom_to_meet" name="whom_to_meet" style="width:100%" aria-label="Whom To Meet">
 						<option value="">All</option>
 						<?php if(count((array)$employees) > 0){
@@ -63,7 +63,7 @@ $today = date('Y-m-d');
 					</select>
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>Movement</label>
+					<label for="movement">Movement</label>
 					<select class="form-control js-example-basic-single" id="movement" name="movement" style="width:100%" aria-label="Movement">
 						<option value="">All</option>
 						<option value="inside">Still Inside</option>
@@ -71,11 +71,11 @@ $today = date('Y-m-d');
 					</select>
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>Search</label>
+					<label for="search">Search</label>
 					<input class="form-control" type="text" name="search" id="search" placeholder="Name / Phone / Card No" value="" aria-label="Name / Phone / Card No">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label>&nbsp;</label>
+					<label for="getVisitorsMovementsReportBtn" aria-label="Search">&nbsp;</label>
 					<button type="button" class="btn btn-primary form-control" id="getVisitorsMovementsReportBtn">Search</button>
 				</div>
 			</div>
