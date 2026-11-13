@@ -61,7 +61,7 @@ foreach($emplo5 as $emplo){
 </style>
 <script type="text/javascript">
     function deleteidrow(id,deleteid) {
-        var delet = confirm('Are you sure want to delete report?');
+        var delet = confirm(<?php echo json_encode(__('Are you sure want to delete report?'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         if(delet){
             $.ajax({
                 url: "ajax.php",
@@ -110,10 +110,10 @@ foreach($emplo5 as $emplo){
             success: function(response) {
                 console.log(response);
                 swal.fire({
-                    title: "Report is move to trash successfully",
+                    title: <?php echo json_encode(__('Report is move to trash successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                     type: "success",
                     buttonsStyling: true,
-                    confirmButtonText: "<i class='la la-hand-o-up'></i>OK",
+                    confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('OK'), ENT_QUOTES, 'UTF-8'); ?>",
                     confirmButtonClass: "btn btn-success",
                     showCancelButton: false
 
@@ -140,11 +140,11 @@ foreach($emplo5 as $emplo){
  <div class="d-flex flex-column-fluid">
     <div class="container-fluid">
         <div class="card-header" >
-            <h5> Report Builder </h5>
+            <h5> <?= __('Report Builder'); ?> </h5>
             <div class="card-header-right" >
                 <a href="index.php?option=COM_INSERT_REPORT_ATTRIBUTES_NEW" class="btn btn-success mb-2 desktop-view">
               <i class="icofont icofont-plus icon-white "></i>
-              Report            </a>
+              <?= __('Report'); ?>            </a>
             </div>
         </div>
 
@@ -152,7 +152,7 @@ foreach($emplo5 as $emplo){
             <div class="row ">
                 <div class="col-lg-12">
                 <?php if($_GET['FLD']==""){ ?>
-                 <h3 class="f-18 f-w-600">Stantdard Report</h3>
+                 <h3 class="f-18 f-w-600"><?= __('Stantdard Report'); ?></h3>
                  <div class="row mt-3">
                     <?php foreach($parent_data as $pdata){
                         $count = count((array)$submain_data[$pdata['id']]);
@@ -166,10 +166,10 @@ foreach($emplo5 as $emplo){
                                         <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="">
                                             <?php if($_SESSION['admin_type'] == 1){ ?>
                                             <button type="button" class="dropdown-item waves-light waves-effect" onclick="changeflodername(<?php echo $pdata['id'].",'".$pdata['page_name']."'"; ?>)" ><?php echo $pdata['page_name']; ?><i class="ti-pencil m-l-10"></i></button>
-                                            <button type="button" class="dropdown-item waves-light waves-effect" onclick="movecopyfloder(<?php echo $pdata['id']; ?>)">Move to Folder</button>
-                                            <button type="button" class="dropdown-item waves-light waves-effect" onclick="movetotrash(<?php echo $pdata['id']; ?>)">Move to Trash</button>
+                                            <button type="button" class="dropdown-item waves-light waves-effect" onclick="movecopyfloder(<?php echo $pdata['id']; ?>)"><?= __('Move to Folder'); ?></button>
+                                            <button type="button" class="dropdown-item waves-light waves-effect" onclick="movetotrash(<?php echo $pdata['id']; ?>)"><?= __('Move to Trash'); ?></button>
                                           <?php } ?>
-                                            <button type="button" class="dropdown-item waves-light waves-effect" onclick="copyreportsbyid(<?php echo $pdata['id']; ?>)">Make a Copy</button>
+                                            <button type="button" class="dropdown-item waves-light waves-effect" onclick="copyreportsbyid(<?php echo $pdata['id']; ?>)"><?= __('Make a Copy'); ?></button>
                                         </div>
                                     </div>
                                 </div>
@@ -178,7 +178,7 @@ foreach($emplo5 as $emplo){
                                     <img src="assets/images/folder.png" class="img-20" alt="">
                                     <div class="d-block m-t-15">
                                         <h4 class="f-14 m-0 text-primary"><?php echo $pdata['page_name']; ?> <i class="ti-user f-14 text-dark m-l-10"></i></h4>
-                                        <p class="m-0 mt-2 text-muted f-12 f-w-600">No of Files <?php echo $count; ?></p>
+                                        <p class="m-0 mt-2 text-muted f-12 f-w-600"><?= __('No of Files'); ?> <?php echo $count; ?></p>
                                     </div>
                                 </div>
                                 </a>
@@ -190,7 +190,7 @@ foreach($emplo5 as $emplo){
 
 
                 </div>
-                <h3 class="f-18 f-w-600">My Report</h3>
+                <h3 class="f-18 f-w-600"><?= __('My Report'); ?></h3>
                 <div class="row mt-3">
                     <?php foreach($parent_data as $pdata){
                         $count = count((array)$submain_data[$pdata['id']]);
@@ -203,10 +203,10 @@ foreach($emplo5 as $emplo){
                                         <button class="btn waves-effect waves-light p-0" type="button" id="dropdown-2_2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></button>
                                         <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="">
                                             <button type="button" class="dropdown-item waves-light waves-effect" onclick="changeflodername(<?php echo $pdata['id'].",'".$pdata['page_name']."'"; ?>)" ><?php echo $pdata['page_name']; ?><i class="ti-pencil m-l-10"></i></button>
-                                            <button type="button" class="dropdown-item waves-light waves-effect" onclick="copyreportsbyid(<?php echo $pdata['id']; ?>)">Make a Copy</button>
-                                            <button type="button" class="dropdown-item waves-light waves-effect" onclick="movecopyfloder(<?php echo $pdata['id']; ?>)">Move to Folder</button>
-                                            <button type="button" class="dropdown-item waves-light waves-effect" onclick="movetotrash(<?php echo $pdata['id']; ?>)">Move to Trash</button>
-                                            <a class="dropdown-item waves-light waves-effect" href="index.php?option=COM_INSERT_REPORT_ATTRIBUTES_NEW&Rid=<?php echo deocdeId("id:".$pdata['report_id']); ?>" >View</a>
+                                            <button type="button" class="dropdown-item waves-light waves-effect" onclick="copyreportsbyid(<?php echo $pdata['id']; ?>)"><?= __('Make a Copy'); ?></button>
+                                            <button type="button" class="dropdown-item waves-light waves-effect" onclick="movecopyfloder(<?php echo $pdata['id']; ?>)"><?= __('Move to Folder'); ?></button>
+                                            <button type="button" class="dropdown-item waves-light waves-effect" onclick="movetotrash(<?php echo $pdata['id']; ?>)"><?= __('Move to Trash'); ?></button>
+                                            <a class="dropdown-item waves-light waves-effect" href="index.php?option=COM_INSERT_REPORT_ATTRIBUTES_NEW&Rid=<?php echo deocdeId("id:".$pdata['report_id']); ?>" ><?= __('View'); ?></a>
                                         </div>
                                     </div>
                                 </div>
@@ -215,7 +215,7 @@ foreach($emplo5 as $emplo){
                                     <img src="assets/images/folder.png" class="img-20" alt="">
                                     <div class="d-block m-t-15">
                                         <h4 class="f-14 m-0 text-primary"><?php echo $pdata['page_name']; ?> <i class="ti-user f-14 text-dark m-l-10"></i></h4>
-                                        <p class="m-0 mt-2 text-muted f-12 f-w-600">No of Files <?php echo $count; ?></p>
+                                        <p class="m-0 mt-2 text-muted f-12 f-w-600"><?= __('No of Files'); ?> <?php echo $count; ?></p>
                                     </div>
                                 </div>
                                 </a>
@@ -234,24 +234,24 @@ foreach($emplo5 as $emplo){
                                 <thead>
                                    <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Report Name</th>
-                                        <th scope="col">Activity</th>
-                                        <th scope="col">Created By</th>
+                                        <th scope="col"><?= __('Report Name'); ?></th>
+                                        <th scope="col"><?= __('Activity'); ?></th>
+                                        <th scope="col"><?= __('Created By'); ?></th>
 
-                                        <th scope="col">Actions</th>
+                                        <th scope="col"><?= __('Actions'); ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <th scope="col">1</th>
-                                        <td>Facebook</td>
+                                        <td><?= __('Facebook'); ?></td>
                                         <td>19-11-2018</td>
                                         <td>
                                             <div class="d-inline-block align-middle">
-                                                <img src="../files/assets/images/avatar-4.jpg" alt="user" class="img-radius img-40 align-top m-r-15">
+                                                <img src="../files/assets/images/avatar-4.jpg" alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-15">
                                                 <div class="d-inline-block">
-                                                    <h6>Shirley  Hoe</h6>
-                                                    <p class="text-muted m-b-0">Sales executive , NY</p>
+                                                    <h6><?= __('Shirley Hoe'); ?></h6>
+                                                    <p class="text-muted m-b-0"><?= __('Sales executive , NY'); ?></p>
                                                 </div>
                                             </div>
                                         </td>
@@ -260,25 +260,25 @@ foreach($emplo5 as $emplo){
                                             <div class="dropdown-primary dropdown open float-right">
                                                 <button class="btn waves-effect waves-light p-0" type="button" id="dropdown-2_3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="">
-                                                    <a class="dropdown-item waves-light waves-effect d-block" href="#">Action</a>
-                                                    <a class="dropdown-item waves-light waves-effect d-block" href="#">Another action</a>
-                                                    <a class="dropdown-item waves-light waves-effect d-block" href="#">Something else</a>
+                                                    <a class="dropdown-item waves-light waves-effect d-block" href="#"><?= __('Action'); ?></a>
+                                                    <a class="dropdown-item waves-light waves-effect d-block" href="#"><?= __('Another action'); ?></a>
+                                                    <a class="dropdown-item waves-light waves-effect d-block" href="#"><?= __('Something else'); ?></a>
                                                     <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item waves-light waves-effect d-block" href="#">Something else</a>
+                                                    <a class="dropdown-item waves-light waves-effect d-block" href="#"><?= __('Something else'); ?></a>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="col">2</th>
-                                        <td>Facebook</td>
+                                        <td><?= __('Facebook'); ?></td>
                                         <td>19-11-2018</td>
                                         <td>
                                             <div class="d-inline-block align-middle">
-                                                <img src="../files/assets/images/avatar-4.jpg" alt="user" class="img-radius img-40 align-top m-r-15">
+                                                <img src="../files/assets/images/avatar-4.jpg" alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-15">
                                                 <div class="d-inline-block">
-                                                    <h6>Shirley  Hoe</h6>
-                                                    <p class="text-muted m-b-0">Sales executive , NY</p>
+                                                    <h6><?= __('Shirley Hoe'); ?></h6>
+                                                    <p class="text-muted m-b-0"><?= __('Sales executive , NY'); ?></p>
                                                 </div>
                                             </div>
                                         </td>
@@ -287,25 +287,25 @@ foreach($emplo5 as $emplo){
                                             <div class="dropdown-primary dropdown open float-right">
                                                 <button class="btn waves-effect waves-light p-0" type="button" id="dropdown-2_4" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="">
-                                                    <a class="dropdown-item waves-light waves-effect d-block" href="#">Action</a>
-                                                    <a class="dropdown-item waves-light waves-effect d-block" href="#">Another action</a>
-                                                    <a class="dropdown-item waves-light waves-effect d-block" href="#">Something else</a>
+                                                    <a class="dropdown-item waves-light waves-effect d-block" href="#"><?= __('Action'); ?></a>
+                                                    <a class="dropdown-item waves-light waves-effect d-block" href="#"><?= __('Another action'); ?></a>
+                                                    <a class="dropdown-item waves-light waves-effect d-block" href="#"><?= __('Something else'); ?></a>
                                                     <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item waves-light waves-effect d-block" href="#">Something else</a>
+                                                    <a class="dropdown-item waves-light waves-effect d-block" href="#"><?= __('Something else'); ?></a>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="col">3</th>
-                                        <td>Facebook</td>
+                                        <td><?= __('Facebook'); ?></td>
                                         <td>19-11-2018</td>
                                         <td>
                                             <div class="d-inline-block align-middle">
-                                                <img src="../files/assets/images/avatar-4.jpg" alt="user" class="img-radius img-40 align-top m-r-15">
+                                                <img src="../files/assets/images/avatar-4.jpg" alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-15">
                                                 <div class="d-inline-block">
-                                                    <h6>Shirley  Hoe</h6>
-                                                    <p class="text-muted m-b-0">Sales executive , NY</p>
+                                                    <h6><?= __('Shirley Hoe'); ?></h6>
+                                                    <p class="text-muted m-b-0"><?= __('Sales executive , NY'); ?></p>
                                                 </div>
                                             </div>
                                         </td>
@@ -313,11 +313,11 @@ foreach($emplo5 as $emplo){
                                             <div class="dropdown-primary dropdown open float-right">
                                                 <button class="btn waves-effect waves-light p-0" type="button" id="dropdown-2_5" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="">
-                                                    <a class="dropdown-item waves-light waves-effect d-block" href="#">Action</a>
-                                                    <a class="dropdown-item waves-light waves-effect d-block" href="#">Another action</a>
-                                                    <a class="dropdown-item waves-light waves-effect d-block" href="#">Something else</a>
+                                                    <a class="dropdown-item waves-light waves-effect d-block" href="#"><?= __('Action'); ?></a>
+                                                    <a class="dropdown-item waves-light waves-effect d-block" href="#"><?= __('Another action'); ?></a>
+                                                    <a class="dropdown-item waves-light waves-effect d-block" href="#"><?= __('Something else'); ?></a>
                                                     <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item waves-light waves-effect d-block" href="#">Something else</a>
+                                                    <a class="dropdown-item waves-light waves-effect d-block" href="#"><?= __('Something else'); ?></a>
                                                 </div>
                                             </div>
                                         </td>
@@ -358,9 +358,9 @@ foreach($emplo5 as $emplo){
                                         <button class="btn waves-effect waves-light p-0" type="button" id="dropdown-2_6" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></button>
                                         <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="">
                                             <button type="button" class="dropdown-item waves-light waves-effect" onclick="changeflodername(<?php echo $pdata['id'].",'".$pdata['page_name']."'"; ?>)" ><?php echo $pdata['page_name']; ?><i class="ti-pencil m-l-10"></i></button>
-                                            <button type="button" class="dropdown-item waves-light waves-effect" onclick="copyreportsbyid(<?php echo $pdata['id']; ?>)">Make a Copy</button>
-                                            <button type="button" class="dropdown-item waves-light waves-effect" onclick="movecopyfloder(<?php echo $pdata['id']; ?>)">Move to Folder</button>
-                                            <button type="button" class="dropdown-item waves-light waves-effect" onclick="movetotrash(<?php echo $pdata['id']; ?>)">Move to Trash</button>
+                                            <button type="button" class="dropdown-item waves-light waves-effect" onclick="copyreportsbyid(<?php echo $pdata['id']; ?>)"><?= __('Make a Copy'); ?></button>
+                                            <button type="button" class="dropdown-item waves-light waves-effect" onclick="movecopyfloder(<?php echo $pdata['id']; ?>)"><?= __('Move to Folder'); ?></button>
+                                            <button type="button" class="dropdown-item waves-light waves-effect" onclick="movetotrash(<?php echo $pdata['id']; ?>)"><?= __('Move to Trash'); ?></button>
                                         </div>
                                     </div>
                                 </div>
@@ -369,7 +369,7 @@ foreach($emplo5 as $emplo){
                                     <img src="assets/images/folder.png" class="img-20" alt="">
                                     <div class="d-block m-t-15">
                                         <h4 class="f-14 m-0 text-primary"><?php echo $pdata['page_name']; ?> <i class="ti-user f-14 text-dark m-l-10"></i></h4>
-                                        <p class="m-0 mt-2 text-muted f-12 f-w-600">No of Files <?php echo $count; ?></p>
+                                        <p class="m-0 mt-2 text-muted f-12 f-w-600"><?= __('No of Files'); ?> <?php echo $count; ?></p>
                                     </div>
                                 </div>
                                 </a>
@@ -391,11 +391,11 @@ foreach($emplo5 as $emplo){
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Report Name</th>
-                                        <th scope="col">Activity</th>
-                                        <th scope="col">Created By</th>
+                                        <th scope="col"><?= __('Report Name'); ?></th>
+                                        <th scope="col"><?= __('Activity'); ?></th>
+                                        <th scope="col"><?= __('Created By'); ?></th>
 
-                                        <th scope="col">Actions</th>
+                                        <th scope="col"><?= __('Actions'); ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -408,13 +408,13 @@ foreach($emplo5 as $emplo){
                                             <div class="d-inline-block align-middle">
 
                                                <?php if($employees_list[$result['emp_id']]['image']) {?>
-                                                            <img src="uploads/all/<?php echo $employees_list[$result['emp_id']]['image']; ?>"  class="img-radius img-50 align-top m-r-15" alt="Attachment Preview">
+                                                            <img src="uploads/all/<?php echo $employees_list[$result['emp_id']]['image']; ?>"  class="img-radius img-50 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                                         <?php } else { ?>
-                                                            <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($employees_list[$result['emp_id']]['display_name']); ?></span>
+                                                            <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($employees_list[$result['emp_id']]['display_name']); ?></span>
                                                         <?php } ?>
                                                 <div class="d-inline-block">
                                                     <h6><?php echo $employees_list[$result['emp_id']]['display_name']; ?></h6>
-                                                    <p class="text-muted m-b-0">Sales executive , NY</p>
+                                                    <p class="text-muted m-b-0"><?= __('Sales executive , NY'); ?></p>
                                                 </div>
                                             </div>
                                         </td>
@@ -422,14 +422,14 @@ foreach($emplo5 as $emplo){
                                             <div class="dropdown-primary dropdown open float-right">
                                                 <button class="btn waves-effect waves-light p-0" type="button" id="dropdown-2_7" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="">
-                                                    <a class="dropdown-item waves-light waves-effect d-block" href="index.php?option=COM_VIEW_MY_REPORT&Rid=<?php echo deocdeId("id:".$result['report_id']);  ?>">Preview</a>
-                                                    <a class="dropdown-item waves-light waves-effect d-block"href="index.php?option=COM_INSERT_REPORT_ATTRIBUTES_NEW&Rid=<?php echo deocdeId("id:".$result['report_id']);  ?>">Edit</a>
+                                                    <a class="dropdown-item waves-light waves-effect d-block" href="index.php?option=COM_VIEW_MY_REPORT&Rid=<?php echo deocdeId("id:".$result['report_id']);  ?>"><?= __('Preview'); ?></a>
+                                                    <a class="dropdown-item waves-light waves-effect d-block"href="index.php?option=COM_INSERT_REPORT_ATTRIBUTES_NEW&Rid=<?php echo deocdeId("id:".$result['report_id']);  ?>"><?= __('Edit'); ?></a>
 
                                                     <div class="dropdown-divider"></div>
 
-                                            <button type="button" class="dropdown-item waves-light waves-effect" onclick="copyreportsbyid(<?php echo $result['id']; ?>)">Make a Copy</button>
-                                            <button type="button" class="dropdown-item waves-light waves-effect" onclick="movecopyfloder(<?php echo $result['id']; ?>)">Move to Folder</button>
-                                            <button type="button" class="dropdown-item waves-light waves-effect" onclick="movetotrash(<?php echo $result['id']; ?>)">Move to Trash</button>
+                                            <button type="button" class="dropdown-item waves-light waves-effect" onclick="copyreportsbyid(<?php echo $result['id']; ?>)"><?= __('Make a Copy'); ?></button>
+                                            <button type="button" class="dropdown-item waves-light waves-effect" onclick="movecopyfloder(<?php echo $result['id']; ?>)"><?= __('Move to Folder'); ?></button>
+                                            <button type="button" class="dropdown-item waves-light waves-effect" onclick="movetotrash(<?php echo $result['id']; ?>)"><?= __('Move to Trash'); ?></button>
                                                 </div>
                                             </div>
                                         </td>
