@@ -13,7 +13,7 @@ $_SESSION['download_data'] = array();
 </style>
 <div class="card">
   <div class="card-header">
-    <h5 class="f-30">Vendor</h5>
+    <h5 class="f-30"><?= __('Vendor'); ?></h5>
     <div class="card-header-right">
     
     </div>
@@ -29,8 +29,8 @@ $_SESSION['download_data'] = array();
           </tr>
           <tr bgcolor="#eeeeee">
             <th scope="col">#</th>
-            <th scope="col">Job Title</th>
-            <th scope="col">Exp</th>
+            <th scope="col"><?= __('Job Title'); ?></th>
+            <th scope="col"><?= __('Exp'); ?></th>
             <?php foreach ($result['vendor_data'] as $locdata) { 
               foreach ($locdata as $vendata) { 
                 $listvendors[] = $vendata['id'];
