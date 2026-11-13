@@ -30,8 +30,8 @@ foreach ($appwizdata as  $value) {
     <div class="container-fluid">
         <div class="row">
         <div class="alert alert-warning alert-dismissible">
-            <strong><?php echo "This function is used for maintaining <strong>Display Attributes</strong>. * represents mandatory fields."; ?></strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <strong><?php echo "This function is used for maintaining <strong>".__('Display Attributes')."</strong>".__('. * represents mandatory fields.').""; ?></strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
         </div>
         </div>
 
@@ -71,7 +71,7 @@ foreach ($appwizdata as  $value) {
                                                         <span class="switch switch-outline switch-icon switch-primary">
                                                             <label>
 
-                                                                <input aria-label="Checkbox" type="checkbox" <?php if(in_array($cost['id'], $acceptwz)){ ?> checked <?php
+                                                                <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" <?php if(in_array($cost['id'], $acceptwz)){ ?> checked <?php
 } ?> value="<?php echo $cost['id']; ?>" class="js-switch"  name="name[]" >
                                                                 <span></span>
                                                             </label>
@@ -89,8 +89,8 @@ foreach ($appwizdata as  $value) {
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <input type="hidden" name="submit" value="Add" />
-                                            <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit"><i class="la la-check"></i>Save</button>
-                                            <button type="reset" class="btn btn-light-primary font-weight-bolder mr-2" ><i class="la la-close"></i>Cancel</button>
+                                            <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit"><i class="la la-check"></i><?= __('Save'); ?></button>
+                                            <button type="reset" class="btn btn-light-primary font-weight-bolder mr-2" ><i class="la la-close"></i><?= __('Cancel'); ?></button>
                                         </div>
                                     </div>
                                 </form>
