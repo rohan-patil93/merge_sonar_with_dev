@@ -153,28 +153,28 @@ if($_GET['option'] == 'COM_VENDOR_EMPLOYEE_DASH_BOARD'){ ?>
         <div class="col-lg-3">
             <div class="col bg-light-primary ">
                 <span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
-                    <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="Theme-Logo" />
+                    <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="<?= htmlspecialchars(__('Theme-Logo'), ENT_QUOTES, 'UTF-8'); ?>" />
                 </span>
                 <span class="text-dark-75 font-weight-bolder font-size-h3"><?php echo $_SESSION['config']['name']; ?></span>
             </div>
         </div>
         <div class="col-lg-6">
-            <h4 class="card-label text-center f-w-700">Vendor Wise Monthly Dash Board Summary
-                <?php echo date('M, Y',strtotime($from_date));?> </br><small class="f-10">Name : <?php echo $_SESSION['display_name']; ?> &nbsp;  Date & Time : <?php echo date("d-m-Y H:i:s"); ?></small></h4>
+            <h4 class="card-label text-center f-w-700"><?= __('Vendor Wise Monthly Dash Board Summary'); ?>
+                <?php echo date('M, Y',strtotime($from_date));?> </br><small class="f-10"><?= __('Name'); ?> : <?php echo $_SESSION['display_name']; ?> &nbsp;  <?= htmlspecialchars(__('Date & Time'), ENT_QUOTES, 'UTF-8'); ?> : <?php echo date("d-m-Y H:i:s"); ?></small></h4>
         </div>
         <div class="col-lg-3">
             <form class="kt-form" id="kt_form" method="post" action="" >
                 <div class="input-group input-group-button">
-                    <input aria-label="From Date" type="month" name="from_date" value="<?php echo $from_cur_year."-".$from_cur_month?>"  id="att_month_year"  class="form-control form-control-sm width1" style="font-size: 14px;height: 40px !important;padding: 10px 15px;">  <button type="submit" name="applyform" value="apply" class="btn btn-info waves-effect waves-light input-group-text mt-0">
-                        Submit
+                    <input aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>" type="month" name="from_date" value="<?php echo $from_cur_year."-".$from_cur_month?>"  id="att_month_year"  class="form-control form-control-sm width1" style="font-size: 14px;height: 40px !important;padding: 10px 15px;">  <button type="submit" name="applyform" value="apply" class="btn btn-info waves-effect waves-light input-group-text mt-0">
+                        <?= __('Submit'); ?>
                     </button>
                 </div>
             </form>
 
             <div>
-                <select aria-label="Locationvalueget" class="form-select js-example-basic-single" id="locationvalueget" onchange="changeLocation()">
+                <select aria-label="<?= htmlspecialchars(__('Locationvalueget'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="locationvalueget" onchange="changeLocation()">
                     <option <?php if($loc==0){ echo "SELECTED";
-}  ?>  value="0">ALL</option>
+}  ?>  value="0"><?= __('ALL'); ?></option>
                     <?php foreach($displaylocations as $locat){ ?>
                     <option <?php if($loc==$locat['id']){ echo "SELECTED";
 }  ?> value="<?php echo $locat['id']; ?>"> <?php echo $locat['location_name']; ?> </option>
@@ -190,19 +190,19 @@ if($_GET['option'] == 'COM_VENDOR_EMPLOYEE_DASH_BOARD'){ ?>
         <div class="card-body">
             <?php if($_GET['option'] != 'COM_VENDOR_EMPLOYEE_DASH_BOARD'){ ?>
                 <div>
-                 <button class="btn btn-info waves-effect float-right waves-light input-group-text mt-0"> History </button>
+                 <button class="btn btn-info waves-effect float-right waves-light input-group-text mt-0"> <?= __('History'); ?> </button>
             </div>
             <?php  } ?>
             <div class="row dt-responsive table-responsive">
                 <table class="table table-separate table-head-custom table-checkable data-table" id="kt_datatable1">
                     <tr>
                         <th scope="col" style="width: 3%;"></th>
-                        <th scope="col" style="width: 5%;">SL.NO.</th>
-                        <th scope="col" style="width: 13%;">Vendor Name</th>
-                        <th scope="col" class="text-right" style="width: 7%;">Employee</th>
-                        <th scope="col" class="text-right" style="width: 10%;">Billable Days</th>
+                        <th scope="col" style="width: 5%;"><?= __('SL.NO.'); ?></th>
+                        <th scope="col" style="width: 13%;"><?= __('Vendor Name'); ?></th>
+                        <th scope="col" class="text-right" style="width: 7%;"><?= __('Employee'); ?></th>
+                        <th scope="col" class="text-right" style="width: 10%;"><?= __('Billable Days'); ?></th>
 
-                        <th scope="col" class="text-right" style="width: 10%;">Billable Amount</th>
+                        <th scope="col" class="text-right" style="width: 10%;"><?= __('Billable Amount'); ?></th>
                     </tr>
                     <?php $k=1; $lists = array(); foreach($venders as  $vender){
                         $billable_hrs += ($vender['billable_hrs']/8);
