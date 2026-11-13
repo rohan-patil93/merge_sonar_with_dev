@@ -45,14 +45,14 @@ $company_id = $_SESSION['company_id'];
                 <div class="card shadow-sm">
                     <div class="card-header bg-primary text-white">
                         <h4 class="mb-0">
-                            <i class="fas fa-users-cog me-2"></i>Employee Buddy Reassignment
+                            <i class="fas fa-users-cog me-2"></i><?= __('Employee Buddy Reassignment'); ?>
                         </h4>
                     </div>
                     <div class="card-body">
 
                         <div class="mb-3">
                             <a href="index.php?option=COM_VIEW_BUDDY_REASSIGNMENT_HISTORY" class="btn btn-secondary">
-                                <i class="fas fa-history me-1"></i>View Reassignment History
+                                <i class="fas fa-history me-1"></i><?= __('View Reassignment History'); ?>
                             </a>
                         </div>
 
@@ -63,27 +63,27 @@ $company_id = $_SESSION['company_id'];
 
                             <div class="row mb-3">
                                 <div class="col-md-4">
-                                    <label for="buddy_type" class="form-label">Buddy Type <span class="text-danger">*</span></label>
+                                    <label for="buddy_type" class="form-label"><?= __('Buddy Type'); ?> <span class="text-danger">*</span></label>
                                     <select name="buddy_type" id="buddy_type" class="form-select" required>
-                                        <option value="">-- Select Buddy Type --</option>
-                                        <option value="admin_buddy">Approval 1</option>
-                                        <option value="project_buddy">Approval 2</option>
-                                        <option value="finance_buddy">Approval 3</option>
+                                        <option value="">-- <?= __('Select Buddy Type'); ?> --</option>
+                                        <option value="admin_buddy"><?= __('Approval 1'); ?></option>
+                                        <option value="project_buddy"><?= __('Approval 2'); ?></option>
+                                        <option value="finance_buddy"><?= __('Approval 3'); ?></option>
 
                                     </select>
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label for="from_buddy" class="form-label">From Buddy <span class="text-danger">*</span></label>
+                                    <label for="from_buddy" class="form-label"><?= __('From Buddy'); ?> <span class="text-danger">*</span></label>
                                     <select name="from_buddy" id="from_buddy" class="form-select js-example-basic-single" required>
-                                        <option value="">-- Select Employee --</option>
+                                        <option value="">-- <?= __('Select Employee'); ?> --</option>
                                     </select>
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label for="to_buddy" class="form-label">To Buddy <span class="text-danger">*</span></label>
+                                    <label for="to_buddy" class="form-label"><?= __('To Buddy'); ?> <span class="text-danger">*</span></label>
                                     <select name="to_buddy" id="to_buddy" class="form-select js-example-basic-single" required>
-                                        <option value="">-- Select Employee --</option>
+                                        <option value="">-- <?= __('Select Employee'); ?> --</option>
                                     </select>
                                 </div>
                             </div>
@@ -91,10 +91,10 @@ $company_id = $_SESSION['company_id'];
                             <div class="row mb-3">
                                 <div class="col-12">
                                     <button type="button" id="btn_preview" class="btn btn-info">
-                                        <i class="fas fa-eye me-1"></i>Preview Affected Employees
+                                        <i class="fas fa-eye me-1"></i><?= __('Preview Affected Employees'); ?>
                                     </button>
                                     <button type="reset" class="btn btn-secondary">
-                                        <i class="fas fa-redo me-1"></i>Reset
+                                        <i class="fas fa-redo me-1"></i><?= __('Reset'); ?>
                                     </button>
                                 </div>
                             </div>
@@ -104,7 +104,7 @@ $company_id = $_SESSION['company_id'];
                         <div id="preview_section" class="mt-4" style="display: none;">
                             <hr>
                             <h5 class="mb-3">
-                                <i class="fas fa-users me-2"></i>Affected Employees Preview
+                                <i class="fas fa-users me-2"></i><?= __('Affected Employees Preview'); ?>
                             </h5>
                             <div id="preview_info" class="alert alert-info mb-3"></div>
 
@@ -112,11 +112,11 @@ $company_id = $_SESSION['company_id'];
                                 <table id="employees_table" class="table table-striped table-bordered">
                                     <thead class="table-dark">
                                         <tr>
-                                            <th scope="col">Emp Code</th>
-                                            <th scope="col">Employee Name</th>
-                                            <th scope="col">Department</th>
-                                            <th scope="col">Designation</th>
-                                            <th scope="col">Current Buddy</th>
+                                            <th scope="col"><?= __('Emp Code'); ?></th>
+                                            <th scope="col"><?= __('Employee Name'); ?></th>
+                                            <th scope="col"><?= __('Department'); ?></th>
+                                            <th scope="col"><?= __('Designation'); ?></th>
+                                            <th scope="col"><?= __('Current Buddy'); ?></th>
                                         </tr>
                                     </thead>
                                     <tbody id="employees_tbody">
@@ -127,10 +127,10 @@ $company_id = $_SESSION['company_id'];
 
                             <div class="mt-3">
                                 <button type="button" id="btn_confirm" class="btn btn-success btn-lg">
-                                    <i class="fas fa-check-circle me-1"></i>Confirm Reassignment
+                                    <i class="fas fa-check-circle me-1"></i><?= __('Confirm Reassignment'); ?>
                                 </button>
                                 <button type="button" id="btn_cancel_preview" class="btn btn-danger btn-lg">
-                                    <i class="fas fa-times-circle me-1"></i>Cancel
+                                    <i class="fas fa-times-circle me-1"></i><?= __('Cancel'); ?>
                                 </button>
                             </div>
                         </div>
