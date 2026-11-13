@@ -95,9 +95,9 @@ foreach($parentcoa as $pcoa1){
         <div class="table-responsive" style="overflow: clip;">
             <table style="width:100%;border-collapse: collapse;" class="mt-4">
                 <tr style="position: sticky; top: 0;">
-                    <th scope="col" style="background-color: #C0C0C0; font-size:14px; font-family:'Tahoma'; width: 80%; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-transform: uppercase; text-align: left;">Account Code/ Description</th>
-                    <th scope="col" style="background-color: #C0C0C0; font-size:14px; font-family:'Tahoma'; width: 10%; font-weight:500; border:1px solid #eeeeee;padding: 5px;text-transform: uppercase; text-align: right;">Debit</th>
-                    <th scope="col" style="background-color: #C0C0C0; font-size:14px; font-family:'Tahoma'; width: 10%; font-weight:500; border:1px solid #eeeeee;padding: 5px;text-transform: uppercase; text-align: right;">Credit</th>
+                    <th scope="col" style="background-color: #C0C0C0; font-size:14px; font-family:'Tahoma'; width: 80%; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-transform: uppercase; text-align: left;"><?= __('Account Code/ Description'); ?></th>
+                    <th scope="col" style="background-color: #C0C0C0; font-size:14px; font-family:'Tahoma'; width: 10%; font-weight:500; border:1px solid #eeeeee;padding: 5px;text-transform: uppercase; text-align: right;"><?= __('Debit'); ?></th>
+                    <th scope="col" style="background-color: #C0C0C0; font-size:14px; font-family:'Tahoma'; width: 10%; font-weight:500; border:1px solid #eeeeee;padding: 5px;text-transform: uppercase; text-align: right;"><?= __('Credit'); ?></th>
                 </tr>
                 <?php
                 $a = 1; $totaldebit = $totalcredit = 0;
