@@ -106,14 +106,14 @@ foreach ((array) $locdata as $locda) {
             console.log("check val" + count);
             var htmlRows = '';
             htmlRows += '<div class="col-md-6 itemRow cardid' + count + '"> <div class="card  p-5 "><span class="deleteiconcustom text-right text-danger f-22" onclick="deleteitem(' + count + ')" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Delete VRC Card"><i class="ti-trash"></i></span>';
-            htmlRows += '<div class="row"><div class="col-md-5"><label>job Title</label></div><div class="col-md-7"> <select class="form-select js-data-example-ajax-multiselect selectitemorservice col-lg-4 ' + count + ' col-lg-4 selectitemorservice"  name= "productCode[]" id="productCode_' + count + '"  onchange="itemChangejob(this.value,' + count + ')" data-tablename="job_titles"  data-fieldsname="job_title" > <option value="0"> Select Job Title </option></select><input type="hidden" name="item_name[]" id="item_name_' + count + '" class="form-control" value="">  <input type="hidden" name="purchase_account[]" id="purchase_account_' + count + '" class="form-control" value=""> <input type="hidden" name="purchase_account_aval[]" id="purchase_account_aval_' + count + '" class="form-control" value=""></div></div><hr>';
-            htmlRows += '<div class="row"><div class="col-md-5"><label>Description</label></div><div class="col-md-7"> <input type="text" name="productName[]" id="productName_' + count + '" value="" class="form-control " placeholder="Description" data-bs-toggle="tooltip" data-placement="bottom" title="Description"></div></div><hr>';
-            htmlRows += '<div class="row"><div class="col-md-5"><label>Min Experience</label></div><div class="col-md-7"> <div class="input-group input-group-button "> <input type="text" name="min_exp[]" id="min_exp_' + count + '"  class="form-control form-control-sm width1" value="" placeholder="Min Exp" data-bs-toggle="tooltip" data-placement="bottom" title="Minmum Experience" > <span class="input-group-text addon-style"><span class="">Years</span></span></div></div></div><hr>';
-            htmlRows += '<div class="row"><div class="col-md-5"><label>Max Experience</label></div><div class="col-md-7"><div class="input-group input-group-button "> <input type="hidden" name="quantity_old[]" id="quantity_old_' + count + '"  class="form-control amount" value=""><input type="text" name="max_exp[]" id="max_exp_' + count + '" class="form-control form-control-sm  width1" value="" placeholder="Max Exp" data-bs-toggle="tooltip" data-placement="bottom" title="Maxmum Experience"> <span class="input-group-text addon-style"><span class="">Years</span></span></div> </div></div><hr>';
+            htmlRows += '<div class="row"><div class="col-md-5"><label><?= htmlspecialchars(__('job Title'), ENT_QUOTES, 'UTF-8'); ?></label></div><div class="col-md-7"> <select class="form-select js-data-example-ajax-multiselect selectitemorservice col-lg-4 ' + count + ' col-lg-4 selectitemorservice"  name= "productCode[]" id="productCode_' + count + '"  onchange="itemChangejob(this.value,' + count + ')" data-tablename="job_titles"  data-fieldsname="job_title" > <option value="0"> <?= htmlspecialchars(__('Select Job Title'), ENT_QUOTES, 'UTF-8'); ?> </option></select><input type="hidden" name="item_name[]" id="item_name_' + count + '" class="form-control" value="">  <input type="hidden" name="purchase_account[]" id="purchase_account_' + count + '" class="form-control" value=""> <input type="hidden" name="purchase_account_aval[]" id="purchase_account_aval_' + count + '" class="form-control" value=""></div></div><hr>';
+            htmlRows += '<div class="row"><div class="col-md-5"><label><?= htmlspecialchars(__('Description'), ENT_QUOTES, 'UTF-8'); ?></label></div><div class="col-md-7"> <input type="text" name="productName[]" id="productName_' + count + '" value="" class="form-control " placeholder="Description" data-bs-toggle="tooltip" data-placement="bottom" title="Description"></div></div><hr>';
+            htmlRows += '<div class="row"><div class="col-md-5"><label><?= htmlspecialchars(__('Min Experience'), ENT_QUOTES, 'UTF-8'); ?></label></div><div class="col-md-7"> <div class="input-group input-group-button "> <input type="text" name="min_exp[]" id="min_exp_' + count + '"  class="form-control form-control-sm width1" value="" placeholder="Min Exp" data-bs-toggle="tooltip" data-placement="bottom" title="Minmum Experience" > <span class="input-group-text addon-style"><span class=""><?= htmlspecialchars(__('Years'), ENT_QUOTES, 'UTF-8'); ?></span></span></div></div></div><hr>';
+            htmlRows += '<div class="row"><div class="col-md-5"><label><?= htmlspecialchars(__('Max Experience'), ENT_QUOTES, 'UTF-8'); ?></label></div><div class="col-md-7"><div class="input-group input-group-button "> <input type="hidden" name="quantity_old[]" id="quantity_old_' + count + '"  class="form-control amount" value=""><input type="text" name="max_exp[]" id="max_exp_' + count + '" class="form-control form-control-sm  width1" value="" placeholder="Max Exp" data-bs-toggle="tooltip" data-placement="bottom" title="Maxmum Experience"> <span class="input-group-text addon-style"><span class=""><?= htmlspecialchars(__('Years'), ENT_QUOTES, 'UTF-8'); ?></span></span></div> </div></div><hr>';
 
-            htmlRows += '<div class="row"><div class="col-md-5"><label>Monthly Leaves</label></div><div class="col-md-7"><div class="input-group input-group-button"> <input type="text" name="min_leave[]" id="min_leave_' + count + '" class="form-control width1" placeholder="Monthly Leaves" data-bs-toggle="tooltip" data-placement="bottom" title="Monthly Leaves"> <span class="input-group-text addon-style"><span class="">Days</span></span></div></div></div><hr>';
+            htmlRows += '<div class="row"><div class="col-md-5"><label><?= htmlspecialchars(__('Monthly Leaves'), ENT_QUOTES, 'UTF-8'); ?></label></div><div class="col-md-7"><div class="input-group input-group-button"> <input type="text" name="min_leave[]" id="min_leave_' + count + '" class="form-control width1" placeholder="Monthly Leaves" data-bs-toggle="tooltip" data-placement="bottom" title="Monthly Leaves"> <span class="input-group-text addon-style"><span class=""><?= htmlspecialchars(__('Days'), ENT_QUOTES, 'UTF-8'); ?></span></span></div></div></div><hr>';
 
-            htmlRows += '<div class="row"><div class="col-md-5"><label>Unit *</label></div><div class="col-md-7"><select class="form-control form-select js-example-basic-single"  name= "uom[]"  id="uom_' + count + '"><option value="0"> Select Any UOM </option>';
+            htmlRows += '<div class="row"><div class="col-md-5"><label><?= htmlspecialchars(__('Unit'), ENT_QUOTES, 'UTF-8'); ?> *</label></div><div class="col-md-7"><select class="form-control form-select js-example-basic-single"  name= "uom[]"  id="uom_' + count + '"><option value="0"> <?= htmlspecialchars(__('Select Any UOM'), ENT_QUOTES, 'UTF-8'); ?> </option>';
             <?php if (count((array) $uomlist) > 0) {
                 foreach ((array) $uomlist as $uom) {
                     $uom_code = htmlspecialchars($uom['genc_detail_code'], ENT_QUOTES);
@@ -123,11 +123,11 @@ foreach ((array) $locdata as $locda) {
                 <?php }
             } ?>
             htmlRows += '</select></div></div><hr>';
-            htmlRows += '<div class="row"><div class="col-md-5"><label>Resources</label></div><div class="col-md-7"><input type="text" name="quantity[]" id="quantity_' + count + '"  onblur="quantityCheckold(this.id)"  class="form-control amount" value=""  autocomplete="off" placeholder="Resources"> </div></div><hr>';
+            htmlRows += '<div class="row"><div class="col-md-5"><label><?= htmlspecialchars(__('Resources'), ENT_QUOTES, 'UTF-8'); ?></label></div><div class="col-md-7"><input type="text" name="quantity[]" id="quantity_' + count + '"  onblur="quantityCheckold(this.id)"  class="form-control amount" value=""  autocomplete="off" placeholder="Resources"> </div></div><hr>';
 
-            htmlRows += '<div class="row"><div class="col-md-5"><label>Base Rate*</label></div><div class="col-md-7"> <input type="text" name="price[]" id="price_' + count + '" class="form-control price amount" value="" autocomplete="off" placeholder="Rate"></div></div><hr>';
-            htmlRows += '<div class="row"><div class="col-md-5"><label>Amount</label></div><div class="col-md-7"><input type="hidden" name="dis_ptax_amount[]" value="" readonly class="form-control price amount" id="dis_ptax_amount_' + count + '"><input type="hidden" name="pdiscount_amount[]" value="" readonly class="form-control price amount" id="pdiscount_amount_' + count + '"><input type="hidden" name="ptax_amount[]" value="" readonly class="form-control price amount" id="ptax_amount_' + count + '"> <input type="hidden" name="p_amount[]" value="" readonly class="form-control price amount" id="p_amount_' + count + '"><input type="text" name="dis_amount[]" readonly id="dis_amount_' + count + '" class="form-control amount" placeholder="Amount" value="" autocomplete="off"> <input type="hidden" name="amount[]" readonly id="amount_' + count + '" class="form-control amount" value=""></div></div><hr>';
-            htmlRows += '<div class="row"><div class="col-md-2"></div><div class="col-md-5"><div class="checkbox-fade fade-in-primary "> <label class="form-label"><input type="checkbox"  name="experience_base[' + count + ']" checked><span class="cr"> <i class="cr-icon icofont icofont-ui-check txt-primary"></i> </span> <span>Report Expe Base </span></label></div></div><div class="col-md-5"><div class="checkbox-fade fade-in-primary "> <label class="form-label"><input type="checkbox"  name="allow_overtime[' + count + ']"><span class="cr"> <i class="cr-icon icofont icofont-ui-check txt-primary"></i> </span> <span>&nbsp;Allow Overtime </span></label></div></div></div>';
+            htmlRows += '<div class="row"><div class="col-md-5"><label><?= htmlspecialchars(__('Base Rate'), ENT_QUOTES, 'UTF-8'); ?>*</label></div><div class="col-md-7"> <input type="text" name="price[]" id="price_' + count + '" class="form-control price amount" value="" autocomplete="off" placeholder="Rate"></div></div><hr>';
+            htmlRows += '<div class="row"><div class="col-md-5"><label><?= htmlspecialchars(__('Amount'), ENT_QUOTES, 'UTF-8'); ?></label></div><div class="col-md-7"><input type="hidden" name="dis_ptax_amount[]" value="" readonly class="form-control price amount" id="dis_ptax_amount_' + count + '"><input type="hidden" name="pdiscount_amount[]" value="" readonly class="form-control price amount" id="pdiscount_amount_' + count + '"><input type="hidden" name="ptax_amount[]" value="" readonly class="form-control price amount" id="ptax_amount_' + count + '"> <input type="hidden" name="p_amount[]" value="" readonly class="form-control price amount" id="p_amount_' + count + '"><input type="text" name="dis_amount[]" readonly id="dis_amount_' + count + '" class="form-control amount" placeholder="Amount" value="" autocomplete="off"> <input type="hidden" name="amount[]" readonly id="amount_' + count + '" class="form-control amount" value=""></div></div><hr>';
+            htmlRows += '<div class="row"><div class="col-md-2"></div><div class="col-md-5"><div class="checkbox-fade fade-in-primary "> <label class="form-label"><input type="checkbox"  name="experience_base[' + count + ']" checked><span class="cr"> <i class="cr-icon icofont icofont-ui-check txt-primary"></i> </span> <span><?= htmlspecialchars(__('Report Expe Base'), ENT_QUOTES, 'UTF-8'); ?> </span></label></div></div><div class="col-md-5"><div class="checkbox-fade fade-in-primary "> <label class="form-label"><input type="checkbox"  name="allow_overtime[' + count + ']"><span class="cr"> <i class="cr-icon icofont icofont-ui-check txt-primary"></i> </span> <span>&nbsp;<?= htmlspecialchars(__('Allow Overtime'), ENT_QUOTES, 'UTF-8'); ?> </span></label></div></div></div>';
             htmlRows += '</div></div>';
             $('#invoiceItem').append(htmlRows);
             initVrcJobTitleSelect($("#productCode_" + count));
@@ -142,19 +142,19 @@ foreach ((array) $locdata as $locda) {
         }
         if (typeof Swal != "undefined" && typeof Swal.fire == "function") {
             Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't to Delete this!",
+                title: <?php echo json_encode(__('Are you sure?'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                text: <?php echo json_encode(__('You won\'t to Delete this!'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
+                confirmButtonText: <?php echo json_encode(__('Yes, delete it!'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>
             }).then(function (result) {
                 if (result.isConfirmed) {
                     doRemove();
                 }
             });
-        } else if (confirm("Are you sure you want to delete this?")) {
+        } else if (confirm(<?php echo json_encode(__('Are you sure you want to delete this?'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>)) {
             doRemove();
         }
     }
@@ -165,18 +165,18 @@ foreach ((array) $locdata as $locda) {
         foreach ((array) $table2 as $tab2) {
             $tab2['id'] = 0; ?>
             <div class="col-md-6 itemRow cardid<?php echo $i; ?>">
-                <div class="card  p-5 "><span class="deleteiconcustom text-danger  text-right f-22" role="button" tabindex="0" aria-label="Delete VRC Card" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"
+                <div class="card  p-5 "><span class="deleteiconcustom text-danger  text-right f-22" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Delete VRC Card'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"
                         onclick="deleteitem(<?php echo $i; ?>)" data-container="body" data-toggle="tooltip"
-                        data-placement="bottom" title="Delete VRC Card"><i class="ti-trash"></i></span>
+                        data-placement="bottom" title="<?= htmlspecialchars(__('Delete VRC Card'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-trash"></i></span>
                     <div class="row">
                         <div class="col-md-5">
-                            <label for="productCode_<?php echo $i; ?>">job Title</label>
+                            <label for="productCode_<?php echo $i; ?>"><?= __('job Title'); ?></label>
                         </div>
                         <div class="col-md-7">
                             <select class="form-select js-data-example-ajax-multiselect selectitemorservice col-lg-4"
                                 data-tablename="job_titles" data-fieldsname="job_title" name="productCode[]"
                                 id="productCode_<?php echo $i; ?>" onchange="itemChangejob(this.value,<?php echo $i; ?>)">
-                                <option value="0"> Select Job Title </option>
+                                <option value="0"> <?= __('Select Job Title'); ?> </option>
                                 <?php $like_item_check = 0;
                                 foreach ($itemres as $item) {
                                     if ($tab2['item_id'] == $item['id']) { ?>
@@ -195,28 +195,28 @@ foreach ((array) $locdata as $locda) {
                     <hr>
                     <div class="row">
                         <div class="col-md-5">
-                            <label for="productName_<?php echo $i; ?>">Description</label>
+                            <label for="productName_<?php echo $i; ?>"><?= __('Description'); ?></label>
                         </div>
                         <div class="col-md-7">
                             <input type="text" name="productName[]" id="productName_<?php echo $i; ?>"
-                                value="<?php echo $tab2['description']; ?>" class="form-control " placeholder="Description"
-                                data-bs-toggle="tooltip" data-placement="bottom" title="Description">
+                                value="<?php echo $tab2['description']; ?>" class="form-control " placeholder="<?= htmlspecialchars(__('Description'), ENT_QUOTES, 'UTF-8'); ?>"
+                                data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Description'), ENT_QUOTES, 'UTF-8'); ?>">
 
                         </div>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col-md-5">
-                            <label for="min_exp_<?php echo $i; ?>">Min Experience</label>
+                            <label for="min_exp_<?php echo $i; ?>"><?= __('Min Experience'); ?></label>
                         </div>
                         <div class="col-md-7">
                             <div class="input-group input-group-button ">
                                 <input type="text" name="min_exp[]" id="min_exp_<?php echo $i; ?>"
                                     class="form-control form-control-sm width1" value="<?php echo $tab2['min_exp']; ?>"
-                                    placeholder="Min Exp" data-bs-toggle="tooltip" data-placement="bottom"
-                                    title="Minmum Experience">
+                                    placeholder="<?= htmlspecialchars(__('Min Exp'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom"
+                                    title="<?= htmlspecialchars(__('Minmum Experience'), ENT_QUOTES, 'UTF-8'); ?>">
                                 <span class="input-group-text addon-style">
-                                    <span class="">Years</span>
+                                    <span class=""><?= __('Years'); ?></span>
                                 </span>
                             </div>
                         </div>
@@ -224,16 +224,16 @@ foreach ((array) $locdata as $locda) {
                     <hr>
                     <div class="row">
                         <div class="col-md-5">
-                            <label for="max_exp_<?php echo $i; ?>">Max Experience</label>
+                            <label for="max_exp_<?php echo $i; ?>"><?= __('Max Experience'); ?></label>
                         </div>
                         <div class="col-md-7">
                             <div class="input-group input-group-button ">
                                 <input type="text" name="max_exp[]" id="max_exp_<?php echo $i; ?>"
                                     class="form-control form-control-sm width1" value="<?php echo $tab2['max_exp']; ?>"
-                                    placeholder="Max Exp" data-bs-toggle="tooltip" data-placement="bottom"
-                                    title="Maxmum Experience">
+                                    placeholder="<?= htmlspecialchars(__('Max Exp'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom"
+                                    title="<?= htmlspecialchars(__('Maxmum Experience'), ENT_QUOTES, 'UTF-8'); ?>">
                                 <span class="input-group-text addon-style">
-                                    <span class="">Years</span>
+                                    <span class=""><?= __('Years'); ?></span>
                                 </span>
                             </div>
                         </div>
@@ -241,15 +241,15 @@ foreach ((array) $locdata as $locda) {
                     <hr>
                     <div class="row">
                         <div class="col-md-5">
-                            <label for="min_leave_<?php echo $i; ?>">Monthly Leaves</label>
+                            <label for="min_leave_<?php echo $i; ?>"><?= __('Monthly Leaves'); ?></label>
                         </div>
                         <div class="col-md-7">
                             <div class="input-group input-group-button">
                                 <input type="text" class="form-control width1" name="min_leave[]"
-                                    id="min_leave_<?php echo $i; ?>" placeholder="Monthly Leaves" data-bs-toggle="tooltip"
-                                    value="<?php echo $tab2['min_leave']; ?>" data-placement="bottom" title="Monthly Leaves">
+                                    id="min_leave_<?php echo $i; ?>" placeholder="<?= htmlspecialchars(__('Monthly Leaves'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip"
+                                    value="<?php echo $tab2['min_leave']; ?>" data-placement="bottom" title="<?= htmlspecialchars(__('Monthly Leaves'), ENT_QUOTES, 'UTF-8'); ?>">
                                 <span class="input-group-text addon-style">
-                                    <span class="">Days</span>
+                                    <span class=""><?= __('Days'); ?></span>
                                 </span>
                             </div>
 
@@ -258,15 +258,15 @@ foreach ((array) $locdata as $locda) {
                     <hr>
                     <div class="row">
                         <div class="col-md-5">
-                            <label for="uom_<?php echo $i; ?>">Unit *</label>
+                            <label for="uom_<?php echo $i; ?>"><?= __('Unit'); ?> *</label>
                         </div>
                         <div class="col-md-7">
                             <select class="form-control form-select js-example-basic-single" name="uom[]"
                                 id="uom_<?php echo $i; ?>">
-                                <option value="0"> Select Any UOM </option>
+                                <option value="0"> <?= __('Select Any UOM'); ?> </option>
                                 <?php foreach ($uomlist as $uom) { ?>
                                     <option <?php if ($tab2['uom'] == $uom['genc_detail_code']) { ?> selected <?php } ?>
-                                        value="<?php echo $uom['genc_detail_code']; ?>"> <?php echo $uom['genc_detail_name']; ?>
+                                        value="<?php echo $uom['genc_detail_code']; ?>"> <?php echo __($uom['genc_detail_name']); ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -275,12 +275,12 @@ foreach ((array) $locdata as $locda) {
                     <hr>
                     <div class="row">
                         <div class="col-md-5">
-                            <label for="quantity_<?php echo $i; ?>">Resources *</label>
+                            <label for="quantity_<?php echo $i; ?>"><?= __('Resources'); ?> *</label>
                         </div>
                         <div class="col-md-7">
                             <input type="text" name="quantity[]" id="quantity_<?php echo $i; ?>"
                                 onblur="quantityCheckold(this.id)" class="form-control amount"
-                                value="<?php echo $tab2['quantity']; ?>" autocomplete="off" placeholder="Resources">
+                                value="<?php echo $tab2['quantity']; ?>" autocomplete="off" placeholder="<?= htmlspecialchars(__('Resources'), ENT_QUOTES, 'UTF-8'); ?>">
                             <input type="hidden" name="quantity_old[]" id="quantity_old_<?php echo $i; ?>"
                                 class="form-control amount" value="<?php echo $tab2['quantity']; ?>">
                         </div>
@@ -288,19 +288,19 @@ foreach ((array) $locdata as $locda) {
                     <hr>
                     <div class="row">
                         <div class="col-md-5">
-                            <label for="price_<?php echo $i; ?>">Base Rate *</label>
+                            <label for="price_<?php echo $i; ?>"><?= __('Base Rate'); ?> *</label>
                         </div>
                         <div class="col-md-7">
                             <input type="text" name="price[]" id="price_<?php echo $i; ?>" class="form-control price amount"
                                 value="<?php echo number_format($tab2['item_price'], 2, '.', ''); ?>" autocomplete="off"
-                                placeholder="Rate">
+                                placeholder="<?= htmlspecialchars(__('Rate'), ENT_QUOTES, 'UTF-8'); ?>">
 
                         </div>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col-md-5">
-                            <label for="dis_amount_<?php echo $i; ?>">Amount</label>
+                            <label for="dis_amount_<?php echo $i; ?>"><?= __('Amount'); ?></label>
                         </div>
                         <div class="col-md-7">
                             <input type="hidden" name="dis_ptax_amount[]"
@@ -314,7 +314,7 @@ foreach ((array) $locdata as $locda) {
                             <input type="hidden" name="p_amount[]" value="<?php echo $tab2['amount']; ?>" readonly
                                 class="form-control price amount" id="p_amount_<?php echo $i; ?>">
                             <input type="text" name="dis_amount[]" readonly <?php echo $sty; ?>
-                                id="dis_amount_<?php echo $i; ?>" class="form-control amount" placeholder="Amount"
+                                id="dis_amount_<?php echo $i; ?>" class="form-control amount" placeholder="<?= htmlspecialchars(__('Amount'), ENT_QUOTES, 'UTF-8'); ?>"
                                 value="<?php echo customeummarmonyformate($tab2['total_amount']); ?>" autocomplete="off">
                             <input type="hidden" name="amount[]" readonly id="amount_<?php echo $i; ?>"
                                 class="form-control amount" value="<?php echo $tab2['total_amount']; ?>">
@@ -324,9 +324,9 @@ foreach ((array) $locdata as $locda) {
                     <div class="row">
                         <div class="col-md-2 ">
                             <?php if ($_GET['Rid'] != "" AND isset($_GET['Rid'])) { ?>
-                                <div class="btn btn-icon btn-primary btn-circle mr-2" role="button" tabindex="0" aria-label="Per-diem" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"
+                                <div class="btn btn-icon btn-primary btn-circle mr-2" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Per-diem'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"
                                     onclick="toopenpredim(<?php echo $i . "," . $tab2['id']; ?>)" data-container="body"
-                                    data-toggle="tooltip" data-placement="bottom" title="Per-diem"><i
+                                    data-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Per-diem'), ENT_QUOTES, 'UTF-8'); ?>"><i
                                         class="fas fa-dollar-sign"></i></div>
                             <?php } ?>
                         </div>
@@ -340,7 +340,7 @@ foreach ((array) $locdata as $locda) {
                                     <span class="cr">
                                         <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                     </span>
-                                    <span>Report Expe Base </span>
+                                    <span><?= __('Report Expe Base'); ?> </span>
                                 </label>
                             </div>
                         </div>
@@ -354,7 +354,7 @@ foreach ((array) $locdata as $locda) {
                                     <span class="cr">
                                         <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                     </span>
-                                    <span>&nbsp;Allow Overtime </span>
+                                    <span>&nbsp;<?= __('Allow Overtime'); ?> </span>
                                 </label>
                             </div>
                         </div>
