@@ -24,7 +24,7 @@ function printDiv(divName) {
                                             <table style="width: 100%;">
                                                 <tr>
                                                     <th scope="col">
-                                                        <h1 class="f-w-600 mb-10">PAYSLIP</h1>
+                                                        <h1 class="f-w-600 mb-10"><?= __('PAYSLIP'); ?></h1>
                                                     </th>
                                                     <th scope="col">
                                                         <div class="text-end">
@@ -44,31 +44,31 @@ function printDiv(divName) {
                                                 <tr>
                                                     <th scope="col">
                                                         <div class="d-flex flex-column flex-root">
-                                                            <span class="f-w-600 mb-2">PAY DATE</span>
+                                                            <span class="f-w-600 mb-2"><?= __('PAY DATE'); ?></span>
                                                             <span class="opacity-70">feb 12, 2020</span>
                                                         </div>
                                                     </th>
                                                     <th scope="col">
                                                         <div class="d-flex flex-column flex-root">
-                                                            <span class="f-w-600 mb-2">PAY PERIOD</span>
+                                                            <span class="f-w-600 mb-2"><?= __('PAY PERIOD'); ?></span>
                                                             <span class="opacity-70">01-02-2020 to 28-02-2020</span>
                                                         </div>
                                                     </th>
                                                     <th scope="col">
                                                         <div class="d-flex flex-column flex-root">
-                                                            <span class="f-w-600 mb-2">STATUS</span>
-                                                            <span class="opacity-70">FULL-TIME
+                                                            <span class="f-w-600 mb-2"><?= __('STATUS'); ?></span>
+                                                            <span class="opacity-70"><?= __('FULL-TIME'); ?>
                                                         </div>
                                                     </span>
                                                     <td>
                                                         <div class="d-flex flex-column flex-root">
-                                                            <span class="f-w-600 mb-2">DATE OF JOINING</span>
+                                                            <span class="f-w-600 mb-2"><?= __('DATE OF JOINING'); ?></span>
                                                             <span class="opacity-70">feb 12, 2020
                                                         </div>
                                                     </th>
                                                     <th scope="col">
                                                         <div class="d-flex flex-column flex-root">
-                                                            <span class="f-w-600 mb-2">EMPLOYEE</span>
+                                                            <span class="f-w-600 mb-2"><?= __('EMPLOYEE'); ?></span>
                                                             <span>96522 - Iris Watson</span>
                                                             <span class="">Software Developer</span>
                                                         </div>
@@ -83,93 +83,93 @@ function printDiv(divName) {
                                                 <table class="table">
                                                     <thead>
                                                         <tr>
-                                                            <th scope="col" class="f-w-600 text-muted text-uppercase ">Earnings</th>
-                                                            <th scope="col" class="text-right f-w-600 text-muted text-uppercase">Amount</th>
-                                                            <th scope="col" class="f-w-600 text-muted text-uppercase">Earnings</th>
-                                                            <th scope="col" class="text-right f-w-600 text-muted text-uppercase">Amount</th>
+                                                            <th scope="col" class="f-w-600 text-muted text-uppercase "><?= __('Earnings'); ?></th>
+                                                            <th scope="col" class="text-right f-w-600 text-muted text-uppercase"><?= __('Amount'); ?></th>
+                                                            <th scope="col" class="f-w-600 text-muted text-uppercase"><?= __('Earnings'); ?></th>
+                                                            <th scope="col" class="text-right f-w-600 text-muted text-uppercase"><?= __('Amount'); ?></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <tr class="">
-                                                            <td class="">BASIC</td>
+                                                            <td class=""><?= __('BASIC'); ?></td>
                                                             <td class="text-right">8,000.00</td>
-                                                            <td class="">PROVIDENT FUND</td>
+                                                            <td class=""><?= __('PROVIDENT FUND'); ?></td>
                                                             <td class="text-right">400.00</td>
                                                         </tr>
                                                         <tr class="">
-                                                            <td class="">HRA</td>
+                                                            <td class=""><?= __('HRA'); ?></td>
                                                             <td class="text-right">2,400.00</td>
-                                                            <td class="">E.S.I</td>
+                                                            <td class=""><?= __('E.S.I'); ?></td>
                                                             <td class="text-right">200.00</td>
                                                         </tr>
                                                         <tr class="">
-                                                            <td class="">CONVEYANCE</td>
+                                                            <td class=""><?= __('CONVEYANCE'); ?></td>
                                                             <td class="text-right">1,800.00</td>
-                                                            <td class="">LOANS</td>
+                                                            <td class=""><?= __('LOANS'); ?></td>
                                                             <td class="text-right">-</td>
                                                         </tr>
                                                         <tr class="">
-                                                            <td class="">FLEXI BASKET</td>
+                                                            <td class=""><?= __('FLEXI BASKET'); ?></td>
                                                             <td class="text-right">56,000.00</td>
-                                                            <td class="">PROFESSIONAL TAX</td>
+                                                            <td class=""><?= __('PROFESSIONAL TAX'); ?></td>
                                                             <td class="text-right">200.00</td>
                                                         </tr>
                                                         <tr class="">
                                                             <td class=""></td>
                                                             <td class="text-right"></td>
-                                                            <td class="pl-0">INCOME TAX</td>
+                                                            <td class="pl-0"><?= __('INCOME TAX'); ?></td>
                                                             <td class="text-right">8,000.00</td>
                                                         </tr>
                                                         <tr class="">
-                                                            <td class="f-w-600">GROSS EARNINGS</td>
+                                                            <td class="f-w-600"><?= __('GROSS EARNINGS'); ?></td>
                                                             <td class="f-w-600 text-right text-primary">68,200.00</td>
-                                                            <td class="f-w-600">TOTAL DECUTIONS</td>
+                                                            <td class="f-w-600"><?= __('TOTAL DEDUCTIONS'); ?></td>
                                                             <td class="f-w-600 text-right text-danger">8,800.00</td>
                                                         </tr>
                                                         <tr class="">
-                                                            <td class="text-muted"><h5 class="f-w-600">REIMBURSEMENTS</h5></td>
+                                                            <td class="text-muted"><h5 class="f-w-600"><?= __('REIMBURSEMENTS'); ?></h5></td>
                                                             <td class="text-right"></td>
                                                             <td class=""></td>
                                                             <td class="text-right text-danger"></td>
                                                         </tr>
                                                         <tr class="">
-                                                            <td class="f-w-600">FUEL</td>
+                                                            <td class="f-w-600"><?= __('FUEL'); ?></td>
                                                             <td class="text-right">2,000.00</td>
                                                             <td class=""></td>
                                                             <td class="text-right"></td>
                                                         </tr>
                                                         <tr class="">
-                                                            <td class="f-w-600">DRIVER</td>
+                                                            <td class="f-w-600"><?= __('DRIVER'); ?></td>
                                                             <td class="text-right">8,000.00</td>
                                                             <td class=""></td>
                                                             <td class="text-right"></td>
                                                         </tr>
                                                         <tr class="">
-                                                            <td class="text-muted"><h5 class="f-w-600">NET PAY</h5></td>
+                                                            <td class="text-muted"><h5 class="f-w-600"><?= __('NET PAY'); ?></h5></td>
                                                             <td class="text-right"></td>
                                                             <td class=""></td>
-                                                            <td class="text-right text-muted"><h5 class="f-w-600">AMOUNT</h5></td>
+                                                            <td class="text-right text-muted"><h5 class="f-w-600"><?= __('AMOUNT'); ?></h5></td>
                                                         </tr>
                                                         <tr class="">
-                                                            <td class="f-w-600">GROSS EARNINGS</td>
+                                                            <td class="f-w-600"><?= __('GROSS EARNINGS'); ?></td>
                                                             <td class="text-right text-primary"></td>
                                                             <td class=""></td>
                                                             <td class="f-w-600 text-right text-primary">68,200.00</td>
                                                         </tr>
                                                         <tr class="">
-                                                            <td class="f-w-600">TOTAL DEDUCTIONS</td>
+                                                            <td class="f-w-600"><?= __('TOTAL DEDUCTIONS'); ?></td>
                                                             <td class="text-right text-primary"></td>
                                                             <td class=""></td>
                                                             <td class="f-w-600 text-right text-danger">8,800.00</td>
                                                         </tr>
                                                         <tr class="">
-                                                            <td class="f-w-600">TOTAL REIMBURSEMENTS</td>
+                                                            <td class="f-w-600"><?= __('TOTAL REIMBURSEMENTS'); ?></td>
                                                             <td class="text-right text-primary"></td>
                                                             <td class=""></td>
                                                             <td class="f-w-600 text-right text-primary">10,000.00</td>
                                                         </tr>
                                                         <tr class="">
-                                                            <td class="f-w-600">TOTAL NET PAYABLE</td>
+                                                            <td class="f-w-600"><?= __('TOTAL NET PAYABLE'); ?></td>
                                                             <td class="text-right text-primary"></td>
                                                             <td class=""></td>
                                                             <td class="f-w-600 text-right text-primary">69,200.00</td>
@@ -181,7 +181,7 @@ function printDiv(divName) {
                                                 <div class="col-md-11">
                                                     <div class="d-flex justify-content-between flex-column flex-md-row font-size-lg">
                                                         <div class="d-flex flex-column mb-10 mb-md-0">
-                                                            <div class="f-w-600 mb-3">Total Net Payable ₹68,200.00 (Indian Rupee Sixty-Nine Thousand Two Hundred Only)
+                                                            <div class="f-w-600 mb-3"><?= __('Total Net Payable'); ?> ₹68,200.00 (Indian Rupee Sixty-Nine Thousand Two Hundred Only)
                                                             </div>
                                                         </div>
                                                     </div>
@@ -195,10 +195,10 @@ function printDiv(divName) {
                                                 <table class="table">
                                                     <thead>
                                                         <tr>
-                                                            <th scope="col" class="f-w-600 text-muted text-uppercase">BANK</th>
-                                                            <th scope="col" class="f-w-600 text-muted text-uppercase">ACC.NO.</th>
-                                                            <th scope="col" class="f-w-600 text-muted text-uppercase">DUE DATE</th>
-                                                            <th scope="col" class="f-w-600 text-muted text-uppercase">NET SALARY</th>
+                                                            <th scope="col" class="f-w-600 text-muted text-uppercase"><?= __('BANK'); ?></th>
+                                                            <th scope="col" class="f-w-600 text-muted text-uppercase"><?= __('ACC.NO.'); ?></th>
+                                                            <th scope="col" class="f-w-600 text-muted text-uppercase"><?= __('DUE DATE'); ?></th>
+                                                            <th scope="col" class="f-w-600 text-muted text-uppercase"><?= __('NET SALARY'); ?></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -216,8 +216,8 @@ function printDiv(divName) {
                                     <div class="row justify-content-center mt-5">
                                         <div class="col-md-9">
                                             <div class="d-flex justify-content-between">
-                                                <button type="button" class="btn btn-success waves-effect waves-light f-w-600 m-r-10" onclick="window.print();">Download Payslip</button>
-                                                <button type="button" class="btn btn-primary waves-effect f-w-600" onclick="printDiv('printableArea')">Print Payslip</button>
+                                                <button type="button" class="btn btn-success waves-effect waves-light f-w-600 m-r-10" onclick="window.print();"><?= __('Download Payslip'); ?></button>
+                                                <button type="button" class="btn btn-primary waves-effect f-w-600" onclick="printDiv('printableArea')"><?= __('Print Payslip'); ?></button>
                                             </div>
                                         </div>
                                     </div>

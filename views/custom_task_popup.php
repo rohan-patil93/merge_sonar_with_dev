@@ -35,15 +35,15 @@ $frequencyllist = json_decode($frequencyllist,1);
          count++;
         var htmlRows = '';
         htmlRows += '<tr class="itemRow123" id="tr_'+count+'" >';
-        htmlRows += '<td><input aria-label="Name[]" type="text" name="name[]" class="form-control" value="" id="name_'+count+'"></td> ';
-        htmlRows += '<td><textarea aria-label="Descrption[]" class="form-control" name="descrption[]" id="descrption_'+count+'"></textarea></td>';
+        htmlRows += '<td><input aria-label="<?= htmlspecialchars(__('Name'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="name[]" class="form-control" value="" id="name_'+count+'"></td> ';
+        htmlRows += '<td><textarea aria-label="<?= htmlspecialchars(__('Description'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control" name="descrption[]" id="descrption_'+count+'"></textarea></td>';
 
-        htmlRows += '<td><input aria-label="Short Code[]" type="text" name="short_code[]" class="form-control" value="" id="short_code_'+count+'"></td>';
-       htmlRows += '<td><select aria-label="Frequency[]" class="form-control js-example-basic-single" name="frequency[]" id="frequency__2"+count+'" ><option value="0">Select Any One</option><?php foreach ($frequencyllist as  $frequency) { ?><option value="<?php echo $frequency['genc_detail_code']; ?>"><?php echo $frequency['genc_detail_name']; ?></option><?php
+        htmlRows += '<td><input aria-label="<?= htmlspecialchars(__('Short Code'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="short_code[]" class="form-control" value="" id="short_code_'+count+'"></td>';
+       htmlRows += '<td><select aria-label="<?= htmlspecialchars(__('Frequency'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control js-example-basic-single" name="frequency[]" id="frequency__2"+count+'" ><option value="0"><?= htmlspecialchars(__('Select Any One'), ENT_QUOTES, 'UTF-8'); ?></option><?php foreach ($frequencyllist as  $frequency) { ?><option value="<?php echo $frequency['genc_detail_code']; ?>"><?php echo htmlspecialchars(__($frequency['genc_detail_name']), ENT_QUOTES, 'UTF-8'); ?></option><?php
 } ?></select></td>';
 
-        htmlRows += '<td> <input aria-label="Mandatory[]" class="js-single'+count+'"  type="checkbox" onclick="mvaluechange('+count+')" id="mandatory_'+count+'"   value = "0"  name="mandatory[]" onkeydown=""><span></span></label></span></td>';
-        htmlRows += '<td><input type="hidden" value="0" id="delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deletestatickRows('+count+')">Delete</button></td>';
+        htmlRows += '<td> <input aria-label="<?= htmlspecialchars(__('Mandatory'), ENT_QUOTES, 'UTF-8'); ?>[]" class="js-single'+count+'"  type="checkbox" onclick="mvaluechange('+count+')" id="mandatory_'+count+'"   value = "0"  name="mandatory[]" onkeydown=""><span></span></label></span></td>';
+        htmlRows += '<td><input type="hidden" value="0" id="delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deletestatickRows('+count+')"><?= htmlspecialchars(__('Delete'), ENT_QUOTES, 'UTF-8'); ?></button></td>';
 
         htmlRows += '</tr>';
         $('#invoiceItem123').append(htmlRows);
@@ -81,14 +81,14 @@ $frequencyllist = json_decode($frequencyllist,1);
             success: function(response) {
                 console.log(response);
              swal.fire({
-                            title: "Record has been saved successfully ",
-                            text: "Do you want to close ? ",
+                            title: <?php echo json_encode(__('Record has been saved successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                            text: <?php echo json_encode(__('Do you want to close ?'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                             type: "success",
                             buttonsStyling: false,
-                            confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",
+                            confirmButtonText: "<i class='la la-hand-o-up'></i>" + <?php echo json_encode(__('Yes, close!'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                             confirmButtonClass: "btn btn-success",
                             showCancelButton: true,
-                            cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",
+                            cancelButtonText: "<i class='la la-hand-o-right'></i> " + <?php echo json_encode(__('No, continue'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                             cancelButtonClass: "btn btn-default"
                         }).then(function(result) {
                             if (result.value) {
@@ -105,21 +105,21 @@ $frequencyllist = json_decode($frequencyllist,1);
 
                     <div class="modal-header">
     <h5 class="modal-title">
-                            Tasks
-                            <small>&nbsp;&nbsp; <b>Table: </b>&nbsp; <?php echo $table; ?> </small>
+                            <?= __('Tasks'); ?>
+                            <small>&nbsp;&nbsp; <b><?= __('Table'); ?>: </b>&nbsp; <?php echo $table; ?> </small>
                         </h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
                     <div class="modal-body" >
                         <div class="row align-items-center" style="margin-top: 10px;padding: 3px;">
                                 <div class="col-lg-12">
                                     <table class="table table-striped- table-bordered table-hover table-checkable  no-footer" style="color: #646c9a;" id="invoiceItem123">
                                             <tr>
-                                                <th scope="col" class="text-center" style="width: 25%;">Name</th>
-                                                <th scope="col" class="thheader text-center" style="width: 30%;">Descrption</th>
-                                                <th scope="col" class="thheader text-center" style="width: 15%;">Short Code</th>
-                                                <th scope="col" class="thheader text-center" style="width: 15%;">Frequency</th>
-                                                <th scope="col" class="thheader text-center" style="width: 10%;">Mandatory</th>
+                                                <th scope="col" class="text-center" style="width: 25%;"><?= __('Name'); ?></th>
+                                                <th scope="col" class="thheader text-center" style="width: 30%;"><?= __('Description'); ?></th>
+                                                <th scope="col" class="thheader text-center" style="width: 15%;"><?= __('Short Code'); ?></th>
+                                                <th scope="col" class="thheader text-center" style="width: 15%;"><?= __('Frequency'); ?></th>
+                                                <th scope="col" class="thheader text-center" style="width: 10%;"><?= __('Mandatory'); ?></th>
                                                 <th scope="col" class="thheader " style="width: 5%;"></th>
                                             </tr>
                                             <?php
@@ -129,20 +129,20 @@ $frequencyllist = json_decode($frequencyllist,1);
 
                                                 <tr class="itemRow123" id="tr_<?php echo $count; ?>"  >
                                                     <td>
-                                                        <input aria-label="Name[]" type="text" name="name[]" class="form-control" value="<?php echo $td['task_name'] ?>" id="name_<?php echo $count; ?>">
+                                                        <input aria-label="<?= htmlspecialchars(__('Name'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="name[]" class="form-control" value="<?php echo $td['task_name'] ?>" id="name_<?php echo $count; ?>">
                                                     </td>
                                                     <td>
-                                                        <textarea aria-label="Descrption[]" class="form-control" name="descrption[]"  id="descrption_<?php echo $count; ?>"><?php echo $td['description'] ?></textarea>
+                                                        <textarea aria-label="<?= htmlspecialchars(__('Description'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control" name="descrption[]"  id="descrption_<?php echo $count; ?>"><?php echo $td['description'] ?></textarea>
                                                     </td>
                                                     <td>
-                                                        <input aria-label="Short Code[]" type="text" name="short_code[]" class="form-control" value="<?php echo $td['task_shot_code'] ?>" id="short_code_<?php echo $count; ?>">
+                                                        <input aria-label="<?= htmlspecialchars(__('Short Code'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="short_code[]" class="form-control" value="<?php echo $td['task_shot_code'] ?>" id="short_code_<?php echo $count; ?>">
                                                     </td>
                                                     <td>
-                                                        <select aria-label="Frequency[]" class="form-control js-example-basic-single" name="frequency[]" id="frequency_<?php echo $count; ?>" >
-                                                            <option value="0">Select Any One</option>
+                                                        <select aria-label="<?= htmlspecialchars(__('Frequency'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control js-example-basic-single" name="frequency[]" id="frequency_<?php echo $count; ?>" >
+                                                            <option value="0"><?= htmlspecialchars(__('Select Any One'), ENT_QUOTES, 'UTF-8'); ?></option>
                                                             <?php foreach ($frequencyllist as  $frequency) { ?>
                                                                 <option <?php if($td['task_frequency'] == $frequency['genc_detail_code']){ ?> selected <?php
-} ?> value="<?php echo $frequency['genc_detail_code']; ?>"><?php echo $frequency['genc_detail_name']; ?></option>
+} ?> value="<?php echo $frequency['genc_detail_code']; ?>"><?php echo __($frequency['genc_detail_name']); ?></option>
                                                             <?php } ?>
 
                                                         </select>
@@ -151,14 +151,14 @@ $frequencyllist = json_decode($frequencyllist,1);
                                                     <td class="text-center">
 
 
-                                <input aria-label="Checkbox"  class="js-switch" type="checkbox" onclick="mvaluechange(<?php echo $count; ?>)" id="mandatory_<?php echo $count; ?>" <?php  $mvalue=0; if($td['mandatory'] == 1){ $mvalue=1;?> checked <?php
+                                <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>"  class="js-switch" type="checkbox" onclick="mvaluechange(<?php echo $count; ?>)" id="mandatory_<?php echo $count; ?>" <?php  $mvalue=0; if($td['mandatory'] == 1){ $mvalue=1;?> checked <?php
 } ?>  value = "<?php echo $mvalue; ?>"  name="mandatory[]" onkeydown="" />
 
 
                                                     </td>
                                                     <td>
                                                         <input type="hidden" value="0" id="delete_value_<?php echo $count; ?>" >
-                                                        <button class="btn btn-warning" id="<?php echo $count; ?>" type="button" onclick="deletestatickRows(<?php echo $count; ?>)">Delete</button>
+                                                        <button class="btn btn-warning" id="<?php echo $count; ?>" type="button" onclick="deletestatickRows(<?php echo $count; ?>)"><?= __('Delete'); ?></button>
                                                     </td>
                                                 </tr>
                                             <?php $count++;
@@ -166,7 +166,7 @@ $frequencyllist = json_decode($frequencyllist,1);
                                     </table>
                                     <div class="row align-items-center" style="margin-top: 10px;margin-left: 2px;">
 
-                                <button class="btn btn-success col-lg-2" id="addRows" type="button" onclick="addmoreRows()">+ Add More</button>&nbsp;&nbsp;
+                                <button class="btn btn-success col-lg-2" id="addRows" type="button" onclick="addmoreRows()">+ <?= __('Add More'); ?></button>&nbsp;&nbsp;
 
                             </div>
                                 </div>
@@ -177,9 +177,9 @@ $frequencyllist = json_decode($frequencyllist,1);
                 <input type="hidden" name="table" id="table" value="<?php echo $table; ?>">
                 <input type="hidden" name="kpi_id" id="kpi_id" value="<?php echo $_POST['id']; ?>">
                 <input type="hidden" name="page" value="dis_submit">
-                    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
 <?php if($_POST['table'] !="employee_kpi_tasks"){ ?>
-                <button type="button" class="btn btn-primary" onclick="submitrom()" >Submit</button>
+                <button type="button" class="btn btn-primary" onclick="submitrom()" ><?= __('Submit'); ?></button>
                 <?php } ?>
             </div>
 
