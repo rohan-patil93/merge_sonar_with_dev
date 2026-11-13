@@ -32,12 +32,12 @@ $statuse = ViewStatusData(); ?>
 ?>
 <table class="table table-hover m-b-0" style="font-size:13px;">
     <thead>
-        <tr><th scope="col">Transaction No.</th>
-            <th scope="col">Originator</th>
-            <th scope="col">Date</th>
-            <th scope="col">Party Name</th>
-            <th scope="col" class="text-right">Amount</th>
-            <th scope="col">Satus</th>
+        <tr><th scope="col"><?= __('Transaction No.'); ?></th>
+            <th scope="col"><?= __('Originator'); ?></th>
+            <th scope="col"><?= __('Date'); ?></th>
+            <th scope="col"><?= __('Party Name'); ?></th>
+            <th scope="col" class="text-right"><?= __('Amount'); ?></th>
+            <th scope="col"><?= __('Satus'); ?></th>
         </tr></thead>
         <tbody>
             <?php foreach($location_pettycashbox as $list){ ?>
@@ -56,7 +56,7 @@ $statuse = ViewStatusData(); ?>
     </table>
     <?php }else{ ?>
         <div class="card-px text-center ">
-            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Transactions</p>
+            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Transactions'); ?></p>
             <div class="text-center px-4">
                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
             </div>
