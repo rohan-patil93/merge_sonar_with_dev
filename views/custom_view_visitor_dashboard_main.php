@@ -53,19 +53,19 @@ function render_type_tile($key, $stats, $icons, $periodKey, $location_id)
                     <div class="type-count-item cursor-pointer openbucketmodal"
                         data-period="<?= htmlspecialchars($periodKey) ?>" data-type="<?= htmlspecialchars($key) ?>"
                         data-bucket="total" data-location_id="<?php echo $location_id; ?>" data-bs-toggle="tooltip"
-                        title="Total Entries">
+                        title="<?= htmlspecialchars(__('Total Entries'), ENT_QUOTES, 'UTF-8'); ?>">
                         <span class="c-val text-primary"><?= $total; ?></span>
                     </div>
                     <div class="type-count-item cursor-pointer openbucketmodal"
                         data-period="<?= htmlspecialchars($periodKey) ?>" data-type="<?= htmlspecialchars($key) ?>"
                         data-bucket="in_only" data-location_id="<?php echo $location_id; ?>" data-bs-toggle="tooltip"
-                        title="Inside Premises">
+                        title="<?= htmlspecialchars(__('Inside Premises'), ENT_QUOTES, 'UTF-8'); ?>">
                         <span class="c-val text-danger"><?= $inOnly; ?></span>
                     </div>
                     <div class="type-count-item cursor-pointer openbucketmodal"
                         data-period="<?= htmlspecialchars($periodKey) ?>" data-type="<?= htmlspecialchars($key) ?>"
                         data-bucket="out" data-location_id="<?php echo $location_id; ?>" data-bs-toggle="tooltip"
-                        title="Exited">
+                        title="<?= htmlspecialchars(__('Exited'), ENT_QUOTES, 'UTF-8'); ?>">
                         <span class="c-val text-success"><?= $out; ?></span>
                     </div>
                 </div>
@@ -94,14 +94,14 @@ function render_period_block($title, $bigNumber, $bucket, $typesOrder, $icons, $
                             data-period_key="<?= strtoupper($periodKey); ?>" data-location_id="<?php echo $location_id; ?>">
                             <?= (int) $bigNumber; ?>
                         </div>
-                        <span class="text-muted f-11">Total Entries</span>
+                        <span class="text-muted f-11"><?= __('Total Entries'); ?></span>
                     </div>
 
                     <!-- Small Legend -->
                     <div class="d-flex gap-2 small mt-2 f-10 text-muted">
-                        <span><i class="fa fa-circle text-primary"></i> TOT</span>
-                        <span><i class="fa fa-circle text-danger"></i> IN</span>
-                        <span><i class="fa fa-circle text-success"></i> OUT</span>
+                        <span><i class="fa fa-circle text-primary"></i> <?= __('TOT'); ?></span>
+                        <span><i class="fa fa-circle text-danger"></i> <?= __('IN'); ?></span>
+                        <span><i class="fa fa-circle text-success"></i> <?= __('OUT'); ?></span>
                     </div>
                 </div>
 
@@ -327,11 +327,11 @@ if (isset($by['TODAY'])) {
 
 <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2 mb-4">
     <div>
-        <h4 class="mb-0 fw-bold text-dark" style="font-family: 'Outfit', sans-serif;">Visitor Analytics Dashboard</h4>
-        <small class="text-muted">Real-time visitor logs and check-in metrics</small>
+        <h4 class="mb-0 fw-bold text-dark" style="font-family: 'Outfit', sans-serif;"><?= __('Visitor Analytics Dashboard'); ?></h4>
+        <small class="text-muted"><?= __('Real-time visitor logs and check-in metrics'); ?></small>
     </div>
     <a href="index.php?option=custom_insert_visitor_logs" class="btn btn-primary d-flex align-items-center gap-2 px-3 py-2" style="border-radius: 8px; font-weight: 500; font-family: 'Outfit', sans-serif; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);">
-        <i class="fa fa-plus-circle" style="font-size: 16px;"></i> VMS Check-In / Out Console
+        <i class="fa fa-plus-circle" style="font-size: 16px;"></i> <?= __('VMS Check-In / Out Console'); ?>
     </a>
 </div>
 
@@ -342,7 +342,7 @@ if (isset($by['TODAY'])) {
         <div class="card stat-summary-card stat-card-blue h-100">
             <div class="card-body p-3 d-flex align-items-center justify-content-between">
                 <div>
-                    <span class="text-muted f-12 d-block mb-1">Total Registered (All-Time)</span>
+                    <span class="text-muted f-12 d-block mb-1"><?= __('Total Registered (All-Time)'); ?></span>
                     <h3 class="fw-bold mb-0 text-dark"><?= number_format($total_visitors); ?></h3>
                 </div>
                 <div class="stat-card-icon bg-light-blue">
@@ -356,7 +356,7 @@ if (isset($by['TODAY'])) {
         <div class="card stat-summary-card stat-card-red h-100">
             <div class="card-body p-3 d-flex align-items-center justify-content-between">
                 <div>
-                    <span class="text-muted f-12 d-block mb-1">Active On-Site (Inside)</span>
+                    <span class="text-muted f-12 d-block mb-1"><?= __('Active On-Site (Inside)'); ?></span>
                     <h3 class="fw-bold mb-0 text-danger"><?= number_format($inside_now); ?></h3>
                 </div>
                 <div class="stat-card-icon bg-light-red">
@@ -370,7 +370,7 @@ if (isset($by['TODAY'])) {
         <div class="card stat-summary-card stat-card-warning h-100">
             <div class="card-body p-3 d-flex align-items-center justify-content-between">
                 <div>
-                    <span class="text-muted f-12 d-block mb-1">Today's Arrivals</span>
+                    <span class="text-muted f-12 d-block mb-1"><?= __('Today\'s Arrivals'); ?></span>
                     <h3 class="fw-bold mb-0 text-warning"><?= number_format($today_visitors); ?></h3>
                 </div>
                 <div class="stat-card-icon bg-light-warning">
@@ -384,7 +384,7 @@ if (isset($by['TODAY'])) {
         <div class="card stat-summary-card stat-card-green h-100">
             <div class="card-body p-3 d-flex align-items-center justify-content-between">
                 <div>
-                    <span class="text-muted f-12 d-block mb-1">Exited Today</span>
+                    <span class="text-muted f-12 d-block mb-1"><?= __('Exited Today'); ?></span>
                     <h3 class="fw-bold mb-0 text-success"><?= number_format($exited_today); ?></h3>
                 </div>
                 <div class="stat-card-icon bg-light-green">
@@ -421,17 +421,17 @@ if (isset($by['TODAY'])) {
     <div class="col-lg-5">
         <div class="recent-logs-card shadow-sm">
             <div class="recent-logs-header">
-                <h5>Recent Logs Stream</h5>
+                <h5><?= __('Recent Logs Stream'); ?></h5>
 
                 <ul class="nav dashboard-tabs">
                     <li class="nav-item">
                         <a class="nav-link active" data-bs-toggle="tab" href="#IN" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                            IN <span class="badge bg-danger ms-1"><?= count((array) $recent_in); ?></span>
+                            <?= __('IN'); ?> <span class="badge bg-danger ms-1"><?= count((array) $recent_in); ?></span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="tab" href="#OUT" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                            OUT <span class="badge bg-success ms-1"><?= count((array) $recent_out); ?></span>
+                            <?= __('OUT'); ?> <span class="badge bg-success ms-1"><?= count((array) $recent_out); ?></span>
                         </a>
                     </li>
                 </ul>
@@ -444,10 +444,10 @@ if (isset($by['TODAY'])) {
                         <table class="table table-sm table-hover align-middle mb-0" style="font-size:12.5px;">
                             <thead>
                                 <tr class="text-muted">
-                                    <th scope="col">Visitor Profile</th>
-                                    <th scope="col">Type</th>
-                                    <th scope="col">Whom to Meet</th>
-                                    <th scope="col" style="white-space:nowrap;">In Time</th>
+                                    <th scope="col"><?= __('Visitor Profile'); ?></th>
+                                    <th scope="col"><?= __('Type'); ?></th>
+                                    <th scope="col"><?= __('Whom to Meet'); ?></th>
+                                    <th scope="col" style="white-space:nowrap;"><?= __('In Time'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -494,7 +494,7 @@ if (isset($by['TODAY'])) {
                                                     <?php if (!empty($v['image_path'])) { ?>
                                                         <img src="uploads/visitors/<?= htmlspecialchars($v['image_path']) ?>"
                                                             class="rounded-circle avatar-in"
-                                                            style="width:32px; height:32px; object-fit:cover;" alt="User Profile">
+                                                            style="width:32px; height:32px; object-fit:cover;" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <?php } else { ?>
                                                         <span class="avatar-circle avatar-in"><?= initials($displayName) ?></span>
                                                     <?php } ?>
@@ -516,7 +516,7 @@ if (isset($by['TODAY'])) {
                                     <?php }
                                 } else { ?>
                                     <tr>
-                                        <td colspan="4" class="text-center py-4 text-muted">No entry logs for today.</td>
+                                        <td colspan="4" class="text-center py-4 text-muted"><?= __('No entry logs for today.'); ?></td>
                                     </tr>
                                 <?php } ?>
                             </tbody>
@@ -530,10 +530,10 @@ if (isset($by['TODAY'])) {
                         <table class="table table-sm table-hover align-middle mb-0" style="font-size:12.5px;">
                             <thead>
                                 <tr class="text-muted">
-                                    <th scope="col">Visitor Profile</th>
-                                    <th scope="col">Type</th>
-                                    <th scope="col">Whom to Meet</th>
-                                    <th scope="col" style="white-space:nowrap;">Out Time</th>
+                                    <th scope="col"><?= __('Visitor Profile'); ?></th>
+                                    <th scope="col"><?= __('Type'); ?></th>
+                                    <th scope="col"><?= __('Whom to Meet'); ?></th>
+                                    <th scope="col" style="white-space:nowrap;"><?= __('Out Time'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -580,7 +580,7 @@ if (isset($by['TODAY'])) {
                                                     <?php if (!empty($v['image_path'])) { ?>
                                                         <img src="uploads/visitors/<?= htmlspecialchars($v['image_path']) ?>"
                                                             class="rounded-circle avatar-out"
-                                                            style="width:32px; height:32px; object-fit:cover;" alt="User Profile">
+                                                            style="width:32px; height:32px; object-fit:cover;" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <?php } else { ?>
                                                         <span class="avatar-circle avatar-out"><?= initials($displayName) ?></span>
                                                     <?php } ?>
@@ -602,7 +602,7 @@ if (isset($by['TODAY'])) {
                                     <?php }
                                 } else { ?>
                                     <tr>
-                                        <td colspan="4" class="text-center py-4 text-muted">No exit logs for today.</td>
+                                        <td colspan="4" class="text-center py-4 text-muted"><?= __('No exit logs for today.'); ?></td>
                                     </tr>
                                 <?php } ?>
                             </tbody>
