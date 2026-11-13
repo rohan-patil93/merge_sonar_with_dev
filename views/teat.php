@@ -12,7 +12,7 @@
         <div class="card card-custom card-sticky" id="kt_page_sticky_card">
             <div class="card-header">
                 <div class="card-title">
-                     <h3 class="card-label">&nbsp;<?php echo "Pay Slip"  ?> </h3>
+                     <h3 class="card-label">&nbsp;<?php echo __("Pay Slip")  ?> </h3>
                 </div>
             </div>
         </div>
@@ -30,13 +30,13 @@
                 </tr>
                 <tr>
                     <td  class="table-primary font-weight-bold w-25">
-                       Employee Number:
+                       <?= __('Employee Number'); ?>:
                     </td>
                     <td  class="w-25">
                         <?php echo $data['emp_number'];?>
                     </td>
                     <td   class="table-primary font-weight-bold w-25">
-                       Name:
+                       <?= __('Name'); ?>:
                     </td>
                     <td  class="w-25">
                         <?php echo ucwords($data['emp_name']);?>
@@ -44,13 +44,13 @@
                 </tr>
                 <tr>
                     <td  class="table-primary font-weight-bold">
-                       Bank:
+                       <?= __('Bank'); ?>:
                     </td>
                     <td  class="">
                         <?php echo $data['bank'];?>
                     </td>
                     <td   class="table-primary font-weight-bold">
-                       Bank Ac/No:
+                       <?= __('Bank Ac/No'); ?>:
                     </td>
                     <td  class="">
                         <?php echo $data['bank_account_no'];?>
@@ -58,13 +58,13 @@
                 </tr>
                 <tr>
                     <td  class="table-primary font-weight-bold">
-                       DOJ:
+                       <?= __('DOJ'); ?>:
                     </td>
                     <td  class="">
                         <?php echo $data['doj'];?>
                     </td>
                     <td   class="table-primary font-weight-bold">
-                       LOP Days:
+                       <?= __('LOP Days'); ?>:
                     </td>
                     <td  class="">
                         <?php echo $data['lop'];?>
@@ -72,13 +72,13 @@
                 </tr>
                 <tr>
                     <td  class="table-primary font-weight-bold">
-                       PF No.:
+                       <?= __('PF No.'); ?>:
                     </td>
                     <td  class="">
                         <?php echo $data['pf'];?>
                     </td>
                     <td   class="table-primary font-weight-bold">
-                       STD Days:
+                       <?= __('STD Days'); ?>:
                     </td>
                     <td  class="">
                         <?php echo $data['std'];?>
@@ -86,13 +86,13 @@
                 </tr>
                 <tr>
                     <td  class="table-primary font-weight-bold">
-                       Location:
+                       <?= __('Location'); ?>:
                     </td>
                     <td  class="">
                         <?php echo $data['location'];?>
                     </td>
                     <td   class="table-primary font-weight-bold">
-                       Worked Days:
+                       <?= __('Worked Days'); ?>:
                     </td>
                     <td  class="">
                         <?php echo $data['work'];?>
@@ -100,13 +100,13 @@
                 </tr>
                 <tr>
                     <td  class="table-primary font-weight-bold">
-                       Department:
+                       <?= __('Department'); ?>:
                     </td>
                     <td  class="">
                         <?php echo $data['department'];?>
                     </td>
                     <td   class="table-primary font-weight-bold">
-                       Designation:
+                       <?= __('Designation'); ?>:
                     </td>
                     <td  class="">
                         <?php echo $data['designation'];?>
@@ -118,16 +118,16 @@
             <table class="table table-bordered">
                 <tr class="table-primary font-weight-bold">
                     <th scope="col" style="width: 40%;">
-                       Earnngs
+                       <?= __('Earnngs'); ?>
                     </th>
                     <th scope="col"  style="width: 10%;" class="text-right">
-                        <?php echo "Amount";?>
+                        <?php echo __("Amount");?>
                     </th>
                     <th scope="col"   class="" style="width: 40%;">
-                       Deductions
+                       <?= __('Deductions'); ?>
                     </th>
                     <th scope="col"  style="width: 10%;" class="text-right">
-                        <?php echo "Amount";?>
+                        <?php echo __("Amount");?>
                     </th>
                 </tr>
                 <?php
@@ -153,13 +153,13 @@
 
                 <tr class="font-weight-bold table-active">
                     <td style="width: 40%;">
-                       Gross Earnings
+                       <?= __('Gross Earnings'); ?>
                     </td>
                     <td  style="width: 10%;" class="text-right">
                         <?php echo $data['actual_amount'];?>
                     </td>
                     <td   class="" style="width: 40%;">
-                       Gross Deductions
+                       <?= __('Gross Deductions'); ?>
                     </td>
                     <td  style="width: 10%;" class="text-right">
                         <?php echo $data['dedaction_amount'];?>
@@ -168,7 +168,7 @@
                 <tr class="font-weight-bold table-active">
 
                     <td  colspan="2" class="text-right">
-                       NetPay
+                       <?= __('NetPay'); ?>
                     </td>
                     <td   colspan="2" class="text-left">
                          <?php echo $data['net'];?>
