@@ -32,7 +32,7 @@ $usersLocations = $result;
      ) ?>'>
     <div class="card">
         <div class="card-header">
-            <h5>Map View</h5>
+            <h5><?= __('Map View'); ?></h5>
         </div>
         <div class="card-body p-3 " id="mapModal">
             <div id="map" class="map-large"></div>
@@ -44,7 +44,7 @@ $usersLocations = $result;
 <div id="infoContainer" class="info-container d-none card-block custom-scroll">
 
     <div class="d-flex justify-between align-center">
-        <h5>Location Details</h5>
+        <h5><?= __('Location Details'); ?></h5>
         <button id="closeContainer" class="info-close-btn">&times;</button>
     </div>
     <hr>
@@ -52,52 +52,52 @@ $usersLocations = $result;
     <form id="fieldWorkDailyPlansForm" method="post">
         <div class="row">
             <div  class="col-lg-12 col-xs-12 form-group">
-                <span>User <span class="text-danger">*</span></span>
-                <input aria-label="Display Name" class="form-control" type="text" name="display_name" id="display_name"  disabled />
+                <span><?= __('User'); ?> <span class="text-danger">*</span></span>
+                <input aria-label="<?= htmlspecialchars(__('Display Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="display_name" id="display_name"  disabled />
                 <div class="d-none text-danger" id="user_id_err"></div>
                 <input class="form-control" type="hidden" name="user_id" id="user_id" />
             </div>
             <div  class="col-lg-12 col-xs-12 form-group">
-                <span>Date<span class="text-danger">*</span></span>
-                <input aria-label="Plan Date" class="form-control" type="date" name="plan_date" id="plan_date" />
+                <span><?= __('Date'); ?><span class="text-danger">*</span></span>
+                <input aria-label="<?= htmlspecialchars(__('Plan Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="plan_date" id="plan_date" />
                 <div class="d-none text-danger" id="plan_date_err"></div>
             </div>
             <!-- Location -->
             <div class="col-lg-12 col-xs-12 form-group">
-                <span>Location Name</span>
-                <input aria-label="Plan Location" class="form-control" type="text" name="plan_location" id="plan_location">
+                <span><?= __('Location Name'); ?></span>
+                <input aria-label="<?= htmlspecialchars(__('Plan Location'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="plan_location" id="plan_location">
             </div>
             <div class="col-lg-12 col-xs-6 form-group">
-                <span>Contact person </span>
-                <input aria-label="Contact Person" class="form-control lat" type="text" name="contact_person" id="contact_person" >
+                <span><?= __('Contact person'); ?> </span>
+                <input aria-label="<?= htmlspecialchars(__('Contact Person'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control lat" type="text" name="contact_person" id="contact_person" >
 
             </div>
             <div class="col-lg-12 col-xs-6 form-group">
-                <span>Phone No.</span>
-                <input aria-label="Mobile" class="form-control lat" type="text" name="mobile" id="mobile" >
+                <span><?= __('Phone No.'); ?></span>
+                <input aria-label="<?= htmlspecialchars(__('Mobile'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control lat" type="text" name="mobile" id="mobile" >
 
             </div>
 
             <!-- Latitude -->
             <div class="col-lg-12 col-xs-6 form-group">
-                <span>Latitude <span class="text-danger">*</span> </span>
-                <input aria-label="Plan Latitude" class="form-control lat" type="text" name="plan_latitude" id="plan_latitude"  readonly>
+                <span><?= __('Latitude'); ?> <span class="text-danger">*</span> </span>
+                <input aria-label="<?= htmlspecialchars(__('Plan Latitude'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control lat" type="text" name="plan_latitude" id="plan_latitude"  readonly>
                 <div class="d-none text-danger" id="plan_latitude_err"></div>
             </div>
 
             <!-- Longitude -->
             <div class="col-lg-12 col-xs-6 form-group">
-                <span>Longitude <span class="text-danger">*</span></span>
-                <input aria-label="Plan Longitude" class="form-control lng" type="text" name="plan_longitude" id="plan_longitude"  readonly>
+                <span><?= __('Longitude'); ?> <span class="text-danger">*</span></span>
+                <input aria-label="<?= htmlspecialchars(__('Plan Longitude'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control lng" type="text" name="plan_longitude" id="plan_longitude"  readonly>
                 <div class="d-none text-danger" id="plan_longitude_err"></div>
             </div>
             <div class="col-lg-12 col-xs-12 form-group">
-                <span>Address</span>
-                <textarea aria-label="Plan Address" class="form-control" type="text" name="plan_address" id="plan_address" readonly></textarea>
+                <span><?= __('Address'); ?></span>
+                <textarea aria-label="<?= htmlspecialchars(__('Plan Address'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="plan_address" id="plan_address" readonly></textarea>
             </div>
 
             <div class="border-top">
-                <button id="saveContainer" type="submit" value='insert'  name='submit' class="save-btn" >Save</button>
+                <button id="saveContainer" type="submit" value='insert'  name='submit' class="save-btn" ><?= __('Save'); ?></button>
 
             </div>
         </div>
