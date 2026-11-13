@@ -11,7 +11,7 @@ $schedule_data = $details['today_services']['schedule_data'];
 ?>
 <div class="card">
     <div class="card-header">
-        <h5>AMC Schedule </h5>
+        <h5><?= __('AMC Schedule'); ?> </h5>
 
     </div>
     <div class="card-body">
@@ -22,14 +22,14 @@ $schedule_data = $details['today_services']['schedule_data'];
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">AMC Name</th>
-                        <th scope="col">Product Name</th>
-                        <th scope="col">Customer Name</th>
-                        <th scope="col">Service Type</th>
-                        <th scope="col">Service Name</th>
-                        <th scope="col">Service Company</th>
-                        <th scope="col">Date Time</th>
-                        <th scope="col">Status Name</th>
+                        <th scope="col"><?= __('AMC Name'); ?></th>
+                        <th scope="col"><?= __('Product Name'); ?></th>
+                        <th scope="col"><?= __('Customer Name'); ?></th>
+                        <th scope="col"><?= __('Service Type'); ?></th>
+                        <th scope="col"><?= __('Service Name'); ?></th>
+                        <th scope="col"><?= __('Service Company'); ?></th>
+                        <th scope="col"><?= __('Date Time'); ?></th>
+                        <th scope="col"><?= __('Status Name'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -73,7 +73,7 @@ $schedule_data = $details['today_services']['schedule_data'];
             </table>
             <?php }else{ ?>
             <div class="card-px text-center ">
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Data Found</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Data Found'); ?></p>
                 <div class="text-center px-4">
                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>
