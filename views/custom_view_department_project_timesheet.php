@@ -105,14 +105,14 @@ $venders[$role['department_id']]['nonbillable'] = $venders[$role['department_id'
                     <div class="col-lg-3 col-md-6 col-sm-12 col-12">
                         <div class="col bg-light-primary ">
                             <span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
-                                <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="Theme-Logo" />
+                                <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="<?= htmlspecialchars(__('Theme-Logo'), ENT_QUOTES, 'UTF-8'); ?>" />
                             </span>
                             <span class="text-dark-75 font-weight-bolder font-size-h3"><?php echo $_SESSION['config']['name']; ?></span>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-12 mb-4">
-                        <h4 class="card-label text-center f-w-700">Department Wise Monthly Summary
-                            <small class="f-10 d-block">Name : <?php echo $_SESSION['display_name']; ?> &nbsp;  Date & Time : <?php echo date("d-m-Y H:i:s"); ?>
+                        <h4 class="card-label text-center f-w-700"><?= __('Department Wise Monthly Summary'); ?>
+                            <small class="f-10 d-block"><?= __('Name'); ?> : <?php echo $_SESSION['display_name']; ?> &nbsp;  <?= htmlspecialchars(__('Date & Time'), ENT_QUOTES, 'UTF-8'); ?> : <?php echo date("d-m-Y H:i:s"); ?>
                             </small>
                         </h4>
                     </div>
@@ -120,20 +120,20 @@ $venders[$role['department_id']]['nonbillable'] = $venders[$role['department_id'
                         <form class="kt-form" id="kt_form" method="post" action="" >
                             <div class="radio radio-outline  mt-1">
                                 <label class="radio radio-inline" style="margin-right: 2px !important;">
-                                    <input aria-label="Radio option" type="radio" <?php if($expand==''){ echo "checked";
+                                    <input aria-label="<?= htmlspecialchars(__('Radio option'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" <?php if($expand==''){ echo "checked";
 } ?> name="expand" value="" onclick="expands()" onkeydown="">
-                                    <span style="float: left;"></span>Collapse
+                                    <span style="float: left;"></span><?= __('Collapse'); ?>
                                 </label>
                                 <label class="radio radio-inline">
-                                    <input aria-label="Radio option" type="radio" <?php if($expand=='E'){ echo "checked";
+                                    <input aria-label="<?= htmlspecialchars(__('Radio option'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" <?php if($expand=='E'){ echo "checked";
 } ?> name="expand" value="E" onclick="expands()" onkeydown="">
-                                    <span style="float: left;"></span>Expand All
+                                    <span style="float: left;"></span><?= __('Expand All'); ?>
                                 </label>
                             </div>
                             <div class="input-group input-group-button">
-                                <input aria-label="From Date" type="month" name="from_date" value="<?php echo $from_cur_year."-".$from_cur_month?>"  id="att_month_year"  class="form-control form-control-sm width1" style="font-size: 14px;height: 40px !important;padding: 10px 15px;">
+                                <input aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>" type="month" name="from_date" value="<?php echo $from_cur_year."-".$from_cur_month?>"  id="att_month_year"  class="form-control form-control-sm width1" style="font-size: 14px;height: 40px !important;padding: 10px 15px;">
                                 <button type="submit" name="applyform" value="apply" class="btn btn-info waves-effect waves-light input-group-text mt-0">
-                                    Submit
+                                    <?= __('Submit'); ?>
                                 </button>
                             </div>
                         </form>
@@ -148,20 +148,20 @@ $venders[$role['department_id']]['nonbillable'] = $venders[$role['department_id'
                     <table class="table table-separate table-head-custom table-checkable data-table" id="kt_datatable1">
                         <tr>
                             <th scope="col" style="width: 3%;"></th>
-                            <th scope="col" style="width: 5%;">SL.NO.</th>
-                            <th scope="col" style="width: 13%;">Department Name</th>
-                            <th scope="col" class="text-right" style="width: 7%;">Employee</th>
-                            <th scope="col" class="text-right" style="width: 10%;">Billable Days</th>
-                            <th scope="col" class="text-right" style="width: 12%;">Nonbillable Days</th>
+                            <th scope="col" style="width: 5%;"><?= __('SL.NO.'); ?></th>
+                            <th scope="col" style="width: 13%;"><?= __('Department Name'); ?></th>
+                            <th scope="col" class="text-right" style="width: 7%;"><?= __('Employee'); ?></th>
+                            <th scope="col" class="text-right" style="width: 10%;"><?= __('Billable Days'); ?></th>
+                            <th scope="col" class="text-right" style="width: 12%;"><?= __('Nonbillable Days'); ?></th>
                              <?php if($_SESSION['user_type']!=3){ ?>
-                            <th scope="col" class="text-right" style="width: 10%;"> PO Amount</th>
-                               <th scope="col" class="text-right" style="width: 10%;"> VRC Amount</th>
+                            <th scope="col" class="text-right" style="width: 10%;"> <?= __('PO Amount'); ?></th>
+                               <th scope="col" class="text-right" style="width: 10%;"> <?= __('VRC Amount'); ?></th>
                             <?php } ?>
-                            <th scope="col" class="text-right" style="width: 10%;">Billable Amount</th>
-                            <th scope="col" class="text-right" style="width: 10%;"> VRC Billable Amount</th>
-                            <th scope="col" class="text-right" style="width: 10%;">Billable/Non Billable</th>
+                            <th scope="col" class="text-right" style="width: 10%;"><?= __('Billable Amount'); ?></th>
+                            <th scope="col" class="text-right" style="width: 10%;"> <?= __('VRC Billable Amount'); ?></th>
+                            <th scope="col" class="text-right" style="width: 10%;"><?= __('Billable/Non Billable'); ?></th>
 
-                            <th scope="col" class="text-right" style="width: 8%;">Leave Days</th>
+                            <th scope="col" class="text-right" style="width: 8%;"><?= __('Leave Days'); ?></th>
 
 
                         </tr>
@@ -245,7 +245,7 @@ $venders[$role['department_id']]['nonbillable'] = $venders[$role['department_id'
                                         <?php } ?>
                                         <td class="text-right"><?php echo customeummarmonyformateround($data['billable_amount']); ?></td>
                                         <td class="text-right"><?php echo customeummarmonyformateround($data['vrc_billable_amount']); ?></td>
-                                           <td class="text-right"><?php echo $data['emp_billable']==0 ? 'Billable':'<span style="color:red">Non Billable</span>' ?></td>
+                                           <td class="text-right"><?php echo $data['emp_billable']==0 ? 'Billable':'<span style="color:red">'.__('Non Billable').'</span>' ?></td>
 
                                         <td class="text-right"><?php echo customeummarmonyformateround($data['leave_days_from_to']); ?></td>
                                            <td class=""><?php echo $data['job_title']; ?></td>
