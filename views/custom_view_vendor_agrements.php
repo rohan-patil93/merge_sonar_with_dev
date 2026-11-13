@@ -30,14 +30,14 @@
                     <span class="kt-portlet__head-icon">
                         <i class="kt-font-brand flaticon2-line-chart"></i>
                     </span>
-                    <h3 class="card-label">&nbsp;<?php echo "Vendor-wise Agrement List";  ?> </h3>
+                    <h3 class="card-label">&nbsp;<?php echo __("Vendor-wise Agrement List");  ?> </h3>
 
                 </div>
                 <div class="kt-portlet__head-toolbar">
                     <div class="card-toolbar">
                             <a href="javascript:history.go(-1)" class="btn btn-light-primary font-weight-bolder mr-2">
                                 <i class="ki ki-long-arrow-back icon-xs"></i>
-                                Back
+                                <?= __('Back'); ?>
                             </a>
                     </div>
                 </div>
@@ -50,13 +50,13 @@
         <table class="table table-separate table-head-custom table-checkable data-table" id="kt_datatable1">
             <tr>
                 <th scope="col" style="width: 3%;"></th>
-                <th scope="col" style="width: 5%;">SL.NO.</th>
-                <th scope="col" style="width: 13%;">Vendor Name</th>
-                <th scope="col" class="text-right" style="width: 10%;">Company Name</th>
-                <th scope="col" class="text-right" style="width: 12%;">Email Id</th>
-                <th scope="col" class="text-right" style="width: 12%;">Mobile No</th>
-                <th scope="col" class="text-right" style="width: 12%;">Contact Person</th>
-                <th scope="col" class="text-right" style="width: 12%;">Web Site</th>
+                <th scope="col" style="width: 5%;"><?= __('SL.NO.'); ?></th>
+                <th scope="col" style="width: 13%;"><?= __('Vendor Name'); ?></th>
+                <th scope="col" class="text-right" style="width: 10%;"><?= __('Company Name'); ?></th>
+                <th scope="col" class="text-right" style="width: 12%;"><?= __('Email Id'); ?></th>
+                <th scope="col" class="text-right" style="width: 12%;"><?= __('Mobile No'); ?></th>
+                <th scope="col" class="text-right" style="width: 12%;"><?= __('Contact Person'); ?></th>
+                <th scope="col" class="text-right" style="width: 12%;"><?= __('Web Site'); ?></th>
             </tr>
         <?php $k=1; foreach($roles as $vender){
    ?>
@@ -86,13 +86,13 @@
                     <table class="mb-3" style="width: 100%">
                         <tr>
                             <th scope="col" style="width: 3%;"></th>
-                            <th scope="col" style="width: 5%;">SL.NO</th>
-              <th scope="col" style="width: 13%;">Agreement Name</th>
-              <th scope="col" class="text-right" style="width: 10%;">Agreement Ref No</th>
-              <th scope="col" class="text-right" style="width: 12%;">Signed Date</th>
-              <th scope="col" class="text-right" style="width: 10%;">Expiry Date</th>
-              <th scope="col" class="text-right" style="width: 10%;">File</th>
-                          <th scope="col" class="text-right" style="width: 10%;">Remark</th>
+                            <th scope="col" style="width: 5%;"><?= __('SL.NO'); ?></th>
+              <th scope="col" style="width: 13%;"><?= __('Agreement Name'); ?></th>
+              <th scope="col" class="text-right" style="width: 10%;"><?= __('Agreement Ref No'); ?></th>
+              <th scope="col" class="text-right" style="width: 12%;"><?= __('Signed Date'); ?></th>
+              <th scope="col" class="text-right" style="width: 10%;"><?= __('Expiry Date'); ?></th>
+              <th scope="col" class="text-right" style="width: 10%;"><?= __('File'); ?></th>
+                          <th scope="col" class="text-right" style="width: 10%;"><?= __('Remark'); ?></th>
                     </tr>
 
 
@@ -113,8 +113,8 @@ foreach($aggrements as $data){
                             <td class="text-right"><?php echo $data['agreement_ref_no']; ?></td>
                             <td class="text-right"><?php echo $data['signed_date']; ?></td>
                             <td class="text-right"><?php echo $data['expiry_date']; ?></td>
-                            <td class="text-right"><a href="<?php echo IMGURL.$data['file_url']; ?>" download="">Attachment</a></td>
-                                                    <td class="text-right"> <?php if(strtotime($data['expiry_date']) < strtotime(date('Y-m-d'))){ echo "<spne style='color:red';>Agrement  Expire</span>";
+                            <td class="text-right"><a href="<?php echo IMGURL.$data['file_url']; ?>" download=""><?= __('Attachment'); ?></a></td>
+                                                    <td class="text-right"> <?php if(strtotime($data['expiry_date']) < strtotime(date('Y-m-d'))){ echo "<spne style='color:red';>".__('Agrement Expire')."</span>";
 } ?></td>
                         </tr>
                         <?php  $l++; $xx++;
