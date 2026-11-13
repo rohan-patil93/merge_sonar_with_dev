@@ -12,9 +12,9 @@ $empdata = json_decode($empdata,1);
 ?>
 <div class="modal-header">
     <h5 class="modal-title">
-        <small><b class="f-w-600"> <?php echo "Employees"; ?> </b> </small>
+        <small><b class="f-w-600"> <?php echo __("Employees"); ?> </b> </small>
     </h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body">
     <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
@@ -23,10 +23,10 @@ $empdata = json_decode($empdata,1);
                 <table  class="table table-striped table-bordered nowrap">
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Employee Code</th>
-                        <th scope="col">Employee Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Reporting Manager</th>
+                        <th scope="col"><?= __('Employee Code'); ?></th>
+                        <th scope="col"><?= __('Employee Name'); ?></th>
+                        <th scope="col"><?= __('Email'); ?></th>
+                        <th scope="col"><?= __('Reporting Manager'); ?></th>
                     </tr>
                     <?php  $k=1; foreach($empdata as $list){ ?>
                     <tr>
