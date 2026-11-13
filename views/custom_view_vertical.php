@@ -55,20 +55,20 @@
                         <div class="card card-custom " id="kt_page_sticky_card">
                             <div class="card-header">
                                 <div class="card-title col-lg-9">
-                                    <h3 class="card-label col-lg-3">&nbsp;Vertical Wise Billing </h3>
-                                    From  <div class="col-lg-3">
-                                            <input aria-label="From Date" class="form-control" type="month" name="from_date" value="<?php echo $from_cur_year."-".$from_cur_month?>"  id="att_month_year" />
+                                    <h3 class="card-label col-lg-3">&nbsp;<?= __('Vertical Wise Billing'); ?> </h3>
+                                    <?= __('From'); ?>  <div class="col-lg-3">
+                                            <input aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="month" name="from_date" value="<?php echo $from_cur_year."-".$from_cur_month?>"  id="att_month_year" />
                                             <input type="hidden" name="filtertbl_rowid" id="filtertbl_rowid" value="<?php echo $filtertbl_rowid;?>" >
                                     </div>
 
-                                    To  <div class="col-lg-3">
-                                          <input aria-label="To Date" class="form-control" type="month" name="to_date" value="<?php echo $to_cur_year."-".$to_cur_month?>"  id="att_month_year_2" />
+                                    <?= __('To'); ?>  <div class="col-lg-3">
+                                          <input aria-label="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="month" name="to_date" value="<?php echo $to_cur_year."-".$to_cur_month?>"  id="att_month_year_2" />
                                     </div>
                                     <div class="col-lg-3">
-                                        <a href="#" class="btn btn-outline-secondary" onclick="showpopup();"><i class="flaticon2-hourglass-1"></i>Filter</a>
+                                        <a href="#" class="btn btn-outline-secondary" onclick="showpopup();"><i class="flaticon2-hourglass-1"></i><?= __('Filter'); ?></a>
                                     </div>
                                     <div class="col-lg-2">
-                                        <select aria-label="Displayattributes[]" class="form-control kt-select2" id="kt_select2_31" multiple="multiple" name="displayattributes[]" >
+                                        <select aria-label="<?= htmlspecialchars(__('Displayattributes'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control kt-select2" id="kt_select2_31" multiple="multiple" name="displayattributes[]" >
 
                                             <?php foreach ($employees_fieldlist as $fkey => $fieldvalue) { ?>
                                                 <option value="<?php echo $fkey; ?>" <?php echo in_array($fkey, $defalut_fields) ? 'selected' : ''; ?>  > <?php echo $fieldvalue; ?> </option>
@@ -77,7 +77,7 @@
                                     </div>
                                     <div class="col-lg-2">
                                         <input type="hidden" id="filterby" name="filterby">
-                                        <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"  name="applyform" value="apply">Apply</button>
+                                        <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"  name="applyform" value="apply"><?= __('Apply'); ?></button>
                                     </div>
                                 </div>
                             </div>
