@@ -57,7 +57,7 @@ $header_list = json_decode($myreprtdata['header'],1);
 $headers[$header_list['orderhedding']] = $header_list['heddingdislay'] ==0 ? '<h5 class="card-label text-center f-w-700 d-block mb-0">'. $page_title.'</h5>' : "";
 $headers[$header_list['orderlogo']] = $header_list['logodislay'] ==0 ? "<img src='uploads/all/".$_SESSION['config']['display_logo']."' class='img-fluid  img-120' alt='Logo'>": "";
 
-$headers[$header_list['addresorder']] = $header_list['addressdislay'] ==0 ?'<span class="f-10"><span class="d-block">Name : '.ucwords($_SESSION['display_name']).' </span> <span> Date & Time : '.date("d-m-Y H:i:s").'</span></span>':'';
+$headers[$header_list['addresorder']] = $header_list['addressdislay'] ==0 ?'<span class="f-10"><span class="d-block">'.__('Name').' : '.ucwords($_SESSION['display_name']).' </span> <span> '.htmlspecialchars(__('Date & Time'), ENT_QUOTES, 'UTF-8').' : '.date("d-m-Y H:i:s").'</span></span>':'';
 
 $header_position[$header_list['orderhedding']] = $header_list['heddingposition'];
 $header_position[$header_list['orderlogo']] = $header_list['logoposition'];
@@ -165,7 +165,7 @@ $headers[1] =  $filterfileds;
     function printDiv(divId) {
         var printContents = document.getElementById(divId).innerHTML;
         var originalContents = document.body.innerHTML;
-        document.body.innerHTML = "<html lang='en'><head><title>rohan patil</title></head><body><div>rohan new project</div>" + printContents + "</body>";
+        document.body.innerHTML = "<html lang='en'><head><title><?= htmlspecialchars(__('rohan patil'), ENT_QUOTES, 'UTF-8'); ?></title></head><body><div><?= htmlspecialchars(__('rohan new project'), ENT_QUOTES, 'UTF-8'); ?></div>" + printContents + "</body>";
         window.print();
         document.body.innerHTML = originalContents;
     }
@@ -222,15 +222,15 @@ $headers[1] =  $filterfileds;
                                 <?php if($filt['filter_type'] == 'text'){ ?>
                                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile form-group">
                                         <span class="form-label"><?php echo $filt['lable']; ?></span>
-                                        <input aria-label="Input field" type="text" class="form-control kt-inpu filterdynamic" data-lable="<?php echo $filt['lable']; ?>" data-type="<?php echo $filt['filter_type']; ?>" value="<?php echo $_POST[$name_field]; ?>" name="<?php echo $name_field; ?>"  data-col-index="4">
+                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control kt-inpu filterdynamic" data-lable="<?php echo $filt['lable']; ?>" data-type="<?php echo $filt['filter_type']; ?>" value="<?php echo $_POST[$name_field]; ?>" name="<?php echo $name_field; ?>"  data-col-index="4">
                                     </div>
                                 <?php }elseif($filt['filter_type']=='select') {
                                     $selectdata =$filt['listoption'];
                                     ?>
                                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile form-group w-full">
                                         <span class="form-label"><?php echo $filt['lable']; ?></span>
-                                        <select aria-label="Select option" class="form-control kt-input form-select js-example-basic-single filterdynamic" name="<?php echo $name_field; ?>" data-col-index="2" data-lable="<?php echo $filt['lable']; ?>" data-type="<?php echo $filt['filter_type']; ?>">
-                                            <option  value=""><?php echo "ALL"; ?></option>
+                                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control kt-input form-select js-example-basic-single filterdynamic" name="<?php echo $name_field; ?>" data-col-index="2" data-lable="<?php echo $filt['lable']; ?>" data-type="<?php echo $filt['filter_type']; ?>">
+                                            <option  value=""><?php echo __("ALL"); ?></option>
                                             <?php foreach($selectdata as $selectkey=>$select){ ?>
                                                 <option <?php if($_POST[$name_field] == $selectkey){ ?> selected <?php
 } ?> value="<?php echo $selectkey; ?>"><?php echo $select; ?></option>
@@ -249,28 +249,28 @@ $headers[1] =  $filterfileds;
                                     <span id="btn_<?php echo $name_field; ?>"><?php echo $_POST['pick_'.$name_field] !=""?$_POST['pick_'.$name_field]:"Today"; ?></span>
                                 </button>
                                 <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split waves-effect waves-light" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 20%;height: 45px;">
-                                    <span class="visually-hidden" >Toggle primary</span>
+                                    <span class="visually-hidden" ><?= __('Toggle primary'); ?></span>
                                 </button>
                                 <div class="dropdown-menu">
-                                       <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TD"?"active":"";?> empty_active" id="TD" href="#!" onclick="dynamicSelectDateRange('TD','Today','<?php echo $name_field; ?>','<?php echo fromDate(date("Y-m-d")); ?>','<?php echo fromDate(date("Y-m-d")); ?>')">Today</a>
-                                    <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TW"?"active":"";?> empty_active" id="TW" href="#!" onclick="dynamicSelectDateRange('TW','This Week','<?php echo $name_field; ?>','<?php echo fromDate(date("Y-m-d", strtotime('monday this week')));?>','<?php echo fromDate(date("Y-m-d", strtotime('monday this sunday ')));?>')">This Week</a>
-                                    <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TM"?"active":"";?> empty_active" id="TM" href="#!" onclick="dynamicSelectDateRange('TM','This Month','<?php echo $name_field; ?>','<?php echo fromDate(date("Y-m-01")); ?>','<?php echo fromDate(date("Y-m-t")); ?>')">This Month</a>
-                                    <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TY"?"active":"";?> empty_active" id="TY" href="#!" onclick="dynamicSelectDateRange('TY','This Year','<?php echo $name_field; ?>','<?php echo fromDate(date("Y-01-01")); ?>','<?php echo fromDate(date("Y-12-31")); ?>')">This Year</a>
+                                       <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TD"?"active":"";?> empty_active" id="TD" href="#!" onclick="dynamicSelectDateRange('TD','Today','<?php echo $name_field; ?>','<?php echo fromDate(date("Y-m-d")); ?>','<?php echo fromDate(date("Y-m-d")); ?>')"><?= __('Today'); ?></a>
+                                    <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TW"?"active":"";?> empty_active" id="TW" href="#!" onclick="dynamicSelectDateRange('TW','This Week','<?php echo $name_field; ?>','<?php echo fromDate(date("Y-m-d", strtotime('monday this week')));?>','<?php echo fromDate(date("Y-m-d", strtotime('monday this sunday ')));?>')"><?= __('This Week'); ?></a>
+                                    <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TM"?"active":"";?> empty_active" id="TM" href="#!" onclick="dynamicSelectDateRange('TM','This Month','<?php echo $name_field; ?>','<?php echo fromDate(date("Y-m-01")); ?>','<?php echo fromDate(date("Y-m-t")); ?>')"><?= __('This Month'); ?></a>
+                                    <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TY"?"active":"";?> empty_active" id="TY" href="#!" onclick="dynamicSelectDateRange('TY','This Year','<?php echo $name_field; ?>','<?php echo fromDate(date("Y-01-01")); ?>','<?php echo fromDate(date("Y-12-31")); ?>')"><?= __('This Year'); ?></a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="YD"?"active":"";?> empty_active" id="YD" href="#!" onclick="dynamicSelectDateRange('YD','Yesterday','<?php echo $name_field; ?>','<?php echo fromDate(date('Y-m-d',strtotime("-1 days"))); ?>','<?php echo fromDate(date('Y-m-d',strtotime("-1 days"))); ?>')">Yesterday</a>
-                                    <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="PW"?"active":"";?> empty_active" id="PW" href="#!" onclick="dynamicSelectDateRange('PW','Previous Week','<?php echo $name_field; ?>','<?php echo fromDate(date('Y-m-d', strtotime("previous week monday"))); ?>','<?php echo fromDate(date('Y-m-d', strtotime("previous week sunday"))); ?>')">Previous Week</a>
-                                    <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="PM"?"active":"";?> empty_active" id="PM" href="#!" onclick="dynamicSelectDateRange('PM','Previous Month','<?php echo $name_field; ?>','<?php echo fromDate(date("Y-m-01",strtotime('last month'))); ?>','<?php echo fromDate(date("Y-m-t",strtotime('last month'))); ?>')">Previous Month</a>
-                                    <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="PY"?"active":"";?> empty_active" id="PY" href="#!" onclick="dynamicSelectDateRange('PY','Previous Year','<?php echo $name_field; ?>','<?php echo fromDate(date("Y-01-01",strtotime('last year'))); ?>','<?php echo fromDate(date("Y-12-31",strtotime('last year'))); ?>')">Previous Year</a>
+                                    <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="YD"?"active":"";?> empty_active" id="YD" href="#!" onclick="dynamicSelectDateRange('YD','Yesterday','<?php echo $name_field; ?>','<?php echo fromDate(date('Y-m-d',strtotime("-1 days"))); ?>','<?php echo fromDate(date('Y-m-d',strtotime("-1 days"))); ?>')"><?= __('Yesterday'); ?></a>
+                                    <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="PW"?"active":"";?> empty_active" id="PW" href="#!" onclick="dynamicSelectDateRange('PW','Previous Week','<?php echo $name_field; ?>','<?php echo fromDate(date('Y-m-d', strtotime("previous week monday"))); ?>','<?php echo fromDate(date('Y-m-d', strtotime("previous week sunday"))); ?>')"><?= __('Previous Week'); ?></a>
+                                    <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="PM"?"active":"";?> empty_active" id="PM" href="#!" onclick="dynamicSelectDateRange('PM','Previous Month','<?php echo $name_field; ?>','<?php echo fromDate(date("Y-m-01",strtotime('last month'))); ?>','<?php echo fromDate(date("Y-m-t",strtotime('last month'))); ?>')"><?= __('Previous Month'); ?></a>
+                                    <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="PY"?"active":"";?> empty_active" id="PY" href="#!" onclick="dynamicSelectDateRange('PY','Previous Year','<?php echo $name_field; ?>','<?php echo fromDate(date("Y-01-01",strtotime('last year'))); ?>','<?php echo fromDate(date("Y-12-31",strtotime('last year'))); ?>')"><?= __('Previous Year'); ?></a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="CD"?"active":""; ?> empty_active" id="CD" href="#!" onclick="dynamicSelectDateRange('CD','Custom Date','<?php echo $name_field; ?>')">Custom Date</a>
+                                    <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="CD"?"active":""; ?> empty_active" id="CD" href="#!" onclick="dynamicSelectDateRange('CD','Custom Date','<?php echo $name_field; ?>')"><?= __('Custom Date'); ?></a>
                                 </div>
                             </div>
                             <div class="row mt-2" style="display: none" id="custome_<?php echo $name_field; ?>">
                                 <div  class="col-lg-6">
-                                    <input aria-label="Input field" type="text" class="form-control filterdynamic datepicker" name="<?php echo $name_field; ?>[]" id="start_<?php echo $name_field; ?>" value="<?php echo $_POST[$name_field][0] !=""?$_POST[$name_field][0]:fromDate(date("Y-m-d")); ?>">
+                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control filterdynamic datepicker" name="<?php echo $name_field; ?>[]" id="start_<?php echo $name_field; ?>" value="<?php echo $_POST[$name_field][0] !=""?$_POST[$name_field][0]:fromDate(date("Y-m-d")); ?>">
                                 </div>
                                 <div class="col-lg-6">
-                                    <input aria-label="Input field" type="text" class="form-control filterdynamic datepicker" name="<?php echo $name_field; ?>[]" id="end_<?php echo $name_field; ?>" value="<?php echo $_POST[$name_field][1] !=""?$_POST[$name_field][1]:fromDate(date("Y-m-d")); ?>">
+                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control filterdynamic datepicker" name="<?php echo $name_field; ?>[]" id="end_<?php echo $name_field; ?>" value="<?php echo $_POST[$name_field][1] !=""?$_POST[$name_field][1]:fromDate(date("Y-m-d")); ?>">
                                 </div>
                             </div>
                             </div>
@@ -278,14 +278,14 @@ $headers[1] =  $filterfileds;
 }elseif($filt['filter_type']=='month' || $filt['filter_type']=='year' || $filt['filter_type'] == 'month_year'){ ?>
                                         <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile form-group">
                                             <span class="form-label"><?php echo $filt['lable']; ?></span>
-                                            <input aria-label="Input field" type="month" class="form-control filterdynamic"  value="<?php echo $_POST[$name_field]!=""?date('Y-m',strtotime($_POST[$name_field])):""; ?>"  name="<?php echo $name_field; ?>"   data-lable="<?php echo $filt['lable']; ?>" data-type="<?php echo $filt['filter_type']; ?>"/>
+                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="month" class="form-control filterdynamic"  value="<?php echo $_POST[$name_field]!=""?date('Y-m',strtotime($_POST[$name_field])):""; ?>"  name="<?php echo $name_field; ?>"   data-lable="<?php echo $filt['lable']; ?>" data-type="<?php echo $filt['filter_type']; ?>"/>
                                         </div>
                                     <?php } ?>
                                 <?php } ?>
                             </div>
                         </div>
                             <div class="col-lg-2 text-right">
-                                <button class="btn btn-primary btn-brand--icon" id="kt_search" name="submit"><i class="fa fa-search"></i> Preview</span></span></button>
+                                <button class="btn btn-primary btn-brand--icon" id="kt_search" name="submit"><i class="fa fa-search"></i> <?= __('Preview'); ?></span></span></button>
                             </div>
                         </div>
                         </form>
@@ -298,9 +298,9 @@ $headers[1] =  $filterfileds;
                 <div class="card-body ">
                     <div class="text-right">
 
-                        <a href="custom_view_download.php?page=<?php echo $page_title; ?>" class="" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Download CSV"><button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon"><span class="ti-cloud-down"></span></button></a>
+                        <a href="custom_view_download.php?page=<?php echo $page_title; ?>" class="" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Download CSV'), ENT_QUOTES, 'UTF-8'); ?>"><button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon"><span class="ti-cloud-down"></span></button></a>
 
-                        <a href="custom_view_download.php?page=<?php echo $page_title; ?>" class="m-l-10" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Print"><button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon"><span class="ti-printer"></span></button>
+                        <a href="custom_view_download.php?page=<?php echo $page_title; ?>" class="m-l-10" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Print'), ENT_QUOTES, 'UTF-8'); ?>"><button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon"><span class="ti-printer"></span></button>
                         </a>
                     </div>
                     <table style="width: 100%;">
@@ -459,7 +459,7 @@ $headers[1] =  $filterfileds;
                             <?php $m++;  $csvarray[] = $printarray;
 } $key5++;
 } ?>
-                            <tfoot><tr><td>Grand Total</td>
+                            <tfoot><tr><td><?= __('Grand Total'); ?></td>
                                 <td colspan="100" class="text-right">
                                     <?php
                                         foreach($grandtotal as $labekey =>$labelvalue){
@@ -476,7 +476,7 @@ $headers[1] =  $filterfileds;
                     <?php $_SESSION['download_data'] = $csvarray;
 }else{ ?>
                         <div class="card-px text-center ">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Result</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Result'); ?></p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                             </div>
