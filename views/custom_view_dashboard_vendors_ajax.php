@@ -120,7 +120,7 @@ function changestatus(val,tranid,allowitemid,table_name){
             });
         }
         function openApprovedPage(table,clone){
-            var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+            var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
             $("#tabsopen").html(loader);
             jQuery.ajax({
                 url: "views/custom_list_approved_table.php",
@@ -173,9 +173,9 @@ if($totaldoc != 0 && $totaldoc !=""){
                                 <?php
                         $disname = $_SESSION['user']['display_name']!=""?$_SESSION['user']['display_name']:$_SESSION['display_name'];
                         if($_SESSION['user']['user_photo']!=""){ ?>
-                          <img src="<?php echo "uploads/all/".$_SESSION['user']['user_photo']; ?>" class="percentag-img-radius img-90" alt="Details" style="border-radius: 50%;border: 8px solid #ffffff;">
+                          <img src="<?php echo "uploads/all/".$_SESSION['user']['user_photo']; ?>" class="percentag-img-radius img-90" alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>" style="border-radius: 50%;border: 8px solid #ffffff;">
                        <?php }elseif($_SESSION['employee']['gender'] !=""){ ?>
-                                <img src="uploads/all/<?php echo $_SESSION['employee']['gender'].".png"; ?>" class="percentag-img-radius img-90" alt="Details" style="border-radius: 50%;border: 8px solid #ffffff;">
+                                <img src="uploads/all/<?php echo $_SESSION['employee']['gender'].".png"; ?>" class="percentag-img-radius img-90" alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>" style="border-radius: 50%;border: 8px solid #ffffff;">
                         <?php }else{ ?>
                           <span class="text-dark f-16 f-w-600 d-block" style="    background-color: white !important;"><?php echo initials($disname); ?></span>
                       <?php } ?>
@@ -187,7 +187,7 @@ if($totaldoc != 0 && $totaldoc !=""){
                                 <div class="s-cont d-inline-block">
                                     <h5 class="f-w-700 m-b-0  f-12"><?php
                                     echo convert_Rupee_Number($totaldocsamt !=''?$totaldocsamt:"0"); ?></h5>
-                                    <p class="m-b-0 f-10">Total Value</p>
+                                    <p class="m-b-0 f-10"><?= __('Total Value'); ?></p>
                                 </div>
                             </div>
                             <div class="col-6 b-l-default">
@@ -195,7 +195,7 @@ if($totaldoc != 0 && $totaldoc !=""){
                                 <div class="s-cont d-inline-block">
                                     <h5 class="f-w-700 m-b-0 f-12"><?php
                                     echo convert_Rupee_Number($approvedresamt !=''?$approvedresamt:"0"); ?></h5>
-                                    <p class="m-b-0 f-10">Approved </p>
+                                    <p class="m-b-0 f-10"><?= __('Approved'); ?> </p>
                                 </div>
                             </div>
                         </div>
@@ -203,7 +203,7 @@ if($totaldoc != 0 && $totaldoc !=""){
                 </div>
                 <div class="card sale-card mb-2">
                     <div class="card-header">
-                        <h5>Announcements</h5>
+                        <h5><?= __('Announcements'); ?></h5>
                     </div>
                     <div class="card-block text-center">
                         <div class="text-facebook m-b-20"><i class="ti-announcement "></i></div>
@@ -237,10 +237,10 @@ if($totaldoc != 0 && $totaldoc !=""){
 
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#itemlocation" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Locations<span class="form-label label label-xs label-success m-l-10"><?php echo array_sum(array_map("count", $locationlist)); ?></span></a>
+                                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#itemlocation" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Locations'); ?><span class="form-label label label-xs label-success m-l-10"><?php echo array_sum(array_map("count", $locationlist)); ?></span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#costcenter" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Cost Centers<span class="form-label label label-xs label-success m-l-10"><?php echo array_sum(array_map("count", $costcenterlist)); ?></span></a>
+                                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#costcenter" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Cost Centers'); ?><span class="form-label label label-xs label-success m-l-10"><?php echo array_sum(array_map("count", $costcenterlist)); ?></span></a>
                             </li>
                         </ul>
                         <div class="tab-content tabs custom-scroll" style="max-height: 1000px;">
@@ -249,7 +249,7 @@ if($totaldoc != 0 && $totaldoc !=""){
                                     <h5><?php echo $itemcatname; ?></h5>
                                     <div class="card-header-right table-card-header">
                                          <div class="input-group input-group-button mb-0" >
-                                            <input aria-label="Search" type="text" id="dynamicfilterhideshow" data-id='categoryfilter' data-type="tr" class="form-control form-control-sm width1"  placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="Search">
+                                            <input aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="dynamicfilterhideshow" data-id='categoryfilter' data-type="tr" class="form-control form-control-sm width1"  placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <span class="input-group-text addon-style">
                                                 <span class=""><span class="ti-search text-white mt-2"></span></span>
                                             </span>
@@ -282,12 +282,12 @@ if($totaldoc != 0 && $totaldoc !=""){
                                             </div>
                                                     <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter_2">
                                                         <thead>
-                                                            <th scope="col">Transaction No.</th>
-                                                            <th scope="col">Originator</th>
-                                                            <th scope="col">Date</th>
-                                                            <th scope="col">Party Name</th>
-                                                            <th scope="col" class="text-right">Amount</th>
-                                                            <th scope="col">Satus</th>
+                                                            <th scope="col"><?= __('Transaction No.'); ?></th>
+                                                            <th scope="col"><?= __('Originator'); ?></th>
+                                                            <th scope="col"><?= __('Date'); ?></th>
+                                                            <th scope="col"><?= __('Party Name'); ?></th>
+                                                            <th scope="col" class="text-right"><?= __('Amount'); ?></th>
+                                                            <th scope="col"><?= __('Satus'); ?></th>
                                                         </thead>
                                                         <tbody>
                                                             <?php foreach($list as $list){ ?>
@@ -306,7 +306,7 @@ if($totaldoc != 0 && $totaldoc !=""){
                                                     </table>
                                                 <?php }else{ ?>
                                                     <div class="card-px text-center ">
-                                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No <?php echo $_POST['menu_label']; ?></p>
+                                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No'); ?> <?php echo $_POST['menu_label']; ?></p>
                                                         <div class="text-center px-4">
                                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                                         </div>
@@ -320,10 +320,10 @@ if($totaldoc != 0 && $totaldoc !=""){
                             </div>
                             <div class="tab-pane card-body p-0" id="itemlocation" role="tabpanel">
                                 <div class="card-header">
-                                    <h5>Locations</h5>
+                                    <h5><?= __('Locations'); ?></h5>
                                     <div class="card-header-right table-card-header">
                                          <div class="input-group input-group-button mb-0" >
-                                            <input aria-label="Search" type="text" id="dynamicfilterhideshow_2" data-id='locationfilter' data-type="tr" class="form-control form-control-sm width1"  placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="Search">
+                                            <input aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="dynamicfilterhideshow_2" data-id='locationfilter' data-type="tr" class="form-control form-control-sm width1"  placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <span class="input-group-text addon-style">
                                                 <span class=""><span class="ti-search text-white mt-2"></span></span>
                                             </span>
@@ -356,12 +356,12 @@ if($totaldoc != 0 && $totaldoc !=""){
                                             </div>
                                                     <table class="table table-hover m-b-0" style="font-size:13px;" id="locationfilter_2">
                                                         <thead>
-                                                            <th scope="col">Transaction No.</th>
-                                                            <th scope="col">Originator</th>
-                                                            <th scope="col">Date</th>
-                                                            <th scope="col">Party Name</th>
-                                                            <th scope="col" class="text-right">Amount</th>
-                                                            <th scope="col">Satus</th>
+                                                            <th scope="col"><?= __('Transaction No.'); ?></th>
+                                                            <th scope="col"><?= __('Originator'); ?></th>
+                                                            <th scope="col"><?= __('Date'); ?></th>
+                                                            <th scope="col"><?= __('Party Name'); ?></th>
+                                                            <th scope="col" class="text-right"><?= __('Amount'); ?></th>
+                                                            <th scope="col"><?= __('Satus'); ?></th>
                                                         </thead>
                                                         <tbody>
                                                             <?php foreach($list as $list){?>
@@ -380,7 +380,7 @@ if($totaldoc != 0 && $totaldoc !=""){
                                                     </table>
                                                 <?php }else{ ?>
                                                     <div class="card-px text-center ">
-                                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No <?php echo $_POST['menu_label']; ?></p>
+                                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No'); ?> <?php echo $_POST['menu_label']; ?></p>
                                                         <div class="text-center px-4">
                                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                                         </div>
@@ -394,10 +394,10 @@ if($totaldoc != 0 && $totaldoc !=""){
                             </div>
                             <div class="tab-pane card-body p-0" id="costcenter" role="tabpanel">
                                 <div class="card-header">
-                                    <h5>Cost Centers</h5>
+                                    <h5><?= __('Cost Centers'); ?></h5>
                                     <div class="card-header-right table-card-header">
                                          <div class="input-group input-group-button mb-0" >
-                                            <input aria-label="Search" type="text" id="dynamicfilterhideshow_3" data-id='costcenterfilter' data-type="tr" class="form-control form-control-sm width1"  placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="Search">
+                                            <input aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="dynamicfilterhideshow_3" data-id='costcenterfilter' data-type="tr" class="form-control form-control-sm width1"  placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <span class="input-group-text addon-style">
                                                 <span class=""><span class="ti-search text-white mt-2"></span></span>
                                             </span>
@@ -430,12 +430,12 @@ if($totaldoc != 0 && $totaldoc !=""){
                                             </div>
                                                     <table class="table table-hover m-b-0" style="font-size:13px;" id="costcenterfilter_2">
                                                         <thead>
-                                                            <th scope="col">Transaction No.</th>
-                                                            <th scope="col">Originator</th>
-                                                            <th scope="col">Date</th>
-                                                            <th scope="col">Party Name</th>
-                                                            <th scope="col" class="text-right">Amount</th>
-                                                            <th scope="col">Satus</th>
+                                                            <th scope="col"><?= __('Transaction No.'); ?></th>
+                                                            <th scope="col"><?= __('Originator'); ?></th>
+                                                            <th scope="col"><?= __('Date'); ?></th>
+                                                            <th scope="col"><?= __('Party Name'); ?></th>
+                                                            <th scope="col" class="text-right"><?= __('Amount'); ?></th>
+                                                            <th scope="col"><?= __('Satus'); ?></th>
                                                         </thead>
                                                         <tbody>
                                                             <?php foreach($list as $list){?>
@@ -454,7 +454,7 @@ if($totaldoc != 0 && $totaldoc !=""){
                                                     </table>
                                                 <?php }else{ ?>
                                                     <div class="card-px text-center ">
-                                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No <?php echo $_POST['menu_label']; ?></p>
+                                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No'); ?> <?php echo $_POST['menu_label']; ?></p>
                                                         <div class="text-center px-4">
                                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                                         </div>
@@ -484,7 +484,7 @@ if($totaldoc != 0 && $totaldoc !=""){
 <div class="col-lg-3">
     <div class="card sale-card mb-2">
         <div class="card-header">
-            <h5>Holidays </h5>
+            <h5><?= __('Holidays'); ?> </h5>
             <div class="card-header-right table-card-header ">
                 <span class="text-dark f-w-600"><?php echo date('Y');?></span>
             </div>
@@ -505,7 +505,7 @@ if($totaldoc != 0 && $totaldoc !=""){
                     </div>
                 <?php } ?>
                 <?php } else {
-                    echo "<h4><i class='fa fa-warning'></i> No Holidays Available</h4>";
+                    echo "<h4><i class='fa fa-warning'></i> ".__('No Holidays Available')."</h4>";
                 } ?>
             </div>
         </div>
