@@ -15,11 +15,11 @@ $estimationdata = implode('|', (array)$maingra['bdget']);
                     <!--begin::Header-->
                     <div class="card-header h-auto">
                         <div class="card-title">
-                <h3 class="card-label">Overall Budget Utilization</h3>
+                <h3 class="card-label"><?= __('Overall Budget Utilization'); ?></h3>
             </div>
             <div class="card-toolbar">
                 <a target="_blank" href="index.php?option=COM_VIEW_BUDGET_REPORT" class="btn btn-success font-weight-bolder mr-1">
-                    Full Report
+                    <?= __('Full Report'); ?>
                 </a>
             </div>
 
